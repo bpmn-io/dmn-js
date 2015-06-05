@@ -1,0 +1,998 @@
+<html>
+  <head>
+    <title>DMN table design</title>
+    <link type="text/css"
+          rel="stylesheet"
+          href="normalize.css" />
+    <link type="text/css"
+          rel="stylesheet"
+          href="dev.css" />
+    <link type="text/css"
+          rel="stylesheet"
+          href="styles.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <nav>
+        <ul>
+          <li><a href="#limited-available-height">
+            Limited available height
+          </a></li>
+          <li><a href="#limited-available-width">
+            Limited available width
+          </a></li>
+          <li><a href="#full-width">
+            Full width
+          </a></li>
+          <li><a href="#compact-style">
+            Compact style
+          </a></li>
+          <li><a href="#bold-style">
+            Bold style
+          </a></li>
+        </ul>
+      </nav>
+
+      <div class="holder holder-1"
+           id="limited-available-height">
+        <h2>Limited available height</h2>
+
+        <section class="dmn-table">
+          <header>
+            <h3>Table name</h3>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                <th class="control"
+                    rowspan="4"></th>
+                <th class="hit"
+                    rowspan="4">UC</th>
+
+                <th class="input double-border-right"
+                    colspan="3">
+                  Inputs
+                </th>
+
+                <th class="output"
+                    colspan="2">
+                  Outputs
+                </th>
+
+                <td class="annotation"
+                    rowspan="4">
+                  Annotation
+                </td>
+              </tr>
+
+              <tr class="labels">
+                <td class="input">
+                  Input label 1
+                </td>
+                <td class="input">
+                  Input label 2
+                </td>
+                <td class="input double-border-right">
+                  Input label 3
+                </td>
+
+                <td class="output">
+                  Output label 1
+                </td>
+                <td class="output">
+                  Output label 2
+                </td>
+              </tr>
+
+              <tr class="values">
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right">
+                  <a>option A</a>,
+                  <a>option B</a>
+                </td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+              </tr>
+
+              <tr class="mappings">
+                <td class="input">
+                  varIntger
+                </td>
+                <td class="input">
+                  varDings
+                </td>
+                <td class="input double-border-right">
+                  varBumms
+                </td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="double-border-top">
+                <th class="control"></th>
+                <td class="number">1</td>
+
+                <td class="input">&ge; 100</td>
+
+                <td class="input">&le; 1000</td>
+
+                <td class="input double-border-right">= option A</td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation">
+                  Some notes about the stuff on that row.
+                </td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">2</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">3</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">4</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">5</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">6</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">7</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">8</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">9</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">10</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">11</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">12</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">13</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <th class="control"></th>
+                <td class="number">14</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="holder holder-2"
+           id="limited-available-width">
+        <h2>Limited available width</h2>
+
+        <section class="dmn-table">
+          <header>
+            <h3>Table name</h3>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                <th class="hit"
+                    rowspan="4"></th>
+
+                <th class="input double-border-right"
+                    colspan="3">
+                  Inputs
+                </th>
+
+                <th class="output"
+                    colspan="2">
+                  Outputs
+                </th>
+
+                <td class="annotation"
+                    rowspan="4">
+                  Annotation
+                </td>
+              </tr>
+
+              <tr class="labels">
+                <td class="input">
+                  Input label 1
+                </td>
+                <td class="input">
+                  Input label 2
+                </td>
+                <td class="input double-border-right">
+                  Input label 3
+                </td>
+
+                <td class="output">
+                  Output label 1
+                </td>
+                <td class="output">
+                  Output label 2
+                </td>
+              </tr>
+
+              <tr class="values">
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right">
+                  <a>option A</a>,
+                  <a>option B</a>
+                </td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+              </tr>
+
+              <tr class="mappings">
+                <td class="input">
+                  varIntger
+                </td>
+                <td class="input">
+                  varDings
+                </td>
+                <td class="input double-border-right">
+                  varBumms
+                </td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="double-border-top">
+                <td class="number">1</td>
+
+                <td class="input">&ge; 100</td>
+
+                <td class="input">&le; 1000</td>
+
+                <td class="input double-border-right">= option A</td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation">
+                  Some notes about the stuff on that row.
+                </td>
+              </tr>
+
+              <tr>
+                <td class="number">2</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">3</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">4</td>
+
+                <td class="input"></td>
+                <td class="input"></td>
+                <td class="input double-border-right"></td>
+
+                <td class="output"></td>
+                <td class="output"></td>
+
+                <td class="annotation"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="holder holder-3"
+           id="full-width">
+        <h2>Full width</h2>
+
+        <section class="dmn-table">
+          <header>
+            <h3>Check order</h3>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                <th class="hit"
+                    rowspan="4"></th>
+
+                <th class="input double-border-right"
+                    colspan="2">
+                  Input
+                </th>
+
+                <th class="output"
+                    colspan="2">
+                  Output
+                </th>
+
+                <td class="annotation"
+                    rowspan="4">
+                  Annotation
+                </td>
+              </tr>
+
+              <tr class="labels">
+                <td class="input">
+                  Customer Status
+                </td>
+                <td class="input double-border-right">
+                  Input Order Sum
+                </td>
+
+                <td class="output">
+                  Check Result
+                </td>
+                <td class="output">
+                  Reason
+                </td>
+              </tr>
+
+              <tr class="values">
+                <td class="input">
+                  (<a>gold</a>,
+                  <a>silver</a>,
+                  <a>bronze</a>)
+                </td>
+                <td class="input double-border-right">
+                  Integer
+                </td>
+
+                <td class="output">
+                  (<a>ok</a>,
+                  <a>notok</a>)
+                </td>
+                <td class="output">
+                  String
+                </td>
+              </tr>
+
+              <tr class="mappings">
+                <td class="input">
+                  ?
+                </td>
+                <td class="input double-border-right">
+                  ?
+                </td>
+
+                <td class="output">
+                  ?
+                </td>
+                <td class="output">
+                  ?
+                </td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="double-border-top">
+                <td class="number">1</td>
+
+                <td class="input">bronze</td>
+
+                <td class="input double-border-right"></td>
+
+                <td class="output">
+                  notok
+                </td>
+                <td class="output">
+                  work on your status first, as bronze, you're not going to get anything
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">2</td>
+
+                <td class="input">
+                  silver
+                </td>
+                <td class="input double-border-right">
+                  &lt; 1000
+                </td>
+
+                <td class="output">
+                  ok
+                </td>
+                <td class="output">
+                  you little fish will get what you want
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">3</td>
+
+                <td class="input">
+                  silver
+                </td>
+                <td class="input double-border-right">
+                  &gt;= 1000
+                </td>
+
+                <td class="output">
+                  notok
+                </td>
+                <td class="output">
+                  you took too much man, you took too much!
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">4</td>
+
+                <td class="input">
+                  gold
+                </td>
+                <td class="input double-border-right"></td>
+
+                <td class="output">
+                  ok
+                </td>
+                <td class="output">
+                  you get anything you want
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="holder holder-4"
+           id="compact-style">
+        <h2>Compact style</h2>
+
+        <section class="dmn-table dmn-table-compact">
+          <header>
+            <h3>Check order</h3>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                <th class="hit"
+                    rowspan="4"></th>
+
+                <th class="input double-border-right"
+                    colspan="2">
+                  Input
+                </th>
+
+                <th class="output"
+                    colspan="2">
+                  Output
+                </th>
+
+                <td class="annotation"
+                    rowspan="4">
+                  Annotation
+                </td>
+              </tr>
+
+              <tr class="labels">
+                <td class="input">
+                  Customer Status
+                </td>
+                <td class="input double-border-right">
+                  Input Order Sum
+                </td>
+
+                <td class="output">
+                  Check Result
+                </td>
+                <td class="output">
+                  Reason
+                </td>
+              </tr>
+
+              <tr class="values">
+                <td class="input">
+                  (<a>gold</a>,
+                  <a>silver</a>,
+                  <a>bronze</a>)
+                </td>
+                <td class="input double-border-right">
+                  Integer
+                </td>
+
+                <td class="output">
+                  (<a>ok</a>,
+                  <a>notok</a>)
+                </td>
+                <td class="output">
+                  String
+                </td>
+              </tr>
+
+              <tr class="mappings">
+                <td class="input">
+                  ?
+                </td>
+                <td class="input double-border-right">
+                  ?
+                </td>
+
+                <td class="output">
+                  ?
+                </td>
+                <td class="output">
+                  ?
+                </td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="double-border-top">
+                <td class="number">1</td>
+
+                <td class="input">bronze</td>
+
+                <td class="input double-border-right"></td>
+
+                <td class="output">
+                  notok
+                </td>
+                <td class="output">
+                  work on your status first, as bronze, you're not going to get anything
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">2</td>
+
+                <td class="input"
+                    rowspan="2">
+                  silver
+                </td>
+                <td class="input double-border-right">
+                  &lt; 1000
+                </td>
+
+                <td class="output">
+                  ok
+                </td>
+                <td class="output">
+                  you little fish will get what you want
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">3</td>
+
+                <td class="input double-border-right">
+                  &gt;= 1000
+                </td>
+
+                <td class="output">
+                  notok
+                </td>
+                <td class="output">
+                  you took too much man, you took too much!
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">4</td>
+
+                <td class="input">
+                  gold
+                </td>
+                <td class="input double-border-right"></td>
+
+                <td class="output">
+                  ok
+                </td>
+                <td class="output">
+                  you get anything you want
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="holder holder-5"
+           id="bold-style">
+        <h2>Bold style</h2>
+
+        <section class="dmn-table dmn-table-bold">
+          <header>
+            <h3>Check order</h3>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                <th class="hit"
+                    rowspan="4"></th>
+
+                <th class="input double-border-right"
+                    colspan="2">
+                  Input
+                </th>
+
+                <th class="output"
+                    colspan="2">
+                  Output
+                </th>
+
+                <td class="annotation"
+                    rowspan="4">
+                  Annotation
+                </td>
+              </tr>
+
+              <tr class="labels">
+                <td class="input">
+                  Customer Status
+                </td>
+                <td class="input double-border-right">
+                  Input Order Sum
+                </td>
+
+                <td class="output">
+                  Check Result
+                </td>
+                <td class="output">
+                  Reason
+                </td>
+              </tr>
+
+              <tr class="values">
+                <td class="input">
+                  (<a>gold</a>,
+                  <a>silver</a>,
+                  <a>bronze</a>)
+                </td>
+                <td class="input double-border-right">
+                  Integer
+                </td>
+
+                <td class="output">
+                  (<a>ok</a>,
+                  <a>notok</a>)
+                </td>
+                <td class="output">
+                  String
+                </td>
+              </tr>
+
+              <tr class="mappings">
+                <td class="input">
+                  ?
+                </td>
+                <td class="input double-border-right">
+                  ?
+                </td>
+
+                <td class="output">
+                  ?
+                </td>
+                <td class="output">
+                  ?
+                </td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="double-border-top">
+                <td class="number">1</td>
+
+                <td class="input">bronze</td>
+
+                <td class="input double-border-right"></td>
+
+                <td class="output">
+                  notok
+                </td>
+                <td class="output">
+                  work on your status first, as bronze, you're not going to get anything
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">2</td>
+
+                <td class="input"
+                    rowspan="2">
+                  silver
+                </td>
+                <td class="input double-border-right">
+                  &lt; 1000
+                </td>
+
+                <td class="output">
+                  ok
+                </td>
+                <td class="output">
+                  you little fish will get what you want
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">3</td>
+
+                <td class="input double-border-right">
+                  &gt;= 1000
+                </td>
+
+                <td class="output">
+                  notok
+                </td>
+                <td class="output">
+                  you took too much man, you took too much!
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+
+              <tr>
+                <td class="number">4</td>
+
+                <td class="input">
+                  gold
+                </td>
+                <td class="input double-border-right"></td>
+
+                <td class="output">
+                  ok
+                </td>
+                <td class="output">
+                  you get anything you want
+                </td>
+
+                <td class="annotation"></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript">
+      'use strict';
+      /* global selectAll: false, DecisionTable: false */
+
+      selectAll('.dmn-table').forEach(function (dt) {
+        new DecisionTable(dt);
+      });
+    </script>
+  </body>
+</html>

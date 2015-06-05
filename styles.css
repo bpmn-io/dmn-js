@@ -1,0 +1,167 @@
+.dmn-table {
+  position: relative;
+  max-height: 100%;
+  overflow: auto;
+  color: #606060;
+}
+.dmn-table .input {
+  background-color: #eff9e8;
+}
+.dmn-table .output {
+  background-color: #c4e7ae;
+}
+.dmn-table .control {
+  width: 3em;
+}
+.dmn-table .number {
+  text-align: right;
+  width: 2em;
+}
+.dmn-table .double-border-right {
+  border-right: 3px double #a0a0a0;
+}
+.dmn-table header,
+.dmn-table table {
+  border: 2px solid #a0a0a0;
+}
+.dmn-table header,
+.dmn-table td,
+.dmn-table th {
+  padding: 3px 6px;
+}
+.dmn-table td,
+.dmn-table th {
+  border: 1px solid #a0a0a0;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  -webkit-transition: background-color 0.218s ease;
+  -o-transition: background-color 0.218s ease;
+  transition: background-color 0.218s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmn-table td:empty:before,
+.dmn-table th:empty:before {
+  content: '…';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmn-table header {
+  background-color: #fff;
+  display: inline-block;
+  border-bottom: none;
+  margin-bottom: -1px;
+}
+.dmn-table header h3 {
+  margin: auto;
+}
+.dmn-table table {
+  font-size: 90%;
+  color: #606060;
+  background-color: #ffffff;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.dmn-table thead {
+  border-bottom: 3px double #a0a0a0;
+}
+.dmn-table thead .hit {
+  vertical-align: top;
+  width: 2em;
+}
+.dmn-table thead .labels,
+.dmn-table thead .values,
+.dmn-table thead .mappings,
+.dmn-table thead .annotation {
+  text-align: center;
+}
+.dmn-table thead .mappings {
+  font-family: monospace;
+}
+.dmn-table thead .values td,
+.dmn-table thead .values th {
+  background-color: #c0c0c0;
+  color: #f0f0f0;
+}
+.dmn-table thead .annotation {
+  vertical-align: bottom;
+}
+.dmn-table tbody {
+  border-top: none;
+}
+.dmn-table tbody tr:nth-child(1) td,
+.dmn-table tbody tr:nth-child(1) th {
+  border-top: none;
+}
+.dmn-table tbody .input {
+  color: #808080;
+}
+.dmn-table tbody .input.set {
+  color: #606060;
+}
+.dmn-table tbody .input:empty:before {
+  content: ' - ';
+  color: #606060;
+}
+.dmn-table tbody tr:nth-child(even) td,
+.dmn-table tbody tr:nth-child(even) th {
+  background-color: #efefef;
+}
+.dmn-table tbody tr:nth-child(even):hover td,
+.dmn-table tbody tr:nth-child(even):hover th {
+  background-color: #e0e0e0;
+}
+.dmn-table tbody tr:nth-child(even) td.hover,
+.dmn-table tbody tr:nth-child(even) th.hover {
+  background-color: #e0e0e0;
+}
+.dmn-table tbody tr:nth-child(odd) td,
+.dmn-table tbody tr:nth-child(odd) th {
+  background-color: #fefefe;
+}
+.dmn-table tbody tr:nth-child(odd):hover td,
+.dmn-table tbody tr:nth-child(odd):hover th {
+  background-color: #e6e6e6;
+}
+.dmn-table tbody tr:nth-child(odd) td.hover,
+.dmn-table tbody tr:nth-child(odd) th.hover {
+  background-color: #e6e6e6;
+}
+.dmn-table tbody tr:hover td,
+.dmn-table tbody tr:hover th,
+.dmn-table tbody tr .hover {
+  color: #606060;
+}
+.dmn-table.scrollable {
+  overflow: hidden;
+}
+.dmn-table.scrollable .detached.dmn-table-head {
+  width: calc(100% - 15px);
+}
+.dmn-table.scrollable .detached.dmn-table-body {
+  border-top: none;
+  margin-bottom: 2px;
+}
+.dmn-table.scrollable .body-wrapper {
+  overflow-y: scroll;
+}
+.dmn-table.dmn-table-compact {
+  font-size: 95%;
+}
+.dmn-table.dmn-table-compact header,
+.dmn-table.dmn-table-compact td,
+.dmn-table.dmn-table-compact th {
+  padding: 1px 2px;
+}
+.dmn-table.dmn-table-bold {
+  font-size: 110%;
+}
+.dmn-table.dmn-table-bold header,
+.dmn-table.dmn-table-bold td,
+.dmn-table.dmn-table-bold th {
+  padding: 6px 12px;
+}
