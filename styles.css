@@ -105,7 +105,7 @@
 }
 .dmn-table tbody .input:empty:before {
   content: ' - ';
-  color: #606060;
+  color: #c0c0c0;
 }
 .dmn-table tbody tr:nth-child(even) td,
 .dmn-table tbody tr:nth-child(even) th {
@@ -113,11 +113,11 @@
 }
 .dmn-table tbody tr:nth-child(even):hover td,
 .dmn-table tbody tr:nth-child(even):hover th {
-  background-color: #e0e0e0;
+  background-color: #ededd4;
 }
 .dmn-table tbody tr:nth-child(even) td.hover,
 .dmn-table tbody tr:nth-child(even) th.hover {
-  background-color: #e0e0e0;
+  background-color: #ededd4;
 }
 .dmn-table tbody tr:nth-child(odd) td,
 .dmn-table tbody tr:nth-child(odd) th {
@@ -125,11 +125,11 @@
 }
 .dmn-table tbody tr:nth-child(odd):hover td,
 .dmn-table tbody tr:nth-child(odd):hover th {
-  background-color: #e6e6e6;
+  background-color: #f0f0d7;
 }
 .dmn-table tbody tr:nth-child(odd) td.hover,
 .dmn-table tbody tr:nth-child(odd) th.hover {
-  background-color: #e6e6e6;
+  background-color: #f0f0d7;
 }
 .dmn-table tbody tr:hover td,
 .dmn-table tbody tr:hover th,

@@ -63,11 +63,31 @@ function children(parent) {
           });
 }
 
-function DecisionTable(el) {
+
+function cellFocus(evt) {
+  console.info('cellFocus', evt.target, evt.target.innerText);
+}
+
+
+function cellBlur(evt) {
+  console.info('cellBlur', evt.target, evt.target.innerText);
+}
+
+
+function cellInput(evt) {
+  console.info('cellInput', evt.target, evt.target.innerText);
+}
+
+
+
+function DecisionTable(el, options) {
   if (!el) {
     throw new Error('Missing element to construct a DecisionTable');
   }
+  options = options || {};
   this.el = el;
+  this.inputs = [];
+  this.outputs = [];
 
   var parent = this.el.parentNode;
   var parentBox = elBox(parent);
@@ -102,8 +122,22 @@ function DecisionTable(el) {
     this.el.appendChild(div);
   }
 
-  var cols = selectAll('tbody .input, tbody .output', this.el);
-  cols.forEach(function (col) {
+
+  selectAll([
+    '.labels td',
+    '.values td',
+    '.mappings td',
+    'tbody .input',
+    'tbody .output',
+    'tbody .annotation'
+  ].join(', '), this.el).forEach(function (cell) {
+    cell.contentEditable = true;
+    cell.addEventListener('focus', cellFocus);
+    cell.addEventListener('blur', cellBlur);
+    cell.addEventListener('input', cellInput);
+  });
+
+  selectAll('tbody .input, tbody .output', this.el).forEach(function (col) {
     col.addEventListener('mouseover', tableColumnHover);
   });
 }
@@ -112,3 +146,108 @@ DecisionTable.prototype.columnNumber = function (cell) {
   return selectAll('td', this.el).indexOf(cell);
 };
 
+DecisionTable.prototype.addInput = function () {
+
+};
+
+
+DecisionTable.prototype.addOutput = function () {
+
+};
+
+
+DecisionTable.prototype.addRow = function () {
+
+};
+
+
+DecisionTable.prototype.toggleEditing = function () {
+
+};
+
+
+
+
+
+function DecisionTableInput(table) {
+  if (!table) { throw new Error('Missing table argument for DecisionTableInput'); }
+  this.table = table;
+}
+
+DecisionTableInput.prototype.label = function (value) {
+  if (!value) { return this.labelEl.innerText.trim(); }
+  this.labelEl.innerText = value;
+  return this;
+};
+
+
+DecisionTableInput.prototype.choices = function (value) {
+  if (!value) { return this.choicesEl.innerText.trim(); }
+  this.choicesEl.innerText = value;
+  return this;
+};
+
+
+DecisionTableInput.prototype.mapping = function (value) {
+  if (!value) { return this.mappingEl.innerText.trim(); }
+  this.mappingEl.innerText = value;
+  return this;
+};
+
+
+DecisionTableInput.prototype.remove = function () {
+  // this.table =
+};
+
+
+
+
+
+function DecisionTableOutput(table) {
+  if (!table) { throw new Error('Missing table argument for DecisionTableOutput'); }
+  this.table = table;
+}
+
+DecisionTableOutput.prototype.label = function (value) {
+  if (!value) { return this.labelEl.innerText.trim(); }
+  this.labelEl.innerText = value;
+  return this;
+};
+
+
+DecisionTableOutput.prototype.choices = function (value) {
+  if (!value) { return this.choicesEl.innerText.trim(); }
+  this.choicesEl.innerText = value;
+  return this;
+};
+
+
+DecisionTableOutput.prototype.mapping = function (value) {
+  if (!value) { return this.mappingEl.innerText.trim(); }
+  this.mappingEl.innerText = value;
+  return this;
+};
+
+
+DecisionTableOutput.prototype.remove = function () {};
+
+
+
+
+var dialogElement = document.createElement('div');
+dialogElement.classList.add('dmn-modal');
+function DecisionTableDialog() {
+  if (document.body.contains(dialogElement)) {
+    return;
+  }
+
+  document.body.appendChild(dialogElement);
+}
+
+DecisionTableDialog.prototype.open = function () {
+  document.body.classList.add('dmn-modal-open');
+};
+
+DecisionTableDialog.prototype.close = function () {
+  document.body.classList.remove('dmn-modal-open');
+};
