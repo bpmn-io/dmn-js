@@ -1,8 +1,44 @@
+@font-face {
+  font-family: 'dmn';
+  src: url('fonts/dmn.eot');
+  src: url('fonts/dmn.eot#iefix') format('embedded-opentype'), url('fonts/dmn.woff') format('woff'), url('fonts/dmn.ttf') format('truetype'), url('fonts/dmn.svg#dmn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon-dmn:before,
+[class^="icon-dmn-"]:before,
+[class*=" icon-dmn-"]:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
 .dmn-table {
   position: relative;
   max-height: 100%;
-  overflow: auto;
   color: #606060;
+  overflow: visible;
 }
 .dmn-table .input {
   background-color: #eff9e8;
@@ -149,12 +185,103 @@
 .dmn-table.scrollable .body-wrapper {
   overflow-y: scroll;
 }
+.dmn-table .dropdown {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+  cursor: pointer;
+}
+.dmn-table .dropdown > .wrapper {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+}
+.dmn-table .dropdown .clear,
+.dmn-table .dropdown .value,
+.dmn-table .dropdown .caret {
+  display: table-cell;
+}
+.dmn-table .dropdown .clear,
+.dmn-table .dropdown .caret {
+  width: 1em;
+  cursor: pointer;
+  background-color: red;
+}
+.dmn-table .dropdown .clear:before {
+  content: '\e802';
+}
+.dmn-table .dropdown .caret {
+  text-align: right;
+}
+.dmn-table .dropdown .caret:before {
+  content: '\e801';
+}
+.dmn-table .dropdown .value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmn-table .dropdown .value:empty:before {
+  content: '…';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmn-table .dropdown .value:empty:before {
+  content: ' - ';
+  color: #c0c0c0;
+}
+.dmn-table .dropdown ul {
+  position: absolute;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 0;
+  z-index: 999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #a0a0a0;
+  border-top: none;
+  -webkit-box-shadow: 0 0 0 0 #52b415;
+  box-shadow: 0 0 0 0 #52b415;
+  -webkit-transition: all 0.218s ease;
+  -o-transition: all 0.218s ease;
+  transition: all 0.218s ease;
+}
+.dmn-table .dropdown ul li {
+  padding: 0;
+  margin: 0;
+}
+.dmn-table .dropdown ul a {
+  cursor: pointer;
+  display: block;
+  padding: 3px 6px;
+}
+.dmn-table .dropdown ul a:hover {
+  background-color: #f0f0f0;
+}
+.dmn-table .dropdown.open {
+  z-index: 10;
+}
+.dmn-table .dropdown.open .caret:before {
+  content: '\e800';
+}
+.dmn-table .dropdown.open ul {
+  max-height: 1000px;
+  -webkit-box-shadow: 0 3px 3px 3px rgba(82, 180, 21, 0.2);
+  box-shadow: 0 3px 3px 3px rgba(82, 180, 21, 0.2);
+}
 .dmn-table.dmn-table-compact {
   font-size: 95%;
 }
 .dmn-table.dmn-table-compact header,
 .dmn-table.dmn-table-compact td,
-.dmn-table.dmn-table-compact th {
+.dmn-table.dmn-table-compact th,
+.dmn-table.dmn-table-compact .dropdown ul a {
   padding: 1px 2px;
 }
 .dmn-table.dmn-table-bold {
@@ -162,6 +289,7 @@
 }
 .dmn-table.dmn-table-bold header,
 .dmn-table.dmn-table-bold td,
-.dmn-table.dmn-table-bold th {
+.dmn-table.dmn-table-bold th,
+.dmn-table.dmn-table-bold .dropdown ul a {
   padding: 6px 12px;
 }
