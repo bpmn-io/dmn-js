@@ -205,7 +205,6 @@
 .dmn-table .dropdown .caret {
   width: 1em;
   cursor: pointer;
-  background-color: red;
 }
 .dmn-table .dropdown .clear:before {
   content: '\e802';
