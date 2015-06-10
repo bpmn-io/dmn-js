@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions xmlns="http://www.omg.org/spec/DMN/20130901" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="def01" name="myDMN" namespace="http://camunda.org/dmn/test01" xsi:schemaLocation="http://www.omg.org/spec/DMN/20130901 dmn.xsd">
+</Definitions>
