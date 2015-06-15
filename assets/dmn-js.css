@@ -1,0 +1,374 @@
+@font-face {
+  font-family: 'dmn';
+  src: url('fonts/dmn.eot');
+  src: url('fonts/dmn.eot#iefix') format('embedded-opentype'), url('fonts/dmn.woff') format('woff'), url('fonts/dmn.ttf') format('truetype'), url('fonts/dmn.svg#dmn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon-dmn:before,
+[class^="icon-dmn-"]:before,
+[class*=" icon-dmn-"]:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.dmnjs-container {
+  position: relative;
+  max-height: 100%;
+  color: #606060;
+  overflow: visible;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmnjs-container * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmnjs-container *:before,
+.dmnjs-container *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmnjs-container .input {
+  background-color: #eff9e8;
+}
+.dmnjs-container .output {
+  background-color: #c4e7ae;
+}
+.dmnjs-container .control {
+  width: 3em;
+}
+.dmnjs-container .number {
+  text-align: right;
+  width: 2em;
+}
+.dmnjs-container .double-border-right {
+  border-right: 3px double #a0a0a0;
+}
+.dmnjs-container header,
+.dmnjs-container table {
+  border: 2px solid #a0a0a0;
+}
+.dmnjs-container header,
+.dmnjs-container td,
+.dmnjs-container th {
+  padding: 3px 6px;
+}
+.dmnjs-container td,
+.dmnjs-container th {
+  border: 1px solid #a0a0a0;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  -webkit-transition: background-color 0.218s ease;
+  -o-transition: background-color 0.218s ease;
+  transition: background-color 0.218s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmnjs-container td:empty:before,
+.dmnjs-container th:empty:before {
+  content: '…';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmnjs-container td:focus,
+.dmnjs-container th:focus {
+  outline-color: #52b415;
+}
+.dmnjs-container header {
+  background-color: #fff;
+  display: inline-block;
+  border-bottom: none;
+  margin-bottom: -1px;
+}
+.dmnjs-container header h3 {
+  margin: auto;
+}
+.dmnjs-container table {
+  font-size: 90%;
+  color: #606060;
+  background-color: #ffffff;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.dmnjs-container thead {
+  border-bottom: 3px double #a0a0a0;
+}
+.dmnjs-container thead .hit {
+  vertical-align: top;
+  width: 2em;
+}
+.dmnjs-container thead .labels,
+.dmnjs-container thead .values,
+.dmnjs-container thead .mappings,
+.dmnjs-container thead .annotation {
+  text-align: center;
+}
+.dmnjs-container thead .mappings {
+  font-family: monospace;
+}
+.dmnjs-container thead .values td,
+.dmnjs-container thead .values th {
+  background-color: #c0c0c0;
+  color: #f0f0f0;
+}
+.dmnjs-container thead .annotation {
+  vertical-align: bottom;
+}
+.dmnjs-container tbody {
+  border-top: none;
+}
+.dmnjs-container tbody tr:nth-child(1) td,
+.dmnjs-container tbody tr:nth-child(1) th {
+  border-top: none;
+}
+.dmnjs-container tbody .input {
+  color: #808080;
+}
+.dmnjs-container tbody .input.set {
+  color: #606060;
+}
+.dmnjs-container tbody .input:empty:before {
+  content: ' - ';
+  color: #c0c0c0;
+}
+.dmnjs-container tbody tr:nth-child(even) td,
+.dmnjs-container tbody tr:nth-child(even) th {
+  background-color: #efefef;
+}
+.dmnjs-container tbody tr:nth-child(even):hover td,
+.dmnjs-container tbody tr:nth-child(even):hover th {
+  background-color: #ededd4;
+}
+.dmnjs-container tbody tr:nth-child(even) td.hover,
+.dmnjs-container tbody tr:nth-child(even) th.hover {
+  background-color: #ededd4;
+}
+.dmnjs-container tbody tr:nth-child(odd) td,
+.dmnjs-container tbody tr:nth-child(odd) th {
+  background-color: #fefefe;
+}
+.dmnjs-container tbody tr:nth-child(odd):hover td,
+.dmnjs-container tbody tr:nth-child(odd):hover th {
+  background-color: #f0f0d7;
+}
+.dmnjs-container tbody tr:nth-child(odd) td.hover,
+.dmnjs-container tbody tr:nth-child(odd) th.hover {
+  background-color: #f0f0d7;
+}
+.dmnjs-container tbody tr:hover td,
+.dmnjs-container tbody tr:hover th,
+.dmnjs-container tbody tr .hover {
+  color: #606060;
+}
+.dmnjs-container.scrollable {
+  overflow: hidden;
+}
+.dmnjs-container.scrollable .detached.dmnjs-container-head {
+  width: calc(100% - 15px);
+}
+.dmnjs-container.scrollable .detached.dmnjs-container-body {
+  border-top: none;
+  margin-bottom: 2px;
+}
+.dmnjs-container.scrollable .body-wrapper {
+  overflow-y: scroll;
+}
+.dmnjs-container .dropdown {
+  overflow: visible;
+  z-index: 1;
+  cursor: pointer;
+}
+.dmnjs-container .dropdown > .wrapper {
+  overflow: visible;
+  min-width: 100%;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+.dmnjs-container .dropdown > .wrapper:hover .caret,
+.dmnjs-container .dropdown > .wrapper:hover .clear {
+  color: #52b415;
+}
+.dmnjs-container .dropdown .value {
+  width: 100%;
+  padding: 0 1.2em;
+  display: inline-block;
+}
+.dmnjs-container .dropdown .clear,
+.dmnjs-container .dropdown .caret {
+  position: absolute;
+  top: 2px;
+  width: 1em;
+  cursor: pointer;
+}
+.dmnjs-container .dropdown .clear {
+  left: -2px;
+}
+.dmnjs-container .dropdown .clear:before {
+  content: '\e802';
+}
+.dmnjs-container .dropdown .caret {
+  right: 0;
+}
+.dmnjs-container .dropdown .caret:before {
+  content: '\e801';
+}
+.dmnjs-container .dropdown .value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmnjs-container .dropdown .value:empty:before {
+  content: '…';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmnjs-container .dropdown .value:empty:before {
+  content: ' - ';
+  color: #c0c0c0;
+}
+.dmnjs-container .dropdown ul {
+  position: absolute;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  top: 100%;
+  margin-top: 2px;
+  left: -7px;
+  right: -7px;
+  max-height: 0;
+  z-index: 999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 0 solid rgba(82, 180, 21, 0);
+  -webkit-box-shadow: 0 0 0 0 rgba(82, 180, 21, 0);
+  box-shadow: 0 0 0 0 rgba(82, 180, 21, 0);
+  -webkit-transition: all 0.218s ease;
+  -o-transition: all 0.218s ease;
+  transition: all 0.218s ease;
+}
+.dmnjs-container .dropdown ul li {
+  padding: 0;
+  margin: 0;
+}
+.dmnjs-container .dropdown ul a {
+  cursor: pointer;
+  display: block;
+  padding: 3px 6px;
+}
+.dmnjs-container .dropdown ul a:before {
+  display: inline-block;
+  content: '';
+  width: 1.2em;
+}
+.dmnjs-container .dropdown ul a:hover {
+  background-color: #f0f0f0;
+}
+.dmnjs-container .dropdown.open {
+  z-index: 10;
+}
+.dmnjs-container .dropdown.open .caret:before {
+  content: '\e800';
+}
+.dmnjs-container .dropdown.open ul {
+  border: 1px solid #52b415;
+  max-height: 1000px;
+  -webkit-box-shadow: 0 3px 3px 3px rgba(82, 180, 21, 0.2);
+  box-shadow: 0 3px 3px 3px rgba(82, 180, 21, 0.2);
+}
+.dmnjs-container.dmnjs-container-compact {
+  font-size: 95%;
+}
+.dmnjs-container.dmnjs-container-compact header,
+.dmnjs-container.dmnjs-container-compact td,
+.dmnjs-container.dmnjs-container-compact th,
+.dmnjs-container.dmnjs-container-compact .dropdown ul a {
+  padding: 1px 2px;
+}
+.dmnjs-container.dmnjs-container-compact .dropdown ul {
+  left: -3px;
+  right: -3px;
+}
+.dmnjs-container.dmnjs-container-bold {
+  font-size: 110%;
+}
+.dmnjs-container.dmnjs-container-bold header,
+.dmnjs-container.dmnjs-container-bold td,
+.dmnjs-container.dmnjs-container-bold th,
+.dmnjs-container.dmnjs-container-bold .dropdown ul a {
+  padding: 6px 12px;
+}
+.dmnjs-container.dmnjs-container-bold .dropdown ul {
+  left: -13px;
+  right: -13px;
+}
+.choice-suggestions-helper {
+  position: absolute;
+  background-color: #f0f0f0;
+  list-style: none;
+  padding: 3px 6px;
+  margin: 3px 0 0 6px;
+  color: #808080;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+}
+.choice-suggestions-helper:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  content: '';
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 8px solid #f0f0f0;
+}
+.choice-suggestions-helper li {
+  display: inline-block;
+  padding: 0;
+  cursor: pointer;
+}
+.choice-suggestions-helper li:after {
+  display: inline-block;
+  content: ' / ';
+  color: #c0c0c0;
+  margin: 0 0.2em;
+}
+.choice-suggestions-helper li:last-child:after {
+  display: none;
+}
+.choice-suggestions-helper li span {
+  color: #52b415;
+  text-decoration: underline;
+}
