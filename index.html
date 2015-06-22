@@ -39,12 +39,14 @@
         Those examples are aimed to provide styling guidelines for the decision tables of
         <a href="//github.com/dmn-io/dmn-js">dmn-js</a>.
       </div>
-
+      <!--
       <div class="holder holder-1"
            id="limited-available-height">
         <h2>Limited available height</h2>
 
         <section class="dmn-table">
+          <div data-hook="controls"></div>
+
           <header>
             <h3>Table name</h3>
           </header>
@@ -52,12 +54,10 @@
           <table>
             <thead>
               <tr>
-                <th class="control"
-                    rowspan="4"></th>
                 <th class="hit"
                     rowspan="4">UC</th>
 
-                <th class="input double-border-right"
+                <th class="input"
                     colspan="3">
                   Input
                 </th>
@@ -80,7 +80,7 @@
                 <td class="input">
                   Input label 2
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Input label 3
                 </td>
 
@@ -95,7 +95,7 @@
               <tr class="values">
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right">
+                <td class="input">
                   (<a>option A</a>,
                   <a>option B</a>)
                 </td>
@@ -111,7 +111,7 @@
                 <td class="input">
                   varDings
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   varBumms
                 </td>
 
@@ -122,14 +122,13 @@
 
             <tbody>
               <tr class="double-border-top">
-                <th class="control"></th>
                 <td class="number">1</td>
 
                 <td class="input">&ge; 100</td>
 
                 <td class="input">&le; 1000</td>
 
-                <td class="input double-border-right">= option A</td>
+                <td class="input">= option A</td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -140,12 +139,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">2</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -154,12 +152,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">3</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -168,12 +165,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">4</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -182,12 +178,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">5</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -196,12 +191,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">6</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -210,12 +204,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">7</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -224,12 +217,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">8</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -238,12 +230,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">9</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -252,12 +243,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">10</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -266,12 +256,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">11</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -280,12 +269,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">12</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -294,12 +282,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">13</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -308,12 +295,11 @@
               </tr>
 
               <tr>
-                <th class="control"></th>
                 <td class="number">14</td>
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -340,6 +326,8 @@
         <h2>Limited available width</h2>
 
         <section class="dmn-table">
+          <div data-hook="controls"></div>
+
           <header>
             <h3>Table name</h3>
           </header>
@@ -350,7 +338,7 @@
                 <th class="hit"
                     rowspan="4"></th>
 
-                <th class="input double-border-right"
+                <th class="input"
                     colspan="3">
                   Input
                 </th>
@@ -373,7 +361,7 @@
                 <td class="input">
                   Input label 2
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Input label 3
                 </td>
 
@@ -388,7 +376,7 @@
               <tr class="values">
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right">
+                <td class="input">
                   (<a>option A</a>,
                   <a>option B</a>)
                 </td>
@@ -404,7 +392,7 @@
                 <td class="input">
                   varDings
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   varBumms
                 </td>
 
@@ -421,7 +409,7 @@
 
                 <td class="input">&le; 1000</td>
 
-                <td class="input double-border-right">= option A</td>
+                <td class="input">= option A</td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -436,7 +424,7 @@
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -449,7 +437,7 @@
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -462,7 +450,7 @@
 
                 <td class="input"></td>
                 <td class="input"></td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output"></td>
                 <td class="output"></td>
@@ -489,6 +477,8 @@
         <h2>Full width</h2>
 
         <section class="dmn-table">
+          <div data-hook="controls"></div>
+
           <header>
             <h3>Check order</h3>
           </header>
@@ -499,7 +489,7 @@
                 <th class="hit"
                     rowspan="4"></th>
 
-                <th class="input double-border-right"
+                <th class="input"
                     colspan="2">
                   Input
                 </th>
@@ -519,7 +509,7 @@
                 <td class="input">
                   Customer Status
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Input Order Sum
                 </td>
 
@@ -537,7 +527,7 @@
                   <a>silver</a>,
                   <a>bronze</a>)
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Integer
                 </td>
 
@@ -554,7 +544,7 @@
                 <td class="input">
                   ?
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   ?
                 </td>
 
@@ -573,7 +563,7 @@
 
                 <td class="input">bronze</td>
 
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output">
                   notok
@@ -591,7 +581,7 @@
                 <td class="input">
                   silver
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   &lt; 1000
                 </td>
 
@@ -611,7 +601,7 @@
                 <td class="input">
                   silver
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   &gt;= 1000
                 </td>
 
@@ -631,7 +621,7 @@
                 <td class="input">
                   gold
                 </td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output">
                   ok
@@ -672,7 +662,7 @@
                 <th class="hit"
                     rowspan="4"></th>
 
-                <th class="input double-border-right"
+                <th class="input"
                     colspan="2">
                   Input
                 </th>
@@ -692,7 +682,7 @@
                 <td class="input">
                   Customer Status
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Input Order Sum
                 </td>
 
@@ -710,7 +700,7 @@
                   <a>silver</a>,
                   <a>bronze</a>)
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Integer
                 </td>
 
@@ -727,7 +717,7 @@
                 <td class="input">
                   ?
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   ?
                 </td>
 
@@ -746,7 +736,7 @@
 
                 <td class="input">bronze</td>
 
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output">
                   notok
@@ -764,7 +754,7 @@
                 <td class="input">
                   silver
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   &lt; 1000
                 </td>
 
@@ -784,7 +774,7 @@
                 <td class="input">
                   silver
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   &gt;= 1000
                 </td>
 
@@ -804,7 +794,7 @@
                 <td class="input">
                   gold
                 </td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output">
                   ok
@@ -821,7 +811,7 @@
       </div>
 
 
-
+      -->
 
 
 
@@ -835,6 +825,8 @@
         <h2>Bold style</h2>
 
         <section class="dmn-table dmn-table-bold">
+          <div data-hook="controls"></div>
+
           <header>
             <h3>Check order</h3>
           </header>
@@ -845,7 +837,7 @@
                 <th class="hit"
                     rowspan="4"></th>
 
-                <th class="input double-border-right"
+                <th class="input"
                     colspan="2">
                   Input
                 </th>
@@ -865,7 +857,7 @@
                 <td class="input">
                   Customer Status
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Input Order Sum
                 </td>
 
@@ -885,7 +877,7 @@
                   <a>spectacular</a>,
                   <a>bronze</a>)
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   Integer
                 </td>
 
@@ -902,7 +894,7 @@
                 <td class="input">
                   ?
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   ?
                 </td>
 
@@ -921,7 +913,7 @@
 
                 <td class="input">bronze</td>
 
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output">
                   notok
@@ -936,11 +928,10 @@
               <tr>
                 <td class="number">2</td>
 
-                <td class="input"
-                    rowspan="2">
+                <td class="input">
                   silver
                 </td>
-                <td class="input double-border-right">
+                <td class="input">
                   &lt; 1000
                 </td>
 
@@ -957,7 +948,10 @@
               <tr>
                 <td class="number">3</td>
 
-                <td class="input double-border-right">
+                <td class="input">
+                  silver
+                </td>
+                <td class="input">
                   &gt;= 1000
                 </td>
 
@@ -977,7 +971,7 @@
                 <td class="input">
                   gold
                 </td>
-                <td class="input double-border-right"></td>
+                <td class="input"></td>
 
                 <td class="output">
                   ok
@@ -996,13 +990,17 @@
 
 
 
+    <script type="text/javascript" src="dependencies.js"></script>
     <script type="text/javascript" src="scripts.js"></script>
     <script type="text/javascript">
       'use strict';
       /* global selectAll: false, DecisionTable: false */
-
+      var dmnTables = {};
       selectAll('.dmn-table').forEach(function (dt) {
-        new DecisionTable(dt);
+        var tableView = new DecisionTable({
+          el: dt
+        });
+        dmnTables[tableView.cid] = tableView;
       });
     </script>
   </body>
