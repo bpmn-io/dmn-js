@@ -5,6 +5,99 @@
   font-weight: normal;
   font-style: normal;
 }
+.icon-dmn:before,
+[class^="icon-dmn"]:before,
+[class*=" icon-dmn"]:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.icon-up:before {
+  content: '\e800';
+}
+/* '' */
+.icon-down:before {
+  content: '\e801';
+}
+/* '' */
+.icon-clear:before {
+  content: '\e802';
+}
+/* '' */
+.icon-plus:before {
+  content: '\e803';
+}
+/* '' */
+.icon-minus:before {
+  content: '\e804';
+}
+/* '' */
+.icon-info:before {
+  content: '\e805';
+}
+/* '' */
+.icon-left:before {
+  content: '\e806';
+}
+/* '' */
+.icon-dmn-io:before {
+  content: '\e807';
+}
+/* '' */
+.icon-right:before {
+  content: '\e808';
+}
+/* '' */
+.icon-input:before {
+  content: '\e809';
+}
+/* '' */
+.icon-output:before {
+  content: '\e80a';
+}
+/* '' */
+.icon-copy:before {
+  content: '\e80b';
+}
+/* '' */
+.icon-keyboard:before {
+  content: '\e80c';
+}
+/* '' */
+.icon-undo:before {
+  content: '\e80d';
+}
+/* '' */
+.icon-redo:before {
+  content: '\e80e';
+}
+/* '' */
+.icon-menu:before {
+  content: '\e80f';
+}
+/* '' */
 .dmn-table {
   position: relative;
   max-height: 100%;
@@ -38,7 +131,8 @@
   text-align: right;
 }
 .dmn-table header,
-.dmn-table table {
+.dmn-table tbody,
+.dmn-table thead {
   border: 2px solid #a0a0a0;
 }
 .dmn-table thead,
@@ -77,6 +171,18 @@
 .dmn-table th.focused {
   z-index: 10;
   outline: 2px solid #52b415;
+}
+.dmn-table td > .value,
+.dmn-table th > .value {
+  display: block;
+}
+.dmn-table td > .value:empty:before,
+.dmn-table th > .value:empty:before {
+  content: '…';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
 }
 .dmn-table header {
   background-color: #fff;
@@ -122,7 +228,7 @@
 .dmn-table thead .annotation {
   vertical-align: bottom;
 }
-.dmn-table thead .annotation:after {
+.dmn-table thead .annotation .dmn-js-logo:after {
   font-family: "dmn";
   font-style: normal;
   font-weight: normal;
@@ -158,11 +264,13 @@
   -webkit-transition: color 0.218s ease;
   -o-transition: color 0.218s ease;
   transition: color 0.218s ease;
+  text-decoration: none;
 }
-.dmn-table thead .annotation:hover:after {
+.dmn-table thead .annotation .dmn-js-logo:hover:after {
   color: #52b415;
 }
 .dmn-table tbody {
+  border: 2px solid #a0a0a0;
   border-top: none;
 }
 .dmn-table tbody tr:nth-child(1) td,
@@ -178,6 +286,21 @@
 .dmn-table tbody .input:empty:before {
   content: ' - ';
   color: #c0c0c0;
+}
+.dmn-table tfoot tr,
+.dmn-table tfoot td {
+  border: none;
+}
+.dmn-table tfoot .add-rule {
+  text-align: right;
+}
+.dmn-table tfoot .add-rule a {
+  cursor: pointer;
+  color: #52b415;
+}
+.dmn-table tfoot .add-rule a:before {
+  padding: 0;
+  margin: 0;
 }
 .dmn-table tr.focused .number {
   z-index: 10;
@@ -261,6 +384,39 @@
 .dmn-table td.output:hover .ctrls:before,
 .dmn-table td.number:hover .ctrls:before {
   color: #52b415;
+}
+.dmn-table td.number .ctrls {
+  right: auto;
+  left: -4px;
+}
+.dmn-table.stripped tr:nth-child(even) td,
+.dmn-table.stripped tr:nth-child(even) th {
+  background-color: #efefef;
+}
+.dmn-table.stripped tr:nth-child(even):hover td,
+.dmn-table.stripped tr:nth-child(even):hover th {
+  background-color: #ededd4;
+}
+.dmn-table.stripped tr:nth-child(even) td.hover,
+.dmn-table.stripped tr:nth-child(even) th.hover {
+  background-color: #ededd4;
+}
+.dmn-table.stripped tr:nth-child(odd) td,
+.dmn-table.stripped tr:nth-child(odd) th {
+  background-color: #fefefe;
+}
+.dmn-table.stripped tr:nth-child(odd):hover td,
+.dmn-table.stripped tr:nth-child(odd):hover th {
+  background-color: #f0f0d7;
+}
+.dmn-table.stripped tr:nth-child(odd) td.hover,
+.dmn-table.stripped tr:nth-child(odd) th.hover {
+  background-color: #f0f0d7;
+}
+.dmn-table.stripped tr:hover td,
+.dmn-table.stripped tr:hover th,
+.dmn-table.stripped tr .hover {
+  color: #606060;
 }
 .dmn-table.scrollable {
   overflow: hidden;
