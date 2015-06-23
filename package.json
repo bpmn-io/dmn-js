@@ -58,6 +58,7 @@
   "dependencies": {
     "dmn-moddle": "dmn-io/dmn-moddle",
     "table-js": "dmn-io/table-js",
+    "diagram-js": "^0.10.2",
     "didi": "^0.0.4",
     "ids": "^0.1.0",
     "inherits": "^2.0.1",
