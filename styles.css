@@ -98,6 +98,14 @@
   content: '\e80f';
 }
 /* '' */
+.icon-setting:before {
+  content: '\e810';
+}
+/* '' */
+.icon-wrench:before {
+  content: '\e811';
+}
+/* '' */
 .dmn-table {
   position: relative;
   max-height: 100%;
@@ -273,6 +281,10 @@
   border: 2px solid #a0a0a0;
   border-top: none;
 }
+.dmn-table tbody td.input,
+.dmn-table tbody td.output {
+  cursor: context-menu;
+}
 .dmn-table tbody tr:nth-child(1) td,
 .dmn-table tbody tr:nth-child(1) th {
   border-top: none;
@@ -323,71 +335,76 @@
 .dmn-table td.output .ctrls,
 .dmn-table td.number .ctrls {
   position: absolute;
-  top: 5px;
-  right: -4px;
-  -webkit-transform-origin: center;
-  -moz-transform-origin: center;
-  -ms-transform-origin: center;
-  transform-origin: center;
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 .dmn-table th.input .ctrls:before,
 .dmn-table th.output .ctrls:before,
 .dmn-table td.input .ctrls:before,
 .dmn-table td.output .ctrls:before,
 .dmn-table td.number .ctrls:before {
-  font-family: "dmn";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Font smoothing. That was taken from TWBS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-  content: '\e80f';
-  color: #c0c0c0;
-  cursor: pointer;
-  -webkit-transition: color 0.218s ease;
-  -o-transition: color 0.218s ease;
-  transition: color 0.218s ease;
-}
-.dmn-table th.input .ctrls.open:before,
-.dmn-table th.output .ctrls.open:before,
-.dmn-table td.input .ctrls.open:before,
-.dmn-table td.output .ctrls.open:before,
-.dmn-table td.number .ctrls.open:before {
-  display: none;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+  width: 0;
+  height: 0;
+  top: -7px;
+  right: -2px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #c0c0c0;
+  -webkit-transition: border 0.218s ease;
+  -o-transition: border 0.218s ease;
+  transition: border 0.218s ease;
+  -webkit-transition: top 0.218s ease;
+  -o-transition: top 0.218s ease;
+  transition: top 0.218s ease;
+  -webkit-transition: right 0.218s ease;
+  -o-transition: right 0.218s ease;
+  transition: right 0.218s ease;
 }
 .dmn-table th.input:hover .ctrls:before,
 .dmn-table th.output:hover .ctrls:before,
 .dmn-table td.input:hover .ctrls:before,
 .dmn-table td.output:hover .ctrls:before,
 .dmn-table td.number:hover .ctrls:before {
-  color: #52b415;
+  top: -9px;
+  right: -4px;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 14px solid #52b415;
+}
+.dmn-table td.number {
+  /*
+    .ctrls {
+      right: auto;
+      left: -4px;
+    }
+    */
 }
 .dmn-table td.number .ctrls {
   right: auto;
-  left: -4px;
+  left: 0;
+}
+.dmn-table td.number .ctrls:before {
+  top: -7px;
+  left: -2px;
+  right: auto;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: left 0.218s ease;
+  -o-transition: left 0.218s ease;
+  transition: left 0.218s ease;
+}
+.dmn-table td.number:hover .ctrls:before {
+  left: -2px;
 }
 .dmn-table.stripped tr:nth-child(even) td,
 .dmn-table.stripped tr:nth-child(even) th {
