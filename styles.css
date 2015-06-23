@@ -138,6 +138,9 @@
 .dmn-table .number {
   text-align: right;
 }
+.dmn-table [contenteditable] {
+  cursor: text;
+}
 .dmn-table header,
 .dmn-table tbody,
 .dmn-table thead {
@@ -277,6 +280,10 @@
 .dmn-table thead .annotation .dmn-js-logo:hover:after {
   color: #52b415;
 }
+.dmn-table thead > tr .icon-dmn {
+  cursor: pointer;
+  color: #52b415;
+}
 .dmn-table tbody {
   border: 2px solid #a0a0a0;
   border-top: none;
@@ -347,10 +354,9 @@
   content: '';
   display: block;
   position: absolute;
-  -webkit-transform: rotate(135deg);
-  -ms-transform: rotate(135deg);
-  -o-transform: rotate(135deg);
-  transform: rotate(135deg);
+  -webkit-transition: border 0.218s ease;
+  -o-transition: border 0.218s ease;
+  transition: border 0.218s ease;
   width: 0;
   height: 0;
   top: -7px;
@@ -358,9 +364,10 @@
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-right: 10px solid #c0c0c0;
-  -webkit-transition: border 0.218s ease;
-  -o-transition: border 0.218s ease;
-  transition: border 0.218s ease;
+  -webkit-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
   -webkit-transition: top 0.218s ease;
   -o-transition: top 0.218s ease;
   transition: top 0.218s ease;
