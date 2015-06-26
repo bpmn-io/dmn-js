@@ -154,13 +154,6 @@
 .dmn-table thead {
   border: 2px solid #a0a0a0;
 }
-.dmn-table thead,
-.dmn-table tbody,
-.dmn-table tr,
-.dmn-table th,
-.dmn-table td {
-  position: relative;
-}
 .dmn-table header,
 .dmn-table td,
 .dmn-table th {
@@ -208,6 +201,7 @@
   display: inline-block;
   border-bottom: none;
   margin-bottom: -1px;
+  position: relative;
 }
 .dmn-table header h3 {
   margin: auto;
@@ -286,6 +280,7 @@
 }
 .dmn-table thead .annotation {
   vertical-align: bottom;
+  position: relative;
 }
 .dmn-table thead .annotation .dmn-js-logo:after {
   font-family: "dmn";
@@ -335,19 +330,10 @@
 .dmn-table tbody {
   border: 2px solid #a0a0a0;
   border-top: none;
-  /*
-    .input,
-    .output {
-      &:empty:before {
-        content: ' - ';
-        color: @dmn-gray-light;
-      }
-    }
-    */
 }
 .dmn-table tbody td.input,
 .dmn-table tbody td.output {
-  cursor: context-menu;
+  cursor: url(contextmenu-cursor.png), context-menu;
 }
 .dmn-table tbody tr:nth-child(1) td,
 .dmn-table tbody tr:nth-child(1) th {
@@ -384,63 +370,6 @@
 }
 .dmn-table tr > .input + .output {
   border-left: 3px double #a0a0a0;
-}
-.dmn-table th.input,
-.dmn-table th.output,
-.dmn-table td.input,
-.dmn-table td.output,
-.dmn-table td.number {
-  position: relative;
-}
-.dmn-table th.input .ctrls,
-.dmn-table th.output .ctrls,
-.dmn-table td.input .ctrls,
-.dmn-table td.output .ctrls,
-.dmn-table td.number .ctrls {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-.dmn-table th.input .ctrls:before,
-.dmn-table th.output .ctrls:before,
-.dmn-table td.input .ctrls:before,
-.dmn-table td.output .ctrls:before,
-.dmn-table td.number .ctrls:before {
-  content: '';
-  display: block;
-  position: absolute;
-  -webkit-transition: border 0.218s ease;
-  -o-transition: border 0.218s ease;
-  transition: border 0.218s ease;
-  width: 0;
-  height: 0;
-  top: -7px;
-  right: -2px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid #c0c0c0;
-  -webkit-transform: rotate(135deg);
-  -ms-transform: rotate(135deg);
-  -o-transform: rotate(135deg);
-  transform: rotate(135deg);
-  -webkit-transition: top 0.218s ease;
-  -o-transition: top 0.218s ease;
-  transition: top 0.218s ease;
-  -webkit-transition: right 0.218s ease;
-  -o-transition: right 0.218s ease;
-  transition: right 0.218s ease;
-}
-.dmn-table th.input:hover .ctrls:before,
-.dmn-table th.output:hover .ctrls:before,
-.dmn-table td.input:hover .ctrls:before,
-.dmn-table td.output:hover .ctrls:before,
-.dmn-table td.number:hover .ctrls:before {
-  top: -9px;
-  right: -4px;
-  border-top: 14px solid transparent;
-  border-bottom: 14px solid transparent;
-  border-right: 14px solid #52b415;
 }
 .dmn-table > [data-hook=controls] {
   float: right;
