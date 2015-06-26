@@ -249,7 +249,10 @@
   background-color: #cfcfcf;
   color: #fff;
 }
-.dmn-table thead .labels:empty:before {
+.dmn-table thead .labels td {
+  cursor: url(contextmenu-cursor.png), context-menu;
+}
+.dmn-table thead .labels td:empty:before {
   font-family: "dmn";
   font-style: normal;
   font-weight: normal;
