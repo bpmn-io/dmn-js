@@ -233,13 +233,29 @@
 .dmn-table thead .annotation {
   text-align: center;
 }
+.dmn-table thead .values,
+.dmn-table thead .mappings {
+  background-color: #c0c0c0;
+  color: #fff;
+}
+.dmn-table thead .values .input,
+.dmn-table thead .mappings .input,
+.dmn-table thead .values .output,
+.dmn-table thead .mappings .output {
+  background-color: transparent;
+}
+.dmn-table thead .values .input.col-focused,
+.dmn-table thead .mappings .input.col-focused,
+.dmn-table thead .values .output.col-focused,
+.dmn-table thead .mappings .output.col-focused {
+  background-color: rgba(255, 252, 176, 0.3);
+}
 .dmn-table thead .mappings {
   font-family: monospace;
+  background-color: #cfcfcf;
+  color: #fff;
 }
-.dmn-table thead .mappings td {
-  background-color: #f0f0f0;
-}
-.dmn-table thead .labels .value:empty:before {
+.dmn-table thead .labels:empty:before {
   font-family: "dmn";
   font-style: normal;
   font-weight: normal;
@@ -267,11 +283,6 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
   content: '\e813';
   color: #d9534f;
-}
-.dmn-table thead .values td,
-.dmn-table thead .values th {
-  background-color: #c0c0c0;
-  color: #f0f0f0;
 }
 .dmn-table thead .annotation {
   vertical-align: bottom;
@@ -348,9 +359,13 @@
 .dmn-table tbody .input.set {
   color: #606060;
 }
+.dmn-table tfoot {
+  border: 2px solid #eeeeee;
+  border-top: none;
+}
 .dmn-table tfoot tr,
 .dmn-table tfoot td {
-  border: none;
+  border-color: #eeeeee;
 }
 .dmn-table tfoot .add-rule {
   text-align: right;
@@ -363,10 +378,9 @@
   padding: 0;
   margin: 0;
 }
-.dmn-table tr.focused .number {
-  z-index: 10;
-  color: #52b415;
-  background-color: #eff9e8;
+.dmn-table td.col-focused,
+.dmn-table tr.row-focused td {
+  background-color: rgba(255, 252, 176, 0.3);
 }
 .dmn-table tr > .input + .output {
   border-left: 3px double #a0a0a0;
@@ -427,75 +441,6 @@
   border-top: 14px solid transparent;
   border-bottom: 14px solid transparent;
   border-right: 14px solid #52b415;
-}
-.dmn-table td.number {
-  /*
-    .ctrls {
-      right: auto;
-      left: -4px;
-    }
-    */
-}
-.dmn-table td.number .ctrls {
-  right: auto;
-  left: 0;
-}
-.dmn-table td.number .ctrls:before {
-  top: -7px;
-  left: -2px;
-  right: auto;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  -webkit-transition: left 0.218s ease;
-  -o-transition: left 0.218s ease;
-  transition: left 0.218s ease;
-}
-.dmn-table td.number:hover .ctrls:before {
-  left: -2px;
-}
-.dmn-table.stripped tr:nth-child(even) td,
-.dmn-table.stripped tr:nth-child(even) th {
-  background-color: #efefef;
-}
-.dmn-table.stripped tr:nth-child(even):hover td,
-.dmn-table.stripped tr:nth-child(even):hover th {
-  background-color: #ededd4;
-}
-.dmn-table.stripped tr:nth-child(even) td.hover,
-.dmn-table.stripped tr:nth-child(even) th.hover {
-  background-color: #ededd4;
-}
-.dmn-table.stripped tr:nth-child(odd) td,
-.dmn-table.stripped tr:nth-child(odd) th {
-  background-color: #fefefe;
-}
-.dmn-table.stripped tr:nth-child(odd):hover td,
-.dmn-table.stripped tr:nth-child(odd):hover th {
-  background-color: #f0f0d7;
-}
-.dmn-table.stripped tr:nth-child(odd) td.hover,
-.dmn-table.stripped tr:nth-child(odd) th.hover {
-  background-color: #f0f0d7;
-}
-.dmn-table.stripped tr:hover td,
-.dmn-table.stripped tr:hover th,
-.dmn-table.stripped tr .hover {
-  color: #606060;
-}
-.dmn-table.scrollable {
-  overflow: hidden;
-}
-.dmn-table.scrollable .detached.dmn-table-head {
-  width: calc(100% - 15px);
-}
-.dmn-table.scrollable .detached.dmn-table-body {
-  border-top: none;
-  margin-bottom: 2px;
-}
-.dmn-table.scrollable .body-wrapper {
-  overflow-y: scroll;
 }
 .dmn-table > [data-hook=controls] {
   float: right;
