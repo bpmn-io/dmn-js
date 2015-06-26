@@ -165,9 +165,9 @@
   -webkit-transition: color 0.218s ease;
   -o-transition: color 0.218s ease;
   transition: color 0.218s ease;
-  -webkit-transition: background-color 0.218s ease;
-  -o-transition: background-color 0.218s ease;
-  transition: background-color 0.218s ease;
+  -webkit-transition: background-color 0.436s ease;
+  -o-transition: background-color 0.436s ease;
+  transition: background-color 0.436s ease;
   overflow: hidden;
   text-overflow: ellipsis;
 }
