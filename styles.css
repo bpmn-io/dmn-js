@@ -206,6 +206,11 @@
 .dmn-table header h3 {
   margin: auto;
 }
+.dmn-table header h3:empty:before {
+  display: inline;
+  content: '<Set a name>';
+  color: #f0ad4e;
+}
 .dmn-table table {
   font-size: 90%;
   color: #606060;
@@ -248,9 +253,6 @@
   font-family: monospace;
   background-color: #cfcfcf;
   color: #fff;
-}
-.dmn-table thead .labels td {
-  cursor: url(contextmenu-cursor.png), context-menu;
 }
 .dmn-table thead .labels td:empty:before {
   font-family: "dmn";
@@ -334,10 +336,6 @@
   border: 2px solid #a0a0a0;
   border-top: none;
 }
-.dmn-table tbody td.input,
-.dmn-table tbody td.output {
-  cursor: url(contextmenu-cursor.png), context-menu;
-}
 .dmn-table tbody tr:nth-child(1) td,
 .dmn-table tbody tr:nth-child(1) th {
   border-top: none;
@@ -347,6 +345,12 @@
 }
 .dmn-table tbody .input.set {
   color: #606060;
+}
+.dmn-table .labels td,
+.dmn-table tbody .input,
+.dmn-table tbody .output,
+.dmn-table tbody .number {
+  cursor: url(contextmenu-cursor.png), context-menu;
 }
 .dmn-table tfoot {
   border: 2px solid #eeeeee;

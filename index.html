@@ -32,6 +32,9 @@
           <li><a href="#bold-style">
             Bold style
           </a></li>
+          <li><a href="#from-scratch">
+            From scratch
+          </a></li>
         </ul>
       </nav>
 
@@ -322,7 +325,6 @@
 
 
 
-
       <div class="holder holder-2"
            id="limited-available-width">
         <h2>Limited available width</h2>
@@ -465,9 +467,6 @@
           </table>
         </section>
       </div>
-
-
-
 
 
 
@@ -652,7 +651,6 @@
 
 
 
-
       <div class="holder holder-4"
            id="compact-style">
         <h2>Compact style</h2>
@@ -817,8 +815,6 @@
           </table>
         </section>
       </div>
-
-
 
 
 
@@ -995,6 +991,19 @@
           </table>
         </section>
       </div>
+
+
+
+
+
+
+
+
+      <div class="holder holder-6"
+           id="from-scratch">
+        <h2>From scratch</h2>
+        <!-- Will be outputed by the view -->
+      </div>
     </div>
 
 
@@ -1003,7 +1012,7 @@
     <script type="text/javascript" src="scripts.js"></script>
     <script type="text/javascript">
       'use strict';
-      /* global selectAll: false, DecisionTable: false */
+      /* global selectAll: false, DecisionTable: false, DecisionTableModel: false */
       var dmnTables = {};
       selectAll('.dmn-table').forEach(function (dt) {
         var tableView = new DecisionTable({
@@ -1011,6 +1020,20 @@
         });
         dmnTables[tableView.cid] = tableView;
       });
+
+      var fromScratchContainer = document.querySelector('#from-scratch');
+
+      var tableView = new DecisionTable({
+        model: new DecisionTableModel({
+          // name: 'Brand new table',
+          inputs: [],
+          outputs: [],
+          rules: []
+        })
+      });
+
+      dmnTables[tableView.cid] = tableView;
+      fromScratchContainer.appendChild(tableView.el);
     </script>
   </body>
 </html>
