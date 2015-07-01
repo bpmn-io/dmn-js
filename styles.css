@@ -378,7 +378,7 @@
 .dmn-table tr > .input + .output {
   border-left: 3px double #a0a0a0;
 }
-.dmn-table > [data-hook=controls] {
+.dmn-table > .hints {
   float: right;
   max-width: 50%;
   min-width: 20%;
@@ -386,39 +386,38 @@
   font-size: 90%;
   background-color: #f0f0f0;
 }
-.dmn-table > [data-hook=controls]:empty:before {
-  content: 'Hint: Make a right-click on the table';
-  display: inline-block;
-  min-width: 1em;
+.dmn-table > .hints i:before {
+  margin: 0;
+  color: #c0c0c0;
 }
-.dmn-table > [data-hook=controls] ul,
-.dmn-table > [data-hook=controls] li {
+.dmn-table > .hints ul,
+.dmn-table > .hints li {
   margin: 0;
   padding: 0;
 }
-.dmn-table > [data-hook=controls] ul {
+.dmn-table > .hints ul {
   list-style: none;
 }
-.dmn-table > [data-hook=controls] .coordinates {
+.dmn-table > .hints .coordinates {
   background-color: #fff;
   border-bottom: 1px dashed #a0a0a0;
   min-width: 100%;
   padding: 3px 6px;
 }
-.dmn-table > [data-hook=controls] .coordinates:empty:before {
+.dmn-table > .hints .coordinates:empty:before {
   display: inline-block;
   min-width: 1px;
   content: '*';
 }
-.dmn-table > [data-hook=controls] .actions {
+.dmn-table > .hints .actions {
   display: inline-block;
 }
-.dmn-table > [data-hook=controls] .actions a {
+.dmn-table > .hints .actions a {
   padding: 3px 6px;
   cursor: pointer;
   display: inline-block;
 }
-.dmn-table > [data-hook=controls] .actions a:hover {
+.dmn-table > .hints .actions a:hover {
   color: #52b415;
 }
 .dmn-table.dmn-table-compact {
@@ -462,9 +461,11 @@
 .dmn-suggestions-helper:after {
   display: block;
   position: absolute;
+  content: '';
+}
+.dmn-suggestions-helper:after {
   left: 0;
   top: 100%;
-  content: '';
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
   border-top: 8px solid #f0f0f0;
@@ -706,4 +707,89 @@
 }
 .dmn-context-menu ul ul ul li .label {
   display: none;
+}
+.dmn-clausevalues-setter {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  background-color: #f0f0f0;
+  min-width: 180px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter *:before,
+.dmn-clausevalues-setter *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-clausevalues-setter:after {
+  right: 100%;
+  top: 40px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #f0f0f0;
+}
+.dmn-clausevalues-setter .datatype,
+.dmn-clausevalues-setter .allowed-values {
+  padding: 6px;
+  max-width: 100%;
+}
+.dmn-clausevalues-setter .datatype {
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #a0a0a0;
+}
+.dmn-clausevalues-setter .datatype label,
+.dmn-clausevalues-setter .datatype select {
+  display: table-cell;
+}
+.dmn-clausevalues-setter .allowed-values {
+  border-top: 1px solid #fff;
+}
+.dmn-clausevalues-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clausevalues-setter select,
+.dmn-clausevalues-setter input {
+  border: 1px solid #a0a0a0;
+  background-color: #fff;
+  padding: 3px 6px;
+}
+.dmn-clausevalues-setter select:focus,
+.dmn-clausevalues-setter input:focus {
+  outline-color: #52b415;
+}
+.dmn-clausevalues-setter label {
+  font-weight: bolder;
+}
+.dmn-clausevalues-setter select {
+  width: 100%;
+}
+.dmn-clausevalues-setter ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 180px;
+  overflow-y: scroll;
+}
+.dmn-clausevalues-setter li {
+  margin: 3px 0 0 0;
+  padding: 0;
 }
