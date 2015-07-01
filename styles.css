@@ -740,7 +740,7 @@
 }
 .dmn-clausevalues-setter:after {
   right: 100%;
-  top: 40px;
+  top: 20px;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   border-right: 8px solid #f0f0f0;
@@ -753,7 +753,6 @@
 .dmn-clausevalues-setter .datatype {
   display: table;
   width: 100%;
-  border-bottom: 1px solid #a0a0a0;
 }
 .dmn-clausevalues-setter .datatype label,
 .dmn-clausevalues-setter .datatype select {
@@ -761,6 +760,16 @@
 }
 .dmn-clausevalues-setter .allowed-values {
   border-top: 1px solid #fff;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 6px;
+}
+.dmn-clausevalues-setter.choices .datatype {
+  border-bottom: 1px solid #a0a0a0;
+}
+.dmn-clausevalues-setter.choices .allowed-values {
+  padding: 6px;
+  max-height: 1000px;
 }
 .dmn-clausevalues-setter .invalid {
   background-color: #f4cecd;
