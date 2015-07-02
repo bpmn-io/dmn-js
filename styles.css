@@ -168,28 +168,20 @@
   -webkit-transition: background-color 0.436s ease;
   -o-transition: background-color 0.436s ease;
   transition: background-color 0.436s ease;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.dmn-table td:empty:before,
-.dmn-table th:empty:before {
-  content: '-';
-  display: inline-block;
-  width: 100%;
-  color: #a0a0a0;
-  text-align: center;
 }
 .dmn-table td.focused,
 .dmn-table th.focused {
   z-index: 10;
   outline: 2px solid #52b415;
 }
-.dmn-table td > .value,
-.dmn-table th > .value {
+.dmn-table .pseudo-input {
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  height: 100%;
 }
-.dmn-table td > .value:empty:before,
-.dmn-table th > .value:empty:before {
+.dmn-table .pseudo-input:empty:before {
   content: '-';
   display: inline-block;
   width: 100%;
