@@ -169,19 +169,28 @@
   -o-transition: background-color 0.436s ease;
   transition: background-color 0.436s ease;
 }
+.dmn-table td:empty:before,
+.dmn-table th:empty:before {
+  content: '-';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
 .dmn-table td.focused,
 .dmn-table th.focused {
-  z-index: 10;
-  outline: 2px solid #52b415;
+  box-shadow: 0px 0px 2px 2px rgba(82, 180, 21, 0.6) inset;
 }
-.dmn-table .pseudo-input {
+.dmn-table td [contenteditable],
+.dmn-table th [contenteditable] {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
   height: 100%;
 }
-.dmn-table .pseudo-input:empty:before {
+.dmn-table td [contenteditable]:empty:before,
+.dmn-table th [contenteditable]:empty:before {
   content: '-';
   display: inline-block;
   width: 100%;
@@ -750,18 +759,28 @@
 .dmn-clausevalues-setter .datatype select {
   display: table-cell;
 }
-.dmn-clausevalues-setter .allowed-values {
-  border-top: 1px solid #fff;
+.dmn-clausevalues-setter.choices .datatype,
+.dmn-clausevalues-setter.range .datatype {
+  border-bottom: 1px solid #a0a0a0;
+}
+.dmn-clausevalues-setter .allowed-values,
+.dmn-clausevalues-setter .ranged-values {
   max-height: 0;
   overflow: hidden;
   padding: 0 6px;
 }
-.dmn-clausevalues-setter.choices .datatype {
-  border-bottom: 1px solid #a0a0a0;
-}
-.dmn-clausevalues-setter.choices .allowed-values {
+.dmn-clausevalues-setter.choices .allowed-values,
+.dmn-clausevalues-setter.range .ranged-values {
   padding: 6px;
   max-height: 1000px;
+  border-top: 1px solid #fff;
+}
+.dmn-clausevalues-setter .allowed-values ul,
+.dmn-clausevalues-setter .ranged-values ul {
+  max-height: 180px;
+}
+.dmn-clausevalues-setter .allowed-values ul {
+  overflow-y: scroll;
 }
 .dmn-clausevalues-setter .invalid {
   background-color: #f4cecd;
@@ -779,7 +798,7 @@
   outline-color: #52b415;
 }
 .dmn-clausevalues-setter label {
-  font-weight: bolder;
+  font-weight: lighter;
 }
 .dmn-clausevalues-setter select {
   width: 100%;
@@ -788,8 +807,6 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: 180px;
-  overflow-y: scroll;
 }
 .dmn-clausevalues-setter li {
   margin: 3px 0 0 0;
