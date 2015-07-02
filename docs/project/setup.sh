@@ -61,6 +61,7 @@ npm install
 npm link
 npm link table-js
 npm link dmn-moddle
+npm link diagram-js
 
 
 echo setup dmn-js-examples/modeler

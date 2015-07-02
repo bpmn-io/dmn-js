@@ -14,6 +14,7 @@ The following projects from the [dmn-io](https://github.com/dmn-io) and [bpmn-io
 * [dmn-moddle](https://github.com/dmn-io/dmn-moddle)
 * [moddle](https://github.com/bpmn-io/moddle)
 * [moddle-xml](https://github.com/bpmn-io/moddle-xml)
+* [diagram-js](https://github.com/bpmn-io/diagram-js)
 
 and clone them into a common directory via
 
@@ -37,6 +38,7 @@ git clone git@github.com:dmn-io/PROJECT_NAME.git
 ├─dmn-js
 │   └─node_modules
 │       ├─table-js <link>
+│       ├─diagram-js <link>
 │       ├─moddle <link>
 │       └─dmn-moddle <link>
 ├─dmn-moddle
@@ -44,6 +46,8 @@ git clone git@github.com:dmn-io/PROJECT_NAME.git
 │       ├─moddle <link>
 │       └─moddle-xml <link>
 ├─table-js
+│   └─node_modules
+│       └─diagram-js <link>
 ├─moddle
 └─moddle-xml
     └─node_modules
