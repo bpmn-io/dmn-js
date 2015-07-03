@@ -168,6 +168,9 @@
   -webkit-transition: background-color 0.436s ease;
   -o-transition: background-color 0.436s ease;
   transition: background-color 0.436s ease;
+  -webkit-transition: box-shadow 0.436s ease;
+  -o-transition: box-shadow 0.436s ease;
+  transition: box-shadow 0.436s ease;
 }
 .dmn-table td:empty:before,
 .dmn-table th:empty:before {
@@ -179,7 +182,7 @@
 }
 .dmn-table td.focused,
 .dmn-table th.focused {
-  box-shadow: 0px 0px 2px 2px rgba(82, 180, 21, 0.6) inset;
+  box-shadow: 0px 0px 6px 0px rgba(82, 180, 21, 0.6) inset;
 }
 .dmn-table td [contenteditable],
 .dmn-table th [contenteditable] {
@@ -515,7 +518,7 @@
   display: block;
   z-index: 99;
   color: #808080;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
   box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
   -webkit-transition: top 0.218s ease;
@@ -524,7 +527,6 @@
   -webkit-transition: left 0.218s ease;
   -o-transition: left 0.218s ease;
   transition: left 0.218s ease;
-  background-color: #fff;
   min-width: 180px;
 }
 .dmn-context-menu .coordinates {
@@ -719,9 +721,9 @@
   display: block;
   z-index: 99;
   color: #808080;
+  background-color: #ffffff;
   -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
   box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
-  background-color: #f0f0f0;
   min-width: 180px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -748,7 +750,7 @@
   top: 20px;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 8px solid #f0f0f0;
+  border-right: 8px solid #ffffff;
 }
 .dmn-clausevalues-setter .datatype,
 .dmn-clausevalues-setter .allowed-values {
@@ -764,21 +766,20 @@
   vertical-align: middle;
   display: table-cell;
 }
-.dmn-clausevalues-setter.choices .datatype,
-.dmn-clausevalues-setter.range .datatype {
-  border-bottom: 1px solid #a0a0a0;
-}
 .dmn-clausevalues-setter .allowed-values,
 .dmn-clausevalues-setter .ranged-values {
   max-height: 0;
   overflow: hidden;
   padding: 0 6px;
 }
+.dmn-clausevalues-setter.choices .datatype,
+.dmn-clausevalues-setter.range .datatype {
+  border-bottom: 1px solid #f0f0f0;
+}
 .dmn-clausevalues-setter.choices .allowed-values,
 .dmn-clausevalues-setter.range .ranged-values {
   padding: 6px;
   max-height: 1000px;
-  border-top: 1px solid #fff;
 }
 .dmn-clausevalues-setter .allowed-values ul,
 .dmn-clausevalues-setter .ranged-values ul {
@@ -807,11 +808,17 @@
   border: 1px solid #a0a0a0;
   background-color: #fff;
   padding: 3px 6px;
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
 }
 .dmn-clausevalues-setter input:focus {
-  outline-color: #52b415;
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
 }
 .dmn-clausevalues-setter label {
+  color: #606060;
   min-width: 50px;
   font-weight: lighter;
   padding: 3px 0;
@@ -831,7 +838,7 @@
   display: block;
   z-index: 99;
   color: #808080;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
   box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
   z-index: 999;
@@ -848,11 +855,9 @@
   top: -4px;
   width: 100%;
   z-index: 10;
-  background-color: #f0f0f0;
+  background-color: inherit;
   position: absolute;
   border: 1px solid #a0a0a0;
-  border-width: 0 1px;
-  border-top: 1px solid #fff;
   left: -1px;
   z-index: 1;
 }
@@ -864,11 +869,22 @@
   min-height: 12px;
   padding: 3px 6px;
   cursor: pointer;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #a0a0a0;
+  border-bottom: 1px solid #c0c0c0;
+  background-color: #fff;
+  -webkit-transition: background-color 0.218s ease;
+  -o-transition: background-color 0.218s ease;
+  transition: background-color 0.218s ease;
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+}
+.combobox-suggestions li:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
 }
 .combobox-suggestions li:hover {
-  background-color: #c0c0c0;
+  background-color: #eefce5;
 }
 .combobox-suggestions li:first-child {
   margin-top: -4px;
