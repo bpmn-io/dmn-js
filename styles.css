@@ -288,6 +288,13 @@
   vertical-align: bottom;
   position: relative;
 }
+.dmn-table thead .annotation .dmn-js-logo {
+  text-decoration: none;
+  display: block;
+  position: absolute;
+  top: 12px;
+  right: 0;
+}
 .dmn-table thead .annotation .dmn-js-logo:after {
   font-family: "dmn";
   font-style: normal;
@@ -315,9 +322,6 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
   content: '\e807';
-  position: absolute;
-  top: 12px;
-  right: 0;
   text-align: right;
   font-size: 3em;
   color: #c0c0c0;
@@ -756,7 +760,8 @@
   width: 100%;
 }
 .dmn-clausevalues-setter .datatype label,
-.dmn-clausevalues-setter .datatype select {
+.dmn-clausevalues-setter .datatype input {
+  vertical-align: middle;
   display: table-cell;
 }
 .dmn-clausevalues-setter.choices .datatype,
@@ -782,26 +787,35 @@
 .dmn-clausevalues-setter .allowed-values ul {
   overflow-y: scroll;
 }
+.dmn-clausevalues-setter .allowed-values input {
+  width: 100%;
+}
+.dmn-clausevalues-setter .ranged-values li {
+  display: table;
+}
+.dmn-clausevalues-setter .ranged-values li label,
+.dmn-clausevalues-setter .ranged-values li input {
+  vertical-align: middle;
+  display: table-cell;
+}
+.dmn-clausevalues-setter .ranged-values li label {
+  min-width: 50px;
+}
 .dmn-clausevalues-setter .invalid {
   background-color: #f4cecd;
   border-color: #d9534f;
   color: #c9302c;
 }
-.dmn-clausevalues-setter select,
 .dmn-clausevalues-setter input {
   border: 1px solid #a0a0a0;
   background-color: #fff;
   padding: 3px 6px;
 }
-.dmn-clausevalues-setter select:focus,
 .dmn-clausevalues-setter input:focus {
   outline-color: #52b415;
 }
 .dmn-clausevalues-setter label {
   font-weight: lighter;
-}
-.dmn-clausevalues-setter select {
-  width: 100%;
 }
 .dmn-clausevalues-setter ul {
   list-style: none;
@@ -811,4 +825,48 @@
 .dmn-clausevalues-setter li {
   margin: 3px 0 0 0;
   padding: 0;
+}
+.combobox-suggestions {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #f0f0f0;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  z-index: 999;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #a0a0a0;
+  margin-top: 5px;
+}
+.combobox-suggestions:before {
+  content: '';
+  display: block;
+  height: 4px;
+  top: -4px;
+  width: 100%;
+  z-index: 10;
+  background-color: #f0f0f0;
+  position: absolute;
+  border: 1px solid #a0a0a0;
+  border-width: 0 1px;
+  border-top: 1px solid #fff;
+  left: -1px;
+}
+.combobox-suggestions li {
+  padding: 0;
+  margin: 0;
+  min-height: 12px;
+  padding: 3px 6px;
+  cursor: pointer;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #a0a0a0;
+}
+.combobox-suggestions li:hover {
+  background-color: #c0c0c0;
+}
+.combobox-suggestions li:last-child {
+  border-bottom: 0;
 }
