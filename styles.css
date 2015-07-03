@@ -798,9 +798,6 @@
   vertical-align: middle;
   display: table-cell;
 }
-.dmn-clausevalues-setter .ranged-values li label {
-  min-width: 50px;
-}
 .dmn-clausevalues-setter .invalid {
   background-color: #f4cecd;
   border-color: #d9534f;
@@ -815,7 +812,10 @@
   outline-color: #52b415;
 }
 .dmn-clausevalues-setter label {
+  min-width: 50px;
   font-weight: lighter;
+  padding: 3px 0;
+  margin-right: 6px;
 }
 .dmn-clausevalues-setter ul {
   list-style: none;
