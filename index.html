@@ -1,6 +1,7 @@
-<html>
+<!DOCTYPE html><html>
   <head>
     <title>DMN table design</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link type="text/css"
           rel="stylesheet"
           href="normalize.css" />
@@ -40,7 +41,8 @@
 
       <div class="intro">
         Those examples are aimed to provide styling guidelines for the decision tables of
-        <a href="//github.com/dmn-io/dmn-js">dmn-js</a>.
+        <a href="//github.com/dmn-io/dmn-js">dmn-js</a>.<br/>
+        <a href="https://github.com/falko/omg-specifications/blob/master/dmn/DMN%201.0%20FTF%20Beta%202%20(dtc-14-11-02).pdf">DMN 1.0 FTF Beta 2 (dtc-14-11-02).pdf</a>
       </div>
 
       <div class="holder holder-1"
@@ -48,7 +50,10 @@
         <h2>Limited available height</h2>
 
         <section class="dmn-table">
-          <div data-hook="controls"></div>
+          <div class="hints">
+            <i class="icon-dmn icon-info"></i>
+            <span data-hook="hints"></span>
+          </div>
 
           <header>
             <h3>Table name</h3>
@@ -330,7 +335,10 @@
         <h2>Limited available width</h2>
 
         <section class="dmn-table">
-          <div data-hook="controls"></div>
+          <div class="hints">
+            <i class="icon-dmn icon-info"></i>
+            <span data-hook="hints"></span>
+          </div>
 
           <header>
             <h3>Table name</h3>
@@ -480,7 +488,10 @@
         <h2>Full width</h2>
 
         <section class="dmn-table">
-          <div data-hook="controls"></div>
+          <div class="hints">
+            <i class="icon-dmn icon-info"></i>
+            <span data-hook="hints"></span>
+          </div>
 
           <header>
             <h3>Check order</h3>
@@ -822,13 +833,15 @@
 
 
 
-
       <div class="holder holder-5"
            id="bold-style">
         <h2>Bold style</h2>
 
         <section class="dmn-table dmn-table-bold">
-          <div data-hook="controls"></div>
+          <div class="hints">
+            <i class="icon-dmn icon-info"></i>
+            <span data-hook="hints"></span>
+          </div>
 
           <header>
             <h3>Check order</h3>
@@ -1016,6 +1029,9 @@
       var dmnTables = {};
       selectAll('.dmn-table').forEach(function (dt) {
         var tableView = new DecisionTable({
+          contextMenu:        window.dmnContextMenu,
+          clauseValuesEditor: window.dmnClauseValuedEditor,
+
           el: dt
         });
         dmnTables[tableView.cid] = tableView;
@@ -1024,6 +1040,9 @@
       var fromScratchContainer = document.querySelector('#from-scratch');
 
       var tableView = new DecisionTable({
+        contextMenu:        window.dmnContextMenu,
+        clauseValuesEditor: window.dmnClauseValuedEditor,
+
         model: new DecisionTableModel({
           // name: 'Brand new table',
           inputs: [],
