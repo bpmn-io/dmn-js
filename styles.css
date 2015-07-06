@@ -141,7 +141,7 @@
   background-color: #eff9e8;
 }
 .dmn-table .output {
-  background-color: #c4e7ae;
+  background-color: #e1f3d5;
 }
 .dmn-table .number {
   text-align: right;
@@ -716,6 +716,12 @@
 .dmn-context-menu ul ul ul li .label {
   display: none;
 }
+.dmn-context-menu li.input {
+  background-color: #eff9e8;
+}
+.dmn-context-menu li.output {
+  background-color: #e1f3d5;
+}
 .dmn-clausevalues-setter {
   position: absolute;
   display: block;
@@ -833,7 +839,64 @@
   margin: 3px 0 0 0;
   padding: 0;
 }
-.combobox-suggestions {
+.dmn-combobox {
+  position: relative;
+}
+.dmn-combobox input {
+  position: relative;
+  z-index: 1;
+}
+.dmn-combobox .caret {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  display: block;
+  z-index: 2;
+  text-align: center;
+  cursor: pointer;
+}
+.dmn-combobox .caret:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  display: block;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 50%;
+  margin-top: -8px;
+  content: '\E801';
+}
+.dmn-combobox .caret:hover:before {
+  color: #52b415;
+}
+.dmn-combobox.expanded .caret:before {
+  content: '\E800';
+}
+.dmn-combobox-suggestions {
   position: absolute;
   display: block;
   z-index: 99;
@@ -848,7 +911,7 @@
   border: 1px solid #a0a0a0;
   margin-top: 5px;
 }
-.combobox-suggestions:before {
+.dmn-combobox-suggestions:before {
   content: '';
   display: block;
   height: 4px;
@@ -861,7 +924,7 @@
   left: -1px;
   z-index: 1;
 }
-.combobox-suggestions li {
+.dmn-combobox-suggestions li {
   position: relative;
   z-index: 2;
   padding: 0;
@@ -878,17 +941,17 @@
   -o-transition: box-shadow 0.218s ease;
   transition: box-shadow 0.218s ease;
 }
-.combobox-suggestions li:focus {
+.dmn-combobox-suggestions li:focus {
   outline: none;
   box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
   border-color: #52b415;
 }
-.combobox-suggestions li:hover {
+.dmn-combobox-suggestions li:hover {
   background-color: #eefce5;
 }
-.combobox-suggestions li:first-child {
+.dmn-combobox-suggestions li:first-child {
   margin-top: -4px;
 }
-.combobox-suggestions li:last-child {
+.dmn-combobox-suggestions li:last-child {
   border-bottom: 0;
 }
