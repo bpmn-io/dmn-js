@@ -375,6 +375,7 @@
 }
 .dmn-table .labels td,
 .dmn-table .values td,
+.dmn-table .mappings td,
 .dmn-table tbody .input,
 .dmn-table tbody .output,
 .dmn-table tbody .number {
@@ -980,12 +981,16 @@
   display: table-cell;
   vertical-align: middle;
 }
+.dmn-combobox label {
+  padding-right: 6px;
+}
 .dmn-combobox input {
   -webkit-transition: box-shadow 0.218s ease;
   -o-transition: box-shadow 0.218s ease;
   transition: box-shadow 0.218s ease;
   padding: 3px 6px;
   border: 1px solid;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
