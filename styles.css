@@ -1,3 +1,12 @@
+/*
+@dmn-input-bg:            #DCDBC4;
+@dmn-output-bg:           #E1F3D5;
+@dmn-values-bg:           #C0C0C0;
+@dmn-mapping-bg:          #CFCFCF;
+@dmn-label-focused-bg:    #FEFDE6;
+@dmn-values-focused-bg:   #D2D1BA;
+@dmn-mapping-focused-bg:  #DCDBC4;
+*/
 @font-face {
   font-family: 'dmn';
   src: url('fonts/dmn.eot');
@@ -112,6 +121,14 @@
 /* '' */
 .icon-attention:before {
   content: '\e813';
+}
+/* '' */
+.icon-resize-big:before {
+  content: '\e814';
+}
+/* '' */
+.icon-resize-small:before {
+  content: '\e815';
 }
 /* '' */
 .dmn-table {
@@ -290,6 +307,8 @@
 .dmn-table thead .annotation {
   vertical-align: bottom;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .dmn-table thead .annotation .dmn-js-logo {
   text-decoration: none;
@@ -839,12 +858,141 @@
   margin: 3px 0 0 0;
   padding: 0;
 }
-.dmn-combobox {
+.dmn-clauseexpression-setter {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter *:before,
+.dmn-clauseexpression-setter *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-clauseexpression-setter:after {
+  right: 100%;
+  top: 20px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #ffffff;
+}
+.dmn-clauseexpression-setter .language,
+.dmn-clauseexpression-setter .source {
+  padding: 6px;
+}
+.dmn-clauseexpression-setter .language {
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+}
+.dmn-clauseexpression-setter .source {
   position: relative;
 }
+.dmn-clauseexpression-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clauseexpression-setter textarea {
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  position: relative;
+  font-family: monospace;
+  resize: none;
+}
+.dmn-clauseexpression-setter textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-clauseexpression-setter .toggle-editor-size {
+  position: absolute;
+  z-index: 2;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+}
+.dmn-clauseexpression-setter .toggle-editor-size:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  content: '\e814';
+}
+.dmn-clauseexpression-setter.big {
+  max-width: none;
+}
+.dmn-clauseexpression-setter.big:after {
+  display: none;
+}
+.dmn-clauseexpression-setter.big .toggle-editor-size:before {
+  content: '\e815';
+}
+.dmn-combobox {
+  position: relative;
+  display: table;
+  width: 100%;
+}
+.dmn-combobox label,
 .dmn-combobox input {
+  display: table-cell;
+  vertical-align: middle;
+}
+.dmn-combobox input {
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+  padding: 3px 6px;
+  border: 1px solid;
   position: relative;
   z-index: 1;
+}
+.dmn-combobox input:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
 }
 .dmn-combobox .caret {
   position: absolute;
