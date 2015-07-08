@@ -1,0 +1,140 @@
+.dmn-context-menu {
+  .tooltip(@dmn-gray-dark, #fff);
+  .transition(top 0.218s ease);
+  .transition(left 0.218s ease);
+  min-width: 180px;
+
+  .coordinates {
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+    display: none;
+  }
+
+  a {
+    .links-item;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style: none;
+    .fancy-list;
+  }
+
+  span {
+    display: inline-block;
+  }
+
+
+  .icon {
+    &:before {
+      .dmn-font;
+      margin: 0;
+    }
+
+    width: 1em;
+    margin-left: 0;
+    margin-right: .4em;
+
+    &.undo:before { content: '\e80d'; }
+    &.redo:before { content: '\e80e'; }
+
+    &.plus:before { content: '\e803'; }
+    &.minus:before { content: '\e804'; }
+
+    &.input:before { content: '\e809'; }
+    &.output:before { content: '\e80a'; }
+
+    &.copy:before { content: '\e80b'; }
+
+    &.above:before { content: '\e800'; }
+    &.below:before { content: '\e801'; }
+    &.left:before { content: '\e806'; }
+    &.right:before { content: '\e808'; }
+
+    &.clear:before { content: '\e812'; }
+  }
+
+  a.disabled,
+  a.disabled:hover {
+    color: @dmn-gray-dark;
+    cursor: default;
+  }
+
+  ul:empty {
+    display: none;
+  }
+
+  > ul > li {
+    padding-top: @dmn-vertical-padding;
+    padding-bottom: @dmn-vertical-padding;
+    border-bottom: 1px dotted @dmn-gray-light;
+    &:last-child {
+      border-bottom: none;
+    }
+
+    > ul {
+      .label {
+        padding-left: 0.4em;
+      }
+    }
+  }
+
+  ul ul {
+    overflow: hidden;
+    li {
+      overflow: hidden;
+      position: relative;
+
+      float: left;
+      clear: both;
+
+      > a {
+        display: inline-block;
+      }
+
+      > ul {
+        float: right;
+      }
+      &.dropdown {
+        width: 100%;
+      }
+    }
+  }
+
+  ul ul ul {
+    display: inline-block;
+    text-align: right;
+
+    li {
+      display: inline-block;
+      float: none;
+      width: auto;
+
+      &:after {
+        display: none;
+      }
+
+      .icon {
+        width: 1em;
+        margin: 0 0.2em;
+      }
+
+      .label {
+        display: none;
+      }
+    }
+  }
+
+  li {
+    &.input {
+      background-color: @dmn-input-color;
+    }
+    &.output {
+      background-color: @dmn-output-color;
+    }
+  }
+}
