@@ -867,9 +867,23 @@
   background-color: #ffffff;
   -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
   box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  max-width: 280px;
+  max-height: 220px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-transition: top 0.218s ease;
+  -o-transition: top 0.218s ease;
+  transition: top 0.218s ease;
+  -webkit-transition: left 0.218s ease;
+  -o-transition: left 0.218s ease;
+  transition: left 0.218s ease;
+  -webkit-transition: max-width 0.218s ease;
+  -o-transition: max-width 0.218s ease;
+  transition: max-width 0.218s ease;
+  -webkit-transition: max-height 0.218s ease;
+  -o-transition: max-height 0.218s ease;
+  transition: max-height 0.218s ease;
 }
 .dmn-clauseexpression-setter * {
   -webkit-box-sizing: border-box;
@@ -963,7 +977,8 @@
   content: '\e814';
 }
 .dmn-clauseexpression-setter.big {
-  max-width: none;
+  max-width: 20000px;
+  max-height: 20000px;
 }
 .dmn-clauseexpression-setter.big:after {
   display: none;
