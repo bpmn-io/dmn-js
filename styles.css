@@ -255,7 +255,7 @@
 }
 .dmn-table thead .values,
 .dmn-table thead .mappings {
-  background-color: #c0c0c0;
+  background-color: #cfcfcf;
   color: #fff;
 }
 .dmn-table thead .values .input,
@@ -272,8 +272,7 @@
 }
 .dmn-table thead .mappings {
   font-family: monospace;
-  background-color: #cfcfcf;
-  color: #fff;
+  background-color: #c0c0c0;
 }
 .dmn-table thead .labels td:empty:before {
   font-family: "dmn";
@@ -373,13 +372,9 @@
 .dmn-table tbody .input.set {
   color: #606060;
 }
-.dmn-table .labels td,
-.dmn-table .values td,
 .dmn-table .mappings td,
-.dmn-table tbody .input,
-.dmn-table tbody .output,
-.dmn-table tbody .number {
-  cursor: url(contextmenu-cursor.png), context-menu;
+.dmn-table .values td {
+  cursor: pointer;
 }
 .dmn-table tfoot {
   border: 2px solid #eeeeee;
