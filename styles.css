@@ -1,0 +1,1105 @@
+/*
+@dmn-input-bg:            #DCDBC4;
+@dmn-output-bg:           #E1F3D5;
+@dmn-values-bg:           #C0C0C0;
+@dmn-mapping-bg:          #CFCFCF;
+@dmn-label-focused-bg:    #FEFDE6;
+@dmn-values-focused-bg:   #D2D1BA;
+@dmn-mapping-focused-bg:  #DCDBC4;
+*/
+@font-face {
+  font-family: 'dmn';
+  src: url('fonts/dmn.eot');
+  src: url('fonts/dmn.eot#iefix') format('embedded-opentype'), url('fonts/dmn.woff') format('woff'), url('fonts/dmn.ttf') format('truetype'), url('fonts/dmn.svg#dmn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon-dmn:before,
+[class^="icon-dmn"]:before,
+[class*=" icon-dmn"]:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.icon-up:before {
+  content: '\e800';
+}
+/* '' */
+.icon-down:before {
+  content: '\e801';
+}
+/* '' */
+.icon-clear:before {
+  content: '\e802';
+}
+/* '' */
+.icon-plus:before {
+  content: '\e803';
+}
+/* '' */
+.icon-minus:before {
+  content: '\e804';
+}
+/* '' */
+.icon-info:before {
+  content: '\e805';
+}
+/* '' */
+.icon-left:before {
+  content: '\e806';
+}
+/* '' */
+.icon-dmn-io:before {
+  content: '\e807';
+}
+/* '' */
+.icon-right:before {
+  content: '\e808';
+}
+/* '' */
+.icon-input:before {
+  content: '\e809';
+}
+/* '' */
+.icon-output:before {
+  content: '\e80a';
+}
+/* '' */
+.icon-copy:before {
+  content: '\e80b';
+}
+/* '' */
+.icon-keyboard:before {
+  content: '\e80c';
+}
+/* '' */
+.icon-undo:before {
+  content: '\e80d';
+}
+/* '' */
+.icon-redo:before {
+  content: '\e80e';
+}
+/* '' */
+.icon-menu:before {
+  content: '\e80f';
+}
+/* '' */
+.icon-setting:before {
+  content: '\e810';
+}
+/* '' */
+.icon-wrench:before {
+  content: '\e811';
+}
+/* '' */
+.icon-eraser:before {
+  content: '\e812';
+}
+/* '' */
+.icon-attention:before {
+  content: '\e813';
+}
+/* '' */
+.icon-resize-big:before {
+  content: '\e814';
+}
+/* '' */
+.icon-resize-small:before {
+  content: '\e815';
+}
+/* '' */
+.dmn-table {
+  position: relative;
+  max-height: 100%;
+  color: #606060;
+  overflow: visible;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-table * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-table *:before,
+.dmn-table *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-table *:focus {
+  outline: none;
+}
+.dmn-table .input {
+  background-color: #eff9e8;
+}
+.dmn-table .output {
+  background-color: #e1f3d5;
+}
+.dmn-table .number {
+  text-align: right;
+}
+.dmn-table [contenteditable] {
+  cursor: text;
+}
+.dmn-table header,
+.dmn-table tbody,
+.dmn-table thead {
+  border: 2px solid #a0a0a0;
+}
+.dmn-table header,
+.dmn-table td,
+.dmn-table th {
+  padding: 3px 6px;
+}
+.dmn-table td,
+.dmn-table th {
+  border: 1px solid #a0a0a0;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  -webkit-transition: background-color 0.436s ease;
+  -o-transition: background-color 0.436s ease;
+  transition: background-color 0.436s ease;
+  -webkit-transition: box-shadow 0.436s ease;
+  -o-transition: box-shadow 0.436s ease;
+  transition: box-shadow 0.436s ease;
+}
+.dmn-table td:empty:before,
+.dmn-table th:empty:before {
+  content: '-';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmn-table td.focused,
+.dmn-table th.focused {
+  box-shadow: 0px 0px 6px 0px rgba(82, 180, 21, 0.6) inset;
+}
+.dmn-table td [contenteditable],
+.dmn-table th [contenteditable] {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  height: 100%;
+}
+.dmn-table td [contenteditable]:empty:before,
+.dmn-table th [contenteditable]:empty:before {
+  content: '-';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmn-table header {
+  background-color: #fff;
+  display: inline-block;
+  border-bottom: none;
+  margin-bottom: -1px;
+  position: relative;
+}
+.dmn-table header h3 {
+  margin: auto;
+}
+.dmn-table header h3:empty:before {
+  display: inline;
+  content: '<Set a name>';
+  color: #f0ad4e;
+}
+.dmn-table table {
+  font-size: 90%;
+  color: #606060;
+  background-color: #ffffff;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.dmn-table thead {
+  border-bottom: 3px double #a0a0a0;
+}
+.dmn-table thead .hit {
+  vertical-align: top;
+  width: 3em;
+}
+.dmn-table thead .labels,
+.dmn-table thead .values,
+.dmn-table thead .mappings,
+.dmn-table thead .annotation {
+  text-align: center;
+}
+.dmn-table thead .values,
+.dmn-table thead .mappings {
+  background-color: #cfcfcf;
+  color: #fff;
+}
+.dmn-table thead .values .input,
+.dmn-table thead .mappings .input,
+.dmn-table thead .values .output,
+.dmn-table thead .mappings .output {
+  background-color: transparent;
+}
+.dmn-table thead .values .input.col-focused,
+.dmn-table thead .mappings .input.col-focused,
+.dmn-table thead .values .output.col-focused,
+.dmn-table thead .mappings .output.col-focused {
+  background-color: rgba(255, 252, 176, 0.3);
+}
+.dmn-table thead .mappings {
+  font-family: monospace;
+  background-color: #c0c0c0;
+}
+.dmn-table thead .labels td:empty:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  content: '\e813';
+  color: #d9534f;
+}
+.dmn-table thead .annotation {
+  vertical-align: bottom;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmn-table thead .annotation .dmn-js-logo {
+  text-decoration: none;
+  display: block;
+  position: absolute;
+  top: 12px;
+  right: 0;
+}
+.dmn-table thead .annotation .dmn-js-logo:after {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  content: '\e807';
+  text-align: right;
+  font-size: 3em;
+  color: #c0c0c0;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  text-decoration: none;
+}
+.dmn-table thead .annotation .dmn-js-logo:hover:after {
+  color: #52b415;
+}
+.dmn-table thead > tr .icon-dmn {
+  cursor: pointer;
+  color: #52b415;
+}
+.dmn-table tbody {
+  border: 2px solid #a0a0a0;
+  border-top: none;
+}
+.dmn-table tbody tr:nth-child(1) td,
+.dmn-table tbody tr:nth-child(1) th {
+  border-top: none;
+}
+.dmn-table tbody .input {
+  color: #808080;
+}
+.dmn-table tbody .input.set {
+  color: #606060;
+}
+.dmn-table .mappings td,
+.dmn-table .values td {
+  cursor: pointer;
+}
+.dmn-table tfoot {
+  border: 2px solid #eeeeee;
+  border-top: none;
+}
+.dmn-table tfoot tr,
+.dmn-table tfoot td {
+  border-color: #eeeeee;
+}
+.dmn-table tfoot .add-rule {
+  text-align: right;
+}
+.dmn-table tfoot .add-rule a {
+  cursor: pointer;
+  color: #52b415;
+}
+.dmn-table tfoot .add-rule a:before {
+  padding: 0;
+  margin: 0;
+}
+.dmn-table td.col-focused,
+.dmn-table tr.row-focused td {
+  background-color: rgba(255, 252, 176, 0.3);
+}
+.dmn-table tr > .input + .output {
+  border-left: 3px double #a0a0a0;
+}
+.dmn-table > .hints {
+  float: right;
+  max-width: 50%;
+  min-width: 20%;
+  padding: 3px 6px;
+  font-size: 90%;
+  background-color: #f0f0f0;
+}
+.dmn-table > .hints i:before {
+  margin: 0;
+  color: #c0c0c0;
+}
+.dmn-table > .hints ul,
+.dmn-table > .hints li {
+  margin: 0;
+  padding: 0;
+}
+.dmn-table > .hints ul {
+  list-style: none;
+}
+.dmn-table > .hints .coordinates {
+  background-color: #fff;
+  border-bottom: 1px dashed #a0a0a0;
+  min-width: 100%;
+  padding: 3px 6px;
+}
+.dmn-table > .hints .coordinates:empty:before {
+  display: inline-block;
+  min-width: 1px;
+  content: '*';
+}
+.dmn-table > .hints .actions {
+  display: inline-block;
+}
+.dmn-table > .hints .actions a {
+  padding: 3px 6px;
+  cursor: pointer;
+  display: inline-block;
+}
+.dmn-table > .hints .actions a:hover {
+  color: #52b415;
+}
+.dmn-table.dmn-table-compact {
+  font-size: 95%;
+}
+.dmn-table.dmn-table-compact header,
+.dmn-table.dmn-table-compact td,
+.dmn-table.dmn-table-compact th,
+.dmn-table.dmn-table-compact .controls .coordinates,
+.dmn-table.dmn-table-compact .controls a {
+  padding: 1px 2px;
+}
+.dmn-table.dmn-table-compact .controls {
+  margin-bottom: 4px;
+}
+.dmn-table.dmn-table-bold {
+  font-size: 110%;
+}
+.dmn-table.dmn-table-bold header,
+.dmn-table.dmn-table-bold td,
+.dmn-table.dmn-table-bold th,
+.dmn-table.dmn-table-bold .controls .coordinates,
+.dmn-table.dmn-table-bold .controls a {
+  padding: 6px 12px;
+}
+.dmn-table.dmn-table-bold .controls {
+  margin-bottom: 24px;
+}
+.dmn-suggestions-helper {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #f0f0f0;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  list-style: none;
+  padding: 3px 6px;
+  margin: 3px 0 0 6px;
+}
+.dmn-suggestions-helper:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-suggestions-helper:after {
+  left: 0;
+  top: 100%;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 8px solid #f0f0f0;
+}
+.dmn-suggestions-helper li {
+  display: inline-block;
+  padding: 0;
+  cursor: pointer;
+}
+.dmn-suggestions-helper li:after {
+  display: inline-block;
+  content: ' / ';
+  color: #c0c0c0;
+  margin: 0 0.2em;
+}
+.dmn-suggestions-helper li:last-child:after {
+  display: none;
+}
+.dmn-suggestions-helper li span {
+  color: #52b415;
+  text-decoration: underline;
+}
+.dmn-table-clause-controls {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #f0f0f0;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  margin: 0;
+  padding: 0;
+}
+.dmn-table-clause-controls li {
+  padding: 3px 6px;
+  margin: 3px 0 0 6px;
+  cursor: pointer;
+}
+.dmn-context-menu {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  -webkit-transition: top 0.218s ease;
+  -o-transition: top 0.218s ease;
+  transition: top 0.218s ease;
+  -webkit-transition: left 0.218s ease;
+  -o-transition: left 0.218s ease;
+  transition: left 0.218s ease;
+  min-width: 180px;
+}
+.dmn-context-menu .coordinates {
+  padding: 3px 6px;
+  display: none;
+}
+.dmn-context-menu a {
+  color: #52b415;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  padding: 3px 6px;
+}
+.dmn-context-menu a:hover {
+  color: #3d8610;
+}
+.dmn-context-menu a:hover {
+  background-color: #c0c0c0;
+}
+.dmn-context-menu ul,
+.dmn-context-menu li {
+  margin: 0;
+  padding: 0;
+}
+.dmn-context-menu ul {
+  list-style: none;
+}
+.dmn-context-menu ul li {
+  position: relative;
+}
+.dmn-context-menu ul li:after,
+.dmn-context-menu ul li > a {
+  display: block;
+}
+.dmn-context-menu ul li:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(200, 200, 200, 0.3);
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 0;
+  -webkit-transition: width 0.218s ease;
+  -o-transition: width 0.218s ease;
+  transition: width 0.218s ease;
+}
+.dmn-context-menu ul li:hover:after {
+  width: 1.6em;
+}
+.dmn-context-menu ul li li:hover:after {
+  width: 100%;
+}
+.dmn-context-menu ul li > a {
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+}
+.dmn-context-menu ul li > a:hover {
+  background-color: transparent;
+}
+.dmn-context-menu span {
+  display: inline-block;
+}
+.dmn-context-menu .icon {
+  width: 1em;
+  margin-left: 0;
+  margin-right: .4em;
+}
+.dmn-context-menu .icon:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  margin: 0;
+}
+.dmn-context-menu .icon.undo:before {
+  content: '\e80d';
+}
+.dmn-context-menu .icon.redo:before {
+  content: '\e80e';
+}
+.dmn-context-menu .icon.plus:before {
+  content: '\e803';
+}
+.dmn-context-menu .icon.minus:before {
+  content: '\e804';
+}
+.dmn-context-menu .icon.input:before {
+  content: '\e809';
+}
+.dmn-context-menu .icon.output:before {
+  content: '\e80a';
+}
+.dmn-context-menu .icon.copy:before {
+  content: '\e80b';
+}
+.dmn-context-menu .icon.above:before {
+  content: '\e800';
+}
+.dmn-context-menu .icon.below:before {
+  content: '\e801';
+}
+.dmn-context-menu .icon.left:before {
+  content: '\e806';
+}
+.dmn-context-menu .icon.right:before {
+  content: '\e808';
+}
+.dmn-context-menu .icon.clear:before {
+  content: '\e812';
+}
+.dmn-context-menu a.disabled,
+.dmn-context-menu a.disabled:hover {
+  color: #808080;
+  cursor: default;
+}
+.dmn-context-menu ul:empty {
+  display: none;
+}
+.dmn-context-menu > ul > li {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px dotted #c0c0c0;
+}
+.dmn-context-menu > ul > li:last-child {
+  border-bottom: none;
+}
+.dmn-context-menu > ul > li > ul .label {
+  padding-left: 0.4em;
+}
+.dmn-context-menu ul ul {
+  overflow: hidden;
+}
+.dmn-context-menu ul ul li {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  clear: both;
+}
+.dmn-context-menu ul ul li > a {
+  display: inline-block;
+}
+.dmn-context-menu ul ul li > ul {
+  float: right;
+}
+.dmn-context-menu ul ul li.dropdown {
+  width: 100%;
+}
+.dmn-context-menu ul ul ul {
+  display: inline-block;
+  text-align: right;
+}
+.dmn-context-menu ul ul ul li {
+  display: inline-block;
+  float: none;
+  width: auto;
+}
+.dmn-context-menu ul ul ul li:after {
+  display: none;
+}
+.dmn-context-menu ul ul ul li .icon {
+  width: 1em;
+  margin: 0 0.2em;
+}
+.dmn-context-menu ul ul ul li .label {
+  display: none;
+}
+.dmn-context-menu li.input {
+  background-color: #eff9e8;
+}
+.dmn-context-menu li.output {
+  background-color: #e1f3d5;
+}
+.dmn-clausevalues-setter {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  min-width: 180px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter *:before,
+.dmn-clausevalues-setter *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-clausevalues-setter:after {
+  right: 100%;
+  top: 20px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #ffffff;
+}
+.dmn-clausevalues-setter .datatype,
+.dmn-clausevalues-setter .allowed-values {
+  padding: 6px;
+  max-width: 100%;
+}
+.dmn-clausevalues-setter .datatype {
+  display: table;
+  width: 100%;
+}
+.dmn-clausevalues-setter .datatype label,
+.dmn-clausevalues-setter .datatype input {
+  vertical-align: middle;
+  display: table-cell;
+}
+.dmn-clausevalues-setter .allowed-values,
+.dmn-clausevalues-setter .ranged-values {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 6px;
+}
+.dmn-clausevalues-setter.choices .datatype,
+.dmn-clausevalues-setter.range .datatype {
+  border-bottom: 1px solid #f0f0f0;
+}
+.dmn-clausevalues-setter.choices .allowed-values,
+.dmn-clausevalues-setter.range .ranged-values {
+  padding: 6px;
+  max-height: 1000px;
+}
+.dmn-clausevalues-setter .allowed-values ul,
+.dmn-clausevalues-setter .ranged-values ul {
+  max-height: 180px;
+}
+.dmn-clausevalues-setter .allowed-values ul {
+  overflow-y: scroll;
+}
+.dmn-clausevalues-setter .allowed-values input {
+  width: 100%;
+}
+.dmn-clausevalues-setter .ranged-values li {
+  display: table;
+}
+.dmn-clausevalues-setter .ranged-values li label,
+.dmn-clausevalues-setter .ranged-values li input {
+  vertical-align: middle;
+  display: table-cell;
+}
+.dmn-clausevalues-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clausevalues-setter input {
+  border: 1px solid #a0a0a0;
+  background-color: #fff;
+  padding: 3px 6px;
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+}
+.dmn-clausevalues-setter input:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-clausevalues-setter label {
+  color: #606060;
+  min-width: 50px;
+  font-weight: lighter;
+  padding: 3px 0;
+  margin-right: 6px;
+}
+.dmn-clausevalues-setter ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dmn-clausevalues-setter li {
+  margin: 3px 0 0 0;
+  padding: 0;
+}
+.dmn-clauseexpression-setter {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter *:before,
+.dmn-clauseexpression-setter *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-clauseexpression-setter:after {
+  right: 100%;
+  top: 20px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #ffffff;
+}
+.dmn-clauseexpression-setter .language,
+.dmn-clauseexpression-setter .source {
+  padding: 6px;
+}
+.dmn-clauseexpression-setter .language {
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+}
+.dmn-clauseexpression-setter .source {
+  position: relative;
+}
+.dmn-clauseexpression-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clauseexpression-setter textarea {
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  position: relative;
+  font-family: monospace;
+  resize: none;
+}
+.dmn-clauseexpression-setter textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-clauseexpression-setter .toggle-editor-size {
+  position: absolute;
+  z-index: 2;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+}
+.dmn-clauseexpression-setter .toggle-editor-size:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  content: '\e814';
+}
+.dmn-clauseexpression-setter.big {
+  max-width: none;
+}
+.dmn-clauseexpression-setter.big:after {
+  display: none;
+}
+.dmn-clauseexpression-setter.big .toggle-editor-size:before {
+  content: '\e815';
+}
+.dmn-combobox {
+  position: relative;
+  display: table;
+  width: 100%;
+}
+.dmn-combobox label,
+.dmn-combobox input {
+  display: table-cell;
+  vertical-align: middle;
+}
+.dmn-combobox label {
+  padding-right: 6px;
+}
+.dmn-combobox input {
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+  padding: 3px 6px;
+  border: 1px solid;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.dmn-combobox input:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-combobox .caret {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  display: block;
+  z-index: 2;
+  text-align: center;
+  cursor: pointer;
+}
+.dmn-combobox .caret:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  display: block;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 50%;
+  margin-top: -8px;
+  content: '\E801';
+}
+.dmn-combobox .caret:hover:before {
+  color: #52b415;
+}
+.dmn-combobox.expanded .caret:before {
+  content: '\E800';
+}
+.dmn-combobox-suggestions {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  z-index: 999;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #a0a0a0;
+  margin-top: 5px;
+}
+.dmn-combobox-suggestions:before {
+  content: '';
+  display: block;
+  height: 4px;
+  top: -4px;
+  width: 100%;
+  z-index: 10;
+  background-color: inherit;
+  position: absolute;
+  border: 1px solid #a0a0a0;
+  left: -1px;
+  z-index: 1;
+}
+.dmn-combobox-suggestions li {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  min-height: 12px;
+  padding: 3px 6px;
+  cursor: pointer;
+  border-bottom: 1px solid #c0c0c0;
+  background-color: #fff;
+  -webkit-transition: background-color 0.218s ease;
+  -o-transition: background-color 0.218s ease;
+  transition: background-color 0.218s ease;
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+}
+.dmn-combobox-suggestions li:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-combobox-suggestions li:hover {
+  background-color: #eefce5;
+}
+.dmn-combobox-suggestions li:first-child {
+  margin-top: -4px;
+}
+.dmn-combobox-suggestions li:last-child {
+  border-bottom: 0;
+}

@@ -1,0 +1,67 @@
+.dmn-clauseexpression-setter {
+  .tooltip(@dmn-gray-dark, #fff);
+  // min-width: 120px;
+  // max-width: 290px;
+
+  .borderbox;
+
+  .arrow-left(8px, 20px, #fff);
+
+
+  .language,
+  .source {
+    padding: @dmn-horizontal-padding;
+  }
+
+  .language {
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .source {
+    position: relative;
+  }
+
+  .invalid {
+    background-color: lighten(@dmn-danger, 30%);
+    border-color: @dmn-danger;
+    color: darken(@dmn-danger, 10%);
+  }
+
+  textarea {
+    .focused();
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    position: relative;
+    font-family: monospace;
+    resize: none;
+  }
+
+  .toggle-editor-size {
+    position: absolute;
+    z-index: 2;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+
+    &:before {
+      .dmn-font();
+      content: '\e814';
+    }
+  }
+
+  &.big {
+    max-width: none;
+
+    &:after {
+      display: none;
+    }
+
+    .toggle-editor-size:before {
+      content: '\e815';
+    }
+  }
+}

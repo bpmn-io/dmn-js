@@ -1,0 +1,272 @@
+.styles-editor {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: fixed;
+  background-color: #eeeeee;
+  left: 0;
+  top: 0;
+  width: 350px;
+  bottom: 0;
+  padding: 15px;
+  z-index: 9999;
+  color: #333333;
+  border-right: 1px solid #777777;
+  -webkit-transform: translate(-350px, 0);
+  -ms-transform: translate(-350px, 0);
+  -o-transform: translate(-350px, 0);
+  transform: translate(-350px, 0);
+  -webkit-transition: transform 0.436s ease;
+  -o-transition: transform 0.436s ease;
+  transition: transform 0.436s ease;
+  -webkit-box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
+  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
+}
+.styles-editor * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.styles-editor *:before,
+.styles-editor *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.styles-editor .toggle-open {
+  position: absolute;
+  display: block;
+  width: 28px;
+  height: 28px;
+  right: -28px;
+  top: 8px;
+  background-color: #eeeeee;
+  border: 1px solid #777777;
+  border-left: none;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
+  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
+  /*
+    span:nth-child(1) {
+      -webkit-transform: rotate(45deg) translate(0, -3px);
+          -ms-transform: rotate(45deg) translate(0, -3px); // IE9 only
+           -o-transform: rotate(45deg) translate(0, -3px);
+              transform: rotate(45deg) translate(0, -3px);
+    }
+
+    span:nth-child(3) {
+      -webkit-transform: rotate(-45deg) translate(0, 3px);
+          -ms-transform: rotate(-45deg) translate(0, 3px); // IE9 only
+           -o-transform: rotate(-45deg) translate(0, 3px);
+              transform: rotate(-45deg) translate(0, 3px);
+    }
+    */
+}
+.styles-editor .toggle-open:before {
+  position: absolute;
+  content: '';
+  height: 38px;
+  top: -5px;
+  left: -5px;
+  width: 5px;
+  background-color: #eeeeee;
+  z-index: 99;
+}
+.styles-editor .toggle-open a {
+  display: block;
+  margin: 4px;
+  height: 18px;
+  overflow: hidden;
+}
+.styles-editor .toggle-open span {
+  display: block;
+  height: 2px;
+  margin: 3px 0;
+  background-color: #777777;
+  -webkit-transition: transform 0.218s ease;
+  -o-transition: transform 0.218s ease;
+  transition: transform 0.218s ease;
+}
+.styles-editor.open {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.styles-editor.open .toggle-open {
+  /*
+      span:nth-child(1) {
+        -webkit-transform: rotate(-45deg) translate(0, -3px);
+            -ms-transform: rotate(-45deg) translate(0, -3px); // IE9 only
+             -o-transform: rotate(-45deg) translate(0, -3px);
+                transform: rotate(-45deg) translate(0, -3px);
+      }
+
+      span:nth-child(3) {
+        -webkit-transform: rotate(45deg) translate(0, 3px);
+            -ms-transform: rotate(45deg) translate(0, 3px); // IE9 only
+             -o-transform: rotate(45deg) translate(0, 3px);
+                transform: rotate(45deg) translate(0, 3px);
+      }
+      */
+}
+.styles-editor input,
+.styles-editor textarea {
+  border: none;
+  font-family: monospace;
+  background-color: #fbfbfb;
+  padding: .4em .2em;
+}
+.styles-editor input {
+  margin-top: .2em;
+  font-family: monospace;
+}
+.styles-editor input:focus {
+  color: #337ab7;
+  border-bottom-color: #337ab7;
+  outline: none;
+}
+.styles-editor textarea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 200px;
+  resize: vertical;
+}
+.styles-editor.compiling:before,
+.styles-editor.compiling:after {
+  display: block;
+  position: absolute;
+}
+.styles-editor.compiling:before {
+  z-index: 99;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  background-color: rgba(85, 85, 85, 0.5);
+  z-index: 100;
+}
+.styles-editor.compiling:after {
+  z-index: 100;
+  content: '...';
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 32px;
+  margin: -20px 0 0 -20px;
+  z-index: 101;
+}
+.styles-editor .tabs-wrapper {
+  position: relative;
+  height: calc(100% - 40px);
+}
+.styles-editor .tabs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 .5em 0;
+  display: table;
+  width: 100%;
+}
+.styles-editor .tabs li {
+  display: table-cell;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  padding: .2em;
+  color: #337ab7;
+  border-bottom: 2px solid transparent;
+}
+.styles-editor .tabs li.active,
+.styles-editor .tabs li:hover {
+  color: #777777;
+}
+.styles-editor .tabs li.active {
+  cursor: default;
+  border-bottom: 2px solid #337ab7;
+}
+.styles-editor .tabs-content {
+  height: calc(100% - 40px);
+}
+.styles-editor .tabs-content > .base,
+.styles-editor .tabs-content > ul {
+  display: none;
+}
+.styles-editor .tabs-content > .base.active,
+.styles-editor .tabs-content > ul.active {
+  display: block;
+}
+.styles-editor .tabs-content > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 100%;
+  overflow: auto;
+}
+.styles-editor .tabs-content > ul li {
+  padding: .2em 0;
+  margin: 0 0 .2em 0;
+}
+.styles-editor .tabs-content > ul label,
+.styles-editor .tabs-content > ul input {
+  color: #555555;
+  width: 100%;
+}
+.styles-editor .tabs-content > ul label {
+  display: block;
+  font-weight: bold;
+}
+.styles-editor .tabs-content > ul label:after {
+  content: ':';
+  display: inline-block;
+}
+.styles-editor ul.variables .changed input {
+  background-color: #fceedb;
+}
+.styles-editor ul.variables li > div {
+  display: table;
+  width: 100%;
+}
+.styles-editor ul.variables input {
+  display: table-cell;
+}
+.styles-editor ul.variables a {
+  cursor: pointer;
+  width: 1%;
+  display: none;
+}
+.styles-editor ul.variables .changed a {
+  display: table-cell;
+}
+.styles-editor .actions {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.styles-editor .actions a {
+  color: #eeeeee;
+  text-decoration: none;
+  padding: 0 .5em;
+  display: inline-block;
+  border-radius: 3px;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  -webkit-transition: background-color 0.218s ease;
+  -o-transition: background-color 0.218s ease;
+  transition: background-color 0.218s ease;
+  background-color: #337ab7;
+  border: 1px solid #286090;
+}
+.styles-editor .actions a:hover {
+  background-color: #5094ce;
+  border: 1px solid #337ab7;
+}
+body.styles-editor-open {
+  padding-left: 350px;
+}
