@@ -28,6 +28,15 @@ body {
   z-index: 999;
   border-bottom: 1px solid #c0c0c0;
 }
+.page-wrapper > nav:after {
+  position: absolute;
+  bottom: 0;
+  content: '';
+  width: 100%;
+  left: 0;
+  height: 1px;
+  background-color: #fff;
+}
 .page-wrapper > nav ul,
 .page-wrapper > nav li {
   padding: 0;
@@ -97,4 +106,5 @@ body {
 */
 body > .styles-editor {
   top: 31px;
+  z-index: 998;
 }
