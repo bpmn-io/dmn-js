@@ -57,8 +57,12 @@
 
   td,
   th {
+    overflow: hidden;
+    text-overflow: ellipsis;
     [contenteditable] {
       .empty();
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;

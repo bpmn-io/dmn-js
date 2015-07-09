@@ -1,12 +1,28 @@
 .dmn-clauseexpression-setter {
   .tooltip(@dmn-gray-dark, #fff);
-  // min-width: 120px;
-  // max-width: 290px;
+
+
+  .expression {
+    padding: @dmn-horizontal-padding;
+    display: table;
+    input,
+    .toggle-editor-size {
+      display: table-cell;
+      position: static;
+    }
+    .toggle-editor-size {
+      padding-left: @dmn-horizontal-padding;
+    }
+  }
+
+  .scripted {
+    display: none;
+  }
 
   .borderbox;
 
-  .arrow-left(8px, 20px, #fff);
-
+  // .arrow-left(8px, 20px, #fff);
+  .arrow-bottom(8px, 0, #fff);
 
   .language,
   .source {
@@ -26,6 +42,10 @@
     background-color: lighten(@dmn-danger, 30%);
     border-color: @dmn-danger;
     color: darken(@dmn-danger, 10%);
+  }
+
+  label {
+    margin-right: @dmn-horizontal-padding;
   }
 
   textarea {
@@ -55,6 +75,12 @@
 
   &.big {
     max-width: none;
+    .expression {
+      display: none;
+    }
+    .scripted {
+      display: block;
+    }
 
     &:after {
       display: none;

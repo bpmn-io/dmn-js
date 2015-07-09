@@ -201,6 +201,11 @@
 .dmn-table th.focused {
   box-shadow: 0px 0px 6px 0px rgba(82, 180, 21, 0.6) inset;
 }
+.dmn-table td,
+.dmn-table th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .dmn-table td [contenteditable],
 .dmn-table th [contenteditable] {
   display: block;
@@ -868,6 +873,15 @@
 }
 .dmn-clauseexpression-setter .expression {
   padding: 6px;
+  display: table;
+}
+.dmn-clauseexpression-setter .expression input,
+.dmn-clauseexpression-setter .expression .toggle-editor-size {
+  display: table-cell;
+  position: static;
+}
+.dmn-clauseexpression-setter .expression .toggle-editor-size {
+  padding-left: 6px;
 }
 .dmn-clauseexpression-setter .scripted {
   display: none;
@@ -889,11 +903,11 @@
   content: '';
 }
 .dmn-clauseexpression-setter:after {
-  right: 100%;
-  top: 20px;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-right: 8px solid #ffffff;
+  left: 0;
+  top: 100%;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 8px solid #ffffff;
 }
 .dmn-clauseexpression-setter .language,
 .dmn-clauseexpression-setter .source {
