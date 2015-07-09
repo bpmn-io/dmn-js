@@ -928,10 +928,21 @@
 .dmn-clauseexpression-setter label {
   margin-right: 6px;
 }
+.dmn-clauseexpression-setter input,
 .dmn-clauseexpression-setter textarea {
   -webkit-transition: box-shadow 0.218s ease;
   -o-transition: box-shadow 0.218s ease;
   transition: box-shadow 0.218s ease;
+  padding: 3px 6px;
+  border: 1px solid;
+}
+.dmn-clauseexpression-setter input:focus,
+.dmn-clauseexpression-setter textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-clauseexpression-setter textarea {
   z-index: 1;
   display: block;
   width: 100%;
@@ -939,11 +950,6 @@
   position: relative;
   font-family: monospace;
   resize: none;
-}
-.dmn-clauseexpression-setter textarea:focus {
-  outline: none;
-  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
-  border-color: #52b415;
 }
 .dmn-clauseexpression-setter .toggle-editor-size {
   position: absolute;

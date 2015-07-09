@@ -1,7 +1,6 @@
 .dmn-clauseexpression-setter {
   .tooltip(@dmn-gray-dark, #fff);
 
-
   .expression {
     padding: @dmn-horizontal-padding;
     display: table;
@@ -48,8 +47,14 @@
     margin-right: @dmn-horizontal-padding;
   }
 
+  input,
   textarea {
     .focused();
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+    border: 1px solid;
+  }
+
+  textarea {
     position: relative;
     z-index: 1;
     display: block;
