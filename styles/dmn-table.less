@@ -57,13 +57,20 @@
 
   td,
   th {
+    overflow: hidden;
+    text-overflow: ellipsis;
     [contenteditable] {
       .empty();
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       width: 100%;
       height: 100%;
+    }
+    &.invalid {
+      .invalid();
     }
   }
 
@@ -96,43 +103,6 @@
 
   thead {
     border-bottom: 3px double @dmn-gray;
-
-    .hit {
-      vertical-align: top;
-      width: 3em;
-    }
-
-    .labels,
-    .values,
-    .mappings,
-    .annotation {
-      text-align: center;
-    }
-
-    .values,
-    .mappings {
-      background-color: lighten(@dmn-gray-light, 6%);
-      color: #fff;
-      .input,
-      .output {
-        background-color: transparent;
-        &.col-focused {
-          background-color: fade(@dmn-info, 30%);
-        }
-      }
-    }
-
-    .mappings {
-      font-family: monospace;
-      background-color: @dmn-gray-light;
-    }
-
-    .labels td:empty:before {
-      .dmn-font;
-      content: '\e813';
-      color: @dmn-danger;
-    }
-
     .annotation {
       vertical-align: bottom;
       position: relative;
@@ -140,10 +110,9 @@
       text-overflow: ellipsis;
       .dmn-js-logo {
         .dmn-js-logo();
-
         position: absolute;
-        top: 12px;
-        right: 0;
+        top: 4px;
+        right: -5px;
       }
     }
 
@@ -151,6 +120,54 @@
       cursor: pointer;
       color: @dmn-primary;
     }
+  }
+
+  .hit {
+    vertical-align: top;
+    width: 3em;
+  }
+
+  .labels,
+  .values,
+  .mappings {
+    text-align: center;
+  }
+
+  .values,
+  .mappings {
+    background-color: lighten(@dmn-gray-light, 6%);
+    color: #fff;
+
+    .input,
+    .output {
+      background-color: transparent;
+      &.col-focused {
+        background-color: fade(@dmn-info, 30%);
+      }
+    }
+
+    td,
+    th {
+      cursor: pointer;
+      &.invalid {
+        .invalid();
+      }
+    }
+  }
+
+  .mappings {
+    font-family: monospace;
+    background-color: @dmn-gray-light;
+  }
+
+  &.hide-mappings .mappings * {
+    display: none;
+  }
+
+  .labels td:empty:before {
+    .dmn-font;
+    content: '\e813';
+    color: @dmn-danger;
   }
 
   tbody {
@@ -168,22 +185,6 @@
       &.set {
         color: @dmn-gray-darker;
       }
-    }
-  }
-
-  // .labels td,
-  // .values td,
-  // .mappings td,
-  // tbody .input,
-  // tbody .output,
-  // tbody .number {
-  //   cursor: url(contextmenu-cursor.png), context-menu;
-  // }
-
-  .mappings,
-  .values {
-    td {
-      cursor: pointer;
     }
   }
 
@@ -224,21 +225,38 @@
 
 
 
-  // &.scrollable {
-  //   overflow: hidden;
-  //   .detached {
-  //     &.dmn-table-head {
-  //       width: ~"calc(100% - 15px)";
-  //     }
-  //     &.dmn-table-body {
-  //       border-top: none;
-  //       margin-bottom: 2px;
-  //     }
-  //   }
-  //   .body-wrapper {
-  //     overflow-y: scroll;
-  //   }
-  // }
+  &.scrollable {
+    position: relative;
+
+    thead,
+    tfoot,
+    tbody
+    {
+      display: block;
+      width: 100%;
+      tr {
+        width: 100%;
+      }
+    }
+    thead,
+    tfoot {
+      display: table;
+    }
+
+    tbody {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      .number {
+        border-left: 0;
+      }
+      .annotation {
+        border-right: none;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
 
 
 
@@ -246,50 +264,16 @@
 
 
 
-  > .hints {
+  > .controls {
     float: right;
+    text-align: right;
     max-width: 50%;
-    min-width: 20%;
     padding: @dmn-vertical-padding @dmn-horizontal-padding;
     font-size: 90%;
 
     background-color: @dmn-gray-lighter;
-    i:before {
-      margin: 0;
-      color: @dmn-gray-light;
-    }
-
-    ul, li {
-      margin: 0;
-      padding: 0;
-    }
-    ul {
-      list-style: none;
-    }
-
-    .coordinates {
-      &:empty:before {
-        display: inline-block;
-        min-width: 1px;
-        content: '*';
-      }
-      background-color: #fff;
-      border-bottom: 1px dashed @dmn-gray;
-      min-width: 100%;
-      padding: @dmn-vertical-padding @dmn-horizontal-padding;
-    }
-
-    .actions {
-      display: inline-block;
-
-      a {
-        padding: @dmn-vertical-padding @dmn-horizontal-padding;
-        cursor: pointer;
-        display: inline-block;
-        &:hover {
-          color: @dmn-primary;
-        }
-      }
+    a {
+      cursor: pointer;
     }
   }
 
@@ -299,13 +283,8 @@
     font-size: 95%;
     header,
     td,
-    th,
-    .controls .coordinates,
-    .controls a {
+    th {
       padding: 1px 2px;
-    }
-    .controls {
-      margin-bottom: 4px;
     }
   }
 
@@ -313,13 +292,8 @@
     font-size: 110%;
     header,
     td,
-    th,
-    .controls .coordinates,
-    .controls a {
+    th {
       padding: 6px 12px;
-    }
-    .controls {
-      margin-bottom: 24px;
     }
   }
 }

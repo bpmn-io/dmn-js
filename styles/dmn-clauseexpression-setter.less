@@ -1,46 +1,22 @@
 .dmn-clauseexpression-setter {
   .tooltip(@dmn-gray-dark, #fff);
 
-
-  .expression {
-    padding: @dmn-horizontal-padding;
-  }
-
-  .scripted {
-    display: none;
-  }
-
   .borderbox;
 
-  .arrow-left(8px, 20px, #fff);
-
-
-  .language,
-  .source {
-    padding: @dmn-horizontal-padding;
-  }
-
-  .language {
-    width: 100%;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .source {
-    position: relative;
-  }
-
-  .invalid {
-    background-color: lighten(@dmn-danger, 30%);
-    border-color: @dmn-danger;
-    color: darken(@dmn-danger, 10%);
-  }
+  .arrow-bottom(8px, 0, #fff);
 
   label {
     margin-right: @dmn-horizontal-padding;
   }
 
+  input,
   textarea {
     .focused();
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+    border: 1px solid;
+  }
+
+  textarea {
     position: relative;
     z-index: 1;
     display: block;
@@ -51,17 +27,50 @@
     resize: none;
   }
 
-  .toggle-editor-size {
-    position: absolute;
-    z-index: 2;
-    top: 6px;
-    right: 6px;
+  .icon-clear {
+    color: @dmn-primary;
     cursor: pointer;
+    float: right;
+    // margin-top: @dmn-vertical-padding;
+  }
 
-    &:before {
-      .dmn-font();
-      content: '\e814';
+  .region {
+    padding: @dmn-horizontal-padding 0;
+  }
+
+  .row {
+    overflow: hidden;
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+    vertical-align: middle;
+
+    &.link {
+      padding-top: 0;
+      border-bottom: 1px solid @dmn-gray-lighter;
+      margin-bottom: @dmn-vertical-padding;
     }
+
+    &.fields {
+      padding-bottom: 0;
+    }
+  }
+
+  .language {
+    width: auto;
+    margin-bottom: @dmn-vertical-padding;
+  }
+
+  .invalid {
+    .invalid();
+  }
+
+  .toggle-script {
+    color: @dmn-primary;
+    cursor: pointer;
+    padding-top: @dmn-vertical-padding;
+  }
+
+  .script {
+    display: none;
   }
 
   &.big {
@@ -69,16 +78,12 @@
     .expression {
       display: none;
     }
-    .scripted {
+    .script {
       display: block;
     }
 
     &:after {
       display: none;
-    }
-
-    .toggle-editor-size:before {
-      content: '\e815';
     }
   }
 }
