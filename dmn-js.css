@@ -877,6 +877,7 @@
 }
 .dmn-clauseexpression-setter .expression input,
 .dmn-clauseexpression-setter .expression .toggle-editor-size {
+  vertical-align: middle;
   display: table-cell;
   position: static;
 }

@@ -72,69 +72,75 @@ fromScratchContainer.appendChild(tableView.el);
 
 
 
+var editor;
 
+function addEditor() {
+  if (location.hash !== '#editor' || editor) {
+    return;
+  }
+  var req = new XMLHttpRequest();
+  req.onload = function () {
+    var data = JSON.parse(this.responseText);
 
+    editor = new StylesEditor({
+      globals: {
+        'brand-success':  '#5cb85c',
+        'brand-info':     '#5bc0de',
+        'brand-warning':  '#f0ad4e',
+        'brand-danger':   '#d9534f'
+      },
 
+      variables: StylesEditor.objToStates(data),
 
-// var req = new XMLHttpRequest();
-// req.onload = function () {
-//   var data = JSON.parse(this.responseText);
+      imports: [
+        {
+          directive: 'reference',
+          name: 'dmn-variables'
+        },
+        {
+          directive: 'reference',
+          name: 'dmn-mixins'
+        },
+        {
+          directive: 'reference',
+          name: 'mixins/vendor-prefixes'
+        },
+        {
+          directive: '',
+          name: 'dmn-font'
+        },
+        {
+          directive: '',
+          name: 'dmn-table'
+        },
+        {
+          directive: '',
+          name: 'dmn-choice'
+        },
+        {
+          directive: '',
+          name: 'dmn-controls'
+        },
+        {
+          directive: '',
+          name: 'dmn-contextmenu'
+        }
+      ]
+    });
 
-//   var editor = new StylesEditor({
-//     globals: {
-//       'brand-success':  '#5cb85c',
-//       'brand-info':     '#5bc0de',
-//       'brand-warning':  '#f0ad4e',
-//       'brand-danger':   '#d9534f'
-//     },
+    document.body.appendChild(editor.el);
+    // editor.open = true;
 
-//     variables: StylesEditor.objToStates(data),
+    editor.inputEl.value = [
+      '@import "dmn-js";'
+    ].join('\n');
 
-//     imports: [
-//       {
-//         directive: 'reference',
-//         name: 'dmn-variables'
-//       },
-//       {
-//         directive: 'reference',
-//         name: 'dmn-mixins'
-//       },
-//       {
-//         directive: 'reference',
-//         name: 'mixins/vendor-prefixes'
-//       },
-//       {
-//         directive: '',
-//         name: 'dmn-font'
-//       },
-//       {
-//         directive: '',
-//         name: 'dmn-table'
-//       },
-//       {
-//         directive: '',
-//         name: 'dmn-choice'
-//       },
-//       {
-//         directive: '',
-//         name: 'dmn-controls'
-//       },
-//       {
-//         directive: '',
-//         name: 'dmn-contextmenu'
-//       }
-//     ]
-//   });
+    editor.update();
+  };
 
-//   document.body.appendChild(editor.el);
-//   // editor.open = true;
+  req.open('get', 'styles-variables.json', true);
+  req.send();
+}
 
-//   editor.inputEl.value = [
-//     '@import "dmn-js";'
-//   ].join('\n');
-
-//   editor.update();
-// };
-
-// req.open('get', 'styles-variables.json', true);
-// req.send();
+window.addEventListener('hashchange', addEditor);
+addEditor();

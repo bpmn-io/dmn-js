@@ -91,19 +91,15 @@ body {
   margin-top: 0;
   font-weight: lighter;
 }
-/*
 .holder-1 {
   max-height: 260px;
 }
-
 .holder-2 {
   max-width: 500px;
 }
-
 .holder-3 {
   max-width: 2600px;
 }
-*/
 body > .styles-editor {
   top: 31px;
   z-index: 998;

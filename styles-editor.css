@@ -133,33 +133,43 @@
   min-height: 200px;
   resize: vertical;
 }
-.styles-editor.compiling:before,
-.styles-editor.compiling:after {
-  display: block;
+.styles-editor:before,
+.styles-editor:after {
+  display: none;
   position: absolute;
 }
-.styles-editor.compiling:before {
-  z-index: 99;
+.styles-editor:before {
+  z-index: 299;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   content: '';
   background-color: rgba(85, 85, 85, 0.5);
-  z-index: 100;
 }
-.styles-editor.compiling:after {
-  z-index: 100;
-  content: '...';
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
+.styles-editor:after {
+  z-index: 300;
+  color: #eeeeee;
   text-align: center;
+  top: 50%;
+  height: 40px;
   line-height: 40px;
   font-size: 32px;
-  margin: -20px 0 0 -20px;
-  z-index: 101;
+  margin-top: -20px;
+  width: 100%;
+  left: 0;
+}
+.styles-editor.compiling:before,
+.styles-editor.drag-over:before,
+.styles-editor.compiling:after,
+.styles-editor.drag-over:after {
+  display: block;
+}
+.styles-editor.compiling:after {
+  content: '…';
+}
+.styles-editor.drag-over:after {
+  content: 'Drop the files';
 }
 .styles-editor .tabs-wrapper {
   position: relative;
@@ -221,9 +231,17 @@
   display: block;
   font-weight: bold;
 }
+.styles-editor .tabs-content > ul label:before,
+.styles-editor .tabs-content > ul label:after {
+  display: inline-block;
+  font-weight: lighter;
+  color: #777777;
+}
+.styles-editor .tabs-content > ul label:before {
+  content: '@';
+}
 .styles-editor .tabs-content > ul label:after {
   content: ':';
-  display: inline-block;
 }
 .styles-editor ul.variables .changed input {
   background-color: #fceedb;
