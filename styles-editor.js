@@ -19949,8 +19949,8 @@ var Editor = View.extend({
   _handleDrop: function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
-    var self = this;
     this.dragingOver = false;
+    var self = this;
 
     function readFileData(file) {
       return function (progressEvt) {

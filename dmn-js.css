@@ -126,11 +126,15 @@
 .icon-resize-big:before {
   content: '\e814';
 }
-/* '' */
+/* '' */
 .icon-resize-small:before {
   content: '\e815';
 }
-/* '' */
+/* '' */
+.icon-file-code:before {
+  content: '\e816';
+}
+/* '' */
 .dmn-table {
   position: relative;
   max-height: 100%;
@@ -871,22 +875,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.dmn-clauseexpression-setter .expression {
-  padding: 6px;
-  display: table;
-}
-.dmn-clauseexpression-setter .expression input,
-.dmn-clauseexpression-setter .expression .toggle-editor-size {
-  vertical-align: middle;
-  display: table-cell;
-  position: static;
-}
-.dmn-clauseexpression-setter .expression .toggle-editor-size {
-  padding-left: 6px;
-}
-.dmn-clauseexpression-setter .scripted {
-  display: none;
-}
 .dmn-clauseexpression-setter * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -909,22 +897,6 @@
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
   border-top: 8px solid #ffffff;
-}
-.dmn-clauseexpression-setter .language,
-.dmn-clauseexpression-setter .source {
-  padding: 6px;
-}
-.dmn-clauseexpression-setter .language {
-  width: 100%;
-  border-bottom: 1px solid #f0f0f0;
-}
-.dmn-clauseexpression-setter .source {
-  position: relative;
-}
-.dmn-clauseexpression-setter .invalid {
-  background-color: #f4cecd;
-  border-color: #d9534f;
-  color: #c9302c;
 }
 .dmn-clauseexpression-setter label {
   margin-right: 6px;
@@ -952,40 +924,43 @@
   font-family: monospace;
   resize: none;
 }
-.dmn-clauseexpression-setter .toggle-editor-size {
-  position: absolute;
-  z-index: 2;
-  top: 6px;
-  right: 6px;
+.dmn-clauseexpression-setter .icon-clear {
+  color: #52b415;
   cursor: pointer;
+  float: right;
 }
-.dmn-clauseexpression-setter .toggle-editor-size:before {
-  font-family: "dmn";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Font smoothing. That was taken from TWBS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-  content: '\e814';
+.dmn-clauseexpression-setter .region {
+  padding: 6px 0;
+}
+.dmn-clauseexpression-setter .row {
+  overflow: hidden;
+  padding: 3px 6px;
+  vertical-align: middle;
+}
+.dmn-clauseexpression-setter .row.link {
+  padding-top: 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 3px;
+}
+.dmn-clauseexpression-setter .row.fields {
+  padding-bottom: 0;
+}
+.dmn-clauseexpression-setter .language {
+  width: auto;
+  margin-bottom: 3px;
+}
+.dmn-clauseexpression-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clauseexpression-setter .toggle-script {
+  color: #52b415;
+  cursor: pointer;
+  padding-top: 3px;
+}
+.dmn-clauseexpression-setter .script {
+  display: none;
 }
 .dmn-clauseexpression-setter.big {
   max-width: none;
@@ -993,14 +968,11 @@
 .dmn-clauseexpression-setter.big .expression {
   display: none;
 }
-.dmn-clauseexpression-setter.big .scripted {
+.dmn-clauseexpression-setter.big .script {
   display: block;
 }
 .dmn-clauseexpression-setter.big:after {
   display: none;
-}
-.dmn-clauseexpression-setter.big .toggle-editor-size:before {
-  content: '\e815';
 }
 .dmn-combobox {
   position: relative;
