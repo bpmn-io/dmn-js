@@ -4246,33 +4246,35 @@ var DecisionTableView = View.extend({
     var nameHeight = this.tableNameEl.clientHeight;
     var headHeight = this.headerEl.clientHeight;
     var footHeight = this.footView.el.clientHeight;
+    var tableTop = this.tableEl.offsetTop + this.el.offsetTop;//this.tableEl.offsetTop + this.tableNameEl.offsetTop;
 
-    var availableHeight = parentHeight - (nameHeight + headHeight + footHeight);
+
+    var availableHeight = parentHeight - (tableTop + nameHeight + headHeight + footHeight + 40);
     var bodyHeight = this.bodyEl.clientHeight;
 
     this.bodyEl.style.visibility = 'hidden';
     this.bodyEl.style.height = 'auto';
 
-    console.info('availableHeight', this.cid, bodyHeight, availableHeight);
     var firstRow = this.queryAll('tbody tr:first-child td');
-
     if (bodyHeight > availableHeight) {
       this.bodyEl.style.height = availableHeight +'px';
 
       this.scrollable = true;
       firstRow[0].style.width = this.hitEl.clientWidth + 'px';
-      // firstRow[0].style.marginLeft = '-1px';
       this.queryAll('thead tr:nth-child(2) td').forEach(function (th, i) {
+        // don't set the width of the last column
         if (i === firstRow.length - 2) { return; }
+
         var styles = getComputedStyle(firstRow[i + 1]);
         var border = styles.getPropertyValue('border-left-width');
-        // var border = styles.getPropertyValue('border-right-width');
-        firstRow[i + 1].style.width = th.clientWidth + parseInt(border, 10) + 'px';
+        border = parseInt(border, 10);
+        // border = border === 1 ? border : border + 1;
+
+        firstRow[i + 1].style.width = th.clientWidth + border + 'px';
       }, this);
     }
     else if (this.scrollable) {
       this.scrollable = false;
-      // firstRow[0].style.marginLeft = null;
       firstRow.forEach(function (td) {
         td.style.width = null;
       }, this);
