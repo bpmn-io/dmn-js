@@ -1683,7 +1683,14 @@ var ClauseModel = State.extend({
     label:        'string',
     choices:      'array',
     datatype:     {type: 'string', default: 'string'},
-    expression:   'string'
+    expression:   {
+      type: 'string',
+      test: function (val) {
+        if (/[^a-z0-9-_]+/ig.test(val)) {
+          return 'only alphanumeric charachters are allowed';
+        }
+      }
+    }
   },
 
   session: {
@@ -1876,7 +1883,8 @@ var contextViewsMixin = require('./context-views-mixin');
 
 var MappingView = View.extend(merge({}, {
   events: {
-    'click':       '_handleClick'
+    'click': '_handleClick',
+    'keyup [contenteditable]': '_handleKeyup'
   },
 
   derived: merge({}, contextViewsMixin, {
@@ -1902,7 +1910,31 @@ var MappingView = View.extend(merge({}, {
         type: 'attribute',
         name: 'title'
       }
+    ],
+    'model.expression': {
+      type: function (el, value) {
+        if (el === document.activeElement) {
+          return;
+        }
+        el.textContent = value.trim();
+      },
+      selector: '[contenteditable]'
+    },
+
+    error: [
+      {
+        type: 'booleanClass',
+        name: 'invalid'
+      },
+      {
+        type: 'attribute',
+        name: 'title'
+      }
     ]
+  },
+
+  session: {
+    error: 'string'
   },
 
   _handleClick: function () {
@@ -1916,12 +1948,29 @@ var MappingView = View.extend(merge({}, {
     this.clauseValuesEditor.hide();
   },
 
-  _handleInput: function () {
-    this.model.mapping = this.el.textContent.trim();
+  _handleKeyup: function (evt) {
+    try {
+      this.model.expression = evt.target.textContent.trim();
+      if (this.error) {
+        this.error = false;
+      }
+    }
+    catch (err) {
+      if (!this.error) {
+        this.error = err.message;
+      }
+    }
   },
 
   initialize: function () {
-    this.el.textContent = (this.model.mapping || '').trim();
+    var val = (this.model.mapping || '').trim();
+
+    if (this.model.clauseType !== 'input') {
+      this.el.innerHTML = '<span contenteditable spellcheck="false">' + val + '</span>';
+    }
+    else {
+      this.el.textContent = val;
+    }
   }
 }));
 
@@ -2387,8 +2436,11 @@ var ClauseExpressionView = View.extend({
   },
 
   _resizeTextarea: function (box) {
-    var labelHeight = this.sourceEl.parentNode.clientHeight - this.sourceEl.clientHeight;
-    this.sourceEl.style.height = (box.height - (this.languageEl.clientHeight + labelHeight)) + 'px';
+    var holder = this.sourceEl.parentNode;
+    var link = this.query('.region.' +  this.model.mappingType + ' .row.link');
+    var availableHeight = holder.clientHeight - (this.languageEl.clientHeight + link.clientHeight);
+
+    this.sourceEl.style.height = (box.height - (this.languageEl.clientHeight + availableHeight)) + 'px';
   },
 
   show: function (model, parent) {
@@ -3830,26 +3882,28 @@ var DecisionTableView = View.extend({
   autoRender: true,
 
   template: '<div class="dmn-table">' +
-              '<div class="hints">' +
-                '<i class="icon-dmn icon-info"></i> ' +
-                '<span data-hook="hints"></span>' +
-              '</div>' +
+              '<span data-hook="controls"></span>' +
+
               '<header>' +
                 '<h3 data-hook="table-name" contenteditable></h3>' +
               '</header>' +
+
               '<table>' +
                 '<thead>' +
                   '<tr>' +
                     '<th class="hit" rowspan="4"></th>' +
-                    '<th class="input double-border-right" colspan="2">Input</th>' +
+                    '<th class="input" colspan="2">Input</th>' +
                     '<th class="output" colspan="2">Output</th>' +
                     '<th class="annotation" rowspan="4">Annotation</th>' +
                   '</tr>' +
+
                   '<tr class="labels"></tr>' +
                   '<tr class="mappings"></tr>' +
                   '<tr class="values"></tr>' +
                 '</thead>' +
+
                 '<tbody></tbody>' +
+
               '</table>' +
             '</div>',
 
@@ -3861,7 +3915,9 @@ var DecisionTableView = View.extend({
     hint: {
       type: 'string',
       default: 'Make a right-click on the table'
-    }
+    },
+
+    scrollable: 'boolean'
   },
 
   bindings: {
@@ -3872,6 +3928,9 @@ var DecisionTableView = View.extend({
     hint: {
       type: 'innerHTML',
       hook: 'hints'
+    },
+    scrollable: {
+      type: 'booleanClass'
     }
   },
 
@@ -4178,6 +4237,48 @@ var DecisionTableView = View.extend({
     return this;
   },
 
+  _resizeBody: function () {
+    if (!this.el.parentNode) {
+      return;
+    }
+
+    var parentHeight = this.el.parentNode.clientHeight;
+    var nameHeight = this.tableNameEl.clientHeight;
+    var headHeight = this.headerEl.clientHeight;
+    var footHeight = this.footView.el.clientHeight;
+
+    var availableHeight = parentHeight - (nameHeight + headHeight + footHeight);
+    var bodyHeight = this.bodyEl.clientHeight;
+
+    this.bodyEl.style.visibility = 'hidden';
+    this.bodyEl.style.height = 'auto';
+
+    console.info('availableHeight', this.cid, bodyHeight, availableHeight);
+    var firstRow = this.queryAll('tbody tr:first-child td');
+
+    if (bodyHeight > availableHeight) {
+      this.bodyEl.style.height = availableHeight +'px';
+
+      this.scrollable = true;
+      firstRow[0].style.width = this.hitEl.clientWidth + 'px';
+      // firstRow[0].style.marginLeft = '-1px';
+      this.queryAll('thead tr:nth-child(2) td').forEach(function (th, i) {
+        if (i === firstRow.length - 2) { return; }
+        var styles = getComputedStyle(firstRow[i + 1]);
+        var border = styles.getPropertyValue('border-left-width');
+        // var border = styles.getPropertyValue('border-right-width');
+        firstRow[i + 1].style.width = th.clientWidth + parseInt(border, 10) + 'px';
+      }, this);
+    }
+    else if (this.scrollable) {
+      this.scrollable = false;
+      // firstRow[0].style.marginLeft = null;
+      firstRow.forEach(function (td) {
+        td.style.width = null;
+      }, this);
+    }
+    this.bodyEl.style.visibility = 'visible';
+  },
 
   render: function () {
     if (!this.el) {
@@ -4195,6 +4296,7 @@ var DecisionTableView = View.extend({
         tableEl:          'table',
         tableNameEl:      'header h3',
         headerEl:         'thead',
+        hitEl:            'th.hit',
         bodyEl:           'tbody',
         inputsHeaderEl:   'thead tr:nth-child(1) th.input',
         outputsHeaderEl:  'thead tr:nth-child(1) th.output',
@@ -4255,7 +4357,6 @@ var DecisionTableView = View.extend({
       });
     }, this);
 
-
     this.bodyEl.innerHTML = '';
     this.rulesView = this.renderCollection(this.model.rules, RuleView, this.bodyEl);
 
@@ -4269,6 +4370,10 @@ var DecisionTableView = View.extend({
       this.tableEl.appendChild(this.footView.el);
     }
 
+    this.listenToAndRun(this.model.rules, 'all', this._resizeBody);
+    // window.addEventListener('resize', function () {
+    //   this._resizeBody();
+    // }.bind(this));
     return this;
   }
 });

@@ -7,6 +7,11 @@
 @dmn-values-focused-bg:   #D2D1BA;
 @dmn-mapping-focused-bg:  #DCDBC4;
 */
+.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
 @font-face {
   font-family: 'dmn';
   src: url('fonts/dmn.eot');
@@ -226,6 +231,12 @@
   color: #a0a0a0;
   text-align: center;
 }
+.dmn-table td.invalid,
+.dmn-table th.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
 .dmn-table header {
   background-color: #fff;
   display: inline-block;
@@ -278,6 +289,14 @@
 .dmn-table thead .values .output.col-focused,
 .dmn-table thead .mappings .output.col-focused {
   background-color: rgba(255, 252, 176, 0.3);
+}
+.dmn-table thead .values td.invalid,
+.dmn-table thead .mappings td.invalid,
+.dmn-table thead .values th.invalid,
+.dmn-table thead .mappings th.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
 }
 .dmn-table thead .mappings {
   font-family: monospace;
@@ -410,6 +429,31 @@
 }
 .dmn-table tr > .input + .output {
   border-left: 3px double #a0a0a0;
+}
+.dmn-table.scrollable {
+  position: relative;
+}
+.dmn-table.scrollable thead,
+.dmn-table.scrollable tfoot,
+.dmn-table.scrollable tbody {
+  display: block;
+  width: 100%;
+}
+.dmn-table.scrollable thead tr,
+.dmn-table.scrollable tfoot tr,
+.dmn-table.scrollable tbody tr {
+  width: 100%;
+}
+.dmn-table.scrollable thead,
+.dmn-table.scrollable tfoot {
+  display: table;
+}
+.dmn-table.scrollable tbody {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.dmn-table.scrollable tbody .number {
+  border-left: 0;
 }
 .dmn-table > .hints {
   float: right;

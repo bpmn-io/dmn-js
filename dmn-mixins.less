@@ -20,6 +20,14 @@
   .box-shadow(0 0 3px 1px @shadow-color);
 }
 
+
+.invalid {
+  background-color: lighten(@dmn-danger, 30%);
+  border-color: @dmn-danger;
+  color: darken(@dmn-danger, 10%);
+}
+
+
 .focused(@color: @dmn-primary) {
   .transition(box-shadow 0.218s ease);
   &:focus {
