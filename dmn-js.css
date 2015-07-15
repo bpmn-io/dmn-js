@@ -263,74 +263,6 @@
 .dmn-table thead {
   border-bottom: 3px double #a0a0a0;
 }
-.dmn-table thead .hit {
-  vertical-align: top;
-  width: 3em;
-}
-.dmn-table thead .labels,
-.dmn-table thead .values,
-.dmn-table thead .mappings,
-.dmn-table thead .annotation {
-  text-align: center;
-}
-.dmn-table thead .values,
-.dmn-table thead .mappings {
-  background-color: #cfcfcf;
-  color: #fff;
-}
-.dmn-table thead .values .input,
-.dmn-table thead .mappings .input,
-.dmn-table thead .values .output,
-.dmn-table thead .mappings .output {
-  background-color: transparent;
-}
-.dmn-table thead .values .input.col-focused,
-.dmn-table thead .mappings .input.col-focused,
-.dmn-table thead .values .output.col-focused,
-.dmn-table thead .mappings .output.col-focused {
-  background-color: rgba(255, 252, 176, 0.3);
-}
-.dmn-table thead .values td.invalid,
-.dmn-table thead .mappings td.invalid,
-.dmn-table thead .values th.invalid,
-.dmn-table thead .mappings th.invalid {
-  background-color: #f4cecd;
-  border-color: #d9534f;
-  color: #c9302c;
-}
-.dmn-table thead .mappings {
-  font-family: monospace;
-  background-color: #c0c0c0;
-}
-.dmn-table thead .labels td:empty:before {
-  font-family: "dmn";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Font smoothing. That was taken from TWBS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-  content: '\e813';
-  color: #d9534f;
-}
 .dmn-table thead .annotation {
   vertical-align: bottom;
   position: relative;
@@ -341,8 +273,8 @@
   text-decoration: none;
   display: block;
   position: absolute;
-  top: 12px;
-  right: 0;
+  top: 4px;
+  right: -5px;
 }
 .dmn-table thead .annotation .dmn-js-logo:after {
   font-family: "dmn";
@@ -386,6 +318,82 @@
   cursor: pointer;
   color: #52b415;
 }
+.dmn-table .hit {
+  vertical-align: top;
+  width: 3em;
+}
+.dmn-table .labels,
+.dmn-table .values,
+.dmn-table .mappings {
+  text-align: center;
+}
+.dmn-table .values,
+.dmn-table .mappings {
+  background-color: #cfcfcf;
+  color: #fff;
+}
+.dmn-table .values .input,
+.dmn-table .mappings .input,
+.dmn-table .values .output,
+.dmn-table .mappings .output {
+  background-color: transparent;
+}
+.dmn-table .values .input.col-focused,
+.dmn-table .mappings .input.col-focused,
+.dmn-table .values .output.col-focused,
+.dmn-table .mappings .output.col-focused {
+  background-color: rgba(255, 252, 176, 0.3);
+}
+.dmn-table .values td,
+.dmn-table .mappings td,
+.dmn-table .values th,
+.dmn-table .mappings th {
+  cursor: pointer;
+}
+.dmn-table .values td.invalid,
+.dmn-table .mappings td.invalid,
+.dmn-table .values th.invalid,
+.dmn-table .mappings th.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-table .mappings {
+  font-family: monospace;
+  background-color: #c0c0c0;
+}
+.dmn-table.hide-mappings .mappings * {
+  display: none;
+}
+.dmn-table .labels td:empty:before {
+  font-family: "dmn";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  content: '\e813';
+  color: #d9534f;
+}
 .dmn-table tbody {
   border: 2px solid #a0a0a0;
   border-top: none;
@@ -399,10 +407,6 @@
 }
 .dmn-table tbody .input.set {
   color: #606060;
-}
-.dmn-table .mappings td,
-.dmn-table .values td {
-  cursor: pointer;
 }
 .dmn-table tfoot {
   border: 2px solid #eeeeee;
@@ -455,73 +459,38 @@
 .dmn-table.scrollable tbody .number {
   border-left: 0;
 }
-.dmn-table > .hints {
+.dmn-table.scrollable tbody .annotation {
+  border-right: none;
+}
+.dmn-table.scrollable tbody tr:last-child td {
+  border-bottom: none;
+}
+.dmn-table > .controls {
   float: right;
+  text-align: right;
   max-width: 50%;
-  min-width: 20%;
   padding: 3px 6px;
   font-size: 90%;
   background-color: #f0f0f0;
 }
-.dmn-table > .hints i:before {
-  margin: 0;
-  color: #c0c0c0;
-}
-.dmn-table > .hints ul,
-.dmn-table > .hints li {
-  margin: 0;
-  padding: 0;
-}
-.dmn-table > .hints ul {
-  list-style: none;
-}
-.dmn-table > .hints .coordinates {
-  background-color: #fff;
-  border-bottom: 1px dashed #a0a0a0;
-  min-width: 100%;
-  padding: 3px 6px;
-}
-.dmn-table > .hints .coordinates:empty:before {
-  display: inline-block;
-  min-width: 1px;
-  content: '*';
-}
-.dmn-table > .hints .actions {
-  display: inline-block;
-}
-.dmn-table > .hints .actions a {
-  padding: 3px 6px;
+.dmn-table > .controls a {
   cursor: pointer;
-  display: inline-block;
-}
-.dmn-table > .hints .actions a:hover {
-  color: #52b415;
 }
 .dmn-table.dmn-table-compact {
   font-size: 95%;
 }
 .dmn-table.dmn-table-compact header,
 .dmn-table.dmn-table-compact td,
-.dmn-table.dmn-table-compact th,
-.dmn-table.dmn-table-compact .controls .coordinates,
-.dmn-table.dmn-table-compact .controls a {
+.dmn-table.dmn-table-compact th {
   padding: 1px 2px;
-}
-.dmn-table.dmn-table-compact .controls {
-  margin-bottom: 4px;
 }
 .dmn-table.dmn-table-bold {
   font-size: 110%;
 }
 .dmn-table.dmn-table-bold header,
 .dmn-table.dmn-table-bold td,
-.dmn-table.dmn-table-bold th,
-.dmn-table.dmn-table-bold .controls .coordinates,
-.dmn-table.dmn-table-bold .controls a {
+.dmn-table.dmn-table-bold th {
   padding: 6px 12px;
-}
-.dmn-table.dmn-table-bold .controls {
-  margin-bottom: 24px;
 }
 .dmn-suggestions-helper {
   position: absolute;
