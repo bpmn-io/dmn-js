@@ -19684,7 +19684,8 @@ var VariableState = State.extend({
       type: 'string',
       required: true
     },
-    value: 'string'
+    value: 'string',
+    filename: 'string'
   },
 
   session: {
@@ -19725,6 +19726,7 @@ var VariableView = View.extend({
                 '<input type="text" />' +
                 '<a title="reset">×</a>' +
               '</div>' +
+              '<span></span>' +
             '</li>',
 
   bindings: {
@@ -19740,6 +19742,16 @@ var VariableView = View.extend({
       type: 'booleanClass',
       name: 'changed'
     },
+    'model.filename': [
+      {
+        type: 'toggle',
+        selector: 'span'
+      },
+      {
+        type: 'text',
+        selector: 'span'
+      }
+    ],
     'parent.compiling': {
       selector: 'input',
       type: 'booleanAttribute',
@@ -19811,6 +19823,8 @@ var Editor = View.extend({
 
               // '<textarea class="output" readonly></textarea>' +
 
+              '<div class="errors"><div></div></div>' +
+
               '<div class="actions">' +
                 '<a target="_blank" class="download">Download</a>'+
               '</div>' +
@@ -19822,6 +19836,7 @@ var Editor = View.extend({
     compiling: 'number',
     compiled: 'string',
     globals: 'any',
+    error: 'any',
     // rootpath: {
     //   type: 'any',
     //   test: function (val) {
@@ -19868,6 +19883,16 @@ var Editor = View.extend({
       type: 'booleanClass',
       name: 'compiling'
     },
+
+    error: [
+      {
+        type: 'booleanClass'
+      },
+      {
+        type: 'text',
+        selector: '.errors > div'
+      }
+    ],
 
     compiled: [
       {
@@ -19956,6 +19981,7 @@ var Editor = View.extend({
       return function (progressEvt) {
         var varName = 'custom-' + file.type.split('/').shift() + '-' + self.variables.length;
         self.variables.add({
+          filename: file.name,
           name: varName,
           value: '"'+ progressEvt.target.result +'"'
         });
@@ -19992,7 +20018,8 @@ var Editor = View.extend({
 
     function error(err) {
       self.compiling = null;
-      throw err;
+      self.error = err.message;
+      // throw err;
     }
 
     // debounce and prevent blocking
@@ -20001,6 +20028,7 @@ var Editor = View.extend({
     }
 
     self.compiling = setTimeout(function () {
+      self.error = null;
       less.render(src, {
         globalVars: self.globals,
         modifyVars: self.variables.toObj()
