@@ -56,7 +56,7 @@ git clone git@github.com:dmn-io/PROJECT_NAME.git
 
 #### On Linux
 
-Use [npm-link](https://www.npmjs.org/doc/link.html) or `ln -s <target> <link>`.
+Use [npm-link](https://docs.npmjs.com/cli/link) or `ln -s <target> <link>`.
 
 #### On Windows
 
