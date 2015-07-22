@@ -903,10 +903,10 @@
   z-index: 1;
   display: block;
   width: 100%;
-  min-height: 120px;
+  min-height: 220px;
   position: relative;
   font-family: monospace;
-  resize: none;
+  resize: vertical;
 }
 .dmn-clauseexpression-setter .links {
   display: table;

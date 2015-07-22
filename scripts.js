@@ -2347,38 +2347,8 @@ var ClauseExpressionView = View.extend({
     },
 
     'model.mappingType': {
-      type: function (el, val) {
-        var style = this.el.style;
-        var box;
-        if (!this.model) { return; }
-
-        if (val === 'expression') {
-          el.classList.remove('use-script');
-          box = elBox(this.parent.el);
-          console.info('this.originalBox', this.originalBox);
-
-          style.width = 'auto';
-          style.height = 'auto';
-
-          box.top -= this.el.clientHeight;
-
-          box.left += Math.min(document.body.clientWidth - (box.left + this.el.clientWidth), 0);
-          box.top += Math.min(document.body.clientHeight - (box.top + this.el.clientHeight), 0);
-        }
-
-        else {
-          el.classList.add('use-script');
-          box = elBox(this.tableView.el);
-
-          style.width = box.width +'px';
-          style.height = box.height +'px';
-        }
-
-        if (box) {
-          this._resizeTextarea(box);
-          style.top = box.top +'px';
-          style.left = box.left +'px';
-        }
+      type: function () {
+        this.setPosition();
       }
     }
   },
@@ -2419,26 +2389,44 @@ var ClauseExpressionView = View.extend({
       this.visible = false;
       return;
     }
+    var box;
+    var style = this.el.style;
 
-    this.originalBox = elBox(this.el);
+    // initial or expression
+    if (this.model.mappingType !== 'script') {
+      this.el.classList.remove('use-script');
 
-    var box = elBox(this.parent.el);
+      style.visibility = 'hidden';
+      style.display = 'block';
+      style.width = 'auto';
 
-    box.top -= this.el.clientHeight;
+      this.originalBox = elBox(this.el);
+      box = elBox(this.parent.el);
 
-    box.left += Math.min(document.body.clientWidth - (box.left + this.el.clientWidth), 0);
-    box.top += Math.min(document.body.clientHeight - (box.top + this.el.clientHeight), 0);
+      box.top -= this.el.clientHeight;
 
-    this.el.style.top = box.top +'px';
-    this.el.style.left = box.left +'px';
+      box.left += Math.min(document.body.clientWidth - (box.left + this.el.clientWidth), 0);
+      box.top += Math.min(document.body.clientHeight - (box.top + this.el.clientHeight), 0);
 
-    if (this.languageView) {
-      this.languageView.setPosition();
+      style.top = box.top +'px';
+      style.left = box.left +'px';
+      style.visibility = null;
     }
-  },
 
-  _resizeTextarea: function (box) {
-    //
+    // script
+    else {
+      if (this.languageView) {
+        this.languageView.setPosition();
+      }
+      this.el.classList.add('use-script');
+
+      box = elBox(this.tableView.el);
+      style.top = box.top + 'px';
+      style.left = box.left + 'px';
+      style.width = box.width + 'px';
+    }
+
+    return this;
   },
 
   show: function (model, parent) {
