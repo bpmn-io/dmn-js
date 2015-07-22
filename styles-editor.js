@@ -19837,6 +19837,7 @@ var Editor = View.extend({
     compiled: 'string',
     globals: 'any',
     error: 'any',
+    rootpath: 'string',
     // rootpath: {
     //   type: 'any',
     //   test: function (val) {
@@ -19915,6 +19916,7 @@ var Editor = View.extend({
     showTab: [
       {
         type: function (el, value) {
+          if (value.indexOf('active') > -1) { return; }
           this.queryAll('.tabs > li').forEach(function (li) {
             li.classList.remove('active');
           });
@@ -20030,6 +20032,7 @@ var Editor = View.extend({
     self.compiling = setTimeout(function () {
       self.error = null;
       less.render(src, {
+        rootpath: self.rootpath,
         globalVars: self.globals,
         modifyVars: self.variables.toObj()
       }).then(success, error);

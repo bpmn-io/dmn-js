@@ -19,8 +19,8 @@
   -webkit-transition: transform 0.436s ease;
   -o-transition: transform 0.436s ease;
   transition: transform 0.436s ease;
-  -webkit-box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
-  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
+  -webkit-box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.2);
+  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.2);
 }
 .styles-editor * {
   -webkit-box-sizing: border-box;
@@ -45,23 +45,8 @@
   border-left: none;
   border-radius: 0 3px 3px 0;
   cursor: pointer;
-  -webkit-box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
-  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
-  /*
-    span:nth-child(1) {
-      -webkit-transform: rotate(45deg) translate(0, -3px);
-          -ms-transform: rotate(45deg) translate(0, -3px); // IE9 only
-           -o-transform: rotate(45deg) translate(0, -3px);
-              transform: rotate(45deg) translate(0, -3px);
-    }
-
-    span:nth-child(3) {
-      -webkit-transform: rotate(-45deg) translate(0, 3px);
-          -ms-transform: rotate(-45deg) translate(0, 3px); // IE9 only
-           -o-transform: rotate(-45deg) translate(0, 3px);
-              transform: rotate(-45deg) translate(0, 3px);
-    }
-    */
+  -webkit-box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.2);
+  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.2);
 }
 .styles-editor .toggle-open:before {
   position: absolute;
@@ -94,38 +79,25 @@
   -o-transform: translate(0, 0);
   transform: translate(0, 0);
 }
-.styles-editor.open .toggle-open {
-  /*
-      span:nth-child(1) {
-        -webkit-transform: rotate(-45deg) translate(0, -3px);
-            -ms-transform: rotate(-45deg) translate(0, -3px); // IE9 only
-             -o-transform: rotate(-45deg) translate(0, -3px);
-                transform: rotate(-45deg) translate(0, -3px);
-      }
-
-      span:nth-child(3) {
-        -webkit-transform: rotate(45deg) translate(0, 3px);
-            -ms-transform: rotate(45deg) translate(0, 3px); // IE9 only
-             -o-transform: rotate(45deg) translate(0, 3px);
-                transform: rotate(45deg) translate(0, 3px);
-      }
-      */
-}
 .styles-editor input,
 .styles-editor textarea {
-  border: none;
+  border: 1px solid #777777;
   font-family: monospace;
-  background-color: #fbfbfb;
   padding: .4em .2em;
+  background-color: #fbfbfb;
+  -webkit-box-shadow: 0 0 1px 2px rgba(119, 119, 119, 0.2) inset;
+  box-shadow: 0 0 1px 2px rgba(119, 119, 119, 0.2) inset;
+}
+.styles-editor input:focus,
+.styles-editor textarea:focus {
+  -webkit-box-shadow: 0 0 1px 2px rgba(51, 122, 183, 0.2) inset;
+  box-shadow: 0 0 1px 2px rgba(51, 122, 183, 0.2) inset;
+  border-color: #337ab7;
+  outline: none;
 }
 .styles-editor input {
   margin-top: .2em;
   font-family: monospace;
-}
-.styles-editor input:focus {
-  color: #337ab7;
-  border-bottom-color: #337ab7;
-  outline: none;
 }
 .styles-editor textarea {
   min-width: 100%;
@@ -224,10 +196,10 @@
 }
 .styles-editor .tabs-content > ul label,
 .styles-editor .tabs-content > ul input {
-  color: #555555;
   width: 100%;
 }
 .styles-editor .tabs-content > ul label {
+  color: #555555;
   display: block;
   font-weight: bold;
 }

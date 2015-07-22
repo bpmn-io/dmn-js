@@ -2,7 +2,7 @@
   position: relative;
   max-height: 100%;
   color: @dmn-gray-darker;
-  overflow: visible;
+  overflow: auto;
 
   .borderbox;
 
@@ -138,14 +138,6 @@
     background-color: lighten(@dmn-gray-light, 6%);
     color: #fff;
 
-    .input,
-    .output {
-      background-color: transparent;
-      &.col-focused {
-        background-color: fade(@dmn-info, 30%);
-      }
-    }
-
     td,
     th {
       cursor: pointer;
@@ -155,9 +147,25 @@
     }
   }
 
+  .values {
+    td {
+      background-color: @dmn-values-bg;;
+    }
+
+    .col-focused {
+      background-color: @dmn-values-focused-bg;
+    }
+  }
+
   .mappings {
     font-family: monospace;
-    background-color: @dmn-gray-light;
+    td {
+      background-color: @dmn-mappings-bg;;
+    }
+
+    .col-focused {
+      background-color: @dmn-mappings-focused-bg;
+    }
   }
 
   &.hide-mappings .mappings * {
@@ -210,13 +218,10 @@
   }
 
 
-  td.col-focused,
-  tr.row-focused td {
-    background-color: fade(@dmn-info, 30%);
+  .col-focused,
+  .row-focused td {
+    background-color: @dmn-focused-bg;
   }
-
-
-
 
   tr > .input + .output {
     border-left: 3px double @dmn-gray;
@@ -224,7 +229,7 @@
 
 
 
-
+  /*
   &.scrollable {
     position: relative;
 
@@ -257,7 +262,7 @@
       }
     }
   }
-
+  */
 
 
 

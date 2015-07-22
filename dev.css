@@ -1,12 +1,3 @@
-/*
-@dmn-input-bg:            #DCDBC4;
-@dmn-output-bg:           #E1F3D5;
-@dmn-values-bg:           #C0C0C0;
-@dmn-mapping-bg:          #CFCFCF;
-@dmn-label-focused-bg:    #FEFDE6;
-@dmn-values-focused-bg:   #D2D1BA;
-@dmn-mapping-focused-bg:  #DCDBC4;
-*/
 body {
   background-color: #fff;
   position: relative;
@@ -92,7 +83,7 @@ body {
   font-weight: lighter;
 }
 .holder-1 {
-  max-height: 360px;
+  height: 360px;
 }
 .holder-2 {
   max-width: 500px;
