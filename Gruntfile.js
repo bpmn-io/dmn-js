@@ -70,7 +70,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('auto-test', [ 'karma:unit' ]);
 
-  grunt.registerTask('build', [ 'bundle' ]);
-
-  grunt.registerTask('default', [ 'jshint', 'test', 'build', 'jsdoc' ]);
+  grunt.registerTask('default', [ 'jshint', 'test', 'jsdoc' ]);
 };

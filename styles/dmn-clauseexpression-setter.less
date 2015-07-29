@@ -5,6 +5,8 @@
 
   .arrow-bottom(8px, 0, #fff);
 
+  transition: all 0.218s linear;
+
   label {
     margin-right: @dmn-horizontal-padding;
   }
@@ -21,37 +23,54 @@
     z-index: 1;
     display: block;
     width: 100%;
-    min-height: 120px;
+    min-height: 220px;
     position: relative;
     font-family: monospace;
-    resize: none;
+    resize: vertical;
+  }
+
+  .links {
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid @dmn-gray-lighter;
+    a {
+      cursor: pointer;
+      color: @dmn-primary;
+    }
+
+    .expression,
+    .script {
+      &:before {
+        display: inline-block;
+        margin: 0 0.3em;
+        color: @dmn-gray;
+      }
+    }
+    .expression:before {
+      content: 'Use: ';
+      margin-left: 0;
+    }
+    .script:before {
+      content: ' / ';
+    }
   }
 
   .icon-clear {
-    color: @dmn-primary;
-    cursor: pointer;
-    float: right;
-    // margin-top: @dmn-vertical-padding;
+    text-align: right;
+    &:before {
+      margin: 0;
+    }
   }
 
+  .toggle-type,
+  .icon-clear,
   .region {
-    padding: @dmn-horizontal-padding 0;
+    padding: @dmn-horizontal-padding;
   }
 
-  .row {
-    overflow: hidden;
-    padding: @dmn-vertical-padding @dmn-horizontal-padding;
-    vertical-align: middle;
-
-    &.link {
-      padding-top: 0;
-      border-bottom: 1px solid @dmn-gray-lighter;
-      margin-bottom: @dmn-vertical-padding;
-    }
-
-    &.fields {
-      padding-bottom: 0;
-    }
+  .toggle-type,
+  .icon-clear {
+    display: table-cell;
   }
 
   .language {
@@ -63,23 +82,37 @@
     .invalid();
   }
 
-  .toggle-script {
-    color: @dmn-primary;
-    cursor: pointer;
-    padding-top: @dmn-vertical-padding;
+  .expression input {
+    min-width: 300px;
   }
 
-  .script {
+  .links .expression {
+    text-decoration: underline;
+  }
+
+  .region.script {
     display: none;
   }
 
-  &.big {
+  &.use-script {
     max-width: none;
-    .expression {
-      display: none;
+
+    .links {
+      .script {
+        text-decoration: underline;
+      }
+      .expression {
+        text-decoration: none;
+      }
     }
-    .script {
-      display: block;
+
+    .region {
+      &.expression {
+        display: none;
+      }
+      &.script {
+        display: block;
+      }
     }
 
     &:after {
