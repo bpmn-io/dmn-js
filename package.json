@@ -33,6 +33,7 @@
   },
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
+    "bootstrap": "^3.3.5",
     "brfs": "^1.4.0",
     "browserify": "^8.1.0",
     "browserify-derequire": "^0.9.1",
@@ -40,6 +41,7 @@
     "grunt": "^0.4.4",
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-jshint": "^0.7.2",
+    "grunt-contrib-less": "^1.0.1",
     "grunt-jsdoc": "^0.5.1",
     "grunt-karma": "^0.8.0",
     "grunt-release": "^0.7.0",

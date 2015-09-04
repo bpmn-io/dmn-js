@@ -67,6 +67,19 @@ module.exports = function(grunt) {
       }
     },
 
+    less: {
+      options: {
+        paths: [
+          // in order to be able to import "bootstrap/less/**"
+          'node_modules'
+        ]
+      },
+
+      styles: {
+        files: { 'dist/css/dmn-js.css': 'styles/dmn-js.less' }
+      }
+    },
+
     jsdoc: {
       dist: {
         src: [ '<%= config.sources %>/**/*.js' ],
@@ -84,7 +97,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('auto-test', [ 'karma:unit' ]);
 
-  grunt.registerTask('build', [ 'bundle' ]);
+  grunt.registerTask('build', [ 'bundle', 'less' ]);
 
   grunt.registerTask('default', [ 'jshint', 'test', 'build', 'jsdoc' ]);
 };
