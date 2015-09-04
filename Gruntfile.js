@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     config: {
       sources: 'lib',
       tests: 'test',
-      dist: '../bower-bpmn-js/dist'
+      dist: 'dist'
     },
 
     jshint: {
@@ -54,6 +54,19 @@ module.exports = function(grunt) {
       }
     },
 
+    bundle: {
+      viewer: {
+        name: 'dmn-viewer',
+        src: '<%= config.sources %>/Viewer.js',
+        dest: '<%= config.dist %>'
+      },
+      modeler: {
+        name: 'dmn-modeler',
+        src: '<%= config.sources %>/Modeler.js',
+        dest: '<%= config.dist %>'
+      }
+    },
+
     jsdoc: {
       dist: {
         src: [ '<%= config.sources %>/**/*.js' ],
@@ -65,10 +78,13 @@ module.exports = function(grunt) {
     }
   });
   // tasks
+  grunt.loadTasks('tasks');
 
   grunt.registerTask('test', [ 'karma:single' ]);
 
   grunt.registerTask('auto-test', [ 'karma:unit' ]);
 
-  grunt.registerTask('default', [ 'jshint', 'test', 'jsdoc' ]);
+  grunt.registerTask('build', [ 'bundle' ]);
+
+  grunt.registerTask('default', [ 'jshint', 'test', 'build', 'jsdoc' ]);
 };
