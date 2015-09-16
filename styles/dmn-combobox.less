@@ -1,5 +1,6 @@
 .dmn-combobox {
   .dmn-normalize;
+  .borderbox;
 
   position: relative;
 
@@ -33,6 +34,8 @@
     display: block;
     z-index: 2;
     text-align: center;
+    height: 26px;
+    border: none;
 
     cursor: pointer;
     &:before {
@@ -44,6 +47,10 @@
       top: 50%;
       margin-top: -8px;
       content: '\E801';
+
+      display: block;
+      height: 26px;
+      width: 16px;
     }
     &:hover:before {
       color: @dmn-primary;
