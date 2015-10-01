@@ -1,17 +1,20 @@
 'use strict';
 
-var TestHelper = require('../TestHelper');
-
-
 var Modeler = require('../../lib/Modeler');
 
+var fs = require('fs');
 
 describe('Modeler', function() {
 
   var container;
 
   beforeEach(function() {
-    container = jasmine.getEnv().getTestContainer();
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(function() {
+    container.parentNode.removeChild(container);
   });
 
 
@@ -25,20 +28,20 @@ describe('Modeler', function() {
 
 
   it('should import simple process', function(done) {
-    var xml = require('../fixtures/dmn/simple.dmn');
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
     createModeler(xml, done);
   });
 
 
   it('should import empty definitions', function(done) {
-    var xml = require('../fixtures/dmn/empty-definitions.dmn');
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
     createModeler(xml, done);
   });
 
 
   it('should re-import simple process', function(done) {
 
-    var xml = require('../fixtures/dmn/simple.dmn');
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
 
     // given
     createModeler(xml, function(err, warnings, modeler) {
@@ -52,8 +55,8 @@ describe('Modeler', function() {
       modeler.importXML(xml, function(err, warnings) {
 
         // then
-        expect(err).toBeFalsy();
-        expect(warnings.length).toBe(0);
+        expect(err).to.eql(null);
+        expect(warnings.length).to.eql(0);
 
         done();
       });
@@ -65,13 +68,13 @@ describe('Modeler', function() {
 
     it('should use <body> as default parent', function(done) {
 
-      var xml = require('../fixtures/dmn/simple.dmn');
+      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
 
       var modeler = new Modeler();
 
       modeler.importXML(xml, function(err, warnings) {
 
-        expect(modeler.container.parentNode).toBe(document.body);
+        expect(modeler.container.parentNode).to.eql(document.body);
 
         done(err, warnings);
       });
@@ -87,7 +90,7 @@ describe('Modeler', function() {
       // given
       var modeler = new Modeler({ container: container });
 
-      var xml = require('../fixtures/dmn/empty-definitions.dmn');
+      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
 
       var events = [];
 
@@ -107,7 +110,7 @@ describe('Modeler', function() {
       modeler.importXML(xml, function(err) {
 
         // then
-        expect(events).toEqual([
+        expect(events).to.eql([
           'import.start',
           'import.success'
         ]);

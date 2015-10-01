@@ -1,17 +1,20 @@
 'use strict';
 
-var TestHelper = require('../TestHelper');
-
-
 var Viewer = require('../../lib/Viewer');
 
+var fs = require('fs');
 
 describe('Viewer', function() {
 
   var container;
 
   beforeEach(function() {
-    container = jasmine.getEnv().getTestContainer();
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(function() {
+    container.parentNode.removeChild(container);
   });
 
 
@@ -25,20 +28,20 @@ describe('Viewer', function() {
 
 
   it('should import simple process', function(done) {
-    var xml = require('../fixtures/dmn/simple.dmn');
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
     createViewer(xml, done);
   });
 
 
   it('should import empty definitions', function(done) {
-    var xml = require('../fixtures/dmn/empty-definitions.dmn');
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
     createViewer(xml, done);
   });
 
 
   it('should re-import simple process', function(done) {
 
-    var xml = require('../fixtures/dmn/simple.dmn');
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
 
     // given
     createViewer(xml, function(err, warnings, viewer) {
@@ -52,8 +55,8 @@ describe('Viewer', function() {
       viewer.importXML(xml, function(err, warnings) {
 
         // then
-        expect(err).toBeFalsy();
-        expect(warnings.length).toBe(0);
+        expect(err).to.eql(null);
+        expect(warnings.length).to.eql(0);
 
         done();
       });
@@ -65,13 +68,13 @@ describe('Viewer', function() {
 
     it('should use <body> as default parent', function(done) {
 
-      var xml = require('../fixtures/dmn/simple.dmn');
+      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
 
       var viewer = new Viewer();
 
       viewer.importXML(xml, function(err, warnings) {
 
-        expect(viewer.container.parentNode).toBe(document.body);
+        expect(viewer.container.parentNode).to.eql(document.body);
 
         done(err, warnings);
       });
@@ -87,7 +90,7 @@ describe('Viewer', function() {
       // given
       var viewer = new Viewer({ container: container });
 
-      var xml = require('../fixtures/dmn/empty-definitions.dmn');
+      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
 
       var events = [];
 
@@ -107,7 +110,7 @@ describe('Viewer', function() {
       viewer.importXML(xml, function(err) {
 
         // then
-        expect(events).toEqual([
+        expect(events).to.eql([
           'import.start',
           'import.success'
         ]);

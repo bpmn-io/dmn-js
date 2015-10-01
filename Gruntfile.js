@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
   // configures browsers to run test against
   // any of [ 'PhantomJS', 'Chrome', 'Firefox', 'IE']
-  var TEST_BROWSERS = ((process.env.TEST_BROWSERS || '').replace(/^\s+|\s+$/, '') || 'PhantomJS').split(/\s*,\s*/g);
+  var TEST_BROWSERS = ((process.env.TEST_BROWSERS || '').replace(/^\s+|\s+$/, '') || 'Chrome').split(/\s*,\s*/g);
 
   // project configuration
   grunt.initConfig({
