@@ -9,6 +9,8 @@ var TestContainer = require('mocha-test-container-support');
 
 var Modeler = require('../lib/Modeler');
 
+var fs = require('fs');
+
 var OPTIONS, MODELER;
 
 
@@ -37,7 +39,7 @@ var OPTIONS, MODELER;
  */
 function bootstrapModeler(options, locals) {
 
-  return function() {
+  return function(done) {
 
     var testContainer;
 
@@ -73,17 +75,11 @@ function bootstrapModeler(options, locals) {
       _locals = _locals();
     }
 
-    _options = assign({ sheet: { container: testContainer } }, OPTIONS || {}, _options || {});
-
-    var mockModule = {};
-
-    forEach(_locals, function(v, k) {
-      mockModule[k] = ['value', v];
-    });
-
-    _options.modules = unique([].concat(_options.modules || [], [ mockModule ]));
+    _options = assign({ container: testContainer }, OPTIONS || {}, _options || {});
 
     MODELER = new Modeler(_options);
+
+    MODELER.importXML(fs.readFileSync(__dirname + '/fixtures/dmn/new-table.dmn', 'utf-8'), function(){ done(); });
   };
 }
 
@@ -113,7 +109,7 @@ function inject(fn) {
   return function() {
 
     if (!MODELER) {
-      throw new Error('no bootstraped table, ensure you created it via #bootstrapTable');
+      throw new Error('no bootstraped modeler, ensure you created it via #bootstrapModeler');
     }
 
     MODELER.invoke(fn);
@@ -121,5 +117,5 @@ function inject(fn) {
 }
 
 
-module.exports.bootstrapTable = (window || global).bootstrapTable = bootstrapModeler;
+module.exports.bootstrapTable = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.inject = (window || global).inject = inject;
