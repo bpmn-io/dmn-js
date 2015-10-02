@@ -35,6 +35,7 @@
   "devDependencies": {
     "bootstrap": "^3.3.5",
     "brfs": "^1.4.0",
+    "chai": "~2.2.0",
     "browserify": "^8.1.0",
     "browserify-derequire": "^0.9.1",
     "bundle-collapser": "^1.1.1",
