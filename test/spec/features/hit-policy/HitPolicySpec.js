@@ -17,4 +17,16 @@ describe('features/hit-policy', function() {
     expect(elementRegistry.getGraphics(hitPolicy.getCell()).textContent).to.eql('U');
   }));
 
+  it('should render the aggregator for the collect policy as symbol', inject(function(elementRegistry, hitPolicy, eventBus) {
+    eventBus.fire('hitPolicy.edit', {
+      table: hitPolicy.table,
+      hitPolicy: 'COLLECT',
+      aggregation: 'MIN',
+      cell: hitPolicy.getCell()
+    });
+
+    expect(elementRegistry.getGraphics(hitPolicy.getCell()).textContent).to.eql('C<');
+
+  }));
+
 });
