@@ -37,10 +37,6 @@
     font-size: 100%;
   }
 
-  .dmn-dropdown-menu {
-    display: block;
-  }
-
   .icon {
     &:before {
       .dmn-font;
@@ -111,7 +107,7 @@
       > ul {
         float: right;
       }
-      &.dmn-dropdown {
+      &.popup-dropdown {
         width: 100%;
       }
     }
@@ -122,8 +118,8 @@
     text-align: right;
 
     li {
-      display: inline-block;
-      float: none;
+      float: left;
+      clear: none;
       width: auto;
 
       &:after {
