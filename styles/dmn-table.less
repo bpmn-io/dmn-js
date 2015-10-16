@@ -57,6 +57,13 @@
     }
   }
 
+  // firefox does not render the borders of the whole table if it has an empty tbody
+  // hiding the tbody will solve that problem
+  // http://jsfiddle.net/zeropaper/kwbd4vgz/
+  tbody:empty {
+    display: none;
+  }
+
   td,
   th {
     overflow: hidden;
