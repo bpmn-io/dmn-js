@@ -7,12 +7,19 @@
 
   .borderbox;
 
-  .arrow-left(8px, 20px, #fff);
+  .arrow-left(8px, 16px, #fff);
 
   .datatype,
   .allowed-values {
-    padding: @dmn-horizontal-padding;
     max-width: 100%;
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+  }
+
+  .ranged-values,
+  .allowed-values {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 @dmn-horizontal-padding;
   }
 
   .datatype {
@@ -23,13 +30,6 @@
       vertical-align: middle;
       display: table-cell;
     }
-  }
-
-  .allowed-values,
-  .ranged-values {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 @dmn-horizontal-padding;
   }
 
   &.choices,
@@ -49,13 +49,11 @@
   .ranged-values {
     ul {
       max-height: 180px;
+      overflow: auto;
     }
   }
 
   .allowed-values {
-    ul {
-      overflow-y: scroll;
-    }
     input {
       width: 100%;
     }
@@ -76,15 +74,13 @@
 
   input {
     border: 1px solid @dmn-gray;
-    /*background-color: #fff;*/
     padding: @dmn-vertical-padding @dmn-horizontal-padding;
     .focused();
   }
 
   label {
-    color: @dmn-gray-darker;
+    .tjs-label;
     min-width: 50px;
-    font-weight: lighter;
     padding: @dmn-vertical-padding 0;
     margin-right: @dmn-horizontal-padding;
   }
@@ -107,7 +103,7 @@
       border: none;
     }
     .dmn-combobox {
-      .caret {
+      .cb-caret {
         display: none;
       }
       input {

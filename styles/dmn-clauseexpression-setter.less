@@ -10,6 +10,7 @@
   transition: all 0.218s linear;
 
   label {
+    .tjs-label;
     margin-right: @dmn-horizontal-padding;
   }
 
@@ -39,48 +40,6 @@
       cursor: pointer;
       color: @dmn-primary;
     }
-
-    .expression,
-    .script {
-      &:before {
-        display: inline-block;
-        margin: 0 0.3em;
-        color: @dmn-gray;
-      }
-    }
-    .expression:before {
-      content: 'Use: ';
-      margin-left: 0;
-    }
-    .script:before {
-      content: ' / ';
-    }
-  }
-
-  .links {
-    display: table;
-    width: 100%;
-    border-bottom: 1px solid @dmn-gray-lighter;
-    a {
-      cursor: pointer;
-      color: @dmn-primary;
-    }
-
-    .expression,
-    .script {
-      &:before {
-        display: inline-block;
-        margin: 0 0.3em;
-        color: @dmn-gray;
-      }
-    }
-    .expression:before {
-      content: 'Use: ';
-      margin-left: 0;
-    }
-    .script:before {
-      content: ' / ';
-    }
   }
 
   .icon-clear {
@@ -103,6 +62,7 @@
 
   .language {
     width: auto;
+    max-width: 350px;
     margin-bottom: @dmn-vertical-padding;
   }
 
@@ -155,7 +115,7 @@
       border: none;
     }
     .dmn-combobox {
-      .caret {
+      .cb-caret {
         display: none;
       }
       input {

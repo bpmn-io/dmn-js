@@ -74,7 +74,6 @@
       text-overflow: ellipsis;
       display: block;
       overflow: hidden;
-      text-overflow: ellipsis;
       width: 100%;
       height: 100%;
       white-space: pre-wrap;
@@ -92,7 +91,12 @@
     position: relative;
 
     h3 {
-      margin: auto;
+      font-size: 24px;
+      line-height: 30px;
+      margin: 0.3em auto;
+      font-weight: bold;
+      text-align: center;
+
       &:empty:before {
         display: inline;
         content: '<Set a name>';
@@ -100,9 +104,11 @@
       }
     }
 
-    .table-id {
+    .tjs-table-id {
+      font-size: 18px;
       background-color: @dmn-gray-light;
       font-family: monospace;
+      font-weight: 300;
       color: white;
       text-align: center;
       margin: 0px -6px -3px;
@@ -112,7 +118,6 @@
 
   table {
     font-size: 90%;
-    color: @dmn-gray-darker;
     background-color: @dmn-table-bg;
     width: 100%;
     table-layout: fixed;
@@ -300,7 +305,7 @@
 
 
 
-  .controls {
+  .tjs-controls {
     float: right;
     text-align: right;
     max-width: 50%;

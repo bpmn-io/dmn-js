@@ -14,6 +14,7 @@
   }
 
   label {
+    .tjs-label;
     padding-right: @dmn-horizontal-padding;
   }
 
@@ -26,38 +27,36 @@
     z-index: 1;
   }
 
-  .caret {
+  .cb-caret {
     position: absolute;
-    top: @dmn-horizontal-padding;
     right: @dmn-horizontal-padding;
-    bottom: @dmn-horizontal-padding;
+    top: @dmn-vertical-padding;
+    bottom: @dmn-vertical-padding;
     display: block;
     z-index: 2;
     text-align: center;
-    height: 26px;
-    border: none;
-
     cursor: pointer;
+
     &:before {
       .dmn-font();
-      display: block;
       position: absolute;
-      height: 100%;
-      right: 0;
-      top: 50%;
-      margin-top: -8px;
-      content: '\E801';
-
       display: block;
-      height: 26px;
-      width: 16px;
+      right: 0;
+      width: 1.2em;
+      height: @line-height-computed;
+      line-height: @line-height-computed;
+      height: 1.2em;
+      top: 50%;
+      margin-top: -0.6em;
+      content: '\E801';
     }
+
     &:hover:before {
       color: @dmn-primary;
     }
   }
 
-  &.expanded .caret:before {
+  &.expanded .cb-caret:before {
     content: '\E800';
   }
 }

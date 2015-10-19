@@ -1,17 +1,11 @@
 /* The content of this file is mostly taken from */
-.dmn-normalize() {
+.original-normalize() {
   /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
   //
   // 1. Set default font family to sans-serif.
   // 2. Prevent iOS text size adjust after orientation change, without disabling
   //    user zoom.
   //
-
-
-  // CUSTOM for dmn-js
-  font-size: 16px;
-  // CUSTOM end
-
 
 
   // html {
@@ -436,5 +430,19 @@
   td,
   th {
     padding: 0;
+  }
+}
+
+
+.dmn-normalize() {
+  .original-normalize();
+
+  font-size: 16px;
+  color: @dmn-gray-dark;
+
+  input,
+  textarea {
+    font-size: 16px;
+    color: @dmn-gray-dark;
   }
 }
