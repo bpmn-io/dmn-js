@@ -1,4 +1,5 @@
-.dmn-clausevalues-setter {
+.dmn-clausevalues-setter,
+.dmn-hitpolicy-setter {
   .dmn-normalize;
 
   .tooltip(@dmn-gray-dark, #fff);
@@ -109,6 +110,16 @@
       input {
         padding-bottom: 0;
       }
+    }
+  }
+}
+
+.dmn-hitpolicy-setter {
+  max-width: 420px;
+  > div > .dmn-combobox {
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+    label {
+      white-space: nowrap;
     }
   }
 }
