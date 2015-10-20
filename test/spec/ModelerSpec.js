@@ -2,6 +2,8 @@
 
 var Modeler = require('../../lib/Modeler');
 
+var ComboBox = require('table-js/lib/features/combo-box');
+
 var fs = require('fs');
 
 describe('Modeler', function() {
@@ -19,11 +21,13 @@ describe('Modeler', function() {
 
 
   function createModeler(xml, done) {
-    var modeler = new Modeler({ container: container, additionalModules: [require('table-js/lib/features/interaction-events')] });
+    var modeler = new Modeler({ container: container });
 
     modeler.importXML(xml, function(err, warnings) {
       done(err, warnings, modeler);
     });
+
+    return modeler;
   }
 
 
@@ -117,6 +121,41 @@ describe('Modeler', function() {
 
         done(err);
       });
+    });
+
+  });
+
+  describe('destruction', function() {
+    it('should close open combobox dropdowns on destruction', function(done) {
+      // given
+      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
+
+      var modeler = new Modeler();
+
+      modeler.importXML(xml, function(err, warnings) {
+
+        var options = ['LIST', 'SUM', 'MIN', 'MAX', 'COUNT'];
+        var comboBox = new ComboBox({
+            label: 'ComboBox',
+            options: options,
+        });
+
+        container.appendChild(comboBox.getNode());
+
+        comboBox._openDropdown(options);
+
+        // make sure the dropdown is open
+        expect(document.body.contains(comboBox._dropdown)).to.be.true;
+
+        // when
+        modeler.destroy();
+
+        // then
+        expect(document.body.contains(comboBox._dropdown)).to.be.false;
+
+        done();
+      });
+
     });
 
   });
