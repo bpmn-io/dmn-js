@@ -80,6 +80,8 @@ function bootstrapModeler(options, locals) {
     MODELER = new Modeler(_options);
 
     MODELER.importXML(fs.readFileSync(__dirname + '/fixtures/dmn/new-table.dmn', 'utf-8'), function(){ done(); });
+
+    return MODELER;
   };
 }
 
