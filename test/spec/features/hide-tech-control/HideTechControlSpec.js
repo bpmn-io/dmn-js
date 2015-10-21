@@ -29,6 +29,38 @@ describe('features/hide-tech-control', function() {
       expect(domClasses(sheet.getContainer().parentNode).list.contains('hide-mappings')).to.eql(false);
     }));
 
+    it('should expose the current state', inject(function(hideTechControl) {
+      hideTechControl.hide();
+
+      expect(hideTechControl.isHidden()).to.be.true;
+
+      hideTechControl.show();
+
+      expect(hideTechControl.isHidden()).to.be.false;
+    }));
+
+    it('should fire an event when details are hidden', inject(function(hideTechControl, eventBus) {
+      var functionCalled = false;
+      eventBus.on('details.hidden', function() {
+        functionCalled = true;
+      });
+
+      hideTechControl.hide();
+
+      expect(functionCalled).to.be.true;
+    }));
+
+    it('should fire an event when details are shown', inject(function(hideTechControl, eventBus) {
+      var functionCalled = false;
+      eventBus.on('details.shown', function() {
+        functionCalled = true;
+      });
+
+      hideTechControl.show();
+
+      expect(functionCalled).to.be.true;
+    }));
+
   });
 
   describe('defaults', function() {
