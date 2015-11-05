@@ -38,6 +38,23 @@ describe('Viewer', function() {
     createViewer(xml, done);
   });
 
+  it('should import missing id on decision', function(done) {
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/no-decision-id.dmn', 'utf-8');
+    createViewer(xml, function(err, warnings, viewer) {
+      expect(viewer.definitions.decision[0].id).to.eql(undefined);
+      done();
+    });
+  });
+
+  it('should repair empty id on decision', function(done) {
+    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-decision-id.dmn', 'utf-8');
+    createViewer(xml, function(err, warnings, viewer) {
+      expect(viewer.definitions.decision[0].id).to.not.eql(undefined);
+      expect(viewer.definitions.decision[0].id).to.not.eql('');
+      done();
+    });
+  });
+
 
   it('should re-import simple process', function(done) {
 
