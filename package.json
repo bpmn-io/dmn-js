@@ -68,7 +68,7 @@
     "uglify-js": "^2.4.16"
   },
   "dependencies": {
-    "dmn-moddle": "^0.1.0",
+    "dmn-moddle": "^0.2.0",
     "table-js": "dmn-io/table-js",
     "diagram-js": "^0.11.0",
     "didi": "^0.0.4",
