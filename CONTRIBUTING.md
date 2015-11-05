@@ -1,11 +1,11 @@
 # How to contribute
 
-We love you to contribute to this project by filing bugs, helping others on the [issue tracker](https://github.com/bpmn-io/bpmn-js/issues), by contributing features/bug fixes through pull requests or by helping out in our [forums](https://forum.bpmn.io/).
+We love you to contribute to this project by filing bugs, helping others on the [issue tracker](https://github.com/bpmn-io/dmn-js/issues), by contributing features/bug fixes through pull requests or by helping out in our [forums](https://forum.bpmn.io/).
 
 
 ## Creating issues
 
-We use our [issue tracker](https://github.com/bpmn-io/bpmn-js/issues) for project communication.
+We use our [issue tracker](https://github.com/bpmn-io/dmn-js/issues) for project communication.
 When using the issue tracker:
 
 * Be descriptive when creating an issue (what, where, when and how does a problem pop up)?
@@ -18,20 +18,20 @@ Create a pull request if you would like to have an in-depth discussion about som
 
 ## Setting up the project locally
 
-The project development runs on top of the [diagram-js](https://github.com/bpmn-io/diagram-js) master branch. The following code snippet sets up both libraries linking diagram-js to bpmn-js.
-    
+The project development runs on top of the [table-js](https://github.com/bpmn-io/table-js) master branch. The following code snippet sets up both libraries linking table-js to dmn-js.
+
     mkdir bpmn.io
     cd bpmn.io
 
-    git clone git@github.com:bpmn-io/diagram-js.git
-    (cd diagram-js && npm i)
+    git clone git@github.com:bpmn-io/table-js.git
+    (cd table-js && npm i)
 
-    git clone git@github.com:bpmn-io/bpmn-js.git
-    (cd bpmn-js && npm install && npm link ../diagram-js)
-    
+    git clone git@github.com:bpmn-io/dmn-js.git
+    (cd dmn-js && npm install && npm link ../table-js)
+
     // Run the test suite
     grunt
-    
+
     // Running the test suite with every file change
     TEST_BROWSERS=(Chrome|Firefox|IE) grunt auto-test
 

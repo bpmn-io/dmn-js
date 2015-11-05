@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# Setup script to be executed in a dmn.io project root (some empty folder chosen by YOU)
+# Setup script to be executed in a bpmn.io project root (some empty folder chosen by YOU)
 ###
 
 base=`pwd`
@@ -11,10 +11,10 @@ echo cloning repositories
 git clone git@github.com:bpmn-io/diagram-js.git
 git clone git@github.com:bpmn-io/moddle.git
 git clone git@github.com:bpmn-io/moddle-xml.git
-git clone git@github.com:dmn-io/dmn-js.git
-git clone git@github.com:dmn-io/dmn-moddle.git
-git clone git@github.com:dmn-io/table-js.git
-git clone git@github.com:dmn-io/dmn-js-examples.git
+git clone git@github.com:bpmn-io/dmn-js.git
+git clone git@github.com:bpmn-io/dmn-moddle.git
+git clone git@github.com:bpmn-io/table-js.git
+git clone git@github.com:bpmn-io/dmn-js-examples.git
 
 echo done.
 

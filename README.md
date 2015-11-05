@@ -1,6 +1,6 @@
 # dmn-js - DMN for the web
 
-[dmn-js](https://github.com/dmn-io/dmn-js) is a DMN modeling and rendering toolkit.
+[dmn-js](https://github.com/bpmn-io/dmn-js) is a DMN modeling and rendering toolkit.
 
 
 > the project is still in an early stage. Documentation may be missing and examples may be broken.
@@ -26,19 +26,19 @@ viewer.importXML(xml, function(err) {
 
 ## Resources
 
-*   [Issues](https://github.com/dmn-io/dmn-js/issues)
+*   [Issues](https://github.com/bpmn-io/dmn-js/issues)
 
 ## Tools
 
 dmn-js builds on top of a few additional powerful tools
 
-* [dmn-moddle](https://github.com/dmn-io/dmn-moddle): Read / write support for DMN XML in the browsers
-* [table-js](https://github.com/dmn-io/table-js): Table rendering and editing toolkit
+* [dmn-moddle](https://github.com/bpmn-io/dmn-moddle): Read / write support for DMN XML in the browsers
+* [table-js](https://github.com/bpmn-io/table-js): Table rendering and editing toolkit
 
 
 ## Building the Project
 
-As long as the project is in alpha stage, you must make sure you setup the whole development environment, including a number of [project dependencies](https://github.com/dmn-io) according to [our development setup](https://github.com/dmn-io/dmn-js/blob/master/docs/project/SETUP.md).
+As long as the project is in alpha stage, you must make sure you setup the whole development environment, including a number of [project dependencies](https://github.com/bpmn-io) according to [our development setup](https://github.com/bpmn-io/dmn-js/blob/master/docs/project/SETUP.md).
 
 
 ## License

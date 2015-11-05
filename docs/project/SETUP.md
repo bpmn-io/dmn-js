@@ -7,11 +7,11 @@ Make sure you have [git](http://git-scm.com/), [NodeJS](nodejs.org) and [npm](ht
 
 ### Get Project + Dependencies
 
-The following projects from the [dmn-io](https://github.com/dmn-io) and [bpmn-io](https://github.com/bpmn-io) projects on GitHub
+Get the following projects from the [bpmn-io](https://github.com/bpmn-io) projects on GitHub
 
-* [dmn-js](https://github.com/dmn-io/dmn-js)
-* [table-js](https://github.com/dmn-io/table-js)
-* [dmn-moddle](https://github.com/dmn-io/dmn-moddle)
+* [dmn-js](https://github.com/bpmn-io/dmn-js)
+* [table-js](https://github.com/bpmn-io/table-js)
+* [dmn-moddle](https://github.com/bpmn-io/dmn-moddle)
 * [moddle](https://github.com/bpmn-io/moddle)
 * [moddle-xml](https://github.com/bpmn-io/moddle-xml)
 * [diagram-js](https://github.com/bpmn-io/diagram-js)
@@ -21,13 +21,6 @@ and clone them into a common directory via
 ```
 git clone git@github.com:bpmn-io/PROJECT_NAME.git
 ```
-
-or
-
-```
-git clone git@github.com:dmn-io/PROJECT_NAME.git
-```
-
 
 ### Link Projects
 
