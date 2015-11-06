@@ -34,8 +34,6 @@
   },
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
-    "bootstrap": "^3.3.5",
-    "brfs": "^1.4.0",
     "chai": "~2.2.0",
     "browserify": "^8.1.0",
     "browserify-derequire": "^0.9.1",
@@ -70,6 +68,8 @@
   "dependencies": {
     "dmn-moddle": "^0.2.0",
     "table-js": "bpmn-io/table-js",
+    "bootstrap": "^3.3.5",
+    "brfs": "^1.4.0",
     "diagram-js": "^0.11.0",
     "didi": "^0.0.4",
     "ids": "^0.1.0",
