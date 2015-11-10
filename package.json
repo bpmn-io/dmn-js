@@ -66,7 +66,7 @@
     "uglify-js": "^2.4.16"
   },
   "dependencies": {
-    "dmn-moddle": "^0.2.0",
+    "dmn-moddle": "^0.2.3",
     "table-js": "bpmn-io/table-js",
     "bootstrap": "^3.3.5",
     "brfs": "^1.4.0",
