@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "dmn-moddle": "^0.2.3",
-    "table-js": "bpmn-io/table-js",
+    "table-js": "^0.2.0",
     "bootstrap": "^3.3.5",
     "brfs": "^1.4.0",
     "diagram-js": "^0.11.0",
