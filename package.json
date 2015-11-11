@@ -1,6 +1,6 @@
 {
   "name": "dmn-js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A dmn toolkit and web modeler",
   "scripts": {
     "test": "grunt test",
@@ -30,7 +30,9 @@
     }
   ],
   "browserify": {
-    "transform": ["brfs"]
+    "transform": [
+      "brfs"
+    ]
   },
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
