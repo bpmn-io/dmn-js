@@ -3,8 +3,7 @@
   "version": "0.2.0",
   "description": "A dmn toolkit and web modeler",
   "scripts": {
-    "test": "grunt test",
-    "preinstall": "npm install chai@2.2.0"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
