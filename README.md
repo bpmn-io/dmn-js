@@ -1,5 +1,7 @@
 # dmn-js - DMN for the web
 
+[![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=master)](https://travis-ci.org/bpmn-io/dmn-js)
+
 [dmn-js](https://github.com/bpmn-io/dmn-js) is a DMN modeling and rendering toolkit.
 
 
