@@ -1,6 +1,6 @@
 {
-  "name": "dmn",
-  "css_prefix_text": "icon-",
+  "name": "dmn-js",
+  "css_prefix_text": "dmn-icon-",
   "css_use_suffix": false,
   "hinting": true,
   "units_per_em": 1000,

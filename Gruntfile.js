@@ -80,6 +80,14 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      fonts: {
+        files: [
+          {expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.dist %>/fonts'},
+        ]
+      }
+    },
+
     jsdoc: {
       dist: {
         src: [ '<%= config.sources %>/**/*.js' ],
@@ -97,7 +105,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('auto-test', [ 'karma:unit' ]);
 
-  grunt.registerTask('build', [ 'bundle', 'less' ]);
+  grunt.registerTask('build', [ 'bundle', 'less', 'copy:fonts' ]);
 
   grunt.registerTask('default', [ 'jshint', 'test', 'build', 'jsdoc' ]);
 };
