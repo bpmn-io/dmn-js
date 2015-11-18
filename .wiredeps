@@ -290,7 +290,7 @@
       "version": "0.1.1"
     },
     "table-js": {
-      "version": "0.2.0"
+      "version": "bpmn-io/table-js"
     }
   }
 }
