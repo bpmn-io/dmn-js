@@ -1,0 +1,48 @@
+.dmn-table {
+
+  .input.wrongValue {
+	background-color: red;
+  }
+  
+  .input.missingValue {
+	background-color: #FC7F7F;
+  }
+  
+  .output.wrongValue {
+	background-color: red;
+  }
+  
+  .wrongValue:hover .wrongValueToolTip {
+    display: block;
+  }
+
+  .wrongValueToolTip {
+    display: none;
+    background: #C8C8C8;
+    margin-left: 28px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1000;
+    width:200px;
+    height:100px;
+  }
+  .tooltip{
+    display: inline-block;
+    background: #C8C8C8;
+    margin-left: 28px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1000;
+    width:200px;
+  }
+  
+  .ruleErrorText{
+	text-align:left; 
+	font-size:small;
+  }
+  
+  .overlapping-rules-focused td {
+    background-color: #FDC6C6;
+  }
+  
+}
