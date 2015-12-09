@@ -75,9 +75,9 @@
     "didi": "^0.0.4",
     "ids": "^0.1.0",
     "inherits": "^2.0.1",
+	"jquery": "^2.1.1",
     "lodash": "^3.0.1",
     "min-dom": "^0.2.0",
-    "object-refs": "^0.1.0",
-	"jquery": "^2.1.1"
+    "object-refs": "^0.1.0"
   }
 }
