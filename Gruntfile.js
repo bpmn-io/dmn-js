@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     config: {
       sources: 'lib',
       tests: 'test',
-      dist: 'dist'
+      dist: '../bower-dmn-js/dist'
     },
 
     jshint: {
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
       },
 
       styles: {
-        files: { 'dist/css/dmn-js.css': 'styles/dmn-js.less' }
+        files: { '<%= config.dist %>/css/dmn-js.css': 'styles/dmn-js.less' }
       }
     },
 
