@@ -27,9 +27,14 @@
     }
 
     td.draggable {
+      &:before {
+        content: '\283F';
+        float: left;
+      }
       cursor: move;
       span {
         cursor: move;
+        display: inline;
       }
     }
   }
