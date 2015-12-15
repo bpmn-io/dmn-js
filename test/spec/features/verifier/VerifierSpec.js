@@ -9,7 +9,7 @@ var domClasses = require('min-dom/lib/classes');
 
 describe('features/verifier', function() {
 
-	beforeEach(bootstrapModeler({additionalModules: [ require('dmn-js/lib/features/verifier') ]}));
+	beforeEach(bootstrapModeler({additionalModules: [ require('../../../../lib/features/verifier') ]}));
 
 	beforeEach(inject(function(modeling) {
 		modeling.createRow({id: 'rule1'});
