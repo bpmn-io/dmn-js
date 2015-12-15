@@ -1,0 +1,30 @@
+.dmn-table {
+
+  .dragTable {
+    width: 100%;
+    pointer-events:none;
+    box-shadow: 5px 5px 3px 0px rgba(181, 181, 181, 0.7);
+    transform: scale(0.75);
+    transform-origin: left top;
+  }
+
+  table > tbody tr {
+    &.drop {
+      border-style: dashed;
+      border-color: green;
+      border-width: 0;
+
+      &.above {
+        border-top-width: 4px;
+      }
+      &.below {
+        border-bottom-width: 4px;
+      }
+    }
+
+    &.dragged {
+      opacity: 0.4;
+    }
+  }
+
+}
