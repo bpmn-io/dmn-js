@@ -67,16 +67,17 @@
     "uglify-js": "^2.4.16"
   },
   "dependencies": {
-    "dmn-moddle": "^0.2.3",
-    "table-js": "^0.3.0",
     "bootstrap": "^3.3.5",
     "brfs": "^1.4.0",
     "diagram-js": "^0.11.0",
     "didi": "^0.0.4",
+    "dmn-moddle": "^0.2.3",
     "ids": "^0.1.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
     "min-dom": "^0.2.0",
-    "object-refs": "^0.1.0"
+    "object-refs": "^0.1.0",
+    "selection-update": "^0.1.2",
+    "table-js": "^0.3.0"
   }
 }
