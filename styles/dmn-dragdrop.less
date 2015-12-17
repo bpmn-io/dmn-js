@@ -9,6 +9,20 @@
     opacity: 0.85;
   }
 
+  table tr > td.drop {
+
+    border-style: dashed !important;
+    border-color: green !important;
+    border-width: 0 !important;
+
+    &.left {
+      border-left-width: 4px !important;
+    }
+    &.right {
+      border-right-width: 4px !important;
+    }
+  }
+
   table > tbody tr {
     &.drop {
       border-style: double;
@@ -37,6 +51,19 @@
       span {
         cursor: move;
         display: inline;
+      }
+    }
+  }
+
+  table > thead tr {
+    td.draggable {
+      span.drag-handle:before {
+        content: '\283F';
+        float: left;
+        cursor: move;
+      }
+      span {
+        display: inline
       }
     }
   }
