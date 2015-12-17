@@ -3,35 +3,37 @@
   .dragTable {
     width: 100%;
     pointer-events:none;
-    box-shadow: 5px 5px 3px 0px rgba(181, 181, 181, 0.7);
-    transform: scale(0.75);
+    box-shadow: 0 0 3px 0px rgba(181, 181, 181, 0.7);
+    transform: scale(0.75) translateY(-50%);
     transform-origin: left top;
+    opacity: 0.85;
   }
 
   table > tbody tr {
     &.drop {
-      border-style: dashed;
-      border-color: green;
+      border-style: double;
+      border-color: @dmn-primary;
       border-width: 0;
 
       &.above {
-        border-top-width: 4px;
+        border-top-width: 6px;
       }
       &.below {
-        border-bottom-width: 4px;
+        border-bottom-width: 6px;
       }
     }
 
     &.dragged {
-      opacity: 0.4;
     }
 
     td.draggable {
+      cursor: move;
+
       &:before {
         content: '\283F';
         float: left;
       }
-      cursor: move;
+
       span {
         cursor: move;
         display: inline;
