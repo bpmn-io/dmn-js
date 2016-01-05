@@ -9,62 +9,71 @@
     opacity: 0.85;
   }
 
-  table tr > td.drop {
-    &.left {
-      border-left-style: dashed;
-      border-left-color: green;
-      border-left-width: 4px;
-    }
-    &.right {
-      border-right-style: dashed;
-      border-right-color: green;
-      border-right-width: 4px;
+  thead,
+  tbody {
+    tr > td.drop {
+      &.left {
+        border-left: 6px double @dmn-primary;
+      }
+      &.right {
+        border-right: 6px double @dmn-primary;
+      }
     }
   }
 
   table > tbody tr {
     &.drop {
-      border-style: double;
-      border-color: @dmn-primary;
-      border-width: 0;
 
       &.above {
-        border-top-width: 6px;
+        border-top: 6px double @dmn-primary;
       }
       &.below {
-        border-bottom-width: 6px;
+        border-bottom: 6px double @dmn-primary;
       }
-    }
-
-    &.dragged {
     }
 
     td.draggable {
       cursor: move;
+      cursor: ns-resize;
 
       &:before {
-        content: '\283F';
         float: left;
+        content: '\283F';
+        cursor: move;
+        cursor: ns-resize;
       }
 
       span {
-        cursor: move;
-        display: inline;
+        float: right;
+        width: auto;
       }
     }
   }
 
   table > thead tr {
     td.draggable {
-      span.drag-handle:before {
-        content: '\283F';
-        float: left;
-        cursor: move;
+      .drag-handle,
+      [contenteditable] {
+        vertical-align: middle;
+        display: inline-block;
       }
-      span {
-        display: inline
+
+      [contenteditable] {
+        width: ~"calc(100% - 1em)";
+      }
+
+      .drag-handle {
+        float: left;
+        width: 1em;
+        cursor: move;
+        cursor: ew-resize;
+        &:before {
+          position: relative;
+          top: 2px;
+          content: '\283F';
+          display: inline-block;
+        }
       }
     }
   }
-
 }
