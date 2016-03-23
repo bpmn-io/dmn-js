@@ -505,56 +505,6 @@ describe('features/verifier', function() {
         expect(domClasses(elements['cell_input1_rule2'].gfx).contains('wrongValue')).to.be.true;
     }));
   
-    it('should add a overlapping rule into "Missing and overlapping rules" table (string)', inject(function(elementRegistry, graphicsFactory, verifier, sheet, modeling) {
-        
-        modeling.createRow({id: 'rule3'});
-        modeling.editCell('rule3', 'input1', '"silver"');
-        
-        verifier.verifyTable();
-        
-        var errorTableFirstRow = sheet.getContainer().childNodes[3].tBodies[0].rows[0];
-        var errorValue = errorTableFirstRow.cells[0].getElementsByTagName('span')[0].innerHTML;
-
-        expect(errorValue === 'Rules 2, 3 are overlapping (outputs are same)').to.be.true;
-
-    }));
-  
-    it('should add a overlapping rule into "Missing and overlapping rules" table (numeric)', inject(function(verifier, sheet, modeling, elementRegistry) {
-    
-        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'integer';
-        modeling.editCell('rule1', 'input1', '< 100');
-        modeling.editCell('rule2', 'input1', '>= 100');
-        
-        modeling.createRow({id: 'rule3'});
-        modeling.editCell('rule3', 'input1', '[10,100)');
-        
-        verifier.verifyTable();
-        
-        var errorTableFirstRow = sheet.getContainer().childNodes[3].tBodies[0].rows[0];
-        var errorValue = errorTableFirstRow.cells[0].getElementsByTagName('span')[0].innerHTML;
-        
-        expect(errorValue === 'Rules 1, 3 are overlapping (outputs are same)').to.be.true;
-
-    }));
-  
-    it('should highlight overlapping rules when clicked "Higlight overlapping rules"', inject(function(verifier, sheet, modeling, elementRegistry) {
-        modeling.createRow({id: 'rule3'});
-        modeling.editCell('rule3', 'input1', '"silver"');
-        
-        
-        verifier.verifyTable();
-        
-        var elements = elementRegistry._elements
-        
-        var errorTableFirstRow = sheet.getContainer().childNodes[3].tBodies[0].rows[0];
-        errorTableFirstRow.cells[1].getElementsByTagName('input')[0].click();
-
-        expect(domClasses(elements['rule1'].gfx).contains('overlapping-rules-focused')).to.be.false;
-        expect(domClasses(elements['rule2'].gfx).contains('overlapping-rules-focused')).to.be.true;
-        expect(domClasses(elements['rule3'].gfx).contains('overlapping-rules-focused')).to.be.true;
-        
-    }));
-  
     it('should add a missing rule into "Missing and overlapping rules" table', inject(function(verifier, sheet, modeling, elementRegistry) {
     
         elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'integer';
