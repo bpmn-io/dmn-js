@@ -1,0 +1,77 @@
+.dmn-table {
+
+  .dragTable {
+    width: 100%;
+    pointer-events:none;
+    box-shadow: 0 0 3px 0px rgba(181, 181, 181, 0.7);
+    transform: scale(0.75) translateY(-50%);
+    transform-origin: left top;
+    opacity: 0.85;
+  }
+
+  thead,
+  tbody {
+    tr > td.drop {
+      &.left {
+        border-left: 6px double @dmn-primary;
+      }
+      &.right {
+        border-right: 6px double @dmn-primary;
+      }
+    }
+  }
+
+  table > tbody tr {
+    &.drop {
+
+      &.above {
+        border-top: 6px double @dmn-primary;
+      }
+      &.below {
+        border-bottom: 6px double @dmn-primary;
+      }
+    }
+
+    td.draggable {
+      cursor: move;
+      cursor: ns-resize;
+
+      &:before {
+        float: left;
+        cursor: move;
+        cursor: ns-resize;
+      }
+
+      span {
+        float: right;
+        width: auto;
+      }
+    }
+  }
+
+  table > thead tr {
+    td.draggable {
+      .drag-handle,
+      [contenteditable] {
+        vertical-align: middle;
+        display: inline-block;
+      }
+
+      [contenteditable] {
+        width: ~"calc(100% - 1em)";
+      }
+
+      .drag-handle {
+        float: left;
+        width: 1em;
+        cursor: move;
+        cursor: ew-resize;
+        &:before {
+          position: relative;
+          top: 2px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
