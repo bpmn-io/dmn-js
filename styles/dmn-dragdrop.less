@@ -23,7 +23,6 @@
 
   table > tbody tr {
     &.drop {
-
       &.above {
         border-top: 6px double @dmn-primary;
       }
@@ -37,9 +36,14 @@
       cursor: ns-resize;
 
       &:before {
+        visibility: hidden;
         float: left;
         cursor: move;
         cursor: ns-resize;
+      }
+
+      &:hover:before {
+        visibility: visible;
       }
 
       span {
@@ -62,6 +66,7 @@
       }
 
       .drag-handle {
+        visibility: hidden;
         float: left;
         width: 1em;
         cursor: move;
@@ -71,6 +76,9 @@
           top: 2px;
           display: inline-block;
         }
+      }
+      &:hover .drag-handle {
+        visibility: visible;
       }
     }
   }
