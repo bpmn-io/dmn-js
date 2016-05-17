@@ -201,7 +201,7 @@ describe('features/verifier', function() {
     }));
     
     it('should construct array with cell objects (numeric)', inject(function(verifier, modeling, elementRegistry) {
-        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'integer';
+        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'double';
         modeling.editCell('rule1', 'input1', '> 100');
         modeling.editCell('rule2', 'input1', '<= 100');
         
@@ -211,7 +211,7 @@ describe('features/verifier', function() {
         var firstCellObject = cellValues[0]['cell_input1_rule2'];
         var secondCellObject = cellValues[0]['cell_input1_rule1'];
         
-        expect(firstCellObject.type === 'integer').to.be.true;
+        expect(firstCellObject.type === 'double').to.be.true;
         expect(firstCellObject.allowedValues[0] === 'any').to.be.true;
         expect(firstCellObject.value === '<= 100').to.be.true;
         expect(firstCellObject.clauseId === 'input1').to.be.true;
@@ -222,7 +222,7 @@ describe('features/verifier', function() {
         expect(firstCellObject.equalSigns[0]).to.be.false;
         expect(firstCellObject.equalSigns[1]).to.be.true;
         
-        expect(secondCellObject.type === 'integer').to.be.true;
+        expect(secondCellObject.type === 'double').to.be.true;
         expect(secondCellObject.allowedValues[0] === 'any').to.be.true;
         expect(secondCellObject.value === '> 100').to.be.true;
         expect(secondCellObject.clauseId === 'input1').to.be.true;
@@ -306,7 +306,7 @@ describe('features/verifier', function() {
     }));
     
     it('should sort rules into ascending order if input type is numeric', inject(function(verifier, modeling, elementRegistry) {
-        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'integer';
+        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'double';
         modeling.editCell('rule1', 'input1', '>= 100');
         modeling.editCell('rule2', 'input1', '< 1000');
         
@@ -352,9 +352,9 @@ describe('features/verifier', function() {
                 equal: false
             };
             
-            var range = verifier.constructOverlappingRange(-Infinity, false, rule, 'integer', false);
+            var range = verifier.constructOverlappingRange(-Infinity, false, rule, 'double', false);
             
-            expect(range === 'any').to.be.true;
+            expect(range === '').to.be.true;
         }));
         
         it('if last value was -Infinity and current value is start interval and has equal sign' +
@@ -366,7 +366,7 @@ describe('features/verifier', function() {
                 equal: true
             };
             
-            var range = verifier.constructOverlappingRange(-Infinity, false, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(-Infinity, false, rule, 'double', true);
             
             expect(range === '< 100').to.be.true;
         }));
@@ -380,7 +380,7 @@ describe('features/verifier', function() {
                 equal: false
             };
             
-            var range = verifier.constructOverlappingRange(-Infinity, false, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(-Infinity, false, rule, 'double', true);
             
             expect(range === '<= 100').to.be.true;
         }));
@@ -394,7 +394,7 @@ describe('features/verifier', function() {
                 equal: false
             };
             
-            var range = verifier.constructOverlappingRange(100, false, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(100, false, rule, 'double', true);
             
             expect(range === '> 100').to.be.true;
         }));
@@ -408,7 +408,7 @@ describe('features/verifier', function() {
                 equal: false
             };
             
-            var range = verifier.constructOverlappingRange(100, true, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(100, true, rule, 'double', true);
             
             expect(range === '>= 100').to.be.true;
         }));
@@ -422,7 +422,7 @@ describe('features/verifier', function() {
                 equal: false
             };
             
-            var range = verifier.constructOverlappingRange(100, true, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(100, true, rule, 'double', true);
             
             expect(range === '[100, 200]').to.be.true;
         }));
@@ -436,7 +436,7 @@ describe('features/verifier', function() {
                 equal: false
             };
             
-            var range = verifier.constructOverlappingRange(100, false, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(100, false, rule, 'double', true);
             
             expect(range === '(100, 200]').to.be.true;
         }));
@@ -452,7 +452,7 @@ describe('features/verifier', function() {
                 equal: true
             };
             
-            var range = verifier.constructOverlappingRange(100, true, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(100, true, rule, 'double', true);
             
             expect(range === '[100, 200)').to.be.true;
         }));
@@ -466,7 +466,7 @@ describe('features/verifier', function() {
                 equal: true
             };
             
-            var range = verifier.constructOverlappingRange(100, false, rule, 'integer', true);
+            var range = verifier.constructOverlappingRange(100, false, rule, 'double', true);
             
             expect(range === '(100, 200)').to.be.true;
         }));
@@ -503,40 +503,6 @@ describe('features/verifier', function() {
         
         expect(domClasses(elements['cell_input1_rule1'].gfx).contains('wrongValue')).to.be.false;
         expect(domClasses(elements['cell_input1_rule2'].gfx).contains('wrongValue')).to.be.true;
-    }));
-  
-    it('should add a missing rule into "Missing and overlapping rules" table', inject(function(verifier, sheet, modeling, elementRegistry) {
-    
-        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'integer';
-        modeling.editCell('rule1', 'input1', '< 100');
-        modeling.editCell('rule2', 'input1', '> 100');
-        
-        
-        verifier.verifyTable();
-        
-        var errorTableFirstRow = sheet.getContainer().childNodes[3].tBodies[0].rows[0];
-        var errorValue = errorTableFirstRow.cells[0].getElementsByTagName('span')[0].innerHTML;
-        
-        expect(errorValue === 'No rule exists for (100)').to.be.true;
-    
-    }));
-  
-    it('should add missing rule when clicked "Add missing rule" button', inject(function(verifier, sheet, modeling, elementRegistry) {
-        
-        elementRegistry.get('input1').businessObject.inputExpression.typeRef = 'integer';
-        modeling.editCell('rule1', 'input1', '< 100');
-        modeling.editCell('rule2', 'input1', '> 100');
-        
-        
-        verifier.verifyTable();
-        
-        var errorTableFirstRow = sheet.getContainer().childNodes[3].tBodies[0].rows[0];
-        errorTableFirstRow.cells[1].getElementsByTagName('input')[0].click();
-        
-        var lastRule = sheet._lastRow.body.businessObject.inputEntry[0];
-        
-        expect(lastRule.text === '100').to.be.true;
-        
     }));
 
 });
