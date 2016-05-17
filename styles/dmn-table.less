@@ -1,12 +1,17 @@
 .dmn-table {
-  position: relative;
-  max-height: 100%;
-  color: @dmn-gray-darker;
-  overflow: auto;
-
   .dmn-normalize;
 
   .borderbox;
+
+  color: @dmn-gray;
+  position: relative;
+
+  .dmn-js-logo {
+    .dmn-js-logo();
+    position: absolute;
+    top: 1px;
+    right: 0;
+  }
 
   * {
     &:focus {
@@ -93,6 +98,7 @@
     border-bottom: none;
     margin-bottom: -1px;
     position: relative;
+    max-width: 50%;
 
     h3 {
       font-size: 24px;
@@ -110,7 +116,8 @@
 
     .tjs-table-id {
       font-size: 18px;
-      background-color: @dmn-gray-light;
+      background-color: @dmn-mappings-bg;
+      border-top: 1px solid @dmn-gray;
       font-family: monospace;
       font-weight: 300;
       color: white;
@@ -140,6 +147,10 @@
       th {
         padding-top: @dmn-vertical-padding * 2;
         padding-bottom: @dmn-vertical-padding * 2;
+        &.input,
+        &.output {
+          min-width: 120px;
+        }
       }
     }
 
@@ -148,12 +159,6 @@
       position: relative;
       overflow: hidden;
       text-overflow: ellipsis;
-      .dmn-js-logo {
-        .dmn-js-logo();
-        position: absolute;
-        top: 4px;
-        right: -5px;
-      }
     }
 
     th {
@@ -161,15 +166,22 @@
     }
   }
 
-  .hit {
-    vertical-align: top;
-    width: 3em;
+  thead,
+  tbody {
+    .hit {
+      vertical-align: top;
+      width: 3.5em;
+    }
   }
 
   .labels,
   .values,
   .mappings {
     text-align: center;
+  }
+
+  .labels td {
+    min-width: 120px;
   }
 
   .values,
@@ -199,7 +211,7 @@
   .mappings {
     font-family: monospace;
     td {
-      background-color: @dmn-mappings-bg;;
+      background-color: @dmn-mappings-bg;
     }
 
     .col-focused {
@@ -221,6 +233,23 @@
     color: @dmn-danger;
   }
 
+  .fired > td {
+    background-color: @dmn-fired-color;
+    color: @gray-base;
+  }
+
+  span.dmn-input,
+  span.dmn-output,
+  span.dmn-input-object,
+  span.dmn-output-object {
+    font-weight: 700;
+  }
+
+  span.dmn-input-object,
+  span.dmn-output-object {
+    font-style: italic;
+  }
+
   tbody {
     border: 2px solid @dmn-gray;
     border-top: none;
@@ -228,13 +257,6 @@
     tr:nth-child(1) {
       td, th {
         border-top: none;
-      }
-    }
-
-    .input {
-      color: @dmn-gray-dark;
-      &.set {
-        color: @dmn-gray-darker;
       }
     }
   }
@@ -275,53 +297,20 @@
   }
 
 
-
-  /*
-  &.scrollable {
-    position: relative;
-
-    thead,
-    tfoot,
-    tbody
-    {
-      display: block;
-      width: 100%;
-      tr {
-        width: 100%;
-      }
-    }
-    thead,
-    tfoot {
-      display: table;
-    }
-
-    tbody {
-      overflow-x: hidden;
-      overflow-y: scroll;
-      .number {
-        border-left: 0;
-      }
-      .annotation {
-        border-right: none;
-      }
-      tr:last-child td {
-        border-bottom: none;
-      }
-    }
+  .annotation {
+    background-color: @dmn-annotation-color;
   }
-  */
 
-
-
-
-
+  .tjs-container {
+    position: relative;
+  }
 
   .tjs-controls {
-    float: right;
-    text-align: right;
-    max-width: 50%;
     padding: @dmn-vertical-padding @dmn-horizontal-padding;
     font-size: 90%;
+    position: absolute;
+    top: 0;
+    right: 60px;
 
     background-color: @dmn-gray-lighter;
     a {

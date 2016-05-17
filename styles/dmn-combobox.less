@@ -42,12 +42,10 @@
       position: absolute;
       display: block;
       right: 0;
-      width: 1.2em;
       height: @line-height-computed;
       line-height: @line-height-computed;
-      height: 1.2em;
       top: 50%;
-      margin-top: -0.6em;
+      margin-top: 0 - round(@line-height-computed * 0.5);
       content: '\E801';
     }
 

@@ -4,15 +4,15 @@
 @dmn-focus:               #f9fac8;// #E4E5BB
 
 @dmn-success:             @brand-success;
-@dmn-info:                #fffcb0;//@brand-info;
+@dmn-info:                #fffcb0;
 @dmn-warning:             @brand-warning;
 @dmn-danger:              @brand-danger;
 
-@dmn-gray-lighter:        #f0f0f0;
-@dmn-gray-light:          #c0c0c0;
-@dmn-gray:                #a0a0a0;
-@dmn-gray-dark:           #808080;
-@dmn-gray-darker:         #606060;
+@dmn-gray-lighter:        @gray-lighter;
+@dmn-gray-light:          @gray-light;
+@dmn-gray:                @gray;
+@dmn-gray-dark:           @gray-dark;
+@dmn-gray-darker:         @gray-darker;
 
 @dmn-table-bg:            #fff;
 @dmn-row-even-bg:         #efefef;
@@ -23,9 +23,11 @@
 @dmn-col-even-hover-bg:   @dmn-row-even-hover-bg;
 @dmn-col-odd-hover-bg:    @dmn-row-odd-hover-bg;
 
-@dmn-input-color:         lighten(desaturate(@dmn-primary, 20%), 55%);
-@dmn-output-color:        lighten(desaturate(@dmn-primary, 25%), 50%);
+@dmn-input-color:         @body-bg;
+@dmn-output-color:        lighten(desaturate(@dmn-primary, 20%), 58%);
+@dmn-annotation-color:    lighten(@dmn-gray-lighter, 3%);
 
+@dmn-fired-color:         #E0F2FB;
 
 @dmn-shadow-color:        fade(@dmn-primary, 20%);
 
