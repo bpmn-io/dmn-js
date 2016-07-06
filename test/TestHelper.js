@@ -9,8 +9,6 @@ var TestContainer = require('mocha-test-container-support');
 
 var Modeler = require('../lib/Modeler');
 
-var fs = require('fs');
-
 var OPTIONS, MODELER;
 
 // bind polyfill for PhantomJS
@@ -61,10 +59,10 @@ if (!Function.prototype.bind) {
  * });
  *
  * @param  {Object} (options) optional options to be passed to the table upon instantiation
- * @param  {Object|Function} locals  the local overrides to be used by the table or a function that produces them
+ * @param  {String} (xml) optional xml of the table to be bootstrapped
  * @return {Function}         a function to be passed to beforeEach
  */
-function bootstrapModeler(options, locals) {
+function bootstrapModeler(options, xml) {
 
   return function(done) {
 
@@ -86,27 +84,18 @@ function bootstrapModeler(options, locals) {
     testContainer.classList.add('test-container');
 
 
-    var _options = options,
-        _locals = locals;
-
-    if (!_locals && isFunction(_options)) {
-      _locals = _options;
-      _options = null;
-    }
+    var _options = options;
+    var _xml = xml || require('fs').readFileSync(__dirname + '/fixtures/dmn/new-table.dmn', 'utf-8');
 
     if (isFunction(_options)) {
       _options = _options();
-    }
-
-    if (isFunction(_locals)) {
-      _locals = _locals();
     }
 
     _options = assign({ container: testContainer }, OPTIONS || {}, _options || {});
 
     MODELER = new Modeler(_options);
 
-    MODELER.importXML(fs.readFileSync(__dirname + '/fixtures/dmn/new-table.dmn', 'utf-8'), function(){ done(); });
+    MODELER.importXML(_xml, function(){ done(); });
 
     return MODELER;
   };
