@@ -203,6 +203,79 @@ describe('features/editor-actions', function() {
     }));
 
 
+    it('should copy a rule', inject(function(editorActions, selection, modeling, elementRegistry) {
+      // given
+      modeling.createRow({ id: 'row1' });
+
+      modeling.editCell('row1', 'input1', 'foo');
+
+      modeling.createRow({ id: 'row2' });
+
+      var row1 = elementRegistry.get('cell_input1_row1'),
+          row2 = elementRegistry.get('cell_input1_row2'),
+          newRow;
+
+      selection.select(row1);
+
+      // when
+      editorActions.trigger("ruleCopy");
+
+      newRow = row2.row.next;
+
+      // then
+      expect(newRow).to.exist;
+      expect(newRow.businessObject.inputEntry[0].text).to.eql('"foo"');
+    }));
+
+
+    it('should copy rule above selection', inject(function(editorActions, selection, elementRegistry, modeling) {
+      // given
+      modeling.createRow({ id: 'row1' });
+      modeling.createRow({ id: 'row2' });
+
+      modeling.editCell('row2', 'input1', 'foo');
+
+      var row1 = elementRegistry.get('cell_input1_row1'),
+          row2 = elementRegistry.get('cell_input1_row2'),
+          newRow;
+
+      selection.select(row2);
+
+      // when
+      editorActions.trigger("ruleCopyAbove");
+
+      newRow = row1.row.next;
+
+      // then
+      expect(newRow).to.exist;
+      expect(newRow.businessObject.inputEntry[0].text).to.eql('"foo"');
+    }));
+
+
+    it('should copy rule below selection', inject(function(editorActions, selection, elementRegistry, modeling) {
+      // given
+      modeling.createRow({ id: 'row1' });
+
+      modeling.editCell('row1', 'input1', 'foo');
+
+      modeling.createRow({ id: 'row2' });
+
+      var row1 = elementRegistry.get('cell_input1_row1'),
+          newRow;
+
+      selection.select(row1);
+
+      // when
+      editorActions.trigger("ruleCopyBelow");
+
+      newRow = row1.row.next;
+
+      // then
+      expect(newRow).to.exist;
+      expect(newRow.businessObject.inputEntry[0].text).to.eql('"foo"');
+    }));
+
+
     it('should clear a rule', inject(function(editorActions, selection, elementRegistry, modeling) {
       // given
       // by default input1, output1 and annotations are the existing columns
@@ -321,5 +394,3 @@ describe('features/editor-actions', function() {
 
   });
 });
-
-
