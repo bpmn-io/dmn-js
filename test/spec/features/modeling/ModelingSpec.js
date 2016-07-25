@@ -1,16 +1,17 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
+var booleanXML = require('../../../fixtures/dmn/boolean.dmn');
 
 describe('features/modeling', function() {
 
   var modeler;
 
   beforeEach(function(done) {
-    modeler = bootstrapModeler({}, require('fs').readFileSync(__dirname + '/../../../fixtures/dmn/boolean.dmn', 'utf-8'))(done);
+    modeler = bootstrapModeler(booleanXML)(done);
   });
 
   describe('cellExpressionLanguage', function() {
@@ -19,6 +20,7 @@ describe('features/modeling', function() {
     beforeEach(inject(function(elementRegistry) {
       businessObject = elementRegistry.get('cell_input1_rule1').content;
     }));
+
     it('should set the expression language for a cell', inject(function(modeling) {
       // when
       modeling.editCellExpressionLanguage(businessObject, 'myScriptLanguage');
@@ -26,6 +28,7 @@ describe('features/modeling', function() {
       // then
       expect(businessObject.expressionLanguage).to.eql('myScriptLanguage');
     }));
+
 
     it('should undo', inject(function(modeling, commandStack) {
       // given
@@ -37,6 +40,7 @@ describe('features/modeling', function() {
       // then
       expect(businessObject.expressionLanguage).to.not.exist;
     }));
+
 
     it('should redo', inject(function(modeling, commandStack) {
       // given
@@ -50,6 +54,7 @@ describe('features/modeling', function() {
       expect(businessObject.expressionLanguage).to.eql('myScriptLanguage');
     }));
 
+
     it('should persist the change in the xml', inject(function(modeling) {
       // given
       modeling.editCellExpressionLanguage(businessObject, 'myScriptLanguage');
@@ -59,6 +64,7 @@ describe('features/modeling', function() {
         expect(xml).to.include('expressionLanguage="myScriptLanguage"');
       });
     }));
+    
   });
 
 });
