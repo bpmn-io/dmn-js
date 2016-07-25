@@ -6,10 +6,12 @@ var domClasses = require('min-dom/lib/classes');
 
 /* global bootstrapModeler, inject */
 
+var basicXML = require('../../../fixtures/dmn/new-table.dmn');
+
 
 describe('features/simple-editing', function() {
 
-  beforeEach(bootstrapModeler());
+  beforeEach(bootstrapModeler(basicXML));
 
   it('should not put quotes when editing table head', inject(function(modeling, elementRegistry) {
 

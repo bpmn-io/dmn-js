@@ -7,12 +7,14 @@ var domClasses = require('min-dom/lib/classes');
 /* global bootstrapModeler, inject */
 
 
+var basicXML = require('../../../fixtures/dmn/new-table.dmn');
+
 describe('features/factory', function() {
 
   var modeler;
 
   beforeEach(function(done) {
-    modeler = bootstrapModeler()(done);
+    modeler = bootstrapModeler(basicXML)(done);
   });
 
   it('should automatically create an id for a created rule', inject(function(dmnFactory) {

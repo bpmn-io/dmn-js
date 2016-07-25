@@ -5,10 +5,12 @@ var domQuery = require('min-dom/lib/query');
 
 /* global bootstrapModeler, inject */
 
+var basicXML = require('../../../fixtures/dmn/new-table.dmn');
+
 
 describe('features/editor-actions', function() {
 
-  beforeEach(bootstrapModeler());
+  beforeEach(bootstrapModeler(basicXML));
 
   it('should make registered actions available', inject(function(editorActions) {
     expect(editorActions._actions).to.be.an("object");

@@ -4,7 +4,9 @@ var Modeler = require('../../lib/Modeler');
 
 var ComboBox = require('table-js/lib/features/combo-box');
 
-var fs = require('fs');
+var simpleXML = require('../fixtures/dmn/simple.dmn'),
+    emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
+
 
 describe('Modeler', function() {
 
@@ -32,23 +34,19 @@ describe('Modeler', function() {
 
 
   it('should import simple process', function(done) {
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-    createModeler(xml, done);
+    createModeler(simpleXML, done);
   });
 
 
   it('should import empty definitions', function(done) {
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
-    createModeler(xml, done);
+    createModeler(emptyDefsXML, done);
   });
 
 
   it('should re-import simple process', function(done) {
 
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-
     // given
-    createModeler(xml, function(err, warnings, modeler) {
+    createModeler(simpleXML, function(err, warnings, modeler) {
 
       if (err) {
         return done(err);
@@ -56,7 +54,7 @@ describe('Modeler', function() {
 
       // when
       // mimic re-import of same diagram
-      modeler.importXML(xml, function(err, warnings) {
+      modeler.importXML(simpleXML, function(err, warnings) {
 
         // then
         expect(err).to.eql(null);
@@ -72,11 +70,9 @@ describe('Modeler', function() {
 
     it('should use <body> as default parent', function(done) {
 
-      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-
       var modeler = new Modeler();
 
-      modeler.importXML(xml, function(err, warnings) {
+      modeler.importXML(simpleXML, function(err, warnings) {
 
         expect(modeler.container.parentNode).to.eql(document.body);
 
@@ -94,8 +90,6 @@ describe('Modeler', function() {
       // given
       var modeler = new Modeler({ container: container });
 
-      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
-
       var events = [];
 
       modeler.on('import.start', function() {
@@ -111,7 +105,7 @@ describe('Modeler', function() {
       });
 
       // when
-      modeler.importXML(xml, function(err) {
+      modeler.importXML(emptyDefsXML, function(err) {
 
         // then
         expect(events).to.eql([
@@ -128,11 +122,9 @@ describe('Modeler', function() {
   describe('destruction', function() {
     it('should close open combobox dropdowns on destruction', function(done) {
       // given
-      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-
       var modeler = new Modeler();
 
-      modeler.importXML(xml, function(err, warnings) {
+      modeler.importXML(simpleXML, function(err, warnings) {
 
         var options = ['LIST', 'SUM', 'MIN', 'MAX', 'COUNT'];
         var comboBox = new ComboBox({

@@ -6,14 +6,16 @@ var domClasses = require('min-dom/lib/classes');
 
 /* global bootstrapModeler, inject */
 
+var basicXML = require('../../../fixtures/dmn/new-table.dmn');
 
 describe('features/annotations', function() {
 
   var modeler;
 
   beforeEach(function(done) {
-    modeler = bootstrapModeler()(done);
+    modeler = bootstrapModeler(basicXML)(done);
   });
+
   beforeEach(inject(function(modeling) {
     modeling.createRow({id: 'row'});
   }));
@@ -28,7 +30,8 @@ describe('features/annotations', function() {
 
   }));
 
-  it('should set the rowspan to 2 when details are hidden', inject(function(elementRegistry, hideTechControl, ioLabel, annotations) {
+  it('should set the rowspan to 2 when details are hidden',
+    inject(function(elementRegistry, hideTechControl, ioLabel, annotations) {
     hideTechControl.hide();
 
     // get header cell

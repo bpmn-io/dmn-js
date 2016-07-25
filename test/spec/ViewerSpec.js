@@ -2,7 +2,10 @@
 
 var Viewer = require('../../lib/Viewer');
 
-var fs = require('fs');
+var simpleXML = require('../fixtures/dmn/simple.dmn'),
+    emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn'),
+    emptyDecisionXML = require('../fixtures/dmn/empty-decision-id.dmn'),
+    noDecisionXML = require('../fixtures/dmn/no-decision-id.dmn');
 
 describe('Viewer', function() {
 
@@ -28,27 +31,23 @@ describe('Viewer', function() {
 
 
   it('should import simple process', function(done) {
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-    createViewer(xml, done);
+    createViewer(simpleXML, done);
   });
 
 
   it('should import empty definitions', function(done) {
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
-    createViewer(xml, done);
+    createViewer(emptyDefsXML, done);
   });
 
   it('should import missing id on decision', function(done) {
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/no-decision-id.dmn', 'utf-8');
-    createViewer(xml, function(err, warnings, viewer) {
+    createViewer(noDecisionXML, function(err, warnings, viewer) {
       expect(viewer.definitions.decision[0].id).to.eql(undefined);
       done();
     });
   });
 
   it('should repair empty id on decision', function(done) {
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-decision-id.dmn', 'utf-8');
-    createViewer(xml, function(err, warnings, viewer) {
+    createViewer(emptyDecisionXML, function(err, warnings, viewer) {
       expect(viewer.definitions.decision[0].id).to.not.eql(undefined);
       expect(viewer.definitions.decision[0].id).to.not.eql('');
       done();
@@ -57,11 +56,8 @@ describe('Viewer', function() {
 
 
   it('should re-import simple process', function(done) {
-
-    var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-
     // given
-    createViewer(xml, function(err, warnings, viewer) {
+    createViewer(simpleXML, function(err, warnings, viewer) {
 
       if (err) {
         return done(err);
@@ -69,7 +65,7 @@ describe('Viewer', function() {
 
       // when
       // mimic re-import of same diagram
-      viewer.importXML(xml, function(err, warnings) {
+      viewer.importXML(simpleXML, function(err, warnings) {
 
         // then
         expect(err).to.eql(null);
@@ -85,11 +81,9 @@ describe('Viewer', function() {
 
     it('should use <body> as default parent', function(done) {
 
-      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/simple.dmn', 'utf-8');
-
       var viewer = new Viewer();
 
-      viewer.importXML(xml, function(err, warnings) {
+      viewer.importXML(simpleXML, function(err, warnings) {
 
         expect(viewer.container.parentNode).to.eql(document.body);
 
@@ -107,8 +101,6 @@ describe('Viewer', function() {
       // given
       var viewer = new Viewer({ container: container });
 
-      var xml = fs.readFileSync(__dirname + '/../fixtures/dmn/empty-definitions.dmn', 'utf-8');
-
       var events = [];
 
       viewer.on('import.start', function() {
@@ -124,7 +116,7 @@ describe('Viewer', function() {
       });
 
       // when
-      viewer.importXML(xml, function(err) {
+      viewer.importXML(emptyDefsXML, function(err) {
 
         // then
         expect(events).to.eql([

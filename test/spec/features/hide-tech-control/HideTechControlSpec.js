@@ -6,12 +6,13 @@ var domClasses = require('min-dom/lib/classes');
 
 /* global bootstrapModeler, inject */
 
+var basicXML = require('../../../fixtures/dmn/new-table.dmn');
 
 describe('features/hide-tech-control', function() {
 
   describe('api', function() {
 
-    beforeEach(bootstrapModeler());
+    beforeEach(bootstrapModeler(basicXML));
 
     it('should display a button to hide the controls', inject(function(hideTechControl) {
       expect(hideTechControl._node).to.be.defined;
@@ -65,7 +66,7 @@ describe('features/hide-tech-control', function() {
 
   describe('defaults', function() {
 
-    beforeEach(bootstrapModeler({hideDetails: true}));
+    beforeEach(bootstrapModeler(basicXML, { hideDetails: true }));
 
     it('should hide the controls per default if set in the configuration', inject(function(sheet) {
       expect(domClasses(sheet.getContainer().parentNode).list.contains('hide-mappings')).to.eql(true);

@@ -4,6 +4,9 @@ var TestHelper = require('../../../TestHelper');
 
 var domClasses = require('min-dom/lib/classes');
 
+var booleanXML = require('../../../fixtures/dmn/boolean.dmn'),
+    basicXML = require('../../../fixtures/dmn/new-table.dmn');
+
 /* global bootstrapModeler, inject */
 
 
@@ -11,7 +14,7 @@ describe('features/simple-mode', function() {
 
   describe('api', function() {
 
-    beforeEach(bootstrapModeler());
+    beforeEach(bootstrapModeler(basicXML));
 
     it('should display a button to enter advance mode', inject(function(simpleMode) {
       expect(simpleMode._node).to.exist;
@@ -54,7 +57,7 @@ describe('features/simple-mode', function() {
 
   describe('defaults', function() {
 
-    beforeEach(bootstrapModeler({advancedMode: true}));
+    beforeEach(bootstrapModeler(booleanXML, { advancedMode: true }));
 
     it('should enter advanced mode per default if set in the configuration', inject(function(simpleMode) {
       expect(simpleMode.isSimple()).to.eql(false);
@@ -64,7 +67,7 @@ describe('features/simple-mode', function() {
 
   describe('interaction', function() {
 
-    beforeEach(bootstrapModeler({advancedMode: false}, require('fs').readFileSync(__dirname + '/../../../fixtures/dmn/boolean.dmn', 'utf-8')));
+    beforeEach(bootstrapModeler(booleanXML, { advancedMode: false }));
 
     it('should have a dropdown for booleans', inject(function(elementRegistry) {
       var cellUnderConsideration = elementRegistry.getGraphics('cell_output1_rule1');
