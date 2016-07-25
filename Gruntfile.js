@@ -19,7 +19,8 @@ module.exports = function(grunt) {
     config: {
       sources: 'lib',
       tests: 'test',
-      dist: '../bower-dmn-js/dist'
+      dist: '../bower-dmn-js/dist',
+      assets: 'assets'
     },
 
     jshint: {
@@ -68,22 +69,33 @@ module.exports = function(grunt) {
     },
 
     less: {
-      options: {
-        paths: [
-          // in order to be able to import "bootstrap/less/**"
-          'node_modules'
-        ]
-      },
+      prod: {
+        options: {
+          paths: [
+            // in order to be able to import "bootstrap/less/**"
+            'node_modules'
+          ]
+        },
 
-      styles: {
         files: { '<%= config.dist %>/css/dmn-js.css': 'styles/dmn-js.less' }
+      },
+      dev: {
+        options: {
+          paths: [
+            // in order to be able to import "bootstrap/less/**"
+            'node_modules'
+          ]
+        },
+
+        files: { '<%= config.assets %>/css/dmn-js.css': 'styles/dmn-js.less' }
       }
     },
 
     copy: {
       fonts: {
         files: [
-          {expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.dist %>/fonts'},
+          { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.dist %>/fonts' },
+          { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.assets %>/fonts' },
         ]
       }
     },
@@ -101,11 +113,11 @@ module.exports = function(grunt) {
   // tasks
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('test', [ 'karma:single' ]);
+  grunt.registerTask('test', [ 'less:dev', 'copy:fonts', 'karma:single' ]);
 
-  grunt.registerTask('auto-test', [ 'karma:unit' ]);
+  grunt.registerTask('auto-test', [ 'less:dev', 'copy:fonts', 'karma:unit' ]);
 
-  grunt.registerTask('build', [ 'bundle', 'less', 'copy:fonts' ]);
+  grunt.registerTask('build', [ 'bundle', 'less:prod', 'copy:fonts' ]);
 
   grunt.registerTask('default', [ 'jshint', 'test', 'build', 'jsdoc' ]);
 };
