@@ -1,8 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
-
-var domClasses = require('min-dom/lib/classes');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 

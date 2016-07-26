@@ -1,6 +1,7 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
+require('../../../TestHelper');
+
 var domQuery = require('min-dom/lib/query');
 
 /* global bootstrapModeler, inject */
@@ -13,7 +14,7 @@ describe('features/editor-actions', function() {
   beforeEach(bootstrapModeler(basicXML));
 
   it('should make registered actions available', inject(function(editorActions) {
-    expect(editorActions._actions).to.be.an("object");
+    expect(editorActions._actions).to.be.an('object');
   }));
 
 
@@ -162,7 +163,7 @@ describe('features/editor-actions', function() {
       var amount = domQuery.all('tbody > tr').length;
 
       // when
-      editorActions.trigger("ruleAdd");
+      editorActions.trigger('ruleAdd');
 
       // then
       expect(domQuery.all('tbody > tr').length).to.eql(amount + 1);
@@ -179,7 +180,7 @@ describe('features/editor-actions', function() {
 
       // when
       selection.select(element);
-      editorActions.trigger("ruleAddAbove");
+      editorActions.trigger('ruleAddAbove');
 
       // then
       expect(domQuery.all('tbody > tr').length).to.eql(amount + 1);
@@ -197,7 +198,7 @@ describe('features/editor-actions', function() {
 
       // when
       selection.select(element);
-      editorActions.trigger("ruleAddBelow");
+      editorActions.trigger('ruleAddBelow');
 
       // then
       expect(domQuery.all('tbody > tr').length).to.eql(amount + 1);
@@ -220,7 +221,7 @@ describe('features/editor-actions', function() {
       selection.select(row1);
 
       // when
-      editorActions.trigger("ruleCopy");
+      editorActions.trigger('ruleCopy');
 
       newRow = row2.row.next;
 
@@ -244,7 +245,7 @@ describe('features/editor-actions', function() {
       selection.select(row2);
 
       // when
-      editorActions.trigger("ruleCopyAbove");
+      editorActions.trigger('ruleCopyAbove');
 
       newRow = row1.row.next;
 
@@ -268,7 +269,7 @@ describe('features/editor-actions', function() {
       selection.select(row1);
 
       // when
-      editorActions.trigger("ruleCopyBelow");
+      editorActions.trigger('ruleCopyBelow');
 
       newRow = row1.row.next;
 
@@ -286,16 +287,16 @@ describe('features/editor-actions', function() {
           output1 = elementRegistry.get('cell_output1_row1');
 
 
-      input1.content.text = "foo";
-      output1.content.text = "bar";
+      input1.content.text = 'foo';
+      output1.content.text = 'bar';
 
       // when
       selection.select(input1);
-      editorActions.trigger("ruleClear");
+      editorActions.trigger('ruleClear');
 
       // then
-      expect(input1.content.text).to.eql("");
-      expect(output1.content.text).to.eql("");
+      expect(input1.content.text).to.eql('');
+      expect(output1.content.text).to.eql('');
     }));
 
 
@@ -308,7 +309,7 @@ describe('features/editor-actions', function() {
 
       // when
       selection.select(element);
-      editorActions.trigger("ruleRemove");
+      editorActions.trigger('ruleRemove');
 
       // then
       expect(domQuery.all('tbody > tr').length).to.eql(amount - 1);
@@ -325,8 +326,7 @@ describe('features/editor-actions', function() {
       selection.select(element);
 
       // when
-      debugger;
-      editorActions.trigger("clauseAdd", "input");
+      editorActions.trigger('clauseAdd', 'input');
 
       // then
       expect(domQuery.all('tbody > tr > td.input').length).to.eql(amount + 1);
@@ -344,7 +344,7 @@ describe('features/editor-actions', function() {
       selection.select(element);
 
       // when
-      editorActions.trigger("clauseAddLeft");
+      editorActions.trigger('clauseAddLeft');
 
       // then
       expect(domElement.children.length).to.eql(amount + 1);
@@ -364,7 +364,7 @@ describe('features/editor-actions', function() {
       selection.select(element);
 
       // when
-      editorActions.trigger("clauseAddRight");
+      editorActions.trigger('clauseAddRight');
 
       // then
       expect(domElement.children.length).to.eql(amount + 1);
@@ -381,13 +381,13 @@ describe('features/editor-actions', function() {
           amount;
 
       selection.select(element);
-      editorActions.trigger("clauseAdd", "input");
+      editorActions.trigger('clauseAdd', 'input');
 
       amount = domQuery.all('tbody > tr > td.input').length;
 
       // when
       selection.select(element);
-      editorActions.trigger("clauseRemove");
+      editorActions.trigger('clauseRemove');
 
       // then
       expect(domQuery.all('tbody > tr > td.input').length).to.eql(amount - 1);

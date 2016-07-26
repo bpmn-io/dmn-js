@@ -1,8 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
-
-var domClasses = require('min-dom/lib/classes');
+require('../../../TestHelper');
 
 var booleanXML = require('../../../fixtures/dmn/boolean.dmn'),
     basicXML = require('../../../fixtures/dmn/new-table.dmn');

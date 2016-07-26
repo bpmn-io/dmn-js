@@ -108,7 +108,7 @@ function bootstrapModeler(table, options, locals) {
 
     MODELER = new Modeler(_options);
 
-    MODELER.importXML(table, function(){ done(); });
+    MODELER.importXML(table, function() { done(); });
 
     return MODELER;
   };

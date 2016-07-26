@@ -128,8 +128,8 @@ describe('Modeler', function() {
 
         var options = ['LIST', 'SUM', 'MIN', 'MAX', 'COUNT'];
         var comboBox = new ComboBox({
-            label: 'ComboBox',
-            options: options,
+          label: 'ComboBox',
+          options: options
         });
 
         container.appendChild(comboBox.getNode());

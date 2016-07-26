@@ -1,8 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../../TestHelper');
-
-var domClasses = require('min-dom/lib/classes');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
@@ -17,7 +15,7 @@ describe('features/annotations', function() {
   });
 
   beforeEach(inject(function(modeling) {
-    modeling.createRow({id: 'row'});
+    modeling.createRow({ id: 'row' });
   }));
 
   it('should persist annotations in the xml', inject(function(annotations, elementRegistry, modeling) {
@@ -32,14 +30,14 @@ describe('features/annotations', function() {
 
   it('should set the rowspan to 2 when details are hidden',
     inject(function(elementRegistry, hideTechControl, ioLabel, annotations) {
-    hideTechControl.hide();
+      hideTechControl.hide();
 
     // get header cell
-    var cell = elementRegistry.filter(function(element) {
-      return element._type === 'cell' && element.row === ioLabel.getRow() && element.column === annotations.getColumn();
-    })[0];
+      var cell = elementRegistry.filter(function(element) {
+        return element._type === 'cell' && element.row === ioLabel.getRow() && element.column === annotations.getColumn();
+      })[0];
 
-    expect(cell.rowspan).to.eql(2);
-  }));
+      expect(cell.rowspan).to.eql(2);
+    }));
 
 });
