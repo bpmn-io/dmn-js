@@ -1,8 +1,8 @@
 language: node_js
-node_js: '0.10'
+node_js: '4.4'
 
 script:
-  - grunt jshint test
+  - grunt test
 
 before_install:
   - npm install -g grunt-cli wiredeps
