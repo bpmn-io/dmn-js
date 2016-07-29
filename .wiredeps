@@ -94,6 +94,42 @@
     },
     "selection-update": {
       "version": "0.1.2"
+    },
+    "stringify": {
+      "version": "3.2.1",
+      "dependencies": {
+        "html-minifier": {
+          "version": "0.6.9",
+          "dependencies": {
+            "change-case": {
+              "version": "2.1.6"
+            },
+            "clean-css": {
+              "version": "2.2.23"
+            },
+            "cli": {
+              "version": "0.6.6"
+            },
+            "relateurl": {
+              "version": "0.2.7"
+            },
+            "uglify-js": {
+              "version": "2.4.24"
+            }
+          }
+        },
+        "stream-spec": {
+          "version": "0.3.5",
+          "dependencies": {
+            "macgyver": {
+              "version": "0.10.1"
+            }
+          }
+        },
+        "through": {
+          "version": "2.3.4"
+        }
+      }
     }
   }
 }
