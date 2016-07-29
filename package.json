@@ -49,7 +49,6 @@
     "grunt-contrib-less": "^1.0.1",
     "grunt-karma": "^0.12.0",
     "grunt-release": "^0.7.0",
-    "grunt-jsdoc": "^0.5.1",
     "jsondiffpatch": "^0.1.26",
     "karma": "^0.13.0",
     "karma-browserify": "^5.0.1",

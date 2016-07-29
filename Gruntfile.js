@@ -106,17 +106,8 @@ module.exports = function(grunt) {
         ]
       }
     },
-
-    jsdoc: {
-      dist: {
-        src: [ '<%= config.sources %>/**/*.js' ],
-        options: {
-          destination: 'docs/api',
-          plugins: [ 'plugins/markdown' ]
-        }
-      }
-    }
   });
+
   // tasks
   grunt.loadTasks('tasks');
 
@@ -126,5 +117,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [ 'bundle', 'less:prod', 'copy:fonts' ]);
 
-  grunt.registerTask('default', [ 'eslint:check', 'test', 'build', 'jsdoc' ]);
+  grunt.registerTask('default', [ 'eslint:check', 'test', 'build' ]);
 };
