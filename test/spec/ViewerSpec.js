@@ -39,12 +39,14 @@ describe('Viewer', function() {
     createViewer(emptyDefsXML, done);
   });
 
+
   it('should import missing id on decision', function(done) {
     createViewer(noDecisionXML, function(err, warnings, viewer) {
       expect(viewer.definitions.decision[0].id).to.eql(undefined);
       done();
     });
   });
+
 
   it('should repair empty id on decision', function(done) {
     createViewer(emptyDecisionXML, function(err, warnings, viewer) {
@@ -74,6 +76,46 @@ describe('Viewer', function() {
         done();
       });
 
+    });
+
+  });
+
+
+  it('should create input when loading a table with only an output', function(done) {
+
+    var xml = require('../fixtures/dmn/one-output.dmn');
+
+    createViewer(xml, function(err, warnings, viewer) {
+      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
+      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
+
+      done();
+    });
+  });
+
+
+  it('should create output when loading a table with only an input', function(done) {
+
+    var xml = require('../fixtures/dmn/one-input.dmn');
+
+    createViewer(xml, function(err, warnings, viewer) {
+      expect(viewer.definitions.decision[0].decisionTable.output).to.exist;
+      expect(viewer.definitions.decision[0].decisionTable.output).to.have.length(1);
+
+      done();
+    });
+  });
+
+
+  it('should create input when loading a table with multiple outputs and no rules', function(done) {
+
+    var xml = require('../fixtures/dmn/no-rules.dmn');
+
+    createViewer(xml, function(err, warnings, viewer) {
+      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
+      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
+
+      done();
     });
   });
 
