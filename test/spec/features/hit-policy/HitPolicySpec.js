@@ -31,10 +31,4 @@ describe('features/hit-policy', function() {
 
     }));
 
-  it('should set the rowspan to 2 when details are hidden', inject(function(hideTechControl, hitPolicy) {
-    hideTechControl.hide();
-
-    expect(hitPolicy.getCell().rowspan).to.eql(2);
-  }));
-
 });

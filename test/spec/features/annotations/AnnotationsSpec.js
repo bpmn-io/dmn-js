@@ -28,16 +28,4 @@ describe('features/annotations', function() {
 
   }));
 
-  it('should set the rowspan to 2 when details are hidden',
-    inject(function(elementRegistry, hideTechControl, ioLabel, annotations) {
-      hideTechControl.hide();
-
-    // get header cell
-      var cell = elementRegistry.filter(function(element) {
-        return element._type === 'cell' && element.row === ioLabel.getRow() && element.column === annotations.getColumn();
-      })[0];
-
-      expect(cell.rowspan).to.eql(2);
-    }));
-
 });

@@ -76,6 +76,7 @@
   td,
   th {
     overflow: hidden;
+    position: relative;
     text-overflow: ellipsis;
     [contenteditable] {
       .empty();
@@ -89,6 +90,17 @@
     }
     &.invalid {
       .invalid();
+    }
+
+    .description-indicator {
+      float: right;
+      position: absolute;
+      height: 30px;
+      background-color: #52b415;
+      top: -15px;
+      right: -15px;
+      width: 30px;
+      transform: rotate(45deg);
     }
   }
 
@@ -219,11 +231,7 @@
     }
   }
 
-  &.hide-mappings .mappings {
-    display: none;
-  }
-
-  &.hide-mappings .values {
+  &.simple-mode .mappings {
     display: none;
   }
 
