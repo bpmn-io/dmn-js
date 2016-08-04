@@ -72,12 +72,6 @@ describe('features/simple-mode', function() {
       expect(cellUnderConsideration.querySelector('select')).to.exist;
     }));
 
-    it('should have no quotes for strings', inject(function(elementRegistry) {
-      var cellUnderConsideration = elementRegistry.getGraphics('cell_input1_rule1');
-
-      expect(cellUnderConsideration.querySelector('span').textContent).to.not.include('"');
-    }));
-
     it('should show the real values after activating advanced mode', inject(function(elementRegistry, simpleMode) {
       simpleMode.deactivate();
 

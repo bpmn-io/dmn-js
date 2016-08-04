@@ -16,8 +16,7 @@
     padding: @dmn-vertical-padding @dmn-horizontal-padding;
   }
 
-  .ranged-values,
-  .allowed-values {
+  .ranged-values {
     max-height: 0;
     overflow: hidden;
     padding: 0 @dmn-horizontal-padding;
@@ -40,23 +39,15 @@
     }
   }
 
-  &.choices .allowed-values,
   &.range .ranged-values {
     padding: @dmn-horizontal-padding;
     max-height: 1000px;
   }
 
-  .allowed-values,
   .ranged-values {
     ul {
       max-height: 180px;
       overflow: auto;
-    }
-  }
-
-  .allowed-values {
-    input {
-      width: 100%;
     }
   }
 
@@ -111,6 +102,55 @@
         padding-bottom: 0;
       }
     }
+  }
+}
+
+.dmn-clausevalues-setter .allowed-values {
+  ul {
+    margin-bottom: @dmn-vertical-padding * 2;
+    list-style: none;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  li {
+    overflow: hidden;
+
+    &:before {
+      float: left;
+      content: '-';
+      display: inline-block;
+      width: 1em;
+      text-align: center;
+    }
+  }
+
+  .value-text,
+  .dmn-icon-clear {
+    display: inline-block;
+    float: left;
+  }
+
+  .value-text {
+    max-width: ~"calc(100% - 2em)";
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .dmn-icon-clear {
+    width: 1em;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    color: @dmn-primary;
+  }
+
+  input {
+    width: 100%;
   }
 }
 

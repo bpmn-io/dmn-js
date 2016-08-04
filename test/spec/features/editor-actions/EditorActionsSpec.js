@@ -211,7 +211,7 @@ describe('features/editor-actions', function() {
       // given
       modeling.createRow({ id: 'row1' });
 
-      modeling.editCell('row1', 'input1', 'foo');
+      modeling.editCell('row1', 'input1', '"foo"');
 
       modeling.createRow({ id: 'row2' });
 
@@ -237,7 +237,7 @@ describe('features/editor-actions', function() {
       modeling.createRow({ id: 'row1' });
       modeling.createRow({ id: 'row2' });
 
-      modeling.editCell('row2', 'input1', 'foo');
+      modeling.editCell('row2', 'input1', '"foo"');
 
       var row1 = elementRegistry.get('cell_input1_row1'),
           row2 = elementRegistry.get('cell_input1_row2'),
@@ -260,7 +260,7 @@ describe('features/editor-actions', function() {
       // given
       modeling.createRow({ id: 'row1' });
 
-      modeling.editCell('row1', 'input1', 'foo');
+      modeling.editCell('row1', 'input1', '"foo"');
 
       modeling.createRow({ id: 'row2' });
 
