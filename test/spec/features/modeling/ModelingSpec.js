@@ -114,7 +114,7 @@ describe('features/modeling', function() {
 
       // when
       modeler.saveXML(function(err, xml) {
-        expect(xml).to.include('<description>This is a description</description>');
+        expect(xml).to.include('<dmn:description>This is a description</dmn:description>');
       });
     }));
 

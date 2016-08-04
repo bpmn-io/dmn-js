@@ -174,6 +174,7 @@ describe('features/editor-actions', function() {
       // given
       // by default input1, output1 and annotations are the existing columns
       modeling.createRow({ id: 'row1' });
+
       var element = elementRegistry.get('cell_input1_row1'),
           row = element.parent,
           amount = domQuery.all('tbody > tr').length;
@@ -283,6 +284,7 @@ describe('features/editor-actions', function() {
       // given
       // by default input1, output1 and annotations are the existing columns
       modeling.createRow({ id: 'row1' });
+
       var input1 = elementRegistry.get('cell_input1_row1'),
           output1 = elementRegistry.get('cell_output1_row1');
 
@@ -304,6 +306,7 @@ describe('features/editor-actions', function() {
       // given
       // by default input1, output1 and annotations are the existing columns
       modeling.createRow({ id: 'row1' });
+
       var element = elementRegistry.get('cell_input1_row1'),
           amount = domQuery.all('tbody > tr').length;
 
@@ -320,6 +323,7 @@ describe('features/editor-actions', function() {
       // given
       // by default input1, output1 and annotations are the existing columns
       modeling.createRow({ id: 'row1' });
+
       var element = elementRegistry.get('cell_input1_row1'),
           amount = domQuery.all('tbody > tr > td.input').length;
 
@@ -357,6 +361,7 @@ describe('features/editor-actions', function() {
       // given
       // by default input1, output1 and annotations are the existing columns
       modeling.createRow({ id: 'row1' });
+
       var element = elementRegistry.get('cell_input1_row1'),
           domElement = element.parent,  // this is the <tr> element
           amount = domElement.children.length;
@@ -377,6 +382,7 @@ describe('features/editor-actions', function() {
       // given
       // by default input1, output1 and annotations are the existing columns
       modeling.createRow({ id: 'row1' });
+
       var element = elementRegistry.get('cell_input1_row1'),
           amount;
 
@@ -393,6 +399,6 @@ describe('features/editor-actions', function() {
       expect(domQuery.all('tbody > tr > td.input').length).to.eql(amount - 1);
     }));
 
-
   });
+
 });
