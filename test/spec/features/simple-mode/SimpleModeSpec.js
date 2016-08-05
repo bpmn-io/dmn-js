@@ -72,8 +72,9 @@ describe('features/simple-mode', function() {
       expect(cellUnderConsideration.querySelector('select')).to.exist;
     }));
 
-    it('should have no quoutes for strings', inject(function(elementRegistry) {
+    it('should have no quotes for strings', inject(function(elementRegistry) {
       var cellUnderConsideration = elementRegistry.getGraphics('cell_input1_rule1');
+
       expect(cellUnderConsideration.querySelector('span').textContent).to.not.include('"');
     }));
 
@@ -87,6 +88,45 @@ describe('features/simple-mode', function() {
       cellUnderConsideration = elementRegistry.getGraphics('cell_input1_rule1');
       expect(cellUnderConsideration.querySelector('span').textContent).to.include('"');
     }));
+
+  });
+
+  describe('methods', function() {
+
+    beforeEach(bootstrapModeler(basicXML, { advancedMode: false }));
+
+    describe('#isString', function() {
+
+      it('should be true', inject(function(simpleMode) {
+        [
+          '',
+          '"hello world"',
+          '""bar foo""',
+          '""bar , foo""',
+          '"bar , foo"'
+        ].forEach(function(str) {
+          expect(simpleMode.isString(str)).to.be.true;
+        });
+      }));
+
+      it('should be false', inject(function(simpleMode) {
+        [
+          '"123',
+          'bar"',
+          '"foo" bar"',
+          '"foo", "',
+          '"foo", "bar"',
+          '"foo" , "bar"',
+          '"foo","bar"',
+          '"foo" ,"bar", hello"',
+          '"foo" , "bar", "hello"',
+          '""foo"","bar"'
+        ].forEach(function(str) {
+          expect(simpleMode.isString(str)).to.be.false;
+        });
+      }));
+
+    });
 
   });
 
