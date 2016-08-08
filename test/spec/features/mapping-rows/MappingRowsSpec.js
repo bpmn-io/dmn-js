@@ -48,6 +48,33 @@ describe('features/mappings-row', function() {
 
 
     // works if you single it out. As a batch the click fails.
+    it.skip('should remove on close', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
+      // given
+      var input = elementRegistry.get('input1'),
+          cell = elementRegistry.get('cell_input1_mappingsRow'),
+          cellGfx = elementRegistry.getGraphics(cell),
+          inputVariable;
+
+      // when
+      mouseEvent('click', cellGfx);
+
+      inputVariable = domQuery('.dmn-clauseexpression-setter input[placeholder="inputVariable"]');
+
+      inputVariable.value = '';
+
+      // when
+      complexCell.close();
+
+      mouseEvent('click', cellGfx);
+
+      inputVariable = domQuery('.dmn-clauseexpression-setter input[placeholder="inputVariable"]');
+
+      // then
+      expect(inputVariable.value).to.equal('');
+      expect(input.businessObject.inputVariable).to.equal('');
+    }));
+
+
     it('should synchronize after changing modes', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
       // given
       var cell = elementRegistry.get('cell_input1_mappingsRow'),
