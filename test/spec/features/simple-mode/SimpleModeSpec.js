@@ -19,14 +19,14 @@ describe('features/simple-mode', function() {
     }));
 
     it('should have simple mode flag set by default', inject(function(simpleMode) {
-      expect(simpleMode.isSimple()).to.eql(true);
+      expect(simpleMode.isActive()).to.eql(true);
     }));
 
     it('should expose the current state', inject(function(simpleMode) {
       simpleMode.deactivate();
-      expect(simpleMode.isSimple()).to.eql(false);
+      expect(simpleMode.isActive()).to.eql(false);
       simpleMode.activate();
-      expect(simpleMode.isSimple()).to.eql(true);
+      expect(simpleMode.isActive()).to.eql(true);
     }));
 
     it('should fire an event when deactivating', inject(function(simpleMode, eventBus) {
@@ -58,7 +58,7 @@ describe('features/simple-mode', function() {
     beforeEach(bootstrapModeler(booleanXML, { advancedMode: true }));
 
     it('should enter advanced mode per default if set in the configuration', inject(function(simpleMode) {
-      expect(simpleMode.isSimple()).to.eql(false);
+      expect(simpleMode.isActive()).to.eql(false);
     }));
 
   });

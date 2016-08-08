@@ -399,6 +399,29 @@ describe('features/editor-actions', function() {
       expect(domQuery.all('tbody > tr > td.input').length).to.eql(amount - 1);
     }));
 
+
+    it('should toggle between modes', inject(function(editorActions, simpleMode) {
+      // given
+      var initial = simpleMode.isActive();
+
+      // when
+      editorActions.trigger('toggleEditingMode');
+
+      // then
+      expect(simpleMode.isActive()).to.be.false;
+      expect(simpleMode.isActive()).to.not.eql(initial);
+
+      // given
+      initial = simpleMode.isActive();
+
+      // when
+      editorActions.trigger('toggleEditingMode');
+
+      // then
+      expect(simpleMode.isActive()).to.be.true;
+      expect(simpleMode.isActive()).to.not.eql(initial);
+    }));
+
   });
 
 });
