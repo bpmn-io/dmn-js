@@ -66,7 +66,6 @@ function bootstrapModeler(table, options, locals) {
 
     var testContainer;
 
-
     // Make sure the test container is an optional dependency and we fall back
     // to an empty <div> if it does not exist.
     //
@@ -80,7 +79,6 @@ function bootstrapModeler(table, options, locals) {
     }
 
     testContainer.classList.add('test-container');
-
 
     var _options = options,
         _locals = locals;
@@ -106,9 +104,14 @@ function bootstrapModeler(table, options, locals) {
 
     _options = assign({ container: testContainer }, OPTIONS || {}, _options || {});
 
+    // remove previous instance
+    if (MODELER) {
+      MODELER.destroy();
+    }
+
     MODELER = new Modeler(_options);
 
-    MODELER.importXML(table, function() { done(); });
+    MODELER.importXML(table, done);
 
     return MODELER;
   };
@@ -146,7 +149,6 @@ function inject(fn) {
     MODELER.invoke(fn);
   };
 }
-
 
 module.exports.bootstrapTable = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.inject = (window || global).inject = inject;
