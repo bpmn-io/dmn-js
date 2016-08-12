@@ -7,19 +7,16 @@ var simpleXML = require('../fixtures/dmn/simple.dmn'),
     emptyDecisionXML = require('../fixtures/dmn/empty-decision-id.dmn'),
     noDecisionXML = require('../fixtures/dmn/no-decision-id.dmn');
 
+var TestContainer = require('mocha-test-container-support');
+
+
 describe('Viewer', function() {
 
   var container;
 
   beforeEach(function() {
-    container = document.createElement('div');
-    document.body.appendChild(container);
+    container = TestContainer.get(this);
   });
-
-  afterEach(function() {
-    container.parentNode.removeChild(container);
-  });
-
 
   function createViewer(xml, done) {
     var viewer = new Viewer({ container: container });
@@ -50,6 +47,9 @@ describe('Viewer', function() {
 
   it('should repair empty id on decision', function(done) {
     createViewer(emptyDecisionXML, function(err, warnings, viewer) {
+      expect(err).to.not.exist;
+      expect(warnings).to.have.length(0);
+
       expect(viewer.definitions.decision[0].id).to.not.eql(undefined);
       expect(viewer.definitions.decision[0].id).to.not.eql('');
       done();
@@ -70,8 +70,8 @@ describe('Viewer', function() {
       viewer.importXML(simpleXML, function(err, warnings) {
 
         // then
-        expect(err).to.eql(null);
-        expect(warnings.length).to.eql(0);
+        expect(err).to.not.exist;
+        expect(warnings).to.have.length(0);
 
         done();
       });
@@ -80,44 +80,6 @@ describe('Viewer', function() {
 
   });
 
-
-  it('should create input when loading a table with only an output', function(done) {
-
-    var xml = require('../fixtures/dmn/one-output.dmn');
-
-    createViewer(xml, function(err, warnings, viewer) {
-      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
-      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
-
-      done();
-    });
-  });
-
-
-  it('should create output when loading a table with only an input', function(done) {
-
-    var xml = require('../fixtures/dmn/one-input.dmn');
-
-    createViewer(xml, function(err, warnings, viewer) {
-      expect(viewer.definitions.decision[0].decisionTable.output).to.exist;
-      expect(viewer.definitions.decision[0].decisionTable.output).to.have.length(1);
-
-      done();
-    });
-  });
-
-
-  it('should create input when loading a table with multiple outputs and no rules', function(done) {
-
-    var xml = require('../fixtures/dmn/no-rules.dmn');
-
-    createViewer(xml, function(err, warnings, viewer) {
-      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
-      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
-
-      done();
-    });
-  });
 
   describe('defaults', function() {
 
@@ -138,23 +100,27 @@ describe('Viewer', function() {
 
   describe('import events', function() {
 
-    it('should fire <import.*> events', function(done) {
+    it('should emit <import.*> events', function(done) {
 
       // given
       var viewer = new Viewer({ container: container });
 
       var events = [];
 
-      viewer.on('import.start', function() {
-        events.push('import.start');
-      });
-
-      viewer.on('import.success', function() {
-        events.push('import.success');
-      });
-
-      viewer.on('import.error', function() {
-        events.push('import.error');
+      viewer.on([
+        'import.parse.start',
+        'import.parse.complete',
+        'import.render.start',
+        'import.render.complete',
+        'import.done'
+      ], function(e) {
+        // log event type + event arguments
+        events.push([
+          e.type,
+          Object.keys(e).filter(function(key) {
+            return key !== 'type';
+          })
+        ]);
       });
 
       // when
@@ -162,8 +128,11 @@ describe('Viewer', function() {
 
         // then
         expect(events).to.eql([
-          'import.start',
-          'import.success'
+          [ 'import.parse.start', [ 'xml' ] ],
+          [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
+          [ 'import.render.start', [ 'definitions' ] ],
+          [ 'import.render.complete', [ 'error', 'warnings' ] ],
+          [ 'import.done', [ 'error', 'warnings' ] ]
         ]);
 
         done(err);

@@ -40,7 +40,7 @@ describe('integration/sheet', function() {
         // given
         var container = sheet.getContainer(),
             initialWidth = container.clientWidth;
-        console.log(container.clientWidth);
+
         // when
         eventBus.fire('sheet.resized');
 

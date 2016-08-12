@@ -5,7 +5,13 @@ var Modeler = require('../../lib/Modeler');
 var ComboBox = require('table-js/lib/features/combo-box');
 
 var simpleXML = require('../fixtures/dmn/simple.dmn'),
-    emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
+    emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn'),
+    oneOutputXML = require('../fixtures/dmn/one-output.dmn'),
+    oneInputXML = require('../fixtures/dmn/one-input.dmn'),
+    noRulesXML = require('../fixtures/dmn/no-rules.dmn'),
+    otherXML = require('../fixtures/dmn/new-table.dmn');
+
+var TestContainer = require('mocha-test-container-support');
 
 
 describe('Modeler', function() {
@@ -13,14 +19,8 @@ describe('Modeler', function() {
   var container;
 
   beforeEach(function() {
-    container = document.createElement('div');
-    document.body.appendChild(container);
+    container = TestContainer.get(this);
   });
-
-  afterEach(function() {
-    container.parentNode.removeChild(container);
-  });
-
 
   function createModeler(xml, done) {
     var modeler = new Modeler({ container: container });
@@ -28,8 +28,6 @@ describe('Modeler', function() {
     modeler.importXML(xml, function(err, warnings) {
       done(err, warnings, modeler);
     });
-
-    return modeler;
   }
 
 
@@ -57,12 +55,57 @@ describe('Modeler', function() {
       modeler.importXML(simpleXML, function(err, warnings) {
 
         // then
-        expect(err).to.eql(null);
+        expect(err).to.not.exist;
         expect(warnings.length).to.eql(0);
 
         done();
       });
 
+    });
+  });
+
+
+  it('should create input when loading a table with only an output', function(done) {
+
+    createModeler(oneOutputXML, function(err, warnings, viewer) {
+      // then
+      expect(err).to.not.exist;
+      expect(warnings).to.have.length(0);
+
+      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
+      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
+
+      done();
+    });
+  });
+
+
+  it('should create output when loading a table with only an input', function(done) {
+
+    createModeler(oneInputXML, function(err, warnings, viewer) {
+      // then
+      expect(err).to.not.exist;
+      expect(warnings).to.have.length(0);
+
+      expect(viewer.definitions.decision[0].decisionTable.output).to.exist;
+      expect(viewer.definitions.decision[0].decisionTable.output).to.have.length(1);
+
+      done();
+    });
+  });
+
+
+  it('should create input when loading a table with multiple outputs and no rules', function(done) {
+
+    createModeler(noRulesXML, function(err, warnings, viewer) {
+      // then
+      expect(err).to.not.exist;
+      expect(warnings).to.have.length(0);
+
+      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
+      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
+
+      done();
     });
   });
 
@@ -85,46 +128,177 @@ describe('Modeler', function() {
 
   describe('import events', function() {
 
-    it('should fire <import.*> events', function(done) {
+
+    it('should emit <import.*> events', function(done) {
+
+      // given
+      var viewer = new Modeler({ container: container });
+
+      var events = [];
+
+      viewer.on([
+        'import.parse.start',
+        'import.parse.complete',
+        'import.render.start',
+        'import.render.complete',
+        'import.done'
+      ], function(e) {
+        // log event type + event arguments
+        events.push([
+          e.type,
+          Object.keys(e).filter(function(key) {
+            return key !== 'type';
+          })
+        ]);
+      });
+
+      // when
+      viewer.importXML(emptyDefsXML, function(err) {
+
+        // then
+        expect(events).to.eql([
+          [ 'import.parse.start', [ 'xml' ] ],
+          [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
+          [ 'import.render.start', [ 'definitions' ] ],
+          [ 'import.render.complete', [ 'error', 'warnings' ] ],
+          [ 'import.done', [ 'error', 'warnings' ] ]
+        ]);
+
+        done(err);
+      });
+
+    });
+
+  });
+
+  describe('ids', function() {
+
+    it('should provide ids with moddle', function() {
 
       // given
       var modeler = new Modeler({ container: container });
 
-      var events = [];
+      // when
+      var moddle = modeler.get('moddle');
 
-      modeler.on('import.start', function() {
-        events.push('import.start');
-      });
+      // then
+      expect(moddle.ids).to.exist;
+    });
 
-      modeler.on('import.success', function() {
-        events.push('import.success');
-      });
 
-      modeler.on('import.error', function() {
-        events.push('import.error');
-      });
+    it('should populate ids on import', function(done) {
+
+      // given
+      var modeler = new Modeler({ container: container });
+
+      var moddle = modeler.get('moddle');
+      var elementRegistry = modeler.get('elementRegistry');
 
       // when
-      modeler.importXML(emptyDefsXML, function(err) {
+      modeler.importXML(simpleXML, function(err) {
+
+        var column = elementRegistry.get('input1').businessObject;
 
         // then
-        expect(events).to.eql([
-          'import.start',
-          'import.success'
-        ]);
+        expect(moddle.ids.assigned('input1')).to.eql(column);
+
+        done();
+      });
+
+    });
+
+
+    it('should clear ids before re-import', function(done) {
+
+      // given
+      var modeler = new Modeler({ container: container });
+
+      var moddle = modeler.get('moddle');
+      var elementRegistry = modeler.get('elementRegistry');
+
+      // when
+      modeler.importXML(simpleXML, function() {
+
+        modeler.importXML(otherXML, function() {
+
+          var column = elementRegistry.get('input1').businessObject;
+
+          // then
+          // not in other.bpmn
+          expect(moddle.ids.assigned('output2')).to.be.false;
+
+          // in other.bpmn
+          expect(moddle.ids.assigned('input1')).to.eql(column);
+
+          done();
+        });
+      });
+
+    });
+
+  });
+
+  describe('dependency injection', function() {
+
+    it('should provide self as <dmnjs>', function(done) {
+
+      createModeler(simpleXML, function(err, warnings, modeler) {
+
+        expect(modeler.get('dmnjs')).to.equal(modeler);
 
         done(err);
       });
     });
 
+
+    it('should allow Diagram#get before import', function() {
+
+      // when
+      var modeler = new Modeler({ container: container });
+
+      // then
+      var eventBus = modeler.get('eventBus');
+
+      expect(eventBus).to.exist;
+    });
+
+
+    it('should keep references to services across re-import', function(done) {
+
+      // given
+      var modeler = new Modeler({ container: container });
+
+      var eventBus = modeler.get('eventBus'),
+          sheet = modeler.get('sheet');
+
+      // when
+      modeler.importXML(simpleXML, function() {
+
+        // then
+        expect(modeler.get('sheet')).to.equal(sheet);
+        expect(modeler.get('eventBus')).to.equal(eventBus);
+
+        modeler.importXML(otherXML, function() {
+
+          // then
+          expect(modeler.get('sheet')).to.equal(sheet);
+          expect(modeler.get('eventBus')).to.equal(eventBus);
+
+          done();
+        });
+      });
+
+    });
+
   });
 
-  describe('destruction', function() {
-    it('should close open combobox dropdowns on destruction', function(done) {
-      // given
-      var modeler = new Modeler();
 
-      modeler.importXML(simpleXML, function(err, warnings) {
+  describe('destruction', function() {
+
+    it('should close open combobox dropdowns on destruction', function(done) {
+
+      // given
+      createModeler(simpleXML, function(err, warnings, modeler) {
 
         var options = ['LIST', 'SUM', 'MIN', 'MAX', 'COUNT'];
         var comboBox = new ComboBox({
