@@ -8,6 +8,9 @@
     "diagram-js": {
       "version": "bpmn-io/diagram-js",
       "dependencies": {
+        "didi": {
+          "version": "0.1.1"
+        },
         "eve": {
           "version": "0.4.2"
         },
@@ -15,12 +18,9 @@
           "version": "2.0.4"
         },
         "snapsvg": {
-          "version": "0.3.0"
+          "version": "https://github.com/Nikku/Snap.svg/archive/v0.3.0-browserify.tar.gz"
         }
       }
-    },
-    "didi": {
-      "version": "0.0.4"
     },
     "dmn-moddle": {
       "version": "bpmn-io/dmn-moddle",
