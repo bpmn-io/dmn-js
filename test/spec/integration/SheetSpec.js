@@ -34,6 +34,7 @@ describe('integration/sheet', function() {
       bootstrapModeler(basicXML, { minColWidth: 200 })(done);
     });
 
+    // tests fail in PhantomJS
     it.skip('should NOT resize when sheet width is higher than the min column width',
       inject(function(eventBus, elementRegistry, sheet) {
 

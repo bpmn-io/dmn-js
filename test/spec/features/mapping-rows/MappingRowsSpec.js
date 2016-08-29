@@ -47,8 +47,7 @@ describe('features/mappings-row', function() {
     }));
 
 
-    // works if you single it out. As a batch the click fails.
-    it.skip('should remove on close', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
+    it('should remove on close', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
       // given
       var input = elementRegistry.get('input1'),
           cell = elementRegistry.get('cell_input1_mappingsRow'),
@@ -97,8 +96,7 @@ describe('features/mappings-row', function() {
     }));
 
 
-    // works if you single it out. As a batch the click fails.
-    it.skip('should persist editing changes .script', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
+    it('should persist editing changes .script', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
       // given
       var input = elementRegistry.get('input1'),
           cell = elementRegistry.get('cell_input1_mappingsRow'),
@@ -123,8 +121,8 @@ describe('features/mappings-row', function() {
       });
     }));
 
-    // works if you single it out. As a batch the click fails.
-    it.skip('should persist editing changes .expression', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
+
+    it('should persist editing changes .expression', inject(function(elementRegistry, mappingsRow, eventBus, complexCell) {
       // given
       var input = elementRegistry.get('input1'),
           cell = elementRegistry.get('cell_input1_mappingsRow'),
