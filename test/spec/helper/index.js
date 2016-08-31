@@ -149,8 +149,17 @@ function inject(fn) {
   };
 }
 
+function injectAsync(doneFn) {
+  return function(done) {
+    var testFn = doneFn(done);
+
+    inject(testFn)();
+  };
+}
+
 module.exports.bootstrapTable = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.inject = (window || global).inject = inject;
+module.exports.injectAsync = (window || global).injectAsync = injectAsync;
 
 
 module.exports.getDmnJS = function() {
