@@ -1,14 +1,18 @@
 'use strict';
 
-require('../../../TestHelper');
+var TestHelper = require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
-var domQuery = require('min-dom/lib/query');
-
-var mouseEvent = require('table-js/test/util/MouseEvents').performMouseEvent;
+var EventUtils = require('../../../util/EventUtils'),
+    queryElement = require('../../../util/ElementUtils').queryElement,
+    clickElement = EventUtils.clickElement,
+    clickAndQuery = EventUtils.clickAndQuery;
 
 var inputVariableXML = require('../../../fixtures/dmn/input-variable.dmn');
+
+var INPUT_VAR_EXPR = '.dmn-clauseexpression-setter .expression input[placeholder="inputVariable"]',
+    INPUT_VAR_SCRIPT = '.dmn-clauseexpression-setter .script input[placeholder="inputVariable"]';
 
 
 describe('features/mappings-row', function() {
@@ -17,29 +21,26 @@ describe('features/mappings-row', function() {
 
     var modeler;
 
-    beforeEach(function(done) {
-      modeler = bootstrapModeler(inputVariableXML)(done);
+    beforeEach(bootstrapModeler(inputVariableXML, { advancedMode: true }));
+
+    beforeEach(function() {
+      modeler = TestHelper.getDmnJS();
     });
 
     it('should import expression', inject(function(elementRegistry, mappingsRow, eventBus) {
       // given
       var input = elementRegistry.get('input1'),
           cell = elementRegistry.get('cell_input1_mappingsRow'),
-          cellGfx = elementRegistry.getGraphics(cell),
           inputVariable;
 
       // when
-      mouseEvent('click', cellGfx);
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter input[placeholder="inputVariable"]');
+      inputVariable = clickAndQuery(cell, INPUT_VAR_EXPR);
 
       // then
       expect(inputVariable.value).to.equal('currentSeason');
 
       // when
-      mouseEvent('click', domQuery('.toggle-type a.script'));
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter .expression input[placeholder="inputVariable"]');
+      inputVariable = clickAndQuery(queryElement('.toggle-type a.script'), INPUT_VAR_SCRIPT);
 
       // then
       expect(inputVariable.value).to.equal('currentSeason');
@@ -51,22 +52,17 @@ describe('features/mappings-row', function() {
       // given
       var input = elementRegistry.get('input1'),
           cell = elementRegistry.get('cell_input1_mappingsRow'),
-          cellGfx = elementRegistry.getGraphics(cell),
           inputVariable;
 
       // when
-      mouseEvent('click', cellGfx);
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter input[placeholder="inputVariable"]');
+      inputVariable = clickAndQuery(cell, INPUT_VAR_EXPR);
 
       inputVariable.value = '';
 
       // when
       complexCell.close();
 
-      mouseEvent('click', cellGfx);
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter input[placeholder="inputVariable"]');
+      inputVariable = clickAndQuery(cell, INPUT_VAR_EXPR);
 
       // then
       expect(inputVariable.value).to.equal('');
@@ -80,16 +76,14 @@ describe('features/mappings-row', function() {
           cellGfx = elementRegistry.getGraphics(cell),
           inputVariable;
 
-      mouseEvent('click', cellGfx);
+      clickElement(cellGfx);
 
-      inputVariable = domQuery('.dmn-clauseexpression-setter .expression input[placeholder="inputVariable"]');
+      inputVariable = queryElement(INPUT_VAR_EXPR);
 
       inputVariable.value = 'foobar';
 
       // when
-      mouseEvent('click', domQuery('.toggle-type a.script'));
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter .script input[placeholder="inputVariable"]');
+      inputVariable = clickAndQuery(queryElement('.toggle-type a.script'), INPUT_VAR_SCRIPT);
 
       // then
       expect(inputVariable.value).to.equal('foobar');
@@ -103,14 +97,13 @@ describe('features/mappings-row', function() {
           cellGfx = elementRegistry.getGraphics(cell),
           inputVariable;
 
-      mouseEvent('click', cellGfx);
+      clickElement(cellGfx);
 
-      mouseEvent('click', domQuery('.toggle-type a.script'));
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter .script input[placeholder="inputVariable"]');
+      inputVariable = clickAndQuery(queryElement('.toggle-type a.script'), INPUT_VAR_SCRIPT);
 
       inputVariable.value = 'foobar';
 
+      // when
       complexCell.close();
 
       // then
@@ -126,15 +119,13 @@ describe('features/mappings-row', function() {
       // given
       var input = elementRegistry.get('input1'),
           cell = elementRegistry.get('cell_input1_mappingsRow'),
-          cellGfx = elementRegistry.getGraphics(cell),
-          inputVariable;
+          cellGfx = elementRegistry.getGraphics(cell);
 
-      mouseEvent('click', cellGfx);
-
-      inputVariable = domQuery('.dmn-clauseexpression-setter .expression input[placeholder="inputVariable"]');
+      var inputVariable = clickAndQuery(cellGfx, INPUT_VAR_EXPR);
 
       inputVariable.value = 'foobar';
 
+      // when
       complexCell.close();
 
       // then

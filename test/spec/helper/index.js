@@ -7,7 +7,7 @@ var TestContainer = require('mocha-test-container-support');
 
 var Modeler = require('../../../lib/Modeler');
 
-var OPTIONS, MODELER;
+var OPTIONS, DMN_JS;
 
 // bind polyfill for PhantomJS
 if (!Function.prototype.bind) {
@@ -65,7 +65,6 @@ function bootstrapModeler(table, options, locals) {
   return function(done) {
 
     var testContainer;
-
     // Make sure the test container is an optional dependency and we fall back
     // to an empty <div> if it does not exist.
     //
@@ -105,15 +104,15 @@ function bootstrapModeler(table, options, locals) {
     _options = assign({ container: testContainer }, OPTIONS || {}, _options || {});
 
     // remove previous instance
-    if (MODELER) {
-      MODELER.destroy();
+    if (DMN_JS) {
+      DMN_JS.destroy();
     }
 
-    MODELER = new Modeler(_options);
+    DMN_JS = new Modeler(_options);
 
-    MODELER.importXML(table, done);
+    DMN_JS.importXML(table, done);
 
-    return MODELER;
+    return DMN_JS;
   };
 }
 
@@ -142,17 +141,21 @@ function bootstrapModeler(table, options, locals) {
 function inject(fn) {
   return function() {
 
-    if (!MODELER) {
+    if (!DMN_JS) {
       throw new Error('no bootstraped modeler, ensure you created it via #bootstrapModeler');
     }
 
-    MODELER.invoke(fn);
+    DMN_JS.invoke(fn);
   };
 }
 
 module.exports.bootstrapTable = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.inject = (window || global).inject = inject;
 
+
+module.exports.getDmnJS = function() {
+  return DMN_JS;
+};
 
 function insertCSS(name, css) {
   if (document.querySelector('[data-css-file="' + name + '"]')) {
