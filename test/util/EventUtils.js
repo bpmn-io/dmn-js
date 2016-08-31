@@ -4,7 +4,9 @@ var TestHelper = require('../spec/helper');
 
 var domQuery = require('min-dom/lib/query');
 
-var mouseEvent = require('table-js/test/util/MouseEvents').performMouseEvent;
+var DOMEvents = require('table-js/test/util/DOMEvents'),
+    mouseEvent = DOMEvents.performMouseEvent,
+    createEvent = DOMEvents.createEvent;
 
 
 function clickElement(element) {
@@ -37,6 +39,24 @@ function rightClickElement(element) {
 }
 
 module.exports.rightClickElement = rightClickElement;
+
+
+function inputEvent(element, value) {
+  return TestHelper.getDmnJS().invoke(function(elementRegistry) {
+
+    var target = elementRegistry.getGraphics(element);
+
+    if (!target) {
+      target = element;
+    }
+
+    target.value = value;
+
+    createEvent('input', target);
+  });
+}
+
+module.exports.inputEvent = inputEvent;
 
 
 function clickAndQuery(element, selector) {
