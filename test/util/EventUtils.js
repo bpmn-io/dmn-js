@@ -9,7 +9,7 @@ var DOMEvents = require('table-js/test/util/DOMEvents'),
     createEvent = DOMEvents.createEvent;
 
 
-function clickElement(element) {
+function clickElement(element, isMousedown) {
   return TestHelper.getDmnJS().invoke(function(elementRegistry) {
 
     var target = elementRegistry.getGraphics(element);
@@ -18,7 +18,11 @@ function clickElement(element) {
       target = element;
     }
 
-    mouseEvent('click', target);
+    if (isMousedown) {
+      mouseEvent('mousedown', target);
+    } else {
+      mouseEvent('click', target);
+    }
   });
 }
 

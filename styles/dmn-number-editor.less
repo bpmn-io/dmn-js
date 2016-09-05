@@ -1,0 +1,127 @@
+.dmn-number-editor {
+  .dmn-normalize;
+
+  .tooltip(@dmn-gray-dark, #fff);
+
+  .borderbox;
+
+  .arrow-left(8px, 8px, #000);
+
+  min-width: 180px;
+  max-width: 370px;
+  padding: 10px;
+
+  label {
+    .tjs-label;
+    margin-right: @dmn-horizontal-padding;
+  }
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+    float: left;
+    clear: both;
+  }
+
+  a {
+    cursor: pointer;
+    color: @dmn-primary;
+  }
+
+  input {
+    padding: @dmn-vertical-padding @dmn-horizontal-padding;
+    border: 1px solid;
+  }
+
+  input[type="text"] {
+    .focused();
+  }
+
+  .links {
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid @dmn-gray-lighter;
+  }
+
+  .dmn-icon-clear {
+    float: right;
+  }
+
+  .region.range {
+    display: none;
+  }
+
+  .links .comparison {
+    text-decoration: underline;
+  }
+
+  &.use-range {
+      max-width: none;
+
+    .links {
+      .range {
+        text-decoration: underline;
+      }
+      .comparison {
+        text-decoration: none;
+      }
+    }
+
+    .region {
+      &.comparison {
+        display: none;
+      }
+      &.range {
+        display: block;
+      }
+    }
+  }
+
+  h4,
+  .toggle-type,
+  .dmn-icon-clear,
+  .region {
+    padding: @dmn-vertical-padding 0;
+  }
+
+  .range {
+    clear: both;
+
+    input {
+      width: 40%;
+    }
+
+    label {
+      margin-left: 50%;
+    }
+
+    .include-inputs {
+      padding: @dmn-vertical-padding 0;
+    }
+  }
+
+  .comparison-dropdown {
+    padding: 2px @dmn-horizontal-padding;
+    background: none;
+    width: 45%;
+    float: left;
+    clear: both;
+
+    overflow:hidden;
+    white-space:pre;
+    text-overflow:ellipsis;
+    -webkit-appearance: none;
+  }
+
+  .comparison-number {
+    background: none;
+    width: 50%;
+    float: right;
+  }
+
+  .comparison-dropdown
+  .comparison-number {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
