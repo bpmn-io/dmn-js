@@ -13,6 +13,12 @@
         <dmn:outputEntry id="outputEntry1">        <dmn:text></dmn:text>
 </dmn:outputEntry>
       </dmn:rule>
+      <dmn:rule id="rule2">
+        <dmn:inputEntry id="inputEntry2">        <dmn:text>date and time("2016-11-11T11:11:11")</dmn:text>
+</dmn:inputEntry>
+        <dmn:outputEntry id="outputEntry2">        <dmn:text></dmn:text>
+</dmn:outputEntry>
+      </dmn:rule>
     </dmn:decisionTable>
   </dmn:decision>
 </dmn:definitions>

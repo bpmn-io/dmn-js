@@ -8,6 +8,7 @@ var dateXML = require('../../../fixtures/dmn/date.dmn');
 
 var EventUtils = require('../../../util/EventUtils'),
     queryElement = require('../../../util/ElementUtils').queryElement,
+    inputEvent = EventUtils.inputEvent,
     clickElement = EventUtils.clickElement;
 
 describe('features/date-edit', function() {
@@ -130,6 +131,23 @@ describe('features/date-edit', function() {
 
         // then
         expect(queryElement('.dmn-date-editor')).to.exist;
+      }));
+
+      it('sets a date expression', inject(function(elementRegistry, sheet) {
+        // given
+        var rule = elementRegistry.get('cell_input1_rule2');
+
+        // when
+        clickElement(rule);
+
+        var editor = queryElement('.dmn-date-editor');
+
+        inputEvent(queryElement('.date-1 input', editor), '2020-04-18T17:23:41');
+
+        clickElement(sheet.getContainer());
+
+        // then
+        expect(rule.content.text).to.equal('date and time("2020-04-18T17:23:41")');
       }));
     });
   });
