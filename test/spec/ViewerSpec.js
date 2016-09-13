@@ -5,7 +5,8 @@ var Viewer = require('../../lib/Viewer');
 var simpleXML = require('../fixtures/dmn/simple.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn'),
     emptyDecisionXML = require('../fixtures/dmn/empty-decision-id.dmn'),
-    noDecisionXML = require('../fixtures/dmn/no-decision-id.dmn');
+    noDecisionXML = require('../fixtures/dmn/no-decision-id.dmn'),
+    multipleTablesXML = require('../fixtures/dmn/multiple-tables.dmn');
 
 var TestContainer = require('mocha-test-container-support');
 
@@ -139,6 +140,50 @@ describe('Viewer', function() {
       });
     });
 
+  });
+
+
+  describe('xml with multiple tables', function() {
+    it('should display the first table by default', function(done) {
+      // given
+      var viewer = new Viewer();
+
+      // when
+      viewer.importXML(multipleTablesXML, function(err, warnings) {
+
+        // then
+        expect(viewer.container.querySelector('header > h3').textContent).to.eql('Dish Decision');
+        done();
+      });
+    });
+
+    it('should expose all contained decision tables', function(done) {
+      // given
+      var viewer = new Viewer();
+
+      // when
+      viewer.importXML(multipleTablesXML, function(err, warnings) {
+
+        // then
+        expect(viewer.getDecisions().length).to.eql(3);
+        done();
+      });
+    });
+
+    it('should switch between decision tables', function(done) {
+      // given
+      var viewer = new Viewer();
+
+      viewer.importXML(multipleTablesXML, function(err, warnings) {
+
+        // when
+        viewer.showDecision(viewer.getDecisions()[2]);
+
+        // then
+        expect(viewer.container.querySelector('header > h3').textContent).to.eql('Guest Count');
+        done();
+      });
+    });
   });
 
 });
