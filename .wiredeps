@@ -1,6 +1,6 @@
 {
   "name": "dmn-js",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "dependencies": {
     "bootstrap": {
       "version": "3.3.5"
