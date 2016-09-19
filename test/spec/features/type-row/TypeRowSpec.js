@@ -2,6 +2,11 @@
 
 require('../../../TestHelper');
 
+var EventUtils = require('../../../util/EventUtils'),
+    inputEvent = EventUtils.inputEvent,
+    queryElement = require('../../../util/ElementUtils').queryElement,
+    clickElement = EventUtils.clickElement;
+
 /* global bootstrapModeler, inject */
 
 var basicXML = require('../../../fixtures/dmn/simple.dmn');
@@ -25,6 +30,26 @@ describe('features/type-row', function() {
         expect(xml).to.contain('myValue');
       });
 
+    }));
+
+    it('should apply a transient change when closing the popover', inject(function(elementRegistry, sheet) {
+      // given
+      var cell = elementRegistry.get('cell_input1_typeRow');
+
+      // when
+      clickElement(cell);
+
+      var editor = queryElement('.dmn-clausevalues-setter');
+
+      inputEvent(queryElement('.allowed-values input', editor), 'first value, second value');
+
+      clickElement(sheet.getContainer());
+
+      // then
+      modeler.saveXML(function(err, xml) {
+        expect(xml).to.contain('first value');
+        expect(xml).to.contain('second value');
+      });
     }));
   });
 
