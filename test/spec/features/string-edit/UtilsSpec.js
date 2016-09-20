@@ -7,11 +7,11 @@ describe('features/string-edit/utils', function() {
     describe('empty', function() {
       it('should recognize an empty string', function() {
         var result = utils.parseString('');
-        expect(result).to.eql({ type: '', values: [] });
+        expect(result).to.eql({ type: 'disjunction', values: [] });
       });
       it('should recognize a string only containing whitespace', function() {
         var result = utils.parseString('  ');
-        expect(result).to.eql({ type: '', values: [] });
+        expect(result).to.eql({ type: 'disjunction', values: [] });
       });
     });
 

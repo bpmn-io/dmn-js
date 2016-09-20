@@ -115,7 +115,8 @@ describe('features/date-edit', function() {
 
       // when
       dateEdit.updateCellContent(cell, {
-        type: ''
+        type: 'disjunction',
+        date1: ''
       });
 
       // then
