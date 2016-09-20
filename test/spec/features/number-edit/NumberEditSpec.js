@@ -221,16 +221,21 @@ describe('features/number-edit', function() {
       expect(numberEdit.getEditingType('-1000')).to.equal('comparison');
       expect(numberEdit.getEditingType('1e10')).to.equal('comparison');
       expect(numberEdit.getEditingType('> 1000')).to.equal('comparison');
+      expect(numberEdit.getEditingType('>1000')).to.equal('comparison');
       expect(numberEdit.getEditingType('> -1000')).to.equal('comparison');
+      expect(numberEdit.getEditingType('>-1000')).to.equal('comparison');
       expect(numberEdit.getEditingType('< 1000')).to.equal('comparison');
+      expect(numberEdit.getEditingType('<1000')).to.equal('comparison');
       expect(numberEdit.getEditingType('= 1000')).to.equal('comparison');
+      expect(numberEdit.getEditingType('=1000')).to.equal('comparison');
       expect(numberEdit.getEditingType('>= 1000')).to.equal('comparison');
+      expect(numberEdit.getEditingType('>=1000')).to.equal('comparison');
+      expect(numberEdit.getEditingType('<1')).to.equal('comparison');
       expect(numberEdit.getEditingType('>= -e')).to.equal(null);
       expect(numberEdit.getEditingType('1000 <')).to.equal(null);
       expect(numberEdit.getEditingType('1000 < -e')).to.equal(null);
       expect(numberEdit.getEditingType('>')).to.equal(null);
       expect(numberEdit.getEditingType('1<')).to.equal(null);
-      expect(numberEdit.getEditingType('<1')).to.equal(null);
       expect(numberEdit.getEditingType('-')).to.equal(null);
       expect(numberEdit.getEditingType('.')).to.equal(null);
 
