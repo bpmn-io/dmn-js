@@ -8,6 +8,7 @@ var stringXML = require('../../../fixtures/dmn/simple.dmn');
 
 var EventUtils = require('../../../util/EventUtils'),
     queryElement = require('../../../util/ElementUtils').queryElement,
+    inputEvent = EventUtils.inputEvent,
     clickElement = EventUtils.clickElement;
 
 describe('features/string-edit', function() {
@@ -159,6 +160,44 @@ describe('features/string-edit', function() {
 
         // then
         expect(cell.content.text).to.equal('');
+      }));
+
+      it('adds a transient value on dialog close', inject(function(elementRegistry, sheet) {
+        // given
+        var cell = elementRegistry.get('cell_input1_rule1');
+
+        // when
+        clickElement(cell);
+
+        var stringEditor = queryElement('.dmn-string-editor');
+
+        var input = queryElement('.free-input input', stringEditor);
+
+        inputEvent(input, 'newValue');
+
+        clickElement(sheet.getContainer());
+
+        // then
+        expect(cell.content.text).to.contain('"newValue"');
+      }));
+
+      it('does not add the same value twice', inject(function(elementRegistry, sheet) {
+        // given
+        var cell = elementRegistry.get('cell_input1_rule1');
+
+        // when
+        clickElement(cell);
+
+        var stringEditor = queryElement('.dmn-string-editor');
+
+        var input = queryElement('.free-input input', stringEditor);
+
+        inputEvent(input, 'bronze, bronze');
+
+        clickElement(sheet.getContainer());
+
+        // then
+        expect(cell.content.text).to.eql('"bronze"');
       }));
     });
   });
