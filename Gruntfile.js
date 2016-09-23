@@ -105,7 +105,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.assets %>/fonts' }
         ]
       }
-    },
+    }
   });
 
   // tasks
