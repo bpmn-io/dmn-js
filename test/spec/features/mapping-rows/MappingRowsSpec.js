@@ -11,8 +11,8 @@ var EventUtils = require('../../../util/EventUtils'),
 
 var inputVariableXML = require('../../../fixtures/dmn/input-variable.dmn');
 
-var INPUT_VAR_EXPR = '.dmn-clauseexpression-setter .expression input[placeholder="inputVariable"]',
-    INPUT_VAR_SCRIPT = '.dmn-clauseexpression-setter .script input[placeholder="inputVariable"]';
+var INPUT_VAR_EXPR = '.dmn-clauseexpression-setter .expression input[placeholder="cellInput"]',
+    INPUT_VAR_SCRIPT = '.dmn-clauseexpression-setter .script input[placeholder="cellInput"]';
 
 
 describe('features/mappings-row', function() {
