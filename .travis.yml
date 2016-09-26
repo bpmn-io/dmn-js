@@ -2,7 +2,7 @@ language: node_js
 node_js: '4.4'
 
 script:
-  - grunt test
+  - npm run all
 
 before_install:
   - npm install -g grunt-cli wiredeps
