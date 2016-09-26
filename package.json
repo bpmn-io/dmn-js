@@ -1,6 +1,6 @@
 {
   "name": "dmn-js",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A dmn toolkit and web modeler",
   "scripts": {
     "all": "grunt",
