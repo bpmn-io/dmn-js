@@ -25,6 +25,8 @@ describe('Modeler', function() {
   function createModeler(xml, done) {
     var modeler = new Modeler({ container: container });
 
+    modeler._parentContainer.appendChild(modeler.container);
+
     modeler.importXML(xml, function(err, warnings) {
       done(err, warnings, modeler);
     });
@@ -115,6 +117,8 @@ describe('Modeler', function() {
 
       var modeler = new Modeler();
 
+      modeler._parentContainer.appendChild(modeler.container);
+
       modeler.importXML(simpleXML, function(err, warnings) {
 
         expect(modeler.container.parentNode).to.eql(document.body);
@@ -133,6 +137,8 @@ describe('Modeler', function() {
 
       // given
       var viewer = new Modeler({ container: container });
+
+      viewer._parentContainer.appendChild(viewer.container);
 
       var events = [];
 
@@ -177,6 +183,8 @@ describe('Modeler', function() {
 
       // given
       var modeler = new Modeler({ container: container });
+
+      modeler._parentContainer.appendChild(modeler.container);
 
       // when
       var moddle = modeler.get('moddle');

@@ -22,6 +22,8 @@ describe('TableViewer', function() {
   function createViewer(xml, done) {
     var viewer = new Viewer({ container: container });
 
+    viewer._parentContainer.appendChild(viewer.container);
+
     viewer.importXML(xml, function(err, warnings) {
       done(err, warnings, viewer);
     });
@@ -88,6 +90,8 @@ describe('TableViewer', function() {
 
       var viewer = new Viewer();
 
+      viewer._parentContainer.appendChild(viewer.container);
+
       viewer.importXML(simpleXML, function(err, warnings) {
 
         expect(viewer.container.parentNode).to.eql(document.body);
@@ -105,6 +109,8 @@ describe('TableViewer', function() {
 
       // given
       var viewer = new Viewer({ container: container });
+
+      viewer._parentContainer.appendChild(viewer.container);
 
       var events = [];
 
