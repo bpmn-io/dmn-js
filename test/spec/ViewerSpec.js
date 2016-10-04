@@ -3,6 +3,7 @@
 var Viewer = require('../../lib/Viewer');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
+    oneDecisionXML = require('../fixtures/dmn/oneDecision.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
@@ -68,6 +69,22 @@ describe('Viewer', function() {
       viewer.importXML(exampleXML, function(err, warnings) {
 
         expect(viewer.container.parentNode).to.eql(document.body);
+
+        done(err, warnings);
+      });
+    });
+
+    it('should display the table if only one decision is present', function(done) {
+      var viewer = new Viewer();
+
+      var importFired = false;
+      viewer.tableViewer.on('import.done', function(e) {
+        importFired = true;
+      });
+
+      viewer.importXML(oneDecisionXML, function(err, warnings) {
+
+        expect(importFired).to.be.true;
 
         done(err, warnings);
       });
