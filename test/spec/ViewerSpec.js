@@ -1,6 +1,6 @@
 'use strict';
 
-var Viewer = require('../../lib/TableViewer');
+var Viewer = require('../../lib/Viewer');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');

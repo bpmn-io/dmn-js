@@ -5,7 +5,7 @@ var isFunction = require('lodash/lang/isFunction'),
 
 var TestContainer = require('mocha-test-container-support');
 
-var Viewer = require('../../../lib/Viewer');
+var Modeler = require('../../../../lib/table/Modeler');
 
 var OPTIONS, DMN_JS;
 
@@ -60,7 +60,7 @@ if (!Function.prototype.bind) {
  * @param  {Object|Function} locals  the local overrides to be used by the table or a function that produces them
  * @return {Function}         a function to be passed to beforeEach
  */
-function bootstrapViewer(table, options, locals) {
+function bootstrapModeler(table, options, locals) {
 
   return function(done) {
 
@@ -108,7 +108,7 @@ function bootstrapViewer(table, options, locals) {
       DMN_JS.destroy();
     }
 
-    DMN_JS = new Viewer(_options);
+    DMN_JS = new Modeler(_options);
 
     DMN_JS.importXML(table, done);
 
@@ -142,7 +142,7 @@ function inject(fn) {
   return function() {
 
     if (!DMN_JS) {
-      throw new Error('no bootstraped viewer, ensure you created it via #bootstrapViewer');
+      throw new Error('no bootstraped modeler, ensure you created it via #bootstrapModeler');
     }
 
     DMN_JS.invoke(fn);
@@ -157,7 +157,7 @@ function injectAsync(doneFn) {
   };
 }
 
-module.exports.bootstrapTable = (window || global).bootstrapViewer = bootstrapViewer;
+module.exports.bootstrapTable = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.inject = (window || global).inject = inject;
 module.exports.injectAsync = (window || global).injectAsync = injectAsync;
 
