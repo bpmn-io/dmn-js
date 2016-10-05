@@ -3,7 +3,7 @@
 var Viewer = require('../../lib/Viewer');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
-    oneDecisionXML = require('../fixtures/dmn/oneDecision.dmn'),
+    oneDecisionXML = require('../fixtures/dmn/one-decision.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');

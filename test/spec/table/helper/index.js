@@ -110,8 +110,6 @@ function bootstrapModeler(table, options, locals) {
 
     DMN_JS = new Modeler(_options);
 
-    DMN_JS._parentContainer.appendChild(DMN_JS.container);
-
     DMN_JS.importXML(table, done);
 
     return DMN_JS;
