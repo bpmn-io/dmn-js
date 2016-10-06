@@ -7,21 +7,29 @@
 
   <inputData name="Type of day" id="dayType_id">
     <extensionElements>
-      <biodi:bounds x="240" y="270" width="200" height="60" />
+      <biodi:bounds x="240" y="270" width="125" height="45" />
     </extensionElements>
     <variable typeRef="string" name="Type of day" id="dayType_ii"/>
   </inputData>
   <inputData name="Weather in Celsius" id="temperature_id">
     <extensionElements>
-      <biodi:bounds x="5" y="270" width="170" height="90" />
+      <biodi:bounds x="5" y="270" width="125" height="45" />
     </extensionElements>
     <variable typeRef="integer" name="Weather in Celsius" id="temperature_ii"/>
   </inputData>
   <knowledgeSource name="Host" id="host_ks">
     <extensionElements>
-      <biodi:bounds x="495" y="10" width="120" height="75" />
+      <biodi:bounds x="495" y="10" width="63" height="100" />
     </extensionElements>
   </knowledgeSource>
+  <businessKnowledgeModel name="El menú" id="elMenu">
+    <extensionElements>
+      <biodi:bounds x="450" y="250" width="135" height="46" />
+    </extensionElements>
+    <authorityRequirement>
+      <requiredAuthority href="#guestCount"/>
+    </authorityRequirement>
+  </businessKnowledgeModel>
   <decision id="dish-decision" name="Dish Decision">
     <extensionElements>
       <biodi:bounds x="150" y="10" width="100" height="55" />
@@ -38,6 +46,10 @@
       <biodi:edge target="host_ks">
         <biodi:waypoint x="495" y="30" />
         <biodi:waypoint x="250" y="30" />
+      </biodi:edge>
+      <biodi:edge target="elMenu">
+        <biodi:waypoint x="450" y="275" />
+        <biodi:waypoint x="205" y="65" />
       </biodi:edge>
     </extensionElements>
     <informationRequirement>

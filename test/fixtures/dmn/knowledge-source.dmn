@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="dish" name="Dish"
+  namespace="http://camunda.org/schema/1.0/dmn"
+  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
+  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+  xmlns:biodi="http://bpmn.io/ns/di">
+
+  <knowledgeSource name="Master of Nothing" id="host_ks">
+    <extensionElements>
+      <biodi:bounds x="100" y="10" width="65" height="100" />
+    </extensionElements>
+  </knowledgeSource>
+</definitions>

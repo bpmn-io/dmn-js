@@ -46,7 +46,7 @@ if (!Function.prototype.bind) {
  *
  *   var mockEvents;
  *
- *   beforeEach(bootstrapTable(function() {
+ *   beforeEach(bootstrapDiagram(function() {
  *     mockEvents = new Events();
  *
  *     return {
@@ -56,11 +56,11 @@ if (!Function.prototype.bind) {
  *
  * });
  *
- * @param  {Object} (options) optional options to be passed to the table upon instantiation
- * @param  {Object|Function} locals  the local overrides to be used by the table or a function that produces them
+ * @param  {Object} (options) optional options to be passed to the diagram upon instantiation
+ * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
  * @return {Function}         a function to be passed to beforeEach
  */
-function bootstrapViewer(table, options, locals) {
+function bootstrapViewer(diagram, options, locals) {
 
   return function(done) {
 
@@ -82,10 +82,10 @@ function bootstrapViewer(table, options, locals) {
     var _options = options,
         _locals = locals;
 
-    if (typeof table !== 'string') {
-      options = table;
+    if (typeof diagram !== 'string') {
+      options = diagram;
       locals = options;
-      table = undefined;
+      diagram = undefined;
     }
 
     if (!_locals && isFunction(_options)) {
@@ -110,16 +110,16 @@ function bootstrapViewer(table, options, locals) {
 
     DMN_JS = new Viewer(_options);
 
-    DMN_JS.importXML(table, done);
+    DMN_JS.importXML(diagram, done);
 
     return DMN_JS;
   };
 }
 
 /**
- * Injects services of an instantiated table into the argument.
+ * Injects services of an instantiated diagram into the argument.
  *
- * Use it in conjunction with {@link #bootstrapTable}.
+ * Use it in conjunction with {@link #bootstrapViewer}.
  *
  * @example
  *
@@ -127,7 +127,7 @@ function bootstrapViewer(table, options, locals) {
  *
  *   var mockEvents;
  *
- *   beforeEach(bootstrapTable(...));
+ *   beforeEach(bootstrapViewer(...));
  *
  *   it('should provide mocked events', inject(function(events) {
  *     expect(events).toBe(mockEvents);
@@ -157,7 +157,7 @@ function injectAsync(doneFn) {
   };
 }
 
-module.exports.bootstrapTable = (window || global).bootstrapViewer = bootstrapViewer;
+module.exports.bootstrapDiagram = (window || global).bootstrapViewer = bootstrapViewer;
 module.exports.inject = (window || global).inject = inject;
 module.exports.injectAsync = (window || global).injectAsync = injectAsync;
 
