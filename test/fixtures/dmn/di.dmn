@@ -19,7 +19,7 @@
   </inputData>
   <knowledgeSource name="Host" id="host_ks">
     <extensionElements>
-      <biodi:bounds x="495" y="10" width="63" height="100" />
+      <biodi:bounds x="495" y="10" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <businessKnowledgeModel name="El menú" id="elMenu">

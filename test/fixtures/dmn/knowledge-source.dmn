@@ -7,7 +7,7 @@
 
   <knowledgeSource name="Master of Nothing" id="host_ks">
     <extensionElements>
-      <biodi:bounds x="100" y="10" width="65" height="100" />
+      <biodi:bounds x="100" y="10" width="100" height="65" />
     </extensionElements>
   </knowledgeSource>
 </definitions>
