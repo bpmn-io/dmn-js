@@ -86,7 +86,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "diagram-js": "^0.16.0",
-    "dmn-moddle": "^0.3.0",
+    "dmn-moddle": "^0.4.1",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
