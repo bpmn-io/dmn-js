@@ -24,4 +24,10 @@ describe('draw - DrdRenderer', function() {
     bootstrapViewer(xml)(done);
   });
 
+  it('Literal Expression', function(done) {
+    var xml = require('../../fixtures/dmn/literal-expression.dmn');
+
+    bootstrapViewer(xml, { loadDiagram: true })(done);
+  });
+
 });
