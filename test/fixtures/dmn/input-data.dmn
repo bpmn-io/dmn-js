@@ -3,7 +3,7 @@
   namespace="http://camunda.org/schema/1.0/dmn"
   xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
   xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-  xmlns:biodi="http://bpmn.io/ns/di">
+  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
 
   <inputData name="Type of day" id="dayType_id">
     <extensionElements>
