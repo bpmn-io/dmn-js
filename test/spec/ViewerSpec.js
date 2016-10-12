@@ -59,6 +59,79 @@ describe('Viewer', function() {
 
   });
 
+  describe('interaction', function() {
+
+    function triggerMouseEvent(type, gfx) {
+
+      var event = document.createEvent('MouseEvent');
+      event.initMouseEvent(type, true, true, window);
+
+      return gfx.dispatchEvent(event);
+    }
+
+    it('should go to table view on double-click', function(done) {
+      createViewer(exampleXML, function(err, warnings, viewer) {
+        var elementRegistry = viewer.get('elementRegistry');
+        var el = elementRegistry.getGraphics('dish-decision');
+
+        triggerMouseEvent('dblclick', el.node);
+
+        expect(container.querySelector('.dmn-diagram')).to.not.exist;
+        expect(container.querySelector('.dmn-table')).to.exist;
+
+        done();
+      });
+    });
+
+    it('should have a button to go to drd on table view', function(done) {
+      createViewer(exampleXML, function(err, warnings, viewer) {
+        viewer.showDecision(viewer.getDecisions()[0]);
+
+        var button = viewer.tableViewer.container.querySelector('.tjs-controls button:last-child');
+
+        expect(button.textContent).to.eql('Show DRD');
+
+        triggerMouseEvent('click', button);
+
+        expect(container.querySelector('.dmn-table')).to.not.exist;
+        expect(container.querySelector('.dmn-diagram')).to.exist;
+
+        done();
+      });
+    });
+
+    it('not go to table view if interaction is disabled', function(done) {
+      var viewer = new Viewer({ container: container, disableDrdInteraction: true });
+
+      viewer.importXML(exampleXML, function(err, warnings) {
+        var elementRegistry = viewer.get('elementRegistry');
+        var el = elementRegistry.getGraphics('dish-decision');
+
+        triggerMouseEvent('dblclick', el.node);
+
+        expect(container.querySelector('.dmn-diagram')).to.exist;
+        expect(container.querySelector('.dmn-table')).to.not.exist;
+
+        done();
+      });
+    });
+
+    it('should not have a goto drd button if interaction is disabled', function(done) {
+      var viewer = new Viewer({ container: container, disableDrdInteraction: true });
+
+      viewer.importXML(exampleXML, function(err, warnings) {
+        viewer.showDecision(viewer.getDecisions()[0]);
+
+        var button = viewer.tableViewer.container.querySelector('.tjs-controls button:last-child');
+
+        expect(button.textContent).to.not.eql('Show DRD');
+
+        done();
+      });
+    });
+
+  });
+
 
   describe('defaults', function() {
 
