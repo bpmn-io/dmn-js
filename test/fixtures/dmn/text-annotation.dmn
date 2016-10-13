@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="dish" name="Dish"
+  namespace="http://camunda.org/schema/1.0/dmn"
+  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
+  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
+
+  <inputData name="Type of day" id="dayType_id">
+    <extensionElements>
+      <biodi:bounds x="240" y="270" width="125" height="45" />
+      <biodi:edge target="TextAnnotation_1t4zaz9">
+        <biodi:waypoint x="365" y="270" />
+        <biodi:waypoint x="50" y="150" />
+      </biodi:edge>
+    </extensionElements>
+    <variable typeRef="string" name="Type of day" id="dayType_ii"/>
+  </inputData>
+  <textAnnotation id="TextAnnotation_1t4zaz9">
+    <extensionElements>
+      <biodi:bounds x="50" y="150" width="125" height="45" />
+    </extensionElements>
+    <text>foobar</text>
+  </textAnnotation>
+  <association id="Association_1c4jixb">
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#TextAnnotation_1t4zaz9" />
+  </association>
+</definitions>

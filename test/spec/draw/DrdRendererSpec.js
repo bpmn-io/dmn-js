@@ -28,6 +28,13 @@ describe('draw - DrdRenderer', function() {
     var xml = require('../../fixtures/dmn/literal-expression.dmn');
 
     bootstrapViewer(xml, { loadDiagram: true })(done);
+
+  });
+
+  it('Text Annotation', function(done) {
+    var xml = require('../../fixtures/dmn/text-annotation.dmn');
+
+    bootstrapViewer(xml, { loadDiagram: true })(done);
   });
 
 });
