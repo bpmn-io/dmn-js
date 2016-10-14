@@ -72,8 +72,8 @@ describe('Modeler', function() {
       expect(err).to.not.exist;
       expect(warnings).to.have.length(0);
 
-      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
-      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
+      expect(viewer.definitions.drgElements[0].decisionTable.input).to.exist;
+      expect(viewer.definitions.drgElements[0].decisionTable.input).to.have.length(1);
 
       done();
     });
@@ -87,8 +87,8 @@ describe('Modeler', function() {
       expect(err).to.not.exist;
       expect(warnings).to.have.length(0);
 
-      expect(viewer.definitions.decision[0].decisionTable.output).to.exist;
-      expect(viewer.definitions.decision[0].decisionTable.output).to.have.length(1);
+      expect(viewer.definitions.drgElements[0].decisionTable.output).to.exist;
+      expect(viewer.definitions.drgElements[0].decisionTable.output).to.have.length(1);
 
       done();
     });
@@ -102,8 +102,8 @@ describe('Modeler', function() {
       expect(err).to.not.exist;
       expect(warnings).to.have.length(0);
 
-      expect(viewer.definitions.decision[0].decisionTable.input).to.exist;
-      expect(viewer.definitions.decision[0].decisionTable.input).to.have.length(1);
+      expect(viewer.definitions.drgElements[0].decisionTable.input).to.exist;
+      expect(viewer.definitions.drgElements[0].decisionTable.input).to.have.length(1);
 
       done();
     });
@@ -209,26 +209,41 @@ describe('Modeler', function() {
 
 
     it('should clear ids before re-import', function(done) {
-
       // given
       var modeler = new Modeler({ container: container });
 
-      var moddle = modeler.get('moddle');
-      var elementRegistry = modeler.get('elementRegistry');
+      var moddle = modeler.get('moddle'),
+          elementRegistry = modeler.get('elementRegistry');
 
       // when
-      modeler.importXML(simpleXML, function() {
+      modeler.importXML(simpleXML, function(err) {
+        if (err) {
+          done(err);
+        }
 
-        modeler.importXML(otherXML, function() {
+        console.log(elementRegistry.get('input1').businessObject);
+
+        modeler.importXML(otherXML, function(err) {
+          var output2, input1;
+
+          if (err) {
+            done(err);
+          }
+
+          output2 = moddle.ids.assigned('output2');
+          input1 = moddle.ids.assigned('input1');
 
           var column = elementRegistry.get('input1').businessObject;
 
+          console.log(input1);
+          console.log(column);
+
           // then
           // not in other.bpmn
-          expect(moddle.ids.assigned('output2')).to.be.false;
+          expect(output2).to.be.false;
 
           // in other.bpmn
-          expect(moddle.ids.assigned('input1')).to.eql(column);
+          expect(input1).to.eql(column);
 
           done();
         });

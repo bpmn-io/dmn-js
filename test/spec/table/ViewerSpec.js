@@ -40,7 +40,7 @@ describe('TableViewer', function() {
 
   it('should import missing id on decision', function(done) {
     createViewer(noDecisionXML, function(err, warnings, viewer) {
-      expect(viewer.definitions.decision[0].id).to.eql(undefined);
+      expect(viewer.definitions.drgElements[0].id).to.eql(undefined);
       done();
     });
   });
@@ -51,8 +51,8 @@ describe('TableViewer', function() {
       expect(err).to.not.exist;
       expect(warnings).to.have.length(0);
 
-      expect(viewer.definitions.decision[0].id).to.not.eql(undefined);
-      expect(viewer.definitions.decision[0].id).to.not.eql('');
+      expect(viewer.definitions.drgElements[0].id).to.not.eql(undefined);
+      expect(viewer.definitions.drgElements[0].id).to.not.eql('');
       done();
     });
   });
