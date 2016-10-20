@@ -221,8 +221,6 @@ describe('Modeler', function() {
           done(err);
         }
 
-        console.log(elementRegistry.get('input1').businessObject);
-
         modeler.importXML(otherXML, function(err) {
           var output2, input1;
 
@@ -234,9 +232,6 @@ describe('Modeler', function() {
           input1 = moddle.ids.assigned('input1');
 
           var column = elementRegistry.get('input1').businessObject;
-
-          console.log(input1);
-          console.log(column);
 
           // then
           // not in other.bpmn
