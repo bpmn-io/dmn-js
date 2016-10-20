@@ -2,6 +2,9 @@
 
 require('../../TestHelper');
 
+var DOMEvents = require('table-js/test/util/DOMEvents'),
+    createEvent = DOMEvents.createEvent;
+
 /* global bootstrapModeler, inject */
 
 var basicXML = require('../../../../fixtures/dmn/literal-expression.dmn');
@@ -43,6 +46,18 @@ describe('features/literal-expression', function() {
 
       // then
       expect(businessObject.literalExpression.text).to.eql('myNewLiteralExpression');
+    }));
+
+    it('should get the correct expression language from the input field', inject(function(sheet) {
+      // when
+      var target = sheet.getContainer().querySelector('.expression-language input');
+      target.value = 'Brainfuck';
+      createEvent('input', target);
+
+      modeler.saveXML(function(err, xml) {
+        // then
+        expect(xml).to.include('Brainfuck');
+      });
     }));
 
 
