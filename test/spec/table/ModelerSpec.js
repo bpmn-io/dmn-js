@@ -14,7 +14,7 @@ var simpleXML = require('../../fixtures/dmn/simple.dmn'),
 var TestContainer = require('mocha-test-container-support');
 
 
-describe('Modeler', function() {
+describe('Table - Modeler', function() {
 
   var container;
 

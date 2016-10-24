@@ -11,7 +11,7 @@ var simpleXML = require('../../fixtures/dmn/simple.dmn'),
 var TestContainer = require('mocha-test-container-support');
 
 
-describe('TableViewer', function() {
+describe('Table - Viewer', function() {
 
   var container;
 

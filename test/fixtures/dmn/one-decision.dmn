@@ -5,50 +5,10 @@
   xmlns:camunda="http://camunda.org/schema/1.0/dmn"
   xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
 
-  <inputData name="Type of day" id="dayType_id">
-    <extensionElements>
-      <biodi:bounds x="240" y="270" width="200" height="60" />
-    </extensionElements>
-    <variable typeRef="string" name="Type of day" id="dayType_ii"/>
-  </inputData>
-  <inputData name="Weather in Celsius" id="temperature_id">
-    <extensionElements>
-      <biodi:bounds x="5" y="270" width="170" height="90" />
-    </extensionElements>
-    <variable typeRef="integer" name="Weather in Celsius" id="temperature_ii"/>
-  </inputData>
-  <knowledgeSource name="Host" id="host_ks">
-    <extensionElements>
-      <biodi:bounds x="495" y="10" width="120" height="75" />
-    </extensionElements>
-  </knowledgeSource>
   <decision id="dish-decision" name="Dish Decision">
     <extensionElements>
       <biodi:bounds x="150" y="10" width="100" height="55" />
-      <!-- need to associate edge with (informationRequirement -> requiredDecision -> href) === (edge -> target) -->
-      <!-- assumption requiredDecision -> href is always unique per decission element (@philipp) -->
-      <biodi:edge target="season">
-        <biodi:waypoint x="80" y="140" />
-        <biodi:waypoint x="205" y="65" />
-      </biodi:edge>
-      <biodi:edge target="guestCount">
-        <biodi:waypoint x="345" y="140" />
-        <biodi:waypoint x="205" y="65" />
-      </biodi:edge>
-      <biodi:edge target="host_ks">
-        <biodi:waypoint x="495" y="30" />
-        <biodi:waypoint x="250" y="30" />
-      </biodi:edge>
     </extensionElements>
-    <informationRequirement>
-      <requiredDecision href="#season" />
-    </informationRequirement>
-    <informationRequirement>
-      <requiredDecision href="#guestCount" />
-    </informationRequirement>
-    <authorityRequirement>
-      <requiredAuthority href="#host_ks"/>
-    </authorityRequirement>
     <decisionTable id="dishDecisionTable">
       <input id="seasonInput" label="Season">
         <inputExpression id="seasonInputExpression" typeRef="string">

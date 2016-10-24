@@ -1,8 +1,8 @@
 'use strict';
 
-/* global sinon */
+var Modeler = require('../../lib/Modeler');
 
-var Viewer = require('../../lib/Viewer');
+var TableModeler = require('../../lib/table/Modeler');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
     oneDecisionXML = require('../fixtures/dmn/one-decision.dmn'),
@@ -11,7 +11,7 @@ var exampleXML = require('../fixtures/dmn/di.dmn'),
 var TestContainer = require('mocha-test-container-support');
 
 
-describe('Viewer', function() {
+describe('Modeler', function() {
 
   var container;
 
@@ -19,28 +19,28 @@ describe('Viewer', function() {
     container = TestContainer.get(this);
   });
 
-  function createViewer(xml, done) {
-    var viewer = new Viewer({ container: container });
+  function createModeler(xml, done) {
+    var modeler = new Modeler({ container: container });
 
-    viewer.importXML(xml, function(err, warnings) {
-      done(err, warnings, viewer);
+    modeler.importXML(xml, function(err, warnings) {
+      done(err, warnings, modeler);
     });
   }
 
 
   it('should import simple process', function(done) {
-    createViewer(exampleXML, done);
+    createModeler(exampleXML, done);
   });
 
 
   it('should import empty definitions', function(done) {
-    createViewer(emptyDefsXML, done);
+    createModeler(emptyDefsXML, done);
   });
 
 
   it('should re-import simple process', function(done) {
     // given
-    createViewer(exampleXML, function(err, warnings, viewer) {
+    createModeler(exampleXML, function(err, warnings, modeler) {
 
       if (err) {
         return done(err);
@@ -48,7 +48,7 @@ describe('Viewer', function() {
 
       // when
       // mimic re-import of same diagram
-      viewer.importXML(exampleXML, function(err, warnings) {
+      modeler.importXML(exampleXML, function(err, warnings) {
 
         // then
         expect(err).to.not.exist;
@@ -72,8 +72,8 @@ describe('Viewer', function() {
     }
 
     it('should go to table view on double-click', function(done) {
-      createViewer(exampleXML, function(err, warnings, viewer) {
-        var elementRegistry = viewer.get('elementRegistry');
+      createModeler(exampleXML, function(err, warnings, modeler) {
+        var elementRegistry = modeler.get('elementRegistry');
         var el = elementRegistry.getGraphics('dish-decision');
 
         triggerMouseEvent('dblclick', el.node);
@@ -85,12 +85,11 @@ describe('Viewer', function() {
       });
     });
 
-
     it('should have a button to go to drd on table view', function(done) {
-      createViewer(exampleXML, function(err, warnings, viewer) {
-        viewer.showDecision(viewer.getDecisions()[0]);
+      createModeler(exampleXML, function(err, warnings, modeler) {
+        modeler.showDecision(modeler.getDecisions()[0]);
 
-        var button = viewer.table.container.querySelector('.tjs-controls button:last-child');
+        var button = modeler.table.container.querySelector('.tjs-controls button:last-child');
 
         expect(button.textContent).to.eql('Show DRD');
 
@@ -103,12 +102,11 @@ describe('Viewer', function() {
       });
     });
 
-
     it('not go to table view if interaction is disabled', function(done) {
-      var viewer = new Viewer({ container: container, disableDrdInteraction: true });
+      var modeler = new Modeler({ container: container, disableDrdInteraction: true });
 
-      viewer.importXML(exampleXML, function(err, warnings) {
-        var elementRegistry = viewer.get('elementRegistry');
+      modeler.importXML(exampleXML, function(err, warnings) {
+        var elementRegistry = modeler.get('elementRegistry');
         var el = elementRegistry.getGraphics('dish-decision');
 
         triggerMouseEvent('dblclick', el.node);
@@ -120,14 +118,13 @@ describe('Viewer', function() {
       });
     });
 
-
     it('should not have a goto drd button if interaction is disabled', function(done) {
-      var viewer = new Viewer({ container: container, disableDrdInteraction: true });
+      var modeler = new Modeler({ container: container, disableDrdInteraction: true });
 
-      viewer.importXML(exampleXML, function(err, warnings) {
-        viewer.showDecision(viewer.getDecisions()[0]);
+      modeler.importXML(exampleXML, function(err, warnings) {
+        modeler.showDecision(modeler.getDecisions()[0]);
 
-        var button = viewer.table.container.querySelector('.tjs-controls button:last-child');
+        var button = modeler.table.container.querySelector('.tjs-controls button:last-child');
 
         expect(button.textContent).to.not.eql('Show DRD');
 
@@ -142,68 +139,60 @@ describe('Viewer', function() {
 
     it('should share the same moddle', function() {
 
-      var viewer = new Viewer({ container: container });
+      var modeler = new Modeler();
 
-      expect(viewer.moddle).to.equal(viewer.table.moddle);
+      expect(modeler.moddle).to.equal(modeler.table.moddle);
     });
 
 
     it('should share definitions', function(done) {
 
-      var viewer = new Viewer({ container: container });
+      var modeler = new Modeler();
 
-      viewer.importXML(exampleXML, function(err, warnings) {
+      modeler.importXML(exampleXML, function(err, warnings) {
 
-        expect(viewer.definitions).to.eql(viewer.table.definitions);
+        expect(modeler.definitions).to.eql(modeler.table.definitions);
 
         done(err, warnings);
       });
+    });
+
+
+    it('should load Table Modeler', function() {
+
+      var modeler = new Modeler();
+
+      expect(modeler.table).to.be.instanceof(TableModeler);
     });
 
 
     it('should use <body> as default parent', function(done) {
 
-      var viewer = new Viewer();
+      var modeler = new Modeler();
 
-      viewer.importXML(exampleXML, function(err, warnings) {
+      modeler.importXML(exampleXML, function(err, warnings) {
 
-        expect(viewer.container.parentNode).to.eql(document.body);
+        expect(modeler.container.parentNode).to.eql(document.body);
 
         done(err, warnings);
       });
     });
-
 
     it('should display the table if only one decision is present', function(done) {
-      var viewer = new Viewer({ container: container }),
-          tableViewer = viewer.table;
+      var modeler = new Modeler();
 
-      var importSpy = sinon.spy(tableViewer, 'importDefinitions');
+      var importFired = false;
 
-      viewer.importXML(oneDecisionXML, function(err, warnings) {
+      modeler.table.on('import.done', function(e) {
+        importFired = true;
+      });
 
-        expect(importSpy).to.have.been.called;
-        expect(tableViewer.container.parentElement).to.eql(container);
+      modeler.importXML(oneDecisionXML, function(err, warnings) {
+
+        expect(importFired).to.be.true;
 
         done(err, warnings);
       });
-
-    });
-
-
-    it('should NOT display the table if only one decision is present', function(done) {
-      var viewer = new Viewer({ container: container, loadDiagram: true }),
-          tableViewer = viewer.table;
-
-      var importSpy = sinon.spy(tableViewer, 'importDefinitions');
-
-      viewer.importXML(oneDecisionXML, function(err, warnings) {
-
-        expect(importSpy).to.not.have.been.called;
-
-        done(err, warnings);
-      });
-
     });
 
   });
@@ -214,11 +203,11 @@ describe('Viewer', function() {
     it('should emit <import.*> events', function(done) {
 
       // given
-      var viewer = new Viewer({ container: container });
+      var modeler = new Modeler({ container: container });
 
       var events = [];
 
-      viewer.on([
+      modeler.on([
         'import.parse.start',
         'import.parse.complete',
         'import.render.start',
@@ -235,7 +224,7 @@ describe('Viewer', function() {
       });
 
       // when
-      viewer.importXML(exampleXML, function(err) {
+      modeler.importXML(exampleXML, function(err) {
 
         // then
         expect(events).to.eql([
@@ -248,7 +237,6 @@ describe('Viewer', function() {
 
         done(err);
       });
-
     });
 
   });
