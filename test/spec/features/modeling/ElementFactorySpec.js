@@ -9,7 +9,7 @@ var modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core');
 
 
-describe('features/modeling/behavior - create elements', function() {
+describe('features/modeling - create elements', function() {
 
   var testModules = [ coreModule, modelingModule ];
 
