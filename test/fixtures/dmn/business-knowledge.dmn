@@ -9,9 +9,6 @@
     <extensionElements>
       <biodi:bounds x="450" y="250" width="125" height="45" />
     </extensionElements>
-    <authorityRequirement>
-      <requiredAuthority href="#guestCount"/>
-    </authorityRequirement>
   </businessKnowledgeModel>
 
   <decision id="dish-decision" name="Dish Decision">
