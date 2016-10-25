@@ -104,6 +104,11 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.dist %>/fonts' },
           { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.assets %>/fonts' }
         ]
+      },
+      diagram_js: {
+        files: [
+          { expand: true, cwd: 'node_modules/diagram-js/assets', src: [ '**' ], dest: '<%= config.dist %>/assets' }
+        ]
       }
     }
   });
@@ -111,11 +116,11 @@ module.exports = function(grunt) {
   // tasks
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('test', [ 'less:dev', 'copy:fonts', 'karma:single' ]);
+  grunt.registerTask('test', [ 'less:dev', 'karma:single' ]);
 
-  grunt.registerTask('auto-test', [ 'less:dev', 'copy:fonts', 'karma:unit' ]);
+  grunt.registerTask('auto-test', [ 'less:dev', 'karma:unit' ]);
 
-  grunt.registerTask('build', [ 'bundle', 'less:prod', 'copy:fonts' ]);
+  grunt.registerTask('build', [ 'bundle', 'less:prod', 'copy' ]);
 
   grunt.registerTask('default', [ 'eslint:check', 'test', 'build' ]);
 };
