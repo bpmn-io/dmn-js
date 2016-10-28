@@ -11,7 +11,7 @@ var modelingModule = require('../../../../lib/features/modeling'),
 var domQuery = require('min-dom/lib/query');
 
 
-describe.only('features/palette', function() {
+describe('features/palette', function() {
 
   var diagramXML = require('../../../fixtures/dmn/input-data.dmn');
 
