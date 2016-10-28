@@ -7,4 +7,4 @@ dist/
 *.iml
 .DS_Store
 npm-debug.log
-assets/
+assets/css

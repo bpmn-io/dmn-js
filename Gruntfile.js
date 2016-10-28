@@ -101,8 +101,7 @@ module.exports = function(grunt) {
     copy: {
       fonts: {
         files: [
-          { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.dist %>/fonts' },
-          { expand: true, cwd: 'fonts', src: ['dmn-js*'], dest: '<%= config.assets %>/fonts' }
+          { expand: true, cwd: 'assets', src: ['dmn-js*'], dest: '<%= config.dist %>/fonts' }
         ]
       },
       diagram_js: {

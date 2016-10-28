@@ -1,13 +1,6 @@
-@font-face {
-  font-family: 'dmn-js';
-  src: url('@{dmn-font-path}dmn-js.eot');
-  src: url('@{dmn-font-path}dmn-js.eot#iefix') format('embedded-opentype'),
-       url('@{dmn-font-path}dmn-js.woff') format('woff'),
-       url('@{dmn-font-path}dmn-js.ttf') format('truetype'),
-       url('@{dmn-font-path}dmn-js.svg#dmn') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+@import (less) "../assets/dmn-font/css/dmn.css";
+@import (less) "../assets/dmn-font/css/dmn-embedded.css";
+
 
 .dmn-font() {
   font-family: "dmn-js";
@@ -37,48 +30,3 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-[class^="dmn-icon"]:before,
-[class*=" dmn-icon"]:before {
-  .dmn-font;
-}
-
-.table-js-add-row {
-  .dmn-font;
-
-  width: auto;
-  margin-right: auto;
-
-  span {
-    display: none;
-  }
-
-  &:before {
-    content: '\e803';
-  }
-}
-
-.dmn-icon-up:before { content: '\e800'; } /* 'î €' */
-.dmn-icon-down:before { content: '\e801'; } /* 'î ' */
-.dmn-icon-clear:before { content: '\e802'; } /* 'î ‚' */
-.dmn-icon-plus:before { content: '\e803'; } /* 'î ƒ' */
-.dmn-icon-minus:before { content: '\e804'; } /* 'î „' */
-.dmn-icon-info:before { content: '\e805'; } /* 'î …' */
-.dmn-icon-left:before { content: '\e806'; } /* 'î †' */
-.dmn-icon-dmn-io:before { content: '\e807'; } /* 'î ‡' */
-.dmn-icon-right:before { content: '\e808'; } /* 'î ˆ' */
-.dmn-icon-input:before { content: '\e809'; } /* 'î ‰' */
-.dmn-icon-output:before { content: '\e80a'; } /* 'î Š' */
-.dmn-icon-copy:before { content: '\e80b'; } /* 'î ‹' */
-.dmn-icon-keyboard:before { content: '\e80c'; } /* 'î Œ' */
-.dmn-icon-undo:before { content: '\e80d'; } /* 'î ' */
-.dmn-icon-redo:before { content: '\e80e'; } /* 'î Ž' */
-.dmn-icon-menu:before { content: '\e80f'; } /* 'î ' */
-.dmn-icon-setting:before { content: '\e810'; } /* 'î ' */
-.dmn-icon-wrench:before { content: '\e811'; } /* 'î ‘' */
-.dmn-icon-eraser:before { content: '\e812'; } /* 'î ’' */
-.dmn-icon-attention:before { content: '\e813'; } /* 'î “' */
-.dmn-icon-resize-big:before { content: '\e814'; } /* 'î ”' */
-.dmn-icon-resize-small:before { content: '\e815'; } /* 'î •' */
-.dmn-icon-file-code:before { content: '\e816'; } /* 'î –' */
-.dmn-icon-drag:before { content: '\e817'; } /* '' */
