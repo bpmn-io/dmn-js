@@ -73,13 +73,23 @@ describe('Viewer', function() {
 
     it('should go to table view on double-click', function(done) {
       createViewer(exampleXML, function(err, warnings, viewer) {
-        var elementRegistry = viewer.get('elementRegistry');
-        var el = elementRegistry.getGraphics('dish-decision');
+        var elementRegistry = viewer.get('elementRegistry'),
+            el = elementRegistry.getGraphics('dish-decision'),
+            eventFired = false,
+            eventPayload;
+
+        viewer.on('view.switch', function(evt) {
+          eventFired = true;
+          eventPayload = evt;
+        });
 
         triggerMouseEvent('dblclick', el.node);
 
         expect(container.querySelector('.dmn-diagram')).to.not.exist;
         expect(container.querySelector('.dmn-table')).to.exist;
+
+        expect(eventFired).to.be.true;
+        expect(eventPayload.decision).to.eql(elementRegistry.get('dish-decision').businessObject);
 
         done();
       });
@@ -88,16 +98,27 @@ describe('Viewer', function() {
 
     it('should have a button to go to drd on table view', function(done) {
       createViewer(exampleXML, function(err, warnings, viewer) {
+        var eventFired = false,
+            eventPayload;
+
         viewer.showDecision(viewer.getDecisions()[0]);
 
         var button = viewer.table.container.querySelector('.tjs-controls button:last-child');
 
         expect(button.textContent).to.eql('Show DRD');
 
+        viewer.on('view.switch', function(evt) {
+          eventFired = true;
+          eventPayload = evt;
+        });
+
         triggerMouseEvent('click', button);
 
         expect(container.querySelector('.dmn-table')).to.not.exist;
         expect(container.querySelector('.dmn-diagram')).to.exist;
+
+        expect(eventFired).to.be.true;
+        expect(eventPayload.decision).to.be.undefined;
 
         done();
       });
