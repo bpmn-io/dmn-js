@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="dish" name="Dish"
+  namespace="http://camunda.org/schema/1.0/dmn"
+  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
+  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
+
+  <inputData id="dayType_id" name="Input Data 1">
+    <extensionElements>
+      <biodi:bounds x="240" y="270" width="125" height="45" />
+    </extensionElements>
+    <variable typeRef="string" name="Input 1" id="input1"/>
+  </inputData>
+  <knowledgeSource name="Host" id="host_ks">
+    <extensionElements>
+      <biodi:bounds x="495" y="150" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <businessKnowledgeModel name="El menú" id="elMenu">
+    <extensionElements>
+      <biodi:bounds x="450" y="250" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <textAnnotation id="annotation_1">
+    <extensionElements>
+      <biodi:bounds x="240" y="400" width="125" height="45" />
+    </extensionElements>
+    <text>foobar</text>
+  </textAnnotation>
+  <association id="Association_1">
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#annotation_1" />
+    <extensionElements>
+      <biodi:edge source="dayType_id">
+        <biodi:waypoint x="303" y="293" />
+        <biodi:waypoint x="303" y="423" />
+      </biodi:edge>
+    </extensionElements>
+  </association>
+  <decision id="guestCount" name="Guest Count">
+    <extensionElements>
+      <biodi:bounds x="150" y="10" width="100" height="55" />
+      <biodi:edge source="host_ks">
+        <biodi:waypoint x="545" y="182" />
+        <biodi:waypoint x="200" y="38" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredDecision href="#host_ks"/>
+    </authorityRequirement>
+    <variable name="gCount" typeRef="integer" />
+    <literalExpression>
+      <text>guestService.getCount(dinnerEvent)</text>
+    </literalExpression>
+  </decision>
+
+  <decision id="decision2" name="Another Decision">
+    <extensionElements>
+      <biodi:bounds x="300" y="10" width="100" height="55" />
+    </extensionElements>
+    <variable name="gCount" typeRef="integer" />
+    <literalExpression>
+      <text>guestService.getCount(dinnerEvent)</text>
+    </literalExpression>
+  </decision>
+</definitions>
