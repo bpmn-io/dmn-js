@@ -8,14 +8,22 @@ var TestContainer = require('mocha-test-container-support');
 
 
 function expectConnection(connection, type) {
-  var businessObject = connection.businessObject;
+  var businessObject = connection.businessObject,
+      edge;
 
   expect(connection.type).to.equal(type);
   expect(connection.waypoints).to.have.length.of(2);
 
   expect(businessObject.$type).to.equal(type);
-  expect(businessObject.di.$type).to.equal('biodi:Edge');
-  expect(businessObject.di.waypoints).to.have.length.of(2);
+
+  if (type === 'dmn:Association') {
+    edge = businessObject.extensionElements.values[0];
+  } else {
+    edge = connection.target.businessObject.extensionElements.values[1];
+  }
+
+  expect(edge.$type).to.equal('biodi:Edge');
+  expect(edge.waypoints).to.have.length.of(2);
 }
 
 describe('DRD - Import', function() {
