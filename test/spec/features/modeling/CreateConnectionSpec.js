@@ -166,7 +166,7 @@ describe('features/modeling - create connection', function() {
       sourceRef = connectionBO.sourceRef;
       targetRef = connectionBO.targetRef;
 
-      waypoints = connectionBO.extensionElements.values[1].waypoints;
+      waypoints = connectionBO.extensionElements.values[0].waypoints;
 
       // then
       expect(connection).to.exist;
