@@ -71,20 +71,6 @@ describe('Modeler', function() {
       return gfx.dispatchEvent(event);
     }
 
-    it('should go to table view on double-click', function(done) {
-      createModeler(exampleXML, function(err, warnings, modeler) {
-        var elementRegistry = modeler.get('elementRegistry');
-        var el = elementRegistry.getGraphics('dish-decision');
-
-        triggerMouseEvent('dblclick', el.node);
-
-        expect(container.querySelector('.dmn-diagram')).to.not.exist;
-        expect(container.querySelector('.dmn-table')).to.exist;
-
-        done();
-      });
-    });
-
     it('should have a button to go to drd on table view', function(done) {
       createModeler(exampleXML, function(err, warnings, modeler) {
         modeler.showDecision(modeler.getDecisions()[0]);

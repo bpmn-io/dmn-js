@@ -39,15 +39,15 @@
       <biodi:bounds x="450" y="250" width="135" height="46" />
     </extensionElements>
   </businessKnowledgeModel>
-  <textAnnotation id="TextAnnotation_1t4zaz9">
+  <textAnnotation id="TextAnnotation_1">
     <extensionElements>
       <biodi:bounds x="240" y="400" width="125" height="45" />
     </extensionElements>
     <text>foobar</text>
   </textAnnotation>
-  <association id="Association_1c4jixb">
+  <association id="Association_1">
     <sourceRef href="#dayType_id" />
-    <targetRef href="#TextAnnotation_1t4zaz9" />
+    <targetRef href="#TextAnnotation_1" />
     <extensionElements>
       <biodi:edge source="dayType_id">
         <biodi:waypoint x="275" y="315" />
