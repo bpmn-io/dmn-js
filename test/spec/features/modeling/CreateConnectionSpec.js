@@ -2,8 +2,17 @@
 
 require('../../TestHelper');
 
-/* global bootstrapModeler, inject */
+var LayoutUtil = require('diagram-js/lib/layout/LayoutUtil');
 
+var getMid = LayoutUtil.getMid;
+
+/* global bootstrapModeler, inject */
+function expectWaypoint(waypoint, element) {
+  var midPoint = getMid(element);
+
+  expect(waypoint.x).to.eql(midPoint.x);
+  expect(waypoint.y).to.eql(midPoint.y);
+}
 
 var modelingModule = require('../../../../lib/features/modeling'),
     coreModule = require('../../../../lib/core');
@@ -58,10 +67,8 @@ describe('features/modeling - create connection', function() {
     expect(decision.informationRequirement).to.include(informationRequirement);
     expect(rootElement.children).to.include(informationRequirementConnection);
 
-    expect(waypoints[0].x).to.eql(inputExtensionElements[0].x);
-    expect(waypoints[0].y).to.eql(inputExtensionElements[0].y);
-    expect(waypoints[1].x).to.eql(decisionExtensionElements[0].x);
-    expect(waypoints[1].y).to.eql(decisionExtensionElements[0].y);
+    expectWaypoint(waypoints[0], inputExtensionElements[0]);
+    expectWaypoint(waypoints[1], decisionExtensionElements[0]);
   }));
 
 
@@ -143,6 +150,26 @@ describe('features/modeling - create connection', function() {
   }));
 
 
+  it('should not contain source and target business object in waypoint data', inject(function(canvas, elementRegistry, commandStack, modeling) {
+    // given
+    var rootElement = canvas.getRootElement(),
+        inputShape = elementRegistry.get('inputData_1'),
+        decisionShape = elementRegistry.get('decision_1'),
+        waypoints;
+
+    // when
+    modeling.createConnection(inputShape, decisionShape, {
+      type: 'dmn:InformationRequirement'
+    }, rootElement);
+
+    waypoints = decisionShape.businessObject.extensionElements.values[1].waypoints;
+
+    // then
+    expect(waypoints[0].$attrs.type).to.be.undefined;
+    expect(waypoints[1].$attrs.type).to.be.undefined;
+  }));
+
+
   describe('Annotations', function() {
 
     it('should create an association', inject(function(canvas, elementRegistry, modeling) {
@@ -185,11 +212,8 @@ describe('features/modeling - create connection', function() {
       expect(rootElement.children).to.include(connection);
       expect(rootElement.businessObject.artifacts).to.include(connectionBO);
 
-      expect(waypoints[0].x).to.eql(sourceBounds.x);
-      expect(waypoints[0].y).to.eql(sourceBounds.y);
-      expect(waypoints[1].x).to.eql(targetBounds.x);
-      expect(waypoints[1].y).to.eql(targetBounds.y);
-
+      expectWaypoint(waypoints[0], sourceBounds);
+      expectWaypoint(waypoints[1], targetBounds);
     }));
 
 
