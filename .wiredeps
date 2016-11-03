@@ -22,6 +22,9 @@
         }
       }
     },
+    "diagram-js-direct-editing": {
+      "version": "bpmn-io/diagram-js-direct-editing"
+    },
     "dmn-moddle": {
       "version": "bpmn-io/dmn-moddle",
       "dependencies": {
