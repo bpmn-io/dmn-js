@@ -94,7 +94,7 @@ describe('Viewer', function() {
         expect(container.querySelector('.dmn-diagram')).to.exist;
 
         expect(eventFired).to.be.true;
-        expect(eventPayload.decision).to.be.undefined;
+        expect(eventPayload.decision).to.exist;
 
         done();
       });

@@ -3,7 +3,7 @@
              id="definitions"
              name="definitions"
              namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="decision" name="">
+  <decision id="decision_1" name="">
     <decisionTable id="decisionTable">
       <input id="input1" label="">
         <inputExpression id="inputExpression1" typeRef="string">

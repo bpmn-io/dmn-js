@@ -1,11 +1,15 @@
 'use strict';
 
+var pick = require('lodash/object/pick');
+
 var Modeler = require('../../lib/Modeler');
 
 var TableModeler = require('../../lib/table/Modeler');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
     oneDecisionXML = require('../fixtures/dmn/one-decision.dmn'),
+    newTableXML = require('../fixtures/dmn/new-table.dmn'),
+    oneLitExprXML = require('../fixtures/dmn/one-literal-expr.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
@@ -13,18 +17,30 @@ var TestContainer = require('mocha-test-container-support');
 
 describe('Modeler', function() {
 
-  var container;
+  var container, modeler;
 
   beforeEach(function() {
     container = TestContainer.get(this);
   });
 
+  afterEach(function() {
+    modeler.destroy();
+  });
+
   function createModeler(xml, done) {
-    var modeler = new Modeler({ container: container });
+    modeler = new Modeler({ container: container });
 
     modeler.importXML(xml, function(err, warnings) {
       done(err, warnings, modeler);
     });
+  }
+
+  function triggerMouseEvent(type, gfx) {
+
+    var event = document.createEvent('MouseEvent');
+    event.initMouseEvent(type, true, true, window);
+
+    return gfx.dispatchEvent(event);
   }
 
 
@@ -62,14 +78,6 @@ describe('Modeler', function() {
   });
 
   describe('interaction', function() {
-
-    function triggerMouseEvent(type, gfx) {
-
-      var event = document.createEvent('MouseEvent');
-      event.initMouseEvent(type, true, true, window);
-
-      return gfx.dispatchEvent(event);
-    }
 
     it('should have a button to go to drd on table view', function(done) {
       createModeler(exampleXML, function(err, warnings, modeler) {
@@ -223,6 +231,42 @@ describe('Modeler', function() {
 
         done(err);
       });
+    });
+
+  });
+
+  describe('decisions without DI', function() {
+
+    function testDICreation(xml, done) {
+
+      createModeler(xml, function(err, warnings, modeler) {
+        var elementRegistry = modeler.get('elementRegistry');
+
+        var button = modeler.table.container.querySelector('.tjs-controls button:last-child'),
+            decision, extElems;
+
+        triggerMouseEvent('click', button);
+
+        decision = elementRegistry.get('decision_1');
+
+        extElems = decision.businessObject.extensionElements;
+
+        expect(pick(decision, [ 'x', 'y' ])).to.eql({ x: 0, y: 0 });
+
+        expect(extElems).to.exist;
+        expect(pick(extElems.values[0], [ 'x', 'y' ])).to.eql({ x: 0, y: 0 });
+
+        done();
+      });
+    }
+
+    it('should create DI when transitioning from a single table', function(done) {
+      testDICreation(newTableXML, done);
+    });
+
+
+    it('should create DI when transitioning from a single literal expression', function(done) {
+      testDICreation(oneLitExprXML, done);
     });
 
   });
