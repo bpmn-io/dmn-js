@@ -2,7 +2,11 @@
 
 var TestHelper = require('../../TestHelper');
 
+var TestContainer = require('mocha-test-container-support');
+
 var domQuery = require('min-dom/lib/query');
+
+var is = require('../../../../lib/util/ModelUtil').is;
 
 
 /* global bootstrapModeler, inject */
@@ -191,6 +195,7 @@ describe('features - context-pad', function() {
 
       expectContextPadEntries('guestCount', [
         'connect',
+        'replace',
         'delete',
         'append.knowledge-source',
         'append.text-annotation',
@@ -242,6 +247,68 @@ describe('features - context-pad', function() {
         'delete'
       ]);
     }));
+
+  });
+
+  describe('replace', function() {
+
+    var diagramXML = require('./ContextPad.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    var container;
+
+    beforeEach(function() {
+      container = TestContainer.get(this);
+    });
+
+
+    it('should show popup menu in the correct position', inject(function(elementRegistry, contextPad) {
+
+      // given
+      var element = elementRegistry.get('guestCount'),
+          padding = 5,
+          replaceMenuRect,
+          padMenuRect;
+
+      contextPad.open(element);
+      padMenuRect = contextPad.getPad(element).html.getBoundingClientRect();
+
+      // mock event
+      var event = {
+        target: padEntry(container, 'replace'),
+        preventDefault: function() {}
+      };
+
+      // when
+      contextPad.trigger('click', event);
+      replaceMenuRect = domQuery('.dmn-replace', container).getBoundingClientRect();
+
+      // then
+      expect(replaceMenuRect.left).to.be.at.most(padMenuRect.left);
+      expect(replaceMenuRect.top).to.be.at.most(padMenuRect.bottom + padding);
+    }));
+
+
+    it('should not include control if replacement is disallowed',
+      inject(function(elementRegistry, contextPad, customRules) {
+
+        // given
+        var element = elementRegistry.get('guestCount');
+
+        // disallow replacement
+        customRules.addRule('shape.replace', function(context) {
+          return !is(context.element, 'dmn:Decision');
+        });
+
+        // when
+        contextPad.open(element);
+
+        var padNode = contextPad.getPad(element).html;
+
+        // then
+        expect(padEntry(padNode, 'replace')).not.to.exist;
+      }));
 
   });
 
