@@ -36,7 +36,6 @@ describe('features/modeling - create connection', function() {
         decisionShape = elementRegistry.get('decision_1'),
         decision = decisionShape.businessObject,
         decisionExtensionElements = decision.extensionElements.values,
-        inputExtensionElements = input.extensionElements.values,
         informationRequirementConnection,
         informationRequirement,
         waypoints,
@@ -67,8 +66,11 @@ describe('features/modeling - create connection', function() {
     expect(decision.informationRequirement).to.include(informationRequirement);
     expect(rootElement.children).to.include(informationRequirementConnection);
 
-    expectWaypoint(waypoints[0], inputExtensionElements[0]);
-    expectWaypoint(waypoints[1], decisionExtensionElements[0]);
+    expect(waypoints[0].x).to.eql(decisionExtensionElements[1].waypoints[0].x);
+    expect(waypoints[0].y).to.eql(decisionExtensionElements[1].waypoints[0].y);
+
+    expect(waypoints[1].x).to.eql(decisionExtensionElements[1].waypoints[1].x);
+    expect(waypoints[1].y).to.eql(decisionExtensionElements[1].waypoints[1].y);
   }));
 
 

@@ -1,10 +1,13 @@
 'use strict';
 
-var Viewer = require('../../../lib/Viewer');
+var Modeler = require('../../../lib/Modeler');
 
-var exampleXML = require('../../fixtures/dmn/di.dmn');
+var exampleXML = require('../../fixtures/dmn/di.dmn'),
+    multipleDecisionsXML = require('../../fixtures/dmn/multiple-decisions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
+
+var pick = require('lodash/object/pick');
 
 
 function expectConnection(connection, type) {
@@ -28,33 +31,33 @@ function expectConnection(connection, type) {
 
 describe('DRD - Import', function() {
 
-  var viewer, elementRegistry;
-
-  var getElementWithSourceAndTargetType = function(sourceType, targetType) {
-    var match;
-
-    elementRegistry.forEach(function(el) {
-      if (el.source && el.source.type === sourceType &&
-         el.target && el.target.type === targetType) {
-        match = el;
-      }
-    });
-
-    return match;
-  };
-
-  before(function(done) {
-    var container = TestContainer.get(this);
-
-    viewer = new Viewer({ container: container });
-
-    viewer.importXML(exampleXML, function() {
-      elementRegistry = viewer.get('elementRegistry');
-      done();
-    });
-  });
+  var modeler, elementRegistry;
 
   describe('connection types', function() {
+
+    var getElementWithSourceAndTargetType = function(sourceType, targetType) {
+      var match;
+
+      elementRegistry.forEach(function(el) {
+        if (el.source && el.source.type === sourceType &&
+           el.target && el.target.type === targetType) {
+          match = el;
+        }
+      });
+
+      return match;
+    };
+
+    before(function(done) {
+      var container = TestContainer.get(this);
+
+      modeler = new Modeler({ container: container });
+
+      modeler.importXML(exampleXML, function() {
+        elementRegistry = modeler.get('elementRegistry');
+        done();
+      });
+    });
 
     it('should connect decisions with information requirement', function() {
       var connection = getElementWithSourceAndTargetType('dmn:Decision', 'dmn:Decision');
@@ -88,6 +91,42 @@ describe('DRD - Import', function() {
       var connection = getElementWithSourceAndTargetType('dmn:InputData', 'dmn:TextAnnotation');
 
       expectConnection(connection, 'dmn:Association');
+    });
+
+  });
+
+  it('should crop connections', function(done) {
+
+    var connection, waypoints;
+
+    var container = TestContainer.get(this);
+
+    modeler = new Modeler({ container: container });
+
+    modeler.importXML(multipleDecisionsXML, function() {
+      var modeling = modeler.get('modeling'),
+          elementRegistry = modeler.get('elementRegistry');
+
+      connection = modeling.connect(elementRegistry.get('guestCount'), elementRegistry.get('season'));
+
+      waypoints = connection.waypoints.slice();
+
+      modeler.saveXML(function(err, xml) {
+
+        modeler.importXML(xml, function() {
+          var decision;
+
+          elementRegistry = modeler.get('elementRegistry');
+
+          decision = elementRegistry.get('guestCount');
+          connection = decision.outgoing[0];
+
+          expect(pick(connection.waypoints[0], [ 'x', 'y' ])).to.eql(pick(waypoints[0], [ 'x', 'y' ]));
+          expect(pick(connection.waypoints[1], [ 'x', 'y' ])).to.eql(pick(waypoints[1], [ 'x', 'y' ]));
+
+          done();
+        });
+      });
     });
 
   });
