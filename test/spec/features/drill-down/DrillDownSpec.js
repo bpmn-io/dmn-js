@@ -74,4 +74,20 @@ describe('features - drill-down', function() {
     mouseEvent('click', drillDownOverlay);
   }));
 
+
+  it('should have the drill-down overlay after deletion of element is undone', inject(function(elementRegistry, modeling, commandStack) {
+    // given
+    var decisionElement = elementRegistry.get('dish-decision'),
+        elements;
+
+    modeling.removeShape(decisionElement);
+
+    // when
+    commandStack.undo();
+
+    // then
+    elements = queryElement('.djs-overlays', true);
+    expect(elements).to.have.length(3);
+  }));
+
 });
