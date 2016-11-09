@@ -16,6 +16,7 @@
       <biodi:bounds x="495" y="150" width="100" height="63" />
       <biodi:edge source="guestCount">
         <biodi:waypoint x="200" y="38" />
+        <biodi:waypoint x="250" y="150" />
         <biodi:waypoint x="545" y="182" />
       </biodi:edge>
     </extensionElements>

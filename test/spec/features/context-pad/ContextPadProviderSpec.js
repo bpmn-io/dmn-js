@@ -173,7 +173,6 @@ describe('features - context-pad', function() {
         contextPad.open(element, true);
 
         var entries = contextPad._current.entries;
-        console.log(JSON.stringify(entries, null, '  '));
 
         expect(Object.keys(entries)).to.have.length(Object.keys(expectedEntries).length);
 

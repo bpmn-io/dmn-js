@@ -32,11 +32,15 @@ describe('features/modeling - layout connection', function() {
       var expectedWaypoints = [
         {
           original: { x: 200, y: 38 },
-          x: 250, y: 59
+          x: 212, y: 65
+        },
+        {
+          original: { x: 250, y: 150 },
+          x: 250, y: 150
         },
         {
           original: { x: 545, y: 182 },
-          x: 495, y: 161
+          x: 495, y: 177
         }
       ];
 
@@ -47,12 +51,11 @@ describe('features/modeling - layout connection', function() {
 
       // expect cropped, repaired connection
       // that was not actually modified
-
       expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
 
       // expect cropped waypoints in di
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 250, y: 59 });
-      expect(pick(edge.waypoints[1], [ 'x', 'y' ])).eql({ x: 495, y: 161 });
+      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
+      expect(pick(edge.waypoints[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
     }));
 
   });
@@ -73,6 +76,10 @@ describe('features/modeling - layout connection', function() {
           x: 200, y: 38
         },
         {
+          original: { x: 250, y: 150 },
+          x: 250, y: 150
+        },
+        {
           original: { x: 545, y: 182 },
           x: 545, y: 182
         }
@@ -91,7 +98,7 @@ describe('features/modeling - layout connection', function() {
 
       // expect cropped waypoints in di
       expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 200, y: 38 });
-      expect(pick(edge.waypoints[1], [ 'x', 'y' ])).eql({ x: 545, y: 182 });
+      expect(pick(edge.waypoints[2], [ 'x', 'y' ])).eql({ x: 545, y: 182 });
     }));
 
   });
@@ -108,11 +115,15 @@ describe('features/modeling - layout connection', function() {
       var expectedWaypoints = [
         {
           original: { x: 200, y: 38 },
-          x: 250, y: 59
+          x: 212, y: 65
+        },
+        {
+          original: { x: 250, y: 150 },
+          x: 250, y: 150
         },
         {
           original: { x: 545, y: 182 },
-          x: 495, y: 161
+          x: 495, y: 177
         }
       ];
 
@@ -129,8 +140,8 @@ describe('features/modeling - layout connection', function() {
       expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
 
       // expect cropped waypoints in di
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 250, y: 59 });
-      expect(pick(edge.waypoints[1], [ 'x', 'y' ])).eql({ x: 495, y: 161 });
+      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
+      expect(pick(edge.waypoints[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
     }));
 
   });
