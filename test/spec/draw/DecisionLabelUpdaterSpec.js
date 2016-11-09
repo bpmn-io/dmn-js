@@ -24,7 +24,7 @@ describe('draw/DecisionLabelUpdater', function() {
     eventBus.fire('view.switch');
 
     // then
-    expect(elementRegistry.getGraphics('dish-decision').node.textContent).to.eql('FOO BAR');
+    expect(elementRegistry.getGraphics('dish-decision').textContent).to.eql('FOO BAR');
   }));
 
 });

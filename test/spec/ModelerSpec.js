@@ -103,7 +103,7 @@ describe('Modeler', function() {
         var elementRegistry = modeler.get('elementRegistry');
         var el = elementRegistry.getGraphics('dish-decision');
 
-        triggerMouseEvent('dblclick', el.node);
+        triggerMouseEvent('dblclick', el);
 
         expect(container.querySelector('.dmn-diagram')).to.exist;
         expect(container.querySelector('.dmn-table')).to.not.exist;

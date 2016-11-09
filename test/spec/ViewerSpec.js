@@ -108,7 +108,7 @@ describe('Viewer', function() {
         var elementRegistry = viewer.get('elementRegistry');
         var el = elementRegistry.getGraphics('dish-decision');
 
-        triggerMouseEvent('dblclick', el.node);
+        triggerMouseEvent('dblclick', el);
 
         expect(container.querySelector('.dmn-diagram')).to.exist;
         expect(container.querySelector('.dmn-table')).to.not.exist;
