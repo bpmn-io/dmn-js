@@ -32,3 +32,38 @@
     width: 100%;
   }
 }
+
+.dmn-definitions {
+  position: absolute;
+  top: 20px;
+  left: 80px;
+  background-color: rgba(255,255,255, .9);
+
+  .dmn-definitions-name {
+    font-size: 1.5em;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+    &:focus {
+      opacity: 1;
+      outline: none;
+    }
+  }
+
+  .dmn-definitions-id {
+    font-size: 0.8em;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+    &:focus {
+      opacity: 1;
+      outline: none;
+    }
+  }
+}
