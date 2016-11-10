@@ -262,6 +262,29 @@ describe('features/modeling - create connection', function() {
 
   });
 
+  describe('append', function() {
+
+
+    it('should connect decision to knowledge source', inject(function(canvas, elementRegistry, elementFactory, modeling) {
+      // given
+      var decision = elementRegistry.get('decision_1'),
+          inputData = elementFactory.createShape({ type: 'dmn:InputData' }),
+          rootElement = canvas.getRootElement(),
+          connection;
+
+      // when
+      modeling.appendShape(decision, inputData, { x: 100, y: 300 }, rootElement);
+
+      connection = decision.incoming[0];
+
+      // then
+      expect(connection.type).to.eql('dmn:InformationRequirement');
+      expect(inputData.outgoing[0].type).to.eql('dmn:InformationRequirement');
+      expect(decision.businessObject.extensionElements.values[1].source).to.equal(inputData.id);
+    }));
+
+  });
+
   describe('connection types', function() {
 
     it('should connect decision to knowledge source', inject(function(canvas, elementRegistry, commandStack, modeling) {

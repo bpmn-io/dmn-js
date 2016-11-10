@@ -197,6 +197,7 @@ describe('features - context-pad', function() {
         'replace',
         'delete',
         'append.knowledge-source',
+        'append.input-data',
         'append.text-annotation',
         'append.decision'
       ]);
