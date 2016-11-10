@@ -6,6 +6,7 @@ var Viewer = require('../../lib/Viewer');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
     oneDecisionXML = require('../fixtures/dmn/one-decision.dmn'),
+    namespaceXML = require('../fixtures/dmn/namespace.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
@@ -60,6 +61,34 @@ describe('Viewer', function() {
     });
 
   });
+
+
+  it('should fix the namespace from "dmn11.xsd" to "dmn.xsd"', function(done) {
+
+    createViewer(namespaceXML, function(err, warnings, modeler) {
+
+      if (err) {
+        return done(err);
+      }
+
+      // when
+      // mimic re-import of same diagram
+      modeler.saveXML(function(err, xml) {
+        if (err) {
+          return done(err);
+        }
+
+        // then
+        expect(err).to.not.exist;
+        expect(xml.indexOf('xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd')).to.exist;
+
+        done();
+      });
+
+    });
+
+  });
+
 
   describe('interaction', function() {
 
