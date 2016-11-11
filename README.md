@@ -45,4 +45,4 @@ As long as the project is in alpha stage, you must make sure you setup the whole
 
 ## License
 
-Use under the terms of the [bpmn-js license](http://bpmn.io/license).
+Use under the terms of the [dmn-js license](http://bpmn.io/license).

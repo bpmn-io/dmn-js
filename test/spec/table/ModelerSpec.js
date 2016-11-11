@@ -234,10 +234,10 @@ describe('Table - Modeler', function() {
           var column = elementRegistry.get('input1').businessObject;
 
           // then
-          // not in other.bpmn
+          // not in other.dmn
           expect(output2).to.be.false;
 
-          // in other.bpmn
+          // in other.dmn
           expect(input1).to.eql(column);
 
           done();
