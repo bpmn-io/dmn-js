@@ -232,6 +232,37 @@ describe('Viewer', function() {
 
     });
 
+
+    it('should return table as the active editor', function(done) {
+      var viewer = new Viewer({ container: container }),
+          tableViewer = viewer.table;
+
+      viewer.importXML(oneDecisionXML, function(err, warnings) {
+
+        var activeEditor = viewer.getActiveEditor();
+
+        expect(activeEditor).to.equal(tableViewer);
+
+        done(err, warnings);
+      });
+
+    });
+
+
+    it('should return table as the active editor', function(done) {
+      var viewer = new Viewer({ container: container });
+
+      viewer.importXML(exampleXML, function(err, warnings) {
+
+        var activeEditor = viewer.getActiveEditor();
+
+        expect(activeEditor).to.equal(viewer);
+
+        done(err, warnings);
+      });
+
+    });
+
   });
 
 
