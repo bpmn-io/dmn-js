@@ -310,4 +310,80 @@ describe('Viewer', function() {
 
   });
 
+
+  describe('export', function() {
+
+    function isValid(svg) {
+      var expectedStart = '<?xml version="1.0" encoding="utf-8"?>';
+      var expectedEnd = '</svg>';
+
+      expect(svg.indexOf(expectedStart)).to.equal(0);
+      expect(svg.indexOf(expectedEnd)).to.equal(svg.length - expectedEnd.length);
+
+      // ensure correct rendering of SVG contents
+      expect(svg.indexOf('undefined')).to.equal(-1);
+
+      // expect header to be written only once
+      expect(svg.indexOf('<svg width="100%" height="100%">')).to.equal(-1);
+      expect(svg.indexOf('<g class="viewport"')).to.equal(-1);
+
+      // FIXME(nre): make matcher
+      return true;
+    }
+
+
+    it('should export XML', function(done) {
+
+      // given
+      createViewer(exampleXML, function(err, warnings, viewer) {
+
+        if (err) {
+          return done(err);
+        }
+
+        // when
+        viewer.saveXML({ format: true }, function(err, xml) {
+
+          if (err) {
+            return done(err);
+          }
+
+          // then
+          expect(xml).to.contain('<?xml version="1.0" encoding="UTF-8"?>');
+          expect(xml).to.contain('definitions');
+          expect(xml).to.contain('  ');
+
+          done();
+        });
+      });
+
+    });
+
+
+    it('should export svg', function(done) {
+
+      // given
+      createViewer(exampleXML, function(err, warnings, viewer) {
+
+        if (err) {
+          return done(err);
+        }
+
+        // when
+        viewer.saveSVG(function(err, svg) {
+
+          if (err) {
+            return done(err);
+          }
+
+          // then
+          expect(isValid(svg)).to.be.true;
+
+          done();
+        });
+      });
+    });
+
+  });
+
 });
