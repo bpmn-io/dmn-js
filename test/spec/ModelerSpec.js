@@ -251,10 +251,10 @@ describe('Modeler', function() {
 
         extElems = decision.businessObject.extensionElements;
 
-        expect(pick(decision, [ 'x', 'y' ])).to.eql({ x: 0, y: 0 });
+        expect(pick(decision, [ 'x', 'y' ])).to.eql({ x: 200, y: 200 });
 
         expect(extElems).to.exist;
-        expect(pick(extElems.values[0], [ 'x', 'y' ])).to.eql({ x: 0, y: 0 });
+        expect(pick(extElems.values[0], [ 'x', 'y' ])).to.eql({ x: 200, y: 200 });
 
         done();
       });
