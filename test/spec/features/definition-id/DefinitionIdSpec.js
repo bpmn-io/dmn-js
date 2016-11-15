@@ -7,6 +7,7 @@ require('../../TestHelper');
 /* global bootstrapModeler, inject */
 
 var modelingModule = require('../../../../lib/features/modeling'),
+    paletteProviderModule = require('../../../../lib/features/palette'),
     definitionIdViewerModule = require('../../../../lib/features/definition-id/viewer'),
     definitionIdModelerModule = require('../../../../lib/features/definition-id/modeler'),
     coreModule = require('../../../../lib/core');
@@ -15,6 +16,7 @@ describe('features/definition-id', function() {
 
   var testModules = [
     coreModule,
+    paletteProviderModule,
     definitionIdViewerModule,
     definitionIdModelerModule,
     modelingModule
@@ -96,6 +98,20 @@ describe('features/definition-id', function() {
 
     // then
     expect(nameContainer.textContent).to.eql('new Name');
+  }));
+
+
+  it('should be responsive', inject(function(canvas, eventBus, definitionIdView) {
+    // given
+    var parent = canvas.getContainer();
+
+    parent.style.height = '600px';
+
+    // when
+    canvas.resized();
+
+    // then
+    expect(definitionIdView._container.offsetLeft).to.equal(130);
   }));
 
 });
