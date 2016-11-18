@@ -50,8 +50,8 @@ describe('features/modeling - create elements', function() {
     // then
     expectElement(decision, {
       type: 'dmn:Decision',
-      width: 100,
-      height: 55,
+      width: 180,
+      height: 80,
       businessObject: businessObject
     });
   }));

@@ -8,10 +8,6 @@
   <inputData name="Type of day" id="dayType_id">
     <extensionElements>
       <biodi:bounds x="240" y="270" width="125" height="45" />
-      <biodi:edge target="TextAnnotation_1t4zaz9">
-        <biodi:waypoint x="365" y="270" />
-        <biodi:waypoint x="50" y="150" />
-      </biodi:edge>
     </extensionElements>
     <variable typeRef="string" name="Type of day" id="dayType_ii"/>
   </inputData>
@@ -24,5 +20,11 @@
   <association id="Association_1c4jixb">
     <sourceRef href="#dayType_id" />
     <targetRef href="#TextAnnotation_1t4zaz9" />
+    <extensionElements>
+      <biodi:edge source="TextAnnotation_1t4zaz9">
+        <biodi:waypoint x="365" y="270" />
+        <biodi:waypoint x="50" y="150" />
+      </biodi:edge>
+    </extensionElements>
   </association>
 </definitions>

@@ -7,7 +7,7 @@
 
   <decision id="season" name="Season">
     <extensionElements>
-      <biodi:bounds x="150" y="150" width="100" height="55" />
+      <biodi:bounds x="150" y="150" width="180" height="80" />
     </extensionElements>
     <variable name="season" typeRef="string" />
     <literalExpression expressionLanguage="Javascript">
@@ -17,7 +17,7 @@
 
   <decision id="dish-decision" name="Dish Decision">
     <extensionElements>
-      <biodi:bounds x="150" y="10" width="100" height="55" />
+      <biodi:bounds x="150" y="10" width="180" height="80" />
     </extensionElements>
     <decisionTable id="dishDecisionTable">
       <input id="seasonInput" label="Season">
@@ -102,7 +102,7 @@
 
   <decision id="guestCount" name="Guest Count">
     <extensionElements>
-      <biodi:bounds x="400" y="140" width="210" height="55" />
+      <biodi:bounds x="400" y="140" width="180" height="80" />
     </extensionElements>
     <decisionTable id="guestCountDecisionTable">
       <input id="typeOfDayInput" label="Type of day">

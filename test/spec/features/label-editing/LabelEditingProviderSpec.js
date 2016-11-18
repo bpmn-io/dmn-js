@@ -174,7 +174,7 @@ describe('features - label-editing', function() {
     it('should edit Text-Annotation', inject(function(elementRegistry) {
 
       // given
-      var shape = elementRegistry.get('TextAnnotation_1');
+      var shape = elementRegistry.get('TextAnnotation_1t4zaz9');
 
       // when
       setText(shape, 'FOO');
@@ -199,7 +199,7 @@ describe('features - label-editing', function() {
     it('should not activate directEditing - Connection', inject(function(eventBus, elementRegistry, directEditing) {
 
       // given
-      var shape = elementRegistry.get('Association_1');
+      var shape = elementRegistry.get('Association_1c4jixb');
 
       // when
       eventBus.fire('element.dblclick', { element: shape });
