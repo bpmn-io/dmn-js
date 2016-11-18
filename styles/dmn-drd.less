@@ -38,33 +38,37 @@
   position: absolute;
   top: 20px;
   left: 80px;
-  background-color: rgba(255,255,255, .9);
+  background-color: #FAFAFA;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  padding: 4px;
 
   .dmn-definitions-name {
     font-size: 1.5em;
-    opacity: 0.4;
-    transition: opacity 0.3s;
+    padding: 3px;
 
-    &:hover {
-      opacity: 1;
-    }
     &:focus {
-      opacity: 1;
       outline: none;
     }
   }
 
   .dmn-definitions-id {
-    font-size: 0.8em;
-    opacity: 0.3;
-    transition: opacity 0.3s;
+    font-family: monospace;
+    margin-top: 2px;
+    padding: 3px;
 
-    &:hover {
-      opacity: 1;
-    }
     &:focus {
-      opacity: 1;
       outline: none;
+    }
+  }
+
+  > [contenteditable] {
+    &:hover,
+    &:focus {
+      padding: 2px;
+      background-color: white;
+      border-radius: 2px;
+      border: 1px solid #aaaaaa;
     }
   }
 }
