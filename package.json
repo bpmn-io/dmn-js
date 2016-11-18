@@ -96,6 +96,6 @@
     "selection-update": "^0.1.2",
     "stringify": "^5.1.0",
     "table-js": "^0.6.0",
-    "tiny-svg": "^0.1.0"
+    "tiny-svg": "^0.1.1"
   }
 }

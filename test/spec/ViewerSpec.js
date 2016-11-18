@@ -313,7 +313,7 @@ describe('Viewer', function() {
 
   describe('export', function() {
 
-    function isValid(svg) {
+    function validSVG(svg) {
       var expectedStart = '<?xml version="1.0" encoding="utf-8"?>';
       var expectedEnd = '</svg>';
 
@@ -327,9 +327,19 @@ describe('Viewer', function() {
       expect(svg.indexOf('<svg width="100%" height="100%">')).to.equal(-1);
       expect(svg.indexOf('<g class="viewport"')).to.equal(-1);
 
+      var parser = new DOMParser();
+      var svgNode = parser.parseFromString(svg, 'image/svg+xml');
+
+      // [comment, <!DOCTYPE svg>, svg]
+      expect(svgNode.childNodes).to.have.length(3);
+
+      // no error body
+      expect(svgNode.body).not.to.exist;
+
       // FIXME(nre): make matcher
       return true;
     }
+
 
 
     it('should export XML', function(done) {
@@ -377,7 +387,7 @@ describe('Viewer', function() {
           }
 
           // then
-          expect(isValid(svg)).to.be.true;
+          expect(validSVG(svg)).to.be.true;
 
           done();
         });
