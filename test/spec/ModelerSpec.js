@@ -44,7 +44,7 @@ describe('Modeler', function() {
   }
 
 
-  it('should import simple process', function(done) {
+  it('should import simple DRD', function(done) {
     createModeler(exampleXML, done);
   });
 
@@ -54,7 +54,7 @@ describe('Modeler', function() {
   });
 
 
-  it('should re-import simple process', function(done) {
+  it('should re-import simple DRD', function(done) {
     // given
     createModeler(exampleXML, function(err, warnings, modeler) {
 
@@ -77,6 +77,7 @@ describe('Modeler', function() {
 
   });
 
+
   describe('interaction', function() {
 
     it('should have a button to go to drd on table view', function(done) {
@@ -95,6 +96,7 @@ describe('Modeler', function() {
         done();
       });
     });
+
 
     it('not go to table view if interaction is disabled', function(done) {
       var modeler = new Modeler({ container: container, disableDrdInteraction: true });
@@ -171,6 +173,7 @@ describe('Modeler', function() {
         done(err, warnings);
       });
     });
+
 
     it('should display the table if only one decision is present', function(done) {
       var modeler = new Modeler();

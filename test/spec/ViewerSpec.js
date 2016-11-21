@@ -29,7 +29,7 @@ describe('Viewer', function() {
   }
 
 
-  it('should import simple process', function(done) {
+  it('should import simple DRD', function(done) {
     createViewer(exampleXML, done);
   });
 
@@ -39,7 +39,7 @@ describe('Viewer', function() {
   });
 
 
-  it('should re-import simple process', function(done) {
+  it('should re-import simple DRD', function(done) {
     // given
     createViewer(exampleXML, function(err, warnings, viewer) {
 
