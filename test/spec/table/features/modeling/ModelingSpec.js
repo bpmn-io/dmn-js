@@ -250,6 +250,17 @@ describe('features/modeling', function() {
         expect(modeler.getDecisions()[0].informationRequirement[0].requiredDecision.href).to.eql('#myNewShinyId');
       }));
 
+      it('should update required decisions for authorityRequirements', inject(function(modeling) {
+        // given
+        modeler.showDecision(modeler.getDecisions()[2]);
+
+        // when
+        modeling.editId('newAuthorityId');
+
+        // then
+        expect(modeler.definitions.drgElements[3].authorityRequirement[0].requiredDecision.href).to.eql('#newAuthorityId');
+      }));
+
 
       it('should undo', inject(function(modeling, commandStack) {
         // given
