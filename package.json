@@ -85,9 +85,9 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "diagram-js": "^0.18.0",
+    "diagram-js": "^0.18.1",
     "diagram-js-direct-editing": "^0.17.0",
-    "dmn-moddle": "^0.5.0",
+    "dmn-moddle": "^0.5.2",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
@@ -95,7 +95,7 @@
     "object-refs": "^0.1.0",
     "selection-update": "^0.1.2",
     "stringify": "^5.1.0",
-    "table-js": "^0.6.0",
+    "table-js": "^0.6.3",
     "tiny-svg": "^0.1.1"
   }
 }
