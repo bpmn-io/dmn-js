@@ -172,4 +172,24 @@ describe('features/modeling - replace connection', function() {
     expectConnected(source, newTarget, 'dmn:AuthorityRequirement');
   }));
 
+
+  it('should update the semantic parent on undo', inject(function(modeling, commandStack) {
+    // given
+    var source = element('host_ks'),
+        oldTarget = element('guestCount'),
+        newTarget = element('decision2'),
+        connection = getConnection(source, oldTarget, 'dmn:AuthorityRequirement'),
+
+        newTargetBounds = newTarget.businessObject.extensionElements.values[0],
+
+        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
+
+    modeling.reconnectEnd(connection, newTarget, newWaypoints);
+
+    // when
+    commandStack.undo();
+
+    // then
+    expect(oldTarget.businessObject.authorityRequirement).to.have.a.lengthOf(1);
+  }));
 });
