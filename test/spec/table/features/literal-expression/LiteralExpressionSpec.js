@@ -20,14 +20,17 @@ describe('features/literal-expression', function() {
     expect(sheet.getContainer().querySelector('.literal-expression-editor')).to.exist;
   }));
 
+
   it('should render the literal expression text', inject(function(sheet) {
     expect(sheet.getContainer().querySelector('textarea').value).to.eql('calendar.getSeason(date)');
   }));
+
 
   it('should render variable name and type', inject(function(sheet) {
     expect(sheet.getContainer().querySelector('.variable-name').value).to.eql('season');
     expect(sheet.getContainer().querySelector('.variable-type input').value).to.eql('string');
   }));
+
 
   it('should render expression language', inject(function(sheet) {
     expect(sheet.getContainer().querySelector('.expression-language input').value).to.eql('Javascript');
@@ -47,6 +50,7 @@ describe('features/literal-expression', function() {
       // then
       expect(businessObject.literalExpression.text).to.eql('myNewLiteralExpression');
     }));
+
 
     it('should get the correct expression language from the input field', inject(function(sheet) {
       // when
@@ -95,6 +99,50 @@ describe('features/literal-expression', function() {
         expect(xml).to.include('<text>myNewLiteralExpression</text>');
       });
     }));
+
+
+    it('should not persist empty strings', inject(function(modeling) {
+      // when
+      modeling.editLiteralExpression(businessObject, '', '', '', '');
+
+      // then
+      expect(businessObject.literalExpression.text).to.not.exist;
+      expect(businessObject.literalExpression.expressionLanguage).to.not.exist;
+      expect(businessObject.variable.name).to.not.exist;
+      expect(businessObject.variable.typeRef).to.not.exist;
+    }));
+
+
+    it('should not persist empty strings -> undo', inject(function(modeling, commandStack) {
+      // given
+      modeling.editLiteralExpression(businessObject, '', '', '', '');
+
+      // when
+      commandStack.undo();
+
+      // then
+      expect(businessObject.literalExpression.text).to.equal('calendar.getSeason(date)');
+      expect(businessObject.literalExpression.expressionLanguage).to.equal('Javascript');
+      expect(businessObject.variable.name).to.equal('season');
+      expect(businessObject.variable.typeRef).to.equal('string');
+    }));
+
+
+    it('should not persist empty strings -> redo', inject(function(modeling, commandStack) {
+      // given
+      modeling.editLiteralExpression(businessObject, '', '', '', '');
+
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(businessObject.literalExpression.text).to.not.exist;
+      expect(businessObject.literalExpression.expressionLanguage).to.not.exist;
+      expect(businessObject.variable.name).to.not.exist;
+      expect(businessObject.variable.typeRef).to.not.exist;
+    }));
+
   });
 
 });
