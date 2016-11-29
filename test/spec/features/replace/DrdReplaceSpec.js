@@ -150,6 +150,86 @@ describe('features/replace - drd replace', function() {
       expect(businessObject.decisionTable).to.not.exist;
       expect(businessObject.literalExpression).to.exist;
     }));
+  });
+
+
+  describe('should work with text annotations', function() {
+
+    var diagramXML = require('./textAnnotation.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+    it('should keep references for associations', inject(function(elementRegistry, drdReplace) {
+      // given
+      var decision = elementRegistry.get('decision');
+
+      var newElementData =  {
+        type: 'dmn:Decision',
+        table: true,
+        expression: false
+      };
+
+      // when
+      drdReplace.replaceElement(decision, newElementData);
+
+      // then
+      var association = elementRegistry.filter(function(element) {
+        return element.type === 'dmn:Association';
+      })[0];
+
+      expect(association.businessObject.sourceRef.href).to.eql('#decision');
+      expect(association.businessObject.extensionElements.values[0].source).to.eql('decision');
+    }));
+
+
+    it('should undo', inject(function(elementRegistry, drdReplace, commandStack) {
+      // given
+      var decision = elementRegistry.get('decision');
+
+      var newElementData =  {
+        type: 'dmn:Decision',
+        table: true,
+        expression: false
+      };
+      drdReplace.replaceElement(decision, newElementData);
+
+      // when
+      commandStack.undo();
+
+      // then
+      var association = elementRegistry.filter(function(element) {
+        return element.type === 'dmn:Association';
+      })[0];
+
+      expect(association.businessObject.sourceRef.href).to.eql('#decision');
+      expect(association.businessObject.extensionElements.values[0].source).to.eql('decision');
+    }));
+
+
+    it('should redo', inject(function(elementRegistry, drdReplace, commandStack) {
+      // given
+      var decision = elementRegistry.get('decision');
+
+      var newElementData =  {
+        type: 'dmn:Decision',
+        table: true,
+        expression: false
+      };
+      drdReplace.replaceElement(decision, newElementData);
+
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      var association = elementRegistry.filter(function(element) {
+        return element.type === 'dmn:Association';
+      })[0];
+
+      expect(association.businessObject.sourceRef.href).to.eql('#decision');
+      expect(association.businessObject.extensionElements.values[0].source).to.eql('decision');
+    }));
+
 
   });
 });
