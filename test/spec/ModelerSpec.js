@@ -238,6 +238,7 @@ describe('Modeler', function() {
 
   });
 
+
   describe('decisions without DI', function() {
 
     function testDICreation(xml, done) {

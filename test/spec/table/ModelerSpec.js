@@ -109,6 +109,7 @@ describe('Table - Modeler', function() {
     });
   });
 
+
   describe('defaults', function() {
 
     it('should use <body> as default parent', function(done) {
@@ -170,6 +171,7 @@ describe('Table - Modeler', function() {
     });
 
   });
+
 
   describe('ids', function() {
 
@@ -247,6 +249,7 @@ describe('Table - Modeler', function() {
     });
 
   });
+
 
   describe('dependency injection', function() {
 
