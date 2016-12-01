@@ -228,6 +228,66 @@ describe('features/modeling', function() {
         }));
       });
     });
+
+    describe('decision-id', function() {
+
+      var decision;
+
+      beforeEach(inject(function(elementRegistry) {
+        decision = elementRegistry.get('decisionTable').businessObject.$parent;
+      }));
+
+      it('should update id of decision', inject(function(elementRegistry, modeling) {
+        // given
+
+        // when
+        modeling.editId('myNewShinyId');
+
+        // then
+        expect(decision.id).to.eql('myNewShinyId');
+      }));
+
+
+      it('should undo', inject(function(modeling, commandStack) {
+        // given
+        modeling.editId('myNewShinyId');
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(decision.id).to.eql('decision');
+      }));
+
+
+      it('should redo', inject(function(modeling, commandStack) {
+        // given
+        modeling.editId('myNewShinyId');
+        commandStack.undo();
+
+        // when
+        commandStack.redo();
+
+        // then
+        expect(decision.id).to.eql('myNewShinyId');
+      }));
+
+
+      it('should persist the change in the xml', inject(function(modeling) {
+        // given
+        modeling.editId('myNewShinyId');
+
+        // when
+        modeler.saveXML(function(err, xml) {
+
+          // then
+          expect(xml).to.include('myNewShinyId');
+
+        });
+      }));
+
+    });
+
   });
 
   describe('drd interaction', function() {
