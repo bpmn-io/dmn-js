@@ -5,10 +5,63 @@ require('../../TestHelper');
 var booleanXML = require('../../../../fixtures/dmn/boolean.dmn'),
     basicXML = require('../../../../fixtures/dmn/new-table.dmn');
 
-/* global bootstrapModeler, inject */
+var mouseEvent = require('table-js/test/util/DOMEvents').performMouseEvent;
+
+/* global bootstrapModeler, inject, sinon */
 
 
 describe('features/simple-mode', function() {
+
+  describe('integration', function() {
+    var modeler;
+
+    beforeEach(function(done) {
+      modeler = bootstrapModeler(basicXML)(done);
+    });
+
+    it('should fire an event when initializing', function(done) {
+      function initialized() {
+        done();
+      }
+
+      var initializedSpy = sinon.spy(initialized);
+
+      modeler.on('simpleMode.initialized', initializedSpy);
+
+      modeler.importXML(basicXML, function(err) {
+        if (err) {
+          return done(err);
+        }
+
+        expect(initializedSpy).to.have.been.called;
+      });
+    });
+
+    it('should fire an event when activating/deactivating',
+      inject(function(simpleMode, eventBus, elementRegistry) {
+        // given
+        var activatedSpy = sinon.spy(function() {}),
+            deactivatedSpy = sinon.spy(function() {});
+
+        var button = simpleMode._node;
+
+        eventBus.on('simpleMode.activated', activatedSpy);
+        eventBus.on('simpleMode.deactivated', deactivatedSpy);
+
+        // when
+        mouseEvent('click', button);
+
+        // then
+        expect(deactivatedSpy).to.have.been.called;
+
+        // when
+        mouseEvent('click', button);
+
+        // then
+        expect(activatedSpy).to.have.been.called;
+      }));
+
+  });
 
   describe('api', function() {
 
@@ -24,31 +77,12 @@ describe('features/simple-mode', function() {
 
     it('should expose the current state', inject(function(simpleMode) {
       simpleMode.deactivate();
+
       expect(simpleMode.isActive()).to.eql(false);
+
       simpleMode.activate();
+
       expect(simpleMode.isActive()).to.eql(true);
-    }));
-
-    it('should fire an event when deactivating', inject(function(simpleMode, eventBus) {
-      var functionCalled = false;
-      eventBus.on('simpleMode.deactivated', function() {
-        functionCalled = true;
-      });
-
-      simpleMode.deactivate();
-
-      expect(functionCalled).to.be.true;
-    }));
-
-    it('should fire an event when activating', inject(function(simpleMode, eventBus) {
-      var functionCalled = false;
-      eventBus.on('simpleMode.activated', function() {
-        functionCalled = true;
-      });
-
-      simpleMode.activate();
-
-      expect(functionCalled).to.be.true;
     }));
 
   });
