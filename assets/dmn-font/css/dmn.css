@@ -2,7 +2,6 @@
   font-family: 'dmn';
   src: url('../font/dmn.eot?3620375');
   src: url('../font/dmn.eot?3620375#iefix') format('embedded-opentype'),
-       url('../font/dmn.woff2?3620375') format('woff2'),
        url('../font/dmn.woff?3620375') format('woff'),
        url('../font/dmn.ttf?3620375') format('truetype'),
        url('../font/dmn.svg?3620375#dmn') format('svg');
