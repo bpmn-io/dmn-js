@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="test" name="My first DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_1">
+    <extensionElements>
+      <biodi:bounds x="458" y="158" width="180" height="80" />
+      <biodi:edge source="InputData_1">
+        <biodi:waypoints x="389" y="368" />
+        <biodi:waypoints x="500" y="238" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_1" />
+    </informationRequirement>
+  </decision>
+  <inputData id="InputData_1">
+    <extensionElements>
+      <biodi:bounds x="306" y="368" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+</definitions>
