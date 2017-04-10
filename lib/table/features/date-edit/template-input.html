@@ -1,18 +1,18 @@
 <div>
-  <h4>Edit Date Condition</h4>
+  <h4>{{ translate('Edit Date Condition') }}</h4>
   <select class="dateEdit-type-dropdown">
-    <option value="exact">Exactly</option>
-    <option value="before">Before</option>
-    <option value="after">After</option>
-    <option value="between">Between</option>
+    <option value="exact">{{ translate('Exactly') }}</option>
+    <option value="before">{{ translate('Before') }}</option>
+    <option value="after">{{ translate('After') }}</option>
+    <option value="between">{{ translate('Between') }}</option>
   </select>
   <div class="date-1">
-    <input type="text" placeholder="yyyy-mm-dd'T'hh:mm:ss" spellcheck="false"><button>Today</button>
+    <input type="text" placeholder="yyyy-mm-dd'T'hh:mm:ss" spellcheck="false"><button>{{ translate('Today') }}</button>
     <div class="helptext">yyyy-mm-dd'T'hh:mm:ss</div>
   </div>
   <div class="date-2" style="display: none;">
     <div>and</div>
-    <input type="text" placeholder="yyyy-mm-dd'T'hh:mm:ss" spellcheck="false"><button>Today</button>
+    <input type="text" placeholder="yyyy-mm-dd'T'hh:mm:ss" spellcheck="false"><button>{{ translate('Today') }}</button>
     <div class="helptext">yyyy-mm-dd'T'hh:mm:ss</div>
   </div>
 </div>

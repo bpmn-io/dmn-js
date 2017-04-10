@@ -1,27 +1,27 @@
 <div>
   <div class="links">
     <div class="toggle-type">
-      <label>Use:</label>
-      <a class="expression">Expression</a>
+      <label>{{ translate('Use:') }}</label>
+      <a class="expression">{{ translate('Expression') }}</a>
       /
-      <a class="script">Script</a>
+      <a class="script">{{ translate('Script') }}</a>
     </div>
     <a class="dmn-icon-clear"></a>
   </div>
   <div class="expression region">
     <div class="input-expression">
-      <label>Expression:</label>
+       <label>{{ translate('Expression:') }}</label>
       <input placeholder="propertyName">
     </div>
     <div class="input-expression">
-      <label>Input Variable Name:</label>
+      <label>{{ translate('Input Variable Name:') }}</label>
       <input placeholder="cellInput">
     </div>
   </div>
   <div class="script region">
     <textarea placeholder="return obj.propertyName;"></textarea>
     <div class="input-expression">
-      <label>Input Variable Name:</label>
+      <label>{{ translate('Input Variable Name:') }}</label>
       <input placeholder="cellInput">
     </div>
   </div>
