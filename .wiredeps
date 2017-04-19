@@ -6,7 +6,7 @@
       "version": "3.3.5"
     },
     "diagram-js": {
-      "version": "bpmn-io/diagram-js",
+      "version": "0.18.1",
       "dependencies": {
         "didi": {
           "version": "0.1.1"
