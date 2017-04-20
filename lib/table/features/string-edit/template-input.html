@@ -1,14 +1,14 @@
 <div>
-  <h4>{{ translate('Edit String Expression') }}</h4>
+  <h4>{{ 'Edit String Expression' | translate }}</h4>
   <select class="string-type-dropdown">
-    <option value="disjunction">{{ translate('Match one of') }}</option>
-    <option value="negation">{{ translate('Match anything except') }}</option>
+    <option value="disjunction">{{ 'Match one of' | translate }}</option>
+    <option value="negation">{{ 'Match anything except' | translate }}</option>
   </select>
   <div class="free-input">
     <ul>
     </ul>
-    <input type="text" placeholder="{{ translate('new Value') }}" class="free-input-value-field" />
-    <div class="helptext">{{ translate('Enter value without quotes')}}</div>
+    <input type="text" placeholder="{{ 'new Value' | translate }}" class="free-input-value-field" />
+    <div class="helptext">{{ 'Enter value without quotes' | translate }}</div>
   </div>
   <div class="input-values">
     <ul>

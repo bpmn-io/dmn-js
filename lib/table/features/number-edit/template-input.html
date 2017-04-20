@@ -1,24 +1,24 @@
 <div>
-  <h4>{{ translate('Edit Number Condition') }}</h4>
+  <h4>{{ 'Edit Number Condition' | translate }}</h4>
   <div class="links">
     <div class="toggle-type">
-      <a class="comparison">{{ translate('Comparison') }}</a>
+      <a class="comparison">{{ 'Comparison' | translate }}</a>
       /
-      <a class="range">{{ translate('Range') }}</a>
+      <a class="range">{{ 'Range' | translate }}</a>
     </div>
   </div>
   <div class="comparison region">
     <select class="comparison-dropdown">
-      <option value="equals">= {{ translate('(Equals)') }}</option>
-      <option value="less">&lt; {{ translate('(Less than)') }}</option>
-      <option value="less-equal">&lt;= {{ translate('(Less than or equal)') }}</option>
-      <option value="greater">&gt; {{ translate('(Greater than)') }}</option>
-      <option value="greater-equal">&gt;= {{ translate('(Greater than or equal)') }}</option>
+      <option value="equals">= {{ '(Equals)' | translate }}</option>
+      <option value="less">&lt; {{ '(Less than)' | translate }}</option>
+      <option value="less-equal">&lt;= {{ '(Less than or equal)' | translate }}</option>
+      <option value="greater">&gt; {{ '(Greater than)' | translate }}</option>
+      <option value="greater-equal">&gt;= {{ '(Greater than or equal)' | translate }}</option>
     </select>
     <input type="number" class="comparison-number" placeholder="number" />
   </div>
   <div class="range region">
-    <label>{{ translate('Include') }}</label>
+    <label>{{ 'Include' | translate }}</label>
     <div class="include-inputs">
       <input type="number" placeholder="start" />
       <input type="checkbox" placeholder="include-start" />
