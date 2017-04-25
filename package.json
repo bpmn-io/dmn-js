@@ -30,7 +30,7 @@
       "url": "https://github.com/bpmn-io"
     }
   ],
-  "license": "LicenseRef-LICENSE",
+  "license": "SEE LICENSE IN LICENSE",
   "browserify": {
     "transform": [
       [
