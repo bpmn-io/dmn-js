@@ -90,6 +90,7 @@ module.exports = function(grunt) {
       standalone: 'DmnJS',
       debug: true,
       builtins: false,
+      dedupe: false,
       insertGlobalVars: {
         process: function() {
           return 'undefined';
