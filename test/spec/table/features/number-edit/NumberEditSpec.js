@@ -4,6 +4,8 @@ require('../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
+var assign = require('lodash/object/assign');
+
 var EventUtils = require('../../util/EventUtils'),
     queryElement = require('../../util/ElementUtils').queryElement,
     inputEvent = EventUtils.inputEvent,
@@ -11,6 +13,8 @@ var EventUtils = require('../../util/EventUtils'),
     clickElement = EventUtils.clickElement;
 
 var basicXML = require('../../../../fixtures/dmn/simple.dmn');
+
+var DELTA = 2;
 
 describe('features/number-edit', function() {
 
@@ -286,6 +290,62 @@ describe('features/number-edit', function() {
       expect(numberEdit.parseRangeString(']12112.11111..10111111.2222]')).to.eql([ '12112.11111', '10111111.2222' ]);
 
       expect(numberEdit.parseRangeString('12112.11111..10111111.2222')).to.eql([ '12112.11111', '10111111.2222' ]);
+    }));
+
+  });
+
+  describe('position', function() {
+
+    beforeEach(bootstrapModeler(basicXML, { advancedMode: false }));
+
+    it('container parent with NO scroll offset', inject(function(elementRegistry, sheet) {
+
+      // given
+      var container = sheet.getContainer();
+
+      assign(container.style, {
+        width: '2000px'
+      });
+
+      var rule1 = elementRegistry.get('cell_input2_rule1');
+
+      // when
+      clickElement(rule1);
+
+      // then
+      var element = queryElement('.dmn-number-editor');
+
+      expect(element).to.exist;
+      expect(element.offsetLeft).to.be.closeTo(817, DELTA);
+    }));
+
+    it('container parent with scroll offset', inject(function(elementRegistry, sheet) {
+
+      // given
+      var container = sheet.getContainer(),
+          containerParent = container.parentNode;
+
+      assign(container.style, {
+        width: '2000px'
+      });
+
+      assign(containerParent.style, {
+        width: '1000px',
+        overflow: 'scroll'
+      });
+
+      containerParent.scrollLeft = 200;
+
+      var rule1 = elementRegistry.get('cell_input2_rule1');
+
+      // when
+      clickElement(rule1);
+
+      // then
+      var element = queryElement('.dmn-number-editor');
+
+      expect(element).to.exist;
+      expect(element.offsetLeft).to.be.closeTo(617, DELTA);
     }));
 
   });

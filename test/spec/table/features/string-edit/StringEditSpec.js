@@ -4,12 +4,16 @@ require('../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
+var assign = require('lodash/object/assign');
+
 var stringXML = require('../../../../fixtures/dmn/simple.dmn');
 
 var EventUtils = require('../../util/EventUtils'),
     queryElement = require('../../util/ElementUtils').queryElement,
     inputEvent = EventUtils.inputEvent,
     clickElement = EventUtils.clickElement;
+
+var DELTA = 2;
 
 describe('features/string-edit', function() {
 
@@ -22,6 +26,7 @@ describe('features/string-edit', function() {
   }));
 
   describe('Viewer', function() {
+
     it('displays the string in advanced mode', inject(function(simpleMode, graphicsFactory) {
       // given
       simpleMode.deactivate();
@@ -33,6 +38,7 @@ describe('features/string-edit', function() {
       // then
       expect(gfx.textContent).to.eql('"string", expression');
     }));
+
     it('displays the string in simple mode if it is parsable', inject(function(graphicsFactory) {
       // given
       cell.content.text = '"string", "another string"';
@@ -43,6 +49,7 @@ describe('features/string-edit', function() {
       // then
       expect(gfx.querySelector('.string-content').textContent).to.eql('"string", "another string"');
     }));
+
     it('displays an expression placeholder for an unparsable string', inject(function(graphicsFactory) {
       // given
       cell.content.text = 'stringVarable';
@@ -53,9 +60,11 @@ describe('features/string-edit', function() {
       // then
       expect(gfx.querySelector('.string-content').textContent).to.eql('[expression]');
     }));
+
   });
 
   describe('Modeler', function() {
+
     it('sets the string expression for a single value', inject(function(stringEdit) {
       // given
 
@@ -123,7 +132,7 @@ describe('features/string-edit', function() {
     }));
 
     describe('interaction', function() {
-      it('opens dialog when clicking on a string cell in simple mode', inject(function() {
+      it('opens the editor popup when clicking on a string cell in simple mode', inject(function() {
         // given
 
         // when
@@ -219,5 +228,61 @@ describe('features/string-edit', function() {
           expect(queryElement('.dmn-string-editor')).to.exist;
         }));
     });
+
+    describe('position', function() {
+
+      it('container parent with NO scroll offset', inject(function(elementRegistry, sheet) {
+
+        // given
+        var container = sheet.getContainer();
+
+        assign(container.style, {
+          width: '2000px'
+        });
+
+        var rule1 = queryElement('[data-element-id="cell_input1_rule1"]');
+
+        // when
+        clickElement(rule1);
+
+        // then
+        var element = queryElement('.dmn-string-editor');
+
+        expect(element).to.exist;
+        expect(element.offsetLeft).to.be.closeTo(426, DELTA);
+      }));
+
+      it('container parent with scroll offset', inject(function(elementRegistry, sheet) {
+
+        // given
+        var container = sheet.getContainer(),
+            containerParent = container.parentNode;
+
+        assign(container.style, {
+          width: '2000px'
+        });
+
+        assign(containerParent.style, {
+          width: '1000px',
+          overflow: 'scroll'
+        });
+
+        containerParent.scrollLeft = 200;
+
+        var rule1 = queryElement('[data-element-id="cell_input1_rule1"]');
+
+        // when
+        clickElement(rule1);
+
+        // then
+        var element = queryElement('.dmn-string-editor');
+
+        expect(element).to.exist;
+        expect(element.offsetLeft).to.be.closeTo(226, DELTA);
+      }));
+
+    });
+
   });
+
 });
