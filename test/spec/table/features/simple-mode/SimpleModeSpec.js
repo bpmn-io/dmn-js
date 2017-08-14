@@ -67,7 +67,7 @@ describe('features/simple-mode', function() {
 
     beforeEach(bootstrapModeler(basicXML));
 
-    it('should display a button to enter advance mode', inject(function(simpleMode) {
+    it('should display a button to enter advanced mode', inject(function(simpleMode) {
       expect(simpleMode._node).to.exist;
     }));
 

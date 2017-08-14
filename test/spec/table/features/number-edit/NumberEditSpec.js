@@ -209,6 +209,23 @@ describe('features/number-edit', function() {
       expect(numberEditor).to.not.exist;
     }));
 
+    it('should open dialog after switching from advanced to simple mode',
+      inject(function(editorActions, elementRegistry) {
+
+        // given
+
+        // switch to simple mode
+        editorActions.trigger('toggleEditingMode');
+
+        var rule1 = elementRegistry.get('cell_input2_rule1');
+
+        // when - open
+        clickElement(rule1);
+
+        // when
+        expect(queryElement('.dmn-number-editor')).to.exist;
+      }));
+
   });
 
   describe('methods', function() {

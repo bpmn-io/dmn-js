@@ -122,8 +122,8 @@ describe('features/string-edit', function() {
       expect(cell.content.text).to.eql('');
     }));
 
-    describe('Interaction', function() {
-      it('opens the editor popup when clicking on a string cell in simple mode', inject(function() {
+    describe('interaction', function() {
+      it('opens dialog when clicking on a string cell in simple mode', inject(function() {
         // given
 
         // when
@@ -132,6 +132,7 @@ describe('features/string-edit', function() {
         // then
         expect(queryElement('.dmn-string-editor')).to.exist;
       }));
+
       it('has input values checkboxes when input values are set', inject(function(stringEdit) {
         // given
         cell.column.businessObject.inputValues = { text: '"bronze","silver","gold"' };
@@ -199,6 +200,24 @@ describe('features/string-edit', function() {
         // then
         expect(cell.content.text).to.eql('"bronze"');
       }));
+
+      it('should open dialog after switching from advanced to simple mode',
+        inject(function(editorActions) {
+
+          // given
+
+          // switch to advanced mode
+          editorActions.trigger('toggleEditingMode');
+
+          // switch to simple mode
+          editorActions.trigger('toggleEditingMode');
+
+          // when
+          clickElement(queryElement('[data-element-id="cell_input1_rule1"]'));
+
+          // then
+          expect(queryElement('.dmn-string-editor')).to.exist;
+        }));
     });
   });
 });
