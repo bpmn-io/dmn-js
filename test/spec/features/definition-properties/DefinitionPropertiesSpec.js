@@ -4,13 +4,17 @@ var domQuery = require('min-dom/lib/query');
 
 require('../../TestHelper');
 
-/* global bootstrapModeler, inject */
+/* global bootstrapModeler, inject, injectAsync */
 
 var modelingModule = require('../../../../lib/features/modeling'),
     paletteProviderModule = require('../../../../lib/features/palette'),
     definitionPropertiesViewerModule = require('../../../../lib/features/definition-properties/viewer'),
     definitionPropertiesModelerModule = require('../../../../lib/features/definition-properties/modeler'),
     coreModule = require('../../../../lib/core');
+
+var EventUtils = require('../../../util/EventUtils'),
+    inputEvent = EventUtils.inputEvent,
+    clickElement = EventUtils.clickElement;
 
 describe('features/definition-properties', function() {
 
@@ -113,5 +117,53 @@ describe('features/definition-properties', function() {
     // then
     expect(definitionPropertiesView._container.offsetLeft).to.equal(130);
   }));
+
+  describe('editing', function() {
+
+    it('should edit definition name', injectAsync(function(done) {
+      return function(canvas, definitionPropertiesView, eventBus) {
+
+        // given
+        var definitions = canvas.getRootElement().businessObject;
+        var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
+
+        clickElement(nameContainer);
+
+        // when
+        eventBus.on('commandStack.element.updateProperties.postExecute', function() {
+
+          // then
+          expect(definitions.name).to.equal('hello');
+
+          done();
+        });
+
+        inputEvent(nameContainer, 'hello');
+      };
+    }));
+
+    it('should edit definition ID', injectAsync(function(done) {
+      return function(canvas, definitionPropertiesView, eventBus) {
+
+        // given
+        var definitions = canvas.getRootElement().businessObject;
+        var idContainer = domQuery('.dmn-definitions-id', definitionPropertiesView._container);
+
+        clickElement(idContainer);
+
+        // when
+        eventBus.on('commandStack.element.updateProperties.postExecute', function() {
+
+          // then
+          expect(definitions.id).to.equal('world');
+
+          done();
+        });
+
+        inputEvent(idContainer, 'world');
+      };
+    }));
+
+  });
 
 });
