@@ -85,8 +85,8 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "diagram-js": "^0.18.1",
-    "diagram-js-direct-editing": "^0.17.0",
+    "diagram-js": "^0.21.1",
+    "diagram-js-direct-editing": "^0.19.0",
     "dmn-moddle": "^0.6.0",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
