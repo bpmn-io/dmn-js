@@ -6,6 +6,25 @@ var basePath = '../../';
 
 var absoluteBasePath = path.resolve(path.join(__dirname, basePath));
 
+// configures browsers to run test against
+// any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE' ]
+var TEST_BROWSERS = ((process.env.TEST_BROWSERS || '').replace(/^\s+|\s+$/, '') || 'ChromeHeadless').split(/\s*,\s*/g);
+
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
+// workaround https://github.com/GoogleChrome/puppeteer/issues/290
+if (process.platform === 'linux') {
+  TEST_BROWSERS = TEST_BROWSERS.map(function(browser) {
+    if (browser === 'ChromeHeadless') {
+      return 'ChromeHeadless_Linux';
+    } else {
+      return browser;
+    }
+  });
+
+}
+
+
 module.exports = function(karma) {
   karma.set({
 
@@ -28,16 +47,29 @@ module.exports = function(karma) {
 
     reporters: [ 'spec' ],
 
-    browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ],
+    browsers: TEST_BROWSERS,
 
     browserNoActivityTimeout: 30000,
     singleRun: false,
     autoWatch: true,
 
+    customLaunchers: {
+      ChromeHeadless_Linux: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox'
+        ],
+        debug: true
+      }
+    },
+
     // browserify configuration
     browserify: {
       debug: true,
-      paths: [ absoluteBasePath ]
+      paths: [ absoluteBasePath ],
+      transform: [ 'babelify' ]
     }
   });
+
 };
