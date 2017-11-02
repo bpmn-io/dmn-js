@@ -21,7 +21,7 @@ describe('draw/DecisionLabelUpdater', function() {
     elementRegistry.get('dish-decision').businessObject.name = 'FOO BAR';
 
     // when
-    eventBus.fire('view.switch');
+    eventBus.fire('view.changed');
 
     // then
     expect(elementRegistry.getGraphics('dish-decision').textContent).to.eql('FOO BAR');
