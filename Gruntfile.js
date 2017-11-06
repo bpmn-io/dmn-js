@@ -72,6 +72,11 @@ module.exports = function(grunt) {
         name: 'dmn-modeler',
         src: '<%= config.sources %>/Modeler.js',
         dest: '<%= config.dist %>'
+      },
+	  navigatedviewer: {
+        name: 'dmn-navigated-viewer',
+        src: '<%= config.sources %>/NavigatedViewer.js',
+        dest: '<%= config.dist %>'
       }
     },
 
