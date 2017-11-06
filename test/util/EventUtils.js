@@ -1,6 +1,6 @@
 'use strict';
 
-var TestHelper = require('../spec/helper');
+var TestHelper = require('../helper');
 
 var DOMEvents = require('table-js/test/util/DOMEvents'),
     mouseEvent = DOMEvents.performMouseEvent,

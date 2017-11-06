@@ -1,5 +1,5 @@
 
-require('../TestHelper');
+require('../../TestHelper');
 
 /* global bootstrapViewer */
 

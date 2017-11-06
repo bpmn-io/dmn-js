@@ -2,7 +2,7 @@
 
 var domQuery = require('min-dom/lib/query');
 
-require('../../TestHelper');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject, injectAsync */
 

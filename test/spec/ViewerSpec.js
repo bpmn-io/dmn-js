@@ -20,7 +20,7 @@ describe('Viewer', function() {
   });
 
   function createViewer(xml, done) {
-    var viewer = new Viewer({ container: container });
+    var viewer = window.viewer = new Viewer({ container: container });
 
     viewer.importXML(xml, function(err, warnings) {
       done(err, warnings, viewer);
@@ -28,7 +28,7 @@ describe('Viewer', function() {
   }
 
 
-  it('should import simple DRD', function(done) {
+  it.only('should import simple DRD', function(done) {
     createViewer(exampleXML, done);
   });
 

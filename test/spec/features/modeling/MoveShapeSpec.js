@@ -2,7 +2,7 @@
 
 var pick = require('lodash/object/pick');
 
-require('../../TestHelper');
+require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 

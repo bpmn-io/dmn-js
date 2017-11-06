@@ -1,6 +1,6 @@
 'use strict';
 
-var TestHelper = require('../../TestHelper');
+var TestHelper = require('../../../TestHelper');
 
 var TestContainer = require('mocha-test-container-support');
 

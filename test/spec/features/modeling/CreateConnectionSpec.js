@@ -1,6 +1,6 @@
 'use strict';
 
-require('../../TestHelper');
+require('../../../TestHelper');
 
 var LayoutUtil = require('diagram-js/lib/layout/LayoutUtil');
 
