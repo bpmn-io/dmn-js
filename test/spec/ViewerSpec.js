@@ -28,7 +28,7 @@ describe('Viewer', function() {
   }
 
 
-  it.only('should import simple DRD', function(done) {
+  it('should import simple DRD', function(done) {
     createViewer(exampleXML, done);
   });
 
