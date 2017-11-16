@@ -4,6 +4,9 @@ node_js: '4.4'
 script:
   - npm run all
 
+before_script:
+  - lerna bootstrap
+
 before_install:
-  - npm install -g grunt-cli wiredeps
+  - npm install -g wiredeps lerna
   - wiredeps --branch=$TRAVIS_BRANCH --tag=$TRAVIS_TAG --verbose

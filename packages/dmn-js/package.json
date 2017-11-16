@@ -1,0 +1,40 @@
+{
+  "name": "dmn-js",
+  "description": "A dmn toolkit and web modeler",
+  "version": "0.11.0",
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": {
+    "name": "Sebastian Stamm",
+    "url": "https://github.com/SebastianStamm"
+  },
+  "contributors": [
+    {
+      "name": "bpmn.io contributors",
+      "url": "https://github.com/bpmn-io"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bpmn-io/dmn-js"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "dmn",
+    "dmn-js",
+    "toolkit",
+    "web modeler",
+    "modeler",
+    "modeling",
+    "decision modeling"
+  ],
+  "devDependencies": {
+    "dmn-js-shared": "*",
+    "mocha-test-container-support": "^0.2.0"
+  },
+  "dependencies": {
+    "diagram-js": "^0.22.2",
+    "diagram-js-direct-editing": "^0.19.0"
+  }
+}

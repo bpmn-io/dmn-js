@@ -1,0 +1,10 @@
+{
+  "name": "dmn-js-table",
+  "scripts": {
+    "test": "karma start"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "dmn-js-shared": "*"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "dmn-js-shared",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "exit 0"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

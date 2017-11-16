@@ -1,0 +1,14 @@
+{
+  "name": "dmn-js-drd",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bpmn-io/dmn-js"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "dmn-js-shared": "*"
+  }
+}

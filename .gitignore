@@ -1,8 +1,6 @@
-node_modules/
-bower_components/
-tmp/
-docs/api/
-dist/
+node_modules
+lerna-debug.log
+npm-debug.log
 .idea
 *.iml
 .DS_Store
