@@ -5,7 +5,8 @@
     "all": "run-s lint test",
     "lint": "eslint packages",
     "test": "lerna run test",
-    "dev": "lerna run dev --stream --scope"
+    "dev": "lerna run dev --stream --scope",
+    "postinstall": "lerna bootstrap"
   },
   "author": {
     "name": "Sebastian Stamm",

@@ -26,9 +26,11 @@ viewer.importXML(xml, function(err) {
 });
 ```
 
+
 ## Resources
 
 *   [Issues](https://github.com/bpmn-io/dmn-js/issues)
+
 
 ## Tools
 
@@ -40,9 +42,15 @@ dmn-js builds on top of a few additional powerful tools
 
 ## Building the Project
 
-As long as the project is in alpha stage, you must make sure you setup the whole development environment, including a number of [project dependencies](https://github.com/bpmn-io) according to [our development setup](https://github.com/bpmn-io/dmn-js/blob/master/docs/project/SETUP.md).
+```
+# build everything
+npm run all
+
+# dev in a sub-project
+npm run dev -- dmn-js
+```
 
 
 ## License
 
-Use under the terms of the [dmn-js license](http://bpmn.io/license).
+Use under the terms of the [bpmn.io license](http://bpmn.io/license).

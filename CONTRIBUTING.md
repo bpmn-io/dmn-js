@@ -30,10 +30,10 @@ The project development runs on top of the [table-js](https://github.com/bpmn-io
     (cd dmn-js && npm install && npm link ../table-js)
 
     // Run the test suite
-    grunt
+    npm run all
 
     // Running the test suite with every file change
-    TEST_BROWSERS=(Chrome|Firefox|IE) grunt auto-test
+    TEST_BROWSERS=(Chrome|Firefox|IE) npm run dev -- dmn-js
 
 
 ## Creating pull requests
