@@ -7,4 +7,4 @@ describe('dmn-js-table', function() {
 
   });
 
-})
+});

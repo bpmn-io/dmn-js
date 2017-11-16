@@ -4,8 +4,8 @@
   "scripts": {
     "all": "run-s lint test",
     "lint": "eslint packages",
-    "test": "npm run pkgs -- test",
-    "pkgs": "lerna run"
+    "test": "lerna run test",
+    "dev": "lerna run dev --stream --scope"
   },
   "author": {
     "name": "Sebastian Stamm",

@@ -25,8 +25,10 @@ function mouseEvent(type, element, opts) {
       relatedTarget = opts.relatedTarget || null;
     }
 
-    evt.initMouseEvent(type, true, true, 'window', 0, 0, 0, clientX, clientY,
-                       false, false, false, false, 0, relatedTarget);
+    evt.initMouseEvent(
+      type, true, true, 'window', 0, 0, 0, clientX, clientY,
+      false, false, false, false, 0, relatedTarget
+    );
   } else {
 
     options = assign(defaults, opts || {});

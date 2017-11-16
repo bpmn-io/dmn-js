@@ -1,7 +1,5 @@
 'use strict';
 
-/* global sinon */
-
 var Viewer = require('../../lib/Viewer');
 
 var exampleXML = require('../fixtures/dmn/di.dmn'),
@@ -87,7 +85,7 @@ describe('Viewer', function() {
     });
 
   });
-  
+
 
   describe('defaults', function() {
 

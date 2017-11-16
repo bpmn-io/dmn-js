@@ -102,38 +102,38 @@ describe('features/popup-menu - replace menu provider', function() {
       beforeEach(bootstrapModeler(diagramXMLReplace, { modules: testModules }));
 
       it('should replace empty decision with decision table',
-          inject(function(popupMenu, drdReplace, elementRegistry) {
+        inject(function(popupMenu, drdReplace, elementRegistry) {
 
-            // given
-            var decision = elementRegistry.get('decision');
+          // given
+          var decision = elementRegistry.get('decision');
 
-            // when
-            openPopup(decision);
-            var entries = getEntries(popupMenu);
-            triggerAction(entries, 'replace-with-decision-table');
+          // when
+          openPopup(decision);
+          var entries = getEntries(popupMenu);
+          triggerAction(entries, 'replace-with-decision-table');
 
-            // then
-            decision = elementRegistry.get('decision');
-            expect(decision.businessObject.decisionTable).to.exist;
-          })
-        );
+          // then
+          decision = elementRegistry.get('decision');
+          expect(decision.businessObject.decisionTable).to.exist;
+        })
+      );
 
       it('should replace empty decision with literal expression',
-          inject(function(popupMenu, drdReplace, elementRegistry) {
+        inject(function(popupMenu, drdReplace, elementRegistry) {
 
-            // given
-            var decision = elementRegistry.get('decision');
+          // given
+          var decision = elementRegistry.get('decision');
 
-            // when
-            openPopup(decision);
-            var entries = getEntries(popupMenu);
-            triggerAction(entries, 'replace-with-literal-expression');
+          // when
+          openPopup(decision);
+          var entries = getEntries(popupMenu);
+          triggerAction(entries, 'replace-with-literal-expression');
 
-            // then
-            decision = elementRegistry.get('decision');
-            expect(decision.businessObject.literalExpression).to.exist;
-          })
-        );
+          // then
+          decision = elementRegistry.get('decision');
+          expect(decision.businessObject.literalExpression).to.exist;
+        })
+      );
 
     });
 

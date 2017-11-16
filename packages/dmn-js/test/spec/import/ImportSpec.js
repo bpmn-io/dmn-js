@@ -15,7 +15,7 @@ function expectConnection(connection, type) {
       edge;
 
   expect(connection.type).to.equal(type);
-  expect(connection.waypoints).to.have.length.of(2);
+  expect(connection.waypoints).to.have.length(2);
 
   expect(businessObject.$type).to.equal(type);
 
@@ -26,7 +26,7 @@ function expectConnection(connection, type) {
   }
 
   expect(edge.$type).to.equal('biodi:Edge');
-  expect(edge.waypoints).to.have.length.of(2);
+  expect(edge.waypoints).to.have.length(2);
 }
 
 describe('DRD - Import', function() {

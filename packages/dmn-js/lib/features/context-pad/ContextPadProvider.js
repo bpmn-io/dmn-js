@@ -128,7 +128,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
     if (typeof title !== 'string') {
       options = title;
-      title = translate('Append {type}', { type: type.replace(/^dmn\:/, '') });
+      title = translate('Append {type}', { type: type.replace(/^dmn:/, '') });
     }
 
     function appendListener(event, element) {
