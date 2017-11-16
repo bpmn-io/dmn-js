@@ -2,9 +2,10 @@
   "name": "dmn-js-build",
   "version": "0.11.0",
   "scripts": {
+    "all": "run-s lint test",
     "lint": "eslint packages",
-    "all": "npm run-s lint all:packages",
-    "all:packages": "lerna run all"
+    "test": "npm run pkgs -- test",
+    "pkgs": "lerna run"
   },
   "author": {
     "name": "Sebastian Stamm",
@@ -21,9 +22,14 @@
     "url": "https://github.com/bpmn-io/dmn-js"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
     "browserify": "^14.5.0",
     "chai": "^4.1.2",
     "eslint": "^4.11.0",
+    "eslint-plugin-mocha": "^4.11.0",
     "karma": "^1.7.1",
     "karma-browserify": "^5.1.1",
     "karma-chrome-launcher": "^2.2.0",
@@ -36,6 +42,7 @@
     "karma-spec-reporter": "0.0.31",
     "lerna": "^2.5.1",
     "mocha": "^4.0.1",
+    "npm-run-all": "^4.1.2",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
     "stringify": "^5.1.0",

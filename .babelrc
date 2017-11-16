@@ -1,6 +1,5 @@
 {
   "plugins": [
-    "inferno",
     "transform-object-rest-spread"
   ],
   "presets": [

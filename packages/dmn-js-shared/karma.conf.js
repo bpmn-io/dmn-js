@@ -66,16 +66,17 @@ module.exports = function(path) {
         debug: true,
         paths: [ path ],
         transform: [
-          [ 'stringify',
-            {
-              global: true,
-              extensions: [
-                '.dmn',
-                '.html',
-                '.css'
-              ]
-            }
-          ]
+          [ 'babelify', {
+            global: true
+          } ],
+          [ 'stringify', {
+            global: true,
+            extensions: [
+              '.dmn',
+              '.html',
+              '.css'
+            ]
+          } ]
         ],
         fullPaths: true,
         basedir: path
