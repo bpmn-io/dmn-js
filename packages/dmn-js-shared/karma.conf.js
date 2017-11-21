@@ -67,7 +67,8 @@ module.exports = function(path) {
         paths: [ path ],
         transform: [
           [ 'babelify', {
-            global: true
+            global: true,
+            sourceMapsAbsolute: true
           } ],
           [ 'stringify', {
             global: true,
