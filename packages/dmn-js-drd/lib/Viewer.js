@@ -317,7 +317,6 @@ Viewer.prototype._modules = [
   require('diagram-js/lib/features/selection'),
   require('diagram-js/lib/features/overlays'),
   require('./features/rules'),
-  require('./features/decision-table-editor/viewer'),
   require('./features/definition-properties/viewer'),
   require('./features/drill-down')
 ];
