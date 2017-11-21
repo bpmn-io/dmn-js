@@ -1,7 +1,8 @@
 {
   "name": "dmn-js-drd",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "dev": "npm run test -- --no-single-run --auto-watch"
   },
   "repository": {
     "type": "git",
@@ -9,6 +10,12 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "dmn-js-shared": "*"
+    "dmn-js-shared": "*",
+    "mocha-test-container-support": "^0.2.0",
+    "dmn-js": "^0.11.0"
+  },
+  "dependencies": {
+    "diagram-js": "^0.22.2",
+    "diagram-js-direct-editing": "^0.19.0"
   }
 }

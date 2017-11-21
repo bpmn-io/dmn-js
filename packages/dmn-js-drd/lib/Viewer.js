@@ -7,15 +7,13 @@
 
 import assign from 'lodash/object/assign';
 import omit from 'lodash/object/omit';
-import isString from 'lodash/lang/isString';
 import isNumber from 'lodash/lang/isNumber';
 
 var domify = require('min-dom/lib/domify'),
     domQuery = require('min-dom/lib/query'),
     domRemove = require('min-dom/lib/remove');
 
-var Diagram = require('diagram-js'),
-    DmnModdle = require('dmn-moddle');
+var Diagram = require('diagram-js');
 
 var inherits = require('inherits');
 
@@ -23,31 +21,11 @@ var Importer = require('./import/Importer');
 
 var innerSVG = require('tiny-svg/lib/innerSVG');
 
-function noop() {}
-
-function checkValidationError(err) {
-
-  // check if we can help the user by indicating wrong DMN 1.1 xml
-  // (in case he or the exporting tool did not get that right)
-
-  var pattern = /unparsable content <([^>]+)> detected([\s\S]*)$/,
-      match = pattern.exec(err.message);
-
-  if (match) {
-    err.message =
-      'unparsable content <' + match[1] + '> detected; ' +
-      'this may indicate an invalid DMN 1.1 diagram file' + match[2];
-  }
-
-  return err;
-}
 
 var DEFAULT_OPTIONS = {
   width: '100%',
   height: '100%',
-  position: 'relative',
-  container: 'body',
-  disableDrdInteraction: false
+  position: 'relative'
 };
 
 
@@ -97,128 +75,32 @@ function ensureUnit(val) {
  * drdViewer.importXML(...);
  * ```
  *
- * @param {Object} [options] configuration options to pass to the viewer
- * @param {DOMElement} [options.container] the container to render the viewer in, defaults to body.
+ * @param {Object} options configuration options to pass to the viewer
+ * @param {Moddle} options.moddle moddle instance to use
+ * @param {DOMElement} [options.container] the container to render the viewer in, defaults to body
  * @param {String|Number} [options.width] the width of the viewer
  * @param {String|Number} [options.height] the height of the viewer
- * @param {Object} [options.moddleExtensions] extension packages to provide
  * @param {Array<didi.Module>} [options.modules] a list of modules to override the default modules
  * @param {Array<didi.Module>} [options.additionalModules] a list of modules to use with the default modules
  */
 function Viewer(options) {
+
   options = assign({}, DEFAULT_OPTIONS, options);
 
-  this.moddle = this._createModdle(options);
-
-  this.container = this._createContainer(options);
+  this._container = this._createContainer(options);
 
   /* <project-logo> */
 
-  addProjectLogo(this.container);
+  addProjectLogo(this._container);
 
   /* </project-logo> */
 
-  this._init(this.container, this.moddle, options);
+  this._init(this._container, options);
 }
 
 inherits(Viewer, Diagram);
 
 module.exports = Viewer;
-
-/**
- * Parse and render a DMN 1.1 diagram.
- *
- * Once finished the viewer reports back the result to the
- * provided callback function with (err, warnings).
- *
- * ## Life-Cycle Events
- *
- * During import the viewer will fire life-cycle events:
- *
- *   * import.parse.start (about to read model from xml)
- *   * import.parse.complete (model read; may have worked or not)
- *   * import.render.start (graphical import start)
- *   * import.render.complete (graphical import finished)
- *   * import.done (everything done)
- *
- * You can use these events to hook into the life-cycle.
- *
- * @param {String} xml the DMN 1.1 xml
- * @param {Function} [done] invoked with (err, warnings=[])
- */
-Viewer.prototype.importXML = function(xml, done) {
-
-  // done is optional
-  done = done || noop;
-
-  var self = this;
-
-  var oldNm = 'xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd"';
-
-  // convert old namespace
-  if (xml.indexOf(oldNm)) {
-    xml = xml.replace(new RegExp(oldNm), 'xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"');
-  }
-
-  // hook in pre-parse listeners +
-  // allow xml manipulation
-  xml = this._emit('import.parse.start', { xml: xml }) || xml;
-
-  this.moddle.fromXML(xml, 'dmn:Definitions', function(err, definitions, context) {
-
-    // hook in post parse listeners +
-    // allow definitions manipulation
-    definitions = self._emit('import.parse.complete', {
-      error: err,
-      definitions: definitions,
-      context: context
-    }) || definitions;
-
-    if (err) {
-      err = checkValidationError(err);
-
-      self._emit('import.done', { error: err });
-
-      return done(err);
-    }
-
-    var parseWarnings = context.warnings;
-
-    self.importDefinitions(definitions, function(err, importWarnings) {
-      var allWarnings = [].concat(parseWarnings, importWarnings || []);
-
-      self._emit('import.done', { error: err, warnings: allWarnings });
-
-      done(err, allWarnings);
-    });
-  });
-};
-
-/**
- * Export the currently displayed DMN 1.1 diagram as
- * a DMN 1.1 XML document.
- *
- * @param {Object} [options] export options
- * @param {Boolean} [options.format=false] output formated XML
- * @param {Boolean} [options.preamble=true] output preamble
- *
- * @param {Function} done invoked with (err, xml)
- */
-Viewer.prototype.saveXML = function(options, done) {
-
-  if (!done) {
-    done = options;
-    options = {};
-  }
-
-  var definitions = this.definitions;
-
-  if (!definitions) {
-    return done(new Error('no definitions loaded'));
-  }
-
-  this.moddle.toXML(definitions, options, done);
-};
 
 /**
  * Export the currently displayed DMN 1.1 diagram as
@@ -257,27 +139,6 @@ Viewer.prototype.saveSVG = function(options, done) {
   done(null, svg);
 };
 
-Viewer.prototype.importDefinitions = function(definitions, done) {
-  // use try/catch to not swallow synchronous exceptions
-  // that may be raised during model parsing
-  try {
-
-    if (this.definitions) {
-      // clear existing rendered diagram
-      this.clear();
-    }
-
-    // update definitions
-    this.definitions = definitions;
-
-    // perform graphical import
-    Importer.importDRD(this, definitions, done);
-  } catch (e) {
-    // handle synchronous errors
-    done(e);
-  }
-};
-
 Viewer.prototype.getModules = function() {
   return this._modules;
 };
@@ -292,7 +153,7 @@ Viewer.prototype.destroy = function() {
   Diagram.prototype.destroy.call(this);
 
   // dom detach
-  domRemove(this.container);
+  domRemove(this._container);
 };
 
 /**
@@ -320,26 +181,39 @@ Viewer.prototype.off = function(event, callback) {
 };
 
 
-Viewer.prototype._init = function(container, moddle, options) {
+Viewer.prototype._init = function(container, options) {
+
+  var moddle = options.moddle,
+      additionalModules = options.additionalModules || [];
+
+  if (!moddle) {
+    throw new Error('must provide options.moddle');
+  }
+
+  this._moddle = moddle;
 
   var baseModules = options.modules || this.getModules(),
-      additionalModules = options.additionalModules || [],
       staticModules = [
         {
-          dmnjs: [ 'value', this ],
+          drd: [ 'value', this ],
           moddle: [ 'value', moddle ]
         }
       ];
 
   var diagramModules = [].concat(staticModules, baseModules, additionalModules);
 
-  var diagramOptions = assign(omit(options, 'additionalModules'), {
+  var diagramOptions = assign(omit(options, [ 'additionalModules', 'moddle' ]), {
     canvas: assign({}, options.canvas, { container: container }),
     modules: diagramModules
   });
 
+
   // invoke diagram constructor
   Diagram.call(this, diagramOptions);
+
+  if (options && options.container) {
+    this.attachTo(options.container);
+  }
 };
 
 /**
@@ -356,23 +230,7 @@ Viewer.prototype._emit = function(type, event) {
 
 Viewer.prototype._createContainer = function(options) {
 
-  var parent = options.container,
-      container;
-
-  // support jquery element
-  // unwrap it if passed
-  if (parent.get) {
-    parent = parent.get(0);
-  }
-
-  // support selector
-  if (isString(parent)) {
-    parent = domQuery(parent);
-  }
-
-  this._parentContainer = parent;
-
-  container = domify('<div class="dmn-diagram"></div>');
+  var container = domify('<div class="drd-container"></div>');
 
   assign(container.style, {
     width: ensureUnit(options.width),
@@ -380,23 +238,77 @@ Viewer.prototype._createContainer = function(options) {
     position: options.position
   });
 
-  parent.appendChild(container);
-
   return container;
 };
 
-Viewer.prototype._createModdle = function(options) {
-  var moddleOptions = assign({}, options.moddleExtensions);
+Viewer.prototype.open = function(definitions, done) {
 
-  return new DmnModdle(moddleOptions);
+  // use try/catch to not swallow synchronous exceptions
+  // that may be raised during model parsing
+  try {
+
+    if (this._definitions) {
+      // clear existing rendered diagram
+      this.clear();
+    }
+
+    // update definitions
+    this._definitions = definitions;
+
+    // perform graphical import
+    Importer.importDRD(this, definitions, done);
+  } catch (e) {
+    // handle synchronous errors
+    done(e);
+  }
 };
 
-Viewer.prototype.attach = function() {
-  this._parentContainer.appendChild(this.container);
+/**
+ * Attach viewer to given parent node.
+ *
+ * @param  {Element} parentNode
+ */
+Viewer.prototype.attachTo = function(parentNode) {
+
+  if (!parentNode) {
+    throw new Error('parentNode required');
+  }
+
+  // ensure we detach from the
+  // previous, old parent
+  this.detach();
+
+  // unwrap jQuery if provided
+  if (parentNode.get && parentNode.constructor.prototype.jquery) {
+    parentNode = parentNode.get(0);
+  }
+
+  if (typeof parentNode === 'string') {
+    parentNode = domQuery(parentNode);
+  }
+
+  var container = this._container;
+
+  parentNode.appendChild(container);
+
+  this._emit('attach', {});
 };
 
+/**
+ * Detach viewer from parent node, if attached.
+ */
 Viewer.prototype.detach = function() {
-  this._parentContainer.removeChild(this.container);
+
+  var container = this._container,
+      parentNode = container.parentNode;
+
+  if (!parentNode) {
+    return;
+  }
+
+  this._emit('detach', {});
+
+  parentNode.removeChild(container);
 };
 
 Viewer.prototype._modules = [

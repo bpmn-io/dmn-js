@@ -1,9 +1,9 @@
-var Modeler = require('../../lib/Modeler');
-
 var exampleXML = require('../fixtures/dmn/di.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
+
+import DrdModeler from '../helper/DrdModeler';
 
 
 describe('Modeler', function() {
@@ -15,7 +15,7 @@ describe('Modeler', function() {
   });
 
   function createModeler(xml, done) {
-    modeler = new Modeler({ container: container });
+    modeler = new DrdModeler({ container: container });
 
     modeler.importXML(xml, function(err, warnings) {
       done(err, warnings, modeler);
@@ -57,30 +57,12 @@ describe('Modeler', function() {
   });
 
 
-  describe('defaults', function() {
-
-
-    it('should use <body> as default parent', function(done) {
-
-      var modeler = new Modeler();
-
-      modeler.importXML(exampleXML, function(err, warnings) {
-
-        expect(modeler.container.parentNode).to.eql(document.body);
-
-        done(err, warnings);
-      });
-    });
-
-  });
-
-
   describe('import events', function() {
 
     it('should emit <import.*> events', function(done) {
 
       // given
-      var modeler = new Modeler({ container: container });
+      var modeler = new DrdModeler({ container: container });
 
       var events = [];
 
@@ -107,8 +89,8 @@ describe('Modeler', function() {
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
           [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
-          [ 'import.render.start', [ 'definitions' ] ],
-          [ 'import.render.complete', [ 'error', 'warnings' ] ],
+          [ 'import.render.start', [ 'view', 'element' ] ],
+          [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
           [ 'import.done', [ 'error', 'warnings' ] ]
         ]);
 

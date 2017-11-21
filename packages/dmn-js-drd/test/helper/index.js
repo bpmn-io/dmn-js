@@ -7,10 +7,10 @@ var unique = require('lodash/array/unique'),
 
 var TestContainer = require('mocha-test-container-support');
 
-var Viewer = require('../../lib/Viewer'),
-    Modeler = require('../../lib/Modeler');
+import DrdModeler from './DrdModeler';
+import DrdViewer from './DrdViewer';
 
-var OPTIONS, DRD_JS;
+var OPTIONS, DMN_JS;
 
 
 /**
@@ -36,7 +36,7 @@ var OPTIONS, DRD_JS;
  * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
  * @return {Function}         a function to be passed to beforeEach
  */
-function bootstrapDrdJS(DrdJS, diagram, options, locals) {
+function bootstrapDmnJS(DmnJS, diagram, options, locals) {
 
   return function(done) {
 
@@ -55,18 +55,19 @@ function bootstrapDrdJS(DrdJS, diagram, options, locals) {
 
     testContainer.classList.add('test-container');
 
-    var _options = options,
-        _locals = locals;
-
     if (typeof diagram !== 'string') {
       options = diagram;
       locals = options;
       diagram = undefined;
     }
 
+    var _options = options,
+        _locals = locals,
+        _modules;
+
     if (!_locals && isFunction(_options)) {
       _locals = _options;
-      _options = null;
+      _options = {};
     }
 
     if (isFunction(_options)) {
@@ -77,7 +78,7 @@ function bootstrapDrdJS(DrdJS, diagram, options, locals) {
       _locals = _locals();
     }
 
-    _options = assign({ container: testContainer }, OPTIONS || {}, _options || {});
+    _modules = (_options || {})._modules || [];
 
     if (_locals) {
       var mockModule = {};
@@ -86,25 +87,30 @@ function bootstrapDrdJS(DrdJS, diagram, options, locals) {
         mockModule[k] = ['value', v];
       });
 
-      _options.modules = [].concat(_options.modules || [], [ mockModule ]);
+      _modules = [].concat(_modules, [ mockModule ]);
     }
 
-    _options.modules = unique(_options.modules);
-
-    if (!_options.modules.length) {
-      _options.modules = undefined;
+    if (_modules.length === 0) {
+      _modules = undefined;
     }
+
+    _options = {
+      container: testContainer,
+      drd: assign({
+        modules: _modules && unique(_modules) || undefined
+      }, OPTIONS || {}, _options || {})
+    };
 
     // remove previous instance
-    if (DRD_JS) {
-      DRD_JS.destroy();
+    if (DMN_JS) {
+      DMN_JS.destroy();
     }
 
-    DRD_JS = new DrdJS(_options);
+    DMN_JS = new DmnJS(_options);
 
-    DRD_JS.importXML(diagram, done);
+    DMN_JS.importXML(diagram, done);
 
-    return DRD_JS;
+    return DMN_JS;
   };
 }
 
@@ -133,11 +139,17 @@ function bootstrapDrdJS(DrdJS, diagram, options, locals) {
 function inject(fn) {
   return function() {
 
-    if (!DRD_JS) {
+    if (!DMN_JS) {
       throw new Error('no bootstraped viewer, ensure you created it via #bootstrapViewer');
     }
 
-    DRD_JS.invoke(fn);
+    var view = getDrdJS();
+
+    if (!view) {
+      throw new Error('dmn-js-drd viewer not found');
+    }
+
+    view.invoke(fn);
   };
 }
 
@@ -171,10 +183,11 @@ function injectAsync(doneFn) {
  * @param  {String} xml document to display
  * @param  {Object} (options) optional options to be passed to the diagram upon instantiation
  * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
- * @return {Function}         a function to be passed to beforeEach
+ *
+ * @return {Function} a function to be passed to beforeEach
  */
 function bootstrapModeler(diagram, options, locals) {
-  return bootstrapDrdJS(Modeler, diagram, options, locals);
+  return bootstrapDmnJS(DrdModeler, diagram, options, locals);
 }
 
 /**
@@ -199,23 +212,29 @@ function bootstrapModeler(diagram, options, locals) {
  * @param  {String} xml document to display
  * @param  {Object} (options) optional options to be passed to the diagram upon instantiation
  * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
- * @return {Function}         a function to be passed to beforeEach
+ *
+ * @return {Function} a function to be passed to beforeEach
  */
 function bootstrapViewer(diagram, options, locals) {
-  return bootstrapDrdJS(Viewer, diagram, options, locals);
+  return bootstrapDmnJS(DrdViewer, diagram, options, locals);
 }
 
+function getDmnJS() {
+  return DMN_JS;
+}
 
-module.exports.bootstrapDrdJS = (window || global).bootstrapDrdJS = bootstrapDrdJS;
+function getDrdJS() {
+  return DMN_JS.getActiveViewer();
+}
+
+module.exports.bootstrapDmnJS = (window || global).bootstrapDmnJS = bootstrapDmnJS;
 module.exports.bootstrapModeler = (window || global).bootstrapModeler = bootstrapModeler;
 module.exports.bootstrapViewer = (window || global).bootstrapViewer = bootstrapViewer;
 module.exports.inject = (window || global).inject = inject;
 module.exports.injectAsync = (window || global).injectAsync = injectAsync;
+module.exports.getDrdJS = (window || global).getDrdJS = getDrdJS;
+module.exports.getDmnJS = (window || global).getDmnJS = getDmnJS;
 
-
-module.exports.getDrdJS = function() {
-  return DRD_JS;
-};
 
 function insertCSS(name, css) {
   if (document.querySelector('[data-css-file="' + name + '"]')) {

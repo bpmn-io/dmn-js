@@ -8,14 +8,14 @@ var DrdTreeWalker = require('./DrdTreeWalker');
  *
  * Errors and warnings are reported through the specified callback.
  *
- * @param  {Canvas} canvas
+ * @param  {Drd} drd
  * @param  {ModdleElement} definitions
  * @param  {Function} done the callback, invoked with (err, [ warning ]) once the import is done
  */
-function importDRD(canvas, definitions, done) {
+function importDRD(drd, definitions, done) {
 
-  var importer = canvas.get('drdImporter'),
-      eventBus = canvas.get('eventBus');
+  var importer = drd.get('drdImporter'),
+      eventBus = drd.get('eventBus');
 
   var error,
       warnings = [];
@@ -42,7 +42,7 @@ function importDRD(canvas, definitions, done) {
     walker.handleDefinitions(definitions);
   }
 
-  eventBus.fire('import.render.start', { definitions: definitions });
+  eventBus.fire('import.start', { definitions: definitions });
 
   try {
     render(definitions);
@@ -50,11 +50,7 @@ function importDRD(canvas, definitions, done) {
     error = e;
   }
 
-  eventBus.fire('import.render.complete', {
-    error: error,
-    warnings: warnings
-  });
-
+  eventBus.fire('import.done', { error: error, warnings: warnings });
 
   done(error, warnings);
 }

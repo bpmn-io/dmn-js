@@ -1,12 +1,11 @@
 'use strict';
 
-var Viewer = require('../../lib/Viewer');
-
 var exampleXML = require('../fixtures/dmn/di.dmn'),
-    namespaceXML = require('../fixtures/dmn/namespace.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
+
+import DrdViewer from '../helper/DrdViewer';
 
 
 describe('Viewer', function() {
@@ -17,8 +16,10 @@ describe('Viewer', function() {
     container = TestContainer.get(this);
   });
 
+
   function createViewer(xml, done) {
-    var viewer = window.viewer = new Viewer({ container: container });
+
+    var viewer = new DrdViewer({ container });
 
     viewer.importXML(xml, function(err, warnings) {
       done(err, warnings, viewer);
@@ -60,57 +61,12 @@ describe('Viewer', function() {
   });
 
 
-  it('should fix the namespace from "dmn11.xsd" to "dmn.xsd"', function(done) {
-
-    createViewer(namespaceXML, function(err, warnings, modeler) {
-
-      if (err) {
-        return done(err);
-      }
-
-      // when
-      // mimic re-import of same diagram
-      modeler.saveXML(function(err, xml) {
-        if (err) {
-          return done(err);
-        }
-
-        // then
-        expect(err).to.not.exist;
-        expect(xml.indexOf('xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd')).to.exist;
-
-        done();
-      });
-
-    });
-
-  });
-
-
-  describe('defaults', function() {
-
-
-    it('should use <body> as default parent', function(done) {
-
-      var viewer = new Viewer();
-
-      viewer.importXML(exampleXML, function(err, warnings) {
-
-        expect(viewer.container.parentNode).to.eql(document.body);
-
-        done(err, warnings);
-      });
-    });
-
-  });
-
-
   describe('import events', function() {
 
     it('should emit <import.*> events', function(done) {
 
       // given
-      var viewer = new Viewer({ container: container });
+      var viewer = new DrdViewer({ container: container });
 
       var events = [];
 
@@ -137,8 +93,8 @@ describe('Viewer', function() {
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
           [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
-          [ 'import.render.start', [ 'definitions' ] ],
-          [ 'import.render.complete', [ 'error', 'warnings' ] ],
+          [ 'import.render.start', [ 'view', 'element' ] ],
+          [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
           [ 'import.done', [ 'error', 'warnings' ] ]
         ]);
 
@@ -152,7 +108,7 @@ describe('Viewer', function() {
 
   describe('export', function() {
 
-    function validSVG(svg) {
+    function expectValidSVG(svg) {
       var expectedStart = '<?xml version="1.0" encoding="utf-8"?>';
       var expectedEnd = '</svg>';
 
@@ -174,39 +130,7 @@ describe('Viewer', function() {
 
       // no error body
       expect(svgNode.body).not.to.exist;
-
-      // FIXME(nre): make matcher
-      return true;
     }
-
-
-
-    it('should export XML', function(done) {
-
-      // given
-      createViewer(exampleXML, function(err, warnings, viewer) {
-
-        if (err) {
-          return done(err);
-        }
-
-        // when
-        viewer.saveXML({ format: true }, function(err, xml) {
-
-          if (err) {
-            return done(err);
-          }
-
-          // then
-          expect(xml).to.contain('<?xml version="1.0" encoding="UTF-8"?>');
-          expect(xml).to.contain('definitions');
-          expect(xml).to.contain('  ');
-
-          done();
-        });
-      });
-
-    });
 
 
     it('should export svg', function(done) {
@@ -218,19 +142,22 @@ describe('Viewer', function() {
           return done(err);
         }
 
+        var drd = viewer.getActiveViewer();
+
         // when
-        viewer.saveSVG(function(err, svg) {
+        drd.saveSVG(function(err, svg) {
 
           if (err) {
             return done(err);
           }
 
           // then
-          expect(validSVG(svg)).to.be.true;
+          expectValidSVG(svg);
 
           done();
         });
       });
+
     });
 
   });

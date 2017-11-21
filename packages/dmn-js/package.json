@@ -31,11 +31,9 @@
     "decision modeling"
   ],
   "devDependencies": {
-    "dmn-js-shared": "*",
-    "mocha-test-container-support": "^0.2.0"
+    "dmn-js-shared": "*"
   },
   "dependencies": {
-    "diagram-js": "^0.22.2",
-    "diagram-js-direct-editing": "^0.19.0"
+    "diagram-js": "^0.22.2"
   }
 }

@@ -16,6 +16,7 @@ var EventUtils = require('../../../util/EventUtils'),
     inputEvent = EventUtils.inputEvent,
     clickElement = EventUtils.clickElement;
 
+
 describe('features/definition-properties', function() {
 
   var testModules = [
@@ -118,6 +119,7 @@ describe('features/definition-properties', function() {
     expect(definitionPropertiesView._container.offsetLeft).to.equal(130);
   }));
 
+
   describe('editing', function() {
 
     it('should edit definition name', injectAsync(function(done) {
@@ -141,6 +143,7 @@ describe('features/definition-properties', function() {
         inputEvent(nameContainer, 'hello');
       };
     }));
+
 
     it('should edit definition ID', injectAsync(function(done) {
       return function(canvas, definitionPropertiesView, eventBus) {
