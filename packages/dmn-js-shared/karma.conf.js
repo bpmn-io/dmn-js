@@ -29,10 +29,10 @@ module.exports = function(path) {
       basePath: path,
 
       frameworks: [
-        'browserify',
-        'source-map-support',
         'mocha',
-        'sinon-chai'
+        'sinon-chai',
+        'source-map-support',
+        'browserify'
       ],
 
       files: [
@@ -77,9 +77,7 @@ module.exports = function(path) {
               '.css'
             ]
           } ]
-        ],
-        fullPaths: true,
-        basedir: path
+        ]
       }
     });
   };
