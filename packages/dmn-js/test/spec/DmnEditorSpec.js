@@ -52,7 +52,7 @@ describe('DmnEditor', function() {
   });
 
 
-  it.only('should open DRD', function(done) {
+  it('should open DRD', function(done) {
 
     var editor = new DmnEditor({ container: container });
 
