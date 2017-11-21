@@ -51,7 +51,7 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "dmn-moddle": "^0.6.0",
+    "dmn-moddle": "^1.0.0",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
