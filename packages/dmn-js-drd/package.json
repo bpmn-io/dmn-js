@@ -1,5 +1,6 @@
 {
   "name": "dmn-js-drd",
+  "version": "0.11.0",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
