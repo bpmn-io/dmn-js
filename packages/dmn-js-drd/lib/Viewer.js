@@ -278,15 +278,6 @@ Viewer.prototype.attachTo = function(parentNode) {
   // previous, old parent
   this.detach();
 
-  // unwrap jQuery if provided
-  if (parentNode.get && parentNode.constructor.prototype.jquery) {
-    parentNode = parentNode.get(0);
-  }
-
-  if (typeof parentNode === 'string') {
-    parentNode = domQuery(parentNode);
-  }
-
   var container = this._container;
 
   parentNode.appendChild(container);

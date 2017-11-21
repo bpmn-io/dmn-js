@@ -2,6 +2,11 @@ import EventBus from 'diagram-js/lib/core/EventBus';
 
 import DmnModdle from 'dmn-moddle';
 
+import domify from 'domify';
+
+import domQuery from 'min-dom/lib/query';
+import domRemove from 'min-dom/lib/remove';
+
 
 /**
  * The base class for DMN viewers and editors.
@@ -125,6 +130,12 @@ export default class Manager {
     return activeView && this._getViewer(activeView);
   }
 
+  getView(element) {
+    return this._views.filter(function(v) {
+      return v.element === element;
+    })[0];
+  }
+
   getViews() {
     return this._views;
   }
@@ -179,6 +190,16 @@ export default class Manager {
   }
 
   attachTo(parentNode) {
+
+    // unwrap jQuery if provided
+    if (parentNode.get && parentNode.constructor.prototype.jquery) {
+      parentNode = parentNode.get(0);
+    }
+
+    if (typeof parentNode === 'string') {
+      parentNode = domQuery(parentNode);
+    }
+
     parentNode.appendChild(this._container);
   }
 
@@ -204,7 +225,7 @@ export default class Manager {
     this._viewers = {};
     this._views = [];
 
-    this._container = document.createElement('div');
+    this._container = domify('<div class="dmn-js-parent"></div>');
 
     if (options.container) {
       this.attachTo(options.container);
@@ -443,11 +464,5 @@ function viewsEqual(a, b) {
 function safeExecute(viewer, method) {
   if (typeof viewer[method] === 'function') {
     viewer[method]();
-  }
-}
-
-function domRemove(el) {
-  if (el.parentNode) {
-    el.parentNode.removeChild(el);
   }
 }
