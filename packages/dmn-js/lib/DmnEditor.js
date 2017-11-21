@@ -1,22 +1,18 @@
-import Manager from './Manager';
+import EditingManager from './base/Manager';
 
-import DrdEditor from 'dmn-js-drd/lib/Editor';
+import DrdModeler from 'dmn-js-drd/lib/Modeler';
 
 /**
  * The dmn editor.
  */
-export default class DmnEditor extends Manager {
+export default class DmnEditor extends EditingManager {
 
-  constructor(options) {
-    super(options);
-  }
-
-  getViewProviders() {
+  _getViewProviders() {
 
     return [
       {
         id: 'drd',
-        constructor: DrdEditor,
+        constructor: DrdModeler,
         opens: 'dmn:Definitions'
       }
     ];

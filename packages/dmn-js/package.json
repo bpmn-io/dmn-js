@@ -34,6 +34,7 @@
     "dmn-js-shared": "*"
   },
   "dependencies": {
-    "diagram-js": "^0.22.2"
+    "diagram-js": "^0.22.2",
+    "dmn-js-drd": "^0.11.0"
   }
 }
