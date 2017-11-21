@@ -183,9 +183,7 @@ export default class Manager {
   }
 
   detach() {
-    if (this._container.parentNode) {
-      this._container.parentNode.removeChild(this._container);
-    }
+    domRemove(this._container);
   }
 
   destroy() {
@@ -195,9 +193,7 @@ export default class Manager {
       safeExecute(viewer, 'destroy');
     });
 
-    if (this._container.parentNode) {
-      this._container.parentNode.removeChild(this._container);
-    }
+    domRemove(this._container);
   }
 
   _init(options) {
@@ -357,9 +353,16 @@ export default class Manager {
     var Viewer = provider.constructor;
 
     if (!viewer) {
+      var providerOptions = this._options[providerId] || {};
+
       viewer = this._viewers[providerId] = new Viewer({
+        ...providerOptions,
         moddle: this._moddle,
-        ...this._options[providerId]
+        additionalModules: [
+          ...(providerOptions.additionalModules || []), {
+            _parent: [ 'value', this ]
+          }
+        ]
       });
 
       // TODO(nikku): wire changed events
@@ -440,5 +443,11 @@ function viewsEqual(a, b) {
 function safeExecute(viewer, method) {
   if (typeof viewer[method] === 'function') {
     viewer[method]();
+  }
+}
+
+function domRemove(el) {
+  if (el.parentNode) {
+    el.parentNode.removeChild(el);
   }
 }

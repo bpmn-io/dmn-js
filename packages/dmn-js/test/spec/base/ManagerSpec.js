@@ -2,7 +2,32 @@ import Manager from 'lib/base/Manager';
 
 import View from 'lib/base/View';
 
-class DummyView extends View { }
+class DummyView extends View {
+
+  constructor(options) {
+
+    super(options);
+
+    this._modules = options.additionalModules || [];
+  }
+
+  // mock DI api
+  get(name) {
+
+    return this._modules.reduce(function(s, module) {
+
+      if (s) {
+        return s;
+      }
+
+      if (name in module) {
+        // unwrap [ 'value', someValue ]
+        return module[name][1];
+      }
+    }, null);
+  }
+
+}
 
 class DummyViewer extends Manager {
 
@@ -307,6 +332,30 @@ describe('Manager', function() {
 
     });
 
+  });
+
+
+  it('should advertise self as <_parent> to viewers', function(done) {
+
+    // given
+    var dummy = new DummyViewer();
+
+    dummy.importXML(diagramXML, function(err, warnings) {
+
+      if (err) {
+        return done(err);
+      }
+
+      // when
+      var activeViewer = dummy.getActiveViewer();
+
+      // then
+      expect(activeViewer).is.instanceOf(DummyView);
+
+      expect(activeViewer.get('_parent')).to.equal(dummy);
+
+      done();
+    });
   });
 
 });

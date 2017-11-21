@@ -19,11 +19,10 @@ export default class View {
   /**
    * Open view on the given element.
    *
-   * @param  {[type]}   element [description]
-   * @param  {Function} done    [description]
-   * @return {[type]}           [description]
+   * @param  {View}   view
+   * @param  {Function} [done]
    */
-  open(element, done=noop) {
+  open(view, done=noop) {
     done();
   }
 
