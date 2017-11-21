@@ -7,4 +7,5 @@ dist/
 *.iml
 .DS_Store
 npm-debug.log
+lerna-debug.log
 assets/css
