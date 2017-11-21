@@ -8,3 +8,6 @@ This file keeps track of features we've removed from dmn-js with the `next` refa
 
 * DmnJS -> drd parts extracted to dmn-js-drd
   * attach -> attachTo
+
+* not attaching to 'body' anymore per default
+* DmnJS -> saveSVG now available on DrdViewer/Editor only
