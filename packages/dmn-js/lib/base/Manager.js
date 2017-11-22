@@ -7,6 +7,8 @@ import domify from 'domify';
 import domQuery from 'min-dom/lib/query';
 import domRemove from 'min-dom/lib/remove';
 
+import debounce from 'lodash/function/debounce';
+
 
 /**
  * The base class for DMN viewers and editors.
@@ -24,6 +26,8 @@ export default class Manager {
    */
   constructor(options={}) {
     this._eventBus = new EventBus();
+
+    this._viewsChanged = debounce(this._viewsChanged, 100);
 
     this._views = [];
     this._viewers = {};
@@ -56,7 +60,7 @@ export default class Manager {
    */
   importXML(xml, options, done) {
 
-    if (typeof options === 'function') {
+    if (typeof options !== 'object') {
       done = options;
       options = { open: true };
     }
@@ -189,6 +193,18 @@ export default class Manager {
     this._eventBus.off(...args);
   }
 
+  /**
+   * Register a listener to be invoked once only.
+   *
+   * @param {String} event
+   * @param {Number} [priority]
+   * @param {Function} callback
+   * @param {Object} [that]
+   */
+  once(...args) {
+    this._eventBus.once(...args);
+  }
+
   attachTo(parentNode) {
 
     // unwrap jQuery if provided
@@ -245,14 +261,21 @@ export default class Manager {
   _setDefinitions(definitions) {
     this._definitions = definitions;
 
-    this._viewsChanged();
+    this._updateViews();
+  }
+
+  _viewsChanged() {
+    this._emit('views.changed', {
+      views: this._views,
+      activeView: this._activeView
+    });
   }
 
   /**
    * Recompute changed views after elements in
    * the DMN diagram have changed.
    */
-  _viewsChanged() {
+  _updateViews() {
 
     var definitions = this._definitions;
 
@@ -303,9 +326,11 @@ export default class Manager {
         this._activeView = newActiveView;
       } else {
         // active view got deleted
-        this._switchView(null);
+        return this._switchView(null);
       }
     }
+
+    this._viewsChanged();
   }
 
   _getInitialView(views) {
@@ -319,6 +344,12 @@ export default class Manager {
    * @param  {Function} [done]
    */
   _switchView(newView, done=noop) {
+
+    var complete = (err, warnings) => {
+      this._viewsChanged();
+
+      done(err, warnings);
+    };
 
     var activeView = this.getActiveView(),
         activeViewer;
@@ -356,12 +387,12 @@ export default class Manager {
           warnings: warnings
         });
 
-        done(err, warnings);
+        complete(err, warnings);
       });
     }
 
     // no active view
-    done();
+    complete();
   }
 
   _getViewer(view) {

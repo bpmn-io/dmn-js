@@ -2,7 +2,7 @@ import Manager from 'lib/base/Manager';
 
 import View from 'lib/base/View';
 
-class DummyView extends View {
+class DiView extends View {
 
   constructor(options) {
 
@@ -26,27 +26,41 @@ class DummyView extends View {
       }
     }, null);
   }
-
 }
 
-class DummyViewer extends Manager {
+class DummyView extends View { }
+
+class TestViewer extends Manager {
+
+  constructor(viewProviders=[ DECISION_VIEW, DRD_VIEW ], options={}) {
+    super(options);
+
+    this._viewProviders = viewProviders;
+  }
 
   _getViewProviders() {
-    return [
-      {
-        id: 'decision',
-        opens: 'dmn:Decision',
-        constructor: DummyView
-      },
-      {
-        id: 'drd',
-        opens: 'dmn:Definitions',
-        constructor: DummyView
-      }
-    ];
+    return this._viewProviders;
   }
 
 }
+
+const DECISION_VIEW = {
+  id: 'decision',
+  opens: 'dmn:Decision',
+  constructor: DummyView
+};
+
+const DRD_VIEW = {
+  id: 'drd',
+  opens: 'dmn:Definitions',
+  constructor: DummyView
+};
+
+const DI_VIEW = {
+  id: 'drd',
+  opens: 'dmn:Decision',
+  constructor: DiView
+};
 
 var diagramXML = require('./diagram.dmn');
 
@@ -72,7 +86,7 @@ describe('Manager', function() {
     it('should import and open DMN file', function(done) {
 
       // given
-      var manager = new DummyViewer();
+      var manager = new TestViewer();
 
       // when
       manager.importXML(diagramXML, function(err) {
@@ -90,7 +104,7 @@ describe('Manager', function() {
     it('should import DMN file', function(done) {
 
       // given
-      var manager = new DummyViewer();
+      var manager = new TestViewer();
 
       // when
       manager.importXML(diagramXML, { open: false }, function(err) {
@@ -110,7 +124,7 @@ describe('Manager', function() {
       it('should emit <import.*> events', function(done) {
 
         // given
-        var viewer = new DummyViewer();
+        var viewer = new TestViewer();
 
         var events = [];
 
@@ -147,6 +161,57 @@ describe('Manager', function() {
           ]);
 
           done(err);
+        });
+
+      });
+
+
+      describe('<views.changed>', function() {
+
+        it('should emit on import', function(done) {
+
+          // given
+          var manager = new TestViewer();
+
+          // when
+          manager.importXML(diagramXML);
+
+          // then
+          // expect single views.changed event
+          manager.on('views.changed', function(event) {
+
+            var { views, activeView } = event;
+
+            expect(views).to.eql(manager.getViews());
+            expect(activeView).to.eql(manager.getActiveView());
+
+            done();
+          });
+        });
+
+
+        it('should emit on open', function(done) {
+
+          // given
+          var manager = new TestViewer();
+
+          // when
+          manager.importXML(diagramXML);
+
+          manager.once('import.done', function() {
+
+            manager.on('views.changed', function(event) {
+
+              var { views, activeView } = event;
+
+              expect(views).to.eql(manager.getViews());
+              expect(activeView).to.eql(manager.getActiveView());
+
+              done();
+            });
+
+            manager.open(manager.getViews()[1]);
+          });
         });
 
       });
@@ -195,7 +260,7 @@ describe('Manager', function() {
 
   describe('views', function() {
 
-    var manager = new DummyViewer();
+    var manager = new TestViewer();
 
 
     it('should expose views', function(done) {
@@ -290,7 +355,7 @@ describe('Manager', function() {
     it('should indicate nothing imported', function(done) {
 
       // given
-      var viewer = new DummyViewer();
+      var viewer = new TestViewer();
 
       // then
       viewer.saveXML(function(err, xml) {
@@ -306,7 +371,7 @@ describe('Manager', function() {
     it('should export XML', function(done) {
 
       // given
-      var viewer = new DummyViewer();
+      var viewer = new TestViewer();
 
       viewer.importXML(diagramXML, function(err, warnings) {
 
@@ -338,7 +403,7 @@ describe('Manager', function() {
   it('should advertise self as <_parent> to viewers', function(done) {
 
     // given
-    var dummy = new DummyViewer();
+    var dummy = new TestViewer([ DI_VIEW ]);
 
     dummy.importXML(diagramXML, function(err, warnings) {
 
@@ -350,7 +415,7 @@ describe('Manager', function() {
       var activeViewer = dummy.getActiveViewer();
 
       // then
-      expect(activeViewer).is.instanceOf(DummyView);
+      expect(activeViewer).is.instanceOf(DiView);
 
       expect(activeViewer.get('_parent')).to.equal(dummy);
 
