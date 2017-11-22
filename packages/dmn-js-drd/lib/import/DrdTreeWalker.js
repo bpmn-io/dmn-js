@@ -55,14 +55,11 @@ function DRDTreeWalker(handler, options) {
     var edges = [];
 
     handleDI(element, function(extensionElement) {
-      if (extensionElement.$parent.$instanceOf('dmn:ExtensionElements')) {
+      if (is(extensionElement, 'biodi:Bounds')) {
+        visit(element, extensionElement);
 
-        if (is(extensionElement, 'biodi:Bounds')) {
-          visit(element, extensionElement);
-
-        } else if (is(extensionElement, 'biodi:Edge')) {
-          edges.push(extensionElement);
-        }
+      } else if (is(extensionElement, 'biodi:Edge')) {
+        edges.push(extensionElement);
       }
     });
 
@@ -119,16 +116,13 @@ function DRDTreeWalker(handler, options) {
   }
 
   function handleDI(element, fn) {
-    var extensionElements = element.extensionElements,
-        values;
+    var extensionElements = element.extensionElements;
 
     if (!extensionElements) {
       return;
     }
 
-    values = extensionElements.values;
-
-    forEach(values, fn);
+    forEach(extensionElements.values, fn);
   }
 
   ///// API ////////////////////////////////
