@@ -1,5 +1,5 @@
 {
-  "name": "dmn-js-expression",
+  "name": "dmn-js-literal-expression",
   "scripts": {
     "test": "karma start"
   },

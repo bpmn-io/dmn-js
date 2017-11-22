@@ -6,7 +6,7 @@ describe('DmnViewer', function() {
   var diagram = require('./diagram.dmn');
 
 
-  it.skip('should open DMN table', function(done) {
+  it('should open DMN table', function(done) {
 
     var editor = new DmnViewer();
 

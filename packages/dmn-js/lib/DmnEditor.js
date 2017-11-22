@@ -1,7 +1,8 @@
-import EditingManager from './base/Manager';
+import EditingManager from './base/EditingManager';
 import View from './base/View';
 
 import DrdModeler from 'dmn-js-drd/lib/Modeler';
+import DecisionTableEditor from 'dmn-js-decision-table/lib/DecisionTableEditor';
 
 
 /**
@@ -19,8 +20,10 @@ export default class DmnEditor extends EditingManager {
       },
       {
         id: 'decision',
-        constructor: View,
-        opens: 'dmn:Decision'
+        constructor: DecisionTableEditor,
+        opens(element) {
+          return element.$type === 'dmn:Decision' && element.decisionTable;
+        }
       }
     ];
 

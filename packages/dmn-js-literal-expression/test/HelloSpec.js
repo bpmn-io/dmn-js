@@ -1,5 +1,5 @@
 
-describe('dmn-js-table', function() {
+describe('dmn-js-literal-expression', function() {
 
   it('should say hello', function() {
 

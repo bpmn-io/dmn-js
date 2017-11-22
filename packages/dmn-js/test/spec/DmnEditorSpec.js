@@ -4,6 +4,8 @@ import { insertCSS } from 'test/helper';
 
 insertCSS('dmn-js.css', require('dmn-js-drd/assets/css/dmn-js.css'));
 
+insertCSS('dmn-next.css', require('dmn-js-decision-table/assets/dmn-next.css'));
+
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
 insertCSS('dmn-js-testing.css',
@@ -31,9 +33,9 @@ describe('DmnEditor', function() {
   */
 
 
-  it.skip('should open DMN table', function(done) {
+  it.only('should open DMN table', function(done) {
 
-    var editor = new DmnEditor();
+    var editor = new DmnEditor({ container: container });
 
     editor.importXML(diagram, { open: false }, function(err) {
 

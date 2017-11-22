@@ -1,0 +1,292 @@
+.tjs-container {
+  font-family: 'Arial', sans-serif;
+}
+
+table {
+  table-layout: fixed;
+  background-color: #FFF;
+  border-collapse: collapse;
+  border: solid 2px #555;
+  color: #555;
+}
+
+table thead {
+  border-bottom: 3px double #555;
+}
+
+th {
+  border: solid 1px #555;
+  min-width: 192px;
+  padding: 4px;
+}
+
+thead tr:first-child th:first-child {
+  width: 45px;
+  min-width: 45px;
+}
+
+thead tr:not(:first-child) th {
+  font-weight: normal;
+}
+
+td {
+  border: solid 1px #555;
+  padding: 4px;
+}
+
+.tjs-container thead th {
+  text-align: center;
+}
+
+th.hit-policy {
+  width: 40px;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+th.hit-policy:hover {
+  background-color: #FEFDE6;
+}
+
+td.rule-index {
+  text-align: right;
+}
+
+th.annotation {
+  vertical-align: bottom;
+}
+
+td.annotation {
+  text-align: center;
+}
+
+th.hit-policy,
+td.rule-index,
+th.input,
+td.input,
+th.annotation,
+td.annotation {
+  background-color: #f6f6f6;
+}
+
+td.annotation:hover,
+td.annotation.focussed {
+  background-color: #FEFDE6;
+}
+
+td.annotation:not(.focussed):hover {
+  cursor: pointer;
+}
+
+th.output,
+td.output {
+  background-color: #f7fcf4;
+}
+
+th.output.output-name {
+  outline: none;
+}
+
+th.output.output-name:hover,
+th.output.output-name.focussed {
+  background-color: #FEFDE6;
+}
+
+th.output.output-name:not(.focussed):hover {
+  cursor: pointer;
+}
+
+td.input:not(.selected):hover,
+td.output:not(.selected):hover {
+  background-color: #FEFDE6;
+  cursor: pointer;
+}
+
+th.input.add-input,
+th.output.add-output {
+  cursor: pointer;
+}
+
+th.input.add-input:hover,
+th.output.add-output:hover {
+  background-color: #FEFDE6;
+}
+
+th.input-type,
+th.output-type {
+  background-color: #CFCFCF;
+  color: #fff;
+}
+
+table tr > .input + .output {
+  border-left: 3px double #555;
+}
+
+table tbody {
+  border: solid 2px #555;
+}
+
+td {
+  outline: none;
+}
+
+table tfoot {
+  border-right: solid 2px #eee;
+  border-bottom: solid 2px #eee;
+  border-left: solid 2px #eee;
+}
+
+table tfoot td {
+  border: solid 1px #eee;
+}
+
+table tfoot td.add-rule {
+  text-align: center;
+}
+
+table tfoot td.add-rule-add {
+  text-align: right;
+}
+
+table tfoot tr.add-rule:hover td {
+  background-color: #FEFDE6;
+  cursor: pointer;
+}
+
+/* context menu */
+.context-menu {
+  position: absolute;
+  background: #FAFAFA;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.context-menu .context-menu-group {
+  margin: 6px;
+  padding-bottom: 6px;
+  border-bottom: solid 1px #ccc;
+}
+
+.context-menu .context-menu-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.context-menu .context-menu-group .context-menu-group-title {
+  font-weight: bold;
+  color: #555;
+  margin: 0 0 6px 0;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry.disabled {
+  pointer-events: none;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry.disabled .context-menu-group-entry-part {
+  color: #ccc;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry-part {
+  padding: 3px 6px 3px 6px;
+  border: solid 1px transparent;
+  white-space: nowrap;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry:hover .context-menu-group-entry-part {
+  border-color: #555;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry-part:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry-part:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  flex: 1;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-part:hover {
+  background-color: #555;
+  color: #fff;
+  cursor: pointer;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
+  display: inline-block;
+  text-align: center;
+  width: 12px;
+  margin-right: 6px;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry button {
+  border: solid 1px transparent;
+  border-radius: 2px;
+  background: none;
+  padding: 6px;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry button:hover {
+  cursor: pointer;
+}
+
+/* selection */
+tr.selected,
+th.selected,
+td.selected {
+  background-color: #FEFDE6;
+}
+
+/* decision table properties */
+.decision-table-properties {
+  color: #555;
+  background-color: #fff;
+  display: inline-block;
+  border: 2px solid #555;
+  border-bottom: none;
+  margin-bottom: -1px;
+  position: relative;
+  min-width: 100px;
+  max-width: 50%;
+}
+
+.decision-table-name,
+.decision-table-id {
+  margin: 0;
+  padding: 3px 6px;
+  text-align: center;
+  outline: none;
+}
+
+.decision-table-name.focussed,
+.decision-table-id.focussed {
+  background: #FEFDE6;
+}
+
+.decision-table-name:not(.focussed):hover,
+.decision-table-id:not(.focussed):hover {
+  background: #FEFDE6;
+  cursor: pointer;
+}
+
+.decision-table-name {
+  font-size: 24px;
+  line-height: 30px;
+  padding: .3em;
+  font-weight: bold;
+}
+
+.decision-table-id {
+  border-top: 1px solid #555;
+  font-family: monospace;
+  font-size: 18px;
+}

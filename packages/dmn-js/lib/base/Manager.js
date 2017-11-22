@@ -294,7 +294,11 @@ export default class Manager {
     this._views = displayableElements.reduce((views, element) => {
 
       var provider = find(viewProviders, function(provider) {
-        return provider.opens === element.$type;
+        if (typeof provider.opens === 'string') {
+          return provider.opens === element.$type;
+        } else {
+          return provider.opens(element);
+        }
       });
 
       if (!provider) {
