@@ -1,14 +1,8 @@
-import { insertCSS } from 'test/TestHelper';
-
 import Inferno from 'inferno';
 
-import DecisionTable from 'lib/DecisionTable';
+import DmnDecisionTableViewer from '../helper/DecisionTable';
 
 import simpleXML from './simple.dmn';
-
-import dmnNextCSS from 'assets/dmn-next.css';
-
-insertCSS('dmn-next-css', dmnNextCSS);
 
 describe('DecisionTable', function() {
 
@@ -20,7 +14,7 @@ describe('DecisionTable', function() {
   });
 
   function createDecisionTable(xml, done) {
-    const decisionTable = window.decisionTable = new DecisionTable({ container });
+    const decisionTable = new DmnDecisionTableViewer({ container });
 
     decisionTable.importXML(xml, (err, warnings) => {
       done(err, warnings, decisionTable);

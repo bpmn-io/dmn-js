@@ -4,7 +4,7 @@ import { insertCSS } from 'test/helper';
 
 insertCSS('dmn-js.css', require('dmn-js-drd/assets/css/dmn-js.css'));
 
-insertCSS('dmn-next.css', require('dmn-js-decision-table/assets/dmn-next.css'));
+insertCSS('dmn-decision-table.css', require('dmn-js-decision-table/assets/css/dmn-decision-table.css'));
 
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 

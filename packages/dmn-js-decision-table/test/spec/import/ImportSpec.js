@@ -1,22 +1,22 @@
-import DecisionTable from 'lib/DecisionTable';
+import DmnDecisionTableViewer from '../../helper/DecisionTable';
 
 import dmnXML from './simple.dmn';
 
 describe('import', function() {
 
-  let decisionTable;
+  let dmnDecisionTableViewer;
 
   beforeEach(function() {
     let container = document.createElement('div');
     
     document.body.appendChild(container);
 
-    decisionTable = new DecisionTable({ container });
+    dmnDecisionTableViewer = new DmnDecisionTableViewer({ container });
   });
 
 
   it('should import without errors and warnings', function(done) {
-    decisionTable.importXML(dmnXML, (err, importWarnings) => {
+    dmnDecisionTableViewer.importXML(dmnXML, (err, importWarnings) => {
       expect(err).not.to.exist;
       expect(importWarnings).to.have.lengthOf(0);
 

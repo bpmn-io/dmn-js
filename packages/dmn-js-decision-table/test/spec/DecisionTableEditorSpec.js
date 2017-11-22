@@ -2,16 +2,9 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import { insertCSS } from 'test/TestHelper';
-
-import DecisionTableEditor from 'lib/DecisionTableEditor';
+import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
 import TestDecision from './simple.dmn';
-// import TestDecision from './performance.dmn';
-
-import dmnNextCSS from 'assets/dmn-next.css';
-
-insertCSS('dmn-next-css', dmnNextCSS);
 
 describe('DecisionTable', function() {
 
@@ -23,15 +16,15 @@ describe('DecisionTable', function() {
   });
 
   function createDecisionTableEditor(xml, done) {
-    const decisionTableEditor = window.decisionTableEditor = new DecisionTableEditor({ container });
+    const dmnDecisionTableEditor = new DmnDecisionTableEditor({ container });
 
-    decisionTableEditor.importXML(xml, (err, warnings) => {
-      done(err, warnings, decisionTableEditor);
+    dmnDecisionTableEditor.importXML(xml, (err, warnings) => {
+      done(err, warnings, dmnDecisionTableEditor);
     });
   }
 
 
-  it.only('should import simple decision', function(done) {
+  it('should import simple decision', function(done) {
     createDecisionTableEditor(TestDecision, done);
   });
 

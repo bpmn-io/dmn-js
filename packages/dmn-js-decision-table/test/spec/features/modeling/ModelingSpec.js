@@ -1,11 +1,10 @@
-import {
-  bootstrapEditor,
-  inject,
-  importXML
-} from 'test/TestHelper';
+require('../../../TestHelper');
 
-import TestDecision from './modeling.dmn';
+/* global bootstrapModeler, inject */
 
+import modelingXML from './modeling.dmn';
+
+import CoreModule from '../../../../lib/core';
 import ModelingModule from '../../../../lib/features/modeling';
 
 import { is } from 'lib/util/ModelUtil';
@@ -20,11 +19,12 @@ describe('Modeling', function() {
     'dmn:LiteralExpression'
   ];
 
-  beforeEach(bootstrapEditor({
-    modules: [ ModelingModule ]
+  beforeEach(bootstrapModeler(modelingXML, {
+    modules: [
+      CoreModule,
+      ModelingModule
+    ]
   }));
-
-  beforeEach(importXML(TestDecision));
 
 
   describe('add row', function() {

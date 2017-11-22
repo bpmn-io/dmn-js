@@ -1,21 +1,18 @@
-import {
-  bootstrapEditor,
-  inject,
-  importXML
-} from 'test/TestHelper';
+require('../TestHelper');
+
+/* global bootstrapModeler, inject */
 
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import DecisionTable from '../../lib/DecisionTable';
-import DecisionTableEditor from '../../lib/DecisionTableEditor';
+import DmnDecisionTableViewer from '../helper/DecisionTable';
+import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
-// import TestDecision from './simple.dmn';
-import TestDecision from './performance.dmn';
+import performanceXML from './performance.dmn';
 
 import ModelingModule from '../../lib/features/modeling';
 
-describe('Performance', function() {
+describe.skip('Performance', function() {
 
   let container;
 
@@ -26,10 +23,10 @@ describe('Performance', function() {
 
   describe('DecisionTable', function() {
 
-    function createDecisionTable(xml, done) {
-      const decisionTable = new DecisionTable({ container });
+    function createDmnDecisionTableViewer(xml, done) {
+      const dmnDecisionTableViewer = new DmnDecisionTableViewer({ container });
   
-      decisionTable.importXML(xml, (err, warnings) => {
+      dmnDecisionTableViewer.importXML(xml, (err, warnings) => {
         done(err, warnings);
       });
     }
@@ -38,7 +35,7 @@ describe('Performance', function() {
     it('import in less than 1500ms', function(done) {
       const now = performance.now();
   
-      createDecisionTable(TestDecision, function() {
+      createDmnDecisionTableViewer(performanceXML, function() {
         const duration = performance.now() - now;
   
         expect(duration).to.be.below(1500);
@@ -54,10 +51,10 @@ describe('Performance', function() {
 
   describe('DecisionTableEditor', function() {
 
-    function createDecisionTableEditor(xml, done) {
-      const decisionTableEditor = new DecisionTableEditor({ container });
+    function createDmnDecisionTableEditor(xml, done) {
+      const dmnDecisionTableEditor = new DmnDecisionTableEditor({ container });
   
-      decisionTableEditor.importXML(xml, (err, warnings) => {
+      dmnDecisionTableEditor.importXML(xml, (err, warnings) => {
         done(err, warnings);
       });
     }
@@ -66,7 +63,7 @@ describe('Performance', function() {
     it('import in less than 2500ms', function(done) {
       const now = performance.now();
   
-      createDecisionTableEditor(TestDecision, function() {
+      createDmnDecisionTableEditor(performanceXML, function() {
         const duration = performance.now() - now;
   
         expect(duration).to.be.below(2500);
@@ -80,11 +77,9 @@ describe('Performance', function() {
 
     describe('modeling', function() {
 
-      beforeEach(bootstrapEditor({
+      beforeEach(bootstrapModeler(performanceXML, {
         modules: [ ModelingModule ]
       }));
-  
-      beforeEach(importXML(TestDecision));
   
   
       it.skip('moving rows/cols', inject(function(eventBus, modeling, renderer, sheet) {

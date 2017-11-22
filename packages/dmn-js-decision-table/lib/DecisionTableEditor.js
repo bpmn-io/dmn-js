@@ -1,5 +1,3 @@
-import Ids from 'ids';
-
 import DecisionTable from './DecisionTable';
 
 import addInputOutputModule from './features/add-input-output';

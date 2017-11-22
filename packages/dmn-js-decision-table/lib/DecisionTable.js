@@ -14,7 +14,6 @@ import decisionTablePropertiesModule from './features/decision-table-properties'
 import ruleIndicesModule from './features/rule-indices';
 import rulesModule from './features/rules';
 import hitPolicyModule from './features/hit-policy';
-import { debug } from 'util';
 
 
 export default class DecisionTable extends Table {
