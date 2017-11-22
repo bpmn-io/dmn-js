@@ -48,19 +48,5 @@
     "min-dom": "^1.0.0",
     "stringify": "^5.1.0",
     "table-js": "*"
-  },
-  "browserify": {
-    "transform": [
-      "babelify",
-      [
-        "stringify",
-        {
-          "extensions": [
-            ".css",
-            ".dmn"
-          ]
-        }
-      ]
-    ]
   }
 }

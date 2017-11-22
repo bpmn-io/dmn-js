@@ -33,7 +33,7 @@ describe('DmnEditor', function() {
   */
 
 
-  it.only('should open DMN table', function(done) {
+  it('should open DMN table', function(done) {
 
     var editor = new DmnEditor({ container: container });
 
