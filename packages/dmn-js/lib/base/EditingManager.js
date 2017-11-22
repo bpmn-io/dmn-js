@@ -19,6 +19,25 @@ export default class EditingManager extends Manager {
     this.on('destroy', () => {
       this._moddle.ids.clear();
     });
+
+    this.on('viewer.created', ({ viewer }) => {
+
+      viewer.on('elements.changed', ({ elements }) => {
+
+        if (elements.some(function(e) {
+
+          var bo = e.businessObject;
+
+          return bo && (
+            bo.$instanceOf('dmn:Decision') ||
+            bo.$instanceOf('dmn:Definitions')
+          );
+        })) {
+
+          this._updateViews();
+        }
+      });
+    });
   }
 
   /**
