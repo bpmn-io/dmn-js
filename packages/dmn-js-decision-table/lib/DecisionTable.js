@@ -65,20 +65,14 @@ export default class DecisionTable extends Table {
     let {
       modules,
       additionalModules,
-      moddle,
       ...config
     } = options;
-
-    if (!moddle) {
-      throw new Error('must provide options.moddle');
-    }
 
     let baseModules = modules || this.getModules();
     let extraModules = additionalModules || [];
     let staticModules = [
       {
-        moddle: [ 'value', moddle ],
-        dmnjs: [ 'value', this ]
+        decisionTable: [ 'value', this ]
       }
     ];
 
