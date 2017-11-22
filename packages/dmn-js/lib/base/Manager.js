@@ -27,7 +27,7 @@ export default class Manager {
   constructor(options={}) {
     this._eventBus = new EventBus();
 
-    this._viewsChanged = debounce(this._viewsChanged, 100);
+    this._viewsChanged = debounce(this._viewsChanged, 0);
 
     this._views = [];
     this._viewers = {};
@@ -303,7 +303,7 @@ export default class Manager {
 
       var view = {
         element,
-        provider
+        type: provider.id
       };
 
       return [
@@ -397,30 +397,45 @@ export default class Manager {
 
   _getViewer(view) {
 
-    var provider = view.provider;
+    var type = view.type;
 
-    var providerId = provider.id;
-
-    var viewer = this._viewers[providerId];
-    var Viewer = provider.constructor;
+    var viewer = this._viewers[type];
 
     if (!viewer) {
-      var providerOptions = this._options[providerId] || {};
+      viewer = this._viewers[type] = this._createViewer(view.type);
 
-      viewer = this._viewers[providerId] = new Viewer({
-        ...providerOptions,
-        moddle: this._moddle,
-        additionalModules: [
-          ...(providerOptions.additionalModules || []), {
-            _parent: [ 'value', this ]
-          }
-        ]
+      this._emit('viewer.created', {
+        type: type,
+        viewer: viewer
       });
-
-      // TODO(nikku): wire changed events
     }
 
     return viewer;
+  }
+
+  _createViewer(id) {
+
+    var provider = find(this._getViewProviders(), function(provider) {
+      return provider.id === id;
+    });
+
+    if (!provider) {
+      throw new Error('no provider for view type <' + id + '>');
+    }
+
+    var Viewer = provider.constructor;
+
+    var providerOptions = this._options[id] || {};
+
+    return new Viewer({
+      ...providerOptions,
+      additionalModules: [
+        ...(providerOptions.additionalModules || []), {
+          _parent: [ 'value', this ],
+          moddle: [ 'value', this._moddle ]
+        }
+      ]
+    });
   }
 
   /**

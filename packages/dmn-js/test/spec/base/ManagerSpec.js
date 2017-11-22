@@ -1,34 +1,6 @@
 import Manager from 'lib/base/Manager';
 
-import View from 'lib/base/View';
-
-class DiView extends View {
-
-  constructor(options) {
-
-    super(options);
-
-    this._modules = options.additionalModules || [];
-  }
-
-  // mock DI api
-  get(name) {
-
-    return this._modules.reduce(function(s, module) {
-
-      if (s) {
-        return s;
-      }
-
-      if (name in module) {
-        // unwrap [ 'value', someValue ]
-        return module[name][1];
-      }
-    }, null);
-  }
-}
-
-class DummyView extends View { }
+import TestView from './TestView';
 
 class TestViewer extends Manager {
 
@@ -47,20 +19,15 @@ class TestViewer extends Manager {
 const DECISION_VIEW = {
   id: 'decision',
   opens: 'dmn:Decision',
-  constructor: DummyView
+  constructor: TestView
 };
 
 const DRD_VIEW = {
   id: 'drd',
   opens: 'dmn:Definitions',
-  constructor: DummyView
+  constructor: TestView
 };
 
-const DI_VIEW = {
-  id: 'drd',
-  opens: 'dmn:Decision',
-  constructor: DiView
-};
 
 var diagramXML = require('./diagram.dmn');
 
@@ -91,9 +58,12 @@ describe('Manager', function() {
       // when
       manager.importXML(diagramXML, function(err) {
 
+        var activeView = manager.getActiveView();
+
         // then
         // we show the first active view
-        expect(manager.getActiveView()).to.eql(manager.getViews()[0]);
+        expect(activeView).to.eql(manager.getViews()[0]);
+        expect(activeView.type).to.eql('drd');
 
         done(err);
       });
@@ -278,14 +248,14 @@ describe('Manager', function() {
         expect(manager.getActiveView()).to.eql(views[0]);
 
         var elementIds = views.map(function(view) {
-          return view.element.id;
+          return { type: view.type, element: view.element.id };
         });
 
         expect(elementIds).to.eql([
-          'dish',
-          'dish-decision',
-          'season',
-          'guestCount'
+          { type: 'drd', element: 'dish' },
+          { type: 'decision', element: 'dish-decision' },
+          { type: 'decision', element: 'season' },
+          { type: 'decision', element: 'guestCount' }
         ]);
 
         done();
@@ -400,10 +370,10 @@ describe('Manager', function() {
   });
 
 
-  it('should advertise self as <_parent> to viewers', function(done) {
+  it('should provide { _parent, moddle } to viewers', function(done) {
 
     // given
-    var dummy = new TestViewer([ DI_VIEW ]);
+    var dummy = new TestViewer([ DECISION_VIEW ]);
 
     dummy.importXML(diagramXML, function(err, warnings) {
 
@@ -415,9 +385,10 @@ describe('Manager', function() {
       var activeViewer = dummy.getActiveViewer();
 
       // then
-      expect(activeViewer).is.instanceOf(DiView);
+      expect(activeViewer).is.instanceOf(TestView);
 
       expect(activeViewer.get('_parent')).to.equal(dummy);
+      expect(activeViewer.get('moddle')).to.equal(dummy._moddle);
 
       done();
     });

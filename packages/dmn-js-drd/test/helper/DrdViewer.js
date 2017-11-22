@@ -1,4 +1,3 @@
-
 import Manager from 'dmn-js/lib/base/Manager';
 
 import DrdReadOnlyView from '../../lib/Viewer';

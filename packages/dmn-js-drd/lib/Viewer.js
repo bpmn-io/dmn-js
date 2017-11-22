@@ -76,7 +76,6 @@ function ensureUnit(val) {
  * ```
  *
  * @param {Object} options configuration options to pass to the viewer
- * @param {Moddle} options.moddle moddle instance to use
  * @param {DOMElement} [options.container] the container to render the viewer in, defaults to body
  * @param {String|Number} [options.width] the width of the viewer
  * @param {String|Number} [options.height] the height of the viewer
@@ -183,26 +182,18 @@ Viewer.prototype.off = function(event, callback) {
 
 Viewer.prototype._init = function(container, options) {
 
-  var moddle = options.moddle,
-      additionalModules = options.additionalModules || [];
-
-  if (!moddle) {
-    throw new Error('must provide options.moddle');
-  }
-
-  this._moddle = moddle;
+  var additionalModules = options.additionalModules || [];
 
   var baseModules = options.modules || this.getModules(),
       staticModules = [
         {
-          drd: [ 'value', this ],
-          moddle: [ 'value', moddle ]
+          drd: [ 'value', this ]
         }
       ];
 
   var diagramModules = [].concat(staticModules, baseModules, additionalModules);
 
-  var diagramOptions = assign(omit(options, [ 'additionalModules', 'moddle' ]), {
+  var diagramOptions = assign(omit(options, [ 'additionalModules' ]), {
     canvas: assign({}, options.canvas, { container: container }),
     modules: diagramModules
   });
