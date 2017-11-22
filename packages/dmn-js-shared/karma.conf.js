@@ -36,6 +36,7 @@ module.exports = function(path) {
       ],
 
       files: [
+        require.resolve('babel-polyfill/dist/polyfill'),
         'test/**/*Spec.js'
       ],
 
