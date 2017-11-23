@@ -1,5 +1,3 @@
-import Inferno from 'inferno';
-
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 
 import simpleXML from './simple.dmn';

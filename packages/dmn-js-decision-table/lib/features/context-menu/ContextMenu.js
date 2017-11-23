@@ -2,7 +2,7 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import { is, isAny } from '../../util/ModelUtil';
+import { is } from '../../util/ModelUtil';
 
 export default class ContextMenu {
   constructor(components, contextMenu, editorActions, eventBus, elementRegistry, modeling, sheet) {

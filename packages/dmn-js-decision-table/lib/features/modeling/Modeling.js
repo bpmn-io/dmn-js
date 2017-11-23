@@ -1,5 +1,4 @@
 import assign from 'lodash/assign';
-import forEach from 'lodash/forEach';
 
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 
@@ -90,19 +89,3 @@ export default class Modeling extends BaseModeling {
 }
 
 Modeling.$inject = [ 'eventBus', 'elementFactory', 'commandStack', 'sheet' ];
-
-
-////////// helpers //////////
-
-
-/**
- * Register handlers with the command stack
- *
- * @param {Object} handlers { id -> Handler } map
- * @param {CommandStack} commandStack
- */
-function registerHandlers(handlers, commandStack) {
-  forEach(handlers, function(handler, id) {
-    commandStack.registerHandler(id, handler);
-  });
-}
