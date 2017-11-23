@@ -50,6 +50,6 @@
     "lodash": "^4.17.4",
     "min-dom": "^1.0.0",
     "stringify": "^5.1.0",
-    "table-js": "*"
+    "table-js": "^1.0.0-0"
   }
 }
