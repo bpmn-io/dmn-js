@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { getBusinessObject } from '../../../util/ModelUtil';
+import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class DecisionTableHeadComponent extends Component {
 
@@ -27,7 +27,7 @@ export default class DecisionTableHeadComponent extends Component {
 
     changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
-  
+
   componentWillUnmout() {
     const root = this._sheet.getRoot();
 

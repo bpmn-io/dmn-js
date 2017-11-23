@@ -1,6 +1,6 @@
 'use strict';
 
-var ModelUtil = require('../../util/ModelUtil'),
+var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
     is = ModelUtil.is,
     isAny = ModelUtil.isAny;
 

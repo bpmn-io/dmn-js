@@ -7,7 +7,7 @@ import modelingXML from './modeling.dmn';
 import CoreModule from '../../../../lib/core';
 import ModelingModule from '../../../../lib/features/modeling';
 
-import { is } from 'lib/util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 describe('Modeling', function() {

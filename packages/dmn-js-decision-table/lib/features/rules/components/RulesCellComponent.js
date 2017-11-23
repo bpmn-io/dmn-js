@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { is } from '../../../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class RulesCellComponent extends Component {
   render() {

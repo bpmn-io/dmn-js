@@ -1,4 +1,4 @@
-import { is } from '../../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export default class DmnFactory {

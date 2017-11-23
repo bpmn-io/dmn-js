@@ -1,4 +1,4 @@
-import { is } from '../../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import domify from 'min-dom/lib/domify';
 import domClasses from 'min-dom/lib/classes';

@@ -4,7 +4,7 @@
 var assign = require('lodash/object/assign'),
     isArray = require('lodash/lang/isArray');
 
-var ModelUtil = require('../../util/ModelUtil'),
+var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
     is = ModelUtil.is,
     isAny = ModelUtil.isAny,
     hasPrimaryModifier = require('diagram-js/lib/util/Mouse').hasPrimaryModifier;

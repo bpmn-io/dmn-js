@@ -2,7 +2,7 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import { is } from '../../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class ContextMenu {
   constructor(components, contextMenu, editorActions, eventBus, elementRegistry, modeling, sheet) {
@@ -12,14 +12,14 @@ export default class ContextMenu {
     this._eventBus = eventBus;
     this._modeling = modeling;
     this._sheet = sheet;
-    
+
     this._onClick = this._onClick.bind(this);
     this._getEntries = this._getEntries.bind(this);
 
     components.onGetComponent('context-menu', (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
         const entries = this._getEntries(context);
-  
+
         return () => (
           <div>
             { entries }
@@ -54,7 +54,7 @@ export default class ContextMenu {
   _getEntries(context) {
     const root = this._sheet.getRoot(),
           businessObject = root.businessObject;
-    
+
     const handlers = {
       addRuleAbove: (rule) => {
         this._editorActions.trigger('addRuleAbove', { rule });
@@ -68,49 +68,49 @@ export default class ContextMenu {
       },
       removeRule: (rule) => {
         this._editorActions.trigger('removeRule', { rule });
-        
+
         this._contextMenu.close();
       },
       addInputLeft: (input) => {
         this._editorActions.trigger('addInputLeft', { input });
-        
+
         this._contextMenu.close();
       },
       addInputRight: (input) => {
         this._editorActions.trigger('addInputRight', { input });
-        
+
         this._contextMenu.close();
       },
       removeInput: (input) => {
         this._editorActions.trigger('removeInput', { input });
-        
+
         this._contextMenu.close();
       },
       addOutputLeft: (output) => {
         this._editorActions.trigger('addOutputLeft', { output });
-        
+
         this._contextMenu.close();
       },
       addOutputRight: (output) => {
         this._editorActions.trigger('addOutputRight', { output });
-        
+
         this._contextMenu.close();
       },
       removeOutput: (output) => {
         this._editorActions.trigger('removeOutput', { output });
-        
+
         this._contextMenu.close();
       }
     };
 
     const id = context && context.id;
-    
+
     if (!id) {
       return null;
     }
 
     const element = this._elementRegistry.get(id);
-    
+
     if (!element) {
       return null;
     }
@@ -119,7 +119,7 @@ export default class ContextMenu {
 
     if (is(element.row, 'dmn:DecisionRule')) {
       const canDelete = businessObject.rule.length > 1;
-      
+
       entries.push(
         <div className="context-menu-group">
           <h4 className="context-menu-group-title">Rule</h4>

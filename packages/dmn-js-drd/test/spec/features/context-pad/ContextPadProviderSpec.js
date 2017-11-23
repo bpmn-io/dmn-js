@@ -6,7 +6,7 @@ var TestContainer = require('mocha-test-container-support');
 
 var domQuery = require('min-dom/lib/query');
 
-var is = require('../../../../lib/util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 
 /* global bootstrapModeler, inject */

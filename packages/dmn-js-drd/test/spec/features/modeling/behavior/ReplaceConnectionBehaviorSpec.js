@@ -4,7 +4,7 @@ require('../../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
-var is = require('../../../../../lib/util/ModelUtil').is,
+var is = require('dmn-js-shared/lib/util/ModelUtil').is,
     find = require('lodash/collection/find');
 
 var modelingModule = require('../../../../../lib/features/modeling'),

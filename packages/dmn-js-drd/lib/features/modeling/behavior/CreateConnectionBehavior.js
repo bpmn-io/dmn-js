@@ -6,7 +6,7 @@ var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
 
 var getMid = require('diagram-js/lib/layout/LayoutUtil').getMid;
 
-var is = require('../../../util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 var getRequirementType = function(source) {
   switch (source.type) {

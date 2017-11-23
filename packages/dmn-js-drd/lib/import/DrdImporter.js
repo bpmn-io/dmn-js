@@ -3,7 +3,7 @@
 var assign = require('lodash/object/assign'),
     map = require('lodash/collection/map');
 
-var ModelUtil = require('../util/ModelUtil'),
+var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
     is = ModelUtil.is;
 
 function elementData(semantic, attrs) {

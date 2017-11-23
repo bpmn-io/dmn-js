@@ -1,6 +1,6 @@
 import assign from 'lodash/assign';
 
-import { is } from '../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 function elementData(semantic, attrs) {
   return assign({

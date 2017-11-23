@@ -4,7 +4,7 @@ var UpdateLabelHandler = require('./cmd/UpdateLabelHandler');
 
 var LabelUtil = require('./LabelUtil');
 
-var is = require('../../util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 function LabelEditingProvider(eventBus, canvas, directEditing, commandStack) {
 

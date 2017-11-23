@@ -1,6 +1,6 @@
 'use strict';
 
-var is = require('../../util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 function getLabelAttr(semantic) {
   if (is(semantic, 'dmn:Decision') ||

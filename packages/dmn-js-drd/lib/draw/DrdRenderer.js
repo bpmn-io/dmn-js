@@ -15,7 +15,7 @@ var svgAppend = require('tiny-svg/lib/append'),
 var BaseRenderer = require('diagram-js/lib/draw/BaseRenderer'),
     RenderUtil = require('diagram-js/lib/util/RenderUtil'),
     TextUtil = require('diagram-js/lib/util/Text'),
-    ModelUtil = require('../util/ModelUtil');
+    ModelUtil = require('dmn-js-shared/lib/util/ModelUtil');
 
 var is = ModelUtil.is,
     getName = ModelUtil.getName;

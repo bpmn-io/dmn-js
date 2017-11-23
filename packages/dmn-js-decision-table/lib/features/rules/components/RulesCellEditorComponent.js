@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { is } from '../../../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import debounce from 'lodash/debounce';
 
@@ -29,7 +29,7 @@ export default class RulesEditorCellComponent extends Component {
 
   onElementsChanged() {
     const { isFocussed } = this.state;
-    
+
     if (!isFocussed) {
       this.forceUpdate();
     }

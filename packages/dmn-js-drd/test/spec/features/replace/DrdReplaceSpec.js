@@ -9,7 +9,7 @@ var modelingModule = require('../../../../lib/features/modeling'),
     moveModule = require('diagram-js/lib/features/move'),
     coreModule = require('../../../../lib/core');
 
-var is = require('../../../../lib/util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 
 describe('features/replace - drd replace', function() {

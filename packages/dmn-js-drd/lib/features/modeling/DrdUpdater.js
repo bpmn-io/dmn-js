@@ -8,7 +8,7 @@ var assign = require('lodash/object/assign'),
 
 var Collections = require('diagram-js/lib/util/Collections');
 
-var ModelUtil = require('../../util/ModelUtil'),
+var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
     getBusinessObject = ModelUtil.getBusinessObject,
     is = ModelUtil.is;
 

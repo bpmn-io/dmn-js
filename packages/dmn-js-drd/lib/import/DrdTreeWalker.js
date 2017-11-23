@@ -3,7 +3,7 @@
 var forEach = require('lodash/collection/forEach'),
     find = require('lodash/collection/find');
 
-var is = require('../util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 
 function parseID(element) {

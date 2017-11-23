@@ -3,7 +3,7 @@
 var assign = require('lodash/object/assign'),
     inherits = require('inherits');
 
-var is = require('../../util/ModelUtil').is;
+var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 var BaseElementFactory = require('diagram-js/lib/core/ElementFactory');
 

@@ -1,4 +1,4 @@
-import { is } from '../../util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import BaseElementFactory from 'table-js/lib/core/ElementFactory';
 

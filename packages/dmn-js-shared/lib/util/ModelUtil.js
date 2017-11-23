@@ -1,4 +1,6 @@
-import some from 'lodash/some';
+'use strict';
+
+var any = require('lodash/collection/any');
 
 /**
  * Is an element of the given DMN type?
@@ -8,11 +10,13 @@ import some from 'lodash/some';
  *
  * @return {Boolean}
  */
-export function is(element, type) {
+function is(element, type) {
   var bo = getBusinessObject(element);
 
   return bo && (typeof bo.$instanceOf === 'function') && bo.$instanceOf(type);
 }
+
+module.exports.is = is;
 
 
 /**
@@ -22,22 +26,18 @@ export function is(element, type) {
  *
  * @return {ModdleElement}
  */
-export function getBusinessObject(element) {
+function getBusinessObject(element) {
   return (element && element.businessObject) || element;
 }
 
+module.exports.getBusinessObject = getBusinessObject;
 
-/**
- * Returns the semantic name of an element.
- *
- * @param  {tjs.model.Base|ModdleElement} element
- * @return {String} name
- */
-export function getName(element) {
-  element = getBusinessObject(element);
 
-  return element.name;
+function getName(element) {
+  return getBusinessObject(element).name;
 }
+
+module.exports.getName = getName;
 
 
 /**
@@ -48,8 +48,10 @@ export function getName(element) {
  *
  * @return {Boolean}
  */
-export function isAny(element, types) {
-  return some(types, function(t) {
+function isAny(element, types) {
+  return any(types, function(t) {
     return is(element, t);
   });
 }
+
+module.exports.isAny = isAny;
