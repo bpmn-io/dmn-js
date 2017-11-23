@@ -55,6 +55,9 @@ describe('Manager', function() {
       // given
       var manager = new TestViewer();
 
+      // assume
+      expect(manager.getDefinitions()).not.to.exist;
+
       // when
       manager.importXML(diagramXML, function(err) {
 
@@ -64,6 +67,8 @@ describe('Manager', function() {
         // we show the first active view
         expect(activeView).to.eql(manager.getViews()[0]);
         expect(activeView.type).to.eql('drd');
+
+        expect(manager.getDefinitions()).to.equal(manager._definitions);
 
         done(err);
       });

@@ -114,6 +114,10 @@ export default class Manager {
     });
   }
 
+  getDefinitions() {
+    return this._definitions;
+  }
+
   /**
    * Return active view.
    *
