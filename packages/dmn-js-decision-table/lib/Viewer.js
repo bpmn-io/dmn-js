@@ -16,10 +16,10 @@ import rulesModule from './features/rules';
 import hitPolicyModule from './features/hit-policy';
 
 
-export default class DecisionTable extends Table {
+export default class Viewer extends Table {
 
   constructor(options = {}) {
-    const container = DecisionTable._createContainer(options);
+    const container = Viewer._createContainer(options);
 
     super(assign(options, {
       renderer: {
@@ -171,7 +171,7 @@ export default class DecisionTable extends Table {
   }
 
   getModules() {
-    return DecisionTable._getModules();
+    return Viewer._getModules();
   }
 
   static _getModules() {

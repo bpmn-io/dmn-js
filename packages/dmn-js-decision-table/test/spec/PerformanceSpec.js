@@ -5,11 +5,12 @@ require('../TestHelper');
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import DmnDecisionTableViewer from '../helper/DecisionTable';
+import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
 import performanceXML from './performance.dmn';
 
+import CoreModule from '../../lib/core';
 import ModelingModule from '../../lib/features/modeling';
 
 describe.skip('Performance', function() {
@@ -78,7 +79,10 @@ describe.skip('Performance', function() {
     describe('modeling', function() {
 
       beforeEach(bootstrapModeler(performanceXML, {
-        modules: [ ModelingModule ]
+        modules: [ 
+          CoreModule,
+          ModelingModule
+        ]
       }));
   
   

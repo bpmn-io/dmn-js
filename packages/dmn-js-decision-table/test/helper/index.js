@@ -7,7 +7,7 @@ var uniq = require('lodash/uniq'),
 
 var TestContainer = require('mocha-test-container-support');
 
-import DecisionTable from './DecisionTable';
+import DecisionTableViewer from './DecisionTableViewer';
 import DecisionTableEditor from './DecisionTableEditor';
 
 var OPTIONS, DMN_JS;
@@ -216,7 +216,7 @@ function bootstrapModeler(diagram, options, locals) {
  * @return {Function} a function to be passed to beforeEach
  */
 function bootstrapViewer(diagram, options, locals) {
-  return bootstrapDmnJS(DecisionTable, diagram, options, locals);
+  return bootstrapDmnJS(DecisionTableViewer, diagram, options, locals);
 }
 
 function getDmnJS() {

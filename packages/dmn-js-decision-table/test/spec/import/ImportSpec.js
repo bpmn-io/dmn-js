@@ -1,4 +1,4 @@
-import DmnDecisionTableViewer from '../../helper/DecisionTable';
+import DecisionTableViewer from '../../helper/DecisionTableViewer';
 
 import dmnXML from './simple.dmn';
 
@@ -11,7 +11,7 @@ describe('import', function() {
     
     document.body.appendChild(container);
 
-    dmnDecisionTableViewer = new DmnDecisionTableViewer({ container });
+    dmnDecisionTableViewer = new DecisionTableViewer({ container });
   });
 
 

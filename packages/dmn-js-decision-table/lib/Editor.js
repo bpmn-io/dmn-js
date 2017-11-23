@@ -1,4 +1,4 @@
-import DecisionTable from './DecisionTable';
+import Viewer from './Viewer';
 
 import addInputOutputModule from './features/add-input-output';
 import addRuleModule from './features/add-rule';
@@ -16,12 +16,12 @@ import rulesEditorModule from './features/rules/editor';
 import selectionModule from 'table-js/lib/features/selection';
 
 
-export default class DecisionTableEditor extends DecisionTable {
+export default class Editor extends Viewer {
 
   getModules() {
     return [
-      ...DecisionTable._getModules(),
-      ...DecisionTableEditor._getModules()
+      ...Viewer._getModules(),
+      ...Editor._getModules()
     ];
   }
 

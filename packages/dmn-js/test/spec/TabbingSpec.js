@@ -12,7 +12,7 @@ import DrdModeler from 'dmn-js-drd/lib/Modeler';
 
 import { insertCSS } from 'test/helper';
 
-insertCSS('dmn-js.css', require('dmn-js-drd/assets/css/dmn-js.css'));
+insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 

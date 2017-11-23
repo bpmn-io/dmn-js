@@ -1,7 +1,7 @@
 import Manager from './base/Manager';
 
 import DrdViewer from 'dmn-js-drd/lib/Viewer';
-import DecisionTableViewer from 'dmn-js-decision-table/lib/DecisionTable';
+import DecisionTableViewer from 'dmn-js-decision-table/lib/Viewer';
 
 /**
  * The dmn editor.

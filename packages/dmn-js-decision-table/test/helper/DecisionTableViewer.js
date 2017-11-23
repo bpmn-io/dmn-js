@@ -1,16 +1,16 @@
 import Manager from 'dmn-js/lib/base/Manager';
 
-import DecisionTableConstructor from '../../lib/DecisionTable';
+import Viewer from '../../lib/Viewer';
 
 
-export default class DecisionTable extends Manager {
+export default class DecisionTableViewer extends Manager {
 
   _getViewProviders() {
 
     return [
       {
         id: 'decisionTable',
-        constructor: DecisionTableConstructor,
+        constructor: Viewer,
         opens(element) {
           return element.$type === 'dmn:Decision' && element.decisionTable;
         }

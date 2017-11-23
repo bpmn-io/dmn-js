@@ -2,7 +2,7 @@ import EditingManager from './base/EditingManager';
 import View from './base/View';
 
 import DrdModeler from 'dmn-js-drd/lib/Modeler';
-import DecisionTableEditor from 'dmn-js-decision-table/lib/DecisionTableEditor';
+import DecisionTableEditor from 'dmn-js-decision-table/lib/Editor';
 
 
 /**
