@@ -1,4 +1,4 @@
-import DmnEditor from 'lib/DmnEditor';
+import Modeler from 'lib/Modeler';
 
 import { insertCSS } from 'test/helper';
 
@@ -13,7 +13,7 @@ insertCSS('dmn-js-testing.css',
 );
 
 
-describe('DmnEditor', function() {
+describe('Modeler', function() {
 
   var diagram = require('./diagram.dmn');
 
@@ -35,7 +35,7 @@ describe('DmnEditor', function() {
 
   it('should open DMN table', function(done) {
 
-    var editor = new DmnEditor({ container: container });
+    var editor = new Modeler({ container: container });
 
     editor.importXML(diagram, { open: false }, function(err) {
 
@@ -57,7 +57,7 @@ describe('DmnEditor', function() {
 
   it('should open DRD', function(done) {
 
-    var editor = new DmnEditor({ container: container });
+    var editor = new Modeler({ container: container });
 
     editor.importXML(diagram, { open: false }, function(err) {
 

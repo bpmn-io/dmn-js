@@ -8,7 +8,7 @@ import DecisionTableEditor from 'dmn-js-decision-table/lib/DecisionTableEditor';
 /**
  * The dmn editor.
  */
-export default class DmnEditor extends EditingManager {
+export default class Modeler extends EditingManager {
 
   _getViewProviders() {
 

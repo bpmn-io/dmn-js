@@ -6,7 +6,7 @@ import DecisionTableViewer from 'dmn-js-decision-table/lib/DecisionTable';
 /**
  * The dmn editor.
  */
-export default class DmnViewer extends Manager {
+export default class Viewer extends Manager {
 
   _getViewProviders() {
 
