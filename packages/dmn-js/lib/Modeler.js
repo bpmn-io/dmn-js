@@ -18,7 +18,7 @@ export default class Modeler extends EditingManager {
         opens: 'dmn:Definitions'
       },
       {
-        id: 'decision',
+        id: 'decision-table',
         constructor: DecisionTableEditor,
         opens(element) {
           return element.$type === 'dmn:Decision' && element.decisionTable;

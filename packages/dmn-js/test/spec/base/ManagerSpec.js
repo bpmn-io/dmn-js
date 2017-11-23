@@ -4,7 +4,7 @@ import TestView from './TestView';
 
 class TestViewer extends Manager {
 
-  constructor(viewProviders=[ DECISION_VIEW, DRD_VIEW ], options={}) {
+  constructor(viewProviders=[ DECISION_TABLE_VIEW, DRD_VIEW ], options={}) {
     super(options);
 
     this._viewProviders = viewProviders;
@@ -16,8 +16,8 @@ class TestViewer extends Manager {
 
 }
 
-const DECISION_VIEW = {
-  id: 'decision',
+const DECISION_TABLE_VIEW = {
+  id: 'decision-table',
   opens: 'dmn:Decision',
   constructor: TestView
 };
@@ -258,9 +258,9 @@ describe('Manager', function() {
 
         expect(elementIds).to.eql([
           { type: 'drd', element: 'dish' },
-          { type: 'decision', element: 'dish-decision' },
-          { type: 'decision', element: 'season' },
-          { type: 'decision', element: 'guestCount' }
+          { type: 'decision-table', element: 'dish-decision' },
+          { type: 'decision-table', element: 'season' },
+          { type: 'decision-table', element: 'guestCount' }
         ]);
 
         done();
@@ -378,7 +378,7 @@ describe('Manager', function() {
   it('should provide { _parent, moddle } to viewers', function(done) {
 
     // given
-    var dummy = new TestViewer([ DECISION_VIEW ]);
+    var dummy = new TestViewer([ DECISION_TABLE_VIEW ]);
 
     dummy.importXML(diagramXML, function(err, warnings) {
 
