@@ -1,13 +1,9 @@
-import EditingManager from 'lib/base/EditingManager';
-
-import View from 'lib/base/View';
+import Modeler from 'lib/Modeler';
 
 import domify from 'domify';
 
 import domQuery from 'min-dom/lib/query';
 import domDelegate from 'min-dom/lib/delegate';
-
-import DrdModeler from 'dmn-js-drd/lib/Modeler';
 
 
 import { insertCSS } from 'test/helper';
@@ -62,7 +58,7 @@ describe('tabs', function() {
     var $tabs = domQuery('.editor-tabs', $parent);
 
 
-    var editor = new Editor({ container: $container });
+    var editor = new Modeler({ container: $container });
 
     domDelegate.bind($tabs, '.tab', 'click', function(e) {
       var target = e.delegateTarget;
@@ -96,57 +92,3 @@ describe('tabs', function() {
   });
 
 });
-
-
-class CustomView extends View {
-
-  constructor(options) {
-
-    super(options);
-
-    this._el = document.createElement('div');
-
-  }
-
-  open(el, done=noop) {
-
-    console.log('OPEN', el);
-
-    this._el.textContent = 'ELEMENT #' + el.id;
-
-    done();
-  }
-
-  attachTo(parentNode) {
-    parentNode.appendChild(this._el);
-  }
-
-  detach() {
-    if (this._el.parentNode) {
-      this._el.parentNode.removeChild(this._el);
-    }
-  }
-}
-
-
-class Editor extends EditingManager {
-
-  _getViewProviders() {
-
-    return [
-      {
-        id: 'drd',
-        constructor: DrdModeler,
-        opens: 'dmn:Definitions'
-      },
-      {
-        id: 'decision',
-        constructor: CustomView,
-        opens: 'dmn:Decision'
-      }
-    ];
-
-  }
-}
-
-function noop() {}
