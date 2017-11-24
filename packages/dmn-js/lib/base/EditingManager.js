@@ -2,6 +2,8 @@ import Manager from './Manager';
 
 import Ids from 'ids';
 
+import { isAny } from 'dmn-js-shared/lib/util/ModelUtil';
+
 
 export default class EditingManager extends Manager {
 
@@ -24,16 +26,11 @@ export default class EditingManager extends Manager {
 
       viewer.on('elements.changed', ({ elements }) => {
 
-        if (elements.some(function(e) {
+        var viewsChanged = elements.some(function(e) {
+          return isAny(e, [ 'dmn:Decision', 'dmn:Definitions' ]);
+        });
 
-          var bo = e.businessObject;
-
-          return bo && (
-            bo.$instanceOf('dmn:Decision') ||
-            bo.$instanceOf('dmn:Definitions')
-          );
-        })) {
-
+        if (viewsChanged) {
           this._updateViews();
         }
       });
