@@ -37,6 +37,7 @@ insertCSS('tabs.css', `
 `);
 
 var diagramXML = require('./diagram.dmn');
+// var performanceXML = require('./performance.dmn');
 
 
 describe('tabs', function() {
