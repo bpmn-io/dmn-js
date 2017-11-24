@@ -31,7 +31,7 @@ export default class DecisionTableHeadComponent extends Component {
   componentWillUnmout() {
     const root = this._sheet.getRoot();
 
-    this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
+    this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
   }
 
   render(props) {

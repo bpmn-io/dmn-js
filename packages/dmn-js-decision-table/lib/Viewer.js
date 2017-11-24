@@ -6,6 +6,7 @@ import assign from 'lodash/assign';
 import isNumber from 'lodash/isNumber';
 
 import domify from 'min-dom/lib/domify';
+import { remove as domRemove } from 'min-dom';
 
 import annotationsModule from './features/annotations';
 import coreModule from './core';
@@ -158,16 +159,14 @@ export default class Viewer extends Table {
     }
   
     this._emit('detach', {});
-  
-    parentNode.removeChild(container);
-  }
-
-  clear() {
-    console.warn('not implemented');
+    
+    domRemove(container);
   }
 
   destroy() {
-    console.warn('not implemented');
+    super.destroy();
+
+    this.detach();
   }
 
   getModules() {

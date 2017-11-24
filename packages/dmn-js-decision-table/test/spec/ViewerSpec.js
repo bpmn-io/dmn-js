@@ -1,18 +1,19 @@
+import TestContainer from 'mocha-test-container-support';
+
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 
 import simpleXML from './simple.dmn';
 
 describe('DecisionTable', function() {
 
-  let container;
-
+  let testContainer;
+  
   beforeEach(function() {
-    container = document.createElement('div');
-    document.body.appendChild(container);
+    testContainer = TestContainer.get(this);
   });
 
   function createDecisionTable(xml, done) {
-    const decisionTable = new DmnDecisionTableViewer({ container });
+    const decisionTable = new DmnDecisionTableViewer({ container: testContainer });
 
     decisionTable.importXML(xml, (err, warnings) => {
       done(err, warnings, decisionTable);
