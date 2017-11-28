@@ -33,10 +33,12 @@ export default class Viewer extends Table {
 
   open(decision, done) {
 
+    var err;
+
     // use try/catch to not swallow synchronous exceptions
     // that may be raised during model parsing
     try {
-    
+
       if (this._decision) {
         // clear existing rendered diagram
         this.clear();
@@ -46,11 +48,13 @@ export default class Viewer extends Table {
       this._decision = decision;
 
       // perform import
-      importDecision(this, decision, done);
+      return importDecision(this, decision, done);
     } catch (e) {
-      // handle synchronous errors
-      done(e);
+      err = e;
     }
+
+    // handle synchronously thrown exception
+    return done(err);
   }
 
   /**
@@ -130,19 +134,19 @@ export default class Viewer extends Table {
    * @param  {Element} parentNode
    */
   attachTo(parentNode) {
-  
+
     if (!parentNode) {
       throw new Error('parentNode required');
     }
-  
+
     // ensure we detach from the
     // previous, old parent
     this.detach();
-  
+
     const container = this._container;
-  
+
     parentNode.appendChild(container);
-  
+
     this._emit('attach', {});
   }
 
@@ -150,16 +154,16 @@ export default class Viewer extends Table {
    * Detach viewer from parent node, if attached.
    */
   detach() {
-    
+
     const container = this._container,
           parentNode = container.parentNode;
-  
+
     if (!parentNode) {
       return;
     }
-  
+
     this._emit('detach', {});
-    
+
     domRemove(container);
   }
 
@@ -187,13 +191,13 @@ export default class Viewer extends Table {
 
   static _createContainer(options) {
     const container = domify('<div class="decision-table-container"></div>');
-  
+
     assign(container.style, {
       width: ensureUnit(options.width),
       height: ensureUnit(options.height),
       position: options.position
     });
-  
+
     return container;
   }
 }
