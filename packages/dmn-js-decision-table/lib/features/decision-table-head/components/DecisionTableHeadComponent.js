@@ -3,7 +3,11 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
+import {
+  is,
+  getBusinessObject
+} from 'dmn-js-shared/lib/util/ModelUtil';
+
 
 export default class DecisionTableHeadComponent extends Component {
 
@@ -35,10 +39,16 @@ export default class DecisionTableHeadComponent extends Component {
   }
 
   render(props) {
+
     const { components } = this.context;
 
-    const root = this._sheet.getRoot(),
-          businessObject = getBusinessObject(root);
+    const root = this._sheet.getRoot();
+
+    if (!is(root, 'dmn:DMNElement')) {
+      return null;
+    }
+
+    const businessObject = getBusinessObject(root);
 
     const inputs = businessObject.input,
           outputs = businessObject.output;

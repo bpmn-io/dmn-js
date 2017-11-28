@@ -3,8 +3,11 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
+
 export default class DecisionTablePropertiesComponent extends Component {
-  
+
   componentWillMount() {
     const { injector } = this.context;
 
@@ -12,8 +15,13 @@ export default class DecisionTablePropertiesComponent extends Component {
   }
 
   render() {
-    const root = this._sheet.getRoot(),
-          businessObject = root.businessObject;
+    const root = this._sheet.getRoot();
+
+    if (!is(root, 'dmn:DMNElement')) {
+      return null;
+    }
+
+    var businessObject = root.businessObject;
 
     const { id, name } = businessObject.$parent;
 
