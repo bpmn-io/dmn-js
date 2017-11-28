@@ -5,5 +5,5 @@ export function elementToString(element) {
 
   const id = element.id ? ` id="${element.id}"` : '';
 
-  return `<${element.type}${id} />`;
+  return `<${element.$type}${id} />`;
 }
