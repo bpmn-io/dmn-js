@@ -48,8 +48,16 @@ describe('features/replace - drd replace', function() {
 
       expect(newElement).to.exist;
       expect(is(businessObject, 'dmn:Decision')).to.be.true;
-      expect(businessObject.decisionTable).to.exist;
-      expect(businessObject.decisionTable.output[0].id).to.exist;
+
+      var decisionTable = businessObject.decisionTable;
+
+      expect(decisionTable).to.exist;
+
+      expect(decisionTable.output).to.have.length(1);
+      expect(decisionTable.output[0].id).to.exist;
+
+      expect(decisionTable.input).to.have.length(1);
+      expect(decisionTable.input[0].id).to.exist;
     }));
 
 

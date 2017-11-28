@@ -43,6 +43,18 @@ function DrdReplace(drdFactory, replace, selection, modeling) {
       output.typeRef = 'string';
       output.$parent = table;
       table.output = [ output ];
+
+      var input = drdFactory.create('dmn:InputClause');
+      input.$parent = table;
+
+      var inputExpression = drdFactory.create('dmn:LiteralExpression', {
+        typeRef: 'string'
+      });
+
+      input.inputExpression = inputExpression;
+      inputExpression.$parent = input;
+
+      table.input = [ input ];
     }
 
     if (target.expression) {
