@@ -6,6 +6,7 @@
     "lint": "eslint packages",
     "test": "lerna run test",
     "dev": "lerna run dev --stream --scope",
+    "clean": "lerna clean --yes",
     "postinstall": "lerna bootstrap"
   },
   "author": {
