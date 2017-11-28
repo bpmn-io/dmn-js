@@ -12,7 +12,7 @@ import { bootstrapViewer, getDecisionTable } from '../helper/index';
 describe('DecisionTable', function() {
 
   let testContainer;
-  
+
   beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
@@ -24,6 +24,10 @@ describe('DecisionTable', function() {
       done(err, warnings, dmnDecisionTableViewer);
     });
   }
+
+
+  // TODO(nikku): test re-import and #clear() interaction
+  it.skip('should re-open, clearing the previous diagram');
 
 
   it('should import simple decision', function(done) {
@@ -43,10 +47,10 @@ describe('DecisionTable', function() {
 
 
     it('should attach', function() {
-      
+
       // given
       const container = domify('<div></div>');
-      
+
       // when
       decisionTableViewer.attachTo(container);
 
@@ -75,9 +79,9 @@ describe('DecisionTable', function() {
 
 
   describe('#detach', function() {
-    
+
     let decisionTableViewer;
-    
+
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
@@ -86,7 +90,7 @@ describe('DecisionTable', function() {
 
 
     it('should detach', function() {
-      
+
       // when
       decisionTableViewer.detach();
 
@@ -115,7 +119,7 @@ describe('DecisionTable', function() {
   describe('#destroy', function() {
 
     let decisionTableViewer;
-    
+
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
@@ -123,7 +127,7 @@ describe('DecisionTable', function() {
     });
 
     it('should destroy', function() {
-      
+
       // when
       decisionTableViewer.destroy();
 
@@ -137,7 +141,7 @@ describe('DecisionTable', function() {
   describe('#on', function() {
 
     let decisionTableViewer;
-    
+
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
@@ -145,7 +149,7 @@ describe('DecisionTable', function() {
     });
 
     it('should add listener', function() {
-      
+
       // when
       decisionTableViewer.on('foo', () => {
         return 'bar';
@@ -163,7 +167,7 @@ describe('DecisionTable', function() {
   describe('#off', function() {
 
     let decisionTableViewer;
-    
+
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
@@ -171,7 +175,7 @@ describe('DecisionTable', function() {
     });
 
     it('should remove listener', function() {
-      
+
       // given
       const listener = () => {
         return 'bar';
