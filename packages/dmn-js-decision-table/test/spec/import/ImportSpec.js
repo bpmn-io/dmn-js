@@ -1,3 +1,5 @@
+import TestContainer from 'mocha-test-container-support';
+
 import DecisionTableViewer from '../../helper/DecisionTableViewer';
 
 import dmnXML from './simple.dmn';
@@ -7,11 +9,9 @@ describe('import', function() {
   let dmnDecisionTableViewer;
 
   beforeEach(function() {
-    let container = document.createElement('div');
-    
-    document.body.appendChild(container);
+    const testContainer = TestContainer.get(this);
 
-    dmnDecisionTableViewer = new DecisionTableViewer({ container });
+    dmnDecisionTableViewer = new DecisionTableViewer({ container: testContainer });
   });
 
 
