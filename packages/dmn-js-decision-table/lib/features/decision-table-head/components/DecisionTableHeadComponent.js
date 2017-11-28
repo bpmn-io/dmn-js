@@ -102,17 +102,35 @@ export default class DecisionTableHeadComponent extends Component {
       </tr>
       <tr>
         {
-          inputs.map(({ id, inputExpression }) => {
-            return (
-              <th className="input type-ref">{ inputExpression.typeRef }</th>
-            );
+          inputs.map(input => {
+            const { inputExpression } = input;
+
+            const InputExpressionTypeRefComponent = components.getComponent('cell', {
+              cellType: 'input-expression-type-ref',
+              inputExpression
+            });
+
+            if (InputExpressionTypeRefComponent) {
+              return <InputExpressionTypeRefComponent input={ input } />;
+            } else {
+              return <th className="input type-ref">{ inputExpression.typeRef }</th>;
+            }
           })
         }
         {
-          outputs.map(({ id, typeRef }) => {
-            return (
-              <th className="output type-ref">{ typeRef }</th>
-            );
+          outputs.map(output => {
+            const { typeRef } = output;
+
+            const OutputTypeRefComponent = components.getComponent('cell', {
+              cellType: 'output-type-ref',
+              output
+            });
+
+            if (OutputTypeRefComponent) {
+              return <OutputTypeRefComponent output={ output } />;
+            } else {
+              return <th className="output type-ref">{ typeRef }</th>;
+            }
           })
         }
       </tr>

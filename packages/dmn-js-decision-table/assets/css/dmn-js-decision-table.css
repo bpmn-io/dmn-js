@@ -69,6 +69,15 @@ td.annotation {
   background-color: #f6f6f6;
 }
 
+th.input.input-expression:hover,
+th.input.input-expression.focussed {
+  background-color: #FEFDE6;
+}
+
+th.input.input-expression:not(.focussed):hover {
+  cursor: pointer;
+}
+
 td.annotation:hover,
 td.annotation.focussed {
   background-color: #FEFDE6;
