@@ -1,5 +1,6 @@
 {
   "name": "dmn-js-drd",
+  "description": "A decision requirements diagram view for dmn-js",
   "version": "0.11.0",
   "scripts": {
     "test": "karma start",
@@ -10,13 +11,18 @@
     "url": "https://github.com/bpmn-io/dmn-js"
   },
   "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "dmn",
+    "dmn-js",
+    "dmn-js-view",
+    "drd"
+  ],
   "devDependencies": {
-    "dmn-js": "^0.11.0",
-    "dmn-js-shared": "*",
     "mocha-test-container-support": "^0.2.0"
   },
   "dependencies": {
     "diagram-js": "^0.22.2",
-    "diagram-js-direct-editing": "^0.20.0"
+    "diagram-js-direct-editing": "^0.20.0",
+    "dmn-js-shared": "^0.11.0"
   }
 }

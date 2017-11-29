@@ -2,7 +2,7 @@ import Manager from './Manager';
 
 import Ids from 'ids';
 
-import { isAny } from 'dmn-js-shared/lib/util/ModelUtil';
+import { isAny } from '../util/ModelUtil';
 
 
 export default class EditingManager extends Manager {

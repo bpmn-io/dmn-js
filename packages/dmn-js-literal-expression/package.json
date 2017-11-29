@@ -1,5 +1,7 @@
 {
   "name": "dmn-js-literal-expression",
+  "description": "A literal expression view for dmn-js",
+  "version": "0.11.0",
   "scripts": {
     "test": "karma start"
   },
@@ -8,7 +10,13 @@
     "url": "https://github.com/bpmn-io/dmn-js"
   },
   "license": "SEE LICENSE IN LICENSE",
-  "devDependencies": {
-    "dmn-js-shared": "*"
+  "keywords": [
+    "dmn",
+    "dmn-js",
+    "dmn-js-view",
+    "literal expression"
+  ],
+  "dependencies": {
+    "dmn-js-shared": "^0.11.0"
   }
 }

@@ -1,4 +1,4 @@
-import EditingManager from 'dmn-js/lib/base/EditingManager';
+import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
 import DrdModelerView from '../../lib/Modeler';
 

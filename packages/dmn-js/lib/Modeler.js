@@ -1,4 +1,4 @@
-import EditingManager from './base/EditingManager';
+import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
 import DrdModeler from 'dmn-js-drd/lib/Modeler';
 import DecisionTableEditor from 'dmn-js-decision-table/lib/Editor';

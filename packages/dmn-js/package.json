@@ -31,11 +31,11 @@
     "decision modeling"
   ],
   "devDependencies": {
-    "dmn-js-shared": "*"
+    "diagram-js": "^0.22.2"
   },
   "dependencies": {
-    "diagram-js": "^0.22.2",
     "dmn-js-drd": "^0.11.0",
-    "dmn-js-decision-table": "^0.11.0"
+    "dmn-js-decision-table": "^0.11.0",
+    "dmn-js-shared": "^0.11.0"
   }
 }

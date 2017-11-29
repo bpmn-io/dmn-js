@@ -1,9 +1,13 @@
 {
   "name": "dmn-js-shared",
-  "version": "0.0.0",
-  "private": true,
+  "description": "Shared components used by dmn-js",
+  "version": "0.11.0",
   "scripts": {
-    "test": "exit 0"
+    "test": "karma start",
+    "dev": "npm run test -- --no-single-run --auto-watch"
   },
-  "license": "SEE LICENSE IN LICENSE"
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "diagram-js": "^0.22.4"
+  }
 }

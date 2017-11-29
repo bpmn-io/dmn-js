@@ -1,4 +1,4 @@
-import Manager from './base/Manager';
+import Manager from 'dmn-js-shared/lib/base/Manager';
 
 import DrdViewer from 'dmn-js-drd/lib/Viewer';
 import DecisionTableViewer from 'dmn-js-decision-table/lib/Viewer';
