@@ -4,12 +4,6 @@ var inherits = require('inherits');
 
 var Viewer = require('./Viewer');
 
-import forEach from 'lodash/collection/forEach';
-
-import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
-
-
 /**
  * A modeler for DMN tables.
  *
@@ -84,64 +78,12 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
  */
 function Modeler(options) {
   Viewer.call(this, options);
-
-  // ensure the definitions contains DI information
-  this.on('import.start', ({ definitions }) => {
-    if (!containsDi(definitions)) {
-      this._createDi(definitions);
-    }
-  });
 }
 
 inherits(Modeler, Viewer);
 
 module.exports = Modeler;
 
-
-Modeler.prototype._createDi = function(definitions) {
-
-  var drdFactory = this.get('drdFactory'),
-      elementFactory = this.get('elementFactory');
-
-  var idx = 0;
-
-  forEach(definitions.drgElements, function(element) {
-
-    var bounds,
-        extensionElements,
-        dimensions;
-
-    // only create DI for decision elements;
-    // we're not a full fledged layouter (!)
-    if (!is(element, 'dmn:Decision')) {
-      return;
-    }
-
-    extensionElements = element.extensionElements;
-
-    if (!extensionElements) {
-      extensionElements = element.extensionElements = drdFactory.createDi();
-      extensionElements.$parent = element;
-    }
-
-    dimensions = elementFactory._getDefaultSize(element);
-
-    bounds = drdFactory.createDiBounds({
-      x: 150 + (idx * 30),
-      y: 150 + (idx * 30),
-      width: dimensions.width,
-      height: dimensions.height
-    });
-
-    // add bounds
-    extensionElements.get('values').push(bounds);
-    bounds.$parent = extensionElements;
-
-    // stacking elements nicely on top of each other
-    idx++;
-  });
-
-};
 
 // modules the modeler is composed of
 //
@@ -161,6 +103,7 @@ Modeler.prototype._modelingModules = [
   require('diagram-js/lib/features/move'),
   require('diagram-js/lib/features/bendpoints'),
   require('diagram-js/lib/features/overlays'),
+  require('./features/generate-di'),
   require('./features/editor-actions'),
   require('./features/context-pad'),
   require('./features/keyboard'),
