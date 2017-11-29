@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_04uxikv" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_0" name="Decision 0">
+    <decisionTable id="DecisionTable_0">
+      <input id="Input_0">
+        <inputExpression id="InputExpression_0" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_0" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="Decision_1">
+    <extensionElements></extensionElements>
+    <decisionTable id="DecisionTable_1">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string" />
+      </input>
+      <output id="Output_1" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="Decision_2">
+  </decision>
+  <decision id="Decision_3">
+  </decision>
+  <inputData id="InputData_1">
+  </inputData>
+</definitions>

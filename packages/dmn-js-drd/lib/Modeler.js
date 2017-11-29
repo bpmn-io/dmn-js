@@ -2,9 +2,12 @@
 
 var inherits = require('inherits');
 
-var assign = require('lodash/object/assign');
-
 var Viewer = require('./Viewer');
+
+import forEach from 'lodash/collection/forEach';
+
+import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 var initialTemplate = [
   '<?xml version="1.0" encoding="UTF-8"?>',
@@ -100,6 +103,13 @@ var initialTemplate = [
  */
 function Modeler(options) {
   Viewer.call(this, options);
+
+  // ensure the definitions contains DI information
+  this.on('import.start', ({ definitions }) => {
+    if (!containsDi(definitions)) {
+      this._createDi(definitions);
+    }
+  });
 }
 
 inherits(Modeler, Viewer);
@@ -111,34 +121,49 @@ Modeler.prototype.createTemplate = function(done) {
   this.importXML(initialTemplate, done);
 };
 
-// TODO: refactor into feature
-Modeler.prototype.createDecisionDi = function(decision) {
-  var elementFactory = this.get('elementFactory'),
-      canvas = this.get('canvas'),
-      eventBus = this.get('eventBus'),
-      drdFactory = this.get('drdFactory');
+Modeler.prototype._createDi = function(definitions) {
 
-  var decisionShape = elementFactory.createShape({ type: 'dmn:Decision', businessObject: decision }),
-      bounds;
+  var drdFactory = this.get('drdFactory'),
+      elementFactory = this.get('elementFactory');
 
-  decisionShape = assign(decisionShape, { x: 200, y: 200 });
+  var idx = 0;
 
-  bounds = drdFactory.createDiBounds({
-    x: 200,
-    y: 200,
-    width: decisionShape.width,
-    height: decisionShape.height
+  forEach(definitions.drgElements, function(element) {
+
+    var bounds,
+        extensionElements,
+        dimensions;
+
+    // only create DI for decision elements;
+    // we're not a full fledged layouter (!)
+    if (!is(element, 'dmn:Decision')) {
+      return;
+    }
+
+    extensionElements = element.extensionElements;
+
+    if (!extensionElements) {
+      extensionElements = element.extensionElements = drdFactory.createDi();
+      extensionElements.$parent = element;
+    }
+
+    dimensions = elementFactory._getDefaultSize(element);
+
+    bounds = drdFactory.createDiBounds({
+      x: 150 + (idx * 30),
+      y: 150 + (idx * 30),
+      width: dimensions.width,
+      height: dimensions.height
+    });
+
+    // add bounds
+    extensionElements.get('values').push(bounds);
+    bounds.$parent = extensionElements;
+
+    // stacking elements nicely on top of each other
+    idx++;
   });
 
-  decision.extensionElements.$parent = decision;
-
-  bounds.$parent = decision.extensionElements;
-
-  decision.extensionElements.values.push(bounds);
-
-  canvas.addShape(decisionShape);
-
-  eventBus.fire('drdElement.added', { element: decisionShape, di: decision.extensionElements });
 };
 
 // modules the modeler is composed of

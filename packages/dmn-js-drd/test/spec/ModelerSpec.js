@@ -1,4 +1,5 @@
 var exampleXML = require('../fixtures/dmn/di.dmn'),
+    noDiXML = require('../fixtures/dmn/no-di.dmn'),
     emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
 
 var TestContainer = require('mocha-test-container-support');
@@ -103,8 +104,64 @@ describe('Modeler', function() {
 
   describe('decisions without DI', function() {
 
-    // ...
+    it('should generate ID', function(done) {
+      // given
+      createModeler(noDiXML, function(err, warnings, modeler) {
+
+        if (err) {
+          return done(err);
+        }
+
+        var drdJS = modeler.getActiveViewer();
+
+        var elementRegistry = drdJS.get('elementRegistry');
+
+        // when
+        var decision1 = elementRegistry.get('Decision_1');
+        var decision3 = elementRegistry.get('Decision_3');
+        var inputData = elementRegistry.get('InputData_1');
+
+        // then
+        expect(decision1).to.exist;
+        expect(decision3).to.exist;
+
+        // we generate DI for decisions, only
+        expect(inputData).not.to.exist;
+
+        expect(bounds(decision1)).to.eql({
+          x: 180,
+          y: 180,
+          width: 180,
+          height: 80
+        });
+
+        // we stack decision elements on top of each other
+        expect(bounds(decision3)).to.eql({
+          x: 240,
+          y: 240,
+          width: 180,
+          height: 80
+        });
+
+        done();
+      });
+
+    });
 
   });
 
 });
+
+
+
+
+//////////// helpers //////////////////////////////////
+
+function bounds(el) {
+  return {
+    x: el.x,
+    y: el.y,
+    width: el.width,
+    height: el.height
+  };
+}
