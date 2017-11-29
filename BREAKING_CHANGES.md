@@ -11,3 +11,6 @@ This file keeps track of features we've removed from dmn-js with the `next` refa
 
 * not attaching to 'body' anymore per default
 * DmnJS -> saveSVG now available on DrdViewer/Editor only
+
+* dmn-js: Modeler#createTemplate is gone; import your own, starter template instead:
+  Modeler#importXML(starterTemplate, ...);
