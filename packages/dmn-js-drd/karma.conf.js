@@ -1,6 +1,6 @@
 'use strict';
 
-var createConfig = require('dmn-js-shared/karma.conf');
+var createConfig = require('dmn-js-shared/karma.base');
 
 var path = require('path');
 
