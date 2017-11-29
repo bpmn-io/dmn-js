@@ -17,7 +17,7 @@ var Diagram = require('diagram-js');
 
 var inherits = require('inherits');
 
-var Importer = require('./import/Importer');
+var importDRD = require('./import/Importer').importDRD;
 
 var innerSVG = require('tiny-svg/lib/innerSVG');
 
@@ -234,6 +234,8 @@ Viewer.prototype._createContainer = function(options) {
 
 Viewer.prototype.open = function(definitions, done) {
 
+  var err;
+
   // use try/catch to not swallow synchronous exceptions
   // that may be raised during model parsing
   try {
@@ -247,11 +249,12 @@ Viewer.prototype.open = function(definitions, done) {
     this._definitions = definitions;
 
     // perform graphical import
-    Importer.importDRD(this, definitions, done);
+    return importDRD(this, definitions, done);
   } catch (e) {
-    // handle synchronous errors
-    done(e);
+    err = e;
   }
+
+  return done(err);
 };
 
 /**
