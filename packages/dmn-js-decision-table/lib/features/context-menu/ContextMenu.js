@@ -44,11 +44,11 @@ export default class ContextMenu {
   }
 
   _onClick(event) {
-    if (!event.target.closest('.context-menu')) {
-      this._contextMenu.close();
+    // if (!event.target.closest('.context-menu')) {
+    //   this._contextMenu.close();
 
-      window.removeEventListener('click', this._onClick);
-    }
+    //   window.removeEventListener('click', this._onClick);
+    // }
   }
 
   _getEntries(context) {

@@ -13,8 +13,24 @@ export default class InputExpressionCellComponent extends Component {
     this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
-  onClick() {
-    console.log('open context menu');
+  onClick(event) {
+    const { inputExpression } = this.props.input;
+
+    this._eventBus.fire('inputExpression.edit', {
+      event,
+      node: this.node,
+      inputExpression
+    });
+
+    this.node.classList.add('focussed');
+    
+    window.addEventListener('click', ({ target }) => {
+
+      if (!this.node.contains(target)) {
+        this.node.classList.remove('focussed');
+      }
+
+    });
   }
 
   onContextmenu(event) {
@@ -50,13 +66,19 @@ export default class InputExpressionCellComponent extends Component {
 
     const root = this._sheet.getRoot();
 
+    const { inputExpression } = this.props.input;
+
     changeSupport.onElementsChanged(root.id, this.onElementsChanged);
+    changeSupport.onElementsChanged(inputExpression.id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
     const root = this._sheet.getRoot();
+
+    const { inputExpression } = this.props.input;
     
     this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
+    this._changeSupport.onElementsChanged(inputExpression.id, this.onElementsChanged);
   }
 
   render() {

@@ -1,3 +1,7 @@
+.decision-table-container {
+  overflow: scroll;
+}
+
 .tjs-container {
   font-family: 'Arial', sans-serif;
 }
@@ -246,6 +250,26 @@ table tfoot tr.add-rule:hover td {
 
 .context-menu .context-menu-group .context-menu-group-entry button:hover {
   cursor: pointer;
+}
+
+/* input expression edit */
+.context-menu .input-expression-edit {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.context-menu .input-expression-edit .input-expression-edit-input {
+  margin-left: 10px;
+  outline: none;
+  border: none;
+  border-bottom: solid .5px #555;
+  background: none;
+  padding: 4px;
+  font-size: 16px;
+  color: #555;
 }
 
 /* selection */
