@@ -395,7 +395,7 @@ td.selected {
 .decision-table-container .view-drd {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 60px;
 }
 
 .decision-table-container .view-drd .view-drd-button {
@@ -408,8 +408,53 @@ td.selected {
   color: #555;
   font-weight: bold;
   cursor: pointer;
+  outline: none;
 }
 
 .decision-table-container .view-drd .view-drd-button:hover {
   background: #f6f6f6;
+}
+
+/* powered by */
+.powered-by-logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  z-index: 10000;
+  cursor: pointer;
+}
+
+.powered-by-logo .logo {
+  width: 100%;
+}
+
+.powered-by-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.powered-by-overlay .powered-by-overlay-content {
+  background: #fff;
+  padding: 8px;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  font-size: 16px;
+  color: #555;
+  display: flex;
+  flex-direction: row;
+  max-width: 260px;
+}
+
+.powered-by-overlay .powered-by-overlay-content div:first-child {
+  margin-right: 8px;
 }

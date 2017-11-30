@@ -5,7 +5,7 @@ import { importDecision } from './import/Importer';
 import assign from 'lodash/assign';
 import isNumber from 'lodash/isNumber';
 
-import domify from 'min-dom/lib/domify';
+import { domify } from 'min-dom';
 import { remove as domRemove } from 'min-dom';
 
 import annotationsModule from './features/annotations';
@@ -16,6 +16,7 @@ import ruleIndicesModule from './features/rule-indices';
 import rulesModule from './features/rules';
 import hitPolicyModule from './features/hit-policy';
 import viewDrdModule from './features/view-drd';
+import PoweredByModule from './features/powered-by';
 
 
 export default class Viewer extends Table {
@@ -82,6 +83,7 @@ export default class Viewer extends Table {
     ];
 
     let allModules = [
+      PoweredByModule,
       ...baseModules,
       ...extraModules,
       ...staticModules
