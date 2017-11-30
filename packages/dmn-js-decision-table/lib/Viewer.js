@@ -15,6 +15,7 @@ import decisionTablePropertiesModule from './features/decision-table-properties'
 import ruleIndicesModule from './features/rule-indices';
 import rulesModule from './features/rules';
 import hitPolicyModule from './features/hit-policy';
+import viewDrdModule from './features/view-drd';
 
 
 export default class Viewer extends Table {
@@ -185,7 +186,8 @@ export default class Viewer extends Table {
       decisionTablePropertiesModule,
       ruleIndicesModule,
       rulesModule,
-      hitPolicyModule
+      hitPolicyModule,
+      viewDrdModule
     ];
   }
 

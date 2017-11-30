@@ -6,41 +6,42 @@
   font-family: 'Arial', sans-serif;
 }
 
-table {
+.tjs-container table {
   table-layout: fixed;
   background-color: #FFF;
   border-collapse: collapse;
   border: solid 2px #555;
   color: #555;
+  min-width: 100%;
 }
 
-table thead {
+.tjs-container table thead {
   border-bottom: 3px double #555;
 }
 
-td,
-th {
+.tjs-container td,
+.tjs-container th {
   font-size: 16px;
 }
 
-td {
+.tjs-container td {
   border: solid 1px #555;
   padding: 4px;
 }
 
 
-th {
+.tjs-container th {
   border: solid 1px #555;
   min-width: 192px;
   padding: 4px;
 }
 
-thead tr:first-child th:first-child {
+.tjs-container thead tr:first-child th:first-child {
   width: 45px;
   min-width: 45px;
 }
 
-thead tr:not(:first-child) th {
+.tjs-container thead tr:not(:first-child) th {
   font-weight: normal;
 }
 
@@ -48,25 +49,25 @@ thead tr:not(:first-child) th {
   text-align: center;
 }
 
-th.hit-policy {
+.tjs-container th.hit-policy {
   width: 40px;
   vertical-align: top;
   cursor: pointer;
 }
 
-th.hit-policy:hover {
+.tjs-container th.hit-policy:hover {
   background-color: #FEFDE6;
 }
 
-td.rule-index {
+.tjs-container td.rule-index {
   text-align: right;
 }
 
-th.annotation {
+.tjs-container th.annotation {
   vertical-align: bottom;
 }
 
-td.annotation {
+.tjs-container td.annotation {
   text-align: center;
 }
 
@@ -190,6 +191,8 @@ table tfoot tr.add-rule:hover td {
   border: solid 1px #CCC;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  font-size: 16px;
+  color: #555;
 }
 
 .context-menu .context-menu-group {
@@ -386,4 +389,27 @@ td.selected {
   border-top: 1px solid #555;
   font-family: monospace;
   font-size: 18px;
+}
+
+/* view drd */
+.decision-table-container .view-drd {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.decision-table-container .view-drd .view-drd-button {
+  background: #fff;
+  padding: 8px;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  font-size: 16px;
+  color: #555;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.decision-table-container .view-drd .view-drd-button:hover {
+  background: #f6f6f6;
 }
