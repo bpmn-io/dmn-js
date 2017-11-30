@@ -5,10 +5,24 @@ describe('Viewer', function() {
 
   var diagram = require('./diagram.dmn');
 
+  var container;
+  
+  beforeEach(function() {
+    container = document.createElement('div');
+    container.className = 'test-container';
 
-  it.skip('should open DMN table', function(done) {
+    document.body.appendChild(container);
+  });
 
-    var editor = new Viewer();
+  /*
+  afterEach(function() {
+    document.body.removeChild(container);
+  });
+  */
+
+  it('should open DMN table', function(done) {
+
+    var editor = new Viewer({ container: container });
 
     editor.importXML(diagram, { open: false }, function(err) {
 
@@ -30,7 +44,7 @@ describe('Viewer', function() {
 
   it('should open DRD', function(done) {
 
-    var editor = new Viewer();
+    var editor = new Viewer({ container: container });
 
     editor.importXML(diagram, { open: false }, function(err) {
 
