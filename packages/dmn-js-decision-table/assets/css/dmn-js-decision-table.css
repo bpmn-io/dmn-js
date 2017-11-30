@@ -1,5 +1,5 @@
 .decision-table-container {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .tjs-container {
@@ -18,6 +18,17 @@ table thead {
   border-bottom: 3px double #555;
 }
 
+td,
+th {
+  font-size: 16px;
+}
+
+td {
+  border: solid 1px #555;
+  padding: 4px;
+}
+
+
 th {
   border: solid 1px #555;
   min-width: 192px;
@@ -31,11 +42,6 @@ thead tr:first-child th:first-child {
 
 thead tr:not(:first-child) th {
   font-weight: normal;
-}
-
-td {
-  border: solid 1px #555;
-  padding: 4px;
 }
 
 .tjs-container thead th {
@@ -73,12 +79,23 @@ td.annotation {
   background-color: #f6f6f6;
 }
 
+th.input.input-expression,
+th.output.output-name,
+th.type-ref {
+  font-family: monospace;
+}
+
 th.input.input-expression:hover,
 th.input.input-expression.focussed {
   background-color: #FEFDE6;
+  cursor: pointer;
 }
 
-th.input.input-expression:not(.focussed):hover {
+th.input.type-ref:hover,
+th.output.type-ref:hover,
+th.input.type-ref.focussed,
+th.output.type-ref.focussed {
+  background-color: #FEFDE6;
   cursor: pointer;
 }
 
@@ -169,7 +186,7 @@ table tfoot tr.add-rule:hover td {
 /* context menu */
 .context-menu {
   position: absolute;
-  background: #FAFAFA;
+  background: #fff;
   border: solid 1px #CCC;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
@@ -274,7 +291,28 @@ table tfoot tr.add-rule:hover td {
   background: none;
   padding: 4px;
   font-size: 16px;
+  color: #555555;
+}
+
+/* type ref edit */
+.context-menu .type-ref-edit {
+  font-size: 16px;
+  font-weight: bold;
   color: #555;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.context-menu .type-ref-edit .type-ref-edit-select {
+  margin-left: 8px;
+  outline: none;
+  border: none;
+  border-bottom: solid .5px #555;
+  background: none;
+  padding: 4px;
+  font-size: 16px;
+  color: #555555;
+  font-family: monospace;
 }
 
 /* input expression edit */
@@ -295,6 +333,7 @@ table tfoot tr.add-rule:hover td {
   padding: 4px;
   font-size: 16px;
   color: #555;
+  font-family: monospace;
 }
 
 /* selection */

@@ -111,7 +111,7 @@ export default class DecisionTableHeadComponent extends Component {
             });
 
             if (InputExpressionTypeRefComponent) {
-              return <InputExpressionTypeRefComponent input={ input } />;
+              return <InputExpressionTypeRefComponent inputExpression={ inputExpression } />;
             } else {
               return <th className="input type-ref">{ inputExpression.typeRef }</th>;
             }

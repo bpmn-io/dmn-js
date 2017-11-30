@@ -88,7 +88,7 @@ export default class DecisionTablePropertiesComponent extends Component {
           onBlur={ () => this.onBlur('name') }
           onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
           ref={ node => this.nameNode = node }
-          className={ nameClassNames.join(' ') }>{ name }</h3>
+          className={ nameClassNames.join(' ') }>{ name || (this.state.name.isFocussed ? '' : '-') }</h3>
         <h5 
           contenteditable="true"
           spellcheck="false"
@@ -96,7 +96,7 @@ export default class DecisionTablePropertiesComponent extends Component {
           onBlur={ () => this.onBlur('id') }
           onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
           ref={ node => this.idNode = node }
-          className={ idClassNames.join(' ') }>{ id }</h5>
+          className={ idClassNames.join(' ') }>{ id || (this.state.id.isFocussed ? '' : '-') }</h5>
       </header>
     );
   }

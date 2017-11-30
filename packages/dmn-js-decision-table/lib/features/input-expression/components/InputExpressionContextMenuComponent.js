@@ -48,7 +48,11 @@ export default class InputExpressionContextMenuComponent extends Component {
         Expression:
         <input
           className="input-expression-edit-input"
-          ref={ node => this.node = node }
+          ref={ node => {
+            this.node = node;
+            node && node.focus();
+            node && node.select();
+          } }
           type="text"
           placeholder="-"
           spellcheck="false"

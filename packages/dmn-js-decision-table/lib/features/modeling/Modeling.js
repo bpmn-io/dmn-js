@@ -91,6 +91,28 @@ export default class Modeling extends BaseModeling {
     this._commandStack.execute('editProperties', context);
   }
 
+  editInputExpressionTypeRef(inputExpression, typeRef) {
+    const context = {
+      element: inputExpression,
+      properties: {
+        typeRef
+      }
+    };
+
+    this._commandStack.execute('editProperties', context);
+  }
+
+  editOutputTypeRef(output, typeRef) {
+    const context = {
+      element: output,
+      properties: {
+        typeRef
+      }
+    };
+
+    this._commandStack.execute('editProperties', context);
+  }
+
   editCell(cell, text) {
     const context = {
       element: cell,

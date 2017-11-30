@@ -49,8 +49,6 @@ export default class HitPolicyCellComponent extends Component {
 
     const aggregationLabel = getAggregationLabel(aggregation);
 
-    console.log(businessObject);
-
     return (
       <th
         id="hit-policy"

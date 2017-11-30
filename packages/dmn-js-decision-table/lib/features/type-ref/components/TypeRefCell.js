@@ -3,8 +3,9 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-export default class InputExpressionCellComponent extends Component {
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
+export default class TypeRefCell extends Component {
   constructor(props) {
     super(props);
 
@@ -13,18 +14,22 @@ export default class InputExpressionCellComponent extends Component {
     this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
-  onClick(event) {
-    const { inputExpression } = this.props.input;
+  onClick() {
+    const { inputExpression, output } = this.props;
 
-    this._eventBus.fire('inputExpression.edit', {
+    this._eventBus.fire('typeRef.edit', {
       event,
       node: this.node,
-      inputExpression
+      element: inputExpression || output
     });
   }
 
   onContextmenu(event) {
-    const { id } = this.props.input;
+    const { inputExpression, output } = this.props;
+
+    const id = inputExpression
+      ? inputExpression.$parent.id
+      : output.id;
 
     this._eventBus.fire('cell.contextmenu', {
       event,
@@ -46,31 +51,38 @@ export default class InputExpressionCellComponent extends Component {
 
     const root = this._sheet.getRoot();
 
-    const { inputExpression } = this.props.input;
+    const { inputExpression, output } = this.props;
 
     changeSupport.onElementsChanged(root.id, this.onElementsChanged);
-    changeSupport.onElementsChanged(inputExpression.id, this.onElementsChanged);
+    changeSupport.onElementsChanged(inputExpression ? inputExpression.id : output.id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
     const root = this._sheet.getRoot();
 
-    const { inputExpression } = this.props.input;
+    const { inputExpression, output } = this.props;
     
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
-    this._changeSupport.offElementsChanged(inputExpression.id, this.onElementsChanged);
+    this._changeSupport.offElementsChanged(inputExpression ? inputExpression.id : output.id, this.onElementsChanged);
   }
 
   render() {
-    const { inputExpression } = this.props.input;
-    
+    const { inputExpression, output } = this.props;
+
+    const businessOject = inputExpression || output;
+
+    const { typeRef } = businessOject;
+
+    const className = is(businessOject, 'dmn:LiteralExpression')
+      ? 'input type-ref'
+      : 'output type-ref';
+
     return (
       <th
         onClick={ this.onClick }
         onContextmenu={ this.onContextmenu }
         ref={ node => this.node = node }
-        className="input input-expression">{ inputExpression.text || '-' }</th>
+        className={ className }>{ typeRef }</th>
     );
   }
-
 }
