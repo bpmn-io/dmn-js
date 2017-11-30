@@ -13,8 +13,23 @@ export default class HitPolicyCellComponent extends Component {
   render() {
     const root = this._sheet.getRoot(),
           businessObject = root.businessObject,
-          hitPolicy = businessObject.hitPolicy.charAt(0);
+          hitPolicy = businessObject.hitPolicy.charAt(0),
+          aggregation = businessObject.aggregation;
 
-    return <th className="hit-policy" rowspan="3">{ hitPolicy }</th>;
+    const aggregationLabel = getAggregationLabel(aggregation);
+
+    return <th className="hit-policy" rowspan="3">{ hitPolicy }{ aggregationLabel }</th>;
+  }
+}
+
+////////// helpers //////////
+
+function getAggregationLabel(aggregation) {
+  switch (aggregation) {
+  case 'SUM': return '+';
+  case 'MIN': return '<';
+  case 'MAX': return '>';
+  case 'COUNT': return '#';
+  default: return '';
   }
 }

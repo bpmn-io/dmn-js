@@ -54,6 +54,21 @@ export default class Modeling extends BaseModeling {
     this._commandStack.execute('editProperties', context);
   }
 
+  editHitPolicy(hitPolicy, aggregation) {
+    const root = this._sheet.getRoot(),
+          businessObject = root.businessObject;
+
+    const context = {
+      element: businessObject,
+      properties: {
+        hitPolicy,
+        aggregation
+      }
+    };
+
+    this._commandStack.execute('editProperties', context);
+  }
+
   editInputExpression(inputExpression, text) {
     const context = {
       element: inputExpression,

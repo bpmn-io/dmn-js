@@ -77,8 +77,8 @@ export default class InputExpressionCellComponent extends Component {
 
     const { inputExpression } = this.props.input;
     
-    this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
-    this._changeSupport.onElementsChanged(inputExpression.id, this.onElementsChanged);
+    this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
+    this._changeSupport.offElementsChanged(inputExpression.id, this.onElementsChanged);
   }
 
   render() {
