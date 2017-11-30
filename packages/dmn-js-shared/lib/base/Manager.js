@@ -105,7 +105,7 @@ export default class Manager {
 
       this.open(view, (err, warnings) => {
 
-        var allWarnings = [].concat(parseWarnings, warnings);
+        var allWarnings = [].concat(parseWarnings, warnings || []);
 
         this._emit('import.done', { error: err, warnings: allWarnings });
 
