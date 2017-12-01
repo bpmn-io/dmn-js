@@ -1,9 +1,9 @@
-import Manager from 'lib/base/Manager';
+import EditingManager from 'lib/base/EditingManager';
 
 import TestView from './TestView';
 
 
-class TestViewer extends Manager {
+class TestViewer extends EditingManager {
 
   _getViewProviders() {
     return [

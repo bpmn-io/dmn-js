@@ -8,7 +8,8 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
-    "diagram-js": "^0.22.4"
+    "diagram-js": "^0.22.4",
+    "min-dash": "^1.1.0"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
