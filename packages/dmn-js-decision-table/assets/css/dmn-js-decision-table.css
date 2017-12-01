@@ -372,6 +372,11 @@ td.selected {
   background: #FEFDE6;
 }
 
+.decision-table-id.invalid {
+  background: #f4cecd;
+  color: #c9302c;
+}
+
 .decision-table-name:not(.focussed):hover,
 .decision-table-id:not(.focussed):hover {
   background: #FEFDE6;

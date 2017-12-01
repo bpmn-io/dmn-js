@@ -8,6 +8,7 @@ import debounce from 'lodash/debounce';
 const DEBOUNCE_TIME = 300;
 
 import { selectNodeContents } from '../../../util/DomUtil';
+import { isIdValid } from '../../../util/IdsUtil';
 
 export default class DecisionTablePropertiesComponent extends Component {
 
@@ -15,32 +16,57 @@ export default class DecisionTablePropertiesComponent extends Component {
     super(props);
 
     this.state = {
-      name: {
-        isFocussed: false
-      },
-      id: {
-        isFocussed: false
-      }
+      nameIsFocussed: false,
+      idIsFocussed: false,
+      idIsValid: true
     };
 
     this.onInput = this.onInput.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+
+    this.editDecisionTableName = debounce(this.editDecisionTableName.bind(this), DEBOUNCE_TIME);
+    this.editDecisionTableId = debounce(this.editDecisionTableId.bind(this), DEBOUNCE_TIME);
+  }
+
+  editDecisionTableName(name) {
+    this._modeling.editDecisionTableName(name);
+  }
+
+  editDecisionTableId(id) {
+    this._modeling.editDecisionTableId(id);
   }
 
   onInput(event) {
+
     if (event.target === this.nameNode) {
-      this._modeling.editDecisionTableName(event.target.textContent);
+
+      this.editDecisionTableName(event.target.textContent);
+    
     } else if (event.target === this.idNode) {
-      this._modeling.editDecisionTableId(event.target.textContent);
+
+      const root = this._sheet.getRoot(),
+            businessObject = root.businessObject;
+
+      const id = event.target.textContent;
+
+      // if no error message returned ID is valid
+      if (!isIdValid(businessObject, id)) {
+        
+        // this should be debounced
+        this.editDecisionTableId(id);
+
+        this.idNode.classList.remove('invalid');
+      } else {
+        this.idNode.classList.add('invalid');
+      }
+
     }
   }
 
   onFocus(property) {
     this.setState({
-      [ property ]: {
-        isFocussed: true
-      }
+      [ `${property}IsFocussed` ]: true
     }, () => {
       selectNodeContents(this[ `${property}Node` ]);
     });
@@ -48,9 +74,7 @@ export default class DecisionTablePropertiesComponent extends Component {
 
   onBlur(property) {
     this.setState({
-      [ property ]: {
-        isFocussed: false
-      }
+      [ `${property}IsFocussed` ]: false
     });
   }
   
@@ -64,13 +88,13 @@ export default class DecisionTablePropertiesComponent extends Component {
   render() {
     const nameClassNames = [ 'decision-table-name' ];
 
-    if (this.state.name.isFocussed) {
+    if (this.state.nameIsFocussed) {
       nameClassNames.push('focussed');
     }
 
     const idClassNames = [ 'decision-table-id' ];
     
-    if (this.state.id.isFocussed) {
+    if (this.state.idIsFocussed) {
       idClassNames.push('focussed');
     }
 
@@ -86,17 +110,17 @@ export default class DecisionTablePropertiesComponent extends Component {
           spellcheck="false"
           onFocus={ () => this.onFocus('name') }
           onBlur={ () => this.onBlur('name') }
-          onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
+          onInput={ this.onInput }
           ref={ node => this.nameNode = node }
-          className={ nameClassNames.join(' ') }>{ name || (this.state.name.isFocussed ? '' : '-') }</h3>
+          className={ nameClassNames.join(' ') }>{ name || (this.state.nameIsFocussed ? '' : '-') }</h3>
         <h5 
           contenteditable="true"
           spellcheck="false"
           onFocus={ () => this.onFocus('id') }
           onBlur={ () => this.onBlur('id') }
-          onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
+          onInput={ this.onInput }
           ref={ node => this.idNode = node }
-          className={ idClassNames.join(' ') }>{ id || (this.state.id.isFocussed ? '' : '-') }</h5>
+          className={ idClassNames.join(' ') }>{ id || (this.state.idIsFocussed ? '' : '-') }</h5>
       </header>
     );
   }
