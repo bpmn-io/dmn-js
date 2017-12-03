@@ -123,26 +123,23 @@ export default class ContextMenu {
       entries.push(
         <div className="context-menu-group">
           <h4 className="context-menu-group-title">Rule</h4>
-          <div className="context-menu-group-entry">
-            <div
-              class="context-menu-group-entry-part"
-              onClick={ () => handlers.addRuleAbove(element.row) }>
-              <span className="context-menu-group-entry-icon">+</span>
-              Add Above
-            </div>
-            <div
-              class="context-menu-group-entry-part"
-              onClick={ () => handlers.addRuleBelow(element.row) }>
-              Below
-            </div>
+          <div
+            className="context-menu-group-entry"
+            onClick={ () => handlers.addRuleAbove(element.row) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Add Above
           </div>
-          <div className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }>
-            <div
-              className="context-menu-group-entry-part"
-              onClick={ () => handlers.removeRule(element.row) }>
-              <span className="context-menu-group-entry-icon">-</span>
-              Remove
-            </div>
+          <div
+            className="context-menu-group-entry"
+            onClick={ () => handlers.addRuleBelow(element.row) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Add Below
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            onClick={ () => handlers.removeRule(element.row) }>
+            <span className="context-menu-group-entry-icon">-</span>
+            Remove
           </div>
         </div>
       );
@@ -156,26 +153,23 @@ export default class ContextMenu {
       entries.push(
         <div className="context-menu-group">
           <h4 className="context-menu-group-title">Input</h4>
-          <div className="context-menu-group-entry">
-            <div
-              className="context-menu-group-entry-part"
-              onClick={ () => handlers.addInputLeft(actualElement) }>
-              <span className="context-menu-group-entry-icon">+</span>
-              Add Left
-            </div>
-            <div
-              className="context-menu-group-entry-part"
-              onClick={ () => handlers.addInputRight(actualElement) }>
-              Right
-            </div>
+          <div
+            className="context-menu-group-entry"
+            onClick={ () => handlers.addInputLeft(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Add Left
           </div>
-          <div className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }>
-            <div
-              class="context-menu-group-entry-part"
-              onClick={ () => handlers.removeInput(actualElement) }>
-              <span className="context-menu-group-entry-icon">-</span>
-              Remove
-            </div>
+          <div
+            className="context-menu-group-entry"
+            onClick={ () => handlers.addInputRight(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Add Right
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            onClick={ () => handlers.removeInput(actualElement) }>
+            <span className="context-menu-group-entry-icon">-</span>
+            Remove
           </div>
         </div>
       );
@@ -187,26 +181,23 @@ export default class ContextMenu {
       entries.push(
         <div className="context-menu-group">
           <h4 className="context-menu-group-title">Output</h4>
-          <div className="context-menu-group-entry">
-            <div
-              className="context-menu-group-entry-part"
-              onClick={ () => handlers.addOutputLeft(actualElement) }>
-              <span className="context-menu-group-entry-icon">+</span>
-              Add Left
-            </div>
-            <div
-              className="context-menu-group-entry-part"
-              onClick={ () => handlers.addOutputRight(actualElement) }>
-              Right
-            </div>
+          <div
+            className="context-menu-group-entry"
+            onClick={ () => handlers.addOutputLeft(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Add Left
           </div>
-          <div className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }>
-            <div
-              class="context-menu-group-entry-part"
-              onClick={ () => handlers.removeOutput(actualElement) }>
-              <span className="context-menu-group-entry-icon">-</span>
-              Remove
-            </div>
+          <div
+            className="context-menu-group-entry"
+            onClick={ () => handlers.addOutputRight(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Add Right
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            onClick={ () => handlers.removeOutput(actualElement) }>
+            <span className="context-menu-group-entry-icon">-</span>
+            Remove
           </div>
         </div>
       );

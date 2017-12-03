@@ -10,28 +10,28 @@
   table-layout: fixed;
   background-color: #FFF;
   border-collapse: collapse;
-  border: solid 2px #555;
-  color: #555;
+  border: solid 2px #000;
+  color: #000;
   min-width: 100%;
 }
 
 .tjs-container table thead {
-  border-bottom: 3px double #555;
+  border-bottom: 3px double #000;
 }
 
 .tjs-container td,
 .tjs-container th {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .tjs-container td {
-  border: solid 1px #555;
+  border: solid 1px #000;
   padding: 4px;
 }
 
 
 .tjs-container th {
-  border: solid 1px #555;
+  border: solid 1px #000;
   min-width: 192px;
   padding: 4px;
 }
@@ -56,7 +56,7 @@
 }
 
 .tjs-container th.hit-policy:hover {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
 }
 
 .tjs-container td.rule-index {
@@ -77,18 +77,18 @@ th.input,
 td.input,
 th.annotation,
 td.annotation {
-  background-color: #f6f6f6;
+  background-color: #fff;
 }
 
-th.input.input-expression,
-th.output.output-name,
-th.type-ref {
+.tjs-container thead tr th.input.input-expression,
+.tjs-container thead tr th.output.output-name,
+.tjs-container thead tr  th.type-ref {
   font-family: monospace;
 }
 
 th.input.input-expression:hover,
 th.input.input-expression.focussed {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
   cursor: pointer;
 }
 
@@ -96,13 +96,13 @@ th.input.type-ref:hover,
 th.output.type-ref:hover,
 th.input.type-ref.focussed,
 th.output.type-ref.focussed {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
   cursor: pointer;
 }
 
 td.annotation:hover,
 td.annotation.focussed {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
 }
 
 td.annotation:not(.focussed):hover {
@@ -111,7 +111,7 @@ td.annotation:not(.focussed):hover {
 
 th.output,
 td.output {
-  background-color: #f7fcf4;
+  background-color: #FAFAFA;
 }
 
 th.output.output-name {
@@ -120,7 +120,7 @@ th.output.output-name {
 
 th.output.output-name:hover,
 th.output.output-name.focussed {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
 }
 
 th.output.output-name:not(.focussed):hover {
@@ -129,7 +129,7 @@ th.output.output-name:not(.focussed):hover {
 
 td.input:not(.selected):hover,
 td.output:not(.selected):hover {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
   cursor: pointer;
 }
 
@@ -140,7 +140,7 @@ th.output.add-output {
 
 th.input.add-input:hover,
 th.output.add-output:hover {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
 }
 
 th.input-type,
@@ -150,11 +150,11 @@ th.output-type {
 }
 
 table tr > .input + .output {
-  border-left: 3px double #555;
+  border-left: 3px double #000;
 }
 
 table tbody {
-  border: solid 2px #555;
+  border: solid 2px #000;
 }
 
 td {
@@ -180,7 +180,7 @@ table tfoot td.add-rule-add {
 }
 
 table tfoot tr.add-rule:hover td {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
   cursor: pointer;
 }
 
@@ -191,25 +191,24 @@ table tfoot tr.add-rule:hover td {
   border: solid 1px #CCC;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  font-size: 16px;
-  color: #555;
+  font-size: 14px;
+  color: #000;
 }
 
 .context-menu .context-menu-group {
-  margin: 6px;
-  padding-bottom: 6px;
+  margin-bottom: 6px;
   border-bottom: solid 1px #ccc;
 }
 
 .context-menu .context-menu-group:last-child {
   border-bottom: none;
-  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .context-menu .context-menu-group .context-menu-group-title {
   font-weight: bold;
-  color: #555;
-  margin: 0 0 6px 0;
+  color: #000;
+  margin: 6px;
 }
 
 .context-menu .context-menu-group .context-menu-group-entry {
@@ -217,41 +216,19 @@ table tfoot tr.add-rule:hover td {
   flex-direction: row;
   align-items: stretch;
   width: 100%;
+  white-space: nowrap;
+  padding: 3px 6px 3px 6px;
+  cursor: pointer;
+  padding: 6px;
 }
 
 .context-menu .context-menu-group .context-menu-group-entry.disabled {
   pointer-events: none;
-}
-
-.context-menu .context-menu-group .context-menu-group-entry.disabled .context-menu-group-entry-part {
   color: #ccc;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry-part {
-  padding: 3px 6px 3px 6px;
-  border: solid 1px transparent;
-  white-space: nowrap;
-}
-
-.context-menu .context-menu-group .context-menu-group-entry:hover .context-menu-group-entry-part {
-  border-color: #555;
-}
-
-.context-menu .context-menu-group .context-menu-group-entry-part:first-child {
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-}
-
-.context-menu .context-menu-group .context-menu-group-entry-part:last-child {
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-  flex: 1;
-}
-
-.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-part:hover {
-  background-color: #555;
-  color: #fff;
-  cursor: pointer;
+.context-menu .context-menu-group .context-menu-group-entry:hover {
+  background-color: #fffcb0;
 }
 
 .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
@@ -261,22 +238,11 @@ table tfoot tr.add-rule:hover td {
   margin-right: 6px;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry button {
-  border: solid 1px transparent;
-  border-radius: 2px;
-  background: none;
-  padding: 6px;
-}
-
-.context-menu .context-menu-group .context-menu-group-entry button:hover {
-  cursor: pointer;
-}
-
 /* hit policy edit */
 .context-menu .hit-policy-edit {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #555;
+  color: #000;
   padding: 8px;
   white-space: nowrap;
 }
@@ -289,19 +255,24 @@ table tfoot tr.add-rule:hover td {
 .context-menu .hit-policy-edit .hit-policy-edit-operator-select {
   margin-left: 8px;
   outline: none;
-  border: none;
-  border-bottom: solid .5px #555;
-  background: none;
-  padding: 4px;
-  font-size: 16px;
-  color: #555555;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  color: #000;
+}
+
+.context-menu .hit-policy-edit .hit-policy-edit-policy-select:focus,
+.context-menu .hit-policy-edit .hit-policy-edit-operator-select:focus {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
 /* type ref edit */
 .context-menu .type-ref-edit {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #555;
+  color: #000;
   padding: 8px;
   white-space: nowrap;
 }
@@ -309,20 +280,24 @@ table tfoot tr.add-rule:hover td {
 .context-menu .type-ref-edit .type-ref-edit-select {
   margin-left: 8px;
   outline: none;
-  border: none;
-  border-bottom: solid .5px #555;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
   background: none;
-  padding: 4px;
-  font-size: 16px;
-  color: #555555;
+  font-size: 14px;
+  color: #000;
   font-family: monospace;
+}
+
+.context-menu .type-ref-edit .type-ref-edit-select:focus {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
 /* input expression edit */
 .context-menu .input-expression-edit {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #555;
+  color: #000;
   padding: 8px;
   white-space: nowrap;
 }
@@ -330,28 +305,32 @@ table tfoot tr.add-rule:hover td {
 .context-menu .input-expression-edit .input-expression-edit-input {
   margin-left: 8px;
   outline: none;
-  border: none;
-  border-bottom: solid .5px #555;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
   background: none;
-  padding: 4px;
-  font-size: 16px;
-  color: #555;
+  font-size: 14px;
+  color: #000;
   font-family: monospace;
+}
+
+.context-menu .input-expression-edit .input-expression-edit-input {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
 /* selection */
 tr.selected,
 th.selected,
 td.selected {
-  background-color: #FEFDE6;
+  background-color: #fffcb0;
 }
 
 /* decision table properties */
 .decision-table-properties {
-  color: #555;
+  color: #000;
   background-color: #fff;
   display: inline-block;
-  border: 2px solid #555;
+  border: 2px solid #000;
   border-bottom: none;
   margin-bottom: -1px;
   position: relative;
@@ -369,7 +348,7 @@ td.selected {
 
 .decision-table-name.focussed,
 .decision-table-id.focussed {
-  background: #FEFDE6;
+  background: #fffcb0;
 }
 
 .decision-table-id.invalid {
@@ -379,7 +358,7 @@ td.selected {
 
 .decision-table-name:not(.focussed):hover,
 .decision-table-id:not(.focussed):hover {
-  background: #FEFDE6;
+  background: #fffcb0;
   cursor: pointer;
 }
 
@@ -391,7 +370,7 @@ td.selected {
 }
 
 .decision-table-id {
-  border-top: 1px solid #555;
+  border-top: 1px solid #000;
   font-family: monospace;
   font-size: 18px;
 }
@@ -409,8 +388,8 @@ td.selected {
   border: solid 1px #CCC;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  font-size: 16px;
-  color: #555;
+  font-size: 14px;
+  color: #000;
   font-weight: bold;
   cursor: pointer;
   outline: none;
@@ -453,8 +432,8 @@ td.selected {
   border: solid 1px #CCC;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  font-size: 16px;
-  color: #555;
+  font-size: 14px;
+  color: #000;
   display: flex;
   flex-direction: row;
   max-width: 260px;
