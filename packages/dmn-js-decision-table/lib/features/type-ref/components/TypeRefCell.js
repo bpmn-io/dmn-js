@@ -14,7 +14,7 @@ export default class TypeRefCell extends Component {
     this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
-  onClick() {
+  onClick(event) {
     const { inputExpression, output } = this.props;
 
     this._eventBus.fire('typeRef.edit', {

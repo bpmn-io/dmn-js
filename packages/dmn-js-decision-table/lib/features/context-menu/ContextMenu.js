@@ -21,7 +21,7 @@ export default class ContextMenu {
         const entries = this._getEntries(context);
 
         return () => (
-          <div>
+          <div className="context-menu-context-menu">
             { entries }
           </div>
         );

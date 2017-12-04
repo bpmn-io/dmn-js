@@ -1,5 +1,6 @@
 .decision-table-container {
   overflow: auto;
+  position: relative;
 }
 
 .tjs-container {
@@ -195,20 +196,40 @@ table tfoot tr.add-rule:hover td {
   color: #000;
 }
 
-.context-menu .context-menu-group {
+.context-menu .context-menu-context-menu {
+  display: flex;
+}
+
+.context-menu.vertical .context-menu-context-menu {
+  flex-direction: column;
+}
+
+.context-menu.horizontal .context-menu-context-menu {
+  flex-direction: row;
+}
+
+.context-menu.vertical .context-menu-group {
   margin-bottom: 6px;
   border-bottom: solid 1px #ccc;
 }
 
-.context-menu .context-menu-group:last-child {
+.context-menu.vertical .context-menu-group:last-child {
   border-bottom: none;
   margin-bottom: 0;
+}
+
+.context-menu.horizontal .context-menu-group {
+  border-right: solid 1px #ccc;
+}
+
+.context-menu.horizontal .context-menu-group:last-child {
+  border-right: none;
 }
 
 .context-menu .context-menu-group .context-menu-group-title {
   font-weight: bold;
   color: #000;
-  margin: 6px;
+  margin: 6px 9px 6px 9px;
 }
 
 .context-menu .context-menu-group .context-menu-group-entry {
@@ -217,9 +238,9 @@ table tfoot tr.add-rule:hover td {
   align-items: stretch;
   width: 100%;
   white-space: nowrap;
-  padding: 3px 6px 3px 6px;
+  padding: 6px 9px 6px 9px;
   cursor: pointer;
-  padding: 6px;
+  box-sizing: border-box;
 }
 
 .context-menu .context-menu-group .context-menu-group-entry.disabled {

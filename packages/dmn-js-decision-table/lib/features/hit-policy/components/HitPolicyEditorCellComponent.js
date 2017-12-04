@@ -12,7 +12,7 @@ export default class HitPolicyCellComponent extends Component {
     this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
-  onClick() {
+  onClick(event) {
     this._eventBus.fire('hitPolicy.edit', {
       event,
       node: this.node

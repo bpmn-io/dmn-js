@@ -31,6 +31,6 @@
     "inferno": "^3.9.0",
     "inferno-component": "^3.9.0",
     "min-dom": "^1.0.0",
-    "table-js": "^1.0.0-7"
+    "table-js": "^1.0.0-8"
   }
 }
