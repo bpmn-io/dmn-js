@@ -1,10 +1,18 @@
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 export default class DecisionTableEditorActions {
-  constructor(editorActions, modeling, sheet) {
+  constructor(editorActions, modeling, selection, sheet) {
     const actions = {
       addRule() {
         modeling.addRow({ type: 'dmn:DecisionRule' });
       },
       addRuleAbove({ rule }) {
+        if (!rule && !selection.hasSelection()) {
+          return;
+        }
+
+        rule = rule || selection.get().row;
+
         const root = sheet.getRoot(),
               index = root.rows.indexOf(rule);
 
@@ -15,6 +23,12 @@ export default class DecisionTableEditorActions {
         modeling.addRow({ type: 'dmn:DecisionRule' }, index);
       },
       addRuleBelow({ rule }) {
+        if (!rule && !selection.hasSelection()) {
+          return;
+        }
+
+        rule = rule || selection.get().row;
+
         const root = sheet.getRoot(),
               index = root.rows.indexOf(rule);
 
@@ -25,6 +39,12 @@ export default class DecisionTableEditorActions {
         modeling.addRow({ type: 'dmn:DecisionRule' }, index + 1);
       },
       removeRule({ rule }) {
+        if (!rule && !selection.hasSelection()) {
+          return;
+        }
+
+        rule = rule || selection.get().row;
+
         modeling.removeRow(rule);
       },
       addInput() {
@@ -88,6 +108,50 @@ export default class DecisionTableEditorActions {
         }
 
         modeling.addCol({ type: 'dmn:OutputClause' }, index + 1);
+      },
+      addClause() {
+        if (!selection.hasSelection()) {
+          return;
+        }
+      },
+      addClauseLeft() {
+        if (!selection.hasSelection()) {
+          return;
+        }
+
+        const clause = selection.get().col;
+        
+        if (is(clause, 'dmn:InputClause')) {
+          actions.addInputLeft({ input: clause });
+        } else if (is(clause, 'dmn:OutputClause')) {
+          actions.addOutputLeft({ output: clause });
+        }
+      },
+      addClauseRight() {
+        if (!selection.hasSelection()) {
+          return;
+        }
+
+        const clause = selection.get().col;
+        
+        if (is(clause, 'dmn:InputClause')) {
+          actions.addInputRight({ input: clause });
+        } else if (is(clause, 'dmn:OutputClause')) {
+          actions.addOutputRight({ output: clause });
+        }
+      },
+      removeClause() {
+        if (!selection.hasSelection()) {
+          return;
+        }
+
+        const clause = selection.get().col;
+
+        if (is(clause, 'dmn:InputClause')) {
+          actions.removeInput({ input: clause });
+        } else if (is(clause, 'dmn:OutputClause')) {
+          actions.removeOutput({ output: clause });
+        }
       }
     };
     
@@ -95,4 +159,4 @@ export default class DecisionTableEditorActions {
   }
 }
 
-DecisionTableEditorActions.$inject = [ 'editorActions', 'modeling', 'sheet' ];
+DecisionTableEditorActions.$inject = [ 'editorActions', 'modeling', 'selection', 'sheet' ];

@@ -7,7 +7,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import debounce from 'lodash/debounce';
 
-import { selectNodeContents } from '../../../util/DomUtil';
+import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
 
 const DEBOUNCE_TIME = 300;
 
@@ -68,6 +68,8 @@ export default class RulesEditorCellComponent extends Component {
     this.setState({
       isFocussed: false
     });
+
+    removeSelection();
   }
 
 

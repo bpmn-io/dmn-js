@@ -7,7 +7,7 @@ import debounce from 'lodash/debounce';
 
 const DEBOUNCE_TIME = 300;
 
-import { selectNodeContents } from '../../../util/DomUtil';
+import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
 import { isIdValid } from '../../../util/IdsUtil';
 
 export default class DecisionTablePropertiesComponent extends Component {
@@ -76,6 +76,8 @@ export default class DecisionTablePropertiesComponent extends Component {
     this.setState({
       [ `${property}IsFocussed` ]: false
     });
+
+    removeSelection();
   }
   
   componentWillMount() {
