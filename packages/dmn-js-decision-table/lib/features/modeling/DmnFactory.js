@@ -15,6 +15,8 @@ export default class DmnFactory {
       element.inputExpression = this.create('dmn:LiteralExpression', {
         typeRef: 'string'
       });
+
+      element.inputExpression.$parent = element;
     }
 
     if (is(element, 'dmn:OutputClause')) {

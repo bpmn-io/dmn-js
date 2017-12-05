@@ -27,10 +27,10 @@
   "dependencies": {
     "diagram-js": "^0.21.1",
     "dmn-js-shared": "^0.11.0",
-    "lodash": "^4.17.4",
     "inferno": "^3.9.0",
     "inferno-component": "^3.9.0",
+    "lodash": "^4.17.4",
     "min-dom": "^1.0.0",
-    "table-js": "^1.0.0-8"
+    "table-js": "^1.0.0"
   }
 }
