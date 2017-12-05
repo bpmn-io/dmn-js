@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "0.11.0",
+  "version": "1.0.0",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "diagram-js": "^0.21.1",
-    "dmn-js-shared": "^0.11.0",
+    "dmn-js-shared": "^1.0.0",
     "inferno": "^3.9.0",
     "inferno-component": "^3.9.0",
     "lodash": "^4.17.4",
