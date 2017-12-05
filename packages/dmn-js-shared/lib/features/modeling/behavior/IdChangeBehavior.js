@@ -4,6 +4,9 @@ import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 import { is } from '../../../util/ModelUtil';
 
+const ID = 'id';
+
+
 export default class IdChangeBehavior extends CommandInterceptor {
   constructor(eventBus) {
     super(eventBus);
@@ -14,7 +17,7 @@ export default class IdChangeBehavior extends CommandInterceptor {
   updateIds({ context }) {
     const { element, oldProperties, properties } = context;
 
-    if (!is(element, 'dmn:DRGElement') || !idChanged(properties, oldProperties)) {
+    if (!is(element, 'dmn:DRGElement') || !isIdChange(oldProperties, properties)) {
       return;
     }
 
@@ -33,8 +36,8 @@ IdChangeBehavior.$inject = [ 'eventBus' ];
 
 ////////// helpers //////////
 
-function idChanged(oldProperties, properties) {
-  return oldProperties.hasOwnProperty('id') && properties.hasOwnProperty('id');
+function isIdChange(oldProperties, properties) {
+  return ID in oldProperties && ID in properties;
 }
 
 function getDrgElements(element) {
