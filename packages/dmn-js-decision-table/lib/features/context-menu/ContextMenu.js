@@ -5,15 +5,24 @@ import Inferno from 'inferno';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class ContextMenu {
-  constructor(components, contextMenu, editorActions, eventBus, elementRegistry, modeling, sheet) {
+  constructor(
+    components,
+    contextMenu,
+    clipBoard,
+    editorActions,
+    eventBus,
+    elementRegistry,
+    modeling,
+    sheet
+  ) {
     this._contextMenu = contextMenu;
+    this._clipBoard = clipBoard;
     this._editorActions = editorActions;
     this._elementRegistry = elementRegistry;
     this._eventBus = eventBus;
     this._modeling = modeling;
     this._sheet = sheet;
 
-    this._onClick = this._onClick.bind(this);
     this._getEntries = this._getEntries.bind(this);
 
     components.onGetComponent('context-menu', (context = {}) => {
@@ -38,17 +47,7 @@ export default class ContextMenu {
         contextMenuType: 'context-menu',
         id
       });
-
-      window.addEventListener('click', this._onClick);
     });
-  }
-
-  _onClick(event) {
-    // if (!event.target.closest('.context-menu')) {
-    //   this._contextMenu.close();
-
-    //   window.removeEventListener('click', this._onClick);
-    // }
   }
 
   _getEntries(context) {
@@ -100,6 +99,15 @@ export default class ContextMenu {
         this._editorActions.trigger('removeOutput', { output });
 
         this._contextMenu.close();
+      },
+      cut: element => {
+        this._editorActions.trigger('cut', { element });
+      },
+      pasteBefore: element => {
+        this._editorActions.trigger('pasteBefore', { element });
+      },
+      pasteAfter: element => {
+        this._editorActions.trigger('pasteAfter', { element });
       }
     };
 
@@ -119,6 +127,9 @@ export default class ContextMenu {
 
     if (is(element.row, 'dmn:DecisionRule')) {
       const canDelete = businessObject.rule.length > 1;
+      const canPaste =
+        this._clipBoard.hasElement()
+        && is(this._clipBoard.getElement(), 'dmn:DecisionRule');
 
       entries.push(
         <div className="context-menu-group">
@@ -141,6 +152,24 @@ export default class ContextMenu {
             <span className="context-menu-group-entry-icon">-</span>
             Remove
           </div>
+          <div
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            onClick={ () => handlers.cut(element.row) }>
+            <span className="context-menu-group-entry-icon">-</span>
+            Cut
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            onClick={ () => handlers.pasteBefore(element.row) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Paste Above
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            onClick={ () => handlers.pasteAfter(element.row) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Paste Below
+          </div>
         </div>
       );
     }
@@ -149,6 +178,9 @@ export default class ContextMenu {
       const actualElement = is(element, 'dmn:InputClause') ? element : element.col;
 
       const canDelete = businessObject.input.length > 1;
+      const canPaste =
+        this._clipBoard.hasElement()
+        && is(this._clipBoard.getElement(), 'dmn:InputClause');
 
       entries.push(
         <div className="context-menu-group">
@@ -171,12 +203,33 @@ export default class ContextMenu {
             <span className="context-menu-group-entry-icon">-</span>
             Remove
           </div>
+          <div
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            onClick={ () => handlers.cut(actualElement) }>
+            <span className="context-menu-group-entry-icon">-</span>
+            Cut
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            onClick={ () => handlers.pasteBefore(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Paste Left
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            onClick={ () => handlers.pasteAfter(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Paste Right
+          </div>
         </div>
       );
     } else if (is(element, 'dmn:OutputClause') || is(element.col, 'dmn:OutputClause')) {
       const actualElement = is(element, 'dmn:OutputClause') ? element : element.col;
 
       const canDelete = businessObject.output.length > 1;
+      const canPaste =
+        this._clipBoard.hasElement()
+        && is(this._clipBoard.getElement(), 'dmn:OutputClause');
 
       entries.push(
         <div className="context-menu-group">
@@ -199,6 +252,24 @@ export default class ContextMenu {
             <span className="context-menu-group-entry-icon">-</span>
             Remove
           </div>
+          <div
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            onClick={ () => handlers.cut(actualElement) }>
+            <span className="context-menu-group-entry-icon">-</span>
+            Cut
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            onClick={ () => handlers.pasteBefore(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Paste Left
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            onClick={ () => handlers.pasteAfter(actualElement) }>
+            <span className="context-menu-group-entry-icon">+</span>
+            Paste Right
+          </div>
         </div>
       );
     }
@@ -207,4 +278,13 @@ export default class ContextMenu {
   }
 }
 
-ContextMenu.$inject = [ 'components', 'contextMenu', 'editorActions', 'eventBus', 'elementRegistry', 'modeling', 'sheet' ];
+ContextMenu.$inject = [
+  'components',
+  'contextMenu',
+  'clipBoard',
+  'editorActions',
+  'eventBus',
+  'elementRegistry',
+  'modeling',
+  'sheet'
+];
