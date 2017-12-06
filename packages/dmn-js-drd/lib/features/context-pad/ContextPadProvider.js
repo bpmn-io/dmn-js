@@ -86,6 +86,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   var businessObject = element.businessObject;
 
   function startConnect(event, element, autoActivate) {
+
+    // prevent dragging of connection icon
+    event.preventDefault();
+
     connect.start(event, element, autoActivate);
   }
 
@@ -230,8 +234,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         className: 'dmn-icon-trash',
         title: translate('Remove'),
         action: {
-          click: removeElement,
-          dragstart: removeElement
+          click: removeElement
         }
       }
     });
