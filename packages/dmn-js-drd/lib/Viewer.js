@@ -277,6 +277,8 @@ Viewer.prototype.attachTo = function(parentNode) {
   parentNode.appendChild(container);
 
   this._emit('attach', {});
+
+  this.get('canvas').resized();
 };
 
 /**
