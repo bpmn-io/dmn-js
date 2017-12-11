@@ -110,13 +110,18 @@ describe('features/definition-properties', function() {
     // given
     var parent = canvas.getContainer();
 
-    parent.style.height = '600px';
+    var propertiesContainer = definitionPropertiesView._container;
+
+    // assume
+    expect(propertiesContainer.offsetLeft).to.eql(80);
 
     // when
+    parent.style.height = '160px';
+
     canvas.resized();
 
     // then
-    expect(definitionPropertiesView._container.offsetLeft).to.equal(130);
+    expect(propertiesContainer.offsetLeft).to.equal(130);
   }));
 
 

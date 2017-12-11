@@ -884,7 +884,7 @@
 .dmn-definitions {
   position: absolute;
   top: 20px;
-  left: 80px;
+  left: 20px;
   background-color: #FAFAFA;
   border: solid 1px #CCC;
   border-radius: 2px;
@@ -912,7 +912,10 @@
   border-radius: 2px;
   border: 1px solid #aaaaaa;
 }
-.djs-container.two-column .dmn-definitions {
+.djs-container.with-palette .dmn-definitions {
+  left: 80px;
+}
+.djs-container.with-palette-two-column .dmn-definitions {
   left: 130px;
 }
 .literal-expression-editor {
