@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-literal-expression",
   "description": "A literal expression view for dmn-js",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "scripts": {
     "test": "karma start"
   },
@@ -17,6 +17,6 @@
     "literal expression"
   ],
   "dependencies": {
-    "dmn-js-shared": "^1.0.1"
+    "dmn-js-shared": "^1.2.0"
   }
 }
