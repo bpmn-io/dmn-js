@@ -7,6 +7,9 @@ var TestContainer = require('mocha-test-container-support');
 
 import DrdViewer from '../helper/DrdViewer';
 
+import DefaultExport from '../../';
+import DrdView from 'lib/Viewer';
+
 
 describe('Viewer', function() {
 
@@ -25,6 +28,11 @@ describe('Viewer', function() {
       done(err, warnings, viewer);
     });
   }
+
+
+  it('should expose Viewer as library default', function() {
+    expect(DefaultExport).to.equal(DrdView);
+  });
 
 
   it('should import simple DRD', function(done) {

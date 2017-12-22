@@ -1,12 +1,14 @@
 import Viewer from 'lib/Viewer';
 
+import DefaultExport from '../../';
+
 
 describe('Viewer', function() {
 
   var diagram = require('./diagram.dmn');
 
   var container;
-  
+
   beforeEach(function() {
     container = document.createElement('div');
     container.className = 'test-container';
@@ -19,6 +21,11 @@ describe('Viewer', function() {
     document.body.removeChild(container);
   });
   */
+
+  it('should expose Viewer as library default', function() {
+    expect(DefaultExport).to.equal(Viewer);
+  });
+
 
   it('should open DMN table', function(done) {
 

@@ -2,6 +2,9 @@ import TestContainer from 'mocha-test-container-support';
 
 /* global sinon */
 
+import DefaultExport from '../../';
+import DecisionTableView from 'lib/Viewer';
+
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 
 import { domify } from 'min-dom';
@@ -24,6 +27,11 @@ describe('DecisionTable', function() {
       done(err, warnings, dmnDecisionTableViewer);
     });
   }
+
+
+  it('should expose Viewer as library default', function() {
+    expect(DefaultExport).to.equal(DecisionTableView);
+  });
 
 
   // TODO(nikku): test re-import and #clear() interaction
