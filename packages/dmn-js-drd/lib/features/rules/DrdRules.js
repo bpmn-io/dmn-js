@@ -62,9 +62,15 @@ DrdRules.prototype.init = function() {
     return null;
   });
 
+  this.addRule('shape.create', function(context) {
+    return canCreate(context.shape, context.target);
+  });
+
 };
 
 DrdRules.prototype.canConnect = canConnect;
+
+DrdRules.prototype.canCreate = canCreate;
 
 DrdRules.prototype.canMove = canMove;
 
@@ -101,6 +107,10 @@ function canConnect(source, target) {
   }
 
   return false;
+}
+
+function canCreate(shape, target) {
+  return is(target, 'dmn:Definitions');
 }
 
 function canMove(elements, target) {
