@@ -21,7 +21,7 @@
     "mocha-test-container-support": "^0.2.0"
   },
   "dependencies": {
-    "diagram-js": "^0.27.0",
+    "diagram-js": "^0.27.1",
     "diagram-js-direct-editing": "^0.22.0",
     "dmn-js-shared": "^1.2.0"
   }

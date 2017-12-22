@@ -86,10 +86,6 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   var businessObject = element.businessObject;
 
   function startConnect(event, element, autoActivate) {
-
-    // prevent dragging of connection icon
-    event.preventDefault();
-
     connect.start(event, element, autoActivate);
   }
 

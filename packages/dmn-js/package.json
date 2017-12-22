@@ -31,7 +31,7 @@
     "decision modeling"
   ],
   "devDependencies": {
-    "diagram-js": "^0.27.0"
+    "diagram-js": "^0.27.1"
   },
   "dependencies": {
     "dmn-js-decision-table": "^1.2.1",
