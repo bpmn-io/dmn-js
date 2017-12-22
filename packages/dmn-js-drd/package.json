@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
