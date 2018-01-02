@@ -8,7 +8,7 @@ import { findRenderedDOMElementWithClass, renderIntoDocument } from 'inferno-tes
 import RuleIndexCellComponent from '../../../../../lib/features/rule-indices/components/RuleIndexCellComponent';
 
 
-describe('RuleIndexCellComponentSpec', function() {
+describe('RuleIndexCellComponent', function() {
 
   it('should render', function() {
 

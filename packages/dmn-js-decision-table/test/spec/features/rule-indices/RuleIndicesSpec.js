@@ -20,7 +20,7 @@ function expectIndices(cells) {
 }
 
 
-describe('RuleIndices', function() {
+describe('rule indices', function() {
 
   beforeEach(bootstrapModeler(simpleXML, {
     modules: [
