@@ -21,6 +21,7 @@
     "babel-plugin-inferno": "^3.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "inferno-test-utils": "^3.10.1",
     "mocha-test-container-support": "^0.2.0",
     "stringify": "^5.1.0"
   },
