@@ -21,18 +21,18 @@ export default class AddRuleFootComponent extends Component {
   render({ cols }) {
 
     const cells = [
-      <td
-        className="add-rule-add"
-        onClick={ this.addRule }>+</td>
+      <td className="add-rule-add">+</td>
     ];
 
     for (let i = 0; i < cols.length + 1; i++) {
-      cells.push(<td className="add-rule" onClick={ this.addRule }>-</td>);
+      cells.push(<td className="add-rule">-</td>);
     }
 
     return (
       <tfoot>
-        <tr className="add-rule">
+        <tr
+          className="add-rule"
+          onClick={ this.addRule }>
           { cells }
         </tr>
       </tfoot>
