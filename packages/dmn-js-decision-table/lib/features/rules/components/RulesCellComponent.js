@@ -10,9 +10,9 @@ export default class RulesCellComponent extends Component {
     const { cell } = this.props;
 
     if (is(cell, 'dmn:UnaryTests')) {
-      return <td className="input">{ cell.businessObject.text }</td>;
+      return <td className="input" data-element-id={ cell.id }>{ cell.businessObject.text }</td>;
     } else {
-      return <td className="output">{ cell.businessObject.text }</td>;
+      return <td className="output" data-element-id={ cell.id }>{ cell.businessObject.text }</td>;
     }
   }
 }

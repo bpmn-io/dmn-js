@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="Check Order">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="Customer Status">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text>status</text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="Check Result" name="result" typeRef="string" />
+      <rule id="rule1">
+        <description>Bronze is really not that good</description>
+        <inputEntry id="inputEntry1">
+          <text><![CDATA["bronze"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry1">
+          <text><![CDATA["notok"]]></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

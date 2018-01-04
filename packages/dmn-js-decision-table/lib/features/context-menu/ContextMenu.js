@@ -132,40 +132,40 @@ export default class ContextMenu {
         && is(this._clipBoard.getElement(), 'dmn:DecisionRule');
 
       entries.push(
-        <div className="context-menu-group">
+        <div className="context-menu-group context-menu-group-rule">
           <h4 className="context-menu-group-title">Rule</h4>
           <div
-            className="context-menu-group-entry"
+            className="context-menu-group-entry context-menu-entry-add-rule-above"
             onClick={ () => handlers.addRuleAbove(element.row) }>
             <span className="context-menu-group-entry-icon">+</span>
             Add Above
           </div>
           <div
-            className="context-menu-group-entry"
+            className="context-menu-group-entry context-menu-entry-add-rule-below"
             onClick={ () => handlers.addRuleBelow(element.row) }>
             <span className="context-menu-group-entry-icon">+</span>
             Add Below
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-remove-rule` }
             onClick={ () => handlers.removeRule(element.row) }>
             <span className="context-menu-group-entry-icon">-</span>
             Remove
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-cut-rule` }
             onClick={ () => handlers.cut(element.row) }>
             <span className="context-menu-group-entry-icon">-</span>
             Cut
           </div>
           <div
-            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-rule-above` }
             onClick={ () => handlers.pasteBefore(element.row) }>
             <span className="context-menu-group-entry-icon">+</span>
             Paste Above
           </div>
           <div
-            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-rule-below` }
             onClick={ () => handlers.pasteAfter(element.row) }>
             <span className="context-menu-group-entry-icon">+</span>
             Paste Below
@@ -183,40 +183,40 @@ export default class ContextMenu {
         && is(this._clipBoard.getElement(), 'dmn:InputClause');
 
       entries.push(
-        <div className="context-menu-group">
+        <div className="context-menu-group context-menu-group-input">
           <h4 className="context-menu-group-title">Input</h4>
           <div
-            className="context-menu-group-entry"
+            className="context-menu-group-entry context-menu-entry-add-input-left"
             onClick={ () => handlers.addInputLeft(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Add Left
           </div>
           <div
-            className="context-menu-group-entry"
+            className="context-menu-group-entry context-menu-entry-add-input-right"
             onClick={ () => handlers.addInputRight(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Add Right
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-remove-input` }
             onClick={ () => handlers.removeInput(actualElement) }>
             <span className="context-menu-group-entry-icon">-</span>
             Remove
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-cut-input` }
             onClick={ () => handlers.cut(actualElement) }>
             <span className="context-menu-group-entry-icon">-</span>
             Cut
           </div>
           <div
-            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-input-left` }
             onClick={ () => handlers.pasteBefore(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Paste Left
           </div>
           <div
-            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-input-right` }
             onClick={ () => handlers.pasteAfter(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Paste Right
@@ -232,40 +232,40 @@ export default class ContextMenu {
         && is(this._clipBoard.getElement(), 'dmn:OutputClause');
 
       entries.push(
-        <div className="context-menu-group">
+        <div className="context-menu-group context-menu-group-output">
           <h4 className="context-menu-group-title">Output</h4>
           <div
-            className="context-menu-group-entry"
+            className="context-menu-group-entry context-menu-entry-add-output-left"
             onClick={ () => handlers.addOutputLeft(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Add Left
           </div>
           <div
-            className="context-menu-group-entry"
+            className="context-menu-group-entry context-menu-entry-add-output-right"
             onClick={ () => handlers.addOutputRight(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Add Right
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-remove-output` }
             onClick={ () => handlers.removeOutput(actualElement) }>
             <span className="context-menu-group-entry-icon">-</span>
             Remove
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-cut-output` }
             onClick={ () => handlers.cut(actualElement) }>
             <span className="context-menu-group-entry-icon">-</span>
             Cut
           </div>
           <div
-            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-output-left` }
             onClick={ () => handlers.pasteBefore(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Paste Left
           </div>
           <div
-            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' }` }
+            className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-output-right` }
             onClick={ () => handlers.pasteAfter(actualElement) }>
             <span className="context-menu-group-entry-icon">+</span>
             Paste Right
