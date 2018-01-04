@@ -6,20 +6,12 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
+import { triggerMouseEvent } from '../../../util/EventUtil';
+
 import simpleXML from '../../simple.dmn';
 
 import AddRuleModule from '../../../../lib/features/add-rule';
 import CoreModule from '../../../../lib/core';
-
-function triggerMouseEvent(element, event, clientX, clientY) {
-  const e = document.createEvent('MouseEvent');
-
-  if (e.initMouseEvent) {
-    e.initMouseEvent(event, true, true, window, 0, 0, 0, clientX, clientY, false, false, false, false, 0, null);
-  }
-
-  element.dispatchEvent(e);
-}
 
 
 describe('add input output', function() {

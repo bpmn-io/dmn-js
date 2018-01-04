@@ -3,22 +3,21 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import debounce from 'lodash/debounce';
-
-import { selectNodeContents } from '../../../util/DomUtil';
-
-const DEBOUNCE_TIME = 300;
+import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
+import { debounceOnInput } from '../../../util/DebounceUtil';
 
 export default class RulesEditorAnnotationCellComponent extends Component {
   
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       isFocussed: false
     };
 
-    this.onInput = this.onInput.bind(this);
+    const config = context.injector.get('config');
+
+    this.onInput = debounceOnInput(this.onInput.bind(this), config);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
@@ -63,7 +62,7 @@ export default class RulesEditorAnnotationCellComponent extends Component {
   onBlur() {
     this.setState({
       isFocussed: false
-    });
+    }, removeSelection);
   }
 
 
@@ -91,7 +90,7 @@ export default class RulesEditorAnnotationCellComponent extends Component {
       <td
         contentEditable="true"
         spellcheck="false"
-        onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
+        onInput={ this.onInput }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
         ref={ node => this.node = node }
