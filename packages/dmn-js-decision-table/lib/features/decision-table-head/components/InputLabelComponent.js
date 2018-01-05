@@ -18,7 +18,7 @@ export default class InputLabelComponent extends Component {
 
     return (
       <th 
-        className="input"
+        className="input input-label"
         colspan={ colspan }>Input</th>
     );
   }

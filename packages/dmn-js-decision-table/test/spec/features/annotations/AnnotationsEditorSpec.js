@@ -25,7 +25,7 @@ describe('annotations editor', function() {
       DecisionTableHeadModule,
       RulesModule
     ],
-    deferOnInput: false
+    debounceOnInput: false
   }));
 
   let testContainer;

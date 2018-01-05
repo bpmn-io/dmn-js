@@ -18,7 +18,7 @@ export default class OutputLabelComponent extends Component {
 
     return (
       <th 
-        className="output"
+        className="output output-label"
         colspan={ colspan }>Output</th>
     );
   }

@@ -3,23 +3,23 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import debounce from 'lodash/debounce';
-
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
+import { debounceOnInput } from '../../../util/DebounceUtil';
 
-const DEBOUNCE_TIME = 300;
 
 export default class OutputNameComponent extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       isFocussed: false
     };
 
+    const config = context.injector.get('config');
+
     this.onContextmenu = this.onContextmenu.bind(this);
-    this.onInput = this.onInput.bind(this);
+    this.onInput = debounceOnInput(this.onInput.bind(this), config);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
@@ -92,7 +92,7 @@ export default class OutputNameComponent extends Component {
     const { name } = this.props.output;
     const { isFocussed } = this.state;
 
-    const classNames = [ 'output', 'output-name' ];
+    const classNames = [ 'output', 'output-name', 'output-name-editor' ];
 
     if (isFocussed) {
       classNames.push('focussed');
@@ -107,7 +107,7 @@ export default class OutputNameComponent extends Component {
         contentEditable="true"
         spellcheck="false"
         ref={ node => this.node = node }
-        onInput={ debounce(this.onInput, DEBOUNCE_TIME) }>{ name || (isFocussed ? '' : '-') }</th>
+        onInput={ this.onInput }>{ name || (isFocussed ? '' : '-') }</th>
     );
   }
 
