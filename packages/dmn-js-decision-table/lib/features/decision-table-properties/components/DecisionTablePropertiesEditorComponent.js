@@ -9,11 +9,12 @@ const DEBOUNCE_TIME = 300;
 
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
 import { isIdValid } from '../../../util/IdsUtil';
+import { debounceOnInput } from '../../../util/DebounceUtil';
 
 export default class DecisionTablePropertiesComponent extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       nameIsFocussed: false,
@@ -21,12 +22,14 @@ export default class DecisionTablePropertiesComponent extends Component {
       idIsValid: true
     };
 
+    const config = context.injector.get('config');
+
     this.onInput = this.onInput.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
-    this.editDecisionTableName = debounce(this.editDecisionTableName.bind(this), DEBOUNCE_TIME);
-    this.editDecisionTableId = debounce(this.editDecisionTableId.bind(this), DEBOUNCE_TIME);
+    this.editDecisionTableName = debounceOnInput(this.editDecisionTableName.bind(this), config);
+    this.editDecisionTableId = debounceOnInput(this.editDecisionTableId.bind(this), config);
   }
 
   editDecisionTableName(name) {
@@ -106,7 +109,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     const { id, name } = businessObject.$parent;
 
     return (
-      <header className="decision-table-properties">
+      <header className="decision-table-properties decision-table-properties-editor">
         <h3
           contenteditable="true"
           spellcheck="false"
