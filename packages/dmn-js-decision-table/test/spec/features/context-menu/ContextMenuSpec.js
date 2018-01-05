@@ -2,7 +2,7 @@ require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
-import { triggerMouseEvent, triggerInputEvent } from '../../../util/EventUtil';
+import { triggerMouseEvent } from '../../../util/EventUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 
@@ -78,7 +78,7 @@ describe('context menu', function() {
       });
   
   
-      it('should contain correct entries', function () {
+      it('should contain correct entries', function() {
         
         // given
         const contextMenu = domQuery('.context-menu', testContainer),
@@ -98,7 +98,7 @@ describe('context menu', function() {
       });
 
 
-      it('should contain disabled paste entries', function () {
+      it('should contain disabled paste entries', function() {
         
         // given
         const contextMenu = domQuery('.context-menu', testContainer),
@@ -346,7 +346,7 @@ describe('context menu', function() {
       });
   
   
-      it('should contain correct entries', function () {
+      it('should contain correct entries', function() {
         
         // given
         const contextMenu = domQuery('.context-menu', testContainer),
@@ -366,7 +366,7 @@ describe('context menu', function() {
       });
 
 
-      it('should contain disabled paste entries', function () {
+      it('should contain disabled paste entries', function() {
         
         // given
         const contextMenu = domQuery('.context-menu', testContainer),
@@ -600,7 +600,7 @@ describe('context menu', function() {
       });
   
   
-      it('should contain correct entries', function () {
+      it('should contain correct entries', function() {
         
         // given
         const contextMenu = domQuery('.context-menu', testContainer),
@@ -620,7 +620,7 @@ describe('context menu', function() {
       });
   
 
-      it('should contain disabled paste entries', function () {
+      it('should contain disabled paste entries', function() {
         
         // given
         const contextMenu = domQuery('.context-menu', testContainer),
