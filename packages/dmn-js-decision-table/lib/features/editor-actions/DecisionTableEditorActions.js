@@ -4,7 +4,7 @@ export default class DecisionTableEditorActions {
   constructor(editorActions, modeling, selection, sheet) {
     const actions = {
       addRule() {
-        modeling.addRow({ type: 'dmn:DecisionRule' });
+        return modeling.addRow({ type: 'dmn:DecisionRule' });
       },
       addRuleAbove({ rule }) {
         if (!rule && !selection.hasSelection()) {
@@ -20,7 +20,7 @@ export default class DecisionTableEditorActions {
           return;
         }
 
-        modeling.addRow({ type: 'dmn:DecisionRule' }, index);
+        return modeling.addRow({ type: 'dmn:DecisionRule' }, index);
       },
       addRuleBelow({ rule }) {
         if (!rule && !selection.hasSelection()) {
@@ -36,7 +36,7 @@ export default class DecisionTableEditorActions {
           return;
         }
 
-        modeling.addRow({ type: 'dmn:DecisionRule' }, index + 1);
+        return modeling.addRow({ type: 'dmn:DecisionRule' }, index + 1);
       },
       removeRule({ rule }) {
         if (!rule && !selection.hasSelection()) {
@@ -53,7 +53,7 @@ export default class DecisionTableEditorActions {
 
         const { input } = businessObject;
 
-        modeling.addCol({ type: 'dmn:InputClause' }, input.length);
+        return modeling.addCol({ type: 'dmn:InputClause' }, input.length);
       },
       addInputLeft({ input }) {
         const root = sheet.getRoot(),
@@ -63,7 +63,7 @@ export default class DecisionTableEditorActions {
           return;
         }
 
-        modeling.addCol({ type: 'dmn:InputClause' }, index);
+        return modeling.addCol({ type: 'dmn:InputClause' }, index);
       },
       addInputRight({ input }) {
         const root = sheet.getRoot(),
@@ -73,7 +73,7 @@ export default class DecisionTableEditorActions {
           return;
         }
 
-        modeling.addCol({ type: 'dmn:InputClause' }, index + 1);
+        return modeling.addCol({ type: 'dmn:InputClause' }, index + 1);
       },
       removeInput({ input }) {
         modeling.removeCol(input);
@@ -84,7 +84,7 @@ export default class DecisionTableEditorActions {
 
         const { input, output } = businessObject;
 
-        modeling.addCol({ type: 'dmn:OutputClause' }, input.length + output.length);
+        return modeling.addCol({ type: 'dmn:OutputClause' }, input.length + output.length);
       },
       removeOutput({ output }) {
         modeling.removeCol(output);
@@ -97,7 +97,7 @@ export default class DecisionTableEditorActions {
           return;
         }
 
-        modeling.addCol({ type: 'dmn:OutputClause' }, index);
+        return modeling.addCol({ type: 'dmn:OutputClause' }, index);
       },
       addOutputRight({ output }) {
         const root = sheet.getRoot(),
@@ -107,11 +107,19 @@ export default class DecisionTableEditorActions {
           return;
         }
 
-        modeling.addCol({ type: 'dmn:OutputClause' }, index + 1);
+        return modeling.addCol({ type: 'dmn:OutputClause' }, index + 1);
       },
       addClause() {
         if (!selection.hasSelection()) {
           return;
+        }
+
+        const clause = selection.get().col;
+        
+        if (is(clause, 'dmn:InputClause')) {
+          actions.addInputLeft({ input: clause });
+        } else if (is(clause, 'dmn:OutputClause')) {
+          actions.addOutputLeft({ output: clause });
         }
       },
       addClauseLeft() {

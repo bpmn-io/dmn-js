@@ -149,12 +149,12 @@ describe('context menu', function() {
 
         beforeEach(inject(function(sheet) {
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { rows } = root;
 
-          rule1 = businessObject.rule[0];
-          rule2 = businessObject.rule[1];
-          rule3 = businessObject.rule[2];
-          rule4 = businessObject.rule[3];
+          rule1 = rows[0];
+          rule2 = rows[1];
+          rule3 = rows[2];
+          rule4 = rows[3];
         }));
 
   
@@ -168,14 +168,14 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { rows } = root;
 
-          expect(businessObject.rule).to.have.lengthOf(5);
+          expect(rows).to.have.lengthOf(5);
 
-          expect(businessObject.rule[1]).to.equal(rule1);
-          expect(businessObject.rule[2]).to.equal(rule2);
-          expect(businessObject.rule[3]).to.equal(rule3);
-          expect(businessObject.rule[4]).to.equal(rule4);
+          expect(rows[1]).to.equal(rule1);
+          expect(rows[2]).to.equal(rule2);
+          expect(rows[3]).to.equal(rule3);
+          expect(rows[4]).to.equal(rule4);
         }));
   
   
@@ -189,14 +189,14 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { rows } = root;
 
-          expect(businessObject.rule).to.have.lengthOf(5);
+          expect(rows).to.have.lengthOf(5);
 
-          expect(businessObject.rule[0]).to.equal(rule1);
-          expect(businessObject.rule[2]).to.equal(rule2);
-          expect(businessObject.rule[3]).to.equal(rule3);
-          expect(businessObject.rule[4]).to.equal(rule4);
+          expect(rows[0]).to.equal(rule1);
+          expect(rows[2]).to.equal(rule2);
+          expect(rows[3]).to.equal(rule3);
+          expect(rows[4]).to.equal(rule4);
         }));
   
   
@@ -210,13 +210,15 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { rows } = root;
 
-          expect(businessObject.rule).to.have.lengthOf(3);
+          expect(rows).to.have.lengthOf(3);
 
-          expect(businessObject.rule[0]).to.equal(rule2);
-          expect(businessObject.rule[1]).to.equal(rule3);
-          expect(businessObject.rule[2]).to.equal(rule4);
+          expectOrder(rows, [
+            rule2,
+            rule3,
+            rule4
+          ]);
         }));
   
         
@@ -230,15 +232,17 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { rows } = root;
 
-          expect(businessObject.rule).to.have.lengthOf(3);
+          expect(rows).to.have.lengthOf(3);
 
-          expect(businessObject.rule[0]).to.equal(rule2);
-          expect(businessObject.rule[1]).to.equal(rule3);
-          expect(businessObject.rule[2]).to.equal(rule4);
+          expectOrder(rows, [
+            rule2,
+            rule3,
+            rule4
+          ]);
 
-          expect(clipBoard.getElement().businessObject).to.equal(rule1);
+          expect(clipBoard.getElement()).to.equal(rule1);
         }));
 
   
@@ -265,14 +269,16 @@ describe('context menu', function() {
 
             // then
             const root = sheet.getRoot(),
-                  { businessObject } = root;
+                  { rows } = root;
 
-            expect(businessObject.rule).to.have.lengthOf(4);
+            expect(rows).to.have.lengthOf(4);
             
-            expect(businessObject.rule[0]).to.equal(rule1);
-            expect(businessObject.rule[1]).to.equal(rule2);
-            expect(businessObject.rule[2]).to.equal(rule3);
-            expect(businessObject.rule[3]).to.equal(rule4);
+            expectOrder(rows, [
+              rule1,
+              rule2,
+              rule3,
+              rule4
+            ]);
           }));
 
 
@@ -286,14 +292,14 @@ describe('context menu', function() {
 
             // then
             const root = sheet.getRoot(),
-                  { businessObject } = root;
+                  { rows } = root;
 
-            expect(businessObject.rule).to.have.lengthOf(4);
+            expect(rows).to.have.lengthOf(4);
             
-            expect(businessObject.rule[0]).to.equal(rule2);
-            expect(businessObject.rule[1]).to.equal(rule1);
-            expect(businessObject.rule[2]).to.equal(rule3);
-            expect(businessObject.rule[3]).to.equal(rule4);
+            expect(rows[0]).to.equal(rule2);
+            expect(rows[1]).to.equal(rule1);
+            expect(rows[2]).to.equal(rule3);
+            expect(rows[3]).to.equal(rule4);
           }));
 
         });
@@ -413,14 +419,16 @@ describe('context menu', function() {
   
       describe('actions', function() {
   
-        let input1, input2;
+        let input1, input2, output1, output2;
 
         beforeEach(inject(function(sheet) {
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          input1 = businessObject.input[0];
-          input2 = businessObject.input[1];
+          input1 = cols[0];
+          input2 = cols[1];
+          output1 = cols[2];
+          output2 = cols[3];
         }));
 
   
@@ -434,12 +442,14 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.input).to.have.lengthOf(3);
+          expect(cols).to.have.lengthOf(5);
 
-          expect(businessObject.input[1]).to.equal(input1);
-          expect(businessObject.input[2]).to.equal(input2);
+          expect(cols[1]).to.equal(input1);
+          expect(cols[2]).to.equal(input2);
+          expect(cols[3]).to.equal(output1);
+          expect(cols[4]).to.equal(output2);
         }));
   
   
@@ -453,12 +463,14 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.input).to.have.lengthOf(3);
+          expect(cols).to.have.lengthOf(5);
 
-          expect(businessObject.input[0]).to.equal(input1);
-          expect(businessObject.input[2]).to.equal(input2);
+          expect(cols[0]).to.equal(input1);
+          expect(cols[2]).to.equal(input2);
+          expect(cols[3]).to.equal(output1);
+          expect(cols[4]).to.equal(output2);
         }));
   
   
@@ -472,11 +484,15 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.input).to.have.lengthOf(1);
+          expect(cols).to.have.lengthOf(3);
 
-          expect(businessObject.input[0]).to.equal(input2);
+          expectOrder(cols, [
+            input2,
+            output1,
+            output2
+          ]);
         }));
   
         
@@ -490,13 +506,17 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.input).to.have.lengthOf(1);
+          expect(cols).to.have.lengthOf(3);
 
-          expect(businessObject.input[0]).to.equal(input2);
+          expectOrder(cols, [
+            input2,
+            output1,
+            output2
+          ]);
 
-          expect(clipBoard.getElement().businessObject).to.equal(input1);
+          expect(clipBoard.getElement()).to.equal(input1);
         }));
 
   
@@ -523,12 +543,16 @@ describe('context menu', function() {
 
             // then
             const root = sheet.getRoot(),
-                  { businessObject } = root;
+                  { cols } = root;
 
-            expect(businessObject.input).to.have.lengthOf(2);
+            expect(cols).to.have.lengthOf(4);
             
-            expect(businessObject.input[0]).to.equal(input1);
-            expect(businessObject.input[1]).to.equal(input2);
+            expectOrder(cols, [
+              input1,
+              input2,
+              output1,
+              output2
+            ]);
           }));
 
 
@@ -542,12 +566,16 @@ describe('context menu', function() {
 
             // then
             const root = sheet.getRoot(),
-                  { businessObject } = root;
+                  { cols } = root;
 
-            expect(businessObject.input).to.have.lengthOf(2);
+            expect(cols).to.have.lengthOf(4);
             
-            expect(businessObject.input[0]).to.equal(input2);
-            expect(businessObject.input[1]).to.equal(input1);
+            expectOrder(cols, [
+              input2,
+              input1,
+              output1,
+              output2
+            ]);
           }));
 
         });
@@ -667,14 +695,16 @@ describe('context menu', function() {
   
       describe('actions', function() {
         
-        let output1, output2;
+        let input1, input2, output1, output2;
 
         beforeEach(inject(function(sheet) {
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          output1 = businessObject.output[0];
-          output2 = businessObject.output[1];
+          input1 = cols[0],
+          input2 = cols[1],
+          output1 = cols[2];
+          output2 = cols[3];
         }));
 
   
@@ -688,12 +718,14 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.output).to.have.lengthOf(3);
+          expect(cols).to.have.lengthOf(5);
 
-          expect(businessObject.output[1]).to.equal(output1);
-          expect(businessObject.output[2]).to.equal(output2);
+          expect(cols[0]).to.equal(input1);
+          expect(cols[1]).to.equal(input2);
+          expect(cols[3]).to.equal(output1);
+          expect(cols[4]).to.equal(output2);
         }));
   
   
@@ -707,12 +739,14 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.output).to.have.lengthOf(3);
+          expect(cols).to.have.lengthOf(5);
 
-          expect(businessObject.output[0]).to.equal(output1);
-          expect(businessObject.output[2]).to.equal(output2);
+          expect(cols[0]).to.equal(input1);
+          expect(cols[1]).to.equal(input2);
+          expect(cols[2]).to.equal(output1);
+          expect(cols[4]).to.equal(output2);
         }));
   
   
@@ -726,11 +760,15 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.output).to.have.lengthOf(1);
+          expect(cols).to.have.lengthOf(3);
 
-          expect(businessObject.output[0]).to.equal(output2);
+          expectOrder(cols, [
+            input1,
+            input2,
+            output2
+          ]);
         }));
   
         
@@ -744,13 +782,17 @@ describe('context menu', function() {
 
           // then
           const root = sheet.getRoot(),
-                { businessObject } = root;
+                { cols } = root;
 
-          expect(businessObject.output).to.have.lengthOf(1);
+          expect(cols).to.have.lengthOf(3);
 
-          expect(businessObject.output[0]).to.equal(output2);
+          expectOrder(cols, [
+            input1,
+            input2,
+            output2
+          ]);
 
-          expect(clipBoard.getElement().businessObject).to.equal(output1);
+          expect(clipBoard.getElement()).to.equal(output1);
         }));
 
   
@@ -777,12 +819,16 @@ describe('context menu', function() {
 
             // then
             const root = sheet.getRoot(),
-                  { businessObject } = root;
+                  { cols } = root;
 
-            expect(businessObject.output).to.have.lengthOf(2);
+            expect(cols).to.have.lengthOf(4);
             
-            expect(businessObject.output[0]).to.equal(output1);
-            expect(businessObject.output[1]).to.equal(output2);
+            expectOrder(cols, [
+              input1,
+              input2,
+              output1,
+              output2
+            ]);
           }));
 
 
@@ -796,12 +842,16 @@ describe('context menu', function() {
 
             // then
             const root = sheet.getRoot(),
-                  { businessObject } = root;
+                  { cols } = root;
 
-            expect(businessObject.output).to.have.lengthOf(2);
+            expect(cols).to.have.lengthOf(4);
             
-            expect(businessObject.output[0]).to.equal(output2);
-            expect(businessObject.output[1]).to.equal(output1);
+            expectOrder(cols, [
+              input1,
+              input2,
+              output2,
+              output1
+            ]);
           }));
 
         });
@@ -819,5 +869,11 @@ describe('context menu', function() {
 function expectEntries(entries, contextMenu) {
   entries.forEach(entry => {
     expect(domQuery(entry, contextMenu)).to.exist;
+  });
+}
+
+function expectOrder(actual, expected) {
+  expected.forEach((e, index) => {
+    expect(e).to.equal(actual[index]);
   });
 }
