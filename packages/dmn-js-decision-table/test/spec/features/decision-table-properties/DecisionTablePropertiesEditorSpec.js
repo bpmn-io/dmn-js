@@ -20,7 +20,7 @@ describe('decision table properties', function() {
       DecisionTablePropertiesModule,
       DecisionTablePropertiesEditorModule
     ],
-    debounceOnInput: false
+    debounceInput: false
   }));
 
   let testContainer;

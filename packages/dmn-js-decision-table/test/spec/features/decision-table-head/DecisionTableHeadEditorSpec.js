@@ -24,7 +24,7 @@ describe('decision table head editor', function() {
       DecisionTableHeadModule,
       DecisionTableHeadEditorModule
     ],
-    debounceOnInput: false
+    debounceInput: false
   }));
 
   let testContainer;

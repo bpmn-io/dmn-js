@@ -4,7 +4,6 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
-import { debounceOnInput } from '../../../util/DebounceUtil';
 
 
 export default class OutputNameComponent extends Component {
@@ -16,10 +15,10 @@ export default class OutputNameComponent extends Component {
       isFocussed: false
     };
 
-    const config = context.injector.get('config');
+    const debounceInput = context.injector.get('debounceInput');
 
     this.onContextmenu = this.onContextmenu.bind(this);
-    this.onInput = debounceOnInput(this.onInput.bind(this), config);
+    this.onInput = debounceInput(this.onInput.bind(this));
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);

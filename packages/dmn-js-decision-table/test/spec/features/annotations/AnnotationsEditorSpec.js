@@ -23,7 +23,7 @@ describe('annotations editor', function() {
       DecisionTableHeadModule,
       RulesModule
     ],
-    debounceOnInput: false
+    debounceInput: false
   }));
 
   let testContainer;

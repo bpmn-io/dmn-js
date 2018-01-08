@@ -5,7 +5,6 @@ import Component from 'inferno-component';
 
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
 import { isIdValid } from '../../../util/IdsUtil';
-import { debounceOnInput } from '../../../util/DebounceUtil';
 
 export default class DecisionTablePropertiesComponent extends Component {
 
@@ -18,14 +17,14 @@ export default class DecisionTablePropertiesComponent extends Component {
       idIsValid: true
     };
 
-    const config = context.injector.get('config');
+    const debounceInput = context.injector.get('debounceInput');
 
     this.onInput = this.onInput.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
-    this.editDecisionTableName = debounceOnInput(this.editDecisionTableName.bind(this), config);
-    this.editDecisionTableId = debounceOnInput(this.editDecisionTableId.bind(this), config);
+    this.editDecisionTableName = debounceInput(this.editDecisionTableName.bind(this));
+    this.editDecisionTableId = debounceInput(this.editDecisionTableId.bind(this));
   }
 
   editDecisionTableName(name) {
