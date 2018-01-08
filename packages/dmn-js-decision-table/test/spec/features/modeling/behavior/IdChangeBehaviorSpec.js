@@ -1,9 +1,7 @@
-require('../../../../TestHelper');
+import { bootstrapModeler, getDmnJS, inject } from 'test/helper';
 
-/* global bootstrapModeler, getDmnJS, inject */
-
-import CoreModule from '../../../../../lib/core';
-import ModelingModule from '../../../../../lib/features/modeling';
+import CoreModule from 'lib/core';
+import ModelingModule from 'lib/features/modeling';
 
 import diagramXML from './two-decision-tables.dmn';
 

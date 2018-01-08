@@ -1,18 +1,16 @@
-require('../../../TestHelper');
-
-/* global bootstrapModeler, inject */
+import { bootstrapModeler, inject } from 'test/helper';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerInputEvent } from '../../../util/EventUtil';
+import { triggerInputEvent } from 'test/util/EventUtil';
 
 import twoDecisionsXML from '../../two-decisions.dmn';
 
-import CoreModule from '../../../../lib/core';
-import DecisionTablePropertiesModule from '../../../../lib/features/decision-table-properties';
-import DecisionTablePropertiesEditorModule from '../../../../lib/features/decision-table-properties/editor';
+import CoreModule from 'lib/core';
+import DecisionTablePropertiesModule from 'lib/features/decision-table-properties';
+import DecisionTablePropertiesEditorModule from 'lib/features/decision-table-properties/editor';
 
 describe('decision table properties', function() {
 

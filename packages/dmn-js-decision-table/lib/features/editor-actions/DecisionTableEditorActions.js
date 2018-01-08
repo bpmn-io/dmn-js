@@ -6,7 +6,9 @@ export default class DecisionTableEditorActions {
       addRule() {
         return modeling.addRow({ type: 'dmn:DecisionRule' });
       },
-      addRuleAbove({ rule }) {
+      addRuleAbove(context) {
+        let rule = context && context.rule;
+
         if (!rule && !selection.hasSelection()) {
           return;
         }
@@ -22,7 +24,9 @@ export default class DecisionTableEditorActions {
 
         return modeling.addRow({ type: 'dmn:DecisionRule' }, index);
       },
-      addRuleBelow({ rule }) {
+      addRuleBelow(context) {
+        let rule = context && context.rule;
+
         if (!rule && !selection.hasSelection()) {
           return;
         }
@@ -38,7 +42,9 @@ export default class DecisionTableEditorActions {
 
         return modeling.addRow({ type: 'dmn:DecisionRule' }, index + 1);
       },
-      removeRule({ rule }) {
+      removeRule(context) {
+        let rule = context && context.rule;
+
         if (!rule && !selection.hasSelection()) {
           return;
         }
@@ -55,7 +61,15 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol({ type: 'dmn:InputClause' }, input.length);
       },
-      addInputLeft({ input }) {
+      addInputLeft(context) {
+        let input = context && context.input;
+
+        if (!input && !selection.hasSelection()) {
+          return;
+        }
+        
+        input = input || selection.get().col;
+
         const root = sheet.getRoot(),
               index = root.cols.indexOf(input);
 
@@ -65,7 +79,15 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol({ type: 'dmn:InputClause' }, index);
       },
-      addInputRight({ input }) {
+      addInputRight(context) {
+        let input = context && context.input;
+        
+        if (!input && !selection.hasSelection()) {
+          return;
+        }
+        
+        input = input || selection.get().col;
+        
         const root = sheet.getRoot(),
               index = root.cols.indexOf(input);
 
@@ -75,7 +97,15 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol({ type: 'dmn:InputClause' }, index + 1);
       },
-      removeInput({ input }) {
+      removeInput(context) {
+        let input = context && context.input;
+        
+        if (!input && !selection.hasSelection()) {
+          return;
+        }
+        
+        input = input || selection.get().col;
+
         modeling.removeCol(input);
       },
       addOutput() {
@@ -86,10 +116,15 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol({ type: 'dmn:OutputClause' }, input.length + output.length);
       },
-      removeOutput({ output }) {
-        modeling.removeCol(output);
-      },
-      addOutputLeft({ output }) {
+      addOutputLeft(context) {
+        let output = context && context.output;
+        
+        if (!output && !selection.hasSelection()) {
+          return;
+        }
+        
+        output = output || selection.get().col;
+
         const root = sheet.getRoot(),
               index = root.cols.indexOf(output);
 
@@ -99,7 +134,15 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol({ type: 'dmn:OutputClause' }, index);
       },
-      addOutputRight({ output }) {
+      addOutputRight(context) {
+        let output = context && context.output;
+        
+        if (!output && !selection.hasSelection()) {
+          return;
+        }
+        
+        output = output || selection.get().col;
+        
         const root = sheet.getRoot(),
               index = root.cols.indexOf(output);
 
@@ -109,6 +152,17 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol({ type: 'dmn:OutputClause' }, index + 1);
       },
+      removeOutput(context) {
+        let output = context && context.output;
+        
+        if (!output && !selection.hasSelection()) {
+          return;
+        }
+        
+        output = output || selection.get().col;
+
+        modeling.removeCol(output);
+      },
       addClause() {
         if (!selection.hasSelection()) {
           return;
@@ -117,9 +171,9 @@ export default class DecisionTableEditorActions {
         const clause = selection.get().col;
         
         if (is(clause, 'dmn:InputClause')) {
-          actions.addInputLeft({ input: clause });
+          return actions.addInput({ input: clause });
         } else if (is(clause, 'dmn:OutputClause')) {
-          actions.addOutputLeft({ output: clause });
+          return actions.addOutput({ output: clause });
         }
       },
       addClauseLeft() {
@@ -130,9 +184,9 @@ export default class DecisionTableEditorActions {
         const clause = selection.get().col;
         
         if (is(clause, 'dmn:InputClause')) {
-          actions.addInputLeft({ input: clause });
+          return actions.addInputLeft({ input: clause });
         } else if (is(clause, 'dmn:OutputClause')) {
-          actions.addOutputLeft({ output: clause });
+          return actions.addOutputLeft({ output: clause });
         }
       },
       addClauseRight() {
@@ -143,9 +197,9 @@ export default class DecisionTableEditorActions {
         const clause = selection.get().col;
         
         if (is(clause, 'dmn:InputClause')) {
-          actions.addInputRight({ input: clause });
+          return actions.addInputRight({ input: clause });
         } else if (is(clause, 'dmn:OutputClause')) {
-          actions.addOutputRight({ output: clause });
+          return actions.addOutputRight({ output: clause });
         }
       },
       removeClause() {
@@ -156,9 +210,9 @@ export default class DecisionTableEditorActions {
         const clause = selection.get().col;
 
         if (is(clause, 'dmn:InputClause')) {
-          actions.removeInput({ input: clause });
+          return actions.removeInput({ input: clause });
         } else if (is(clause, 'dmn:OutputClause')) {
-          actions.removeOutput({ output: clause });
+          return actions.removeOutput({ output: clause });
         }
       }
     };

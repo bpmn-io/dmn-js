@@ -1,11 +1,9 @@
-require('../../../TestHelper');
-
-/* global bootstrapModeler, inject */
+import { bootstrapModeler, inject } from 'test/helper';
 
 import modelingXML from './modeling.dmn';
 
-import CoreModule from '../../../../lib/core';
-import ModelingModule from '../../../../lib/features/modeling';
+import CoreModule from 'lib/core';
+import ModelingModule from 'lib/features/modeling';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 

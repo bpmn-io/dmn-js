@@ -1,17 +1,15 @@
-require('../../../TestHelper');
-
-/* global bootstrapModeler, inject */
+import { bootstrapModeler, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerMouseEvent } from '../../../util/EventUtil';
+import { triggerMouseEvent } from 'test/util/EventUtil';
 
 import simpleXML from '../../simple.dmn';
 
-import AddRuleModule from '../../../../lib/features/add-rule';
-import CoreModule from '../../../../lib/core';
+import AddRuleModule from 'lib/features/add-rule';
+import CoreModule from 'lib/core';
 
 
 describe('add input output', function() {

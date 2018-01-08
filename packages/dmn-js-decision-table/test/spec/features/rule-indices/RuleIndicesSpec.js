@@ -1,6 +1,4 @@
-require('../../../TestHelper');
-
-/* global bootstrapModeler, inject */
+import { bootstrapModeler, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -8,10 +6,10 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from '../../../../lib/core';
-import ModelingModule from '../../../../lib/features/modeling';
-import RulesModule from '../../../../lib/features/rules';
-import RuleIndicesModule from '../../../../lib/features/rule-indices';
+import CoreModule from 'lib/core';
+import ModelingModule from 'lib/features/modeling';
+import RulesModule from 'lib/features/rules';
+import RuleIndicesModule from 'lib/features/rule-indices';
 
 function expectIndices(cells) {
   Array.from(cells).forEach((cell, index) => {

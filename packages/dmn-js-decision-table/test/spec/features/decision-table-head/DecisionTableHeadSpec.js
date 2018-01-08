@@ -2,9 +2,7 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-require('../../../TestHelper');
-
-/* global bootstrapViewer, inject */
+import { bootstrapViewer, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -12,8 +10,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from '../../../../lib/core';
-import DecisionTableHeadModule from '../../../../lib/features/decision-table-head';
+import CoreModule from 'lib/core';
+import DecisionTableHeadModule from 'lib/features/decision-table-head';
 
 describe('decision table head', function() {
 

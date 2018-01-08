@@ -1,6 +1,4 @@
-require('../../../TestHelper');
-
-/* global bootstrapViewer */
+import { bootstrapViewer } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -8,8 +6,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from '../../../../lib/core';
-import DecisionTablePropertiesModule from '../../../../lib/features/decision-table-properties';
+import CoreModule from 'lib/core';
+import DecisionTablePropertiesModule from 'lib/features/decision-table-properties';
 
 describe('decision table properties', function() {
 

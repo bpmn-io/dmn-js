@@ -1,8 +1,6 @@
-require('../../../TestHelper');
+import { bootstrapModeler, inject } from 'test/helper';
 
-/* global bootstrapModeler, inject */
-
-import { triggerMouseEvent } from '../../../util/EventUtil';
+import { triggerMouseEvent } from 'test/util/EventUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 
@@ -11,11 +9,11 @@ import TestContainer from 'mocha-test-container-support';
 import simpleXML from '../../simple.dmn';
 import oneRuleOneInputOneOutputXML from '../../one-rule-one-input-one-output.dmn';
 
-import ContextMenuModule from '../../../../lib/features/context-menu';
-import CoreModule from '../../../../lib/core';
-import DecisionTableHeadModule from '../../../../lib/features/decision-table-head';
+import ContextMenuModule from 'lib/features/context-menu';
+import CoreModule from 'lib/core';
+import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
-import RulesModule from '../../../../lib/features/rules';
+import RulesModule from 'lib/features/rules';
 
 
 describe('context menu', function() {

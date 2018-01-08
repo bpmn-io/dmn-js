@@ -1,6 +1,4 @@
-require('../../../TestHelper');
-
-/* global bootstrapViewer */
+import { bootstrapViewer } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -8,10 +6,10 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import AnnotationsModule from '../../../../lib/features/annotations';
-import CoreModule from '../../../../lib/core';
-import DecisionTableHeadModule from '../../../../lib/features/decision-table-head';
-import RulesModule from '../../../../lib/features/rules';
+import AnnotationsModule from 'lib/features/annotations';
+import CoreModule from 'lib/core';
+import DecisionTableHeadModule from 'lib/features/decision-table-head';
+import RulesModule from 'lib/features/rules';
 
 
 describe('annotations', function() {

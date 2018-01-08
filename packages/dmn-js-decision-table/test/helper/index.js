@@ -256,6 +256,3 @@ function insertCSS(name, css) {
 }
 
 module.exports.insertCSS = insertCSS;
-
-global.chai.use(require('diagram-js/test/matchers/BoundsMatchers'));
-global.chai.use(require('diagram-js/test/matchers/ConnectionMatchers'));

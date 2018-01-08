@@ -1,18 +1,16 @@
-require('../../../TestHelper');
-
-/* global bootstrapModeler, inject */
+import { bootstrapModeler, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerMouseEvent } from '../../../util/EventUtil';
+import { triggerMouseEvent } from 'test/util/EventUtil';
 
 import simpleXML from '../../simple.dmn';
 
-import AddInputOutputModule from '../../../../lib/features/add-input-output';
-import CoreModule from '../../../../lib/core';
-import ModelingModule from '../../../../lib/features/modeling';
+import AddInputOutputModule from 'lib/features/add-input-output';
+import CoreModule from 'lib/core';
+import ModelingModule from 'lib/features/modeling';
 
 
 describe('add input output', function() {
