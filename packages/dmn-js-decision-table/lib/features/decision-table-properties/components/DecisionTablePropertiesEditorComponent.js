@@ -3,10 +3,6 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import debounce from 'lodash/debounce';
-
-const DEBOUNCE_TIME = 300;
-
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
 import { isIdValid } from '../../../util/IdsUtil';
 import { debounceOnInput } from '../../../util/DebounceUtil';
