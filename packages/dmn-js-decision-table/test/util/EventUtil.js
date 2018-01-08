@@ -1,5 +1,9 @@
 export function triggerInputEvent(element, text) {
-  element.textContent = text;
+  if (element.tagName === 'INPUT') {
+    element.value = text;
+  } else if (element.contentEditable) {
+    element.textContent = text;
+  }
 
   const event = new Event('input', {
     bubbles: true,

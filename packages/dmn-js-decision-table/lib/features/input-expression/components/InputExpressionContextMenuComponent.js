@@ -3,17 +3,15 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import debounce from 'lodash/debounce';
-
-const DEBOUNCE_TIME = 300;
-
 
 export default class InputExpressionContextMenuComponent extends Component {
   
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
-    this.onInput = this.onInput.bind(this);
+    const debounceInput = context.injector.get('debounceInput');
+
+    this.onInput = debounceInput(this.onInput.bind(this));
     this.onKeyDown = this.onKeyDown.bind(this);
   }
   
@@ -56,7 +54,7 @@ export default class InputExpressionContextMenuComponent extends Component {
           type="text"
           placeholder="-"
           spellcheck="false"
-          onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
+          onInput={ this.onInput }
           onKeyDown={ this.onKeyDown }
           value={ inputExpression.text } />
       </div>
