@@ -18,3 +18,13 @@ export function triggerMouseEvent(element, event, clientX, clientY) {
 
   element.dispatchEvent(e);
 }
+
+export function triggerChangeEvent(element, value) {
+  element.value = value;
+
+  const event = document.createEvent('HTMLEvents');
+  
+  event.initEvent('change', false, true);
+  
+  element.dispatchEvent(event);
+}
