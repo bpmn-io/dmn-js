@@ -48,7 +48,7 @@ describe('add input output', function() {
     // then
     const root = sheet.getRoot();
 
-    expect(root.businessObject.rule).to.have.lengthOf(5);
+    expect(root.rows).to.have.lengthOf(5);
   }));
 
 

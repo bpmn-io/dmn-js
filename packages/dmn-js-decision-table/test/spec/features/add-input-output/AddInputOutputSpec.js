@@ -52,7 +52,7 @@ describe('add input output', function() {
       // then
       const root = sheet.getRoot();
 
-      expect(root.businessObject.input).to.have.lengthOf(3);
+      expect(root.cols).to.have.lengthOf(5);
     }));
 
 
@@ -88,7 +88,7 @@ describe('add input output', function() {
       // then
       const root = sheet.getRoot();
 
-      expect(root.businessObject.output).to.have.lengthOf(3);
+      expect(root.cols).to.have.lengthOf(5);
     }));
 
 
