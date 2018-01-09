@@ -91,7 +91,7 @@ export default class OutputNameComponent extends Component {
     const { name } = this.props.output;
     const { isFocussed } = this.state;
 
-    const classNames = [ 'output', 'output-name', 'output-name-editor' ];
+    const classNames = [ 'output', 'output-name' ];
 
     if (isFocussed) {
       classNames.push('focussed');

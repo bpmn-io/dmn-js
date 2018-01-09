@@ -5,23 +5,21 @@ import Component from 'inferno-component';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import debounce from 'lodash/debounce';
-
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
-
-const DEBOUNCE_TIME = 300;
 
 
 export default class RulesEditorCellComponent extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       isFocussed: false
     };
 
-    this.onInput = this.onInput.bind(this);
+    const debounceInput = context.injector.get('debounceInput');
+
+    this.onInput = debounceInput(this.onInput.bind(this));
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
@@ -90,7 +88,7 @@ export default class RulesEditorCellComponent extends Component {
         data-element-id={ cell.id }
         contentEditable="true"
         spellcheck="false"
-        onInput={ debounce(this.onInput, DEBOUNCE_TIME) }
+        onInput={ this.onInput }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
         ref={ node => this.node = node }

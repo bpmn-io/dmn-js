@@ -37,7 +37,7 @@ describe('decision table head editor', function() {
   it('should render output name', function() {
 
     // then
-    expect(domQuery('.output-name-editor', testContainer)).to.exist;
+    expect(domQuery('.output-name', testContainer)).to.exist;
   });
 
 

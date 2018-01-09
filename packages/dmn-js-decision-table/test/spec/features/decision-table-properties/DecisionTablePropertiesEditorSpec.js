@@ -33,7 +33,7 @@ describe('decision table properties', function() {
   it('should render decision table properties', function() {
 
     // then
-    expect(domQuery('.decision-table-properties-editor', testContainer)).to.exist;
+    expect(domQuery('.decision-table-properties', testContainer)).to.exist;
   });
 
 

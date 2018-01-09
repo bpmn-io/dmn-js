@@ -104,7 +104,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     const { id, name } = businessObject.$parent;
 
     return (
-      <header className="decision-table-properties decision-table-properties-editor">
+      <header className="decision-table-properties">
         <h3
           contenteditable="true"
           spellcheck="false"
