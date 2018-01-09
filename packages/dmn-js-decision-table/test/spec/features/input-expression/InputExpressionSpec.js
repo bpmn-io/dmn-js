@@ -31,7 +31,7 @@ describe('input expression', function() {
   });
 
 
-  it('should edit input expression', inject(function(sheet) {
+  it('should edit input expression', inject(function(elementRegistry) {
     
     // given
     const cell = domQuery('.input-expression', testContainer);
@@ -46,9 +46,7 @@ describe('input expression', function() {
     triggerInputEvent(input, 'foo');
 
     // then
-    const root = sheet.getRoot();
-
-    expect(root.cols[0].businessObject.inputExpression.text).to.equal('foo');
+    expect(elementRegistry.get('input1').businessObject.inputExpression.text).to.equal('foo');
   }));
 
 });

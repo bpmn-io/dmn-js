@@ -30,7 +30,7 @@ describe('type ref', function() {
   });
 
 
-  it('should edit type ref', inject(function(sheet) {
+  it('should edit type ref', inject(function(elementRegistry) {
     
     // given
     const cell = domQuery('.type-ref', testContainer);
@@ -43,9 +43,7 @@ describe('type ref', function() {
     triggerChangeEvent(select, 'boolean');
 
     // then
-    const root = sheet.getRoot();
-
-    expect(root.cols[0].businessObject.inputExpression.typeRef).to.equal('boolean');
+    expect(elementRegistry.get('input1').businessObject.inputExpression.typeRef).to.equal('boolean');
   }));
 
 });
