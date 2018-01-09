@@ -2,7 +2,7 @@ export function triggerInputEvent(element, text) {
   if (element.tagName === 'INPUT') {
     element.value = text;
   } else if (element.contentEditable) {
-    element.textContent = text;
+    element.innerHTML = text;
   }
 
   const event = new Event('input', {

@@ -39,17 +39,18 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     if (event.target === this.nameNode) {
 
-      this.editDecisionTableName(event.target.textContent);
+      this.editDecisionTableName(htmlToString(event.target.innerHTML));
 
     } else if (event.target === this.idNode) {
 
       const root = this._sheet.getRoot(),
             businessObject = root.businessObject;
 
-      const id = event.target.textContent;
+      const id = htmlToString(event.target.innerHTML);
 
       // if no error message returned ID is valid
-      if (!isIdValid(businessObject, id)) {
+      // isInvalid might return error when ID is equal to ID assigned to decision
+      if (!isIdValid(businessObject, id) || businessObject.$parent.id === id) {
 
         // this should be debounced
         this.editDecisionTableId(id);
@@ -112,7 +113,8 @@ export default class DecisionTablePropertiesComponent extends Component {
           onBlur={ () => this.onBlur('name') }
           onInput={ this.onInput }
           ref={ node => this.nameNode = node }
-          className={ nameClassNames.join(' ') }>{ name || (this.state.nameIsFocussed ? '' : '-') }</h3>
+          dangerouslySetInnerHTML={{ __html: name || (this.state.nameIsFocussed ? '' : '-') }}
+          className={ nameClassNames.join(' ') }></h3>
         <h5
           contenteditable="true"
           spellcheck="false"
@@ -120,8 +122,20 @@ export default class DecisionTablePropertiesComponent extends Component {
           onBlur={ () => this.onBlur('id') }
           onInput={ this.onInput }
           ref={ node => this.idNode = node }
-          className={ idClassNames.join(' ') }>{ id || (this.state.idIsFocussed ? '' : '-') }</h5>
+          dangerouslySetInnerHTML={{ __html: id || (this.state.idIsFocussed ? '' : '-') }}
+          className={ idClassNames.join(' ') }></h5>
       </header>
     );
   }
+}
+
+////////// helpers //////////
+
+function htmlToString(html) {
+  return html
+    .replace(/<div><br><\/div>/ig, '\n')  // replace div with a br with single linebreak
+    .replace(/<br(\s*)\/*>/ig, '\n')      // replace single line-breaks
+    .replace(/<(div|p)(\s*)\/*>/ig, '\n') // add a line break before all div and p tags
+    .replace(/&nbsp;/ig, ' ')             // replace non breaking spaces with normal spaces
+    .replace(/(<([^>]+)>)/ig, '');        // remove any remaining tags
 }

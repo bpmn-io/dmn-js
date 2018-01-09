@@ -45,7 +45,7 @@ export default class RulesEditorAnnotationCellComponent extends Component {
   onInput(event) {
     const { row } = this.props;
 
-    this._modeling.editAnnotation(row.businessObject, event.target.textContent);
+    this._modeling.editAnnotation(row.businessObject, htmlToString(event.target.innerHTML));
   }
 
 
@@ -93,8 +93,20 @@ export default class RulesEditorAnnotationCellComponent extends Component {
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
         ref={ node => this.node = node }
-        className={ classNames.join(' ') }>{ businessObject.description || (isFocussed ? '' : '-') }</td>
+        dangerouslySetInnerHTML={{ __html: businessObject.description || (isFocussed ? '' : '-') }}
+        className={ classNames.join(' ') }></td>
     );
   }
 
+}
+
+////////// helpers //////////
+
+function htmlToString(html) {
+  return html
+    .replace(/<div><br><\/div>/ig, '\n')  // replace div with a br with single linebreak
+    .replace(/<br(\s*)\/*>/ig, '\n')      // replace single line-breaks
+    .replace(/<(div|p)(\s*)\/*>/ig, '\n') // add a line break before all div and p tags
+    .replace(/&nbsp;/ig, ' ')             // replace non breaking spaces with normal spaces
+    .replace(/(<([^>]+)>)/ig, '');        // remove any remaining tags
 }

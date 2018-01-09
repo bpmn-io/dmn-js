@@ -69,6 +69,7 @@
 }
 
 .tjs-container td.annotation {
+  white-space: pre;
   text-align: center;
 }
 
@@ -117,6 +118,7 @@ td.output {
 
 th.output.output-name {
   outline: none;
+  white-space: pre;
 }
 
 th.output.output-name:hover,
@@ -160,6 +162,7 @@ table tbody {
 
 td {
   outline: none;
+  white-space: pre;
 }
 
 table tfoot {
@@ -365,6 +368,7 @@ td.selected {
   padding: 3px 6px;
   text-align: center;
   outline: none;
+  white-space: pre;
 }
 
 .decision-table-name.focussed,

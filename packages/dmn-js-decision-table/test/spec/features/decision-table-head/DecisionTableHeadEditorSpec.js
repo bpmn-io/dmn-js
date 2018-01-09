@@ -61,6 +61,29 @@ describe('decision table head editor', function() {
       expect(output.name).to.equal('foo');
     }));
 
+
+    it('should edit output name - line break', inject(function(sheet) {
+      
+      // given
+      const outputName = domQuery('.output-name', testContainer);
+
+      outputName.focus();
+
+      // when
+      triggerInputEvent(outputName, 'foo\nbar');
+
+      outputName.blur();
+
+      // then
+      const root = sheet.getRoot();
+    
+      const output = root.businessObject.output[0];
+  
+      expect(output.name).to.equal('foo\nbar');
+  
+      expect(outputName.innerHTML).to.equal('foo\nbar');
+    }));
+
   });
 
 });

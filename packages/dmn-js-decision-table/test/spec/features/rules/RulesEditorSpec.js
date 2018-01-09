@@ -48,4 +48,23 @@ describe('rules editor', function() {
     expect(elementRegistry.get('inputEntry1').businessObject.text).to.equal('foo');
   }));
 
+
+  it('should edit cell - line breaks', inject(function(elementRegistry) {
+    
+    // given
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    cell.focus();
+
+    // when
+    triggerInputEvent(cell, 'foo\nbar');
+
+    cell.blur();
+
+    // then
+    expect(elementRegistry.get('inputEntry1').businessObject.text).to.equal('foo\nbar');
+
+    expect(cell.innerHTML).to.equal('foo\nbar');
+  }));
+
 });

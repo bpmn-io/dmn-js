@@ -93,4 +93,27 @@ describe('annotations editor', function() {
     expect(rule.description).to.equal('foo');
   }));
 
+
+  it('should edit annotation - line break', inject(function(sheet) {
+    
+    // given
+    const cell = domQuery('td.annotation', testContainer);
+    
+    // when
+    cell.focus();
+
+    triggerInputEvent(cell, 'foo<div>bar</div>');
+
+    cell.blur();
+
+    // then
+    const root = sheet.getRoot();
+
+    const rule = root.businessObject.rule[0];
+
+    expect(rule.description).to.equal('foo\nbar');
+
+    expect(cell.innerHTML).to.equal('foo\nbar');
+  }));
+
 });

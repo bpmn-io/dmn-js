@@ -56,6 +56,27 @@ describe('decision table properties', function() {
     }));
 
 
+    it('should edit name - line breaks', inject(function(sheet) {
+
+      // given
+      const name = domQuery('.decision-table-name', testContainer);
+
+      name.focus();
+
+      // when
+      triggerInputEvent(name, 'foo\nbar');
+
+      name.blur();
+
+      // then
+      const root = sheet.getRoot();
+
+      expect(root.businessObject.$parent.name).to.equal('foo\nbar');
+
+      expect(name.innerHTML).to.equal('foo\nbar');
+    }));
+
+
     it('should edit ID if valid', inject(function(sheet) {
 
       // given

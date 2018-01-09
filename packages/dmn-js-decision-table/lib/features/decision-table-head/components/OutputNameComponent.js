@@ -56,7 +56,7 @@ export default class OutputNameComponent extends Component {
   onInput(event) {
     const { output } = this.props;
 
-    this._modeling.editOutputName(output, event.target.textContent);
+    this._modeling.editOutputName(output, htmlToString(event.target.innerHTML));
   }
 
 
@@ -106,8 +106,20 @@ export default class OutputNameComponent extends Component {
         contentEditable="true"
         spellcheck="false"
         ref={ node => this.node = node }
-        onInput={ this.onInput }>{ name || (isFocussed ? '' : '-') }</th>
+        dangerouslySetInnerHTML={{ __html: name || (isFocussed ? '' : '-') }}
+        onInput={ this.onInput }></th>
     );
   }
 
+}
+
+////////// helpers //////////
+
+function htmlToString(html) {
+  return html
+    .replace(/<div><br><\/div>/ig, '\n')  // replace div with a br with single linebreak
+    .replace(/<br(\s*)\/*>/ig, '\n')      // replace single line-breaks
+    .replace(/<(div|p)(\s*)\/*>/ig, '\n') // add a line break before all div and p tags
+    .replace(/&nbsp;/ig, ' ')             // replace non breaking spaces with normal spaces
+    .replace(/(<([^>]+)>)/ig, '');        // remove any remaining tags
 }
