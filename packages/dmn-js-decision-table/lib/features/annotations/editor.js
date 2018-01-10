@@ -1,5 +1,5 @@
 import AnnotationsEditor from './AnnotationsEditor';
-import DebounceInput from '../../util/debounceInput';
+import DebounceInput from '../debounce-input';
 import Modeling from '../modeling';
 
 export default {

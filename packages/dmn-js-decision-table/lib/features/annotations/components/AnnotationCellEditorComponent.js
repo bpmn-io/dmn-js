@@ -6,7 +6,7 @@ import Component from 'inferno-component';
 import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
 
 export default class RulesEditorAnnotationCellComponent extends Component {
-  
+
   constructor(props, context) {
     super(props, context);
 
@@ -29,7 +29,7 @@ export default class RulesEditorAnnotationCellComponent extends Component {
     const { changeSupport, injector } = this.context;
 
     this._modeling = injector.get('modeling');
-    
+
     changeSupport.onElementsChanged(row.id, this.onElementsChanged);
   }
 
@@ -80,7 +80,7 @@ export default class RulesEditorAnnotationCellComponent extends Component {
     const { isFocussed } = this.state;
 
     const classNames = [ 'annotation' ];
-    
+
     if (isFocussed) {
       classNames.push('focussed');
     }
@@ -96,5 +96,5 @@ export default class RulesEditorAnnotationCellComponent extends Component {
         className={ classNames.join(' ') }>{ businessObject.description || (isFocussed ? '' : '-') }</td>
     );
   }
-  
+
 }

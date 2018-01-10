@@ -1,5 +1,5 @@
 import ContextMenu from 'table-js/lib/features/context-menu';
-import DebounceInput from '../../util/debounceInput';
+import DebounceInput from '../debounce-input';
 import InputExpression from './InputExpression';
 import Modeling from '../modeling';
 

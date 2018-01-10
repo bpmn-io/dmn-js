@@ -1,4 +1,4 @@
-import DebounceInput from '../../util/debounceInput';
+import DebounceInput from '../debounce-input';
 import Modeling from '../modeling';
 import RulesEditor from './RulesEditor';
 
