@@ -6,7 +6,7 @@
         <inputExpression id="inputExpression1" typeRef="string">
           <text>status</text>
         </inputExpression>
-        <inputValues id="UnaryTests_04olqy1">
+        <inputValues id="UnaryTests_1e76ebn">
           <text><![CDATA["bronze","silver","gold"]]></text>
         </inputValues>
       </input>
@@ -16,12 +16,13 @@
         </inputExpression>
       </input>
       <output id="output1" label="Check Result" name="result" typeRef="string">
-        <outputValues id="UnaryTests_1a126ym">
+        <outputValues id="UnaryTests_017iuu3">
           <text><![CDATA["ok","notok"]]></text>
         </outputValues>
       </output>
       <output id="output2" label="Reason" name="reason" typeRef="string" />
       <rule id="rule1">
+        <description>Bronze is really not that good</description>
         <inputEntry id="inputEntry1">
           <text><![CDATA["bronze"]]></text>
         </inputEntry>
@@ -36,6 +37,7 @@
         </outputEntry>
       </rule>
       <rule id="rule2">
+        <description>Silver is actually quite okay</description>
         <inputEntry id="inputEntry3">
           <text><![CDATA["silver"]]></text>
         </inputEntry>
@@ -50,6 +52,7 @@
         </outputEntry>
       </rule>
       <rule id="rule3">
+        <description>Same here</description>
         <inputEntry id="inputEntry5">
           <text><![CDATA["silver"]]></text>
         </inputEntry>
@@ -64,6 +67,7 @@
         </outputEntry>
       </rule>
       <rule id="rule4">
+        <description>Gold is really good, try even harder next time though</description>
         <inputEntry id="inputEntry7">
           <text><![CDATA["gold"]]></text>
         </inputEntry>
@@ -75,6 +79,32 @@
         </outputEntry>
         <outputEntry id="outputEntry8">
           <text><![CDATA["you get anything you want"]]></text>
+        </outputEntry>
+      </rule>
+      <rule id="rule5">
+        <description>Man, you really suck</description>
+        <inputEntry id="inputEntry9">
+          <text><![CDATA[not("bronze", "silver", "gold")]]></text>
+        </inputEntry>
+        <inputEntry id="inputEntry10" />
+        <outputEntry id="outputEntry9">
+          <text><![CDATA["notok"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry10">
+          <text><![CDATA["you suck"]]></text>
+        </outputEntry>
+      </rule>
+      <rule id="rule6">
+        <description>Stop cheating</description>
+        <inputEntry id="inputEntry11">
+          <text><![CDATA["bronze", "silver"]]></text>
+        </inputEntry>
+        <inputEntry id="inputEntry12" />
+        <outputEntry id="outputEntry11">
+          <text><![CDATA["notok"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry12">
+          <text><![CDATA["how can you have two medals at the same time?"]]></text>
         </outputEntry>
       </rule>
     </decisionTable>

@@ -463,3 +463,81 @@ td.selected {
 .powered-by-overlay .powered-by-overlay-content div:first-child {
   margin-right: 8px;
 }
+
+/* input & output values edit */
+.tjs-container .input-output-values-edit {
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.tjs-container .input-output-values-edit .values {
+  margin-top: 8px;
+  max-width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tjs-container .input-output-values-edit .values .value {
+  border: solid 1px #fafafa;
+  background-color: #fafafa;
+  color: #444;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  padding: 3px 6px;
+  font-weight: normal;
+}
+
+.tjs-container .input-output-values-edit .values .value:hover {
+  cursor: pointer;
+  background: #f4cecd;
+  color: #c9302c;
+  border-color: #f4cecd;
+}
+
+.tjs-container .input-output-values-edit .values .input {
+  width: 100%;
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: none;
+  font-size: 14px;
+  color: #444;
+}
+
+.tjs-container .input-output-values-edit .values .input.invalid {
+  background: #f4cecd;
+  color: #c9302c;
+}
+
+.tjs-container .input-output-values-edit .values .input:focus.invalid {
+  border-color: #c9302c;
+  box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
+}
+
+.tjs-container .input-output-values-edit .values .input:focus {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
+}
+
+.no-margin-top,
+.no-margin-top:before {
+  margin-top: 0;
+}
+
+.no-margin-right,
+.no-margin-right:before {
+  margin-right: 0;
+}
+
+.no-margin-bottom,
+.no-margin-bottom:before {
+  margin-bottom: 0;
+}
+
+.no-margin-left,
+.no-margin-left:before {
+  margin-left: 0;
+}

@@ -32,3 +32,16 @@ export function triggerChangeEvent(element, value) {
   
   element.dispatchEvent(event);
 }
+
+export function triggerKeyEvent(element, event, code) {
+  const e = document.createEvent('Events');
+
+  if (e.initEvent) {
+    e.initEvent(event, true, true);
+  }
+
+  e.keyCode = code;
+  e.which = code;
+
+  element.dispatchEvent(e);
+}

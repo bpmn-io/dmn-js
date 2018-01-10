@@ -2,6 +2,7 @@ import assign from 'lodash/assign';
 
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 
+import EditAllowedValuesHandler from './cmd/EditAllowedValuesHandler';
 import EditPropertiesHandler from './cmd/EditPropertiesHandler';
 
 export default class Modeling extends BaseModeling {
@@ -20,6 +21,7 @@ export default class Modeling extends BaseModeling {
 
   static _getHandlers() {
     return assign(super._getHandlers(), {
+      'editAllowedValues': EditAllowedValuesHandler,
       'editProperties': EditPropertiesHandler
     });
   }
@@ -133,6 +135,15 @@ export default class Modeling extends BaseModeling {
     };
 
     this._commandStack.execute('editProperties', context);
+  }
+
+  editAllowedValues(element, allowedValues) {
+    const context = {
+      element,
+      allowedValues
+    };
+
+    this._commandStack.execute('editAllowedValues', context);
   }
 }
 

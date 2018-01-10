@@ -317,6 +317,112 @@ describe('Modeling', function() {
 
   });
 
+  
+  describe('edit allowed values', function() {
+
+    describe('dmn:OutputClause', function() {
+
+      it('should execute', inject(function(modeling, sheet) {
+        
+        // given
+        var table = sheet.getRoot();
+        var col = table.cols[2];
+
+        // when
+        modeling.editAllowedValues(col.businessObject, [ 'foo' ]);
+
+        // then
+        expect(col.businessObject.outputValues.text).to.equal('foo');
+      }));
+
+
+      it('should undo', inject(function(modeling, sheet, commandStack) {
+
+        // given
+        var table = sheet.getRoot();
+        var col = table.cols[2];
+
+        // when
+        modeling.editAllowedValues(col.businessObject, [ 'foo' ]);
+
+        commandStack.undo();
+
+        // then
+        expect(col.businessObject.outputValues.text).to.equal('"ok","notok"');
+      }));
+
+
+      it('should undo', inject(function(modeling, sheet, commandStack) {
+
+        // given
+        var table = sheet.getRoot();
+        var col = table.cols[2];
+
+        // when
+        modeling.editAllowedValues(col.businessObject, [ 'foo' ]);
+
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(col.businessObject.outputValues.text).to.equal('foo');
+      }));
+
+    });
+
+
+    describe('dmn:InputClause', function() {
+
+      it('should execute', inject(function(modeling, sheet) {
+        
+        // given
+        var table = sheet.getRoot();
+        var col = table.cols[0];
+
+        // when
+        modeling.editAllowedValues(col.businessObject, [ 'foo' ]);
+
+        // then
+        expect(col.businessObject.inputValues.text).to.equal('foo');
+      }));
+
+
+      it('should undo', inject(function(modeling, sheet, commandStack) {
+
+        // given
+        var table = sheet.getRoot();
+        var col = table.cols[0];
+
+        // when
+        modeling.editAllowedValues(col.businessObject, [ 'foo' ]);
+
+        commandStack.undo();
+
+        // then
+        expect(col.businessObject.inputValues.text).to.equal('"bronze","silver","gold"');
+      }));
+
+
+      it('should undo', inject(function(modeling, sheet, commandStack) {
+
+        // given
+        var table = sheet.getRoot();
+        var col = table.cols[0];
+
+        // when
+        modeling.editAllowedValues(col.businessObject, [ 'foo' ]);
+
+        commandStack.undo();
+        commandStack.redo();
+
+        // then
+        expect(col.businessObject.inputValues.text).to.equal('foo');
+      }));
+
+    });
+
+  });
+
 });
 
 

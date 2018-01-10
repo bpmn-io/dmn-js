@@ -74,6 +74,8 @@ export default class RulesEditorCellComponent extends Component {
   onInput(event) {
     const { cell } = this.props;
 
+    // TODO(philippfromme): valide against allowed values first
+
     this._modeling.editCell(cell.businessObject, event.target.textContent);
   }
 

@@ -1,5 +1,7 @@
 const TestHelper = module.exports = require('./helper');
 
+TestHelper.insertCSS('dmn-font.css', require('dmn-font/dist/css/dmn-embedded.css'));
+
 TestHelper.insertCSS('dmn-js-decision-table-js.css', require('../assets/css/dmn-js-decision-table.css'));
 
 TestHelper.insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));

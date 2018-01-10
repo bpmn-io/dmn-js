@@ -13,6 +13,7 @@ import decisionTablePropertiesEditorModule from './features/decision-table-prope
 import editorActionsModule from 'table-js/lib/features/editor-actions';
 import hitPolicyEditorModule from './features/hit-policy/editor';
 import inputExpressionModule from './features/input-expression';
+import inputOutputValuesModule from './features/input-output-values';
 import interactionEventsModule from 'table-js/lib/features/interaction-events';
 import modelingModule from './features/modeling';
 import rulesEditorModule from './features/rules/editor';
@@ -44,6 +45,7 @@ export default class Editor extends Viewer {
       editorActionsModule,
       hitPolicyEditorModule,
       inputExpressionModule,
+      inputOutputValuesModule,
       interactionEventsModule,
       modelingModule,
       rulesEditorModule,

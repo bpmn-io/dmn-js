@@ -6,13 +6,20 @@
         <inputExpression id="inputExpression1" typeRef="string">
           <text>status</text>
         </inputExpression>
+        <inputValues id="UnaryTests_1e76ebn">
+          <text><![CDATA["bronze","silver","gold"]]></text>
+        </inputValues>
       </input>
       <input id="input2" label="Order Sum">
         <inputExpression id="inputExpression2" typeRef="double">
           <text>sum</text>
         </inputExpression>
       </input>
-      <output id="output1" label="Check Result" name="result" typeRef="string" />
+      <output id="output1" label="Check Result" name="result" typeRef="string">
+        <outputValues id="UnaryTests_017iuu3">
+          <text><![CDATA["ok","notok"]]></text>
+        </outputValues>
+      </output>
       <output id="output2" label="Reason" name="reason" typeRef="string" />
       <rule id="rule1">
         <description>Bronze is really not that good</description>

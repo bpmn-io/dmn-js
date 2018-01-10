@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-             xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0"
-             id="dish" name="Dish"
-             namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <inputData id="dayType_id" name="Type of day">
     <extensionElements>
       <biodi:bounds x="240" y="270" width="125" height="45" />
@@ -37,22 +34,6 @@
       <biodi:bounds x="450" y="250" width="135" height="46" />
     </extensionElements>
   </businessKnowledgeModel>
-  <textAnnotation id="TextAnnotation_1t4zaz9">
-    <extensionElements>
-      <biodi:bounds x="240" y="400" width="125" height="45" />
-    </extensionElements>
-    <text>foobar</text>
-  </textAnnotation>
-  <association id="Association_1c4jixb">
-    <extensionElements>
-      <biodi:edge source="dayType_id">
-        <biodi:waypoints x="275" y="315" />
-        <biodi:waypoints x="240" y="400" />
-      </biodi:edge>
-    </extensionElements>
-    <sourceRef href="#dayType_id" />
-    <targetRef href="#TextAnnotation_1t4zaz9" />
-  </association>
   <decision id="dish-decision" name="Dish Decision">
     <extensionElements>
       <biodi:bounds x="140" y="5" width="180" height="80" />
@@ -83,13 +64,20 @@
         <inputExpression id="seasonInputExpression" typeRef="string">
           <text>season</text>
         </inputExpression>
+        <inputValues id="UnaryTests_0twhp5w">
+          <text><![CDATA["Winter","Summer","Spring"]]></text>
+        </inputValues>
       </input>
       <input id="guestCountInput" label="How many guests">
         <inputExpression id="guestCountInputExpression" typeRef="integer">
           <text>guestCount</text>
         </inputExpression>
       </input>
-      <output id="output1" label="Dish" name="desiredDish" typeRef="string" />
+      <output id="output1" label="Dish" name="desiredDish" typeRef="string">
+        <outputValues id="UnaryTests_0y5qdnh">
+          <text><![CDATA["Spareribs","Pasta","Light salad","Beans salad","Stew","Steak"]]></text>
+        </outputValues>
+      </output>
       <rule id="row-495762709-1">
         <inputEntry id="UnaryTests_1nxcsjr">
           <text><![CDATA["Winter"]]></text>
@@ -253,4 +241,20 @@
       </rule>
     </decisionTable>
   </decision>
+  <textAnnotation id="TextAnnotation_1t4zaz9">
+    <extensionElements>
+      <biodi:bounds x="240" y="400" width="125" height="45" />
+    </extensionElements>
+    <text>foobar</text>
+  </textAnnotation>
+  <association id="Association_1c4jixb">
+    <extensionElements>
+      <biodi:edge source="dayType_id">
+        <biodi:waypoints x="275" y="315" />
+        <biodi:waypoints x="240" y="400" />
+      </biodi:edge>
+    </extensionElements>
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#TextAnnotation_1t4zaz9" />
+  </association>
 </definitions>
