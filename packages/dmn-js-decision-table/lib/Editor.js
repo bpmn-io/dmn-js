@@ -18,6 +18,7 @@ import interactionEventsModule from 'table-js/lib/features/interaction-events';
 import modelingModule from './features/modeling';
 import rulesEditorModule from './features/rules/editor';
 import selectionModule from 'table-js/lib/features/selection';
+import simpleModeModule from './features/simple-mode';
 import typeRefModule from './features/type-ref';
 
 
@@ -50,6 +51,7 @@ export default class Editor extends Viewer {
       modelingModule,
       rulesEditorModule,
       selectionModule,
+      simpleModeModule,
       typeRefModule
     ];
   }
