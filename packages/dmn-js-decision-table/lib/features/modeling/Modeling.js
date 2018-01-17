@@ -20,7 +20,7 @@ export default class Modeling extends BaseModeling {
   }
 
   static _getHandlers() {
-    return assign(super._getHandlers(), {
+    return assign({}, super._getHandlers(), {
       'editAllowedValues': EditAllowedValuesHandler,
       'editProperties': EditPropertiesHandler
     });
