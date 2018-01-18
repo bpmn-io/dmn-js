@@ -107,7 +107,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
     }
 
     DMN_JS = new DmnJS(_options);
-    
+
     DMN_JS.importXML(diagram, done);
 
     return DMN_JS;

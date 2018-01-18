@@ -10,7 +10,7 @@ export default class RulesEditor {
         return RulesCellEditorComponent;
       }
     });
-  }  
+  }
 }
 
 RulesEditor.$inject = [ 'components' ];

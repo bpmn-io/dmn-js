@@ -25,7 +25,7 @@ describe('decision table properties', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -73,7 +73,7 @@ describe('decision table properties', function() {
     }));
 
     it('should not edit ID if invalid', inject(function(sheet) {
-      
+
       // given
       const id = domQuery('.decision-table-id', testContainer);
 

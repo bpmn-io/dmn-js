@@ -6,7 +6,7 @@ import Component from 'inferno-component';
 export default class RulesIndexCellComponent extends Component {
   render() {
     const { rowIndex } = this.props;
-  
+
     return <td className="rule-index">{rowIndex}</td>;
   }
 }

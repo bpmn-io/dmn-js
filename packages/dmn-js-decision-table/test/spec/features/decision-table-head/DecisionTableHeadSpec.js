@@ -24,7 +24,7 @@ describe('decision table head', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -44,7 +44,7 @@ describe('decision table head', function() {
 
 
   it('should render output label', function() {
-    
+
     // then
     expect(domQuery('.output-label', testContainer)).to.exist;
   });

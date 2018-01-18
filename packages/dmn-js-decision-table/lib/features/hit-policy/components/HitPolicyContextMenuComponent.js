@@ -39,7 +39,7 @@ export default class HitPolicyContextMenuComponent extends Component {
   }
 
   onAggregationChange({ target }) {
-    let aggregation = target.value === 'NONE' 
+    let aggregation = target.value === 'NONE'
       ? undefined
       : target.value;
 
@@ -49,7 +49,7 @@ export default class HitPolicyContextMenuComponent extends Component {
   onElementsChanged() {
     this.forceUpdate();
   }
-  
+
   componentWillMount() {
     const { injector } = this.context;
 
@@ -73,7 +73,7 @@ export default class HitPolicyContextMenuComponent extends Component {
 
   componentWillUnmount() {
     const root = this._sheet.getRoot();
-    
+
     this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
 

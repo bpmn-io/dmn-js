@@ -14,12 +14,12 @@ export default class ViewDrd {
       }
 
       const root = sheet.getRoot();
-      
+
       const definitions = getDefinitions(root);
 
       // open definitions
       const view = parent.getView(definitions);
-      
+
       if (view) {
         parent.open(view);
       }

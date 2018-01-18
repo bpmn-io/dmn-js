@@ -10,7 +10,7 @@ const HIGH_PRIORITY = 1500;
 
 export default class AddInputOutput {
   constructor(components, editorActions, eventBus, modeling, sheet) {
-    components.onGetComponent('cell', HIGH_PRIORITY, ({ cellType }) => {      
+    components.onGetComponent('cell', HIGH_PRIORITY, ({ cellType }) => {
       if (cellType === 'input-label') {
         return AddInputCellComponent;
       } else if (cellType === 'output-label') {

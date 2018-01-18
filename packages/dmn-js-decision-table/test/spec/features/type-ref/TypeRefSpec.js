@@ -25,13 +25,13 @@ describe('type ref', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
 
   it('should edit type ref', inject(function(elementRegistry) {
-    
+
     // given
     const cell = domQuery('.type-ref', testContainer);
 

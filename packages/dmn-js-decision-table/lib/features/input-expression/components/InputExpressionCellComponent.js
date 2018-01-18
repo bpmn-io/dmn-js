@@ -39,7 +39,7 @@ export default class InputExpressionCellComponent extends Component {
 
   componentWillMount() {
     const { injector } = this.context;
-    
+
     const changeSupport = this._changeSupport = this.context.changeSupport;
     this._sheet = injector.get('sheet');
     this._eventBus = injector.get('eventBus');
@@ -56,14 +56,14 @@ export default class InputExpressionCellComponent extends Component {
     const root = this._sheet.getRoot();
 
     const { inputExpression } = this.props.input;
-    
+
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
     this._changeSupport.offElementsChanged(inputExpression.id, this.onElementsChanged);
   }
 
   render() {
     const { inputExpression } = this.props.input;
-    
+
     return (
       <th
         onClick={ this.onClick }

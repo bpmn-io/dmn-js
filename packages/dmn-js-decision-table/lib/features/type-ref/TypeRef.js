@@ -2,7 +2,7 @@ import TypeRefCell from './components/TypeRefCell';
 import TypeRefContextMenuComponent from './components/TypeRefContextMenuComponent';
 
 export default class TypeRef {
-  
+
   constructor(components, contextMenu, eventBus, renderer) {
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'input-expression-type-ref' ||

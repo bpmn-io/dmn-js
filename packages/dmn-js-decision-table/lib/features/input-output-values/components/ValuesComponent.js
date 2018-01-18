@@ -7,7 +7,7 @@ import { uniq } from 'lodash';
 import { classes as domClasses } from 'min-dom';
 
 export default class ValuesComponent extends Component {
-  
+
   constructor(props, context) {
     super(props, context);
 
@@ -49,7 +49,7 @@ export default class ValuesComponent extends Component {
 
   onKeyUp(e) {
     const values = e.target.value.split(',');
-    
+
     if (e.target.value !== '' && !values.reduce((areValid, value) => {
       return areValid && this.isValid(value);
     }, true)) {
@@ -63,7 +63,7 @@ export default class ValuesComponent extends Component {
   // when value has been deleted
   removeValue(value) {
     const { onChange } = this.props;
-    
+
     const values = this.state.values.filter(t => t !== value);
 
     this.setState({
@@ -72,7 +72,7 @@ export default class ValuesComponent extends Component {
 
     onChange && onChange(values);
   }
-  
+
   render() {
     const { values } = this.state;
 

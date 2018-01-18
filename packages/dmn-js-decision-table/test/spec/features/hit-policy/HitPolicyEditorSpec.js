@@ -25,7 +25,7 @@ describe('hit policy editor', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -36,7 +36,7 @@ describe('hit policy editor', function() {
     expect(domQuery('th.hit-policy', testContainer)).to.exist;
   });
 
-  
+
   describe('hit policy editing', function() {
 
     let select, root;
@@ -53,7 +53,7 @@ describe('hit policy editor', function() {
 
 
     it('should edit hit policy', inject(function(sheet) {
-      
+
       // when
       triggerChangeEvent(select, 'FIRST');
 
@@ -65,7 +65,7 @@ describe('hit policy editor', function() {
     describe('aggregation', function() {
 
       it('should render aggregation select', function() {
-        
+
         // when
         triggerChangeEvent(select, 'COLLECT');
 
@@ -90,14 +90,14 @@ describe('hit policy editor', function() {
 
 
       it('should remove aggregation', inject(function(sheet) {
-        
+
         // given
         triggerChangeEvent(select, 'COLLECT');
 
         const aggregationSelect = domQuery('.hit-policy-edit-operator-select', testContainer);
 
         triggerChangeEvent(aggregationSelect, 'SUM');
-        
+
         // when
         triggerChangeEvent(select, 'FIRST');
 

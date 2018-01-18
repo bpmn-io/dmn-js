@@ -26,13 +26,13 @@ describe('input expression', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
 
   it('should edit input expression', inject(function(elementRegistry) {
-    
+
     // given
     const cell = domQuery('.input-expression', testContainer);
 

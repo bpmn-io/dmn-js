@@ -19,7 +19,7 @@ var UpdatePropertiesHandler = require('./cmd/UpdatePropertiesHandler.js'),
 function Modeling(canvas, eventBus, elementFactory, commandStack, drdRules) {
   this._canvas = canvas;
   this._drdRules = drdRules;
-  
+
   BaseModeling.call(this, eventBus, elementFactory, commandStack);
 }
 

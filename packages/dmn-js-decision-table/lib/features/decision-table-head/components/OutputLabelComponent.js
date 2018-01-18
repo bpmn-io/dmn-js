@@ -17,7 +17,7 @@ export default class OutputLabelComponent extends Component {
           colspan = businessObject.output.length;
 
     return (
-      <th 
+      <th
         className="output output-label"
         colspan={ colspan }>Output</th>
     );

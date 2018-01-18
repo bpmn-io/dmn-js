@@ -19,8 +19,8 @@ export default class Rules {
         return RulesCellComponent;
       }
     });
-  }  
-  
+  }
+
 }
 
 Rules.$inject = [ 'components' ];

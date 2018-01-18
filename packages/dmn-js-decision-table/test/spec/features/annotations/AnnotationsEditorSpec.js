@@ -28,7 +28,7 @@ describe('annotations editor', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -41,7 +41,7 @@ describe('annotations editor', function() {
 
 
   it('should render annotation cells', function() {
-    
+
     // then
     const cells = domQuery.all('td.annotation', testContainer);
 
@@ -67,9 +67,9 @@ describe('annotations editor', function() {
 
     // given
     const cell = domQuery('td.annotation', testContainer);
-    
+
     cell.focus();
-    
+
     // when
     cell.blur();
   });
@@ -79,7 +79,7 @@ describe('annotations editor', function() {
 
     // given
     const cell = domQuery('td.annotation', testContainer);
-    
+
     // when
     cell.focus();
 

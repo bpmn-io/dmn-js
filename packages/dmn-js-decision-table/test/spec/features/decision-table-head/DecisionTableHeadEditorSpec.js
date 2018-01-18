@@ -29,7 +29,7 @@ describe('decision table head editor', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -55,9 +55,9 @@ describe('decision table head editor', function() {
 
       // then
       const root = sheet.getRoot();
-    
+
       const output = root.businessObject.output[0];
-  
+
       expect(output.name).to.equal('foo');
     }));
 

@@ -44,7 +44,7 @@ export default class TypeRefCell extends Component {
 
   componentWillMount() {
     const { injector } = this.context;
-    
+
     const changeSupport = this._changeSupport = this.context.changeSupport;
     this._sheet = injector.get('sheet');
     this._eventBus = injector.get('eventBus');
@@ -61,7 +61,7 @@ export default class TypeRefCell extends Component {
     const root = this._sheet.getRoot();
 
     const { inputExpression, output } = this.props;
-    
+
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
     this._changeSupport.offElementsChanged(inputExpression ? inputExpression.id : output.id, this.onElementsChanged);
   }

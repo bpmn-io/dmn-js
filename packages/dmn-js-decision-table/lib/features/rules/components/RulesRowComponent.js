@@ -4,10 +4,10 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 
 export default class RulesRowComponent extends Component {
-  
+
   render({ row, rowIndex, cols }) {
     const { components } = this.context;
-    
+
     const { cells } = row;
 
     const beforeRuleCellsComponents = components.getComponents('cell', { cellType: 'before-rule-cells' });
@@ -20,7 +20,7 @@ export default class RulesRowComponent extends Component {
           cells.map((cell, colIndex) => {
             const CellComponent = components.getComponent('cell', { cellType: 'rule' });
 
-            return CellComponent ? <CellComponent 
+            return CellComponent ? <CellComponent
               key={ cell.id }
               rowIndex={ rowIndex }
               cols={ cols }

@@ -17,7 +17,7 @@ export default class InputLabelComponent extends Component {
           colspan = businessObject.input.length;
 
     return (
-      <th 
+      <th
         className="input input-label"
         colspan={ colspan }>Input</th>
     );

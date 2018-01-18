@@ -26,7 +26,7 @@ describe('input output values', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -37,15 +37,15 @@ describe('input output values', function() {
 
     beforeEach(function() {
       const cell = domQuery('.input.type-ref', testContainer);
-      
+
       triggerMouseEvent(cell, 'click');
-  
+
       inputValuesEdit = domQuery('.input-output-values-edit', testContainer);
     });
 
 
     it('should render input values', function() {
-              
+
       // then
       expectValuesRendered(inputValuesEdit, [
         '"bronze"',
@@ -63,7 +63,7 @@ describe('input output values', function() {
       input.focus();
 
       input.value = '"foo"';
-      
+
       // press ""
       triggerKeyEvent(input, 'keyup', 50);
 
@@ -91,7 +91,7 @@ describe('input output values', function() {
       input.focus();
 
       input.value = '"foo", "bar"';
-      
+
       // press ""
       triggerKeyEvent(input, 'keyup', 50);
 
@@ -116,7 +116,7 @@ describe('input output values', function() {
 
       // when
       const value = domQuery('.value', inputValuesEdit);
-      
+
       triggerMouseEvent(value, 'mouseup');
 
       // then
@@ -134,11 +134,11 @@ describe('input output values', function() {
 
       // when
       const input = domQuery('.input', inputValuesEdit);
-      
+
       input.focus();
 
       input.value = '"foo';
-      
+
       // press o
       triggerKeyEvent(input, 'keyup', 79);
 
@@ -161,10 +161,10 @@ describe('input output values', function() {
 
     it('should delete allowed values when type is changed to anything but string',
       inject(function(elementRegistry) {
-        
+
         // given
         const select = domQuery('.type-ref-edit-select', testContainer);
-        
+
         // when
         triggerChangeEvent(select, 'boolean');
 
@@ -181,32 +181,32 @@ describe('input output values', function() {
 
     beforeEach(function() {
       const cell = domQuery('.output.type-ref', testContainer);
-      
+
       triggerMouseEvent(cell, 'click');
-  
+
       outputValuesEdit = domQuery('.input-output-values-edit', testContainer);
     });
 
 
     it('should render output values', function() {
-          
+
       // then
       expectValuesRendered(outputValuesEdit, [
         '"ok"',
         '"notok"'
       ]);
     });
-    
+
 
     it('should add value', inject(function(elementRegistry) {
-      
+
       // when
       const input = domQuery('.input', outputValuesEdit);
 
       input.focus();
 
       input.value = '"foo"';
-      
+
       // press ""
       triggerKeyEvent(input, 'keyup', 50);
 
@@ -233,7 +233,7 @@ describe('input output values', function() {
       input.focus();
 
       input.value = '"foo", "bar"';
-      
+
       // press ""
       triggerKeyEvent(input, 'keyup', 50);
 
@@ -257,7 +257,7 @@ describe('input output values', function() {
 
       // when
       const value = domQuery('.value', outputValuesEdit);
-      
+
       triggerMouseEvent(value, 'mouseup');
 
       // then
@@ -274,7 +274,7 @@ describe('input output values', function() {
 
       // when
       const input = domQuery('.input', outputValuesEdit);
-      
+
       input.focus();
 
       input.value = '"foo';
@@ -300,17 +300,17 @@ describe('input output values', function() {
 
     it('should delete allowed values when type is changed to anything but string',
       inject(function(elementRegistry) {
-        
+
         // given
         const select = domQuery('.type-ref-edit-select', testContainer);
-        
+
         // when
         triggerChangeEvent(select, 'boolean');
 
         // then
         expect(elementRegistry.get('output1').outputValues).not.to.exist;
       }));
-            
+
   });
 
 });

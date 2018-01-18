@@ -6,7 +6,7 @@ import Component from 'inferno-component';
 export default class HitPolicyCellComponent extends Component {
   componentWillMount() {
     const { injector } = this.context;
-    
+
     this._sheet = injector.get('sheet');
   }
 

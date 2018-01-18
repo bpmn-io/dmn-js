@@ -5,7 +5,7 @@ import Component from 'inferno-component';
 
 
 export default class InputExpressionContextMenuComponent extends Component {
-  
+
   constructor(props, context) {
     super(props, context);
 
@@ -14,7 +14,7 @@ export default class InputExpressionContextMenuComponent extends Component {
     this.onInput = debounceInput(this.onInput.bind(this));
     this.onKeyDown = this.onKeyDown.bind(this);
   }
-  
+
   onInput(event) {
     const { inputExpression } = this.props.context;
 
@@ -24,9 +24,9 @@ export default class InputExpressionContextMenuComponent extends Component {
   onKeyDown(event) {
     if (isEnter(event)) {
       const { inputExpression } = this.props.context;
-  
+
       this._modeling.editInputExpression(inputExpression, this.node.value);
-  
+
       this._contextMenu.close();
     }
   }

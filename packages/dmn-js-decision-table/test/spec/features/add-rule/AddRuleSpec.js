@@ -23,7 +23,7 @@ describe('add input output', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -36,7 +36,7 @@ describe('add input output', function() {
 
 
   it('should add rule on click', inject(function(sheet) {
-      
+
     // given
     const row = domQuery('.add-rule', testContainer);
 

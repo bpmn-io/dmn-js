@@ -31,7 +31,7 @@ describe('rule indices', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -46,12 +46,12 @@ describe('rule indices', function() {
     expectIndices(cells);
   });
 
-  
+
   it('should update rule indices on rule added', inject(function(modeling) {
 
     // when
     modeling.addRow({ type: 'dmn:DecisionRule' });
-    
+
     // then
     const cells = domQuery.all('.rule-index', testContainer);
 
@@ -69,7 +69,7 @@ describe('rule indices', function() {
 
     // when
     modeling.removeRow(row);
-    
+
     // then
     const cells = domQuery.all('.rule-index', testContainer);
 

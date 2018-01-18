@@ -25,7 +25,7 @@ describe('annotations', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -38,7 +38,7 @@ describe('annotations', function() {
 
 
   it('should render annotation cells', function() {
-    
+
     // then
     const cells = domQuery.all('td.annotation', testContainer);
 

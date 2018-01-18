@@ -24,7 +24,7 @@ export default class EditAllowedValuesHandler {
     const isInput = is(element, 'dmn:InputClause');
 
     if (isInput) {
-      
+
       if (element.inputValues) {
         context.oldAllowedValues = element.inputValues.text;
       } else {
@@ -102,7 +102,7 @@ export default class EditAllowedValuesHandler {
       }
 
     } else {
-      
+
       if (oldAllowedValues) {
 
         if (!element.outputValues) {

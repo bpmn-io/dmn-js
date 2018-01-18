@@ -6,7 +6,7 @@ export default class InputExpression {
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'input-expression') {
         return InputExpressionCellComponent;
-      } 
+      }
     });
 
     components.onGetComponent('context-menu', (context = {}) => {

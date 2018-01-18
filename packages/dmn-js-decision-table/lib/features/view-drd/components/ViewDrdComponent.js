@@ -7,7 +7,7 @@ import { query as domQuery } from 'min-dom';
 
 
 export default class ViewDrdComponent extends Component {
-  
+
   constructor(props) {
     super(props);
 
@@ -23,7 +23,7 @@ export default class ViewDrdComponent extends Component {
     if (!this.node) {
       return;
     }
-    
+
     const containerWidth = this.container.getBoundingClientRect().width;
     const tableWidth = domQuery('.tjs-table', this.container).getBoundingClientRect().width;
 
@@ -34,7 +34,7 @@ export default class ViewDrdComponent extends Component {
     this._eventBus = this.context.injector.get('eventBus');
 
     const renderer = this.context.injector.get('renderer');
-    
+
     this._eventBus.on('elements.changed', this.reposition);
 
     this.container = renderer.getContainer();

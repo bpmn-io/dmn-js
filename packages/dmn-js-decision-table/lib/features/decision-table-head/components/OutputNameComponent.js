@@ -32,7 +32,7 @@ export default class OutputNameComponent extends Component {
 
     this._eventBus = injector.get('eventBus');
     this._modeling = injector.get('modeling');
-    
+
     changeSupport.onElementsChanged(this.props.output.id, this.onElementsChanged);
   }
 
@@ -55,7 +55,7 @@ export default class OutputNameComponent extends Component {
 
   onInput(event) {
     const { output } = this.props;
-    
+
     this._modeling.editOutputName(output, event.target.textContent);
   }
 

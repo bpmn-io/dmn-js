@@ -36,7 +36,7 @@ describe('DecisionTable', function() {
 
       // when
       modeling.editDecisionTableId('foo');
-  
+
       // then
       expect(dishDecision.informationRequirement[0].requiredDecision.href).to.eql('#foo');
       expect(dishDecision.extensionElements.values[1].source).to.eql('foo');

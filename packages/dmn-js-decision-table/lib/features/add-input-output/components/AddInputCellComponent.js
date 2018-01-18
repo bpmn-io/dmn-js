@@ -26,13 +26,13 @@ export default class AddInputCellComponent extends Component {
 
     changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
-  
+
   componentWillUnmout() {
     const root = this._sheet.getRoot();
 
     this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
-  
+
   add() {
     this._eventBus.fire('addInput');
   }
@@ -43,7 +43,7 @@ export default class AddInputCellComponent extends Component {
           colspan = businessObject.input.length;
 
     return (
-      <th 
+      <th
         onClick={ this.add }
         className="input add-input"
         colspan={ colspan }>Input +</th>

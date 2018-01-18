@@ -25,7 +25,7 @@ describe('add input output', function() {
 
   let testContainer;
 
-  beforeEach(function() {    
+  beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
@@ -33,7 +33,7 @@ describe('add input output', function() {
   describe('add input', function() {
 
     it('should render add input cell', function() {
-      
+
       // then
       expect(domQuery('.add-input', testContainer)).to.exist;
     });
@@ -67,16 +67,16 @@ describe('add input output', function() {
 
 
   describe('add output', function() {
-    
+
     it('should render add output cell', function() {
-      
+
       // then
       expect(domQuery('.add-output', testContainer)).to.exist;
     });
 
 
     it('should add output on click', inject(function(sheet) {
-      
+
       // given
       const cell = domQuery('.add-output', testContainer);
 
@@ -91,7 +91,7 @@ describe('add input output', function() {
 
 
     it('should update col span', inject(function(eventBus) {
-      
+
       // when
       eventBus.fire('addOutput');
 
@@ -99,6 +99,6 @@ describe('add input output', function() {
       expect(domQuery('.add-output', testContainer).colSpan).to.equal(3);
     }));
 
-  }); 
+  });
 
 });

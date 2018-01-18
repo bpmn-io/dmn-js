@@ -9,7 +9,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 import ValuesComponent from './ValuesComponent';
 
 export default class InputOutputValuesComponent extends Component {
-  
+
   constructor(props, context) {
     super(props, context);
 
@@ -36,7 +36,7 @@ export default class InputOutputValuesComponent extends Component {
 
     this._changeSupport.offElementsChanged(element.id, this.onElementsChanged);
   }
-  
+
   onChange(allowedValues) {
     const { element } = this.props.context;
 

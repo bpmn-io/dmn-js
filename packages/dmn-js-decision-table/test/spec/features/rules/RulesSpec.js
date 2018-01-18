@@ -56,7 +56,7 @@ describe('rules', function() {
 
 
   it('should allow rendering after rule', inject(function(components, eventBus, sheet) {
-    
+
     // given
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'after-rule-cells') {

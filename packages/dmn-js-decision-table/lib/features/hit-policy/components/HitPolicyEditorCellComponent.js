@@ -25,7 +25,7 @@ export default class HitPolicyCellComponent extends Component {
 
   componentWillMount() {
     const { injector } = this.context;
-    
+
     const changeSupport = this._changeSupport = this.context.changeSupport;
     this._sheet = injector.get('sheet');
     this._eventBus = injector.get('eventBus');
@@ -37,7 +37,7 @@ export default class HitPolicyCellComponent extends Component {
 
   componentWillUnmount() {
     const root = this._sheet.getRoot();
-    
+
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
   }
 

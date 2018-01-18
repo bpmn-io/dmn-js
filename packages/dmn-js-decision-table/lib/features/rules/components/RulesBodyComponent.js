@@ -9,7 +9,7 @@ export default class RulesBodyComponent extends Component {
 
     return (
       <tbody>
-        { 
+        {
           rows.map((row, rowIndex) => {
             const RulesRowComponent = components.getComponent('row', { rowType: 'rule' });
 

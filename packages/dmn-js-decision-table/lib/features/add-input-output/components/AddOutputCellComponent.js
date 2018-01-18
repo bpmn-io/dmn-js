@@ -26,13 +26,13 @@ export default class AddOutputCellComponent extends Component {
 
     changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
-  
+
   componentWillUnmout() {
     const root = this._sheet.getRoot();
 
     this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
-  
+
   add() {
     this._eventBus.fire('addOutput');
   }
@@ -43,7 +43,7 @@ export default class AddOutputCellComponent extends Component {
           colspan = businessObject.output.length;
 
     return (
-      <th 
+      <th
         onClick={ this.add }
         className="output add-output"
         colspan={ colspan }>Output +</th>

@@ -40,7 +40,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     if (event.target === this.nameNode) {
 
       this.editDecisionTableName(event.target.textContent);
-    
+
     } else if (event.target === this.idNode) {
 
       const root = this._sheet.getRoot(),
@@ -50,7 +50,7 @@ export default class DecisionTablePropertiesComponent extends Component {
 
       // if no error message returned ID is valid
       if (!isIdValid(businessObject, id)) {
-        
+
         // this should be debounced
         this.editDecisionTableId(id);
 
@@ -77,7 +77,7 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     removeSelection();
   }
-  
+
   componentWillMount() {
     const { injector } = this.context;
 
@@ -93,7 +93,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     }
 
     const idClassNames = [ 'decision-table-id' ];
-    
+
     if (this.state.idIsFocussed) {
       idClassNames.push('focussed');
     }
@@ -113,7 +113,7 @@ export default class DecisionTablePropertiesComponent extends Component {
           onInput={ this.onInput }
           ref={ node => this.nameNode = node }
           className={ nameClassNames.join(' ') }>{ name || (this.state.nameIsFocussed ? '' : '-') }</h3>
-        <h5 
+        <h5
           contenteditable="true"
           spellcheck="false"
           onFocus={ () => this.onFocus('id') }

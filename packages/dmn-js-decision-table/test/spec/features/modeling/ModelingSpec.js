@@ -317,13 +317,13 @@ describe('Modeling', function() {
 
   });
 
-  
+
   describe('edit allowed values', function() {
 
     describe('dmn:OutputClause', function() {
 
       it('should execute', inject(function(modeling, sheet) {
-        
+
         // given
         var table = sheet.getRoot();
         var col = table.cols[2];
@@ -374,7 +374,7 @@ describe('Modeling', function() {
     describe('dmn:InputClause', function() {
 
       it('should execute', inject(function(modeling, sheet) {
-        
+
         // given
         var table = sheet.getRoot();
         var col = table.cols[0];

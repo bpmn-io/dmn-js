@@ -17,7 +17,7 @@ export default class EditPropertiesHandler {
    */
   execute(context) {
     const ids = this._moddle.ids;
-    
+
     const {
       element,
       properties
@@ -25,7 +25,7 @@ export default class EditPropertiesHandler {
 
     if (isIdChange(properties, element)) {
       ids.unclaim(element[ID]);
-  
+
       ids.claim(properties[ID], element);
     }
 
@@ -56,7 +56,7 @@ export default class EditPropertiesHandler {
       element[key] = value;
     });
 
-    return element;    
+    return element;
   }
 
 }
