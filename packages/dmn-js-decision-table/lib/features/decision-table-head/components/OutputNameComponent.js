@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { removeSelection, selectNodeContents } from '../../../util/DomUtil';
+import EditableComponent from '../../../components/EditableComponent';
 
 
 export default class OutputNameComponent extends Component {
@@ -11,17 +11,11 @@ export default class OutputNameComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      isFocussed: false
-    };
-
-    const debounceInput = context.injector.get('debounceInput');
-
     this.onContextmenu = this.onContextmenu.bind(this);
-    this.onInput = debounceInput(this.onInput.bind(this));
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
+
     this.onElementsChanged = this.onElementsChanged.bind(this);
+
+    this.setOutputName = this.setOutputName.bind(this);
   }
 
 
@@ -53,73 +47,46 @@ export default class OutputNameComponent extends Component {
   }
 
 
-  onInput(event) {
+  setOutputName(newName) {
     const { output } = this.props;
 
-    this._modeling.editOutputName(output, htmlToString(event.target.innerHTML));
-  }
-
-
-  onFocus() {
-    this.setState({
-      isFocussed: true
-    }, () => {
-      selectNodeContents(this.node);
-    });
-  }
-
-
-  onBlur() {
-    this.setState({
-      isFocussed: false
-    });
-
-    removeSelection();
+    this._modeling.editOutputName(output, newName);
   }
 
 
   onElementsChanged() {
-    const { isFocussed } = this.state;
-
-    if (!isFocussed) {
-      this.forceUpdate();
-    }
+    this.forceUpdate();
   }
 
 
   render() {
-    const { name } = this.props.output;
-    const { isFocussed } = this.state;
-
-    const classNames = [ 'output', 'output-name' ];
-
-    if (isFocussed) {
-      classNames.push('focussed');
-    }
+    const { output } = this.props;
 
     return (
-      <th
+      <EditableOutputName
+        className="output output-name"
         onContextmenu={ this.onContextmenu }
-        onFocus={ this.onFocus }
-        onBlur={ this.onBlur }
-        className={ classNames.join(' ') }
-        contentEditable="true"
-        spellcheck="false"
-        ref={ node => this.node = node }
-        dangerouslySetInnerHTML={{ __html: name || (isFocussed ? '' : '-') }}
-        onInput={ this.onInput }></th>
+        onChange={ this.setOutputName }
+        value={ output.name } />
     );
   }
 
 }
 
-////////// helpers //////////
 
-function htmlToString(html) {
-  return html
-    .replace(/<div><br><\/div>/ig, '\n')  // replace div with a br with single linebreak
-    .replace(/<br(\s*)\/*>/ig, '\n')      // replace single line-breaks
-    .replace(/<(div|p)(\s*)\/*>/ig, '\n') // add a line break before all div and p tags
-    .replace(/&nbsp;/ig, ' ')             // replace non breaking spaces with normal spaces
-    .replace(/(<([^>]+)>)/ig, '');        // remove any remaining tags
+class EditableOutputName extends EditableComponent {
+
+  render() {
+
+    var { onContextmenu } = this.props;
+
+    return (
+      <th
+        className={ this.getClassName() }
+        onContextmenu={ onContextmenu }>
+        { this.getEditor() }
+      </th>
+    );
+  }
+
 }

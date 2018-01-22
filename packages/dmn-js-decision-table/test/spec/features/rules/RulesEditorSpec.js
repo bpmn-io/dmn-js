@@ -6,7 +6,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import { triggerInputEvent } from 'test/util/EventUtil';
 
-import { query as domQuery } from 'min-dom';
+import { queryEditor } from 'test/util/EditorUtil';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -37,7 +37,7 @@ describe('rules editor', function() {
   it('should edit cell', inject(function(elementRegistry) {
 
     // given
-    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+    const cell = queryEditor('[data-element-id="inputEntry1"]', testContainer);
 
     cell.focus();
 
@@ -50,9 +50,9 @@ describe('rules editor', function() {
 
 
   it('should edit cell - line breaks', inject(function(elementRegistry) {
-    
+
     // given
-    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+    const cell = queryEditor('[data-element-id="inputEntry1"]', testContainer);
 
     cell.focus();
 

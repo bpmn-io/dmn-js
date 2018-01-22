@@ -30,11 +30,14 @@
   padding: 4px;
 }
 
-
 .tjs-container th {
   border: solid 1px #444;
   min-width: 192px;
   padding: 4px;
+}
+
+.tjs-container .content-editable {
+  outline: none;
 }
 
 .tjs-container thead tr:first-child th:first-child {
@@ -117,7 +120,6 @@ td.output {
 }
 
 th.output.output-name {
-  outline: none;
   white-space: pre;
 }
 
@@ -161,7 +163,6 @@ table tbody {
 }
 
 td {
-  outline: none;
   white-space: pre;
 }
 
@@ -367,7 +368,6 @@ td.selected {
   margin: 0;
   padding: 3px 6px;
   text-align: center;
-  outline: none;
   white-space: pre;
 }
 

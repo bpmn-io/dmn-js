@@ -16,7 +16,7 @@ const PLACEHOLDER_REGEX = /\$\{([^}]*)\}/g;
  *
  * @return {String} error message
  */
-export function isIdValid(businessObject, id) {
+export function validateId(businessObject, id) {
   const assigned = businessObject.$model.ids.assigned(id);
 
   const idExists = assigned && assigned !== businessObject;
@@ -25,11 +25,11 @@ export function isIdValid(businessObject, id) {
     return 'Element must have an unique id.';
   }
 
-  return validateId(id);
+  return validateIdFormat(id);
 }
 
 
-function validateId(id) {
+function validateIdFormat(id) {
 
   id = stripPlaceholders(id);
 

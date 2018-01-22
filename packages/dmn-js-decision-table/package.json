@@ -29,6 +29,7 @@
     "diagram-js": "^0.27.1",
     "dmn-font": "^0.1.0",
     "dmn-js-shared": "^1.2.2",
+    "escape-html": "^1.0.3",
     "inferno": "^3.9.0",
     "inferno-component": "^3.9.0",
     "lodash": "^4.17.4",

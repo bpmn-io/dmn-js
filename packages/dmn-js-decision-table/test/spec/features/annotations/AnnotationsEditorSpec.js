@@ -5,6 +5,7 @@ import { query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import { triggerInputEvent } from 'test/util/EventUtil';
+import { queryEditor } from 'test/util/EditorUtil';
 
 import simpleXML from '../../simple.dmn';
 
@@ -53,32 +54,10 @@ describe('annotations editor', function() {
   });
 
 
-  it('should select text on focus', function() {
-
-    // given
-    const cell = domQuery('td.annotation', testContainer);
-
-    // when
-    cell.focus();
-  });
-
-
-  it('should unselect text on blur', function() {
-
-    // given
-    const cell = domQuery('td.annotation', testContainer);
-
-    cell.focus();
-
-    // when
-    cell.blur();
-  });
-
-
   it('should edit annotation', inject(function(sheet) {
 
     // given
-    const cell = domQuery('td.annotation', testContainer);
+    const cell = queryEditor('td.annotation', testContainer);
 
     // when
     cell.focus();
@@ -95,14 +74,14 @@ describe('annotations editor', function() {
 
 
   it('should edit annotation - line break', inject(function(sheet) {
-    
+
     // given
-    const cell = domQuery('td.annotation', testContainer);
-    
+    const cell = queryEditor('td.annotation', testContainer);
+
     // when
     cell.focus();
 
-    triggerInputEvent(cell, 'foo<div>bar</div>');
+    triggerInputEvent(cell, 'foo\nbar');
 
     cell.blur();
 
@@ -113,7 +92,7 @@ describe('annotations editor', function() {
 
     expect(rule.description).to.equal('foo\nbar');
 
-    expect(cell.innerHTML).to.equal('foo\nbar');
+    expect(cell.innerText).to.equal('foo\nbar');
   }));
 
 });

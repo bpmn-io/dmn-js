@@ -9,12 +9,14 @@ import { query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import { triggerInputEvent } from 'test/util/EventUtil';
+import { queryEditor } from 'test/util/EditorUtil';
 
 import simpleXML from '../../simple.dmn';
 
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import DecisionTableHeadEditorModule from 'lib/features/decision-table-head/editor';
+
 
 describe('decision table head editor', function() {
 
@@ -46,7 +48,7 @@ describe('decision table head editor', function() {
     it('should edit output name', inject(function(sheet) {
 
       // given
-      const outputName = domQuery('.output-name', testContainer);
+      const outputName = queryEditor('.output-name', testContainer);
 
       outputName.focus();
 
@@ -63,9 +65,9 @@ describe('decision table head editor', function() {
 
 
     it('should edit output name - line break', inject(function(sheet) {
-      
+
       // given
-      const outputName = domQuery('.output-name', testContainer);
+      const outputName = queryEditor('.output-name', testContainer);
 
       outputName.focus();
 
@@ -76,12 +78,12 @@ describe('decision table head editor', function() {
 
       // then
       const root = sheet.getRoot();
-    
+
       const output = root.businessObject.output[0];
-  
+
       expect(output.name).to.equal('foo\nbar');
-  
-      expect(outputName.innerHTML).to.equal('foo\nbar');
+
+      expect(outputName.innerText).to.equal('foo\nbar');
     }));
 
   });
