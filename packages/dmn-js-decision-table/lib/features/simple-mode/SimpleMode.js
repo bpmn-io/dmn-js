@@ -2,6 +2,8 @@ import SimpleModeButtonComponent from './components/SimpleModeButtonComponent';
 
 export default class SimpleMode {
   constructor(components, contextMenu, eventBus, renderer) {
+    this._providers = [];
+
     components.onGetComponent('table.before', () => {
       return SimpleModeButtonComponent;
     });
@@ -21,6 +23,16 @@ export default class SimpleMode {
         element
       });
     });
+  }
+
+  registerProvider(provider) {
+    this._providers.push(provider);
+  }
+
+  canSimpleEdit(element) {
+    return this._providers.reduce((canSimpleEdit, provider) => {
+      return canSimpleEdit || provider(element);
+    }, false);
   }
 }
 

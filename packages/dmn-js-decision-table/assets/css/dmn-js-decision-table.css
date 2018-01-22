@@ -198,6 +198,7 @@ table tfoot tr.add-rule:hover td {
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   font-size: 14px;
   color: #444;
+  z-index: 10000;
 }
 
 .context-menu .context-menu-context-menu {
@@ -471,9 +472,10 @@ td.selected {
 /* simple mode */
 
 .simple-mode-button {
+  color: #444;
   position: absolute;
   background: #fff;
-  padding: 8px;
+  padding: 4px;
   border: solid 1px #CCC;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
@@ -485,10 +487,54 @@ td.selected {
   background-color: #f6f6f6;
 }
 
+/* simple string edit */
+.tjs-container .simple-string-edit {
+  padding: 8px;
+  font-size: 14px;
+  max-width: 250px;
+}
+
+/* select component */
+.tjs-container .select-component {
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  color: #444;
+}
+
+.tjs-container .select-component:focus {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
+}
+
+/* list component */
+.tjs-container .list-component {
+  max-width: 250px;
+}
+
+.tjs-container .list-component .group .title,
+.tjs-container .list-component .group .input-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tjs-container .list-component .item {
+  color: #444;
+}
+
+.tjs-container .list-component .warning {
+  color: #c9302c;
+}
+
+.tjs-container .list-component .dmn-icon-clear:hover {
+  color: #c9302c;
+}
+
 /* input & output values edit */
 .tjs-container .input-output-values-edit {
   font-size: 14px;
-  font-weight: bold;
   color: #444;
   padding: 8px;
   white-space: nowrap;
@@ -496,7 +542,7 @@ td.selected {
 
 .tjs-container .input-output-values-edit .values {
   margin-top: 8px;
-  max-width: 200px;
+  max-width: 250px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -530,12 +576,13 @@ td.selected {
 
 .tjs-container .input-output-values-edit .values .input.invalid {
   background: #f4cecd;
+  border-color: #c9302c;
   color: #c9302c;
 }
 
 .tjs-container .input-output-values-edit .values .input:focus.invalid {
-  border-color: #c9302c;
   box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
+  border-color: #c9302c;
 }
 
 .tjs-container .input-output-values-edit .values .input:focus {
@@ -543,6 +590,37 @@ td.selected {
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
+/* validated input */
+.tjs-container .validated-text-input-component .validation-warning {
+  color: #f00;
+}
+
+/* input */
+.tjs-container .input[type="text"] {
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  color: #444;
+}
+
+.tjs-container .input[type="text"]:focus {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
+}
+
+.tjs-container .input[type="text"].invalid {
+  background: #f4cecd;
+  border-color: #c9302c;
+  color: #c9302c;
+}
+
+.tjs-container .input[type="text"].invalid:focus {
+  box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
+}
+
+/* helpers */
 .no-margin-top,
 .no-margin-top:before {
   margin-top: 0;
@@ -561,4 +639,99 @@ td.selected {
 .no-margin-left,
 .no-margin-left:before {
   margin-left: 0;
+}
+
+.tjs-container .margin-top-small {
+  margin-top: 4px;
+}
+
+.tjs-container .margin-top-medium {
+  margin-top: 8px;
+}
+
+.tjs-container .margin-top-large {
+  margin-top: 12px;
+}
+
+.tjs-container .margin-right-small {
+  margin-right: 4px;
+}
+
+.tjs-container .margin-right-medium {
+  margin-right: 8px;
+}
+
+.tjs-container .margin-right-large {
+  margin-right: 12px;
+}
+
+.tjs-container .margin-bottom-small {
+  margin-bottom: 4px;
+}
+
+.tjs-container .margin-bottom-medium {
+  margin-bottom: 8px;
+}
+
+.tjs-container .margin-bottom-large {
+  margin-bottom: 12px;
+}
+
+.tjs-container .margin-left-small {
+  margin-left: 4px;
+}
+
+.tjs-container .margin-left-medium {
+  margin-left: 8px;
+}
+
+.tjs-container .margin-left-large {
+  margin-left: 12px;
+}
+
+.tjs-container .full-width {
+  width: 100%;
+}
+
+.tjs-container .full-height {
+  height: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.heading-large {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.heading-medium {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.heading-small {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }

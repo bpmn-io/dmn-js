@@ -19,6 +19,20 @@ function is(element, type) {
 module.exports.is = is;
 
 
+function isInput(element) {
+  return is(element, 'dmn:InputClause');
+}
+
+module.exports.isInput = isInput;
+
+
+function isOutput(element) {
+  return is(element, 'dmn:OutputClause');
+}
+
+module.exports.isOutput = isOutput;
+
+
 /**
  * Return the business object for a given element.
  *

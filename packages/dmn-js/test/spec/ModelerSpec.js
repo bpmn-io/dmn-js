@@ -35,7 +35,7 @@ describe('Modeler', function() {
   */
 
 
-  it.only('should open DMN table', function(done) {
+  it('should open DMN table', function(done) {
 
     var editor = new Modeler({ container: container });
 

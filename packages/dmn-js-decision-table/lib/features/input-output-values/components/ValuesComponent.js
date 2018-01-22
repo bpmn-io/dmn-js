@@ -1,3 +1,4 @@
+// TODO(philippfromme): refactor into generic component
 
 // eslint-disable-next-line
 import Inferno from 'inferno';
@@ -92,7 +93,7 @@ export default class ValuesComponent extends Component {
         }
         <input
           ref={ node => this.node = node }
-          placeholder='"Value", "Value", ...'
+          placeholder='"value", "value", ...'
           onKeyDown={ this.onKeyDown }
           onKeyUp={ this.onKeyUp }
           className="input" value="" />
