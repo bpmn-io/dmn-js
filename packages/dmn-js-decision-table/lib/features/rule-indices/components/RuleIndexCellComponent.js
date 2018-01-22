@@ -7,6 +7,6 @@ export default class RulesIndexCellComponent extends Component {
   render() {
     const { rowIndex } = this.props;
 
-    return <td className="rule-index">{rowIndex}</td>;
+    return <td className="rule-index">{rowIndex + 1}</td>;
   }
 }

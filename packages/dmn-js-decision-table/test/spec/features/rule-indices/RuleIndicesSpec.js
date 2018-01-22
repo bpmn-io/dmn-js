@@ -13,7 +13,7 @@ import RuleIndicesModule from 'lib/features/rule-indices';
 
 function expectIndices(cells) {
   Array.from(cells).forEach((cell, index) => {
-    expect(parseInt(cell.textContent)).to.equal(index);
+    expect(parseInt(cell.textContent)).to.equal(index + 1);
   });
 }
 
