@@ -10,7 +10,8 @@
     "quotes": [ 2, "single" ],
     "semi": [ 2, "always" ],
     "no-console": 0,
-    "mocha/no-exclusive-tests": 2
+    "mocha/no-exclusive-tests": 2,
+    "react/jsx-uses-vars": 2
   },
   "env": {
     "node": true,
@@ -26,7 +27,8 @@
     }
   },
   "plugins": [
-    "mocha"
+    "mocha",
+    "react"
   ],
   "globals": {
     "expect": false,
