@@ -67,7 +67,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     let inputValue = '';
 
-    if (!isInputClause && !inputOrOutputValues.includes(parsedString.values[0])) {
+    if (!isInputClause && parsedString.values.length && !inputOrOutputValues.includes(parsedString.values[0])) {
       inputValue = parsedString.values[0];
     }
 
@@ -129,8 +129,11 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     const { element } = this.props.context;
 
-    const { context } = this.props,
-          type = parseString(context.element.businessObject.text).type;
+    const { context } = this.props;
+
+    const parsedString = parseString(context.element.businessObject.text);
+
+    const type = parsedString ? parsedString.type : DISJUNCTION;
 
     if (type === 'disjunction') {
       this.editCell(element.businessObject, values.join(','));
@@ -154,11 +157,11 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     const parsedString = parseString(inputValue);
 
-    if (!parsedString || parsedString.values.length !== 1 || parsedString.type === NEGATION) {
+    if (!parsedString || parsedString.values.length > 1) {
       return;
     }
 
-    this.editCell(element.businessObject, `${ parsedString.values[0] }`);
+    this.editCell(element.businessObject, `${ parsedString.values.join('') }`);
 
     // uncheck all other values
     this.setState({
