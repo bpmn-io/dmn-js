@@ -15,5 +15,8 @@ module.exports = {
   elementFactory: [ 'type', require('./ElementFactory') ],
   modeling: [ 'type', require('./Modeling') ],
   layouter: [ 'type', require('./DrdLayouter') ],
-  connectionDocking: [ 'type', require('diagram-js/lib/layout/CroppingConnectionDocking') ]
+  connectionDocking: [
+    'type',
+    require('diagram-js/lib/layout/CroppingConnectionDocking')
+  ]
 };

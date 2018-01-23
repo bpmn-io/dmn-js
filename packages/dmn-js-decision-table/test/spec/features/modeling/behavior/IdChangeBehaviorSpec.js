@@ -27,8 +27,13 @@ describe('DecisionTable', function() {
 
     const { drgElements } = definitions;
 
-    const dishDecision = drgElements.filter(drgElement => drgElement.id === 'dish-decision')[0];
-    const seasonDecision = drgElements.filter(drgElement => drgElement.id === 'season')[0];
+    const dishDecision = drgElements.filter(
+      drgElement => drgElement.id === 'dish-decision'
+    )[0];
+
+    const seasonDecision = drgElements.filter(
+      drgElement => drgElement.id === 'season'
+    )[0];
 
     const dmnJS = getDmnJS();
 

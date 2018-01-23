@@ -18,7 +18,13 @@ var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
  * A command interceptor responsible for updating elements after they've
  * been changed in the DRD view.
  */
-function DrdUpdater(eventBus, drdFactory, connectionDocking, drdRules, definitionPropertiesView) {
+function DrdUpdater(
+  eventBus,
+  drdFactory,
+  connectionDocking,
+  drdRules,
+  definitionPropertiesView
+) {
 
   CommandInterceptor.call(this, eventBus);
 
@@ -238,7 +244,13 @@ inherits(DrdUpdater, CommandInterceptor);
 
 module.exports = DrdUpdater;
 
-DrdUpdater.$inject = [ 'eventBus', 'drdFactory', 'connectionDocking', 'drdRules', 'definitionPropertiesView' ];
+DrdUpdater.$inject = [
+  'eventBus',
+  'drdFactory',
+  'connectionDocking',
+  'drdRules',
+  'definitionPropertiesView'
+];
 
 
 /////// implementation //////////////////////////////////

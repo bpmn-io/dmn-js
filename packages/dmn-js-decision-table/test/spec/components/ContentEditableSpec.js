@@ -47,7 +47,12 @@ describe('ContentEditable', function() {
       var onBlur = sinon.spy();
       var onFocus = sinon.spy();
 
-      const node = render(<ContentEditable onFocus={ onFocus } onBlur={ onBlur } text={ 'FOO' } />);
+      const node = render(
+        <ContentEditable
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          text={ 'FOO' } />
+      );
 
       // when
       node.focus();

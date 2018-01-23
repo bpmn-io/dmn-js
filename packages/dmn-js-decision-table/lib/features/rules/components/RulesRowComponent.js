@@ -10,12 +10,22 @@ export default class RulesRowComponent extends Component {
 
     const { cells } = row;
 
-    const beforeRuleCellsComponents = components.getComponents('cell', { cellType: 'before-rule-cells' });
-    const afterRuleCellsComponents = components.getComponents('cell', { cellType: 'after-rule-cells' });
+    const beforeComponents =
+      components.getComponents('cell', {
+        cellType: 'before-rule-cells'
+      });
+
+    const afterComponents =
+      components.getComponents('cell', {
+        cellType: 'after-rule-cells'
+      });
 
     return (
       <tr>
-        { beforeRuleCellsComponents && beforeRuleCellsComponents.map(Component => <Component { ...this.props } />) }
+        {
+          beforeComponents &&
+          beforeComponents.map(Component => <Component { ...this.props } />)
+        }
         {
           cells.map((cell, colIndex) => {
             const CellComponent = components.getComponent('cell', { cellType: 'rule' });
@@ -29,7 +39,10 @@ export default class RulesRowComponent extends Component {
             /> : null;
           })
         }
-        { afterRuleCellsComponents && afterRuleCellsComponents.map(Component => <Component { ...this.props } />) }
+        {
+          afterComponents &&
+          afterComponents.map(Component => <Component { ...this.props } />)
+        }
       </tr>
     );
   }

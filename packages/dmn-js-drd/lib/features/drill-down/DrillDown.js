@@ -54,8 +54,9 @@ export default class DrillDown {
   /**
    * Add overlay to an element that enables drill down.
    *
-   * @param {Object} element - Element to add overlay to.
-   * @param {string} className - CSS class that will be added to overlay in order to display icon.
+   * @param {Object} element Element to add overlay to.
+   * @param {string} className
+   *        CSS class that will be added to overlay in order to display icon.
    */
   addOverlay(element, className) {
     const html = domify(`

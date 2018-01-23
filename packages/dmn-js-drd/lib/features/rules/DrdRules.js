@@ -98,7 +98,11 @@ function canConnect(source, target) {
   }
 
   if (is(source, 'dmn:KnowledgeSource') &&
-      isAny(target, [ 'dmn:Decision', 'dmn:BusinessKnowledgeModel', 'dmn:KnowledgeSource' ])) {
+      isAny(target, [
+        'dmn:Decision',
+        'dmn:BusinessKnowledgeModel',
+        'dmn:KnowledgeSource'
+      ])) {
     return { type: 'dmn:AuthorityRequirement' };
   }
 

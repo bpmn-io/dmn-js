@@ -9,6 +9,7 @@ const HIGH_PRIORITY = 1500;
 
 
 export default class AddInputOutput {
+
   constructor(components, editorActions, eventBus, modeling, sheet) {
     components.onGetComponent('cell', HIGH_PRIORITY, ({ cellType }) => {
       if (cellType === 'input-label') {
@@ -28,4 +29,10 @@ export default class AddInputOutput {
   }
 }
 
-AddInputOutput.$inject = [ 'components', 'editorActions', 'eventBus', 'modeling', 'sheet' ];
+AddInputOutput.$inject = [
+  'components',
+  'editorActions',
+  'eventBus',
+  'modeling',
+  'sheet'
+];

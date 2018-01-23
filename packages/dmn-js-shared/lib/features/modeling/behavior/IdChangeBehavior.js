@@ -54,7 +54,11 @@ function updateElementReferences(element, oldId, id) {
 
     authorityRequirement: () => {
       element.authorityRequirement.forEach(authorityRequirement => {
-        const { requiredAuthority, requiredDecision, requiredInput } = authorityRequirement;
+        const {
+          requiredAuthority,
+          requiredDecision,
+          requiredInput
+        } = authorityRequirement;
 
         if (requiredAuthority && requiredAuthority.href === `#${oldId}`) {
           requiredAuthority.href = `#${id}`;

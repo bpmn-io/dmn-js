@@ -76,11 +76,14 @@ function ensureUnit(val) {
  * ```
  *
  * @param {Object} options configuration options to pass to the viewer
- * @param {DOMElement} [options.container] the container to render the viewer in, defaults to body
+ * @param {DOMElement} [options.container]
+ *        the container to render the viewer in, defaults to body
  * @param {String|Number} [options.width] the width of the viewer
  * @param {String|Number} [options.height] the height of the viewer
- * @param {Array<didi.Module>} [options.modules] a list of modules to override the default modules
- * @param {Array<didi.Module>} [options.additionalModules] a list of modules to use with the default modules
+ * @param {Array<didi.Module>} [options.modules]
+ *        a list of modules to override the default modules
+ * @param {Array<didi.Module>} [options.additionalModules]
+ *        a list of modules to use with the default modules
  */
 function Viewer(options) {
 
@@ -125,6 +128,7 @@ Viewer.prototype.saveSVG = function(options, done) {
 
   var bbox = contentNode.getBBox();
 
+  /* eslint-disable max-len */
   var svg =
     '<?xml version="1.0" encoding="utf-8"?>\n' +
     '<!-- created with dmn-js / http://bpmn.io -->\n' +
@@ -134,6 +138,7 @@ Viewer.prototype.saveSVG = function(options, done) {
          'viewBox="' + bbox.x + ' ' + bbox.y + ' ' + bbox.width + ' ' + bbox.height + '" version="1.1">' +
       defs + contents +
     '</svg>';
+  /* eslint-enable */
 
   done(null, svg);
 };

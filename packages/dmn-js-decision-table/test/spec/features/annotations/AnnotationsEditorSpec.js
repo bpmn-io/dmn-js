@@ -50,7 +50,9 @@ describe('annotations editor', function() {
     expect(cells[0].textContent).to.equal('Bronze is really not that good');
     expect(cells[1].textContent).to.equal('Silver is actually quite okay');
     expect(cells[2].textContent).to.equal('Same here');
-    expect(cells[3].textContent).to.equal('Gold is really good, try even harder next time though');
+    expect(cells[3].textContent).to.equal(
+      'Gold is really good, try even harder next time though'
+    );
   });
 
 

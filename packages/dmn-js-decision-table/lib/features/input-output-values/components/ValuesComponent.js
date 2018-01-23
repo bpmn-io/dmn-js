@@ -59,8 +59,8 @@ export default class ValuesComponent extends Component {
     }
   }
 
-  // is triggered onMouseup, onClick sometimes triggers click on the value that comes after
-  // when value has been deleted
+  // is triggered onMouseup, onClick sometimes triggers click
+  // on the value that comes after when value has been deleted
   removeValue(value) {
     const { onChange } = this.props;
 

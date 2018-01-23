@@ -54,7 +54,9 @@ export default class TypeRefCell extends Component {
     const { inputExpression, output } = this.props;
 
     changeSupport.onElementsChanged(root.id, this.onElementsChanged);
-    changeSupport.onElementsChanged(inputExpression ? inputExpression.id : output.id, this.onElementsChanged);
+    changeSupport.onElementsChanged(
+      inputExpression ? inputExpression.id : output.id, this.onElementsChanged
+    );
   }
 
   componentWillUnmount() {
@@ -63,7 +65,9 @@ export default class TypeRefCell extends Component {
     const { inputExpression, output } = this.props;
 
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
-    this._changeSupport.offElementsChanged(inputExpression ? inputExpression.id : output.id, this.onElementsChanged);
+    this._changeSupport.offElementsChanged(
+      inputExpression ? inputExpression.id : output.id, this.onElementsChanged
+    );
   }
 
   render() {

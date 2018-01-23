@@ -1,17 +1,20 @@
-import InputExpressionCellComponent from './components/InputExpressionCellComponent';
-import InputExpressionContextMenuComponent from './components/InputExpressionContextMenuComponent';
+import CellComponent from './components/InputExpressionCellComponent';
+import ContextMenuComponent from './components/InputExpressionContextMenuComponent';
 
 export default class InputExpression {
   constructor(components, contextMenu, eventBus, renderer) {
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'input-expression') {
-        return InputExpressionCellComponent;
+        return CellComponent;
       }
     });
 
     components.onGetComponent('context-menu', (context = {}) => {
-      if (context.contextMenuType && context.contextMenuType === 'input-expression-edit') {
-        return InputExpressionContextMenuComponent;
+      if (
+        context.contextMenuType &&
+        context.contextMenuType === 'input-expression-edit'
+      ) {
+        return ContextMenuComponent;
       }
     });
 
@@ -33,4 +36,9 @@ export default class InputExpression {
   }
 }
 
-InputExpression.$inject = [ 'components', 'contextMenu',  'eventBus', 'renderer' ];
+InputExpression.$inject = [
+  'components',
+  'contextMenu',
+  'eventBus',
+  'renderer'
+];

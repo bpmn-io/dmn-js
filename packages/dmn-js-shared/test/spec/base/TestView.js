@@ -12,7 +12,10 @@ export default class TestView extends View {
 
     super(options);
 
-    this._modules = [].concat(options.modules || [], options.additionalModules || []).reverse();
+    this._modules = [].concat(
+      options.modules || [],
+      options.additionalModules || []
+    ).reverse();
 
     this._eventBus = new EventBus();
   }

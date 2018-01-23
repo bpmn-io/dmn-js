@@ -83,7 +83,10 @@ describe('context menu', function() {
               ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
 
         // then
-        expect(domQuery.all('.context-menu-group-entry', ruleEntriesGroup)).to.have.lengthOf(6);
+        expect(domQuery.all(
+          '.context-menu-group-entry',
+          ruleEntriesGroup
+        )).to.have.lengthOf(6);
 
         expectEntries([
           '.context-menu-entry-add-rule-above',
@@ -103,8 +106,13 @@ describe('context menu', function() {
               ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
 
         // then
-        expect(domClasses(domQuery('.context-menu-entry-paste-rule-above', ruleEntriesGroup)).has('disabled')).to.be.true;
-        expect(domClasses(domQuery('.context-menu-entry-paste-rule-below', ruleEntriesGroup)).has('disabled')).to.be.true;
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-rule-above', ruleEntriesGroup)
+        ).has('disabled')).to.be.true;
+
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-rule-below', ruleEntriesGroup)
+        ).has('disabled')).to.be.true;
       });
 
 
@@ -135,7 +143,11 @@ describe('context menu', function() {
                 ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
 
           // then
-          expect(domClasses(domQuery('.context-menu-entry-cut-rule', ruleEntriesGroup)).has('disabled')).to.be.true;
+          expect(
+            domClasses(
+              domQuery('.context-menu-entry-cut-rule', ruleEntriesGroup)
+            ).has('disabled')
+          ).to.be.true;
         });
 
       });
@@ -159,7 +171,10 @@ describe('context menu', function() {
         it('should add rule above', inject(function(sheet) {
 
           // given
-          const addRuleAboveEntry = domQuery('.context-menu-entry-add-rule-above', testContainer);
+          const addRuleAboveEntry = domQuery(
+            '.context-menu-entry-add-rule-above',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(addRuleAboveEntry, 'click');
@@ -180,7 +195,10 @@ describe('context menu', function() {
         it('should add rule below', inject(function(sheet) {
 
           // given
-          const addRuleBelowEntry = domQuery('.context-menu-entry-add-rule-below', testContainer);
+          const addRuleBelowEntry = domQuery(
+            '.context-menu-entry-add-rule-below',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(addRuleBelowEntry, 'click');
@@ -201,7 +219,10 @@ describe('context menu', function() {
         it('should remove rule', inject(function(sheet) {
 
           // given
-          const removeRuleEntry = domQuery('.context-menu-entry-remove-rule', testContainer);
+          const removeRuleEntry = domQuery(
+            '.context-menu-entry-remove-rule',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(removeRuleEntry, 'click');
@@ -260,7 +281,10 @@ describe('context menu', function() {
           it('should paste rule above', inject(function(sheet) {
 
             // given
-            const pasteRuleAboveEntry = domQuery('.context-menu-entry-paste-rule-above', testContainer);
+            const pasteRuleAboveEntry = domQuery(
+              '.context-menu-entry-paste-rule-above',
+              testContainer
+            );
 
             // when
             triggerMouseEvent(pasteRuleAboveEntry, 'click');
@@ -283,7 +307,10 @@ describe('context menu', function() {
           it ('should paste rule below', inject(function(sheet) {
 
             // given
-            const pasteRuleBelowEntry = domQuery('.context-menu-entry-paste-rule-below', testContainer);
+            const pasteRuleBelowEntry = domQuery(
+              '.context-menu-entry-paste-rule-below',
+              testContainer
+            );
 
             // when
             triggerMouseEvent(pasteRuleBelowEntry, 'click');
@@ -357,7 +384,9 @@ describe('context menu', function() {
               inputEntriesGroup = domQuery('.context-menu-group-input', contextMenu);
 
         // then
-        expect(domQuery.all('.context-menu-group-entry', inputEntriesGroup)).to.have.lengthOf(6);
+        expect(
+          domQuery.all('.context-menu-group-entry', inputEntriesGroup)
+        ).to.have.lengthOf(6);
 
         expectEntries([
           '.context-menu-entry-add-input-left',
@@ -377,8 +406,13 @@ describe('context menu', function() {
               inputEntriesGroup = domQuery('.context-menu-group-input', contextMenu);
 
         // then
-        expect(domClasses(domQuery('.context-menu-entry-paste-input-left', inputEntriesGroup)).has('disabled')).to.be.true;
-        expect(domClasses(domQuery('.context-menu-entry-paste-input-right', inputEntriesGroup)).has('disabled')).to.be.true;
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-input-left', inputEntriesGroup)
+        ).has('disabled')).to.be.true;
+
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-input-right', inputEntriesGroup)
+        ).has('disabled')).to.be.true;
       });
 
 
@@ -409,7 +443,11 @@ describe('context menu', function() {
                 inputEntriesGroup = domQuery('.context-menu-group-input', contextMenu);
 
           // then
-          expect(domClasses(domQuery('.context-menu-entry-cut-input', inputEntriesGroup)).has('disabled')).to.be.true;
+          expect(
+            domClasses(
+              domQuery('.context-menu-entry-cut-input', inputEntriesGroup)
+            ).has('disabled')
+          ).to.be.true;
         });
 
       });
@@ -433,7 +471,10 @@ describe('context menu', function() {
         it('should add input left', inject(function(sheet) {
 
           // given
-          const addInputLeftEntry = domQuery('.context-menu-entry-add-input-left', testContainer);
+          const addInputLeftEntry = domQuery(
+            '.context-menu-entry-add-input-left',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(addInputLeftEntry, 'click');
@@ -454,7 +495,10 @@ describe('context menu', function() {
         it('should add input right', inject(function(sheet) {
 
           // given
-          const addInputRight = domQuery('.context-menu-entry-add-input-right', testContainer);
+          const addInputRight = domQuery(
+            '.context-menu-entry-add-input-right',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(addInputRight, 'click');
@@ -475,7 +519,10 @@ describe('context menu', function() {
         it('should remove input', inject(function(sheet) {
 
           // given
-          const removeInputEntry = domQuery('.context-menu-entry-remove-input', testContainer);
+          const removeInputEntry = domQuery(
+            '.context-menu-entry-remove-input',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(removeInputEntry, 'click');
@@ -521,8 +568,14 @@ describe('context menu', function() {
         describe('paste', function() {
 
           beforeEach(function() {
-            const cutInputEntry = domQuery('.context-menu-entry-cut-input', testContainer),
-                  cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+            const cutInputEntry = domQuery(
+                    '.context-menu-entry-cut-input',
+                    testContainer
+                  ),
+                  cell = domQuery(
+                    '[data-element-id="inputEntry2"]',
+                    testContainer
+                  );
 
             triggerMouseEvent(cutInputEntry, 'click');
 
@@ -534,7 +587,10 @@ describe('context menu', function() {
           it('should paste input left', inject(function(sheet) {
 
             // given
-            const pasteInputLeftEntry = domQuery('.context-menu-entry-paste-input-left', testContainer);
+            const pasteInputLeftEntry = domQuery(
+              '.context-menu-entry-paste-input-left',
+              testContainer
+            );
 
             // when
             triggerMouseEvent(pasteInputLeftEntry, 'click');
@@ -557,7 +613,10 @@ describe('context menu', function() {
           it ('should paste input right', inject(function(sheet) {
 
             // given
-            const pasteInputRightEntry = domQuery('.context-menu-entry-paste-input-right', testContainer);
+            const pasteInputRightEntry = domQuery(
+              '.context-menu-entry-paste-input-right',
+              testContainer
+            );
 
             // when
             triggerMouseEvent(pasteInputRightEntry, 'click');
@@ -633,7 +692,9 @@ describe('context menu', function() {
               outputEntriesGroup = domQuery('.context-menu-group-output', contextMenu);
 
         // then
-        expect(domQuery.all('.context-menu-group-entry', outputEntriesGroup)).to.have.lengthOf(6);
+        expect(
+          domQuery.all('.context-menu-group-entry', outputEntriesGroup)
+        ).to.have.lengthOf(6);
 
         expectEntries([
           '.context-menu-entry-add-output-left',
@@ -653,8 +714,13 @@ describe('context menu', function() {
               outputEntriesGroup = domQuery('.context-menu-group-output', contextMenu);
 
         // then
-        expect(domClasses(domQuery('.context-menu-entry-paste-output-left', outputEntriesGroup)).has('disabled')).to.be.true;
-        expect(domClasses(domQuery('.context-menu-entry-paste-output-right', outputEntriesGroup)).has('disabled')).to.be.true;
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-output-left', outputEntriesGroup)
+        ).has('disabled')).to.be.true;
+
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-output-right', outputEntriesGroup)
+        ).has('disabled')).to.be.true;
       });
 
 
@@ -685,7 +751,11 @@ describe('context menu', function() {
                 outputEntriesGroup = domQuery('.context-menu-group-output', contextMenu);
 
           // then
-          expect(domClasses(domQuery('.context-menu-entry-cut-output', outputEntriesGroup)).has('disabled')).to.be.true;
+          expect(
+            domClasses(
+              domQuery('.context-menu-entry-cut-output', outputEntriesGroup)
+            ).has('disabled')
+          ).to.be.true;
         });
 
       });
@@ -709,7 +779,10 @@ describe('context menu', function() {
         it('should add output left', inject(function(sheet) {
 
           // given
-          const addOutputLeftEntry = domQuery('.context-menu-entry-add-output-left', testContainer);
+          const addOutputLeftEntry = domQuery(
+            '.context-menu-entry-add-output-left',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(addOutputLeftEntry, 'click');
@@ -730,7 +803,10 @@ describe('context menu', function() {
         it('should add output right', inject(function(sheet) {
 
           // given
-          const addOutputRight = domQuery('.context-menu-entry-add-output-right', testContainer);
+          const addOutputRight = domQuery(
+            '.context-menu-entry-add-output-right',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(addOutputRight, 'click');
@@ -751,7 +827,10 @@ describe('context menu', function() {
         it('should remove output', inject(function(sheet) {
 
           // given
-          const removeOutputEntry = domQuery('.context-menu-entry-remove-output', testContainer);
+          const removeOutputEntry = domQuery(
+            '.context-menu-entry-remove-output',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(removeOutputEntry, 'click');
@@ -773,7 +852,10 @@ describe('context menu', function() {
         it('should cut output', inject(function(clipBoard, sheet) {
 
           // given
-          const cutOutputEntry = domQuery('.context-menu-entry-cut-output', testContainer);
+          const cutOutputEntry = domQuery(
+            '.context-menu-entry-cut-output',
+            testContainer
+          );
 
           // when
           triggerMouseEvent(cutOutputEntry, 'click');
@@ -797,8 +879,14 @@ describe('context menu', function() {
         describe('paste', function() {
 
           beforeEach(function() {
-            const cutOutputEntry = domQuery('.context-menu-entry-cut-output', testContainer),
-                  cell = domQuery('[data-element-id="outputEntry2"]', testContainer);
+            const cutOutputEntry = domQuery(
+                    '.context-menu-entry-cut-output',
+                    testContainer
+                  ),
+                  cell = domQuery(
+                    '[data-element-id="outputEntry2"]',
+                    testContainer
+                  );
 
             triggerMouseEvent(cutOutputEntry, 'click');
 
@@ -810,7 +898,10 @@ describe('context menu', function() {
           it('should paste output left', inject(function(sheet) {
 
             // given
-            const pasteOutputLeftEntry = domQuery('.context-menu-entry-paste-output-left', testContainer);
+            const pasteOutputLeftEntry = domQuery(
+              '.context-menu-entry-paste-output-left',
+              testContainer
+            );
 
             // when
             triggerMouseEvent(pasteOutputLeftEntry, 'click');
@@ -833,7 +924,10 @@ describe('context menu', function() {
           it ('should paste output right', inject(function(sheet) {
 
             // given
-            const pasteOutputRightEntry = domQuery('.context-menu-entry-paste-output-right', testContainer);
+            const pasteOutputRightEntry = domQuery(
+              '.context-menu-entry-paste-output-right',
+              testContainer
+            );
 
             // when
             triggerMouseEvent(pasteOutputRightEntry, 'click');
@@ -861,6 +955,7 @@ describe('context menu', function() {
   });
 
 });
+
 
 ////////// helpers //////////
 

@@ -11,9 +11,16 @@ export default class RulesBodyComponent extends Component {
       <tbody>
         {
           rows.map((row, rowIndex) => {
-            const RulesRowComponent = components.getComponent('row', { rowType: 'rule' });
+            const RowComponent = components.getComponent('row', { rowType: 'rule' });
 
-            return RulesRowComponent && <RulesRowComponent key={ row.id } row={ row } rowIndex={ rowIndex } cols={ cols } />;
+            return (
+              RowComponent &&
+              <RowComponent
+                key={ row.id }
+                row={ row }
+                rowIndex={ rowIndex }
+                cols={ cols } />
+            );
           })
         }
       </tbody>

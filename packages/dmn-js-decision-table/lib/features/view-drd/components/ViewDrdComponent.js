@@ -25,7 +25,10 @@ export default class ViewDrdComponent extends Component {
     }
 
     const containerWidth = this.container.getBoundingClientRect().width;
-    const tableWidth = domQuery('.tjs-table', this.container).getBoundingClientRect().width;
+    const tableWidth =
+      domQuery('.tjs-table', this.container)
+        .getBoundingClientRect()
+        .width;
 
     this.node.style.right = (containerWidth - tableWidth + 40) + 'px';
   }

@@ -36,9 +36,13 @@ DefinitionIdView.prototype._init = function() {
   this.nameElement = domQuery('.dmn-definitions-name', this._container);
   this.idElement = domQuery('.dmn-definitions-id', this._container);
 
-  domDelegate.bind(container, '.dmn-definitions-name, .dmn-definitions-id', 'mousedown', function(event) {
-    event.stopPropagation();
-  });
+  domDelegate.bind(
+    container,
+    '.dmn-definitions-name, .dmn-definitions-id', 'mousedown',
+    function(event) {
+      event.stopPropagation();
+    }
+  );
 
   eventBus.fire('definitionIdView.create', {
     html: container

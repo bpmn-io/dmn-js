@@ -21,7 +21,11 @@ function LabelEditingProvider(eventBus, canvas, directEditing, commandStack) {
   });
 
   // complete on followup canvas operation
-  eventBus.on([ 'element.mousedown', 'drag.init', 'canvas.viewbox.changed' ], function(event) {
+  eventBus.on([
+    'element.mousedown',
+    'drag.init',
+    'canvas.viewbox.changed'
+  ], function(event) {
     directEditing.complete();
   });
 
@@ -75,7 +79,9 @@ LabelEditingProvider.prototype.activate = function(element) {
  *
  * @param  {djs.model.Base} element
  *
- * @return {Object} an object containing information about position and size (fixed or minimum and/or maximum)
+ * @return {Object}
+ *         an object containing information about position and
+ *         size (fixed or minimum and/or maximum)
  */
 LabelEditingProvider.prototype.getEditingBBox = function(element) {
   var canvas = this._canvas;

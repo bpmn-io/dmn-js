@@ -81,7 +81,11 @@ describe('tabs', function() {
 
       views.forEach(function(v, idx) {
 
-        var tab = domify(`<div class="tab ${ v === activeView ? 'active' : ''}" data-id="${idx}"></div>`);
+        var tab = domify(`
+          <div class="tab ${ v === activeView ? 'active' : ''}" data-id="${idx}">
+          </div>
+        `);
+
         tab.textContent = v.element.name || v.element.id;
 
         $tabs.appendChild(tab);

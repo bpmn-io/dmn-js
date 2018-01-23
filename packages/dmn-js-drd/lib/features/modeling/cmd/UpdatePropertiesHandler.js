@@ -53,7 +53,10 @@ UpdatePropertiesHandler.prototype.execute = function(context) {
 
   var businessObject = element.businessObject,
       properties = context.properties,
-      oldProperties = context.oldProperties || getProperties(businessObject, keys(properties));
+      oldProperties = (
+        context.oldProperties ||
+        getProperties(businessObject, keys(properties))
+      );
 
   if (isIdChange(properties, businessObject)) {
     ids.unclaim(businessObject[ID]);

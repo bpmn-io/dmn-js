@@ -14,7 +14,8 @@ var OPTIONS, DMN_JS;
 
 
 /**
- * Bootstrap the modeler given the specified options and a number of locals (i.e. services)
+ * Bootstrap the modeler given the specified options and
+ * a number of locals (i.e. services)
  *
  * @example
  *
@@ -32,9 +33,11 @@ var OPTIONS, DMN_JS;
  *
  * });
  *
- * @param  {Object} (options) optional options to be passed to the diagram upon instantiation
- * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
- * @return {Function}         a function to be passed to beforeEach
+ * @param  {Object} [options]
+ *         optional options to be passed to the diagram upon instantiation
+ * @param  {Object|Function} locals
+ *         the local overrides to be used by the diagram or a function that produces them
+ * @return {Function} a function to be passed to beforeEach
  */
 function bootstrapDmnJS(DmnJS, diagram, options, locals) {
 
@@ -140,7 +143,10 @@ function inject(fn) {
   return function() {
 
     if (!DMN_JS) {
-      throw new Error('no bootstraped viewer, ensure you created it via #bootstrapViewer');
+      throw new Error(
+        'no bootstraped viewer, ' +
+        'ensure you created it via #bootstrapViewer'
+      );
     }
 
     var view = getDrdJS();
@@ -162,7 +168,8 @@ function injectAsync(doneFn) {
 }
 
 /**
- * Bootstrap the Modeler given the specified options and a number of locals (i.e. services)
+ * Bootstrap the Modeler given the specified options and
+ * a number of locals (i.e. services)
  *
  * @example
  *
@@ -181,8 +188,11 @@ function injectAsync(doneFn) {
  * });
  *
  * @param  {String} xml document to display
- * @param  {Object} (options) optional options to be passed to the diagram upon instantiation
- * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
+ * @param  {Object} [options]
+ *         optional options to be passed to the diagram upon instantiation
+ * @param  {Object|Function} locals
+ *         the local overrides to be used by the diagram or a
+ *         function that produces them
  *
  * @return {Function} a function to be passed to beforeEach
  */
@@ -210,8 +220,11 @@ function bootstrapModeler(diagram, options, locals) {
  * });
  *
  * @param  {String} xml document to display
- * @param  {Object} (options) optional options to be passed to the diagram upon instantiation
- * @param  {Object|Function} locals  the local overrides to be used by the diagram or a function that produces them
+ * @param  {Object} [options]
+ *         optional options to be passed to the diagram upon instantiation
+ * @param  {Object|Function} locals
+ *         the local overrides to be used by the diagram or a
+ *         function that produces them
  *
  * @return {Function} a function to be passed to beforeEach
  */

@@ -1,9 +1,9 @@
-import DecisionTablePropertiesEditorComponent from './components/DecisionTablePropertiesEditorComponent';
+import Component from './components/DecisionTablePropertiesEditorComponent';
 
 export default class DecisionTableProperties {
   constructor(components) {
     components.onGetComponent('table.before', () => {
-      return DecisionTablePropertiesEditorComponent;
+      return Component;
     });
   }
 }

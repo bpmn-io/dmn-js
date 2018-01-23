@@ -59,7 +59,9 @@ describe('add input output', function() {
     const row = domQuery('.add-rule', testContainer);
 
     // then
-    expect(row.childNodes).to.have.lengthOf(cols.length + 2); // + 2 for indices and annotations
+    expect(
+      row.childNodes
+    ).to.have.lengthOf(cols.length + 2); // + 2 for indices and annotations
   }));
 
 });

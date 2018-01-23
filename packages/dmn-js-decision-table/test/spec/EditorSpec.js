@@ -17,7 +17,9 @@ describe('DecisionTable', function() {
   });
 
   function createDecisionTableEditor(xml, done) {
-    const dmnDecisionTableEditor = new DmnDecisionTableEditor({ container: testContainer });
+    const dmnDecisionTableEditor = new DmnDecisionTableEditor({
+      container: testContainer
+    });
 
     dmnDecisionTableEditor.importXML(xml, (err, warnings) => {
       done(err, warnings, dmnDecisionTableEditor);

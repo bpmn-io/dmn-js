@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-disable max-len */
+
 /**
  * Map containing SVG paths needed by BpmnRenderer.
  */

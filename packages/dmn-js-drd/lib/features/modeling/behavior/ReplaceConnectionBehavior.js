@@ -35,10 +35,14 @@ function ReplaceConnectionBehavior(eventBus, modeling, drdRules) {
   this.postExecuted('connection.reconnectStart', function(event) {
 
     // remove old di information from target
-    var extensionElements = event.context.connection.target.businessObject.extensionElements.values;
+    var extensionElements =
+      event.context.connection.target.businessObject.extensionElements.values;
 
     var extension = filter(extensionElements, function(extension) {
-      return extension.$type === 'biodi:Edge' && extension.source === event.context.oldSource.id;
+      return (
+        extension.$type === 'biodi:Edge' &&
+        extension.source === event.context.oldSource.id
+      );
     })[0];
 
     if (extension) {
@@ -60,6 +64,10 @@ function ReplaceConnectionBehavior(eventBus, modeling, drdRules) {
 
 inherits(ReplaceConnectionBehavior, CommandInterceptor);
 
-ReplaceConnectionBehavior.$inject = [ 'eventBus', 'modeling', 'drdRules' ];
+ReplaceConnectionBehavior.$inject = [
+  'eventBus',
+  'modeling',
+  'drdRules'
+];
 
 module.exports = ReplaceConnectionBehavior;

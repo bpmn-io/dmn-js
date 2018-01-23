@@ -114,7 +114,10 @@ export default class DecisionTableEditorActions {
 
         const { input, output } = businessObject;
 
-        return modeling.addCol({ type: 'dmn:OutputClause' }, input.length + output.length);
+        return modeling.addCol(
+          { type: 'dmn:OutputClause' },
+          input.length + output.length
+        );
       },
       addOutputLeft(context) {
         let output = context && context.output;
@@ -221,4 +224,9 @@ export default class DecisionTableEditorActions {
   }
 }
 
-DecisionTableEditorActions.$inject = [ 'editorActions', 'modeling', 'selection', 'sheet' ];
+DecisionTableEditorActions.$inject = [
+  'editorActions',
+  'modeling',
+  'selection',
+  'sheet'
+];

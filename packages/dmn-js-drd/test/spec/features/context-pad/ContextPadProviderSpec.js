@@ -12,9 +12,9 @@ var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 /* global bootstrapModeler, inject */
 
 
-var contextPadModule = require('../../../../lib/features/context-pad'),
-    coreModule = require('../../../../lib/core'),
-    modelingModule = require('../../../../lib/features/modeling'),
+var contextPadModule = require('lib/features/context-pad'),
+    coreModule = require('lib/core'),
+    modelingModule = require('lib/features/modeling'),
     createModule = require('diagram-js/lib/features/create'),
     customRulesModule = require('../../../util/custom-rules');
 
@@ -47,17 +47,19 @@ describe('features - context-pad', function() {
     }));
 
 
-    it('should add delete action by default', inject(function(elementRegistry, contextPad) {
+    it('should add delete action by default', inject(
+      function(elementRegistry, contextPad) {
 
-      // given
-      var element = elementRegistry.get('dayType_id');
+        // given
+        var element = elementRegistry.get('dayType_id');
 
-      // when
-      contextPad.open(element);
+        // when
+        contextPad.open(element);
 
-      // then
-      expect(deleteAction(element)).to.exist;
-    }));
+        // then
+        expect(deleteAction(element)).to.exist;
+      }
+    ));
 
 
     it('should include delete action when rule returns true',
@@ -98,24 +100,26 @@ describe('features - context-pad', function() {
     );
 
 
-    it('should call rules with [ element ]', inject(function(elementRegistry, contextPad, customRules) {
+    it('should call rules with [ element ]', inject(
+      function(elementRegistry, contextPad, customRules) {
 
-      // given
-      var element = elementRegistry.get('dayType_id');
+        // given
+        var element = elementRegistry.get('dayType_id');
 
-      customRules.addRule('elements.delete', 1500, function(context) {
+        customRules.addRule('elements.delete', 1500, function(context) {
 
-        // element array is actually passed
-        expect(context.elements).to.eql([ element ]);
+          // element array is actually passed
+          expect(context.elements).to.eql([ element ]);
 
-        return true;
-      });
+          return true;
+        });
 
-      // then
-      expect(function() {
-        contextPad.open(element);
-      }).not.to.throw;
-    }));
+        // then
+        expect(function() {
+          contextPad.open(element);
+        }).not.to.throw;
+      }
+    ));
 
 
     it('should include delete action when [ element ] is returned from rule',
@@ -168,7 +172,11 @@ describe('features - context-pad', function() {
 
       TestHelper.getDrdJS().invoke(function(elementRegistry, contextPad) {
 
-        var element = typeof elementOrId === 'string' ? elementRegistry.get(elementOrId) : elementOrId;
+        var element = (
+          typeof elementOrId === 'string' ?
+            elementRegistry.get(elementOrId) :
+            elementOrId
+        );
 
         contextPad.open(element, true);
 
@@ -263,31 +271,33 @@ describe('features - context-pad', function() {
     });
 
 
-    it('should show popup menu in the correct position', inject(function(elementRegistry, contextPad) {
+    it('should show popup menu in the correct position', inject(
+      function(elementRegistry, contextPad) {
 
-      // given
-      var element = elementRegistry.get('guestCount'),
-          padding = 5,
-          replaceMenuRect,
-          padMenuRect;
+        // given
+        var element = elementRegistry.get('guestCount'),
+            padding = 5,
+            replaceMenuRect,
+            padMenuRect;
 
-      contextPad.open(element);
-      padMenuRect = contextPad.getPad(element).html.getBoundingClientRect();
+        contextPad.open(element);
+        padMenuRect = contextPad.getPad(element).html.getBoundingClientRect();
 
-      // mock event
-      var event = {
-        target: padEntry(container, 'replace'),
-        preventDefault: function() {}
-      };
+        // mock event
+        var event = {
+          target: padEntry(container, 'replace'),
+          preventDefault: function() {}
+        };
 
-      // when
-      contextPad.trigger('click', event);
-      replaceMenuRect = domQuery('.dmn-replace', container).getBoundingClientRect();
+        // when
+        contextPad.trigger('click', event);
+        replaceMenuRect = domQuery('.dmn-replace', container).getBoundingClientRect();
 
-      // then
-      expect(replaceMenuRect.left).to.be.at.most(padMenuRect.left);
-      expect(replaceMenuRect.top).to.be.at.most(padMenuRect.bottom + padding);
-    }));
+        // then
+        expect(replaceMenuRect.left).to.be.at.most(padMenuRect.left);
+        expect(replaceMenuRect.top).to.be.at.most(padMenuRect.bottom + padding);
+      }
+    ));
 
 
     it('should not include control if replacement is disallowed',

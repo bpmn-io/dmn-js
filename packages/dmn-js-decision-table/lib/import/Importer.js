@@ -6,9 +6,10 @@ import TableTreeWalker from './TableTreeWalker';
  *
  * Errors and warnings are reported through the specified callback.
  *
- * @param  {decisionTable} decisionTable - Instance of DecisionTable.
- * @param  {ModdleElement} decision - Decision moddle element.
- * @param  {Function} done the callback, invoked with (err, [ warning ]) once the import is done
+ * @param  {decisionTable} decisionTable instance of DecisionTable
+ * @param  {ModdleElement} decision moddle element
+ * @param  {Function} done
+ *         the callback, invoked with (err, [ warning ]) once the import is done
  */
 export function importDecision(decisionTable, decision, done) {
   const importer = decisionTable.get('tableImporter'),

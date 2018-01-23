@@ -10,7 +10,7 @@ var pick = require('lodash/object/pick');
 
 describe('DRD - Import', function() {
 
-  describe('connection types', function() {
+  describe('should connect', function() {
 
     function getConnection(sourceType, targetType) {
       return getDrdJS().invoke(function(elementRegistry) {
@@ -58,7 +58,7 @@ describe('DRD - Import', function() {
     before(bootstrapModeler(exampleXML));
 
 
-    it('should connect decisions with information requirement', function() {
+    it('decisions with information requirement', function() {
       expectConnection({
         source: 'dmn:Decision',
         target: 'dmn:Decision',
@@ -67,7 +67,7 @@ describe('DRD - Import', function() {
     });
 
 
-    it('should connect business knowledge model to decisions with knowledge requirement', function() {
+    it('business knowledge model to decision with knowledge requirement', function() {
       expectConnection({
         source: 'dmn:BusinessKnowledgeModel',
         target: 'dmn:Decision',
@@ -76,7 +76,7 @@ describe('DRD - Import', function() {
     });
 
 
-    it('should connect knowledge source to decisions with authority requirement', function() {
+    it('knowledge source to decision with authority requirement', function() {
       expectConnection({
         source: 'dmn:KnowledgeSource',
         target: 'dmn:Decision',
@@ -85,7 +85,7 @@ describe('DRD - Import', function() {
     });
 
 
-    it('should connect input data to decisions with information requirement', function() {
+    it('input data to decision with information requirement', function() {
       expectConnection({
         source: 'dmn:InputData',
         target: 'dmn:Decision',
@@ -94,7 +94,7 @@ describe('DRD - Import', function() {
     });
 
 
-    it('should connect input data to text annotation with an association', function() {
+    it('input data to text annotation with an association', function() {
       expectConnection({
         source: 'dmn:InputData',
         target: 'dmn:TextAnnotation',
@@ -133,8 +133,13 @@ describe('DRD - Import', function() {
           var decision = elementRegistry.get('guestCount');
           var importedConnection = decision.outgoing[0];
 
-          expect(pick(importedConnection.waypoints[0], [ 'x', 'y' ])).to.eql(pick(waypoints[0], [ 'x', 'y' ]));
-          expect(pick(importedConnection.waypoints[1], [ 'x', 'y' ])).to.eql(pick(waypoints[1], [ 'x', 'y' ]));
+          expect(
+            pick(importedConnection.waypoints[0], [ 'x', 'y' ])
+          ).to.eql(pick(waypoints[0], [ 'x', 'y' ]));
+
+          expect(
+            pick(importedConnection.waypoints[1], [ 'x', 'y' ])
+          ).to.eql(pick(waypoints[1], [ 'x', 'y' ]));
 
           done();
         });

@@ -7,14 +7,17 @@ require('../../../../TestHelper');
 var is = require('dmn-js-shared/lib/util/ModelUtil').is,
     find = require('lodash/collection/find');
 
-var modelingModule = require('../../../../../lib/features/modeling'),
-    coreModule = require('../../../../../lib/core');
+var modelingModule = require('lib/features/modeling'),
+    coreModule = require('lib/core');
 
 
 function getConnection(source, target, connectionOrType) {
   return find(source.outgoing, function(c) {
-    return c.target === target &&
-      (typeof connectionOrType === 'string' ? is(c, connectionOrType) : c === connectionOrType);
+    return c.target === target && (
+      typeof connectionOrType === 'string' ?
+        is(c, connectionOrType) :
+        c === connectionOrType
+    );
   });
 }
 
@@ -45,6 +48,7 @@ describe('features/modeling - replace connection', function() {
     };
   }));
 
+
   it('should update target', inject(function(modeling) {
 
     // given
@@ -55,8 +59,10 @@ describe('features/modeling - replace connection', function() {
 
         newTargetBounds = newTarget.businessObject.extensionElements.values[0],
 
-        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
-
+        newWaypoints = [
+          connection.waypoints[0],
+          { x: newTargetBounds.x, y: newTargetBounds.y }
+        ];
 
     // when
     modeling.reconnectEnd(connection, newTarget, newWaypoints);
@@ -65,6 +71,7 @@ describe('features/modeling - replace connection', function() {
     expectNotConnected(source, oldTarget, 'dmn:AuthorityRequirement');
     expectConnected(source, newTarget, 'dmn:AuthorityRequirement');
   }));
+
 
   it('should update source', inject(function(modeling) {
 
@@ -76,7 +83,10 @@ describe('features/modeling - replace connection', function() {
 
         newSourceBounds = newSource.businessObject.extensionElements.values[0],
 
-        newWaypoints = [ { x: newSourceBounds.x, y: newSourceBounds.y }, connection.waypoints[1]];
+        newWaypoints = [
+          { x: newSourceBounds.x, y: newSourceBounds.y },
+          connection.waypoints[1]
+        ];
 
 
     // when
@@ -87,45 +97,58 @@ describe('features/modeling - replace connection', function() {
     expectConnected(newSource, target, 'dmn:KnowledgeRequirement');
   }));
 
-  it('should replace Association with InformationRequirement', inject(function(modeling) {
 
-    // given
-    var source = element('dayType_id'),
-        oldTarget = element('annotation_1'),
-        newTarget = element('guestCount'),
-        connection = element('Association_1'),
+  it('should replace Association with InformationRequirement', inject(
+    function(modeling) {
 
-        newTargetBounds = newTarget.businessObject.extensionElements.values[0],
+      // given
+      var source = element('dayType_id'),
+          oldTarget = element('annotation_1'),
+          newTarget = element('guestCount'),
+          connection = element('Association_1'),
 
-        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
+          newTargetBounds = newTarget.businessObject.extensionElements.values[0],
 
-    // when
-    modeling.reconnectEnd(connection, newTarget, newWaypoints);
+          newWaypoints = [
+            connection.waypoints[0],
+            { x: newTargetBounds.x, y: newTargetBounds.y }
+          ];
 
-    // then
-    expectNotConnected(source, oldTarget, 'dmn:Association');
-    expectConnected(source, newTarget, 'dmn:InformationRequirement');
-  }));
+      // when
+      modeling.reconnectEnd(connection, newTarget, newWaypoints);
 
-  it('should replace AuthorityRequirement with Association', inject(function(modeling) {
+      // then
+      expectNotConnected(source, oldTarget, 'dmn:Association');
+      expectConnected(source, newTarget, 'dmn:InformationRequirement');
+    }
+  ));
 
-    // given
-    var source = element('host_ks'),
-        oldTarget = element('guestCount'),
-        newTarget = element('annotation_1'),
-        connection = getConnection(source, oldTarget, 'dmn:AuthorityRequirement'),
 
-        newTargetBounds = newTarget.businessObject.extensionElements.values[0],
+  it('should replace AuthorityRequirement with Association', inject(
+    function(modeling) {
 
-        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
+      // given
+      var source = element('host_ks'),
+          oldTarget = element('guestCount'),
+          newTarget = element('annotation_1'),
+          connection = getConnection(source, oldTarget, 'dmn:AuthorityRequirement'),
 
-    // when
-    modeling.reconnectEnd(connection, newTarget, newWaypoints);
+          newTargetBounds = newTarget.businessObject.extensionElements.values[0],
 
-    // then
-    expectNotConnected(source, oldTarget, 'dmn:AuthorityRequirement');
-    expectConnected(source, newTarget, 'dmn:Association');
-  }));
+          newWaypoints = [
+            connection.waypoints[0],
+            { x: newTargetBounds.x, y: newTargetBounds.y }
+          ];
+
+      // when
+      modeling.reconnectEnd(connection, newTarget, newWaypoints);
+
+      // then
+      expectNotConnected(source, oldTarget, 'dmn:AuthorityRequirement');
+      expectConnected(source, newTarget, 'dmn:Association');
+    }
+  ));
+
 
   it('should undo', inject(function(modeling, commandStack) {
 
@@ -137,7 +160,10 @@ describe('features/modeling - replace connection', function() {
 
         newTargetBounds = newTarget.businessObject.extensionElements.values[0],
 
-        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
+        newWaypoints = [
+          connection.waypoints[0],
+          { x: newTargetBounds.x, y: newTargetBounds.y }
+        ];
 
     modeling.reconnectEnd(connection, newTarget, newWaypoints);
 
@@ -149,6 +175,7 @@ describe('features/modeling - replace connection', function() {
     expectConnected(source, oldTarget, 'dmn:AuthorityRequirement');
   }));
 
+
   it('should redo', inject(function(modeling, commandStack) {
 
     // given
@@ -159,7 +186,10 @@ describe('features/modeling - replace connection', function() {
 
         newTargetBounds = newTarget.businessObject.extensionElements.values[0],
 
-        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
+        newWaypoints = [
+          connection.waypoints[0],
+          { x: newTargetBounds.x, y: newTargetBounds.y }
+        ];
 
     modeling.reconnectEnd(connection, newTarget, newWaypoints);
 
@@ -173,23 +203,30 @@ describe('features/modeling - replace connection', function() {
   }));
 
 
-  it('should update the semantic parent on undo', inject(function(modeling, commandStack) {
-    // given
-    var source = element('host_ks'),
-        oldTarget = element('guestCount'),
-        newTarget = element('decision2'),
-        connection = getConnection(source, oldTarget, 'dmn:AuthorityRequirement'),
+  it('should update the semantic parent on undo', inject(
+    function(modeling, commandStack) {
 
-        newTargetBounds = newTarget.businessObject.extensionElements.values[0],
+      // given
+      var source = element('host_ks'),
+          oldTarget = element('guestCount'),
+          newTarget = element('decision2'),
+          connection = getConnection(source, oldTarget, 'dmn:AuthorityRequirement'),
 
-        newWaypoints = [ connection.waypoints[0], { x: newTargetBounds.x, y: newTargetBounds.y }];
+          newTargetBounds = newTarget.businessObject.extensionElements.values[0],
 
-    modeling.reconnectEnd(connection, newTarget, newWaypoints);
+          newWaypoints = [
+            connection.waypoints[0],
+            { x: newTargetBounds.x, y: newTargetBounds.y }
+          ];
 
-    // when
-    commandStack.undo();
+      modeling.reconnectEnd(connection, newTarget, newWaypoints);
 
-    // then
-    expect(oldTarget.businessObject.authorityRequirement).to.have.a.lengthOf(1);
-  }));
+      // when
+      commandStack.undo();
+
+      // then
+      expect(oldTarget.businessObject.authorityRequirement).to.have.a.lengthOf(1);
+    }
+  ));
+
 });

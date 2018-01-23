@@ -21,7 +21,9 @@ describe('DecisionTable', function() {
   });
 
   function createDecisionTable(xml, done) {
-    const dmnDecisionTableViewer = new DmnDecisionTableViewer({ container: testContainer });
+    const dmnDecisionTableViewer = new DmnDecisionTableViewer({
+      container: testContainer
+    });
 
     dmnDecisionTableViewer.importXML(xml, (err, warnings) => {
       done(err, warnings, dmnDecisionTableViewer);

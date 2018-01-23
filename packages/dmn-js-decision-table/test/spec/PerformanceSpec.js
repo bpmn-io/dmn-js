@@ -10,8 +10,8 @@ import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
 import performanceXML from './performance.dmn';
 
-import CoreModule from '../../lib/core';
-import ModelingModule from '../../lib/features/modeling';
+import CoreModule from 'lib/core';
+import ModelingModule from 'lib/features/modeling';
 
 describe.skip('Performance', function() {
 
@@ -121,7 +121,11 @@ describe.skip('Performance', function() {
         setInterval(() => {
           now = performance.now();
 
-          const cell = rows[Math.floor(Math.random() * rows.length)].cells[Math.floor(Math.random() * cols.length)];
+          const cell = rows[
+            Math.floor(Math.random() * rows.length)
+          ].cells[
+            Math.floor(Math.random() * cols.length)
+          ];
 
           cell.businessObject.text = 'FOO';
 
@@ -132,55 +136,67 @@ describe.skip('Performance', function() {
       }));
 
 
-      it.skip('should add/move/remove/edit', inject(function(eventBus, modeling, renderer, sheet) {
-        const root = sheet.getRoot();
+      it.skip('should add/move/remove/edit', inject(
+        function(eventBus, modeling, renderer, sheet) {
+          const root = sheet.getRoot();
 
-        const rows = root.rows,
-              cols = root.cols;
+          const rows = root.rows,
+                cols = root.cols;
 
-        const businessObject = root.businessObject,
-              inputs = businessObject.input,
-              outputs = businessObject.output;
+          const businessObject = root.businessObject,
+                inputs = businessObject.input,
+                outputs = businessObject.output;
 
-        let now;
+          let now;
 
-        setInterval(() => {
-          now = performance.now();
+          setInterval(() => {
+            now = performance.now();
 
-          let random = Math.random();
+            let random = Math.random();
 
-          if (random < 0.333) {
-            let row = rows[Math.floor(Math.random() * rows.length)];
-            let idx = Math.floor(Math.random() * rows.length);
+            if (random < 0.333) {
+              let row = rows[Math.floor(Math.random() * rows.length)];
+              let idx = Math.floor(Math.random() * rows.length);
 
-            modeling.moveRow(row, idx);
+              modeling.moveRow(row, idx);
 
-            console.log(`Modeling#moveRow took ${Math.round(performance.now() - now)}ms`);
-          } else if (random < 0.666) {
-            let col, idx;
+              console.log(
+                `Modeling#moveRow took ${Math.round(performance.now() - now)}ms`
+              );
+            } else if (random < 0.666) {
+              let col, idx;
 
-            if (Math.random() < 0.5) {
-              col = cols[Math.floor(Math.random() * inputs.length)];
-              idx = Math.floor(Math.random() * inputs.length);
+              if (Math.random() < 0.5) {
+                col = cols[Math.floor(Math.random() * inputs.length)];
+                idx = Math.floor(Math.random() * inputs.length);
+              } else {
+                col = cols[Math.floor(Math.random() * outputs.length) + inputs.length];
+                idx = Math.floor(Math.random() * outputs.length) + inputs.length;
+              }
+
+              modeling.moveCol(col, idx);
+
+              console.log(
+                `Modeling#moveCol took ${Math.round(performance.now() - now)}ms`
+              );
             } else {
-              col = cols[Math.floor(Math.random() * outputs.length) + inputs.length];
-              idx = Math.floor(Math.random() * outputs.length) + inputs.length;
+              let cell = rows[
+                Math.floor(Math.random() * rows.length)
+              ].cells[
+                Math.floor(Math.random() * cols.length)
+              ];
+
+              cell.businessObject.text = 'foo';
+
+              modeling.editCell(cell);
+
+              console.log(
+                `Modeling#editCell took ${Math.round(performance.now() - now)}ms`
+              );
             }
-
-            modeling.moveCol(col, idx);
-
-            console.log(`Modeling#moveCol took ${Math.round(performance.now() - now)}ms`);
-          } else {
-            let cell = rows[Math.floor(Math.random() * rows.length)].cells[Math.floor(Math.random() * cols.length)];
-
-            cell.businessObject.text = 'foo';
-
-            modeling.editCell(cell);
-
-            console.log(`Modeling#editCell took ${Math.round(performance.now() - now)}ms`);
-          }
-        }, 1000);
-      }));
+          }, 1000);
+        }
+      ));
 
     });
 

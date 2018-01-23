@@ -148,21 +148,40 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     };
   }
 
-  if (isAny(businessObject, [ 'dmn:InputData', 'dmn:BusinessKnowledgeModel', 'dmn:KnowledgeSource', 'dmn:Decision' ])) {
+  if (
+    isAny(businessObject, [
+      'dmn:InputData',
+      'dmn:BusinessKnowledgeModel',
+      'dmn:KnowledgeSource',
+      'dmn:Decision'
+    ])
+  ) {
     assign(actions, {
       'append.decision': appendAction('dmn:Decision', 'dmn-icon-decision')
     });
   }
 
-  if (isAny(businessObject, [ 'dmn:InputData', 'dmn:Decision', 'dmn:KnowledgeSource' ])) {
+  if (
+    isAny(businessObject, [
+      'dmn:InputData',
+      'dmn:Decision',
+      'dmn:KnowledgeSource'
+    ])
+  ) {
     assign(actions, {
-      'append.knowledge-source': appendAction('dmn:KnowledgeSource', 'dmn-icon-knowledge-source')
+      'append.knowledge-source': appendAction(
+        'dmn:KnowledgeSource',
+        'dmn-icon-knowledge-source'
+      )
     });
   }
 
   if (isAny(businessObject, [ 'dmn:BusinessKnowledgeModel', 'dmn:KnowledgeSource' ])) {
     assign(actions, {
-      'append.business-knowledge-model': appendAction('dmn:BusinessKnowledgeModel', 'dmn-icon-business-knowledge')
+      'append.business-knowledge-model': appendAction(
+        'dmn:BusinessKnowledgeModel',
+        'dmn-icon-business-knowledge'
+      )
     });
   }
 
@@ -175,12 +194,18 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   if (is(businessObject, 'dmn:DRGElement')) {
 
     assign(actions, {
-      'append.text-annotation': appendAction('dmn:TextAnnotation', 'dmn-icon-text-annotation'),
+      'append.text-annotation': appendAction(
+        'dmn:TextAnnotation',
+        'dmn-icon-text-annotation'
+      ),
 
       'connect': {
         group: 'connect',
         className: 'dmn-icon-connection-multi',
-        title: translate('Connect using Information/Knowledge/Authority Requirement or Association'),
+        title: translate(
+          'Connect using Information/Knowledge' +
+          '/Authority Requirement or Association'
+        ),
         action: {
           click: startConnect,
           dragstart: startConnect

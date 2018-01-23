@@ -5,12 +5,12 @@ require('../../../TestHelper');
 /* global bootstrapViewer, inject */
 
 
-var labelEditingModule = require('../../../../lib/features/label-editing'),
-    modelingModule = require('../../../../lib/features/modeling'),
-    coreModule = require('../../../../lib/core'),
+var labelEditingModule = require('lib/features/label-editing'),
+    modelingModule = require('lib/features/modeling'),
+    coreModule = require('lib/core'),
     draggingModule = require('diagram-js/lib/features/dragging');
 
-var LabelUtil = require('../../../../lib/features/label-editing/LabelUtil');
+var LabelUtil = require('lib/features/label-editing/LabelUtil');
 
 
 function triggerKeyEvent(element, event, code) {
@@ -50,64 +50,71 @@ describe('features - label-editing', function() {
 
   }));
 
+
   describe('basics', function() {
 
-    it('should register on dblclick', inject(function(elementRegistry, directEditing, eventBus) {
+    it('should register on dblclick', inject(
+      function(elementRegistry, directEditing, eventBus) {
 
-      // given
-      var shape = elementRegistry.get('dish-decision');
+        // given
+        var shape = elementRegistry.get('dish-decision');
 
-      // when
-      eventBus.fire('element.dblclick', { element: shape });
+        // when
+        eventBus.fire('element.dblclick', { element: shape });
 
-      // then
-      expect(directEditing.isActive()).to.be.true;
-    }));
-
-
-    it('should cancel on <ESC>', inject(function(elementRegistry, directEditing, eventBus) {
-
-      // given
-      var shape = elementRegistry.get('dish-decision'),
-          decision = shape.businessObject;
-
-      var oldName = decision.name;
-
-      // activate
-      eventBus.fire('element.dblclick', { element: shape });
-
-      // get the textBox Content (a <div> element)
-      var textBoxContent = directEditing._textbox.content;
-
-      // when
-      // change + ESC is pressed
-      textBoxContent.textContent = 'new value';
-      triggerKeyEvent(textBoxContent, 'keydown', 27);
-
-      // then
-      expect(directEditing.isActive()).to.be.false;
-      expect(decision.name).to.equal(oldName);
-    }));
+        // then
+        expect(directEditing.isActive()).to.be.true;
+      }
+    ));
 
 
-    it('should complete on drag start', inject(function(elementRegistry, directEditing, dragging) {
+    it('should cancel on <ESC>', inject(
+      function(elementRegistry, directEditing, eventBus) {
 
-      // given
-      var shape = elementRegistry.get('dish-decision'),
-          decision = shape.businessObject;
+        // given
+        var shape = elementRegistry.get('dish-decision'),
+            decision = shape.businessObject;
 
-      directEditing.activate(shape);
+        var oldName = decision.name;
 
-      // get the textBox Content (a <div> element)
-      var textBoxContent = directEditing._textbox.content;
-      textBoxContent.textContent = 'FOO BAR';
+        // activate
+        eventBus.fire('element.dblclick', { element: shape });
 
-      // when
-      dragging.init(null, { x: 0, y: 0 }, 'foo');
+        // get the textBox Content (a <div> element)
+        var textBoxContent = directEditing._textbox.content;
 
-      // then
-      expect(decision.name).to.equal('FOO BAR');
-    }));
+        // when
+        // change + ESC is pressed
+        textBoxContent.textContent = 'new value';
+        triggerKeyEvent(textBoxContent, 'keydown', 27);
+
+        // then
+        expect(directEditing.isActive()).to.be.false;
+        expect(decision.name).to.equal(oldName);
+      }
+    ));
+
+
+    it('should complete on drag start', inject(
+      function(elementRegistry, directEditing, dragging) {
+
+        // given
+        var shape = elementRegistry.get('dish-decision'),
+            decision = shape.businessObject;
+
+        directEditing.activate(shape);
+
+        // get the textBox Content (a <div> element)
+        var textBoxContent = directEditing._textbox.content;
+        textBoxContent.textContent = 'FOO BAR';
+
+        // when
+        dragging.init(null, { x: 0, y: 0 }, 'foo');
+
+        // then
+        expect(decision.name).to.equal('FOO BAR');
+      }
+    ));
 
   });
 
@@ -184,29 +191,35 @@ describe('features - label-editing', function() {
       expect(shape.businessObject.text).to.equal('FOO');
     }));
 
-    it('should not activate directEditing - Root', inject(function(canvas, eventBus, directEditing) {
 
-      // given
-      var shape = canvas.getRootElement();
+    it('should not activate directEditing - Root', inject(
+      function(canvas, eventBus, directEditing) {
 
-      // when
-      eventBus.fire('element.dblclick', { element: shape });
+        // given
+        var shape = canvas.getRootElement();
 
-      // then
-      expect(directEditing.isActive()).to.be.false;
-    }));
+        // when
+        eventBus.fire('element.dblclick', { element: shape });
 
-    it('should not activate directEditing - Connection', inject(function(eventBus, elementRegistry, directEditing) {
+        // then
+        expect(directEditing.isActive()).to.be.false;
+      }
+    ));
 
-      // given
-      var shape = elementRegistry.get('Association_1c4jixb');
 
-      // when
-      eventBus.fire('element.dblclick', { element: shape });
+    it('should not activate directEditing - Connection', inject(
+      function(eventBus, elementRegistry, directEditing) {
 
-      // then
-      expect(directEditing.isActive()).to.be.false;
-    }));
+        // given
+        var shape = elementRegistry.get('Association_1c4jixb');
+
+        // when
+        eventBus.fire('element.dblclick', { element: shape });
+
+        // then
+        expect(directEditing.isActive()).to.be.false;
+      }
+    ));
 
   });
 

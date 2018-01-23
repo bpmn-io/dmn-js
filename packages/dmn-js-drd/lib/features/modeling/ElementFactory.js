@@ -46,7 +46,11 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
     businessObject = drdFactory.create(attrs.type);
   }
 
-  if ((elementType !== 'root' && elementType !== 'connection') && !businessObject.extensionElements) {
+  if (
+    elementType !== 'root' &&
+    elementType !== 'connection' &&
+    !businessObject.extensionElements
+  ) {
     businessObject.extensionElements = drdFactory.createDi();
   }
 

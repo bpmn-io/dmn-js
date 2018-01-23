@@ -43,7 +43,9 @@ describe('type ref', function() {
     triggerChangeEvent(select, 'boolean');
 
     // then
-    expect(elementRegistry.get('input1').businessObject.inputExpression.typeRef).to.equal('boolean');
+    expect(
+      elementRegistry.get('input1').businessObject.inputExpression.typeRef
+    ).to.equal('boolean');
   }));
 
 });

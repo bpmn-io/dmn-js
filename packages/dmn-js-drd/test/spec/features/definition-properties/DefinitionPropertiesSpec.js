@@ -6,11 +6,11 @@ require('../../../TestHelper');
 
 /* global bootstrapModeler, inject, injectAsync */
 
-var modelingModule = require('../../../../lib/features/modeling'),
-    paletteProviderModule = require('../../../../lib/features/palette'),
-    definitionPropertiesViewerModule = require('../../../../lib/features/definition-properties/viewer'),
-    definitionPropertiesModelerModule = require('../../../../lib/features/definition-properties/modeler'),
-    coreModule = require('../../../../lib/core');
+var modelingModule = require('lib/features/modeling'),
+    paletteProviderModule = require('lib/features/palette'),
+    defPropsViewerModule = require('lib/features/definition-properties/viewer'),
+    defPropsModelerModule = require('lib/features/definition-properties/modeler'),
+    coreModule = require('lib/core');
 
 var EventUtils = require('../../../util/EventUtils'),
     inputEvent = EventUtils.inputEvent,
@@ -22,8 +22,8 @@ describe('features/definition-properties', function() {
   var testModules = [
     coreModule,
     paletteProviderModule,
-    definitionPropertiesViewerModule,
-    definitionPropertiesModelerModule,
+    defPropsViewerModule,
+    defPropsModelerModule,
     modelingModule
   ];
 
@@ -33,7 +33,10 @@ describe('features/definition-properties', function() {
 
   it('should display the definitions name', inject(function(definitionPropertiesView) {
     // given
-    var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
+    var nameContainer = domQuery(
+      '.dmn-definitions-name',
+      definitionPropertiesView._container
+    );
 
     // when
 
@@ -44,7 +47,10 @@ describe('features/definition-properties', function() {
 
   it('should display the definitions id', inject(function(definitionPropertiesView) {
     // given
-    var nameContainer = domQuery('.dmn-definitions-id', definitionPropertiesView._container);
+    var nameContainer = domQuery(
+      '.dmn-definitions-id',
+      definitionPropertiesView._container
+    );
 
     // when
 
@@ -53,57 +59,77 @@ describe('features/definition-properties', function() {
   }));
 
 
-  it('should apply changes from updated definitions', inject(function(definitionPropertiesView, canvas) {
-    // given
-    var definitions = canvas.getRootElement().businessObject;
-    var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
+  it('should apply changes from updated definitions', inject(
+    function(definitionPropertiesView, canvas) {
+      // given
+      var definitions = canvas.getRootElement().businessObject;
+      var nameContainer = domQuery(
+        '.dmn-definitions-name',
+        definitionPropertiesView._container
+      );
 
-    // when
-    definitions.name = 'new Name';
-    definitionPropertiesView.update();
+      // when
+      definitions.name = 'new Name';
+      definitionPropertiesView.update();
 
-    // then
-    expect(nameContainer.textContent).to.eql('new Name');
-  }));
-
-
-  it('should react to definition name updates', inject(function(definitionPropertiesView, definitionPropertiesEdit) {
-    // given
-    var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
-
-    // when
-    definitionPropertiesEdit.update('name', 'new Name');
-
-    // then
-    expect(nameContainer.textContent).to.eql('new Name');
-  }));
+      // then
+      expect(nameContainer.textContent).to.eql('new Name');
+    }
+  ));
 
 
-  it('should undo', inject(function(definitionPropertiesView, definitionPropertiesEdit, commandStack) {
-    // given
-    var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
-    definitionPropertiesEdit.update('name', 'new Name');
+  it('should react to definition name updates', inject(
+    function(definitionPropertiesView, definitionPropertiesEdit) {
+      // given
+      var nameContainer = domQuery(
+        '.dmn-definitions-name',
+        definitionPropertiesView._container
+      );
 
-    // when
-    commandStack.undo();
+      // when
+      definitionPropertiesEdit.update('name', 'new Name');
 
-    // then
-    expect(nameContainer.textContent).to.eql('drd-name');
-  }));
+      // then
+      expect(nameContainer.textContent).to.eql('new Name');
+    }
+  ));
 
 
-  it('should redo', inject(function(definitionPropertiesView, definitionPropertiesEdit, commandStack) {
-    // given
-    var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
-    definitionPropertiesEdit.update('name', 'new Name');
+  it('should undo', inject(
+    function(definitionPropertiesView, definitionPropertiesEdit, commandStack) {
+      // given
+      var nameContainer = domQuery(
+        '.dmn-definitions-name',
+        definitionPropertiesView._container
+      );
+      definitionPropertiesEdit.update('name', 'new Name');
 
-    // when
-    commandStack.undo();
-    commandStack.redo();
+      // when
+      commandStack.undo();
 
-    // then
-    expect(nameContainer.textContent).to.eql('new Name');
-  }));
+      // then
+      expect(nameContainer.textContent).to.eql('drd-name');
+    }
+  ));
+
+
+  it('should redo', inject(
+    function(definitionPropertiesView, definitionPropertiesEdit, commandStack) {
+      // given
+      var nameContainer = domQuery(
+        '.dmn-definitions-name',
+        definitionPropertiesView._container
+      );
+      definitionPropertiesEdit.update('name', 'new Name');
+
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(nameContainer.textContent).to.eql('new Name');
+    }
+  ));
 
 
   it('should be responsive', inject(function(canvas, eventBus, definitionPropertiesView) {
@@ -132,7 +158,10 @@ describe('features/definition-properties', function() {
 
         // given
         var definitions = canvas.getRootElement().businessObject;
-        var nameContainer = domQuery('.dmn-definitions-name', definitionPropertiesView._container);
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
 
         clickElement(nameContainer);
 
@@ -155,7 +184,10 @@ describe('features/definition-properties', function() {
 
         // given
         var definitions = canvas.getRootElement().businessObject;
-        var idContainer = domQuery('.dmn-definitions-id', definitionPropertiesView._container);
+        var idContainer = domQuery(
+          '.dmn-definitions-id',
+          definitionPropertiesView._container
+        );
 
         clickElement(idContainer);
 

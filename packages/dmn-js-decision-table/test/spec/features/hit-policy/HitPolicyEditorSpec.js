@@ -79,7 +79,10 @@ describe('hit policy editor', function() {
         // given
         triggerChangeEvent(select, 'COLLECT');
 
-        const aggregationSelect = domQuery('.hit-policy-edit-operator-select', testContainer);
+        const aggregationSelect = domQuery(
+          '.hit-policy-edit-operator-select',
+          testContainer
+        );
 
         // when
         triggerChangeEvent(aggregationSelect, 'SUM');
@@ -94,7 +97,10 @@ describe('hit policy editor', function() {
         // given
         triggerChangeEvent(select, 'COLLECT');
 
-        const aggregationSelect = domQuery('.hit-policy-edit-operator-select', testContainer);
+        const aggregationSelect = domQuery(
+          '.hit-policy-edit-operator-select',
+          testContainer
+        );
 
         triggerChangeEvent(aggregationSelect, 'SUM');
 

@@ -13,8 +13,12 @@ import { queryEditor } from 'test/util/EditorUtil';
 import twoDecisionsXML from '../../two-decisions.dmn';
 
 import CoreModule from 'lib/core';
-import DecisionTablePropertiesModule from 'lib/features/decision-table-properties';
-import DecisionTablePropertiesEditorModule from 'lib/features/decision-table-properties/editor';
+
+import DecisionTablePropertiesModule
+  from 'lib/features/decision-table-properties';
+
+import DecisionTablePropertiesEditorModule
+  from 'lib/features/decision-table-properties/editor';
 
 
 describe('decision table properties', function() {

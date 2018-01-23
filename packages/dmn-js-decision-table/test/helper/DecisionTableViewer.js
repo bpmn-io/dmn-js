@@ -1,6 +1,6 @@
 import Manager from 'dmn-js-shared/lib/base/Manager';
 
-import Viewer from '../../lib/Viewer';
+import Viewer from 'lib/Viewer';
 
 
 export default class DecisionTableViewer extends Manager {

@@ -4,10 +4,10 @@ require('../../../TestHelper');
 
 /* global bootstrapModeler, inject */
 
-var modelingModule = require('../../../../lib/features/modeling'),
-    replaceModule = require('../../../../lib/features/replace'),
+var modelingModule = require('lib/features/modeling'),
+    replaceModule = require('lib/features/replace'),
     moveModule = require('diagram-js/lib/features/move'),
-    coreModule = require('../../../../lib/core');
+    coreModule = require('lib/core');
 
 var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
@@ -167,27 +167,31 @@ describe('features/replace - drd replace', function() {
 
     beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-    it('should keep references for associations', inject(function(elementRegistry, drdReplace) {
-      // given
-      var decision = elementRegistry.get('decision');
+    it('should keep references for associations', inject(
+      function(elementRegistry, drdReplace) {
+        // given
+        var decision = elementRegistry.get('decision');
 
-      var newElementData =  {
-        type: 'dmn:Decision',
-        table: true,
-        expression: false
-      };
+        var newElementData =  {
+          type: 'dmn:Decision',
+          table: true,
+          expression: false
+        };
 
-      // when
-      drdReplace.replaceElement(decision, newElementData);
+        // when
+        drdReplace.replaceElement(decision, newElementData);
 
-      // then
-      var association = elementRegistry.filter(function(element) {
-        return element.type === 'dmn:Association';
-      })[0];
+        // then
+        var association = elementRegistry.filter(function(element) {
+          return element.type === 'dmn:Association';
+        })[0];
 
-      expect(association.businessObject.sourceRef.href).to.eql('#decision');
-      expect(association.businessObject.extensionElements.values[0].source).to.eql('decision');
-    }));
+        var associationBo = association.businessObject;
+
+        expect(associationBo.sourceRef.href).to.eql('#decision');
+        expect(associationBo.extensionElements.values[0].source).to.eql('decision');
+      }
+    ));
 
 
     it('should undo', inject(function(elementRegistry, drdReplace, commandStack) {
@@ -209,8 +213,10 @@ describe('features/replace - drd replace', function() {
         return element.type === 'dmn:Association';
       })[0];
 
-      expect(association.businessObject.sourceRef.href).to.eql('#decision');
-      expect(association.businessObject.extensionElements.values[0].source).to.eql('decision');
+      var associationBo = association.businessObject;
+
+      expect(associationBo.sourceRef.href).to.eql('#decision');
+      expect(associationBo.extensionElements.values[0].source).to.eql('decision');
     }));
 
 
@@ -234,10 +240,12 @@ describe('features/replace - drd replace', function() {
         return element.type === 'dmn:Association';
       })[0];
 
-      expect(association.businessObject.sourceRef.href).to.eql('#decision');
-      expect(association.businessObject.extensionElements.values[0].source).to.eql('decision');
+      var associationBo = association.businessObject;
+
+      expect(associationBo.sourceRef.href).to.eql('#decision');
+      expect(associationBo.extensionElements.values[0].source).to.eql('decision');
     }));
 
-
   });
+
 });

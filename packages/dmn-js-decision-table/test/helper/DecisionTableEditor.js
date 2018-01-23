@@ -1,6 +1,6 @@
 import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
-import Editor from '../../lib/Editor';
+import Editor from 'lib/Editor';
 
 
 export default class DecisionTableEditor extends EditingManager {

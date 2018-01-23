@@ -7,8 +7,8 @@ require('../../../TestHelper');
 /* global bootstrapModeler, inject */
 
 
-var modelingModule = require('../../../../lib/features/modeling'),
-    coreModule = require('../../../../lib/core');
+var modelingModule = require('lib/features/modeling'),
+    coreModule = require('lib/core');
 
 
 describe('features/modeling - move shape', function() {
@@ -174,57 +174,61 @@ describe('features/modeling - move shape', function() {
     }));
 
 
-    it('should undo requirement update', inject(function(elementRegistry, modeling, commandStack) {
+    it('should undo requirement update', inject(
+      function(elementRegistry, modeling, commandStack) {
 
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks'),
-          decision = elementRegistry.get('guestCount'),
-          businessObject = knowledgeSource.businessObject,
-          edge = businessObject.extensionElements.values[1],
-          sourceWaypoint;
+        // given
+        var knowledgeSource = elementRegistry.get('host_ks'),
+            decision = elementRegistry.get('guestCount'),
+            businessObject = knowledgeSource.businessObject,
+            edge = businessObject.extensionElements.values[1],
+            sourceWaypoint;
 
-      // when
-      sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+        // when
+        sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
 
-      modeling.moveShape(decision, { x: 50, y: 0 });
+        modeling.moveShape(decision, { x: 50, y: 0 });
 
-      commandStack.undo();
+        commandStack.undo();
 
-      // then
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
-        x: sourceWaypoint.x,
-        y: sourceWaypoint.y
-      });
-    }));
+        // then
+        expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+          x: sourceWaypoint.x,
+          y: sourceWaypoint.y
+        });
+      }
+    ));
 
 
-    it('should redo requirement update', inject(function(elementRegistry, modeling, commandStack) {
+    it('should redo requirement update', inject(
+      function(elementRegistry, modeling, commandStack) {
 
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks'),
-          decision = elementRegistry.get('guestCount'),
-          businessObject = knowledgeSource.businessObject,
-          edge = businessObject.extensionElements.values[1],
-          sourceWaypoint;
+        // given
+        var knowledgeSource = elementRegistry.get('host_ks'),
+            decision = elementRegistry.get('guestCount'),
+            businessObject = knowledgeSource.businessObject,
+            edge = businessObject.extensionElements.values[1],
+            sourceWaypoint;
 
-      // apply cropping
-      modeling.layoutConnection(knowledgeSource.incoming[0]);
+        // apply cropping
+        modeling.layoutConnection(knowledgeSource.incoming[0]);
 
-      // when
-      sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+        // when
+        sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
 
-      modeling.moveShape(decision, { x: 50, y: 0 });
+        modeling.moveShape(decision, { x: 50, y: 0 });
 
-      commandStack.undo();
+        commandStack.undo();
 
-      commandStack.redo();
+        commandStack.redo();
 
-      // then
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
-        x: sourceWaypoint.x + 38,
-        y: sourceWaypoint.y
-      });
-    }));
+        // then
+        expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+          x: sourceWaypoint.x + 38,
+          y: sourceWaypoint.y
+        });
+      }
+    ));
 
   });
 

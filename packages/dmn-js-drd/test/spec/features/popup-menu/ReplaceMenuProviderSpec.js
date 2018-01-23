@@ -4,9 +4,9 @@
 
 var TestHelper = require('../../../TestHelper');
 
-var coreModule = require('../../../../lib/core'),
-    modelingModule = require('../../../../lib/features/modeling'),
-    replaceMenuProviderModule = require('../../../../lib/features/popup-menu'),
+var coreModule = require('lib/core'),
+    modelingModule = require('lib/features/modeling'),
+    replaceMenuProviderModule = require('lib/features/popup-menu'),
     customRulesModule = require('../../../util/custom-rules');
 
 var domQuery = require('min-dom/lib/query'),

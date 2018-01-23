@@ -5,8 +5,8 @@ require('../../../TestHelper');
 /* global bootstrapModeler, inject */
 
 
-var modelingModule = require('../../../../lib/features/modeling'),
-    coreModule = require('../../../../lib/core');
+var modelingModule = require('lib/features/modeling'),
+    coreModule = require('lib/core');
 
 
 describe('features/modeling - move elements', function() {
@@ -125,24 +125,26 @@ describe('features/modeling - move elements', function() {
     }));
 
 
-    it('should update di waypoints -> undo', inject(function(elementRegistry, modeling, canvas, commandStack) {
+    it('should update di waypoints -> undo', inject(
+      function(elementRegistry, modeling, canvas, commandStack) {
 
-      // given
-      var elements = elementRegistry.filter(function(element) {
-            return element.parent;
-          }),
-          decision = elementRegistry.get('Decision_1'),
-          connection = decision.incoming[0],
-          connectionDI = decision.businessObject.extensionElements.values[1];
+        // given
+        var elements = elementRegistry.filter(function(element) {
+              return element.parent;
+            }),
+            decision = elementRegistry.get('Decision_1'),
+            connection = decision.incoming[0],
+            connectionDI = decision.businessObject.extensionElements.values[1];
 
-      // when
-      modeling.moveElements(elements, { x: 0, y: 50 });
+        // when
+        modeling.moveElements(elements, { x: 0, y: 50 });
 
-      commandStack.undo();
+        commandStack.undo();
 
-      // then
-      expect(connectionDI).to.have.waypoints(connection.waypoints);
-    }));
+        // then
+        expect(connectionDI).to.have.waypoints(connection.waypoints);
+      }
+    ));
 
   });
 

@@ -10,7 +10,8 @@ var DrdTreeWalker = require('./DrdTreeWalker');
  *
  * @param  {Drd} drd
  * @param  {ModdleElement} definitions
- * @param  {Function} done the callback, invoked with (err, [ warning ]) once the import is done
+ * @param  {Function} done
+ *         the callback, invoked with (err, [ warning ]) once the import is done
  */
 function importDRD(drd, definitions, done) {
 

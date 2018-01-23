@@ -46,7 +46,9 @@ describe('input expression', function() {
     triggerInputEvent(input, 'foo');
 
     // then
-    expect(elementRegistry.get('input1').businessObject.inputExpression.text).to.equal('foo');
+    expect(
+      elementRegistry.get('input1').businessObject.inputExpression.text
+    ).to.equal('foo');
   }));
 
 });

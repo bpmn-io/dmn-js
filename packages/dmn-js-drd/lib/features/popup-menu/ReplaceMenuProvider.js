@@ -61,9 +61,18 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
   if (is(businessObject, 'dmn:Decision')) {
 
     var options = filter(replaceOptions.DECISION, function(option) {
-      var notEmpty = option.actionName === 'replace-with-empty-decision' && (businessObject.decisionTable || businessObject.literalExpression);
-      var notTable = option.actionName === 'replace-with-decision-table' && !businessObject.decisionTable;
-      var notExp = option.actionName === 'replace-with-literal-expression' && !businessObject.literalExpression;
+      var notEmpty = (
+        option.actionName === 'replace-with-empty-decision' &&
+          (businessObject.decisionTable || businessObject.literalExpression)
+      );
+      var notTable = (
+        option.actionName === 'replace-with-decision-table' &&
+          !businessObject.decisionTable
+      );
+      var notExp = (
+        option.actionName === 'replace-with-literal-expression' &&
+          !businessObject.literalExpression
+      );
 
       return notEmpty || notTable || notExp;
     });

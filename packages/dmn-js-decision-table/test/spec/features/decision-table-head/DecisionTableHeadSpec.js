@@ -50,23 +50,25 @@ describe('decision table head', function() {
   });
 
 
-  it('should allow rendering before labels', inject(function(components, eventBus, sheet) {
+  it('should allow rendering before labels', inject(
+    function(components, eventBus, sheet) {
 
-    // given
-    components.onGetComponent('cell', ({ cellType }) => {
-      if (cellType === 'before-label-cells') {
-        return () => <td className="foo">FOO</td>;
-      }
-    });
+      // given
+      components.onGetComponent('cell', ({ cellType }) => {
+        if (cellType === 'before-label-cells') {
+          return () => <td className="foo">FOO</td>;
+        }
+      });
 
-    const root = sheet.getRoot();
+      const root = sheet.getRoot();
 
-    // when
-    eventBus.fire('elements.changed', { elements: [ root ] });
+      // when
+      eventBus.fire('elements.changed', { elements: [ root ] });
 
-    // then
-    expect(domQuery('.foo', testContainer)).to.exist;
-  }));
+      // then
+      expect(domQuery('.foo', testContainer)).to.exist;
+    }
+  ));
 
 
   it('should allow rendering after labels', inject(function(components, eventBus, sheet) {

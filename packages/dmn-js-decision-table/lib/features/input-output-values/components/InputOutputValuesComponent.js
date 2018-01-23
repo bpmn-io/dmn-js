@@ -50,7 +50,10 @@ export default class InputOutputValuesComponent extends Component {
   render() {
     const { element } = this.props.context;
 
-    const label = is(element, 'dmn:LiteralExpression') ? 'Input Values:' : 'Output Values:';
+    const label =
+      is(element, 'dmn:LiteralExpression') ?
+        'Input Values:' :
+        'Output Values:';
 
     let values;
 

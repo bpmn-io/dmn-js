@@ -53,18 +53,30 @@ export default class DecisionTableHeadComponent extends Component {
     const inputs = businessObject.input,
           outputs = businessObject.output;
 
-    const InputLabelCellComponent = components.getComponent('cell', { cellType: 'input-label' });
-    const OutputLabelComponent = components.getComponent('cell', { cellType: 'output-label' });
+    const InputLabelCellComponent = components.getComponent(
+      'cell',
+      { cellType: 'input-label' }
+    );
+    const OutputLabelComponent = components.getComponent(
+      'cell',
+      { cellType: 'output-label' }
+    );
 
-    const beforeLabelCellsComponents = components.getComponents('cell', { cellType: 'before-label-cells' });
-    const afterLabelCellsComponents = components.getComponents('cell', { cellType: 'after-label-cells' });
+    const beforeComponents = components.getComponents(
+      'cell',
+      { cellType: 'before-label-cells' }
+    );
+    const afterComponents = components.getComponents(
+      'cell',
+      { cellType: 'after-label-cells' }
+    );
 
     return <thead>
       <tr>
-        { beforeLabelCellsComponents && beforeLabelCellsComponents.map(Component => <Component />) }
+        { beforeComponents && beforeComponents.map(Component => <Component />) }
         { InputLabelCellComponent && <InputLabelCellComponent /> }
         { OutputLabelComponent && <OutputLabelComponent /> }
-        { afterLabelCellsComponents && afterLabelCellsComponents.map(Component => <Component />) }
+        { afterComponents && afterComponents.map(Component => <Component />) }
       </tr>
       <tr>
         {
@@ -79,7 +91,11 @@ export default class DecisionTableHeadComponent extends Component {
             if (InputExpressionComponent) {
               return <InputExpressionComponent input={ input } />;
             } else {
-              return <th className="input input-expression">{ inputExpression.text || '-' }</th>;
+              return (
+                <th className="input input-expression">
+                  { inputExpression.text || '-' }
+                </th>
+              );
             }
           })
         }
@@ -111,7 +127,10 @@ export default class DecisionTableHeadComponent extends Component {
             });
 
             if (InputExpressionTypeRefComponent) {
-              return <InputExpressionTypeRefComponent inputExpression={ inputExpression } />;
+              return (
+                <InputExpressionTypeRefComponent
+                  inputExpression={ inputExpression } />
+              );
             } else {
               return <th className="input type-ref">{ inputExpression.typeRef }</th>;
             }

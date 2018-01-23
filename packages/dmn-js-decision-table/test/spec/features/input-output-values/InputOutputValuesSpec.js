@@ -1,6 +1,13 @@
-import { bootstrapModeler, inject } from 'test/helper';
+import {
+  bootstrapModeler,
+  inject
+} from 'test/helper';
 
-import { triggerChangeEvent, triggerKeyEvent, triggerMouseEvent } from 'test/util/EventUtil';
+import {
+  triggerChangeEvent,
+  triggerKeyEvent,
+  triggerMouseEvent
+} from 'test/util/EventUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 

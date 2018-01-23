@@ -2,11 +2,11 @@
 
 var TestContainer = require('mocha-test-container-support');
 
-var coreModule = require('../../../../lib/core'),
-    editorActionsModule = require('../../../../lib/features/editor-actions'),
-    labelEditingModule = require('../../../../lib/features/label-editing'),
-    keyboardModule = require('../../../../lib/features/keyboard'),
-    modelingModule = require('../../../../lib/features/modeling');
+var coreModule = require('lib/core'),
+    editorActionsModule = require('lib/features/editor-actions'),
+    labelEditingModule = require('lib/features/label-editing'),
+    keyboardModule = require('lib/features/keyboard'),
+    modelingModule = require('lib/features/modeling');
 
 var createKeyEvent = require('diagram-js/test/util/KeyEvents').createKeyEvent;
 
@@ -57,42 +57,46 @@ describe('features - keyboard', function() {
     }));
 
 
-    it('should trigger direct editing', inject(function(keyboard, selection, elementRegistry, directEditing) {
+    it('should trigger direct editing', inject(
+      function(keyboard, selection, elementRegistry, directEditing) {
 
-      sinon.spy(directEditing, 'activate');
+        sinon.spy(directEditing, 'activate');
 
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks');
+        // given
+        var knowledgeSource = elementRegistry.get('host_ks');
 
-      selection.select(knowledgeSource);
+        selection.select(knowledgeSource);
 
-      var e = createKeyEvent(container, 69, false);
+        var e = createKeyEvent(container, 69, false);
 
-      // when
-      keyboard._keyHandler(e);
+        // when
+        keyboard._keyHandler(e);
 
-      // then
-      expect(directEditing.activate.calledOnce).to.be.true;
-    }));
+        // then
+        expect(directEditing.activate.calledOnce).to.be.true;
+      }
+    ));
 
 
-    it('should select all elements', inject(function(canvas, keyboard, selection, elementRegistry) {
+    it('should select all elements', inject(
+      function(canvas, keyboard, selection, elementRegistry) {
 
-      // given
-      var e = createKeyEvent(container, 65, true);
+        // given
+        var e = createKeyEvent(container, 65, true);
 
-      var allElements = elementRegistry.getAll(),
-          rootElement = canvas.getRootElement();
+        var allElements = elementRegistry.getAll(),
+            rootElement = canvas.getRootElement();
 
-      // when
-      keyboard._keyHandler(e);
+        // when
+        keyboard._keyHandler(e);
 
-      // then
-      var selectedElements = selection.get();
+        // then
+        var selectedElements = selection.get();
 
-      expect(selectedElements).to.have.length(allElements.length - 1);
-      expect(selectedElements).not.to.contain(rootElement);
-    }));
+        expect(selectedElements).to.have.length(allElements.length - 1);
+        expect(selectedElements).not.to.contain(rootElement);
+      }
+    ));
 
   });
 
