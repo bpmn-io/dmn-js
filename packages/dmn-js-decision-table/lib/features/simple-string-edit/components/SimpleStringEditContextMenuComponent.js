@@ -101,11 +101,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
   /**
    * Change type of unary tests.
    */
-  onUnaryTestsTypeChange(e) {
+  onUnaryTestsTypeChange(value) {
     const { element } = this.props.context,
           { text } = element.businessObject;
-
-    const { value } = e.target;
 
     if (value === 'disjunction') {
       this.editCell(
@@ -231,7 +229,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         value,
         isChecked: true,
         isRemovable: true,
-        group: 'Input Entry Values'
+        group: 'Custom Values'
       };
     }));
 
@@ -261,7 +259,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     return (
       <div class="simple-string-edit">
 
-        <div class="heading-medium">Edit String Expression</div>
+        <div class="heading-medium">Edit String</div>
 
         {
           isInputClause

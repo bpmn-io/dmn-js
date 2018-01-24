@@ -494,8 +494,14 @@ td.selected {
   max-width: 250px;
 }
 
-/* select component */
-.tjs-container .select-component {
+/* simple number edit */
+.tjs-container .simple-number-edit {
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* select */
+.tjs-container select.select {
   outline: none;
   padding: 3px 6px;
   border: 1px solid #ccc;
@@ -504,7 +510,7 @@ td.selected {
   color: #444;
 }
 
-.tjs-container .select-component:focus {
+.tjs-container select.select:focus {
   border-color: #52B415;
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
@@ -596,27 +602,27 @@ td.selected {
 }
 
 /* input */
-.tjs-container .input[type="text"] {
+.tjs-container input.input {
   outline: none;
-  padding: 3px 6px;
+  padding: 4px 6px;
   border: 1px solid #ccc;
   background: #fff;
   font-size: 14px;
   color: #444;
 }
 
-.tjs-container .input[type="text"]:focus {
+.tjs-container input.input:focus {
   border-color: #52B415;
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
-.tjs-container .input[type="text"].invalid {
+.tjs-container input.input.invalid {
   background: #f4cecd;
   border-color: #c9302c;
   color: #c9302c;
 }
 
-.tjs-container .input[type="text"].invalid:focus {
+.tjs-container input.input.invalid:focus {
   box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
 }
 

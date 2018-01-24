@@ -1,28 +1,39 @@
-
 // eslint-disable-next-line
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-const noop = () => {};
 
 export default class SelectComponent extends Component {
-  render() {
-    const { className, onChange, options, value, ...rest } = this.props;
+  constructor(props, context) {
+    super(props, context);
 
-    const classes = [
-      'select-component'
-    ];
+    this.onChange = this.onChange.bind(this);
+  }
 
-    if (className) {
-      classes.push(className);
+  onChange(event) {
+    const { onChange } = this.props;
+
+    if (typeof onChange !== 'function') {
+      return;
     }
+
+    const { value } = event.target;
+
+    onChange(value);
+  }
+
+  render() {
+    const {
+      className,
+      options,
+      value
+    } = this.props;
 
     return (
       <select
-        className={ classes.join(' ') }
-        onChange={ onChange || noop }
-        value={ value }
-        { ...rest }>
+        className={ [ className || '', 'select' ].join(' ') }
+        onChange={ this.onChange }
+        value={ value }>
         {
           (options || []).map(({ label, value }) => {
             return <option className="option" value={ value }>{ label }</option>;

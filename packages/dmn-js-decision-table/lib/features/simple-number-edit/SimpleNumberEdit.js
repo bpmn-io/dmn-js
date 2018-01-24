@@ -1,12 +1,15 @@
-import ContextMenuComponent from './components/SimpleStringEditContextMenuComponent';
+import InputNumberEdit from './components/InputNumberEdit';
+import OutputNumberEdit from './components/OutputNumberEdit';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class SimpleStringEdit {
   constructor(components, simpleMode) {
     simpleMode.registerProvider(element => {
+      const typeRef = getTypeRef(element);
+
       return (isInput(element.col) || isOutput(element.col))
-        && getTypeRef(element) === 'string';
+        && (typeRef === 'integer' || typeRef === 'long' || typeRef === 'double');
     });
 
     components.onGetComponent('context-menu', (context = {}) => {
@@ -18,9 +21,16 @@ export default class SimpleStringEdit {
 
         const typeRef = getTypeRef(context.element);
 
-        if (typeRef === 'string') {
-          return ContextMenuComponent;
+        if (isNumber(typeRef)) {
+
+          if (isInput(context.element.col)) {
+            return InputNumberEdit;
+          } else if (isOutput(context.element.col)) {
+            return OutputNumberEdit; 
+          }
+
         }
+
       }
     });
   }
@@ -36,4 +46,8 @@ function getTypeRef(element) {
   } else {
     return element.col && element.col.businessObject.typeRef;
   }
+}
+
+function isNumber(typeRef) {
+  return typeRef === 'integer' || typeRef === 'long' || typeRef === 'double';
 }
