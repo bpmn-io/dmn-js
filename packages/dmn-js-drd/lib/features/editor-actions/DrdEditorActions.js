@@ -6,10 +6,12 @@ var EditorActions = require('diagram-js/lib/features/editor-actions/EditorAction
 
 
 function DrdEditorActions(
-  injector,
-  canvas, elementRegistry, selection,
-  lassoTool,
-  directEditing) {
+    injector,
+    canvas,
+    elementRegistry,
+    selection,
+    lassoTool,
+    directEditing) {
 
   injector.invoke(EditorActions, this);
 

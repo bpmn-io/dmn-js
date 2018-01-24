@@ -19,12 +19,11 @@ var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
  * been changed in the DRD view.
  */
 function DrdUpdater(
-  eventBus,
-  drdFactory,
-  connectionDocking,
-  drdRules,
-  definitionPropertiesView
-) {
+    eventBus,
+    drdFactory,
+    connectionDocking,
+    drdRules,
+    definitionPropertiesView) {
 
   CommandInterceptor.call(this, eventBus);
 

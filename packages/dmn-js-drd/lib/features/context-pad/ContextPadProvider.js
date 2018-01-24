@@ -13,10 +13,10 @@ var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
 * A provider for DMN 1.1 elements context pad
 */
 function ContextPadProvider(
-  eventBus, contextPad, modeling,
-  elementFactory, connect, create,
-  rules, popupMenu, canvas,
-  translate) {
+    eventBus, contextPad, modeling,
+    elementFactory, connect, create,
+    rules, popupMenu, canvas,
+    translate) {
 
   contextPad.registerProvider(this);
 
