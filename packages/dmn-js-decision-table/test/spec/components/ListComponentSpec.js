@@ -3,12 +3,18 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import { findRenderedDOMElementWithClass, scryRenderedDOMElementsWithClass, scryRenderedDOMElementsWithTag, renderIntoDocument } from 'inferno-test-utils';
+import {
+  findRenderedDOMElementWithClass,
+  scryRenderedDOMElementsWithClass,
+  scryRenderedDOMElementsWithTag,
+  renderIntoDocument
+} from 'inferno-test-utils';
 
 import { triggerMouseEvent } from 'test/util/EventUtil';
 
 // eslint-disable-next-line
 import ListComponent from 'lib/components/ListComponent';
+
 
 describe('ListComponent', function() {
 
@@ -18,7 +24,9 @@ describe('ListComponent', function() {
     const renderedTree = renderIntoDocument(<ListComponent />);
 
     // then
-    expect(findRenderedDOMElementWithClass(renderedTree, 'list-component')).to.exist;
+    expect(
+      findRenderedDOMElementWithClass(renderedTree, 'list-component')
+    ).to.exist;
   });
 
 
@@ -45,16 +53,25 @@ describe('ListComponent', function() {
 
       spy = sinon.spy();
 
-      renderedTree = renderIntoDocument(<ListComponent items={ items } onChange={ spy } type="checkbox" />);
+      renderedTree = renderIntoDocument(
+        <ListComponent
+          items={ items }
+          onChange={ spy }
+          type="checkbox" />
+      );
     });
 
 
     it('should render', function() {
 
       // then
-      expect(scryRenderedDOMElementsWithTag(renderedTree, 'input')).to.have.lengthOf(3);
+      expect(
+        scryRenderedDOMElementsWithTag(renderedTree, 'input')
+      ).to.have.lengthOf(3);
 
-      expect(scryRenderedDOMElementsWithClass(renderedTree, 'item')).to.have.lengthOf(3);
+      expect(
+        scryRenderedDOMElementsWithClass(renderedTree, 'item')
+      ).to.have.lengthOf(3);
     });
 
 
@@ -156,16 +173,25 @@ describe('ListComponent', function() {
 
       spy = sinon.spy();
 
-      renderedTree = renderIntoDocument(<ListComponent items={ items } onChange={ spy } type="radio" />);
+      renderedTree = renderIntoDocument(
+        <ListComponent
+          items={ items }
+          onChange={ spy }
+          type="radio" />
+      );
     });
 
 
     it('should render', function() {
 
       // then
-      expect(scryRenderedDOMElementsWithTag(renderedTree, 'input')).to.have.lengthOf(3);
+      expect(
+        scryRenderedDOMElementsWithTag(renderedTree, 'input')
+      ).to.have.lengthOf(3);
 
-      expect(scryRenderedDOMElementsWithClass(renderedTree, 'item')).to.have.lengthOf(3);
+      expect(
+        scryRenderedDOMElementsWithClass(renderedTree, 'item')
+      ).to.have.lengthOf(3);
     });
 
 
@@ -238,7 +264,12 @@ describe('ListComponent', function() {
 
       spy = sinon.spy();
 
-      renderedTree = renderIntoDocument(<ListComponent items={ items } onChange={ spy } type="radio" />);
+      renderedTree = renderIntoDocument(
+        <ListComponent
+          items={ items }
+          onChange={ spy }
+          type="radio" />
+      );
     });
 
 

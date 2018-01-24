@@ -7,8 +7,14 @@ import { groupBy, toPairs } from 'lodash';
 
 const RADIO = 'radio';
 
+const REMOVE_BTN_CLS =
+  'remove dmn-icon-clear ' +
+  'no-margin-right small-margin-left float-right ' +
+  'cursor-pointer';
+
 /**
- * Shows a list of grouped items that can be checked (checkboxes or radio buttons), removed.
+ * Shows a list of grouped items that can be checked
+ * (checkboxes or radio buttons), removed.
  *
  * Example list of items:
  *
@@ -128,7 +134,7 @@ export default class ListComponent extends Component {
                             && (<span
                               title="Remove item"
                               onMouseup={ () => this.removeItem(item) }
-                              class="remove dmn-icon-clear no-margin-right small-margin-left float-right cursor-pointer">
+                              className={ REMOVE_BTN_CLS }>
                             </span>)
                         }
                       </div>

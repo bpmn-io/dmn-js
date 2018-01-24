@@ -91,8 +91,10 @@ export default class ValidatedTextInputComponent extends Component {
           value={ value || '' }
           { ...rest } />
         {
-          validationWarning
-            && <span class="validation-warning display-block margin-top-medium">{ validationWarning }</span>
+          validationWarning &&
+            <span class="validation-warning display-block margin-top-medium">
+              { validationWarning }
+            </span>
         }
       </span>
     );

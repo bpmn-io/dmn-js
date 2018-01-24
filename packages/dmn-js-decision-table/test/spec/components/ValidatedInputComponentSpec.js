@@ -3,7 +3,10 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import { findRenderedDOMElementWithClass, renderIntoDocument } from 'inferno-test-utils';
+import {
+  findRenderedDOMElementWithClass,
+  renderIntoDocument
+} from 'inferno-test-utils';
 
 import { triggerInputEvent } from 'test/util/EventUtil';
 
@@ -18,7 +21,9 @@ describe('ValidatedTextInputComponent', function() {
     const renderedTree = renderIntoDocument(<ValidatedTextInputComponent />);
 
     // then
-    expect(findRenderedDOMElementWithClass(renderedTree, 'validated-text-input-component')).to.exist;
+    expect(
+      findRenderedDOMElementWithClass(renderedTree, 'validated-text-input-component')
+    ).to.exist;
   });
 
 
@@ -27,9 +32,13 @@ describe('ValidatedTextInputComponent', function() {
     // given
     const spy = sinon.spy();
 
-    const renderedTree = renderIntoDocument(<ValidatedTextInputComponent onInputChange={ spy } />);
+    const renderedTree = renderIntoDocument(
+      <ValidatedTextInputComponent onInputChange={ spy } />
+    );
 
-    const input = findRenderedDOMElementWithClass(renderedTree, 'validated-text-input-component').firstChild;
+    const input = findRenderedDOMElementWithClass(
+      renderedTree, 'validated-text-input-component'
+    ).firstChild;
 
     // when
     triggerInputEvent(input, 'foo');
@@ -51,9 +60,15 @@ describe('ValidatedTextInputComponent', function() {
       return 'bar';
     }
 
-    const renderedTree = renderIntoDocument(<ValidatedTextInputComponent onInputChange={ spy } validate={ validate } />);
+    const renderedTree = renderIntoDocument(
+      <ValidatedTextInputComponent
+        onInputChange={ spy }
+        validate={ validate } />
+    );
 
-    const input = findRenderedDOMElementWithClass(renderedTree, 'validated-text-input-component').firstChild;
+    const input = findRenderedDOMElementWithClass(
+      renderedTree, 'validated-text-input-component'
+    ).firstChild;
 
     // when
     triggerInputEvent(input, 'foo');
@@ -64,7 +79,9 @@ describe('ValidatedTextInputComponent', function() {
       isValid: false
     });
 
-    expect(findRenderedDOMElementWithClass(renderedTree, 'validation-warning')).to.exist;
+    expect(
+      findRenderedDOMElementWithClass(renderedTree, 'validation-warning')
+    ).to.exist;
   });
 
 });

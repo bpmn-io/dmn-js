@@ -18,7 +18,11 @@ export default class SelectComponent extends Component {
     }
 
     return (
-      <select className={ classes.join(' ') } onChange={ onChange || noop } value={ value } { ...rest }>
+      <select
+        className={ classes.join(' ') }
+        onChange={ onChange || noop }
+        value={ value }
+        { ...rest }>
         {
           (options || []).map(({ label, value }) => {
             return <option className="option" value={ value }>{ label }</option>;

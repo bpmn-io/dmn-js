@@ -1,4 +1,4 @@
-import SimpleStringEditContextMenuComponent from './components/SimpleStringEditContextMenuComponent';
+import ContextMenuComponent from './components/SimpleStringEditContextMenuComponent';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
@@ -19,7 +19,7 @@ export default class SimpleStringEdit {
         const typeRef = getTypeRef(context.element);
 
         if (typeRef === 'string') {
-          return SimpleStringEditContextMenuComponent;
+          return ContextMenuComponent;
         }
       }
     });

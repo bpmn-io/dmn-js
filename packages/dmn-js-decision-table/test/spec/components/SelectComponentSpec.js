@@ -3,12 +3,17 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import { findRenderedDOMElementWithClass, scryRenderedDOMElementsWithClass, renderIntoDocument } from 'inferno-test-utils';
+import {
+  findRenderedDOMElementWithClass,
+  scryRenderedDOMElementsWithClass,
+  renderIntoDocument
+} from 'inferno-test-utils';
 
 import { triggerChangeEvent } from 'test/util/EventUtil';
 
 // eslint-disable-next-line
 import SelectComponent from 'lib/components/SelectComponent';
+
 
 describe('SelectComponent', function() {
 
@@ -18,7 +23,9 @@ describe('SelectComponent', function() {
     const renderedTree = renderIntoDocument(<SelectComponent />);
 
     // then
-    expect(findRenderedDOMElementWithClass(renderedTree, 'select-component')).to.exist;
+    expect(
+      findRenderedDOMElementWithClass(renderedTree, 'select-component')
+    ).to.exist;
   });
 
 
@@ -37,7 +44,9 @@ describe('SelectComponent', function() {
     const renderedTree = renderIntoDocument(<SelectComponent options={ options } />);
 
     // then
-    expect(scryRenderedDOMElementsWithClass(renderedTree, 'option')).to.have.lengthOf(2);
+    expect(
+      scryRenderedDOMElementsWithClass(renderedTree, 'option')
+    ).to.have.lengthOf(2);
   });
 
 
@@ -54,7 +63,11 @@ describe('SelectComponent', function() {
 
     const spy = sinon.spy();
 
-    const renderedTree = renderIntoDocument(<SelectComponent onChange={ spy } options={ options } />);
+    const renderedTree = renderIntoDocument(
+      <SelectComponent
+        onChange={ spy }
+        options={ options } />
+    );
 
     const select = findRenderedDOMElementWithClass(renderedTree, 'select-component');
 

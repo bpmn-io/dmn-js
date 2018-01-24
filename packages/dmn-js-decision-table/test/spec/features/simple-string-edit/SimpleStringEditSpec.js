@@ -4,7 +4,12 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerChangeEvent, triggerInputEvent, triggerKeyEvent, triggerMouseEvent } from 'test/util/EventUtil';
+import {
+  triggerChangeEvent,
+  triggerInputEvent,
+  triggerKeyEvent,
+  triggerMouseEvent
+} from 'test/util/EventUtil';
 
 import simpleStringEditXML from './simple-string-edit.dmn';
 

@@ -37,7 +37,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
       };
     }
 
-    const inputOrOutputValues = getInputOrOutputValues(props.context.element.col.businessObject);
+    const inputOrOutputValues = getInputOrOutputValues(
+      props.context.element.col.businessObject
+    );
 
     const filteredValues = parsedString.values.filter(value => {
       return !inputOrOutputValues.includes(value);
@@ -67,7 +69,10 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     let inputValue = '';
 
-    if (!isInputClause && parsedString.values.length && !inputOrOutputValues.includes(parsedString.values[0])) {
+    if (
+      !isInputClause && parsedString.values.length &&
+      !inputOrOutputValues.includes(parsedString.values[0])
+    ) {
       inputValue = parsedString.values[0];
     }
 
@@ -103,7 +108,12 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     const { value } = e.target;
 
     if (value === 'disjunction') {
-      this.editCell(element.businessObject, text.replace('not(', '').replace(')', '') || '');
+      this.editCell(
+        element.businessObject,
+        text
+          .replace('not(', '')
+          .replace(')', '') || ''
+      );
 
       this.setState({
         unaryTestsType: DISJUNCTION
@@ -287,7 +297,11 @@ export default class SimpleStringEditContextMenuComponent extends Component {
           }
 
           <ValidatedTextInputComponent
-            onEnter={ isInputClause ? this.addUnaryTestsListItem : this.onOutputValueInputClick }
+            onEnter={
+              isInputClause ?
+                this.addUnaryTestsListItem :
+                this.onOutputValueInputClick
+            }
             onInputChange={ this.onInput }
             placeholder={ isInputClause ? '"value", "value", ...' : '"value"' }
             validate={ value => {
@@ -391,7 +405,10 @@ function isEmptyString(string) {
 }
 
 function getInputOrOutputValues(inputOrOutput) {
-  const inputOrOutputValues = isInput(inputOrOutput) ? inputOrOutput.inputValues : inputOrOutput.outputValues;
+  const inputOrOutputValues =
+    isInput(inputOrOutput) ?
+      inputOrOutput.inputValues :
+      inputOrOutput.outputValues;
 
   if (!inputOrOutputValues) {
     return [];
