@@ -1,10 +1,10 @@
 import { keys } from 'lodash';
 
 // eslint-disable-next-line
-const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|[0-9]e[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|[0-9]e[0-9]|\.[0-9])+)$/;
+const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|\.[0-9])+)$/;
 
 // eslint-disable-next-line
-const RANGE_REGULAR_EXPRESSION = /^(\[|\]){1}-?([0-9]|[0-9]e[0-9]|\.[0-9]){1,}\.\.-?([0-9]|[0-9]e[0-9]|\.[0-9]){1,}(\[|\]){1}$/;
+const RANGE_REGULAR_EXPRESSION = /^(\[|\]){1}(-?(?:[0-9]|\.[0-9])+){1,}\.\.(-?(?:[0-9]|\.[0-9])+){1,}(\[|\]){1}$/;
 
 export const operators = {
   equals: '=',
@@ -27,35 +27,30 @@ export function parseString(string) {
     };
   }
 
-  if (COMPARISON_REGULAR_EXPRESSION.test(string)) {
+  const comparisonMatches = string.match(COMPARISON_REGULAR_EXPRESSION),
+        rangeMatches = string.match(RANGE_REGULAR_EXPRESSION);
 
-    const matches = string.match(COMPARISON_REGULAR_EXPRESSION);
-
-    if (isNumber(matches)) {
+  if (comparisonMatches) {
+    if (isNumber(comparisonMatches)) {
       return {
         type: 'comparison',
-        value: parseFloat(matches[1]),
+        value: parseFloat(comparisonMatches[1]),
         operator: 'equals'
       };
-    } else if (isComparison(matches)) {
+    } else if (isComparison(comparisonMatches)) {
       return {
         type: 'comparison',
-        value: parseFloat(matches[3]),
-        operator: getOperatorName(matches[2])
+        value: parseFloat(comparisonMatches[3]),
+        operator: getOperatorName(comparisonMatches[2])
       };
     }
 
-  } else if (RANGE_REGULAR_EXPRESSION.test(string)) {
-
-    const matches = string.match(RANGE_REGULAR_EXPRESSION);
-
-    const values = string.match(/([^[\]]*)(?:\.\.)([^[\]]*)/);
-
+  } else if (rangeMatches) {
     return {
       type: 'range',
-      values: values.slice(1).map(value => parseFloat(value)),
-      start: matches[1] === ']' ? 'exclude' : 'include',
-      end: matches[4] === '[' ? 'exclude' : 'include'
+      values: [ rangeMatches[2], rangeMatches[3] ].map(value => parseFloat(value)),
+      start: rangeMatches[1] === ']' ? 'exclude' : 'include',
+      end: rangeMatches[4] === '[' ? 'exclude' : 'include'
     };
   }
 

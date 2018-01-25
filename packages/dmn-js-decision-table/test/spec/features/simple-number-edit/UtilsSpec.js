@@ -123,6 +123,14 @@ describe('simple number edit - utils', function() {
     }));
 
 
+    it('[0...1]', expectParsed('[0...1]', {
+      type: 'range',
+      values: [ 0, 0.1 ],
+      start: 'include',
+      end: 'include'
+    }));
+
+
     it('invalid string', expectParsed('foo', undefined));
 
   });

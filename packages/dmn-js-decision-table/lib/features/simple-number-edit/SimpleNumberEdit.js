@@ -3,7 +3,7 @@ import OutputNumberEdit from './components/OutputNumberEdit';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
-export default class SimpleStringEdit {
+export default class SimpleNumberEdit {
   constructor(components, simpleMode) {
     simpleMode.registerProvider(element => {
       const typeRef = getTypeRef(element);
@@ -36,7 +36,7 @@ export default class SimpleStringEdit {
   }
 }
 
-SimpleStringEdit.$inject = [ 'components', 'simpleMode' ];
+SimpleNumberEdit.$inject = [ 'components', 'simpleMode' ];
 
 ////////// helpers //////////
 

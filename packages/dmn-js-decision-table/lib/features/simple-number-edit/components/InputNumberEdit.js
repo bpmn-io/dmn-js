@@ -191,6 +191,91 @@ export default class InputNumberEdit extends Component {
     }
   }
 
+  renderComparison(comparisonOperator, comparisonValue) {
+    const comparisonOperatorOptions = [{
+      label: 'Equals',
+      value: 'equals'
+    }, {
+      label: 'Less',
+      value: 'less'
+    }, {
+      label: 'Less or equals',
+      value: 'lessEquals'
+    }, {
+      label: 'Greater',
+      value: 'greater'
+    }, {
+      label: 'Greater or equals',
+      value: 'greaterEquals'
+    }];
+
+    return (
+      <div className="comparison no-wrap margin-top-medium">
+
+        <div className="heading-small margin-bottom-medium">Value</div>
+
+        <SelectComponent
+          className="margin-right-medium"
+          onChange={ this.onComparisonOperatorChange }
+          options={ comparisonOperatorOptions }
+          value={ comparisonOperator } />
+
+        <Input
+          onInput={ this.onComparisonValueChange }
+          type="number"
+          value={ comparisonValue } />
+
+      </div>
+    );
+  }
+
+  renderRange(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType) {
+    const rangeTypeOptions = [{
+      label: 'Include',
+      value: 'include'
+    }, {
+      label: 'Exclude',
+      value: 'exclude'
+    }];
+
+    return (
+      <div className="range margin-top-medium">
+        <div className="heading-small margin-bottom-medium">Start Value</div>
+
+        <div className="no-wrap">
+          <SelectComponent
+            className="margin-right-medium"
+            onChange={ this.onRangeStartTypeChange }
+            options={ rangeTypeOptions }
+            value={ rangeStartType } />
+
+          <Input
+            onInput={ this.onRangeStartValueChange }
+            type="number"
+            value={ rangeStartValue } />
+        </div>
+
+        <div className="heading-small margin-top-medium margin-bottom-medium">
+          End Value
+        </div>
+
+        <div className="no-wrap">
+          <SelectComponent
+            className="margin-right-medium"
+            onChange={ this.onRangeEndTypeChange }
+            options={ rangeTypeOptions }
+            value={ rangeEndType } />
+
+          <Input
+            onInput={ this.onRangeEndValueChange }
+            type="number"
+            value={ rangeEndValue } />
+        </div>
+
+      </div>
+    );
+  }
+
   render() {
     const {
       type,
@@ -210,31 +295,6 @@ export default class InputNumberEdit extends Component {
       value: RANGE
     }];
 
-    const comparisonOperatorOptions = [{
-      label: 'Equals',
-      value: 'equals'
-    }, {
-      label: 'Less',
-      value: 'less'
-    }, {
-      label: 'Less or equals',
-      value: 'lessEquals'
-    }, {
-      label: 'Greater',
-      value: 'greater'
-    }, {
-      label: 'Greater or equals',
-      value: 'greaterEquals'
-    }];
-
-    const rangeTypeOptions = [{
-      label: 'Include',
-      value: 'include'
-    }, {
-      label: 'Exclude',
-      value: 'exclude'
-    }];
-
     return (
       <div class="simple-number-edit">
 
@@ -248,60 +308,17 @@ export default class InputNumberEdit extends Component {
 
         {
           type === COMPARISON
-            && <div className="comparison no-wrap margin-top-medium">
-
-              <div className="heading-small margin-bottom-medium">Value</div>
-
-              <SelectComponent
-                className="margin-right-medium"
-                onChange={ this.onComparisonOperatorChange }
-                options={ comparisonOperatorOptions }
-                value={ comparisonOperator } />
-
-              <Input
-                onInput={ this.onComparisonValueChange }
-                type="number"
-                value={ comparisonValue } />
-
-            </div>
+            && this.renderComparison(comparisonOperator, comparisonValue)
         }
 
         {
           type === RANGE
-            && <div className="range margin-top-medium">
-              <div className="heading-small margin-bottom-medium">Start Value</div>
-
-              <div className="no-wrap">
-                <SelectComponent
-                  className="margin-right-medium"
-                  onChange={ this.onRangeStartTypeChange }
-                  options={ rangeTypeOptions }
-                  value={ rangeStartType } />
-
-                <Input
-                  onInput={ this.onRangeStartValueChange }
-                  type="number"
-                  value={ rangeStartValue } />
-              </div>
-
-              <div className="heading-small margin-top-medium margin-bottom-medium">
-                End Value
-              </div>
-
-              <div className="no-wrap">
-                <SelectComponent
-                  className="margin-right-medium"
-                  onChange={ this.onRangeEndTypeChange }
-                  options={ rangeTypeOptions }
-                  value={ rangeEndType } />
-
-                <Input
-                  onInput={ this.onRangeEndValueChange }
-                  type="number"
-                  value={ rangeEndValue } />
-              </div>
-
-            </div>
+            && this.renderRange(
+              rangeStartValue,
+              rangeEndValue,
+              rangeStartType,
+              rangeEndType
+            )
         }
 
       </div>

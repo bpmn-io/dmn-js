@@ -51,13 +51,15 @@ export default class Input extends Component {
       value
     } = this.props;
 
-    return <input
-      className={ [ className || '', 'input' ].join(' ') }
-      placeholder={ placeholder || '' }
-      onInput={ this.onInput }
-      onKeyDown={ this.onKeyDown }
-      onKeyUp={ this.onKeyUp }
-      type={ type }
-      value={ value } />;
+    return (
+      <input
+        className={ [ className || '', 'input' ].join(' ') }
+        placeholder={ placeholder || '' }
+        onInput={ this.onInput }
+        onKeyDown={ this.onKeyDown }
+        onKeyUp={ this.onKeyUp }
+        type={ type }
+        value={ value } />
+    );
   }
 }
