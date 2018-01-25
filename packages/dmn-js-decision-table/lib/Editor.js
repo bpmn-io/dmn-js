@@ -19,6 +19,7 @@ import modelingModule from './features/modeling';
 import rulesEditorModule from './features/rules/editor';
 import selectionModule from 'table-js/lib/features/selection';
 import simpleModeModule from './features/simple-mode';
+import simpleBooleanEditModule from './features/simple-boolean-edit';
 import simpleNumberEditModule from './features/simple-number-edit';
 import simpleStringEditModule from './features/simple-string-edit';
 import typeRefModule from './features/type-ref';
@@ -54,6 +55,7 @@ export default class Editor extends Viewer {
       rulesEditorModule,
       selectionModule,
       simpleModeModule,
+      simpleBooleanEditModule,
       simpleNumberEditModule,
       simpleStringEditModule,
       typeRefModule

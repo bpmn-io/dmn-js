@@ -500,6 +500,12 @@ td.selected {
   font-size: 14px;
 }
 
+/* simple boolean edit */
+.tjs-container .simple-boolean-edit {
+  padding: 8px;
+  font-size: 14px;
+}
+
 /* select */
 .tjs-container select.select {
   outline: none;

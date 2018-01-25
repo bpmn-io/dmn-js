@@ -233,7 +233,7 @@ describe('simple number edit', function() {
   });
 
 
-  describe('InputClause', function() {
+  describe('OutputClause', function() {
 
     let simpleNumberEdit,
         outputEntry9;
