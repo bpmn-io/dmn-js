@@ -11,14 +11,14 @@ import {
 import { triggerInputEvent } from 'test/util/EventUtil';
 
 // eslint-disable-next-line
-import ValidatedTextInputComponent from 'lib/components/ValidatedTextInputComponent';
+import ValidatedInput from 'lib/components/ValidatedInput';
 
-describe('ValidatedTextInputComponent', function() {
+describe('ValidatedInput', function() {
 
   it('should render', function() {
 
     // when
-    const renderedTree = renderIntoDocument(<ValidatedTextInputComponent />);
+    const renderedTree = renderIntoDocument(<ValidatedInput />);
 
     // then
     expect(
@@ -33,7 +33,7 @@ describe('ValidatedTextInputComponent', function() {
     const spy = sinon.spy();
 
     const renderedTree = renderIntoDocument(
-      <ValidatedTextInputComponent onInputChange={ spy } />
+      <ValidatedInput onInput={ spy } />
     );
 
     const input = findRenderedDOMElementWithClass(
@@ -61,8 +61,8 @@ describe('ValidatedTextInputComponent', function() {
     }
 
     const renderedTree = renderIntoDocument(
-      <ValidatedTextInputComponent
-        onInputChange={ spy }
+      <ValidatedInput
+        onInput={ spy }
         validate={ validate } />
     );
 

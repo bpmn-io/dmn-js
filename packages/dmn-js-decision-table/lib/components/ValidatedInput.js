@@ -3,10 +3,13 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
+// eslint-disable-next-line
+import Input from './Input';
+
 /**
- * Text input with optional validation.
+ * Input with optional validation.
  */
-export default class ValidatedTextInputComponent extends Component {
+export default class ValidatedInput extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -22,6 +25,7 @@ export default class ValidatedTextInputComponent extends Component {
 
     this.onInput = this.onInput.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -35,10 +39,8 @@ export default class ValidatedTextInputComponent extends Component {
     });
   }
 
-  onInput(event) {
-    const { validate, onInputChange } = this.props;
-
-    const { value } = event.target;
+  onInput(value) {
+    const { onInput, validate } = this.props;
 
     const validationWarning = validate ? validate(value) : undefined;
 
@@ -47,32 +49,58 @@ export default class ValidatedTextInputComponent extends Component {
       value
     });
 
-    onInputChange && onInputChange({
+    if (typeof onInput !== 'function') {
+      return;
+    }
+
+    onInput && onInput({
       isValid: !validationWarning,
       value
     });
   }
 
   onKeyDown(event) {
-    const { keyCode } = event;
+    const { keyCode, target } = event,
+          { value } = target;
 
-    const { onEnter } = this.props;
+    const { onKeyDown, validate } = this.props;
+    
+    const validationWarning = validate ? validate(value) : undefined;
 
-    const { validationWarning, value } = this.state;
-
-    if (isEnter(keyCode) && !validationWarning) {
-      onEnter && onEnter(value);
-
-      this.setState({
-        value: ''
-      });
+    if (typeof onKeyDown !== 'function') {
+      return;
     }
+
+    onKeyDown({
+      isValid: !validationWarning,
+      value,
+      event
+    });
+  }
+
+  onKeyUp(event) {
+    const { keyCode, target } = event,
+          { value } = target;
+
+    const { onKeyUp, validate } = this.props;
+
+    const validationWarning = validate ? validate(value) : undefined;
+
+    if (typeof onKeyUp !== 'function') {
+      return;
+    }
+
+    onKeyUp({
+      isValid: !validationWarning,
+      value,
+      event
+    });
   }
 
   render() {
-    const { ...rest } = this.props;
+    const { placeholder, type } = this.props;
 
-    const { placeholder, validationWarning, value } = this.state;
+    const { validationWarning, value } = this.state;
 
     const classes = [ 'input' ];
 
@@ -82,14 +110,14 @@ export default class ValidatedTextInputComponent extends Component {
 
     return (
       <span class="validated-text-input-component">
-        <input
+        <Input
           className={ classes.join(' ') }
           onInput={ this.onInput }
           onKeyDown={ this.onKeyDown }
+          onKeyUp={ this.onKeyUp }
           placeholder={ placeholder || '' }
-          type="text"
-          value={ value || '' }
-          { ...rest } />
+          type={ type }
+          value={ value || '' } />
         {
           validationWarning &&
             <span class="validation-warning display-block margin-top-medium">

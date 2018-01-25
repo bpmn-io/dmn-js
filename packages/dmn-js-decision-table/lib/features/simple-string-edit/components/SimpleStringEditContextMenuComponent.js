@@ -10,9 +10,11 @@ import SelectComponent from '../../../components/SelectComponent';
 import ListComponent from '../../../components/ListComponent';
 
 // eslint-disable-next-line
-import ValidatedTextInputComponent from '../../../components/ValidatedTextInputComponent';
+import ValidatedInput from '../../../components/ValidatedInput';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
+
+import { getInputOrOutputValues, parseString } from '../Utils';
 
 const DISJUNCTION = 'disjunction',
       NEGATION = 'negation';
@@ -89,6 +91,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     this.editCell = this.editCell.bind(this);
     this.addUnaryTestsListItem = this.addUnaryTestsListItem.bind(this);
     this.onInput = this.onInput.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.onOutputValueInputClick = this.onOutputValueInputClick.bind(this);
     this.onUnaryTestsListChanged = this.onUnaryTestsListChanged.bind(this);
     this.onUnaryTestsTypeChange = this.onUnaryTestsTypeChange.bind(this);
@@ -200,6 +203,23 @@ export default class SimpleStringEditContextMenuComponent extends Component {
   }
 
   /**
+   * Add new value on ENTER.
+   */
+  onKeyDown({ isValid, event }) {
+    if (isEnter(event.keyCode) && isValid) {
+      const { element } = this.props.context;
+
+      const isInputClause = isInput(element.col);
+
+      if (isInputClause) {
+        this.addUnaryTestsListItem();
+      } else {
+        this.onOutputValueInputClick();
+      }
+    }
+  }
+
+  /**
    * Add unary tests to list.
    */
   addUnaryTestsListItem() {
@@ -294,14 +314,11 @@ export default class SimpleStringEditContextMenuComponent extends Component {
                 type={ isInputClause ? 'checkbox' : 'radio' } />
           }
 
-          <ValidatedTextInputComponent
-            onEnter={
-              isInputClause ?
-                this.addUnaryTestsListItem :
-                this.onOutputValueInputClick
-            }
-            onInputChange={ this.onInput }
+          <ValidatedInput
+            onKeyDown={ this.onKeyDown }
+            onInput={ this.onInput }
             placeholder={ isInputClause ? '"value", "value", ...' : '"value"' }
+            type="text"
             validate={ value => {
               if (!parseString(value)) {
                 return 'Strings must be in double quotes';
@@ -317,100 +334,6 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
 ////////// helpers //////////
 
-/**
- * Parse input/output entry string to unary tests and type of unary tests.
- *
- * Example:
- *
- * not("foo", "bar")
- *
- * returns
- *
- * {
- *   type: 'negation',
- *   values: [ "foo", "bar, baz" ]
- * }
- *
- * @param {String} string - Input/Output entry as string e.g. "foo", "bar".
- */
-function parseString(string) {
-
-  // empty string or no string at all
-  if (!string || isEmptyString(string.trim())) {
-    return {
-      type: 'disjunction',
-      values: []
-    };
-  }
-
-  // disjunction
-  let values = string.split(',');
-
-  const result = {
-    type: 'disjunction',
-    values: []
-  };
-
-  let openString = '';
-
-  values.forEach(value => {
-    openString += value;
-
-    if (/^"[^"]*"$/.test(openString.trim())) {
-      result.values.push(openString.trim());
-
-      openString = '';
-    } else {
-      openString += ',';
-    }
-  });
-
-  if (!openString) {
-    return result;
-  }
-
-  // negation
-  result.type = 'negation';
-  result.values = [];
-
-  openString = '';
-
-  const matches = string.match(/^\s*not\((.*)\)\s*$/);
-
-  if (matches) {
-    values = matches[1].split(',');
-
-    values.forEach(value => {
-      openString += value;
-
-      if (/^"[^"]*"$/.test(openString.trim())) {
-        result.values.push(openString.trim());
-
-        openString = '';
-      } else {
-        openString += ',';
-      }
-    });
-
-    if (!openString) {
-      return result;
-    }
-  }
-}
-
-function isEmptyString(string) {
-  return string === '';
-}
-
-function getInputOrOutputValues(inputOrOutput) {
-  const inputOrOutputValues =
-    isInput(inputOrOutput) ?
-      inputOrOutput.inputValues :
-      inputOrOutput.outputValues;
-
-  if (!inputOrOutputValues) {
-    return [];
-  }
-
-  return inputOrOutputValues.text.split(',').map(value => value.trim());
+function isEnter(keyCode) {
+  return keyCode === 13;
 }

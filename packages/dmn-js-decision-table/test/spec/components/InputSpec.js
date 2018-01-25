@@ -9,7 +9,7 @@ import {
   renderIntoDocument
 } from 'inferno-test-utils';
 
-import { triggerInputEvent } from 'test/util/EventUtil';
+import { triggerInputEvent, triggerKeyEvent } from 'test/util/EventUtil';
 
 // eslint-disable-next-line
 import Input from 'lib/components/Input';
@@ -29,7 +29,7 @@ describe('Input', function() {
   });
   
 
-  it('should notify on change', function() {
+  it('should notify on input', function() {
 
     // given
     const spy = sinon.spy();
@@ -43,6 +43,46 @@ describe('Input', function() {
 
     // when
     triggerInputEvent(input, 'foo');
+
+    // then
+    expect(spy).to.have.been.called;
+  });
+
+
+  it('should notify on key down', function() {
+
+    // given
+    const spy = sinon.spy();
+
+    const renderedTree = renderIntoDocument(
+      <Input
+        onKeyDown={ spy } />
+    );
+
+    const input = findRenderedDOMElementWithClass(renderedTree, 'input');
+
+    // when
+    triggerKeyEvent(input, 'keydown', 13);
+
+    // then
+    expect(spy).to.have.been.called;
+  });
+
+
+  it('should notify on key up', function() {
+
+    // given
+    const spy = sinon.spy();
+
+    const renderedTree = renderIntoDocument(
+      <Input
+        onKeyUp={ spy } />
+    );
+
+    const input = findRenderedDOMElementWithClass(renderedTree, 'input');
+
+    // when
+    triggerKeyEvent(input, 'keyup', 13);
 
     // then
     expect(spy).to.have.been.called;
