@@ -122,6 +122,9 @@ describe('simple number edit - utils', function() {
       end: 'exclude'
     }));
 
+
+    it('invalid string', expectParsed('foo', undefined));
+
   });
 
 });
