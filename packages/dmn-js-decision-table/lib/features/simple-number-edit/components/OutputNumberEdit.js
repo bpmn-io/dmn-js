@@ -43,7 +43,7 @@ export default class OutputNumberEdit extends Component {
     const { element } = this.props.context;
 
     this.debouncedEditCell(element.businessObject, value);
-    
+
     this.setState({
       value
     });

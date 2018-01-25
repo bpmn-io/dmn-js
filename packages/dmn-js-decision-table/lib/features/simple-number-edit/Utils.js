@@ -1,7 +1,10 @@
 import { keys } from 'lodash';
 
-const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|[0-9]e[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|[0-9]e[0-9]|\.[0-9])+)$/,
-      RANGE_REGULAR_EXPRESSION = /^(\[|\]){1}-?([0-9]|[0-9]e[0-9]|\.[0-9]){1,}\.\.-?([0-9]|[0-9]e[0-9]|\.[0-9]){1,}(\[|\]){1}$/;
+// eslint-disable-next-line
+const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|[0-9]e[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|[0-9]e[0-9]|\.[0-9])+)$/;
+
+// eslint-disable-next-line
+const RANGE_REGULAR_EXPRESSION = /^(\[|\]){1}-?([0-9]|[0-9]e[0-9]|\.[0-9]){1,}\.\.-?([0-9]|[0-9]e[0-9]|\.[0-9]){1,}(\[|\]){1}$/;
 
 export const operators = {
   equals: '=',
@@ -74,13 +77,17 @@ export function getComparisonString(comparisonOperator, comparisonValue) {
   if (comparisonOperator === 'equals') {
     return `${ comparisonValue }`;
   } else {
-    return `${ operators[comparisonOperator] } ${ comparisonValue }`
+    return `${ operators[comparisonOperator] } ${ comparisonValue }`;
   }
 }
 
-export function getRangeString(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType) {
+export function getRangeString(
+    rangeStartValue,
+    rangeEndValue,
+    rangeStartType,
+    rangeEndType) {
   const rangeStartChar = rangeStartType === 'exclude' ? ']' : '[',
         rangeEndChar = rangeEndType === 'exclude' ? '[' : ']';
 
-  return `${ rangeStartChar }${ rangeStartValue }..${ rangeEndValue }${ rangeEndChar }`
+  return `${ rangeStartChar }${ rangeStartValue }..${ rangeEndValue }${ rangeEndChar }`;
 }

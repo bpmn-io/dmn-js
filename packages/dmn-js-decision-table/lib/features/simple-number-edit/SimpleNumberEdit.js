@@ -26,7 +26,7 @@ export default class SimpleStringEdit {
           if (isInput(context.element.col)) {
             return InputNumberEdit;
           } else if (isOutput(context.element.col)) {
-            return OutputNumberEdit; 
+            return OutputNumberEdit;
           }
 
         }

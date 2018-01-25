@@ -7,7 +7,6 @@ import TestContainer from 'mocha-test-container-support';
 import {
   triggerChangeEvent,
   triggerInputEvent,
-  triggerKeyEvent,
   triggerMouseEvent
 } from 'test/util/EventUtil';
 
@@ -86,7 +85,7 @@ describe('simple number edit', function() {
         const select = domQuery('.select', simpleNumberEdit);
 
         triggerChangeEvent(select, 'range');
-        
+
         // when
         triggerChangeEvent(select, 'comparison');
 
@@ -122,7 +121,7 @@ describe('simple number edit', function() {
 
     });
 
-    
+
     describe('range', function() {
 
       let simpleNumberEdit,
@@ -169,7 +168,7 @@ describe('simple number edit', function() {
         const select = domQuery('.select', simpleNumberEdit);
 
         triggerChangeEvent(select, 'comparison');
-        
+
         // when
         triggerChangeEvent(select, 'range');
 
@@ -202,8 +201,8 @@ describe('simple number edit', function() {
         // then
         expect(inputEntry2.businessObject.text).to.equal('[42..20[');
       });
-      
-      
+
+
       it('should edit range end type', function() {
 
         // given

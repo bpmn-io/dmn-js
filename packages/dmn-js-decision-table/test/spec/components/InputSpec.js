@@ -5,7 +5,6 @@ import Inferno from 'inferno';
 
 import {
   findRenderedDOMElementWithClass,
-  scryRenderedDOMElementsWithClass,
   renderIntoDocument
 } from 'inferno-test-utils';
 
@@ -27,7 +26,7 @@ describe('Input', function() {
       findRenderedDOMElementWithClass(renderedTree, 'input')
     ).to.exist;
   });
-  
+
 
   it('should notify on input', function() {
 

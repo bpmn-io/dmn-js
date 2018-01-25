@@ -7,7 +7,7 @@ import Component from 'inferno-component';
 import Input from '../../../components/Input';
 import SelectComponent from '../../../components/SelectComponent';
 
-import { getComparisonString, getRangeString, operators, parseString } from '../Utils';
+import { getComparisonString, getRangeString, parseString } from '../Utils';
 
 const COMPARISON = 'comparison',
       RANGE = 'range';
@@ -76,9 +76,15 @@ export default class InputNumberEdit extends Component {
     } = this.state;
 
     if (value === COMPARISON) {
-      this.editCell(element.businessObject, getComparisonString(comparisonOperator, comparisonValue));
+      this.editCell(
+        element.businessObject,
+        getComparisonString(comparisonOperator, comparisonValue)
+      );
     } else {
-      this.editCell(element.businessObject, getRangeString(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType));
+      this.editCell(
+        element.businessObject,
+        getRangeString(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType)
+      );
     }
 
     this.setState({
@@ -93,7 +99,7 @@ export default class InputNumberEdit extends Component {
 
     if (type === COMPARISON) {
       this.editCell(element.businessObject, getComparisonString(value, comparisonValue));
-      
+
       this.setState({
         comparisonOperator: value
       });
@@ -106,8 +112,11 @@ export default class InputNumberEdit extends Component {
     const { type, comparisonOperator } = this.state;
 
     if (type === COMPARISON) {
-      this.debouncedEditCell(element.businessObject, getComparisonString(comparisonOperator, comparisonValue));
-      
+      this.debouncedEditCell(
+        element.businessObject,
+        getComparisonString(comparisonOperator, comparisonValue)
+      );
+
       this.setState({
         comparisonValue
       });
@@ -120,8 +129,11 @@ export default class InputNumberEdit extends Component {
     const { type, rangeStartValue, rangeEndValue, rangeEndType } = this.state;
 
     if (type === RANGE) {
-      this.editCell(element.businessObject, getRangeString(rangeStartValue, rangeEndValue, value, rangeEndType));
-      
+      this.editCell(
+        element.businessObject,
+        getRangeString(rangeStartValue, rangeEndValue, value, rangeEndType)
+      );
+
       this.setState({
         rangeStartType: value
       });
@@ -134,8 +146,11 @@ export default class InputNumberEdit extends Component {
     const { type, rangeEndValue, rangeStartType, rangeEndType } = this.state;
 
     if (type === RANGE) {
-      this.editCell(element.businessObject, getRangeString(value, rangeEndValue, rangeStartType, rangeEndType));
-      
+      this.editCell(
+        element.businessObject,
+        getRangeString(value, rangeEndValue, rangeStartType, rangeEndType)
+      );
+
       this.setState({
         rangeStartValue: value
       });
@@ -148,8 +163,11 @@ export default class InputNumberEdit extends Component {
     const { type, rangeStartValue, rangeEndValue, rangeStartType } = this.state;
 
     if (type === RANGE) {
-      this.editCell(element.businessObject, getRangeString(rangeStartValue, rangeEndValue, rangeStartType, value));
-  
+      this.editCell(
+        element.businessObject,
+        getRangeString(rangeStartValue, rangeEndValue, rangeStartType, value)
+      );
+
       this.setState({
         rangeEndType: value
       });
@@ -162,8 +180,11 @@ export default class InputNumberEdit extends Component {
     const { type, rangeStartValue, rangeStartType, rangeEndType } = this.state;
 
     if (type === RANGE) {
-      this.editCell(element.businessObject, getRangeString(rangeStartValue, value, rangeStartType, rangeEndType));
-  
+      this.editCell(
+        element.businessObject,
+        getRangeString(rangeStartValue, value, rangeStartType, rangeEndType)
+      );
+
       this.setState({
         rangeEndValue: value
       });
@@ -179,7 +200,7 @@ export default class InputNumberEdit extends Component {
       rangeEndValue,
       rangeStartType,
       rangeEndType
-     } = this.state;
+    } = this.state;
 
     const typeOptions = [{
       label: 'Comparison',
@@ -223,25 +244,25 @@ export default class InputNumberEdit extends Component {
           className="margin-top-large full-width display-block"
           onChange={ this.onTypeChange }
           options={ typeOptions }
-          value={ type } />         
+          value={ type } />
 
         {
           type === COMPARISON
             && <div className="comparison no-wrap margin-top-medium">
 
               <div className="heading-small margin-bottom-medium">Value</div>
-    
+
               <SelectComponent
                 className="margin-right-medium"
                 onChange={ this.onComparisonOperatorChange }
                 options={ comparisonOperatorOptions }
                 value={ comparisonOperator } />
-    
+
               <Input
                 onInput={ this.onComparisonValueChange }
                 type="number"
                 value={ comparisonValue } />
-    
+
             </div>
         }
 
@@ -263,7 +284,9 @@ export default class InputNumberEdit extends Component {
                   value={ rangeStartValue } />
               </div>
 
-              <div className="heading-small margin-top-medium margin-bottom-medium">End Value</div>
+              <div className="heading-small margin-top-medium margin-bottom-medium">
+                End Value
+              </div>
 
               <div className="no-wrap">
                 <SelectComponent

@@ -60,11 +60,11 @@ export default class ValidatedInput extends Component {
   }
 
   onKeyDown(event) {
-    const { keyCode, target } = event,
+    const { target } = event,
           { value } = target;
 
     const { onKeyDown, validate } = this.props;
-    
+
     const validationWarning = validate ? validate(value) : undefined;
 
     if (typeof onKeyDown !== 'function') {
@@ -79,7 +79,7 @@ export default class ValidatedInput extends Component {
   }
 
   onKeyUp(event) {
-    const { keyCode, target } = event,
+    const { target } = event,
           { value } = target;
 
     const { onKeyUp, validate } = this.props;
@@ -128,10 +128,4 @@ export default class ValidatedInput extends Component {
     );
   }
 
-}
-
-////////// helpers //////////
-
-function isEnter(keyCode) {
-  return keyCode === 13;
 }

@@ -42,7 +42,7 @@ export default class Input extends Component {
 
     onKeyUp(event);
   }
-  
+
   render() {
     const {
       className,
@@ -58,6 +58,6 @@ export default class Input extends Component {
       onKeyDown={ this.onKeyDown }
       onKeyUp={ this.onKeyUp }
       type={ type }
-      value={ value } />
+      value={ value } />;
   }
 }
