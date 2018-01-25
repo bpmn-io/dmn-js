@@ -34,7 +34,7 @@ describe('simple boolean edit', function() {
     testContainer = TestContainer.get(this);
   });
 
-  function openSimpleBooleanEdit(elementId, elementRegistry) {
+  function openSimpleBooleanEdit(elementId) {
     const cell = domQuery(`[data-element-id="${ elementId }"]`, testContainer);
 
     triggerMouseEvent(cell, 'click');

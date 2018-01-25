@@ -58,6 +58,7 @@ export default class Input extends Component {
         onInput={ this.onInput }
         onKeyDown={ this.onKeyDown }
         onKeyUp={ this.onKeyUp }
+        spellcheck="false"
         type={ type }
         value={ value } />
     );

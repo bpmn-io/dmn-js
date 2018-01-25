@@ -21,7 +21,7 @@ function getOperatorName(string) {
 }
 
 export function parseString(string) {
-  if (isEmptyString(string.trim())) {
+  if (!string || isEmptyString(string.trim())) {
     return {
       type: 'comparison'
     };

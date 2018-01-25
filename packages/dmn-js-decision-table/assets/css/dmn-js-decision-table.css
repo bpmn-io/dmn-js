@@ -503,10 +503,20 @@ td.selected {
   max-width: 250px;
 }
 
+.tjs-container .simple-string-edit .validation-warning {
+  max-width: 250px;
+  white-space: pre-wrap;
+}
+
 /* simple number edit */
 .tjs-container .simple-number-edit {
   padding: 8px;
   font-size: 14px;
+}
+
+.tjs-container .simple-number-edit .validation-warning {
+  max-width: 250px;
+  white-space: pre-wrap;
 }
 
 /* simple boolean edit */
@@ -514,6 +524,34 @@ td.selected {
   padding: 8px;
   font-size: 14px;
 }
+
+/* simple date edit */
+.tjs-container .simple-date-edit {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.tjs-container .simple-date-edit .validation-warning {
+  max-width: 250px;
+  white-space: pre-wrap;
+}
+
+/* button */
+.tjs-container .button {
+  background: #fff;
+  padding: 4px 6px;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  outline: none;
+}
+
+.tjs-container .button:hover {
+   background: #f6f6f6;
+ }
 
 /* select */
 .tjs-container select.select {
@@ -613,7 +651,7 @@ td.selected {
 
 /* validated input */
 .tjs-container .validated-text-input-component .validation-warning {
-  color: #f00;
+  color: #c9302c;
 }
 
 /* input */

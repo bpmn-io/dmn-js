@@ -21,7 +21,7 @@ export default class InputNumberEdit extends Component {
 
     const { element } = this.props.context;
 
-    const parsedString = parseString(element.businessObject.text || '');
+    const parsedString = parseString(element.businessObject.text);
 
     if (parsedString) {
       this.state = {
