@@ -89,10 +89,14 @@ export default class DecisionTableHeadComponent extends Component {
             });
 
             if (InputExpressionComponent) {
-              return <InputExpressionComponent input={ input } />;
+              return <InputExpressionComponent
+                input={ input }
+                key={ input.id } />;
             } else {
               return (
-                <th className="input input-expression">
+                <th
+                  className="input input-expression"
+                  key={ input.id }>
                   { inputExpression.text || '-' }
                 </th>
               );
@@ -109,16 +113,20 @@ export default class DecisionTableHeadComponent extends Component {
             });
 
             if (OutputNameComponent) {
-              return <OutputNameComponent output={ output } />;
+              return <OutputNameComponent
+                key={ output.id }
+                output={ output } />;
             } else {
-              return <th className="output output-name">{ name || '-' }</th>;
+              return <th
+                className="output output-name"
+                key={ output.id }>{ name || '-' }</th>;
             }
           })
         }
       </tr>
       <tr>
         {
-          inputs.map(input => {
+          inputs.map((input, index) => {
             const { inputExpression } = input;
 
             const InputExpressionTypeRefComponent = components.getComponent('cell', {
@@ -129,10 +137,13 @@ export default class DecisionTableHeadComponent extends Component {
             if (InputExpressionTypeRefComponent) {
               return (
                 <InputExpressionTypeRefComponent
-                  inputExpression={ inputExpression } />
+                  inputExpression={ inputExpression }
+                  key={ input.id } />
               );
             } else {
-              return <th className="input type-ref">{ inputExpression.typeRef }</th>;
+              return <th
+                className="input type-ref"
+                key={ input.id }>{ inputExpression.typeRef }</th>;
             }
           })
         }
@@ -146,9 +157,13 @@ export default class DecisionTableHeadComponent extends Component {
             });
 
             if (OutputTypeRefComponent) {
-              return <OutputTypeRefComponent output={ output } />;
+              return <OutputTypeRefComponent
+                key={ output.id }
+                output={ output } />;
             } else {
-              return <th className="output type-ref">{ typeRef }</th>;
+              return <th
+                key={ output.id }
+                className="output type-ref">{ typeRef }</th>;
             }
           })
         }
