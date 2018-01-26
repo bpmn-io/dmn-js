@@ -21,7 +21,7 @@ export default class AddRuleFootComponent extends Component {
   render({ cols }) {
 
     const cells = [
-      <td className="add-rule-add">+</td>
+      <td className="add-rule-add dmn-icon-plus"></td>
     ];
 
     for (let i = 0; i < cols.length + 1; i++) {

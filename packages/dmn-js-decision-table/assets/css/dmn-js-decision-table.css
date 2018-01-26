@@ -184,6 +184,11 @@ table tfoot td.add-rule-add {
   text-align: right;
 }
 
+table tfoot td.add-rule-add:before {
+  margin: 0;
+  width: 10px;
+}
+
 table tfoot tr.add-rule:hover td {
   background-color: #fffcb0;
   cursor: pointer;
@@ -260,8 +265,12 @@ table tfoot tr.add-rule:hover td {
 .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
   display: inline-block;
   text-align: center;
-  width: 12px;
+  width: 14px;
   margin-right: 6px;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon:before {
+  margin: 0;
 }
 
 /* hit policy edit */
