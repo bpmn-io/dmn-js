@@ -5,6 +5,7 @@ import {
 
 import {
   triggerChangeEvent,
+  triggerInputEvent,
   triggerKeyEvent,
   triggerMouseEvent
 } from 'test/util/EventUtil';
@@ -69,10 +70,7 @@ describe('input output values', function() {
 
       input.focus();
 
-      input.value = '"foo"';
-
-      // press ""
-      triggerKeyEvent(input, 'keyup', 50);
+      triggerInputEvent(input, '"foo"');
 
       // press ENTER
       triggerKeyEvent(input, 'keydown', 13);
@@ -97,10 +95,7 @@ describe('input output values', function() {
 
       input.focus();
 
-      input.value = '"foo", "bar"';
-
-      // press ""
-      triggerKeyEvent(input, 'keyup', 50);
+      triggerInputEvent(input, '"foo", "bar"');
 
       // press ENTER
       triggerKeyEvent(input, 'keydown', 13);
@@ -122,7 +117,7 @@ describe('input output values', function() {
     it('should remove value - simple', inject(function(elementRegistry) {
 
       // when
-      const value = domQuery('.value', inputValuesEdit);
+      const value = domQuery('.remove', inputValuesEdit);
 
       triggerMouseEvent(value, 'mouseup');
 
@@ -144,10 +139,7 @@ describe('input output values', function() {
 
       input.focus();
 
-      input.value = '"foo';
-
-      // press o
-      triggerKeyEvent(input, 'keyup', 79);
+      triggerInputEvent(input, '"foo');
 
       // press ENTER
       triggerKeyEvent(input, 'keydown', 13);
@@ -174,6 +166,20 @@ describe('input output values', function() {
 
         // when
         triggerChangeEvent(select, 'boolean');
+
+        // then
+        expect(elementRegistry.get('input1').businessObject.inputValues).not.to.exist;
+      }));
+
+
+    it('should delete allowed values',
+      inject(function(elementRegistry) {
+
+        // given
+        const button = domQuery('.button', testContainer);
+
+        // when
+        triggerMouseEvent(button, 'mouseup');
 
         // then
         expect(elementRegistry.get('input1').businessObject.inputValues).not.to.exist;
@@ -212,10 +218,7 @@ describe('input output values', function() {
 
       input.focus();
 
-      input.value = '"foo"';
-
-      // press ""
-      triggerKeyEvent(input, 'keyup', 50);
+      triggerInputEvent(input, '"foo"');
 
       // press ENTER
       triggerKeyEvent(input, 'keydown', 13);
@@ -239,10 +242,7 @@ describe('input output values', function() {
 
       input.focus();
 
-      input.value = '"foo", "bar"';
-
-      // press ""
-      triggerKeyEvent(input, 'keyup', 50);
+      triggerInputEvent(input, '"foo", "bar"');
 
       // press ENTER
       triggerKeyEvent(input, 'keydown', 13);
@@ -263,7 +263,7 @@ describe('input output values', function() {
     it('should remove value', inject(function(elementRegistry) {
 
       // when
-      const value = domQuery('.value', outputValuesEdit);
+      const value = domQuery('.remove', outputValuesEdit);
 
       triggerMouseEvent(value, 'mouseup');
 
@@ -284,10 +284,7 @@ describe('input output values', function() {
 
       input.focus();
 
-      input.value = '"foo';
-
-      // press o
-      triggerKeyEvent(input, 'keyup', 79);
+      triggerInputEvent(input, '"foo');
 
       // press ENTER
       triggerKeyEvent(input, 'keydown', 13);
@@ -315,7 +312,20 @@ describe('input output values', function() {
         triggerChangeEvent(select, 'boolean');
 
         // then
-        expect(elementRegistry.get('output1').outputValues).not.to.exist;
+        expect(elementRegistry.get('output1').businessObject.outputValues).not.to.exist;
+      }));
+
+    it('should delete allowed values',
+      inject(function(elementRegistry) {
+
+        // given
+        const button = domQuery('.button', testContainer);
+
+        // when
+        triggerMouseEvent(button, 'mouseup');
+
+        // then
+        expect(elementRegistry.get('output1').businessObject.outputValues).not.to.exist;
       }));
 
   });
@@ -325,7 +335,7 @@ describe('input output values', function() {
 ////////// helpers //////////
 
 function expectValuesRendered(element, expected) {
-  const values = Array.from(domQuery.all('.value', element));
+  const values = Array.from(domQuery.all('.item', element));
 
   values.forEach((value, index) => {
     expect(value.textContent).to.equal(expected[index]);

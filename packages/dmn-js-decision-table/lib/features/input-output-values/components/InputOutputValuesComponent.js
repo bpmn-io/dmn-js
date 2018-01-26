@@ -6,15 +6,56 @@ import Component from 'inferno-component';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 // eslint-disable-next-line
-import ValuesComponent from './ValuesComponent';
+import ListComponent from '../../../components/ListComponent';
+
+// eslint-disable-next-line
+import ValidatedInput from '../../../components/ValidatedInput';
+
+// eslint-disable-next-line
+import Button from '../../../components/Button';
+
+import { getValuesArray, parseString } from '../Utils';
 
 export default class InputOutputValuesComponent extends Component {
 
   constructor(props, context) {
     super(props, context);
 
+    this._modeling = context.injector.get('modeling');
+
+    const { element } = this.props.context;
+
+    const isInput = is(element, 'dmn:LiteralExpression');
+
+    const parsedString = parseString(
+      (isInput
+        ? (element.$parent.inputValues && element.$parent.inputValues.text)
+        : element.outputValues && element.outputValues.text) || '');
+
+    if (parsedString) {
+      this.state = {
+        values: parsedString.values.map(value => {
+          return {
+            value,
+            isCheckable: false,
+            isRemovable: true,
+            group: 'Predefined Values'
+          };
+        }),
+        inputValue: ''
+      };
+    } else {
+      this.state = {
+        values: [],
+        inputValue: ''
+      };
+    }
+
     this.onElementsChanged = this.onElementsChanged.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onListChange = this.onListChange.bind(this);
+    this.onInput = this.onInput.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.removePredefinedValues = this.removePredefinedValues.bind(this);
   }
 
   onElementsChanged() {
@@ -27,53 +68,119 @@ export default class InputOutputValuesComponent extends Component {
     const changeSupport = this._changeSupport = this.context.changeSupport;
 
     changeSupport.onElementsChanged(element.id, this.onElementsChanged);
-
-    this._modeling = this.context.injector.get('modeling');
   }
 
-  componentWillUnmout() {
+  componentWillUnmount() {
     const { element } = this.props.context;
 
     this._changeSupport.offElementsChanged(element.id, this.onElementsChanged);
   }
 
-  onChange(allowedValues) {
+  onListChange(values) {
     const { element } = this.props.context;
 
+    this.setState({
+      values
+    });
+
     if (is(element, 'dmn:LiteralExpression')) {
-      this._modeling.editAllowedValues(element.$parent, allowedValues);
+      this._modeling.editAllowedValues(element.$parent, getValuesArray(values));
     } else {
-      this._modeling.editAllowedValues(element, allowedValues);
+      this._modeling.editAllowedValues(element, getValuesArray(values));
+    }
+  }
+
+  onInput({ isValid, value }) {
+    this.setState({
+      inputValue: value
+    });
+  }
+
+  /**
+   * Add new value on ENTER.
+   */
+  onKeyDown({ isValid, event }) {
+    if (isEnter(event.keyCode) && isValid) {
+
+      const { inputValue, values } = this.state;
+
+      const parsedString = parseString(inputValue);
+
+      this.onListChange(values.concat(parsedString.values.map(value => {
+        return {
+          value,
+          isCheckable: false,
+          isRemovable: true,
+          group: 'Predefined Values'
+        };
+      })));
+
+      this.setState({
+        inputValue: ''
+      });
+
+    }
+  }
+
+  removePredefinedValues() {
+    const { element } = this.props.context;
+
+    this.setState({
+      values: []
+    });
+
+    if (is(element, 'dmn:LiteralExpression')) {
+      this._modeling.editAllowedValues(element.$parent, null);
+    } else {
+      this._modeling.editAllowedValues(element, null);
     }
   }
 
   render() {
     const { element } = this.props.context;
 
-    const label =
-      is(element, 'dmn:LiteralExpression') ?
-        'Input Values:' :
-        'Output Values:';
-
-    let values;
-
-    if (is(element, 'dmn:LiteralExpression')) {
-      values = (element.$parent.inputValues && element.$parent.inputValues.text.length)
-        ? element.$parent.inputValues.text.split(',').map(value => value.trim())
-        : [];
-    } else {
-      values = (element.outputValues && element.outputValues.text.length)
-        ? element.outputValues.text.split(',').map(value => value.trim())
-        : [];
-    }
+    const { inputValue, values } = this.state;
 
     return (
       element.typeRef === 'string' ?
         <div className="input-output-values-edit">
-          { label }
-          <ValuesComponent onChange={ this.onChange } values={ values } />
+
+          {
+            values.length > 0
+              && <ListComponent
+                items={ values }
+                onChange={ this.onListChange } />
+          }
+
+          <div className="heading-small margin-bottom-medium">Add Predefined Values</div>
+
+          <ValidatedInput
+            onInput={ this.onInput }
+            onKeyDown={ this.onKeyDown }
+            placeholder={ '"value", "value", ...' }
+            type="text"
+            validate={ value => {
+              if (!parseString(value)) {
+                return 'Strings must be in double quotes';
+              }
+            }}
+            value={ inputValue } />
+
+          {
+            values.length > 0
+              && <Button
+                className="display-block margin-top-medium full-width"
+                onMouseUp={ this.removePredefinedValues }>
+                Remove Predefined Values</Button>
+          }
         </div>
         : null
     );
   }
+}
+
+////////// helpers //////////
+
+function isEnter(keyCode) {
+  return keyCode === 13;
 }
