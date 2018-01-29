@@ -98,7 +98,7 @@ export default class ValidatedInput extends Component {
   }
 
   render() {
-    const { placeholder, type } = this.props;
+    const { children, placeholder, type } = this.props;
 
     const { validationWarning, value } = this.state;
 
@@ -118,6 +118,9 @@ export default class ValidatedInput extends Component {
           placeholder={ placeholder || '' }
           type={ type }
           value={ value || '' } />
+        {
+          children
+        }
         {
           validationWarning &&
             <span class="validation-warning display-block margin-top-medium">

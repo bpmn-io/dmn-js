@@ -52,6 +52,14 @@
           <text></text>
         </outputEntry>
       </rule>
+      <rule id="rule6">
+        <inputEntry id="inputEntry8">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="outputEntry8">
+          <text></text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
 </definitions>

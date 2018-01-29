@@ -194,6 +194,45 @@ describe('simple date edit', function() {
         .equal(`[date and time("2018-01-25T00:00:00")..date and time("${ getSampleDate() }")]`);
     }));
 
+
+    describe('empty', function() {
+
+      it('should only set once valid', inject(function(elementRegistry) {
+
+        // given
+        const inputEntry8 = elementRegistry.get('inputEntry8');
+
+        const simpleDateEdit = openSimpleDateEdit('inputEntry8');
+
+        const select = domQuery('.select', simpleDateEdit);
+
+        // when
+        triggerChangeEvent(select, 'between');
+
+        // then
+        // expect not to have been set yet
+        expect(inputEntry8.businessObject.text).to.equal('');
+
+        // when
+        const buttons = domQuery.all('.button', simpleDateEdit);
+
+        triggerMouseEvent(buttons[0], 'click');
+
+        // expect not to have been set yet
+        expect(inputEntry8.businessObject.text).to.equal('');
+
+        // when
+        triggerMouseEvent(buttons[1], 'click');
+
+        // expect not to have been set yet
+        expect(inputEntry8.businessObject.text).to
+
+          // eslint-disable-next-line
+          .equal(`[date and time("${ getSampleDate() }")..date and time("${ getSampleDate() }")]`);
+      }));
+
+    });
+
   });
 
 

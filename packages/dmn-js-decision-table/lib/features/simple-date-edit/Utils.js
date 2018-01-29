@@ -14,8 +14,8 @@ const EXACT = 'exact',
       BETWEEN = 'between';
 
 export function validateISOString(string) {
-  if (!isEmptyString(string.trim()) && !ISO_DATE_REGEX.test(string.trim())) {
-    return 'Dates must be in ISO format meaning yyyy-MM-dd\'T\'HH:mm:ss';
+  if (!ISO_DATE_REGEX.test(string.trim())) {
+    return 'Dates must match pattern yyyy-MM-ddTHH:mm:ss.';
   }
 }
 
@@ -78,8 +78,4 @@ export function parseString(string) {
       date: matches[1]
     };
   }
-}
-
-function isEmptyString(string) {
-  return string === '';
 }

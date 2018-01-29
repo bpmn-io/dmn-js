@@ -2,7 +2,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-export default class Input extends Component {
+export default class Button extends Component {
   constructor(props, context) {
     super(props, context);
 

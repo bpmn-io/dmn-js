@@ -30,9 +30,19 @@ export default class InputDateEdit extends Component {
     const parsedString = parseString(element.businessObject.text);
 
     if (parsedString) {
+      let dates;
+
+      if (parsedString.date) {
+        dates = [ parsedString.date, '' ];
+      } else if (parsedString.dates) {
+        dates = parsedString.dates;
+      } else {
+        dates = [ '', '' ];
+      }
+
       this.state = {
         type: parsedString.type,
-        dates: parsedString.date ? [ parsedString.date, '' ] : parsedString.dates
+        dates
       };
     } else {
       this.state = {
@@ -66,7 +76,9 @@ export default class InputDateEdit extends Component {
       type: value
     });
 
-    this.editCell(element.businessObject, getDateString(value, dates));
+    if (parseString(getDateString(value, dates))) {
+      this.editCell(element.businessObject, getDateString(value, dates));
+    }
   }
 
   onSetStartDateTodayClick() {
@@ -80,7 +92,9 @@ export default class InputDateEdit extends Component {
       dates: [ date, dates[1] ]
     });
 
-    this.editCell(element.businessObject, getDateString(type, [ date, dates[1] ]));
+    if (parseString(getDateString(type, [ date, dates[1] ]))) {
+      this.editCell(element.businessObject, getDateString(type, [ date, dates[1] ]));
+    }
   }
 
   onSetEndDateTodayClick() {
@@ -94,7 +108,9 @@ export default class InputDateEdit extends Component {
       dates: [ dates[0], date ]
     });
 
-    this.editCell(element.businessObject, getDateString(type, [ dates[0], date ]));
+    if (parseString(getDateString(type, [ dates[0], date ]))) {
+      this.editCell(element.businessObject, getDateString(type, [ dates[0], date ]));
+    }
   }
 
   onStartDateInput({ isValid, value }) {
@@ -171,15 +187,17 @@ export default class InputDateEdit extends Component {
         }
 
         <div className="no-wrap">
-          <Button
-            className="margin-right-medium"
-            onClick={ this.onSetStartDateTodayClick }>Today</Button>
-
           <ValidatedInput
             onInput={ this.onStartDateInput }
             placeholder={ `e.g. ${ getSampleDate() }` }
             validate={ validateISOString }
-            value={ dates[0] } />
+            value={ dates[0] }>
+
+            <Button
+              className="margin-left-medium"
+              onClick={ this.onSetStartDateTodayClick }>Today</Button>
+
+          </ValidatedInput>
         </div>
 
         {
@@ -192,15 +210,17 @@ export default class InputDateEdit extends Component {
         {
           type === BETWEEN
             && <div className="no-wrap">
-              <Button
-                className="margin-right-medium"
-                onClick={ this.onSetEndDateTodayClick }>Today</Button>
-
               <ValidatedInput
                 onInput={ this.onEndDateInput }
                 placeholder={ `e.g. ${ getSampleDate() }` }
                 validate={ validateISOString }
-                value={ dates[1] } />
+                value={ dates[1] }>
+
+                <Button
+                  className="margin-left-medium"
+                  onClick={ this.onSetEndDateTodayClick }>Today</Button>
+
+              </ValidatedInput>
             </div>
         }
 
