@@ -145,6 +145,17 @@ export default class Modeling extends BaseModeling {
 
     this._commandStack.execute('editAllowedValues', context);
   }
+
+  editExpressionLanguage(element, expressionLanguage) {
+    const context = {
+      element,
+      properties: {
+        expressionLanguage
+      }
+    };
+
+    this._commandStack.execute('editProperties', context);
+  }
 }
 
 Modeling.$inject = [ 'eventBus', 'elementFactory', 'commandStack', 'sheet' ];

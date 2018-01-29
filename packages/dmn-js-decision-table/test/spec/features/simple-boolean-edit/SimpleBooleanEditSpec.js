@@ -9,7 +9,7 @@ import {
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
-import simpleNumberEditXML from './simple-boolean-edit.dmn';
+import simpleBooleanEditXML from './simple-boolean-edit.dmn';
 
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
@@ -19,7 +19,7 @@ import SimpleBooleanEditModule from 'lib/features/simple-boolean-edit';
 
 describe('simple boolean edit', function() {
 
-  beforeEach(bootstrapModeler(simpleNumberEditXML, {
+  beforeEach(bootstrapModeler(simpleBooleanEditXML, {
     modules: [
       CoreModule,
       InteractionEventsModule,

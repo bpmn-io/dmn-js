@@ -27,9 +27,11 @@ export default class ContextMenu {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
         const entries = this._getEntries(context);
 
+        const additionalEntries = components.getComponents('context-menu-additional', context);
+
         return () => (
           <div className="context-menu-context-menu">
-            { entries }
+            { (entries || []).concat(additionalEntries || []) }
           </div>
         );
       }

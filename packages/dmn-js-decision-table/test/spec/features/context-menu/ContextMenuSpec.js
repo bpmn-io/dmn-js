@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+import Inferno from 'inferno';
+
 import { bootstrapModeler, inject } from 'test/helper';
 
 import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
@@ -951,6 +954,26 @@ describe('context menu', function() {
       });
 
     });
+
+  });
+
+
+  describe('additional entries', function() {
+
+    it('should allow additional entries', inject(function(components) {
+
+      // given
+      components
+        .onGetComponent('context-menu-additional', () => <div class="foo">FOO</div>);
+
+      // when
+      const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+      triggerMouseEvent(cell, 'contextmenu');
+
+      // then
+      expect(domQuery('.foo', testContainer)).to.exist;
+    }));
 
   });
 

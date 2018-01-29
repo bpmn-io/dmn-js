@@ -6,7 +6,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
 
-import simpleStringEditXML from '../../simple.dmn';
+import simpleStringEditXML from './simple-mode.dmn';
 
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
@@ -38,7 +38,7 @@ describe('simple mode', function() {
   });
 
 
-  it('should render', function() {
+  it('should render - enabled', function() {
 
     // given
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
@@ -48,6 +48,19 @@ describe('simple mode', function() {
 
     // then
     expect(domQuery('.simple-mode-button', testContainer)).to.exist;
+  });
+
+
+  it('should render - disabled', function() {
+
+    // given
+    const cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
+
+    // when
+    triggerMouseEvent(cell, 'click');
+
+    // then
+    expect(domQuery('.simple-mode-button.disabled', testContainer)).to.exist;
   });
 
 
@@ -67,7 +80,7 @@ describe('simple mode', function() {
   });
 
 
-  it('should open context menu', function() {
+  it('should open context menu if default expression language', function() {
 
     // given
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
@@ -81,6 +94,23 @@ describe('simple mode', function() {
 
     // then
     expect(domQuery('.foo', testContainer)).to.exist;
+  });
+
+
+  it('should not open context menu if not default expression language', function() {
+
+    // given
+    const cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
+
+    triggerMouseEvent(cell, 'click');
+
+    const button = domQuery('.simple-mode-button', testContainer);
+
+    // when
+    triggerMouseEvent(button, 'click');
+
+    // then
+    expect(domQuery('.foo', testContainer)).to.not.exist;
   });
 
 });

@@ -8,6 +8,7 @@ import contextMenuModule from 'table-js/lib/features/context-menu';
 import cutPasteModule from 'table-js/lib/features/cut-paste';
 import decisionTableContextMenu from './features/context-menu';
 import decisionTableEditorActionsModule from './features/editor-actions';
+import expressionLanguageModule from './features/expression-language';
 import tableHeadEditorModule from './features/decision-table-head/editor';
 import tablePropertiesEditorModule from './features/decision-table-properties/editor';
 import editorActionsModule from 'table-js/lib/features/editor-actions';
@@ -45,6 +46,7 @@ export default class Editor extends Viewer {
       cutPasteModule,
       decisionTableContextMenu,
       decisionTableEditorActionsModule,
+      expressionLanguageModule,
       tableHeadEditorModule,
       tablePropertiesEditorModule,
       editorActionsModule,

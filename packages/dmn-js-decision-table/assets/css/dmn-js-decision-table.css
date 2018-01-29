@@ -190,6 +190,7 @@ table tr > .input + .output {
 }
 
 .context-menu.vertical .context-menu-group {
+  padding-bottom: 6px;
   margin-bottom: 6px;
   border-bottom: solid 1px #ccc;
 }
@@ -230,7 +231,7 @@ table tr > .input + .output {
 }
 
 .context-menu .context-menu-group .context-menu-group-entry:hover {
-  background-color: #fffcb0;
+  color: #52b415;
 }
 
 .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
@@ -271,6 +272,11 @@ table tr > .input + .output {
 .context-menu .hit-policy-edit .hit-policy-edit-policy-select:focus,
 .context-menu .hit-policy-edit .hit-policy-edit-operator-select:focus {
   border-color: #52B415;
+}
+
+/* expression language */
+.context-menu .context-menu-group .context-menu-entry-set-expression-language {
+  flex-direction: column;
 }
 
 /* type ref edit */
@@ -436,7 +442,7 @@ table tr > .input + .output {
 
 /* simple mode */
 
-.simple-mode-button {
+.tjs-container .simple-mode-button {
   color: #444;
   background-color: #f6f6f6;
   position: absolute;
@@ -454,4 +460,49 @@ table tr > .input + .output {
   opacity: 1;
 }
 
+.simple-mode-button.disabled,
+.simple-mode-button.disabled:hover {
+  color: #CCC;
+}
+
 /* end simple mode  */
+
+/* cell expression language */
+
+.dmn-decision-table-container .cell-expression-language {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #4285f4;
+  color: white;
+  border-radius: 2px;
+  padding: 3px 6px;
+  font-size: .8em;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.dmn-decision-table-container td:hover .cell-expression-language {
+  opacity: 0.75;
+}
+
+.dmn-decision-table-container td .cell-expression-language .label {
+  display: none;
+}
+
+.dmn-decision-table-container td:hover .cell-expression-language .label {
+  display: inline;
+}
+
+.dmn-decision-table-container td .cell-expression-language .dmn-icon-file-code:before {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.dmn-decision-table-container td:hover .cell-expression-language .dmn-icon-file-code:before {
+  margin-right: 6px;
+}
+
+/* end cell expression language */

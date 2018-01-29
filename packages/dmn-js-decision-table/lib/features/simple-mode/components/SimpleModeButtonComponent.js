@@ -4,6 +4,8 @@ import { assign } from 'min-dash/lib/object';
 
 import { query as domQuery } from 'min-dom';
 
+import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
+
 const OFFSET = 4;
 
 
@@ -14,7 +16,8 @@ export default class SimpleModeButtonComponent extends Component {
     this.state = {
       top: 0,
       left: 0,
-      isVisible: false
+      isVisible: false,
+      isDisabled: true
     };
 
     const { injector } = context;
@@ -37,9 +40,25 @@ export default class SimpleModeButtonComponent extends Component {
         return;
       }
 
+      var isDisabled;
+
       this.setState({
         isVisible: true,
         selection
+      }, this.updatePosition);
+
+      const expressionLanguage = getExpressionLanguage(selection);
+
+      if (isDefaultExpressionLanguage(selection, expressionLanguage)) {
+        isDisabled = false;
+      } else {
+        isDisabled = true;
+      }
+
+      this.setState({
+        isVisible: true,
+        selection,
+        isDisabled
       }, this.updatePosition);
     });
 
@@ -110,6 +129,12 @@ export default class SimpleModeButtonComponent extends Component {
   }
 
   onClick() {
+    const { isDisabled } = this.state;
+
+    if (isDisabled) {
+      return;
+    }
+
     const element = this._selection.get();
 
     if (!element) {
@@ -127,16 +152,47 @@ export default class SimpleModeButtonComponent extends Component {
   }
 
   render() {
-    const { isVisible, top, left } = this.state;
+    const { isDisabled, isVisible, top, left } = this.state;
+
+    const classes = [
+      'simple-mode-button',
+      'no-deselect'
+    ];
+
+    if (isDisabled) {
+      classes.push('disabled');
+    }
 
     return (
       isVisible
         ? <div
-          className="simple-mode-button no-deselect"
+          className={ classes.join(' ') }
           onClick={ this.onClick }
           ref={ node => this.node = node }
-          style={{ top, left }}><span className="dmn-icon-edit"></span></div>
+          style={{ top, left }}
+          title={ isDisabled
+            ? 'Editing not supported for set expression language'
+            : 'Edit' }><span className="dmn-icon-edit"></span></div>
         : null
     );
+  }
+}
+
+////////// helpers //////////
+
+/**
+ * Return set expression language if found.
+ *
+ * @param {Cell} cell - Cell.
+ */
+function getExpressionLanguage(cell) {
+  return cell.businessObject.expressionLanguage;
+}
+
+function isDefaultExpressionLanguage(cell, expressionLanguage) {
+  if (isInput(cell.col)) {
+    return !expressionLanguage || expressionLanguage === 'feel';
+  } else if (isOutput(cell.col)) {
+    return !expressionLanguage || expressionLanguage === 'juel';
   }
 }
