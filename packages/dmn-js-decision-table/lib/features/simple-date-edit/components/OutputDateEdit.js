@@ -78,11 +78,13 @@ export default class OutputDateEdit extends Component {
             onInput={ this.onInput }
             placeholder={ `e.g. ${ getSampleDate() }` }
             validate={ validateISOString }
-            value={ date } />
+            value={ date }>
 
-          <Button
-            className="margin-left-medium"
-            onClick={ this.onClick }>Today</Button>
+            <Button
+              className="margin-left-medium"
+              onClick={ this.onClick }>Today</Button>
+
+          </ValidatedInput>
         </div>
 
       </div>
