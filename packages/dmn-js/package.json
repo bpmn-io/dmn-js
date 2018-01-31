@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
@@ -34,7 +34,7 @@
     "diagram-js": "^0.27.1"
   },
   "dependencies": {
-    "dmn-js-decision-table": "^1.3.0",
+    "dmn-js-decision-table": "^1.3.1",
     "dmn-js-drd": "^1.3.0",
     "dmn-js-shared": "^1.3.0"
   }

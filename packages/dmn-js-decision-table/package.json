@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
