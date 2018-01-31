@@ -161,7 +161,7 @@ export default class InputOutputValuesComponent extends Component {
             type="text"
             validate={ value => {
               if (!parseString(value)) {
-                return 'Strings must be in double quotes';
+                return 'Strings must be in double quotes.';
               }
             }}
             value={ inputValue } />
