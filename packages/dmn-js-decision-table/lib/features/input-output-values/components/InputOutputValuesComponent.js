@@ -46,7 +46,7 @@ export default class InputOutputValuesComponent extends Component {
       };
     } else {
       this.state = {
-        values: [],
+        values: null,
         inputValue: ''
       };
     }
@@ -106,7 +106,7 @@ export default class InputOutputValuesComponent extends Component {
 
       const parsedString = parseString(inputValue);
 
-      this.onListChange(values.concat(parsedString.values.map(value => {
+      this.onListChange((values || []).concat(parsedString.values.map(value => {
         return {
           value,
           isCheckable: false,
@@ -126,7 +126,7 @@ export default class InputOutputValuesComponent extends Component {
     const { element } = this.props.context;
 
     this.setState({
-      values: []
+      values: null
     });
 
     if (is(element, 'dmn:LiteralExpression')) {
@@ -146,10 +146,22 @@ export default class InputOutputValuesComponent extends Component {
         <div className="input-output-values-edit">
 
           {
-            values.length > 0
+            !isNull(values)
+              && values.length > 0
               && <ListComponent
                 items={ values }
                 onChange={ this.onListChange } />
+          }
+
+          {
+            !isNull(values)
+              && !values.length
+              && <div className="margin-bottom-medium">
+                <div className="heading-small margin-bottom-medium">
+                  Predefined Values
+                </div>
+                <span className="placeholder">No values</span>
+              </div>
           }
 
           <div className="heading-small margin-bottom-medium">Add Predefined Values</div>
@@ -167,7 +179,7 @@ export default class InputOutputValuesComponent extends Component {
             value={ inputValue } />
 
           {
-            values.length > 0
+            !isNull(values)
               && <Button
                 className="display-block margin-top-medium full-width"
                 onMouseUp={ this.removePredefinedValues }>
@@ -183,4 +195,8 @@ export default class InputOutputValuesComponent extends Component {
 
 function isEnter(keyCode) {
   return keyCode === 13;
+}
+
+function isNull(value) {
+  return value === null;
 }

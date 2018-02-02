@@ -114,7 +114,7 @@ describe('input output values', function() {
     }));
 
 
-    it('should remove value - simple', inject(function(elementRegistry) {
+    it('should remove value', inject(function(elementRegistry) {
 
       // when
       const value = domQuery('.remove', inputValuesEdit);
@@ -130,6 +130,39 @@ describe('input output values', function() {
       expect(elementRegistry.get('input1').businessObject.inputValues.text)
         .to.equal('"silver","gold"');
     }));
+
+
+    it('should show placeholder when empty values', function() {
+
+      // when
+      let remove = domQuery('.remove', inputValuesEdit);
+
+      triggerMouseEvent(remove, 'mouseup');
+
+      remove = domQuery('.remove', inputValuesEdit);
+
+      triggerMouseEvent(remove, 'mouseup');
+
+      remove = domQuery('.remove', inputValuesEdit);
+
+      triggerMouseEvent(remove, 'mouseup');
+
+      // then
+      expect(domQuery('.placeholder', inputValuesEdit)).to.exist;
+    });
+
+
+    it('should NOT show placeholder when no values', function() {
+
+      // given
+      const button = domQuery('.button', inputValuesEdit);
+
+      // when
+      triggerMouseEvent(button, 'mouseup');
+
+      // then
+      expect(domQuery('.placeholder', inputValuesEdit)).to.not.exist;
+    });
 
 
     it('should validate value', inject(function(elementRegistry) {
@@ -176,7 +209,7 @@ describe('input output values', function() {
       inject(function(elementRegistry) {
 
         // given
-        const button = domQuery('.button', testContainer);
+        const button = domQuery('.button', inputValuesEdit);
 
         // when
         triggerMouseEvent(button, 'mouseup');
@@ -277,6 +310,35 @@ describe('input output values', function() {
     }));
 
 
+    it('should show placeholder when empty values', function() {
+
+      // when
+      let remove = domQuery('.remove', outputValuesEdit);
+
+      triggerMouseEvent(remove, 'mouseup');
+
+      remove = domQuery('.remove', outputValuesEdit);
+
+      triggerMouseEvent(remove, 'mouseup');
+
+      // then
+      expect(domQuery('.placeholder', outputValuesEdit)).to.exist;
+    });
+
+
+    it('should NOT show placeholder when no values', function() {
+
+      // given
+      const button = domQuery('.button', outputValuesEdit);
+
+      // when
+      triggerMouseEvent(button, 'mouseup');
+
+      // then
+      expect(domQuery('.placeholder', outputValuesEdit)).to.not.exist;
+    });
+
+
     it('should validate value', inject(function(elementRegistry) {
 
       // when
@@ -315,11 +377,12 @@ describe('input output values', function() {
         expect(elementRegistry.get('output1').businessObject.outputValues).not.to.exist;
       }));
 
+
     it('should delete allowed values',
       inject(function(elementRegistry) {
 
         // given
-        const button = domQuery('.button', testContainer);
+        const button = domQuery('.button', outputValuesEdit);
 
         // when
         triggerMouseEvent(button, 'mouseup');
