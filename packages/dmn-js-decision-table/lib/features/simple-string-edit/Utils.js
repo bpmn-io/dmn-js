@@ -81,19 +81,18 @@ export function parseString(string) {
   }
 }
 
-function isEmptyString(string) {
-  return string === '';
-}
-
+// TODO(philippfromme): seperate when refactoring component
 export function getInputOrOutputValues(inputOrOutput) {
   const inputOrOutputValues =
     isInput(inputOrOutput) ?
       inputOrOutput.inputValues :
       inputOrOutput.outputValues;
 
-  if (!inputOrOutputValues) {
-    return [];
-  }
+  return isEmptyString(inputOrOutputValues.text)
+    ? []
+    : inputOrOutputValues.text.split(',').map(value => value.trim());
+}
 
-  return inputOrOutputValues.text.split(',').map(value => value.trim());
+function isEmptyString(string) {
+  return string === '';
 }
