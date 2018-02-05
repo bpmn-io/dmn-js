@@ -1,0 +1,16 @@
+<definitions id="dish"
+             name="Desired Dish"
+             namespace="party"
+             xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
+             xmlns:camunda="http://camunda.org/schema/1.0/dmn"
+             xmlns:biodi="http://bpmn.io/ns/di">
+  <decision id="season" name="Season">
+    <extensionElements>
+      <biodi:bounds x="150" y="10" width="100" height="55" />
+    </extensionElements>
+    <variable name="season" typeRef="string" />
+    <literalExpression expressionLanguage="Javascript">
+      <text>calendar.getSeason(date)</text>
+    </literalExpression>
+  </decision>
+</definitions>

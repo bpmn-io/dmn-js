@@ -2,6 +2,7 @@ import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
 import DrdModeler from 'dmn-js-drd/lib/Modeler';
 import DecisionTableEditor from 'dmn-js-decision-table/lib/Editor';
+import LiteralExpressionEditor from 'dmn-js-literal-expression/lib/Editor';
 
 
 /**
@@ -22,6 +23,13 @@ export default class Modeler extends EditingManager {
         constructor: DecisionTableEditor,
         opens(element) {
           return element.$type === 'dmn:Decision' && element.decisionTable;
+        }
+      },
+      {
+        id: 'literalExpression',
+        constructor: LiteralExpressionEditor,
+        opens(element) {
+          return element.$type === 'dmn:Decision' && element.literalExpression;
         }
       }
     ];

@@ -9,11 +9,22 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "diagram-js": "^0.27.1",
+    "didi": "^0.1.1",
     "dmn-moddle": "^1.0.0",
+    "inferno": "^3.9.0",
+    "inferno-component": "^3.9.0",
     "min-dash": "^1.1.0"
   },
   "devDependencies": {
+    "babel-plugin-inferno": "^3.3.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "inferno-test-utils": "^3.10.1",
+    "mocha-test-container-support": "^0.2.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   }
 }
