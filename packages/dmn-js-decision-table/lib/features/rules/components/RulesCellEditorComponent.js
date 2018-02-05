@@ -5,7 +5,7 @@ import Component from 'inferno-component';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import EditableComponent from '../../../components/EditableComponent';
+import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
 
 export default class RulesEditorCellComponent extends Component {

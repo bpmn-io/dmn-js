@@ -7,7 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import {
   triggerChangeEvent,
   triggerMouseEvent
-} from 'test/util/EventUtil';
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleNumberEditXML from './simple-boolean-edit.dmn';
 

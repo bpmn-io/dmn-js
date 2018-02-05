@@ -9,7 +9,7 @@ import {
   triggerInputEvent,
   triggerKeyEvent,
   triggerMouseEvent
-} from 'test/util/EventUtil';
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleStringEditXML from './simple-string-edit.dmn';
 

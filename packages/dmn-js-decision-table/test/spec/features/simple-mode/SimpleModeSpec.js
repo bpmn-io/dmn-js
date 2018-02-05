@@ -4,7 +4,7 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerMouseEvent } from 'test/util/EventUtil';
+import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleStringEditXML from '../../simple.dmn';
 

@@ -8,9 +8,18 @@ import domDelegate from 'min-dom/lib/delegate';
 
 import { insertCSS } from 'test/helper';
 
+insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
+
+insertCSS('dmn-font',
+  require('dmn-js-decision-table/node_modules/dmn-font/dist/css/dmn-embedded.css'));
+
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
-insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
+insertCSS('dmn-js-literal-expression.css',
+  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css'));
+
+insertCSS('dmn-js-decision-table-controls.css',
+  require('dmn-js-decision-table/assets/css/dmn-js-decision-table-controls.css'));
 
 insertCSS('dmn-js-testing.css', `
   .test-container .dmn-js-parent {
@@ -22,17 +31,28 @@ insertCSS('tabs.css', `
   .editor-tabs .tab {
     display: inline-block;
     whitespace: no-wrap;
-    background-color: #EEE;
     padding: 5px;
     margin: 5px 10px 0 5px;
+    background-color: #FAFAFA;
+    border: solid 1px #CCC;
+    border-radius: 2px;
+    padding: 8px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    cursor: default;
+    font-size: 14px;
+    color: #444;
   }
 
   .editor-tabs .tab:first-child {
     margin-left: 0;
   }
 
-  .editor-tabs .tab.active {
-    background-color: #BBB;
+  .editor-tabs .tab.active,
+  .editor-tabs .tab:hover {
+    background-color: #52b415;
+    border-color: #52b415;
+    color: #fff;
   }
 `);
 

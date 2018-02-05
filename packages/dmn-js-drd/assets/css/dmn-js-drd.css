@@ -12,27 +12,6 @@
   padding: 0 2px;
 }
 
-.djs-overlay .literal-expression-overlay {
-  font-family: Arial;
-  font-size: 12px;
-  min-height: 16px;
-  white-space: nowrap;
-  border: 1px solid black;
-}
-
-.djs-overlay .literal-expression-overlay > div {
-  color: Black;
-  padding: 5px;
-}
-
-.djs-overlay .literal-expression-overlay .variable-name {
-  padding-bottom: 0;
-}
-
-.djs-overlay .literal-expression-overlay .literal-text {
-  width: 100%;
-}
-
 .dmn-definitions {
   position: absolute;
   top: 20px;
