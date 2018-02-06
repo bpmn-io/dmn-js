@@ -194,7 +194,7 @@ export default class Viewer extends Table {
   }
 
   static _createContainer(options) {
-    const container = domify('<div class="decision-table-container"></div>');
+    const container = domify('<div class="dmn-decision-table-container"></div>');
 
     assign(container.style, {
       width: ensureUnit(options.width),

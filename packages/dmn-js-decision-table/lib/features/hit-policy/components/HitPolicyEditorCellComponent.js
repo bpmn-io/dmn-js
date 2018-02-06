@@ -51,11 +51,10 @@ export default class HitPolicyCellComponent extends Component {
 
     return (
       <th
-        id="hit-policy"
         data-element-id={ root.id }
         data-hit-policy="true"
         onClick={ this.onClick }
-        className="hit-policy"
+        className="hit-policy header"
         ref= { node => this.node = node }
         rowspan="3">{ hitPolicy }{ aggregationLabel }</th>
     );

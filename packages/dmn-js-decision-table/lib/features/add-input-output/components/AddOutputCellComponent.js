@@ -45,8 +45,10 @@ export default class AddOutputCellComponent extends Component {
     return (
       <th
         onClick={ this.add }
-        className="output add-output"
-        colspan={ colspan }>Output <span className="dmn-icon-plus"></span></th>
+        className="output add-output header actionable"
+        colspan={ colspan }>
+        Output <span className="dmn-icon-plus action-icon"></span>
+      </th>
     );
   }
 }

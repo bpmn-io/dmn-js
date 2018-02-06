@@ -1,0 +1,299 @@
+
+/* simple string edit */
+.tjs-container .simple-string-edit {
+  padding: 8px;
+  font-size: 14px;
+  max-width: 250px;
+}
+
+.tjs-container .simple-string-edit .validation-warning {
+  max-width: 250px;
+  white-space: pre-wrap;
+}
+
+/* simple number edit */
+.tjs-container .simple-number-edit {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.tjs-container .simple-number-edit .validation-warning {
+  max-width: 250px;
+  white-space: pre-wrap;
+}
+
+/* simple boolean edit */
+.tjs-container .simple-boolean-edit {
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* simple date edit */
+.tjs-container .simple-date-edit {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.tjs-container .simple-date-edit .validation-warning {
+  max-width: 250px;
+  white-space: pre-wrap;
+}
+
+/* button */
+.tjs-container .button {
+  background: #fff;
+  padding: 4px 6px;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  outline: none;
+}
+
+.tjs-container .button:hover {
+   background: #f6f6f6;
+ }
+
+/* select */
+.tjs-container select.select {
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  color: #444;
+}
+
+.tjs-container select.select:focus {
+  border-color: #52B415;
+  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
+}
+
+/* list component */
+.tjs-container .list-component {
+  max-width: 250px;
+}
+
+.tjs-container .list-component .group .title,
+.tjs-container .list-component .group .input-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tjs-container .list-component .item {
+  color: #444;
+}
+
+.tjs-container .list-component .warning {
+  color: #c9302c;
+}
+
+.tjs-container .list-component .dmn-icon-clear:hover {
+  color: #c9302c;
+}
+
+/* input & output values edit */
+.tjs-container .input-output-values-edit {
+  font-size: 14px;
+  color: #444;
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.tjs-container .input-output-values-edit .values {
+  margin-top: 8px;
+  max-width: 250px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tjs-container .input-output-values-edit .values .value {
+  border: solid 1px #fafafa;
+  background-color: #fafafa;
+  color: #444;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  padding: 3px 6px;
+  font-weight: normal;
+}
+
+.tjs-container .input-output-values-edit .values .value:hover {
+  cursor: pointer;
+  background: #f4cecd;
+  color: #c9302c;
+  border-color: #f4cecd;
+}
+
+.tjs-container .input-output-values-edit .values .input {
+  width: 100%;
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: none;
+  font-size: 14px;
+  color: #444;
+}
+
+.tjs-container .input-output-values-edit .values .input.invalid {
+  background: #f4cecd;
+  border-color: #c9302c;
+  color: #c9302c;
+}
+
+.tjs-container .input-output-values-edit .values .input:focus.invalid {
+  border-color: #c9302c;
+}
+
+.tjs-container .input-output-values-edit .values .input:focus {
+  border-color: #52B415;
+}
+
+.tjs-container .input-output-values-edit .placeholder {
+  color: #ccc;
+}
+
+/* validated input */
+.tjs-container .validated-text-input-component .validation-warning {
+  color: #c9302c;
+}
+
+/* input */
+.tjs-container input.input {
+  outline: none;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+  color: #444;
+}
+
+.tjs-container input.input:focus {
+  border-color: #52B415;
+}
+
+.tjs-container input.input.invalid {
+  background: #f4cecd;
+  border-color: #c9302c;
+  color: #c9302c;
+}
+
+.tjs-container input.input.invalid:focus {
+  box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
+}
+
+/* helpers */
+.no-margin-top,
+.no-margin-top:before {
+  margin-top: 0;
+}
+
+.no-margin-right,
+.no-margin-right:before {
+  margin-right: 0;
+}
+
+.no-margin-bottom,
+.no-margin-bottom:before {
+  margin-bottom: 0;
+}
+
+.no-margin-left,
+.no-margin-left:before {
+  margin-left: 0;
+}
+
+.tjs-container .margin-top-small {
+  margin-top: 4px;
+}
+
+.tjs-container .margin-top-medium {
+  margin-top: 8px;
+}
+
+.tjs-container .margin-top-large {
+  margin-top: 12px;
+}
+
+.tjs-container .margin-right-small {
+  margin-right: 4px;
+}
+
+.tjs-container .margin-right-medium {
+  margin-right: 8px;
+}
+
+.tjs-container .margin-right-large {
+  margin-right: 12px;
+}
+
+.tjs-container .margin-bottom-small {
+  margin-bottom: 4px;
+}
+
+.tjs-container .margin-bottom-medium {
+  margin-bottom: 8px;
+}
+
+.tjs-container .margin-bottom-large {
+  margin-bottom: 12px;
+}
+
+.tjs-container .margin-left-small {
+  margin-left: 4px;
+}
+
+.tjs-container .margin-left-medium {
+  margin-left: 8px;
+}
+
+.tjs-container .margin-left-large {
+  margin-left: 12px;
+}
+
+.tjs-container .full-width {
+  width: 100%;
+}
+
+.tjs-container .full-height {
+  height: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.heading-large {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.heading-medium {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.heading-small {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}

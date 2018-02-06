@@ -45,8 +45,10 @@ export default class AddInputCellComponent extends Component {
     return (
       <th
         onClick={ this.add }
-        className="input add-input"
-        colspan={ colspan }>Input <span className="dmn-icon-plus"></span></th>
+        className="input add-input header actionable"
+        colspan={ colspan }>
+        Input <span className="dmn-icon-plus action-icon"></span>
+      </th>
     );
   }
 }

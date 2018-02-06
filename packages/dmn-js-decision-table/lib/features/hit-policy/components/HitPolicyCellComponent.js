@@ -18,7 +18,11 @@ export default class HitPolicyCellComponent extends Component {
 
     const aggregationLabel = getAggregationLabel(aggregation);
 
-    return <th className="hit-policy" rowspan="3">{ hitPolicy }{ aggregationLabel }</th>;
+    return (
+      <th className="hit-policy header" rowspan="3">
+        { hitPolicy }{ aggregationLabel }
+      </th>
+    );
   }
 }
 

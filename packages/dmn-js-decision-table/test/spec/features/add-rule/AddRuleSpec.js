@@ -56,7 +56,7 @@ describe('add input output', function() {
     // given
     const { cols } = sheet.getRoot();
 
-    const row = domQuery('.add-rule', testContainer);
+    const row = domQuery('.add-rule tr', testContainer);
 
     // then
     expect(

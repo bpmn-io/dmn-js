@@ -21,18 +21,32 @@ export default class AddRuleFootComponent extends Component {
   render({ cols }) {
 
     const cells = [
-      <td className="add-rule-add dmn-icon-plus"></td>
+      <td className="add-rule-add">
+        <span className="dmn-icon-plus action-icon"></span>
+      </td>
     ];
 
     for (let i = 0; i < cols.length + 1; i++) {
-      cells.push(<td className="add-rule">-</td>);
+      let className = 'add-rule';
+
+      const businessObject = cols[i] && cols[i].businessObject;
+
+      if (businessObject) {
+        if (businessObject.$instanceOf('dmn:InputClause')) {
+          className += ' input';
+        }
+
+        if (businessObject.$instanceOf('dmn:OutputClause')) {
+          className += ' output';
+        }
+      }
+
+      cells.push(<td className={ className }>-</td>);
     }
 
     return (
-      <tfoot>
-        <tr
-          className="add-rule"
-          onClick={ this.addRule }>
+      <tfoot className="actionable add-rule" onClick={ this.addRule }>
+        <tr>
           { cells }
         </tr>
       </tfoot>
