@@ -129,10 +129,6 @@ table tr > .input + .output {
 
 /* footer styles */
 
-.tjs-container tfoot.add-rule {
-  background: #FAFAFA;
-}
-
 .tjs-container .add-rule td.add-rule-add {
   text-align: right;
 }
