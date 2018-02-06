@@ -2,7 +2,7 @@
 
 .tjs-container .actionable .action-icon {
   border-radius: 4px;
-  transition: all .2s;
+  color: #52b415;
 }
 
 .tjs-container .actionable:hover .action-icon {
@@ -433,9 +433,6 @@ table tr > .input + .output {
   cursor: pointer;
   font-size: 14px;
   z-index: 2;
-
-  transition: opacity .2s;
-
   opacity: .8;
 }
 
