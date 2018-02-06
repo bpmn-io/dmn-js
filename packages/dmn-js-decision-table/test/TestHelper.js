@@ -17,5 +17,5 @@ TestHelper.insertCSS('diagram-js.css',
 );
 
 TestHelper.insertCSS('dmn-js-testing.css',
-  '.test-container .dmn-js-parent { height: 500px; }'
+  '.test-container .dmn-js-parent { height: 576px; }'
 );

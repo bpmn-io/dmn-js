@@ -22,6 +22,8 @@
 
 .dmn-decision-table-container {
   color: #444;
+
+  max-height: 100%;
 }
 
 /* end basic styles */
