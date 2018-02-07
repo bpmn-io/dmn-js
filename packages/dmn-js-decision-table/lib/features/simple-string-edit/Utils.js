@@ -88,9 +88,11 @@ export function getInputOrOutputValues(inputOrOutput) {
       inputOrOutput.inputValues :
       inputOrOutput.outputValues;
 
-  return isEmptyString(inputOrOutputValues.text)
-    ? []
-    : inputOrOutputValues.text.split(',').map(value => value.trim());
+  if (!inputOrOutputValues || isEmptyString(inputOrOutputValues.text)) {
+    return [];
+  } else {
+    return inputOrOutputValues.text.split(',').map(value => value.trim());
+  }
 }
 
 function isEmptyString(string) {

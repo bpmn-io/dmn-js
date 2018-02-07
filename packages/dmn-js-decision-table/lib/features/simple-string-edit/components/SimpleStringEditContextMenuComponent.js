@@ -236,9 +236,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     const { context } = this.props,
           { type, values } = parseString(context.element.businessObject.text);
 
-    const newValues = values.concat(parsedString.values);
+    const newValues = (values || []).concat(parsedString.values);
 
-    if (type === 'disjunction') {
+    if (!type || type === 'disjunction') {
       this.editCell(element.businessObject, newValues.join(','));
     } else {
       this.editCell(element.businessObject, `not(${ newValues.join(',') })`);

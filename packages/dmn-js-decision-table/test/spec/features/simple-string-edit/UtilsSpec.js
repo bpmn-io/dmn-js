@@ -1,4 +1,7 @@
-import { parseString } from 'lib/features/simple-string-edit/Utils';
+import {
+  getInputOrOutputValues,
+  parseString
+} from 'lib/features/simple-string-edit/Utils';
 
 function expectParsed(string, result) {
   return function() {
@@ -41,6 +44,21 @@ describe('simple string edit - utils', function() {
 
 
     it('invalid string', expectParsed('"foo', undefined));
+
+  });
+
+
+  // TODO(philippfromme): refactor method when refactoring simple string edit component
+  describe('getInputOrOutputValues', function() {
+
+    it('should return empty array if no values', function() {
+
+      // given
+      const businessObject = {};
+
+      // then
+      expect(getInputOrOutputValues(businessObject)).to.eql([]);
+    });
 
   });
 
