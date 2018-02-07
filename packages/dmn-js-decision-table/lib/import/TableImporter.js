@@ -1,4 +1,4 @@
-import assign from 'lodash/assign';
+import { assign } from 'min-dash/lib/object';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 

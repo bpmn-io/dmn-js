@@ -2,8 +2,8 @@ import Table from 'table-js';
 
 import { importDecision } from './import/Importer';
 
-import assign from 'lodash/assign';
-import isNumber from 'lodash/isNumber';
+import { assign } from 'min-dash/lib/object';
+import { isNumber } from 'min-dash/lib/lang';
 
 import { domify } from 'min-dom';
 import { remove as domRemove } from 'min-dom';

@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { groupBy, toPairs } from 'lodash';
+import { groupBy } from 'min-dash/lib/collection';
 
 const RADIO = 'radio';
 
@@ -99,7 +99,7 @@ export default class ListComponent extends Component {
     // group items by group title
     const groupedItems = groupBy(items, 'group');
 
-    const asPairs = toPairs(groupedItems);
+    const asPairs = Object.entries(groupedItems);
 
     return (
       <div className={ classes.join(' ') }>

@@ -1,4 +1,4 @@
-import assign from 'lodash/assign';
+import { assign } from 'min-dash/lib/object';
 
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 

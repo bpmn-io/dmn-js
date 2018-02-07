@@ -1,4 +1,4 @@
-import forEach from 'lodash/forEach';
+import { forEach } from 'min-dash/lib/collection';
 
 const ID = 'id';
 

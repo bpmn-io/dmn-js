@@ -27,12 +27,12 @@
   },
   "dependencies": {
     "diagram-js": "^0.27.1",
-    "dmn-font": "^0.3.0",
+    "dmn-font": "^0.4.0",
     "dmn-js-shared": "^1.3.0",
     "escape-html": "^1.0.3",
     "inferno": "^3.9.0",
     "inferno-component": "^3.9.0",
-    "lodash": "^4.17.4",
+    "min-dash": "^1.1.0",
     "min-dom": "^1.0.0",
     "table-js": "^1.3.0"
   }

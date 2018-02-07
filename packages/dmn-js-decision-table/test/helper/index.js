@@ -1,9 +1,6 @@
-'use strict';
-
-var uniq = require('lodash/uniq'),
-    assign = require('lodash/assign'),
-    isFunction = require('lodash/isFunction'),
-    forEach = require('lodash/forEach');
+import { forEach, uniqueBy } from 'min-dash/lib/collection';
+import { assign } from 'min-dash/lib/object';
+import { isFunction } from 'min-dash/lib/lang';
 
 var TestContainer = require('mocha-test-container-support');
 
@@ -101,7 +98,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
     _options = {
       container: testContainer,
       decisionTable: assign({
-        modules: _modules && uniq(_modules) || undefined
+        modules: _modules && uniqueBy(_modules) || undefined
       }, OPTIONS || {}, _options || {})
     };
 

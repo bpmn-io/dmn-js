@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import { assign } from 'lodash';
+import { assign } from 'min-dash/lib/object';
 
 import { query as domQuery } from 'min-dom';
 

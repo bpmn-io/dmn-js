@@ -1,4 +1,5 @@
-import { debounce, isNumber } from 'lodash';
+import { debounce } from 'min-dash/lib/fn';
+import { isNumber } from 'min-dash/lib/lang';
 
 const DEFAULT_DEBOUNCE_TIME = 300;
 
