@@ -131,9 +131,20 @@ table tr > .input + .output {
 
 /* footer styles */
 
-.tjs-container .add-rule td.add-rule-add {
+.tjs-container tfoot.add-rule td.add-rule-add {
   text-align: right;
 }
+
+.tjs-container tfoot.add-rule td {
+  border-color: #AAA;
+  color: #AAA;
+}
+
+.tjs-container tfoot.add-rule:hover td {
+  border-color: #444;
+  color: #444;
+}
+
 
 /* end footer styles */
 
