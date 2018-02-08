@@ -7,8 +7,8 @@ import {
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerInputEvent } from 'test/util/EventUtil';
-import { queryEditor } from 'test/util/EditorUtil';
+import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
+import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import twoDecisionsXML from '../../two-decisions.dmn';
 

@@ -1,8 +1,8 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerInputEvent } from 'dmn-js-decision-table/test/util/EventUtil';
+import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
-import { queryEditor } from 'dmn-js-decision-table/test/util/EditorUtil';
+import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 

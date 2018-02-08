@@ -4,8 +4,8 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 
 // eslint-disable-next-line
-import Input from '../../../components/Input';
-import SelectComponent from '../../../components/SelectComponent';
+import Input from 'dmn-js-shared/lib/components/Input';
+import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 import { getComparisonString, getRangeString, parseString } from '../Utils';
 

@@ -8,7 +8,7 @@ import {
   triggerInputEvent,
   triggerKeyEvent,
   triggerMouseEvent
-} from 'test/util/EventUtil';
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 

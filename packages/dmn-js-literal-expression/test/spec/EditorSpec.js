@@ -25,7 +25,7 @@ describe('Editor', function() {
   }
 
 
-  it.only('should import literal expression', function(done) {
+  it('should import literal expression', function(done) {
     createEditor(simpleXML, done);
   });
 

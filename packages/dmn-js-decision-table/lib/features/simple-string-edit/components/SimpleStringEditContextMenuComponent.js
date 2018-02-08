@@ -4,13 +4,13 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 
 // eslint-disable-next-line
-import SelectComponent from '../../../components/SelectComponent';
+import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 // eslint-disable-next-line
-import ListComponent from '../../../components/ListComponent';
+import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
 
 // eslint-disable-next-line
-import ValidatedInput from '../../../components/ValidatedInput';
+import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
 

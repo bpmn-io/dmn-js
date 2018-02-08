@@ -2,8 +2,8 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import Input from 'dmn-js-decision-table/lib/components/Input';
-import SelectComponent from 'dmn-js-decision-table/lib/components/SelectComponent';
+import Input from 'dmn-js-shared/lib/components/Input';
+import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 const EXPRESSION_LANGUAGE_OPTIONS = [{
   label: 'FEEL',

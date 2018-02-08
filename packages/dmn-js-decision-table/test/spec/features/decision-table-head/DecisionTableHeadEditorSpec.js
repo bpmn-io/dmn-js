@@ -8,8 +8,8 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerInputEvent } from 'test/util/EventUtil';
-import { queryEditor } from 'test/util/EditorUtil';
+import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
+import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import simpleXML from '../../simple.dmn';
 

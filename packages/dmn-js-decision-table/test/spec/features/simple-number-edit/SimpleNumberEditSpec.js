@@ -8,7 +8,7 @@ import {
   triggerChangeEvent,
   triggerInputEvent,
   triggerMouseEvent
-} from 'test/util/EventUtil';
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleNumberEditXML from './simple-number-edit.dmn';
 
