@@ -4,7 +4,4 @@ npm-debug.log
 .idea
 *.iml
 .DS_Store
-npm-debug.log
-lerna-debug.log
-assets/css
 package-lock.json
