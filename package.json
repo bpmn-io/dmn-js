@@ -51,11 +51,11 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "dmn-moddle": "^1.0.0",
+    "dmn-moddle": "^2.0.2",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
-    "min-dom": "^0.2.0",
-    "tiny-svg": "^0.1.1"
+    "min-dom": "^0.3.0",
+    "tiny-svg": "^0.1.3"
   }
 }
