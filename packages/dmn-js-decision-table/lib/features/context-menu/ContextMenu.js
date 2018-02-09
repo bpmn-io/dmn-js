@@ -7,15 +7,15 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class ContextMenu {
   constructor(
-    components,
-    contextMenu,
-    clipBoard,
-    editorActions,
-    eventBus,
-    elementRegistry,
-    modeling,
-    sheet
-  ) {
+      components,
+      contextMenu,
+      clipBoard,
+      editorActions,
+      eventBus,
+      elementRegistry,
+      modeling,
+      sheet) {
+
     this._contextMenu = contextMenu;
     this._clipBoard = clipBoard;
     this._editorActions = editorActions;
