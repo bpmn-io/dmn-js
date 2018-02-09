@@ -190,7 +190,7 @@ export default class Viewer extends BaseViewer {
   }
 
   static _createContainer(options) {
-    const container = domify('<div class="literal-expression-container"></div>');
+    const container = domify('<div class="dmn-literal-expression"></div>');
 
     assign(container.style, {
       width: ensureUnit(options.width),

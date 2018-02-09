@@ -1,11 +1,11 @@
-.literal-expression-container {
+.dmn-literal-expression {
   font-family: 'Arial', sans-serif;
   position: relative;
   color: #444;
 }
 
 /* decision properties */
-.literal-expression-container .decision-properties {
+.dmn-literal-expression .decision-properties {
   color: #444;
   background-color: #fff;
   display: inline-block;
@@ -16,79 +16,86 @@
   max-width: 50%;
 }
 
-.literal-expression-container .decision-name:not(.editor),
-.literal-expression-container .decision-id:not(.editor) {
+.dmn-literal-expression .decision-name:not(.editor),
+.dmn-literal-expression .decision-id:not(.editor) {
   cursor: default;
 }
 
-.literal-expression-container .decision-name.editor,
-.literal-expression-container .decision-id.editor {
+.dmn-literal-expression .decision-name.editor,
+.dmn-literal-expression .decision-id.editor {
   cursor: text;
 }
 
-.literal-expression-container .decision-name,
-.literal-expression-container .decision-id {
+.dmn-literal-expression .decision-name,
+.dmn-literal-expression .decision-id {
   margin: 0;
   padding: 3px 6px;
   text-align: center;
   white-space: pre;
 }
 
-.literal-expression-container .decision-name div,
-.literal-expression-container .decision-id div {
+.dmn-literal-expression .decision-name div,
+.dmn-literal-expression .decision-id div {
   outline: none;
 }
 
-.literal-expression-container .decision-id.invalid {
+.dmn-literal-expression .decision-id.invalid {
   background: #f4cecd;
   color: #c9302c;
 }
 
-.literal-expression-container .decision-name.editor:not(.focussed):hover,
-.literal-expression-container .decision-id.editor:not(.focussed):hover {
+.dmn-literal-expression .decision-name.editor:not(.focussed):hover,
+.dmn-literal-expression .decision-id.editor:not(.focussed):hover {
   cursor: text;
 }
 
-.literal-expression-container .decision-name {
+.dmn-literal-expression .decision-name {
   font-size: 24px;
   line-height: 30px;
   padding: .3em;
   font-weight: bold;
 }
 
-.literal-expression-container .decision-id {
+.dmn-literal-expression .decision-id {
   border-top: 1px solid #444;
   font-family: monospace;
   font-size: 18px;
 }
 
 /* textarea */
-.literal-expression-container .textarea {
+.dmn-literal-expression .textarea {
   box-sizing: border-box;
   width: 100%;
-  padding: 12px;
   font-family: monospace;
   border: 1px solid #444;
   border-bottom-width: 1px;
   white-space: pre;
   font-size: 14px;
   color: #444;
+  height: 250px;
 }
 
-.literal-expression-container .textarea div:focus {
+.dmn-literal-expression .textarea .content-editable {
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.dmn-literal-expression .textarea div:focus {
   outline: none;
 }
 
-.literal-expression-container .textarea.editor {
+.dmn-literal-expression .textarea.editor {
   cursor: text;
 }
 
-.literal-expression-container .textarea:not(.editor) {
+.dmn-literal-expression .textarea:not(.editor) {
   cursor: default;
 }
 
 /* literal expression properties */
-.literal-expression-container .literal-expression-properties {
+.dmn-literal-expression .literal-expression-properties {
   box-sizing: border-box;
   width: 100%;
   padding:  0;
@@ -98,19 +105,19 @@
   color: #444;
 }
 
-.literal-expression-container .literal-expression-properties table {
+.dmn-literal-expression .literal-expression-properties table {
   border-spacing: 12px;
 }
 
-.literal-expression-container .literal-expression-properties table tr td:first-child {
+.dmn-literal-expression .literal-expression-properties table tr td:first-child {
   font-weight: bold;
 }
 
-.literal-expression-container .literal-expression-properties table tr td:last-child {
+.dmn-literal-expression .literal-expression-properties table tr td:last-child {
   min-width: 100px;
 }
 
-.literal-expression-container .literal-expression-properties table tr td:last-child span {
+.dmn-literal-expression .literal-expression-properties table tr td:last-child span {
   padding: 4px 6px;
   border: 1px solid #ccc;
   background: #FAFAFA;
@@ -122,13 +129,13 @@
 }
 
 /* view drd */
-.literal-expression-container .view-drd {
+.dmn-literal-expression .view-drd {
   position: absolute;
   top: 10px;
   right: 60px;
 }
 
-.literal-expression-container .view-drd .view-drd-button {
+.dmn-literal-expression .view-drd .view-drd-button {
   background: #fff;
   padding: 8px;
   border: solid 1px #CCC;
@@ -140,12 +147,12 @@
   outline: none;
 }
 
-.literal-expression-container .view-drd .view-drd-button:hover {
+.dmn-literal-expression .view-drd .view-drd-button:hover {
   background: #f6f6f6;
 }
 
 /* powered by */
-.powered-by-logo {
+.dmn-literal-expression .powered-by-logo {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -154,11 +161,11 @@
   cursor: pointer;
 }
 
-.powered-by-logo .logo {
+.dmn-literal-expression .powered-by-logo .logo {
   width: 100%;
 }
 
-.powered-by-overlay {
+.dmn-literal-expression .powered-by-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -171,7 +178,7 @@
   z-index: 10000;
 }
 
-.powered-by-overlay .powered-by-overlay-content {
+.dmn-literal-expression .powered-by-overlay .powered-by-overlay-content {
   background: #fff;
   padding: 8px;
   border: solid 1px #CCC;
@@ -184,69 +191,69 @@
   max-width: 260px;
 }
 
-.powered-by-overlay .powered-by-overlay-content div:first-child {
+.dmn-literal-expression .powered-by-overlay .powered-by-overlay-content div:first-child {
   margin-right: 8px;
 }
 
 /* helpers */
-.literal-expression-container .padding-top-small {
+.dmn-literal-expression .padding-top-small {
   padding-top: 4px;
 }
 
-.literal-expression-container .padding-top-medium {
+.dmn-literal-expression .padding-top-medium {
   padding-top: 8px;
 }
 
-.literal-expression-container .padding-top-large {
+.dmn-literal-expression .padding-top-large {
   padding-top: 12px;
 }
 
-.literal-expression-container .padding-right-small {
+.dmn-literal-expression .padding-right-small {
   padding-right: 4px;
 }
 
-.literal-expression-container .padding-right-medium {
+.dmn-literal-expression .padding-right-medium {
   padding-right: 8px;
 }
 
-.literal-expression-container .padding-right-large {
+.dmn-literal-expression .padding-right-large {
   padding-right: 12px;
 }
 
-.literal-expression-container .padding-bottom-small {
+.dmn-literal-expression .padding-bottom-small {
   padding-bottom: 4px;
 }
 
-.literal-expression-container .padding-bottom-medium {
+.dmn-literal-expression .padding-bottom-medium {
   padding-bottom: 8px;
 }
 
-.literal-expression-container .padding-bottom-large {
+.dmn-literal-expression .padding-bottom-large {
   padding-bottom: 12px;
 }
 
-.literal-expression-container .padding-left-small {
+.dmn-literal-expression .padding-left-small {
   padding-left: 4px;
 }
 
-.literal-expression-container .padding-left-medium {
+.dmn-literal-expression .padding-left-medium {
   padding-left: 8px;
 }
 
-.literal-expression-container .padding-left-large {
+.dmn-literal-expression .padding-left-large {
   padding-left: 12px;
 }
 
-.literal-expression-container .full-width {
+.dmn-literal-expression .full-width {
   width: 100%;
 }
 
-.literal-expression-container .full-height {
+.dmn-literal-expression .full-height {
   height: 100%;
 }
 
 /* select */
-.literal-expression-container select.select {
+.dmn-literal-expression select.select {
   outline: none;
   padding: 3px 6px;
   border: 1px solid #ccc;
@@ -255,13 +262,13 @@
   color: #444;
 }
 
-.literal-expression-container select.select:focus {
+.dmn-literal-expression select.select:focus {
   border-color: #52B415;
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
 /* input */
-.literal-expression-container input.input {
+.dmn-literal-expression input.input {
   outline: none;
   padding: 4px 6px;
   border: 1px solid #ccc;
@@ -270,17 +277,17 @@
   color: #444;
 }
 
-.literal-expression-container input.input:focus {
+.dmn-literal-expression input.input:focus {
   border-color: #52B415;
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
-.literal-expression-container input.input.invalid {
+.dmn-literal-expression input.input.invalid {
   background: #f4cecd;
   border-color: #c9302c;
   color: #c9302c;
 }
 
-.literal-expression-container input.input.invalid:focus {
+.dmn-literal-expression input.input.invalid:focus {
   box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
 }

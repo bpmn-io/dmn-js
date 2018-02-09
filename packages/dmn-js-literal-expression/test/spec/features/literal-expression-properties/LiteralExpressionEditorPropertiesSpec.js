@@ -62,6 +62,21 @@ describe('literal expression properties editor', function() {
   }));
 
 
+  it('should remove variable type', inject(function(viewer) {
+
+    // given
+    const select = domQuery.all('.select', testContainer)[0];
+
+    triggerChangeEvent(select, 'boolean');
+
+    // when
+    triggerChangeEvent(select, 'none');
+
+    // then
+    expect(viewer._decision.variable.typeRef).to.not.exist;
+  }));
+
+
   it('should edit expression language', inject(function(viewer) {
 
     // given
@@ -72,6 +87,21 @@ describe('literal expression properties editor', function() {
 
     // then
     expect(viewer._decision.literalExpression.expressionLanguage).to.equal('python');
+  }));
+
+
+  it('should remove expression language', inject(function(viewer) {
+
+    // given
+    const select = domQuery.all('.select', testContainer)[1];
+
+    triggerChangeEvent(select, 'python');
+
+    // when
+    triggerChangeEvent(select, 'none');
+
+    // then
+    expect(viewer._decision.literalExpression.expressionLanguage).to.not.exist;
   }));
 
 });

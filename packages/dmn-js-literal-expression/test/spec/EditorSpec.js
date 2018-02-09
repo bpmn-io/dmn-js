@@ -2,7 +2,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import DmnLiteralExpressionEditor from '../helper/LiteralExpressionEditor';
 
-import simpleXML from './literal-expression.dmn';
+import simpleXML from './empty-literal-expression.dmn';
 
 require('../TestHelper');
 
@@ -15,7 +15,7 @@ describe('Editor', function() {
   });
 
   function createEditor(xml, done) {
-    const dmnLiteralExpressionEditor = window.foo = new DmnLiteralExpressionEditor({
+    const dmnLiteralExpressionEditor = window.editor = new DmnLiteralExpressionEditor({
       container: testContainer
     });
 

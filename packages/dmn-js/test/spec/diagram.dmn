@@ -241,6 +241,15 @@
       </rule>
     </decisionTable>
   </decision>
+  <decision id="Decision_1koag35" name="It&#39;s lit">
+    <extensionElements>
+      <biodi:bounds x="670" y="141" width="180" height="80" />
+    </extensionElements>
+    <variable id="InformationItem_10cg57g" name="itsLit" typeRef="string" />
+    <literalExpression id="LiteralExpression_0bhgyiw" expressionLanguage="javascript">
+      <text><![CDATA[return "It's lit!";]]></text>
+    </literalExpression>
+  </decision>
   <textAnnotation id="TextAnnotation_1t4zaz9">
     <extensionElements>
       <biodi:bounds x="240" y="400" width="125" height="45" />

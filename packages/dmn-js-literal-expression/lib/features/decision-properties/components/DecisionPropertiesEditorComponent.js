@@ -20,11 +20,34 @@ export default class DecisionPropertiesEditorComponent extends Component {
 
     const { id } = viewer._decision;
 
-    context.changeSupport.onElementsChanged(id, this.onElementsChanged);
+    this.setupChangeListeners({ bind: id });
+  }
+
+  componentWillUnmount() {
+    const { id } = this._viewer._decision;
+
+    this.setupChangeListeners({
+      unbind: id
+    });
   }
 
   onElementsChanged() {
     this.forceUpdate();
+  }
+
+  setupChangeListeners({ bind, unbind }) {
+
+    const {
+      changeSupport
+    } = this.context;
+
+    if (typeof unbind === 'string') {
+      changeSupport.offElementsChanged(unbind, this.onElementsChanged);
+    }
+
+    if (typeof bind === 'string') {
+      changeSupport.onElementsChanged(bind, this.onElementsChanged);
+    }
   }
 
   setDecisionName(name) {
@@ -32,6 +55,15 @@ export default class DecisionPropertiesEditorComponent extends Component {
   }
 
   setDecisionId(id) {
+    const oldId = this._viewer._decision.id;
+
+    if (oldId === id) {
+      return;
+    }
+
+    // re-bind change listeners from oldId to new id
+    this.setupChangeListeners({ bind: id, unbind: oldId });
+
     this._modeling.editDecisionId(id);
   }
 

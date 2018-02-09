@@ -6,6 +6,9 @@ import Input from 'dmn-js-shared/lib/components/Input';
 import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 const EXPRESSION_LANGUAGE_OPTIONS = [{
+  label: '-',
+  value: 'none'
+}, {
   label: 'FEEL',
   value: 'feel'
 }, {
@@ -26,6 +29,9 @@ const EXPRESSION_LANGUAGE_OPTIONS = [{
 }];
 
 const TYPE_REF_OPTIONS = [{
+  label: '-',
+  value: 'none'
+}, {
   label: 'string',
   value: 'string'
 }, {
@@ -45,6 +51,8 @@ const TYPE_REF_OPTIONS = [{
   value: 'date'
 }];
 
+const NONE = 'none';
+
 
 export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
@@ -56,8 +64,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
     const decision = viewer._decision;
 
     this.state = {
-      variableName: getVariableName(decision.variable),
-      variableType: getVariableType(decision.variable),
+      name: decision.variable.name,
+      typeRef: decision.variable.typeRef,
       expressionLanguage: getExpressionLanguage(decision.literalExpression)
     };
 
@@ -75,25 +83,39 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 
   setVariableType(typeRef) {
-    this._modeling.editVariableType(typeRef);
+    if (typeRef === NONE) {
+      this._modeling.editVariableType(undefined);
 
-    this.setState({
-      typeRef
-    });
+      this.setState({
+        typeRef: undefined
+      });
+    } else {
+      this._modeling.editVariableType(typeRef);
+
+      this.setState({
+        typeRef
+      });
+    }
   }
 
   setExpressionLanguage(expressionLanguage) {
-    this._modeling.editExpressionLanguage(expressionLanguage);
+    if (expressionLanguage === NONE) {
+      this._modeling.editExpressionLanguage(undefined);
 
-    this.setState({
-      expressionLanguage
-    });
+      this.setState({
+        expressionLanguage: undefined
+      });
+    } else {
+      this._modeling.editExpressionLanguage(expressionLanguage);
+
+      this.setState({
+        expressionLanguage
+      });
+    }
   }
 
   render() {
-    let { expressionLanguage } = this.state;
-
-    const { variable } = this._viewer._decision;
+    let { expressionLanguage, name, typeRef } = this.state;
 
     return  (
       <div className="literal-expression-properties">
@@ -103,7 +125,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>
               <Input
                 onInput={ this.setVariableName }
-                value={ variable.name || '' } />
+                placeholder={ 'name' }
+                value={ name || '' } />
             </td>
           </tr>
           <tr>
@@ -113,7 +136,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
                 className="full-width"
                 onChange={ this.setVariableType }
                 options={ TYPE_REF_OPTIONS }
-                value={ variable.typeRef || '' } />
+                value={ typeRef || 'none' } />
             </td>
           </tr>
           <tr>
@@ -123,7 +146,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
                 className="full-width"
                 onChange={ this.setExpressionLanguage }
                 options={ EXPRESSION_LANGUAGE_OPTIONS }
-                value={ expressionLanguage || 'feel' } />
+                value={ expressionLanguage || 'none' } />
             </td>
           </tr>
         </table>
@@ -134,20 +157,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
 ////////// helpers //////////
 
-function getVariableName(variable) {
-  return variable
-    ? variable.name
-    : '';
-}
-
-function getVariableType(variable) {
-  return variable
-    ? variable.typeRef
-    : 'string';
-}
-
 function getExpressionLanguage(literalExpression) {
   return (literalExpression && literalExpression.expressionLanguage)
     ? literalExpression.expressionLanguage.toLowerCase()
-    : 'feel';
+    : undefined;
 }
