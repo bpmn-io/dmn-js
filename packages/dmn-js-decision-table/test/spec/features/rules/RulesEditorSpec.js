@@ -4,9 +4,9 @@ import Inferno from 'inferno';
 
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerInputEvent } from 'test/util/EventUtil';
+import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
-import { queryEditor } from 'test/util/EditorUtil';
+import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import TestContainer from 'mocha-test-container-support';
 

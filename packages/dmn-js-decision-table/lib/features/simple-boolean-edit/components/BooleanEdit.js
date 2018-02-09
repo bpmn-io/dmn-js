@@ -3,7 +3,7 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 
 // eslint-disable-next-line
-import SelectComponent from '../../../components/SelectComponent';
+import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 import { parseString } from '../Utils';
 

@@ -5,7 +5,7 @@ import Component from 'inferno-component';
 
 import { validateId } from '../../../util/IdsUtil';
 
-import EditableComponent from '../../../components/EditableComponent';
+import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
 
 export default class DecisionTablePropertiesComponent extends Component {

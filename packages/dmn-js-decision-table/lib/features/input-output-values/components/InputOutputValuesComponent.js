@@ -6,13 +6,13 @@ import Component from 'inferno-component';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 // eslint-disable-next-line
-import ListComponent from '../../../components/ListComponent';
+import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
 
 // eslint-disable-next-line
-import ValidatedInput from '../../../components/ValidatedInput';
+import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
 // eslint-disable-next-line
-import Button from '../../../components/Button';
+import Button from 'dmn-js-shared/lib/components/Button';
 
 import { getValuesArray, parseString } from '../Utils';
 

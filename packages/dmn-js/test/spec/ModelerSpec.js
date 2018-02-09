@@ -46,7 +46,29 @@ describe('Modeler', function() {
       }
 
       var views = editor.getViews();
-      var decisionView = views[1];
+      var decisionView = views.filter(v => v.type === 'decisionTable')[0];
+
+      // can open decisions
+      expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+
+      editor.open(decisionView, done);
+    });
+
+  });
+
+
+  it('should open DMN literal expression', function(done) {
+
+    var editor = new Modeler({ container: container });
+
+    editor.importXML(diagram, { open: false }, function(err) {
+
+      if (err) {
+        return done(err);
+      }
+
+      var views = editor.getViews();
+      var decisionView = views.filter(v => v.type === 'literalExpression')[0];
 
       // can open decisions
       expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
@@ -68,7 +90,7 @@ describe('Modeler', function() {
       }
 
       var views = editor.getViews();
-      var drdView = views[0];
+      var drdView = views.filter(v => v.type === 'drd')[0];
 
       // can open decisions
       expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;

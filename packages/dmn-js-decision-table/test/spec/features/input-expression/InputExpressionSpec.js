@@ -1,6 +1,6 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerInputEvent, triggerMouseEvent } from 'test/util/EventUtil';
+import { triggerInputEvent, triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
 

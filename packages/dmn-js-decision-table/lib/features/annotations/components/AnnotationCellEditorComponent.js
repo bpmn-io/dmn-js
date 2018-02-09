@@ -3,7 +3,7 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
 
-import EditableComponent from '../../../components/EditableComponent';
+import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
 
 export default class AnnotationCellEditorComponent extends Component {

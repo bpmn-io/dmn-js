@@ -3,10 +3,10 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 
 // eslint-disable-next-line
-import ValidatedInput from '../../../components/ValidatedInput';
+import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
 // eslint-disable-next-line
-import Button from '../../../components/Button';
+import Button from 'dmn-js-shared/lib/components/Button';
 
 import { getSampleDate, validateISOString, parseString } from '../Utils';
 
