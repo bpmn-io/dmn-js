@@ -16,6 +16,11 @@ export default class ContentEditable extends Component {
   }
 
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.text !== this.node.innerText;
+  }
+
+
   onFocus() {
     var propsFocus = this.props.onFocus;
 

@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line
 import Inferno from 'inferno';
+import Component from 'inferno-component';
 
 import {
   matches
@@ -9,6 +10,7 @@ import {
 
 import {
   findRenderedDOMElementWithClass,
+  findVNodeWithType,
   renderIntoDocument
 } from 'inferno-test-utils';
 
@@ -36,6 +38,45 @@ describe('ContentEditable', function() {
     expect(node.innerText).to.eql(text);
 
     expect(matches(node, '.other')).to.be.true;
+  });
+
+
+  it('should not rerender', function() {
+
+    // given
+    class Mock extends Component {
+      constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+          text: 'FOO'
+        };
+      }
+
+      render() {
+        const { text } = this.state;
+
+        return <ContentEditable text={ text } />;
+      }
+    }
+
+    const vNodeTree = <Mock />;
+
+    renderIntoDocument(vNodeTree);
+
+    const mock = findVNodeWithType(vNodeTree, Mock);
+
+    const contentEditable = findVNodeWithType(vNodeTree, ContentEditable);
+
+    const spy = sinon.spy(contentEditable.children, 'render');
+
+    // when
+    mock.children.setState({
+      text: 'FOO'
+    });
+
+    // then
+    expect(spy).to.not.have.been.called;
   });
 
 
