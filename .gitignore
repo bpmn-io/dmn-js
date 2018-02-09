@@ -7,3 +7,4 @@ npm-debug.log
 npm-debug.log
 lerna-debug.log
 assets/css
+package-lock.json
