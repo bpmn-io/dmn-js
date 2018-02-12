@@ -2,16 +2,17 @@ import ViewDrdComponent from './components/ViewDrdComponent';
 
 export default class ViewDrd {
   constructor(components, eventBus, injector, sheet) {
+    this._injector = injector;
+    this._sheet = sheet;
+
     components.onGetComponent('table.before', () => {
-      return ViewDrdComponent;
+      if (this.canViewDrd()) {
+        return ViewDrdComponent;
+      }
     });
 
     eventBus.on('showDrd', () => {
       const parent = injector.get('_parent', false);
-
-      if (!parent) {
-        return;
-      }
 
       const root = sheet.getRoot();
 
@@ -20,10 +21,22 @@ export default class ViewDrd {
       // open definitions
       const view = parent.getView(definitions);
 
-      if (view) {
-        parent.open(view);
-      }
+      parent.open(view);
     });
+  }
+
+  canViewDrd() {
+    const parent = this._injector.get('_parent', false);
+
+    if (!parent) {
+      return false;
+    }
+
+    const root = this._sheet.getRoot();
+
+    const definitions = getDefinitions(root);
+
+    return !!parent.getView(definitions);
   }
 }
 

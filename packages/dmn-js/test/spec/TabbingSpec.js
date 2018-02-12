@@ -28,14 +28,19 @@ insertCSS('dmn-js-testing.css', `
 `);
 
 insertCSS('tabs.css', `
+  .dmn-js-parent {
+    border: solid 1px #ccc;
+  }
+
   .editor-tabs .tab {
     display: inline-block;
     whitespace: no-wrap;
+    background: white;
     padding: 5px;
-    margin: 5px 10px 0 5px;
-    background-color: #FAFAFA;
+    margin-top: -1px;
+    margin-right: 2px;
     border: solid 1px #CCC;
-    border-radius: 2px;
+    border-radius: 0 0 2px 2px;
     padding: 8px;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
@@ -48,13 +53,21 @@ insertCSS('tabs.css', `
     margin-left: 0;
   }
 
+  .editor-tabs .tab.active {
+    border-top-color: white;
+  }
+
   .editor-tabs .tab.active,
   .editor-tabs .tab:hover {
-    background-color: #52b415;
-    border-color: #52b415;
-    color: #fff;
+    border-bottom: solid 3px #52b415;
   }
 `);
+
+const CLASS_NAMES = {
+  drd: 'dmn-icon-lasso-tool',
+  decisionTable: 'dmn-icon-decision-table',
+  literalExpression: 'dmn-icon-literal-expression'
+};
 
 var diagramXML = require('./diagram.dmn');
 // var performanceXML = require('./performance.dmn');
@@ -62,7 +75,7 @@ var diagramXML = require('./diagram.dmn');
 
 describe('tabs', function() {
 
-  it('should show tabs', function() {
+  it.only('should show tabs', function() {
 
     var $parent = domify(`
       <div class="test-container">
@@ -101,12 +114,14 @@ describe('tabs', function() {
 
       views.forEach(function(v, idx) {
 
+        const className = CLASS_NAMES[v.type];
+
         var tab = domify(`
           <div class="tab ${ v === activeView ? 'active' : ''}" data-id="${idx}">
+            <span class="${ className }"></span>
+            ${v.element.name || v.element.id}
           </div>
         `);
-
-        tab.textContent = v.element.name || v.element.id;
 
         $tabs.appendChild(tab);
       });

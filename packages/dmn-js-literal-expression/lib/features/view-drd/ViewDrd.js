@@ -4,26 +4,37 @@ const VERY_HIGH_PRIORITY = 2000;
 
 export default class ViewDrd {
   constructor(components, eventBus, injector, viewer) {
+    this._injector = injector;
+    this._viewer = viewer;
+
     components.onGetComponent('viewer', VERY_HIGH_PRIORITY, () => {
-      return ViewDrdComponent;
+      if (this.canViewDrd()) {
+        return ViewDrdComponent;
+      }
     });
 
     eventBus.on('showDrd', () => {
       const parent = injector.get('_parent', false);
-
-      if (!parent) {
-        return;
-      }
 
       const definitions = getDefinitions(viewer._decision);
 
       // open definitions
       const view = parent.getView(definitions);
 
-      if (view) {
-        parent.open(view);
-      }
+      parent.open(view);
     });
+  }
+
+  canViewDrd() {
+    const parent = this._injector.get('_parent', false);
+
+    if (!parent) {
+      return;
+    }
+
+    const definitions = getDefinitions(this._viewer._decision);
+
+    return !!parent.getView(definitions);
   }
 }
 
