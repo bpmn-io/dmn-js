@@ -1,7 +1,4 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 import { groupBy } from 'min-dash/lib/collection';
 

@@ -1,3 +1,4 @@
+
 export default class ChangeSupport {
   constructor(eventBus) {
     this._listeners = {};

@@ -1,17 +1,18 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
-// eslint-disable-next-line
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-// eslint-disable-next-line
 import Button from 'dmn-js-shared/lib/components/Button';
 
-import { getSampleDate, validateISOString, parseString } from '../Utils';
+import {
+  getSampleDate,
+  validateISOString,
+  parseString
+} from '../Utils';
 
 
 export default class OutputDateEdit extends Component {
+
   constructor(props, context) {
     super(props, context);
 

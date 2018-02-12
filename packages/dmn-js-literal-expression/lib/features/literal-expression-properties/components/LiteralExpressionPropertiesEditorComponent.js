@@ -1,6 +1,4 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 import Input from 'dmn-js-shared/lib/components/Input';
 import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';

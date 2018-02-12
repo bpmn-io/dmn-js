@@ -1,20 +1,15 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
-// eslint-disable-next-line
 import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
 
-// eslint-disable-next-line
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-// eslint-disable-next-line
 import Button from 'dmn-js-shared/lib/components/Button';
 
 import { getValuesArray, parseString } from '../Utils';
+
 
 export default class InputOutputValuesComponent extends Component {
 

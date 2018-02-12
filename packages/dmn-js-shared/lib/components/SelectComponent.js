@@ -1,6 +1,4 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 
 export default class SelectComponent extends Component {

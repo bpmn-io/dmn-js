@@ -1,8 +1,7 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
+
 
 export default class TextareaEditorComponent extends Component {
   constructor(props, context) {

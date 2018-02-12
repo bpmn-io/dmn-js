@@ -1,6 +1,3 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 import { query as domQuery } from 'min-dom';
 
 import { bootstrap, inject } from 'test/spec/base/viewer/TestHelper';

@@ -1,7 +1,4 @@
-
-// eslint-disable-next-line
-import Inferno, { options } from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 const HIT_POLICIES = [
   'UNIQUE',

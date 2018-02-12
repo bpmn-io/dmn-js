@@ -1,8 +1,10 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component, render } from 'inferno';
 
-import { findRenderedDOMElementWithClass, renderIntoDocument } from 'inferno-test-utils';
+import TestContainerSupport from 'mocha-test-container-support';
+
+import {
+  findRenderedDOMElementWithClass,
+} from 'inferno-test-utils';
 
 import { inject, bootstrap } from 'test/spec/base/viewer/TestHelper';
 
@@ -11,16 +13,31 @@ import ViewerComponent from 'lib/base/viewer/core/components/ViewerComponent';
 
 describe('ViewerComponent', function() {
 
+  var container, vTree;
+
+  function renderIntoDocument(vNode) {
+    vTree = render(vNode, container);
+    return vTree;
+  }
+
+  beforeEach(function() {
+    container = TestContainerSupport.get(this);
+  });
+
+  afterEach(function() {
+    render(null, container);
+  });
+
   beforeEach(bootstrap({}));
 
 
   it('should render viewer', inject(function(injector) {
 
     // when
-    const renderedTree = renderIntoDocument(<ViewerComponent injector={ injector } />);
+    const tree = renderIntoDocument(<ViewerComponent injector={ injector } />);
 
     // then
-    const node = findRenderedDOMElementWithClass(renderedTree, 'viewer-container');
+    const node = findRenderedDOMElementWithClass(tree, 'viewer-container');
 
     expect(node).to.exist;
   }));
@@ -32,10 +49,10 @@ describe('ViewerComponent', function() {
     components.onGetComponent('viewer', () => () => <div className="foo"></div>);
 
     // when
-    const renderedTree = renderIntoDocument(<ViewerComponent injector={ injector } />);
+    const tree = renderIntoDocument(<ViewerComponent injector={ injector } />);
 
     // then
-    expect(findRenderedDOMElementWithClass(renderedTree, 'foo')).to.exist;
+    expect(findRenderedDOMElementWithClass(tree, 'foo')).to.exist;
   }));
 
 

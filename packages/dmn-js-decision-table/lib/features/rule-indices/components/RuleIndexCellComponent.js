@@ -1,7 +1,5 @@
+import { Component } from 'inferno';
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
 
 export default class RulesIndexCellComponent extends Component {
   render() {
