@@ -1,16 +1,17 @@
 /* global sinon */
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import TestContainerSupport from 'mocha-test-container-support';
+
+import { Component } from 'inferno';
 
 import {
   matches
 } from 'min-dom';
 
+import { render } from 'inferno';
+
 import {
   findRenderedDOMElementWithClass,
-  renderIntoDocument
 } from 'inferno-test-utils';
 
 import {
@@ -23,13 +24,39 @@ import EditableComponent from 'lib/components/EditableComponent';
 
 describe('EditableComponent', function() {
 
+  var container, vTree;
+
+  function renderIntoDocument(vNode) {
+    vTree = render(vNode, container);
+    return vTree;
+  }
+
+  function renderToNode(vnode) {
+    const tree = renderIntoDocument(
+      <TestContext>
+        { vnode }
+      </TestContext>
+    );
+
+    return findRenderedDOMElementWithClass(tree, 'editable');
+  }
+
+  beforeEach(function() {
+    container = TestContainerSupport.get(this);
+  });
+
+  afterEach(function() {
+    render(null, container);
+  });
+
+
   it('should render', function() {
 
     // given
     var value = 'FOO <br/> BAR';
 
     // when
-    const node = render(
+    const node = renderToNode(
       <TestComponent value={ value } className="test-component" />
     );
 
@@ -44,7 +71,7 @@ describe('EditableComponent', function() {
   it('should render without value', function() {
 
     // when
-    const node = render(
+    const node = renderToNode(
       <TestComponent value={ null } />
     );
 
@@ -61,7 +88,7 @@ describe('EditableComponent', function() {
       var onBlur = sinon.spy();
       var onFocus = sinon.spy();
 
-      const node = render(
+      const node = renderToNode(
         <TestComponent
           onFocus={ onFocus }
           onBlur={ onBlur } />
@@ -89,7 +116,7 @@ describe('EditableComponent', function() {
       // given
       var onChange = sinon.spy();
 
-      const node = render(
+      const node = renderToNode(
         <TestComponent onChange={ onChange } />
       );
 
@@ -115,7 +142,7 @@ describe('EditableComponent', function() {
         }
       });
 
-      const node = render(
+      const node = renderToNode(
         <TestComponent
           onChange={ onChange }
           validate={ validate } />
@@ -151,17 +178,6 @@ describe('EditableComponent', function() {
   });
 
 });
-
-
-function render(vnode) {
-  const tree = renderIntoDocument(
-    <TestContext>
-      { vnode }
-    </TestContext>
-  );
-
-  return findRenderedDOMElementWithClass(tree, 'editable');
-}
 
 
 class TestComponent extends EditableComponent {

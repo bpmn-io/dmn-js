@@ -1,7 +1,3 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 import { bootstrapModeler, inject } from 'test/helper';
 
 import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';

@@ -1,7 +1,3 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 export default class FooProvider {
   constructor(components, simpleMode) {
     simpleMode.registerProvider(() => {

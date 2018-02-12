@@ -7,20 +7,22 @@
     "dev": "npm run test -- --no-single-run --auto-watch"
   },
   "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "babel-plugin-inferno": "^4.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "inferno-test-utils": "^4.0.0",
+    "mocha-test-container-support": "^0.2.0"
+  },
   "dependencies": {
     "diagram-js": "^0.27.1",
     "didi": "^0.1.1",
     "dmn-moddle": "^1.0.0",
-    "inferno": "^3.9.0",
-    "inferno-component": "^3.9.0",
-    "min-dash": "^1.1.0"
-  },
-  "devDependencies": {
-    "babel-plugin-inferno": "^3.3.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "inferno-test-utils": "^3.10.1",
-    "mocha-test-container-support": "^0.2.0"
+    "dom-selection": "^0.3.3",
+    "inferno": "^4.0.0",
+    "min-dash": "^1.1.0",
+    "selection-range": "^1.1.0",
+    "selection-update": "^0.1.2"
   },
   "browserify": {
     "transform": [

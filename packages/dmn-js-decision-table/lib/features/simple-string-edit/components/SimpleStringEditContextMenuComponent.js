@@ -1,15 +1,9 @@
+import { Component } from 'inferno';
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
-
-// eslint-disable-next-line
 import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
-// eslint-disable-next-line
 import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
 
-// eslint-disable-next-line
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
@@ -23,7 +17,9 @@ const INPUT_VALUES_LABEL = 'Predefined Values',
       OUTPUT_VALUES_LABEL = 'Predefined Values',
       INPUT_ENTRY_VALUES_LABEL = 'Custom Values';
 
+
 export default class SimpleStringEditContextMenuComponent extends Component {
+
   constructor(props, context) {
     super(props, context);
 

@@ -1,13 +1,12 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
-// eslint-disable-next-line
 import Input from 'dmn-js-shared/lib/components/Input';
 
 import { parseString } from '../Utils';
 
+
 export default class OutputNumberEdit extends Component {
+
   constructor(props, context) {
     super(props, context);
 

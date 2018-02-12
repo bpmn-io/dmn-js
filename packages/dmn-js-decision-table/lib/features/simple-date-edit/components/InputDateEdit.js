@@ -1,17 +1,17 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
-// eslint-disable-next-line
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-// eslint-disable-next-line
 import Button from 'dmn-js-shared/lib/components/Button';
 
-// eslint-disable-next-line
 import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
-import { getDateString, getSampleDate, validateISOString, parseString } from '../Utils';
+import {
+  getDateString,
+  getSampleDate,
+  validateISOString,
+  parseString
+} from '../Utils';
 
 const EXACT = 'exact',
       BEFORE = 'before',
@@ -20,6 +20,7 @@ const EXACT = 'exact',
 
 
 export default class InputDateEdit extends Component {
+
   constructor(props, context) {
     super(props, context);
 

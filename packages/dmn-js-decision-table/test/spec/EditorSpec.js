@@ -1,7 +1,3 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 import TestContainer from 'mocha-test-container-support';
 
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';

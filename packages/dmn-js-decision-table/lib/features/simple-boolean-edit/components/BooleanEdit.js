@@ -1,8 +1,5 @@
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
-// eslint-disable-next-line
 import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 import { parseString } from '../Utils';
@@ -13,6 +10,7 @@ const TRUE = 'true',
 
 
 export default class BooleanEdit extends Component {
+
   constructor(props, context) {
     super(props, context);
 

@@ -1,13 +1,11 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 
 import { assign } from 'min-dash/lib/object';
 
 import { query as domQuery } from 'min-dom';
 
 const OFFSET = 4;
+
 
 export default class SimpleModeButtonComponent extends Component {
   constructor(props, context) {
