@@ -1,4 +1,4 @@
-import Inferno from 'inferno';
+import { render } from 'inferno';
 
 import ViewerComponent from './components/ViewerComponent';
 
@@ -10,11 +10,11 @@ export default class Renderer {
     this._container = container;
 
     eventBus.on('renderer.mount', () => {
-      Inferno.render(<ViewerComponent injector={ injector } />, container);
+      render(<ViewerComponent injector={ injector } />, container);
     });
 
     eventBus.on('renderer.unmount', () => {
-      Inferno.render(null, container);
+      render(null, container);
     });
   }
 

@@ -1,8 +1,8 @@
 /* global sinon */
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
-import Component from 'inferno-component';
+import TestContainerSupport from 'mocha-test-container-support';
+
+import { Component, render } from 'inferno';
 
 import {
   matches
@@ -10,19 +10,40 @@ import {
 
 import {
   findRenderedDOMElementWithClass,
-  findVNodeWithType,
-  renderIntoDocument
+  findVNodeWithType
 } from 'inferno-test-utils';
 
 import {
   triggerInputEvent
 } from 'test/util/EventUtil';
 
-// eslint-disable-next-line
 import ContentEditable from 'lib/components/ContentEditable';
 
 
 describe('ContentEditable', function() {
+
+  var container, vTree;
+
+  function renderToNode(vnode) {
+    const tree = renderIntoDocument(vnode);
+
+    return findRenderedDOMElementWithClass(tree, 'content-editable');
+  }
+
+  function renderIntoDocument(vNode) {
+    vTree = render(vNode, container);
+    return vTree;
+  }
+
+  beforeEach(function() {
+    container = TestContainerSupport.get(this);
+  });
+
+  afterEach(function() {
+    render(null, container);
+  });
+
+
 
   it('should render', function() {
 
@@ -31,7 +52,7 @@ describe('ContentEditable', function() {
     var text = 'FOO <br/> BAR';
 
     // when
-    const node = render(<ContentEditable className={ 'other' } text={ text } />);
+    const node = renderToNode(<ContentEditable className={ 'other' } text={ text } />);
 
     // then
     expect(node).to.exist;
@@ -88,7 +109,7 @@ describe('ContentEditable', function() {
       var onBlur = sinon.spy();
       var onFocus = sinon.spy();
 
-      const node = render(
+      const node = renderToNode(
         <ContentEditable
           onFocus={ onFocus }
           onBlur={ onBlur }
@@ -115,7 +136,7 @@ describe('ContentEditable', function() {
       // given
       var onInput = sinon.spy();
 
-      const node = render(<ContentEditable onInput={ onInput } text={ 'FOO' } />);
+      const node = renderToNode(<ContentEditable onInput={ onInput } text={ 'FOO' } />);
 
       // when
       triggerInputEvent(node, 'BLUB');
@@ -129,10 +150,3 @@ describe('ContentEditable', function() {
   });
 
 });
-
-
-function render(vnode) {
-  const tree = renderIntoDocument(vnode);
-
-  return findRenderedDOMElementWithClass(tree, 'content-editable');
-}

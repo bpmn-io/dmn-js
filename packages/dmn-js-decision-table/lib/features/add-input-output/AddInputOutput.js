@@ -1,7 +1,3 @@
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 import AddInputCellComponent from './components/AddInputCellComponent';
 import AddOutputCellComponent from './components/AddOutputCellComponent';
 

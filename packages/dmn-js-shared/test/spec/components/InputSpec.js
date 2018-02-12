@@ -1,11 +1,11 @@
 /* global sinon */
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
+import TestContainerSupport from 'mocha-test-container-support';
+
+import { render } from 'inferno';
 
 import {
-  findRenderedDOMElementWithClass,
-  renderIntoDocument
+  findRenderedDOMElementWithClass
 } from 'inferno-test-utils';
 
 import { triggerInputEvent, triggerKeyEvent } from 'test/util/EventUtil';
@@ -15,6 +15,22 @@ import Input from 'lib/components/Input';
 
 
 describe('Input', function() {
+
+  var container, vTree;
+
+  function renderIntoDocument(vNode) {
+    vTree = render(vNode, container);
+    return vTree;
+  }
+
+  beforeEach(function() {
+    container = TestContainerSupport.get(this);
+  });
+
+  afterEach(function() {
+    render(null, container);
+  });
+
 
   it('should render', function() {
 

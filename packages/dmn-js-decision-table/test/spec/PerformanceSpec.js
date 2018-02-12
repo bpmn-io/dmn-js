@@ -1,9 +1,7 @@
-require('../TestHelper');
-
-/* global bootstrapModeler, inject */
-
-// eslint-disable-next-line
-import Inferno from 'inferno';
+import {
+  bootstrapModeler,
+  inject
+} from '../TestHelper';
 
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';

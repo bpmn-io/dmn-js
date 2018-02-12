@@ -1,8 +1,5 @@
 /* eslint-disable max-len */
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class ContextMenu {

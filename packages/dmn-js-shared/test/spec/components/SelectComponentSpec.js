@@ -1,12 +1,12 @@
 /* global sinon */
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
+import TestContainerSupport from 'mocha-test-container-support';
+
+import { render } from 'inferno';
 
 import {
   findRenderedDOMElementWithClass,
-  scryRenderedDOMElementsWithClass,
-  renderIntoDocument
+  scryRenderedDOMElementsWithClass
 } from 'inferno-test-utils';
 
 import { triggerChangeEvent } from 'test/util/EventUtil';
@@ -16,6 +16,22 @@ import SelectComponent from 'lib/components/SelectComponent';
 
 
 describe('SelectComponent', function() {
+
+  var container, vTree;
+
+  function renderIntoDocument(vNode) {
+    vTree = render(vNode, container);
+    return vTree;
+  }
+
+  beforeEach(function() {
+    container = TestContainerSupport.get(this);
+  });
+
+  afterEach(function() {
+    render(null, container);
+  });
+
 
   it('should render', function() {
 
