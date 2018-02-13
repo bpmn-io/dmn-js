@@ -18,6 +18,10 @@ export default class ViewDrd {
 
       const definitions = getDefinitions(root);
 
+      if (!definitions) {
+        return;
+      }
+
       // open definitions
       const view = parent.getView(definitions);
 
@@ -46,6 +50,11 @@ ViewDrd.$inject = [ 'components', 'eventBus', 'injector', 'sheet' ];
 
 function getDefinitions(root) {
   const { businessObject } = root;
+
+  // root might not have business object
+  if (!businessObject) {
+    return;
+  }
 
   const decision = businessObject.$parent;
 
