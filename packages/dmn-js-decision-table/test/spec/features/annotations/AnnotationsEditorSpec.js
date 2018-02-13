@@ -12,6 +12,7 @@ import simpleXML from '../../simple.dmn';
 import AnnotationsEditorModule from 'lib/features/annotations/editor';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
+import ModelingModule from 'lib/features/modeling';
 import RulesModule from 'lib/features/rules';
 
 
@@ -22,6 +23,7 @@ describe('annotations editor', function() {
       AnnotationsEditorModule,
       CoreModule,
       DecisionTableHeadModule,
+      ModelingModule,
       RulesModule
     ],
     debounceInput: false

@@ -13,12 +13,15 @@ import literalExpressionXML from '../../literal-expression.dmn';
 import TextareaEditorModule
   from 'lib/features/textarea/editor';
 
+import ModelingModule from 'lib/features/modeling';
+
 
 describe('textarea editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
-      TextareaEditorModule
+      TextareaEditorModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

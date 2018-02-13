@@ -15,6 +15,7 @@ import simpleStringEditXML from './simple-string-edit.dmn';
 
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
+import ModelingModule from 'lib/features/modeling';
 import RulesEditorModule from 'lib/features/rules/editor';
 import SimpleStringEditModule from 'lib/features/simple-string-edit';
 
@@ -25,6 +26,7 @@ describe('simple string edit', function() {
     modules: [
       CoreModule,
       InteractionEventsModule,
+      ModelingModule,
       RulesEditorModule,
       SimpleStringEditModule
     ]

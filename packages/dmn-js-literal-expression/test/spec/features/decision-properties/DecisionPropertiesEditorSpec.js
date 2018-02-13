@@ -11,13 +11,14 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import DecisionPropertiesEditorModule from 'lib/features/decision-properties/editor';
-
+import ModelingModule from 'lib/features/modeling';
 
 describe('decision properties editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
-      DecisionPropertiesEditorModule
+      DecisionPropertiesEditorModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

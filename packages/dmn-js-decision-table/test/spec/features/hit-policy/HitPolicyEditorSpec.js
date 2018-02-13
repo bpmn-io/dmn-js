@@ -11,6 +11,7 @@ import simpleXML from '../../simple.dmn';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import HitPolicyEditorModule from 'lib/features/hit-policy/editor';
+import ModelingModule from 'lib/features/modeling';
 
 
 describe('hit policy editor', function() {
@@ -19,7 +20,8 @@ describe('hit policy editor', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
-      HitPolicyEditorModule
+      HitPolicyEditorModule,
+      ModelingModule
     ]
   }));
 

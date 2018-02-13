@@ -19,6 +19,7 @@ import inputOutputValuesXML from '../../input-output-values.dmn';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import InputOutputValuesModule from 'lib/features/input-output-values';
+import ModelingModule from 'lib/features/modeling';
 
 
 describe('input output values', function() {
@@ -27,7 +28,8 @@ describe('input output values', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
-      InputOutputValuesModule
+      InputOutputValuesModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

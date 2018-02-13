@@ -20,6 +20,8 @@ import DecisionTablePropertiesModule
 import DecisionTablePropertiesEditorModule
   from 'lib/features/decision-table-properties/editor';
 
+import ModelingModule from 'lib/features/modeling';
+
 
 describe('decision table properties', function() {
 
@@ -27,7 +29,8 @@ describe('decision table properties', function() {
     modules: [
       CoreModule,
       DecisionTablePropertiesModule,
-      DecisionTablePropertiesEditorModule
+      DecisionTablePropertiesEditorModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

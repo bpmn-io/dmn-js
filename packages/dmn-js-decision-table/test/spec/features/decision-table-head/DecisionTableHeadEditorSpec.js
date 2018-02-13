@@ -12,6 +12,7 @@ import simpleXML from '../../simple.dmn';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import DecisionTableHeadEditorModule from 'lib/features/decision-table-head/editor';
+import ModelingModule from 'lib/features/modeling';
 
 
 describe('decision table head editor', function() {
@@ -20,7 +21,8 @@ describe('decision table head editor', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
-      DecisionTableHeadEditorModule
+      DecisionTableHeadEditorModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

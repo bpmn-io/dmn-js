@@ -12,12 +12,15 @@ import literalExpressionXML from '../../literal-expression.dmn';
 import LiteralExpressionPropertiesEditorModule
   from 'lib/features/literal-expression-properties/editor';
 
+import ModelingModule from 'lib/features/modeling';
+
 
 describe('literal expression properties editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
-      LiteralExpressionPropertiesEditorModule
+      LiteralExpressionPropertiesEditorModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

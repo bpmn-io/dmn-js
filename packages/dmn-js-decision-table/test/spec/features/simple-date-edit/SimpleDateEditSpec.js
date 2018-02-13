@@ -14,6 +14,7 @@ import simpleNumberEditXML from './simple-date-edit.dmn';
 
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
+import ModelingModule from 'lib/features/modeling';
 import RulesEditorModule from 'lib/features/rules/editor';
 import SimpleDateEditModule from 'lib/features/simple-date-edit';
 
@@ -26,6 +27,7 @@ describe('simple date edit', function() {
     modules: [
       CoreModule,
       InteractionEventsModule,
+      ModelingModule,
       RulesEditorModule,
       SimpleDateEditModule
     ],

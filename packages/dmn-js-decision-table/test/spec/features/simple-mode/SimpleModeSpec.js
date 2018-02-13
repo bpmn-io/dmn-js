@@ -10,6 +10,7 @@ import simpleStringEditXML from './simple-mode.dmn';
 
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
+import ModelingModule from 'lib/features/modeling';
 import RulesEditorModule from 'lib/features/rules/editor';
 import SimpleModeModule from 'lib/features/simple-mode';
 
@@ -22,6 +23,7 @@ describe('simple mode', function() {
     modules: [
       CoreModule,
       InteractionEventsModule,
+      ModelingModule,
       RulesEditorModule,
       SimpleModeModule,
       {

@@ -11,6 +11,7 @@ import simpleXML from '../../simple.dmn';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import InputExpressionModule from 'lib/features/input-expression';
+import ModelingModule from 'lib/features/modeling';
 
 
 describe('input expression', function() {
@@ -19,7 +20,8 @@ describe('input expression', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
-      InputExpressionModule
+      InputExpressionModule,
+      ModelingModule
     ],
     debounceInput: false
   }));

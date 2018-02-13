@@ -16,6 +16,7 @@ import ContextMenuModule from 'lib/features/context-menu';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
+import ModelingModule from 'lib/features/modeling';
 import RulesModule from 'lib/features/rules';
 
 
@@ -27,6 +28,7 @@ describe('context menu', function() {
       CoreModule,
       DecisionTableHeadModule,
       InteractionEventsModule,
+      ModelingModule,
       RulesModule
     ]
   }));
@@ -128,6 +130,7 @@ describe('context menu', function() {
             CoreModule,
             DecisionTableHeadModule,
             InteractionEventsModule,
+            ModelingModule,
             RulesModule
           ]
         }));
@@ -428,6 +431,7 @@ describe('context menu', function() {
             CoreModule,
             DecisionTableHeadModule,
             InteractionEventsModule,
+            ModelingModule,
             RulesModule
           ]
         }));
@@ -736,6 +740,7 @@ describe('context menu', function() {
             CoreModule,
             DecisionTableHeadModule,
             InteractionEventsModule,
+            ModelingModule,
             RulesModule
           ]
         }));

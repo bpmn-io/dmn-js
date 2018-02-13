@@ -12,6 +12,7 @@ import simpleXML from '../../simple.dmn';
 import languageExpressionXML from '../../expression-language.dmn';
 
 import CoreModule from 'lib/core';
+import ModelingModule from 'lib/features/modeling';
 import RulesModule from 'lib/features/rules';
 import RulesEditorModule from 'lib/features/rules/editor';
 
@@ -29,6 +30,7 @@ describe('rules editor', function() {
     beforeEach(bootstrapModeler(simpleXML, {
       modules: [
         CoreModule,
+        ModelingModule,
         RulesModule,
         RulesEditorModule
       ],
@@ -79,6 +81,7 @@ describe('rules editor', function() {
       beforeEach(bootstrapModeler(languageExpressionXML, {
         modules: [
           CoreModule,
+          ModelingModule,
           RulesModule,
           RulesEditorModule
         ]
@@ -172,6 +175,7 @@ describe('rules editor', function() {
       beforeEach(bootstrapModeler(languageExpressionXML, {
         modules: [
           CoreModule,
+          ModelingModule,
           RulesModule,
           RulesEditorModule
         ],
