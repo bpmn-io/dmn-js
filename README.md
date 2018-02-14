@@ -5,7 +5,7 @@
 [dmn-js](https://github.com/bpmn-io/dmn-js) is a DMN modeling and rendering toolkit.
 
 
-> the project is still in an early stage. Documentation may be missing and examples may be broken.
+__NOTE__: Please do NOT consider dmn-js v1.x.x as stable. The project is still in an early stage of development. Breaking changes may be introduced at any time. We're planning to release a stable dmn-js v2.0.0 soon. In the meantime please refer to dmn-js v0.11.0 as the last stable version.
 
 
 ## Usage
