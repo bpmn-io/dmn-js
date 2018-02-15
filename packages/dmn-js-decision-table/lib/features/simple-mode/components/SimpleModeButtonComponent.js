@@ -26,6 +26,8 @@ export default class SimpleModeButtonComponent extends Component {
 
     this._selection = context.injector.get('selection');
 
+    this.updatePosition = this.updatePosition.bind(this);
+
     eventBus.on('selection.changed', ({ selection }) => {
       if (!selection || !simpleMode.canSimpleEdit(selection)) {
         this.setState({
@@ -38,13 +40,13 @@ export default class SimpleModeButtonComponent extends Component {
       this.setState({
         isVisible: true,
         selection
-      });
+      }, this.updatePosition);
     });
 
     this.onClick = this.onClick.bind(this);
   }
 
-  componentDidUpdate() {
+  updatePosition() {
     const { selection } = this.state;
 
     if (!selection || !this.node) {

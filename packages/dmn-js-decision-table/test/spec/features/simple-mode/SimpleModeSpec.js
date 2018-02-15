@@ -51,6 +51,22 @@ describe('simple mode', function() {
   });
 
 
+  it('should render at position', function() {
+
+    // given
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    // when
+    triggerMouseEvent(cell, 'click');
+
+    // then
+    const simpleModeButton = domQuery('.simple-mode-button', testContainer);
+
+    expect(simpleModeButton.style.top).to.not.equal('0px');
+    expect(simpleModeButton.style.left).to.not.equal('px');
+  });
+
+
   it('should open context menu', function() {
 
     // given
