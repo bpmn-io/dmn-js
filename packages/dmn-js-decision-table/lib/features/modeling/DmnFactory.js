@@ -12,21 +12,27 @@ export default class DmnFactory {
     var element = this._model.create(type, attrs || {});
 
     if (is(element, 'dmn:InputClause')) {
-      element.inputExpression = this.create('dmn:LiteralExpression', {
-        typeRef: 'string'
-      });
 
-      element.inputExpression.$parent = element;
+      if (attrs.inputExpression) {
+        element.inputExpression = attrs.inputExpression;
+      } else {
+        element.inputExpression = this.create('dmn:LiteralExpression', {
+          typeRef: 'string'
+        });
+
+        element.inputExpression.$parent = element;
+      }
+
     }
 
     if (is(element, 'dmn:OutputClause')) {
-      element.typeRef = 'string';
+      element.typeRef = attrs.typeRef || 'string';
     }
 
     if (is(element, 'dmn:UnaryTests') ||
         is(element, 'dmn:LiteralExpression')) {
 
-      element.text = '';
+      element.text = attrs.text || '';
     }
 
     this._ensureId(element);

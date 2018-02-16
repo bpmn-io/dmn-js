@@ -8,7 +8,7 @@ export default class ContextMenu {
   constructor(
       components,
       contextMenu,
-      clipBoard,
+      clipboard,
       editorActions,
       eventBus,
       elementRegistry,
@@ -17,7 +17,7 @@ export default class ContextMenu {
       rules) {
 
     this._contextMenu = contextMenu;
-    this._clipBoard = clipBoard;
+    this._clipboard = clipboard;
     this._editorActions = editorActions;
     this._elementRegistry = elementRegistry;
     this._eventBus = eventBus;
@@ -119,14 +119,25 @@ export default class ContextMenu {
 
         this._contextMenu.close();
       },
+      copy: element => {
+        this._editorActions.trigger('copy', { element });
+
+        this._contextMenu.close();
+      },
       cut: element => {
         this._editorActions.trigger('cut', { element });
+
+        this._contextMenu.close();
       },
       pasteBefore: element => {
         this._editorActions.trigger('pasteBefore', { element });
+
+        this._contextMenu.close();
       },
       pasteAfter: element => {
         this._editorActions.trigger('pasteAfter', { element });
+
+        this._contextMenu.close();
       }
     };
 
@@ -142,11 +153,13 @@ export default class ContextMenu {
       return null;
     }
 
+    const clipboardData = this._clipboard.get() || {};
+
     const entries = [];
 
     if (is(element.row, 'dmn:DecisionRule')) {
       const canPaste = this._rules.allowed('paste', {
-        elements: this._clipBoard.getElement(),
+        data: clipboardData.elements,
         target: element.row
       });
 
@@ -170,6 +183,12 @@ export default class ContextMenu {
             onClick={ () => handlers.removeRule(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
             Remove
+          </div>
+          <div
+            className="context-menu-group-entry context-menu-entry-copy-rule"
+            onClick={ () => handlers.copy(element.row) }>
+            <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
+            Copy
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-cut-rule"
@@ -201,7 +220,7 @@ export default class ContextMenu {
       });
 
       const canPaste = this._rules.allowed('paste', {
-        elements: this._clipBoard.getElement(),
+        data: clipboardData.elements,
         target: element.col || element
       });
 
@@ -225,6 +244,12 @@ export default class ContextMenu {
             onClick={ () => handlers.removeInput(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
             Remove
+          </div>
+          <div
+            className="context-menu-group-entry context-menu-entry-copy-input"
+            onClick={ () => handlers.copy(actualElement) }>
+            <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
+            Copy
           </div>
           <div
             className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-input` }
@@ -254,7 +279,7 @@ export default class ContextMenu {
       });
 
       const canPaste = this._rules.allowed('paste', {
-        elements: this._clipBoard.getElement(),
+        data: clipboardData.elements,
         target: element.col || element
       });
 
@@ -278,6 +303,12 @@ export default class ContextMenu {
             onClick={ () => handlers.removeOutput(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
             Remove
+          </div>
+          <div
+            className="context-menu-group-entry context-menu-entry-copy-output"
+            onClick={ () => handlers.copy(actualElement) }>
+            <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
+            Copy
           </div>
           <div
             className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-output` }
@@ -308,7 +339,7 @@ export default class ContextMenu {
 ContextMenu.$inject = [
   'components',
   'contextMenu',
-  'clipBoard',
+  'clipboard',
   'editorActions',
   'eventBus',
   'elementRegistry',

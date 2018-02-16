@@ -3,9 +3,9 @@ import { assign } from 'min-dash';
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 
 import UpdateAllowedValuesHandler from './cmd/UpdateAllowedValuesHandler';
-
 import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
+import IdClaimHandler from './cmd/IdClaimHandler';
 
 
 export default class Modeling extends BaseModeling {
@@ -26,7 +26,8 @@ export default class Modeling extends BaseModeling {
   static _getHandlers() {
     return assign({}, super._getHandlers(), {
       'editAllowedValues': UpdateAllowedValuesHandler,
-      'updateProperties': UpdatePropertiesHandler
+      'updateProperties': UpdatePropertiesHandler,
+      'id.updateClaim': IdClaimHandler
     });
   }
 
@@ -166,6 +167,25 @@ export default class Modeling extends BaseModeling {
     };
 
     this._commandStack.execute('updateProperties', context);
+  }
+
+  claimId(id, moddleElement) {
+    const context = {
+      id: id,
+      element: moddleElement,
+      claiming: true
+    };
+
+    this._commandStack.execute('id.updateClaim', context);
+  }
+
+  unclaimId(id, moddleElement) {
+    const context = {
+      id: id,
+      element: moddleElement
+    };
+
+    this._commandStack.execute('id.updateClaim', context);
   }
 }
 

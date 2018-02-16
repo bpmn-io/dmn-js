@@ -1,7 +1,8 @@
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class DecisionTableEditorActions {
-  constructor(editorActions, modeling, selection, cellSelection, sheet) {
+
+  constructor(copyCutPaste, editorActions, modeling, selection, cellSelection, sheet) {
     const actions = {
       addRule() {
         return modeling.addRow({ type: 'dmn:DecisionRule' });
@@ -223,6 +224,18 @@ export default class DecisionTableEditorActions {
       },
       selectCellBelow() {
         return cellSelection.selectCell('below');
+      },
+      copy({ element }) {
+        copyCutPaste.copy(element);
+      },
+      cut({ element }) {
+        copyCutPaste.cut(element);
+      },
+      pasteBefore({ element }) {
+        copyCutPaste.pasteBefore(element);
+      },
+      pasteAfter({ element }) {
+        copyCutPaste.pasteAfter(element);
       }
     };
 
@@ -231,6 +244,7 @@ export default class DecisionTableEditorActions {
 }
 
 DecisionTableEditorActions.$inject = [
+  'copyCutPaste',
   'editorActions',
   'modeling',
   'selection',

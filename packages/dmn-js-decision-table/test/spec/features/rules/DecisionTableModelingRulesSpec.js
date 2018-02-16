@@ -89,16 +89,75 @@ describe('modeling rules', function() {
 
   describe('paste', function() {
 
+    const rowData = {
+      root: [{
+        type: 'row',
+        businessObject: {
+          $type: 'dmn:DecisionRule'
+        },
+        cells: [{
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:UnaryTests'
+          }
+        }, {
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:UnaryTests'
+          }
+        }, {
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:LiteralExpression'
+          }
+        }, {
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:LiteralExpression'
+          }
+        }]
+      }]
+    };
+
+    const colData = {
+      root: [{
+        type: 'col',
+        businessObject: {
+          $type: 'dmn:InputClause'
+        },
+        cells: [{
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:UnaryTests'
+          }
+        }, {
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:UnaryTests'
+          }
+        }, {
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:UnaryTests'
+          }
+        }, {
+          type: 'cell',
+          businessObject: {
+            $type: 'dmn:UnaryTests'
+          }
+        }]
+      }]
+    };
+
     it('should allow pasting row', inject(function(elementRegistry, rules) {
 
       // given
-      const rule1 = elementRegistry.get('rule1'),
-            rule2 = elementRegistry.get('rule2');
+      const rule1 = elementRegistry.get('rule1');
 
       // when
       const allowed = rules.allowed('paste', {
-        elements: rule1,
-        target: rule2
+        data: rowData,
+        target: rule1
       });
 
       // then
@@ -110,8 +169,7 @@ describe('modeling rules', function() {
       function(elementRegistry, modeling, rules) {
 
         // given
-        const rule1 = elementRegistry.get('rule1'),
-              rule2 = elementRegistry.get('rule2');
+        const rule1 = elementRegistry.get('rule1');
 
         modeling.removeRow(rule1);
 
@@ -119,8 +177,8 @@ describe('modeling rules', function() {
 
         // when
         const allowed = rules.allowed('paste', {
-          elements: rule1,
-          target: rule2
+          data: rowData,
+          target: rule1
         });
 
         // then
@@ -132,13 +190,12 @@ describe('modeling rules', function() {
     it('should allow pasting col', inject(function(elementRegistry, rules) {
 
       // given
-      const input1 = elementRegistry.get('input1'),
-            input2 = elementRegistry.get('input2');
+      const input1 = elementRegistry.get('input1');
 
       // when
       const allowed = rules.allowed('paste', {
-        elements: input1,
-        target: input2
+        data: colData,
+        target: input1
       });
 
       // then
@@ -150,8 +207,7 @@ describe('modeling rules', function() {
       function(elementRegistry, modeling, rules) {
 
         // given
-        const input1 = elementRegistry.get('input1'),
-              input2 = elementRegistry.get('input2');
+        const input1 = elementRegistry.get('input1');
 
         modeling.removeCol(input1);
 
@@ -159,8 +215,8 @@ describe('modeling rules', function() {
 
         // when
         const allowed = rules.allowed('paste', {
-          elements: input1,
-          target: input2
+          data: colData,
+          target: input1
         });
 
         // then

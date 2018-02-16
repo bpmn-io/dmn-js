@@ -27,6 +27,13 @@ export function isOutput(element) {
 }
 
 
+function isRule(element) {
+  return is(element, 'dmn:DecisionRule');
+}
+
+module.exports.isRule = isRule;
+
+
 /**
  * Return the business object for a given element.
  *

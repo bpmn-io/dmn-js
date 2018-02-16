@@ -99,12 +99,13 @@ describe('context menu', function() {
         expect(domQueryAll(
           '.context-menu-group-entry',
           ruleEntriesGroup
-        )).to.have.lengthOf(6);
+        )).to.have.lengthOf(7);
 
         expectEntries([
           '.context-menu-entry-add-rule-above',
           '.context-menu-entry-add-rule-below',
           '.context-menu-entry-remove-rule',
+          '.context-menu-entry-copy-rule',
           '.context-menu-entry-cut-rule',
           '.context-menu-entry-paste-rule-above',
           '.context-menu-entry-paste-rule-below',
@@ -217,7 +218,25 @@ describe('context menu', function() {
         }));
 
 
-        it('should cut rule', inject(function(clipBoard, sheet) {
+        it('should copy rule', inject(function(clipboard, sheet) {
+
+          // given
+          const copyRule = domQuery('.context-menu-entry-copy-rule', testContainer);
+
+          // when
+          triggerClick(copyRule);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(4);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        it('should cut rule', inject(function(clipboard, sheet) {
 
           // given
           const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer);
@@ -237,7 +256,7 @@ describe('context menu', function() {
             rule4
           ]);
 
-          expect(clipBoard.getElement()).to.equal(rule1);
+          expect(clipboard.isEmpty()).to.be.false;
         }));
 
 
@@ -254,7 +273,7 @@ describe('context menu', function() {
           });
 
 
-          it('should paste rule above', inject(function(sheet) {
+          it('should paste rule above', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteRuleAboveEntry = domQuery(
@@ -266,13 +285,15 @@ describe('context menu', function() {
             triggerClick(pasteRuleAboveEntry);
 
             // then
+            const newRule1 = elementRegistry.get('rule1');
+
             const root = sheet.getRoot(),
                   { rows } = root;
 
             expect(rows).to.have.lengthOf(4);
 
             expectOrder(rows, [
-              rule1,
+              newRule1,
               rule2,
               rule3,
               rule4
@@ -280,7 +301,7 @@ describe('context menu', function() {
           }));
 
 
-          it ('should paste rule below', inject(function(sheet) {
+          it('should paste rule below', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteRuleBelowEntry = domQuery(
@@ -292,15 +313,19 @@ describe('context menu', function() {
             triggerClick(pasteRuleBelowEntry);
 
             // then
+            const newRule1 = elementRegistry.get('rule1');
+
             const root = sheet.getRoot(),
                   { rows } = root;
 
             expect(rows).to.have.lengthOf(4);
 
-            expect(rows[0]).to.equal(rule2);
-            expect(rows[1]).to.equal(rule1);
-            expect(rows[2]).to.equal(rule3);
-            expect(rows[3]).to.equal(rule4);
+            expectOrder(rows, [
+              rule2,
+              newRule1,
+              rule3,
+              rule4
+            ]);
           }));
 
         });
@@ -362,12 +387,13 @@ describe('context menu', function() {
         // then
         expect(
           domQueryAll('.context-menu-group-entry', inputEntriesGroup)
-        ).to.have.lengthOf(6);
+        ).to.have.lengthOf(7);
 
         expectEntries([
           '.context-menu-entry-add-input-left',
           '.context-menu-entry-add-input-right',
           '.context-menu-entry-remove-input',
+          '.context-menu-entry-copy-input',
           '.context-menu-entry-cut-input',
           '.context-menu-entry-paste-input-left',
           '.context-menu-entry-paste-input-right',
@@ -480,7 +506,32 @@ describe('context menu', function() {
         }));
 
 
-        it('should cut input', inject(function(clipBoard, sheet) {
+        it('should copy input', inject(function(clipboard, sheet) {
+
+          // given
+          const cutInputEntry = domQuery('.context-menu-entry-copy-input', testContainer);
+
+          // when
+          triggerClick(cutInputEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { cols } = root;
+
+          expect(cols).to.have.lengthOf(4);
+
+          expectOrder(cols, [
+            input1,
+            input2,
+            output1,
+            output2
+          ]);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        it('should cut input', inject(function(clipboard, sheet) {
 
           // given
           const cutInputEntry = domQuery('.context-menu-entry-cut-input', testContainer);
@@ -500,7 +551,7 @@ describe('context menu', function() {
             output2
           ]);
 
-          expect(clipBoard.getElement()).to.equal(input1);
+          expect(clipboard.isEmpty()).to.be.false;
         }));
 
 
@@ -523,7 +574,7 @@ describe('context menu', function() {
           });
 
 
-          it('should paste input left', inject(function(sheet) {
+          it('should paste input left', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteInputLeftEntry = domQuery(
@@ -535,13 +586,15 @@ describe('context menu', function() {
             triggerClick(pasteInputLeftEntry);
 
             // then
+            const newInput1 = elementRegistry.get('input1');
+
             const root = sheet.getRoot(),
                   { cols } = root;
 
             expect(cols).to.have.lengthOf(4);
 
             expectOrder(cols, [
-              input1,
+              newInput1,
               input2,
               output1,
               output2
@@ -549,7 +602,7 @@ describe('context menu', function() {
           }));
 
 
-          it ('should paste input right', inject(function(sheet) {
+          it ('should paste input right', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteInputRightEntry = domQuery(
@@ -561,6 +614,8 @@ describe('context menu', function() {
             triggerClick(pasteInputRightEntry);
 
             // then
+            const newInput1 = elementRegistry.get('input1');
+
             const root = sheet.getRoot(),
                   { cols } = root;
 
@@ -568,7 +623,7 @@ describe('context menu', function() {
 
             expectOrder(cols, [
               input2,
-              input1,
+              newInput1,
               output1,
               output2
             ]);
@@ -696,12 +751,13 @@ describe('context menu', function() {
         // then
         expect(
           domQueryAll('.context-menu-group-entry', outputEntriesGroup)
-        ).to.have.lengthOf(6);
+        ).to.have.lengthOf(7);
 
         expectEntries([
           '.context-menu-entry-add-output-left',
           '.context-menu-entry-add-output-right',
           '.context-menu-entry-remove-output',
+          '.context-menu-entry-copy-output',
           '.context-menu-entry-cut-output',
           '.context-menu-entry-paste-output-left',
           '.context-menu-entry-paste-output-right',
@@ -814,7 +870,35 @@ describe('context menu', function() {
         }));
 
 
-        it('should cut output', inject(function(clipBoard, sheet) {
+        it('should copy output', inject(function(clipboard, sheet) {
+
+          // given
+          const cutOutputEntry = domQuery(
+            '.context-menu-entry-copy-output',
+            testContainer
+          );
+
+          // when
+          triggerClick(cutOutputEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { cols } = root;
+
+          expect(cols).to.have.lengthOf(4);
+
+          expectOrder(cols, [
+            input1,
+            input2,
+            output1,
+            output2
+          ]);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        it('should cut output', inject(function(clipboard, sheet) {
 
           // given
           const cutOutputEntry = domQuery(
@@ -837,7 +921,7 @@ describe('context menu', function() {
             output2
           ]);
 
-          expect(clipBoard.getElement()).to.equal(output1);
+          expect(clipboard.isEmpty()).to.be.false;
         }));
 
 
@@ -860,7 +944,7 @@ describe('context menu', function() {
           });
 
 
-          it('should paste output left', inject(function(sheet) {
+          it('should paste output left', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteOutputLeftEntry = domQuery(
@@ -872,6 +956,8 @@ describe('context menu', function() {
             triggerClick(pasteOutputLeftEntry);
 
             // then
+            const newOutput1 = elementRegistry.get('output1');
+
             const root = sheet.getRoot(),
                   { cols } = root;
 
@@ -880,13 +966,13 @@ describe('context menu', function() {
             expectOrder(cols, [
               input1,
               input2,
-              output1,
+              newOutput1,
               output2
             ]);
           }));
 
 
-          it ('should paste output right', inject(function(sheet) {
+          it ('should paste output right', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteOutputRightEntry = domQuery(
@@ -898,6 +984,8 @@ describe('context menu', function() {
             triggerClick(pasteOutputRightEntry);
 
             // then
+            const newOutput1 = elementRegistry.get('output1');
+
             const root = sheet.getRoot(),
                   { cols } = root;
 
@@ -907,7 +995,7 @@ describe('context menu', function() {
               input1,
               input2,
               output2,
-              output1
+              newOutput1
             ]);
           }));
 

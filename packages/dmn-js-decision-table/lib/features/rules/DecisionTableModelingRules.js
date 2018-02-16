@@ -1,11 +1,10 @@
 import {
-  isArray,
   every
 } from 'min-dash';
 
 import { Row, Col } from 'table-js/lib/model';
 
-import { is, isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
+import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 
@@ -40,58 +39,57 @@ export default class DecisionTableModelingRules extends RuleProvider {
       }
     });
 
-    this.addRule('paste', HIGH_PRIORITY, ({ elements, target }) => {
-      if (!elements || !target) {
+    // a rule that is aware of the data structure coming from copy and paste
+    this.addRule('paste', HIGH_PRIORITY, ({ data, target }) => {
+      if (!data || !target) {
         return false;
       }
 
-      if (!isArray(elements)) {
-        elements = [ elements ];
-      }
+      const { root } = data;
 
       if (target instanceof Row) {
-        return this.canPasteRows(elements);
+        return this.canPasteRows(root);
       } else if (target instanceof Col) {
-        return this.canPasteCols(elements, target);
+        return this.canPasteCols(root, target);
       }
     });
   }
 
-  canPasteRows(rows) {
+  canPasteRows(root) {
     const { cols } = this._sheet.getRoot();
 
-    return every(rows, row => {
-      if (!(row instanceof Row)) {
+    return every(root, rowDescriptor => {
+      if (rowDescriptor.type !== 'row') {
         return false;
       }
 
-      if (row.cells.length !== cols.length) {
+      if (rowDescriptor.cells.length !== cols.length) {
         return false;
       }
 
-      return every(row.cells, (cell, index) => {
+      return every(rowDescriptor.cells, (cellDescriptor, index) => {
         if (isInput(cols[index])) {
-          return is(cell, 'dmn:UnaryTests');
+          return cellDescriptor.businessObject.$type === 'dmn:UnaryTests';
         } else {
-          return is(cell, 'dmn:LiteralExpression');
+          return cellDescriptor.businessObject.$type === 'dmn:LiteralExpression';
         }
       });
 
     });
   }
 
-  canPasteCols(cols, targetCol) {
+  canPasteCols(root, targetCol) {
     const { rows } = this._sheet.getRoot();
 
-    return every(cols, col => {
-      if (col.cells.length !== rows.length) {
+    return every(root, colDescriptor => {
+      if (colDescriptor.cells.length !== rows.length) {
         return false;
       }
 
       if (isInput(targetCol)) {
-        return isInput(col);
+        return colDescriptor.businessObject.$type === 'dmn:InputClause';
       } else {
-        return isOutput(col);
+        return colDescriptor.businessObject.$type === 'dmn:OutputClause';
       }
     });
   }

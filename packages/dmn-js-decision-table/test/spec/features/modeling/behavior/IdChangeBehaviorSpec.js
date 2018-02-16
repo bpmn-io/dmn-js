@@ -5,7 +5,7 @@ import ModelingModule from 'lib/features/modeling';
 
 import diagramXML from './two-decision-tables.dmn';
 
-describe('DecisionTable', function() {
+describe('IdChangeBehavior', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: [

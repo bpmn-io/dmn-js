@@ -137,6 +137,12 @@ export default function CellSelection(
 
     if (elementId && elementId !== lastSelection) {
       realSelect(selection.id);
+    } else {
+      if (lastSelection) {
+
+        // deselect
+        realSelect();
+      }
     }
   });
 

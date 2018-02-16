@@ -4,6 +4,7 @@ import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
 import TestDecision from './simple.dmn';
 
+
 describe('DecisionTable', function() {
 
   let testContainer;

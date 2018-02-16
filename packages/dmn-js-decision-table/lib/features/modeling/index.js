@@ -4,12 +4,12 @@ import DmnFactory from './DmnFactory';
 import ElementFactory from './ElementFactory';
 import IdChangeBehavior from
   'dmn-js-shared/lib/features/modeling/behavior/IdChangeBehavior';
-
 import Modeling from './Modeling';
+import Behavior from './behavior';
 
 export default {
   __init__: [ 'dmnUpdater', 'idChangeBehavior', 'modeling' ],
-  __depends__: [ CommandStack ],
+  __depends__: [ Behavior, CommandStack ],
   dmnUpdater: [ 'type', DmnUpdater ],
   dmnFactory: [ 'type', DmnFactory ],
   elementFactory: [ 'type', ElementFactory ],
