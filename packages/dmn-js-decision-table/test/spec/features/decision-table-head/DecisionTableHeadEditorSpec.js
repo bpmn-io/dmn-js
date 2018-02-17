@@ -70,7 +70,7 @@ describe('decision table head editor', function() {
       outputName.focus();
 
       // when
-      triggerInputEvent(outputName, 'foo\nbar');
+      triggerInputEvent(outputName, 'foo<br>bar<br>');
 
       outputName.blur();
 
@@ -81,7 +81,7 @@ describe('decision table head editor', function() {
 
       expect(output.name).to.equal('foo\nbar');
 
-      expect(outputName.innerText).to.equal('foo\nbar');
+      expect(outputName.innerHTML).to.equal('foo<br>bar<br>');
     }));
 
   });

@@ -85,7 +85,7 @@ describe('annotations editor', function() {
     // when
     cell.focus();
 
-    triggerInputEvent(cell, 'foo\nbar');
+    triggerInputEvent(cell, 'foo<br>bar<br>');
 
     cell.blur();
 
@@ -96,7 +96,7 @@ describe('annotations editor', function() {
 
     expect(rule.description).to.equal('foo\nbar');
 
-    expect(cell.innerText).to.equal('foo\nbar');
+    expect(cell.innerHTML).to.equal('foo<br>bar<br>');
   }));
 
 });

@@ -76,7 +76,7 @@ describe('decision table properties', function() {
       name.focus();
 
       // when
-      triggerInputEvent(name, 'foo\nbar');
+      triggerInputEvent(name, 'foo<br>bar<br>');
 
       name.blur();
 
@@ -85,7 +85,7 @@ describe('decision table properties', function() {
 
       expect(root.businessObject.$parent.name).to.equal('foo\nbar');
 
-      expect(name.innerHTML).to.equal('foo\nbar');
+      expect(name.innerHTML).to.equal('foo<br>bar<br>');
     }));
 
 

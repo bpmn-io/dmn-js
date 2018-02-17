@@ -16,6 +16,7 @@ import ModelingModule from 'lib/features/modeling';
 import RulesModule from 'lib/features/rules';
 import RulesEditorModule from 'lib/features/rules/editor';
 
+
 describe('rules editor', function() {
 
   let testContainer;
@@ -61,14 +62,14 @@ describe('rules editor', function() {
       editor.focus();
 
       // when
-      triggerInputEvent(editor, 'foo\nbar');
+      triggerInputEvent(editor, 'foo<br>bar<br>');
 
       editor.blur();
 
       // then
       expect(elementRegistry.get('inputEntry1').businessObject.text).to.equal('foo\nbar');
 
-      expect(editor.innerHTML).to.equal('foo\nbar');
+      expect(editor.innerHTML).to.equal('foo<br>bar<br>');
     }));
 
   });
@@ -152,6 +153,7 @@ describe('rules editor', function() {
 
 
         it('should not display expression language if focussed', function() {
+
 
           // given
           const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
