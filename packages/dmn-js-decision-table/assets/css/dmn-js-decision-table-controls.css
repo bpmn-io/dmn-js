@@ -297,3 +297,41 @@
 .no-wrap {
   white-space: nowrap;
 }
+
+
+.dms-input,
+.dms-select {
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: none;
+  font-size: 14px;
+  color: #444;
+  height: 26px;
+  min-height: 26px;
+  box-sizing: border-box;
+}
+
+.dms-input.invalid {
+  background: #f4cecd;
+  border-color: #c9302c;
+  color: #c9302c;
+}
+
+.dms-input.invalid:focus {
+  border-color: #c9302c;
+}
+
+.dms-input:focus {
+  border-color: #52B415;
+}
+
+.dms-script-input {
+  min-height: 200px;
+  max-height: 400px;
+
+  font-family: monospace;
+  box-sizing: border-box;
+
+  white-space: pre-wrap;
+}

@@ -2,48 +2,142 @@ import { Component } from 'inferno';
 
 import escapeHtml from 'escape-html';
 
+import {
+  getRange,
+  setRange,
+  applyRange,
+  getWindowSelection
+} from 'selection-ranges';
 
+import selectionUpdate from 'selection-update';
+
+
+/**
+ * A content ediable that performs proper selection updates on
+ * editable changes. It normalizes editor operations by allowing
+ * only <br/> and plain text to be inserted.
+ *
+ * The callback `onInput(text)` recieves text (including line breaks)
+ * only. Updating the text via props will update the selection
+ * if needed, too.
+ *
+ * @example
+ *
+ * class SomeComponent extends Component {
+ *
+ *   render() {
+ *     return (
+ *       <ContentEditable
+ *         className="some classes"
+ *         text={ this.state.text }
+ *         onInput={ this.handleInput }
+ *         onFocus={ ... }
+ *         onBlur={ ... } />
+ *     );
+ *   }
+ *
+ * }
+ *
+ */
 export default class ContentEditable extends Component {
 
   constructor(props, context) {
     super(props, context);
 
+    this.state = {};
+
     this.onFocus = this.onFocus.bind(this);
     this.onInput = this.onInput.bind(this);
     this.onBlur = this.onBlur.bind(this);
+
+    this.onKeydown = this.onKeydown.bind(this);
   }
 
+  componentWillUpdate(newProps, newState) {
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.text !== this.node.innerText;
+    // save old selection + text for later
+    var node = this.node;
+
+    var range = newState.focussed && getRange(node);
+
+    this.selected = range && {
+      range: range,
+      text: innerText(node)
+    };
   }
 
+  componentDidUpdate() {
+
+    var selected = this.selected;
+
+    if (!selected) {
+      return;
+    }
+
+    // compute and restore selection based on
+    // (possibly new) text
+
+    const range = selected.range;
+    const text = selected.text;
+
+    const node = this.node;
+
+    const newText = innerText(node);
+
+    const newRange = (
+      newText !== text
+        ? selectionUpdate(range, text, newText)
+        : range
+    );
+
+    setRange(node, newRange);
+  }
 
   onFocus() {
     var propsFocus = this.props.onFocus;
+
+    this.setState({
+      focussed: true
+    });
 
     if (typeof propsFocus === 'function') {
       propsFocus();
     }
   }
 
-
   onBlur() {
     var propsBlur = this.props.onBlur;
+
+    this.setState({
+      focussed: false
+    });
 
     if (typeof propsBlur === 'function') {
       propsBlur();
     }
   }
 
+  onKeydown(event) {
+    // enter
+    if (event.which === 13) {
+      event.preventDefault();
+
+      insertLineBreak();
+
+      this.onInput(event);
+    }
+
+  }
+
   onInput(event) {
+
     var propsInput = this.props.onInput;
 
     if (typeof propsInput !== 'function') {
       return;
     }
 
-    var text = event.target.innerText;
+    var text = innerText(this.node);
 
     propsInput(text);
   }
@@ -56,6 +150,12 @@ export default class ContentEditable extends Component {
       className
     } = props;
 
+    // QUIRK: must add trailing <br/> for line
+    // breaks to properly work
+    text =
+      escapeHtml(text)
+        .replace(/\r?\n/g, '<br/>') + '<br/>';
+
     return (
       <div
         className={ [ className || '', 'content-editable' ].join(' ') }
@@ -64,9 +164,46 @@ export default class ContentEditable extends Component {
         onInput={ this.onInput }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
+        onKeydown={ this.onKeydown }
         ref={ node => this.node = node }
-        dangerouslySetInnerHTML={{ __html: escapeHtml(text) }}></div>
+        dangerouslySetInnerHTML={{ __html: text }}></div>
     );
   }
 
+}
+
+function brTag() {
+  return document.createElement('br');
+}
+
+function innerText(node) {
+  // QUIRK: we must remove the last trailing <br/>, if any
+  return node.innerText.replace(/\n$/, '');
+}
+
+function insertLineBreak() {
+
+  // insert line break at current insertation
+  // point; this assumes that the correct element, i.e.
+  // a <ContentEditable /> is currently focussed
+  var selection = getWindowSelection();
+
+  var range = selection.getRangeAt(0);
+
+  if (!range) {
+    return;
+  }
+
+  var newRange = range.cloneRange();
+
+  var br = brTag();
+
+  newRange.deleteContents();
+
+  newRange.insertNode(br);
+
+  newRange.setStartAfter(br);
+  newRange.setEndAfter(br);
+
+  applyRange(newRange);
 }

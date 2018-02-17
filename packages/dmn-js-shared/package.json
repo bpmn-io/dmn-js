@@ -21,7 +21,7 @@
     "dom-selection": "^0.3.3",
     "inferno": "^4.0.0",
     "min-dash": "^1.1.0",
-    "selection-range": "^1.1.0",
+    "selection-ranges": "^1.0.1",
     "selection-update": "^0.1.2"
   },
   "browserify": {
