@@ -165,7 +165,7 @@ export default class EditableComponent extends Component {
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
         onInput={ this.onInput }
-        text={ this.getDisplayValue() } />
+        value={ this.getDisplayValue() } />
     );
   }
 

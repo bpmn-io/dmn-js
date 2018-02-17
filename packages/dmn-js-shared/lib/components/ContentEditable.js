@@ -18,7 +18,7 @@ import selectionUpdate from 'selection-update';
  * only <br/> and plain text to be inserted.
  *
  * The callback `onInput(text)` recieves text (including line breaks)
- * only. Updating the text via props will update the selection
+ * only. Updating the value via props will update the selection
  * if needed, too.
  *
  * @example
@@ -29,7 +29,7 @@ import selectionUpdate from 'selection-update';
  *     return (
  *       <ContentEditable
  *         className="some classes"
- *         text={ this.state.text }
+ *         value={ this.state.text }
  *         onInput={ this.handleInput }
  *         onFocus={ ... }
  *         onBlur={ ... } />
@@ -146,14 +146,14 @@ export default class ContentEditable extends Component {
   render(props) {
 
     var {
-      text,
+      value,
       className
     } = props;
 
     // QUIRK: must add trailing <br/> for line
     // breaks to properly work
-    text =
-      escapeHtml(text)
+    value =
+      escapeHtml(value)
         .replace(/\r?\n/g, '<br/>') + '<br/>';
 
     return (
@@ -166,7 +166,7 @@ export default class ContentEditable extends Component {
         onBlur={ this.onBlur }
         onKeydown={ this.onKeydown }
         ref={ node => this.node = node }
-        dangerouslySetInnerHTML={{ __html: text }}></div>
+        dangerouslySetInnerHTML={{ __html: value }}></div>
     );
   }
 
