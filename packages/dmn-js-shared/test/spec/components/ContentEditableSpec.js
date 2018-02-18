@@ -5,6 +5,11 @@ import TestContainerSupport from 'mocha-test-container-support';
 import { Component, render } from 'inferno';
 
 import {
+  setRange,
+  getRange
+} from 'selection-ranges';
+
+import {
   matches
 } from 'min-dom';
 
@@ -49,55 +54,86 @@ describe('ContentEditable', function() {
 
     // given
     // text + whitespace + to-be-escaped HTML snippet
-    var text = 'FOO <br/> BAR';
+    var value = 'FOO <br/> BAR';
 
     // when
-    const node = renderToNode(<ContentEditable className={ 'other' } text={ text } />);
+    const node = renderToNode(
+      <ContentEditable
+        className={ 'other' }
+        value={ value } />
+    );
 
     // then
     expect(node).to.exist;
-    expect(node.innerText).to.eql(text);
+    expect(innerText(node)).to.eql(value);
 
     expect(matches(node, '.other')).to.be.true;
   });
 
 
-  it('should not rerender', function() {
+  describe('selection', function() {
 
-    // given
-    class Mock extends Component {
-      constructor(props, context) {
-        super(props, context);
+    it('should update on value change', function() {
 
-        this.state = {
-          text: 'FOO'
-        };
+      // given
+      class ParentComponent extends Component {
+        constructor(props, context) {
+          super(props, context);
+
+          this.state = {
+            value: 'FOO'
+          };
+        }
+
+        render() {
+          const { value } = this.state;
+
+          return <ContentEditable value={ value } />;
+        }
       }
 
-      render() {
-        const { text } = this.state;
+      const vTree = <ParentComponent />;
 
-        return <ContentEditable text={ text } />;
-      }
-    }
+      const parentComponent = findVNodeWithType(vTree, ParentComponent);
 
-    const vNodeTree = <Mock />;
+      const node = renderToNode(vTree);
 
-    renderIntoDocument(vNodeTree);
+      node.focus();
 
-    const mock = findVNodeWithType(vNodeTree, Mock);
+      // scenario (1): add line break
 
-    const contentEditable = findVNodeWithType(vNodeTree, ContentEditable);
+      // select F[OO]
+      setRange(node, { start: 1, end: 3 });
 
-    const spy = sinon.spy(contentEditable.children, 'render');
+      // when
+      parentComponent.children.setState({
+        value: 'FOO\nAAA'
+      });
 
-    // when
-    mock.children.setState({
-      text: 'FOO'
+      // then
+      expect(getRange(node)).to.eql({
+        start: 7,
+        end: 7
+      });
+
+
+      // scenario (2): remove content + line break mid string
+
+      // select FO[O\nAA]A
+      setRange(node, { start: 2, end: 6 });
+
+      // when
+      parentComponent.children.setState({
+        value: 'FOA'
+      });
+
+      // then
+      expect(getRange(node)).to.eql({
+        start: 2,
+        end: 2
+      });
     });
 
-    // then
-    expect(spy).to.not.have.been.called;
   });
 
 
@@ -113,7 +149,7 @@ describe('ContentEditable', function() {
         <ContentEditable
           onFocus={ onFocus }
           onBlur={ onBlur }
-          text={ 'FOO' } />
+          value={ 'FOO' } />
       );
 
       // when
@@ -136,13 +172,13 @@ describe('ContentEditable', function() {
       // given
       var onInput = sinon.spy();
 
-      const node = renderToNode(<ContentEditable onInput={ onInput } text={ 'FOO' } />);
+      const node = renderToNode(<ContentEditable onInput={ onInput } value={ 'FOO' } />);
 
       // when
       triggerInputEvent(node, 'BLUB');
 
       // then
-      expect(node.innerText).to.eql('BLUB');
+      expect(innerText(node)).to.eql('BLUB');
 
       expect(onInput).to.have.been.calledWith('BLUB');
     });
@@ -150,3 +186,8 @@ describe('ContentEditable', function() {
   });
 
 });
+
+
+function innerText(node) {
+  return node.innerText.replace(/\n$/, '');
+}

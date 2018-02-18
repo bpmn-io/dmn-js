@@ -62,7 +62,7 @@ describe('EditableComponent', function() {
 
     // then
     expect(node).to.exist;
-    expect(node.innerText).to.eql(value);
+    expect(innerText(node)).to.eql(value);
 
     expect(matches(node, '.test-component')).to.be.true;
   });
@@ -76,7 +76,7 @@ describe('EditableComponent', function() {
     );
 
     // then
-    expect(node.innerText).to.eql('-');
+    expect(innerText(node)).to.eql('-');
   });
 
 
@@ -155,7 +155,7 @@ describe('EditableComponent', function() {
 
       // then
       // text got updated
-      expect(editor.innerText).to.eql('i');
+      expect(innerText(editor)).to.eql('i');
 
       expect(matches(node, '.invalid')).to.be.true;
 
@@ -218,4 +218,9 @@ class TestContext extends Component {
     return this.props.children;
   }
 
+}
+
+
+function innerText(el) {
+  return el.innerText.replace(/\n$/, '');
 }
