@@ -402,9 +402,13 @@ describe('input output values', function() {
 // helpers //////////////////////
 
 function expectValuesRendered(element, expected) {
-  const values = Array.from(domQuery.all('.item', element));
+  const values = arrayFromNodeList(domQuery.all('.item', element));
 
   values.forEach((value, index) => {
     expect(value.textContent.replace(/^\s?/, '')).to.equal(expected[index]);
   });
+}
+
+function arrayFromNodeList(nodeList) {
+  return [].slice.call(nodeList);
 }

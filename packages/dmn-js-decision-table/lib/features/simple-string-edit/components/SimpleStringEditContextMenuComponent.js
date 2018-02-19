@@ -40,7 +40,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     );
 
     const filteredValues = parsedString.values.filter(value => {
-      return !inputOrOutputValues.includes(value);
+      return !includes(inputOrOutputValues, value);
     });
 
     const isInputClause = isInput(props.context.element.col);
@@ -48,7 +48,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     let items = inputOrOutputValues.map(value => {
       return {
         value,
-        isChecked: parsedString.values.includes(value),
+        isChecked: includes(parsedString.values, value),
         isRemovable: false,
         group: isInputClause ? INPUT_VALUES_LABEL : OUTPUT_VALUES_LABEL
       };
@@ -69,7 +69,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     if (
       !isInputClause && parsedString.values.length &&
-      !inputOrOutputValues.includes(parsedString.values[0])
+      !includes(inputOrOutputValues, parsedString.values[0])
     ) {
       inputValue = parsedString.values[0];
     }
@@ -346,4 +346,8 @@ function getValues(items) {
   return items
     .filter(item => item.isChecked)
     .map(item => item.value);
+}
+
+function includes(array, value) {
+  return array.indexOf(value) !== -1;
 }
