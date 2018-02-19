@@ -91,7 +91,7 @@ export default class List extends Component {
     // group items by group title
     const groupedItems = groupBy(items, 'group');
 
-    const asPairs = Object.entries(groupedItems);
+    const asPairs = toPairs(groupedItems);
 
     return (
       <div className={ classes.join(' ') }>
@@ -146,4 +146,17 @@ export default class List extends Component {
       </div>
     );
   }
+}
+
+
+// helpers ////////////
+
+function toPairs(object) {
+  const entrys = [];
+
+  for (let key in object) {
+    entrys.push([key, object[key]]);
+  }
+
+  return entrys;
 }

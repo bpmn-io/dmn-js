@@ -1,6 +1,7 @@
 {
   "plugins": [
     "inferno",
+    "transform-object-assign",
     "transform-object-rest-spread",
     "transform-class-properties"
   ],

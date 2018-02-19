@@ -11,12 +11,6 @@ import ModelingModule from 'lib/features/modeling';
 import RulesModule from 'lib/features/rules';
 import RuleIndicesModule from 'lib/features/rule-indices';
 
-function expectIndices(cells) {
-  Array.from(cells).forEach((cell, index) => {
-    expect(parseInt(cell.textContent)).to.equal(index + 1);
-  });
-}
-
 
 describe('rule indices', function() {
 
@@ -79,3 +73,16 @@ describe('rule indices', function() {
   }));
 
 });
+
+
+// helpers //////////////
+
+function expectIndices(cells) {
+  arrayFromNodeList(cells).forEach((cell, index) => {
+    expect(parseInt(cell.textContent)).to.equal(index + 1);
+  });
+}
+
+function arrayFromNodeList(nodeList) {
+  return [].slice.call(nodeList);
+}
