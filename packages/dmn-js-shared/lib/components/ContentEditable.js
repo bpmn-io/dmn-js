@@ -46,12 +46,6 @@ export default class ContentEditable extends Component {
 
     this.state = {};
 
-    this.onFocus = this.onFocus.bind(this);
-    this.onInput = this.onInput.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-
-    this.onKeydown = this.onKeydown.bind(this);
-
     // TODO(nikku): remove once we drop IE 11 support
     if (isIE()) {
 
@@ -112,7 +106,7 @@ export default class ContentEditable extends Component {
     setRange(node, newRange);
   }
 
-  onFocus() {
+  onFocus = () => {
     var propsFocus = this.props.onFocus;
 
     this.setState({
@@ -124,7 +118,7 @@ export default class ContentEditable extends Component {
     }
   }
 
-  onBlur() {
+  onBlur = () => {
     var propsBlur = this.props.onBlur;
 
     this.setState({
@@ -136,8 +130,7 @@ export default class ContentEditable extends Component {
     }
   }
 
-  onKeydown(event) {
-
+  onKeydown = (event) => {
     // enter
     if (event.which === 13) {
       event.preventDefault();
@@ -149,7 +142,7 @@ export default class ContentEditable extends Component {
 
   }
 
-  onInput(event) {
+  onInput = (event) => {
 
     var propsInput = this.props.onInput;
 
