@@ -51,6 +51,25 @@ export default class ContentEditable extends Component {
     this.onBlur = this.onBlur.bind(this);
 
     this.onKeydown = this.onKeydown.bind(this);
+
+    // TODO(nikku): remove once we drop IE 11 support
+    if (isIE()) {
+
+      // onInput shim for IE <= 11
+      this.onPaste = this.onKeypress = (event) => {
+
+        var oldText = this.node.innerHTML;
+
+        setTimeout(() => {
+
+          var text = this.node.innerHTML;
+          if (oldText !== text) {
+            this.onInput(event);
+          }
+        }, 0);
+      };
+
+    }
   }
 
   componentWillUpdate(newProps, newState) {
@@ -118,6 +137,7 @@ export default class ContentEditable extends Component {
   }
 
   onKeydown(event) {
+
     // enter
     if (event.which === 13) {
       event.preventDefault();
@@ -142,6 +162,11 @@ export default class ContentEditable extends Component {
     propsInput(text);
   }
 
+  // stubs for modern browsers; actual implementation
+  // for IE 11 to polyfill missing <input> event on [contentediable]
+  onPaste = noop;
+  onKeypress = noop;
+
 
   render(props) {
 
@@ -162,6 +187,8 @@ export default class ContentEditable extends Component {
         contentEditable="true"
         spellcheck="false"
         onInput={ this.onInput }
+        onKeypress={ this.onKeypress }
+        onPaste={ this.onPaste }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
         onKeydown={ this.onKeydown }
@@ -206,4 +233,17 @@ function insertLineBreak() {
   newRange.setEndAfter(br);
 
   applyRange(newRange);
+}
+
+function noop() { }
+
+function isIE() {
+  var ua = window.navigator.userAgent;
+
+  return (
+    // IE 10 or older
+    ua.indexOf('MSIE ') > 0 ||
+    // IE 11
+    ua.indexOf('Trident/') > 0
+  );
 }
