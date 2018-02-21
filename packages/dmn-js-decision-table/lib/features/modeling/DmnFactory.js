@@ -23,6 +23,12 @@ export default class DmnFactory {
       element.typeRef = 'string';
     }
 
+    if (is(element, 'dmn:UnaryTests') ||
+        is(element, 'dmn:LiteralExpression')) {
+
+      element.text = '';
+    }
+
     this._ensureId(element);
 
     return element;

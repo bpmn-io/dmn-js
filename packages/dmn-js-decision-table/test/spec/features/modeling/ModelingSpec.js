@@ -34,6 +34,8 @@ describe('Modeling', function() {
 
       // then
       expectRowWired(row, row.root, 2, expectedCells);
+
+      expecteDefaultCellText(row);
     }));
 
 
@@ -132,6 +134,8 @@ describe('Modeling', function() {
 
         // then
         expectColWired(col, table, 3, 'dmn:OutputClause');
+
+        expecteDefaultCellText(col);
       }));
 
 
@@ -463,6 +467,14 @@ function expectColWired(col, table, idx, colType) {
   });
 }
 
+
+function expecteDefaultCellText(colOrRow) {
+
+  colOrRow.cells.forEach(function(c) {
+    expect(c.businessObject.text).to.equal('');
+  });
+
+}
 
 function expectColDetached(col, table) {
 
