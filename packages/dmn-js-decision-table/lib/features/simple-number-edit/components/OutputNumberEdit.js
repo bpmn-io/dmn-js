@@ -52,11 +52,11 @@ export default class OutputNumberEdit extends Component {
     const { value } = this.state;
 
     return (
-      <div class="simple-number-edit">
+      <div class="context-menu-container simple-number-edit">
 
-        <div class="heading-medium margin-bottom-medium">Edit Number</div>
+        <h3 class="dms-heading">Edit Number</h3>
 
-        <div class="heading-small margin-bottom-medium">Set Value</div>
+        <h4 class="dms-heading">Set Value</h4>
 
         <Input
           onInput={ this.onInput }

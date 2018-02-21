@@ -61,7 +61,7 @@ export default class ExpressionLanguage {
               </div>
 
               <SelectComponent
-                className="expression-language display-block full-width margin-top-medium"
+                className="expression-language"
                 onChange={ value => this.onChange(element, value) }
                 options={ INPUT_EXPRESSION_LANGUAGE_OPTIONS }
                 value={ expressionLanguage } />

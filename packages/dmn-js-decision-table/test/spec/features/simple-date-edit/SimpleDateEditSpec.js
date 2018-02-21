@@ -72,7 +72,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const select = domQuery('.select', simpleDateEdit);
+      const select = domQuery('.dms-select', simpleDateEdit);
 
       // when
       triggerChangeEvent(select, 'before');
@@ -90,7 +90,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const input = domQuery('.input', simpleDateEdit);
+      const input = domQuery('.dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, '2000-01-01T00:00:00');
@@ -108,7 +108,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const input = domQuery('.input', simpleDateEdit);
+      const input = domQuery('.dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, 'foo');
@@ -126,7 +126,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const button = domQuery('.button', simpleDateEdit);
+      const button = domQuery('.use-today', simpleDateEdit);
 
       // when
       triggerMouseEvent(button, 'click');
@@ -144,7 +144,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const input = domQuery.all('.input', simpleDateEdit)[1];
+      const input = domQuery.all('.dms-input', simpleDateEdit)[1];
 
       // when
       triggerInputEvent(input, '2000-01-01T00:00:00');
@@ -164,7 +164,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const input = domQuery.all('.input', simpleDateEdit)[1];
+      const input = domQuery.all('.dms-input', simpleDateEdit)[1];
 
       // when
       triggerInputEvent(input, 'foo');
@@ -184,7 +184,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const button = domQuery.all('.button', simpleDateEdit)[1];
+      const button = domQuery.all('.use-today', simpleDateEdit)[1];
 
       // when
       triggerMouseEvent(button, 'click');
@@ -206,7 +206,7 @@ describe('simple date edit', function() {
 
         const simpleDateEdit = openSimpleDateEdit('inputEntry8');
 
-        const select = domQuery('.select', simpleDateEdit);
+        const select = domQuery('.dms-select', simpleDateEdit);
 
         // when
         triggerChangeEvent(select, 'between');
@@ -216,7 +216,7 @@ describe('simple date edit', function() {
         expect(inputEntry8.businessObject.text).to.equal('');
 
         // when
-        const buttons = domQuery.all('.button', simpleDateEdit);
+        const buttons = domQuery.all('.use-today', simpleDateEdit);
 
         triggerMouseEvent(buttons[0], 'click');
 
@@ -257,7 +257,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('outputEntry1');
 
-      const input = domQuery('.input', simpleDateEdit);
+      const input = domQuery('.dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, '2000-01-01T00:00:00');
@@ -275,7 +275,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('outputEntry1');
 
-      const input = domQuery('.input', simpleDateEdit);
+      const input = domQuery('.dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, 'foo');
@@ -293,7 +293,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('outputEntry1');
 
-      const button = domQuery('.button', simpleDateEdit);
+      const button = domQuery('.use-today', simpleDateEdit);
 
       // when
       triggerMouseEvent(button, 'click');

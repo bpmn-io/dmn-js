@@ -95,36 +95,40 @@ export default class ValidatedInput extends Component {
   }
 
   render() {
-    const { children, placeholder, type } = this.props;
+    const { placeholder, type, className } = this.props;
 
     const { validationWarning, value } = this.state;
 
-    const classes = [ 'input' ];
+    const parentClasses = [
+      'validated-input-component',
+      className
+    ].join(' ');
+
+    const inputClasses = [ ];
 
     if (validationWarning) {
-      classes.push('invalid');
+      inputClasses.push('invalid');
     }
 
     return (
-      <span class="validated-text-input-component">
+      <div className={ parentClasses }>
+
         <Input
-          className={ classes.join(' ') }
+          className={ inputClasses }
           onInput={ this.onInput }
           onKeyDown={ this.onKeyDown }
           onKeyUp={ this.onKeyUp }
           placeholder={ placeholder || '' }
           type={ type }
           value={ value || '' } />
-        {
-          children
-        }
+
         {
           validationWarning &&
-            <span class="validation-warning display-block margin-top-medium">
+            <p class="dms-hint dms-validation-warning">
               { validationWarning }
-            </span>
+            </p>
         }
-      </span>
+      </div>
     );
   }
 

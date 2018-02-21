@@ -41,7 +41,7 @@ describe('ListComponent', function() {
 
     // then
     expect(
-      findRenderedDOMElementWithClass(renderedTree, 'list-component')
+      findRenderedDOMElementWithClass(renderedTree, 'dms-list-component')
     ).to.exist;
   });
 

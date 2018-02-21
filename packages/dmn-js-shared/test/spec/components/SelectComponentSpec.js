@@ -40,7 +40,7 @@ describe('SelectComponent', function() {
 
     // then
     expect(
-      findRenderedDOMElementWithClass(renderedTree, 'select')
+      findRenderedDOMElementWithClass(renderedTree, 'dms-select')
     ).to.exist;
   });
 
@@ -85,7 +85,7 @@ describe('SelectComponent', function() {
         options={ options } />
     );
 
-    const select = findRenderedDOMElementWithClass(renderedTree, 'select');
+    const select = findRenderedDOMElementWithClass(renderedTree, 'dms-select');
 
     // when
     triggerChangeEvent(select, 'bar');

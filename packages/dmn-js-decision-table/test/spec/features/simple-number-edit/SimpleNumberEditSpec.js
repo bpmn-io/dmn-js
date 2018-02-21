@@ -71,7 +71,7 @@ describe('simple number edit', function() {
       it('should set to range', function() {
 
         // given
-        const select = domQuery('.select', simpleNumberEdit);
+        const select = domQuery('.dms-select', simpleNumberEdit);
 
         // when
         triggerChangeEvent(select, 'range');
@@ -84,7 +84,7 @@ describe('simple number edit', function() {
       it('should set to comparison restoring previously set comparison', function() {
 
         // given
-        const select = domQuery('.select', simpleNumberEdit);
+        const select = domQuery('.dms-select', simpleNumberEdit);
 
         triggerChangeEvent(select, 'range');
 
@@ -99,7 +99,7 @@ describe('simple number edit', function() {
       it('should edit operator', function() {
 
         // given
-        const select = domQuery.all('.select', simpleNumberEdit)[1];
+        const select = domQuery.all('.dms-select', simpleNumberEdit)[1];
 
         // when
         triggerChangeEvent(select, 'greater');
@@ -112,7 +112,7 @@ describe('simple number edit', function() {
       it('should edit value', function() {
 
         // given
-        const input = domQuery('.input', simpleNumberEdit);
+        const input = domQuery('.dms-input', simpleNumberEdit);
 
         // when
         triggerInputEvent(input, '42');
@@ -154,7 +154,7 @@ describe('simple number edit', function() {
       it('should set to comparison', function() {
 
         // given
-        const select = domQuery('.select', simpleNumberEdit);
+        const select = domQuery('.dms-select', simpleNumberEdit);
 
         // when
         triggerChangeEvent(select, 'comparison');
@@ -167,7 +167,7 @@ describe('simple number edit', function() {
       it('should set to range restoring previously set range', function() {
 
         // given
-        const select = domQuery('.select', simpleNumberEdit);
+        const select = domQuery('.dms-select', simpleNumberEdit);
 
         triggerChangeEvent(select, 'comparison');
 
@@ -182,7 +182,7 @@ describe('simple number edit', function() {
       it('should edit range start type', function() {
 
         // given
-        const select = domQuery.all('.select', simpleNumberEdit)[1];
+        const select = domQuery.all('.dms-select', simpleNumberEdit)[1];
 
         // when
         triggerChangeEvent(select, 'exclude');
@@ -195,7 +195,7 @@ describe('simple number edit', function() {
       it('should edit range start value', function() {
 
         // given
-        const input = domQuery('.input', simpleNumberEdit);
+        const input = domQuery('.dms-input', simpleNumberEdit);
 
         // when
         triggerInputEvent(input, '42');
@@ -208,7 +208,7 @@ describe('simple number edit', function() {
       it('should edit range end type', function() {
 
         // given
-        const select = domQuery.all('.select', simpleNumberEdit)[2];
+        const select = domQuery.all('.dms-select', simpleNumberEdit)[2];
 
         // when
         triggerChangeEvent(select, 'include');
@@ -221,7 +221,7 @@ describe('simple number edit', function() {
       it('should edit range end value', function() {
 
         // given
-        const input = domQuery.all('.input', simpleNumberEdit)[1];
+        const input = domQuery.all('.dms-input', simpleNumberEdit)[1];
 
         // when
         triggerInputEvent(input, '42');
@@ -265,7 +265,7 @@ describe('simple number edit', function() {
     it('should edit value', function() {
 
       // given
-      const input = domQuery('.input', simpleNumberEdit);
+      const input = domQuery('.dms-input', simpleNumberEdit);
 
       // when
       triggerInputEvent(input, '42');

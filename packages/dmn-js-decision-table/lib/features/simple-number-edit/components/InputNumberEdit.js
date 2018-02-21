@@ -210,15 +210,16 @@ export default class InputNumberEdit extends Component {
     }];
 
     return (
-      <div className="comparison no-wrap margin-top-medium">
+      <div className="comparison no-wrap">
 
-        <div className="heading-small margin-bottom-medium">Value</div>
+        <h4 className="dms-heading">Value</h4>
 
         <SelectComponent
-          className="margin-right-medium"
           onChange={ this.onComparisonOperatorChange }
           options={ comparisonOperatorOptions }
           value={ comparisonOperator } />
+
+        &nbsp;
 
         <Input
           onInput={ this.onComparisonValueChange }
@@ -239,15 +240,16 @@ export default class InputNumberEdit extends Component {
     }];
 
     return (
-      <div className="range margin-top-medium">
-        <div className="heading-small margin-bottom-medium">Start Value</div>
+      <div className="range">
+        <h4 className="dms-heading">Start Value</h4>
 
         <div className="no-wrap">
           <SelectComponent
-            className="margin-right-medium"
             onChange={ this.onRangeStartTypeChange }
             options={ rangeTypeOptions }
             value={ rangeStartType } />
+
+          &nbsp;
 
           <Input
             onInput={ this.onRangeStartValueChange }
@@ -255,16 +257,17 @@ export default class InputNumberEdit extends Component {
             value={ rangeStartValue } />
         </div>
 
-        <div className="heading-small margin-top-medium margin-bottom-medium">
+        <h4 className="dms-heading">
           End Value
-        </div>
+        </h4>
 
         <div className="no-wrap">
           <SelectComponent
-            className="margin-right-medium"
             onChange={ this.onRangeEndTypeChange }
             options={ rangeTypeOptions }
             value={ rangeEndType } />
+
+          &nbsp;
 
           <Input
             onInput={ this.onRangeEndValueChange }
@@ -296,12 +299,12 @@ export default class InputNumberEdit extends Component {
     }];
 
     return (
-      <div class="simple-number-edit">
+      <div class="context-menu-container simple-number-edit">
 
-        <div class="heading-medium">Edit Number</div>
+        <h3 class="dms-heading">Edit Number</h3>
 
         <SelectComponent
-          className="margin-top-large full-width display-block"
+          className="full-width display-block"
           onChange={ this.onTypeChange }
           options={ typeOptions }
           value={ type } />

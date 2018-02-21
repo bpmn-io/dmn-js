@@ -39,7 +39,7 @@ describe('Input', function() {
 
     // then
     expect(
-      findRenderedDOMElementWithClass(renderedTree, 'input')
+      findRenderedDOMElementWithClass(renderedTree, 'dms-input')
     ).to.exist;
   });
 
@@ -54,7 +54,7 @@ describe('Input', function() {
         onInput={ spy } />
     );
 
-    const input = findRenderedDOMElementWithClass(renderedTree, 'input');
+    const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
 
     // when
     triggerInputEvent(input, 'foo');
@@ -74,7 +74,7 @@ describe('Input', function() {
         onKeyDown={ spy } />
     );
 
-    const input = findRenderedDOMElementWithClass(renderedTree, 'input');
+    const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
 
     // when
     triggerKeyEvent(input, 'keydown', 13);
@@ -94,7 +94,7 @@ describe('Input', function() {
         onKeyUp={ spy } />
     );
 
-    const input = findRenderedDOMElementWithClass(renderedTree, 'input');
+    const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
 
     // when
     triggerKeyEvent(input, 'keyup', 13);

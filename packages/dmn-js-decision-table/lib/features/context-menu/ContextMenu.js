@@ -30,7 +30,7 @@ export default class ContextMenu {
         const additionalEntries = components.getComponents('context-menu-additional', context);
 
         return () => (
-          <div className="context-menu-context-menu">
+          <div className="context-menu-flex">
             { (entries || []).concat(additionalEntries || []) }
           </div>
         );

@@ -68,7 +68,7 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('inputEntry1');
 
-      const select = domQuery('.select', simpleBooleanEdit);
+      const select = domQuery('.dms-select', simpleBooleanEdit);
 
       // when
       triggerChangeEvent(select, 'false');
@@ -85,7 +85,7 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('inputEntry5');
 
-      const select = domQuery('.select', simpleBooleanEdit);
+      const select = domQuery('.dms-select', simpleBooleanEdit);
 
       // when
       triggerChangeEvent(select, 'false');
@@ -116,7 +116,7 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('outputEntry1');
 
-      const select = domQuery('.select', simpleBooleanEdit);
+      const select = domQuery('.dms-select', simpleBooleanEdit);
 
       // when
       triggerChangeEvent(select, 'false');
@@ -133,7 +133,7 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('outputEntry5');
 
-      const select = domQuery('.select', simpleBooleanEdit);
+      const select = domQuery('.dms-select', simpleBooleanEdit);
 
       // when
       triggerChangeEvent(select, 'false');

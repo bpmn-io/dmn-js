@@ -5,9 +5,7 @@ import { groupBy } from 'min-dash/lib/collection';
 const RADIO = 'radio';
 
 const REMOVE_BTN_CLS =
-  'remove dmn-icon-clear ' +
-  'no-margin-right small-margin-left float-right ' +
-  'cursor-pointer';
+  'remove dmn-icon-clear float-right cursor-pointer';
 
 /**
  * Shows a list of grouped items that can be checked
@@ -86,7 +84,7 @@ export default class ListComponent extends Component {
     const { className, items, type } = this.props;
 
     const classes = [
-      'list-component'
+      'dms-list-component'
     ];
 
     if (className) {
@@ -107,38 +105,40 @@ export default class ListComponent extends Component {
                   groupItems = pair[1];
 
             return (
-              <div className="group margin-bottom-medium">
+              <div className="group">
 
-                <div className="title margin-bottom-medium">{ groupTitle }</div>
+                <h4 className="dms-heading">{ groupTitle }</h4>
 
-                {
-                  groupItems.map(item => {
+                <ul className="items no-wrap">
+                  {
+                    groupItems.map(item => {
 
-                    return (
-                      <div
-                        className="item margin-bottom-medium no-wrap">
-                        {
-                          type
-                            && <input
-                              type={ type }
-                              checked={ item.isChecked }
-                              className="cursor-pointer margin-right-medium"
-                              onClick={ () => this.toggleItem(item) } />
-                        }
-                        { item.value }
-                        {
-                          item.isRemovable
-                            && (<span
-                              title="Remove item"
-                              onMouseup={ () => this.removeItem(item) }
-                              className={ REMOVE_BTN_CLS }>
-                            </span>)
-                        }
-                      </div>
-                    );
+                      return (
+                        <li className="item">
+                          {
+                            type
+                              && <input
+                                type={ type }
+                                checked={ item.isChecked }
+                                className="item-toggle cursor-pointer"
+                                onClick={ () => this.toggleItem(item) } />
+                          }
+                          &nbsp;
+                          { item.value }
+                          {
+                            item.isRemovable
+                              && (<span
+                                title="Remove item"
+                                onMouseup={ () => this.removeItem(item) }
+                                className={ REMOVE_BTN_CLS }>
+                              </span>)
+                          }
+                        </li>
+                      );
 
-                  })
-                }
+                    })
+                  }
+                </ul>
 
               </div>
             );

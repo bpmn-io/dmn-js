@@ -29,7 +29,7 @@ export default class SelectComponent extends Component {
 
     return (
       <select
-        className={ [ className || '', 'select' ].join(' ') }
+        className={ [ className || '', 'dms-select' ].join(' ') }
         onChange={ this.onChange }
         value={ value }>
         {

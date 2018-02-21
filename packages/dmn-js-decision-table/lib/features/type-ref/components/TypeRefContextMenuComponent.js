@@ -42,10 +42,10 @@ export default class TypeRefContextMenuComponent extends Component {
     const { typeRef } = element;
 
     return (
-      <div className="type-ref-edit">
-        Type:
+      <div className="type-ref-edit context-menu-container">
+        <label className="dms-label">Type:</label>&nbsp;
         <select
-          className="type-ref-edit-select"
+          className="type-ref-edit-select dms-select"
           onChange={ this.onTypeChange }>
           {
             TYPES.map(type => {
