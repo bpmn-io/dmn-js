@@ -58,13 +58,14 @@ export default class BooleanEdit extends Component {
     }];
 
     return (
-      <div class="simple-boolean-edit">
+      <div class="simple-boolean-edit context-menu-container">
 
         <h3 class="dms-heading">Edit Boolean</h3>
 
         <h4 class="dms-heading">Set Value</h4>
 
         <SelectComponent
+          className="dms-block"
           onChange={ this.onChange }
           options={ options }
           value={ value } />

@@ -308,9 +308,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
               onClick={ this.onOutputValueInputClick }
               type="radio"
               style={ {
-                marginRight: '8px',
-                verticalAlign: 'top',
-                marginTop: '5px'
+                marginRight: '8px'
               } } />
           }
 
