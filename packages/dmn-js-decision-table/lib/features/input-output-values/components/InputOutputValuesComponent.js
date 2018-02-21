@@ -6,8 +6,6 @@ import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-import Button from 'dmn-js-shared/lib/components/Button';
-
 import { getValuesArray, parseString } from '../Utils';
 
 
@@ -138,7 +136,7 @@ export default class InputOutputValuesComponent extends Component {
 
     return (
       element.typeRef === 'string' ?
-        <div className="input-output-values-edit">
+        <div className="context-menu-container input-output-values-edit">
 
           {
             !isNull(values)
@@ -151,15 +149,27 @@ export default class InputOutputValuesComponent extends Component {
           {
             !isNull(values)
               && !values.length
-              && <div className="margin-bottom-medium">
-                <div className="heading-small margin-bottom-medium">
+              && <div>
+                <h4 className="dms-heading">
                   Predefined Values
-                </div>
+                </h4>
                 <span className="placeholder">No values</span>
               </div>
           }
 
-          <div className="heading-small margin-bottom-medium">Add Predefined Values</div>
+          {
+            !isNull(values)
+              && <p class="dms-hint">
+                <a href="#" className="del-values"
+                  onMouseUp={ this.removePredefinedValues }>
+                  Remove all predefined values.
+                </a>
+              </p>
+          }
+
+          <h4 className="dms-heading">
+            Add Predefined Values
+          </h4>
 
           <ValidatedInput
             onInput={ this.onInput }
@@ -173,13 +183,6 @@ export default class InputOutputValuesComponent extends Component {
             }}
             value={ inputValue } />
 
-          {
-            !isNull(values)
-              && <Button
-                className="display-block margin-top-medium full-width"
-                onMouseUp={ this.removePredefinedValues }>
-                Remove Predefined Values</Button>
-          }
         </div>
         : null
     );

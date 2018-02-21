@@ -68,7 +68,7 @@ describe('input output values', function() {
     it('should add value', inject(function(elementRegistry) {
 
       // when
-      const input = domQuery('.input', inputValuesEdit);
+      const input = domQuery('.dms-input', inputValuesEdit);
 
       input.focus();
 
@@ -93,7 +93,7 @@ describe('input output values', function() {
     it('should add multiple values', inject(function(elementRegistry) {
 
       // when
-      const input = domQuery('.input', inputValuesEdit);
+      const input = domQuery('.dms-input', inputValuesEdit);
 
       input.focus();
 
@@ -157,7 +157,7 @@ describe('input output values', function() {
     it('should NOT show placeholder when no values', function() {
 
       // given
-      const button = domQuery('.button', inputValuesEdit);
+      const button = domQuery('.del-values', inputValuesEdit);
 
       // when
       triggerMouseEvent(button, 'mouseup');
@@ -170,7 +170,7 @@ describe('input output values', function() {
     it('should validate value', inject(function(elementRegistry) {
 
       // when
-      const input = domQuery('.input', inputValuesEdit);
+      const input = domQuery('.dms-input', inputValuesEdit);
 
       input.focus();
 
@@ -211,7 +211,7 @@ describe('input output values', function() {
       inject(function(elementRegistry) {
 
         // given
-        const button = domQuery('.button', inputValuesEdit);
+        const button = domQuery('.del-values', inputValuesEdit);
 
         // when
         triggerMouseEvent(button, 'mouseup');
@@ -249,7 +249,7 @@ describe('input output values', function() {
     it('should add value', inject(function(elementRegistry) {
 
       // when
-      const input = domQuery('.input', outputValuesEdit);
+      const input = domQuery('.dms-input', outputValuesEdit);
 
       input.focus();
 
@@ -273,7 +273,7 @@ describe('input output values', function() {
     it('should add multiple values', inject(function(elementRegistry) {
 
       // when
-      const input = domQuery('.input', outputValuesEdit);
+      const input = domQuery('.dms-input', outputValuesEdit);
 
       input.focus();
 
@@ -331,7 +331,7 @@ describe('input output values', function() {
     it('should NOT show placeholder when no values', function() {
 
       // given
-      const button = domQuery('.button', outputValuesEdit);
+      const button = domQuery('.del-values', outputValuesEdit);
 
       // when
       triggerMouseEvent(button, 'mouseup');
@@ -344,7 +344,7 @@ describe('input output values', function() {
     it('should validate value', inject(function(elementRegistry) {
 
       // when
-      const input = domQuery('.input', outputValuesEdit);
+      const input = domQuery('.dms-input', outputValuesEdit);
 
       input.focus();
 
@@ -384,7 +384,7 @@ describe('input output values', function() {
       inject(function(elementRegistry) {
 
         // given
-        const button = domQuery('.button', outputValuesEdit);
+        const button = domQuery('.del-values', outputValuesEdit);
 
         // when
         triggerMouseEvent(button, 'mouseup');
@@ -403,6 +403,6 @@ function expectValuesRendered(element, expected) {
   const values = Array.from(domQuery.all('.item', element));
 
   values.forEach((value, index) => {
-    expect(value.textContent).to.equal(expected[index]);
+    expect(value.textContent.replace(/^\s?/, '')).to.equal(expected[index]);
   });
 }

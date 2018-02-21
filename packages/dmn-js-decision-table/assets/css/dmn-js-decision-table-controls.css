@@ -1,254 +1,149 @@
 
 /* simple string edit */
-.tjs-container .simple-string-edit {
-  padding: 8px;
-  font-size: 14px;
-  max-width: 250px;
-}
-
-.tjs-container .simple-string-edit .validation-warning {
-  max-width: 250px;
-  white-space: pre-wrap;
-}
-
-/* simple number edit */
-.tjs-container .simple-number-edit {
-  padding: 8px;
-  font-size: 14px;
-}
-
-.tjs-container .simple-number-edit .validation-warning {
-  max-width: 250px;
-  white-space: pre-wrap;
-}
-
-/* simple boolean edit */
-.tjs-container .simple-boolean-edit {
-  padding: 8px;
-  font-size: 14px;
-}
-
-/* simple date edit */
+.tjs-container .simple-string-edit,
 .tjs-container .simple-date-edit {
-  padding: 8px;
-  font-size: 14px;
+  width: 250px;
 }
 
-.tjs-container .simple-date-edit .validation-warning {
-  max-width: 250px;
-  white-space: pre-wrap;
+.tjs-container .input-expression-edit {
+  width: 300px;
 }
 
-/* button */
-.tjs-container .button {
-  background: #fff;
-  padding: 4px 6px;
-  border: solid 1px #CCC;
-  border-radius: 2px;
-  font-size: 14px;
-  color: #444;
-  cursor: pointer;
-  outline: none;
+.dms-list-component .items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.7em;
 }
 
-.tjs-container .button:hover {
-   background: #f6f6f6;
- }
-
-/* select */
-.tjs-container select.select {
-  outline: none;
-  padding: 3px 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  font-size: 14px;
-  color: #444;
+.dms-fill-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }
 
-.tjs-container select.select:focus {
-  border-color: #52B415;
-  box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
+.dms-fill-row > * {
+  flex: 0 0 auto;
 }
 
-/* list component */
-.tjs-container .list-component {
-  max-width: 250px;
-}
-
-.tjs-container .list-component .group .title,
-.tjs-container .list-component .group .input-title {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.tjs-container .list-component .item {
-  color: #444;
-}
-
-.tjs-container .list-component .warning {
-  color: #c9302c;
-}
-
-.tjs-container .list-component .dmn-icon-clear:hover {
-  color: #c9302c;
-}
-
-/* input & output values edit */
-.tjs-container .input-output-values-edit {
-  font-size: 14px;
-  color: #444;
-  padding: 8px;
-  white-space: nowrap;
+.dms-fill-row > :last-child {
+  flex: 1 1 auto;
 }
 
 .tjs-container .input-output-values-edit .values {
-  margin-top: 8px;
-  max-width: 250px;
   display: flex;
   flex-wrap: wrap;
-}
-
-.tjs-container .input-output-values-edit .values .value {
-  border: solid 1px #fafafa;
-  background-color: #fafafa;
-  color: #444;
-  margin-right: 4px;
-  margin-bottom: 8px;
-  padding: 3px 6px;
-  font-weight: normal;
-}
-
-.tjs-container .input-output-values-edit .values .value:hover {
-  cursor: pointer;
-  background: #f4cecd;
-  color: #c9302c;
-  border-color: #f4cecd;
-}
-
-.tjs-container .input-output-values-edit .values .input {
-  width: 100%;
-  outline: none;
-  padding: 3px 6px;
-  border: 1px solid #ccc;
-  background: none;
-  font-size: 14px;
-  color: #444;
-}
-
-.tjs-container .input-output-values-edit .values .input.invalid {
-  background: #f4cecd;
-  border-color: #c9302c;
-  color: #c9302c;
-}
-
-.tjs-container .input-output-values-edit .values .input:focus.invalid {
-  border-color: #c9302c;
-}
-
-.tjs-container .input-output-values-edit .values .input:focus {
-  border-color: #52B415;
 }
 
 .tjs-container .input-output-values-edit .placeholder {
   color: #ccc;
 }
 
-/* validated input */
-.tjs-container .validated-text-input-component .validation-warning {
-  color: #c9302c;
-}
-
-/* input */
-.tjs-container input.input {
-  outline: none;
-  padding: 4px 6px;
-  border: 1px solid #ccc;
+/* TODO(nikku): namespace and refactor context menu styles */
+.context-menu {
+  position: absolute;
   background: #fff;
+  border: solid 1px #CCC;
+  border-radius: 2px;
   font-size: 14px;
   color: #444;
+  z-index: 10;
 }
 
-.tjs-container input.input:focus {
-  border-color: #52B415;
+.context-menu .context-menu-container {
+  margin: 8px;
 }
 
-.tjs-container input.input.invalid {
-  background: #f4cecd;
-  border-color: #c9302c;
-  color: #c9302c;
+.context-menu p {
+  margin: 10px 0;
 }
 
-.tjs-container input.input.invalid:focus {
-  box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
+.context-menu .context-menu-flex {
+  display: flex;
 }
 
-/* helpers */
-.no-margin-top,
-.no-margin-top:before {
-  margin-top: 0;
+.context-menu.vertical .context-menu-flex {
+  flex-direction: column;
 }
 
-.no-margin-right,
-.no-margin-right:before {
-  margin-right: 0;
+.context-menu.horizontal .context-menu-flex {
+  flex-direction: row;
 }
 
-.no-margin-bottom,
-.no-margin-bottom:before {
+.context-menu.vertical .context-menu-group {
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+  border-bottom: solid 1px #ccc;
+}
+
+.context-menu.vertical .context-menu-group:last-child {
+  border-bottom: none;
   margin-bottom: 0;
 }
 
-.no-margin-left,
-.no-margin-left:before {
-  margin-left: 0;
+.context-menu.horizontal .context-menu-group {
+  border-right: solid 1px #ccc;
 }
 
-.tjs-container .margin-top-small {
-  margin-top: 4px;
+.context-menu.horizontal .context-menu-group:last-child {
+  border-right: none;
 }
 
-.tjs-container .margin-top-medium {
+.context-menu .context-menu-group .context-menu-group-title {
+  font-weight: bold;
+  color: #444;
+  margin: 6px 9px 6px 9px;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  white-space: nowrap;
+  padding: 4px 9px 4px 9px;
+  cursor: pointer;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry.disabled {
+  pointer-events: none;
+  color: #ccc;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry:hover {
+  color: #52b415;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
+  display: inline-block;
+  text-align: center;
+  width: 14px;
+  margin-right: 6px;
+}
+
+.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon:before {
+  margin: 0;
+}
+
+
+/* validated input */
+.dms-validation-warning {
+  color: #c9302c;
+  font-size: 0.9em;
+}
+
+.dms-label {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* expression language */
+.context-menu .context-menu-group .context-menu-entry-set-expression-language {
+  flex-direction: column;
+}
+
+.context-menu .context-menu-group .context-menu-entry-set-expression-language .expression-language {
   margin-top: 8px;
-}
-
-.tjs-container .margin-top-large {
-  margin-top: 12px;
-}
-
-.tjs-container .margin-right-small {
-  margin-right: 4px;
-}
-
-.tjs-container .margin-right-medium {
-  margin-right: 8px;
-}
-
-.tjs-container .margin-right-large {
-  margin-right: 12px;
-}
-
-.tjs-container .margin-bottom-small {
-  margin-bottom: 4px;
-}
-
-.tjs-container .margin-bottom-medium {
-  margin-bottom: 8px;
-}
-
-.tjs-container .margin-bottom-large {
-  margin-bottom: 12px;
-}
-
-.tjs-container .margin-left-small {
-  margin-left: 4px;
-}
-
-.tjs-container .margin-left-medium {
-  margin-left: 8px;
-}
-
-.tjs-container .margin-left-large {
-  margin-left: 12px;
 }
 
 .tjs-container .full-width {
@@ -271,33 +166,34 @@
   cursor: pointer;
 }
 
-.display-none {
-  display: none;
-}
-
-.display-block {
-  display: block;
-}
-
-.heading-large {
-  font-size: 18px;
+.dms-heading {
+  margin: 12px 0 8px;
   font-weight: bold;
 }
 
-.heading-medium {
+p.dms-hint {
+  margin: 5px 0 10px 0;
+}
+
+p.dms-hint a {
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #4285f4;
+}
+
+h3.dms-heading {
   font-size: 16px;
-  font-weight: bold;
 }
 
-.heading-small {
+h4.dms-heading {
   font-size: 14px;
-  font-weight: bold;
 }
 
-.no-wrap {
-  white-space: nowrap;
+.validated-input-component.dms-block .dms-input,
+.dms-block {
+  display: block;
+  width: 100%;
 }
-
 
 .dms-input,
 .dms-select {
@@ -309,29 +205,31 @@
   color: #444;
   height: 26px;
   min-height: 26px;
-  box-sizing: border-box;
 }
 
-.dms-input.invalid {
+.dms-input:focus,
+.dms-select:focus {
+  border-color: #52B415;
+}
+
+.dms-select.invalid:focus,
+.dms-input.invalid:focus {
+  border-color: #c9302c;
+}
+
+.dms-input.invalid,
+.dms-select.invalid {
   background: #f4cecd;
   border-color: #c9302c;
   color: #c9302c;
 }
 
-.dms-input.invalid:focus {
-  border-color: #c9302c;
-}
-
-.dms-input:focus {
-  border-color: #52B415;
-}
-
 .dms-script-input {
-  min-height: 200px;
-  max-height: 400px;
+  height: 150px;
 
   font-family: monospace;
-  box-sizing: border-box;
 
   white-space: pre-wrap;
+
+  overflow: auto;
 }

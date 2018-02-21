@@ -2,8 +2,6 @@ import { Component } from 'inferno';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-import Button from 'dmn-js-shared/lib/components/Button';
-
 import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
 
 import {
@@ -168,60 +166,61 @@ export default class InputDateEdit extends Component {
     }];
 
     return (
-      <div class="simple-date-edit">
+      <div class="context-menu-container simple-date-edit">
 
-        <div class="heading-medium margin-bottom-medium">Edit Date</div>
+        <h3 class="dms-heading">Edit Date</h3>
 
         <SelectComponent
           onChange={ this.onTypeChange }
           options={ options }
           value={ type } />
 
-        {
-          type === BETWEEN
-            ? <div class="heading-small margin-bottom-medium margin-top-medium">
-              Edit Start Date
-            </div>
-            : <div class="heading-small margin-bottom-medium margin-top-medium">
-              Set Date
-            </div>
-        }
+        <h4 class="dms-heading">
+          {
+            type === BETWEEN
+              ? 'Edit Start Date'
+              : 'Set Date'
+          }
+        </h4>
 
-        <div className="no-wrap">
+        <div>
           <ValidatedInput
+            className="dms-block"
             onInput={ this.onStartDateInput }
             placeholder={ `e.g. ${ getSampleDate() }` }
             validate={ validateISOString }
             value={ dates[0] }>
-
-            <Button
-              className="margin-left-medium"
-              onClick={ this.onSetStartDateTodayClick }>Today</Button>
-
           </ValidatedInput>
+
+          <p className="dms-hint">
+            <a href="#"
+              className="use-today"
+              onClick={ this.onSetStartDateTodayClick }>Use today</a>.
+          </p>
         </div>
 
         {
           type === BETWEEN
-            && <div class="heading-small margin-bottom-medium margin-top-medium">
+            && <h4 class="dms-heading">
               Edit End Date
-            </div>
+            </h4>
         }
 
         {
           type === BETWEEN
-            && <div className="no-wrap">
+            && <div>
               <ValidatedInput
                 onInput={ this.onEndDateInput }
                 placeholder={ `e.g. ${ getSampleDate() }` }
                 validate={ validateISOString }
                 value={ dates[1] }>
-
-                <Button
-                  className="margin-left-medium"
-                  onClick={ this.onSetEndDateTodayClick }>Today</Button>
-
               </ValidatedInput>
+
+              <p className="dms-hint">
+                <a href="#"
+                  className="use-today"
+                  onClick={ this.onSetEndDateTodayClick }>Use today</a>.
+              </p>
             </div>
         }
 

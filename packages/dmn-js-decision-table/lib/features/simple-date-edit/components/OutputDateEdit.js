@@ -2,8 +2,6 @@ import { Component } from 'inferno';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-import Button from 'dmn-js-shared/lib/components/Button';
-
 import {
   getSampleDate,
   validateISOString,
@@ -68,24 +66,26 @@ export default class OutputDateEdit extends Component {
     const { date } = this.state;
 
     return (
-      <div class="simple-date-edit">
+      <div class="context-menu-container simple-date-edit">
 
-        <div class="heading-medium margin-bottom-medium">Edit Date</div>
+        <h3 class="dms-heading">Edit Date</h3>
 
-        <div class="heading-small margin-bottom-medium">Set Date</div>
+        <h4 class="dms-heading">Set Date</h4>
 
-        <div className="no-wrap">
+        <div>
           <ValidatedInput
             onInput={ this.onInput }
             placeholder={ `e.g. ${ getSampleDate() }` }
             validate={ validateISOString }
-            value={ date }>
-
-            <Button
-              className="margin-left-medium"
-              onClick={ this.onClick }>Today</Button>
-
+            value={ date }
+            className="dms-block">
           </ValidatedInput>
+
+          <p className="dms-hint">
+            Set date <a href="#"
+              className="use-today"
+              onClick={ this.onClick }>to today</a>.
+          </p>
         </div>
 
       </div>

@@ -42,7 +42,7 @@ describe('literal expression properties editor', function() {
   it('should edit variable name', inject(function(viewer) {
 
     // given
-    const input = domQuery('.input', testContainer);
+    const input = domQuery('.dms-input', testContainer);
 
     // when
     triggerInputEvent(input, 'foo');
@@ -55,7 +55,7 @@ describe('literal expression properties editor', function() {
   it('should edit variable type', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.select', testContainer)[0];
+    const select = domQuery.all('.dms-select', testContainer)[0];
 
     // when
     triggerChangeEvent(select, 'boolean');
@@ -68,7 +68,7 @@ describe('literal expression properties editor', function() {
   it('should remove variable type', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.select', testContainer)[0];
+    const select = domQuery.all('.dms-select', testContainer)[0];
 
     triggerChangeEvent(select, 'boolean');
 
@@ -83,7 +83,7 @@ describe('literal expression properties editor', function() {
   it('should edit expression language', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.select', testContainer)[1];
+    const select = domQuery.all('.dms-select', testContainer)[1];
 
     // when
     triggerChangeEvent(select, 'python');
@@ -96,7 +96,7 @@ describe('literal expression properties editor', function() {
   it('should remove expression language', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.select', testContainer)[1];
+    const select = domQuery.all('.dms-select', testContainer)[1];
 
     triggerChangeEvent(select, 'python');
 

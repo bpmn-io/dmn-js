@@ -52,7 +52,7 @@ export default class Input extends Component {
 
     return (
       <input
-        className={ [ className || '', 'input' ].join(' ') }
+        className={ [ className || '', 'dms-input' ].join(' ') }
         placeholder={ placeholder || '' }
         onInput={ this.onInput }
         onKeyDown={ this.onKeyDown }

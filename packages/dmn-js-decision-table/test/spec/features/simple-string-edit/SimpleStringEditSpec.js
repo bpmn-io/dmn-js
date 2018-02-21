@@ -69,7 +69,7 @@ describe('simple string edit', function() {
     it('should change type of unary tests', function() {
 
       // given
-      const select = domQuery('.select', simpleStringEdit);
+      const select = domQuery('.dms-select', simpleStringEdit);
 
       // when
       triggerChangeEvent(select, 'negation');

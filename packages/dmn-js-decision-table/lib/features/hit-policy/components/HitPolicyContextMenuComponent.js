@@ -81,11 +81,12 @@ export default class HitPolicyContextMenuComponent extends Component {
           aggregation = businessObject.aggregation;
 
     return (
-      <div className="hit-policy-edit">
-        <div className="hit-policy-edit-policy">
-          Hit Policy:
+      <div className="context-menu-container hit-policy-edit">
+        <p className="hit-policy-edit-policy">
+          <label className="dms-label">Hit Policy:</label>&nbsp;
+
           <select
-            className="hit-policy-edit-policy-select"
+            className="hit-policy-edit-policy-select dms-select"
             onChange={ this.onHitPolicyChange }>
             {
               HIT_POLICIES.map(p => {
@@ -98,13 +99,14 @@ export default class HitPolicyContextMenuComponent extends Component {
               })
             }
           </select>
-        </div>
+        </p>
         {
           hitPolicy === 'COLLECT' &&
-            <div className="hit-policy-edit-operator">
-              Aggregation:
+            <p className="hit-policy-edit-operator">
+              <label className="dms-label">Aggregation:</label>&nbsp;
+
               <select
-                className="hit-policy-edit-operator-select"
+                className="hit-policy-edit-operator-select dms-select"
                 onChange={ this.onAggregationChange }>
                 {
                   LIST_FUNCTIONS.map(listFunction => {
@@ -125,7 +127,7 @@ export default class HitPolicyContextMenuComponent extends Component {
                   })
                 }
               </select>
-            </div>
+            </p>
         }
       </div>
     );

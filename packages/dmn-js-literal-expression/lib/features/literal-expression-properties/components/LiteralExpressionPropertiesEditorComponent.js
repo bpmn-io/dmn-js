@@ -130,21 +130,25 @@ export default class LiteralExpressionPropertiesComponent extends Component {
           <tr>
             <td>Variable Type:</td>
             <td>
-              <SelectComponent
-                className="full-width"
-                onChange={ this.setVariableType }
-                options={ TYPE_REF_OPTIONS }
-                value={ typeRef || 'none' } />
+              <div className="dms-fill-row">
+                <SelectComponent
+                  onChange={ this.setVariableType }
+                  options={ TYPE_REF_OPTIONS }
+                  value={ typeRef || 'none' }
+                  className="dms-block" />
+              </div>
             </td>
           </tr>
           <tr>
             <td>Expression Language:</td>
             <td>
-              <SelectComponent
-                className="full-width"
-                onChange={ this.setExpressionLanguage }
-                options={ EXPRESSION_LANGUAGE_OPTIONS }
-                value={ expressionLanguage || 'none' } />
+              <div className="dms-fill-row">
+                <SelectComponent
+                  onChange={ this.setExpressionLanguage }
+                  options={ EXPRESSION_LANGUAGE_OPTIONS }
+                  value={ expressionLanguage || 'none' }
+                  className="dms-block" />
+              </div>
             </td>
           </tr>
         </table>

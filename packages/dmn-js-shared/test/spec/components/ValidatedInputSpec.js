@@ -38,7 +38,7 @@ describe('ValidatedInput', function() {
 
     // then
     expect(
-      findRenderedDOMElementWithClass(renderedTree, 'validated-text-input-component')
+      findRenderedDOMElementWithClass(renderedTree, 'validated-input-component')
     ).to.exist;
   });
 
@@ -53,7 +53,7 @@ describe('ValidatedInput', function() {
     );
 
     const input = findRenderedDOMElementWithClass(
-      renderedTree, 'validated-text-input-component'
+      renderedTree, 'validated-input-component'
     ).firstChild;
 
     // when
@@ -83,7 +83,7 @@ describe('ValidatedInput', function() {
     );
 
     const input = findRenderedDOMElementWithClass(
-      renderedTree, 'validated-text-input-component'
+      renderedTree, 'validated-input-component'
     ).firstChild;
 
     // when
@@ -96,7 +96,7 @@ describe('ValidatedInput', function() {
     });
 
     expect(
-      findRenderedDOMElementWithClass(renderedTree, 'validation-warning')
+      findRenderedDOMElementWithClass(renderedTree, 'dms-validation-warning')
     ).to.exist;
   });
 

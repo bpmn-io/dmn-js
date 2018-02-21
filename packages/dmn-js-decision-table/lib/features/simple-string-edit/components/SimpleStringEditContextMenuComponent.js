@@ -272,45 +272,48 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     const isNegation = unaryTestsType === NEGATION;
 
-    return (
-      <div class="simple-string-edit">
+    const showRadio = !isInputClause && items.length > 0;
 
-        <div class="heading-medium">Edit String</div>
+    return (
+      <div class="simple-string-edit context-menu-container">
+
+        <h3 class="dms-heading">Edit String</h3>
 
         {
           isInputClause
             && <SelectComponent
               ref={ node => this.selectNode = node }
-              className="margin-top-large full-width display-block"
+              className="full-width display-block"
               onChange={ this.onUnaryTestsTypeChange }
               options={ options }
               value={ isNegation ? 'negation' : 'disjunction' } />
         }
 
         <ListComponent
-          className="margin-top-large"
           onChange={ this.onUnaryTestsListChanged }
           items={ items }
           type={ isInputClause ? 'checkbox' : 'radio' } />
 
         {
           isInputClause
-            ? <div className="heading-small margin-bottom-medium">Add Values</div>
-            : <div className="heading-small margin-bottom-medium">Set Value</div>
+            ? <h4 className="dms-heading">Add Values</h4>
+            : <h4 className="dms-heading">Set Value</h4>
         }
 
-        <div className="no-wrap">
+        <div className="dms-fill-row">
           {
-            !isInputClause
-              && !!items.length
-              && <input
-                checked={ isOutputValueInputChecked }
-                className="margin-right-medium cursor-pointer"
-                onClick={ this.onOutputValueInputClick }
-                type={ isInputClause ? 'checkbox' : 'radio' } />
+            showRadio && <input
+              checked={ isOutputValueInputChecked }
+              className="cursor-pointer"
+              onClick={ this.onOutputValueInputClick }
+              type="radio"
+              style={ {
+                marginRight: '8px'
+              } } />
           }
 
           <ValidatedInput
+            className="dms-block"
             onKeyDown={ this.onKeyDown }
             onInput={ this.onInput }
             placeholder={ isInputClause ? '"value", "value", ...' : '"value"' }
