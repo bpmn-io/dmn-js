@@ -15,7 +15,7 @@ const EXACT = 'exact',
 
 export function validateISOString(string) {
   if (!ISO_DATE_REGEX.test(string.trim())) {
-    return 'Dates must match pattern yyyy-MM-ddTHH:mm:ss.';
+    return 'Date must match pattern yyyy-MM-ddTHH:mm:ss.';
   }
 }
 
