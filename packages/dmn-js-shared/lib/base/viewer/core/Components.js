@@ -1,5 +1,5 @@
-import isFunction from 'lodash/isFunction';
-import isNumber from 'lodash/isNumber';
+import isFunction from 'lodash/lang/isFunction';
+import isNumber from 'lodash/lang/isNumber';
 
 const DEFAULT_PRIORITY = 1000;
 
