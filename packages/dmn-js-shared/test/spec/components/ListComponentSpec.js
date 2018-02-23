@@ -10,7 +10,10 @@ import {
   scryRenderedDOMElementsWithTag
 } from 'inferno-test-utils';
 
-import { triggerMouseEvent } from 'test/util/EventUtil';
+import {
+  triggerMouseEvent,
+  triggerClick
+} from 'test/util/EventUtil';
 
 // eslint-disable-next-line
 import ListComponent from 'lib/components/ListComponent';
@@ -97,7 +100,7 @@ describe('ListComponent', function() {
       const checkbox = scryRenderedDOMElementsWithTag(renderedTree, 'input')[0];
 
       // when
-      triggerMouseEvent(checkbox, 'click');
+      triggerClick(checkbox);
 
       // then
       expect(spy).to.have.been.calledWith([{
@@ -123,7 +126,7 @@ describe('ListComponent', function() {
       const checkbox = scryRenderedDOMElementsWithTag(renderedTree, 'input')[1];
 
       // when
-      triggerMouseEvent(checkbox, 'click');
+      triggerClick(checkbox);
 
       // then
       expect(spy).to.have.been.calledWith([{
@@ -217,7 +220,7 @@ describe('ListComponent', function() {
       const checkbox = scryRenderedDOMElementsWithTag(renderedTree, 'input')[0];
 
       // when
-      triggerMouseEvent(checkbox, 'click');
+      triggerClick(checkbox);
 
       // then
       expect(spy).to.have.been.calledWith([{

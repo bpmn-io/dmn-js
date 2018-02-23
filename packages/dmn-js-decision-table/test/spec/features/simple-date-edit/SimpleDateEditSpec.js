@@ -7,7 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import {
   triggerChangeEvent,
   triggerInputEvent,
-  triggerMouseEvent
+  triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleNumberEditXML from './simple-date-edit.dmn';
@@ -43,11 +43,11 @@ describe('simple date edit', function() {
   function openSimpleDateEdit(elementId) {
     const cell = domQuery(`[data-element-id="${ elementId }"]`, testContainer);
 
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     const button = domQuery('.simple-mode-button', testContainer);
 
-    triggerMouseEvent(button, 'click');
+    triggerClick(button);
 
     return domQuery('.simple-date-edit', testContainer);
   }
@@ -129,7 +129,7 @@ describe('simple date edit', function() {
       const button = domQuery('.use-today', simpleDateEdit);
 
       // when
-      triggerMouseEvent(button, 'click');
+      triggerClick(button);
 
       // then
       expect(inputEntry1.businessObject.text).to
@@ -187,7 +187,7 @@ describe('simple date edit', function() {
       const button = domQuery.all('.use-today', simpleDateEdit)[1];
 
       // when
-      triggerMouseEvent(button, 'click');
+      triggerClick(button);
 
       // then
       expect(inputEntry7.businessObject.text).to
@@ -218,13 +218,13 @@ describe('simple date edit', function() {
         // when
         const buttons = domQuery.all('.use-today', simpleDateEdit);
 
-        triggerMouseEvent(buttons[0], 'click');
+        triggerClick(buttons[0]);
 
         // expect not to have been set yet
         expect(inputEntry8.businessObject.text).to.equal('');
 
         // when
-        triggerMouseEvent(buttons[1], 'click');
+        triggerClick(buttons[1]);
 
         // expect not to have been set yet
         expect(inputEntry8.businessObject.text).to
@@ -296,7 +296,7 @@ describe('simple date edit', function() {
       const button = domQuery('.use-today', simpleDateEdit);
 
       // when
-      triggerMouseEvent(button, 'click');
+      triggerClick(button);
 
       // then
       expect(outputEntry1.businessObject.text).to

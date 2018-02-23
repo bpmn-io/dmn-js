@@ -7,7 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import {
   triggerChangeEvent,
   triggerInputEvent,
-  triggerMouseEvent
+  triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleNumberEditXML from './simple-number-edit.dmn';
@@ -49,11 +49,11 @@ describe('simple number edit', function() {
       beforeEach(inject(function(elementRegistry) {
         const cell = domQuery('[data-element-id="inputEntry4"]', testContainer);
 
-        triggerMouseEvent(cell, 'click');
+        triggerClick(cell);
 
         const button = domQuery('.simple-mode-button', testContainer);
 
-        triggerMouseEvent(button, 'click');
+        triggerClick(button);
 
         simpleNumberEdit = domQuery('.simple-number-edit', testContainer);
 
@@ -132,11 +132,11 @@ describe('simple number edit', function() {
       beforeEach(inject(function(elementRegistry) {
         const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
-        triggerMouseEvent(cell, 'click');
+        triggerClick(cell);
 
         const button = domQuery('.simple-mode-button', testContainer);
 
-        triggerMouseEvent(button, 'click');
+        triggerClick(button);
 
         simpleNumberEdit = domQuery('.simple-number-edit', testContainer);
 
@@ -243,11 +243,11 @@ describe('simple number edit', function() {
     beforeEach(inject(function(elementRegistry) {
       const cell = domQuery('[data-element-id="outputEntry9"]', testContainer);
 
-      triggerMouseEvent(cell, 'click');
+      triggerClick(cell);
 
       const button = domQuery('.simple-mode-button', testContainer);
 
-      triggerMouseEvent(button, 'click');
+      triggerClick(button);
 
       simpleNumberEdit = domQuery('.simple-number-edit', testContainer);
 

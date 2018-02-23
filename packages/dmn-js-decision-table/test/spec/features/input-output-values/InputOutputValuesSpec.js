@@ -7,7 +7,8 @@ import {
   triggerChangeEvent,
   triggerInputEvent,
   triggerKeyEvent,
-  triggerMouseEvent
+  triggerMouseEvent,
+  triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
@@ -48,7 +49,7 @@ describe('input output values', function() {
     beforeEach(function() {
       const cell = domQuery('.input.type-ref', testContainer);
 
-      triggerMouseEvent(cell, 'click');
+      triggerClick(cell);
 
       inputValuesEdit = domQuery('.input-output-values-edit', testContainer);
     });
@@ -230,7 +231,7 @@ describe('input output values', function() {
     beforeEach(function() {
       const cell = domQuery('.output.type-ref', testContainer);
 
-      triggerMouseEvent(cell, 'click');
+      triggerClick(cell);
 
       outputValuesEdit = domQuery('.input-output-values-edit', testContainer);
     });

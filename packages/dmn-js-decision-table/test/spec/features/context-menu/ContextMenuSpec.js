@@ -3,7 +3,10 @@ import Inferno from 'inferno';
 
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
+import {
+  triggerMouseEvent,
+  triggerClick
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import { classes as domClasses, query as domQuery } from 'min-dom';
 
@@ -73,7 +76,7 @@ describe('context menu', function() {
         setTimeout(() => {
 
           // when
-          triggerMouseEvent(anotherCell, 'click');
+          triggerClick(anotherCell);
 
           // then
           expect(domQuery('.context-menu', testContainer)).not.to.exist;
@@ -183,7 +186,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(addRuleAboveEntry, 'click');
+          triggerClick(addRuleAboveEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -207,7 +210,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(addRuleBelowEntry, 'click');
+          triggerClick(addRuleBelowEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -231,7 +234,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(removeRuleEntry, 'click');
+          triggerClick(removeRuleEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -253,7 +256,7 @@ describe('context menu', function() {
           const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer);
 
           // when
-          triggerMouseEvent(cutRuleEntry, 'click');
+          triggerClick(cutRuleEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -277,7 +280,7 @@ describe('context menu', function() {
             const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer),
                   cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
 
-            triggerMouseEvent(cutRuleEntry, 'click');
+            triggerClick(cutRuleEntry);
 
             // open context menu again
             triggerMouseEvent(cell, 'contextmenu');
@@ -293,7 +296,7 @@ describe('context menu', function() {
             );
 
             // when
-            triggerMouseEvent(pasteRuleAboveEntry, 'click');
+            triggerClick(pasteRuleAboveEntry);
 
             // then
             const root = sheet.getRoot(),
@@ -319,7 +322,7 @@ describe('context menu', function() {
             );
 
             // when
-            triggerMouseEvent(pasteRuleBelowEntry, 'click');
+            triggerClick(pasteRuleBelowEntry);
 
             // then
             const root = sheet.getRoot(),
@@ -375,7 +378,7 @@ describe('context menu', function() {
         setTimeout(() => {
 
           // when
-          triggerMouseEvent(anotherCell, 'click');
+          triggerClick(anotherCell);
 
           // then
           expect(domQuery('.context-menu', testContainer)).not.to.exist;
@@ -484,7 +487,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(addInputLeftEntry, 'click');
+          triggerClick(addInputLeftEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -508,7 +511,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(addInputRight, 'click');
+          triggerClick(addInputRight);
 
           // then
           const root = sheet.getRoot(),
@@ -532,7 +535,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(removeInputEntry, 'click');
+          triggerClick(removeInputEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -554,7 +557,7 @@ describe('context menu', function() {
           const cutInputEntry = domQuery('.context-menu-entry-cut-input', testContainer);
 
           // when
-          triggerMouseEvent(cutInputEntry, 'click');
+          triggerClick(cutInputEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -584,7 +587,7 @@ describe('context menu', function() {
                     testContainer
                   );
 
-            triggerMouseEvent(cutInputEntry, 'click');
+            triggerClick(cutInputEntry);
 
             // open context menu again
             triggerMouseEvent(cell, 'contextmenu');
@@ -600,7 +603,7 @@ describe('context menu', function() {
             );
 
             // when
-            triggerMouseEvent(pasteInputLeftEntry, 'click');
+            triggerClick(pasteInputLeftEntry);
 
             // then
             const root = sheet.getRoot(),
@@ -626,7 +629,7 @@ describe('context menu', function() {
             );
 
             // when
-            triggerMouseEvent(pasteInputRightEntry, 'click');
+            triggerClick(pasteInputRightEntry);
 
             // then
             const root = sheet.getRoot(),
@@ -684,7 +687,7 @@ describe('context menu', function() {
         setTimeout(() => {
 
           // when
-          triggerMouseEvent(anotherCell, 'click');
+          triggerClick(anotherCell);
 
           // then
           expect(domQuery('.context-menu', testContainer)).not.to.exist;
@@ -793,7 +796,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(addOutputLeftEntry, 'click');
+          triggerClick(addOutputLeftEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -817,7 +820,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(addOutputRight, 'click');
+          triggerClick(addOutputRight);
 
           // then
           const root = sheet.getRoot(),
@@ -841,7 +844,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(removeOutputEntry, 'click');
+          triggerClick(removeOutputEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -866,7 +869,7 @@ describe('context menu', function() {
           );
 
           // when
-          triggerMouseEvent(cutOutputEntry, 'click');
+          triggerClick(cutOutputEntry);
 
           // then
           const root = sheet.getRoot(),
@@ -896,7 +899,7 @@ describe('context menu', function() {
                     testContainer
                   );
 
-            triggerMouseEvent(cutOutputEntry, 'click');
+            triggerClick(cutOutputEntry);
 
             // open context menu again
             triggerMouseEvent(cell, 'contextmenu');
@@ -912,7 +915,7 @@ describe('context menu', function() {
             );
 
             // when
-            triggerMouseEvent(pasteOutputLeftEntry, 'click');
+            triggerClick(pasteOutputLeftEntry);
 
             // then
             const root = sheet.getRoot(),
@@ -938,7 +941,7 @@ describe('context menu', function() {
             );
 
             // when
-            triggerMouseEvent(pasteOutputRightEntry, 'click');
+            triggerClick(pasteOutputRightEntry);
 
             // then
             const root = sheet.getRoot(),

@@ -1,6 +1,9 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerChangeEvent, triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
+import {
+  triggerChangeEvent,
+  triggerClick
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
 
@@ -46,7 +49,7 @@ describe('hit policy editor', function() {
     beforeEach(inject(function(sheet) {
       const cell = domQuery('th.hit-policy', testContainer);
 
-      triggerMouseEvent(cell, 'click');
+      triggerClick(cell);
 
       select = domQuery('.hit-policy-edit-policy-select', testContainer);
 

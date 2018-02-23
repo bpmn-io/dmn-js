@@ -4,7 +4,7 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
+import { triggerClick } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleStringEditXML from './simple-mode.dmn';
 
@@ -46,7 +46,7 @@ describe('simple mode', function() {
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
     // when
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     // then
     expect(domQuery('.simple-mode-button', testContainer)).to.exist;
@@ -59,7 +59,7 @@ describe('simple mode', function() {
     const cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
 
     // when
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     // then
     expect(domQuery('.simple-mode-button.disabled', testContainer)).to.exist;
@@ -72,7 +72,7 @@ describe('simple mode', function() {
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
     // when
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     // then
     const simpleModeButton = domQuery('.simple-mode-button', testContainer);
@@ -87,12 +87,12 @@ describe('simple mode', function() {
     // given
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     const button = domQuery('.simple-mode-button', testContainer);
 
     // when
-    triggerMouseEvent(button, 'click');
+    triggerClick(button);
 
     // then
     expect(domQuery('.foo', testContainer)).to.exist;
@@ -104,12 +104,12 @@ describe('simple mode', function() {
     // given
     const cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
 
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     const button = domQuery('.simple-mode-button', testContainer);
 
     // when
-    triggerMouseEvent(button, 'click');
+    triggerClick(button);
 
     // then
     expect(domQuery('.foo', testContainer)).to.not.exist;

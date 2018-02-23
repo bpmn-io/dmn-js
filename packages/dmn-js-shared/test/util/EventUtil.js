@@ -13,6 +13,10 @@ export function triggerInputEvent(element, text) {
   element.dispatchEvent(event);
 }
 
+export function triggerClick(el, clientX, clientY) {
+  triggerMouseEvent(el, 'click', clientX, clientY);
+}
+
 export function triggerMouseEvent(element, event, clientX, clientY) {
   const e = document.createEvent('MouseEvent');
 

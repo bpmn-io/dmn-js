@@ -4,7 +4,9 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
+import {
+  triggerClick
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleXML from '../../simple.dmn';
 
@@ -43,7 +45,7 @@ describe('add input output', function() {
     const row = domQuery('.add-rule', testContainer);
 
     // when
-    triggerMouseEvent(row, 'click');
+    triggerClick(row);
 
     // then
     const root = sheet.getRoot();

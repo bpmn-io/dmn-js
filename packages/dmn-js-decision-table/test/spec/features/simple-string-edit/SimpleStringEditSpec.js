@@ -8,7 +8,8 @@ import {
   triggerChangeEvent,
   triggerInputEvent,
   triggerKeyEvent,
-  triggerMouseEvent
+  triggerMouseEvent,
+  triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleStringEditXML from './simple-string-edit.dmn';
@@ -47,11 +48,11 @@ describe('simple string edit', function() {
     beforeEach(inject(function(elementRegistry) {
       const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
-      triggerMouseEvent(cell, 'click');
+      triggerClick(cell);
 
       const button = domQuery('.simple-mode-button', testContainer);
 
-      triggerMouseEvent(button, 'click');
+      triggerClick(button);
 
       simpleStringEdit = domQuery('.simple-string-edit', testContainer);
 
@@ -85,7 +86,7 @@ describe('simple string edit', function() {
       const checkbox = domQuery.all('input[type="checkbox"]', simpleStringEdit)[1];
 
       // when
-      triggerMouseEvent(checkbox, 'click');
+      triggerClick(checkbox);
 
       // then
       expect(inputEntry1.businessObject.text).to.equal('"bronze","silver"');
@@ -160,11 +161,11 @@ describe('simple string edit', function() {
     beforeEach(inject(function(elementRegistry) {
       const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
 
-      triggerMouseEvent(cell, 'click');
+      triggerClick(cell);
 
       const button = domQuery('.simple-mode-button', testContainer);
 
-      triggerMouseEvent(button, 'click');
+      triggerClick(button);
 
       simpleStringEdit = domQuery('.simple-string-edit', testContainer);
 
@@ -185,7 +186,7 @@ describe('simple string edit', function() {
       const radio = domQuery.all('input[type="radio"]', simpleStringEdit)[0];
 
       // when
-      triggerMouseEvent(radio, 'click');
+      triggerClick(radio);
 
       // then
       expect(outputEntry1.businessObject.text).to.equal('"ok"');

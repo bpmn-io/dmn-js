@@ -6,7 +6,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import {
   triggerChangeEvent,
-  triggerMouseEvent
+  triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleBooleanEditXML from './simple-boolean-edit.dmn';
@@ -39,11 +39,11 @@ describe('simple boolean edit', function() {
   function openSimpleBooleanEdit(elementId) {
     const cell = domQuery(`[data-element-id="${ elementId }"]`, testContainer);
 
-    triggerMouseEvent(cell, 'click');
+    triggerClick(cell);
 
     const button = domQuery('.simple-mode-button', testContainer);
 
-    triggerMouseEvent(button, 'click');
+    triggerClick(button);
 
     return domQuery('.simple-boolean-edit', testContainer);
   }
