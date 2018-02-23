@@ -1,9 +1,11 @@
 import forEach from 'lodash/forEach';
 
-import EditPropertiesHandler
-  from 'dmn-js-decision-table/lib/features/modeling/cmd/EditPropertiesHandler';
+import UpdatePropertiesHandler
+  from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
+
 
 export default class Modeling {
+
   constructor(eventBus, commandStack, viewer) {
     this._eventBus = eventBus;
     this._commandStack = commandStack;
@@ -22,7 +24,7 @@ export default class Modeling {
 
   static _getHandlers() {
     return {
-      'editProperties': EditPropertiesHandler
+      'updateProperties': UpdatePropertiesHandler
     };
   }
 
@@ -36,7 +38,7 @@ export default class Modeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editDecisionId(id) {
@@ -49,7 +51,7 @@ export default class Modeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editLiteralExpressionText(text) {
@@ -63,7 +65,7 @@ export default class Modeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editExpressionLanguage(expressionLanguage) {
@@ -77,7 +79,7 @@ export default class Modeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editVariableName(name) {
@@ -91,7 +93,7 @@ export default class Modeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editVariableType(typeRef) {
@@ -105,7 +107,7 @@ export default class Modeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 }
 

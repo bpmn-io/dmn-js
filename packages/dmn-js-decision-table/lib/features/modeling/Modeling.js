@@ -3,9 +3,13 @@ import { assign } from 'min-dash/lib/object';
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 
 import EditAllowedValuesHandler from './cmd/EditAllowedValuesHandler';
-import EditPropertiesHandler from './cmd/EditPropertiesHandler';
+
+import UpdatePropertiesHandler
+  from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
+
 
 export default class Modeling extends BaseModeling {
+
   constructor(eventBus, elementFactory, commandStack, sheet) {
     super(eventBus, elementFactory, commandStack);
 
@@ -22,7 +26,7 @@ export default class Modeling extends BaseModeling {
   static _getHandlers() {
     return assign({}, super._getHandlers(), {
       'editAllowedValues': EditAllowedValuesHandler,
-      'editProperties': EditPropertiesHandler
+      'updateProperties': UpdatePropertiesHandler
     });
   }
 
@@ -38,7 +42,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editDecisionTableId(id) {
@@ -53,7 +57,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editHitPolicy(hitPolicy, aggregation) {
@@ -68,18 +72,25 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
-  editInputExpression(inputExpression, text) {
+  updateProperties(el, props) {
     const context = {
-      element: inputExpression,
-      properties: {
-        text
-      }
+      element: el,
+      properties: props
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
+  }
+
+  editInputExpression(inputExpression, props) {
+    const context = {
+      element: inputExpression,
+      properties: props
+    };
+
+    this._commandStack.execute('updateProperties', context);
   }
 
   editOutputName(output, name) {
@@ -90,7 +101,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editInputExpressionTypeRef(inputExpression, typeRef) {
@@ -101,7 +112,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editOutputTypeRef(output, typeRef) {
@@ -112,7 +123,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editCell(cell, text) {
@@ -123,7 +134,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editAnnotation(rule, description) {
@@ -134,7 +145,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 
   editAllowedValues(element, allowedValues) {
@@ -154,7 +165,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('editProperties', context);
+    this._commandStack.execute('updateProperties', context);
   }
 }
 

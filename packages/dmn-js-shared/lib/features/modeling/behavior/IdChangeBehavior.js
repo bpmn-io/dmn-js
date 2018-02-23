@@ -11,7 +11,7 @@ export default class IdChangeBehavior extends CommandInterceptor {
   constructor(eventBus) {
     super(eventBus);
 
-    this.executed('editProperties', this.updateIds.bind(this));
+    this.executed('updateProperties', this.updateIds.bind(this));
   }
 
   updateIds({ context }) {

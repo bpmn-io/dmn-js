@@ -9,7 +9,7 @@ export default class EditTypeRefBehavior extends CommandInterceptor {
   constructor(eventBus, modeling) {
     super(eventBus);
 
-    this.postExecuted('editProperties', event => {
+    this.postExecuted('updateProperties', event => {
       const { element, properties } = event.context;
 
       if (properties.typeRef && properties.typeRef !== 'string') {
