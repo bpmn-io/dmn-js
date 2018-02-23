@@ -1,4 +1,4 @@
-import forEach from 'lodash/forEach';
+import forEach from 'lodash/collection/forEach';
 
 import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';

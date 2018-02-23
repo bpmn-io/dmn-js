@@ -1,9 +1,9 @@
 'use strict';
 
-var uniq = require('lodash/uniq'),
-    assign = require('lodash/assign'),
-    isFunction = require('lodash/isFunction'),
-    forEach = require('lodash/forEach');
+var uniq = require('lodash/array/uniq'),
+    assign = require('lodash/object/assign'),
+    isFunction = require('lodash/lang/isFunction'),
+    forEach = require('lodash/collection/forEach');
 
 var TestContainer = require('mocha-test-container-support');
 
