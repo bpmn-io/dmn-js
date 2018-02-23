@@ -28,11 +28,9 @@ describe('Modeler', function() {
     document.body.appendChild(container);
   });
 
-  /*
-  afterEach(function() {
+  false && afterEach(function() {
     document.body.removeChild(container);
   });
-  */
 
 
   it('should open DMN table', function(done) {
