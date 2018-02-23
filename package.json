@@ -23,6 +23,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-plugin-inferno": "^4.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
@@ -44,6 +45,7 @@
     "karma-spec-reporter": "0.0.31",
     "lerna": "^2.8.0",
     "mocha": "^4.0.1",
+    "mocha-test-container-support": "^0.2.0",
     "npm-run-all": "^4.1.2",
     "puppeteer": "^1.1.0",
     "sinon": "^4.1.2",
@@ -52,6 +54,7 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
+    "dmn-font": "^0.4.0",
     "dmn-moddle": "^2.0.2",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
