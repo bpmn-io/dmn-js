@@ -4,7 +4,10 @@
   "version": "1.3.1",
   "scripts": {
     "test": "karma start",
-    "dev": "npm run test -- --no-single-run --auto-watch"
+    "dev": "npm run test -- --no-single-run --auto-watch",
+    "test:distro": "node tasks/test-distro.js",
+    "distro": "node tasks/build-distro.js",
+    "prepublishOnly": "run-s distro test:distro"
   },
   "author": {
     "name": "Sebastian Stamm",
@@ -31,7 +34,14 @@
     "decision modeling"
   ],
   "devDependencies": {
-    "diagram-js": "^0.27.1"
+    "babel-loader": "^7.1.2",
+    "cpx": "^1.5.0",
+    "del": "^3.0.0",
+    "diagram-js": "^0.27.1",
+    "execa": "^0.9.0",
+    "mkdirp": "^0.5.1",
+    "webpack": "^4.0.0-beta.2",
+    "webpack-cli": "^2.0.6"
   },
   "dependencies": {
     "dmn-js-decision-table": "^1.3.1",
