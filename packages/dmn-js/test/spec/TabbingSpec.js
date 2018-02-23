@@ -10,8 +10,7 @@ import { insertCSS } from 'test/helper';
 
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
-insertCSS('dmn-font',
-  require('dmn-js-decision-table/node_modules/dmn-font/dist/css/dmn-embedded.css'));
+insertCSS('dmn-font', require('dmn-font/dist/css/dmn-embedded.css'));
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
