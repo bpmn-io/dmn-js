@@ -29,9 +29,6 @@ export default class List extends Component {
     this.state = {
       items
     };
-
-    this.removeItem = this.removeItem.bind(this);
-    this.toggleItem = this.toggleItem.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -42,7 +39,7 @@ export default class List extends Component {
     });
   }
 
-  removeItem(item) {
+  removeItem = (item) => {
     const { onChange } = this.props;
 
     // remove item
@@ -55,7 +52,7 @@ export default class List extends Component {
     onChange && onChange(newItems);
   }
 
-  toggleItem(item) {
+  toggleItem = (item) => {
     const { onChange, type } = this.props;
 
     // toggle item

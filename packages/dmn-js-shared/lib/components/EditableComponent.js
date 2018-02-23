@@ -42,9 +42,6 @@ export default class EditableComponent extends Component {
       focussed: false
     };
 
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-
 
     const { injector } = context;
 
@@ -79,7 +76,7 @@ export default class EditableComponent extends Component {
     };
   }
 
-  onFocus() {
+  onFocus = () => {
     this.setState({
       focussed: true
     });
@@ -91,7 +88,7 @@ export default class EditableComponent extends Component {
     }
   }
 
-  onBlur(property) {
+  onBlur = (property) => {
     this.setState({
       focussed: false
     });

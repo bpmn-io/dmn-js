@@ -4,13 +4,9 @@ import { Component } from 'inferno';
 export default class Button extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.onClick = this.onClick.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
   }
 
-  onClick(event) {
+  onClick = (event) => {
     const { onClick } = this.props;
 
     if (typeof onClick !== 'function') {
@@ -20,7 +16,7 @@ export default class Button extends Component {
     onClick(event);
   }
 
-  onMouseDown(event) {
+  onMouseDown = (event) => {
     const { onMouseDown } = this.props;
 
     if (typeof onMouseDown !== 'function') {
@@ -30,7 +26,7 @@ export default class Button extends Component {
     onMouseDown(event);
   }
 
-  onMouseUp(event) {
+  onMouseUp = (event) => {
     const { onMouseUp } = this.props;
 
     if (typeof onMouseUp !== 'function') {
