@@ -5,8 +5,8 @@
  * @see http://bpmn.io/license for more information.
  */
 
-import assign from 'lodash/object/assign';
-import omit from 'lodash/object/omit';
+var assign = require('lodash/object/assign'),
+    omit = require('lodash/object/omit');
 
 var domify = require('min-dom/lib/domify'),
     domQuery = require('min-dom/lib/query'),
