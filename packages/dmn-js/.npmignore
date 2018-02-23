@@ -1,5 +1,7 @@
+!dist
 tasks
 resources
 test/*
 !test/helper
 karma.conf.js
+webpack.config.js
