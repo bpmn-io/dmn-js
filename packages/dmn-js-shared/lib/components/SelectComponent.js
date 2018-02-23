@@ -2,13 +2,12 @@ import { Component } from 'inferno';
 
 
 export default class SelectComponent extends Component {
+
   constructor(props, context) {
     super(props, context);
-
-    this.onChange = this.onChange.bind(this);
   }
 
-  onChange(event) {
+  onChange = (event) => {
     const { onChange } = this.props;
 
     if (typeof onChange !== 'function') {

@@ -2,15 +2,12 @@ import { Component } from 'inferno';
 
 
 export default class Input extends Component {
+
   constructor(props, context) {
     super(props, context);
-
-    this.onInput = this.onInput.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
   }
 
-  onInput(event) {
+  onInput = (event) => {
     const { onInput } = this.props;
 
     if (typeof onInput !== 'function') {
@@ -22,7 +19,7 @@ export default class Input extends Component {
     onInput(value);
   }
 
-  onKeyDown(event) {
+  onKeyDown = (event) => {
     const { onKeyDown } = this.props;
 
     if (typeof onKeyDown !== 'function') {
@@ -32,7 +29,7 @@ export default class Input extends Component {
     onKeyDown(event);
   }
 
-  onKeyUp(event) {
+  onKeyUp = (event) => {
     const { onKeyUp } = this.props;
 
     if (typeof onKeyUp !== 'function') {
