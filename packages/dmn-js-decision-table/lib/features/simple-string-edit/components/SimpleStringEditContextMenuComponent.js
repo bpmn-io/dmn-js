@@ -280,13 +280,15 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         <h3 class="dms-heading">Edit String</h3>
 
         {
-          isInputClause
-            && <SelectComponent
-              ref={ node => this.selectNode = node }
-              className="full-width display-block"
-              onChange={ this.onUnaryTestsTypeChange }
-              options={ options }
-              value={ isNegation ? 'negation' : 'disjunction' } />
+          isInputClause &&
+            <p>
+              <SelectComponent
+                ref={ node => this.selectNode = node }
+                className="full-width display-block"
+                onChange={ this.onUnaryTestsTypeChange }
+                options={ options }
+                value={ isNegation ? 'negation' : 'disjunction' } />
+            </p>
         }
 
         <ListComponent

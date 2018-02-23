@@ -162,7 +162,7 @@ export default class InputOutputValuesComponent extends Component {
               && <p class="dms-hint">
                 <a href="#" className="del-values"
                   onMouseUp={ this.removePredefinedValues }>
-                  Remove all predefined values.
+                  Clear predefined values.
                 </a>
               </p>
           }

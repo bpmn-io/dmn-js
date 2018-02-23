@@ -125,13 +125,6 @@
   margin: 0;
 }
 
-
-/* validated input */
-.dms-validation-warning {
-  color: #c9302c;
-  font-size: 0.9em;
-}
-
 .dms-label {
   font-weight: bold;
   white-space: nowrap;
@@ -172,13 +165,23 @@
 }
 
 p.dms-hint {
-  margin: 5px 0 10px 0;
+  font-size: 0.85em;
+  margin-top: 5px;
+  color: #888;
 }
 
 p.dms-hint a {
-  font-size: 0.75em;
-  font-weight: bold;
+  color: #3960a2;
+  text-decoration: none;
+}
+
+p.dms-hint a:hover {
   color: #4285f4;
+}
+
+/* validated input */
+p.dms-validation-warning {
+  color: #c9302c;
 }
 
 h3.dms-heading {
