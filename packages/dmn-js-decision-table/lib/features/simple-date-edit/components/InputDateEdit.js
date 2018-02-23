@@ -2,7 +2,7 @@ import { Component } from 'inferno';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
+import Select from 'dmn-js-shared/lib/components/Select';
 
 import {
   getDateString,
@@ -170,7 +170,7 @@ export default class InputDateEdit extends Component {
 
         <h3 class="dms-heading">Edit Date</h3>
 
-        <SelectComponent
+        <Select
           onChange={ this.onTypeChange }
           options={ options }
           value={ type } />

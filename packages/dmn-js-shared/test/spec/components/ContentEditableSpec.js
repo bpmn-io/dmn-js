@@ -25,7 +25,7 @@ import {
 import ContentEditable from 'lib/components/ContentEditable';
 
 
-describe('ContentEditable', function() {
+describe('components/ContentEditable', function() {
 
   var container, vTree;
 

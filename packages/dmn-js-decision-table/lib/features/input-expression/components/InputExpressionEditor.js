@@ -4,7 +4,7 @@ import { isString } from 'min-dash/lib/lang';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
-import Select from 'dmn-js-shared/lib/components/SelectComponent';
+import Select from 'dmn-js-shared/lib/components/Select';
 
 
 export default class InputExpressionEditor extends Component {

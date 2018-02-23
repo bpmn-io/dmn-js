@@ -2,7 +2,7 @@ import { Component } from 'inferno';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
+import List from 'dmn-js-shared/lib/components/List';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
@@ -141,7 +141,7 @@ export default class InputOutputValuesComponent extends Component {
           {
             !isNull(values)
               && values.length > 0
-              && <ListComponent
+              && <List
                 items={ values }
                 onChange={ this.onListChange } />
           }

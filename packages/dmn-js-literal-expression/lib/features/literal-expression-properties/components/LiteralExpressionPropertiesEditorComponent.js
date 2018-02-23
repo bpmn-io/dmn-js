@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 
 import Input from 'dmn-js-shared/lib/components/Input';
-import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
+import Select from 'dmn-js-shared/lib/components/Select';
 
 const EXPRESSION_LANGUAGE_OPTIONS = [{
   label: '-',
@@ -131,7 +131,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>Variable Type:</td>
             <td>
               <div className="dms-fill-row">
-                <SelectComponent
+                <Select
                   onChange={ this.setVariableType }
                   options={ TYPE_REF_OPTIONS }
                   value={ typeRef || 'none' }
@@ -143,7 +143,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>Expression Language:</td>
             <td>
               <div className="dms-fill-row">
-                <SelectComponent
+                <Select
                   onChange={ this.setExpressionLanguage }
                   options={ EXPRESSION_LANGUAGE_OPTIONS }
                   value={ expressionLanguage || 'none' }

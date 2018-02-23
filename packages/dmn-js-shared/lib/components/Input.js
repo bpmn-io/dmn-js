@@ -14,9 +14,7 @@ export default class Input extends Component {
       return;
     }
 
-    const { value } = event.target;
-
-    onInput(value);
+    onInput(event.target.value);
   }
 
   onKeyDown = (event) => {

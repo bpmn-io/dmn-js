@@ -18,11 +18,10 @@ import {
   triggerInputEvent
 } from 'test/util/EventUtil';
 
-// eslint-disable-next-line
 import EditableComponent from 'lib/components/EditableComponent';
 
 
-describe('EditableComponent', function() {
+describe('components/EditableComponent', function() {
 
   var container, vTree;
 

@@ -1,8 +1,8 @@
 import { Component } from 'inferno';
 
-import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
+import Select from 'dmn-js-shared/lib/components/Select';
 
-import ListComponent from 'dmn-js-shared/lib/components/ListComponent';
+import List from 'dmn-js-shared/lib/components/List';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
@@ -282,7 +282,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         {
           isInputClause &&
             <p>
-              <SelectComponent
+              <Select
                 ref={ node => this.selectNode = node }
                 className="full-width display-block"
                 onChange={ this.onUnaryTestsTypeChange }
@@ -291,7 +291,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
             </p>
         }
 
-        <ListComponent
+        <List
           onChange={ this.onUnaryTestsListChanged }
           items={ items }
           type={ isInputClause ? 'checkbox' : 'radio' } />

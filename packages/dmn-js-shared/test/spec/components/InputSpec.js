@@ -10,11 +10,10 @@ import {
 
 import { triggerInputEvent, triggerKeyEvent } from 'test/util/EventUtil';
 
-// eslint-disable-next-line
 import Input from 'lib/components/Input';
 
 
-describe('Input', function() {
+describe('components/Input', function() {
 
   var container, vTree;
 

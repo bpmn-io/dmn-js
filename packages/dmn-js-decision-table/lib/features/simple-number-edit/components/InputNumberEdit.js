@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 
 import Input from 'dmn-js-shared/lib/components/Input';
-import SelectComponent from 'dmn-js-shared/lib/components/SelectComponent';
+import Select from 'dmn-js-shared/lib/components/Select';
 
 import {
   getComparisonString,
@@ -214,7 +214,7 @@ export default class InputNumberEdit extends Component {
 
         <h4 className="dms-heading">Value</h4>
 
-        <SelectComponent
+        <Select
           onChange={ this.onComparisonOperatorChange }
           options={ comparisonOperatorOptions }
           value={ comparisonOperator } />
@@ -244,7 +244,7 @@ export default class InputNumberEdit extends Component {
         <h4 className="dms-heading">Start Value</h4>
 
         <div className="no-wrap">
-          <SelectComponent
+          <Select
             onChange={ this.onRangeStartTypeChange }
             options={ rangeTypeOptions }
             value={ rangeStartType } />
@@ -262,7 +262,7 @@ export default class InputNumberEdit extends Component {
         </h4>
 
         <div className="no-wrap">
-          <SelectComponent
+          <Select
             onChange={ this.onRangeEndTypeChange }
             options={ rangeTypeOptions }
             value={ rangeEndType } />
@@ -303,7 +303,7 @@ export default class InputNumberEdit extends Component {
 
         <h3 class="dms-heading">Edit Number</h3>
 
-        <SelectComponent
+        <Select
           className="full-width display-block"
           onChange={ this.onTypeChange }
           options={ typeOptions }
