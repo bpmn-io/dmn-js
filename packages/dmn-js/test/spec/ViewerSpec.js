@@ -16,11 +16,10 @@ describe('Viewer', function() {
     document.body.appendChild(container);
   });
 
-  /*
-  afterEach(function() {
+  false && afterEach(function() {
     document.body.removeChild(container);
   });
-  */
+
 
   it('should expose Viewer as library default', function() {
     expect(DefaultExport).to.equal(Viewer);
