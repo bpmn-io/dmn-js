@@ -1,5 +1,5 @@
 import DecisionTableHeadEditor from './DecisionTableHeadEditor';
-import DebounceInput from '../debounce-input';
+import DebounceInput from 'dmn-js-shared/lib/features/debounce-input';
 
 export default {
   __depends__: [ DebounceInput ],

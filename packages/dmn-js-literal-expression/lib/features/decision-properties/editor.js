@@ -1,5 +1,5 @@
 import DecisionPropertiesEditor from './DecisionPropertiesEditor';
-import DebounceInput from 'dmn-js-decision-table/lib/features/debounce-input';
+import DebounceInput from 'dmn-js-shared/lib/features/debounce-input';
 
 export default {
   __depends__: [ DebounceInput ],

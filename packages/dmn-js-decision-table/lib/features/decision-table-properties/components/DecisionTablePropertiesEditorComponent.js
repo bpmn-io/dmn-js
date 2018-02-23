@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { validateId } from '../../../util/IdsUtil';
+import { validateId } from 'dmn-js-shared/lib/util/IdsUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 

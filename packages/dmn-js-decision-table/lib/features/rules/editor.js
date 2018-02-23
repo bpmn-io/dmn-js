@@ -1,4 +1,4 @@
-import DebounceInput from '../debounce-input';
+import DebounceInput from 'dmn-js-shared/lib/features/debounce-input';
 import RulesEditor from './RulesEditor';
 import Rules from './index';
 
