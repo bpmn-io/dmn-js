@@ -1,6 +1,10 @@
 import { Component } from 'inferno';
 
+import { isString } from 'min-dash/lib/lang';
+
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
+import Input from 'dmn-js-shared/lib/components/Input';
+import Select from 'dmn-js-shared/lib/components/SelectComponent';
 
 
 export default class InputExpressionEditor extends Component {
@@ -36,25 +40,16 @@ export default class InputExpressionEditor extends Component {
       this.handleChange(change);
     };
 
-    this.handleLanguageChange = (evt) => {
-      var language = evt.target.value;
-
+    this.handleLanguageChange = (language) => {
       this.setExpressionLanguage(language);
     };
 
-    this.handleInputVariableChange = (evt) => {
+    this.handleInputVariableChange = (value) => {
 
-      // default to <null> for undefined
-      var inputVariable = evt.target.value || undefined;
+      // default to <undefined> for empty string
+      var inputVariable = value || undefined;
 
       this.handleChange({ inputVariable });
-    };
-
-    this.handleKey = (evt) => {
-      // enter key
-      if (evt.which === 13) {
-        this.makeScript();
-      }
     };
   }
 
@@ -75,6 +70,15 @@ export default class InputExpressionEditor extends Component {
     } = this.props;
 
     var editScript = expressionLanguage || isMultiLine(text);
+
+    var languageOptions = [
+      !isMultiLine(text) && '',
+      'FEEL',
+      'JUEL',
+      'JavaScript',
+      'Groovy',
+      'Python'
+    ].filter(isString).map(o => ({ label: o, value: o }));
 
     return (
       <div className="dms-container ref-input-expression-editor">
@@ -119,21 +123,11 @@ export default class InputExpressionEditor extends Component {
             <p>
               <label className="dms-label">Script Language:</label>&nbsp;
 
-              <select
-                className="dms-select ref-language"
-                value={ expressionLanguage }
-                onChange={ this.handleLanguageChange }>
-
-                {
-                  isMultiLine(text)
-                    ? null
-                    : <option value=""></option>
-                }
-                <option value="FEEL">FEEL</option>
-                <option value="JUEL">JUEL</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="Groovy">Groovy</option>
-              </select>
+              <Select
+                className="ref-language"
+                value={ expressionLanguage || '' }
+                onChange={ this.handleLanguageChange }
+                options={ languageOptions } />
             </p>
           )
         }
@@ -141,8 +135,8 @@ export default class InputExpressionEditor extends Component {
         <p className="dms-fill-row">
           <label className="dms-label">Input Variable:</label>&nbsp;
 
-          <input
-            className="dms-input ref-input-variable"
+          <Input
+            className="ref-input-variable"
             value={ inputVariable || '' }
             onInput={ this.handleInputVariableChange }
             placeholder="cellInput" />
