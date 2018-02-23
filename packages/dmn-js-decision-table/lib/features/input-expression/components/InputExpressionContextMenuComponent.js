@@ -1,66 +1,96 @@
 import { Component } from 'inferno';
 
+import InputExpressionEditor from './InputExpressionEditor';
+
 
 export default class InputExpressionContextMenuComponent extends Component {
 
   constructor(props, context) {
     super(props, context);
 
+    this._modeling = context.injector.get('modeling');
+    this._contextMenu = context.injector.get('contextMenu');
+
+    this.state = {};
+
     const debounceInput = context.injector.get('debounceInput');
 
-    this.onInput = debounceInput(this.onInput.bind(this));
-    this.onKeyDown = this.onKeyDown.bind(this);
+    this.persistChanges = debounceInput(this.persistChanges);
   }
 
-  onInput(event) {
+  persistChanges = () => {
     const { inputExpression } = this.props.context;
 
-    this._modeling.editInputExpression(inputExpression, event.target.value);
-  }
+    const { unsaved } = this.state;
 
-  onKeyDown(event) {
-    if (isEnter(event)) {
-      const { inputExpression } = this.props.context;
-
-      this._modeling.editInputExpression(inputExpression, this.node.value);
-
-      this._contextMenu.close();
+    if (!unsaved) {
+      return;
     }
+
+    const {
+      inputVariable,
+      ...inputExpressionProperties
+    } = unsaved;
+
+    var changes = { };
+
+    if ('inputVariable' in unsaved) {
+      changes.inputVariable = inputVariable;
+    }
+
+    if (hasKeys(inputExpressionProperties)) {
+      changes.inputExpression = inputExpressionProperties;
+    }
+
+    // TODO(nikku): should pass input via props
+    // rather than inputExpression
+    this._modeling.updateProperties(inputExpression.$parent, changes);
+
+    this.setState({
+      unsaved: false
+    });
   }
 
-  componentWillMount() {
-    const { injector } = this.context;
+  handleChange = (changes) => {
+    this.setState({
+      unsaved: {
+        ...this.state.unsaved,
+        ...changes
+      }
+    }, this.persistChanges);
+  };
 
-    this._modeling = injector.get('modeling');
-    this._contextMenu = injector.get('contextMenu');
+  getValue(attr) {
+    let { inputExpression } = this.props.context;
+
+    const { unsaved } = this.state;
+
+    // input variable stored in parent
+    if (attr === 'inputVariable') {
+      inputExpression = inputExpression.$parent;
+    }
+
+    return (unsaved && unsaved[attr]) || inputExpression.get(attr);
   }
 
   render() {
-    const { inputExpression } = this.props.context;
-
     return (
-      <div className="input-expression-edit">
-        Expression:
-        <input
-          className="input-expression-edit-input"
-          ref={ node => {
-            this.node = node;
-            node && node.focus();
-            node && node.select();
-          } }
-          type="text"
-          placeholder="-"
-          spellcheck="false"
-          onInput={ this.onInput }
-          onKeyDown={ this.onKeyDown }
-          value={ inputExpression.text } />
+      <div className="context-menu-container input-expression-edit">
+        <InputExpressionEditor
+          expressionLanguage={ this.getValue('expressionLanguage') }
+          inputVariable={ this.getValue('inputVariable') }
+          text={ this.getValue('text') }
+          onChange={ this.handleChange } />
       </div>
     );
   }
 }
 
-////////// helpers //////////
 
-function isEnter(event) {
-  return event.keyCode === 13;
+
+
+////////// helpers ////////////////////////////
+
+function hasKeys(obj) {
+  return Object.keys(obj).length;
 }
