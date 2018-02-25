@@ -45,7 +45,7 @@ var NODE_ENV = process.env.NODE_ENV;
   try {
     process.env.NODE_ENV = env;
 
-    exec('webpack', [ '-p' ]);
+    exec('webpack');
   } catch (e) {
     console.error(e);
   }

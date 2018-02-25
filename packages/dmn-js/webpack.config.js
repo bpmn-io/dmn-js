@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
+  mode: 'production',
   entry: {
     'dmn-viewer': './lib/Viewer',
     'dmn-modeler': './lib/Modeler'
