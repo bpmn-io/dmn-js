@@ -1,20 +1,31 @@
+> __Do NOT consider `dmn-js@1.x` as stable.__ The library is in the middle of
+a rewrite. Breaking changes may be introduced at any time. Please refer to dmn-js `v0.11.0` as the last stable version until `v2.0.0` is released.
+
+
 # dmn-js - DMN for the web
 
 [![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=master)](https://travis-ci.org/bpmn-io/dmn-js)
 
-[dmn-js](https://github.com/bpmn-io/dmn-js) is a DMN modeling and rendering toolkit.
+View and edit DMN 1.1 diagrams in the browser.
 
 
-__NOTE__: Please do NOT consider dmn-js v1.x.x as stable. The project is still in an early stage of development. Breaking changes may be introduced at any time. We're planning to release a stable dmn-js v2.0.0 soon. In the meantime please refer to dmn-js v0.11.0 as the last stable version.
+## Installation
+
+Use the library [pre-packaged](https://github.com/bpmn-io/dmn-js-examples/tree/master/pre-packaged)
+or include it [via npm](https://github.com/bpmn-io/dmn-js-examples/tree/master/bundling)
+into your node-style web-application.
 
 
 ## Usage
 
-```javascript
-var DmnViewer = require('dmn-js');
+To get started, create a [dmn-js](https://github.com/bpmn-io/dmn-js) instance
+and render [DMN 1.1 diagrams](http://www.omg.org/spec/DMN/About-DMN/) in the browser:
 
-var xml; // my DMN xml
-var viewer = new DmnViewer({ container: 'body' });
+```javascript
+var xml; // my DMN 1.1 xml
+var viewer = new DmnJS({
+  container: 'body'
+});
 
 viewer.importXML(xml, function(err) {
 
@@ -26,29 +37,59 @@ viewer.importXML(xml, function(err) {
 });
 ```
 
+Checkout our [examples](https://github.com/bpmn-io/dmn-js-examples) for
+more supported usage scenarios.
+
+
+### Dynamic Attach/Detach
+
+You may attach or detach the viewer dynamically to any element on the page, too:
+
+```javascript
+var viewer = new DmnJS();
+
+// attach it to some element
+viewer.attachTo('#container');
+
+// detach the panel
+viewer.detach();
+```
+
 
 ## Resources
 
+*   [Demo](http://demo.bpmn.io/dmn)
 *   [Issues](https://github.com/bpmn-io/dmn-js/issues)
-
-
-## Tools
-
-dmn-js builds on top of a few additional powerful tools
-
-* [dmn-moddle](https://github.com/bpmn-io/dmn-moddle): Read / write support for DMN XML in the browsers
-* [table-js](https://github.com/bpmn-io/table-js): Table rendering and editing toolkit
+*   [Examples](https://github.com/bpmn-io/dmn-js-examples)
+*   [Forum](https://forum.bpmn.io)
 
 
 ## Building the Project
 
-```
-# build everything
-npm run all
+Perform the following steps to build the library, including running all tests:
 
-# dev in a sub-project
+```
+npm install
+npm run all
+```
+
+Run tests in individual [packages](./packages):
+
+```
 npm run dev -- dmn-js
 ```
+
+Please checkout our [contributing guidelines](./CONTRIBUTING.md) if you plan to
+file an issue or pull request.
+
+
+## Related
+
+dmn-js builds on top of a few additional powerful tools:
+
+* [dmn-moddle](https://github.com/bpmn-io/dmn-moddle): Read / write support for DMN 1.1 XML
+* [diagram-js](https://github.com/bpmn-io/diagram-js): Diagram rendering and editing toolkit
+* [table-js](https://github.com/bpmn-io/table-js): Table rendering and editing toolkit
 
 
 ## License
