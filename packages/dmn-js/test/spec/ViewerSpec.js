@@ -27,6 +27,24 @@ describe('Viewer', function() {
   });
 
 
+  it('should allow to configure container size', function() {
+
+    // when
+    var editor = new Viewer({
+      width: '300px',
+      height: 200,
+      position: 'absolute'
+    });
+
+    // then
+    expect(editor._container.style).to.include({
+      width: '300px',
+      height: '200px',
+      position: 'absolute'
+    });
+  });
+
+
   it('should open DMN table', function(done) {
 
     var editor = new Viewer({ container: container });

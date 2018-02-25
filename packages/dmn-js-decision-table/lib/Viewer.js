@@ -3,7 +3,6 @@ import Table from 'table-js';
 import { importDecision } from './import/Importer';
 
 import { assign } from 'min-dash/lib/object';
-import { isNumber } from 'min-dash/lib/lang';
 
 import { domify } from 'min-dom';
 import { remove as domRemove } from 'min-dom';
@@ -22,7 +21,7 @@ import PoweredByModule from './features/powered-by';
 export default class Viewer extends Table {
 
   constructor(options = {}) {
-    const container = Viewer._createContainer(options);
+    const container = Viewer._createContainer();
 
     super(assign(options, {
       renderer: {
@@ -193,24 +192,10 @@ export default class Viewer extends Table {
     ];
   }
 
-  static _createContainer(options) {
-    const container = domify('<div class="dmn-decision-table-container"></div>');
-
-    assign(container.style, {
-      width: ensureUnit(options.width),
-      height: ensureUnit(options.height),
-      position: options.position
-    });
-
-    return container;
+  static _createContainer() {
+    return domify(
+      '<div class="dmn-decision-table-container"></div>'
+    );
   }
-}
 
-////////// helpers //////////
-
-/**
- * Ensure the passed argument is a proper unit (defaulting to px)
- */
-function ensureUnit(val) {
-  return val + (isNumber(val) ? 'px' : '');
 }

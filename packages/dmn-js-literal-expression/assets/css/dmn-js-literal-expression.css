@@ -1,11 +1,19 @@
-.dmn-literal-expression {
+.dmn-literal-expression-container {
   font-family: 'Arial', sans-serif;
   position: relative;
   color: #444;
+
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.dmn-literal-expression-container * {
+  box-sizing: border-box;
 }
 
 /* decision properties */
-.dmn-literal-expression .decision-properties {
+.dmn-literal-expression-container .decision-properties {
   color: #444;
   background-color: #fff;
   display: inline-block;
@@ -16,54 +24,54 @@
   max-width: 50%;
 }
 
-.dmn-literal-expression .decision-name:not(.editor),
-.dmn-literal-expression .decision-id:not(.editor) {
+.dmn-literal-expression-container .decision-name:not(.editor),
+.dmn-literal-expression-container .decision-id:not(.editor) {
   cursor: default;
 }
 
-.dmn-literal-expression .decision-name.editor,
-.dmn-literal-expression .decision-id.editor {
+.dmn-literal-expression-container .decision-name.editor,
+.dmn-literal-expression-container .decision-id.editor {
   cursor: text;
 }
 
-.dmn-literal-expression .decision-name,
-.dmn-literal-expression .decision-id {
+.dmn-literal-expression-container .decision-name,
+.dmn-literal-expression-container .decision-id {
   margin: 0;
   padding: 3px 6px;
   text-align: center;
   white-space: pre;
 }
 
-.dmn-literal-expression .decision-name div,
-.dmn-literal-expression .decision-id div {
+.dmn-literal-expression-container .decision-name div,
+.dmn-literal-expression-container .decision-id div {
   outline: none;
 }
 
-.dmn-literal-expression .decision-id.invalid {
+.dmn-literal-expression-container .decision-id.invalid {
   background: #f4cecd;
   color: #c9302c;
 }
 
-.dmn-literal-expression .decision-name.editor:not(.focussed):hover,
-.dmn-literal-expression .decision-id.editor:not(.focussed):hover {
+.dmn-literal-expression-container .decision-name.editor:not(.focussed):hover,
+.dmn-literal-expression-container .decision-id.editor:not(.focussed):hover {
   cursor: text;
 }
 
-.dmn-literal-expression .decision-name {
+.dmn-literal-expression-container .decision-name {
   font-size: 24px;
   line-height: 30px;
   padding: .3em;
   font-weight: bold;
 }
 
-.dmn-literal-expression .decision-id {
+.dmn-literal-expression-container .decision-id {
   border-top: 1px solid #444;
   font-family: monospace;
   font-size: 18px;
 }
 
 /* textarea */
-.dmn-literal-expression .textarea {
+.dmn-literal-expression-container .textarea {
   box-sizing: border-box;
   width: 100%;
   font-family: monospace;
@@ -75,31 +83,31 @@
   height: 250px;
 }
 
-.dmn-literal-expression .textarea .content,
-.dmn-literal-expression .textarea .content-editable {
+.dmn-literal-expression-container .textarea .content,
+.dmn-literal-expression-container .textarea .content-editable {
   padding: 12px;
 }
 
-.dmn-literal-expression .textarea .content-editable {
+.dmn-literal-expression-container .textarea .content-editable {
   height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
 }
 
-.dmn-literal-expression .textarea div:focus {
+.dmn-literal-expression-container .textarea div:focus {
   outline: none;
 }
 
-.dmn-literal-expression .textarea.editor {
+.dmn-literal-expression-container .textarea.editor {
   cursor: text;
 }
 
-.dmn-literal-expression .textarea:not(.editor) {
+.dmn-literal-expression-container .textarea:not(.editor) {
   cursor: default;
 }
 
 /* literal expression properties */
-.dmn-literal-expression .literal-expression-properties {
+.dmn-literal-expression-container .literal-expression-properties {
   box-sizing: border-box;
   width: 100%;
   padding:  0;
@@ -109,19 +117,19 @@
   color: #444;
 }
 
-.dmn-literal-expression .literal-expression-properties table {
+.dmn-literal-expression-container .literal-expression-properties table {
   border-spacing: 8px;
 }
 
-.dmn-literal-expression .literal-expression-properties table tr td:first-child {
+.dmn-literal-expression-container .literal-expression-properties table tr td:first-child {
   font-weight: bold;
 }
 
-.dmn-literal-expression .literal-expression-properties table tr td:last-child {
+.dmn-literal-expression-container .literal-expression-properties table tr td:last-child {
   min-width: 100px;
 }
 
-.dmn-literal-expression .literal-expression-properties table tr td:last-child span {
+.dmn-literal-expression-container .literal-expression-properties table tr td:last-child span {
   padding: 4px 6px;
   border: 1px solid #ccc;
   background: #FAFAFA;
@@ -133,13 +141,13 @@
 }
 
 /* view drd */
-.dmn-literal-expression .view-drd {
+.dmn-literal-expression-container .view-drd {
   position: absolute;
   top: 10px;
   right: 60px;
 }
 
-.dmn-literal-expression .view-drd .view-drd-button {
+.dmn-literal-expression-container .view-drd .view-drd-button {
   background: #fff;
   padding: 8px;
   border: solid 1px #CCC;
@@ -151,12 +159,12 @@
   outline: none;
 }
 
-.dmn-literal-expression .view-drd .view-drd-button:hover {
+.dmn-literal-expression-container .view-drd .view-drd-button:hover {
   background: #f6f6f6;
 }
 
 /* powered by */
-.dmn-literal-expression .powered-by-logo {
+.dmn-literal-expression-container .powered-by-logo {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -165,11 +173,11 @@
   cursor: pointer;
 }
 
-.dmn-literal-expression .powered-by-logo .logo {
+.dmn-literal-expression-container .powered-by-logo .logo {
   width: 100%;
 }
 
-.dmn-literal-expression .powered-by-overlay {
+.dmn-literal-expression-container .powered-by-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -182,7 +190,7 @@
   z-index: 10000;
 }
 
-.dmn-literal-expression .powered-by-overlay .powered-by-overlay-content {
+.dmn-literal-expression-container .powered-by-overlay .powered-by-overlay-content {
   background: #fff;
   padding: 8px;
   border: solid 1px #CCC;
@@ -195,69 +203,69 @@
   max-width: 260px;
 }
 
-.dmn-literal-expression .powered-by-overlay .powered-by-overlay-content div:first-child {
+.dmn-literal-expression-container .powered-by-overlay .powered-by-overlay-content div:first-child {
   margin-right: 8px;
 }
 
 /* helpers */
-.dmn-literal-expression .padding-top-small {
+.dmn-literal-expression-container .padding-top-small {
   padding-top: 4px;
 }
 
-.dmn-literal-expression .padding-top-medium {
+.dmn-literal-expression-container .padding-top-medium {
   padding-top: 8px;
 }
 
-.dmn-literal-expression .padding-top-large {
+.dmn-literal-expression-container .padding-top-large {
   padding-top: 12px;
 }
 
-.dmn-literal-expression .padding-right-small {
+.dmn-literal-expression-container .padding-right-small {
   padding-right: 4px;
 }
 
-.dmn-literal-expression .padding-right-medium {
+.dmn-literal-expression-container .padding-right-medium {
   padding-right: 8px;
 }
 
-.dmn-literal-expression .padding-right-large {
+.dmn-literal-expression-container .padding-right-large {
   padding-right: 12px;
 }
 
-.dmn-literal-expression .padding-bottom-small {
+.dmn-literal-expression-container .padding-bottom-small {
   padding-bottom: 4px;
 }
 
-.dmn-literal-expression .padding-bottom-medium {
+.dmn-literal-expression-container .padding-bottom-medium {
   padding-bottom: 8px;
 }
 
-.dmn-literal-expression .padding-bottom-large {
+.dmn-literal-expression-container .padding-bottom-large {
   padding-bottom: 12px;
 }
 
-.dmn-literal-expression .padding-left-small {
+.dmn-literal-expression-container .padding-left-small {
   padding-left: 4px;
 }
 
-.dmn-literal-expression .padding-left-medium {
+.dmn-literal-expression-container .padding-left-medium {
   padding-left: 8px;
 }
 
-.dmn-literal-expression .padding-left-large {
+.dmn-literal-expression-container .padding-left-large {
   padding-left: 12px;
 }
 
-.dmn-literal-expression .full-width {
+.dmn-literal-expression-container .full-width {
   width: 100%;
 }
 
-.dmn-literal-expression .full-height {
+.dmn-literal-expression-container .full-height {
   height: 100%;
 }
 
 /* select */
-.dmn-literal-expression select.select {
+.dmn-literal-expression-container select.select {
   outline: none;
   padding: 3px 6px;
   border: 1px solid #ccc;
@@ -266,13 +274,13 @@
   color: #444;
 }
 
-.dmn-literal-expression select.select:focus {
+.dmn-literal-expression-container select.select:focus {
   border-color: #52B415;
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
 /* input */
-.dmn-literal-expression input.input {
+.dmn-literal-expression-container input.input {
   outline: none;
   padding: 4px 6px;
   border: 1px solid #ccc;
@@ -281,17 +289,17 @@
   color: #444;
 }
 
-.dmn-literal-expression input.input:focus {
+.dmn-literal-expression-container input.input:focus {
   border-color: #52B415;
   box-shadow: 0 0 1px 2px rgba(82, 180, 21, 0.2);
 }
 
-.dmn-literal-expression input.input.invalid {
+.dmn-literal-expression-container input.input.invalid {
   background: #f4cecd;
   border-color: #c9302c;
   color: #c9302c;
 }
 
-.dmn-literal-expression input.input.invalid:focus {
+.dmn-literal-expression-container input.input.invalid:focus {
   box-shadow: 0 0 1px 2px rgba(204, 51, 51, 0.2);
 }

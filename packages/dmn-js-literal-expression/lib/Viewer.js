@@ -1,9 +1,8 @@
 import BaseViewer from 'dmn-js-shared/lib/base/viewer/Viewer';
 
-import assign from 'lodash/assign';
-import isNumber from 'lodash/isNumber';
+import assign from 'lodash/object/assign';
 
-import { domify } from 'min-dom';
+import domify from 'min-dom/lib/domify';
 import { remove as domRemove } from 'min-dom';
 
 import DecisionPropertiesModule from './features/decision-properties';
@@ -16,7 +15,7 @@ import ViewDrdModule from './features/view-drd';
 export default class Viewer extends BaseViewer {
 
   constructor(options = {}) {
-    const container = Viewer._createContainer(options);
+    const container = Viewer._createContainer();
 
     super(assign(options, {
       renderer: {
@@ -145,9 +144,7 @@ export default class Viewer extends BaseViewer {
     // previous, old parent
     this.detach();
 
-    const container = this._container;
-
-    parentNode.appendChild(container);
+    parentNode.appendChild(this._container);
 
     this._emit('attach', {});
   }
@@ -189,24 +186,10 @@ export default class Viewer extends BaseViewer {
     ];
   }
 
-  static _createContainer(options) {
-    const container = domify('<div class="dmn-literal-expression"></div>');
-
-    assign(container.style, {
-      width: ensureUnit(options.width),
-      height: ensureUnit(options.height),
-      position: options.position
-    });
-
-    return container;
+  static _createContainer() {
+    return domify(
+      '<div class="dmn-literal-expression-container"></div>'
+    );
   }
-}
 
-////////// helpers //////////
-
-/**
- * Ensure the passed argument is a proper unit (defaulting to px)
- */
-function ensureUnit(val) {
-  return val + (isNumber(val) ? 'px' : '');
 }

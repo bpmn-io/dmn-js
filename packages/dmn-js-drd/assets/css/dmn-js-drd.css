@@ -1,6 +1,11 @@
-.dmn-drd {
+.dmn-drd-container {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.dmn-drd-container * {
+  box-sizing: border-box;
 }
 
 .djs-overlay .drill-down-overlay {

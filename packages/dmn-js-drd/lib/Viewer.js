@@ -7,7 +7,6 @@
 
 import assign from 'lodash/object/assign';
 import omit from 'lodash/object/omit';
-import isNumber from 'lodash/lang/isNumber';
 
 var domify = require('min-dom/lib/domify'),
     domQuery = require('min-dom/lib/query'),
@@ -21,20 +20,6 @@ var importDRD = require('./import/Importer').importDRD;
 
 var innerSVG = require('tiny-svg/lib/innerSVG');
 
-
-var DEFAULT_OPTIONS = {
-  width: '100%',
-  height: '100%',
-  position: 'relative'
-};
-
-
-/**
- * Ensure the passed argument is a proper unit (defaulting to px)
- */
-function ensureUnit(val) {
-  return val + (isNumber(val) ? 'px' : '');
-}
 
 /**
  * A viewer for DMN 1.1 diagrams.
@@ -78,8 +63,6 @@ function ensureUnit(val) {
  * @param {Object} options configuration options to pass to the viewer
  * @param {DOMElement} [options.container]
  *        the container to render the viewer in, defaults to body
- * @param {String|Number} [options.width] the width of the viewer
- * @param {String|Number} [options.height] the height of the viewer
  * @param {Array<didi.Module>} [options.modules]
  *        a list of modules to override the default modules
  * @param {Array<didi.Module>} [options.additionalModules]
@@ -87,9 +70,7 @@ function ensureUnit(val) {
  */
 function Viewer(options) {
 
-  options = assign({}, DEFAULT_OPTIONS, options);
-
-  this._container = this._createContainer(options);
+  this._container = this._createContainer();
 
   /* <project-logo> */
 
@@ -224,17 +205,10 @@ Viewer.prototype._emit = function(type, event) {
   return this.get('eventBus').fire(type, event);
 };
 
-Viewer.prototype._createContainer = function(options) {
-
-  var container = domify('<div class="drd-container"></div>');
-
-  assign(container.style, {
-    width: ensureUnit(options.width),
-    height: ensureUnit(options.height),
-    position: options.position
-  });
-
-  return container;
+Viewer.prototype._createContainer = function() {
+  return domify(
+    '<div class="dmn-drd-container"></div>'
+  );
 };
 
 Viewer.prototype.open = function(definitions, done) {

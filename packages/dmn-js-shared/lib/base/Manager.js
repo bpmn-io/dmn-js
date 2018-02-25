@@ -9,6 +9,16 @@ import domRemove from 'min-dom/lib/remove';
 
 import debounce from 'lodash/function/debounce';
 
+import isNumber from 'lodash/lang/isNumber';
+
+import assign from 'lodash/object/assign';
+
+
+const DEFAULT_CONTAINER_OPTIONS = {
+  width: '100%',
+  height: '100%',
+  position: 'relative'
+};
 
 /**
  * The base class for DMN viewers and editors.
@@ -245,7 +255,17 @@ export default class Manager {
     this._viewers = {};
     this._views = [];
 
-    this._container = domify('<div class="dmn-js-parent"></div>');
+    const container = domify('<div class="dmn-js-parent"></div>');
+
+    const containerOptions = assign({}, DEFAULT_CONTAINER_OPTIONS, options);
+
+    assign(container.style, {
+      width: ensureUnit(containerOptions.width),
+      height: ensureUnit(containerOptions.height),
+      position: containerOptions.position
+    });
+
+    this._container = container;
 
     if (options.container) {
       this.attachTo(options.container);
@@ -474,6 +494,13 @@ export default class Manager {
 /////////// helpers ////////////////////////////////
 
 function noop() {}
+
+/**
+ * Ensure the passed argument is a proper unit (defaulting to px)
+ */
+function ensureUnit(val) {
+  return val + (isNumber(val) ? 'px' : '');
+}
 
 function checkValidationError(err) {
 
