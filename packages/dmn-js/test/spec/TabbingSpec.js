@@ -16,10 +16,12 @@ insertCSS('dmn-font',
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
 insertCSS('dmn-js-literal-expression.css',
-  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css'));
+  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css')
+);
 
 insertCSS('dmn-js-decision-table-controls.css',
-  require('dmn-js-decision-table/assets/css/dmn-js-decision-table-controls.css'));
+  require('dmn-js-decision-table/assets/css/dmn-js-decision-table-controls.css')
+);
 
 insertCSS('dmn-js-testing.css', `
   .test-container .dmn-js-parent {
@@ -92,7 +94,11 @@ describe('tabs', function() {
     var $tabs = domQuery('.editor-tabs', $parent);
 
 
-    var editor = new Modeler({ container: $container });
+    var editor = new Modeler({
+      container: $container,
+      height: 500,
+      width: '100%'
+    });
 
     domDelegate.bind($tabs, '.tab', 'click', function(e) {
       var target = e.delegateTarget;
