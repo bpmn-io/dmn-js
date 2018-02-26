@@ -4,5 +4,7 @@
     "transform-object-rest-spread",
     "transform-class-properties"
   ],
-  "presets": [ "env" ]
+  "presets": [
+    "env"
+  ]
 }
