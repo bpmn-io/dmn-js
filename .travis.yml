@@ -1,5 +1,19 @@
 language: node_js
-node_js: 'node'
 
-script:
-  - npm run all
+node_js:
+  - 'node'
+
+jobs:
+  include:
+    - stage: test
+      addons:
+        firefox: 'latest-esr'
+      script:
+        - TEST_BROWSERS=Firefox,ChromeHeadless,PhantomJS xvfb-run npm run all
+    - stage: update examples
+      script: './tasks/stages/update-examples'
+
+stages:
+  - test
+  - name: update examples
+    if: tag =~ ^v\d
