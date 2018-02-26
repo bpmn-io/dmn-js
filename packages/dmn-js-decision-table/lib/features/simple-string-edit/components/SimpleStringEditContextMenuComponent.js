@@ -31,7 +31,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     if (!parsedString) {
       parsedString = {
         values: [],
-        type: 'disjunction'
+        type: DISJUNCTION
       };
     }
 
@@ -101,22 +101,23 @@ export default class SimpleStringEditContextMenuComponent extends Component {
    * Change type of unary tests.
    */
   onUnaryTestsTypeChange(value) {
-    const { element } = this.props.context,
-          { text } = element.businessObject;
+    const { items } = this.state;
 
-    if (value === 'disjunction') {
+    const values = getValues(items);
+
+    const { element } = this.props.context;
+
+    if (value === DISJUNCTION) {
       this.editCell(
         element.businessObject,
-        text
-          .replace('not(', '')
-          .replace(')', '') || ''
+        values.join(',')
       );
 
       this.setState({
         unaryTestsType: DISJUNCTION
       });
     } else {
-      this.editCell(element.businessObject, `not(${ text || '' })`);
+      this.editCell(element.businessObject, `not(${ values.join(',') })`);
 
       this.setState({
         unaryTestsType: NEGATION
@@ -130,19 +131,13 @@ export default class SimpleStringEditContextMenuComponent extends Component {
   onUnaryTestsListChanged(items) {
 
     // get checked items
-    const values = items
-      .filter(item => item.isChecked)
-      .map(item => item.value);
+    const values = getValues(items);
 
     const { element } = this.props.context;
 
-    const { context } = this.props;
+    const { unaryTestsType } = this.state;
 
-    const parsedString = parseString(context.element.businessObject.text);
-
-    const type = parsedString ? parsedString.type : DISJUNCTION;
-
-    if (type === 'disjunction') {
+    if (unaryTestsType === DISJUNCTION) {
       this.editCell(element.businessObject, values.join(','));
     } else {
       this.editCell(element.businessObject, `not(${ values.join(',') })`);
@@ -219,7 +214,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
    * Add unary tests to list.
    */
   addUnaryTestsListItem() {
-    const { inputValue, items } = this.state;
+    const { inputValue, items, unaryTestsType } = this.state;
 
     const parsedInput = parseString(inputValue);
 
@@ -229,19 +224,14 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     const { element } = this.props.context;
 
-    const { context } = this.props;
-
-    const parsedExisting = parseString(context.element.businessObject.text) || {
-      type: 'disjunction',
-      values: []
-    };
+    const values = getValues(items);
 
     const newValues = [].concat(
-      parsedExisting.values,
+      values,
       parsedInput.values
     );
 
-    if (parsedExisting.type === 'disjunction') {
+    if (unaryTestsType === DISJUNCTION) {
       this.editCell(element.businessObject, newValues.join(','));
     } else {
       this.editCell(element.businessObject, `not(${ newValues.join(',') })`);
@@ -269,10 +259,10 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     const options = [{
       label: 'Match one',
-      value: 'disjunction'
+      value: DISJUNCTION
     }, {
       label: 'Match none',
-      value: 'negation'
+      value: NEGATION
     }];
 
     const isInputClause = isInput(element.col);
@@ -294,7 +284,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
                 className="full-width display-block"
                 onChange={ this.onUnaryTestsTypeChange }
                 options={ options }
-                value={ isNegation ? 'negation' : 'disjunction' } />
+                value={ isNegation ? NEGATION : DISJUNCTION } />
             </p>
         }
 
@@ -344,4 +334,15 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
 function isEnter(keyCode) {
   return keyCode === 13;
+}
+
+/**
+ * Get array of actual values from array of items.
+ *
+ * @param {Array} items - Array of items.
+ */
+function getValues(items) {
+  return items
+    .filter(item => item.isChecked)
+    .map(item => item.value);
 }

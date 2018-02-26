@@ -165,6 +165,23 @@ describe('simple string edit', function() {
       expect(inputEntry3.businessObject.text).to.equal('"foo"');
     }));
 
+
+    it('should override invalid custom value', inject(function(elementRegistry) {
+
+      // given
+      const inputEntry3 = elementRegistry.get('inputEntry3');
+
+      simpleStringEdit = openEditorMenu('inputEntry3', testContainer);
+
+      const select = domQuery('.dms-select', simpleStringEdit);
+
+      // when
+      triggerChangeEvent(select, 'negation');
+
+      // then
+      expect(inputEntry3.businessObject.text).to.equal('not()');
+    }));
+
   });
 
 
