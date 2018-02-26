@@ -30,9 +30,9 @@ describe('components/EditableComponent', function() {
     return vTree;
   }
 
-  function renderToNode(vnode) {
+  function renderToNode(vnode, props) {
     const tree = renderIntoDocument(
-      <TestContext>
+      <TestContext {...props}>
         { vnode }
       </TestContext>
     );
@@ -174,10 +174,82 @@ describe('components/EditableComponent', function() {
       expect(matches(node, '.invalid')).to.be.false;
     });
 
+
+    it('should cache invalid user input', function() {
+
+      // given
+      var debounceInput = createDebouncer();
+
+      function validate(value) {
+
+        if (value === 'i') {
+          return new Error('i not allowed');
+        }
+      }
+
+      const node = renderToNode(
+        <PersistentTestContainer validate={ validate } />,
+        { debounceInput }
+      );
+
+      const editor = node.querySelector('.content-editable');
+
+      // when
+      triggerInputEvent(editor, 'ab');
+
+      triggerInputEvent(editor, 'i');
+
+      // first onChange + redraw cycle
+      debounceInput.releaseOnce();
+
+      // then
+      // text got updated
+      expect(innerText(editor)).to.eql('i');
+
+      expect(matches(node, '.invalid')).to.be.true;
+
+      // but when...
+      triggerInputEvent(editor, 'ccc');
+
+      // second onChange + redraw cycle
+      debounceInput.releaseOnce();
+
+      // then
+      // text got updated
+      expect(innerText(editor)).to.eql('ccc');
+
+      expect(matches(node, '.invalid')).to.be.false;
+    });
   });
 
 });
 
+
+class PersistentTestContainer extends Component {
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      value: ''
+    };
+  }
+
+  handleChange = (newValue) => {
+    this.setState({
+      value: newValue
+    });
+  }
+
+  render() {
+    return (
+      <TestComponent
+        onChange={ this.handleChange }
+        value={ this.state.value }
+        validate={ this.props.validate } />
+    );
+  }
+}
 
 class TestComponent extends EditableComponent {
 
@@ -196,10 +268,12 @@ class TestContext extends Component {
 
   getChildContext() {
 
+    var self = this;
+
     const fakeInjector = {
       get(str) {
         if (str === 'debounceInput') {
-          return function(fn) {
+          return self.props.debounceInput || function(fn) {
             return fn;
           };
         }
@@ -222,4 +296,31 @@ class TestContext extends Component {
 
 function innerText(el) {
   return el.innerText.replace(/\n$/, '');
+}
+
+
+function createDebouncer() {
+
+  var lastCalls = [];
+
+  function debounce(fn) {
+
+    return function(...args) {
+
+      lastCalls.push([ fn, args ]);
+    };
+  }
+
+  debounce.releaseOnce = function() {
+
+    var call = lastCalls.shift();
+
+    expect(call).to.exist;
+
+    var [ fn, args ] = call;
+
+    fn(...args);
+  };
+
+  return debounce;
 }

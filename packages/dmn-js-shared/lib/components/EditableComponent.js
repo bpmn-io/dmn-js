@@ -54,8 +54,13 @@ export default class EditableComponent extends Component {
         onChange(value);
       }
 
+      // only unset changed if user input and
+      // committed changed value equal. This prevents the
+      // input jumping back to the saved, good value.
+      const currentValue = this.state.changing;
+
       this.setState({
-        changing: false
+        changing: currentValue === value ? false : currentValue
       });
     });
 
