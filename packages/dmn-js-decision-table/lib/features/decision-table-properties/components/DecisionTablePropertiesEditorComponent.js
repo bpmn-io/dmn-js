@@ -9,13 +9,6 @@ export default class DecisionTablePropertiesComponent extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this.setDecisionTableName = this.setDecisionTableName.bind(this);
-    this.setDecisionTableId = this.setDecisionTableId.bind(this);
-
-    this.validateId = this.validateId.bind(this);
-
-    this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
   componentWillMount() {
@@ -54,15 +47,15 @@ export default class DecisionTablePropertiesComponent extends Component {
     return this._sheet.getRoot().businessObject.$parent;
   }
 
-  onElementsChanged() {
+  onElementsChanged = () => {
     this.forceUpdate();
   }
 
-  setDecisionTableName(name) {
+  setDecisionTableName = (name) => {
     this._modeling.editDecisionTableName(name);
   }
 
-  setDecisionTableId(id) {
+  setDecisionTableId = (id) => {
 
     var bo = this.getBusinessObject();
 
@@ -78,7 +71,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     this._modeling.editDecisionTableId(id);
   }
 
-  validateId(id) {
+  validateId = (id) => {
     var bo = this.getBusinessObject();
     return validateId(bo, id);
   }
