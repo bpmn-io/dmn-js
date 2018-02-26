@@ -39,7 +39,7 @@
       <rule id="rule2">
         <description>Silver is actually quite okay</description>
         <inputEntry id="inputEntry3">
-          <text><![CDATA["silver"]]></text>
+          <text><![CDATA["]]></text>
         </inputEntry>
         <inputEntry id="inputEntry4">
           <text><![CDATA[< 1000]]></text>

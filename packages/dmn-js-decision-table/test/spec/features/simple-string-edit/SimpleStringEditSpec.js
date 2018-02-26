@@ -45,16 +45,9 @@ describe('simple string edit', function() {
     let simpleStringEdit,
         inputEntry1;
 
+
     beforeEach(inject(function(elementRegistry) {
-      const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
-
-      triggerClick(cell);
-
-      const button = domQuery('.simple-mode-button', testContainer);
-
-      triggerClick(button);
-
-      simpleStringEdit = domQuery('.simple-string-edit', testContainer);
+      simpleStringEdit = openEditorMenu('inputEntry1', testContainer);
 
       inputEntry1 = elementRegistry.get('inputEntry1');
     }));
@@ -150,6 +143,28 @@ describe('simple string edit', function() {
       expect(inputEntry1.businessObject.text).to.equal('"bronze"');
     });
 
+
+    it('should override invalid custom value', inject(function(elementRegistry) {
+
+      // given
+      const inputEntry3 = elementRegistry.get('inputEntry3');
+
+      simpleStringEdit = openEditorMenu('inputEntry3', testContainer);
+
+      const input = domQuery('input[type="text"]', simpleStringEdit);
+
+      // when
+      input.focus();
+
+      triggerInputEvent(input, '"foo"');
+
+      // press ENTER
+      triggerKeyEvent(input, 'keydown', 13);
+
+      // then
+      expect(inputEntry3.businessObject.text).to.equal('"foo"');
+    }));
+
   });
 
 
@@ -159,15 +174,7 @@ describe('simple string edit', function() {
         outputEntry1;
 
     beforeEach(inject(function(elementRegistry) {
-      const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
-
-      triggerClick(cell);
-
-      const button = domQuery('.simple-mode-button', testContainer);
-
-      triggerClick(button);
-
-      simpleStringEdit = domQuery('.simple-string-edit', testContainer);
+      simpleStringEdit = openEditorMenu('outputEntry1', testContainer);
 
       outputEntry1 = elementRegistry.get('outputEntry1');
     }));
@@ -233,3 +240,18 @@ describe('simple string edit', function() {
   });
 
 });
+
+
+/////////// helpers ////////////////////////
+
+function openEditorMenu(elementId, testContainer) {
+  const cell = domQuery('[data-element-id="' + elementId + '"]', testContainer);
+
+  triggerClick(cell);
+
+  const button = domQuery('.simple-mode-button', testContainer);
+
+  triggerClick(button);
+
+  return domQuery('.simple-string-edit', testContainer);
+}

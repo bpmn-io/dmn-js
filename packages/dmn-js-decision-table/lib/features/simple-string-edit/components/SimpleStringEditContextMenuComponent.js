@@ -221,26 +221,33 @@ export default class SimpleStringEditContextMenuComponent extends Component {
   addUnaryTestsListItem() {
     const { inputValue, items } = this.state;
 
-    const parsedString = parseString(inputValue);
+    const parsedInput = parseString(inputValue);
 
-    if (!parsedString) {
+    if (!parsedInput) {
       return;
     }
 
     const { element } = this.props.context;
 
-    const { context } = this.props,
-          { type, values } = parseString(context.element.businessObject.text);
+    const { context } = this.props;
 
-    const newValues = (values || []).concat(parsedString.values);
+    const parsedExisting = parseString(context.element.businessObject.text) || {
+      type: 'disjunction',
+      values: []
+    };
 
-    if (!type || type === 'disjunction') {
+    const newValues = [].concat(
+      parsedExisting.values,
+      parsedInput.values
+    );
+
+    if (parsedExisting.type === 'disjunction') {
       this.editCell(element.businessObject, newValues.join(','));
     } else {
       this.editCell(element.businessObject, `not(${ newValues.join(',') })`);
     }
 
-    const newItems = items.concat(parsedString.values.map(value => {
+    const newItems = items.concat(parsedInput.values.map(value => {
       return {
         value,
         isChecked: true,
