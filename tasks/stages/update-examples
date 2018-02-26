@@ -13,7 +13,6 @@ git clone --depth=1 https://github.com/bpmn-io/dmn-js-examples.git "$EXAMPLES_DI
 
 cd "$EXAMPLES_DIR"
 
-# update bower.json
 TOOLKIT_VERSION="${TRAVIS_TAG:1}"
 echo "Updating toolkit versions to $TOOLKIT_VERSION"
 
