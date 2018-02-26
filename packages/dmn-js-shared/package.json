@@ -14,6 +14,7 @@
   "dependencies": {
     "diagram-js": "^0.27.1",
     "didi": "^0.1.1",
+    "dmn-moddle": "^2.0.3",
     "inferno": "^4.0.0",
     "min-dash": "^1.1.0",
     "selection-ranges": "^1.2.2",

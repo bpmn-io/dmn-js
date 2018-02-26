@@ -56,7 +56,6 @@
   },
   "dependencies": {
     "dmn-font": "^0.4.0",
-    "dmn-moddle": "^2.0.2",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
