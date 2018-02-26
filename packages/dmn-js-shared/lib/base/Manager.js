@@ -2,7 +2,7 @@ import EventBus from 'diagram-js/lib/core/EventBus';
 
 import DmnModdle from 'dmn-moddle';
 
-import domify from 'domify';
+import domify from 'min-dom/lib/domify';
 
 import domQuery from 'min-dom/lib/query';
 import domRemove from 'min-dom/lib/remove';
