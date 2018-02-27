@@ -55,7 +55,7 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "dmn-font": "^0.4.0",
+    "dmn-font": "^0.4.1",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^3.0.1",
