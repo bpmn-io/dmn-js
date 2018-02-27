@@ -34,12 +34,11 @@ insertCSS('tabs.css', `
   }
 
   .editor-tabs .tab {
-    display: inline-block;
-    whitespace: no-wrap;
+    display: block;
+    white-space: nowrap;
     background: white;
     padding: 5px;
-    margin-top: -1px;
-    margin-right: 2px;
+    margin: -1px 2px 2px 2px;
     border: solid 1px #CCC;
     border-radius: 0 0 2px 2px;
     padding: 8px;
@@ -48,10 +47,17 @@ insertCSS('tabs.css', `
     cursor: default;
     font-size: 14px;
     color: #444;
+    flex: 0 0 1%;
+  }
+
+  .editor-tabs {
+    display: flex;
+    flex-direction: row;
+    position: relative;
   }
 
   .editor-tabs .tab:first-child {
-    margin-left: 0;
+    margin-left: 5px;
   }
 
   .editor-tabs .tab.active {
@@ -61,6 +67,7 @@ insertCSS('tabs.css', `
   .editor-tabs .tab.active,
   .editor-tabs .tab:hover {
     border-bottom: solid 3px #52b415;
+    margin-bottom: 0;
   }
 `);
 
