@@ -11,7 +11,7 @@ export default class TextareaComponent extends Component {
   render() {
     const { text } = this._viewer._decision.literalExpression;
 
-    return  (
+    return (
       <div className="textarea">
         <div className="content">{ text }</div>
       </div>

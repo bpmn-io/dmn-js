@@ -16,7 +16,7 @@ function ReplaceElementBehaviour(eventBus, modeling) {
 
   this._modeling = modeling;
 
-  this.postExecuted( [ 'shape.replace' ], 1500, function(e) {
+  this.postExecuted([ 'shape.replace' ], 1500, function(e) {
     var context = e.context,
         oldShape = context.oldShape,
         newShape = context.newShape,

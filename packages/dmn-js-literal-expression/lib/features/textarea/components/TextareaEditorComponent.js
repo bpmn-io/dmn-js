@@ -29,7 +29,7 @@ export default class TextareaEditorComponent extends Component {
   render() {
     const { text } = this._viewer._decision.literalExpression;
 
-    return  (
+    return (
       <Editor
         className="textarea editor"
         value={ text }

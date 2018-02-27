@@ -44,7 +44,7 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
   }, DEBOUNCE_DELAY));
 
   node.addEventListener('keydown', function(evt) {
-    if (evt.keyCode === 13)  {
+    if (evt.keyCode === 13) {
       node.blur();
       window.getSelection().removeAllRanges();
     }

@@ -169,7 +169,7 @@ export default class SimpleModeButtonComponent extends Component {
           className={ classes.join(' ') }
           onClick={ this.onClick }
           ref={ node => this.node = node }
-          style={{ top, left }}
+          style={ { top, left } }
           title={ isDisabled
             ? 'Editing not supported for set expression language'
             : 'Edit' }><span className="dmn-icon-edit"></span></div>

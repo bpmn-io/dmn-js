@@ -55,7 +55,7 @@ class Root extends Component {
   render() {
     return (
       <Editor
-        {...this.state}
+        { ...this.state }
         onChange={ this.handleChanged } />
     );
   }

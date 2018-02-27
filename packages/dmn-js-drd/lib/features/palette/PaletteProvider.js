@@ -29,7 +29,7 @@ PaletteProvider.$inject = [
 
 PaletteProvider.prototype.getPaletteEntries = function(element) {
 
-  var actions  = {},
+  var actions = {},
       create = this._create,
       elementFactory = this._elementFactory,
       lassoTool = this._lassoTool,

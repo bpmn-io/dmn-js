@@ -28,7 +28,7 @@ function CreateConnectionBehavior(eventBus, drdFactory, drdRules) {
   this.preExecute('connection.create', function(context) {
     var connection = context.connection,
         connectionBusinessObject = connection.businessObject,
-        source =  context.source,
+        source = context.source,
         target = context.target,
         sourceRef, targetRef,
         requirementType, requirement, edge;

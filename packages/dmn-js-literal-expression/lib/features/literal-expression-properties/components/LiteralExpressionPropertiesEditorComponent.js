@@ -115,7 +115,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   render() {
     let { expressionLanguage, name, typeRef } = this.state;
 
-    return  (
+    return (
       <div className="literal-expression-properties">
         <table>
           <tr>

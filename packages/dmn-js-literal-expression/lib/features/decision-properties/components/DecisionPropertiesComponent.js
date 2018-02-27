@@ -11,7 +11,7 @@ export default class DecisionPropertiesComponent extends Component {
   render() {
     const { name, id } = this._viewer._decision;
 
-    return  (
+    return (
       <div className="decision-properties">
         <h3 className="decision-name">{ name }</h3>
         <h5 className="decision-id">{ id }</h5>

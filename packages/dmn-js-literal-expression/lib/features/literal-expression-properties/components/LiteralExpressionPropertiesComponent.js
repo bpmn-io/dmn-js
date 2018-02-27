@@ -11,7 +11,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   render() {
     const { literalExpression, variable } = this._viewer._decision;
 
-    return  (
+    return (
       <div className="literal-expression-properties">
         <table>
           <tr>

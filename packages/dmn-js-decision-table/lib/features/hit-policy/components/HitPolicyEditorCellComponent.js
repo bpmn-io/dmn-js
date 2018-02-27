@@ -53,7 +53,7 @@ export default class HitPolicyCellComponent extends Component {
         data-hit-policy="true"
         onClick={ this.onClick }
         className="hit-policy header"
-        ref= { node => this.node = node }
+        ref={ node => this.node = node }
         rowspan="3">{ hitPolicy }{ aggregationLabel }</th>
     );
   }

@@ -32,7 +32,7 @@ describe('components/EditableComponent', function() {
 
   function renderToNode(vnode, props) {
     const tree = renderIntoDocument(
-      <TestContext {...props}>
+      <TestContext { ...props }>
         { vnode }
       </TestContext>
     );

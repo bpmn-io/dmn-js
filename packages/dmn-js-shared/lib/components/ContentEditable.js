@@ -186,7 +186,7 @@ export default class ContentEditable extends Component {
         onBlur={ this.onBlur }
         onKeydown={ this.onKeydown }
         ref={ node => this.node = node }
-        dangerouslySetInnerHTML={{ __html: value }}></div>
+        dangerouslySetInnerHTML={ { __html: value } }></div>
     );
   }
 

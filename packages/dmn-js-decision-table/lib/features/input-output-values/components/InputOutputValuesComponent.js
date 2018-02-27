@@ -180,7 +180,7 @@ export default class InputOutputValuesComponent extends Component {
               if (!parseString(value)) {
                 return 'Strings must be in double quotes.';
               }
-            }}
+            } }
             value={ inputValue } />
 
         </div>

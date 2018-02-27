@@ -34,7 +34,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('decision');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: true,
         expression: false
@@ -66,7 +66,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('decision');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: false,
         expression: true
@@ -90,7 +90,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('table');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: false,
         expression: false
@@ -114,7 +114,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('table');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: false,
         expression: true
@@ -139,7 +139,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('table');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: false,
         expression: true
@@ -172,7 +172,7 @@ describe('features/replace - drd replace', function() {
         // given
         var decision = elementRegistry.get('decision');
 
-        var newElementData =  {
+        var newElementData = {
           type: 'dmn:Decision',
           table: true,
           expression: false
@@ -198,7 +198,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('decision');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: true,
         expression: false
@@ -224,7 +224,7 @@ describe('features/replace - drd replace', function() {
       // given
       var decision = elementRegistry.get('decision');
 
-      var newElementData =  {
+      var newElementData = {
         type: 'dmn:Decision',
         table: true,
         expression: false

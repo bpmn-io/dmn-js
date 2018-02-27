@@ -74,7 +74,7 @@ export default class DecisionPropertiesEditorComponent extends Component {
   render() {
     const { name, id } = this._viewer._decision;
 
-    return  (
+    return (
       <header className="decision-properties">
         <DecisionName
           className="decision-name editor"
