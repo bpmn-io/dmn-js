@@ -27,8 +27,6 @@ UpdatePropertiesHandler.$inject = [ 'elementRegistry', 'moddle' ];
 module.exports = UpdatePropertiesHandler;
 
 
-////// api /////////////////////////////////////////////
-
 /**
  * Updates a DMN element with a list of new properties
  *
@@ -80,6 +78,7 @@ UpdatePropertiesHandler.prototype.execute = function(context) {
   // indicate changed on objects affected by the update
   return changed;
 };
+
 
 /**
  * Reverts the update on a DMN elements properties.

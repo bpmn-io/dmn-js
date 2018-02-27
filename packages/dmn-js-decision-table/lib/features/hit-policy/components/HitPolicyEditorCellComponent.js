@@ -59,7 +59,8 @@ export default class HitPolicyCellComponent extends Component {
   }
 }
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function getAggregationLabel(aggregation) {
   switch (aggregation) {

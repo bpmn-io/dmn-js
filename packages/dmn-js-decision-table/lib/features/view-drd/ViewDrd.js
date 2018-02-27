@@ -46,7 +46,8 @@ export default class ViewDrd {
 
 ViewDrd.$inject = [ 'components', 'eventBus', 'injector', 'sheet' ];
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function getDefinitions(root) {
   const { businessObject } = root;

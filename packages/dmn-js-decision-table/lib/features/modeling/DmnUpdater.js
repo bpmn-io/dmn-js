@@ -229,7 +229,7 @@ DmnUpdater.$inject = [
 
 
 
-////////// helpers ///////////////////////////
+// helpers //////////////////////
 
 /**
  * Make sure the event listener is only called

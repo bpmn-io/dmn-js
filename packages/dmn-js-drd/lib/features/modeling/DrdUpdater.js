@@ -14,6 +14,7 @@ var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
 
 var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
 
+
 /**
  * A command interceptor responsible for updating elements after they've
  * been changed in the DRD view.
@@ -33,7 +34,8 @@ function DrdUpdater(
 
   var self = this;
 
-  ////// connection cropping /////////////////////////
+
+  // connection cropping //////////////////////
 
   // crop connection ends during create/update
   function cropConnection(e) {
@@ -58,8 +60,8 @@ function DrdUpdater(
     delete e.context.cropped;
   });
 
-  ////// DRD + DI update /////////////////////////
 
+  // DRD + DI update //////////////////////
 
   // update parent
   function updateParent(e) {
@@ -252,7 +254,7 @@ DrdUpdater.$inject = [
 ];
 
 
-/////// implementation //////////////////////////////////
+// implementation //////////////////////
 
 DrdUpdater.prototype.updateParent = function(element, oldParent) {
   var parentShape = element.parent;

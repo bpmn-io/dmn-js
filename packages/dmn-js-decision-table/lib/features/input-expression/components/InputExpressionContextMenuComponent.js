@@ -87,9 +87,7 @@ export default class InputExpressionContextMenuComponent extends Component {
 }
 
 
-
-
-////////// helpers ////////////////////////////
+// helpers //////////////////////
 
 function hasKeys(obj) {
   return Object.keys(obj).length;

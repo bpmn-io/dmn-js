@@ -29,7 +29,8 @@ function DRDTreeWalker(handler, options) {
     return handler.element(element, di);
   }
 
-  ////// Semantic handling //////////////////////
+
+  // Semantic handling //////////////////////
 
   function handleDefinitions(definitions) {
 
@@ -125,7 +126,8 @@ function DRDTreeWalker(handler, options) {
     forEach(extensionElements.values, fn);
   }
 
-  ///// API ////////////////////////////////
+
+  // API //////////////////////
 
   return {
     handleDefinitions: handleDefinitions

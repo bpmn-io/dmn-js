@@ -330,7 +330,8 @@ export default class SimpleStringEditContextMenuComponent extends Component {
   }
 }
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function isEnter(keyCode) {
   return keyCode === 13;

@@ -988,7 +988,7 @@ describe('context menu', function() {
 });
 
 
-////////// helpers //////////
+// helpers //////////////////////
 
 function expectEntries(entries, contextMenu) {
   entries.forEach(entry => {

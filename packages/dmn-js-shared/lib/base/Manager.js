@@ -491,7 +491,7 @@ export default class Manager {
 }
 
 
-/////////// helpers ////////////////////////////////
+// helpers //////////////////////
 
 function noop() {}
 

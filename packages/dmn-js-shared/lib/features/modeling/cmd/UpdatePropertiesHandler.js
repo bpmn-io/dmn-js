@@ -137,7 +137,7 @@ export default class EditPropertiesHandler {
 
 EditPropertiesHandler.$inject = [ 'moddle' ];
 
-////////// helpers //////////
+// helpers //////////////////////
 
 function isIdChange(properties, element) {
   return ID in properties && properties[ID] !== element[ID];

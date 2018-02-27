@@ -21,7 +21,8 @@ export default function TableTreeWalker(handler, options) {
     return handler.table(element);
   }
 
-  ////// Semantic handling //////////////////////
+
+  // Semantic handling //////////////////////
 
   function handleDecision(decision) {
 
@@ -77,7 +78,8 @@ export default function TableTreeWalker(handler, options) {
     });
   }
 
-  ///// API ////////////////////////////////
+
+  // API //////////////////////
 
   return {
     handleDecision: handleDecision

@@ -153,9 +153,7 @@ describe('Modeler', function() {
 });
 
 
-
-
-//////////// helpers //////////////////////////////////
+// helpers //////////////////////
 
 function bounds(el) {
   return {

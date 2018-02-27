@@ -113,8 +113,8 @@ export default class Modeling {
 
 Modeling.$inject = [ 'eventBus', 'commandStack', 'viewer' ];
 
-////////// helpers //////////
 
+// helpers //////////////////////
 
 /**
  * Register handlers with the command stack

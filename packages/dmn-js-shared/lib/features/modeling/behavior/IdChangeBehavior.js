@@ -34,7 +34,8 @@ export default class IdChangeBehavior extends CommandInterceptor {
 
 IdChangeBehavior.$inject = [ 'eventBus' ];
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function isIdChange(oldProperties, properties) {
   return ID in oldProperties && ID in properties;

@@ -54,6 +54,6 @@ export default class View {
 }
 
 
-////////// helpers /////////////////////////////
+// helpers //////////////////////
 
 function noop() { }

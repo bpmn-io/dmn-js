@@ -28,7 +28,8 @@ export default class SimpleBooleanEdit {
 
 SimpleBooleanEdit.$inject = [ 'components', 'simpleMode' ];
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function getTypeRef(element) {
   if (isInput(element.col)) {

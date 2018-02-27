@@ -476,7 +476,8 @@ describe('context menu', function() {
 
 });
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function expectOrder(actual, expected) {
   expected.forEach((e, index) => {

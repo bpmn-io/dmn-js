@@ -60,7 +60,7 @@ export default class Viewer {
 }
 
 
-////////// helpers //////////
+// helpers //////////////////////
 
 function bootstrap(bootstrapModules) {
 

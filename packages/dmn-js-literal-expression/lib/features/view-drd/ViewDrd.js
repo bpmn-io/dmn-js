@@ -2,7 +2,9 @@ import ViewDrdComponent from './components/ViewDrdComponent';
 
 const VERY_HIGH_PRIORITY = 2000;
 
+
 export default class ViewDrd {
+
   constructor(components, eventBus, injector, viewer) {
     this._injector = injector;
     this._viewer = viewer;
@@ -40,7 +42,8 @@ export default class ViewDrd {
 
 ViewDrd.$inject = [ 'components', 'eventBus', 'injector', 'viewer' ];
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function getDefinitions(decision) {
   const definitions = decision.$parent;

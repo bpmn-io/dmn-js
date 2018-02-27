@@ -178,7 +178,8 @@ export default class SimpleModeButtonComponent extends Component {
   }
 }
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 /**
  * Return set expression language if found.

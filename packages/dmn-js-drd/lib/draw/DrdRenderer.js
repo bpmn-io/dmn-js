@@ -374,7 +374,8 @@ function DrdRenderer(eventBus, pathMap, styles) {
   };
 
 
-  // draw shape and connection ////////////////////////////////////
+  // draw shape and connection //////////////////
+
   function drawShape(parent, element) {
     var h = handlers[element.type];
 
@@ -436,7 +437,8 @@ DrdRenderer.$inject = [ 'eventBus', 'pathMap', 'styles' ];
 module.exports = DrdRenderer;
 
 
-///////// helper functions /////////////////////////////
+// helper functions //////////////////////
+
 function getSemantic(element) {
   return element.businessObject;
 }

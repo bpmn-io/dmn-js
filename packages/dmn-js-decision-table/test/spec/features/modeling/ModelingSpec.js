@@ -431,8 +431,7 @@ describe('Modeling', function() {
 
 
 
-//////////// helpers ///////////////////////////
-
+// helpers //////////////////////
 
 function isInput(el) {
   return (

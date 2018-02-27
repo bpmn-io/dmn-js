@@ -259,7 +259,7 @@ describe('simple string edit', function() {
 });
 
 
-/////////// helpers ////////////////////////
+// helpers //////////////////////
 
 function openEditorMenu(elementId, testContainer) {
   const cell = domQuery('[data-element-id="' + elementId + '"]', testContainer);

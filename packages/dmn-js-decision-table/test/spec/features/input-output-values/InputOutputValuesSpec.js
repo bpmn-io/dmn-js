@@ -398,7 +398,8 @@ describe('input output values', function() {
 
 });
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function expectValuesRendered(element, expected) {
   const values = Array.from(domQuery.all('.item', element));

@@ -82,7 +82,7 @@ module.exports = {
 };
 
 
-//////////// helpers ///////////////////////
+// helpers //////////////////////
 
 function pad(n) {
   if (n < 10) {

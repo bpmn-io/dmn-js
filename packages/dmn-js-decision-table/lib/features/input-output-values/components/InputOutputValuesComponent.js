@@ -189,7 +189,8 @@ export default class InputOutputValuesComponent extends Component {
   }
 }
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function isEnter(keyCode) {
   return keyCode === 13;

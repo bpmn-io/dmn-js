@@ -157,7 +157,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 }
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function getExpressionLanguage(literalExpression) {
   return (literalExpression && literalExpression.expressionLanguage)

@@ -126,7 +126,8 @@ export default class EditAllowedValuesHandler {
 
 EditAllowedValuesHandler.$inject = [ 'dmnFactory', 'moddle', 'modeling', 'sheet' ];
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function isNull(value) {
   return value === null;

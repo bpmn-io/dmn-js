@@ -38,7 +38,8 @@ export default class SimpleDateEdit {
 
 SimpleDateEdit.$inject = [ 'components', 'simpleMode' ];
 
-////////// helpers //////////
+
+// helpers //////////////////////
 
 function getTypeRef(element) {
   if (isInput(element.col)) {
