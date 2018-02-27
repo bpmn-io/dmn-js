@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
-  "version": "1.5.1",
+  "version": "2.0.0-alpha1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
@@ -20,6 +20,6 @@
   "dependencies": {
     "diagram-js": "^0.27.1",
     "diagram-js-direct-editing": "^0.22.0",
-    "dmn-js-shared": "^1.5.1"
+    "dmn-js-shared": "^2.0.0-alpha1"
   }
 }
