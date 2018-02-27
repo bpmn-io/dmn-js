@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch",
@@ -45,9 +45,9 @@
     "webpack-cli": "^2.0.6"
   },
   "dependencies": {
-    "dmn-js-decision-table": "^1.4.3",
-    "dmn-js-drd": "^1.4.3",
-    "dmn-js-literal-expression": "^1.4.3",
-    "dmn-js-shared": "^1.4.3"
+    "dmn-js-decision-table": "^1.5.0",
+    "dmn-js-drd": "^1.5.0",
+    "dmn-js-literal-expression": "^1.5.0",
+    "dmn-js-shared": "^1.5.0"
   }
 }
