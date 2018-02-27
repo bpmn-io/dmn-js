@@ -2,14 +2,15 @@
   "name": "dmn-js-build",
   "version": "1.1.0",
   "scripts": {
-    "all": "run-s lint test distro",
+    "all": "run-s lint test",
     "lint": "eslint packages",
-    "test": "lerna run test",
     "distro": "lerna run prepublishOnly",
     "dev": "lerna run dev --stream --scope",
     "clean": "lerna clean --yes",
     "postinstall": "lerna bootstrap",
-    "release": "lerna publish -m \"chore(project): publish %s\""
+    "release": "lerna publish -m \"chore(project): publish %s\"",
+    "test": "lerna run test",
+    "travis": "run-s all distro"
   },
   "contributors": [
     {

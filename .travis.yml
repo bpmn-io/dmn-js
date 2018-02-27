@@ -9,7 +9,7 @@ jobs:
       addons:
         firefox: 'latest-esr'
       script:
-        - TEST_BROWSERS=Firefox,ChromeHeadless,PhantomJS xvfb-run npm run all
+        - TEST_BROWSERS=Firefox,ChromeHeadless,PhantomJS xvfb-run npm run travis
     - stage: update examples
       script: './tasks/stages/update-examples'
 
