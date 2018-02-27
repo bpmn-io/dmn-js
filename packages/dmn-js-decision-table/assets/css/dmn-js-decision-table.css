@@ -246,7 +246,7 @@ table tr > .input + .output {
 
 
 /* powered by */
-.powered-by-logo {
+.dmn-decision-table-container .powered-by-logo {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -255,12 +255,12 @@ table tr > .input + .output {
   cursor: pointer;
 }
 
-.powered-by-logo .logo {
+.dmn-decision-table-container .powered-by-logo .logo {
   width: 100%;
 }
 
-.powered-by-overlay {
-  position: absolute;
+.dmn-decision-table-container .powered-by-overlay {
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -272,7 +272,7 @@ table tr > .input + .output {
   z-index: 10000;
 }
 
-.powered-by-overlay .powered-by-overlay-content {
+.dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content {
   background: #fff;
   padding: 8px;
   border: solid 1px #CCC;
@@ -284,7 +284,7 @@ table tr > .input + .output {
   max-width: 260px;
 }
 
-.powered-by-overlay .powered-by-overlay-content div:first-child {
+.dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content div:first-child {
   margin-right: 8px;
 }
 
