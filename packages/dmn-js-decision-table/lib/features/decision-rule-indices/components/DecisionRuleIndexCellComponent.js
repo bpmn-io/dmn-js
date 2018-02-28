@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 
 
-export default class RulesIndexCellComponent extends Component {
+export default class DecisionRulesIndexCellComponent extends Component {
   render() {
     const { rowIndex } = this.props;
 

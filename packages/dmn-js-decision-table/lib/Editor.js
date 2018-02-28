@@ -17,7 +17,7 @@ import inputExpressionModule from './features/input-expression';
 import inputOutputValuesModule from './features/input-output-values';
 import interactionEventsModule from 'table-js/lib/features/interaction-events';
 import modelingModule from './features/modeling';
-import rulesEditorModule from './features/rules/editor';
+import decisionRulesEditorModule from './features/decision-rules/editor';
 import selectionModule from 'table-js/lib/features/selection';
 import simpleModeModule from './features/simple-mode';
 import simpleBooleanEditModule from './features/simple-boolean-edit';
@@ -55,7 +55,7 @@ export default class Editor extends Viewer {
       inputOutputValuesModule,
       interactionEventsModule,
       modelingModule,
-      rulesEditorModule,
+      decisionRulesEditorModule,
       selectionModule,
       simpleModeModule,
       simpleBooleanEditModule,

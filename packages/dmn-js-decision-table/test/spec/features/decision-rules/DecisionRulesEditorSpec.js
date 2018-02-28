@@ -13,11 +13,11 @@ import languageExpressionXML from '../../expression-language.dmn';
 
 import CoreModule from 'lib/core';
 import ModelingModule from 'lib/features/modeling';
-import RulesModule from 'lib/features/rules';
-import RulesEditorModule from 'lib/features/rules/editor';
+import DecisionRulesModule from 'lib/features/decision-rules';
+import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
 
 
-describe('rules editor', function() {
+describe('decision rules editor', function() {
 
   let testContainer;
 
@@ -32,8 +32,8 @@ describe('rules editor', function() {
       modules: [
         CoreModule,
         ModelingModule,
-        RulesModule,
-        RulesEditorModule
+        DecisionRulesModule,
+        DecisionRulesEditorModule
       ],
       debounceInput: false
     }));
@@ -83,8 +83,8 @@ describe('rules editor', function() {
         modules: [
           CoreModule,
           ModelingModule,
-          RulesModule,
-          RulesEditorModule
+          DecisionRulesModule,
+          DecisionRulesEditorModule
         ]
       }));
 
@@ -178,8 +178,8 @@ describe('rules editor', function() {
         modules: [
           CoreModule,
           ModelingModule,
-          RulesModule,
-          RulesEditorModule
+          DecisionRulesModule,
+          DecisionRulesEditorModule
         ],
         defaultInputExpressionLanguage: 'javascript',
         defaultOutputExpressionLanguage: 'javascript'

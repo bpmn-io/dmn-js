@@ -15,7 +15,7 @@ import simpleNumberEditXML from './simple-date-edit.dmn';
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'lib/features/modeling';
-import RulesEditorModule from 'lib/features/rules/editor';
+import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
 import SimpleDateEditModule from 'lib/features/simple-date-edit';
 
 import { getSampleDate } from 'lib/features/simple-date-edit/Utils';
@@ -28,7 +28,7 @@ describe('simple date edit', function() {
       CoreModule,
       InteractionEventsModule,
       ModelingModule,
-      RulesEditorModule,
+      DecisionRulesEditorModule,
       SimpleDateEditModule
     ],
     debounceInput: false

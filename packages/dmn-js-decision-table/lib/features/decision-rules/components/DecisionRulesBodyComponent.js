@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 
 
-export default class RulesBodyComponent extends Component {
+export default class DecisionRulesBodyComponent extends Component {
   render({ rows, cols }) {
     const { components } = this.context;
 

@@ -13,14 +13,13 @@ import { classes as domClasses, query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
-import oneRuleOneInputOneOutputXML from '../../one-rule-one-input-one-output.dmn';
 
 import ContextMenuModule from 'lib/features/context-menu';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'lib/features/modeling';
-import RulesModule from 'lib/features/rules';
+import DecisionRulesModule from 'lib/features/decision-rules';
 
 
 describe('context menu', function() {
@@ -32,7 +31,7 @@ describe('context menu', function() {
       DecisionTableHeadModule,
       InteractionEventsModule,
       ModelingModule,
-      RulesModule
+      DecisionRulesModule
     ]
   }));
 
@@ -121,44 +120,6 @@ describe('context menu', function() {
         expect(domClasses(
           domQuery('.context-menu-entry-paste-rule-below', ruleEntriesGroup)
         ).has('disabled')).to.be.true;
-      });
-
-
-      describe('disabled entries when only one rule', function() {
-
-        // import decision table with only one rule
-        beforeEach(bootstrapModeler(oneRuleOneInputOneOutputXML, {
-          modules: [
-            ContextMenuModule,
-            CoreModule,
-            DecisionTableHeadModule,
-            InteractionEventsModule,
-            ModelingModule,
-            RulesModule
-          ]
-        }));
-
-        beforeEach(function() {
-          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
-
-          triggerMouseEvent(cell, 'contextmenu');
-        });
-
-
-        it('should contain disabled cut entry', function() {
-
-          // given
-          const contextMenu = domQuery('.context-menu', testContainer),
-                ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
-
-          // then
-          expect(
-            domClasses(
-              domQuery('.context-menu-entry-cut-rule', ruleEntriesGroup)
-            ).has('disabled')
-          ).to.be.true;
-        });
-
       });
 
 
@@ -422,44 +383,6 @@ describe('context menu', function() {
         expect(domClasses(
           domQuery('.context-menu-entry-paste-input-right', inputEntriesGroup)
         ).has('disabled')).to.be.true;
-      });
-
-
-      describe('disabled entries when only one input', function() {
-
-        // import decision table with only one input
-        beforeEach(bootstrapModeler(oneRuleOneInputOneOutputXML, {
-          modules: [
-            ContextMenuModule,
-            CoreModule,
-            DecisionTableHeadModule,
-            InteractionEventsModule,
-            ModelingModule,
-            RulesModule
-          ]
-        }));
-
-        beforeEach(function() {
-          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
-
-          triggerMouseEvent(cell, 'contextmenu');
-        });
-
-
-        it('should contain disabled cut entry', function() {
-
-          // given
-          const contextMenu = domQuery('.context-menu', testContainer),
-                inputEntriesGroup = domQuery('.context-menu-group-input', contextMenu);
-
-          // then
-          expect(
-            domClasses(
-              domQuery('.context-menu-entry-cut-input', inputEntriesGroup)
-            ).has('disabled')
-          ).to.be.true;
-        });
-
       });
 
 
@@ -731,44 +654,6 @@ describe('context menu', function() {
         expect(domClasses(
           domQuery('.context-menu-entry-paste-output-right', outputEntriesGroup)
         ).has('disabled')).to.be.true;
-      });
-
-
-      describe('disabled entries when only one output', function() {
-
-        // import decision table with only one output
-        beforeEach(bootstrapModeler(oneRuleOneInputOneOutputXML, {
-          modules: [
-            ContextMenuModule,
-            CoreModule,
-            DecisionTableHeadModule,
-            InteractionEventsModule,
-            ModelingModule,
-            RulesModule
-          ]
-        }));
-
-        beforeEach(function() {
-          const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
-
-          triggerMouseEvent(cell, 'contextmenu');
-        });
-
-
-        it('should contain disabled cut entry', function() {
-
-          // given
-          const contextMenu = domQuery('.context-menu', testContainer),
-                outputEntriesGroup = domQuery('.context-menu-group-output', contextMenu);
-
-          // then
-          expect(
-            domClasses(
-              domQuery('.context-menu-entry-cut-output', outputEntriesGroup)
-            ).has('disabled')
-          ).to.be.true;
-        });
-
       });
 
 

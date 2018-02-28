@@ -14,7 +14,7 @@ const EXPRESSION_LANGUAGE_LABELS = {
 };
 
 
-export default class RulesEditorCellComponent extends Component {
+export default class DecisionRulesEditorCellComponent extends Component {
 
   constructor(props, context) {
     super(props, context);

@@ -11,7 +11,8 @@ export default class ContextMenu {
       eventBus,
       elementRegistry,
       modeling,
-      sheet) {
+      sheet,
+      rules) {
 
     this._contextMenu = contextMenu;
     this._clipBoard = clipBoard;
@@ -20,6 +21,7 @@ export default class ContextMenu {
     this._eventBus = eventBus;
     this._modeling = modeling;
     this._sheet = sheet;
+    this._rules = rules;
 
     this._getEntries = this._getEntries.bind(this);
 
@@ -51,9 +53,6 @@ export default class ContextMenu {
   }
 
   _getEntries(context) {
-    const root = this._sheet.getRoot(),
-          businessObject = root.businessObject;
-
     const handlers = {
       addRuleAbove: (rule) => {
         this._editorActions.trigger('addRuleAbove', { rule });
@@ -126,10 +125,10 @@ export default class ContextMenu {
     const entries = [];
 
     if (is(element.row, 'dmn:DecisionRule')) {
-      const canDelete = businessObject.rule.length > 1;
-      const canPaste =
-        this._clipBoard.hasElement()
-        && is(this._clipBoard.getElement(), 'dmn:DecisionRule');
+      const canPaste = this._rules.allowed('paste', {
+        elements: this._clipBoard.getElement(),
+        target: element.row
+      });
 
       entries.push(
         <div className="context-menu-group context-menu-group-rule">
@@ -147,13 +146,13 @@ export default class ContextMenu {
             Add Below
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-remove-rule` }
+            className="context-menu-group-entry context-menu-entry-remove-rule"
             onClick={ () => handlers.removeRule(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
             Remove
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-cut-rule` }
+            className="context-menu-group-entry context-menu-entry-cut-rule"
             onClick={ () => handlers.cut(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
             Cut
@@ -177,10 +176,14 @@ export default class ContextMenu {
     if (is(element, 'dmn:InputClause') || is(element.col, 'dmn:InputClause')) {
       const actualElement = is(element, 'dmn:InputClause') ? element : element.col;
 
-      const canDelete = businessObject.input.length > 1;
-      const canPaste =
-        this._clipBoard.hasElement()
-        && is(this._clipBoard.getElement(), 'dmn:InputClause');
+      const canRemove = this._rules.allowed('col.remove', {
+        col: element.col || element
+      });
+
+      const canPaste = this._rules.allowed('paste', {
+        elements: this._clipBoard.getElement(),
+        target: element.col || element
+      });
 
       entries.push(
         <div className="context-menu-group context-menu-group-input">
@@ -198,13 +201,13 @@ export default class ContextMenu {
             Add Right
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-remove-input` }
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-input` }
             onClick={ () => handlers.removeInput(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
             Remove
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-cut-input` }
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-input` }
             onClick={ () => handlers.cut(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
             Cut
@@ -226,10 +229,14 @@ export default class ContextMenu {
     } else if (is(element, 'dmn:OutputClause') || is(element.col, 'dmn:OutputClause')) {
       const actualElement = is(element, 'dmn:OutputClause') ? element : element.col;
 
-      const canDelete = businessObject.output.length > 1;
-      const canPaste =
-        this._clipBoard.hasElement()
-        && is(this._clipBoard.getElement(), 'dmn:OutputClause');
+      const canRemove = this._rules.allowed('col.remove', {
+        col: element.col || element
+      });
+
+      const canPaste = this._rules.allowed('paste', {
+        elements: this._clipBoard.getElement(),
+        target: element.col || element
+      });
 
       entries.push(
         <div className="context-menu-group context-menu-group-output">
@@ -247,13 +254,13 @@ export default class ContextMenu {
             Add Right
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-remove-output` }
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-output` }
             onClick={ () => handlers.removeOutput(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
             Remove
           </div>
           <div
-            className={ `context-menu-group-entry ${ canDelete ? '' : 'disabled' } context-menu-entry-cut-output` }
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-output` }
             onClick={ () => handlers.cut(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
             Cut
@@ -286,5 +293,6 @@ ContextMenu.$inject = [
   'eventBus',
   'elementRegistry',
   'modeling',
-  'sheet'
+  'sheet',
+  'rules'
 ];

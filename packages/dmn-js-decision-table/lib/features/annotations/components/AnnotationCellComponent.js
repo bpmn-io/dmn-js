@@ -1,4 +1,4 @@
-export default function RulesAnnotationCellComponent(props) {
+export default function DecisionRulesAnnotationCellComponent(props) {
   const { row } = props;
 
   return (

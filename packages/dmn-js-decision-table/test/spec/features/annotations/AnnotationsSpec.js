@@ -9,7 +9,7 @@ import simpleXML from '../../simple.dmn';
 import AnnotationsModule from 'lib/features/annotations';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import RulesModule from 'lib/features/rules';
+import DecisionRulesModule from 'lib/features/decision-rules';
 
 
 describe('annotations', function() {
@@ -19,7 +19,7 @@ describe('annotations', function() {
       AnnotationsModule,
       CoreModule,
       DecisionTableHeadModule,
-      RulesModule
+      DecisionRulesModule
     ]
   }));
 

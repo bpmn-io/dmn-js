@@ -5,7 +5,7 @@ import simpleXML from '../../simple.dmn';
 import CoreModule from 'lib/core';
 import EditorActionsModule from 'lib/features/editor-actions';
 import ModelingModule from 'lib/features/modeling';
-import RulesModule from 'lib/features/rules';
+import DecisionRulesModule from 'lib/features/decision-rules';
 
 
 describe('context menu', function() {
@@ -17,7 +17,7 @@ describe('context menu', function() {
       CoreModule,
       EditorActionsModule,
       ModelingModule,
-      RulesModule
+      DecisionRulesModule
     ]
   }));
 

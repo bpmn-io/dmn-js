@@ -13,7 +13,7 @@ import AnnotationsEditorModule from 'lib/features/annotations/editor';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import ModelingModule from 'lib/features/modeling';
-import RulesModule from 'lib/features/rules';
+import DecisionRulesModule from 'lib/features/decision-rules';
 
 
 describe('annotations editor', function() {
@@ -24,7 +24,7 @@ describe('annotations editor', function() {
       CoreModule,
       DecisionTableHeadModule,
       ModelingModule,
-      RulesModule
+      DecisionRulesModule
     ],
     debounceInput: false
   }));

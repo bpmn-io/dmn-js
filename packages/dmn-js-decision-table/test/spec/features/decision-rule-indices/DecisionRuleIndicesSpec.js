@@ -8,18 +8,18 @@ import simpleXML from '../../simple.dmn';
 
 import CoreModule from 'lib/core';
 import ModelingModule from 'lib/features/modeling';
-import RulesModule from 'lib/features/rules';
-import RuleIndicesModule from 'lib/features/rule-indices';
+import DecisionRulesModule from 'lib/features/decision-rules';
+import DecisionRuleIndicesModule from 'lib/features/decision-rule-indices';
 
 
-describe('rule indices', function() {
+describe('decision rule indices', function() {
 
   beforeEach(bootstrapModeler(simpleXML, {
     modules: [
       CoreModule,
       ModelingModule,
-      RulesModule,
-      RuleIndicesModule
+      DecisionRulesModule,
+      DecisionRuleIndicesModule
     ]
   }));
 
@@ -30,7 +30,7 @@ describe('rule indices', function() {
   });
 
 
-  it('should display rule indices', function() {
+  it('should display decision rule indices', function() {
 
     // then
     const cells = domQuery.all('.rule-index', testContainer);
@@ -41,7 +41,7 @@ describe('rule indices', function() {
   });
 
 
-  it('should update rule indices on rule added', inject(function(modeling) {
+  it('should update decision rule indices on rule added', inject(function(modeling) {
 
     // when
     modeling.addRow({ type: 'dmn:DecisionRule' });
@@ -55,22 +55,23 @@ describe('rule indices', function() {
   }));
 
 
-  it('should update rule indices on rule removed', inject(function(modeling, sheet) {
+  it('should update decision rule indices on rule removed',
+    inject(function(modeling, sheet) {
 
-    // given
-    var table = sheet.getRoot();
-    var row = table.rows[0];
+      // given
+      var table = sheet.getRoot();
+      var row = table.rows[0];
 
-    // when
-    modeling.removeRow(row);
+      // when
+      modeling.removeRow(row);
 
-    // then
-    const cells = domQuery.all('.rule-index', testContainer);
+      // then
+      const cells = domQuery.all('.rule-index', testContainer);
 
-    expect(cells).to.have.lengthOf(3);
+      expect(cells).to.have.lengthOf(3);
 
-    expectIndices(cells);
-  }));
+      expectIndices(cells);
+    }));
 
 });
 

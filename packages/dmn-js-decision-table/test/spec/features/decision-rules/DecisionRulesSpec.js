@@ -7,14 +7,14 @@ import TestContainer from 'mocha-test-container-support';
 import simpleXML from '../../simple.dmn';
 
 import CoreModule from 'lib/core';
-import RulesModule from 'lib/features/rules';
+import DecisionRulesModule from 'lib/features/decision-rules';
 
-describe('rules', function() {
+describe('decision rules', function() {
 
   beforeEach(bootstrapViewer(simpleXML, {
     modules: [
       CoreModule,
-      RulesModule
+      DecisionRulesModule
     ]
   }));
 

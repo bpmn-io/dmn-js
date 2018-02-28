@@ -1,6 +1,8 @@
-import Rules from './Rules';
+import DecisionTableModelingRules from './DecisionTableModelingRules';
+import Rules from 'table-js/lib/features/rules';
 
 export default {
-  __init__: [ 'rules' ],
-  rules: [ 'type', Rules ]
+  __depends__: [ Rules ],
+  __init__: [ 'decisionTableModelingRules' ],
+  decisionTableModelingRules: [ 'type', DecisionTableModelingRules ]
 };

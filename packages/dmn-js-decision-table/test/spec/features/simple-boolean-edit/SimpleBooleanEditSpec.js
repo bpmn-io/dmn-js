@@ -14,7 +14,7 @@ import simpleBooleanEditXML from './simple-boolean-edit.dmn';
 import CoreModule from 'lib/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'lib/features/modeling';
-import RulesEditorModule from 'lib/features/rules/editor';
+import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
 import SimpleBooleanEditModule from 'lib/features/simple-boolean-edit';
 
 
@@ -25,7 +25,7 @@ describe('simple boolean edit', function() {
       CoreModule,
       InteractionEventsModule,
       ModelingModule,
-      RulesEditorModule,
+      DecisionRulesEditorModule,
       SimpleBooleanEditModule
     ]
   }));
