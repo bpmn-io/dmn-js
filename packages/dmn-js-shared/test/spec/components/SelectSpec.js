@@ -65,6 +65,32 @@ describe('components/Select', function() {
   });
 
 
+  it('should new value on change', function() {
+
+    // given
+    const options = [{
+      label: 'Foo',
+      value: 'foo'
+    }, {
+      label: 'Bar',
+      value: 'bar'
+    }];
+
+    const renderedTree = renderIntoDocument(
+      <Select
+        options={ options } />
+    );
+
+    const select = findRenderedDOMElementWithClass(renderedTree, 'dms-select');
+
+    // when
+    triggerChangeEvent(select, 'bar');
+
+    // then
+    expect(select.value).to.equal('bar');
+  });
+
+
   it('should notify on change', function() {
 
     // given

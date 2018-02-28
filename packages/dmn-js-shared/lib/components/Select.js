@@ -5,24 +5,45 @@ export default class Select extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    const { value } = props;
+
+    this.state = {
+      value
+    };
+  }
+
+  componentWillReceiveProps(props) {
+    const { value } = props;
+
+    this.setState({
+      value
+    });
   }
 
   onChange = (event) => {
+    const { value } = event.target;
+
+    this.setState({
+      value
+    });
+
     const { onChange } = this.props;
 
     if (typeof onChange !== 'function') {
       return;
     }
 
-    onChange(event.target.value);
+    onChange(value);
   }
 
   render() {
     const {
       className,
-      options,
-      value
+      options
     } = this.props;
+
+    const { value } = this.state;
 
     return (
       <select
