@@ -9,7 +9,8 @@ export default class DecisionRulesRowComponent extends ComponentWithSlots {
 
     const {
       row,
-      rowIndex
+      rowIndex,
+      cols
     } = this.props;
 
     const {
@@ -30,7 +31,6 @@ export default class DecisionRulesRowComponent extends ComponentWithSlots {
         }
         {
           cells.map((cell, colIndex) => {
-
             return this.slotFill({
               type: 'cell',
               context: {
@@ -39,7 +39,9 @@ export default class DecisionRulesRowComponent extends ComponentWithSlots {
                 rowIndex: rowIndex,
                 colIndex: colIndex
               },
-              key: cell.id
+              key: cell.id,
+              row,
+              col: cols[colIndex]
             });
           })
         }

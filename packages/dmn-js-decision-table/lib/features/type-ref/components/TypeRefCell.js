@@ -69,9 +69,14 @@ export default class TypeRefCell extends Component {
 
     const actualClassName = (className || '') + ' type-ref';
 
+    const colId = is(element, 'dmn:LiteralExpression')
+      ? element.$parent.id
+      : element.id;
+
     return (
       <th
         className={ actualClassName }
+        data-col-id={ colId }
         onClick={ this.onClick }
         onContextmenu={ this.onContextmenu }>
         { element.typeRef }

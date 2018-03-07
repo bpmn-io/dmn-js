@@ -17,6 +17,17 @@ export default class DecisionTableModelingRules extends RuleProvider {
   }
 
   init() {
+    this.addRule('col.move', HIGH_PRIORITY, ({ col, index }) => {
+      const { businessObject } = this._sheet.getRoot(),
+            { input } = businessObject;
+
+      if (isInput(col)) {
+        return index < input.length;
+      } else {
+        return index >= input.length;
+      }
+    });
+
     this.addRule('col.remove', HIGH_PRIORITY, ({ col }) => {
       const { cols } = this._sheet.getRoot();
 

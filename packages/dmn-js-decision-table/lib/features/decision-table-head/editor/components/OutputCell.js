@@ -1,7 +1,9 @@
-import { Component } from 'inferno';
+import {
+  ComponentWithSlots
+} from 'dmn-js-shared/lib/components/slots';
 
 
-export default class OutputCell extends Component {
+export default class OutputCell extends ComponentWithSlots {
 
   constructor(props) {
     super(props);
@@ -34,6 +36,7 @@ export default class OutputCell extends Component {
 
     this._changeSupport = this.context.changeSupport;
     this._eventBus = injector.get('eventBus');
+    this._elementRegistry = injector.get('elementRegistry');
 
     const { output } = this.props;
 
@@ -54,9 +57,21 @@ export default class OutputCell extends Component {
 
     return (
       <th
+        data-col-id={ output.id }
         onClick={ this.onClick }
         onContextmenu={ this.onContextmenu }
         className="output-cell output-editor">
+
+        {
+          this.slotFills({
+            type: 'cell-inner',
+            context: {
+              cellType: 'output-cell',
+              col: this._elementRegistry.get(output.id)
+            },
+            col: output
+          })
+        }
 
         {
           label ? (

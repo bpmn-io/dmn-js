@@ -77,7 +77,11 @@ export default class DecisionRulesEditorCellComponent extends Component {
 
 
   render() {
-    const { cell } = this.props;
+    const {
+      cell,
+      row,
+      col
+    } = this.props;
 
     const { isFocussed } = this.state;
 
@@ -86,7 +90,11 @@ export default class DecisionRulesEditorCellComponent extends Component {
     const businessObject = cell.businessObject;
 
     return (
-      <td data-element-id={ cell.id } className={ className }>
+      <td
+        data-element-id={ cell.id }
+        data-row-id={ row.id }
+        data-col-id={ col.id }
+        className={ className }>
         <TableCellEditor
           className="cell-editor"
           onFocus={ this.onFocus }

@@ -250,3 +250,25 @@ h4.dms-heading {
 
   overflow: auto;
 }
+
+/* drag and drop */
+.dmn-icon-drag {
+  color: #ccc;
+}
+
+th .dmn-icon-drag {
+  float: left;
+}
+
+.dmn-icon-drag.horizontal {
+  cursor: w-resize;
+}
+
+.dmn-icon-drag.vertical {
+  cursor: n-resize;
+}
+
+.dmn-icon-drag:hover {
+  color: #444;
+}
+

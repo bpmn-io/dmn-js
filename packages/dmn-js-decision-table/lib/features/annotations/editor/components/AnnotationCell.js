@@ -50,6 +50,7 @@ export default class AnnotationCell extends Component {
 
     return (
       <EditableAnnotationCell
+        row={ row }
         className="annotation"
         onChange={ this.setAnnotationValue }
         value={ businessObject.description } />
@@ -62,8 +63,12 @@ export default class AnnotationCell extends Component {
 class EditableAnnotationCell extends EditableComponent {
 
   render() {
+    const { row } = this.props;
+
     return (
-      <td className={ this.getClassName() }>
+      <td
+        data-row-id={ row.id }
+        className={ this.getClassName() }>
         { this.getEditor() }
       </td>
     );

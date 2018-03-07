@@ -3,8 +3,29 @@ import { Component } from 'inferno';
 
 export default class DecisionRulesIndexCellComponent extends Component {
   render() {
-    const { rowIndex } = this.props;
+    const { row, rowIndex } = this.props;
 
-    return <td className="rule-index">{rowIndex + 1}</td>;
+    const { components } = this.context;
+
+    const innerComponents = components.getComponents(
+      'cell-inner',
+      {
+        cellType: 'rule-index',
+        row,
+        rowIndex
+      }
+    );
+
+    return <td className="rule-index" data-row-id={ row.id }>
+      {
+        innerComponents
+          && innerComponents.map(InnerComponent => {
+            return <InnerComponent
+              row={ row }
+              rowIndex={ rowIndex } />;
+          })
+      }
+      { rowIndex + 1 }
+    </td>;
   }
 }

@@ -1,4 +1,4 @@
-import CommandStack from 'diagram-js/lib/command/CommandStack';
+import CommandStack from 'table-js/lib/command';
 import DmnUpdater from './DmnUpdater';
 import DmnFactory from './DmnFactory';
 import ElementFactory from './ElementFactory';
@@ -9,7 +9,7 @@ import Modeling from './Modeling';
 
 export default {
   __init__: [ 'dmnUpdater', 'idChangeBehavior', 'modeling' ],
-  commandStack: [ 'type', CommandStack ],
+  __depends__: [ CommandStack ],
   dmnUpdater: [ 'type', DmnUpdater ],
   dmnFactory: [ 'type', DmnFactory ],
   elementFactory: [ 'type', ElementFactory ],
