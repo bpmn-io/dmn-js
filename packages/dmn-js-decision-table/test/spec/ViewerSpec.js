@@ -10,7 +10,10 @@ import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 import { domify } from 'min-dom';
 
 import simpleXML from './simple.dmn';
-import { bootstrapViewer, getDecisionTable } from '../helper/index';
+import {
+  bootstrapViewer,
+  getDecisionTable
+} from '../helper/index';
 
 describe('DecisionTable', function() {
 
