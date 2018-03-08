@@ -9,6 +9,7 @@ import simpleXML from '../../simple.dmn';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 
+
 describe('decision table head', function() {
 
   beforeEach(bootstrapViewer(simpleXML, {
@@ -35,14 +36,14 @@ describe('decision table head', function() {
   it('should render input label', function() {
 
     // then
-    expect(domQuery('.input-label', testContainer)).to.exist;
+    expect(domQuery('.inputs-label', testContainer)).to.exist;
   });
 
 
   it('should render output label', function() {
 
     // then
-    expect(domQuery('.output-label', testContainer)).to.exist;
+    expect(domQuery('.outputs-label', testContainer)).to.exist;
   });
 
 

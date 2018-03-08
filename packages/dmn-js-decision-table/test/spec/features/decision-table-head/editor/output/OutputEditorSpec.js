@@ -2,10 +2,11 @@ import { Component, render } from 'inferno';
 
 import TestContainerSupport from 'mocha-test-container-support';
 
-import Editor from 'lib/features/input-expression/components/InputExpressionEditor';
+import Editor
+  from 'lib/features/decision-table-head/editor/components/OutputEditor';
 
 
-describe('input-expression - InputExpressionEditor', function() {
+describe('features/decision-table-head - OutputEditor', function() {
 
   var container, vTree;
 
@@ -44,7 +45,8 @@ class Root extends Component {
     this.state = {
       text: '',
       expressionLanguage: '',
-      inputVariable: null
+      inputVariable: null,
+      label: null
     };
   }
 

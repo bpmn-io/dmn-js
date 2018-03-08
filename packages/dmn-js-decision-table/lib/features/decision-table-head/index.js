@@ -1,6 +1,6 @@
-import DecisionTableHead from './DecisionTableHead';
+import DecisionTableHeadProvider from './DecisionTableHeadProvider';
 
 export default {
-  __init__: [ 'decisionTableHead' ],
-  decisionTableHead: [ 'type', DecisionTableHead ]
+  __init__: [ 'decisionTableHeadProvider' ],
+  decisionTableHeadProvider: [ 'type', DecisionTableHeadProvider ]
 };

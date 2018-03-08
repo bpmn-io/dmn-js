@@ -7,7 +7,7 @@ import Input from 'dmn-js-shared/lib/components/Input';
 import Select from 'dmn-js-shared/lib/components/Select';
 
 
-export default class InputExpressionEditor extends Component {
+export default class InputEditor extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -44,6 +44,14 @@ export default class InputExpressionEditor extends Component {
       this.setExpressionLanguage(language);
     };
 
+    this.handleLabelChange = (value) => {
+
+      // default to <undefined> for empty string
+      var label = value || undefined;
+
+      this.handleChange({ label });
+    };
+
     this.handleInputVariableChange = (value) => {
 
       // default to <undefined> for empty string
@@ -66,6 +74,7 @@ export default class InputExpressionEditor extends Component {
     const {
       expressionLanguage,
       inputVariable,
+      label,
       text
     } = this.props;
 
@@ -81,9 +90,9 @@ export default class InputExpressionEditor extends Component {
     ].filter(isString).map(o => ({ label: o, value: o }));
 
     return (
-      <div className="dms-container ref-input-expression-editor">
+      <div className="dms-container ref-input-editor">
 
-        <h3 className="dms-heading">Edit Input Expression</h3>
+        <h4 className="dms-heading">Input Expression</h4>
 
         <ContentEditable
           placeholder="enter expression"
@@ -91,7 +100,7 @@ export default class InputExpressionEditor extends Component {
             [
               'ref-text',
               'dms-input',
-              editScript ? 'dms-script-input' : '',
+              editScript ? 'dms-script-input script-editor' : '',
               'dms-fit-row'
             ].join(' ')
           }
@@ -121,7 +130,7 @@ export default class InputExpressionEditor extends Component {
         {
           editScript && (
             <p>
-              <label className="dms-label">Script Language:</label>&nbsp;
+              <label className="dms-label">Expression Language</label>
 
               <Select
                 className="ref-language"
@@ -132,8 +141,19 @@ export default class InputExpressionEditor extends Component {
           )
         }
 
+        <hr className="dms-hrule" />
+
         <p className="dms-fill-row">
-          <label className="dms-label">Input Variable:</label>&nbsp;
+          <label className="dms-label">Input Label</label>
+
+          <Input
+            className="ref-input-label"
+            value={ label || '' }
+            onInput={ this.handleLabelChange } />
+        </p>
+
+        <p className="dms-fill-row">
+          <label className="dms-label">Input Variable</label>
 
           <Input
             className="ref-input-variable"
@@ -141,7 +161,6 @@ export default class InputExpressionEditor extends Component {
             onInput={ this.handleInputVariableChange }
             placeholder="cellInput" />
         </p>
-
       </div>
     );
   }
