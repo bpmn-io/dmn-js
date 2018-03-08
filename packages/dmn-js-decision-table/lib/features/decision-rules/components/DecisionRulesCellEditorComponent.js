@@ -81,26 +81,27 @@ export default class DecisionRulesEditorCellComponent extends Component {
 
     const { isFocussed } = this.state;
 
-    const className = is(cell, 'dmn:UnaryTests') ? 'input' : 'output';
+    const className = is(cell, 'dmn:UnaryTests') ? 'input-cell' : 'output-cell';
 
     const businessObject = cell.businessObject;
 
     return (
-      <EditableTableCell
-        className={ className }
-        id={ cell.id }
-        onFocus={ this.onFocus }
-        onBlur={ this.onBlur }
-        isFocussed={ isFocussed }
-        onChange={ this.changeCellValue }
-        value={ businessObject.text }
-        businessObject={ businessObject } />
+      <td data-element-id={ cell.id } className={ className }>
+        <TableCellEditor
+          className="cell-editor"
+          onFocus={ this.onFocus }
+          onBlur={ this.onBlur }
+          isFocussed={ isFocussed }
+          onChange={ this.changeCellValue }
+          value={ businessObject.text }
+          businessObject={ businessObject } />
+      </td>
     );
   }
 }
 
 
-class EditableTableCell extends EditableComponent {
+class TableCellEditor extends EditableComponent {
 
   isDefaultExpressionLanguage(businessObject) {
     const { expressionLanguage } = businessObject;
@@ -137,27 +138,48 @@ class EditableTableCell extends EditableComponent {
     }
   }
 
+  isScript(businessObject) {
+
+    return (
+      is(businessObject, 'dmn:UnaryTests') && (
+        (businessObject.expressionLanguage || 'FEEL') !== 'FEEL' ||
+        businessObject.text.indexOf('\n') !== -1
+      )
+    );
+  }
+
   render() {
-    const { businessObject, id, isFocussed } = this.props;
+    const {
+      businessObject,
+      isFocussed
+    } = this.props;
 
     const isDefaultExpressionLanguage = this.isDefaultExpressionLanguage(businessObject);
 
     const expressionLanguageLabel = this.getExpressionLanguageLabel(businessObject);
 
+    const isScript = this.isScript(businessObject);
+
     return (
-      <td data-element-id={ id } className={ this.getClassName() }>
-        { this.getEditor() }
+      <div className={ this.getClassName() }>
+        <div className="description-indicator"></div>
         {
-          !isDefaultExpressionLanguage
-            && !isFocussed
-            && <span
-              className="cell-expression-language"
-              title={ `Expression Language: ${ expressionLanguageLabel }` }>
-              <span class="dmn-icon-file-code"></span>
-              <span class="label">{ expressionLanguageLabel }</span>
-            </span>
+          this.getEditor({
+            className: isScript ? 'script-editor' : null
+          })
         }
-      </td>
+        {
+          !isDefaultExpressionLanguage &&
+          !isFocussed && (
+            <span
+              className="dms-badge dmn-expression-language"
+              title={ `Expression Language: ${ expressionLanguageLabel }` }>
+              <span class="dms-badge-icon dmn-icon-file-code"></span>
+              <span class="dms-badge-label">{ expressionLanguageLabel }</span>
+            </span>
+          )
+        }
+      </div>
     );
   }
 }

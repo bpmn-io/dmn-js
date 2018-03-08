@@ -1,46 +1,56 @@
+import {
+  ComponentWithSlots
+} from 'dmn-js-shared/lib/components/slots';
 
-import { Component } from 'inferno';
 
+export default class DecisionRulesRowComponent extends ComponentWithSlots {
 
-export default class DecisionRulesRowComponent extends Component {
+  render() {
 
-  render({ row, rowIndex, cols }) {
-    const { components } = this.context;
+    const {
+      row,
+      rowIndex
+    } = this.props;
 
-    const { cells } = row;
-
-    const beforeComponents =
-      components.getComponents('cell', {
-        cellType: 'before-rule-cells'
-      });
-
-    const afterComponents =
-      components.getComponents('cell', {
-        cellType: 'after-rule-cells'
-      });
+    const {
+      cells
+    } = row;
 
     return (
       <tr>
         {
-          beforeComponents &&
-          beforeComponents.map(Component => <Component { ...this.props } />)
-        }
-        {
-          cells.map((cell, colIndex) => {
-            const CellComponent = components.getComponent('cell', { cellType: 'rule' });
-
-            return CellComponent ? <CellComponent
-              key={ cell.id }
-              rowIndex={ rowIndex }
-              cols={ cols }
-              colIndex={ colIndex }
-              cell={ cell }
-            /> : null;
+          this.slotFills({
+            type: 'cell',
+            context: {
+              cellType: 'before-rule-cells',
+              rowIndex,
+              row
+            }
           })
         }
         {
-          afterComponents &&
-          afterComponents.map(Component => <Component { ...this.props } />)
+          cells.map((cell, colIndex) => {
+
+            return this.slotFill({
+              type: 'cell',
+              context: {
+                cellType: 'rule',
+                cell,
+                rowIndex: rowIndex,
+                colIndex: colIndex
+              },
+              key: cell.id
+            });
+          })
+        }
+        {
+          this.slotFills({
+            type: 'cell',
+            context: {
+              cellType: 'after-rule-cells',
+              row
+            }
+          })
         }
       </tr>
     );

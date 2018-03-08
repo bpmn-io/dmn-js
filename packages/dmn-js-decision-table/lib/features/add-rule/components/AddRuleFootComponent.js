@@ -31,11 +31,11 @@ export default class AddRuleFootComponent extends Component {
 
       if (businessObject) {
         if (businessObject.$instanceOf('dmn:InputClause')) {
-          className += ' input';
+          className += ' input-cell';
         }
 
         if (businessObject.$instanceOf('dmn:OutputClause')) {
-          className += ' output';
+          className += ' output-cell';
         }
       }
 

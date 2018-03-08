@@ -17,7 +17,7 @@ import DecisionRulesModule from 'lib/features/decision-rules';
 import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
 
 
-describe('decision rules editor', function() {
+describe('features/decision-rules', function() {
 
   let testContainer;
 
@@ -77,7 +77,7 @@ describe('decision rules editor', function() {
 
   describe('expression language', function() {
 
-    describe('no configured default expression language', function() {
+    describe('no default expression language', function() {
 
       beforeEach(bootstrapModeler(languageExpressionXML, {
         modules: [
@@ -89,30 +89,29 @@ describe('decision rules editor', function() {
       }));
 
 
-      describe('input', function() {
+      describe('on input', function() {
 
-        it('should not display expression language if set to default', function() {
+        it('should not display default', function() {
 
           // given
           const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
 
-        it('should display expression language if set to other than default',
-          function() {
+        it('should display non-default default', function() {
 
-            // given
-            const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+          // given
+          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
-            // then
-            expect(domQuery('.cell-expression-language', cell)).to.exist;
-          });
+          // then
+          expect(domQuery('.dmn-expression-language', cell)).to.exist;
+        });
 
 
-        it('should not display expression language if focussed', function() {
+        it('should not display if focussed', function() {
 
           // given
           const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
@@ -123,36 +122,35 @@ describe('decision rules editor', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
       });
 
 
-      describe('output', function() {
+      describe('on output', function() {
 
-        it('should not display expression language if set to default', function() {
+        it('should not display default', function() {
 
           // given
           const cell = domQuery('[data-element-id="outputEntry2"]', testContainer);
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
 
-        it('should display expression language if set to other than default',
-          function() {
+        it('should display non-default',function() {
 
-            // given
-            const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
+          // given
+          const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
 
-            // then
-            expect(domQuery('.cell-expression-language', cell)).to.exist;
-          });
+          // then
+          expect(domQuery('.dmn-expression-language', cell)).to.exist;
+        });
 
 
-        it('should not display expression language if focussed', function() {
+        it('should not display if focussed', function() {
 
 
           // given
@@ -164,7 +162,7 @@ describe('decision rules editor', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
       });
@@ -186,30 +184,29 @@ describe('decision rules editor', function() {
       }));
 
 
-      describe('input', function() {
+      describe('on input', function() {
 
-        it('should not display expression language if set to default', function() {
+        it('should not default', function() {
 
           // given
           const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
 
-        it('should display expression language if set to other than default',
-          function() {
+        it('should display non-default', function() {
 
-            // given
-            const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+          // given
+          const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
-            // then
-            expect(domQuery('.cell-expression-language', cell)).to.exist;
-          });
+          // then
+          expect(domQuery('.dmn-expression-language', cell)).to.exist;
+        });
 
 
-        it('should not display expression language if focussed', function() {
+        it('should not display if focussed', function() {
 
           // given
           const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
@@ -220,33 +217,32 @@ describe('decision rules editor', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
       });
 
 
-      describe('output', function() {
+      describe('on output', function() {
 
-        it('should not display expression language if set to default', function() {
+        it('should not display default', function() {
 
           // given
           const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
 
-        it('should display expression language if set to other than default',
-          function() {
+        it('should display non-default',function() {
 
-            // given
-            const cell = domQuery('[data-element-id="outputEntry2"]', testContainer);
+          // given
+          const cell = domQuery('[data-element-id="outputEntry2"]', testContainer);
 
-            // then
-            expect(domQuery('.cell-expression-language', cell)).to.exist;
-          });
+          // then
+          expect(domQuery('.dmn-expression-language', cell)).to.exist;
+        });
 
 
         it('should not display expression language if focussed', function() {
@@ -260,7 +256,7 @@ describe('decision rules editor', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.cell-expression-language', cell)).to.not.exist;
+          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
         });
 
       });

@@ -9,13 +9,13 @@ export default class DecisionRulesCellComponent extends Component {
 
     if (is(cell, 'dmn:UnaryTests')) {
       return (
-        <td className="input" data-element-id={ cell.id }>
+        <td className="input-cell" data-element-id={ cell.id }>
           { cell.businessObject.text }
         </td>
       );
     } else {
       return (
-        <td className="output" data-element-id={ cell.id }>
+        <td className="output-cell" data-element-id={ cell.id }>
           { cell.businessObject.text }
         </td>
       );
