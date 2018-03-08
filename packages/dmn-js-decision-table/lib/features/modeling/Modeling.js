@@ -2,7 +2,7 @@ import { assign } from 'min-dash/lib/object';
 
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 
-import EditAllowedValuesHandler from './cmd/EditAllowedValuesHandler';
+import UpdateAllowedValuesHandler from './cmd/UpdateAllowedValuesHandler';
 
 import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
@@ -25,7 +25,7 @@ export default class Modeling extends BaseModeling {
 
   static _getHandlers() {
     return assign({}, super._getHandlers(), {
-      'editAllowedValues': EditAllowedValuesHandler,
+      'editAllowedValues': UpdateAllowedValuesHandler,
       'updateProperties': UpdatePropertiesHandler
     });
   }
