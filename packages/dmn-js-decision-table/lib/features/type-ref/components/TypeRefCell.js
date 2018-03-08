@@ -4,87 +4,79 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export default class TypeRefCell extends Component {
+
   constructor(props) {
     super(props);
-
-    this.onClick = this.onClick.bind(this);
-    this.onContextmenu = this.onContextmenu.bind(this);
-    this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
-  onClick(event) {
-    const { inputExpression, output } = this.props;
+  onClick = (event) => {
+
+    const element = this.getTypeRefTarget();
 
     this._eventBus.fire('typeRef.edit', {
       event,
-      node: this.node,
-      element: inputExpression || output
+      element
     });
   }
 
-  onContextmenu(event) {
-    const { inputExpression, output } = this.props;
+  onContextmenu = (event) => {
 
-    const id = inputExpression
-      ? inputExpression.$parent.id
-      : output.id;
+    const { element } = this.props;
 
     this._eventBus.fire('cell.contextmenu', {
       event,
       node: event.node,
-      id
+      id: element.id
     });
   }
 
-  onElementsChanged() {
+  onElementsChanged = () => {
     this.forceUpdate();
   }
 
   componentWillMount() {
     const { injector } = this.context;
 
-    const changeSupport = this._changeSupport = this.context.changeSupport;
+    this._changeSupport = this.context.changeSupport;
     this._sheet = injector.get('sheet');
     this._eventBus = injector.get('eventBus');
 
-    const root = this._sheet.getRoot();
+    const target = this.getTypeRefTarget();
 
-    const { inputExpression, output } = this.props;
-
-    changeSupport.onElementsChanged(root.id, this.onElementsChanged);
-    changeSupport.onElementsChanged(
-      inputExpression ? inputExpression.id : output.id, this.onElementsChanged
-    );
+    this._changeSupport.onElementsChanged(target.id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
-    const root = this._sheet.getRoot();
+    const target = this.getTypeRefTarget();
 
-    const { inputExpression, output } = this.props;
+    this._changeSupport.offElementsChanged(target.id, this.onElementsChanged);
+  }
 
-    this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
-    this._changeSupport.offElementsChanged(
-      inputExpression ? inputExpression.id : output.id, this.onElementsChanged
-    );
+  getTypeRefTarget() {
+
+    const {
+      element
+    } = this.props;
+
+    return is(element, 'dmn:InputClause') ? element.inputExpression : element;
   }
 
   render() {
-    const { inputExpression, output } = this.props;
+    const {
+      element,
+      className
+    } = this.props;
 
-    const businessOject = inputExpression || output;
-
-    const { typeRef } = businessOject;
-
-    const className = is(businessOject, 'dmn:LiteralExpression')
-      ? 'input type-ref'
-      : 'output type-ref';
+    const actualClassName = (className || '') + ' type-ref';
 
     return (
       <th
+        className={ actualClassName }
         onClick={ this.onClick }
-        onContextmenu={ this.onContextmenu }
-        ref={ node => this.node = node }
-        className={ className }>{ typeRef }</th>
+        onContextmenu={ this.onContextmenu }>
+        { element.typeRef }
+      </th>
     );
   }
+
 }
