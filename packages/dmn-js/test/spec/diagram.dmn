@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <inputData id="dayType_id" name="Type of day">
     <extensionElements>
       <biodi:bounds x="240" y="270" width="125" height="45" />
@@ -60,9 +60,9 @@
       <requiredAuthority href="#host_ks" />
     </authorityRequirement>
     <decisionTable id="dishDecisionTable">
-      <input id="seasonInput" label="Season">
-        <inputExpression id="seasonInputExpression" typeRef="string">
-          <text>season</text>
+      <input id="seasonInput" label="Season" camunda:inputVariable="seasonInput">
+        <inputExpression id="seasonInputExpression" typeRef="string" expressionLanguage="javascript">
+          <text>return getSeason();</text>
         </inputExpression>
         <inputValues id="UnaryTests_0twhp5w">
           <text><![CDATA["Winter","Summer","Spring"]]></text>
@@ -80,7 +80,12 @@
       </output>
       <rule id="row-495762709-1">
         <inputEntry id="UnaryTests_1nxcsjr">
-          <text><![CDATA["Winter"]]></text>
+          <text><![CDATA[if
+  foo
+then
+  "Winter"
+else
+  "Summer"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_1r9yorj">
           <text><![CDATA[<= 8]]></text>
@@ -96,24 +101,27 @@
         <inputEntry id="UnaryTests_0nhiedb">
           <text><![CDATA[> 8]]></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_1h30r12">
+        <outputEntry id="LiteralExpression_1h30r12" expressionLanguage="feel">
           <text><![CDATA["Pasta"]]></text>
         </outputEntry>
       </rule>
       <rule id="row-495762709-3">
+        <description></description>
         <inputEntry id="UnaryTests_0ifgmfm">
           <text><![CDATA["Summer"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_12cib9m">
           <text><![CDATA[> 10]]></text>
         </inputEntry>
-        <outputEntry id="LiteralExpression_0wgaegy">
+        <outputEntry id="LiteralExpression_0wgaegy" expressionLanguage="feel">
+          <description>ASDASD</description>
           <text><![CDATA["Light salad"]]></text>
         </outputEntry>
       </rule>
       <rule id="row-495762709-7">
-        <inputEntry id="UnaryTests_0ozm9s7">
-          <text><![CDATA["Summer"]]></text>
+        <inputEntry id="UnaryTests_0ozm9s7" expressionLanguage="javascript">
+          <description><![CDATA[The "YEA" season]]></description>
+          <text><![CDATA[seasonInput.endsWith("YEA")]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0sesgov">
           <text><![CDATA[<= 10]]></text>
@@ -123,6 +131,7 @@
         </outputEntry>
       </rule>
       <rule id="row-445981423-3">
+        <description></description>
         <inputEntry id="UnaryTests_1er0je1">
           <text><![CDATA["Spring"]]></text>
         </inputEntry>
@@ -137,8 +146,11 @@
         <inputEntry id="UnaryTests_06or48g">
           <text><![CDATA["Spring"]]></text>
         </inputEntry>
-        <inputEntry id="UnaryTests_0wa71sy">
-          <text><![CDATA[>= 10]]></text>
+        <inputEntry id="UnaryTests_0wa71sy" expressionLanguage="javascript">
+          <description><![CDATA[<= 10]]></description>
+          <text><![CDATA[Math.min(
+  cellInput, 10
+) == 10]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_09ggol9">
           <text><![CDATA["Steak"]]></text>
