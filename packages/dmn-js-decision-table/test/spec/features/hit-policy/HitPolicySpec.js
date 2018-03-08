@@ -11,7 +11,7 @@ import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import HitPolicyModule from 'lib/features/hit-policy';
 
 
-describe('hit policy', function() {
+describe('features/hit-policy', function() {
 
   beforeEach(bootstrapViewer(simpleXML, {
     modules: [
