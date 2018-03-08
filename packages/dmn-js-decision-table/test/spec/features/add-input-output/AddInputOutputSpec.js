@@ -11,16 +11,18 @@ import {
 import simpleXML from '../../simple.dmn';
 
 import AddInputOutputModule from 'lib/features/add-input-output';
+import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import CoreModule from 'lib/core';
 import ModelingModule from 'lib/features/modeling';
 
 
-describe('add input output', function() {
+describe('features/add-input-output', function() {
 
   beforeEach(bootstrapModeler(simpleXML, {
     modules: [
       AddInputOutputModule,
       CoreModule,
+      DecisionTableHeadModule,
       ModelingModule
     ]
   }));
