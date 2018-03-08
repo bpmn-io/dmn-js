@@ -1,6 +1,6 @@
-import Annotations from './Annotations';
+import AnnotationsProvider from './AnnotationsProvider';
 
 export default {
-  __init__: [ 'annotations' ],
-  annotations: [ 'type', Annotations ]
+  __init__: [ 'annotationsProvider' ],
+  annotationsProvider: [ 'type', AnnotationsProvider ]
 };
