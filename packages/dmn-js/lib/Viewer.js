@@ -4,8 +4,12 @@ import DrdViewer from 'dmn-js-drd/lib/Viewer';
 import DecisionTableViewer from 'dmn-js-decision-table/lib/Viewer';
 import LiteralExpressionViewer from 'dmn-js-literal-expression/lib/Viewer';
 
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
+
+
 /**
- * The dmn editor.
+ * The dmn viewer.
  */
 export default class Viewer extends Manager {
 
@@ -15,23 +19,26 @@ export default class Viewer extends Manager {
       {
         id: 'drd',
         constructor: DrdViewer,
-        opens: 'dmn:Definitions'
+        opens(element) {
+          return is(element, 'dmn:Definitions') && containsDi(element);
+        }
       },
       {
         id: 'decisionTable',
         constructor: DecisionTableViewer,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.decisionTable;
+          return is(element, 'dmn:Decision') && element.decisionTable;
         }
       },
       {
         id: 'literalExpression',
         constructor: LiteralExpressionViewer,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.literalExpression;
+          return is(element, 'dmn:Decision') && element.literalExpression;
         }
       }
     ];
 
   }
+
 }

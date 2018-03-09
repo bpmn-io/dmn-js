@@ -6,6 +6,7 @@ import DefaultExport from '../../';
 describe('Viewer', function() {
 
   var diagram = require('./diagram.dmn');
+  var noDi = require('./no-di.dmn');
 
   var container;
 
@@ -109,4 +110,24 @@ describe('Viewer', function() {
 
   });
 
+
+  it('should open Table (if no DI)', function(done) {
+
+    var editor = new Viewer({ container: container });
+
+    editor.importXML(noDi, function(err) {
+
+      if (err) {
+        return done(err);
+      }
+
+      var activeView = editor.getActiveView();
+
+      expect(activeView.type).to.eql('decisionTable');
+      expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+
+      done();
+    });
+
+  });
 });
