@@ -4,6 +4,9 @@ import DrdModeler from 'dmn-js-drd/lib/Modeler';
 import DecisionTableEditor from 'dmn-js-decision-table/lib/Editor';
 import LiteralExpressionEditor from 'dmn-js-literal-expression/lib/Editor';
 
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
+
 
 /**
  * The dmn editor.
@@ -22,17 +25,37 @@ export default class Modeler extends EditingManager {
         id: 'decisionTable',
         constructor: DecisionTableEditor,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.decisionTable;
+          return is(element, 'dmn:Decision') && element.decisionTable;
         }
       },
       {
         id: 'literalExpression',
         constructor: LiteralExpressionEditor,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.literalExpression;
+          return is(element, 'dmn:Decision') && element.literalExpression;
         }
       }
     ];
 
   }
+
+  _getInitialView(views) {
+
+    for (var i = 0; i < views.length; i++) {
+
+      const view = views[i];
+      const el = view.element;
+
+      if (is(el, 'dmn:Decision')) {
+        return view;
+      }
+
+      if (is(el, 'dmn:Definitions') && containsDi(el)) {
+        return view;
+      }
+    }
+
+    return views[0];
+  }
+
 }

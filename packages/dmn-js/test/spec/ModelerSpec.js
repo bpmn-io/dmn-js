@@ -18,6 +18,7 @@ insertCSS('dmn-js-testing.css',
 describe('Modeler', function() {
 
   var diagram = require('./diagram.dmn');
+  var noDi = require('./no-di.dmn');
 
   var container;
 
@@ -94,6 +95,27 @@ describe('Modeler', function() {
       expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
       editor.open(drdView, done);
+    });
+
+  });
+
+
+  it('should open Table (if no DI)', function(done) {
+
+    var editor = new Modeler({ container: container });
+
+    editor.importXML(noDi, function(err) {
+
+      if (err) {
+        return done(err);
+      }
+
+      var activeView = editor.getActiveView();
+
+      expect(activeView.type).to.eql('decisionTable');
+      expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+
+      done();
     });
 
   });
