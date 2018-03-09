@@ -20,6 +20,10 @@
   "dependencies": {
     "diagram-js": "^0.28.2",
     "diagram-js-direct-editing": "^0.22.0",
-    "dmn-js-shared": "^2.0.0-alpha1"
+    "dmn-js-shared": "^2.0.0-alpha1",
+    "inherits": "^2.0.1",
+    "lodash": "^3.0.1",
+    "min-dom": "^1.0.0",
+    "tiny-svg": "^0.1.3"
   }
 }
