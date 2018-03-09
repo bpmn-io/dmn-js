@@ -18,7 +18,8 @@
     "decision table"
   ],
   "devDependencies": {
-    "inferno-test-utils": "^4.0.0"
+    "inferno-test-utils": "^4.0.0",
+    "dmn-font": "^0.4.1"
   },
   "dependencies": {
     "diagram-js": "^0.28.2",

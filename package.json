@@ -54,8 +54,5 @@
     "sinon-chai": "^2.14.0",
     "stringify": "^5.1.0",
     "watchify": "^3.9.0"
-  },
-  "dependencies": {
-    "dmn-font": "^0.4.1"
   }
 }

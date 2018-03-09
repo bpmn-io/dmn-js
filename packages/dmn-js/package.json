@@ -42,7 +42,8 @@
     "mkdirp": "^0.5.1",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^4.0.0",
-    "webpack-cli": "^2.0.6"
+    "webpack-cli": "^2.0.6",
+    "dmn-font": "^0.4.1"
   },
   "dependencies": {
     "dmn-js-decision-table": "^2.0.0-alpha1",
