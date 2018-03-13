@@ -1,5 +1,7 @@
 import { Component } from 'inferno';
 
+import { isString } from 'min-dash/lib/lang';
+
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
@@ -130,6 +132,10 @@ class TableCellEditor extends EditableComponent {
     }
   }
 
+  getDescription(businessObject) {
+    return businessObject.description;
+  }
+
   getExpressionLanguageLabel(businessObject) {
     const { expressionLanguage } = businessObject;
 
@@ -162,6 +168,8 @@ class TableCellEditor extends EditableComponent {
       isFocussed
     } = this.props;
 
+    const description = this.getDescription(businessObject);
+
     const isDefaultExpressionLanguage = this.isDefaultExpressionLanguage(businessObject);
 
     const expressionLanguageLabel = this.getExpressionLanguageLabel(businessObject);
@@ -170,7 +178,11 @@ class TableCellEditor extends EditableComponent {
 
     return (
       <div className={ this.getClassName() }>
-        <div className="description-indicator"></div>
+        {
+          isString(description)
+            && !isFocussed
+            && <div className="description-indicator"></div>
+        }
         {
           this.getEditor({
             className: isScript ? 'script-editor' : null

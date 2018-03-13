@@ -9,6 +9,7 @@ import decisionTableContextMenu from './features/context-menu';
 import decisionTableEditorActionsModule from './features/editor-actions';
 import decisionTableHeadEditorModule from './features/decision-table-head/editor';
 import dragAndDropModule from './features/drag-and-drop';
+import descriptionModule from './features/description';
 import expressionLanguageModule from './features/expression-language';
 import tableHeadEditorModule from './features/decision-table-head/editor';
 import tablePropertiesEditorModule from './features/decision-table-properties/editor';
@@ -45,6 +46,7 @@ export default class Editor extends Viewer {
       decisionTableEditorActionsModule,
       decisionTableHeadEditorModule,
       dragAndDropModule,
+      descriptionModule,
       expressionLanguageModule,
       tableHeadEditorModule,
       tablePropertiesEditorModule,

@@ -65,6 +65,7 @@ export default class SimpleModeButtonComponent extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
+  // position button always on opposite site of context menu
   updatePosition() {
     const { selection } = this.state;
 
@@ -92,8 +93,8 @@ export default class SimpleModeButtonComponent extends Component {
         - containerBounds.left
         + cellBounds.left
         - nodeBounds.width
-        + scrollLeft
-        + OFFSET)
+        + OFFSET
+        + scrollLeft)
         + 'px';
     } else {
       nodePosition.left =
@@ -101,8 +102,8 @@ export default class SimpleModeButtonComponent extends Component {
         - containerBounds.left
         + cellBounds.left
         + cellBounds.width
-        + scrollLeft
-        - OFFSET)
+        - OFFSET
+        + scrollLeft)
         + 'px';
     }
 
@@ -112,16 +113,16 @@ export default class SimpleModeButtonComponent extends Component {
         - containerBounds.top
         + cellBounds.top
         - nodeBounds.height
-        + scrollTop
-        + OFFSET)
+        + OFFSET
+        + scrollTop)
         + 'px';
     } else {
       nodePosition.top =
         (window.scrollY
         - containerBounds.top
         + cellBounds.top
-        + scrollTop
-        - OFFSET)
+        - OFFSET
+        + scrollTop)
         + 'px';
     }
 

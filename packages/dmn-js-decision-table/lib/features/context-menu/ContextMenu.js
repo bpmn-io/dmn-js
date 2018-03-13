@@ -29,13 +29,29 @@ export default class ContextMenu {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
         const entries = this._getEntries(context);
 
-        const additionalEntries = components.getComponents('context-menu-additional', context);
+        const additionalCellEntries =
+          components.getComponents('context-menu-cell-additional', context);
 
-        return () => (
-          <div className="context-menu-flex">
-            { (entries || []).concat(additionalEntries || []) }
-          </div>
-        );
+        if (additionalCellEntries && additionalCellEntries.length) {
+          const cellEntriesGroup = (
+            <div className="context-menu-group context-menu-group-cell">
+              <h4 className="context-menu-group-title">Cell</h4>
+              { additionalCellEntries }
+            </div>
+          );
+
+          return () => (
+            <div className="context-menu-flex">
+              { (entries || []).concat([ cellEntriesGroup ]) }
+            </div>
+          );
+        } else {
+          return () => (
+            <div className="context-menu-flex">
+              { entries || [] }
+            </div>
+          );
+        }
       }
     });
 

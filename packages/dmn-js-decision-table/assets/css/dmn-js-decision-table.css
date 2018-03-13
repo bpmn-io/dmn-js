@@ -440,3 +440,18 @@ table tr > .input-cell + .output-cell {
 .dmn-decision-table-container .dragged {
   color: #999;
 }
+
+/* cell description */
+
+.dmn-decision-table-container .description-indicator {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid black;
+  transform: rotate(45deg);
+  transform-origin: top;
+}
+
+/* end cell description */

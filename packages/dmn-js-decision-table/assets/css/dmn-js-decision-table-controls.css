@@ -48,6 +48,7 @@
   font-size: 14px;
   color: #444;
   z-index: 10;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .context-menu .context-menu-container {
@@ -280,3 +281,17 @@ h4.dms-heading {
   color: #444;
 }
 
+/* description editor */
+
+.dmn-decision-table-container .description-editor {
+  margin: 0;
+  width: 192px;
+  border-left: solid 3px #444;
+}
+
+.dmn-decision-table-container .description-editor .dms-input {
+  border: none;
+  min-height: 0;
+}
+
+/* end description editor */

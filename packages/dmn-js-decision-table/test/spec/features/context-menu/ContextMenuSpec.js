@@ -857,7 +857,7 @@ describe('context menu', function() {
 
       // given
       components
-        .onGetComponent('context-menu-additional', () => <div class="foo">FOO</div>);
+        .onGetComponent('context-menu-cell-additional', () => <div class="foo">FOO</div>);
 
       // when
       const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);

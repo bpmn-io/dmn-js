@@ -31,7 +31,7 @@ export default class ExpressionLanguage {
   constructor(components, elementRegistry, modeling) {
     this._modeling = modeling;
 
-    components.onGetComponent('context-menu-additional', (context = {}) => {
+    components.onGetComponent('context-menu-cell-additional', (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
 
         const { id } = context;
@@ -51,22 +51,19 @@ export default class ExpressionLanguage {
           || (isInput(element.col) ? 'feel' : 'juel');
 
         return (
-          <div className="context-menu-group context-menu-group-cell">
-            <h4 className="context-menu-group-title">Cell</h4>
-            <div
-              className="context-menu-group-entry context-menu-entry-set-expression-language">
-              <div>
-                <span className="context-menu-group-entry-icon dmn-icon-file-code"></span>
-                Expression Language
-              </div>
-
-              <Select
-                className="expression-language"
-                onChange={ value => this.onChange(element, value) }
-                options={ INPUT_EXPRESSION_LANGUAGE_OPTIONS }
-                value={ expressionLanguage } />
-
+          <div
+            className="context-menu-group-entry context-menu-entry-set-expression-language">
+            <div>
+              <span className="context-menu-group-entry-icon dmn-icon-file-code"></span>
+              Expression Language
             </div>
+
+            <Select
+              className="expression-language"
+              onChange={ value => this.onChange(element, value) }
+              options={ INPUT_EXPRESSION_LANGUAGE_OPTIONS }
+              value={ expressionLanguage } />
+
           </div>
         );
 
