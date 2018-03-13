@@ -18,22 +18,16 @@ const TOP = 'top',
 
 
 export default class DragAndDrop {
+
   constructor(
-      components,
-      elementRegistry,
-      eventBus,
-      dragAndDrop,
-      renderer,
-      rules,
-      sheet) {
+      components, elementRegistry, eventBus,
+      dragAndDrop, renderer, rules, sheet) {
+
     this._elementRegistry = elementRegistry;
     this._dragAndDrop = dragAndDrop;
     this._renderer = renderer;
     this._rules = rules;
     this._sheet = sheet;
-
-    this._currentDragOverElement = null;
-    this._currentHighlightPosition = null;
 
     // provide drag handle for drag and drop
     components.onGetComponent('cell-inner', ({ cellType, col, row }) => {
@@ -41,94 +35,159 @@ export default class DragAndDrop {
         return () => <span
           draggable="true"
           onDragStart={ e => this.startDrag(row, e) }
-          className="dmn-icon-drag vertical">&nbsp;</span>;
+          className="dmn-icon-drag vertical"
+          title="Move rule">&nbsp;</span>;
       } else if (cellType === 'input-cell' || cellType === 'output-cell') {
+
+        let title = `Move ${isInput(col) ? 'Input' : 'Output' }`;
+
         return () => <span
           draggable="true"
           onDragStart={ e => this.startDrag(col, e) }
-          className="dmn-icon-drag horizontal"></span>;
+          className="dmn-icon-drag horizontal"
+          title={ title }></span>;
       }
     });
 
-    eventBus.on('dragAndDrop.dragOver', ({ draggedElement, dragOverElement, event }) => {
-      const container = this._renderer.getContainer();
+    // validate allowed rules
+    eventBus.on('dragAndDrop.dragEnter', (event) => {
 
-      const horizontalPosition = getHorizontalPosition(event, dragOverElement),
-            verticalPosition = getVerticalPosition(event, dragOverElement);
+      const {
+        dragContext
+      } = event;
 
-      if (this._currentDragOverElement === dragOverElement) {
+      const {
+        draggedElement,
+        hoverEl
+      } = dragContext;
 
-        if (
-          (
-            draggedElement instanceof Row
-            && this._currentHighlightPosition === verticalPosition
-          ) || (
-            draggedElement instanceof Col
-            && this._currentHighlightPosition === horizontalPosition
-          )
-        ) {
-
-          // nothing to update
-          return;
-        }
-
+      // can always drag rows
+      if (draggedElement instanceof Row) {
+        return true;
       }
 
-      removeHighlight();
+      if (draggedElement instanceof Col) {
+        const dropIndex = getTargetColIndex(hoverEl, this._elementRegistry, this._sheet);
 
-      this._currentDragOverElement = dragOverElement;
-
-      this._currentHighlightPosition =
-        (draggedElement instanceof Row)
-          ? verticalPosition
-          : horizontalPosition;
-
-      if (draggedElement instanceof Row) {
-
-        if (verticalPosition === TOP) {
-
-          // drop above
-          highlightRow(dragOverElement, container, 'top');
-        } else {
-
-          // drop below
-          highlightRow(dragOverElement, container, 'bottom');
+        // cannot drop as we cannot compute the drop index
+        if (dropIndex === -1) {
+          return false;
         }
-
-      } else if (draggedElement instanceof Col) {
 
         const allowed = this._rules.allowed('col.move', {
           col: draggedElement,
-          index: getTargetColIndex(dragOverElement, this._elementRegistry, this._sheet)
+          index: dropIndex
         });
 
-        if (allowed) {
+        return allowed;
+      }
+
+      return false;
+    });
+
+    // update UI
+    eventBus.on('dragAndDrop.dragOver', (event) => {
+
+      const {
+        dragContext,
+        originalEvent
+      } = event;
+
+      const {
+        draggedElement,
+        targetEl
+      } = dragContext;
+
+      const container = this._renderer.getContainer();
+
+      if (!targetEl) {
+        return false;
+      }
+
+      if (draggedElement instanceof Row) {
+        const verticalPosition = getVerticalPosition(
+          originalEvent,
+          targetEl
+        );
+
+        if (dragContext._lastTargetEl !== targetEl
+          || dragContext._lastPosition !== verticalPosition) {
+
+          removeHighlight(container);
+
+          if (verticalPosition === TOP) {
+
+            // drop above
+            highlightRow(targetEl, container, 'top');
+          } else {
+
+            // drop below
+            highlightRow(targetEl, container, 'bottom');
+          }
+        }
+
+        dragContext._lastPosition = verticalPosition;
+      }
+
+      if (draggedElement instanceof Col) {
+        const horizontalPosition = getHorizontalPosition(
+          originalEvent,
+          targetEl
+        );
+
+        if (dragContext._lastTargetEl !== targetEl
+          || dragContext._lastPosition !== horizontalPosition) {
+
+          removeHighlight(container);
+
           if (horizontalPosition === LEFT) {
 
             // drop left
-            highlightCol(dragOverElement, container, 'left');
+            highlightCol(targetEl, container, 'left');
           } else {
 
             // drop right
-            highlightCol(dragOverElement, container, 'right');
+            highlightCol(targetEl, container, 'right');
           }
         }
+
+        dragContext._lastPosition = horizontalPosition;
       }
 
+      dragContext._lastTargetEl = targetEl;
+
+      // allowed
+      return true;
     });
 
-    eventBus.on('dragAndDrop.drop', ({ draggedElement, dragOverElement, event }) => {
-      this._cleanup();
 
-      const horizontalPosition = getHorizontalPosition(event, dragOverElement),
-            verticalPosition = getVerticalPosition(event, dragOverElement);
+    // perform drop operation
+    eventBus.on('dragAndDrop.drop', (event) => {
+
+      const {
+        dragContext,
+        originalEvent
+      } = event;
+
+      const {
+        draggedElement,
+        targetEl
+      } = dragContext;
+
+      if (!targetEl) {
+        return false;
+      }
 
       if (draggedElement instanceof Row) {
-        const rowId = dragOverElement.dataset.rowId,
+        const verticalPosition = getVerticalPosition(
+          originalEvent,
+          targetEl
+        );
+
+        const rowId = targetEl.dataset.rowId,
               row = this._elementRegistry.get(rowId);
 
-        if (!row
-          || row === draggedElement) {
+        if (!row || row === draggedElement) {
           return;
         }
 
@@ -144,48 +203,51 @@ export default class DragAndDrop {
         }
 
         return targetRow;
+      }
 
-      } else if (draggedElement instanceof Col) {
-        const allowed = this._rules.allowed('col.move', {
-          col: draggedElement,
-          index: getTargetColIndex(dragOverElement, this._elementRegistry, this._sheet)
-        });
+      if (draggedElement instanceof Col) {
+        const horizontalPosition = getHorizontalPosition(
+          originalEvent,
+          targetEl
+        );
 
-        if (allowed) {
-          const colId = dragOverElement.dataset.colId,
-                col = this._elementRegistry.get(colId);
+        // no need to check rules; we verified on
+        // dragEnter that dropping is O.K.
+        const colId = targetEl.dataset.colId,
+              col = this._elementRegistry.get(colId);
 
-          if (!col
-            || col === draggedElement) {
-            return;
-          }
-
-          const targetCol = getTargetCol(
-            draggedElement,
-            col,
-            horizontalPosition,
-            this._sheet.getRoot().cols
-          );
-
-          if (targetCol === draggedElement) {
-            return;
-          }
-
-          return targetCol;
+        if (!col || col === draggedElement) {
+          return;
         }
 
+        const targetCol = getTargetCol(
+          draggedElement,
+          col,
+          horizontalPosition,
+          this._sheet.getRoot().cols
+        );
+
+        if (targetCol === draggedElement) {
+          return;
+        }
+
+        return targetCol;
       }
     });
 
-    eventBus.on('dragAndDrop.dragEnd', () => {
-      this._cleanup();
-    });
+    eventBus.on('dragAndDrop.dragEnd', this._cleanup);
   }
 
   startDrag(element, event) {
     const container = this._renderer.getContainer();
 
-    this._dragImage = getGraphics(element, container);
+    this._dragImage = domify(
+      `<span style="
+          visibility: hidden;
+          position: fixed;
+          top: -10000px
+      "></span>`
+    );
 
     // needs to be present in DOM
     document.body.appendChild(this._dragImage);
@@ -195,16 +257,16 @@ export default class DragAndDrop {
       event.dataTransfer.setDragImage(this._dragImage, 0, 0);
     }
 
-    this._dragAndDrop.startDrag(element, event);
-
     if (element instanceof Row) {
       fadeOutRow(element, container);
     } else if (element instanceof Col) {
       fadeOutCol(element, container);
     }
+
+    this._dragAndDrop.startDrag(element, event);
   }
 
-  _cleanup() {
+  _cleanup = () => {
     const container = this._renderer.getContainer();
 
     removeHighlight(container);
@@ -212,8 +274,11 @@ export default class DragAndDrop {
 
     if (this._dragImage) {
       domRemove(this._dragImage);
+
+      this._dragImage = null;
     }
   }
+
 }
 
 DragAndDrop.$inject = [
@@ -228,11 +293,11 @@ DragAndDrop.$inject = [
 
 // helpers //////////
 
-function getTargetColIndex(dragOverElement, elementRegistry, sheet) {
-  const targetCol = elementRegistry.get(dragOverElement.dataset.colId);
+function getTargetColIndex(cellEl, elementRegistry, sheet) {
+  const targetCol = elementRegistry.get(cellEl.dataset.colId);
 
   if (!targetCol) {
-    return false;
+    return -1;
   }
 
   const { cols } = sheet.getRoot();
@@ -328,68 +393,6 @@ function removeFadeOut(container) {
       domClasses(cell).remove('dragged');
     }
   });
-}
-
-/**
- * Returns drag image for row/col
- * @param {Base} element - Row or col.
- * @param {DOMElement} container - Container to query in.
- */
-function getGraphics(element, container) {
-  const gfx = domify(`
-      <div class="dmn-decision-table-container dragger">
-        <div class="tjs-container">
-          <table class="tjs-table">
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    `);
-
-  if (element instanceof Row) {
-    const cell = domQuery(`[data-row-id=${element.id}]`, container);
-
-    const row = cell.parentNode;
-
-    const clonedRow = row.cloneNode(true);
-
-    gfx.style.width = row.getBoundingClientRect().width;
-
-    forEach(row.childNodes, (childNode, index) => {
-
-      // QUIRK: PhantomJS finds child nodes that are not actually nodes
-      if (isNode(childNode)) {
-        const { width, height } = childNode.getBoundingClientRect();
-
-        clonedRow.childNodes[index].style.width = `${width}px`;
-        clonedRow.childNodes[index].style.height = `${height}px`;
-      }
-    });
-
-    domQuery('tbody', gfx).appendChild(clonedRow);
-  } else if (element instanceof Col) {
-    const cells = domQuery.all(`[data-col-id=${element.id}]`, container);
-
-    // QUIRK: PhantomJS finds child nodes that are not actually nodes
-    if (isNode(cells[0])) {
-      gfx.style.width = `${cells[0].getBoundingClientRect().width}px`;
-    }
-
-    forEach(cells, cell => {
-
-      // QUIRK: PhantomJS requires check if actual DOM node
-      if (isNode(cell)) {
-        const tableRow = domify('<tr></tr>');
-
-        tableRow.appendChild(cell.cloneNode(true));
-
-        domQuery('tbody', gfx).appendChild(tableRow);
-      }
-    });
-  }
-
-  return gfx;
 }
 
 function getHorizontalPosition(event, dragOverElement) {

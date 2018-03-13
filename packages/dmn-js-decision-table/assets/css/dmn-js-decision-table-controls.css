@@ -253,19 +253,27 @@ h4.dms-heading {
 
 /* drag and drop */
 .dmn-icon-drag {
-  color: #ccc;
+  color: transparent;
 }
 
-th .dmn-icon-drag {
-  float: left;
+.dmn-decision-table-container th .dmn-icon-drag {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.dmn-icon-drag.horizontal {
-  cursor: w-resize;
+.dmn-decision-table-container th:hover .dmn-icon-drag,
+.dmn-decision-table-container td:hover .dmn-icon-drag {
+  color: #999;
 }
 
+.dmn-icon-drag.horizontal,
 .dmn-icon-drag.vertical {
-  cursor: n-resize;
+
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 }
 
 .dmn-icon-drag:hover {

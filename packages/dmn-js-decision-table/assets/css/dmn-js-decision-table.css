@@ -395,59 +395,48 @@ table tr > .input-cell + .output-cell {
 /* end cell expression language */
 
 /* drag and drop */
-.dmn-decision-table-container th.dragover:before,
-.dmn-decision-table-container td.dragover:before {
+.dmn-decision-table-container .dragover:before {
   content: '';
   display: block;
   position: absolute;
-  background-color: #4285f4;
+  background-color: #666;
+  border-radius: 5px;
   z-index: 1;
   pointer-events: none;
 }
 
-.dmn-decision-table-container th.dragover.top:before,
-.dmn-decision-table-container td.dragover.top:before {
+.dmn-decision-table-container .dragover.top:before {
+  left: -6px;
+  right: -6px;
+  height: 5px;
+
   top: -3px;
-  left: 0;
-  right: 0;
-  height: 4px;
 }
 
-.dmn-decision-table-container th.dragover.right:before,
-.dmn-decision-table-container td.dragover.right:before {
-  top: 0;
+.dmn-decision-table-container .dragover.right:before {
+  top: -6px;
+  bottom: -6px;
+  width: 5px;
+
   right: -3px;
-  bottom: 0;
-  width: 4px;
 }
 
-.dmn-decision-table-container th.dragover.bottom:before,
-.dmn-decision-table-container td.dragover.bottom:before {
-  left: 0;
-  bottom: -2px;
-  right: 0;
-  height: 4px;
+.dmn-decision-table-container .dragover.bottom:before {
+  left: -6px;
+  right: -6px;
+  height: 5px;
+
+  bottom: -3px;
 }
 
-.dmn-decision-table-container th.dragover.left:before,
-.dmn-decision-table-container td.dragover.left:before {
-  top: 0;
-  bottom: 0;
-  left: -2px;
-  width: 4px;
+.dmn-decision-table-container .dragover.left:before {
+  top: -6px;
+  bottom: -6px;
+  width: 5px;
+
+  left: -3px;
 }
 
-.dmn-decision-table-container th.dragged,
-.dmn-decision-table-container td.dragged {
-  color: #ddd;
-}
-
-.dmn-decision-table-container.dragger {
-  position: absolute;
-  top: -10000px;
-}
-
-.dmn-decision-table-container.dragger th,
-.dmn-decision-table-container.dragger td {
-  background-color: #fff;
+.dmn-decision-table-container .dragged {
+  color: #999;
 }

@@ -90,7 +90,8 @@ export default class DecisionTableHead extends ComponentWithSlots {
               context: {
                 cellType: 'input-header',
                 input
-              }
+              },
+              key: input.id
             }, DefaultInputHeaderCell);
           })
         }
@@ -101,7 +102,8 @@ export default class DecisionTableHead extends ComponentWithSlots {
               context: {
                 cellType: 'output-header',
                 output
-              }
+              },
+              key: output.id
             }, DefaultOutputHeaderCell);
           })
         }
