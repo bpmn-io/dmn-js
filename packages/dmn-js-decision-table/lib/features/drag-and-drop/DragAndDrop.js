@@ -85,6 +85,26 @@ export default class DragAndDrop {
       return false;
     });
 
+    // clear previous UI
+    eventBus.on('dragAndDrop.dragLeave', (event) => {
+
+      const {
+        dragContext
+      } = event;
+
+      const {
+        targetEl
+      } = dragContext;
+
+      if (!targetEl) {
+        return;
+      }
+
+      const container = this._renderer.getContainer();
+
+      removeHighlight(container);
+    });
+
     // update UI
     eventBus.on('dragAndDrop.dragOver', (event) => {
 
@@ -95,6 +115,7 @@ export default class DragAndDrop {
 
       const {
         draggedElement,
+        lastPosition,
         targetEl
       } = dragContext;
 
@@ -104,57 +125,57 @@ export default class DragAndDrop {
         return false;
       }
 
+      let newPosition;
+
       if (draggedElement instanceof Row) {
-        const verticalPosition = getVerticalPosition(
+        newPosition = getVerticalPosition(
           originalEvent,
           targetEl
         );
-
-        if (dragContext._lastTargetEl !== targetEl
-          || dragContext._lastPosition !== verticalPosition) {
-
-          removeHighlight(container);
-
-          if (verticalPosition === TOP) {
-
-            // drop above
-            highlightRow(targetEl, container, 'top');
-          } else {
-
-            // drop below
-            highlightRow(targetEl, container, 'bottom');
-          }
-        }
-
-        dragContext._lastPosition = verticalPosition;
       }
 
       if (draggedElement instanceof Col) {
-        const horizontalPosition = getHorizontalPosition(
+        newPosition = getHorizontalPosition(
           originalEvent,
           targetEl
         );
-
-        if (dragContext._lastTargetEl !== targetEl
-          || dragContext._lastPosition !== horizontalPosition) {
-
-          removeHighlight(container);
-
-          if (horizontalPosition === LEFT) {
-
-            // drop left
-            highlightCol(targetEl, container, 'left');
-          } else {
-
-            // drop right
-            highlightCol(targetEl, container, 'right');
-          }
-        }
-
-        dragContext._lastPosition = horizontalPosition;
       }
 
-      dragContext._lastTargetEl = targetEl;
+      // nothing to do
+      if (lastPosition === newPosition) {
+        return true;
+      }
+
+      // remove old highlight
+      removeHighlight(container);
+
+      if (draggedElement instanceof Row) {
+
+        if (newPosition === TOP) {
+
+          // drop above
+          highlightRow(targetEl, container, 'top');
+        } else {
+
+          // drop below
+          highlightRow(targetEl, container, 'bottom');
+        }
+      }
+
+      if (draggedElement instanceof Col) {
+        if (newPosition === LEFT) {
+
+          // drop left
+          highlightCol(targetEl, container, 'left');
+        } else {
+
+          // drop right
+          highlightCol(targetEl, container, 'right');
+        }
+      }
+
+      // remember position
+      dragContext.lastPosition = newPosition;
 
       // allowed
       return true;
