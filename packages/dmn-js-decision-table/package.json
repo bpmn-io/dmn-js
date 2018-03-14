@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "2.0.0-alpha1",
+  "version": "2.0.0-alpha2",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
@@ -18,12 +18,12 @@
     "decision table"
   ],
   "devDependencies": {
-    "inferno-test-utils": "^4.0.0",
-    "dmn-font": "^0.4.1"
+    "dmn-font": "^0.4.1",
+    "inferno-test-utils": "^4.0.0"
   },
   "dependencies": {
     "diagram-js": "^0.28.2",
-    "dmn-js-shared": "^2.0.0-alpha1",
+    "dmn-js-shared": "^2.0.0-alpha2",
     "escape-html": "^1.0.3",
     "inferno": "^4.0.0",
     "min-dash": "^1.1.0",
