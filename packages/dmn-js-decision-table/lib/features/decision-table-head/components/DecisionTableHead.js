@@ -123,6 +123,7 @@ export default class DecisionTableHead extends ComponentWithSlots {
                 element: inputExpression
               },
               className: 'input-cell',
+              key: input.id
             }, DefaultTypeRefCell);
           })
         }
@@ -136,6 +137,7 @@ export default class DecisionTableHead extends ComponentWithSlots {
                 element: output
               },
               className: 'output-cell',
+              key: output.id
             }, DefaultTypeRefCell);
           })
         }
