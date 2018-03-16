@@ -32,6 +32,12 @@ export default class AddOutput extends Component {
     return this._sheet.getRoot();
   }
 
+  handleClick = (e) => {
+    e.stopPropagation();
+
+    this.add();
+  }
+
   add = () => {
     this._eventBus.fire('addOutput');
   }
@@ -47,7 +53,7 @@ export default class AddOutput extends Component {
     return (
       <th
         className="output-cell outputs-label add-output actionable header"
-        onClick={ this.add }
+        onClick={ this.handleClick }
         colspan={ colspan }
       >
         Output <span className="add-output dmn-icon-plus action-icon"></span>

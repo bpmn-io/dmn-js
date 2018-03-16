@@ -32,6 +32,12 @@ export default class AddInput extends Component {
     return this._sheet.getRoot();
   }
 
+  handleClick = (e) => {
+    e.stopPropagation();
+
+    this.add();
+  }
+
   add = () => {
     this._eventBus.fire('addInput');
   }
@@ -47,7 +53,7 @@ export default class AddInput extends Component {
     return (
       <th
         className="input-cell inputs-label actionable add-input header"
-        onClick={ this.add }
+        onClick={ this.handleClick }
         colspan={ colspan }
       >
         Input <span className="add-input dmn-icon-plus action-icon"></span>

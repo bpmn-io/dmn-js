@@ -12,6 +12,12 @@ export default class AddRuleFootComponent extends Component {
     this._eventBus = this.context.injector.get('eventBus');
   }
 
+  handleClick = (e) => {
+    e.stopPropagation();
+
+    this.addRule();
+  }
+
   addRule() {
     this._eventBus.fire('addRule');
   }
@@ -43,7 +49,9 @@ export default class AddRuleFootComponent extends Component {
     }
 
     return (
-      <tfoot className="actionable add-rule" onClick={ this.addRule }>
+      <tfoot
+        className="actionable add-rule"
+        onClick={ this.handleClick }>
         <tr>
           { cells }
         </tr>

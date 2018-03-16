@@ -39,6 +39,22 @@ export default class List extends Component {
     });
   }
 
+  getRemoveClickHandler = (item) => {
+    return (e) => {
+      e.stopPropagation();
+
+      this.removeItem(item);
+    };
+  }
+
+  getToggleClickHandler = (item) => {
+    return (e) => {
+      e.stopPropagation();
+
+      this.toggleItem(item);
+    };
+  }
+
   removeItem = (item) => {
     const { onChange } = this.props;
 
@@ -118,7 +134,7 @@ export default class List extends Component {
                                 type={ type }
                                 checked={ item.isChecked }
                                 className="item-toggle cursor-pointer"
-                                onClick={ () => this.toggleItem(item) } />
+                                onClick={ this.getToggleClickHandler(item) } />
                           }
                           &nbsp;
                           { item.value }
@@ -126,7 +142,7 @@ export default class List extends Component {
                             item.isRemovable
                               && (<span
                                 title="Remove item"
-                                onMouseup={ () => this.removeItem(item) }
+                                onClick={ this.getRemoveClickHandler(item) }
                                 className={ REMOVE_BTN_CLS }>
                               </span>)
                           }

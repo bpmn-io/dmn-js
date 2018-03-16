@@ -128,6 +128,12 @@ export default class AllowedValuesEditing extends Component {
     }
   }
 
+  handleRemovePredifinedValuesClick = (e) => {
+    e.stopPropagation();
+
+    this.removePredefinedValues();
+  }
+
   removePredefinedValues = () => {
     this.setPredefinedValues(null);
   }
@@ -167,7 +173,7 @@ export default class AllowedValuesEditing extends Component {
             !isNull(values)
               && <p class="dms-hint">
                 <a href="#" className="del-values"
-                  onMouseUp={ this.removePredefinedValues }>
+                  onClick={ this.handleRemovePredifinedValuesClick }>
                   Clear predefined values.
                 </a>
               </p>

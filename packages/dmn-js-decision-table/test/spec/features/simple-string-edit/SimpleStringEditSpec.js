@@ -119,7 +119,7 @@ describe('simple string edit', function() {
       // when
       const remove = domQuery('.remove', simpleStringEdit);
 
-      triggerMouseEvent(remove, 'mouseup');
+      triggerMouseEvent(remove, 'click');
 
       // then
       expect(inputEntry1.businessObject.text).to.equal('"bronze"');

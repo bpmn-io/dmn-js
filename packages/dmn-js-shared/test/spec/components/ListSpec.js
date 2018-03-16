@@ -151,7 +151,7 @@ describe('components/List', function() {
       const checkbox = scryRenderedDOMElementsWithClass(renderedTree, 'remove')[0];
 
       // when
-      triggerMouseEvent(checkbox, 'mouseup');
+      triggerMouseEvent(checkbox, 'click');
 
       // then
       expect(spy).to.have.been.calledWith([{
@@ -245,7 +245,7 @@ describe('components/List', function() {
       const checkbox = scryRenderedDOMElementsWithClass(renderedTree, 'remove')[0];
 
       // when
-      triggerMouseEvent(checkbox, 'mouseup');
+      triggerMouseEvent(checkbox, 'click');
 
       // then
       expect(spy).to.have.been.calledWith([{
@@ -304,7 +304,7 @@ describe('components/List', function() {
       const checkbox = scryRenderedDOMElementsWithClass(renderedTree, 'remove')[0];
 
       // when
-      triggerMouseEvent(checkbox, 'mouseup');
+      triggerMouseEvent(checkbox, 'click');
 
       // then
       expect(spy).to.have.been.calledWith([{

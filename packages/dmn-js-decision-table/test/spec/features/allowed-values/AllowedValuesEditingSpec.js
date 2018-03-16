@@ -133,7 +133,7 @@ describe('decision-table-head/allowed-values', function() {
       // when
       const value = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(value, 'mouseup');
+      triggerMouseEvent(value, 'click');
 
       // then
       expectValuesRendered(allowedValuesEdit, [
@@ -151,15 +151,15 @@ describe('decision-table-head/allowed-values', function() {
       // when
       let remove = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(remove, 'mouseup');
+      triggerMouseEvent(remove, 'click');
 
       remove = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(remove, 'mouseup');
+      triggerMouseEvent(remove, 'click');
 
       remove = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(remove, 'mouseup');
+      triggerMouseEvent(remove, 'click');
 
       // then
       expect(domQuery('.placeholder', allowedValuesEdit)).to.exist;
@@ -172,7 +172,7 @@ describe('decision-table-head/allowed-values', function() {
       const button = domQuery('.del-values', allowedValuesEdit);
 
       // when
-      triggerMouseEvent(button, 'mouseup');
+      triggerMouseEvent(button, 'click');
 
       // then
       expect(domQuery('.placeholder', allowedValuesEdit)).to.not.exist;
@@ -244,7 +244,7 @@ describe('decision-table-head/allowed-values', function() {
         const button = domQuery('.del-values', allowedValuesEdit);
 
         // when
-        triggerMouseEvent(button, 'mouseup');
+        triggerMouseEvent(button, 'click');
 
         // then
         expect(elementRegistry.get('input1').businessObject.inputValues).not.to.exist;
@@ -330,7 +330,7 @@ describe('decision-table-head/allowed-values', function() {
       // when
       const value = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(value, 'mouseup');
+      triggerMouseEvent(value, 'click');
 
       // then
       expectValuesRendered(allowedValuesEdit, [
@@ -347,11 +347,11 @@ describe('decision-table-head/allowed-values', function() {
       // when
       let remove = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(remove, 'mouseup');
+      triggerMouseEvent(remove, 'click');
 
       remove = domQuery('.remove', allowedValuesEdit);
 
-      triggerMouseEvent(remove, 'mouseup');
+      triggerMouseEvent(remove, 'click');
 
       // then
       expect(domQuery('.placeholder', allowedValuesEdit)).to.exist;
@@ -364,7 +364,7 @@ describe('decision-table-head/allowed-values', function() {
       const button = domQuery('.del-values', allowedValuesEdit);
 
       // when
-      triggerMouseEvent(button, 'mouseup');
+      triggerMouseEvent(button, 'click');
 
       // then
       expect(domQuery('.placeholder', allowedValuesEdit)).to.not.exist;
@@ -417,7 +417,7 @@ describe('decision-table-head/allowed-values', function() {
         const button = domQuery('.del-values', allowedValuesEdit);
 
         // when
-        triggerMouseEvent(button, 'mouseup');
+        triggerMouseEvent(button, 'click');
 
         // then
         expect(elementRegistry.get('output1').businessObject.outputValues).not.to.exist;
