@@ -16,6 +16,7 @@ import tablePropertiesEditorModule from './features/decision-table-properties/ed
 import editorActionsModule from 'table-js/lib/features/editor-actions';
 import hitPolicyEditorModule from './features/hit-policy/editor';
 import interactionEventsModule from 'table-js/lib/features/interaction-events';
+import keyboardModule from './features/keyboard';
 import modelingModule from './features/modeling';
 import decisionRulesEditorModule from './features/decision-rules/editor';
 import selectionModule from 'table-js/lib/features/selection';
@@ -48,6 +49,7 @@ export default class Editor extends Viewer {
       dragAndDropModule,
       descriptionModule,
       expressionLanguageModule,
+      keyboardModule,
       tableHeadEditorModule,
       tablePropertiesEditorModule,
       editorActionsModule,

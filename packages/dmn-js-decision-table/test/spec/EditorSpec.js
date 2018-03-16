@@ -14,7 +14,12 @@ describe('DecisionTable', function() {
 
   function createDecisionTableEditor(xml, done) {
     const dmnDecisionTableEditor = new DmnDecisionTableEditor({
-      container: testContainer
+      container: testContainer,
+      decisionTable: {
+        keyboard: {
+          bindTo: document
+        }
+      }
     });
 
     dmnDecisionTableEditor.importXML(xml, (err, warnings) => {
