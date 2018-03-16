@@ -133,7 +133,12 @@ export default class ContentEditable extends Component {
   onKeydown = (event) => {
     // enter
     if (event.which === 13) {
+
       event.preventDefault();
+
+      if (this.props.ctrlForNewline && !isCmd(event)) {
+        return;
+      }
 
       insertLineBreak();
 
@@ -239,4 +244,8 @@ function isIE() {
     // IE 11
     ua.indexOf('Trident/') > 0
   );
+}
+
+function isCmd(event) {
+  return event.metaKey || event.ctrlKey;
 }
