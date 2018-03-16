@@ -151,7 +151,7 @@ function getPosition(container, bounds) {
 }
 
 function getDescription(element) {
-  const { businessObject } = element;
-
-  return businessObject.description;
+  return element
+    && element.businessObject
+    && element.businessObject.description;
 }

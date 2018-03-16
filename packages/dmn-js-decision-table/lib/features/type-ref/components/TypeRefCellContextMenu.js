@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is, isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 const TYPES = [
   'string',
@@ -27,17 +27,25 @@ export default class TypeRefCellContextMenu extends Component {
 
     const value = event.target.value;
 
-    const newProperties = (
-      is(element, 'dmn:InputClause') ? {
+    const actualElement = is(element, 'dmn:LiteralExpression')
+      ? element.$parent
+      : element;
+
+    let newProperties;
+
+    if (isInput(actualElement)) {
+      newProperties = {
         inputExpression: {
           typeRef: value
         }
-      } : {
+      };
+    } else if (isOutput(actualElement)) {
+      newProperties = {
         typeRef: value
-      }
-    );
+      };
+    }
 
-    this._modeling.updateProperties(element, newProperties);
+    this._modeling.updateProperties(actualElement, newProperties);
   }
 
   render() {

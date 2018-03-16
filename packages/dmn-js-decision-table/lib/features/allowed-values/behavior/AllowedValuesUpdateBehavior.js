@@ -1,6 +1,6 @@
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is, isInput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 /**
  * Makes sure allowed values are removed if type is set to
@@ -17,7 +17,11 @@ export default class AllowedValuesUpdateBehavior extends CommandInterceptor {
         properties
       } = event.context;
 
-      if (properties.typeRef && properties.typeRef !== 'string') {
+      const actualProperties = isInput(element) ? properties.inputExpression : properties;
+
+      if (actualProperties
+        && actualProperties.typeRef
+        && actualProperties.typeRef !== 'string') {
 
         const target = (
           is(element, 'dmn:LiteralExpression') ?

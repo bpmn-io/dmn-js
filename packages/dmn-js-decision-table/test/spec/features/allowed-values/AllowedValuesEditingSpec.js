@@ -216,6 +216,24 @@ describe('decision-table-head/allowed-values', function() {
 
         // then
         expect(elementRegistry.get('input1').businessObject.inputValues).not.to.exist;
+
+        expect(domQuery('.allowed-values-edit', testContainer)).to.not.exist;
+      }));
+
+
+    it('should show allowed values editor when type is changed to string',
+      inject(function(elementRegistry) {
+
+        // given
+        const select = domQuery('.type-ref-edit-select', testContainer);
+
+        triggerChangeEvent(select, 'boolean');
+
+        // when
+        triggerChangeEvent(select, 'string');
+
+        // then
+        expect(domQuery('.allowed-values-edit', testContainer)).to.exist;
       }));
 
 
