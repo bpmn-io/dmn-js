@@ -33,6 +33,13 @@ insertCSS('tabs.css', `
     border: solid 1px #ccc;
   }
 
+  .tjs-container,
+  .viewer-container {
+    display: table;
+    width: 100%;
+    padding: 10px;
+  }
+
   .editor-tabs .tab {
     display: block;
     white-space: nowrap;

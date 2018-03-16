@@ -18,5 +18,6 @@ TestHelper.insertCSS('diagram-js.css',
 
 TestHelper.insertCSS('dmn-js-testing.css',
   '.test-container .dmn-js-parent { height: 576px; }' +
-  '.dmn-decision-table-container { min-height: 400px; overflow: visible }'
+  '.dmn-decision-table-container { min-height: 400px; overflow: scroll }' +
+  '.tjs-container { display: table }'
 );

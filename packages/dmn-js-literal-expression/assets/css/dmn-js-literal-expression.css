@@ -142,9 +142,8 @@
 
 /* view drd */
 .dmn-literal-expression-container .view-drd {
-  position: absolute;
-  top: 10px;
-  right: 60px;
+  float: right;
+  margin-right: 10px;
 }
 
 .dmn-literal-expression-container .view-drd .view-drd-button {
@@ -165,9 +164,7 @@
 
 /* powered by */
 .dmn-literal-expression-container .powered-by-logo {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  float: right;
   width: 38px;
   z-index: 10;
   cursor: pointer;

@@ -3,22 +3,16 @@ import { Component } from 'inferno';
 
 export default class ViewDrdComponent extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
-    this.onClick = this.onClick.bind(this);
+    const { injector } = context;
+
+    this._eventBus = injector.get('eventBus');
   }
 
-  onClick() {
+  onClick = () => {
     this._eventBus.fire('showDrd');
-  }
-
-  componentWillMount() {
-    this._eventBus = this.context.injector.get('eventBus');
-
-    const renderer = this.context.injector.get('renderer');
-
-    this.container = renderer.getContainer();
   }
 
   render() {

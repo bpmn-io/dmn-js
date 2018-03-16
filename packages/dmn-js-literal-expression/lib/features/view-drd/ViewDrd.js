@@ -1,6 +1,6 @@
 import ViewDrdComponent from './components/ViewDrdComponent';
 
-const VERY_HIGH_PRIORITY = 2000;
+const HIGH_PRIORITY = 1500;
 
 
 export default class ViewDrd {
@@ -9,7 +9,7 @@ export default class ViewDrd {
     this._injector = injector;
     this._viewer = viewer;
 
-    components.onGetComponent('viewer', VERY_HIGH_PRIORITY, () => {
+    components.onGetComponent('viewer', HIGH_PRIORITY, () => {
       if (this.canViewDrd()) {
         return ViewDrdComponent;
       }

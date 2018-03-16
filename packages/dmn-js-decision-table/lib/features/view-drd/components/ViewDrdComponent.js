@@ -1,43 +1,18 @@
 import { Component } from 'inferno';
 
-import { query as domQuery } from 'min-dom';
-
 
 export default class ViewDrdComponent extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
-    this.onClick = this.onClick.bind(this);
-    this.reposition = this.reposition.bind(this);
+    const { injector } = context;
+
+    this._eventBus = injector.get('eventBus');
   }
 
-  onClick() {
+  onClick = () => {
     this._eventBus.fire('showDrd');
-  }
-
-  reposition() {
-    if (!this.node) {
-      return;
-    }
-
-    const containerWidth = this.container.getBoundingClientRect().width;
-    const tableWidth =
-      domQuery('.tjs-table', this.container)
-        .getBoundingClientRect()
-        .width;
-
-    this.node.style.right = (containerWidth - tableWidth + 40) + 'px';
-  }
-
-  componentWillMount() {
-    this._eventBus = this.context.injector.get('eventBus');
-
-    const renderer = this.context.injector.get('renderer');
-
-    this._eventBus.on('elements.changed', this.reposition);
-
-    this.container = renderer.getContainer();
   }
 
   render() {

@@ -6,22 +6,16 @@ const logo = 'iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAMAAADypuvZAAAAGXRFWHRTb2Z0d2FyZQ
 
 export default class PoweredByLogoComponent extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
-    this.onClick = this.onClick.bind(this);
+    const { injector } = context;
+
+    this._eventBus = injector.get('eventBus');
   }
 
-  onClick() {
+  onClick = () => {
     this._eventBus.fire('poweredBy.show');
-  }
-
-  componentWillMount() {
-    this._eventBus = this.context.injector.get('eventBus');
-
-    const renderer = this.context.injector.get('renderer');
-
-    this.container = renderer.getContainer();
   }
 
   render() {
