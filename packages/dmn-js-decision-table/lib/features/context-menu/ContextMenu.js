@@ -2,6 +2,8 @@
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { Cell } from 'table-js/lib/model';
+
 export default class ContextMenu {
   constructor(
       components,
@@ -29,8 +31,10 @@ export default class ContextMenu {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
         const entries = this._getEntries(context);
 
-        const additionalCellEntries =
-          components.getComponents('context-menu-cell-additional', context);
+        const element = this._elementRegistry.get(context.id);
+
+        const additionalCellEntries = isCell(element)
+          && components.getComponents('context-menu-cell-additional', context);
 
         if (additionalCellEntries && additionalCellEntries.length) {
           const cellEntriesGroup = (
@@ -312,3 +316,9 @@ ContextMenu.$inject = [
   'sheet',
   'rules'
 ];
+
+// helpers ///////////
+
+function isCell(element) {
+  return element instanceof Cell;
+}

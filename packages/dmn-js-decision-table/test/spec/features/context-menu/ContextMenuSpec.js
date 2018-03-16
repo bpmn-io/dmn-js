@@ -17,6 +17,7 @@ import simpleXML from '../../simple.dmn';
 import ContextMenuModule from 'lib/features/context-menu';
 import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'lib/features/decision-table-head/editor';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'lib/features/modeling';
 import DecisionRulesModule from 'lib/features/decision-rules';
@@ -28,6 +29,8 @@ describe('context menu', function() {
     modules: [
       ContextMenuModule,
       CoreModule,
+      DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
       DecisionTableHeadModule,
       InteractionEventsModule,
       ModelingModule,
@@ -306,7 +309,7 @@ describe('context menu', function() {
   });
 
 
-  describe('input', function() {
+  describe('input - cell', function() {
 
     it('should open on right click', function() {
 
@@ -577,7 +580,51 @@ describe('context menu', function() {
   });
 
 
-  describe('output', function() {
+  describe('input - col', function() {
+
+    it('should open on right click', function() {
+
+      // given
+      const cell = domQuery('[data-col-id="input1"]', testContainer);
+
+      // when
+      triggerMouseEvent(cell, 'contextmenu');
+
+      // then
+      expect(domQuery('.context-menu', testContainer)).to.exist;
+    });
+
+
+    describe('entries', function() {
+
+      let cell;
+
+      beforeEach(function() {
+        cell = domQuery('[data-col-id="input1"]', testContainer);
+
+        triggerMouseEvent(cell, 'contextmenu');
+      });
+
+
+      it('should NOT contain cell entries', inject(function(components) {
+
+        // given
+        components.onGetComponent('context-menu-cell-additional', () => {
+          return <div>FOO</div>;
+        });
+
+        const contextMenu = domQuery('.context-menu', testContainer);
+
+        // then
+        expect(domQuery('.context-menu-group-cell', contextMenu)).to.not.exist;
+      }));
+
+    });
+
+  });
+
+
+  describe('output - cell', function() {
 
     it('should open on right click', function() {
 
@@ -845,6 +892,50 @@ describe('context menu', function() {
         });
 
       });
+
+    });
+
+  });
+
+
+  describe('output - col', function() {
+
+    it('should open on right click', function() {
+
+      // given
+      const cell = domQuery('[data-col-id="output1"]', testContainer);
+
+      // when
+      triggerMouseEvent(cell, 'contextmenu');
+
+      // then
+      expect(domQuery('.context-menu', testContainer)).to.exist;
+    });
+
+
+    describe('entries', function() {
+
+      let cell;
+
+      beforeEach(function() {
+        cell = domQuery('[data-col-id="output1"]', testContainer);
+
+        triggerMouseEvent(cell, 'contextmenu');
+      });
+
+
+      it('should NOT contain cell entries', inject(function(components) {
+
+        // given
+        components.onGetComponent('context-menu-cell-additional', () => {
+          return <div>FOO</div>;
+        });
+
+        const contextMenu = domQuery('.context-menu', testContainer);
+
+        // then
+        expect(domQuery('.context-menu-group-cell', contextMenu)).to.not.exist;
+      }));
 
     });
 
