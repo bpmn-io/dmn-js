@@ -1,7 +1,7 @@
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class DecisionTableEditorActions {
-  constructor(editorActions, modeling, selection, sheet) {
+  constructor(editorActions, modeling, selection, cellSelection, sheet) {
     const actions = {
       addRule() {
         return modeling.addRow({ type: 'dmn:DecisionRule' });
@@ -217,6 +217,12 @@ export default class DecisionTableEditorActions {
         } else if (is(clause, 'dmn:OutputClause')) {
           return actions.removeOutput({ output: clause });
         }
+      },
+      selectCellAbove() {
+        cellSelection.selectCell('above');
+      },
+      selectCellBelow() {
+        cellSelection.selectCell('below');
       }
     };
 
@@ -228,5 +234,6 @@ DecisionTableEditorActions.$inject = [
   'editorActions',
   'modeling',
   'selection',
+  'cellSelection',
   'sheet'
 ];

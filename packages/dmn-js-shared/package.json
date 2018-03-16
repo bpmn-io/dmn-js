@@ -18,7 +18,7 @@
     "ids": "^0.2.0",
     "inferno": "^4.0.0",
     "min-dash": "^1.1.0",
-    "selection-ranges": "^1.2.2",
+    "selection-ranges": "^1.2.3",
     "selection-update": "^0.1.2"
   },
   "browserify": {

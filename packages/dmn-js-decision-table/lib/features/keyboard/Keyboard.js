@@ -158,6 +158,21 @@ export default class Keyboard {
     listeners.push(undo);
     listeners.push(redo);
 
+
+    function selectCell(key, modifiers) {
+
+      if (key !== 13 || isCmd(modifiers)) {
+        return;
+      }
+
+      const cmd = isShift(modifiers) ? 'selectCellAbove' : 'selectCellBelow';
+
+      editorActions.trigger(cmd);
+    }
+
+    listeners.push(selectCell);
+
+
     // not implemented yet
     /*
 
