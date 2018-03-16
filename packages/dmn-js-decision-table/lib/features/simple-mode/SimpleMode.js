@@ -20,7 +20,11 @@ export default class SimpleMode {
         height
       }, {
         contextMenuType: 'simple-mode-edit',
-        element
+        element,
+        offset: {
+          x: 4,
+          y: 4
+        }
       });
     });
   }

@@ -315,6 +315,7 @@ table tr > .input-cell + .output-cell {
   font-size: 14px;
   z-index: 2;
   opacity: .8;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .simple-mode-button:hover {

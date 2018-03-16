@@ -22,14 +22,26 @@ export default class Description {
 
       contextMenu.open(position, {
         contextMenuType: 'cell-description',
-        id
+        id,
+        offset: {
+          x: 4,
+          y: 4
+        }
       });
     });
 
     components.onGetComponent('context-menu', (context = {}) => {
       if (context.contextMenuType
         && context.contextMenuType === 'cell-description') {
-        return DescriptionEditor;
+
+        const element = elementRegistry.get(context.id);
+
+        const description = getDescription(element);
+
+        if (isString(description)) {
+          return DescriptionEditor;
+        }
+
       }
     });
 
@@ -99,7 +111,11 @@ export default class Description {
     this._contextMenu.open(position, {
       contextMenuType: 'cell-description',
       id: cell.id,
-      autoFocus: true
+      autoFocus: true,
+      offset: {
+        x: 4,
+        y: 4
+      }
     });
   }
 
@@ -132,4 +148,10 @@ function getPosition(container, bounds) {
     width: width + (2 * OFFSET_X),
     height
   };
+}
+
+function getDescription(element) {
+  const { businessObject } = element;
+
+  return businessObject.description;
 }
