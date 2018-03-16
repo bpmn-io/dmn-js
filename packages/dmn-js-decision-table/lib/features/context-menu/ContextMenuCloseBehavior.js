@@ -1,10 +1,16 @@
+const COMMANDS = [
+  'row.add',
+  'row.remove',
+  'col.add',
+  'col.remove'
+];
+
 export default class ContextMenuCloseBehavior {
   constructor(contextMenu, eventBus) {
     eventBus.on('commandStack.executed', ({ command }) => {
 
-      // close on every modeling operation except
-      // updating properties (e.g. cell description)
-      if (command !== 'updateProperties') {
+      // close on certain modeling operations
+      if (COMMANDS.indexOf(command) !== -1) {
         contextMenu.close();
       }
 

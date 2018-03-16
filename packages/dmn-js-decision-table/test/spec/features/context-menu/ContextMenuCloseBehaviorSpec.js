@@ -48,7 +48,7 @@ describe('context menu close behavior', function() {
 
     // when
     eventBus.fire('commandStack.executed', {
-      command: 'foo'
+      command: 'row.add'
     });
 
     // then
@@ -65,7 +65,7 @@ describe('context menu close behavior', function() {
 
     // when
     eventBus.fire('commandStack.executed', {
-      command: 'updateProperties'
+      command: 'foo'
     });
 
     // then
