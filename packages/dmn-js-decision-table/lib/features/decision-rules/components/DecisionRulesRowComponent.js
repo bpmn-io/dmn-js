@@ -1,9 +1,21 @@
+import { Component } from 'inferno';
+
+import {
+  mixin
+} from 'table-js/lib/components';
+
 import {
   ComponentWithSlots
-} from 'dmn-js-shared/lib/components/slots';
+} from 'dmn-js-shared/lib/components/mixins';
 
 
-export default class DecisionRulesRowComponent extends ComponentWithSlots {
+export default class DecisionRulesRowComponent extends Component {
+
+  constructor(props, context) {
+    super(props, context);
+
+    mixin(this, ComponentWithSlots);
+  }
 
   render() {
 

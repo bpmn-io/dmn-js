@@ -3,19 +3,23 @@ import {
   getBusinessObject
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { Component } from 'inferno';
+
 import {
-  Component
-} from 'inferno';
+  mixin
+} from 'table-js/lib/components';
 
 import {
   ComponentWithSlots
-} from 'dmn-js-shared/lib/components/slots';
+} from 'dmn-js-shared/lib/components/mixins';
 
 
-export default class DecisionTableHead extends ComponentWithSlots {
+export default class DecisionTableHead extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    mixin(this, ComponentWithSlots);
 
     this._sheet = context.injector.get('sheet');
 
