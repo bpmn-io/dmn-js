@@ -6,6 +6,8 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
+import { Cell } from 'table-js/lib/components';
+
 const EXPRESSION_LANGUAGE_LABELS = {
   feel: 'FEEL',
   juel: 'JUEL',
@@ -81,8 +83,10 @@ export default class DecisionRulesEditorCellComponent extends Component {
   render() {
     const {
       cell,
+      rowIndex,
       row,
-      col
+      col,
+      colIndex
     } = this.props;
 
     const { isFocussed } = this.state;
@@ -92,20 +96,23 @@ export default class DecisionRulesEditorCellComponent extends Component {
     const businessObject = cell.businessObject;
 
     return (
-      <td
-        data-element-id={ cell.id }
+      <Cell
+        className={ className }
+        elementId={ cell.id }
+        coords={ `${rowIndex}:${colIndex}` }
         data-row-id={ row.id }
         data-col-id={ col.id }
-        className={ className }>
+      >
         <TableCellEditor
           className="cell-editor"
+          ctrlForNewline={ true }
           onFocus={ this.onFocus }
           onBlur={ this.onBlur }
           isFocussed={ isFocussed }
           onChange={ this.changeCellValue }
           value={ businessObject.text }
           businessObject={ businessObject } />
-      </td>
+      </Cell>
     );
   }
 }

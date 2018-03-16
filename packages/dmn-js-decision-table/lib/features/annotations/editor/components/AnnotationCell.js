@@ -2,75 +2,87 @@ import { Component } from 'inferno';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
+import {
+  Cell,
+  inject
+} from 'table-js/lib/components';
 
-export default class AnnotationCell extends Component {
+
+export default class EditableAnnotationCell extends Component {
 
   constructor(props, context) {
     super(props, context);
 
-    this.setAnnotationValue = this.setAnnotationValue.bind(this);
-
-    this.onElementsChanged = this.onElementsChanged.bind(this);
+    inject(this);
   }
-
 
   componentWillMount() {
     const { row } = this.props;
-    const { changeSupport, injector } = this.context;
 
-    this._modeling = injector.get('modeling');
-
-    changeSupport.onElementsChanged(row.id, this.onElementsChanged);
+    this.changeSupport.onElementsChanged(row.id, this.onElementsChanged);
   }
-
 
   componentWillUnmount() {
     const { row } = this.props;
-    const { changeSupport } = this.context;
 
-    changeSupport.offElementsChanged(row.id, this.onElementsChanged);
+    this.changeSupport.offElementsChanged(row.id, this.onElementsChanged);
   }
 
+  onElementsChanged = () => {
+    this.forceUpdate();
+  }
 
-  setAnnotationValue(text) {
+  setAnnotationValue = (text) => {
     const { row } = this.props;
 
-    this._modeling.editAnnotation(row.businessObject, text);
-  }
-
-
-  onElementsChanged() {
-    this.forceUpdate();
+    this.modeling.editAnnotation(row.businessObject, text);
   }
 
 
   render() {
-    const { row } = this.props;
-    const { businessObject } = row;
+    const {
+      row,
+      rowIndex
+    } = this.props;
+    const {
+      description,
+      id
+    } = row.businessObject;
 
     return (
-      <EditableAnnotationCell
-        row={ row }
+
+      <Cell
         className="annotation"
         onChange={ this.setAnnotationValue }
-        value={ businessObject.description } />
+        coords={ `${rowIndex}:annotation` }
+        value={ description }
+        elementId={ id + '__annotation' }
+        data-row-id={ row.id }>
+
+        <AnnotationEditor
+          ctrlForNewline={ true }
+          className="annotation-editor"
+          onChange={ this.setAnnotationValue }
+          value={ description } />
+      </Cell>
     );
   }
 
 }
 
+EditableAnnotationCell.$inject = [
+  'changeSupport',
+  'modeling'
+];
 
-class EditableAnnotationCell extends EditableComponent {
+
+class AnnotationEditor extends EditableComponent {
 
   render() {
-    const { row } = this.props;
-
     return (
-      <td
-        data-row-id={ row.id }
-        className={ this.getClassName() }>
+      <div className={ this.getClassName() }>
         { this.getEditor() }
-      </td>
+      </div>
     );
   }
 }

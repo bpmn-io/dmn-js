@@ -18,9 +18,7 @@ export default class DecisionTablePropertiesComponent extends Component {
       return null;
     }
 
-    var businessObject = root.businessObject;
-
-    const { id, name } = businessObject.$parent;
+    const { id, name } = root.businessObject.$parent;
 
     return (
       <header className="decision-table-properties">

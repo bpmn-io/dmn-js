@@ -130,14 +130,13 @@ table tr > .input-cell + .output-cell {
 /* selection styles */
 
 .dmn-decision-table-container th,
-.dmn-decision-table-container td {
+.dmn-decision-table-container td,
+.dmn-decision-table-container h3,
+.dmn-decision-table-container h5 {
   position: relative;
 }
 
-.dmn-decision-table-container th.selected:before,
-.dmn-decision-table-container td.selected:before,
-.dmn-decision-table-container th.focussed:before,
-.dmn-decision-table-container td.focussed:before {
+.dmn-decision-table-container .selected:before {
   content: '';
   display: block;
   position: absolute;
@@ -148,6 +147,10 @@ table tr > .input-cell + .output-cell {
   border: solid 2px #4285f4;
   z-index: 1;
   pointer-events: none;
+}
+
+.dmn-decision-table-container th.selected:not(.focussed) {
+  background: #e9f1ff;
 }
 
 /* end selection styles */
@@ -175,7 +178,8 @@ table tr > .input-cell + .output-cell {
 
 /* content editable styles */
 
-.dmn-decision-table-container .content-editable {
+.dmn-decision-table-container [contenteditable],
+.dmn-decision-table-container [tabindex] {
   outline: none;
 }
 

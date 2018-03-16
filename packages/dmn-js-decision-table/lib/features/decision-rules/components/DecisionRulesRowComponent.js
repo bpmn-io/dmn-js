@@ -24,8 +24,8 @@ export default class DecisionRulesRowComponent extends ComponentWithSlots {
             type: 'cell',
             context: {
               cellType: 'before-rule-cells',
-              rowIndex,
-              row
+              row,
+              rowIndex
             }
           })
         }
@@ -50,7 +50,8 @@ export default class DecisionRulesRowComponent extends ComponentWithSlots {
             type: 'cell',
             context: {
               cellType: 'after-rule-cells',
-              row
+              row,
+              rowIndex
             }
           })
         }

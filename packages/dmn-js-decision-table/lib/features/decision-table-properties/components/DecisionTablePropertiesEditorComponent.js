@@ -4,11 +4,20 @@ import { validateId } from 'dmn-js-shared/lib/util/IdsUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
+import {
+  inject,
+  mixin,
+  classNames,
+  SelectionAware
+} from 'table-js/lib/components';
+
 
 export default class DecisionTablePropertiesComponent extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    inject(this);
   }
 
   componentWillMount() {
@@ -16,8 +25,8 @@ export default class DecisionTablePropertiesComponent extends Component {
       injector
     } = this.context;
 
-    this._sheet = injector.get('sheet');
-    this._modeling = injector.get('modeling');
+    this.sheet = injector.get('sheet');
+    this.modeling = injector.get('modeling');
 
     this.setupChangeListeners({ bind: this.getBusinessObject().id });
   }
@@ -30,21 +39,17 @@ export default class DecisionTablePropertiesComponent extends Component {
 
   setupChangeListeners({ bind, unbind }) {
 
-    const {
-      changeSupport
-    } = this.context;
-
     if (typeof unbind === 'string') {
-      changeSupport.offElementsChanged(unbind, this.onElementsChanged);
+      this.changeSupport.offElementsChanged(unbind, this.onElementsChanged);
     }
 
     if (typeof bind === 'string') {
-      changeSupport.onElementsChanged(bind, this.onElementsChanged);
+      this.changeSupport.onElementsChanged(bind, this.onElementsChanged);
     }
   }
 
   getBusinessObject() {
-    return this._sheet.getRoot().businessObject.$parent;
+    return this.sheet.getRoot().businessObject.$parent;
   }
 
   onElementsChanged = () => {
@@ -52,7 +57,7 @@ export default class DecisionTablePropertiesComponent extends Component {
   }
 
   setDecisionTableName = (name) => {
-    this._modeling.editDecisionTableName(name);
+    this.modeling.editDecisionTableName(name);
   }
 
   setDecisionTableId = (id) => {
@@ -68,7 +73,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     // re-bind change listeners from oldId to new id
     this.setupChangeListeners({ bind: id, unbind: oldId });
 
-    this._modeling.editDecisionTableId(id);
+    this.modeling.editDecisionTableId(id);
   }
 
   validateId = (id) => {
@@ -86,24 +91,43 @@ export default class DecisionTablePropertiesComponent extends Component {
         <DecisionTableName
           className="decision-table-name"
           value={ name }
-          onChange={ this.setDecisionTableName } />
+          onChange={ this.setDecisionTableName }
+          elementId={ 'decisionTable-name' } />
         <DecisionTableId
           className="decision-table-id"
           value={ id }
           validate={ this.validateId }
-          onChange={ this.setDecisionTableId } />
+          onChange={ this.setDecisionTableId }
+          elementId={ 'decisionTable-id' } />
       </header>
     );
   }
 }
 
+DecisionTablePropertiesComponent.$inject = [
+  'sheet',
+  'modeling',
+  'changeSupport'
+];
+
 
 class DecisionTableName extends EditableComponent {
 
+  constructor(props, context) {
+    super(props, context);
+
+    mixin(this, SelectionAware);
+  }
+
   render() {
 
+    const className = classNames(
+      this.getSelectionClasses(),
+      this.getClassName()
+    );
+
     return (
-      <h3 className={ this.getClassName() }>
+      <h3 className={ className } data-element-id={ this.props.elementId }>
         { this.getEditor() }
       </h3>
     );
@@ -113,10 +137,21 @@ class DecisionTableName extends EditableComponent {
 
 class DecisionTableId extends EditableComponent {
 
+  constructor(props, context) {
+    super(props, context);
+
+    mixin(this, SelectionAware);
+  }
+
   render() {
 
+    const className = classNames(
+      this.getSelectionClasses(),
+      this.getClassName()
+    );
+
     return (
-      <h5 className={ this.getClassName() }>
+      <h5 className={ className } data-element-id={ this.props.elementId }>
         { this.getEditor() }
       </h5>
     );

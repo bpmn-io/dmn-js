@@ -25,6 +25,7 @@ import simpleBooleanEditModule from './features/simple-boolean-edit';
 import simpleDateEditModule from './features/simple-date-edit';
 import simpleNumberEditModule from './features/simple-number-edit';
 import simpleStringEditModule from './features/simple-string-edit';
+import cellSelectionModule from './features/cell-selection';
 
 
 export default class Editor extends Viewer {
@@ -40,6 +41,7 @@ export default class Editor extends Viewer {
     return [
       addRuleModule,
       annotationsEditorModule,
+      cellSelectionModule,
       clipboardModule,
       contextMenuModule,
       cutPasteModule,

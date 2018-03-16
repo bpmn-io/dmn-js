@@ -1,5 +1,7 @@
 import { Component } from 'inferno';
 
+import { Cell } from 'table-js/lib/components';
+
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
@@ -9,15 +11,15 @@ export default class DecisionRulesCellComponent extends Component {
 
     if (is(cell, 'dmn:UnaryTests')) {
       return (
-        <td className="input-cell" data-element-id={ cell.id }>
+        <Cell className="input-cell" elementId={ cell.id }>
           { cell.businessObject.text }
-        </td>
+        </Cell>
       );
     } else {
       return (
-        <td className="output-cell" data-element-id={ cell.id }>
+        <Cell className="output-cell" elementId={ cell.id }>
           { cell.businessObject.text }
-        </td>
+        </Cell>
       );
     }
   }
