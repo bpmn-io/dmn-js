@@ -31,7 +31,6 @@ describe('context menu', function() {
       CoreModule,
       DecisionTableHeadModule,
       DecisionTableHeadEditorModule,
-      DecisionTableHeadModule,
       InteractionEventsModule,
       ModelingModule,
       DecisionRulesModule
@@ -582,16 +581,35 @@ describe('context menu', function() {
 
   describe('input - col', function() {
 
-    it('should open on right click', function() {
+    describe('should open on right click', function() {
 
-      // given
-      const cell = domQuery('[data-col-id="input1"]', testContainer);
+      it('input', function() {
 
-      // when
-      triggerMouseEvent(cell, 'contextmenu');
+        // given
+        const cell =
+          domQuery('.input-cell.input-editor[data-col-id="input1"]', testContainer);
 
-      // then
-      expect(domQuery('.context-menu', testContainer)).to.exist;
+        // when
+        triggerMouseEvent(cell, 'contextmenu');
+
+        // then
+        expect(domQuery('.context-menu', testContainer)).to.exist;
+      });
+
+
+      it('type ref', function() {
+
+        // given
+        const cell =
+          domQuery('.input-cell.type-ref[data-col-id="input1"]', testContainer);
+
+        // when
+        triggerMouseEvent(cell, 'contextmenu');
+
+        // then
+        expect(domQuery('.context-menu', testContainer)).to.exist;
+      });
+
     });
 
 
@@ -900,16 +918,35 @@ describe('context menu', function() {
 
   describe('output - col', function() {
 
-    it('should open on right click', function() {
+    describe('should open on right click', function() {
 
-      // given
-      const cell = domQuery('[data-col-id="output1"]', testContainer);
+      it('output', function() {
 
-      // when
-      triggerMouseEvent(cell, 'contextmenu');
+        // given
+        const cell =
+          domQuery('.output-cell.output-editor[data-col-id="output1"]', testContainer);
 
-      // then
-      expect(domQuery('.context-menu', testContainer)).to.exist;
+        // when
+        triggerMouseEvent(cell, 'contextmenu');
+
+        // then
+        expect(domQuery('.context-menu', testContainer)).to.exist;
+      });
+
+
+      it('type ref', function() {
+
+        // given
+        const cell =
+          domQuery('.output-cell.type-ref[data-col-id="output1"]', testContainer);
+
+        // when
+        triggerMouseEvent(cell, 'contextmenu');
+
+        // then
+        expect(domQuery('.context-menu', testContainer)).to.exist;
+      });
+
     });
 
 

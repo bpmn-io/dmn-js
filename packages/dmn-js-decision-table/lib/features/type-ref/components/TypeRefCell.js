@@ -23,10 +23,16 @@ export default class TypeRefCell extends Component {
 
     const { element } = this.props;
 
+    let actualElement = element;
+
+    if (is(element, 'dmn:LiteralExpression')) {
+      actualElement = element.$parent;
+    }
+
     this._eventBus.fire('cell.contextmenu', {
       event,
       node: event.node,
-      id: element.id
+      id: actualElement.id
     });
   }
 
