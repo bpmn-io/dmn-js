@@ -57,7 +57,7 @@
   font-size: 14px;
 }
 
-.dmn-decision-table-container table {
+.dmn-decision-table-container .tjs-table {
   table-layout: fixed;
   border-collapse: collapse;
 
@@ -74,11 +74,7 @@
   padding: 4px;
 }
 
-.dmn-decision-table-container .decision-table-properties {
-  border: solid 1px #444;
-}
-
-table tr > .input-cell + .output-cell {
+.dmn-decision-table-container .tjs-table tr > .input-cell + .output-cell {
   border-left: 3px double #444;
 }
 
@@ -194,38 +190,38 @@ table tr > .input-cell + .output-cell {
 }
 
 /* decision table properties */
-.decision-table-properties {
+.dmn-decision-table-container .decision-table-properties {
   color: #444;
   background-color: #fff;
   display: inline-block;
-  border-bottom: none;
+  border: solid 1px #444;
   margin-bottom: -1px;
   position: relative;
   min-width: 100px;
   max-width: 50%;
 }
 
-.decision-table-name,
-.decision-table-id {
+.dmn-decision-table-container .decision-table-name,
+.dmn-decision-table-container .decision-table-id {
   margin: 0;
   padding: 3px 6px;
   text-align: center;
   white-space: pre;
 }
 
-.decision-table-id.invalid {
+.dmn-decision-table-container .decision-table-id.invalid {
   background: #f4cecd;
   color: #c9302c;
 }
 
-.decision-table-name {
+.dmn-decision-table-container .decision-table-name {
   font-size: 24px;
   line-height: 30px;
   padding: .3em;
   font-weight: bold;
 }
 
-.decision-table-id {
+.dmn-decision-table-container .decision-table-id {
   border-top: 1px solid #444;
   font-family: monospace;
   font-size: 18px;
@@ -320,12 +316,12 @@ table tr > .input-cell + .output-cell {
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-.simple-mode-button:hover {
+.dmn-decision-table-container .simple-mode-button:hover {
   opacity: 1;
 }
 
-.simple-mode-button.disabled,
-.simple-mode-button.disabled:hover {
+.dmn-decision-table-container .simple-mode-button.disabled,
+.dmn-decision-table-container .simple-mode-button.disabled:hover {
   color: #CCC;
 }
 

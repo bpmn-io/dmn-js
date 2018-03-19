@@ -1,11 +1,11 @@
 
 /* simple string edit */
-.tjs-container .simple-string-edit,
-.tjs-container .simple-date-edit {
+.dmn-decision-table-container .simple-string-edit,
+.dmn-decision-table-container .simple-date-edit {
   width: 250px;
 }
 
-.tjs-container .input-expression-edit {
+.dmn-decision-table-container .input-expression-edit {
   width: 300px;
 }
 
@@ -30,17 +30,17 @@
   flex: 1 1 auto;
 }
 
-.tjs-container .allowed-values-edit .values {
+.dmn-decision-table-container .allowed-values-edit .values {
   display: flex;
   flex-wrap: wrap;
 }
 
-.tjs-container .allowed-values-edit .placeholder {
+.dmn-decision-table-container .allowed-values-edit .placeholder {
   color: #ccc;
 }
 
 /* TODO(nikku): namespace and refactor context menu styles */
-.context-menu {
+.dmn-decision-table-container .context-menu {
   position: absolute;
   background: #fff;
   border: solid 1px #CCC;
@@ -51,52 +51,52 @@
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-.context-menu .context-menu-container {
+.dmn-decision-table-container .context-menu .context-menu-container {
   margin: 8px;
 }
 
-.context-menu p {
+.dmn-decision-table-container .context-menu p {
   margin: 10px 0;
 }
 
-.context-menu .context-menu-flex {
+.dmn-decision-table-container .context-menu .context-menu-flex {
   display: flex;
 }
 
-.context-menu.vertical .context-menu-flex {
+.dmn-decision-table-container .context-menu.vertical .context-menu-flex {
   flex-direction: column;
 }
 
-.context-menu.horizontal .context-menu-flex {
+.dmn-decision-table-container .context-menu.horizontal .context-menu-flex {
   flex-direction: row;
 }
 
-.context-menu.vertical .context-menu-group {
+.dmn-decision-table-container .context-menu.vertical .context-menu-group {
   padding-bottom: 6px;
   margin-bottom: 6px;
   border-bottom: solid 1px #ccc;
 }
 
-.context-menu.vertical .context-menu-group:last-child {
+.dmn-decision-table-container .context-menu.vertical .context-menu-group:last-child {
   border-bottom: none;
   margin-bottom: 0;
 }
 
-.context-menu.horizontal .context-menu-group {
+.dmn-decision-table-container .context-menu.horizontal .context-menu-group {
   border-right: solid 1px #ccc;
 }
 
-.context-menu.horizontal .context-menu-group:last-child {
+.dmn-decision-table-container .context-menu.horizontal .context-menu-group:last-child {
   border-right: none;
 }
 
-.context-menu .context-menu-group .context-menu-group-title {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-title {
   font-weight: bold;
   color: #444;
   margin: 6px 9px 6px 9px;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry {
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -106,23 +106,23 @@
   cursor: pointer;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry.disabled {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry.disabled {
   pointer-events: none;
   color: #ccc;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry:hover {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry:hover {
   color: #52b415;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
   display: inline-block;
   text-align: center;
   width: 14px;
   margin-right: 6px;
 }
 
-.context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon:before {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon:before {
   margin: 0;
 }
 
@@ -140,32 +140,12 @@
 }
 
 /* expression language */
-.context-menu .context-menu-group .context-menu-entry-set-expression-language {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language {
   flex-direction: column;
 }
 
-.context-menu .context-menu-group .context-menu-entry-set-expression-language .expression-language {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language .expression-language {
   margin-top: 8px;
-}
-
-.tjs-container .full-width {
-  width: 100%;
-}
-
-.tjs-container .full-height {
-  height: 100%;
-}
-
-.float-right {
-  float: right;
-}
-
-.float-left {
-  float: left;
-}
-
-.cursor-pointer:hover {
-  cursor: pointer;
 }
 
 .dms-heading {
