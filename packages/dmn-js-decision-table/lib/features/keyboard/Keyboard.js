@@ -3,6 +3,10 @@
 var domEvent = require('min-dom/lib/event');
 
 var {
+  findSelectableAncestor
+} = require('../cell-selection/CellSelectionUtil');
+
+var {
   isCmd,
   isShift
 } = require('./KeyboardUtil');
@@ -159,15 +163,21 @@ export default class Keyboard {
     listeners.push(redo);
 
 
-    function selectCell(key, modifiers) {
+    function selectCell(key, event) {
 
-      if (key !== 13 || isCmd(modifiers)) {
+      if (key !== 13 || isCmd(event)) {
         return;
       }
 
-      const cmd = isShift(modifiers) ? 'selectCellAbove' : 'selectCellBelow';
+      if (!findSelectableAncestor(event.target)) {
+        return;
+      }
 
-      return editorActions.trigger(cmd);
+      const cmd = isShift(event) ? 'selectCellAbove' : 'selectCellBelow';
+
+      editorActions.trigger(cmd);
+
+      return true;
     }
 
     listeners.push(selectCell);
