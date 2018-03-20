@@ -28,7 +28,7 @@
     "inferno": "^4.0.0",
     "min-dash": "^1.1.0",
     "min-dom": "^1.0.0",
-    "table-js": "^2.0.0-alpha3",
-    "selection-ranges": "^1.2.3"
+    "selection-ranges": "^1.2.3",
+    "table-js": "^2.0.0-alpha5"
   }
 }
