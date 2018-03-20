@@ -2,7 +2,7 @@ import {
   closest as domClosest
 } from 'min-dom';
 
-import EditableHitPolicyCell from './components/HitPolicyCell';
+import EditableHitPolicyCell from './components/EditableHitPolicyCell';
 import HitPolicyCellContextMenu from './components/HitPolicyCellContextMenu';
 
 
