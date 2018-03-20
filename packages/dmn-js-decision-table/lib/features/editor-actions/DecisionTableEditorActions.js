@@ -219,10 +219,10 @@ export default class DecisionTableEditorActions {
         }
       },
       selectCellAbove() {
-        cellSelection.selectCell('above');
+        return cellSelection.selectCell('above');
       },
       selectCellBelow() {
-        cellSelection.selectCell('below');
+        return cellSelection.selectCell('below');
       }
     };
 

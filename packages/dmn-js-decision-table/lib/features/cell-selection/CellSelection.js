@@ -175,7 +175,9 @@ export default function CellSelection(
     }, container);
 
     if (!nextEl) {
-      return;
+
+      // cancel event
+      return true;
     }
 
     const nextElId = getElementId(nextEl);
@@ -187,7 +189,8 @@ export default function CellSelection(
       });
     }
 
-
+    // cancel event
+    return true;
   };
 }
 

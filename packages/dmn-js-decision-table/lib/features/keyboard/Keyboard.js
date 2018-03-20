@@ -167,7 +167,7 @@ export default class Keyboard {
 
       const cmd = isShift(modifiers) ? 'selectCellAbove' : 'selectCellBelow';
 
-      editorActions.trigger(cmd);
+      return editorActions.trigger(cmd);
     }
 
     listeners.push(selectCell);
