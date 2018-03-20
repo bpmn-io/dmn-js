@@ -1,15 +1,19 @@
-import HitPolicyCell from './components/HitPolicyCell';
+import {
+  closest as domClosest
+} from 'min-dom';
+
+import EditableHitPolicyCell from './components/HitPolicyCell';
 import HitPolicyCellContextMenu from './components/HitPolicyCellContextMenu';
 
 
-export default function HitPolicyProviderEditing(
+export default function HitPolicyEditingProvider(
     components, contextMenu,
     eventBus, renderer
 ) {
 
   components.onGetComponent('cell', ({ cellType }) => {
     if (cellType === 'before-label-cells') {
-      return HitPolicyCell;
+      return EditableHitPolicyCell;
     }
   });
 
@@ -19,7 +23,9 @@ export default function HitPolicyProviderEditing(
     }
   });
 
-  eventBus.on('hitPolicy.edit', ({ event, node }) => {
+  eventBus.on('hitPolicy.edit', ({ event }) => {
+    const node = domClosest(event.target, 'th', true);
+
     const { left, top, width, height } = node.getBoundingClientRect();
 
     const container = renderer.getContainer();
@@ -35,7 +41,7 @@ export default function HitPolicyProviderEditing(
   });
 }
 
-HitPolicyProviderEditing.$inject = [
+HitPolicyEditingProvider.$inject = [
   'components',
   'contextMenu',
   'eventBus',

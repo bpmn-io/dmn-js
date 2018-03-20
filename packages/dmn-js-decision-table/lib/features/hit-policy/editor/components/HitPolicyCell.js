@@ -1,46 +1,42 @@
 import { Component } from 'inferno';
 
+import {
+  inject
+} from 'table-js/lib/components';
 
-export default class HitPolicyCell extends Component {
 
-  constructor(props) {
-    super(props);
+export default class EditableHitPolicyCell extends Component {
 
-    this.onClick = this.onClick.bind(this);
-    this.onElementsChanged = this.onElementsChanged.bind(this);
+  constructor(props, context) {
+    super(props, context);
+
+    inject(this);
   }
 
-  onClick(event) {
-    this._eventBus.fire('hitPolicy.edit', {
-      event,
-      node: this.node
+  onClick = (event) => {
+    this.eventBus.fire('hitPolicy.edit', {
+      event
     });
   }
 
-  onElementsChanged() {
+  onElementsChanged = () => {
     this.forceUpdate();
   }
 
+  getRoot() {
+    return this.sheet.getRoot();
+  }
+
   componentWillMount() {
-    const { injector } = this.context;
-
-    const changeSupport = this._changeSupport = this.context.changeSupport;
-    this._sheet = injector.get('sheet');
-    this._eventBus = injector.get('eventBus');
-
-    const root = this._sheet.getRoot();
-
-    changeSupport.onElementsChanged(root.id, this.onElementsChanged);
+    this.changeSupport.onElementsChanged(this.getRoot().id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
-    const root = this._sheet.getRoot();
-
-    this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
+    this.changeSupport.offElementsChanged(this.getRoot().id, this.onElementsChanged);
   }
 
   render() {
-    const root = this._sheet.getRoot(),
+    const root = this.getRoot(),
           businessObject = root.businessObject,
           hitPolicy = businessObject.hitPolicy.charAt(0),
           aggregation = businessObject.aggregation;
@@ -49,15 +45,19 @@ export default class HitPolicyCell extends Component {
 
     return (
       <th
-        data-element-id={ root.id }
         data-hit-policy="true"
         onClick={ this.onClick }
         className="hit-policy header"
-        ref={ node => this.node = node }
         rowspan="3">{ hitPolicy }{ aggregationLabel }</th>
     );
   }
 }
+
+EditableHitPolicyCell.$inject = [
+  'changeSupport',
+  'sheet',
+  'eventBus'
+];
 
 
 // helpers //////////////////////
