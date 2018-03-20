@@ -139,11 +139,27 @@ export default function CellSelection(
     }
   });
 
-  // API
+  // API //////////////////////
+
+  /**
+   * Return true if a cell is currently selected.
+   *
+   * @return {Boolean} [description]
+   */
   this.isCellSelected = function() {
     return !!lastSelection;
   };
 
+  /**
+   * Select next cell in given direction.
+   *
+   * Returns true on success; false on fail (i.e. if no next selection
+   * in direction could be found).
+   *
+   * @param {String} direction
+   *
+   * @return {Boolean}
+   */
   this.selectCell = function(direction) {
 
     if (!lastSelection) {
@@ -159,7 +175,7 @@ export default function CellSelection(
     const coords = getElementCoords(selectionEl);
 
     if (!coords) {
-      return;
+      return false;
     }
 
     const {
@@ -177,9 +193,7 @@ export default function CellSelection(
     }, container);
 
     if (!nextNode) {
-
-      // cancel event
-      return true;
+      return false;
     }
 
     const nextElId = getElementId(nextNode);
@@ -191,7 +205,6 @@ export default function CellSelection(
       });
     }
 
-    // cancel event
     return true;
   };
 }
