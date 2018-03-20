@@ -1,17 +1,19 @@
 import {
-  closest,
   delegate,
   event,
-  matches,
   query
 } from 'min-dom';
 
 import {
-  setRange,
-  getRange
-} from 'selection-ranges';
-
-const ELEMENT_SELECTOR = '[data-element-id]';
+  ELEMENT_SELECTOR,
+  ensureFocus,
+  findSelectableAncestor,
+  getElementCoords,
+  getElementId,
+  getNodeByCoords,
+  getNodeById,
+  isUnselectableNode
+} from './CellSelectionUtil';
 
 
 /**
@@ -51,13 +53,13 @@ export default function CellSelection(
 
     const target = event.target;
 
-    if (closest(target, '.no-deselect', true)) {
+    const selectableNode = findSelectableAncestor(target);
+    if (isUnselectableNode(target)) {
       return;
     }
 
-    const selectionTarget = closest(target, ELEMENT_SELECTOR, true);
 
-    const elementId = selectionTarget && getElementId(selectionTarget);
+    const elementId = selectableNode && getElementId(selectableNode);
 
     realSelect(elementId);
   }
@@ -152,9 +154,9 @@ export default function CellSelection(
       throw new Error('direction must be any of { above, below }');
     }
 
-    var selectionEl = getElement(lastSelection);
+    var selectionEl = getNodeById(lastSelection, container);
 
-    const coords = getCoordinates(selectionEl);
+    const coords = getElementCoords(selectionEl);
 
     if (!coords) {
       return;
@@ -169,18 +171,18 @@ export default function CellSelection(
 
     const nextRowIndex = direction === 'above' ? rowIndex - 1 : rowIndex + 1;
 
-    const nextEl = getElementByCoords({
+    const nextNode = getNodeByCoords({
       row: nextRowIndex,
       col
     }, container);
 
-    if (!nextEl) {
+    if (!nextNode) {
 
       // cancel event
       return true;
     }
 
-    const nextElId = getElementId(nextEl);
+    const nextElId = getElementId(nextNode);
 
     if (nextElId) {
       realSelect(nextElId, {
@@ -201,63 +203,3 @@ CellSelection.$inject = [
   'selection',
   'elementRegistry'
 ];
-
-
-// helpers ///////////////////
-
-function getCoordinates(el) {
-  const coordsAttr = el.getAttribute('data-coords');
-
-  if (!coordsAttr) {
-    return null;
-  }
-
-  const [ row, col ] = coordsAttr.split(':');
-
-  return {
-    row,
-    col
-  };
-}
-
-function getElementId(el) {
-  return el.getAttribute('data-element-id');
-}
-
-function getElementByCoords(coords, container) {
-  const coordsAttr = `${coords.row}:${coords.col}`;
-
-  return query(`[data-coords="${coordsAttr}"]`, container);
-}
-
-function getElement(id, container) {
-  return query(`[data-element-id="${id}"]`, container);
-}
-
-const selectableSelector = '[contenteditable]';
-
-function ensureFocus(el) {
-
-  if (matches(el, selectableSelector)) {
-    return;
-  }
-
-  const focusEl = query(selectableSelector, el);
-
-  // QUIRK: otherwise range and focus related actions may
-  // yield errors in older browsers (PhantomJS / IE)
-  if (!document.contains(focusEl)) {
-    return;
-  }
-
-  if (focusEl) {
-    focusEl.focus();
-
-    const range = getRange(focusEl);
-
-    if (!range || range.end === 0) {
-      setRange(focusEl, { start: 5000, end: 5000 });
-    }
-
-  }
-}
