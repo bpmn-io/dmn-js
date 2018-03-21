@@ -1,8 +1,8 @@
 'use strict';
 
-var domify = require('min-dom/lib/domify'),
-    domQuery = require('min-dom/lib/query'),
-    domDelegate = require('min-dom/lib/delegate');
+var domify = require('min-dom').domify,
+    domQuery = require('min-dom').query,
+    domDelegate = require('min-dom').delegate;
 
 function DefinitionIdView(eventBus, canvas) {
   this._eventBus = eventBus;

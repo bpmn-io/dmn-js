@@ -1,6 +1,6 @@
 'use strict';
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query;
 
 require('../../../TestHelper');
 

@@ -5,8 +5,8 @@ var inherits = require('inherits'),
     isObject = require('min-dash').isObject,
     assign = require('min-dash').assign;
 
-var domClasses = require('min-dom/lib/classes'),
-    domQuery = require('min-dom/lib/query');
+var domClasses = require('min-dom').classes,
+    domQuery = require('min-dom').query;
 
 var svgAppend = require('tiny-svg/lib/append'),
     svgAttr = require('tiny-svg/lib/attr'),

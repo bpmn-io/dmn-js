@@ -5,9 +5,9 @@
  * @see http://bpmn.io/license for more information.
  */
 
-var domify = require('min-dom/lib/domify'),
-    domQuery = require('min-dom/lib/query'),
-    domRemove = require('min-dom/lib/remove');
+var domify = require('min-dom').domify,
+    domQuery = require('min-dom').query,
+    domRemove = require('min-dom').remove;
 
 var Diagram = require('diagram-js');
 
@@ -299,7 +299,7 @@ Viewer.prototype._modules = [
 /* <project-logo> */
 
 var PoweredBy = require('./util/PoweredByUtil'),
-    domEvent = require('min-dom/lib/event');
+    domEvent = require('min-dom').event;
 
 /**
  * Adds the project logo to the diagram container as
