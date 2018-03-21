@@ -2,8 +2,10 @@ import Modeler from 'lib/Modeler';
 
 import domify from 'domify';
 
-import domQuery from 'min-dom/lib/query';
-import domDelegate from 'min-dom/lib/delegate';
+import {
+  query as domQuery,
+  delegate as domDelegate
+} from 'min-dom';
 
 
 import { insertCSS } from 'test/helper';
