@@ -263,8 +263,9 @@ h4.dms-heading {
 
 /* description editor */
 
-.dmn-decision-table-container .description-editor {
+.dmn-decision-table-container  .context-menu .context-menu-container {
   margin: 0;
+  padding: 5px 0;
   width: 192px;
   border-left: solid 3px #444;
 }
