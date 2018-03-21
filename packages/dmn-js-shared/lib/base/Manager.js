@@ -2,10 +2,11 @@ import EventBus from 'diagram-js/lib/core/EventBus';
 
 import DmnModdle from 'dmn-moddle';
 
-import domify from 'min-dom/lib/domify';
-
-import domQuery from 'min-dom/lib/query';
-import domRemove from 'min-dom/lib/remove';
+import {
+  domify,
+  query as domQuery,
+  remove as domRemove
+} from 'min-dom';
 
 import {
   assign,
