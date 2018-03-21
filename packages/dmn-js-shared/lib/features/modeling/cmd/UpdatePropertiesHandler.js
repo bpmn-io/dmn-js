@@ -1,9 +1,8 @@
-import { reduce } from 'min-dash/lib/collection';
-
 import {
   isObject,
-  isDefined
-} from 'min-dash/lib/lang';
+  isDefined,
+  reduce
+} from 'min-dash';
 
 import {
   getBusinessObject

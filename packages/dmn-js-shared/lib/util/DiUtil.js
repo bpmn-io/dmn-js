@@ -1,5 +1,7 @@
-import find from 'lodash/collection/find';
-import some from 'lodash/collection/some';
+import {
+  find,
+  some
+} from 'min-dash';
 
 import { is } from './ModelUtil';
 

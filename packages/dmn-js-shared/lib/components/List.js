@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { groupBy } from 'min-dash/lib/collection';
+import { groupBy } from 'min-dash';
 
 const RADIO = 'radio';
 

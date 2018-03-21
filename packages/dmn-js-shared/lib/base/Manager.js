@@ -7,11 +7,11 @@ import domify from 'min-dom/lib/domify';
 import domQuery from 'min-dom/lib/query';
 import domRemove from 'min-dom/lib/remove';
 
-import debounce from 'lodash/function/debounce';
-
-import isNumber from 'lodash/lang/isNumber';
-
-import assign from 'lodash/object/assign';
+import {
+  assign,
+  debounce,
+  isNumber
+} from 'min-dash';
 
 
 const DEFAULT_CONTAINER_OPTIONS = {
@@ -288,7 +288,7 @@ export default class Manager {
     this._updateViews();
   }
 
-  _viewsChanged() {
+  _viewsChanged = () => {
     this._emit('views.changed', {
       views: this._views,
       activeView: this._activeView

@@ -1,6 +1,6 @@
 'use strict';
 
-var any = require('lodash/collection/any');
+import { some } from 'min-dash';
 
 /**
  * Is an element of the given DMN type?
@@ -10,27 +10,21 @@ var any = require('lodash/collection/any');
  *
  * @return {Boolean}
  */
-function is(element, type) {
+export function is(element, type) {
   var bo = getBusinessObject(element);
 
   return bo && (typeof bo.$instanceOf === 'function') && bo.$instanceOf(type);
 }
 
-module.exports.is = is;
 
-
-function isInput(element) {
+export function isInput(element) {
   return is(element, 'dmn:InputClause');
 }
 
-module.exports.isInput = isInput;
 
-
-function isOutput(element) {
+export function isOutput(element) {
   return is(element, 'dmn:OutputClause');
 }
-
-module.exports.isOutput = isOutput;
 
 
 /**
@@ -40,18 +34,14 @@ module.exports.isOutput = isOutput;
  *
  * @return {ModdleElement}
  */
-function getBusinessObject(element) {
+export function getBusinessObject(element) {
   return (element && element.businessObject) || element;
 }
 
-module.exports.getBusinessObject = getBusinessObject;
 
-
-function getName(element) {
+export function getName(element) {
   return getBusinessObject(element).name;
 }
-
-module.exports.getName = getName;
 
 
 /**
@@ -62,10 +52,8 @@ module.exports.getName = getName;
  *
  * @return {Boolean}
  */
-function isAny(element, types) {
-  return any(types, function(t) {
+export function isAny(element, types) {
+  return some(types, function(t) {
     return is(element, t);
   });
 }
-
-module.exports.isAny = isAny;

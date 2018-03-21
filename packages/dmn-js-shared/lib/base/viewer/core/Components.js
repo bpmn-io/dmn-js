@@ -1,5 +1,7 @@
-import isFunction from 'lodash/lang/isFunction';
-import isNumber from 'lodash/lang/isNumber';
+import {
+  isFunction,
+  isNumber
+} from 'min-dash';
 
 const DEFAULT_PRIORITY = 1000;
 

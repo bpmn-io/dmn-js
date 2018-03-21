@@ -1,4 +1,4 @@
-import { forEach, uniqueBy } from 'min-dash/lib/collection';
+import { forEach, uniqueBy } from 'min-dash';
 
 import TestContainer from 'mocha-test-container-support';
 
