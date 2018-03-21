@@ -3,7 +3,10 @@ import { bootstrapModeler, inject } from 'test/helper';
 import { triggerChangeEvent, triggerInputEvent }
   from 'dmn-js-shared/test/util/EventUtil';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -55,7 +58,7 @@ describe('literal expression properties editor', function() {
   it('should edit variable type', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.dms-select', testContainer)[0];
+    const select = domQueryAll('.dms-select', testContainer)[0];
 
     // when
     triggerChangeEvent(select, 'boolean');
@@ -68,7 +71,7 @@ describe('literal expression properties editor', function() {
   it('should remove variable type', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.dms-select', testContainer)[0];
+    const select = domQueryAll('.dms-select', testContainer)[0];
 
     triggerChangeEvent(select, 'boolean');
 
@@ -83,7 +86,7 @@ describe('literal expression properties editor', function() {
   it('should edit expression language', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.dms-select', testContainer)[1];
+    const select = domQueryAll('.dms-select', testContainer)[1];
 
     // when
     triggerChangeEvent(select, 'python');
@@ -96,7 +99,7 @@ describe('literal expression properties editor', function() {
   it('should remove expression language', inject(function(viewer) {
 
     // given
-    const select = domQuery.all('.dms-select', testContainer)[1];
+    const select = domQueryAll('.dms-select', testContainer)[1];
 
     triggerChangeEvent(select, 'python');
 
