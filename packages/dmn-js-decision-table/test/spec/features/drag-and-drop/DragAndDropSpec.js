@@ -5,7 +5,10 @@ import Inferno from 'inferno';
 
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -333,11 +336,11 @@ function getColDragHandle(id, testContainer) {
 }
 
 function getRowCells(id, testContainer) {
-  return domQuery.all(`[data-row-id="${id}"]`, testContainer);
+  return domQueryAll(`[data-row-id="${id}"]`, testContainer);
 }
 
 function getColCells(id, testContainer) {
-  return domQuery.all(`[data-col-id="${id}"]`, testContainer);
+  return domQueryAll(`[data-col-id="${id}"]`, testContainer);
 }
 
 function dragAndDropRow(draggedRowId, targetRowId, position, testContainer) {

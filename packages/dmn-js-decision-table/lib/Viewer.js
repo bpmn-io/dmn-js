@@ -4,8 +4,10 @@ import { importDecision } from './import/Importer';
 
 import { assign } from 'min-dash';
 
-import { domify } from 'min-dom';
-import { remove as domRemove } from 'min-dom';
+import {
+  domify,
+  remove as domRemove
+} from 'min-dom';
 
 import annotationsModule from './features/annotations';
 import coreModule from './core';

@@ -25,6 +25,6 @@
     "dmn-js-shared": "^2.0.0-alpha6",
     "escape-html": "^1.0.3",
     "inferno": "^4.0.0",
-    "min-dom": "^1.0.0"
+    "min-dom": "^2.0.0"
   }
 }

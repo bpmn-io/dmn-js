@@ -1,6 +1,9 @@
 import { bootstrapViewer } from 'test/helper';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -40,7 +43,7 @@ describe('annotations', function() {
   it('should render annotation cells', function() {
 
     // then
-    const cells = domQuery.all('td.annotation', testContainer);
+    const cells = domQueryAll('td.annotation', testContainer);
 
     expect(cells).to.have.lengthOf(4);
     expect(cells[0].textContent).to.equal('Bronze is really not that good');

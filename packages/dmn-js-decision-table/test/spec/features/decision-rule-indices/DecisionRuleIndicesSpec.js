@@ -1,6 +1,8 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { query as domQuery } from 'min-dom';
+import {
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -33,7 +35,7 @@ describe('decision rule indices', function() {
   it('should display decision rule indices', function() {
 
     // then
-    const cells = domQuery.all('.rule-index', testContainer);
+    const cells = domQueryAll('.rule-index', testContainer);
 
     expect(cells).to.have.lengthOf(4);
 
@@ -47,7 +49,7 @@ describe('decision rule indices', function() {
     modeling.addRow({ type: 'dmn:DecisionRule' });
 
     // then
-    const cells = domQuery.all('.rule-index', testContainer);
+    const cells = domQueryAll('.rule-index', testContainer);
 
     expect(cells).to.have.lengthOf(5);
 
@@ -66,7 +68,7 @@ describe('decision rule indices', function() {
       modeling.removeRow(row);
 
       // then
-      const cells = domQuery.all('.rule-index', testContainer);
+      const cells = domQueryAll('.rule-index', testContainer);
 
       expect(cells).to.have.lengthOf(3);
 
