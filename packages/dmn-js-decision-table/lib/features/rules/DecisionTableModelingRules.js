@@ -1,5 +1,7 @@
-import { isArray } from 'min-dash/lib/lang';
-import { every } from 'min-dash/lib/collection';
+import {
+  isArray,
+  every
+} from 'min-dash';
 
 import { Row, Col } from 'table-js/lib/model';
 

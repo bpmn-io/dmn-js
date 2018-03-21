@@ -1,4 +1,4 @@
-import { forEach } from 'min-dash/lib/collection';
+import { forEach } from 'min-dash';
 
 import { elementToString } from './Util';
 

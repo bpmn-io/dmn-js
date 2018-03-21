@@ -1,4 +1,4 @@
-import { assign } from 'min-dash/lib/object';
+import { assign } from 'min-dash';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 

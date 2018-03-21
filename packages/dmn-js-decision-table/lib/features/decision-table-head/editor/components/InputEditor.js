@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { isString } from 'min-dash/lib/lang';
+import { isString } from 'min-dash';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';

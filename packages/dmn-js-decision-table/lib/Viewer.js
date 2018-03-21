@@ -2,7 +2,7 @@ import Table from 'table-js';
 
 import { importDecision } from './import/Importer';
 
-import { assign } from 'min-dash/lib/object';
+import { assign } from 'min-dash';
 
 import { domify } from 'min-dom';
 import { remove as domRemove } from 'min-dom';
