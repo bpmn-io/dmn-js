@@ -1,4 +1,4 @@
-import { assign } from 'min-dash/lib/object';
+import { assign } from 'min-dash';
 
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 

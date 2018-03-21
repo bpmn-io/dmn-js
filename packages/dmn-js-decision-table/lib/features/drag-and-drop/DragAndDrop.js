@@ -9,7 +9,7 @@ import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import { Row, Col } from 'table-js/lib/model';
 
-import { forEach } from 'min-dash/lib/collection';
+import { forEach } from 'min-dash';
 
 const TOP = 'top',
       RIGHT = 'right',

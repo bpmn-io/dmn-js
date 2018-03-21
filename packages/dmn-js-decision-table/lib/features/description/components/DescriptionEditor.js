@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { isString } from 'min-dash/lib/lang';
+import { isString } from 'min-dash';
 
 import { query as domQuery } from 'min-dom';
 

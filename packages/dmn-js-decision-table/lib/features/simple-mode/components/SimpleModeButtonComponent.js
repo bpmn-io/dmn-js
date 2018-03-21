@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { assign } from 'min-dash/lib/object';
+import { assign } from 'min-dash';
 
 import { query as domQuery } from 'min-dom';
 

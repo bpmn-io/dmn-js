@@ -1,4 +1,4 @@
-import { keys } from 'min-dash/lib/collection';
+import { keys } from 'min-dash';
 
 // eslint-disable-next-line
 const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|\.[0-9])+)$/;

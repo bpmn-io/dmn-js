@@ -1,6 +1,6 @@
 import { query as domQuery } from 'min-dom';
 
-import { isString } from 'min-dash/lib/lang';
+import { isString } from 'min-dash';
 
 import DescriptionEditor from './components/DescriptionEditor';
 
