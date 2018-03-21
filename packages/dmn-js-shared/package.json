@@ -14,7 +14,7 @@
   "dependencies": {
     "diagram-js": "^0.28.2",
     "didi": "^0.1.1",
-    "dmn-moddle": "^2.0.3",
+    "dmn-moddle": "^3.0.0",
     "ids": "^0.2.0",
     "inferno": "^4.0.0",
     "min-dash": "^1.1.0",
