@@ -2,8 +2,8 @@
 
 var inherits = require('inherits');
 
-var forEach = require('lodash/collection/forEach'),
-    filter = require('lodash/collection/filter');
+var forEach = require('min-dash').forEach,
+    filter = require('min-dash').filter;
 
 var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
 

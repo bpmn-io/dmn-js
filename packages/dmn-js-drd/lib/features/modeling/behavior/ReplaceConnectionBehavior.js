@@ -2,9 +2,10 @@
 
 var inherits = require('inherits');
 
-var filter = require('lodash/collection/filter');
+var filter = require('min-dash').filter;
 
 var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
+
 
 function ReplaceConnectionBehavior(eventBus, modeling, drdRules) {
 

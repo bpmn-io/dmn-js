@@ -1,8 +1,8 @@
 'use strict';
 
-var reduce = require('lodash/object/transform'),
-    keys = require('lodash/object/keys'),
-    forEach = require('lodash/collection/forEach');
+var reduce = require('min-dash').reduce,
+    keys = require('min-dash').keys,
+    forEach = require('min-dash').forEach;
 
 var NAME = 'name',
     ID = 'id';

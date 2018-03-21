@@ -1,6 +1,6 @@
 'use strict';
 
-var pick = require('lodash/object/pick');
+var pick = require('min-dash').pick;
 
 require('../../../TestHelper');
 

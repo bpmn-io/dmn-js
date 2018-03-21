@@ -2,8 +2,8 @@
 
 var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
-var forEach = require('lodash/collection/forEach'),
-    filter = require('lodash/collection/filter');
+var forEach = require('min-dash').forEach,
+    filter = require('min-dash').filter;
 
 var replaceOptions = require ('../replace/ReplaceOptions');
 

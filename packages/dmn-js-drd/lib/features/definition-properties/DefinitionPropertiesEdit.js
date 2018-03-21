@@ -1,6 +1,6 @@
 'use strict';
 
-var debounce = require('lodash/function/debounce');
+var debounce = require('min-dash').debounce;
 
 var DEBOUNCE_DELAY = 300;
 

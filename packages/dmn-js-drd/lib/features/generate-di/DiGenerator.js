@@ -1,4 +1,4 @@
-import forEach from 'lodash/collection/forEach';
+import { forEach } from 'min-dash';
 
 import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';

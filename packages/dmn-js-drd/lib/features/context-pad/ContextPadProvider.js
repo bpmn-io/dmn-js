@@ -1,8 +1,8 @@
 'use strict';
 
 
-var assign = require('lodash/object/assign'),
-    isArray = require('lodash/lang/isArray');
+var assign = require('min-dash').assign,
+    isArray = require('min-dash').isArray;
 
 var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
     is = ModelUtil.is,
