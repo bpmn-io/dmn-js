@@ -1,7 +1,8 @@
 'use strict';
 
-var forEach = require('lodash/collection/forEach'),
-    find = require('lodash/collection/find');
+var forEach = require('min-dash').forEach,
+    find = require('min-dash').find,
+    matchPattern = require('min-dash').matchPattern;
 
 var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
@@ -73,7 +74,7 @@ function DRDTreeWalker(handler, options) {
 
     function deferConnection(semantic, property) {
       var id = parseID(property),
-          edge = find(edges, { source: id });
+          edge = find(edges, matchPattern({ source: id }));
 
       if (edge) {
         deferred.push(function() {

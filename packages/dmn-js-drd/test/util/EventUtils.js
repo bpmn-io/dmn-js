@@ -2,7 +2,7 @@
 
 var TestHelper = require('../helper');
 
-var assign = require('lodash/object/assign');
+var assign = require('min-dash').assign;
 
 
 function mouseEvent(type, element, opts) {

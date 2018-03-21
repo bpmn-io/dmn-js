@@ -1,6 +1,6 @@
 'use strict';
 
-var forEach = require('lodash/collection/forEach');
+var forEach = require('min-dash').forEach;
 
 
 function DrdFactory(moddle) {
@@ -44,11 +44,12 @@ DrdFactory.prototype.createDiBounds = function(bounds) {
 };
 
 DrdFactory.prototype.createDiEdge = function(source, waypoints) {
+  var self = this;
   var semanticWaypoints = [];
 
   forEach(waypoints || [], function(wp) {
-    semanticWaypoints.push(this.createDiWaypoint(wp));
-  }, this);
+    semanticWaypoints.push(self.createDiWaypoint(wp));
+  });
 
   return this.create('biodi:Edge', {
     waypoints: semanticWaypoints,

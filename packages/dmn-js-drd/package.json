@@ -22,8 +22,8 @@
     "diagram-js-direct-editing": "^0.22.0",
     "dmn-js-shared": "^2.0.0-alpha6",
     "inherits": "^2.0.1",
-    "lodash": "^3.0.1",
-    "min-dom": "^1.0.0",
+    "min-dash": "^2.2.0",
+    "min-dom": "^2.0.0",
     "tiny-svg": "^0.1.3"
   }
 }

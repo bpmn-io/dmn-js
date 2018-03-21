@@ -1,9 +1,9 @@
 'use strict';
 
 var inherits = require('inherits'),
-    isArray = require('lodash/lang/isArray'),
-    isObject = require('lodash/lang/isObject'),
-    assign = require('lodash/object/assign');
+    isArray = require('min-dash').isArray,
+    isObject = require('min-dash').isObject,
+    assign = require('min-dash').assign;
 
 var domClasses = require('min-dom/lib/classes'),
     domQuery = require('min-dom/lib/query');

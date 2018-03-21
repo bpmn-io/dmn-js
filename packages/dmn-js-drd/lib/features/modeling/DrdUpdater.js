@@ -1,9 +1,9 @@
 'use strict';
 
-var assign = require('lodash/object/assign'),
-    map = require('lodash/collection/map'),
-    forEach = require('lodash/collection/forEach'),
-    pick = require('lodash/object/pick'),
+var assign = require('min-dash').assign,
+    map = require('min-dash').map,
+    forEach = require('min-dash').forEach,
+    pick = require('min-dash').pick,
     inherits = require('inherits');
 
 var Collections = require('diagram-js/lib/util/Collections');

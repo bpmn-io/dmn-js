@@ -5,7 +5,7 @@
 var exampleXML = require('../../fixtures/dmn/di.dmn'),
     multipleDecisionsXML = require('../../fixtures/dmn/multiple-decisions.dmn');
 
-var pick = require('lodash/object/pick');
+var pick = require('min-dash').pick;
 
 
 describe('DRD - Import', function() {

@@ -1,7 +1,7 @@
 'use strict';
 
-var assign = require('lodash/object/assign'),
-    map = require('lodash/collection/map');
+var assign = require('min-dash').assign,
+    map = require('min-dash').map;
 
 var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
     is = ModelUtil.is;

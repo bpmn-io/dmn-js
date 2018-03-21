@@ -10,7 +10,8 @@ var coreModule = require('lib/core'),
     customRulesModule = require('../../../util/custom-rules');
 
 var domQuery = require('min-dom/lib/query'),
-    find = require('lodash/collection/find');
+    find = require('min-dash').find,
+    matchPattern = require('min-dash').matchPattern;
 
 function queryEntry(popupMenu, id) {
   return queryPopup(popupMenu, '[data-id="' + id + '"]');
@@ -34,7 +35,7 @@ function getEntries(popupMenu) {
 }
 
 function triggerAction(entries, id) {
-  var entry = find(entries, { id: id });
+  var entry = find(entries, matchPattern({ id: id }));
 
   if (!entry) {
     throw new Error('entry "'+ id +'" not found in replace menu');

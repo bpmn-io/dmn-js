@@ -5,9 +5,6 @@
  * @see http://bpmn.io/license for more information.
  */
 
-var assign = require('lodash/object/assign'),
-    omit = require('lodash/object/omit');
-
 var domify = require('min-dom/lib/domify'),
     domQuery = require('min-dom/lib/query'),
     domRemove = require('min-dom/lib/remove');
@@ -168,7 +165,11 @@ Viewer.prototype.off = function(event, callback) {
 
 Viewer.prototype._init = function(container, options) {
 
-  var additionalModules = options.additionalModules || [];
+  var {
+    additionalModules,
+    canvas,
+    ...additionalOptions
+  } = options;
 
   var baseModules = options.modules || this.getModules(),
       staticModules = [
@@ -177,12 +178,20 @@ Viewer.prototype._init = function(container, options) {
         }
       ];
 
-  var diagramModules = [].concat(staticModules, baseModules, additionalModules);
+  var modules = [
+    ...staticModules,
+    ...baseModules,
+    ...(additionalModules || [])
+  ];
 
-  var diagramOptions = assign(omit(options, [ 'additionalModules' ]), {
-    canvas: assign({}, options.canvas, { container: container }),
-    modules: diagramModules
-  });
+  var diagramOptions = {
+    ...additionalOptions,
+    canvas: {
+      ...canvas,
+      container
+    },
+    modules
+  };
 
 
   // invoke diagram constructor
