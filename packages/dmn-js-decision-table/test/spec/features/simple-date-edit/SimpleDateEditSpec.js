@@ -1,6 +1,9 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -144,7 +147,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const input = domQuery.all('.dms-input', simpleDateEdit)[1];
+      const input = domQueryAll('.dms-input', simpleDateEdit)[1];
 
       // when
       triggerInputEvent(input, '2000-01-01T00:00:00');
@@ -164,7 +167,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const input = domQuery.all('.dms-input', simpleDateEdit)[1];
+      const input = domQueryAll('.dms-input', simpleDateEdit)[1];
 
       // when
       triggerInputEvent(input, 'foo');
@@ -184,7 +187,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const button = domQuery.all('.use-today', simpleDateEdit)[1];
+      const button = domQueryAll('.use-today', simpleDateEdit)[1];
 
       // when
       triggerClick(button);
@@ -216,7 +219,7 @@ describe('simple date edit', function() {
         expect(inputEntry8.businessObject.text).to.equal('');
 
         // when
-        const buttons = domQuery.all('.use-today', simpleDateEdit);
+        const buttons = domQueryAll('.use-today', simpleDateEdit);
 
         triggerClick(buttons[0]);
 

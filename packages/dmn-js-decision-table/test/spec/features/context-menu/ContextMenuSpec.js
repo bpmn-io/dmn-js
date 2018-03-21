@@ -8,7 +8,11 @@ import {
   triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
-import { classes as domClasses, query as domQuery } from 'min-dom';
+import {
+  classes as domClasses,
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -92,7 +96,7 @@ describe('context menu', function() {
               ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
 
         // then
-        expect(domQuery.all(
+        expect(domQueryAll(
           '.context-menu-group-entry',
           ruleEntriesGroup
         )).to.have.lengthOf(6);
@@ -357,7 +361,7 @@ describe('context menu', function() {
 
         // then
         expect(
-          domQuery.all('.context-menu-group-entry', inputEntriesGroup)
+          domQueryAll('.context-menu-group-entry', inputEntriesGroup)
         ).to.have.lengthOf(6);
 
         expectEntries([
@@ -691,7 +695,7 @@ describe('context menu', function() {
 
         // then
         expect(
-          domQuery.all('.context-menu-group-entry', outputEntriesGroup)
+          domQueryAll('.context-menu-group-entry', outputEntriesGroup)
         ).to.have.lengthOf(6);
 
         expectEntries([

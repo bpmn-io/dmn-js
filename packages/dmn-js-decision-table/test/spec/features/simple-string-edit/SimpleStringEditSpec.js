@@ -1,6 +1,9 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -76,7 +79,7 @@ describe('simple string edit', function() {
     it('should select value from list of predefined', function() {
 
       // given
-      const checkbox = domQuery.all('input[type="checkbox"]', simpleStringEdit)[1];
+      const checkbox = domQueryAll('input[type="checkbox"]', simpleStringEdit)[1];
 
       // when
       triggerClick(checkbox);
@@ -207,7 +210,7 @@ describe('simple string edit', function() {
     it('should select value from list of predefined', function() {
 
       // given
-      const radio = domQuery.all('input[type="radio"]', simpleStringEdit)[0];
+      const radio = domQueryAll('input[type="radio"]', simpleStringEdit)[0];
 
       // when
       triggerClick(radio);

@@ -2,8 +2,10 @@ import BaseViewer from 'dmn-js-shared/lib/base/viewer/Viewer';
 
 import assign from 'lodash/object/assign';
 
-import domify from 'min-dom/lib/domify';
-import domRemove from 'min-dom/lib/remove';
+import {
+  domify,
+  remove as domRemove
+} from 'min-dom';
 
 import DecisionPropertiesModule from './features/decision-properties';
 import LiteralExpressionPropertiesModule from './features/literal-expression-properties';

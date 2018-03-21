@@ -1,6 +1,6 @@
 'use strict';
 
-var domEvent = require('min-dom/lib/event');
+var domEvent = require('min-dom').event;
 
 var {
   findSelectableAncestor

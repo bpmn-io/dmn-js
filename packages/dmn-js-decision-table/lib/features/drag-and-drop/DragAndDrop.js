@@ -1,7 +1,7 @@
 import {
   classes as domClasses,
   domify,
-  query as domQuery,
+  queryAll as domQueryAll,
   remove as domRemove
 } from 'min-dom';
 
@@ -333,7 +333,7 @@ function highlightRow(dragOverCell, container, position) {
     return;
   }
 
-  const cells = domQuery.all(`[data-row-id=${rowId}]`, container);
+  const cells = domQueryAll(`[data-row-id=${rowId}]`, container);
 
   forEach(cells, cell => {
 
@@ -352,7 +352,7 @@ function highlightCol(dragOverCell, container, position) {
     return;
   }
 
-  const cells = domQuery.all(`[data-col-id=${colId}]`, container);
+  const cells = domQueryAll(`[data-col-id=${colId}]`, container);
 
   forEach(cells, cell => {
 
@@ -365,7 +365,7 @@ function highlightCol(dragOverCell, container, position) {
 }
 
 function removeHighlight(container) {
-  const cells = domQuery.all('.dragover', container);
+  const cells = domQueryAll('.dragover', container);
 
   forEach(cells, cell => {
 
@@ -381,7 +381,7 @@ function removeHighlight(container) {
 }
 
 function fadeOutRow(row, container) {
-  const cells = domQuery.all(`[data-row-id=${row.id}]`, container);
+  const cells = domQueryAll(`[data-row-id=${row.id}]`, container);
 
   forEach(cells, cell => {
 
@@ -393,7 +393,7 @@ function fadeOutRow(row, container) {
 }
 
 function fadeOutCol(col, container) {
-  const cells = domQuery.all(`[data-col-id=${col.id}]`, container);
+  const cells = domQueryAll(`[data-col-id=${col.id}]`, container);
 
   forEach(cells, cell => {
 
@@ -405,7 +405,7 @@ function fadeOutCol(col, container) {
 }
 
 function removeFadeOut(container) {
-  const cells = domQuery.all('.dragged', container);
+  const cells = domQueryAll('.dragged', container);
 
   forEach(cells, cell => {
 

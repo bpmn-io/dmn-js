@@ -1,6 +1,9 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -99,7 +102,7 @@ describe('simple number edit', function() {
       it('should edit operator', function() {
 
         // given
-        const select = domQuery.all('.dms-select', simpleNumberEdit)[1];
+        const select = domQueryAll('.dms-select', simpleNumberEdit)[1];
 
         // when
         triggerChangeEvent(select, 'greater');
@@ -182,7 +185,7 @@ describe('simple number edit', function() {
       it('should edit range start type', function() {
 
         // given
-        const select = domQuery.all('.dms-select', simpleNumberEdit)[1];
+        const select = domQueryAll('.dms-select', simpleNumberEdit)[1];
 
         // when
         triggerChangeEvent(select, 'exclude');
@@ -208,7 +211,7 @@ describe('simple number edit', function() {
       it('should edit range end type', function() {
 
         // given
-        const select = domQuery.all('.dms-select', simpleNumberEdit)[2];
+        const select = domQueryAll('.dms-select', simpleNumberEdit)[2];
 
         // when
         triggerChangeEvent(select, 'include');
@@ -221,7 +224,7 @@ describe('simple number edit', function() {
       it('should edit range end value', function() {
 
         // given
-        const input = domQuery.all('.dms-input', simpleNumberEdit)[1];
+        const input = domQueryAll('.dms-input', simpleNumberEdit)[1];
 
         // when
         triggerInputEvent(input, '42');

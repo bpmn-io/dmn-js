@@ -11,7 +11,11 @@ import {
   triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
-import { classes as domClasses, query as domQuery } from 'min-dom';
+import {
+  classes as domClasses,
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -431,7 +435,7 @@ describe('decision-table-head/allowed-values', function() {
 // helpers //////////////////////
 
 function expectValuesRendered(element, expected) {
-  const values = arrayFromNodeList(domQuery.all('.item', element));
+  const values = arrayFromNodeList(domQueryAll('.item', element));
 
   values.forEach((value, index) => {
     expect(value.textContent.replace(/^\s?/, '')).to.equal(expected[index]);
