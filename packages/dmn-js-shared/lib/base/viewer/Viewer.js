@@ -1,4 +1,4 @@
-import di from 'didi';
+import { Injector } from 'didi';
 
 import core from './core';
 
@@ -95,7 +95,7 @@ function bootstrap(bootstrapModules) {
 
   bootstrapModules.forEach(visit);
 
-  var injector = new di.Injector(modules);
+  var injector = new Injector(modules);
 
   components.forEach(function(c) {
 
