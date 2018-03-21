@@ -9,8 +9,9 @@ var coreModule = require('lib/core'),
     replaceMenuProviderModule = require('lib/features/popup-menu'),
     customRulesModule = require('../../../util/custom-rules');
 
-var domQuery = require('min-dom/lib/query'),
-    find = require('min-dash').find,
+var domQuery = require('min-dom').query;
+
+var find = require('min-dash').find,
     matchPattern = require('min-dash').matchPattern;
 
 function queryEntry(popupMenu, id) {

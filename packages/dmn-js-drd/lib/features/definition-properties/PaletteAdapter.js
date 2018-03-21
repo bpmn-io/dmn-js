@@ -1,4 +1,4 @@
-var domClasses = require('min-dom/lib/classes');
+var domClasses = require('min-dom').classes;
 
 
 function PaletteAdapter(eventBus, canvas) {

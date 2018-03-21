@@ -4,7 +4,8 @@ var debounce = require('min-dash').debounce;
 
 var DEBOUNCE_DELAY = 300;
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query;
+
 
 function DefinitionIdEdit(eventBus, modeling, canvas) {
   this._eventBus = eventBus;

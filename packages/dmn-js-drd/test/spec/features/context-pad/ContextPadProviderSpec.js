@@ -4,7 +4,7 @@ var TestHelper = require('../../../TestHelper');
 
 var TestContainer = require('mocha-test-container-support');
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query;
 
 var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 

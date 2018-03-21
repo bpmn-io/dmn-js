@@ -2,7 +2,8 @@
 
 var TestHelper = require('../helper');
 
-var domQuery = require('min-dom/lib/query');
+var domQuery = require('min-dom').query,
+    domQueryAll = require('min-dom').queryAll;
 
 
 /**
@@ -26,7 +27,7 @@ function queryElement(selector, target, queryAll) {
     target = target || canvas.getContainer();
 
     if (queryAll) {
-      return domQuery.all(selector, target);
+      return domQueryAll(selector, target);
     }
 
     return domQuery(selector, target);
