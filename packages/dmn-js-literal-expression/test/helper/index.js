@@ -1,11 +1,12 @@
 'use strict';
 
-var uniq = require('lodash/array/uniq'),
-    assign = require('lodash/object/assign'),
-    isFunction = require('lodash/lang/isFunction'),
-    forEach = require('lodash/collection/forEach');
+import {
+  assign,
+  isFunction,
+  forEach
+} from 'min-dash';
 
-var TestContainer = require('mocha-test-container-support');
+import TestContainer from 'mocha-test-container-support';
 
 import LiteralExpressionViewer from './LiteralExpressionViewer';
 import LiteralExpressionEditor from './LiteralExpressionEditor';
@@ -101,7 +102,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
     _options = {
       container: testContainer,
       literalExpression: assign({
-        modules: _modules && uniq(_modules) || undefined
+        modules: _modules || undefined
       }, OPTIONS || {}, _options || {})
     };
 

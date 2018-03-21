@@ -1,6 +1,8 @@
 import BaseViewer from 'dmn-js-shared/lib/base/viewer/Viewer';
 
-import assign from 'lodash/object/assign';
+import {
+  assign
+} from 'min-dash';
 
 import {
   domify,
