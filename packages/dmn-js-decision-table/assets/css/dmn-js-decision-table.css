@@ -342,12 +342,12 @@
 }
 
 .dms-badge.dmn-variable-name {
-  background: #b5b5b5;
+  background: #9e9e9e;
   color: white;
 }
 
 .dms-badge.dmn-expression-language {
-  background: #5492fa59;
+  background: #5492faa3;
   color: white;
 }
 
@@ -370,19 +370,18 @@
   display: inline-block;
 }
 
-.dmn-decision-table-container .input-cell:hover .dmn-expression-language {
-  background: #c1d8fd;
+.dmn-decision-table-container .cell:hover .dms-badge.dmn-expression-language {
+  background: #92b9fc;
   z-index: 1;
 }
 
-.dmn-decision-table-container td.input-cell .dmn-expression-language {
+.dmn-decision-table-container .cell .dms-badge.dmn-expression-language {
   z-index: -1;
 }
 
 /* cell expression language */
 
-.dmn-decision-table-container td.input-cell .dmn-expression-language,
-.dmn-decision-table-container td.output-cell .dmn-expression-language {
+.dmn-decision-table-container .cell .dmn-expression-language {
   display: flex;
   align-items: center;
   position: absolute;
