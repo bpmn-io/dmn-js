@@ -21,7 +21,7 @@
     "inferno-test-utils": "^4.0.0"
   },
   "dependencies": {
-    "diagram-js": "^0.28.2",
+    "diagram-js": "^0.29.0",
     "dmn-js-shared": "^2.0.0-alpha6",
     "escape-html": "^1.0.3",
     "inferno": "^4.0.0",
