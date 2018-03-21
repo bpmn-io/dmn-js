@@ -347,7 +347,7 @@ export default class Manager {
       // check the new active view
       newActiveView = find(this._views, function(v) {
         return viewsEqual(activeView, v);
-      }) || this._views[0];
+      }) || this._getInitialView(this._views);
 
       if (viewsEqual(activeView, newActiveView)) {
         // active view changed
@@ -395,8 +395,9 @@ export default class Manager {
       }
     }
 
+    this._activeView = newView;
+
     if (newViewer) {
-      this._activeView = newView;
 
       if (activeViewer !== newViewer) {
         newViewer.attachTo(this._container);

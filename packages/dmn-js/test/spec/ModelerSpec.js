@@ -11,7 +11,7 @@ insertCSS('dmn-js-decision-table.css',
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
 insertCSS('dmn-js-testing.css',
-  '.test-container .dmn-js-parent { height: 500px; }'
+  '.test-container { height: 500px; }'
 );
 
 
@@ -100,22 +100,80 @@ describe('Modeler', function() {
   });
 
 
-  it('should open Table (if no DI)', function(done) {
+  describe('should open Table (if no DI)', function() {
+
+    it('initial open', function(done) {
+
+      var editor = new Modeler({ container: container });
+
+      editor.importXML(noDi, function(err) {
+
+        if (err) {
+          return done(err);
+        }
+
+        var activeView = editor.getActiveView();
+
+        expect(activeView.type).to.eql('decisionTable');
+        expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+
+        done();
+      });
+
+    });
+
+
+    it('on re-import', function(done) {
+
+      var editor = new Modeler({ container: container });
+
+      editor.importXML(diagram, function(err) {
+
+        editor.importXML(noDi, function(err) {
+
+          if (err) {
+            return done(err);
+          }
+
+          var activeView = editor.getActiveView();
+
+          expect(activeView.type).to.eql('decisionTable');
+          expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+
+          done();
+        });
+      });
+
+    });
+
+  });
+
+
+  it('should keep view on re-import', function(done) {
 
     var editor = new Modeler({ container: container });
 
-    editor.importXML(noDi, function(err) {
+    editor.importXML(diagram, function(err) {
 
-      if (err) {
-        return done(err);
-      }
+      var views = editor.getViews();
+      var tableView = views.filter(v => v.type === 'decisionTable')[0];
 
-      var activeView = editor.getActiveView();
+      editor.open(tableView, function(err) {
 
-      expect(activeView.type).to.eql('decisionTable');
-      expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+        editor.importXML(diagram, function(err) {
 
-      done();
+          var activeView = editor.getActiveView();
+
+          var element = activeView.element;
+
+          expect(activeView.type).to.eql('decisionTable');
+          expect(element.$instanceOf('dmn:Decision')).to.be.true;
+          expect(element.id).to.eql(tableView.element.id);
+
+          done();
+        });
+      });
+
     });
 
   });
