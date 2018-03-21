@@ -1,7 +1,6 @@
 import {
   delegate,
-  event,
-  query
+  event
 } from 'min-dom';
 
 import {
@@ -53,11 +52,11 @@ export default function CellSelection(
 
     const target = event.target;
 
-    const selectableNode = findSelectableAncestor(target);
     if (isUnselectableNode(target)) {
       return;
     }
 
+    const selectableNode = findSelectableAncestor(target);
 
     const elementId = selectableNode && getElementId(selectableNode);
 
@@ -121,7 +120,7 @@ export default function CellSelection(
       selection
     } = event;
 
-    const actualElement = query(`[data-element-id="${elementId}"]`, container);
+    const actualElement = getNodeById(elementId, container);
 
     if (selection.selected && actualElement) {
       ensureFocus(actualElement);
@@ -134,7 +133,9 @@ export default function CellSelection(
       selection
     } = event;
 
-    if (selection) {
+    var elementId = selection && selection.id;
+
+    if (elementId && elementId !== lastSelection) {
       realSelect(selection.id);
     }
   });
