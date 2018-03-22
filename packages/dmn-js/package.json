@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "2.0.0-alpha6",
+  "version": "2.0.0-alpha7",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch",
@@ -40,16 +40,16 @@
     "diagram-js": "^0.29.0",
     "dmn-font": "^0.4.1",
     "execa": "^0.9.0",
-    "mkdirp": "^0.5.1",
     "min-dom": "^2.0.0",
+    "mkdirp": "^0.5.1",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^4.0.0",
     "webpack-cli": "^2.0.6"
   },
   "dependencies": {
-    "dmn-js-decision-table": "^2.0.0-alpha6",
-    "dmn-js-drd": "^2.0.0-alpha6",
-    "dmn-js-literal-expression": "^2.0.0-alpha6",
-    "dmn-js-shared": "^2.0.0-alpha6"
+    "dmn-js-decision-table": "^2.0.0-alpha7",
+    "dmn-js-drd": "^2.0.0-alpha7",
+    "dmn-js-literal-expression": "^2.0.0-alpha7",
+    "dmn-js-shared": "^2.0.0-alpha7"
   }
 }
