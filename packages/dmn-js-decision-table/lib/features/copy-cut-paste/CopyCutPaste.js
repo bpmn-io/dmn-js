@@ -8,12 +8,11 @@ import { createDescriptor } from './DescriptorUtil';
 
 export default class CutPaste {
 
-  constructor(clipboard, commandStack, eventBus, modeling, selection, sheet) {
+  constructor(clipboard, commandStack, eventBus, modeling, sheet) {
     this._clipboard = clipboard;
     this._commandStack = commandStack;
     this._eventBus = eventBus;
     this._modeling = modeling;
-    this._selection = selection;
     this._sheet = sheet;
 
     commandStack.registerHandler('cut', CutHandler);
@@ -76,8 +75,6 @@ export default class CutPaste {
     };
 
     this._commandStack.execute('paste', context);
-
-    this._selection.deselect();
   }
 
   /**
@@ -92,8 +89,6 @@ export default class CutPaste {
     };
 
     this._commandStack.execute('paste', context);
-
-    this._selection.deselect();
   }
 
   /**
@@ -109,6 +104,5 @@ CutPaste.$inject = [
   'commandStack',
   'eventBus',
   'modeling',
-  'selection',
   'sheet'
 ];
