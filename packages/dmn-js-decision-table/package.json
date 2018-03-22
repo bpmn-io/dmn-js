@@ -29,6 +29,6 @@
     "min-dash": "^2.2.0",
     "min-dom": "^2.0.0",
     "selection-ranges": "^1.2.3",
-    "table-js": "^2.0.0-alpha6"
+    "table-js": "^2.0.0-alpha7"
   }
 }
