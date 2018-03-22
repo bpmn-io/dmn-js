@@ -130,20 +130,23 @@ export default function CellSelection(
   eventBus.on('selection.changed', function(event) {
 
     const {
-      selection
+      selection,
+      oldSelection
     } = event;
 
     var elementId = selection && selection.id;
+    var oldElementId = oldSelection && oldSelection.id;
 
+    // select new element
     if (elementId && elementId !== lastSelection) {
       realSelect(selection.id);
-    } else {
-      if (lastSelection) {
+    } else
 
-        // deselect
-        realSelect();
-      }
+    // deselect old element
+    if (oldElementId && oldElementId === lastSelection) {
+      realSelect();
     }
+
   });
 
   // API //////////////////////
