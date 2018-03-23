@@ -45,18 +45,21 @@ export default class Keyboard {
 
     eventBus.on('table.destroy', this._destroy);
     eventBus.on('table.init', this._init);
+
+    eventBus.on('attach', () => {
+
+      if (this._config.bindTo) {
+        this.bind(config.bindTo);
+      }
+    });
+
+    eventBus.on('detach', this.unbind);
   }
 
   _init = () => {
-    const config = this._config;
-
     this._registerDefaultBindings();
 
     this._fire('init');
-
-    if (config && config.bindTo) {
-      this.bind(config.bindTo);
-    }
   }
 
   _destroy = () => {
@@ -102,7 +105,7 @@ export default class Keyboard {
     return this._node;
   }
 
-  unbind() {
+  unbind = () => {
     var node = this._node;
 
     if (node) {
