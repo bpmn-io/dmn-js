@@ -17,7 +17,7 @@ class TestViewer extends Manager {
 }
 
 const DECISION_TABLE_VIEW = {
-  id: 'decision-table',
+  id: 'decisionTable',
   opens: 'dmn:Decision',
   constructor: TestView
 };
@@ -258,9 +258,9 @@ describe('Manager', function() {
 
         expect(elementIds).to.eql([
           { type: 'drd', element: 'dish' },
-          { type: 'decision-table', element: 'dish-decision' },
-          { type: 'decision-table', element: 'season' },
-          { type: 'decision-table', element: 'guestCount' }
+          { type: 'decisionTable', element: 'dish-decision' },
+          { type: 'decisionTable', element: 'season' },
+          { type: 'decisionTable', element: 'guestCount' }
         ]);
 
         done();
@@ -394,6 +394,43 @@ describe('Manager', function() {
 
       expect(activeViewer.get('_parent')).to.equal(dummy);
       expect(activeViewer.get('moddle')).to.equal(dummy._moddle);
+
+      done();
+    });
+  });
+
+
+  it('should provide options to viewers', function(done) {
+
+    // given
+    var dummy = new TestViewer([ DECISION_TABLE_VIEW ], {
+      common: {
+        blub: {},
+        common: true
+      },
+      decisionTable: {
+        foo: 'BAR',
+        blub: 'AAA'
+      }
+    });
+
+    dummy.importXML(diagramXML, function(err, warnings) {
+
+      if (err) {
+        return done(err);
+      }
+
+      // when
+      var activeViewer = dummy.getActiveViewer();
+
+      var config = activeViewer.get('config');
+
+      // then
+      expect(config).to.eql({
+        blub: 'AAA',
+        common: true,
+        foo: 'BAR'
+      });
 
       done();
     });

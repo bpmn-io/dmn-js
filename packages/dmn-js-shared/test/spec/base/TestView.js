@@ -12,10 +12,19 @@ export default class TestView extends View {
 
     super(options);
 
+    const {
+      modules,
+      additionalModules,
+      ...additialOptions
+    } = options;
+
     this._modules = [].concat(
-      options.modules || [],
-      options.additionalModules || []
-    ).reverse();
+      modules || [],
+      additionalModules || [],
+      {
+        config: [ 'value', additialOptions ]
+      }
+    );
 
     this._eventBus = new EventBus();
   }

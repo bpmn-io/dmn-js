@@ -36,7 +36,14 @@ describe('Modeler', function() {
 
   it('should open DMN table', function(done) {
 
-    var editor = new Modeler({ container: container });
+    var editor = new Modeler({
+      container: container,
+      common: {
+        keyboard: {
+          bindTo: document
+        }
+      }
+    });
 
     editor.importXML(diagram, { open: false }, function(err) {
 

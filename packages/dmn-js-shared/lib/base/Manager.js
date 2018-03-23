@@ -456,8 +456,10 @@ export default class Manager {
     var Viewer = provider.constructor;
 
     var providerOptions = this._options[id] || {};
+    var commonOptions = this._options.common || {};
 
     return new Viewer({
+      ...commonOptions,
       ...providerOptions,
       additionalModules: [
         ...(providerOptions.additionalModules || []), {
