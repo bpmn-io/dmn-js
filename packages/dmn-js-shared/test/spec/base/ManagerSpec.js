@@ -198,7 +198,7 @@ describe('Manager', function() {
 
   describe('error handling', function() {
 
-    it('should indicate no view to display', function(done) {
+    it('should indicate no displayable contents', function(done) {
 
       // given
       var manager = new Manager();
@@ -206,7 +206,7 @@ describe('Manager', function() {
       // when
       manager.importXML(diagramXML, function(err) {
 
-        expect(err.message).to.match(/no view to display/);
+        expect(err.message).to.match(/no displayable contents/);
 
         done();
       });

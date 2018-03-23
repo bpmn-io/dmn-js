@@ -111,7 +111,7 @@ export default class Manager {
       var view = this._activeView || this._getInitialView(this._views);
 
       if (!view) {
-        return done(new Error('no view to display'));
+        return done(new Error('no displayable contents'));
       }
 
       this.open(view, (err, warnings) => {
