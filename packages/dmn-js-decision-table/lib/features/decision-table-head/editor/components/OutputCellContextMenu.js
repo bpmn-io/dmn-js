@@ -2,20 +2,26 @@ import { Component } from 'inferno';
 
 import OutputEditor from './OutputEditor';
 
+import {
+  inject,
+  mixin
+} from 'table-js/lib/components';
 
-export default class InputCellContextMenu extends Component {
+import CloseBehavior from './CloseBehavior';
+
+
+export default class OutputCellContextMenu extends Component {
 
   constructor(props, context) {
     super(props, context);
 
-    this._modeling = context.injector.get('modeling');
-    this._contextMenu = context.injector.get('contextMenu');
-
     this.state = {};
 
-    const debounceInput = context.injector.get('debounceInput');
+    mixin(this, CloseBehavior);
 
-    this.persistChanges = debounceInput(this.persistChanges);
+    inject(this);
+
+    this.persistChanges = this.debounceInput(this.persistChanges);
   }
 
   persistChanges = () => {
@@ -27,7 +33,7 @@ export default class InputCellContextMenu extends Component {
       return;
     }
 
-    this._modeling.updateProperties(output, unsaved);
+    this.modeling.updateProperties(output, unsaved);
 
     this.setState({
       unsaved: false
@@ -53,7 +59,10 @@ export default class InputCellContextMenu extends Component {
 
   render() {
     return (
-      <div className="context-menu-container output-edit">
+      <div
+        className="context-menu-container output-edit"
+        { ...this.getCloseProps() }
+      >
         <OutputEditor
           name={ this.getValue('name') }
           label={ this.getValue('label') }
@@ -62,3 +71,8 @@ export default class InputCellContextMenu extends Component {
     );
   }
 }
+
+OutputCellContextMenu.$inject = [
+  'debounceInput',
+  'modeling'
+];

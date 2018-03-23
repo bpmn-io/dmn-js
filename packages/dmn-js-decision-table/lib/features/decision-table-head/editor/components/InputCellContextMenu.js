@@ -2,20 +2,26 @@ import { Component } from 'inferno';
 
 import InputEditor from './InputEditor';
 
+import CloseBehavior from './CloseBehavior';
+
+import {
+  inject,
+  mixin
+} from 'table-js/lib/components';
+
 
 export default class InputCellContextMenu extends Component {
 
   constructor(props, context) {
     super(props, context);
 
-    this._modeling = context.injector.get('modeling');
-    this._contextMenu = context.injector.get('contextMenu');
-
     this.state = {};
 
-    const debounceInput = context.injector.get('debounceInput');
+    mixin(this, CloseBehavior);
 
-    this.persistChanges = debounceInput(this.persistChanges);
+    inject(this);
+
+    this.persistChanges = this.debounceInput(this.persistChanges);
   }
 
   persistChanges = () => {
@@ -47,7 +53,7 @@ export default class InputCellContextMenu extends Component {
       changes.inputExpression = inputExpressionProperties;
     }
 
-    this._modeling.updateProperties(input, changes);
+    this.modeling.updateProperties(input, changes);
 
     this.setState({
       unsaved: false
@@ -80,7 +86,10 @@ export default class InputCellContextMenu extends Component {
 
   render() {
     return (
-      <div className="context-menu-container input-edit">
+      <div
+        className="context-menu-container input-edit"
+        { ...this.getCloseProps() }
+      >
         <InputEditor
           expressionLanguage={ this.getValue('expressionLanguage') }
           inputVariable={ this.getValue('inputVariable') }
@@ -91,6 +100,11 @@ export default class InputCellContextMenu extends Component {
     );
   }
 }
+
+InputCellContextMenu.$inject = [
+  'debounceInput',
+  'modeling'
+];
 
 
 // helpers //////////////////////
