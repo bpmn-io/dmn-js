@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-literal-expression",
   "description": "A literal expression view for dmn-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "diagram-js": "^0.29.0",
-    "dmn-js-shared": "^2.0.0",
+    "dmn-js-shared": "^2.0.1",
     "escape-html": "^1.0.3",
     "inferno": "^4.0.0",
     "min-dash": "^2.2.0",
