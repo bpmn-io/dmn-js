@@ -19,6 +19,7 @@ describe('Modeler', function() {
 
   var diagram = require('./diagram.dmn');
   var noDi = require('./no-di.dmn');
+  var noDisplayableContents = require('./no-displayable-contents.dmn');
 
   var container;
 
@@ -146,6 +147,55 @@ describe('Modeler', function() {
 
           expect(activeView.type).to.eql('decisionTable');
           expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+
+          done();
+        });
+      });
+
+    });
+
+  });
+
+
+  describe('should open DRD (if no DI / no displayable contents)', function() {
+
+    it('initial open', function(done) {
+
+      var editor = new Modeler({ container: container });
+
+      editor.importXML(noDisplayableContents, function(err) {
+
+        if (err) {
+          return done(err);
+        }
+
+        var activeView = editor.getActiveView();
+
+        expect(activeView.type).to.eql('drd');
+        expect(activeView.element.$instanceOf('dmn:Definitions')).to.be.true;
+
+        done();
+      });
+
+    });
+
+
+    it('on re-import', function(done) {
+
+      var editor = new Modeler({ container: container });
+
+      editor.importXML(diagram, function(err) {
+
+        editor.importXML(noDisplayableContents, function(err) {
+
+          if (err) {
+            return done(err);
+          }
+
+          var activeView = editor.getActiveView();
+
+          expect(activeView.type).to.eql('drd');
+          expect(activeView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
           done();
         });

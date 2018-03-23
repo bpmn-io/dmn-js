@@ -41,6 +41,8 @@ export default class Modeler extends EditingManager {
 
   _getInitialView(views) {
 
+    var definitionsView;
+
     for (var i = 0; i < views.length; i++) {
 
       const view = views[i];
@@ -50,12 +52,16 @@ export default class Modeler extends EditingManager {
         return view;
       }
 
-      if (is(el, 'dmn:Definitions') && containsDi(el)) {
-        return view;
+      if (is(el, 'dmn:Definitions')) {
+        definitionsView = view;
+
+        if (containsDi(el)) {
+          return view;
+        }
       }
     }
 
-    return views[0];
+    return definitionsView || views[0];
   }
 
 }

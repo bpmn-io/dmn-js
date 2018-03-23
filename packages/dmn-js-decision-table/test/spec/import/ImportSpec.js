@@ -58,7 +58,7 @@ describe('import', function() {
       viewer.importXML(noTableXML, (err, importWarnings) => {
 
         expect(err).to.exist;
-        expect(err.message).to.match(/no view to display/);
+        expect(err.message).to.match(/no displayable contents/);
 
         done();
       });

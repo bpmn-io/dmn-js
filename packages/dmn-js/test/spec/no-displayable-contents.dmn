@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dmn="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_pKGjoH6L" name="test diagram" namespace="http://bpmn.io/schema/dmn">
+  <dmn:description>Diagram without displayable contents</dmn:description>
+  <dmn:decision id="Decision_1" name="A"/>
+  <dmn:decision id="Decision_2" name="B" />
+</dmn:definitions>
