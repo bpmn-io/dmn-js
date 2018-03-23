@@ -96,6 +96,7 @@ export default class InputEditor extends Component {
 
         <ContentEditable
           placeholder="enter expression"
+          ctrlForNewline={ true }
           className={
             [
               'ref-text',

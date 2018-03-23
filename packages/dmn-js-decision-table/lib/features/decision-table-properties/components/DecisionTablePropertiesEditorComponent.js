@@ -91,11 +91,13 @@ export default class DecisionTablePropertiesComponent extends Component {
         <DecisionTableName
           className="decision-table-name"
           value={ name }
+          ctrlForNewline={ true }
           onChange={ this.setDecisionTableName }
           elementId={ 'decisionTable-name' } />
         <DecisionTableId
           className="decision-table-id"
           value={ id }
+          ctrlForNewline={ true }
           validate={ this.validateId }
           onChange={ this.setDecisionTableId }
           elementId={ 'decisionTable-id' } />
