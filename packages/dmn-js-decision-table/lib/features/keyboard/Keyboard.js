@@ -85,6 +85,8 @@ export default class Keyboard {
       if (l(code, event)) {
         event.preventDefault();
         event.stopPropagation();
+
+        return;
       }
     }
   }
@@ -224,7 +226,11 @@ export default class Keyboard {
    * @param {Function} listenerFn
    */
   addListener(listenerFn) {
-    this._listeners.push(listenerFn);
+    this._listeners.unshift(listenerFn);
+  }
+
+  removeListener(listenerFn) {
+    this._listeners = this._listeners.filter(l => l !== listenerFn);
   }
 
 }
