@@ -200,7 +200,7 @@ class TableCellEditor extends EditableComponent {
           !isFocussed && (
             <span
               className="dms-badge dmn-expression-language"
-              title={ `Expression Language: ${ expressionLanguageLabel }` }>
+              title={ `Expression Language = ${ expressionLanguageLabel }` }>
               <span class="dms-badge-icon dmn-icon-file-code"></span>
               <span class="dms-badge-label">{ expressionLanguageLabel }</span>
             </span>

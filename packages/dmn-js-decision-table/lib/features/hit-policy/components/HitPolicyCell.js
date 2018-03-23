@@ -11,14 +11,19 @@ export default class HitPolicyCell extends Component {
   render() {
     const root = this._sheet.getRoot(),
           businessObject = root.businessObject,
-          hitPolicy = businessObject.hitPolicy.charAt(0),
+          hitPolicy = businessObject.hitPolicy,
+          hitPolicyLabel = hitPolicy.charAt(0),
           aggregation = businessObject.aggregation;
 
     const aggregationLabel = getAggregationLabel(aggregation);
 
     return (
-      <th className="hit-policy header" rowspan="3">
-        { hitPolicy }{ aggregationLabel }
+      <th
+        className="hit-policy header"
+        rowspan="3"
+        title={ 'Hit Policy = ' + hitPolicy }
+      >
+        { hitPolicyLabel }{ aggregationLabel }
       </th>
     );
   }

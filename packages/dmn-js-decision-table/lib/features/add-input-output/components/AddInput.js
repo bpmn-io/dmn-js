@@ -56,7 +56,10 @@ export default class AddInput extends Component {
         onClick={ this.handleClick }
         colspan={ colspan }
       >
-        Input <span className="add-input dmn-icon-plus action-icon"></span>
+        Input <span
+          className="add-input dmn-icon-plus action-icon"
+          title="Add Input"
+        ></span>
       </th>
     );
   }

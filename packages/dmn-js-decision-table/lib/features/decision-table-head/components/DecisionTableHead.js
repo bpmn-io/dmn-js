@@ -283,7 +283,7 @@ function DefaultTypeRefCell(props) {
   const actualClassName = className + ' type-ref';
 
   return (
-    <th className={ actualClassName }>
+    <th className={ actualClassName } title="Data Type">
       { element.typeRef }
     </th>
   );

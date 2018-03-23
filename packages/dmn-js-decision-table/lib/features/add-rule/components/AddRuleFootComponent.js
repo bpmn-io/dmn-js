@@ -26,7 +26,7 @@ export default class AddRuleFootComponent extends Component {
 
     const cells = [
       <td className="add-rule-add">
-        <span className="dmn-icon-plus action-icon"></span>
+        <span className="dmn-icon-plus action-icon" title="Add Rule"></span>
       </td>
     ];
 

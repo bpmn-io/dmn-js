@@ -22,8 +22,8 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     return (
       <header className="decision-table-properties">
-        <h3 className="decision-table-name">{ name }</h3>
-        <h5 className="decision-table-id">{ id }</h5>
+        <h3 className="decision-table-name" title="Decision Name">{ name }</h3>
+        <h5 className="decision-table-id" title="Decision Id">{ id }</h5>
       </header>
     );
   }

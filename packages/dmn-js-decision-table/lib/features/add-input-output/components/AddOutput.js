@@ -56,7 +56,10 @@ export default class AddOutput extends Component {
         onClick={ this.handleClick }
         colspan={ colspan }
       >
-        Output <span className="add-output dmn-icon-plus action-icon"></span>
+        Output <span
+          className="add-output dmn-icon-plus action-icon"
+          title="Add Output"
+        ></span>
       </th>
     );
   }

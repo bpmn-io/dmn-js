@@ -38,7 +38,8 @@ export default class EditableHitPolicyCell extends Component {
   render() {
     const root = this.getRoot(),
           businessObject = root.businessObject,
-          hitPolicy = businessObject.hitPolicy.charAt(0),
+          hitPolicy = businessObject.hitPolicy,
+          hitPolicyLabel = hitPolicy.charAt(0),
           aggregation = businessObject.aggregation;
 
     const aggregationLabel = getAggregationLabel(aggregation);
@@ -46,9 +47,10 @@ export default class EditableHitPolicyCell extends Component {
     return (
       <th
         data-hit-policy="true"
+        title={ 'Hit Policy = ' + hitPolicy }
         onClick={ this.onClick }
         className="hit-policy header"
-        rowspan="3">{ hitPolicy }{ aggregationLabel }</th>
+        rowspan="3">{ hitPolicyLabel }{ aggregationLabel }</th>
     );
   }
 }

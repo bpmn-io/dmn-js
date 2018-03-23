@@ -122,7 +122,7 @@ export default class InputCell extends Component {
           showLanguageBadge && (
             <span
               className="dms-badge dmn-expression-language input-expression-language"
-              title={ 'Input Expression Language: ' + expressionLanguage }>
+              title={ 'Input Expression Language = ' + expressionLanguage }>
 
               <span className="dms-badge-icon dmn-icon-file-code"></span>
               <span className="dms-badge-label">{ expressionLanguage }</span>

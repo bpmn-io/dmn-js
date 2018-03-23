@@ -81,6 +81,7 @@ export default class TypeRefCell extends Component {
 
     return (
       <th
+        title="Data Type"
         className={ actualClassName }
         data-col-id={ colId }
         onClick={ this.onClick }

@@ -127,7 +127,11 @@ class DecisionTableName extends EditableComponent {
     );
 
     return (
-      <h3 className={ className } data-element-id={ this.props.elementId }>
+      <h3
+        className={ className }
+        data-element-id={ this.props.elementId }
+        title="Decision Name"
+      >
         { this.getEditor() }
       </h3>
     );
@@ -151,7 +155,11 @@ class DecisionTableId extends EditableComponent {
     );
 
     return (
-      <h5 className={ className } data-element-id={ this.props.elementId }>
+      <h5
+        className={ className }
+        title="Decision Id"
+        data-element-id={ this.props.elementId }
+      >
         { this.getEditor() }
       </h5>
     );
