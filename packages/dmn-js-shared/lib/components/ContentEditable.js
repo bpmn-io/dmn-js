@@ -137,6 +137,9 @@ export default class ContentEditable extends Component {
       event.preventDefault();
 
       if (this.props.ctrlForNewline && !isCmd(event)) {
+        // prevent default action (<br/> insert)
+        event.preventDefault();
+
         return;
       }
 
