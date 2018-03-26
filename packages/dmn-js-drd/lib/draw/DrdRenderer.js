@@ -5,7 +5,7 @@ var inherits = require('inherits'),
     isObject = require('min-dash').isObject,
     assign = require('min-dash').assign;
 
-var domClasses = require('min-dom').classes,
+var domAttr = require('min-dom').attr,
     domQuery = require('min-dom').query;
 
 var svgAppend = require('tiny-svg/lib/append'),
@@ -200,7 +200,9 @@ function DrdRenderer(eventBus, pathMap, styles) {
 
   function renderLabel(p, label, options) {
     var text = textUtil.createText(label || '', options);
-    domClasses(text).add('djs-label');
+
+    domAttr(text, 'class', 'djs-label');
+
     svgAppend(p, text);
 
     return text;
