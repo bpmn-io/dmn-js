@@ -1,15 +1,21 @@
-'use strict';
+import {
+  getRange
+} from 'selection-ranges';
 
-var domEvent = require('min-dom').event;
+import { event as domEvent } from 'min-dom';
 
-var {
+import {
   findSelectableAncestor
-} = require('../cell-selection/CellSelectionUtil');
+} from '../cell-selection/CellSelectionUtil';
 
-var {
+import {
   isCmd,
   isShift
-} = require('./KeyboardUtil');
+} from './KeyboardUtil';
+
+import {
+  query as domQuery
+} from 'min-dom';
 
 /**
  * A keyboard abstraction that may be activated and
@@ -35,11 +41,14 @@ var {
  */
 export default class Keyboard {
 
-  constructor(config, eventBus, editorActions) {
+  constructor(cellSelection, config, editorActions, elementRegistry, eventBus, renderer) {
 
+    this._cellSelection = cellSelection;
     this._config = config || {};
-    this._eventBus = eventBus;
     this._editorActions = editorActions;
+    this._elementRegistry = elementRegistry;
+    this._eventBus = eventBus;
+    this._renderer = renderer;
 
     this._listeners = [];
 
@@ -187,35 +196,126 @@ export default class Keyboard {
 
     listeners.push(selectCell);
 
-
-    // not implemented yet
-    /*
-
     // copy
     // CTRL/CMD + C
-    function copy(key, modifiers) {
+    const copy = (key, modifiers) => {
+      const cellSelectedId = this._cellSelection.getCellSelected();
+
+      const container = this._renderer.getContainer();
+
+      const cellSelected = domQuery(`[data-element-id="${ cellSelectedId }"]`, container);
+
+      const cell = this._elementRegistry.get(cellSelectedId);
+
+      if (!cellSelected || !cell) {
+        return;
+      }
+
+      const range = getRange(cellSelected);
+
+      if (range
+        && (range.start !== range.end)) {
+
+        // don't interfere with normal text copying
+        return;
+      }
 
       if (isCmd(modifiers) && (key === 67)) {
-        editorActions.trigger('copy');
+        if (isShift(modifiers)) {
+          editorActions.trigger('copy', {
+            element: cell.col
+          });
+        } else {
+          editorActions.trigger('copy', {
+            element: cell.row
+          });
+        }
 
         return true;
       }
-    }
+    };
+
+    // cut
+    // CTRL/CMD + X
+    const cut = (key, modifiers) => {
+      const cellSelectedId = this._cellSelection.getCellSelected();
+
+      const container = this._renderer.getContainer();
+
+      const cellSelected = domQuery(`[data-element-id="${ cellSelectedId }"]`, container);
+
+      const cell = this._elementRegistry.get(cellSelectedId);
+
+      if (!cellSelected || !cell) {
+        return;
+      }
+
+      const range = getRange(cellSelected);
+
+      if (range
+        && (range.start !== range.end)) {
+
+        // don't interfere with normal text copying
+        return;
+      }
+
+      if (isCmd(modifiers) && (key === 88)) {
+        if (isShift(modifiers)) {
+          editorActions.trigger('cut', {
+            element: cell.col
+          });
+        } else {
+          editorActions.trigger('cut', {
+            element: cell.row
+          });
+        }
+
+        return true;
+      }
+    };
 
     // paste
     // CTRL/CMD + V
-    function paste(key, modifiers) {
+    const paste = (key, modifiers) => {
+      const cellSelectedId = this._cellSelection.getCellSelected();
+
+      const container = this._renderer.getContainer();
+
+      const cellSelected = domQuery(`[data-element-id="${ cellSelectedId }"]`, container);
+
+      const cell = this._elementRegistry.get(cellSelectedId);
+
+      if (!cellSelected || !cell) {
+        return;
+      }
+
+      const range = getRange(cellSelected);
+
+      if (range
+        && (range.start !== range.end)) {
+
+        // don't interfere with normal text copying
+        return;
+      }
 
       if (isCmd(modifiers) && (key === 86)) {
-        editorActions.trigger('paste');
+        if (isShift(modifiers)) {
+          editorActions.trigger('pasteAfter', {
+            element: cell.col
+          });
+        } else {
+          editorActions.trigger('pasteAfter', {
+            element: cell.row
+          });
+        }
 
         return true;
       }
-    }
+    };
 
     listeners.push(copy);
+    listeners.push(cut);
     listeners.push(paste);
-    */
   }
 
 
@@ -236,7 +336,10 @@ export default class Keyboard {
 }
 
 Keyboard.$inject = [
+  'cellSelection',
   'config.keyboard',
+  'editorActions',
+  'elementRegistry',
   'eventBus',
-  'editorActions'
+  'renderer'
 ];

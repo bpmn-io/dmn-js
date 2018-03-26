@@ -8,7 +8,7 @@ import ModelingModule from 'lib/features/modeling';
 import DecisionRulesModule from 'lib/features/decision-rules';
 
 
-describe('context menu', function() {
+describe('editor actions', function() {
 
   let rule1, rule2, rule3, rule4, input1, input2, output1, output2, root;
 
@@ -38,7 +38,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addRule', inject(function(editorActions, sheet) {
+  it('addRule', inject(function(editorActions) {
 
     // when
     const rule = editorActions.trigger('addRule');
@@ -56,7 +56,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addRuleAbove - specified', inject(function(editorActions, sheet) {
+  it('addRuleAbove - specified', inject(function(editorActions) {
 
     // when
     const rule = editorActions.trigger('addRuleAbove', { rule: rule1 });
@@ -73,7 +73,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addRuleAbove - selected', inject(function(editorActions, selection, sheet) {
+  it('addRuleAbove - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -93,7 +93,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addRuleBelow - specified', inject(function(editorActions, sheet) {
+  it('addRuleBelow - specified', inject(function(editorActions) {
 
     // when
     const rule = editorActions.trigger('addRuleBelow', { rule: rule1 });
@@ -111,7 +111,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addRuleBelow - selected', inject(function(editorActions, selection, sheet) {
+  it('addRuleBelow - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -132,7 +132,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeRule - specified', inject(function(editorActions, sheet) {
+  it('removeRule - specified', inject(function(editorActions) {
 
     // when
     editorActions.trigger('removeRule', { rule: rule1 });
@@ -148,7 +148,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeRule - selected', inject(function(editorActions, selection, sheet) {
+  it('removeRule - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -167,7 +167,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addInput', inject(function(editorActions, sheet) {
+  it('addInput', inject(function(editorActions) {
 
     // when
     const input = editorActions.trigger('addInput');
@@ -183,7 +183,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addInputLeft - specified', inject(function(editorActions, sheet) {
+  it('addInputLeft - specified', inject(function(editorActions) {
 
     // when
     const input = editorActions.trigger('addInputLeft', { input: input1 });
@@ -199,7 +199,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addInputLeft - selected', inject(function(editorActions, selection, sheet) {
+  it('addInputLeft - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -218,7 +218,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addInputRight - specified', inject(function(editorActions, sheet) {
+  it('addInputRight - specified', inject(function(editorActions) {
 
     // when
     const input = editorActions.trigger('addInputRight', { input: input1 });
@@ -234,7 +234,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addInputRight - selected', inject(function(editorActions, selection, sheet) {
+  it('addInputRight - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -253,7 +253,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeInput - specified', inject(function(editorActions, sheet) {
+  it('removeInput - specified', inject(function(editorActions) {
 
     // when
     editorActions.trigger('removeInput', { input: input1 });
@@ -267,7 +267,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeInput - selected', inject(function(editorActions, selection, sheet) {
+  it('removeInput - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -284,7 +284,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addOutput', inject(function(editorActions, sheet) {
+  it('addOutput', inject(function(editorActions) {
 
     // when
     const output = editorActions.trigger('addOutput');
@@ -300,7 +300,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addOutputLeft - specified', inject(function(editorActions, sheet) {
+  it('addOutputLeft - specified', inject(function(editorActions) {
 
     // when
     const output = editorActions.trigger('addOutputLeft', { output: output1 });
@@ -316,7 +316,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addOutputLeft - selected', inject(function(editorActions, selection, sheet) {
+  it('addOutputLeft - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('outputEntry1');
@@ -335,7 +335,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addOutputRight - specified', inject(function(editorActions, sheet) {
+  it('addOutputRight - specified', inject(function(editorActions) {
 
     // when
     const output = editorActions.trigger('addOutputRight', { output: output1 });
@@ -351,7 +351,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addOutputRight - selected', inject(function(editorActions, selection, sheet) {
+  it('addOutputRight - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('outputEntry1');
@@ -370,7 +370,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeOutput - specified', inject(function(editorActions, sheet) {
+  it('removeOutput - specified', inject(function(editorActions) {
 
     // when
     editorActions.trigger('removeOutput', { output: output1 });
@@ -384,7 +384,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeOutput - selected', inject(function(editorActions, selection, sheet) {
+  it('removeOutput - selected', inject(function(editorActions, selection) {
 
     // given
     selection.select('outputEntry1');
@@ -401,7 +401,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addClause', inject(function(editorActions, selection, sheet) {
+  it('addClause', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -420,7 +420,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addClauseLeft', inject(function(editorActions, selection, sheet) {
+  it('addClauseLeft', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -439,7 +439,7 @@ describe('context menu', function() {
   }));
 
 
-  it('addClauseRight', inject(function(editorActions, selection, sheet) {
+  it('addClauseRight', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -458,7 +458,7 @@ describe('context menu', function() {
   }));
 
 
-  it('removeClause', inject(function(editorActions, selection, sheet) {
+  it('removeClause', inject(function(editorActions, selection) {
 
     // given
     selection.select('inputEntry1');
@@ -471,6 +471,96 @@ describe('context menu', function() {
       input2,
       output1,
       output2
+    ]);
+  }));
+
+
+  it('copy', inject(function(clipboard, editorActions, elementRegistry) {
+
+    // given
+    const element = elementRegistry.get('rule1');
+
+    // when
+    editorActions.trigger('copy', {
+      element
+    });
+
+    // then
+    expect(clipboard.isEmpty()).to.be.false;
+  }));
+
+
+  it('cut', inject(function(clipboard, editorActions, elementRegistry) {
+
+    // given
+    const element = elementRegistry.get('rule1');
+
+    // when
+    editorActions.trigger('cut', {
+      element
+    });
+
+    // then
+    expect(clipboard.isEmpty()).to.be.false;
+
+    expectOrder(root.rows, [
+      rule2,
+      rule3,
+      rule4
+    ]);
+  }));
+
+
+  it('pasteBefore', inject(function(editorActions, elementRegistry) {
+
+    // given
+    const rule1 = elementRegistry.get('rule1'),
+          rule4 = elementRegistry.get('rule4');
+
+    editorActions.trigger('cut', {
+      element: rule1
+    });
+
+    // when
+    editorActions.trigger('pasteBefore', {
+      element: rule4
+    });
+
+    // then
+    const newRule1 = elementRegistry.get('rule1');
+
+    expectOrder(root.rows, [
+      rule2,
+      rule3,
+      newRule1,
+      rule4
+    ]);
+  }));
+
+
+  it('pasteAfter', inject(function(editorActions, elementRegistry) {
+
+    // given
+    const rule1 = elementRegistry.get('rule1'),
+          rule4 = elementRegistry.get('rule4');
+
+    editorActions.trigger('cut', {
+      element: rule1
+    });
+
+    // when
+    editorActions.trigger('pasteAfter', {
+      element: rule4
+    });
+
+    // then
+    const newRule1 = elementRegistry.get('rule1');
+
+    expectOrder(root.rows, [
+      rule2,
+      rule3,
+      rule4,
+      newRule1
     ]);
   }));
 

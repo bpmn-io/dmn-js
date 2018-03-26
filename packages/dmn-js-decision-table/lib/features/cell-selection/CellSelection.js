@@ -160,6 +160,10 @@ export default function CellSelection(
     return !!lastSelection;
   };
 
+  this.getCellSelected = function() {
+    return lastSelection;
+  };
+
   /**
    * Select next cell in given direction.
    *
