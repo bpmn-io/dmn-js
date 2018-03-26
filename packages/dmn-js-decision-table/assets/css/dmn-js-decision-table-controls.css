@@ -234,6 +234,14 @@ h4.dms-heading {
 
 .dms-input-select {
   display: inline;
+  position: relative;
+}
+
+.dms-input-select .dms-input-select-icon {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .dms-input-select .options {

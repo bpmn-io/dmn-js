@@ -205,7 +205,11 @@ export default class InputSelect extends Component {
           ref={ node => this.inputNode = node }
           type="text"
           value={ value } />
-
+        {
+          optionsVisible
+            ? <span className="dms-input-select-icon dmn-icon-up"></span>
+            : <span className="dms-input-select-icon dmn-icon-down"></span>
+        }
         {
           optionsVisible
             && createPortal(this.renderOptions(options), this._portalEl)
