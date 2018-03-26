@@ -5,7 +5,8 @@ import { query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  triggerChangeEvent,
+  triggerClick,
+  triggerInputEvent,
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -17,6 +18,7 @@ import ExpressionLanguageModule from 'lib/features/expression-language';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'lib/features/modeling';
 import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
+import KeyboardModule from 'lib/features/keyboard';
 
 
 describe('expression language', function() {
@@ -28,8 +30,10 @@ describe('expression language', function() {
       ExpressionLanguageModule,
       InteractionEventsModule,
       ModelingModule,
-      DecisionRulesEditorModule
-    ]
+      DecisionRulesEditorModule,
+      KeyboardModule
+    ],
+    debounceInput: false
   }));
 
   let testContainer;
@@ -47,20 +51,47 @@ describe('expression language', function() {
   }
 
 
-  it('should edit expression language', inject(function(elementRegistry) {
+  it('should edit expression language - input', inject(function(elementRegistry) {
 
     // given
-    const select = openContextMenu('inputEntry1');
+    const inputSelect = openContextMenu('inputEntry1');
+
+    const input = domQuery('.dms-input', inputSelect);
 
     // when
-    triggerChangeEvent(select, 'javascript');
+    triggerInputEvent(input, 'foo');
 
     // then
+    const expressionLanguage =
+      elementRegistry.get('inputEntry1').businessObject.expressionLanguage;
 
-    var expressionLanguage =
+    expect(expressionLanguage).to.equal('foo');
+  }));
+
+
+  it('should edit expression language - select', inject(function(elementRegistry) {
+
+    // given
+    const inputSelect = openContextMenu('inputEntry1');
+
+    // when
+    triggerInputSelectChange(inputSelect, 'javascript', testContainer);
+
+    // then
+    const expressionLanguage =
       elementRegistry.get('inputEntry1').businessObject.expressionLanguage;
 
     expect(expressionLanguage).to.equal('javascript');
   }));
 
 });
+
+// helpers //////////
+
+function triggerInputSelectChange(inputSelect, value, testContainer) {
+  triggerClick(inputSelect);
+
+  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
+
+  triggerClick(option);
+}

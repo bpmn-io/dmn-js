@@ -3,7 +3,7 @@
 // eslint-disable-next-line
 import Inferno from 'inferno';
 
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
 
@@ -58,7 +58,7 @@ export default class ExpressionLanguage {
               Expression Language
             </div>
 
-            <Select
+            <InputSelect
               className="expression-language"
               onChange={ value => this.onChange(element, value) }
               options={ INPUT_EXPRESSION_LANGUAGE_OPTIONS }

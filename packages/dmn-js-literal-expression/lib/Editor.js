@@ -1,6 +1,7 @@
 import Viewer from './Viewer';
 
 import DecisionPropertiesEditorModule from './features/decision-properties/editor';
+import KeyboardModule from './features/keyboard';
 import LiteralExpressionPropertiesEditorModule
   from './features/literal-expression-properties/editor';
 import ModelingModule from './features/modeling';
@@ -17,6 +18,7 @@ export default class Editor extends Viewer {
   static _getModules() {
     return [
       DecisionPropertiesEditorModule,
+      KeyboardModule,
       LiteralExpressionPropertiesEditorModule,
       ModelingModule,
       TextareaEditorComponent

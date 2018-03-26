@@ -4,7 +4,7 @@ import { isString } from 'min-dash';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 
 export default class InputEditor extends Component {
@@ -133,7 +133,7 @@ export default class InputEditor extends Component {
             <p>
               <label className="dms-label">Expression Language</label>
 
-              <Select
+              <InputSelect
                 className="ref-language"
                 value={ expressionLanguage || '' }
                 onChange={ this.handleLanguageChange }

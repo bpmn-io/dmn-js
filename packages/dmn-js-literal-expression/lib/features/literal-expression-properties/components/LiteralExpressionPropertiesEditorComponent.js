@@ -1,12 +1,9 @@
 import { Component } from 'inferno';
 
 import Input from 'dmn-js-shared/lib/components/Input';
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 const EXPRESSION_LANGUAGE_OPTIONS = [{
-  label: '-',
-  value: 'none'
-}, {
   label: 'FEEL',
   value: 'feel'
 }, {
@@ -27,9 +24,6 @@ const EXPRESSION_LANGUAGE_OPTIONS = [{
 }];
 
 const TYPE_REF_OPTIONS = [{
-  label: '-',
-  value: 'none'
-}, {
   label: 'string',
   value: 'string'
 }, {
@@ -48,8 +42,6 @@ const TYPE_REF_OPTIONS = [{
   label: 'date',
   value: 'date'
 }];
-
-const NONE = 'none';
 
 
 export default class LiteralExpressionPropertiesComponent extends Component {
@@ -81,7 +73,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 
   setVariableType(typeRef) {
-    if (typeRef === NONE) {
+    if (typeRef === '') {
       this._modeling.editVariableType(undefined);
 
       this.setState({
@@ -97,7 +89,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 
   setExpressionLanguage(expressionLanguage) {
-    if (expressionLanguage === NONE) {
+    if (expressionLanguage === '') {
       this._modeling.editExpressionLanguage(undefined);
 
       this.setState({
@@ -122,6 +114,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>Variable Name:</td>
             <td>
               <Input
+                className="variable-name-input"
                 onInput={ this.setVariableName }
                 placeholder={ 'name' }
                 value={ name || '' } />
@@ -131,11 +124,11 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>Variable Type:</td>
             <td>
               <div className="dms-fill-row">
-                <Select
+                <InputSelect
                   onChange={ this.setVariableType }
                   options={ TYPE_REF_OPTIONS }
-                  value={ typeRef || 'none' }
-                  className="dms-block" />
+                  value={ typeRef }
+                  className="variable-type-select dms-block" />
               </div>
             </td>
           </tr>
@@ -143,11 +136,11 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>Expression Language:</td>
             <td>
               <div className="dms-fill-row">
-                <Select
+                <InputSelect
                   onChange={ this.setExpressionLanguage }
                   options={ EXPRESSION_LANGUAGE_OPTIONS }
-                  value={ expressionLanguage || 'none' }
-                  className="dms-block" />
+                  value={ expressionLanguage }
+                  className="expression-language-select dms-block" />
               </div>
             </td>
           </tr>

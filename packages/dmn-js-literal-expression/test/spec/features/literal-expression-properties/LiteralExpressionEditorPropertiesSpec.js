@@ -1,11 +1,12 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerChangeEvent, triggerInputEvent }
-  from 'dmn-js-shared/test/util/EventUtil';
+import {
+  triggerClick,
+  triggerInputEvent
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import {
-  query as domQuery,
-  queryAll as domQueryAll
+  query as domQuery
 } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
@@ -45,7 +46,7 @@ describe('literal expression properties editor', function() {
   it('should edit variable name', inject(function(viewer) {
 
     // given
-    const input = domQuery('.dms-input', testContainer);
+    const input = domQuery('.variable-name-input', testContainer);
 
     // when
     triggerInputEvent(input, 'foo');
@@ -55,13 +56,28 @@ describe('literal expression properties editor', function() {
   }));
 
 
-  it('should edit variable type', inject(function(viewer) {
+  it('should edit variable type - input', inject(function(viewer) {
 
     // given
-    const select = domQueryAll('.dms-select', testContainer)[0];
+    const inputSelect = domQuery('.variable-type-select', testContainer);
+
+    const input = domQuery('.dms-input', inputSelect);
 
     // when
-    triggerChangeEvent(select, 'boolean');
+    triggerInputEvent(input, 'foo');
+
+    // then
+    expect(viewer._decision.variable.typeRef).to.equal('foo');
+  }));
+
+
+  it('should edit variable type - select', inject(function(viewer) {
+
+    // given
+    const inputSelect = domQuery('.variable-type-select', testContainer);
+
+    // when
+    triggerInputSelectChange(inputSelect, 'boolean', testContainer);
 
     // then
     expect(viewer._decision.variable.typeRef).to.equal('boolean');
@@ -71,43 +87,74 @@ describe('literal expression properties editor', function() {
   it('should remove variable type', inject(function(viewer) {
 
     // given
-    const select = domQueryAll('.dms-select', testContainer)[0];
+    const inputSelect = domQuery('.variable-type-select', testContainer);
 
-    triggerChangeEvent(select, 'boolean');
+    triggerInputSelectChange(inputSelect, 'boolean', testContainer);
+
+    const input = domQuery('.dms-input', inputSelect);
 
     // when
-    triggerChangeEvent(select, 'none');
+    triggerInputEvent(input, '');
 
     // then
     expect(viewer._decision.variable.typeRef).to.not.exist;
   }));
 
 
-  it('should edit expression language', inject(function(viewer) {
+  it('should edit expression language - input', inject(function(viewer) {
 
     // given
-    const select = domQueryAll('.dms-select', testContainer)[1];
+    const inputSelect = domQuery('.expression-language-select', testContainer);
+
+    const input = domQuery('.dms-input', inputSelect);
 
     // when
-    triggerChangeEvent(select, 'python');
+    triggerInputEvent(input, 'foo');
 
     // then
-    expect(viewer._decision.literalExpression.expressionLanguage).to.equal('python');
+    expect(viewer._decision.literalExpression.expressionLanguage)
+      .to.equal('foo');
+  }));
+
+
+  it('should edit expression language - select', inject(function(viewer) {
+
+    // given
+    const inputSelect = domQuery('.expression-language-select', testContainer);
+
+    // when
+    triggerInputSelectChange(inputSelect, 'javascript', testContainer);
+
+    // then
+    expect(viewer._decision.literalExpression.expressionLanguage)
+      .to.equal('javascript');
   }));
 
 
   it('should remove expression language', inject(function(viewer) {
 
     // given
-    const select = domQueryAll('.dms-select', testContainer)[1];
+    const inputSelect = domQuery('.expression-language-select', testContainer);
 
-    triggerChangeEvent(select, 'python');
+    triggerInputSelectChange(inputSelect, 'python', testContainer);
+
+    const input = domQuery('.dms-input', inputSelect);
 
     // when
-    triggerChangeEvent(select, 'none');
+    triggerInputEvent(input, '');
 
     // then
     expect(viewer._decision.literalExpression.expressionLanguage).to.not.exist;
   }));
 
 });
+
+// helpers //////////
+
+function triggerInputSelectChange(inputSelect, value, testContainer) {
+  triggerClick(inputSelect);
+
+  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
+
+  triggerClick(option);
+}

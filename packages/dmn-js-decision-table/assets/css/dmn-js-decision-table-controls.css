@@ -232,6 +232,35 @@ h4.dms-heading {
   overflow: auto;
 }
 
+.dms-input-select {
+  display: inline;
+}
+
+.dms-input-select .options {
+  background: #fff;
+}
+
+.dms-select-options {
+  position: fixed;
+  background-color: #fff;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #444;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  cursor: pointer;
+}
+
+.dms-select-options .option { 
+  padding: 4px 9px 4px 9px;
+}
+
+.dms-select-options .option:focus,
+.dms-select-options .option:hover {
+  color: #52B415;
+}
+
 /* drag and drop */
 .dmn-icon-drag {
   color: transparent;

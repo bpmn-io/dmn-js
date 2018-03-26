@@ -2,6 +2,8 @@ import { Component } from 'inferno';
 
 import { is, isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+
 const TYPES = [
   'string',
   'boolean',
@@ -20,12 +22,10 @@ export default class TypeRefCellContextMenu extends Component {
     this._modeling = context.injector.get('modeling');
   }
 
-  onTypeChange = (event) => {
+  onTypeChange = (value) => {
     const {
       element
     } = this.props.context;
-
-    const value = event.target.value;
 
     const actualElement = is(element, 'dmn:LiteralExpression')
       ? element.$parent
@@ -57,23 +57,22 @@ export default class TypeRefCellContextMenu extends Component {
         element
     ).typeRef;
 
+    const typeRefOptions = TYPES.map(t => {
+      return {
+        label: t,
+        value: t
+      };
+    });
+
     return (
       <div className="type-ref-edit context-menu-container">
         <label className="dms-label">Type:</label>
-        <select
-          className="type-ref-edit-select dms-select"
-          onChange={ this.onTypeChange }>
-          {
-            TYPES.map(type => {
-              return (
-                <option
-                  key={ type }
-                  selected={ typeRef === type }
-                  value={ type }>{ type }</option>
-              );
-            })
-          }
-        </select>
+
+        <InputSelect
+          className="type-ref-edit-select"
+          onChange={ this.onTypeChange }
+          options={ typeRefOptions }
+          value={ typeRef } />
       </div>
     );
   }

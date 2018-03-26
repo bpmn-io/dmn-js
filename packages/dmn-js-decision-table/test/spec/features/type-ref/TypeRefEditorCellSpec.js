@@ -1,6 +1,6 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerChangeEvent, triggerClick } from 'dmn-js-shared/test/util/EventUtil';
+import { triggerClick } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
 
@@ -12,6 +12,7 @@ import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import ModelingModule from 'lib/features/modeling';
 import TypeRefModule from 'lib/features/type-ref';
+import KeyboardModule from 'lib/features/keyboard';
 
 
 describe('features/type-ref', function() {
@@ -21,7 +22,8 @@ describe('features/type-ref', function() {
       CoreModule,
       DecisionTableHeadModule,
       ModelingModule,
-      TypeRefModule
+      TypeRefModule,
+      KeyboardModule
     ]
   }));
 
@@ -39,10 +41,10 @@ describe('features/type-ref', function() {
 
     triggerClick(cell);
 
-    const select = domQuery('.type-ref-edit-select', testContainer);
+    const input = domQuery('.type-ref-edit-select', testContainer);
 
     // when
-    triggerChangeEvent(select, 'boolean');
+    triggerInputSelectChange(input, 'boolean', testContainer);
 
     // then
     expect(
@@ -51,3 +53,13 @@ describe('features/type-ref', function() {
   }));
 
 });
+
+// helpers ///////////
+
+function triggerInputSelectChange(inputSelect, value, testContainer) {
+  triggerClick(inputSelect);
+
+  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
+
+  triggerClick(option);
+}

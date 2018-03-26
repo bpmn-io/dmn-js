@@ -4,7 +4,6 @@ import {
 } from 'test/helper';
 
 import {
-  triggerChangeEvent,
   triggerInputEvent,
   triggerKeyEvent,
   triggerMouseEvent,
@@ -29,6 +28,7 @@ import AllowedValuesEditingModule
 
 import TypeRefEditingModule from 'lib/features/type-ref';
 import ModelingModule from 'lib/features/modeling';
+import KeyboardModule from 'lib/features/keyboard';
 
 
 describe('decision-table-head/allowed-values', function() {
@@ -39,7 +39,8 @@ describe('decision-table-head/allowed-values', function() {
       DecisionTableHeadModule,
       AllowedValuesEditingModule,
       TypeRefEditingModule,
-      ModelingModule
+      ModelingModule,
+      KeyboardModule
     ],
     debounceInput: false
   }));
@@ -213,10 +214,10 @@ describe('decision-table-head/allowed-values', function() {
       inject(function(elementRegistry) {
 
         // given
-        const select = domQuery('.type-ref-edit-select', testContainer);
+        const inputSelect = domQuery('.type-ref-edit-select', testContainer);
 
         // when
-        triggerChangeEvent(select, 'boolean');
+        triggerInputSelectChange(inputSelect, 'boolean', testContainer);
 
         // then
         expect(elementRegistry.get('input1').businessObject.inputValues).not.to.exist;
@@ -229,12 +230,12 @@ describe('decision-table-head/allowed-values', function() {
       inject(function(elementRegistry) {
 
         // given
-        const select = domQuery('.type-ref-edit-select', testContainer);
+        const inputSelect = domQuery('.type-ref-edit-select', testContainer);
 
-        triggerChangeEvent(select, 'boolean');
+        triggerInputSelectChange(inputSelect, 'boolean', testContainer);
 
         // when
-        triggerChangeEvent(select, 'string');
+        triggerInputSelectChange(inputSelect, 'string', testContainer);
 
         // then
         expect(domQuery('.allowed-values-edit', testContainer)).to.exist;
@@ -404,10 +405,10 @@ describe('decision-table-head/allowed-values', function() {
       inject(function(elementRegistry) {
 
         // given
-        const select = domQuery('.type-ref-edit-select', testContainer);
+        const inputSelect = domQuery('.type-ref-edit-select', testContainer);
 
         // when
-        triggerChangeEvent(select, 'boolean');
+        triggerInputSelectChange(inputSelect, 'boolean', testContainer);
 
         // then
         expect(elementRegistry.get('output1').businessObject.outputValues).not.to.exist;
@@ -444,4 +445,12 @@ function expectValuesRendered(element, expected) {
 
 function arrayFromNodeList(nodeList) {
   return [].slice.call(nodeList);
+}
+
+function triggerInputSelectChange(inputSelect, value, testContainer) {
+  triggerClick(inputSelect);
+
+  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
+
+  triggerClick(option);
 }

@@ -179,7 +179,8 @@ class TableCellEditor extends EditableComponent {
 
     const isDefaultExpressionLanguage = this.isDefaultExpressionLanguage(businessObject);
 
-    const expressionLanguageLabel = this.getExpressionLanguageLabel(businessObject);
+    const expressionLanguageLabel = this.getExpressionLanguageLabel(businessObject)
+      || businessObject.expressionLanguage;
 
     const isScript = this.isScript(businessObject);
 

@@ -1,5 +1,7 @@
 import { Component } from 'inferno';
 
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+
 const HIT_POLICIES = [
   'UNIQUE',
   'FIRST',
@@ -21,24 +23,22 @@ const LIST_FUNCTIONS = [
 
 export default class HitPolicyCellContextMenu extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.onHitPolicyChange = this.onHitPolicyChange.bind(this);
     this.onAggregationChange = this.onAggregationChange.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
   }
 
-  onHitPolicyChange({ target }) {
-    const hitPolicy = target.value;
-
+  onHitPolicyChange(hitPolicy) {
     this._modeling.editHitPolicy(hitPolicy, undefined);
   }
 
-  onAggregationChange({ target }) {
-    let aggregation = target.value === 'NONE'
+  onAggregationChange(value) {
+    let aggregation = value === 'NONE'
       ? undefined
-      : target.value;
+      : value;
 
     this._modeling.editHitPolicy('COLLECT', aggregation);
   }
@@ -80,53 +80,41 @@ export default class HitPolicyCellContextMenu extends Component {
           hitPolicy = businessObject.hitPolicy,
           aggregation = businessObject.aggregation;
 
+    const hitPolicyOptions = HIT_POLICIES.map(h => {
+      return {
+        label: h,
+        value: h
+      };
+    });
+
+    const aggregationOptions = LIST_FUNCTIONS.map(l => {
+      return {
+        label: l === 'NONE' ? '-' : l,
+        value: l
+      };
+    });
+
     return (
       <div className="context-menu-container hit-policy-edit">
         <p className="hit-policy-edit-policy">
           <label className="dms-label">Hit Policy:</label>
 
-          <select
-            className="hit-policy-edit-policy-select dms-select"
-            onChange={ this.onHitPolicyChange }>
-            {
-              HIT_POLICIES.map(p => {
-                return (
-                  <option
-                    key={ p }
-                    selected={ hitPolicy === p }
-                    value={ p }>{ p }</option>
-                );
-              })
-            }
-          </select>
+          <InputSelect
+            className="hit-policy-edit-policy-select"
+            onChange={ this.onHitPolicyChange }
+            options={ hitPolicyOptions }
+            value={ hitPolicy } />
         </p>
         {
           hitPolicy === 'COLLECT' &&
             <p className="hit-policy-edit-operator">
               <label className="dms-label">Aggregation:</label>
 
-              <select
-                className="hit-policy-edit-operator-select dms-select"
-                onChange={ this.onAggregationChange }>
-                {
-                  LIST_FUNCTIONS.map(listFunction => {
-                    let selected = false;
-
-                    if (listFunction === 'NONE') {
-                      selected = aggregation === undefined;
-                    } else {
-                      selected = aggregation === listFunction;
-                    }
-
-                    return (
-                      <option
-                        key={ listFunction }
-                        selected={ selected }
-                        value={ listFunction }>{ listFunction }</option>
-                    );
-                  })
-                }
-              </select>
+              <InputSelect
+                className="hit-policy-edit-operator-select"
+                onChange={ this.onAggregationChange }
+                options={ aggregationOptions }
+                value={ aggregation } />
             </p>
         }
       </div>

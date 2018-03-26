@@ -15,6 +15,7 @@ import CoreModule from 'lib/core';
 import DecisionTableHeadModule from 'lib/features/decision-table-head';
 import DecisionTableHeadEditorModule from 'lib/features/decision-table-head/editor';
 import ModelingModule from 'lib/features/modeling';
+import KeyboardModule from 'lib/features/keyboard';
 
 
 describe('decision-table-head/editor - input', function() {
@@ -24,7 +25,8 @@ describe('decision-table-head/editor - input', function() {
       CoreModule,
       DecisionTableHeadModule,
       DecisionTableHeadEditorModule,
-      ModelingModule
+      ModelingModule,
+      KeyboardModule
     ],
     debounceInput: false
   }));

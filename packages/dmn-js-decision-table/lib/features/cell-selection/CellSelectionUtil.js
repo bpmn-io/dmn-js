@@ -80,7 +80,7 @@ export function ensureFocus(el) {
 
   // QUIRK: otherwise range and focus related actions may
   // yield errors in older browsers (PhantomJS / IE)
-  if (!document.contains(focusEl)) {
+  if (!document.body.contains(focusEl)) {
     return;
   }
 
