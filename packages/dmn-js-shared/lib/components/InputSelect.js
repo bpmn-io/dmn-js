@@ -38,7 +38,9 @@ export default class InputSelect extends Component {
   componentWillUnmount() {
     document.removeEventListener('click', this.onClick);
 
-    this.keyboard.addListener(this.onKeyboard);
+    this.keyboard.removeListener(this.onKeyboard);
+
+    this.removePortalEl();
   }
 
   componentWillReceiveProps(props) {
@@ -186,7 +188,8 @@ export default class InputSelect extends Component {
   render() {
     const {
       className,
-      options
+      options,
+      noInput
     } = this.props;
 
     const {
@@ -194,17 +197,28 @@ export default class InputSelect extends Component {
       value
     } = this.state;
 
+    const option = options ? options.filter(o => o.value === value)[0] : false;
+
+    const label = option ? option.label : value;
+
     return (
       <div
         ref={ node => this.parentNode = node }
         className={ [ className || '', 'dms-input-select' ].join(' ') }
         onClick={ this.onInputClick }>
-        <input
-          className="dms-input"
-          onInput={ this.onInput }
-          ref={ node => this.inputNode = node }
-          type="text"
-          value={ value } />
+        {
+          noInput
+            ? <div
+              className="dms-input"
+              ref={ node => this.inputNode = node }>{ label }</div>
+            : <input
+              className="dms-input"
+              onInput={ this.onInput }
+              spellcheck="false"
+              ref={ node => this.inputNode = node }
+              type="text"
+              value={ value } />
+        }
         {
           optionsVisible
             ? <span className="dms-input-select-icon dmn-icon-up"></span>

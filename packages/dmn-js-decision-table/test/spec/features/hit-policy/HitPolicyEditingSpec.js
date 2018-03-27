@@ -2,6 +2,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import {
   triggerInputEvent,
+  triggerInputSelectChange,
   triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -157,13 +158,3 @@ describe('features/hit-policy - editor', function() {
   });
 
 });
-
-// helpers //////////
-
-function triggerInputSelectChange(inputSelect, value, testContainer) {
-  triggerClick(inputSelect);
-
-  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
-
-  triggerClick(option);
-}

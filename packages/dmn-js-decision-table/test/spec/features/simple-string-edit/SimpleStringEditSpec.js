@@ -8,8 +8,8 @@ import {
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  triggerChangeEvent,
   triggerInputEvent,
+  triggerInputSelectChange,
   triggerKeyEvent,
   triggerMouseEvent,
   triggerClick
@@ -66,10 +66,10 @@ describe('simple string edit', function() {
     it('should change type of unary tests', function() {
 
       // given
-      const select = domQuery('.dms-select', simpleStringEdit);
+      const select = domQuery('.dms-input-select', simpleStringEdit);
 
       // when
-      triggerChangeEvent(select, 'negation');
+      triggerInputSelectChange(select, 'negation', testContainer);
 
       // then
       expect(inputEntry1.businessObject.text).to.equal('not("bronze")');
@@ -176,10 +176,10 @@ describe('simple string edit', function() {
 
       simpleStringEdit = openEditorMenu('inputEntry3', testContainer);
 
-      const select = domQuery('.dms-select', simpleStringEdit);
+      const select = domQuery('.dms-input-select', simpleStringEdit);
 
       // when
-      triggerChangeEvent(select, 'negation');
+      triggerInputSelectChange(select, 'negation', testContainer);
 
       // then
       expect(inputEntry3.businessObject.text).to.equal('not()');

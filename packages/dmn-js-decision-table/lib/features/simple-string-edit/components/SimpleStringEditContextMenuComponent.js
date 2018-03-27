@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import List from 'dmn-js-shared/lib/components/List';
 
@@ -279,9 +279,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         {
           isInputClause &&
             <p>
-              <Select
+              <InputSelect
+                noInput={ true }
                 ref={ node => this.selectNode = node }
-                className="full-width display-block"
                 onChange={ this.onUnaryTestsTypeChange }
                 options={ options }
                 value={ isNegation ? NEGATION : DISJUNCTION } />

@@ -5,8 +5,8 @@ import { query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  triggerClick,
   triggerInputEvent,
+  triggerInputSelectChange,
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -85,13 +85,3 @@ describe('expression language', function() {
   }));
 
 });
-
-// helpers //////////
-
-function triggerInputSelectChange(inputSelect, value, testContainer) {
-  triggerClick(inputSelect);
-
-  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
-
-  triggerClick(option);
-}

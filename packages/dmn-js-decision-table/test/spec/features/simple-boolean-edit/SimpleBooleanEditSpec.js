@@ -5,8 +5,8 @@ import { query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  triggerChangeEvent,
-  triggerClick
+  triggerClick,
+  triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleBooleanEditXML from './simple-boolean-edit.dmn';
@@ -68,10 +68,10 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('inputEntry1');
 
-      const select = domQuery('.dms-select', simpleBooleanEdit);
+      const select = domQuery('.dms-input-select', simpleBooleanEdit);
 
       // when
-      triggerChangeEvent(select, 'false');
+      triggerInputSelectChange(select, 'false', testContainer);
 
       // then
       expect(inputEntry1.businessObject.text).to.equal('false');
@@ -85,10 +85,10 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('inputEntry5');
 
-      const select = domQuery('.dms-select', simpleBooleanEdit);
+      const select = domQuery('.dms-input-select', simpleBooleanEdit);
 
       // when
-      triggerChangeEvent(select, 'false');
+      triggerInputSelectChange(select, 'false', testContainer);
 
       // then
       expect(inputEntry5.businessObject.text).to.equal('false');
@@ -116,10 +116,10 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('outputEntry1');
 
-      const select = domQuery('.dms-select', simpleBooleanEdit);
+      const select = domQuery('.dms-input-select', simpleBooleanEdit);
 
       // when
-      triggerChangeEvent(select, 'false');
+      triggerInputSelectChange(select, 'false', testContainer);
 
       // then
       expect(outputEntry1.businessObject.text).to.equal('false');
@@ -133,10 +133,10 @@ describe('simple boolean edit', function() {
 
       const simpleBooleanEdit = openSimpleBooleanEdit('outputEntry5');
 
-      const select = domQuery('.dms-select', simpleBooleanEdit);
+      const select = domQuery('.dms-input-select', simpleBooleanEdit);
 
       // when
-      triggerChangeEvent(select, 'false');
+      triggerInputSelectChange(select, 'false', testContainer);
 
       // then
       expect(outputEntry5.businessObject.text).to.equal('false');

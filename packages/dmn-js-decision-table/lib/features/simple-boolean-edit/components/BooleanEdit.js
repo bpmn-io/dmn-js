@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import { parseString } from '../Utils';
 
@@ -64,7 +64,8 @@ export default class BooleanEdit extends Component {
 
         <h4 class="dms-heading">Set Value</h4>
 
-        <Select
+        <InputSelect
+          noInput={ true }
           className="dms-block"
           onChange={ this.onChange }
           options={ options }

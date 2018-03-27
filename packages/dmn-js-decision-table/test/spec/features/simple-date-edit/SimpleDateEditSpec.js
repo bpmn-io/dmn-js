@@ -8,8 +8,8 @@ import {
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  triggerChangeEvent,
   triggerInputEvent,
+  triggerInputSelectChange,
   triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -75,10 +75,10 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const select = domQuery('.dms-select', simpleDateEdit);
+      const select = domQuery('.dms-input-select', simpleDateEdit);
 
       // when
-      triggerChangeEvent(select, 'before');
+      triggerInputSelectChange(select, 'before', testContainer);
 
       // then
       expect(inputEntry1.businessObject.text).to
@@ -93,7 +93,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const input = domQuery('.dms-input', simpleDateEdit);
+      const input = domQuery('.start-date-input .dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, '2000-01-01T00:00:00');
@@ -111,7 +111,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry1');
 
-      const input = domQuery('.dms-input', simpleDateEdit);
+      const input = domQuery('.start-date-input .dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, 'foo');
@@ -147,7 +147,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const input = domQueryAll('.dms-input', simpleDateEdit)[1];
+      const input = domQuery('.end-date-input .dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, '2000-01-01T00:00:00');
@@ -167,7 +167,7 @@ describe('simple date edit', function() {
 
       const simpleDateEdit = openSimpleDateEdit('inputEntry7');
 
-      const input = domQueryAll('.dms-input', simpleDateEdit)[1];
+      const input = domQuery('.end-date-input .dms-input', simpleDateEdit);
 
       // when
       triggerInputEvent(input, 'foo');
@@ -209,10 +209,10 @@ describe('simple date edit', function() {
 
         const simpleDateEdit = openSimpleDateEdit('inputEntry8');
 
-        const select = domQuery('.dms-select', simpleDateEdit);
+        const select = domQuery('.dms-input-select', simpleDateEdit);
 
         // when
-        triggerChangeEvent(select, 'between');
+        triggerInputSelectChange(select, 'between', testContainer);
 
         // then
         // expect not to have been set yet

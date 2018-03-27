@@ -1,3 +1,5 @@
+import { query as domQuery } from 'min-dom';
+
 export function triggerInputEvent(element, text) {
   if (element.tagName === 'INPUT') {
     element.value = text;
@@ -52,4 +54,12 @@ export function triggerKeyEvent(element, event, code) {
   e.which = code;
 
   element.dispatchEvent(e);
+}
+
+export function triggerInputSelectChange(inputSelect, value, testContainer) {
+  triggerClick(inputSelect);
+
+  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
+
+  triggerClick(option);
 }

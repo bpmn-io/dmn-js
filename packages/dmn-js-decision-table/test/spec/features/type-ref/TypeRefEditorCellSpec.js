@@ -1,6 +1,9 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
-import { triggerClick } from 'dmn-js-shared/test/util/EventUtil';
+import {
+  triggerClick,
+  triggerInputSelectChange
+} from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
 
@@ -53,13 +56,3 @@ describe('features/type-ref', function() {
   }));
 
 });
-
-// helpers ///////////
-
-function triggerInputSelectChange(inputSelect, value, testContainer) {
-  triggerClick(inputSelect);
-
-  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
-
-  triggerClick(option);
-}

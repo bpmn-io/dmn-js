@@ -8,8 +8,8 @@ import {
 import TestContainer from 'mocha-test-container-support';
 
 import {
-  triggerChangeEvent,
   triggerInputEvent,
+  triggerInputSelectChange,
   triggerClick
 } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -74,10 +74,10 @@ describe('simple number edit', function() {
       it('should set to range', function() {
 
         // given
-        const select = domQuery('.dms-select', simpleNumberEdit);
+        const select = domQuery('.dms-input-select', simpleNumberEdit);
 
         // when
-        triggerChangeEvent(select, 'range');
+        triggerInputSelectChange(select, 'range', testContainer);
 
         // then
         expect(inputEntry4.businessObject.text).to.equal('[0..0]');
@@ -87,12 +87,12 @@ describe('simple number edit', function() {
       it('should set to comparison restoring previously set comparison', function() {
 
         // given
-        const select = domQuery('.dms-select', simpleNumberEdit);
+        const select = domQuery('.dms-input-select', simpleNumberEdit);
 
-        triggerChangeEvent(select, 'range');
+        triggerInputSelectChange(select, 'range', testContainer);
 
         // when
-        triggerChangeEvent(select, 'comparison');
+        triggerInputSelectChange(select, 'comparison', testContainer);
 
         // then
         expect(inputEntry4.businessObject.text).to.equal('< 1000');
@@ -102,10 +102,10 @@ describe('simple number edit', function() {
       it('should edit operator', function() {
 
         // given
-        const select = domQueryAll('.dms-select', simpleNumberEdit)[1];
+        const select = domQueryAll('.dms-input-select', simpleNumberEdit)[1];
 
         // when
-        triggerChangeEvent(select, 'greater');
+        triggerInputSelectChange(select, 'greater', testContainer);
 
         // then
         expect(inputEntry4.businessObject.text).to.equal('> 1000');
@@ -115,7 +115,7 @@ describe('simple number edit', function() {
       it('should edit value', function() {
 
         // given
-        const input = domQuery('.dms-input', simpleNumberEdit);
+        const input = domQuery('.comparison-number-input', simpleNumberEdit);
 
         // when
         triggerInputEvent(input, '42');
@@ -157,10 +157,10 @@ describe('simple number edit', function() {
       it('should set to comparison', function() {
 
         // given
-        const select = domQuery('.dms-select', simpleNumberEdit);
+        const select = domQuery('.dms-input-select', simpleNumberEdit);
 
         // when
-        triggerChangeEvent(select, 'comparison');
+        triggerInputSelectChange(select, 'comparison', testContainer);
 
         // then
         expect(inputEntry2.businessObject.text).to.equal('0');
@@ -170,12 +170,12 @@ describe('simple number edit', function() {
       it('should set to range restoring previously set range', function() {
 
         // given
-        const select = domQuery('.dms-select', simpleNumberEdit);
+        const select = domQuery('.dms-input-select', simpleNumberEdit);
 
-        triggerChangeEvent(select, 'comparison');
+        triggerInputSelectChange(select, 'comparison');
 
         // when
-        triggerChangeEvent(select, 'range');
+        triggerInputSelectChange(select, 'range', testContainer);
 
         // then
         expect(inputEntry2.businessObject.text).to.equal('[10..20[');
@@ -185,10 +185,10 @@ describe('simple number edit', function() {
       it('should edit range start type', function() {
 
         // given
-        const select = domQueryAll('.dms-select', simpleNumberEdit)[1];
+        const select = domQueryAll('.dms-input-select', simpleNumberEdit)[1];
 
         // when
-        triggerChangeEvent(select, 'exclude');
+        triggerInputSelectChange(select, 'exclude', testContainer);
 
         // then
         expect(inputEntry2.businessObject.text).to.equal(']10..20[');
@@ -198,7 +198,7 @@ describe('simple number edit', function() {
       it('should edit range start value', function() {
 
         // given
-        const input = domQuery('.dms-input', simpleNumberEdit);
+        const input = domQuery('.range-start-number-input', simpleNumberEdit);
 
         // when
         triggerInputEvent(input, '42');
@@ -211,10 +211,10 @@ describe('simple number edit', function() {
       it('should edit range end type', function() {
 
         // given
-        const select = domQueryAll('.dms-select', simpleNumberEdit)[2];
+        const select = domQueryAll('.dms-input-select', simpleNumberEdit)[2];
 
         // when
-        triggerChangeEvent(select, 'include');
+        triggerInputSelectChange(select, 'include', testContainer);
 
         // then
         expect(inputEntry2.businessObject.text).to.equal('[10..20]');
@@ -224,7 +224,7 @@ describe('simple number edit', function() {
       it('should edit range end value', function() {
 
         // given
-        const input = domQueryAll('.dms-input', simpleNumberEdit)[1];
+        const input = domQuery('.range-end-number-input', simpleNumberEdit);
 
         // when
         triggerInputEvent(input, '42');

@@ -1,8 +1,8 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {
-  triggerClick,
-  triggerInputEvent
+  triggerInputEvent,
+  triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import {
@@ -148,13 +148,3 @@ describe('literal expression properties editor', function() {
   }));
 
 });
-
-// helpers //////////
-
-function triggerInputSelectChange(inputSelect, value, testContainer) {
-  triggerClick(inputSelect);
-
-  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
-
-  triggerClick(option);
-}

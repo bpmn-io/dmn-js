@@ -2,7 +2,7 @@ import { Component } from 'inferno';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import {
   getDateString,
@@ -170,10 +170,13 @@ export default class InputDateEdit extends Component {
 
         <h3 class="dms-heading">Edit Date</h3>
 
-        <Select
-          onChange={ this.onTypeChange }
-          options={ options }
-          value={ type } />
+        <div className="dms-fill-row">
+          <InputSelect
+            noInput={ true }
+            onChange={ this.onTypeChange }
+            options={ options }
+            value={ type } />
+        </div>
 
         <h4 class="dms-heading">
           {
@@ -185,12 +188,11 @@ export default class InputDateEdit extends Component {
 
         <div>
           <ValidatedInput
-            className="dms-block"
+            className="start-date-input dms-block"
             onInput={ this.onStartDateInput }
             placeholder={ `e.g. ${ getSampleDate() }` }
             validate={ validateISOString }
-            value={ dates[0] }>
-          </ValidatedInput>
+            value={ dates[0] } />
 
           <p className="dms-hint">
             <a href="#"
@@ -210,6 +212,7 @@ export default class InputDateEdit extends Component {
           type === BETWEEN
             && <div>
               <ValidatedInput
+                className="end-date-input dms-block"
                 onInput={ this.onEndDateInput }
                 placeholder={ `e.g. ${ getSampleDate() }` }
                 validate={ validateISOString }

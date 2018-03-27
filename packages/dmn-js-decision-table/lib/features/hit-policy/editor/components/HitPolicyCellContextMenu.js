@@ -13,7 +13,6 @@ const HIT_POLICIES = [
 ];
 
 const LIST_FUNCTIONS = [
-  'NONE',
   'SUM',
   'MIN',
   'MAX',
@@ -36,7 +35,7 @@ export default class HitPolicyCellContextMenu extends Component {
   }
 
   onAggregationChange(value) {
-    let aggregation = value === 'NONE'
+    let aggregation = value === ''
       ? undefined
       : value;
 

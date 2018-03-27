@@ -5,6 +5,7 @@ import {
 
 import {
   triggerInputEvent,
+  triggerInputSelectChange,
   triggerKeyEvent,
   triggerMouseEvent,
   triggerClick
@@ -445,12 +446,4 @@ function expectValuesRendered(element, expected) {
 
 function arrayFromNodeList(nodeList) {
   return [].slice.call(nodeList);
-}
-
-function triggerInputSelectChange(inputSelect, value, testContainer) {
-  triggerClick(inputSelect);
-
-  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
-
-  triggerClick(option);
 }

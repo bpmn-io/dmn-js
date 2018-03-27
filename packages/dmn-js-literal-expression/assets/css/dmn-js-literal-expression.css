@@ -20,7 +20,7 @@
   border: 1px solid #444;
   border-bottom: none;
   position: relative;
-  min-width: 100px;
+  min-width: 192px;
   max-width: 50%;
 }
 
@@ -173,7 +173,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10000;
+  z-index: 10;
 }
 
 .dmn-literal-expression-container .powered-by-overlay .powered-by-overlay-content {

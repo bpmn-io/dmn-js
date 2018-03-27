@@ -117,7 +117,6 @@ describe('simple mode', function() {
 
 
   it('should open simple edit immediately on click + CMD', function() {
-    console.log('starting actual test');
 
     // given
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);

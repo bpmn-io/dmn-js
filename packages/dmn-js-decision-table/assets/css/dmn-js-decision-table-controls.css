@@ -19,7 +19,7 @@
 .dms-fill-row {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
 }
 
 .dms-fill-row > * {
@@ -233,8 +233,13 @@ h4.dms-heading {
 }
 
 .dms-input-select {
-  display: inline;
+  display: inline-block;
   position: relative;
+  min-width: 128px;
+}
+
+.dms-input-select .dms-input {
+  padding-right: 24px;
 }
 
 .dms-input-select .dms-input-select-icon {

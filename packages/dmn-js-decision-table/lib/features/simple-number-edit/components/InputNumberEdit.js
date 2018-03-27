@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 
 import Input from 'dmn-js-shared/lib/components/Input';
-import Select from 'dmn-js-shared/lib/components/Select';
+import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import {
   getComparisonString,
@@ -210,21 +210,25 @@ export default class InputNumberEdit extends Component {
     }];
 
     return (
-      <div className="comparison no-wrap">
+      <div className="comparison">
 
         <h4 className="dms-heading">Value</h4>
 
-        <Select
-          onChange={ this.onComparisonOperatorChange }
-          options={ comparisonOperatorOptions }
-          value={ comparisonOperator } />
+        <div className="dms-fill-row">
+          <InputSelect
+            noInput={ true }
+            onChange={ this.onComparisonOperatorChange }
+            options={ comparisonOperatorOptions }
+            value={ comparisonOperator } />
 
-        &nbsp;
+          &nbsp;
 
-        <Input
-          onInput={ this.onComparisonValueChange }
-          type="number"
-          value={ comparisonValue } />
+          <Input
+            className="comparison-number-input"
+            onInput={ this.onComparisonValueChange }
+            type="number"
+            value={ comparisonValue } />
+        </div>
 
       </div>
     );
@@ -243,8 +247,9 @@ export default class InputNumberEdit extends Component {
       <div className="range">
         <h4 className="dms-heading">Start Value</h4>
 
-        <div className="no-wrap">
-          <Select
+        <div className="dms-fill-row">
+          <InputSelect
+            noInput={ true }
             onChange={ this.onRangeStartTypeChange }
             options={ rangeTypeOptions }
             value={ rangeStartType } />
@@ -252,6 +257,7 @@ export default class InputNumberEdit extends Component {
           &nbsp;
 
           <Input
+            className="range-start-number-input"
             onInput={ this.onRangeStartValueChange }
             type="number"
             value={ rangeStartValue } />
@@ -261,8 +267,9 @@ export default class InputNumberEdit extends Component {
           End Value
         </h4>
 
-        <div className="no-wrap">
-          <Select
+        <div className="dms-fill-row">
+          <InputSelect
+            noInput={ true }
             onChange={ this.onRangeEndTypeChange }
             options={ rangeTypeOptions }
             value={ rangeEndType } />
@@ -270,6 +277,7 @@ export default class InputNumberEdit extends Component {
           &nbsp;
 
           <Input
+            className="range-end-number-input"
             onInput={ this.onRangeEndValueChange }
             type="number"
             value={ rangeEndValue } />
@@ -303,11 +311,13 @@ export default class InputNumberEdit extends Component {
 
         <h3 class="dms-heading">Edit Number</h3>
 
-        <Select
-          className="full-width display-block"
-          onChange={ this.onTypeChange }
-          options={ typeOptions }
-          value={ type } />
+        <div className="dms-fill-row">
+          <InputSelect
+            noInput={ true }
+            onChange={ this.onTypeChange }
+            options={ typeOptions }
+            value={ type } />
+        </div>
 
         {
           type === COMPARISON
