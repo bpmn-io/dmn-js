@@ -41,7 +41,11 @@ export default class OutputEditingProvider {
         height
       }, {
         contextMenuType: 'output-edit',
-        output
+        output,
+        offset: {
+          x: 4,
+          y: 4
+        }
       });
     });
   }

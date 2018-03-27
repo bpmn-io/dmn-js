@@ -38,7 +38,11 @@ export default class TypeRef {
         height
       }, {
         contextMenuType: 'type-ref-edit',
-        element
+        element,
+        offset: {
+          x: 4,
+          y: 4
+        }
       });
     });
   }

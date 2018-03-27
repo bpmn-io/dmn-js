@@ -36,7 +36,11 @@ export default function HitPolicyEditingProvider(
       width,
       height
     }, {
-      contextMenuType: 'hit-policy-edit'
+      contextMenuType: 'hit-policy-edit',
+      offset: {
+        x: 4,
+        y: 4
+      }
     });
   });
 }

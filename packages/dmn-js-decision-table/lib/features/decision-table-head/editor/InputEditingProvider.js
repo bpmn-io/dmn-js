@@ -41,7 +41,11 @@ export default class InputCellProvider {
         height
       }, {
         contextMenuType: 'input-edit',
-        input
+        input,
+        offset: {
+          x: 4,
+          y: 4
+        }
       });
     });
   }
