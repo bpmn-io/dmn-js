@@ -16,6 +16,10 @@
   line-height: 1.7em;
 }
 
+.dms-list-component .items .item .remove {
+  float: right;
+}
+
 .dms-fill-row {
   display: flex;
   flex-direction: row;

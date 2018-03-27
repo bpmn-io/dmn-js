@@ -5,7 +5,7 @@ import { groupBy } from 'min-dash';
 const RADIO = 'radio';
 
 const REMOVE_BTN_CLS =
-  'remove dmn-icon-clear float-right cursor-pointer';
+  'remove dmn-icon-clear';
 
 /**
  * Shows a list of grouped items that can be checked
@@ -133,7 +133,7 @@ export default class List extends Component {
                               && <input
                                 type={ type }
                                 checked={ item.isChecked }
-                                className="item-toggle cursor-pointer"
+                                className="item-toggle"
                                 onClick={ this.getToggleClickHandler(item) } />
                           }
                           &nbsp;
