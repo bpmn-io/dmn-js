@@ -1,7 +1,7 @@
 import SimpleModeButtonComponent from './components/SimpleModeButtonComponent';
 
 export default class SimpleMode {
-  constructor(components, contextMenu, eventBus, renderer) {
+  constructor(components, contextMenu, elementRegistry, eventBus, renderer) {
     this._providers = [];
 
     components.onGetComponent('table.before', () => {
@@ -27,6 +27,21 @@ export default class SimpleMode {
         }
       });
     });
+
+    eventBus.on('cell.click', context => {
+      const { event, node, id } = context;
+
+      if (isCmd(event)) {
+        const element = elementRegistry.get(id);
+
+        if (element) {
+          eventBus.fire('simpleMode.open', {
+            node,
+            element
+          });
+        }
+      }
+    });
   }
 
   registerProvider(provider) {
@@ -40,4 +55,22 @@ export default class SimpleMode {
   }
 }
 
-SimpleMode.$inject = [ 'components', 'contextMenu', 'eventBus', 'renderer' ];
+SimpleMode.$inject = [
+  'components',
+  'contextMenu',
+  'elementRegistry',
+  'eventBus',
+  'renderer'
+];
+
+// helpers //////////
+
+export function isCmd(event) {
+  // ensure we don't react to AltGr
+  // (mapped to CTRL + ALT)
+  if (event.altKey) {
+    return false;
+  }
+
+  return event.ctrlKey || event.metaKey;
+}

@@ -19,6 +19,12 @@ import FooProvider from './FooProvider';
 
 describe('simple mode', function() {
 
+  let testContainer;
+
+  beforeEach(function() {
+    testContainer = TestContainer.get(this);
+  });
+
   beforeEach(bootstrapModeler(simpleStringEditXML, {
     modules: [
       CoreModule,
@@ -32,12 +38,6 @@ describe('simple mode', function() {
       }
     ]
   }));
-
-  let testContainer;
-
-  beforeEach(function() {
-    testContainer = TestContainer.get(this);
-  });
 
 
   it('should render - enabled', function() {
@@ -113,6 +113,20 @@ describe('simple mode', function() {
 
     // then
     expect(domQuery('.foo', testContainer)).to.not.exist;
+  });
+
+
+  it('should open simple edit immediately on click + CMD', function() {
+    console.log('starting actual test');
+
+    // given
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    // when
+    triggerClick(cell, 0, 0, true);
+
+    // then
+    expect(domQuery('.foo', testContainer)).to.exist;
   });
 
 });

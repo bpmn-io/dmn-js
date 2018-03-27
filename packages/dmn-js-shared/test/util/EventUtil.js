@@ -13,17 +13,17 @@ export function triggerInputEvent(element, text) {
   element.dispatchEvent(event);
 }
 
-export function triggerClick(el, clientX, clientY) {
-  triggerMouseEvent(el, 'click', clientX, clientY);
+export function triggerClick(el, clientX, clientY, ctrlKey) {
+  triggerMouseEvent(el, 'click', clientX, clientY, ctrlKey);
 }
 
-export function triggerMouseEvent(element, event, clientX, clientY) {
+export function triggerMouseEvent(element, event, clientX, clientY, ctrlKey = false) {
   const e = document.createEvent('MouseEvent');
 
   if (e.initMouseEvent) {
     e.initMouseEvent(
       event, true, true, window, 0, 0, 0,
-      clientX, clientY, false, false, false, false,
+      clientX, clientY, ctrlKey, false, false, false,
       0, null
     );
   }
