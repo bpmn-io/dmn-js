@@ -1,6 +1,6 @@
-'use strict';
-
-var domEvent = require('min-dom').event;
+import {
+  event as domEvent
+} from 'min-dom';
 
 var {
   isCmd,
