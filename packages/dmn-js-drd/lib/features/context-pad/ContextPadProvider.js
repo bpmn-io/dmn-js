@@ -1,18 +1,22 @@
-'use strict';
+import {
+  assign,
+  isArray
+} from 'min-dash';
 
+import {
+  is,
+  isAny
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var assign = require('min-dash').assign,
-    isArray = require('min-dash').isArray;
+import {
+  hasPrimaryModifier
+} from 'diagram-js/lib/util/Mouse';
 
-var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
-    is = ModelUtil.is,
-    isAny = ModelUtil.isAny,
-    hasPrimaryModifier = require('diagram-js/lib/util/Mouse').hasPrimaryModifier;
 
 /**
 * A provider for DMN 1.1 elements context pad
 */
-function ContextPadProvider(
+export default function ContextPadProvider(
     eventBus, contextPad, modeling,
     elementFactory, connect, create,
     rules, popupMenu, canvas,
@@ -60,8 +64,6 @@ ContextPadProvider.$inject = [
   'canvas',
   'translate'
 ];
-
-module.exports = ContextPadProvider;
 
 
 ContextPadProvider.prototype.getContextPadEntries = function(element) {

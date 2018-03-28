@@ -1,25 +1,22 @@
-'use strict';
+import {
+  is,
+  isAny
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
-    is = ModelUtil.is,
-    isAny = ModelUtil.isAny;
+import inherits from 'inherits';
 
-var inherits = require('inherits');
-
-var RuleProvider = require('diagram-js/lib/features/rules/RuleProvider');
+import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 
 /**
  * DRD specific modeling rule
  */
-function DrdRules(eventBus) {
+export default function DrdRules(eventBus) {
   RuleProvider.call(this, eventBus);
 }
 
 inherits(DrdRules, RuleProvider);
 
 DrdRules.$inject = [ 'eventBus' ];
-
-module.exports = DrdRules;
 
 DrdRules.prototype.init = function() {
 

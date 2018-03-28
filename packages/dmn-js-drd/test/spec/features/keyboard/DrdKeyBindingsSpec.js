@@ -1,31 +1,36 @@
-'use strict';
+import {
+  bootstrapViewer,
+  inject
+} from 'test/TestHelper';
 
-var TestContainer = require('mocha-test-container-support');
+import TestContainer from 'mocha-test-container-support';
 
-var coreModule = require('lib/core'),
-    editorActionsModule = require('lib/features/editor-actions'),
-    labelEditingModule = require('lib/features/label-editing'),
-    keyboardModule = require('lib/features/keyboard'),
-    modelingModule = require('lib/features/modeling');
+import coreModule from 'lib/core';
+import editorActionsModule from 'lib/features/editor-actions';
+import labelEditingModule from 'lib/features/label-editing';
+import keyboardModule from 'lib/features/keyboard';
+import modelingModule from 'lib/features/modeling';
 
-var createKeyEvent = require('diagram-js/test/util/KeyEvents').createKeyEvent;
+import {
+  createKeyEvent
+} from 'diagram-js/test/util/KeyEvents';
 
-/* global bootstrapViewer, inject, sinon */
+/* global sinon */
 
 
 describe('features - keyboard', function() {
 
   var diagramXML = require('../../../fixtures/dmn/di.dmn');
 
-  var testModules = [
-    coreModule,
-    labelEditingModule,
-    keyboardModule,
-    editorActionsModule,
-    modelingModule
-  ];
-
-  beforeEach(bootstrapViewer(diagramXML, { modules: testModules }));
+  beforeEach(bootstrapViewer(diagramXML, {
+    modules: [
+      coreModule,
+      labelEditingModule,
+      keyboardModule,
+      editorActionsModule,
+      modelingModule
+    ]
+  }));
 
 
   describe('drd key bindings', function() {

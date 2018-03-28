@@ -1,7 +1,9 @@
-var domClasses = require('min-dom').classes;
+import {
+  classes as domClasses
+} from 'min-dom';
 
 
-function PaletteAdapter(eventBus, canvas) {
+export default function PaletteAdapter(eventBus, canvas) {
 
   function toggleMarker(cls, on) {
     var container = canvas.getContainer();
@@ -19,6 +21,7 @@ function PaletteAdapter(eventBus, canvas) {
 
 }
 
-PaletteAdapter.$inject = [ 'eventBus', 'canvas' ];
-
-module.exports = PaletteAdapter;
+PaletteAdapter.$inject = [
+  'eventBus',
+  'canvas'
+];

@@ -1,11 +1,13 @@
-'use strict';
+import {
+  insertCSS
+} from './helper';
 
-var TestHelper = module.exports = require('./helper');
+export * from './helper';
 
-TestHelper.insertCSS('dmn-js-drd.css', require('../assets/css/dmn-js-drd.css'));
+insertCSS('dmn-js-drd.css', require('../assets/css/dmn-js-drd.css'));
 
-TestHelper.insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
+insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
-TestHelper.insertCSS('dmn-js-testing.css',
+insertCSS('dmn-js-testing.css',
   '.test-container .dmn-js-parent { height: 500px; }'
 );

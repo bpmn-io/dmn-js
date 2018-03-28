@@ -1,14 +1,21 @@
-'use strict';
+import DiagramTranslate from 'diagram-js/lib/i18n/translate';
+import DiagramContextPad from 'diagram-js/lib/features/context-pad';
+import DiagramSelection from 'diagram-js/lib/features/selection';
+import DiagramConnect from 'diagram-js/lib/features/connect';
+import DiagramCreate from 'diagram-js/lib/features/create';
+import PopupMenu from '../popup-menu';
 
-module.exports = {
+import ContextPadProvider from './ContextPadProvider';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/i18n/translate'),
-    require('diagram-js/lib/features/context-pad'),
-    require('diagram-js/lib/features/selection'),
-    require('diagram-js/lib/features/connect'),
-    require('diagram-js/lib/features/create'),
-    require('../popup-menu')
+    DiagramTranslate,
+    DiagramContextPad,
+    DiagramSelection,
+    DiagramConnect,
+    DiagramCreate,
+    PopupMenu
   ],
   __init__: [ 'contextPadProvider' ],
-  contextPadProvider: [ 'type', require('./ContextPadProvider') ]
+  contextPadProvider: [ 'type', ContextPadProvider ]
 };

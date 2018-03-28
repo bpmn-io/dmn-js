@@ -1,7 +1,6 @@
-
-require('../../TestHelper');
-
-/* global bootstrapViewer */
+import {
+  bootstrapViewer
+} from 'test/TestHelper';
 
 
 describe('draw - DrdRenderer', function() {

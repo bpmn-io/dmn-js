@@ -1,28 +1,36 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits'),
-    isArray = require('min-dash').isArray,
-    isObject = require('min-dash').isObject,
-    assign = require('min-dash').assign;
+import {
+  isArray,
+  isObject,
+  assign
+} from 'min-dash';
 
-var domAttr = require('min-dom').attr,
-    domQuery = require('min-dom').query;
+import {
+  attr as domAttr,
+  query as domQuery
+} from 'min-dom';
 
-var svgAppend = require('tiny-svg/lib/append'),
-    svgAttr = require('tiny-svg/lib/attr'),
-    svgCreate = require('tiny-svg/lib/create');
+import {
+  append as svgAppend,
+  attr as svgAttr,
+  create as svgCreate
+} from 'tiny-svg';
 
-var BaseRenderer = require('diagram-js/lib/draw/BaseRenderer'),
-    RenderUtil = require('diagram-js/lib/util/RenderUtil'),
-    TextUtil = require('diagram-js/lib/util/Text'),
-    ModelUtil = require('dmn-js-shared/lib/util/ModelUtil');
+import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
+import TextUtil from 'diagram-js/lib/util/Text';
 
-var is = ModelUtil.is,
-    getName = ModelUtil.getName;
+import {
+  createLine
+} from 'diagram-js/lib/util/RenderUtil';
 
-var createLine = RenderUtil.createLine;
+import {
+  is,
+  getName
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-function DrdRenderer(eventBus, pathMap, styles) {
+
+export default function DrdRenderer(eventBus, pathMap, styles) {
 
   BaseRenderer.call(this, eventBus);
 
@@ -434,9 +442,11 @@ function DrdRenderer(eventBus, pathMap, styles) {
 
 inherits(DrdRenderer, BaseRenderer);
 
-DrdRenderer.$inject = [ 'eventBus', 'pathMap', 'styles' ];
-
-module.exports = DrdRenderer;
+DrdRenderer.$inject = [
+  'eventBus',
+  'pathMap',
+  'styles'
+];
 
 
 // helper functions //////////////////////

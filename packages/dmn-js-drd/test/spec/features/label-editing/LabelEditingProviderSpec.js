@@ -1,16 +1,16 @@
-'use strict';
+import {
+  bootstrapViewer,
+  inject
+} from 'test/TestHelper';
 
-require('../../../TestHelper');
+import labelEditingModule from 'lib/features/label-editing';
+import modelingModule from 'lib/features/modeling';
+import coreModule from 'lib/core';
+import draggingModule from 'diagram-js/lib/features/dragging';
 
-/* global bootstrapViewer, inject */
-
-
-var labelEditingModule = require('lib/features/label-editing'),
-    modelingModule = require('lib/features/modeling'),
-    coreModule = require('lib/core'),
-    draggingModule = require('diagram-js/lib/features/dragging');
-
-var LabelUtil = require('lib/features/label-editing/LabelUtil');
+import {
+  getLabel
+} from 'lib/features/label-editing/LabelUtil';
 
 
 function triggerKeyEvent(element, event, code) {
@@ -130,7 +130,7 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO');
 
       // then
-      expect(LabelUtil.getLabel(shape)).to.equal('FOO');
+      expect(getLabel(shape)).to.equal('FOO');
       expect(shape.businessObject.name).to.equal('FOO');
 
     }));
@@ -145,7 +145,7 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO');
 
       // then
-      expect(LabelUtil.getLabel(shape)).to.equal('FOO');
+      expect(getLabel(shape)).to.equal('FOO');
       expect(shape.businessObject.name).to.equal('FOO');
     }));
 
@@ -159,7 +159,7 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO');
 
       // then
-      expect(LabelUtil.getLabel(shape)).to.equal('FOO');
+      expect(getLabel(shape)).to.equal('FOO');
       expect(shape.businessObject.name).to.equal('FOO');
     }));
 
@@ -173,7 +173,7 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO');
 
       // then
-      expect(LabelUtil.getLabel(shape)).to.equal('FOO');
+      expect(getLabel(shape)).to.equal('FOO');
       expect(shape.businessObject.name).to.equal('FOO');
     }));
 
@@ -187,7 +187,7 @@ describe('features - label-editing', function() {
       setText(shape, 'FOO');
 
       // then
-      expect(LabelUtil.getLabel(shape)).to.equal('FOO');
+      expect(getLabel(shape)).to.equal('FOO');
       expect(shape.businessObject.text).to.equal('FOO');
     }));
 

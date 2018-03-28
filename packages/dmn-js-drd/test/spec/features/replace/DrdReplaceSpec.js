@@ -1,15 +1,16 @@
-'use strict';
+import {
+  bootstrapModeler,
+  inject
+} from '../../../TestHelper';
 
-require('../../../TestHelper');
+import modelingModule from 'lib/features/modeling';
+import replaceModule from 'lib/features/replace';
+import moveModule from 'diagram-js/lib/features/move';
+import coreModule from 'lib/core';
 
-/* global bootstrapModeler, inject */
-
-var modelingModule = require('lib/features/modeling'),
-    replaceModule = require('lib/features/replace'),
-    moveModule = require('diagram-js/lib/features/move'),
-    coreModule = require('lib/core');
-
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 describe('features/replace - drd replace', function() {

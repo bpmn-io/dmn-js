@@ -1,10 +1,17 @@
-module.exports = {
+import DiagramTranslate from 'diagram-js/lib/i18n/translate';
+import DiagramPalette from 'diagram-js/lib/features/palette';
+import DiagramCreate from 'diagram-js/lib/features/create';
+import DiagramLasso from 'diagram-js/lib/features/lasso-tool';
+
+import PaletteProvider from './PaletteProvider';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/i18n/translate'),
-    require('diagram-js/lib/features/palette'),
-    require('diagram-js/lib/features/create'),
-    require('diagram-js/lib/features/lasso-tool')
+    DiagramTranslate,
+    DiagramPalette,
+    DiagramCreate,
+    DiagramLasso
   ],
   __init__: [ 'paletteProvider' ],
-  paletteProvider: [ 'type', require('./PaletteProvider') ]
+  paletteProvider: [ 'type', PaletteProvider ]
 };

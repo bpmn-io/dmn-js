@@ -1,8 +1,8 @@
-'use strict';
-
-var reduce = require('min-dash').reduce,
-    keys = require('min-dash').keys,
-    forEach = require('min-dash').forEach;
+import {
+  reduce,
+  keys,
+  forEach
+} from 'min-dash';
 
 var NAME = 'name',
     ID = 'id';
@@ -17,14 +17,12 @@ var NAME = 'name',
  * Use respective diagram-js provided handlers if you would
  * like to perform automated modeling.
  */
-function UpdatePropertiesHandler(elementRegistry, moddle) {
+export default function UpdatePropertiesHandler(elementRegistry, moddle) {
   this._elementRegistry = elementRegistry;
   this._moddle = moddle;
 }
 
 UpdatePropertiesHandler.$inject = [ 'elementRegistry', 'moddle' ];
-
-module.exports = UpdatePropertiesHandler;
 
 
 /**

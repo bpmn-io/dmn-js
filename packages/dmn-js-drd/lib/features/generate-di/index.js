@@ -1,6 +1,6 @@
-'use strict';
+import DiGenerator from './DiGenerator';
 
-module.exports = {
+export default {
   __init__: [ 'diGenerator' ],
-  diGenerator: [ 'type', require('./DiGenerator') ]
+  diGenerator: [ 'type', DiGenerator ]
 };

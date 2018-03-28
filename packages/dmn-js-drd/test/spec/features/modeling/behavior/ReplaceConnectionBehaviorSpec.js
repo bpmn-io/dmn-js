@@ -1,14 +1,18 @@
-'use strict';
+import {
+  bootstrapModeler,
+  inject
+} from '../../../../TestHelper';
 
-require('../../../../TestHelper');
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-/* global bootstrapModeler, inject */
+import {
+  find
+} from 'min-dash';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is,
-    find = require('min-dash').find;
-
-var modelingModule = require('lib/features/modeling'),
-    coreModule = require('lib/core');
+import modelingModule from 'lib/features/modeling';
+import coreModule from 'lib/core';
 
 
 function getConnection(source, target, connectionOrType) {

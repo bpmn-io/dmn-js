@@ -1,20 +1,23 @@
-'use strict';
+import {
+  query as domQuery
+} from 'min-dom';
 
-var domQuery = require('min-dom').query;
+import {
+  bootstrapModeler,
+  inject,
+  injectAsync
+} from 'test/TestHelper';
 
-require('../../../TestHelper');
+import modelingModule from 'lib/features/modeling';
+import paletteProviderModule from 'lib/features/palette';
+import defPropsViewerModule from 'lib/features/definition-properties/viewer';
+import defPropsModelerModule from 'lib/features/definition-properties/modeler';
+import coreModule from 'lib/core';
 
-/* global bootstrapModeler, inject, injectAsync */
-
-var modelingModule = require('lib/features/modeling'),
-    paletteProviderModule = require('lib/features/palette'),
-    defPropsViewerModule = require('lib/features/definition-properties/viewer'),
-    defPropsModelerModule = require('lib/features/definition-properties/modeler'),
-    coreModule = require('lib/core');
-
-var EventUtils = require('../../../util/EventUtils'),
-    inputEvent = EventUtils.inputEvent,
-    clickElement = EventUtils.clickElement;
+import {
+  inputEvent,
+  clickElement
+} from 'test/util/EventUtils';
 
 
 describe('features/definition-properties', function() {

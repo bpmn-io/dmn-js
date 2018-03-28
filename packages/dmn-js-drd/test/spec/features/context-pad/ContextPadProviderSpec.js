@@ -1,22 +1,24 @@
-'use strict';
+import {
+  bootstrapModeler,
+  getDrdJS,
+  inject
+} from 'test/TestHelper';
 
-var TestHelper = require('../../../TestHelper');
+import TestContainer from 'mocha-test-container-support';
 
-var TestContainer = require('mocha-test-container-support');
+import {
+  query as domQuery
+} from 'min-dom';
 
-var domQuery = require('min-dom').query;
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
-
-
-/* global bootstrapModeler, inject */
-
-
-var contextPadModule = require('lib/features/context-pad'),
-    coreModule = require('lib/core'),
-    modelingModule = require('lib/features/modeling'),
-    createModule = require('diagram-js/lib/features/create'),
-    customRulesModule = require('../../../util/custom-rules');
+import contextPadModule from 'lib/features/context-pad';
+import coreModule from 'lib/core';
+import modelingModule from 'lib/features/modeling';
+import createModule from 'diagram-js/lib/features/create';
+import customRulesModule from '../../../util/custom-rules';
 
 
 describe('features - context-pad', function() {
@@ -170,7 +172,7 @@ describe('features - context-pad', function() {
 
     function expectContextPadEntries(elementOrId, expectedEntries) {
 
-      TestHelper.getDrdJS().invoke(function(elementRegistry, contextPad) {
+      getDrdJS().invoke(function(elementRegistry, contextPad) {
 
         var element = (
           typeof elementOrId === 'string' ?

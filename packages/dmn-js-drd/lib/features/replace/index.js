@@ -1,7 +1,12 @@
-module.exports = {
+import DiagramReplace from 'diagram-js/lib/features/replace';
+import DiagramSelection from 'diagram-js/lib/features/selection';
+
+import DrdReplace from './DrdReplace';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/features/replace'),
-    require('diagram-js/lib/features/selection')
+    DiagramReplace,
+    DiagramSelection
   ],
-  drdReplace: [ 'type', require('./DrdReplace') ]
+  drdReplace: [ 'type', DrdReplace ]
 };

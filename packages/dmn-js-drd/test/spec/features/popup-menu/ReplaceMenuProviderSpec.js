@@ -1,18 +1,22 @@
-'use strict';
+import {
+  bootstrapModeler,
+  getDrdJS,
+  inject
+} from '../../../TestHelper';
 
-/* global bootstrapModeler, inject */
+import coreModule from 'lib/core';
+import modelingModule from 'lib/features/modeling';
+import replaceMenuProviderModule from 'lib/features/popup-menu';
+import customRulesModule from '../../../util/custom-rules';
 
-var TestHelper = require('../../../TestHelper');
+import {
+  query as domQuery
+} from 'min-dom';
 
-var coreModule = require('lib/core'),
-    modelingModule = require('lib/features/modeling'),
-    replaceMenuProviderModule = require('lib/features/popup-menu'),
-    customRulesModule = require('../../../util/custom-rules');
-
-var domQuery = require('min-dom').query;
-
-var find = require('min-dash').find,
-    matchPattern = require('min-dash').matchPattern;
+import {
+  find,
+  matchPattern
+} from 'min-dash';
 
 function queryEntry(popupMenu, id) {
   return queryPopup(popupMenu, '[data-id="' + id + '"]');
@@ -60,7 +64,7 @@ describe('features/popup-menu - replace menu provider', function() {
   var openPopup = function(element, offset) {
     offset = offset || 100;
 
-    TestHelper.getDrdJS().invoke(function(popupMenu) {
+    getDrdJS().invoke(function(popupMenu) {
 
       popupMenu.create('dmn-replace', element);
 

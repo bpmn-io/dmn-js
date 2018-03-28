@@ -1,25 +1,27 @@
-'use strict';
+import {
+  assign,
+  map,
+  forEach,
+  pick
+} from 'min-dash';
 
-var assign = require('min-dash').assign,
-    map = require('min-dash').map,
-    forEach = require('min-dash').forEach,
-    pick = require('min-dash').pick,
-    inherits = require('inherits');
+import inherits from 'inherits';
 
-var Collections = require('diagram-js/lib/util/Collections');
+import Collections from 'diagram-js/lib/util/Collections';
 
-var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
-    getBusinessObject = ModelUtil.getBusinessObject,
-    is = ModelUtil.is;
+import {
+  getBusinessObject,
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
+import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 
 /**
  * A command interceptor responsible for updating elements after they've
  * been changed in the DRD view.
  */
-function DrdUpdater(
+export default function DrdUpdater(
     eventBus,
     drdFactory,
     connectionDocking,
@@ -242,8 +244,6 @@ function DrdUpdater(
 }
 
 inherits(DrdUpdater, CommandInterceptor);
-
-module.exports = DrdUpdater;
 
 DrdUpdater.$inject = [
   'eventBus',

@@ -1,8 +1,10 @@
-'use strict';
+import {
+  getDrdJS
+} from '../helper';
 
-var TestHelper = require('../helper');
-
-var assign = require('min-dash').assign;
+import {
+  assign
+} from 'min-dash';
 
 
 function mouseEvent(type, element, opts) {
@@ -49,8 +51,8 @@ function createEvent(type, element) {
 }
 
 
-function clickElement(element, isMousedown) {
-  return TestHelper.getDrdJS().invoke(function(elementRegistry) {
+export function clickElement(element, isMousedown) {
+  return getDrdJS().invoke(function(elementRegistry) {
 
     var target = elementRegistry.getGraphics(element);
 
@@ -66,11 +68,9 @@ function clickElement(element, isMousedown) {
   });
 }
 
-module.exports.clickElement = clickElement;
 
-
-function inputEvent(element, value) {
-  return TestHelper.getDrdJS().invoke(function(elementRegistry) {
+export function inputEvent(element, value) {
+  return getDrdJS().invoke(function(elementRegistry) {
 
     var target = elementRegistry.getGraphics(element);
 
@@ -83,5 +83,3 @@ function inputEvent(element, value) {
     createEvent('input', target);
   });
 }
-
-module.exports.inputEvent = inputEvent;

@@ -1,8 +1,6 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
-
-var Viewer = require('./Viewer');
+import Viewer from './Viewer';
 
 
 /**
@@ -10,17 +8,20 @@ var Viewer = require('./Viewer');
  *
  * @param {Object} options
  */
-function NavigatedViewer(options) {
+export default function NavigatedViewer(options) {
   Viewer.call(this, options);
 }
 
 inherits(NavigatedViewer, Viewer);
 
-module.exports = NavigatedViewer;
+import ZoomScroll from 'diagram-js/lib/navigation/zoomscroll';
+import MoveCanvas from 'diagram-js/lib/navigation/movecanvas';
+import TouchModule from 'diagram-js/lib/navigation/touch';
 
 NavigatedViewer.prototype._navigationModules = [
-  require('diagram-js/lib/navigation/zoomscroll'),
-  require('diagram-js/lib/navigation/movecanvas')
+  ZoomScroll,
+  MoveCanvas,
+  TouchModule
 ];
 
 NavigatedViewer.prototype._modules = [].concat(

@@ -13,7 +13,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
  * @param {DrdFactory} drdFactory
  * @param {ElementFactory} elementFactory
  */
-function DiGenerator(eventBus, drdFactory, elementFactory) {
+export default function DiGenerator(eventBus, drdFactory, elementFactory) {
 
   // ensure the definitions contains DI information
   eventBus.on('import.start', ({ definitions }) => {
@@ -69,8 +69,6 @@ function DiGenerator(eventBus, drdFactory, elementFactory) {
 
 }
 
-
-module.exports = DiGenerator;
 
 DiGenerator.$inject = [
   'eventBus',

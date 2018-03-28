@@ -1,6 +1,6 @@
 import DrillDown from './DrillDown';
 
-module.exports = {
+export default {
   __init__: [ 'drillDown' ],
   drillDown: [ 'type', DrillDown ]
 };

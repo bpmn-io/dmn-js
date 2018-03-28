@@ -1,8 +1,8 @@
-var exampleXML = require('../fixtures/dmn/di.dmn'),
-    noDiXML = require('../fixtures/dmn/no-di.dmn'),
-    emptyDefsXML = require('../fixtures/dmn/empty-definitions.dmn');
+import exampleXML from '../fixtures/dmn/di.dmn';
+import noDiXML from '../fixtures/dmn/no-di.dmn';
+import emptyDefsXML from '../fixtures/dmn/empty-definitions.dmn';
 
-var TestContainer = require('mocha-test-container-support');
+import TestContainer from 'mocha-test-container-support';
 
 import DrdModeler from '../helper/DrdModeler';
 

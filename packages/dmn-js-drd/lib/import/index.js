@@ -1,5 +1,5 @@
-'use strict';
+import DrdImporter from './DrdImporter';
 
-module.exports = {
-  drdImporter: [ 'type', require('./DrdImporter') ]
+export default {
+  drdImporter: [ 'type', DrdImporter ]
 };

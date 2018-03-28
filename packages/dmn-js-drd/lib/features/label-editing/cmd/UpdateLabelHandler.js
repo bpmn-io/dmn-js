@@ -1,12 +1,13 @@
-'use strict';
-
-var LabelUtil = require('../LabelUtil');
+import {
+  getLabel,
+  setLabel
+} from '../LabelUtil';
 
 
 /**
  * A handler that updates the name of a DMN element.
  */
-function UpdateLabelHandler() {
+export default function UpdateLabelHandler() {
 
   /**
    * Set the label and return the changed elements.
@@ -23,13 +24,13 @@ function UpdateLabelHandler() {
 
     var labelTarget = element.labelTarget || element;
 
-    LabelUtil.setLabel(label, text, labelTarget !== label);
+    setLabel(label, text, labelTarget !== label);
 
     return [ label, labelTarget ];
   }
 
   function execute(ctx) {
-    ctx.oldLabel = LabelUtil.getLabel(ctx.element);
+    ctx.oldLabel = getLabel(ctx.element);
     return setText(ctx.element, ctx.newLabel);
   }
 
@@ -42,5 +43,3 @@ function UpdateLabelHandler() {
   this.execute = execute;
   this.revert = revert;
 }
-
-module.exports = UpdateLabelHandler;

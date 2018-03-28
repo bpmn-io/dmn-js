@@ -1,11 +1,10 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
+import BaseModeling from 'diagram-js/lib/features/modeling/Modeling';
 
-var BaseModeling = require('diagram-js/lib/features/modeling/Modeling');
+import UpdatePropertiesHandler from './cmd/UpdatePropertiesHandler.js';
+import IdClaimHandler from './cmd/IdClaimHandler.js';
 
-var UpdatePropertiesHandler = require('./cmd/UpdatePropertiesHandler.js'),
-    IdClaimHandler = require('./cmd/IdClaimHandler.js');
 
 /**
  * DMN 1.1 modeling features activator
@@ -16,7 +15,13 @@ var UpdatePropertiesHandler = require('./cmd/UpdatePropertiesHandler.js'),
  * @param {CommandStack} commandStack
  * @param {DrdRules} drdRules
  */
-function Modeling(canvas, eventBus, elementFactory, commandStack, drdRules) {
+export default function Modeling(
+    canvas,
+    eventBus,
+    elementFactory,
+    commandStack,
+    drdRules) {
+
   this._canvas = canvas;
   this._drdRules = drdRules;
 
@@ -25,10 +30,13 @@ function Modeling(canvas, eventBus, elementFactory, commandStack, drdRules) {
 
 inherits(Modeling, BaseModeling);
 
-Modeling.$inject = [ 'canvas', 'eventBus', 'elementFactory', 'commandStack', 'drdRules' ];
-
-module.exports = Modeling;
-
+Modeling.$inject = [
+  'canvas',
+  'eventBus',
+  'elementFactory',
+  'commandStack',
+  'drdRules'
+];
 
 Modeling.prototype.getHandlers = function() {
   var handlers = BaseModeling.prototype.getHandlers.call(this);

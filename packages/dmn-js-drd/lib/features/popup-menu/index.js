@@ -1,9 +1,15 @@
-module.exports = {
+import DiagramTranslate from 'diagram-js/lib/i18n/translate';
+import DiagramPopupMenu from 'diagram-js/lib/features/popup-menu';
+import Replace from '../replace';
+
+import ReplaceMenuProvider from './ReplaceMenuProvider';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/i18n/translate'),
-    require('diagram-js/lib/features/popup-menu'),
-    require('../replace')
+    DiagramTranslate,
+    DiagramPopupMenu,
+    Replace
   ],
   __init__: [ 'replaceMenuProvider' ],
-  replaceMenuProvider: [ 'type', require('./ReplaceMenuProvider') ]
+  replaceMenuProvider: [ 'type', ReplaceMenuProvider ]
 };

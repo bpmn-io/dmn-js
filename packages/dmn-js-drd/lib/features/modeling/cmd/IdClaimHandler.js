@@ -1,13 +1,8 @@
-'use strict';
-
-
-function IdClaimHandler(moddle) {
+export default function IdClaimHandler(moddle) {
   this._moddle = moddle;
 }
 
 IdClaimHandler.$inject = [ 'moddle' ];
-
-module.exports = IdClaimHandler;
 
 
 IdClaimHandler.prototype.execute = function(context) {

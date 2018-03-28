@@ -1,11 +1,16 @@
-'use strict';
+import {
+  bootstrapModeler,
+  getDrdJS,
+  getDmnJS,
+  inject
+} from 'test/TestHelper';
 
-/* global bootstrapModeler, getDrdJS, inject, getDmnJS */
+import exampleXML from '../../fixtures/dmn/di.dmn';
+import multipleDecisionsXML from '../../fixtures/dmn/multiple-decisions.dmn';
 
-var exampleXML = require('../../fixtures/dmn/di.dmn'),
-    multipleDecisionsXML = require('../../fixtures/dmn/multiple-decisions.dmn');
-
-var pick = require('min-dash').pick;
+import {
+  pick
+} from 'min-dash';
 
 
 describe('DRD - Import', function() {

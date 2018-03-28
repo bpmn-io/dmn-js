@@ -1,13 +1,13 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
+import {
+  filter
+} from 'min-dash';
 
-var filter = require('min-dash').filter;
-
-var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
+import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 
-function ReplaceConnectionBehavior(eventBus, modeling, drdRules) {
+export default function ReplaceConnectionBehavior(eventBus, modeling, drdRules) {
 
   CommandInterceptor.call(this, eventBus);
 
@@ -70,5 +70,3 @@ ReplaceConnectionBehavior.$inject = [
   'modeling',
   'drdRules'
 ];
-
-module.exports = ReplaceConnectionBehavior;

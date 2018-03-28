@@ -1,17 +1,18 @@
-'use strict';
+import {
+  forEach,
+  find,
+  matchPattern
+} from 'min-dash';
 
-var forEach = require('min-dash').forEach,
-    find = require('min-dash').find,
-    matchPattern = require('min-dash').matchPattern;
-
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
-
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 function parseID(element) {
   return element && element.href.slice(1);
 }
 
-function DRDTreeWalker(handler, options) {
+export default function DRDTreeWalker(handler, options) {
 
   // list of elements to handle deferred to ensure
   // prerequisites are drawn
@@ -134,5 +135,3 @@ function DRDTreeWalker(handler, options) {
     handleDefinitions: handleDefinitions
   };
 }
-
-module.exports = DRDTreeWalker;

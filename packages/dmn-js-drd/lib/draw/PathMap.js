@@ -1,12 +1,10 @@
-'use strict';
-
 /* eslint-disable max-len */
 
 /**
  * Map containing SVG paths needed by BpmnRenderer.
  */
 
-function PathMap() {
+export default function PathMap() {
 
   /**
    * Contains a map of path elements
@@ -171,8 +169,6 @@ function PathMap() {
     return path;
   };
 }
-
-module.exports = PathMap;
 
 
 // helpers //////////////////////

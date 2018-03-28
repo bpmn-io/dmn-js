@@ -1,11 +1,14 @@
-'use strict';
+import {
+  assign
+} from 'min-dash';
 
-var assign = require('min-dash').assign;
 
 /**
  * A palette provider for DMN 1.1 elements.
  */
-function PaletteProvider(palette, create, elementFactory, lassoTool, translate) {
+export default function PaletteProvider(
+    palette, create, elementFactory,
+    lassoTool, translate) {
 
   this._palette = palette;
   this._create = create;
@@ -15,8 +18,6 @@ function PaletteProvider(palette, create, elementFactory, lassoTool, translate) 
 
   palette.registerProvider(this);
 }
-
-module.exports = PaletteProvider;
 
 PaletteProvider.$inject = [
   'palette',

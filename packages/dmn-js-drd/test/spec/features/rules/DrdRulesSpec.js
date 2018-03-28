@@ -1,11 +1,10 @@
-'use strict';
+import {
+  bootstrapModeler,
+  inject
+} from '../../../TestHelper';
 
-require('../../../TestHelper');
-
-/* global bootstrapModeler, inject */
-
-var drdRulesModule = require('lib/features/rules'),
-    coreModule = require('lib/core');
+import drdRulesModule from 'lib/features/rules';
+import coreModule from 'lib/core';
 
 
 describe('features/rules', function() {

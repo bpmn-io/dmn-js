@@ -1,11 +1,9 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
-
-var EditorActions = require('diagram-js/lib/features/editor-actions/EditorActions');
+import EditorActions from 'diagram-js/lib/features/editor-actions/EditorActions';
 
 
-function DrdEditorActions(
+export default function DrdEditorActions(
     injector,
     canvas,
     elementRegistry,
@@ -50,5 +48,3 @@ DrdEditorActions.$inject = [
   'lassoTool',
   'directEditing'
 ];
-
-module.exports = DrdEditorActions;

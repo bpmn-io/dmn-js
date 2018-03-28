@@ -1,9 +1,12 @@
-'use strict';
+import DiagramEditorActions from 'diagram-js/lib/features/editor-actions';
+import DiagramLassoTool from 'diagram-js/lib/features/lasso-tool';
 
-module.exports = {
+import DrdEditorActions from './DrdEditorActions';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/features/editor-actions'),
-    require('diagram-js/lib/features/lasso-tool')
+    DiagramEditorActions,
+    DiagramLassoTool
   ],
-  editorActions: [ 'type', require('./DrdEditorActions') ]
+  editorActions: [ 'type', DrdEditorActions ]
 };

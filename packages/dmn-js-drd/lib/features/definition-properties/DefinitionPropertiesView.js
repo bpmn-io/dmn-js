@@ -1,10 +1,11 @@
-'use strict';
+import {
+  domify,
+  query as domQuery,
+  delegate as domDelegate
+} from 'min-dom';
 
-var domify = require('min-dom').domify,
-    domQuery = require('min-dom').query,
-    domDelegate = require('min-dom').delegate;
 
-function DefinitionIdView(eventBus, canvas) {
+export default function DefinitionIdView(eventBus, canvas) {
   this._eventBus = eventBus;
   this._canvas = canvas;
 
@@ -18,8 +19,6 @@ function DefinitionIdView(eventBus, canvas) {
 }
 
 DefinitionIdView.$inject = [ 'eventBus', 'canvas' ];
-
-module.exports = DefinitionIdView;
 
 /**
  * Initialize

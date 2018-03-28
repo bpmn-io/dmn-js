@@ -1,12 +1,17 @@
-'use strict';
+import UpdateLabelHandler from './cmd/UpdateLabelHandler';
 
-var UpdateLabelHandler = require('./cmd/UpdateLabelHandler');
+import {
+  getLabel
+} from './LabelUtil';
 
-var LabelUtil = require('./LabelUtil');
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
-function LabelEditingProvider(eventBus, canvas, directEditing, commandStack) {
+export default function LabelEditingProvider(
+    eventBus, canvas, directEditing, commandStack
+) {
 
   this._canvas = canvas;
   this._commandStack = commandStack;
@@ -48,8 +53,6 @@ function LabelEditingProvider(eventBus, canvas, directEditing, commandStack) {
 
 LabelEditingProvider.$inject = [ 'eventBus', 'canvas', 'directEditing', 'commandStack' ];
 
-module.exports = LabelEditingProvider;
-
 
 /**
  * Activate direct editing for drgs and text annotations.
@@ -60,7 +63,7 @@ module.exports = LabelEditingProvider;
  */
 LabelEditingProvider.prototype.activate = function(element) {
 
-  var text = LabelUtil.getLabel(element);
+  var text = getLabel(element);
 
   if (text === undefined) {
     return;

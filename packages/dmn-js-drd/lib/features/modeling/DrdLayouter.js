@@ -1,18 +1,14 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
+import BaseLayouter from 'diagram-js/lib/layout/BaseLayouter';
 
-var BaseLayouter = require('diagram-js/lib/layout/BaseLayouter');
+import {
+  getMid
+} from 'diagram-js/lib/layout/LayoutUtil';
 
-var LayoutUtil = require('diagram-js/lib/layout/LayoutUtil');
-
-var getMid = LayoutUtil.getMid;
-
-function DrdLayouter() {}
+export default function DrdLayouter() {}
 
 inherits(DrdLayouter, BaseLayouter);
-
-module.exports = DrdLayouter;
 
 
 DrdLayouter.prototype.layoutConnection = function(connection, hints) {

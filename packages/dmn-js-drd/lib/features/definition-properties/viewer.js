@@ -1,9 +1,11 @@
-module.exports = {
-  __depends__: [ ],
+import DefinitionPropertiesView from './DefinitionPropertiesView';
+import PaletteAdapter from './PaletteAdapter';
+
+export default {
   __init__: [
     'definitionPropertiesView',
     'definitionPropertiesPaletteAdapter'
   ],
-  definitionPropertiesView: [ 'type', require('./DefinitionPropertiesView') ],
-  definitionPropertiesPaletteAdapter: [ 'type', require('./PaletteAdapter') ]
+  definitionPropertiesView: [ 'type', DefinitionPropertiesView ],
+  definitionPropertiesPaletteAdapter: [ 'type', PaletteAdapter ]
 };

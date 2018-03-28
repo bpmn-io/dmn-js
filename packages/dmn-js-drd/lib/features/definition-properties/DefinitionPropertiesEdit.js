@@ -1,13 +1,15 @@
-'use strict';
-
-var debounce = require('min-dash').debounce;
+import {
+  debounce
+} from 'min-dash';
 
 var DEBOUNCE_DELAY = 300;
 
-var domQuery = require('min-dom').query;
+import {
+  query as domQuery
+} from 'min-dom';
 
 
-function DefinitionIdEdit(eventBus, modeling, canvas) {
+export default function DefinitionIdEdit(eventBus, modeling, canvas) {
   this._eventBus = eventBus;
   this._modeling = modeling;
   this._canvas = canvas;
@@ -22,9 +24,12 @@ function DefinitionIdEdit(eventBus, modeling, canvas) {
   }, this);
 }
 
-DefinitionIdEdit.$inject = [ 'eventBus', 'modeling', 'canvas' ];
+DefinitionIdEdit.$inject = [
+  'eventBus',
+  'modeling',
+  'canvas'
+];
 
-module.exports = DefinitionIdEdit;
 
 DefinitionIdEdit.prototype.update = function(type, newValue) {
   var newProperties = {};

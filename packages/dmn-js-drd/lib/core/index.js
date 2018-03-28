@@ -1,8 +1,9 @@
-'use strict';
+import DrawModule from '../draw';
+import ImportModule from '../import';
 
-module.exports = {
+export default {
   __depends__: [
-    require('../draw'),
-    require('../import')
+    DrawModule,
+    ImportModule
   ]
 };

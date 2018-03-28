@@ -1,7 +1,8 @@
-'use strict';
+import DrdRenderer from './DrdRenderer';
+import PathMap from './PathMap';
 
-module.exports = {
+export default {
   __init__: [ 'drdRenderer' ],
-  drdRenderer: [ 'type', require('./DrdRenderer') ],
-  pathMap: [ 'type', require('./PathMap')]
+  drdRenderer: [ 'type', DrdRenderer ],
+  pathMap: [ 'type', PathMap ]
 };

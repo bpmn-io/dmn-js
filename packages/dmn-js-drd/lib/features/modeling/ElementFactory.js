@@ -1,16 +1,19 @@
-'use strict';
+import {
+  assign
+} from 'min-dash';
 
-var assign = require('min-dash').assign,
-    inherits = require('inherits');
+import inherits from 'inherits';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var BaseElementFactory = require('diagram-js/lib/core/ElementFactory');
+import BaseElementFactory from 'diagram-js/lib/core/ElementFactory';
 
 /**
  * A drd-aware factory for diagram-js shapes
  */
-function ElementFactory(drdFactory) {
+export default function ElementFactory(drdFactory) {
   BaseElementFactory.call(this);
 
   this._drdFactory = drdFactory;
@@ -20,8 +23,6 @@ inherits(ElementFactory, BaseElementFactory);
 
 
 ElementFactory.$inject = [ 'drdFactory' ];
-
-module.exports = ElementFactory;
 
 ElementFactory.prototype.baseCreate = BaseElementFactory.prototype.create;
 

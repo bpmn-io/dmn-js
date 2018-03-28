@@ -1,14 +1,16 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
+import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
+import {
+  getMid
+} from 'diagram-js/lib/layout/LayoutUtil';
 
-var getMid = require('diagram-js/lib/layout/LayoutUtil').getMid;
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
-
-var getRequirementType = function(source) {
+function getRequirementType(source) {
   switch (source.type) {
   case 'dmn:InputData':
     return 'Input';
@@ -19,9 +21,10 @@ var getRequirementType = function(source) {
   case 'dmn:BusinessKnowledgeModel':
     return 'Knowledge';
   }
-};
+}
 
-function CreateConnectionBehavior(eventBus, drdFactory, drdRules) {
+
+export default function CreateConnectionBehavior(eventBus, drdFactory, drdRules) {
 
   CommandInterceptor.call(this, eventBus);
 
@@ -74,8 +77,10 @@ function CreateConnectionBehavior(eventBus, drdFactory, drdRules) {
 }
 
 
-CreateConnectionBehavior.$inject = [ 'eventBus', 'drdFactory', 'drdRules' ];
+CreateConnectionBehavior.$inject = [
+  'eventBus',
+  'drdFactory',
+  'drdRules'
+];
 
 inherits(CreateConnectionBehavior, CommandInterceptor);
-
-module.exports = CreateConnectionBehavior;

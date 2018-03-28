@@ -1,8 +1,6 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
-
-var Viewer = require('./Viewer');
+import NavigatedViewer from './Viewer';
 
 /**
  * A modeler for DMN tables.
@@ -80,44 +78,44 @@ var Viewer = require('./Viewer');
  * @param {Array<didi.Module>} [options.additionalModules]
  *        a list of modules to use with the default modules
  */
-function Modeler(options) {
-  Viewer.call(this, options);
+export default function Modeler(options) {
+  NavigatedViewer.call(this, options);
 }
 
-inherits(Modeler, Viewer);
-
-module.exports = Modeler;
+inherits(Modeler, NavigatedViewer);
 
 
 // modules the modeler is composed of
 //
-// - viewer modules
-// - interaction modules
+// - viewer + navigation modules
 // - modeling modules
 
-Modeler.prototype._interactionModules = [
-  // non-modeling components
-  require('diagram-js/lib/navigation/movecanvas'),
-  require('diagram-js/lib/navigation/touch'),
-  require('diagram-js/lib/navigation/zoomscroll')
-];
+import MoveModule from 'diagram-js/lib/features/move';
+import BendpointsModule from 'diagram-js/lib/features/bendpoints';
+
+import GenerateDiModule from './features/generate-di';
+import EditorActionsModule from './features/editor-actions';
+import ContextPadModule from './features/context-pad';
+import KeyboardModule from './features/keyboard';
+import LabelEditingModule from './features/label-editing';
+import ModelingModule from './features/modeling';
+import PaletteModule from './features/palette';
+import DefinitionPropertiesModule from './features/definition-properties/modeler';
 
 Modeler.prototype._modelingModules = [
   // modeling components
-  require('diagram-js/lib/features/move'),
-  require('diagram-js/lib/features/bendpoints'),
-  require('diagram-js/lib/features/overlays'),
-  require('./features/generate-di'),
-  require('./features/editor-actions'),
-  require('./features/context-pad'),
-  require('./features/keyboard'),
-  require('./features/label-editing'),
-  require('./features/modeling'),
-  require('./features/palette'),
-  require('./features/definition-properties/modeler')
+  MoveModule,
+  BendpointsModule,
+  GenerateDiModule,
+  EditorActionsModule,
+  ContextPadModule,
+  KeyboardModule,
+  LabelEditingModule,
+  ModelingModule,
+  PaletteModule,
+  DefinitionPropertiesModule
 ];
 
 Modeler.prototype._modules = [].concat(
   Modeler.prototype._modules,
-  Modeler.prototype._interactionModules,
   Modeler.prototype._modelingModules);

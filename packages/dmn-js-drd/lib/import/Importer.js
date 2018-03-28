@@ -1,6 +1,4 @@
-'use strict';
-
-var DrdTreeWalker = require('./DrdTreeWalker');
+import DrdTreeWalker from './DrdTreeWalker';
 
 
 /**
@@ -13,7 +11,7 @@ var DrdTreeWalker = require('./DrdTreeWalker');
  * @param  {Function} done
  *         the callback, invoked with (err, [ warning ]) once the import is done
  */
-function importDRD(drd, definitions, done) {
+export function importDRD(drd, definitions, done) {
 
   var importer = drd.get('drdImporter'),
       eventBus = drd.get('eventBus');
@@ -55,5 +53,3 @@ function importDRD(drd, definitions, done) {
 
   done(error, warnings);
 }
-
-module.exports.importDRD = importDRD;

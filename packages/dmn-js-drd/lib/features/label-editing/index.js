@@ -1,9 +1,15 @@
-module.exports = {
+import DiagramCommand from 'diagram-js/lib/command';
+import DiagramChangeSupport from 'diagram-js/lib/features/change-support';
+import DiagramDirectEditing from 'diagram-js-direct-editing';
+
+import LabelEditingProvider from './LabelEditingProvider';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/command'),
-    require('diagram-js/lib/features/change-support'),
-    require('diagram-js-direct-editing')
+    DiagramCommand,
+    DiagramChangeSupport,
+    DiagramDirectEditing
   ],
   __init__: [ 'labelEditingProvider' ],
-  labelEditingProvider: [ 'type', require('./LabelEditingProvider') ]
+  labelEditingProvider: [ 'type', LabelEditingProvider ]
 };

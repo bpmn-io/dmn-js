@@ -1,17 +1,21 @@
-'use strict';
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
+import {
+  forEach,
+  filter
+} from 'min-dash';
 
-var forEach = require('min-dash').forEach,
-    filter = require('min-dash').filter;
-
-var replaceOptions = require ('../replace/ReplaceOptions');
+import replaceOptions from '../replace/ReplaceOptions';
 
 
 /**
  * This module is an element agnostic replace menu provider for the popup menu.
  */
-function ReplaceMenuProvider(popupMenu, modeling, moddle, drdReplace, rules, translate) {
+export default function ReplaceMenuProvider(
+    popupMenu, modeling, moddle,
+    drdReplace, rules, translate) {
 
   this._popupMenu = popupMenu;
   this._modeling = modeling;
@@ -140,6 +144,3 @@ ReplaceMenuProvider.prototype._createMenuEntry = function(definition, element, a
 ReplaceMenuProvider.prototype.getHeaderEntries = function(element) {
   return [];
 };
-
-
-module.exports = ReplaceMenuProvider;

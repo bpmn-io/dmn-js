@@ -1,12 +1,10 @@
-'use strict';
-
 /**
  * DRD specific key bindings.
  *
  * @param {Keyboard} keyboard
  * @param {EditorActions} editorActions
  */
-function DrdKeyBindings(keyboard, editorActions) {
+export default function DrdKeyBindings(keyboard, editorActions) {
 
   keyboard.addListener(function(key, modifiers) {
 
@@ -41,5 +39,3 @@ DrdKeyBindings.$inject = [
   'keyboard',
   'editorActions'
 ];
-
-module.exports = DrdKeyBindings;

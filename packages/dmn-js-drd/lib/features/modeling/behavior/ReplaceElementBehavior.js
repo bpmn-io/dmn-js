@@ -1,17 +1,18 @@
-'use strict';
+import inherits from 'inherits';
 
-var inherits = require('inherits');
+import {
+  forEach,
+  filter
+} from 'min-dash';
 
-var forEach = require('min-dash').forEach,
-    filter = require('min-dash').filter;
+import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-var CommandInterceptor = require('diagram-js/lib/command/CommandInterceptor');
 
 /**
  * Defines the behaviour of what happens to the elements inside a container
  * that morphs into another DRD element
  */
-function ReplaceElementBehaviour(eventBus, modeling) {
+export default function ReplaceElementBehaviour(eventBus, modeling) {
   CommandInterceptor.call(this, eventBus);
 
   this._modeling = modeling;
@@ -54,5 +55,3 @@ function ReplaceElementBehaviour(eventBus, modeling) {
 inherits(ReplaceElementBehaviour, CommandInterceptor);
 
 ReplaceElementBehaviour.$inject = [ 'eventBus', 'modeling' ];
-
-module.exports = ReplaceElementBehaviour;

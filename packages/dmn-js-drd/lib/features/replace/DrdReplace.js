@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * This module takes care of replacing DRD elements
  */
-function DrdReplace(drdFactory, replace, selection, modeling) {
+export default function DrdReplace(drdFactory, replace, selection, modeling) {
 
   /**
    * Prepares a new business object for the replacement element
@@ -68,6 +66,9 @@ function DrdReplace(drdFactory, replace, selection, modeling) {
   this.replaceElement = replaceElement;
 }
 
-DrdReplace.$inject = [ 'drdFactory', 'replace', 'selection', 'modeling' ];
-
-module.exports = DrdReplace;
+DrdReplace.$inject = [
+  'drdFactory',
+  'replace',
+  'selection',
+  'modeling'
+];

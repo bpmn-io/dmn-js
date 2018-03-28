@@ -1,9 +1,11 @@
-'use strict';
+import {
+  getDrdJS
+} from '../helper';
 
-var TestHelper = require('../helper');
-
-var domQuery = require('min-dom').query,
-    domQueryAll = require('min-dom').queryAll;
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 
 /**
@@ -16,8 +18,8 @@ var domQuery = require('min-dom').query,
  *
  * @return {Event} event, scoped to the given canvas
  */
-function queryElement(selector, target, queryAll) {
-  return TestHelper.getDrdJS().invoke(function(canvas) {
+export function queryElement(selector, target, queryAll) {
+  return getDrdJS().invoke(function(canvas) {
 
     if (typeof target === 'boolean') {
       queryAll = target;
@@ -34,11 +36,7 @@ function queryElement(selector, target, queryAll) {
   });
 }
 
-module.exports.queryElement = queryElement;
 
-
-function getBounds(element) {
+export function getBounds(element) {
   return element.getBoundingClientRect();
 }
-
-module.exports.getBounds = getBounds;

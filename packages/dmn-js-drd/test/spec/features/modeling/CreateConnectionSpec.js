@@ -1,21 +1,22 @@
-'use strict';
+import {
+  bootstrapModeler,
+  inject
+} from 'test/TestHelper';
 
-require('../../../TestHelper');
+import {
+  getMid
+} from 'diagram-js/lib/layout/LayoutUtil';
 
-var LayoutUtil = require('diagram-js/lib/layout/LayoutUtil');
+import modelingModule from 'lib/features/modeling';
+import coreModule from 'lib/core';
 
-var getMid = LayoutUtil.getMid;
 
-/* global bootstrapModeler, inject */
 function expectWaypoint(waypoint, element) {
   var midPoint = getMid(element);
 
   expect(waypoint.x).to.eql(midPoint.x);
   expect(waypoint.y).to.eql(midPoint.y);
 }
-
-var modelingModule = require('lib/features/modeling'),
-    coreModule = require('lib/core');
 
 
 describe('features/modeling - create connection', function() {

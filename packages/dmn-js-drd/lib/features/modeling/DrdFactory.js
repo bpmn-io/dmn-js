@@ -1,9 +1,9 @@
-'use strict';
+import {
+  forEach
+} from 'min-dash';
 
-var forEach = require('min-dash').forEach;
 
-
-function DrdFactory(moddle) {
+export default function DrdFactory(moddle) {
   this._model = moddle;
 }
 
@@ -60,6 +60,3 @@ DrdFactory.prototype.createDiEdge = function(source, waypoints) {
 DrdFactory.prototype.createDiWaypoint = function(waypoint) {
   return this.create('biodi:Waypoint', waypoint);
 };
-
-
-module.exports = DrdFactory;

@@ -1,9 +1,11 @@
-'use strict';
+import DiagramRulesModule from 'diagram-js/lib/features/rules';
 
-module.exports = {
+import DrdRules from './DrdRules';
+
+export default {
   __depends__: [
-    require('diagram-js/lib/features/rules')
+    DiagramRulesModule
   ],
   __init__: [ 'drdRules' ],
-  drdRules: [ 'type', require('./DrdRules') ]
+  drdRules: [ 'type', DrdRules ]
 };

@@ -1,6 +1,7 @@
-'use strict';
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
-var is = require('dmn-js-shared/lib/util/ModelUtil').is;
 
 function getLabelAttr(semantic) {
   if (is(semantic, 'dmn:Decision') ||
@@ -16,17 +17,17 @@ function getLabelAttr(semantic) {
   }
 }
 
-module.exports.getLabel = function(element) {
+export function getLabel(element) {
   var semantic = element.businessObject,
       attr = getLabelAttr(semantic);
 
   if (attr) {
     return semantic[attr] || '';
   }
-};
+}
 
 
-module.exports.setLabel = function(element, text, isExternal) {
+export function setLabel(element, text, isExternal) {
   var semantic = element.businessObject,
       attr = getLabelAttr(semantic);
 
@@ -40,4 +41,4 @@ module.exports.setLabel = function(element, text, isExternal) {
   }
 
   return element;
-};
+}

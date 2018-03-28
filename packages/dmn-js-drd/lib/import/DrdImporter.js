@@ -1,10 +1,11 @@
-'use strict';
+import {
+  assign,
+  map
+} from 'min-dash';
 
-var assign = require('min-dash').assign,
-    map = require('min-dash').map;
-
-var ModelUtil = require('dmn-js-shared/lib/util/ModelUtil'),
-    is = ModelUtil.is;
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 function elementData(semantic, attrs) {
   return assign({
@@ -30,16 +31,24 @@ function collectWaypoints(edge) {
   }
 }
 
-function DrdImporter(eventBus, canvas, elementFactory, elementRegistry) {
+export default function DrdImporter(
+    eventBus,
+    canvas,
+    elementFactory,
+    elementRegistry) {
+
   this._eventBus = eventBus;
   this._canvas = canvas;
   this._elementRegistry = elementRegistry;
   this._elementFactory = elementFactory;
 }
 
-DrdImporter.$inject = [ 'eventBus', 'canvas', 'elementFactory', 'elementRegistry' ];
-
-module.exports = DrdImporter;
+DrdImporter.$inject = [
+  'eventBus',
+  'canvas',
+  'elementFactory',
+  'elementRegistry'
+];
 
 
 DrdImporter.prototype.root = function(diagram) {

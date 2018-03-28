@@ -5,17 +5,23 @@
  * @see http://bpmn.io/license for more information.
  */
 
-var domify = require('min-dom').domify,
-    domQuery = require('min-dom').query,
-    domRemove = require('min-dom').remove;
+import {
+  domify,
+  query as domQuery,
+  remove as domRemove
+} from 'min-dom';
 
-var Diagram = require('diagram-js');
+import Diagram from 'diagram-js';
 
-var inherits = require('inherits');
+import inherits from 'inherits';
 
-var importDRD = require('./import/Importer').importDRD;
+import {
+  importDRD
+} from './import/Importer';
 
-var innerSVG = require('tiny-svg/lib/innerSVG');
+import {
+  innerSVG
+} from 'tiny-svg';
 
 
 /**
@@ -65,7 +71,7 @@ var innerSVG = require('tiny-svg/lib/innerSVG');
  * @param {Array<didi.Module>} [options.additionalModules]
  *        a list of modules to use with the default modules
  */
-function Viewer(options) {
+export default function Viewer(options) {
 
   this._container = this._createContainer();
 
@@ -79,8 +85,6 @@ function Viewer(options) {
 }
 
 inherits(Viewer, Diagram);
-
-module.exports = Viewer;
 
 /**
  * Export the currently displayed DMN 1.1 diagram as
@@ -286,20 +290,32 @@ Viewer.prototype.detach = function() {
   parentNode.removeChild(container);
 };
 
+import CoreModule from './core';
+import TranslateModule from 'diagram-js/lib/i18n/translate';
+import SelectionModule from 'diagram-js/lib/features/selection';
+import OverlaysModule from 'diagram-js/lib/features/overlays';
+import DefinitionPropertiesModule from './features/definition-properties/viewer';
+import DrillDownModule from './features/drill-down';
+
 Viewer.prototype._modules = [
-  require('./core'),
-  require('diagram-js/lib/i18n/translate'),
-  require('diagram-js/lib/features/selection'),
-  require('diagram-js/lib/features/overlays'),
-  require('./features/rules'),
-  require('./features/definition-properties/viewer'),
-  require('./features/drill-down')
+  CoreModule,
+  TranslateModule,
+  SelectionModule,
+  OverlaysModule,
+  DefinitionPropertiesModule,
+  DrillDownModule
 ];
 
 /* <project-logo> */
 
-var PoweredBy = require('./util/PoweredByUtil'),
-    domEvent = require('min-dom').event;
+import {
+  BPMNIO_IMG,
+  open as openPoweredBy
+} from './util/PoweredByUtil';
+
+import {
+  event as domEvent
+} from 'min-dom';
 
 /**
  * Adds the project logo to the diagram container as
@@ -310,7 +326,7 @@ var PoweredBy = require('./util/PoweredByUtil'),
  * @param {Element} container
  */
 function addProjectLogo(container) {
-  var img = PoweredBy.BPMNIO_IMG;
+  var img = BPMNIO_IMG;
 
   var linkMarkup =
     '<a href="http://bpmn.io" ' +
@@ -326,7 +342,7 @@ function addProjectLogo(container) {
   container.appendChild(linkElement);
 
   domEvent.bind(linkElement, 'click', function(event) {
-    PoweredBy.open();
+    openPoweredBy();
 
     event.preventDefault();
   });
