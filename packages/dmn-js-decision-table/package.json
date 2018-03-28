@@ -22,13 +22,13 @@
     "inferno-test-utils": "^4.0.0"
   },
   "dependencies": {
-    "diagram-js": "^0.29.0",
+    "diagram-js": "^0.30.0",
     "dmn-js-shared": "^2.1.0",
     "escape-html": "^1.0.3",
     "inferno": "^4.0.0",
     "min-dash": "^2.2.0",
     "min-dom": "^2.0.0",
     "selection-ranges": "^1.2.3",
-    "table-js": "^2.0.0"
+    "table-js": "^3.0.0"
   }
 }

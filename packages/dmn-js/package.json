@@ -37,7 +37,7 @@
     "babel-loader": "^7.1.2",
     "cpx": "^1.5.0",
     "del": "^3.0.0",
-    "diagram-js": "^0.29.0",
+    "diagram-js": "^0.30.0",
     "dmn-font": "^0.4.1",
     "execa": "^0.9.0",
     "min-dom": "^2.0.0",

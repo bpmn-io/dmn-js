@@ -13,7 +13,7 @@
     "stringify": "^5.1.0"
   },
   "dependencies": {
-    "diagram-js": "^0.29.0",
+    "diagram-js": "^0.30.0",
     "dmn-moddle": "^3.0.1",
     "ids": "^0.2.0",
     "inferno": "^4.0.0",
