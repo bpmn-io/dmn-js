@@ -4,7 +4,6 @@ import DmnLiteralExpressionEditor from '../helper/LiteralExpressionEditor';
 
 import simpleXML from './empty-literal-expression.dmn';
 
-require('../TestHelper');
 
 describe('Editor', function() {
 

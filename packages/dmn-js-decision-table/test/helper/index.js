@@ -4,7 +4,7 @@ import {
   isFunction
 } from 'min-dash';
 
-var TestContainer = require('mocha-test-container-support');
+import TestContainer from 'mocha-test-container-support';
 
 import DecisionTableViewer from './DecisionTableViewer';
 import DecisionTableEditor from './DecisionTableEditor';
