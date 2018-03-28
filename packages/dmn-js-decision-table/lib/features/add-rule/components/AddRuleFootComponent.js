@@ -1,9 +1,14 @@
 import { Component } from 'inferno';
 
+import {
+  inject
+} from 'table-js/lib/components';
 
 export default class AddRuleFootComponent extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+
+    inject(this);
 
     this.addRule = this.addRule.bind(this);
   }
@@ -22,13 +27,20 @@ export default class AddRuleFootComponent extends Component {
     this._eventBus.fire('addRule');
   }
 
-  render({ cols }) {
+  render() {
+    const { cols } = this.props;
 
     const cells = [
       <td className="add-rule-add">
         <span className="dmn-icon-plus action-icon" title="Add Rule"></span>
       </td>
     ];
+
+    const { businessObject } = this.sheet.getRoot();
+
+    if (!businessObject.input || !businessObject.input.length) {
+      cells.push(<td className="input-cell">-</td>);
+    }
 
     for (let i = 0; i < cols.length + 1; i++) {
       let className = 'add-rule';
@@ -59,3 +71,5 @@ export default class AddRuleFootComponent extends Component {
     );
   }
 }
+
+AddRuleFootComponent.$inject = [ 'sheet' ];

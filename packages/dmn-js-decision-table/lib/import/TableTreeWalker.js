@@ -34,17 +34,16 @@ export default function TableTreeWalker(handler, options) {
 
     if (table) {
 
-      if (!table.input) {
-        throw new Error(`missing input for ${ elementToString(table) }`);
-      }
-
       if (!table.output) {
         throw new Error(`missing output for ${ elementToString(table) }`);
       }
 
       const ctx = visitTable(table);
 
-      handleClauses(table.input, ctx, table);
+      if (table.input) {
+        handleClauses(table.input, ctx, table);
+      }
+
       handleClauses(table.output, ctx, table);
 
       // if any input or output clauses (columns) were added
@@ -56,8 +55,8 @@ export default function TableTreeWalker(handler, options) {
 
   }
 
-  function handleClauses(inputs, context, definitions) {
-    forEach(inputs, function(e) {
+  function handleClauses(clauses, context, definitions) {
+    forEach(clauses, function(e) {
       visit(e, context, definitions);
     });
   }

@@ -4,6 +4,7 @@ import addRuleModule from './features/add-rule';
 import annotationsEditorModule from './features/annotations/editor';
 import contextMenuModule from 'table-js/lib/features/context-menu';
 import copyCutPasteModule from './features/copy-cut-paste';
+import createInputsModule from './features/create-inputs';
 import decisionTableContextMenu from './features/context-menu';
 import decisionTableEditorActionsModule from './features/editor-actions';
 import decisionTableHeadEditorModule from './features/decision-table-head/editor';
@@ -43,6 +44,7 @@ export default class Editor extends Viewer {
       cellSelectionModule,
       contextMenuModule,
       copyCutPasteModule,
+      createInputsModule,
       decisionTableContextMenu,
       decisionTableEditorActionsModule,
       decisionTableHeadEditorModule,

@@ -74,8 +74,12 @@
   padding: 4px;
 }
 
-.dmn-decision-table-container .tjs-table tr > .input-cell + .output-cell {
+.dmn-decision-table-container .tjs-table tr .output-cell {
   border-left: 3px double #444;
+}
+
+.dmn-decision-table-container .tjs-table tr .output-cell + .output-cell {
+  border-left: 1px solid #444;
 }
 
 .dmn-decision-table-container th {

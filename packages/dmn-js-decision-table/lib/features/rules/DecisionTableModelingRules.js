@@ -32,11 +32,11 @@ export default class DecisionTableModelingRules extends RuleProvider {
     this.addRule('col.remove', HIGH_PRIORITY, ({ col }) => {
       const { cols } = this._sheet.getRoot();
 
-      if (isInput(col)) {
-        return cols.filter(c => isInput(c)).length > 1;
-      } else {
+      if (isOutput(col)) {
         return cols.filter(c => isOutput(c)).length > 1;
       }
+
+      return true;
     });
 
     // a rule that is aware of the data structure coming from copy and paste

@@ -35,8 +35,7 @@ describe('import', function() {
     it('should handle missing input(s)', function(done) {
       viewer.importXML(noInputXML, (err, importWarnings) => {
 
-        expect(err).to.exist;
-        expect(err.message).to.match(/missing input/);
+        expect(err).not.to.exist;
 
         done();
       });

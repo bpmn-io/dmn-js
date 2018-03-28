@@ -48,7 +48,13 @@ export default class AddInput extends Component {
       businessObject
     } = this.getRoot();
 
-    const colspan = businessObject.input.length;
+    const inputs = businessObject.input;
+
+    if (!inputs || !inputs.length) {
+      return null;
+    }
+
+    const colspan = inputs.length;
 
     return (
       <th

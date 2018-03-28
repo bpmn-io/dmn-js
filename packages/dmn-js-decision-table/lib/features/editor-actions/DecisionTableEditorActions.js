@@ -60,7 +60,9 @@ export default class DecisionTableEditorActions {
 
         const { input } = businessObject;
 
-        return modeling.addCol({ type: 'dmn:InputClause' }, input.length);
+        return modeling.addCol({
+          type: 'dmn:InputClause'
+        }, input ? input.length : 0);
       },
       addInputLeft(context) {
         let input = context && context.input;

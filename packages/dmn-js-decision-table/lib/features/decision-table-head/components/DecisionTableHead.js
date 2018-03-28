@@ -43,7 +43,6 @@ export default class DecisionTableHead extends Component {
   }
 
   render(props) {
-
     const root = this._sheet.getRoot();
 
     if (!is(root, 'dmn:DMNElement')) {
@@ -88,7 +87,7 @@ export default class DecisionTableHead extends Component {
       </tr>
       <tr>
         {
-          inputs.map(input => {
+          inputs && inputs.map(input => {
             return this.slotFill({
               type: 'cell',
               context: {
@@ -114,7 +113,7 @@ export default class DecisionTableHead extends Component {
       </tr>
       <tr>
         {
-          inputs.map((input, index) => {
+          inputs && inputs.map((input, index) => {
 
             const {
               inputExpression
@@ -198,8 +197,15 @@ class DefaultInputLabel extends Component {
   render() {
 
     const root = this._sheet.getRoot(),
-          businessObject = root.businessObject,
-          colspan = businessObject.input.length;
+          businessObject = root.businessObject;
+
+    const inputs = businessObject.input;
+
+    if (!inputs || !inputs.length) {
+      return null;
+    }
+
+    const colspan = businessObject.input.length;
 
     return (
       <th

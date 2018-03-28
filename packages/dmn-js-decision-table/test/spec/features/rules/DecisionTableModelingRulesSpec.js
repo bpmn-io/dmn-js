@@ -45,26 +45,6 @@ describe('modeling rules', function() {
     }));
 
 
-    it('should NOT allow removing last dmn:Input col', inject(
-      function(elementRegistry, modeling, rules) {
-
-        // given
-        const input1 = elementRegistry.get('input1'),
-              input2 = elementRegistry.get('input2');
-
-        modeling.removeCol(input2);
-
-        // when
-        const allowed = rules.allowed('col.remove', {
-          col: input1
-        });
-
-        // then
-        expect(allowed).to.be.false;
-      }
-    ));
-
-
     it('should NOT allow removing last dmn:Output col', inject(
       function(elementRegistry, modeling, rules) {
 

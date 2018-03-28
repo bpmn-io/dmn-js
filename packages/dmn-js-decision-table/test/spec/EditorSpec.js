@@ -2,7 +2,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
-import TestDecision from './simple.dmn';
+import TestDecision from './no-inputs.dmn';
 
 
 describe('DecisionTable', function() {

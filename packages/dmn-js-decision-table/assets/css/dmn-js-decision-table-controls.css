@@ -43,6 +43,32 @@
   color: #ccc;
 }
 
+/** create inputs **/
+.dmn-decision-table-container .create-inputs {
+  white-space: normal;
+  border-color: #AAA;
+  color: #AAA;
+  min-width: 50px;
+  width: 50px;
+}
+
+.dmn-decision-table-container .create-inputs .add-input {
+  margin-left: 0;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.dmn-decision-table-container .create-inputs:hover {
+  border-color: #444;
+  color: #444;
+}
+
+.dmn-decision-table-container th.create-inputs {
+  vertical-align: top;
+}
+/** end create inputs **/
+
+
 /* TODO(nikku): namespace and refactor context menu styles */
 .dmn-decision-table-container .context-menu {
   position: absolute;
@@ -269,7 +295,7 @@ h4.dms-heading {
   cursor: pointer;
 }
 
-.dms-select-options .option { 
+.dms-select-options .option {
   padding: 4px 9px 4px 9px;
 }
 
