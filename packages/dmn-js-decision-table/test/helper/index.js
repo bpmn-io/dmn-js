@@ -139,7 +139,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
  * @param  {Function} fn the function to inject to
  * @return {Function} a function that can be passed to it to carry out the injection
  */
-function inject(fn) {
+export function inject(fn) {
   return function() {
 
     if (!DMN_JS) {
@@ -159,7 +159,7 @@ function inject(fn) {
   };
 }
 
-function injectAsync(doneFn) {
+export function injectAsync(doneFn) {
   return function(done) {
     var testFn = doneFn(done);
 
@@ -196,7 +196,7 @@ function injectAsync(doneFn) {
  *
  * @return {Function} a function to be passed to beforeEach
  */
-function bootstrapModeler(diagram, options, locals) {
+export function bootstrapModeler(diagram, options, locals) {
   return bootstrapDmnJS(DecisionTableEditor, diagram, options, locals);
 }
 
@@ -228,28 +228,19 @@ function bootstrapModeler(diagram, options, locals) {
  *
  * @return {Function} a function to be passed to beforeEach
  */
-function bootstrapViewer(diagram, options, locals) {
+export function bootstrapViewer(diagram, options, locals) {
   return bootstrapDmnJS(DecisionTableViewer, diagram, options, locals);
 }
 
-function getDmnJS() {
+export function getDmnJS() {
   return DMN_JS;
 }
 
-function getDecisionTable() {
+export function getDecisionTable() {
   return DMN_JS.getActiveViewer();
 }
 
-module.exports.bootstrapDmnJS = (window || global).bootstrapDmnJS = bootstrapDmnJS;
-module.exports.bootstrapModeler = (window || global).bootstrapModeler = bootstrapModeler;
-module.exports.bootstrapViewer = (window || global).bootstrapViewer = bootstrapViewer;
-module.exports.inject = (window || global).inject = inject;
-module.exports.injectAsync = (window || global).injectAsync = injectAsync;
-module.exports.getDecisionTable = (window || global).getDecisionTable = getDecisionTable;
-module.exports.getDmnJS = (window || global).getDmnJS = getDmnJS;
-
-
-function insertCSS(name, css) {
+export function insertCSS(name, css) {
   if (document.querySelector('[data-css-file="' + name + '"]')) {
     return;
   }
@@ -267,5 +258,3 @@ function insertCSS(name, css) {
 
   head.appendChild(style);
 }
-
-module.exports.insertCSS = insertCSS;

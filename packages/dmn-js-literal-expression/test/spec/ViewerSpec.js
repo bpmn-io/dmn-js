@@ -1,6 +1,11 @@
+/* global sinon */
+
 import TestContainer from 'mocha-test-container-support';
 
-/* global sinon, bootstrapViewer, getLiteralExpression */
+import {
+  bootstrapViewer,
+  getLiteralExpression
+} from 'test/TestHelper';
 
 import DefaultExport from '../../';
 import DecisionTableView from 'lib/Viewer';
@@ -11,7 +16,6 @@ import { domify } from 'min-dom';
 
 import simpleXML from './literal-expression.dmn';
 
-require('../TestHelper');
 
 describe('Viewer', function() {
 
