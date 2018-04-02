@@ -37,6 +37,7 @@ cp(resolve('dmn-js-decision-table', '/assets/css/**'), dest + '/assets');
 console.log('copy dmn-js-literal-expression assets to ' + dest);
 cp(resolve('dmn-js-literal-expression', '/assets/css/**'), dest + '/assets');
 
+console.log('building pre-packaged distributions');
 
 var NODE_ENV = process.env.NODE_ENV;
 
@@ -47,8 +48,12 @@ var NODE_ENV = process.env.NODE_ENV;
 
     exec('webpack');
   } catch (e) {
-    console.error(e);
+    console.error('failed to build pre-package distributions', e);
+
+    process.exit(1);
   }
 
   process.env.NODE_ENV = NODE_ENV;
 });
+
+console.log('done.');
