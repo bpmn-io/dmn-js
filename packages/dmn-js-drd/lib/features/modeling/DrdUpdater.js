@@ -7,7 +7,9 @@ import {
 
 import inherits from 'inherits';
 
-import Collections from 'diagram-js/lib/util/Collections';
+import {
+  remove as collectionRemove
+} from 'diagram-js/lib/util/Collections';
 
 import {
   getBusinessObject,
@@ -337,7 +339,7 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, newParent) 
     // remove from old parent
     children = businessObject.$parent.get(containment);
 
-    Collections.remove(children, businessObject);
+    collectionRemove(children, businessObject);
   }
 
   if (!newParent) {
