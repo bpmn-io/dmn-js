@@ -197,7 +197,12 @@ export default class SimpleStringEditContextMenuComponent extends Component {
    * Add new value on ENTER.
    */
   onKeyDown({ isValid, event }) {
-    if (isEnter(event.keyCode) && isValid) {
+
+    if (!isEnter(event.keyCode)) {
+      return;
+    }
+
+    if (isValid) {
       const { element } = this.props.context;
 
       const isInputClause = isInput(element.col);
@@ -208,6 +213,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         this.onOutputValueInputClick();
       }
     }
+
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   /**

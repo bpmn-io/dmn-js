@@ -29,14 +29,16 @@ export default class InputSelect extends Component {
     this._portalEl = null;
   }
 
-  componentWillMount() {
-    document.addEventListener('click', this.onClick);
+  componentDidMount() {
+    document.addEventListener('click', this.onGlobalClick);
+    document.addEventListener('focusin', this.onFocusChanged);
 
     this.keyboard.addListener(this.onKeyboard);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.onClick);
+    document.removeEventListener('focusin', this.onFocusChanged);
+    document.removeEventListener('click', this.onGlobalClick);
 
     this.keyboard.removeListener(this.onKeyboard);
 
@@ -115,9 +117,9 @@ export default class InputSelect extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this.setState({
-      optionsVisible: true
-    });
+    this.inputNode.focus();
+
+    this.setOptionsVisible(!this.state.optionsVisible);
   }
 
   onInput = (event) => {
@@ -130,22 +132,99 @@ export default class InputSelect extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this.setState({
-      optionsVisible: false
-    });
+    this.setOptionsVisible(false);
 
     this.onChange(value);
   }
 
-  onClick = ({ target }) => {
-    if (this._portalEl
-      && !this._portalEl.contains(target)
-      && !this.inputNode.contains(target)) {
-      this.setState({
-        optionsVisible: false
-      });
+  checkClose(focusTarget) {
 
-      this.removePortalEl();
+    if (this._portalEl
+      && !this._portalEl.contains(focusTarget)
+      && !this.parentNode.contains(focusTarget)) {
+      this.setOptionsVisible(false);
+    }
+  }
+
+  onFocusChanged = (evt) => {
+    this.checkClose(evt.target);
+  }
+
+  onGlobalClick = (evt) => {
+    this.checkClose(evt.target);
+  }
+
+  select(direction) {
+
+    const {
+      options
+    } = this.props;
+
+    const {
+      value
+    } = this.state;
+
+    if (!options) {
+      return;
+    }
+
+    const option = options.filter(o => o.value === value)[0];
+
+    const idx = option
+      ? options.indexOf(option)
+      : -1;
+
+    const nextIdx = (
+      idx === -1
+        ? (
+          direction === 1
+            ? 0
+            : options.length - 1)
+        : ((idx + direction) % options.length)
+    );
+
+    const nextOption = options[nextIdx < 0 ? options.length + nextIdx : nextIdx];
+
+    this.onChange(nextOption.value);
+  }
+
+  setOptionsVisible(optionsVisible) {
+    this.setState({
+      optionsVisible
+    });
+  }
+
+  onKeyDown = (evt) => {
+
+    const {
+      optionsVisible
+    } = this.state;
+
+    var code = evt.which;
+
+    // DOWN or UP
+    if (code === 40 || code === 38) {
+
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      if (!optionsVisible) {
+        this.setOptionsVisible(true);
+      } else {
+        this.select(code === 40 ? 1 : -1);
+      }
+    }
+
+    if (optionsVisible) {
+
+      // ENTER
+      // ESC
+      if (code === 13 || code === 27) {
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        this.setOptionsVisible(false);
+      }
     }
   }
 
@@ -158,22 +237,22 @@ export default class InputSelect extends Component {
 
     // close on ESC
     if (keycode === 27) {
-      this.setState({
-        optionsVisible: false
-      });
+      this.setOptionsVisible(false);
 
       return true;
     }
   }
 
-  renderOptions(options) {
+  renderOptions(options, activeOption) {
     return (
       <div className="options">
         {
           options.map(option => {
             return (
               <div
-                className="option"
+                className={
+                  [ 'option', activeOption === option ? 'active' : '' ].join(' ')
+                }
                 data-value={ option.value }
                 onClick={ e => this.onOptionClick(option.value, e) }>
                 { option.label }
@@ -210,23 +289,27 @@ export default class InputSelect extends Component {
           noInput
             ? <div
               className="dms-input"
+              tabindex="0"
+              onKeyDown={ this.onKeyDown }
               ref={ node => this.inputNode = node }>{ label }</div>
             : <input
               className="dms-input"
               onInput={ this.onInput }
+              onKeyDown={ this.onKeyDown }
               spellcheck="false"
               ref={ node => this.inputNode = node }
               type="text"
               value={ value } />
         }
+        <span
+          className={ [
+            'dms-input-select-icon',
+            optionsVisible ? 'dmn-icon-up' : 'dmn-icon-down'
+          ].join(' ') }>
+        </span>
         {
           optionsVisible
-            ? <span className="dms-input-select-icon dmn-icon-up"></span>
-            : <span className="dms-input-select-icon dmn-icon-down"></span>
-        }
-        {
-          optionsVisible
-            && createPortal(this.renderOptions(options), this._portalEl)
+            && createPortal(this.renderOptions(options, option), this._portalEl)
         }
       </div>
     );
