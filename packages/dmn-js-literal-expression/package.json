@@ -18,13 +18,13 @@
     "literal expression"
   ],
   "devDependencies": {
-    "inferno-test-utils": "^4.0.0"
+    "inferno-test-utils": "^5.0.0"
   },
   "dependencies": {
     "diagram-js": "^1.1.0",
     "dmn-js-shared": "^2.1.0",
     "escape-html": "^1.0.3",
-    "inferno": "^4.0.0",
+    "inferno": "^5.0.0",
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0"
   }
