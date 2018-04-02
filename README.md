@@ -58,10 +58,11 @@ viewer.detach();
 
 ## Resources
 
-*   [Demo](http://demo.bpmn.io/dmn)
-*   [Issues](https://github.com/bpmn-io/dmn-js/issues)
-*   [Examples](https://github.com/bpmn-io/dmn-js-examples)
-*   [Forum](https://forum.bpmn.io)
+* [Demo](http://demo.bpmn.io/dmn)
+* [Issues](https://github.com/bpmn-io/dmn-js/issues)
+* [Examples](https://github.com/bpmn-io/dmn-js-examples)
+* [Forum](https://forum.bpmn.io)
+* [Changelog](./packages/dmn-js/CHANGELOG.md)
 
 
 ## Building the Project
