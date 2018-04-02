@@ -1,7 +1,3 @@
-> __Do NOT consider `dmn-js@1.x` as stable.__ The library is in the middle of
-a rewrite. Breaking changes may be introduced at any time. Please refer to dmn-js `v0.11.0` as the last stable version until `v2.0.0` is released.
-
-
 # dmn-js - DMN for the web
 
 [![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=master)](https://travis-ci.org/bpmn-io/dmn-js)
