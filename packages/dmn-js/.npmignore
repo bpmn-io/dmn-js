@@ -4,4 +4,4 @@ resources
 test/*
 !test/helper
 karma.conf.js
-webpack.config.js
+rollup.config.js

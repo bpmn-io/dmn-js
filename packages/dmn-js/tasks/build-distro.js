@@ -46,7 +46,7 @@ var NODE_ENV = process.env.NODE_ENV;
   try {
     process.env.NODE_ENV = env;
 
-    exec('webpack');
+    exec('rollup', [ '-c' ]);
   } catch (e) {
     console.error('failed to build pre-package distributions', e);
 
