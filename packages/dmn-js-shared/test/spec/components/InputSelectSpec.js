@@ -4,9 +4,7 @@ import TestContainerSupport from 'mocha-test-container-support';
 
 import { render } from 'inferno';
 
-import {
-  DiContainer
-} from 'table-js/lib/components';
+import DiContainer from './DiContainer';
 
 import {
   findRenderedDOMElementWithClass
@@ -19,7 +17,8 @@ import {
 import {
   triggerClick,
   triggerInputEvent,
-  triggerKeyEvent
+  triggerKeyEvent,
+  triggerFocusIn
 } from 'test/util/EventUtil';
 
 import InputSelect from 'lib/components/InputSelect';
@@ -109,7 +108,185 @@ describe('components/InputSelect', function() {
     });
 
 
-    it('should close options on ESC', function() {
+    it('should hide options on blur', function() {
+
+      // given
+      const renderedTree = renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect
+            options={ OPTIONS } />
+          <input type="text" className="external-input" />
+        </DiContainer>
+      );
+
+      const inputSelect =
+        findRenderedDOMElementWithClass(renderedTree, 'dms-input-select');
+
+      triggerClick(inputSelect);
+
+      const options = findRenderedDOMElementWithClass(renderedTree, 'options');
+
+      // when
+      triggerFocusIn(options);
+
+      // then
+      // options still exists
+      expect(
+        findRenderedDOMElementWithClass(renderedTree, 'options')
+      ).to.exist;
+
+      // when
+      triggerFocusIn(inputSelect);
+
+      // when
+      triggerFocusIn(
+        findRenderedDOMElementWithClass(renderedTree, 'external-input')
+      );
+
+      // then
+      // options is hidden
+      expect(
+        findRenderedDOMElementWithClass(renderedTree, 'options')
+      ).not.to.exist;
+    });
+
+
+    describe('keyboard controls', function() {
+
+      const ARROW_DOWN_KEY = 40;
+      const ARROW_UP_KEY = 38;
+      const ENTER_KEY = 13;
+      const ESC_KEY = 27;
+
+      const MULTIPLE_OPTIONS = [
+        {
+          label: 'Foo',
+          value: 'foo'
+        },
+        {
+          label: 'Bar',
+          value: 'bar'
+        }
+      ];
+
+
+      [ true, false ].forEach(function(noInput) {
+
+        describe('noInput = ' + noInput, function() {
+
+          it('should hide options on ENTER', function() {
+
+            // given
+            const renderedTree = renderIntoDocument(
+              <DiContainer injector={ injector }>
+                <InputSelect noInput={ noInput } options={ MULTIPLE_OPTIONS } />
+              </DiContainer>
+            );
+
+            const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+            triggerClick(input);
+
+            // when
+            triggerKeyEvent(input, 'keydown', ENTER_KEY);
+
+            // then
+            const options = findRenderedDOMElementWithClass(renderedTree, 'options');
+
+            expect(options).to.not.exist;
+          });
+
+
+          it('should hide options on ENTER', function() {
+
+            // given
+            const renderedTree = renderIntoDocument(
+              <DiContainer injector={ injector }>
+                <InputSelect noInput={ noInput } options={ MULTIPLE_OPTIONS } />
+              </DiContainer>
+            );
+
+            const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+            triggerClick(input);
+
+            // when
+            triggerKeyEvent(input, 'keydown', ESC_KEY);
+
+            // then
+            const options = findRenderedDOMElementWithClass(renderedTree, 'options');
+
+            expect(options).to.not.exist;
+          });
+
+
+          it('should open options on keydown', function() {
+
+            // given
+            const renderedTree = renderIntoDocument(
+              <DiContainer injector={ injector }>
+                <InputSelect noInput={ noInput } options={ OPTIONS } />
+              </DiContainer>
+            );
+
+            const input =
+              findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+            // when
+            triggerKeyEvent(input, 'keydown', ARROW_DOWN_KEY);
+
+            // then
+            expect(
+              findRenderedDOMElementWithClass(renderedTree, 'options')
+            ).to.exist;
+          });
+
+
+          it('should change options on keydown', function() {
+
+            let value;
+
+            // given
+            const renderedTree = renderIntoDocument(
+              <DiContainer injector={ injector }>
+                <InputSelect
+                  noInput={ noInput }
+                  options={ MULTIPLE_OPTIONS }
+                  onChange={ (_value) => value = _value } />
+              </DiContainer>
+            );
+
+            const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+            triggerClick(input);
+
+            // when
+            // options open
+            triggerKeyEvent(input, 'keydown', ARROW_UP_KEY);
+
+            // when
+            // select next value
+            triggerKeyEvent(input, 'keydown', ARROW_DOWN_KEY);
+
+            // then
+            expect(value).to.eql('foo');
+
+            // when
+            // select previous value
+            triggerKeyEvent(input, 'keydown', ARROW_UP_KEY);
+
+            // then
+            expect(value).to.eql('bar');
+          });
+
+        });
+
+      });
+
+    });
+
+
+    it('should hide options on global ESC', function() {
 
       // given
       const renderedTree = renderIntoDocument(

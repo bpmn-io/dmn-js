@@ -33,22 +33,28 @@ export function triggerMouseEvent(element, event, clientX, clientY, ctrlKey = fa
   element.dispatchEvent(e);
 }
 
+export function triggerEvent(element, name, eventType, bubbles=false) {
+  const event = document.createEvent(eventType);
+
+  event.initEvent(name, bubbles, true);
+
+  return element.dispatchEvent(event);
+}
+
+export function triggerFocusIn(element) {
+  return triggerEvent(element, 'focusin', 'UIEvents', true);
+}
+
 export function triggerChangeEvent(element, value) {
   element.value = value;
 
-  const event = document.createEvent('HTMLEvents');
-
-  event.initEvent('change', false, true);
-
-  element.dispatchEvent(event);
+  return triggerEvent(element, 'change', 'HTMLEvents');
 }
 
 export function triggerKeyEvent(element, event, code) {
   const e = document.createEvent('Events');
 
-  if (e.initEvent) {
-    e.initEvent(event, true, true);
-  }
+  e.initEvent(event, true, true);
 
   e.keyCode = code;
   e.which = code;
