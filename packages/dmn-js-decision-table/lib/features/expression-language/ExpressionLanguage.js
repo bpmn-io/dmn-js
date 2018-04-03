@@ -1,8 +1,5 @@
 /* eslint-disable max-len */
 
-// eslint-disable-next-line
-import Inferno from 'inferno';
-
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
