@@ -1,6 +1,3 @@
-'use strict';
-
-
 describe('dmn-viewer', function() {
 
   it('should expose globals', function() {

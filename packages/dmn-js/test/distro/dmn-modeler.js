@@ -1,6 +1,3 @@
-'use strict';
-
-
 describe('dmn-modeler', function() {
 
   it('should expose globals', function() {
