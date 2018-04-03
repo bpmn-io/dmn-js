@@ -2,10 +2,10 @@ import {
   event as domEvent
 } from 'min-dom';
 
-var {
+import {
   isCmd,
   isShift
-} = require('./KeyboardUtil');
+} from './KeyboardUtil';
 
 /**
  * A keyboard abstraction that may be activated and
