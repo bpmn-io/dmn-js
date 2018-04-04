@@ -117,14 +117,9 @@ export default class InputSelect extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this.inputNode.focus();
-
-    // move cursor to end of input
-    if ('selectionStart' in this.inputNode) {
-      this.inputNode.selectionStart = 100000;
-    }
-
     this.setOptionsVisible(!this.state.optionsVisible);
+
+    this.focusInput();
   }
 
   onInput = (event) => {
@@ -140,6 +135,22 @@ export default class InputSelect extends Component {
     this.setOptionsVisible(false);
 
     this.onChange(value);
+
+    this.focusInput();
+  }
+
+  /**
+   * Focus input node
+   */
+  focusInput() {
+    const node = this.inputNode;
+
+    node.focus();
+
+    // move cursor to end of input
+    if ('selectionStart' in node) {
+      node.selectionStart = 100000;
+    }
   }
 
   checkClose(focusTarget) {
