@@ -134,12 +134,11 @@ export default class ContentEditable extends Component {
     // enter
     if (event.which === 13) {
 
+      // prevent default action (<br/> insert)
       event.preventDefault();
+      event.stopPropagation();
 
       if (this.props.ctrlForNewline && !isCmd(event)) {
-        // prevent default action (<br/> insert)
-        event.preventDefault();
-
         return;
       }
 
