@@ -212,6 +212,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
       } else {
         this.onOutputValueInputClick();
       }
+
+      event.stopPropagation();
+      event.preventDefault();
     }
 
     event.stopPropagation();

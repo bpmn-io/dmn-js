@@ -2,11 +2,8 @@ import { Component } from 'inferno';
 
 import InputEditor from './InputEditor';
 
-import CloseBehavior from './CloseBehavior';
-
 import {
-  inject,
-  mixin
+  inject
 } from 'table-js/lib/components';
 
 
@@ -16,8 +13,6 @@ export default class InputCellContextMenu extends Component {
     super(props, context);
 
     this.state = {};
-
-    mixin(this, CloseBehavior);
 
     inject(this);
 
@@ -86,10 +81,7 @@ export default class InputCellContextMenu extends Component {
 
   render() {
     return (
-      <div
-        className="context-menu-container input-edit"
-        { ...this.getCloseProps() }
-      >
+      <div className="context-menu-container input-edit">
         <InputEditor
           expressionLanguage={ this.getValue('expressionLanguage') }
           inputVariable={ this.getValue('inputVariable') }
