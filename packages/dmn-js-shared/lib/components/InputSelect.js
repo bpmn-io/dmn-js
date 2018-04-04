@@ -119,6 +119,11 @@ export default class InputSelect extends Component {
 
     this.inputNode.focus();
 
+    // move cursor to end of input
+    if ('selectionStart' in this.inputNode) {
+      this.inputNode.selectionStart = 100000;
+    }
+
     this.setOptionsVisible(!this.state.optionsVisible);
   }
 
