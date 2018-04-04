@@ -26,4 +26,5 @@ NavigatedViewer.prototype._navigationModules = [
 
 NavigatedViewer.prototype._modules = [].concat(
   NavigatedViewer.prototype._modules,
-  NavigatedViewer.prototype._navigationModules);
+  NavigatedViewer.prototype._navigationModules
+);

@@ -1,6 +1,6 @@
 import inherits from 'inherits';
 
-import NavigatedViewer from './Viewer';
+import NavigatedViewer from './NavigatedViewer';
 
 /**
  * A modeler for DMN tables.
@@ -92,7 +92,6 @@ inherits(Modeler, NavigatedViewer);
 
 import MoveModule from 'diagram-js/lib/features/move';
 import BendpointsModule from 'diagram-js/lib/features/bendpoints';
-
 import GenerateDiModule from './features/generate-di';
 import EditorActionsModule from './features/editor-actions';
 import ContextPadModule from './features/context-pad';
@@ -118,4 +117,5 @@ Modeler.prototype._modelingModules = [
 
 Modeler.prototype._modules = [].concat(
   Modeler.prototype._modules,
-  Modeler.prototype._modelingModules);
+  Modeler.prototype._modelingModules
+);
