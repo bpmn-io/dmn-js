@@ -53,7 +53,7 @@ export default class Input extends Component {
         onKeyDown={ this.onKeyDown }
         onKeyUp={ this.onKeyUp }
         spellcheck="false"
-        type={ type }
+        type={ type || 'text' }
         value={ value } />
     );
   }
