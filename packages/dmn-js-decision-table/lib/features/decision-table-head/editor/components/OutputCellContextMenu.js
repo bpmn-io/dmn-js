@@ -3,11 +3,8 @@ import { Component } from 'inferno';
 import OutputEditor from './OutputEditor';
 
 import {
-  inject,
-  mixin
+  inject
 } from 'table-js/lib/components';
-
-import CloseBehavior from './CloseBehavior';
 
 
 export default class OutputCellContextMenu extends Component {
@@ -16,8 +13,6 @@ export default class OutputCellContextMenu extends Component {
     super(props, context);
 
     this.state = {};
-
-    mixin(this, CloseBehavior);
 
     inject(this);
 
@@ -59,10 +54,7 @@ export default class OutputCellContextMenu extends Component {
 
   render() {
     return (
-      <div
-        className="context-menu-container output-edit"
-        { ...this.getCloseProps() }
-      >
+      <div className="context-menu-container output-edit">
         <OutputEditor
           name={ this.getValue('name') }
           label={ this.getValue('label') }

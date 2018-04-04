@@ -18,6 +18,7 @@ We've migrated all parts of [dmn-js](https://github.com/bpmn-io/dmn-js) as well 
 ### Other Improvements
 
 * `FEAT`: add keyboard controls to decision table input selects
+* `FEAT`: add generic keyboard controls to context-menu like components
 * `FEAT`: add ability to open decision table without input
 * `FEAT`: add ability to add input if there are no inputs
 * `CHORE`: improve size of pre-built bundles
