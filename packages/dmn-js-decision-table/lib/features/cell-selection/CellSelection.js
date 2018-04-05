@@ -221,6 +221,16 @@ export default function CellSelection(
 
     return true;
   };
+
+
+  eventBus.on('contextMenu.close', function() {
+
+    if (lastSelection) {
+      return realSelect(lastSelection);
+    }
+
+  });
+
 }
 
 CellSelection.$inject = [
