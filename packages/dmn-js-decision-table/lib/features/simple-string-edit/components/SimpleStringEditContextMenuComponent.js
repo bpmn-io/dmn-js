@@ -202,23 +202,23 @@ export default class SimpleStringEditContextMenuComponent extends Component {
       return;
     }
 
+    const { element } = this.props.context;
+
+    const isInputClause = isInput(element.col);
+
+    // stop ENTER propagation (and ContextMenu close)
+    if (isInputClause || !isValid) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
     if (isValid) {
-      const { element } = this.props.context;
-
-      const isInputClause = isInput(element.col);
-
       if (isInputClause) {
         this.addUnaryTestsListItem();
       } else {
         this.onOutputValueInputClick();
       }
-
-      event.stopPropagation();
-      event.preventDefault();
     }
-
-    event.stopPropagation();
-    event.preventDefault();
   }
 
   /**
