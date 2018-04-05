@@ -6,14 +6,16 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.0.0
+
 ### Breaking Changes
 
-We've migrated all parts of [dmn-js](https://github.com/bpmn-io/dmn-js) as well as it's foundations to ES modules:
+We've migrated all remaining parts of [dmn-js](https://github.com/bpmn-io/dmn-js) as well as it's foundations to ES modules:
 
+* `CHORE`: migrate `dmn-js-drd` to ES modules
 * `CHORE`: migrate to `diagram-js@1.0.0`
 * `CHORE`: migrate to `inferno@5.0.0`
 * `CHORE`: migrate to `table-js@5.0.0`
-* `CHORE`: migrate `dmn-js-drd` to ES modules
 
 ### Other Improvements
 
