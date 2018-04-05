@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.0.0
+
+### Breaking Changes
+
+* `FIX`: deconflict styles by putting shared declarations into `dmn-js-shared.css`
+
 ## 3.0.1
 
 #### dmn-js-decision-table
