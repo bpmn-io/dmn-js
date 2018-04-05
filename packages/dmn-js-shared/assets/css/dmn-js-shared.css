@@ -1,0 +1,161 @@
+.dms-list-component .items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.7em;
+}
+
+.dms-list-component .items .item .remove {
+  float: right;
+}
+
+.dms-fill-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dms-fill-row > * {
+  flex: 0 0 auto;
+}
+
+.dms-fill-row > :last-child {
+  flex: 1 1 auto;
+}
+
+.dms-label {
+  font-weight: bold;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.dms-hrule {
+  border: 0;
+  border-top: dotted 1px #DDD;
+
+  margin: 10px auto;
+}
+
+.dms-heading {
+  margin: 12px 0 8px;
+  font-weight: bold;
+}
+
+p.dms-hint a {
+  color: #3960a2;
+  text-decoration: none;
+}
+
+p.dms-hint a:hover {
+  color: #4285f4;
+}
+
+/* validated input */
+p.dms-validation-warning {
+  color: #c9302c;
+}
+
+h3.dms-heading {
+  font-size: 16px;
+}
+
+h4.dms-heading {
+  font-size: 14px;
+}
+
+.dms-validated-input.dms-block .dms-input,
+.dms-block {
+  display: block;
+  width: 100%;
+}
+
+.dms-input,
+.dms-select {
+  outline: none;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: none;
+  font-size: 14px;
+  color: #444;
+  min-height: 26px;
+}
+
+.dms-input {
+  min-height: 26px;
+  white-space: pre-wrap;
+}
+
+.dms-select {
+  height: 26px;
+}
+
+.dms-input:focus,
+.dms-select:focus {
+  border-color: #52B415;
+}
+
+.dms-select.invalid:focus,
+.dms-input.invalid:focus {
+  border-color: #c9302c;
+}
+
+.dms-input.invalid,
+.dms-select.invalid {
+  background: #f4cecd;
+  border-color: #c9302c;
+  color: #c9302c;
+}
+
+.dms-script-input {
+  height: 150px;
+
+  white-space: pre-wrap;
+
+  overflow: auto;
+}
+
+.dms-input-select {
+  display: inline-block;
+  position: relative;
+  min-width: 128px;
+}
+
+.dms-input-select .dms-input {
+  padding-right: 24px;
+}
+
+.dms-input-select .dms-input-select-icon {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.dms-input-select .options {
+  background: #fff;
+}
+
+.dms-select-options {
+  position: fixed;
+  background-color: #fff;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #444;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  cursor: pointer;
+}
+
+.dms-select-options .option {
+  padding: 4px 9px 4px 9px;
+}
+
+.dms-select-options .option.active {
+  background: #FAFAF0;
+}
+
+.dms-select-options .option:focus,
+.dms-select-options .option:hover {
+  color: #52B415;
+}

@@ -28,6 +28,9 @@ cp(resolve('dmn-font', '/dist/{font,css}/**'), dest + '/assets/dmn-font');
 console.log('copy diagram-js.css to ' + dest);
 cp(resolve('diagram-js', '/assets/**'), dest + '/assets');
 
+console.log('copy dmn-js-shared assets to ' + dest);
+cp(resolve('dmn-js-shared', '/assets/css/**'), dest + '/assets');
+
 console.log('copy dmn-js-drd assets to ' + dest);
 cp(resolve('dmn-js-drd', '/assets/css/**'), dest + '/assets');
 

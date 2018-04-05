@@ -39,7 +39,7 @@ describe('components/ValidatedInput', function() {
 
     // then
     expect(
-      findRenderedDOMElementWithClass(renderedTree, 'validated-input-component')
+      findRenderedDOMElementWithClass(renderedTree, 'dms-validated-input')
     ).to.exist;
   });
 
@@ -54,7 +54,7 @@ describe('components/ValidatedInput', function() {
     );
 
     const input = findRenderedDOMElementWithClass(
-      renderedTree, 'validated-input-component'
+      renderedTree, 'dms-validated-input'
     ).firstChild;
 
     // when
@@ -84,7 +84,7 @@ describe('components/ValidatedInput', function() {
     );
 
     const input = findRenderedDOMElementWithClass(
-      renderedTree, 'validated-input-component'
+      renderedTree, 'dms-validated-input'
     ).firstChild;
 
     // when

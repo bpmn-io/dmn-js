@@ -40,6 +40,7 @@ module.exports = function(karma) {
       'dist/' + VARIANT + '.' + NAME_SUFFIX + '.js',
       'dist/assets/dmn-font/css/dmn.css',
       'dist/assets/diagram-js.css',
+      'dist/assets/dmn-js-shared.css',
       'dist/assets/dmn-js-decision-table-controls.css',
       'dist/assets/dmn-js-decision-table.css',
       'dist/assets/dmn-js-drd.css',

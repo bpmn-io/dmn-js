@@ -100,7 +100,7 @@ export default class ValidatedInput extends Component {
     const { validationWarning, value } = this.state;
 
     const parentClasses = [
-      'validated-input-component',
+      'dms-validated-input',
       className
     ].join(' ');
 
