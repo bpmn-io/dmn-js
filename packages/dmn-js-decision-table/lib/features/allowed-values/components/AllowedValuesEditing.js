@@ -103,8 +103,15 @@ export default class AllowedValuesEditing extends Component {
    * Add new value on ENTER.
    */
   onKeyDown = ({ isValid, event }) => {
-    if (isEnter(event.keyCode) && isValid) {
 
+    if (!isEnter(event.keyCode)) {
+      return;
+    }
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (isValid) {
       const {
         inputValue,
         values
