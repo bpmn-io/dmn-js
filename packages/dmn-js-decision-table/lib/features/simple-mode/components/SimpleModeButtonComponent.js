@@ -6,8 +6,6 @@ import {
   getNodeById
 } from '../../cell-selection/CellSelectionUtil';
 
-import { query as domQuery } from 'min-dom';
-
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 const OFFSET = 4;
@@ -148,7 +146,7 @@ export default class SimpleModeButtonComponent extends Component {
 
     this._eventBus.fire('simpleMode.open', {
       element,
-      node: domQuery(`[data-element-id="${element.id}"]`, this._container)
+      node: getNodeById(element.id, this._container)
     });
 
     this.setState({
