@@ -1,19 +1,23 @@
-import TestContainer from 'mocha-test-container-support';
-
 /* global sinon */
+
+import {
+  bootstrapViewer,
+  getDecisionTable
+} from 'test/TestHelper';
+
+import TestContainer from 'mocha-test-container-support';
 
 import DefaultExport from '../../';
 import DecisionTableView from 'lib/Viewer';
 
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 
-import { domify } from 'min-dom';
+import {
+  domify
+} from 'min-dom';
 
 import simpleXML from './simple.dmn';
-import {
-  bootstrapViewer,
-  getDecisionTable
-} from '../helper/index';
+
 
 describe('DecisionTable', function() {
 
@@ -23,13 +27,22 @@ describe('DecisionTable', function() {
     testContainer = TestContainer.get(this);
   });
 
+  let dmnJS;
+
+  afterEach(function() {
+    if (dmnJS) {
+      dmnJS.destroy();
+      dmnJS = null;
+    }
+  });
+
   function createDecisionTable(xml, done) {
-    const dmnDecisionTableViewer = new DmnDecisionTableViewer({
+    dmnJS = new DmnDecisionTableViewer({
       container: testContainer
     });
 
-    dmnDecisionTableViewer.importXML(xml, (err, warnings) => {
-      done(err, warnings, dmnDecisionTableViewer);
+    dmnJS.importXML(xml, (err, warnings) => {
+      done(err, warnings, dmnJS);
     });
   }
 
@@ -52,7 +65,9 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+    beforeEach(bootstrapViewer(simpleXML, {
+      container: testContainer
+    }));
 
     beforeEach(function() {
       decisionTableViewer = getDecisionTable();
@@ -95,7 +110,9 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+    beforeEach(bootstrapViewer(simpleXML, {
+      container: testContainer
+    }));
 
     beforeEach(function() {
       decisionTableViewer = getDecisionTable();
@@ -133,11 +150,14 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+    beforeEach(bootstrapViewer(simpleXML, {
+      container: testContainer
+    }));
 
     beforeEach(function() {
       decisionTableViewer = getDecisionTable();
     });
+
 
     it('should destroy', function() {
 
@@ -181,7 +201,9 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+    beforeEach(bootstrapViewer(simpleXML, {
+      container: testContainer
+    }));
 
     beforeEach(function() {
       decisionTableViewer = getDecisionTable();

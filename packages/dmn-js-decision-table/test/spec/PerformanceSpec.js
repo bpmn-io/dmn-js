@@ -1,7 +1,7 @@
 import {
   bootstrapModeler,
   inject
-} from '../TestHelper';
+} from 'test/TestHelper';
 
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
@@ -20,12 +20,22 @@ describe.skip('Performance', function() {
     document.body.appendChild(container);
   });
 
+  let dmnJS;
+
+  afterEach(function() {
+    if (dmnJS) {
+      dmnJS.destroy();
+      dmnJS = null;
+    }
+  });
+
+
   describe('DecisionTable', function() {
 
     function createDmnDecisionTableViewer(xml, done) {
-      const dmnDecisionTableViewer = new DmnDecisionTableViewer({ container });
+      dmnJS = new DmnDecisionTableViewer({ container });
 
-      dmnDecisionTableViewer.importXML(xml, (err, warnings) => {
+      dmnJS.importXML(xml, (err, warnings) => {
         done(err, warnings);
       });
     }
@@ -51,9 +61,9 @@ describe.skip('Performance', function() {
   describe('DecisionTableEditor', function() {
 
     function createDmnDecisionTableEditor(xml, done) {
-      const dmnDecisionTableEditor = new DmnDecisionTableEditor({ container });
+      dmnJS = new DmnDecisionTableEditor({ container });
 
-      dmnDecisionTableEditor.importXML(xml, (err, warnings) => {
+      dmnJS.importXML(xml, (err, warnings) => {
         done(err, warnings);
       });
     }

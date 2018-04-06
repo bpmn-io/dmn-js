@@ -2,19 +2,28 @@ import TestContainer from 'mocha-test-container-support';
 
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
-import TestDecision from './simple.dmn';
+import diagramXML from './simple.dmn';
 
 
 describe('DecisionTable', function() {
 
   let testContainer;
 
+  let dmnJS;
+
+  afterEach(function() {
+    if (dmnJS) {
+      dmnJS.destroy();
+      dmnJS = null;
+    }
+  });
+
   beforeEach(function() {
     testContainer = TestContainer.get(this);
   });
 
   function createDecisionTableEditor(xml, done) {
-    const dmnDecisionTableEditor = new DmnDecisionTableEditor({
+    dmnJS = new DmnDecisionTableEditor({
       container: testContainer,
       decisionTable: {
         keyboard: {
@@ -23,14 +32,14 @@ describe('DecisionTable', function() {
       }
     });
 
-    dmnDecisionTableEditor.importXML(xml, (err, warnings) => {
-      done(err, warnings, dmnDecisionTableEditor);
+    dmnJS.importXML(xml, (err, warnings) => {
+      done(err, warnings, dmnJS);
     });
   }
 
 
   it('should import simple decision', function(done) {
-    createDecisionTableEditor(TestDecision, done);
+    createDecisionTableEditor(diagramXML, done);
   });
 
 });
