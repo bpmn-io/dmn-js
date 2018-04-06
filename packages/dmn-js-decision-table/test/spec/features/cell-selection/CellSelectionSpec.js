@@ -9,10 +9,6 @@ import {
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import {
-  query as domQuery
-} from 'min-dom';
-
-import {
   getFocusableNode,
   getNodeById
 } from 'lib/features/cell-selection/CellSelectionUtil';
@@ -88,7 +84,8 @@ describe('features/cell-selection', function() {
       eventBus.fire('cellSelection.changed', {
         elementId: 'outputEntry5',
         selection: {
-          selected: true
+          selected: true,
+          focussed: true
         }
       });
 
@@ -208,6 +205,8 @@ describe('features/cell-selection', function() {
         // given
         click('outputEntry7');
 
+        expect(hasFocus('outputEntry7')).to.be.true;
+
         // when
         const changed = cellSelection.selectCell('below');
 
@@ -230,7 +229,11 @@ function click(elementId) {
 
   getDecisionTable().invoke(function(renderer) {
 
-    const el = getNodeById(elementId, renderer.getContainer());
+    const container = renderer.getContainer();
+
+    expect(container).to.exist;
+
+    const el = getNodeById(elementId, container);
 
     expect(el).to.exist;
 

@@ -1,10 +1,4 @@
 import {
-  delegate,
-  event
-} from 'min-dom';
-
-import {
-  ELEMENT_SELECTOR,
   ensureFocus,
   findSelectableAncestor,
   getElementCoords,
@@ -14,6 +8,7 @@ import {
   isUnselectableNode
 } from './CellSelectionUtil';
 
+const LOW_PRIORITY = 500;
 
 const VALID_DIRECTIONS = {
   above: true,
@@ -68,24 +63,32 @@ export default function CellSelection(
 
     const elementId = selectableNode && getElementId(selectableNode);
 
-    realSelect(elementId);
+    const focussed = !event.defaultPrevented;
+
+    realSelect(elementId, focussed);
+
+    event.stopPropagation();
   }
 
   function focus(event) {
-    const elementId = getElementId(event.delegateTarget);
+    const elementId = getElementId(event.target);
 
-    return realSelect(elementId);
+    const focussed = !event.defaultPrevented;
+
+    event.stopPropagation();
+
+    return realSelect(elementId, focussed);
   }
 
   function unfocus(event) {
-    const elementId = getElementId(event.delegateTarget);
+    const elementId = getElementId(event.target);
 
     emit(elementId, {
       focussed: false
     });
   }
 
-  function realSelect(elementId) {
+  function realSelect(elementId, focussed = true) {
 
     if (lastSelection !== elementId) {
       emit(lastSelection, {
@@ -99,7 +102,7 @@ export default function CellSelection(
     if (elementId) {
       emit(elementId, {
         selected: true,
-        focussed: true
+        focussed
       });
     }
 
@@ -110,16 +113,9 @@ export default function CellSelection(
     }
   }
 
-  event.bind(container, 'click', click);
-  delegate.bind(container, ELEMENT_SELECTOR, 'focusin', focus);
-  delegate.bind(container, ELEMENT_SELECTOR, 'focusout', unfocus);
-
-
-  eventBus.on('table.destroy', function() {
-    event.unbind(container, 'click', click);
-    delegate.unbind(container, ELEMENT_SELECTOR, 'focusin', focus);
-    delegate.unbind(container, ELEMENT_SELECTOR, 'focusout', unfocus);
-  });
+  eventBus.on('cell.click', LOW_PRIORITY, click);
+  eventBus.on('cell.focusin', LOW_PRIORITY, focus);
+  eventBus.on('cell.focusout', LOW_PRIORITY, unfocus);
 
   eventBus.on('cellSelection.changed', function(event) {
 
@@ -130,7 +126,7 @@ export default function CellSelection(
 
     const actualElement = getNodeById(elementId, container);
 
-    if (selection.selected && actualElement) {
+    if (selection.focussed && actualElement) {
       ensureFocus(actualElement);
     }
   });
@@ -162,7 +158,7 @@ export default function CellSelection(
   /**
    * Return true if a cell is currently selected.
    *
-   * @return {Boolean} [description]
+   * @return {Boolean}
    */
   this.isCellSelected = function() {
     return !!lastSelection;
