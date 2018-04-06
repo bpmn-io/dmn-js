@@ -234,10 +234,10 @@ export default class DecisionTableEditorActions {
         copyCutPaste.cut(element);
       },
       pasteBefore({ element }) {
-        copyCutPaste.pasteBefore(element);
+        return copyCutPaste.pasteBefore(element);
       },
       pasteAfter({ element }) {
-        copyCutPaste.pasteAfter(element);
+        return copyCutPaste.pasteAfter(element);
       }
     };
 

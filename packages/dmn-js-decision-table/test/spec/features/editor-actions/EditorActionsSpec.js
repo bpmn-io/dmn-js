@@ -8,7 +8,7 @@ import ModelingModule from 'lib/features/modeling';
 import DecisionRulesModule from 'lib/features/decision-rules';
 
 
-describe('editor actions', function() {
+describe('features/editor-actions', function() {
 
   let rule1, rule2, rule3, rule4, input1, input2, output1, output2, root;
 
@@ -517,17 +517,30 @@ describe('editor actions', function() {
     const rule1 = elementRegistry.get('rule1'),
           rule4 = elementRegistry.get('rule4');
 
+    // when
+    // empty clipboard + paste
+    const notPasted = editorActions.trigger('pasteBefore', {
+      element: rule4
+    });
+
+    // then
+    expect(notPasted).to.be.undefined;
+
+    // given
     editorActions.trigger('cut', {
       element: rule1
     });
 
     // when
-    editorActions.trigger('pasteBefore', {
+    // actual clipboard contents + paste
+    const pasted = editorActions.trigger('pasteBefore', {
       element: rule4
     });
 
     // then
     const newRule1 = elementRegistry.get('rule1');
+
+    expect(pasted).to.be.true;
 
     expectOrder(root.rows, [
       rule2,
@@ -544,17 +557,30 @@ describe('editor actions', function() {
     const rule1 = elementRegistry.get('rule1'),
           rule4 = elementRegistry.get('rule4');
 
+    // when
+    // empty clipboard + paste
+    const notPasted = editorActions.trigger('pasteBefore', {
+      element: rule4
+    });
+
+    // then
+    expect(notPasted).to.be.undefined;
+
+    // given
     editorActions.trigger('cut', {
       element: rule1
     });
 
     // when
-    editorActions.trigger('pasteAfter', {
+    // actual clipboard contents + paste
+    const pasted = editorActions.trigger('pasteAfter', {
       element: rule4
     });
 
     // then
     const newRule1 = elementRegistry.get('rule1');
+
+    expect(pasted).to.be.true;
 
     expectOrder(root.rows, [
       rule2,
