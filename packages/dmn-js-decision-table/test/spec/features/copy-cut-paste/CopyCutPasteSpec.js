@@ -7,7 +7,7 @@ import ModelingModule from 'lib/features/modeling';
 import CopyCutPasteModule from 'lib/features/copy-cut-paste';
 
 
-describe('copy cut paste', function() {
+describe('features/copy-cut-paste', function() {
 
   beforeEach(bootstrapModeler(TestDiagram, {
     modules: [
@@ -16,6 +16,7 @@ describe('copy cut paste', function() {
       CopyCutPasteModule
     ]
   }));
+
 
   describe('cut', function() {
 
@@ -167,10 +168,10 @@ describe('copy cut paste', function() {
   });
 
 
-  describe('copy - paste', function() {
+  describe('copy and paste', function() {
 
-    it('should copy - paste - paste rule', inject(
-      function(clipboard, copyCutPaste, elementRegistry, sheet) {
+    it('should paste rule', inject(
+      function(copyCutPaste, elementRegistry, sheet) {
 
         // given
         const { rows } = sheet.getRoot();
@@ -181,13 +182,14 @@ describe('copy cut paste', function() {
         copyCutPaste.copy(rule1);
 
         // when (paste 1st time)
-        copyCutPaste.pasteAfter(rule4);
+        const pasted = copyCutPaste.pasteAfter(rule4);
 
         // then
         expect(rows).to.have.length(5);
 
         const newRule = rows[rows.length - 1];
 
+        expect(pasted).to.be.true;
         expect(newRule).to.exist;
 
         const newRuleBo = newRule.businessObject;
@@ -199,13 +201,14 @@ describe('copy cut paste', function() {
         expect(newRuleBo.outputEntry[1].id).to.not.equal('outputEntry1');
 
         // when (paste 2nd time)
-        copyCutPaste.pasteAfter(newRule);
+        const pastedAgain = copyCutPaste.pasteAfter(newRule);
 
         expect(rows).to.have.length(6);
 
         const anotherNewRule = rows[rows.length - 1];
 
         expect(anotherNewRule).to.exist;
+        expect(pastedAgain).to.be.true;
 
         const anotherNewRuleBo = anotherNewRule.businessObject;
 
@@ -218,8 +221,8 @@ describe('copy cut paste', function() {
     ));
 
 
-    it('should copy - paste - paste input', inject(
-      function(clipboard, copyCutPaste, elementRegistry, sheet) {
+    it('should paste input', inject(
+      function(copyCutPaste, elementRegistry, sheet) {
 
         // given
         const { cols } = sheet.getRoot();
@@ -230,7 +233,7 @@ describe('copy cut paste', function() {
         copyCutPaste.copy(input1);
 
         // when (paste 1st time)
-        copyCutPaste.pasteAfter(input2);
+        const pasted = copyCutPaste.pasteAfter(input2);
 
         // then
         expect(cols).to.have.length(5);
@@ -238,6 +241,7 @@ describe('copy cut paste', function() {
         const newInput = cols[cols.indexOf(input2) + 1];
 
         expect(newInput).to.exist;
+        expect(pasted).to.be.true;
 
         const newInputBo = newInput.businessObject;
 
@@ -245,13 +249,14 @@ describe('copy cut paste', function() {
         expect(newInputBo.inputExpression.id).to.not.equal('inputExpression1');
 
         // when (paste 2nd time)
-        copyCutPaste.pasteAfter(newInput);
+        const pastedAgain = copyCutPaste.pasteAfter(newInput);
 
         expect(cols).to.have.length(6);
 
         const anotherNewInput = cols[cols.indexOf(newInput) + 1];
 
         expect(anotherNewInput).to.exist;
+        expect(pastedAgain).to.be.true;
 
         const anotherNewInputBo = anotherNewInput.businessObject;
 
@@ -260,9 +265,8 @@ describe('copy cut paste', function() {
       }
     ));
 
-
-    it('should copy - paste - paste output', inject(
-      function(clipboard, copyCutPaste, elementRegistry, sheet) {
+    it('should paste output', inject(
+      function(copyCutPaste, elementRegistry, sheet) {
 
         // given
         const { cols } = sheet.getRoot();
@@ -300,10 +304,10 @@ describe('copy cut paste', function() {
   });
 
 
-  describe('cut - paste', function() {
+  describe('cut and paste', function() {
 
-    it('should cut - paste - paste rule', inject(
-      function(clipboard, copyCutPaste, elementRegistry, sheet) {
+    it('should paste rule', inject(
+      function(copyCutPaste, elementRegistry, sheet) {
 
         // given
         const { rows } = sheet.getRoot();
@@ -351,8 +355,8 @@ describe('copy cut paste', function() {
     ));
 
 
-    it('should cut - paste - paste input', inject(
-      function(clipboard, copyCutPaste, elementRegistry, sheet) {
+    it('should paste input', inject(
+      function(copyCutPaste, elementRegistry, sheet) {
 
         // given
         const { cols } = sheet.getRoot();
@@ -394,8 +398,8 @@ describe('copy cut paste', function() {
     ));
 
 
-    it('should cut - paste - paste output', inject(
-      function(clipboard, copyCutPaste, elementRegistry, sheet) {
+    it('should paste output', inject(
+      function(copyCutPaste, elementRegistry, sheet) {
 
         // given
         const { cols } = sheet.getRoot();
@@ -427,6 +431,61 @@ describe('copy cut paste', function() {
         expect(newOutput).to.exist;
 
         expect(newOutput.businessObject.id).to.not.equal('output1');
+      }
+    ));
+
+  });
+
+
+  describe('paste', function() {
+
+    it('should NOT paste rule as input', inject(
+      function(copyCutPaste, sheet, elementRegistry) {
+
+        // given
+        const rule1 = elementRegistry.get('rule1');
+        const input1 = elementRegistry.get('input1');
+
+        copyCutPaste.copy(rule1);
+
+        // when (paste 1st time)
+        const pasted = copyCutPaste.pasteAfter(input1);
+
+        // then
+        expect(pasted).to.be.false;
+      }
+    ));
+
+
+    it('should NOT paste input as rule', inject(
+      function(copyCutPaste, sheet, elementRegistry) {
+
+        // given
+        const rule1 = elementRegistry.get('rule1');
+        const input1 = elementRegistry.get('input1');
+
+        copyCutPaste.copy(input1);
+
+        // when (paste 1st time)
+        const pasted = copyCutPaste.pasteAfter(rule1);
+
+        // then
+        expect(pasted).to.be.false;
+      }
+    ));
+
+
+    it('should NOT paste empty clipboard', inject(
+      function(copyCutPaste, elementRegistry) {
+
+        // given
+        const rule1 = elementRegistry.get('rule1');
+
+        // when (paste 1st time)
+        const pasted = copyCutPaste.pasteAfter(rule1);
+
+        // then
+        expect(pasted).to.be.undefined;
       }
     ));
 

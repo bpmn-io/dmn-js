@@ -37,13 +37,13 @@ export default class PasteHandler {
       after
     } = context;
 
-    if (this._clipboard.isEmpty()) {
-      return;
+    const data = this._clipboard.get();
+
+    if (!data) {
+      throw new Error('missing clipboard data');
     }
 
     const root = this._sheet.getRoot();
-
-    const data = this._clipboard.get();
 
     // (1) create elements from descriptors
     const elements = reviveDescriptor(data.elements, {

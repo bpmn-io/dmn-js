@@ -8,12 +8,16 @@ import { createDescriptor } from './DescriptorUtil';
 
 export default class CutPaste {
 
-  constructor(clipboard, commandStack, eventBus, modeling, sheet) {
+  constructor(
+      clipboard, commandStack, eventBus,
+      modeling, sheet, rules) {
+
     this._clipboard = clipboard;
     this._commandStack = commandStack;
     this._eventBus = eventBus;
     this._modeling = modeling;
     this._sheet = sheet;
+    this._rules = rules;
 
     commandStack.registerHandler('cut', CutHandler);
     commandStack.registerHandler('paste', PasteHandler);
@@ -69,12 +73,7 @@ export default class CutPaste {
    * @param {Row|Col} element - Row or col to paste elements before.
    */
   pasteBefore(element) {
-    const context = {
-      element,
-      before: true
-    };
-
-    this._commandStack.execute('paste', context);
+    return this._paste(element, { before: true });
   }
 
   /**
@@ -83,12 +82,35 @@ export default class CutPaste {
    * @param {Row|Col} element - Row or col to paste elements after.
    */
   pasteAfter(element) {
-    const context = {
-      element,
-      after: true
-    };
+    return this._paste(element, { after: true });
+  }
 
-    this._commandStack.execute('paste', context);
+  /**
+   * Basic paste onto given target element.
+   */
+  _paste(target, position) {
+
+    const clipboardData = this._clipboard.get();
+
+    if (!clipboardData) {
+      return undefined;
+    }
+
+    const allowed = this._rules.allowed('paste', {
+      data: clipboardData.elements,
+      target
+    });
+
+    if (!allowed) {
+      return false;
+    }
+
+    this._commandStack.execute('paste', {
+      element: target,
+      ...position
+    });
+
+    return true;
   }
 
   /**
@@ -104,5 +126,6 @@ CutPaste.$inject = [
   'commandStack',
   'eventBus',
   'modeling',
-  'sheet'
+  'sheet',
+  'rules'
 ];
