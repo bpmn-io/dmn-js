@@ -15,6 +15,14 @@ import {
 } from './CellSelectionUtil';
 
 
+const VALID_DIRECTIONS = {
+  above: true,
+  below: true,
+  right: true,
+  left: true
+};
+
+
 /**
  * A cell selection utlity; allows selection of elements, independent from
  * whether they are backed by a business object or not.
@@ -160,7 +168,12 @@ export default function CellSelection(
     return !!lastSelection;
   };
 
-  this.getCellSelected = function() {
+  /**
+   * Get the currently active cellSelection.
+   *
+   * @return {String} selection
+   */
+  this.getCellSelection = function() {
     return lastSelection;
   };
 
@@ -180,8 +193,8 @@ export default function CellSelection(
       return;
     }
 
-    if (direction !== 'above' && direction !== 'below') {
-      throw new Error('direction must be any of { above, below }');
+    if (!(direction in VALID_DIRECTIONS)) {
+      throw new Error('direction must be any of { above, below, left, right }');
     }
 
     var selectionEl = getNodeById(lastSelection, container);
@@ -192,19 +205,9 @@ export default function CellSelection(
       return false;
     }
 
-    const {
-      row,
-      col
-    } = coords;
+    const nextCoords = getNextCoords(coords, direction);
 
-    const rowIndex = parseInt(row, 10);
-
-    const nextRowIndex = direction === 'above' ? rowIndex - 1 : rowIndex + 1;
-
-    const nextNode = getNodeByCoords({
-      row: nextRowIndex,
-      col
-    }, container);
+    const nextNode = getNodeByCoords(nextCoords, container);
 
     if (!nextNode) {
       return false;
@@ -240,3 +243,49 @@ CellSelection.$inject = [
   'selection',
   'elementRegistry'
 ];
+
+
+
+// helpers ////////////////
+
+function getNextCoords(coords, direction) {
+
+  const {
+    row,
+    col
+  } = coords;
+
+  if (direction === 'above' || direction === 'below') {
+
+    const rowIndex = parseInt(row, 10);
+
+    if (isNaN(rowIndex)) {
+      return coords;
+    }
+
+    const nextRowIndex = direction === 'above' ? rowIndex - 1 : rowIndex + 1;
+
+    return {
+      col,
+      row: nextRowIndex
+    };
+  }
+
+  if (direction === 'left' || direction === 'right') {
+
+    const colIndex = parseInt(col, 10);
+
+    if (isNaN(colIndex)) {
+      return coords;
+    }
+
+    const nextColIndex = direction === 'left' ? colIndex - 1 : colIndex + 1;
+
+    return {
+      row,
+      col: nextColIndex
+    };
+  }
+
+  throw new Error('invalid direction <' + direction + '>');
+}

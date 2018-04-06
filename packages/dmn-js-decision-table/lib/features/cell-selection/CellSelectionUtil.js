@@ -60,6 +60,23 @@ export function findSelectableAncestor(node) {
   return closest(node, ELEMENT_SELECTOR, true);
 }
 
+/**
+ * Return focusable node in selectable el.
+ *
+ * @param  {Element} el
+ *
+ * @return {Element}
+ */
+export function getFocusableNode(el) {
+
+  const selector = SELECTABLE_SELECTOR;
+
+  return (
+    matches(el, selector)
+      ? el
+      : query(selector, el)
+  );
+}
 
 /**
  * Ensure element or element childNode has the proper focus.
@@ -68,13 +85,7 @@ export function findSelectableAncestor(node) {
  */
 export function ensureFocus(el) {
 
-  const selector = SELECTABLE_SELECTOR;
-
-  const focusEl = (
-    matches(el, selector)
-      ? el
-      : query(selector, el)
-  );
+  const focusEl = getFocusableNode(el);
 
   if (!focusEl) {
     return;
