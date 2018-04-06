@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.1.0
+
+* `FEAT`: improve copy/paste interaction with native browser behavior
+* `FEAT`: improve selection with copy-paste
+* `FIX`: fix copy/paste not being possible in decision table cells and editors
 * `FIX`: escape element ids in CSS selectors
 
 ## 4.0.0
