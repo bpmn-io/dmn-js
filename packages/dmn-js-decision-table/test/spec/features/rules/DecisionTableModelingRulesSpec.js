@@ -129,31 +129,13 @@ describe('modeling rules', function() {
       }]
     };
 
-    it('should allow pasting row', inject(function(elementRegistry, rules) {
 
-      // given
-      const rule1 = elementRegistry.get('rule1');
+    describe('paste row', function() {
 
-      // when
-      const allowed = rules.allowed('paste', {
-        data: rowData,
-        target: rule1
-      });
-
-      // then
-      expect(allowed).to.be.true;
-    }));
-
-
-    it('should NOT allow pasting row', inject(
-      function(elementRegistry, modeling, rules) {
+      it('should allow', inject(function(elementRegistry, rules) {
 
         // given
         const rule1 = elementRegistry.get('rule1');
-
-        modeling.removeRow(rule1);
-
-        modeling.addCol({ type: 'dmn:InputClause' }, 0);
 
         // when
         const allowed = rules.allowed('paste', {
@@ -162,36 +144,58 @@ describe('modeling rules', function() {
         });
 
         // then
-        expect(allowed).to.be.false;
-      }
-    ));
+        expect(allowed).to.be.true;
+      }));
 
 
-    it('should allow pasting col', inject(function(elementRegistry, rules) {
+      it('should NOT allow if cols changed', inject(
+        function(elementRegistry, modeling, rules) {
 
-      // given
-      const input1 = elementRegistry.get('input1');
+          // given
+          const rule1 = elementRegistry.get('rule1');
 
-      // when
-      const allowed = rules.allowed('paste', {
-        data: colData,
-        target: input1
-      });
+          modeling.removeRow(rule1);
 
-      // then
-      expect(allowed).to.be.true;
-    }));
+          modeling.addCol({ type: 'dmn:InputClause' }, 0);
+
+          // when
+          const allowed = rules.allowed('paste', {
+            data: rowData,
+            target: rule1
+          });
+
+          // then
+          expect(allowed).to.be.false;
+        }
+      ));
 
 
-    it('should NOT allow pasting col', inject(
-      function(elementRegistry, modeling, rules) {
+      it('should NOT allow paste as col', inject(
+        function(elementRegistry, modeling, rules) {
+
+          // given
+          const input1 = elementRegistry.get('input1');
+
+          // when
+          const allowed = rules.allowed('paste', {
+            data: rowData,
+            target: input1
+          });
+
+          // then
+          expect(allowed).to.be.false;
+        }
+      ));
+
+    });
+
+
+    describe('paste col', function() {
+
+      it('should allow', inject(function(elementRegistry, rules) {
 
         // given
         const input1 = elementRegistry.get('input1');
-
-        modeling.removeCol(input1);
-
-        modeling.addRow({ type: 'dmn:DecisionRule' });
 
         // when
         const allowed = rules.allowed('paste', {
@@ -200,9 +204,50 @@ describe('modeling rules', function() {
         });
 
         // then
-        expect(allowed).to.be.false;
-      }
-    ));
+        expect(allowed).to.be.true;
+      }));
+
+
+      it('should NOT allow if rows changed', inject(
+        function(elementRegistry, modeling, rules) {
+
+          // given
+          const input1 = elementRegistry.get('input1');
+
+          modeling.removeCol(input1);
+
+          modeling.addRow({ type: 'dmn:DecisionRule' });
+
+          // when
+          const allowed = rules.allowed('paste', {
+            data: colData,
+            target: input1
+          });
+
+          // then
+          expect(allowed).to.be.false;
+        }
+      ));
+
+
+      it('should NOT allow paste as row', inject(
+        function(elementRegistry, modeling, rules) {
+
+          // given
+          const rule1 = elementRegistry.get('rule1');
+
+          // when
+          const allowed = rules.allowed('paste', {
+            data: colData,
+            target: rule1
+          });
+
+          // then
+          expect(allowed).to.be.false;
+        }
+      ));
+
+    });
 
   });
 

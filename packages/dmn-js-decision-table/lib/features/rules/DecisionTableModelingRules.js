@@ -11,6 +11,7 @@ import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 const HIGH_PRIORITY = 2000;
 
 export default class DecisionTableModelingRules extends RuleProvider {
+
   constructor(eventBus, sheet) {
     super(eventBus);
 
@@ -49,25 +50,29 @@ export default class DecisionTableModelingRules extends RuleProvider {
 
       if (target instanceof Row) {
         return this.canPasteRows(root);
-      } else if (target instanceof Col) {
+      }
+
+      if (target instanceof Col) {
         return this.canPasteCols(root, target);
       }
+
+      return false;
     });
   }
 
   canPasteRows(root) {
     const { cols } = this._sheet.getRoot();
 
-    return every(root, rowDescriptor => {
-      if (rowDescriptor.type !== 'row') {
+    return every(root, descriptor => {
+      if (descriptor.type !== 'row') {
         return false;
       }
 
-      if (rowDescriptor.cells.length !== cols.length) {
+      if (descriptor.cells.length !== cols.length) {
         return false;
       }
 
-      return every(rowDescriptor.cells, (cellDescriptor, index) => {
+      return every(descriptor.cells, (cellDescriptor, index) => {
         if (isInput(cols[index])) {
           return cellDescriptor.businessObject.$type === 'dmn:UnaryTests';
         } else {
@@ -81,15 +86,19 @@ export default class DecisionTableModelingRules extends RuleProvider {
   canPasteCols(root, targetCol) {
     const { rows } = this._sheet.getRoot();
 
-    return every(root, colDescriptor => {
-      if (colDescriptor.cells.length !== rows.length) {
+    return every(root, descriptor => {
+      if (descriptor.type !== 'col') {
+        return false;
+      }
+
+      if (descriptor.cells.length !== rows.length) {
         return false;
       }
 
       if (isInput(targetCol)) {
-        return colDescriptor.businessObject.$type === 'dmn:InputClause';
+        return descriptor.businessObject.$type === 'dmn:InputClause';
       } else {
-        return colDescriptor.businessObject.$type === 'dmn:OutputClause';
+        return descriptor.businessObject.$type === 'dmn:OutputClause';
       }
     });
   }
