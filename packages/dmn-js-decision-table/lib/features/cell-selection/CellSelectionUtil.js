@@ -97,6 +97,11 @@ export function ensureFocus(el) {
     return;
   }
 
+  // nothing to do, if element already has focus
+  if (document.activeElement === focusEl) {
+    return;
+  }
+
   // (1) focus
   focusEl.focus();
 
