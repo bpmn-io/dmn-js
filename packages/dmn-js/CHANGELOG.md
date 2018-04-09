@@ -10,6 +10,7 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: improve copy/paste interaction with native browser behavior
 * `FEAT`: improve selection with copy-paste
+* `FEAT`: add ability to navigate decision properties in decision table via keyboard
 * `FIX`: fix copy/paste not being possible in decision table cells and editors
 * `FIX`: escape element ids in CSS selectors
 

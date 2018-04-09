@@ -93,14 +93,18 @@ export default class DecisionTablePropertiesComponent extends Component {
           value={ name }
           ctrlForNewline={ true }
           onChange={ this.setDecisionTableName }
-          elementId={ 'decisionTable-name' } />
+          elementId={ '__decisionProperties_name' }
+          coords={ '0:__decisionProperties' }
+        />
         <DecisionTableId
           className="decision-table-id"
           value={ id }
           ctrlForNewline={ true }
           validate={ this.validateId }
           onChange={ this.setDecisionTableId }
-          elementId={ 'decisionTable-id' } />
+          elementId={ '__decisionProperties_id' }
+          coords={ '1:__decisionProperties' }
+        />
       </header>
     );
   }
@@ -132,6 +136,7 @@ class DecisionTableName extends EditableComponent {
       <h3
         className={ className }
         data-element-id={ this.props.elementId }
+        data-coords={ this.props.coords }
         title="Decision Name"
       >
         { this.getEditor() }
@@ -161,6 +166,7 @@ class DecisionTableId extends EditableComponent {
         className={ className }
         title="Decision Id"
         data-element-id={ this.props.elementId }
+        data-coords={ this.props.coords }
       >
         { this.getEditor() }
       </h5>
