@@ -1,7 +1,9 @@
 import SimpleModeButtonComponent from './components/SimpleModeButtonComponent';
 
 export default class SimpleMode {
+
   constructor(components, contextMenu, elementRegistry, eventBus, renderer) {
+
     this._providers = [];
 
     components.onGetComponent('table.before', () => {
@@ -28,8 +30,13 @@ export default class SimpleMode {
       });
     });
 
-    eventBus.on('cell.click', context => {
-      const { event, node, id } = context;
+    eventBus.on('cell.click', e => {
+
+      const {
+        event,
+        node,
+        id
+      } = e;
 
       if (isCmd(event)) {
         const element = elementRegistry.get(id);
@@ -40,6 +47,9 @@ export default class SimpleMode {
             element
           });
         }
+
+        // prevent focus
+        e.preventDefault();
       }
     });
   }
@@ -62,6 +72,7 @@ SimpleMode.$inject = [
   'eventBus',
   'renderer'
 ];
+
 
 // helpers //////////
 
