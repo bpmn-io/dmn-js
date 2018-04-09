@@ -15,14 +15,12 @@ export default class DescriptionEditor extends Component {
 
     this._changeSupport = this.context.changeSupport;
 
-    this.onElementsChanged = this.onElementsChanged.bind(this);
-
     const { id } = this.props.context;
 
     this._element = this._elementRegistry.get(id);
   }
 
-  onElementsChanged() {
+  onElementsChanged = () => {
     this.forceUpdate();
   }
 

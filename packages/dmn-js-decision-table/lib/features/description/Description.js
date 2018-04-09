@@ -8,22 +8,54 @@ import DescriptionEditor from './components/DescriptionEditor';
 
 const LOW_PRIORITY = 500;
 
+const LOWER_PRIORITY = 750;
+
 const OFFSET_X = 26;
 
+
 export default class Description {
-  constructor(components, contextMenu, elementRegistry, eventBus, modeling, renderer) {
+
+  constructor(
+      components, contextMenu, elementRegistry,
+      eventBus, modeling, renderer) {
+
     this._contextMenu = contextMenu;
     this._modeling = modeling;
     this._renderer = renderer;
 
-    eventBus.on('cell.click', ({ event, id, node }) => {
+
+    eventBus.on('cell.click', LOWER_PRIORITY, (event) => {
+
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      const {
+        target,
+        id
+      } = event;
+
+      const element = elementRegistry.get(id);
+
+      if (!element) {
+        return;
+      }
+
+      const description = getDescription(element);
+
+      if (!description) {
+        // prevent focus
+        event.preventDefault();
+      }
+
       const container = renderer.getContainer(),
-            bounds = node.getBoundingClientRect();
+            bounds = target.getBoundingClientRect();
 
       const position = getPosition(container, bounds);
 
       contextMenu.open(position, {
         contextMenuType: 'cell-description',
+        autoFocus: false,
         id,
         offset: {
           x: 4,
@@ -43,7 +75,6 @@ export default class Description {
         if (isString(description)) {
           return DescriptionEditor;
         }
-
       }
     });
 

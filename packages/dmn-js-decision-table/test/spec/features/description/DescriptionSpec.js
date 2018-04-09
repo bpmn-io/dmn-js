@@ -1,8 +1,15 @@
-import { bootstrapModeler, inject } from 'test/helper';
+import {
+  bootstrapModeler,
+  inject
+} from 'test/helper';
 
-import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
+import {
+  queryEditor
+} from 'dmn-js-shared/test/util/EditorUtil';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -15,7 +22,7 @@ import {
 import simpleBooleanEditXML from './description.dmn';
 
 import CoreModule from 'lib/core';
-import InteractionEventsModule from 'table-js/lib/features/interaction-events';
+import CellSelectionModule from 'lib/features/cell-selection';
 import ModelingModule from 'lib/features/modeling';
 import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
 import DescriptionModule from 'lib/features/description';
@@ -27,7 +34,7 @@ describe('description', function() {
   beforeEach(bootstrapModeler(simpleBooleanEditXML, {
     modules: [
       CoreModule,
-      InteractionEventsModule,
+      CellSelectionModule,
       ModelingModule,
       DecisionRulesEditorModule,
       DescriptionModule,
@@ -43,11 +50,17 @@ describe('description', function() {
   });
 
   function openDescriptionEditor(elementId) {
-    const cell = domQuery(`[data-element-id="${ elementId }"]`, testContainer);
+    const cellEl = domQuery(`[data-element-id="${ elementId }"]`, testContainer);
 
-    triggerClick(cell);
+    expect(cellEl).to.exist;
 
-    return queryEditor('.description-editor', testContainer);
+    triggerClick(cellEl);
+
+    const editorEl = queryEditor('.description-editor', testContainer);
+
+    expect(editorEl).to.exist;
+
+    return editorEl;
   }
 
   function clickContextMenuEntry(elementId, className) {
