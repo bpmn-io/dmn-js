@@ -4,6 +4,8 @@ import {
   query
 } from 'min-dom';
 
+import cssEscape from 'css.escape';
+
 import {
   setRange,
   getRange
@@ -36,11 +38,11 @@ export function getElementCoords(node) {
 export function getNodeByCoords(elementCoords, container) {
   const coordsAttr = `${elementCoords.row}:${elementCoords.col}`;
 
-  return query(`[data-coords="${coordsAttr}"]`, container);
+  return query(`[data-coords="${ cssEscape(coordsAttr) }"]`, container);
 }
 
 export function getNodeById(elementId, container) {
-  return query(`[data-element-id="${elementId}"]`, container);
+  return query(`[data-element-id="${ cssEscape(elementId) }"]`, container);
 }
 
 export function isUnselectableNode(node) {

@@ -5,7 +5,8 @@ import {
 import { event as domEvent } from 'min-dom';
 
 import {
-  findSelectableAncestor
+  findSelectableAncestor,
+  getNodeById
 } from '../cell-selection/CellSelectionUtil';
 
 import {
@@ -203,7 +204,7 @@ export default class Keyboard {
 
       const container = this._renderer.getContainer();
 
-      const cellSelected = domQuery(`[data-element-id="${ cellSelectedId }"]`, container);
+      const cellSelected = getNodeById(cellSelectedId, container);
 
       const cell = this._elementRegistry.get(cellSelectedId);
 
@@ -242,7 +243,7 @@ export default class Keyboard {
 
       const container = this._renderer.getContainer();
 
-      const cellSelected = domQuery(`[data-element-id="${ cellSelectedId }"]`, container);
+      const cellSelected = getNodeById(cellSelectedId, container);
 
       const cell = this._elementRegistry.get(cellSelectedId);
 
@@ -281,7 +282,7 @@ export default class Keyboard {
 
       const container = this._renderer.getContainer();
 
-      const cellSelected = domQuery(`[data-element-id="${ cellSelectedId }"]`, container);
+      const cellSelected = getNodeById(cellSelectedId, container);
 
       const cell = this._elementRegistry.get(cellSelectedId);
 

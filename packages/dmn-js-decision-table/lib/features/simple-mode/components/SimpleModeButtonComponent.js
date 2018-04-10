@@ -2,6 +2,10 @@ import { Component } from 'inferno';
 
 import { assign } from 'min-dash';
 
+import {
+  getNodeById
+} from '../../cell-selection/CellSelectionUtil';
+
 import { query as domQuery } from 'min-dom';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
@@ -75,7 +79,7 @@ export default class SimpleModeButtonComponent extends Component {
 
     const container = this._container = this._renderer.getContainer();
 
-    const cellNode = domQuery(`[data-element-id="${selection.id}"]`, container);
+    const cellNode = getNodeById(selection.id, container);
 
     const cellBounds = cellNode.getBoundingClientRect();
 

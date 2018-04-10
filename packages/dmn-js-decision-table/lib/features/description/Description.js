@@ -1,6 +1,8 @@
-import { query as domQuery } from 'min-dom';
-
 import { isString } from 'min-dash';
+
+import {
+  getNodeById
+} from '../cell-selection/CellSelectionUtil';
 
 import DescriptionEditor from './components/DescriptionEditor';
 
@@ -101,10 +103,11 @@ export default class Description {
       description: ''
     });
 
-    const node = domQuery(`[data-element-id="${ cell.id }"]`);
+    const container = this._renderer.getContainer();
 
-    const container = this._renderer.getContainer(),
-          bounds = node.getBoundingClientRect();
+    const node = getNodeById(cell.id, container);
+
+    const bounds = node.getBoundingClientRect();
 
     const position = getPosition(container, bounds);
 

@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: escape element ids in CSS selectors
+
 ## 4.0.0
 
 ### Breaking Changes
