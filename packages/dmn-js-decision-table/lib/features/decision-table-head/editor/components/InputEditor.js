@@ -106,7 +106,7 @@ export default class InputEditor extends Component {
             ].join(' ')
           }
           onInput={ this.handleValue }
-          value={ text } />
+          value={ text || '' } />
 
         {
           !editScript && (

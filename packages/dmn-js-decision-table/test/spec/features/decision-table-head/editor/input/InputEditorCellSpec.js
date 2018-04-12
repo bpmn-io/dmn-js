@@ -58,6 +58,9 @@ describe('decision-table-head/editor - input', function() {
 
     const inputEl = getControl('.ref-text', editorEl);
 
+    // assume
+    expect(inputEl.textContent).to.eql('');
+
     inputEl.focus();
 
     // when
