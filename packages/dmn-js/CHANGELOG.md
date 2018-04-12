@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: be able to edit decision table inputs without text ([#339](https://github.com/bpmn-io/dmn-js/issues/339))
+
 ## 4.1.0
 
 * `FEAT`: improve copy/paste interaction with native browser behavior
