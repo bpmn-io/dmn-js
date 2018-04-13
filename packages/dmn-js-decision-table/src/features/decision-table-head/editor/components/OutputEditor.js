@@ -40,6 +40,14 @@ export default class OutputEditor extends Component {
 
     return (
       <div className="dms-container ref-output-editor">
+        <p className="dms-fill-row">
+          <label className="dms-label">Output Label</label>
+
+          <Input
+            className="ref-output-label"
+            value={ label || '' }
+            onInput={ this.setLabel } />
+        </p>
 
         <p className="dms-fill-row">
           <label className="dms-label">Output Name</label>
@@ -50,14 +58,6 @@ export default class OutputEditor extends Component {
             onInput={ this.setName } />
         </p>
 
-        <p className="dms-fill-row">
-          <label className="dms-label">Output Label</label>
-
-          <Input
-            className="ref-output-label"
-            value={ label || '' }
-            onInput={ this.setLabel } />
-        </p>
       </div>
     );
   }
