@@ -117,7 +117,7 @@ export default class InputEditor extends Component {
             ].join(' ')
           }
           onInput={ this.handleValue }
-          value={ text } />
+          value={ text || '' } />
 
         {
           !editScript && (
@@ -170,5 +170,9 @@ export default class InputEditor extends Component {
 
 
 function isMultiLine(text) {
+<<<<<<< HEAD
+  return text && text.split(/\n/).length > 1;
+=======
   return text.split(/\n/).length > 1;
+>>>>>>> branch 'change-input-output-label-name' of https://github.com/ingorichtsmeier/dmn-js.git
 }

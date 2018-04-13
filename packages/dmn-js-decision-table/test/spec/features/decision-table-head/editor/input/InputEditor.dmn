@@ -10,10 +10,8 @@
           <text><![CDATA["bronze","silver","gold"]]></text>
         </inputValues>
       </input>
-      <input id="input2" label="Order Sum">
-        <inputExpression id="inputExpression2" typeRef="double">
-          <text>sum</text>
-        </inputExpression>
+      <input id="input2">
+        <inputExpression id="inputExpression2" typeRef="double" />
       </input>
       <output id="output1" label="Check Result" name="result" typeRef="string">
         <outputValues id="UnaryTests_017iuu3">

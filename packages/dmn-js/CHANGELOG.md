@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.2.0
+
+* `CHORE`: bump to `diagram-js@1.3.0`
+* `FIX(drd)`: label editing now correctly activates on element creation ([#339](https://github.com/bpmn-io/dmn-js/issues/339))
+* `FIX(decision-table)`: be able to edit inputs without text ([#347](https://github.com/bpmn-io/dmn-js/issues/347))
+
 ## 4.1.0
 
 * `FEAT`: improve copy/paste interaction with native browser behavior
