@@ -35,20 +35,50 @@ describe('decision-table-head/editor - input', function() {
 
   beforeEach(function() {
     testContainer = TestContainer.get(this);
+  });
 
-    const cellEl = domQuery('.input-editor', testContainer);
+
+  function openEditor(columnId) {
+    const cellEl = domQuery(`[data-col-id="${columnId}"]`, testContainer);
 
     // open input editor
     triggerClick(cellEl);
-  });
+
+    // return input editor
+    return domQuery('.input-edit', testContainer);
+  }
+
+
+  it('should add input expression text', inject(function(elementRegistry) {
+
+    // given
+    const editorEl = openEditor('input2');
+
+    const inputBo = elementRegistry.get('input2').businessObject;
+
+    const inputEl = getControl('.ref-text', editorEl);
+
+    // assume
+    expect(inputEl.textContent).to.eql('');
+
+    inputEl.focus();
+
+    // when
+    triggerInputEvent(inputEl, 'foo');
+
+    // then
+    expect(inputBo.inputExpression.text).to.equal('foo');
+  }));
 
 
   it('should edit input expression text', inject(function(elementRegistry) {
 
     // given
+    const editorEl = openEditor('input1');
+
     const inputBo = elementRegistry.get('input1').businessObject;
 
-    const inputEl = getControl('.ref-text', testContainer);
+    const inputEl = getControl('.ref-text', editorEl);
 
     inputEl.focus();
 
@@ -61,6 +91,11 @@ describe('decision-table-head/editor - input', function() {
 
 
   describe('should transform to script', function() {
+
+    beforeEach(function() {
+      openEditor('input1');
+    });
+
 
     it('via input', inject(function(elementRegistry) {
 
@@ -99,6 +134,11 @@ describe('decision-table-head/editor - input', function() {
 
   describe('should transform back to expression', function() {
 
+    beforeEach(function() {
+      openEditor('input1');
+    });
+
+
     it('via input', inject(function(elementRegistry) {
 
       // given
@@ -121,6 +161,11 @@ describe('decision-table-head/editor - input', function() {
 
 
   describe('should edit input variable', function() {
+
+    beforeEach(function() {
+      openEditor('input1');
+    });
+
 
     it('set', inject(function(elementRegistry) {
 
@@ -160,6 +205,11 @@ describe('decision-table-head/editor - input', function() {
 
 
   describe('should edit input label', function() {
+
+    beforeEach(function() {
+      openEditor('input1');
+    });
+
 
     it('set', inject(function(elementRegistry) {
 
