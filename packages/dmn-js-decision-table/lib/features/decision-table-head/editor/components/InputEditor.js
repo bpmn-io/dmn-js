@@ -92,6 +92,17 @@ export default class InputEditor extends Component {
     return (
       <div className="dms-container ref-input-editor">
 
+        <p className="dms-fill-row">
+          <label className="dms-label">Input Label</label>
+
+          <Input
+            className="ref-input-label"
+            value={ label || '' }
+            onInput={ this.handleLabelChange } />
+        </p>
+
+        <hr className="dms-hrule" />
+
         <h4 className="dms-heading">Input Expression</h4>
 
         <ContentEditable
@@ -141,17 +152,6 @@ export default class InputEditor extends Component {
             </p>
           )
         }
-
-        <hr className="dms-hrule" />
-
-        <p className="dms-fill-row">
-          <label className="dms-label">Input Label</label>
-
-          <Input
-            className="ref-input-label"
-            value={ label || '' }
-            onInput={ this.handleLabelChange } />
-        </p>
 
         <p className="dms-fill-row">
           <label className="dms-label">Input Variable</label>
