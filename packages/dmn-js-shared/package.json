@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-shared",
   "description": "Shared components used by dmn-js",
-  "version": "4.0.0",
+  "version": "4.2.0",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch"
