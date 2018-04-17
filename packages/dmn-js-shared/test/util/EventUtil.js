@@ -1,4 +1,12 @@
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery
+} from 'min-dom';
+
+import {
+  assign,
+  isObject
+} from 'min-dash';
+
 
 export function triggerInputEvent(element, text) {
   if (element.tagName === 'INPUT') {
@@ -12,11 +20,11 @@ export function triggerInputEvent(element, text) {
     cancelable: true
   });
 
-  element.dispatchEvent(event);
+  return element.dispatchEvent(event);
 }
 
 export function triggerClick(el, clientX, clientY, ctrlKey) {
-  triggerMouseEvent(el, 'click', clientX, clientY, ctrlKey);
+  return triggerMouseEvent(el, 'click', clientX, clientY, ctrlKey);
 }
 
 export function triggerMouseEvent(element, event, clientX, clientY, ctrlKey = false) {
@@ -30,7 +38,7 @@ export function triggerMouseEvent(element, event, clientX, clientY, ctrlKey = fa
     );
   }
 
-  element.dispatchEvent(e);
+  return element.dispatchEvent(e);
 }
 
 export function triggerEvent(element, name, eventType, bubbles=false) {
@@ -51,15 +59,19 @@ export function triggerChangeEvent(element, value) {
   return triggerEvent(element, 'change', 'HTMLEvents');
 }
 
-export function triggerKeyEvent(element, event, code) {
+export function triggerKeyEvent(element, event, optionsOrCode) {
   const e = document.createEvent('Events');
 
   e.initEvent(event, true, true);
 
-  e.keyCode = code;
-  e.which = code;
+  if (isObject(optionsOrCode)) {
+    assign(e, optionsOrCode);
+  } else {
+    e.keyCode = optionsOrCode;
+    e.which = optionsOrCode;
+  }
 
-  element.dispatchEvent(e);
+  return element.dispatchEvent(e);
 }
 
 export function triggerInputSelectChange(inputSelect, value, testContainer) {
@@ -67,5 +79,5 @@ export function triggerInputSelectChange(inputSelect, value, testContainer) {
 
   const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
 
-  triggerClick(option);
+  return triggerClick(option);
 }
