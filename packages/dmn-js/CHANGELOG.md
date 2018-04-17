@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.2.1
+
+* `FIX(decision-table)`: close input editor on `ENTER`
+
 ## 4.2.0
 
 * `CHORE`: bump to `diagram-js@1.3.0`
