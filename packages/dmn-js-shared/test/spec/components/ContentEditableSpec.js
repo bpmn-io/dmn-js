@@ -19,7 +19,8 @@ import {
 } from 'inferno-test-utils';
 
 import {
-  triggerInputEvent
+  triggerInputEvent,
+  triggerKeyEvent
 } from 'test/util/EventUtil';
 
 import ContentEditable from 'lib/components/ContentEditable';
@@ -181,6 +182,132 @@ describe('components/ContentEditable', function() {
       expect(innerText(node)).to.eql('BLUB');
 
       expect(onInput).to.have.been.calledWith('BLUB');
+    });
+
+  });
+
+
+  describe('newline behavior', function() {
+
+    const ENTER_KEY = 13;
+
+    let onInput;
+    let globalOnKeydown;
+
+    beforeEach(function() {
+      onInput = sinon.spy();
+      globalOnKeydown = sinon.spy();
+
+      document.addEventListener('keydown', globalOnKeydown);
+    });
+
+    afterEach(function() {
+      document.removeEventListener('keydown', globalOnKeydown);
+    });
+
+
+    describe('ctrlForNewline = false', function() {
+
+      it('should insert newline', function() {
+        // given
+        const node = renderToNode(
+          <ContentEditable
+            onInput={ onInput }
+            value={ 'FOO' } />
+        );
+
+        setRange(node, { start: 1, end: 1 });
+
+        // when
+        const execDefault = triggerKeyEvent(node, 'keydown', {
+          which: ENTER_KEY
+        });
+
+        // then
+        expect(execDefault).to.be.false;
+
+        expect(onInput).to.have.been.calledWith('F\nOO');
+        expect(globalOnKeydown).not.to.have.been.called;
+      });
+
+    });
+
+
+    describe('ctrlForNewline = true', function() {
+
+      it('should insert newline', function() {
+        // given
+        const node = renderToNode(
+          <ContentEditable
+            onInput={ onInput }
+            ctrlForNewline={ true }
+            value={ 'FOO' } />
+        );
+
+        setRange(node, { start: 1, end: 1 });
+
+        // when
+        const execDefault = triggerKeyEvent(node, 'keydown', {
+          which: ENTER_KEY,
+          ctrlKey: true
+        });
+
+        // then
+        expect(execDefault).to.be.false;
+
+        expect(onInput).to.have.been.calledWith('F\nOO');
+        expect(globalOnKeydown).not.to.have.been.called;
+      });
+
+
+      it('should insert newline / metaKey', function() {
+        // given
+        const node = renderToNode(
+          <ContentEditable
+            onInput={ onInput }
+            ctrlForNewline={ true }
+            value={ 'FOO' } />
+        );
+
+        setRange(node, { start: 1, end: 1 });
+
+        // when
+        const execDefault = triggerKeyEvent(node, 'keydown', {
+          which: ENTER_KEY,
+          metaKey: true
+        });
+
+        // then
+        expect(execDefault).to.be.false;
+
+        expect(onInput).to.have.been.calledWith('F\nOO');
+        expect(globalOnKeydown).not.to.have.been.called;
+      });
+
+
+      it('should ignore + prevent default without CTRL', function() {
+        // given
+        const node = renderToNode(
+          <ContentEditable
+            onInput={ onInput }
+            ctrlForNewline={ true }
+            value={ 'FOO' } />
+        );
+
+        setRange(node, { start: 1, end: 1 });
+
+        // when
+        const execDefault = triggerKeyEvent(node, 'keydown', {
+          which: ENTER_KEY
+        });
+
+        // then
+        expect(execDefault).to.be.false;
+
+        expect(onInput).not.to.have.been.called;
+        expect(globalOnKeydown).to.have.been.called;
+      });
+
     });
 
   });
