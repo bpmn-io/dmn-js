@@ -38,8 +38,9 @@ export default class DrillDown {
     this._overlays = overlays;
 
     this._config = config || { enabled: true };
+    this._eventBus = eventBus;
 
-    eventBus.on([ 'drdElement.added', 'shape.added' ], ({ element }) => {
+    this._eventBus.on([ 'drdElement.added', 'shape.added' ], ({ element }) => {
 
       for (let i = 0; i < PROVIDERS.length; i++) {
 
@@ -50,6 +51,13 @@ export default class DrillDown {
         if (editable) {
           this.addOverlay(element, className);
         }
+      }
+    });
+
+    this._eventBus.on('drillDown.click', ({ decision, parent }) => {
+      var view = parent.getView(decision);
+      if (view) {
+        parent.open(view);
       }
     });
   }
@@ -101,14 +109,9 @@ export default class DrillDown {
     }
 
     const overlaysRoot = overlays._overlayRoot;
-
+    const { _eventBus } = this;
     domDelegate.bind(overlaysRoot, '[data-overlay-id="' + id + '"]', 'click', () => {
-
-      var view = parent.getView(element.businessObject);
-
-      if (view) {
-        parent.open(view);
-      }
+      _eventBus.fire('drillDown.click', { decision: element.businessObject, parent });
     });
   }
 
