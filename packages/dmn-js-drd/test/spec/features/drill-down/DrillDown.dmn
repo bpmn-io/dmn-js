@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="definitions_198l4os" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_Table" name="A">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable">
+      <input id="input1" label="">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="" name="" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="Decision_LiteralExpression" name="B">
+    <extensionElements>
+      <biodi:bounds x="383" y="151" width="180" height="80" />
+    </extensionElements>
+    <variable id="InformationItem_1amry2v" />
+    <literalExpression id="LiteralExpression_1gyvidq" />
+  </decision>
+  <decision id="Decision_0lnvug5" name="C">
+    <extensionElements>
+      <biodi:bounds x="151" y="268" width="180" height="80" />
+    </extensionElements>
+  </decision>
+</definitions>
