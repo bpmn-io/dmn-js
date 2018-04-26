@@ -22,22 +22,15 @@ describe('Modeler', function() {
   var noDisplayableContents = require('./no-displayable-contents.dmn');
 
   var container;
+  var editor;
 
   beforeEach(function() {
     container = document.createElement('div');
     container.className = 'test-container';
 
     document.body.appendChild(container);
-  });
 
-  false && afterEach(function() {
-    document.body.removeChild(container);
-  });
-
-
-  it('should open DMN table', function(done) {
-
-    var editor = new Modeler({
+    editor = new Modeler({
       container: container,
       common: {
         keyboard: {
@@ -45,6 +38,20 @@ describe('Modeler', function() {
         }
       }
     });
+  });
+
+  afterEach(function() {
+    if (editor) {
+      editor.destroy();
+
+      editor = null;
+    }
+
+    document.body.removeChild(container);
+  });
+
+
+  it('should open DMN table', function(done) {
 
     editor.importXML(diagram, { open: false }, function(err) {
 
@@ -66,8 +73,6 @@ describe('Modeler', function() {
 
   it('should open DMN literal expression', function(done) {
 
-    var editor = new Modeler({ container: container });
-
     editor.importXML(diagram, { open: false }, function(err) {
 
       if (err) {
@@ -87,8 +92,6 @@ describe('Modeler', function() {
 
 
   it('should open DRD', function(done) {
-
-    var editor = new Modeler({ container: container });
 
     editor.importXML(diagram, { open: false }, function(err) {
 
@@ -112,8 +115,6 @@ describe('Modeler', function() {
 
     it('initial open', function(done) {
 
-      var editor = new Modeler({ container: container });
-
       editor.importXML(noDi, function(err) {
 
         if (err) {
@@ -132,8 +133,6 @@ describe('Modeler', function() {
 
 
     it('on re-import', function(done) {
-
-      var editor = new Modeler({ container: container });
 
       editor.importXML(diagram, function(err) {
 
@@ -161,8 +160,6 @@ describe('Modeler', function() {
 
     it('initial open', function(done) {
 
-      var editor = new Modeler({ container: container });
-
       editor.importXML(noDisplayableContents, function(err) {
 
         if (err) {
@@ -181,8 +178,6 @@ describe('Modeler', function() {
 
 
     it('on re-import', function(done) {
-
-      var editor = new Modeler({ container: container });
 
       editor.importXML(diagram, function(err) {
 
@@ -207,8 +202,6 @@ describe('Modeler', function() {
 
 
   it('should keep view on re-import', function(done) {
-
-    var editor = new Modeler({ container: container });
 
     editor.importXML(diagram, function(err) {
 
