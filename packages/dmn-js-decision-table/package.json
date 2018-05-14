@@ -19,14 +19,14 @@
   ],
   "devDependencies": {
     "dmn-font": "^0.4.1",
-    "inferno-test-utils": "^5.0.0"
+    "inferno-test-utils": "^5.0.5"
   },
   "dependencies": {
     "css.escape": "^1.5.1",
     "diagram-js": "^1.4.0",
     "dmn-js-shared": "^4.3.0",
     "escape-html": "^1.0.3",
-    "inferno": "^5.0.0",
+    "inferno": "^5.0.5",
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0",
     "selection-ranges": "^3.0.0",

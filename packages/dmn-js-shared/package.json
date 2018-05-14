@@ -9,14 +9,14 @@
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "didi": "^4.0.0",
-    "inferno-test-utils": "^5.0.0",
+    "inferno-test-utils": "^5.0.5",
     "stringify": "^5.1.0"
   },
   "dependencies": {
     "diagram-js": "^1.4.0",
     "dmn-moddle": "^5.0.0",
     "ids": "^0.2.0",
-    "inferno": "^5.0.0",
+    "inferno": "^5.0.5",
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0",
     "selection-ranges": "^3.0.0",
