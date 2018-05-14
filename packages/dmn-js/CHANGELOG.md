@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.3.1
+
+* `CHORE`: bump inferno dependency to `inferno@5.0.5`
+
 ## 4.3.0
 
 * `FEAT(drd)`: add ability to intercept drill-down via event listener ([#353](https://github.com/bpmn-io/dmn-js/issues/353))
