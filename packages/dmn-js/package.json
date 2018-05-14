@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch",
@@ -51,9 +51,9 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "dmn-js-decision-table": "^4.3.0",
-    "dmn-js-drd": "^4.3.0",
-    "dmn-js-literal-expression": "^4.3.0",
-    "dmn-js-shared": "^4.3.0"
+    "dmn-js-decision-table": "^4.3.1",
+    "dmn-js-drd": "^4.3.1",
+    "dmn-js-literal-expression": "^4.3.1",
+    "dmn-js-shared": "^4.3.1"
   }
 }
