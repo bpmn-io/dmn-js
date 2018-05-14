@@ -3,14 +3,17 @@
   "version": "1.1.0",
   "scripts": {
     "all": "run-s lint test",
-    "lint": "eslint packages",
-    "distro": "lerna run prepublishOnly",
+    "build-distro": "lerna run prepublishOnly",
+    "clean": "del node_modules packages/*/node_modules",
+    "distro": "run-s clean reinstall build-distro",
     "dev": "lerna run dev --stream --scope",
-    "clean": "lerna clean --yes",
+    "lerna-publish": "lerna publish -m \"chore(project): publish %s\"",
+    "lint": "eslint packages",
     "postinstall": "lerna bootstrap --hoist",
-    "release": "lerna publish -m \"chore(project): publish %s\"",
+    "reinstall": "npm install",
+    "release": "run-s distro test lerna-publish",
     "test": "lerna run test",
-    "travis": "run-s all distro"
+    "travis": "run-s all build-distro"
   },
   "contributors": [
     {
@@ -33,6 +36,7 @@
     "babelify": "^8.0.0",
     "browserify": "^14.5.0",
     "chai": "^4.1.2",
+    "del-cli": "^1.1.0",
     "eslint": "^4.11.0",
     "eslint-plugin-bpmn-io": "^0.5.2",
     "karma": "^1.7.1",
