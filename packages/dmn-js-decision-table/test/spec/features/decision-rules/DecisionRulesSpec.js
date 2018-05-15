@@ -31,6 +31,13 @@ describe('decision rules', function() {
     expect(domQuery('tbody', testContainer)).to.exist;
   });
 
+  it('should render rules with data attributes', function() {
+
+    // then
+    expect(domQuery('[data-row-id]', testContainer)).to.exist;
+    expect(domQuery('[data-col-id]', testContainer)).to.exist;
+  });
+
 
   it('should allow rendering before rule', inject(function(components, eventBus, sheet) {
 
