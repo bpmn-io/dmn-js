@@ -32,6 +32,11 @@ describe('decision table head', function() {
     expect(domQuery('thead', testContainer)).to.exist;
   });
 
+  it('should render header input cells with a [data-col-id] attribute', function() {
+
+    // then
+    expect(domQuery('[data-col-id]', testContainer)).to.exist;
+  });
 
   it('should render input label', function() {
 

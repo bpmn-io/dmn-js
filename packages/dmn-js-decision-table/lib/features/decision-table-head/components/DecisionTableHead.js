@@ -168,6 +168,7 @@ function DefaultInputHeaderCell(props) {
 
   return (
     <th
+      data-col-id={ input.id }
       className={ actualClassName }
       key={ input.id }>
       {
