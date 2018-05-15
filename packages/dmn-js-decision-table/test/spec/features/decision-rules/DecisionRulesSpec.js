@@ -31,6 +31,7 @@ describe('decision rules', function() {
     expect(domQuery('tbody', testContainer)).to.exist;
   });
 
+
   it('should render rules with data attributes', function() {
 
     // then
