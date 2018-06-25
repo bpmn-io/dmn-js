@@ -15,7 +15,7 @@ import {
   triggerClick
 } from 'test/util/EventUtil';
 
-import List from 'lib/components/List';
+import List from 'src/components/List';
 
 
 describe('components/List', function() {

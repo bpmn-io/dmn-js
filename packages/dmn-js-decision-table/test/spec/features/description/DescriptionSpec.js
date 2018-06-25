@@ -21,12 +21,12 @@ import {
 
 import simpleBooleanEditXML from './description.dmn';
 
-import CoreModule from 'lib/core';
-import CellSelectionModule from 'lib/features/cell-selection';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
-import DescriptionModule from 'lib/features/description';
-import ContextMenuModule from 'lib/features/context-menu';
+import CoreModule from 'src/core';
+import CellSelectionModule from 'src/features/cell-selection';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import DescriptionModule from 'src/features/description';
+import ContextMenuModule from 'src/features/context-menu';
 
 
 describe('description', function() {

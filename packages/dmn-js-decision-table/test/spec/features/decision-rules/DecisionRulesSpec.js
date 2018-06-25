@@ -6,8 +6,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionRulesModule from 'lib/features/decision-rules';
+import CoreModule from 'src/core';
+import DecisionRulesModule from 'src/features/decision-rules';
 
 describe('decision rules', function() {
 

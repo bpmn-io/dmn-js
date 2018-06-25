@@ -18,7 +18,7 @@ import {
   triggerInputEvent
 } from 'test/util/EventUtil';
 
-import EditableComponent from 'lib/components/EditableComponent';
+import EditableComponent from 'src/components/EditableComponent';
 
 
 describe('components/EditableComponent', function() {

@@ -11,15 +11,15 @@ import {
 import {
   getFocusableNode,
   getNodeById
-} from 'lib/features/cell-selection/CellSelectionUtil';
+} from 'src/features/cell-selection/CellSelectionUtil';
 
-import CoreModule from 'lib/core';
-import CellSelectionModule from 'lib/features/cell-selection';
-import DecisionRulesModule from 'lib/features/decision-rules';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
-import PropertiesModule from 'lib/features/decision-table-properties';
-import PropertiesEditorModule from 'lib/features/decision-table-properties/editor';
-import ModelingModule from 'lib/features/modeling';
+import CoreModule from 'src/core';
+import CellSelectionModule from 'src/features/cell-selection';
+import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import PropertiesModule from 'src/features/decision-table-properties';
+import PropertiesEditorModule from 'src/features/decision-table-properties/editor';
+import ModelingModule from 'src/features/modeling';
 
 import testDiagram from './cell-selection.dmn';
 

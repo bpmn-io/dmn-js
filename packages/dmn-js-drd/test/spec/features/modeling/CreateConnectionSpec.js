@@ -7,8 +7,8 @@ import {
   getMid
 } from 'diagram-js/lib/layout/LayoutUtil';
 
-import modelingModule from 'lib/features/modeling';
-import coreModule from 'lib/core';
+import modelingModule from 'src/features/modeling';
+import coreModule from 'src/core';
 
 
 function expectWaypoint(waypoint, element) {

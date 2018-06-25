@@ -1,6 +1,6 @@
-import Viewer from 'lib/Viewer';
+import Viewer from 'src/Viewer';
 
-import DefaultExport from '../../';
+import DefaultExport from '../../src';
 
 
 describe('Viewer', function() {

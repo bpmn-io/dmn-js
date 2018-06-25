@@ -2,8 +2,8 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import modelingXML from './modeling.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
 
 
 // TODO(nikku): move test to dmn-js-shared

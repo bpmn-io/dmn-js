@@ -3,14 +3,14 @@ import {
   inject
 } from 'test/TestHelper';
 
-import labelEditingModule from 'lib/features/label-editing';
-import modelingModule from 'lib/features/modeling';
-import coreModule from 'lib/core';
+import labelEditingModule from 'src/features/label-editing';
+import modelingModule from 'src/features/modeling';
+import coreModule from 'src/core';
 import draggingModule from 'diagram-js/lib/features/dragging';
 
 import {
   getLabel
-} from 'lib/features/label-editing/LabelUtil';
+} from 'src/features/label-editing/LabelUtil';
 
 
 function triggerKeyEvent(element, event, code) {

@@ -21,15 +21,15 @@ import TestContainer from 'mocha-test-container-support';
 
 import inputOutputValuesXML from './AllowedValues.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
 
 import AllowedValuesEditingModule
-  from 'lib/features/allowed-values';
+  from 'src/features/allowed-values';
 
-import TypeRefEditingModule from 'lib/features/type-ref';
-import ModelingModule from 'lib/features/modeling';
-import KeyboardModule from 'lib/features/keyboard';
+import TypeRefEditingModule from 'src/features/type-ref';
+import ModelingModule from 'src/features/modeling';
+import KeyboardModule from 'src/features/keyboard';
 
 
 describe('decision-table-head/allowed-values', function() {

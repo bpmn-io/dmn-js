@@ -7,8 +7,8 @@ import {
 
 import TestContainer from 'mocha-test-container-support';
 
-import DefaultExport from '../../';
-import DecisionTableView from 'lib/Viewer';
+import DefaultExport from '../../src';
+import DecisionTableView from 'src/Viewer';
 
 import DmnDecisionTableViewer from '../helper/DecisionTableViewer';
 

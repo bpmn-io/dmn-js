@@ -11,11 +11,11 @@ import TestContainer from 'mocha-test-container-support';
 
 import typeRefXML from './TypeRef.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import ModelingModule from 'lib/features/modeling';
-import TypeRefModule from 'lib/features/type-ref';
-import KeyboardModule from 'lib/features/keyboard';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import ModelingModule from 'src/features/modeling';
+import TypeRefModule from 'src/features/type-ref';
+import KeyboardModule from 'src/features/keyboard';
 
 
 describe('features/type-ref', function() {

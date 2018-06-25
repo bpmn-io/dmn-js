@@ -3,8 +3,8 @@ import {
   inject
 } from '../../../TestHelper';
 
-import drdRulesModule from 'lib/features/rules';
-import coreModule from 'lib/core';
+import drdRulesModule from 'src/features/rules';
+import coreModule from 'src/core';
 
 
 describe('features/rules', function() {

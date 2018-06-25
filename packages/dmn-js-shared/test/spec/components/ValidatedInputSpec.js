@@ -11,7 +11,7 @@ import {
 import { triggerInputEvent } from 'test/util/EventUtil';
 
 // eslint-disable-next-line
-import ValidatedInput from 'lib/components/ValidatedInput';
+import ValidatedInput from 'src/components/ValidatedInput';
 
 
 describe('components/ValidatedInput', function() {

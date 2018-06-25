@@ -1,6 +1,6 @@
 import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
-import Editor from 'lib/Editor';
+import Editor from 'src/Editor';
 
 
 export default class LiteralExpressionEditor extends EditingManager {

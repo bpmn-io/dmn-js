@@ -1,4 +1,4 @@
-import View from 'lib/base/View';
+import View from 'src/base/View';
 
 import EventBus from 'diagram-js/lib/core/EventBus';
 

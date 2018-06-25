@@ -7,7 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import LiteralExpressionPropertiesModule
-  from 'lib/features/literal-expression-properties';
+  from 'src/features/literal-expression-properties';
 
 
 describe('literal expression properties', function() {

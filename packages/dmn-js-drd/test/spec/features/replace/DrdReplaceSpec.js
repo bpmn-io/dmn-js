@@ -3,10 +3,10 @@ import {
   inject
 } from '../../../TestHelper';
 
-import modelingModule from 'lib/features/modeling';
-import replaceModule from 'lib/features/replace';
+import modelingModule from 'src/features/modeling';
+import replaceModule from 'src/features/replace';
 import moveModule from 'diagram-js/lib/features/move';
-import coreModule from 'lib/core';
+import coreModule from 'src/core';
 
 import {
   is

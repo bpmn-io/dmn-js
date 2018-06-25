@@ -12,15 +12,15 @@ import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import twoDecisionsXML from '../../two-decisions.dmn';
 
-import CoreModule from 'lib/core';
+import CoreModule from 'src/core';
 
 import DecisionTablePropertiesModule
-  from 'lib/features/decision-table-properties';
+  from 'src/features/decision-table-properties';
 
 import DecisionTablePropertiesEditorModule
-  from 'lib/features/decision-table-properties/editor';
+  from 'src/features/decision-table-properties/editor';
 
-import ModelingModule from 'lib/features/modeling';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('decision table properties', function() {

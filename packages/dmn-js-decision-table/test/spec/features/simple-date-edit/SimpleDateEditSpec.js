@@ -15,13 +15,13 @@ import {
 
 import simpleNumberEditXML from './simple-date-edit.dmn';
 
-import CoreModule from 'lib/core';
+import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
-import SimpleDateEditModule from 'lib/features/simple-date-edit';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import SimpleDateEditModule from 'src/features/simple-date-edit';
 
-import { getSampleDate } from 'lib/features/simple-date-edit/Utils';
+import { getSampleDate } from 'src/features/simple-date-edit/Utils';
 
 
 describe('simple date edit', function() {

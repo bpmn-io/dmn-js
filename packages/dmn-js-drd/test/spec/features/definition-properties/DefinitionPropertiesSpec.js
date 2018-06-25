@@ -8,11 +8,11 @@ import {
   injectAsync
 } from 'test/TestHelper';
 
-import modelingModule from 'lib/features/modeling';
-import paletteProviderModule from 'lib/features/palette';
-import defPropsViewerModule from 'lib/features/definition-properties/viewer';
-import defPropsModelerModule from 'lib/features/definition-properties/modeler';
-import coreModule from 'lib/core';
+import modelingModule from 'src/features/modeling';
+import paletteProviderModule from 'src/features/palette';
+import defPropsViewerModule from 'src/features/definition-properties/viewer';
+import defPropsModelerModule from 'src/features/definition-properties/modeler';
+import coreModule from 'src/core';
 
 import {
   inputEvent,

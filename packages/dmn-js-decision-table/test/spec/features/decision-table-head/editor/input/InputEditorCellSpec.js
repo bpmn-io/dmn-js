@@ -11,11 +11,11 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from './InputEditor.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import DecisionTableHeadEditorModule from 'lib/features/decision-table-head/editor';
-import ModelingModule from 'lib/features/modeling';
-import KeyboardModule from 'lib/features/keyboard';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
+import ModelingModule from 'src/features/modeling';
+import KeyboardModule from 'src/features/keyboard';
 
 
 describe('decision-table-head/editor - input', function() {

@@ -2,7 +2,7 @@ import {
   validateISOString,
   getDateString,
   parseString
-} from 'lib/features/simple-date-edit/Utils';
+} from 'src/features/simple-date-edit/Utils';
 
 
 function expectDateString(type, dates, result) {

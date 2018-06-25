@@ -21,7 +21,7 @@ import {
   triggerFocusIn
 } from 'test/util/EventUtil';
 
-import InputSelect from 'lib/components/InputSelect';
+import InputSelect from 'src/components/InputSelect';
 
 const OPTIONS =[{
   label: 'Foo',

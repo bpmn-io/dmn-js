@@ -1,6 +1,6 @@
 import {
   parseString
-} from 'lib/features/allowed-values/Utils';
+} from 'src/features/allowed-values/Utils';
 
 function expectParsed(string, result) {
   return function() {

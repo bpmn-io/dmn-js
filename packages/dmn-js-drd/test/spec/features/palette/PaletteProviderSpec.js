@@ -3,9 +3,9 @@ import {
   inject
 } from '../../../TestHelper';
 
-import modelingModule from 'lib/features/modeling';
-import paletteModule from 'lib/features/palette';
-import coreModule from 'lib/core';
+import modelingModule from 'src/features/modeling';
+import paletteModule from 'src/features/palette';
+import coreModule from 'src/core';
 
 import {
   query as domQuery,

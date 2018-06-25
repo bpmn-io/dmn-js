@@ -12,13 +12,13 @@ import {
 
 import simpleXML from '../../simple.dmn';
 
-import ContextMenuModule from 'lib/features/context-menu';
-import CoreModule from 'lib/core';
-import ExpressionLanguageModule from 'lib/features/expression-language';
+import ContextMenuModule from 'src/features/context-menu';
+import CoreModule from 'src/core';
+import ExpressionLanguageModule from 'src/features/expression-language';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
-import KeyboardModule from 'lib/features/keyboard';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import KeyboardModule from 'src/features/keyboard';
 
 
 describe('expression language', function() {

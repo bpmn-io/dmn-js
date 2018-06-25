@@ -1,7 +1,7 @@
 import Manager from 'dmn-js-shared/lib/base/Manager';
 import View from 'dmn-js-shared/lib/base/View';
 
-import Viewer from 'lib/Viewer';
+import Viewer from 'src/Viewer';
 
 
 export default class MockViewer extends Manager {

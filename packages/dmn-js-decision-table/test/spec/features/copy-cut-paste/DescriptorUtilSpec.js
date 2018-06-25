@@ -5,7 +5,7 @@ import { keys } from 'min-dash';
 import {
   createDescriptor,
   reviveDescriptor
-} from 'lib/features/copy-cut-paste/DescriptorUtil';
+} from 'src/features/copy-cut-paste/DescriptorUtil';
 
 import {
   Row,
@@ -15,8 +15,8 @@ import {
 
 import TestDiagram from './copy-cut-paste.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('DescriptorUtil', function() {

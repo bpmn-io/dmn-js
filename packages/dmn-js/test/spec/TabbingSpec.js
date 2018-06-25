@@ -1,4 +1,4 @@
-import Modeler from 'lib/Modeler';
+import Modeler from 'src/Modeler';
 
 import domify from 'domify';
 

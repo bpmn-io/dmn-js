@@ -7,8 +7,8 @@ import {
 
 import TestContainer from 'mocha-test-container-support';
 
-import coreModule from 'lib/core';
-import drillDownModule from 'lib/features/drill-down';
+import coreModule from 'src/core';
+import drillDownModule from 'src/features/drill-down';
 
 import {
   query,

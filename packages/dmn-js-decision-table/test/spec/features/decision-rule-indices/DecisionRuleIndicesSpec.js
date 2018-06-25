@@ -8,10 +8,10 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
-import DecisionRuleIndicesModule from 'lib/features/decision-rule-indices';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionRuleIndicesModule from 'src/features/decision-rule-indices';
 
 
 describe('decision rule indices', function() {

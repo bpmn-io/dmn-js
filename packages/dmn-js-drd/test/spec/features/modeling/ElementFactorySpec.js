@@ -3,8 +3,8 @@ import {
   inject
 } from 'test/TestHelper';
 
-import modelingModule from 'lib/features/modeling';
-import coreModule from 'lib/core';
+import modelingModule from 'src/features/modeling';
+import coreModule from 'src/core';
 
 
 describe('features/modeling - create elements', function() {

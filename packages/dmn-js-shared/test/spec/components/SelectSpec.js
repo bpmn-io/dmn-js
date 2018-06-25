@@ -11,7 +11,7 @@ import {
 
 import { triggerChangeEvent } from 'test/util/EventUtil';
 
-import Select from 'lib/components/Select';
+import Select from 'src/components/Select';
 
 
 describe('components/Select', function() {

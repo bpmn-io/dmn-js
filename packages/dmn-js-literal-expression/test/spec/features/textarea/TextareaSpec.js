@@ -7,7 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import TextareaModule
-  from 'lib/features/textarea';
+  from 'src/features/textarea';
 
 
 describe('textarea', function() {

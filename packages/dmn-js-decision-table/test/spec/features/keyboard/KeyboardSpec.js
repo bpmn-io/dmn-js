@@ -3,11 +3,11 @@ import {
   inject
 } from 'test/helper';
 
-import CoreModule from 'lib/core';
-import KeyboardModule from 'lib/features/keyboard';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
+import CoreModule from 'src/core';
+import KeyboardModule from 'src/features/keyboard';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 import SelectionModule from 'table-js/lib/features/selection';
 
 import diagramXML from './diagram.dmn';

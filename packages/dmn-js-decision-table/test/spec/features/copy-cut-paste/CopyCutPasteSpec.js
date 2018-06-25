@@ -2,9 +2,9 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import TestDiagram from './copy-cut-paste.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
-import CopyCutPasteModule from 'lib/features/copy-cut-paste';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
+import CopyCutPasteModule from 'src/features/copy-cut-paste';
 
 
 describe('features/copy-cut-paste', function() {

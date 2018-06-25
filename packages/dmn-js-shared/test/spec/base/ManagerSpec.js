@@ -1,4 +1,4 @@
-import Manager from 'lib/base/Manager';
+import Manager from 'src/base/Manager';
 
 import TestView from './TestView';
 

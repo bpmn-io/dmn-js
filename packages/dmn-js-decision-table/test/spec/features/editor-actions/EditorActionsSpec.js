@@ -2,10 +2,10 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from 'lib/core';
-import EditorActionsModule from 'lib/features/editor-actions';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
+import CoreModule from 'src/core';
+import EditorActionsModule from 'src/features/editor-actions';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
 
 
 describe('features/editor-actions', function() {

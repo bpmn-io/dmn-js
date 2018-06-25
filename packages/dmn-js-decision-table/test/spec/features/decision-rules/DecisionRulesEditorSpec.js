@@ -11,10 +11,10 @@ import TestContainer from 'mocha-test-container-support';
 import simpleXML from '../../simple.dmn';
 import languageExpressionXML from '../../expression-language.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 
 
 describe('features/decision-rules', function() {

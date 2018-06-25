@@ -10,7 +10,7 @@ import {
 
 import { triggerInputEvent, triggerKeyEvent } from 'test/util/EventUtil';
 
-import Input from 'lib/components/Input';
+import Input from 'src/components/Input';
 
 
 describe('components/Input', function() {

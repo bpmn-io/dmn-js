@@ -5,8 +5,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import DrdViewer from '../helper/DrdViewer';
 
-import DefaultExport from '../../';
-import DrdView from 'lib/Viewer';
+import DefaultExport from '../../src';
+import DrdView from 'src/Viewer';
 
 
 describe('Viewer', function() {

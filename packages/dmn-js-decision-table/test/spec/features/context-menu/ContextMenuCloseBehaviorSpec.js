@@ -13,11 +13,11 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import ContextMenuModule from 'lib/features/context-menu';
-import CoreModule from 'lib/core';
+import ContextMenuModule from 'src/features/context-menu';
+import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
 
 
 describe('context menu close behavior', function() {

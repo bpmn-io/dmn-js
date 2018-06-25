@@ -6,7 +6,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 
-import DecisionPropertiesModule from 'lib/features/decision-properties';
+import DecisionPropertiesModule from 'src/features/decision-properties';
 
 
 describe('decision properties', function() {

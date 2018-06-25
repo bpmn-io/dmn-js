@@ -2,7 +2,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import simpleStringEditXML from '../../literal-expression.dmn';
 
-import Modeling from 'lib/features/modeling';
+import Modeling from 'src/features/modeling';
 
 
 describe('Modeling', function() {

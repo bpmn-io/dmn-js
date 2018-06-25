@@ -8,7 +8,7 @@ import {
 
 import { inject, bootstrap } from 'test/spec/base/viewer/TestHelper';
 
-import ViewerComponent from 'lib/base/viewer/core/components/ViewerComponent';
+import ViewerComponent from 'src/base/viewer/core/components/ViewerComponent';
 
 
 describe('ViewerComponent', function() {

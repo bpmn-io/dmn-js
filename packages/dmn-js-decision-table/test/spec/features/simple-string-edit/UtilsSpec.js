@@ -1,7 +1,7 @@
 import {
   getInputOrOutputValues,
   parseString
-} from 'lib/features/simple-string-edit/Utils';
+} from 'src/features/simple-string-edit/Utils';
 
 function expectParsed(string, result) {
   return function() {

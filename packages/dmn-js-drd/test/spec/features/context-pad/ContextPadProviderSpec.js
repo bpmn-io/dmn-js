@@ -14,9 +14,9 @@ import {
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import contextPadModule from 'lib/features/context-pad';
-import coreModule from 'lib/core';
-import modelingModule from 'lib/features/modeling';
+import contextPadModule from 'src/features/context-pad';
+import coreModule from 'src/core';
+import modelingModule from 'src/features/modeling';
 import createModule from 'diagram-js/lib/features/create';
 import customRulesModule from '../../../util/custom-rules';
 

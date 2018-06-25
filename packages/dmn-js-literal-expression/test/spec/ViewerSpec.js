@@ -7,8 +7,8 @@ import {
   getLiteralExpression
 } from 'test/TestHelper';
 
-import DefaultExport from '../../';
-import DecisionTableView from 'lib/Viewer';
+import DefaultExport from '../../src';
+import DecisionTableView from 'src/Viewer';
 
 import DmnLiteralExpressionViewer from '../helper/LiteralExpressionViewer';
 

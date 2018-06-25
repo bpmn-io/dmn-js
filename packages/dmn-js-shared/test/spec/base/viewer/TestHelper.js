@@ -2,7 +2,7 @@ import { forEach, uniqueBy } from 'min-dash';
 
 import TestContainer from 'mocha-test-container-support';
 
-import Viewer from 'lib/base/viewer/Viewer';
+import Viewer from 'src/base/viewer/Viewer';
 
 
 let BASE_JS = null;

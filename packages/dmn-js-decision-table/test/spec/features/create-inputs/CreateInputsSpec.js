@@ -13,11 +13,11 @@ import {
 
 import simpleXML from './no-inputs.dmn';
 
-import CoreModule from 'lib/core';
-import CreateInputsModule from 'lib/features/create-inputs';
-import DecisionRulesModule from 'lib/features/decision-rules';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import ModelingModule from 'lib/features/modeling';
+import CoreModule from 'src/core';
+import CreateInputsModule from 'src/features/create-inputs';
+import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('features/create-inputs', function() {

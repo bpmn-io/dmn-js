@@ -3,7 +3,7 @@ import { Component, render } from 'inferno';
 import TestContainerSupport from 'mocha-test-container-support';
 
 import Editor
-  from 'lib/features/decision-table-head/editor/components/OutputEditor';
+  from 'src/features/decision-table-head/editor/components/OutputEditor';
 
 
 describe('features/decision-table-head - OutputEditor', function() {

@@ -14,13 +14,13 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from './drag-and-drop.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import DecisionTableHeadEditorModule from 'lib/features/decision-table-head/editor';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
-import DragAndDropModule from 'lib/features/drag-and-drop';
-import DecisionRuleIndicesModule from 'lib/features/decision-rule-indices';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
+import DragAndDropModule from 'src/features/drag-and-drop';
+import DecisionRuleIndicesModule from 'src/features/decision-rule-indices';
 
 
 describe('drag and drop', function() {

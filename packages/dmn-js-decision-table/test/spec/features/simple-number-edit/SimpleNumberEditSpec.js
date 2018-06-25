@@ -15,11 +15,11 @@ import {
 
 import simpleNumberEditXML from './simple-number-edit.dmn';
 
-import CoreModule from 'lib/core';
+import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
-import SimpleNumberEditModule from 'lib/features/simple-number-edit';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import SimpleNumberEditModule from 'src/features/simple-number-edit';
 
 
 describe('simple number edit', function() {

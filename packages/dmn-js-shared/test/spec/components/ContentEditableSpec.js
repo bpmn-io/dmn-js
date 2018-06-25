@@ -23,7 +23,7 @@ import {
   triggerKeyEvent
 } from 'test/util/EventUtil';
 
-import ContentEditable from 'lib/components/ContentEditable';
+import ContentEditable from 'src/components/ContentEditable';
 
 
 describe('components/ContentEditable', function() {

@@ -12,11 +12,11 @@ import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import simpleXML from '../../simple.dmn';
 
-import AnnotationsEditorModule from 'lib/features/annotations/editor';
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesModule from 'lib/features/decision-rules';
+import AnnotationsEditorModule from 'src/features/annotations/editor';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesModule from 'src/features/decision-rules';
 
 
 describe('annotations editor', function() {

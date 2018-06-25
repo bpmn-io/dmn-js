@@ -6,8 +6,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionTablePropertiesModule from 'lib/features/decision-table-properties';
+import CoreModule from 'src/core';
+import DecisionTablePropertiesModule from 'src/features/decision-table-properties';
 
 describe('decision table properties', function() {
 

@@ -1,4 +1,4 @@
-import { parseString } from 'lib/features/simple-boolean-edit/Utils';
+import { parseString } from 'src/features/simple-boolean-edit/Utils';
 
 function expectParsed(string, result) {
   return function() {

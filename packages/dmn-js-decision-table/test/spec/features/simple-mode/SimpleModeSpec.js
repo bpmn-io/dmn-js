@@ -8,11 +8,11 @@ import { triggerClick } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleStringEditXML from './simple-mode.dmn';
 
-import CoreModule from 'lib/core';
+import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
-import ModelingModule from 'lib/features/modeling';
-import DecisionRulesEditorModule from 'lib/features/decision-rules/editor';
-import SimpleModeModule from 'lib/features/simple-mode';
+import ModelingModule from 'src/features/modeling';
+import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import SimpleModeModule from 'src/features/simple-mode';
 
 import FooProvider from './FooProvider';
 

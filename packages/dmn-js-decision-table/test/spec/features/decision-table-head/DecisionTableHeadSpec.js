@@ -6,8 +6,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
 
 
 describe('decision table head', function() {

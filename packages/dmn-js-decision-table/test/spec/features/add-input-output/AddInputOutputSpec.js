@@ -10,10 +10,10 @@ import {
 
 import simpleXML from '../../simple.dmn';
 
-import AddInputOutputModule from 'lib/features/add-input-output';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
+import AddInputOutputModule from 'src/features/add-input-output';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('features/add-input-output', function() {

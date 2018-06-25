@@ -9,10 +9,10 @@ import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
 
-import AnnotationsModule from 'lib/features/annotations';
-import CoreModule from 'lib/core';
-import DecisionTableHeadModule from 'lib/features/decision-table-head';
-import DecisionRulesModule from 'lib/features/decision-rules';
+import AnnotationsModule from 'src/features/annotations';
+import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionRulesModule from 'src/features/decision-rules';
 
 
 describe('annotations', function() {

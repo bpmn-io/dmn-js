@@ -11,8 +11,8 @@ import {
   find
 } from 'min-dash';
 
-import modelingModule from 'lib/features/modeling';
-import coreModule from 'lib/core';
+import modelingModule from 'src/features/modeling';
+import coreModule from 'src/core';
 
 
 function getConnection(source, target, connectionOrType) {

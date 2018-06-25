@@ -1,6 +1,6 @@
 import Manager from 'dmn-js-shared/lib/base/Manager';
 
-import Viewer from 'lib/Viewer';
+import Viewer from 'src/Viewer';
 
 
 export default class LiteralExpressionViewer extends Manager {

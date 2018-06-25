@@ -10,9 +10,9 @@ import {
 
 import simpleXML from '../../simple.dmn';
 
-import AddRuleModule from 'lib/features/add-rule';
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
+import AddRuleModule from 'src/features/add-rule';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('add input output', function() {

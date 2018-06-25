@@ -1,4 +1,4 @@
-import Viewer from 'lib/base/viewer/Viewer';
+import Viewer from 'src/base/viewer/Viewer';
 
 import { domify, remove as domRemove } from 'min-dom';
 

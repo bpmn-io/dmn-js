@@ -11,9 +11,9 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import TextareaEditorModule
-  from 'lib/features/textarea/editor';
+  from 'src/features/textarea/editor';
 
-import ModelingModule from 'lib/features/modeling';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('textarea editor', function() {

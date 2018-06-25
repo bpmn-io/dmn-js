@@ -2,9 +2,9 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import tableXML from './rules.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
-import RulesModule from 'lib/features/rules';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
+import RulesModule from 'src/features/rules';
 
 
 describe('modeling rules', function() {

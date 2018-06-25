@@ -2,8 +2,8 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import { Cell } from 'table-js/lib/model';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
 
 import diagramXML from './id-claim-unclaim.dmn';
 

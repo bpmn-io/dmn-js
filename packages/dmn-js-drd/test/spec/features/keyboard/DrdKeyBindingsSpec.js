@@ -5,11 +5,11 @@ import {
 
 import TestContainer from 'mocha-test-container-support';
 
-import coreModule from 'lib/core';
-import editorActionsModule from 'lib/features/editor-actions';
-import labelEditingModule from 'lib/features/label-editing';
-import keyboardModule from 'lib/features/keyboard';
-import modelingModule from 'lib/features/modeling';
+import coreModule from 'src/core';
+import editorActionsModule from 'src/features/editor-actions';
+import labelEditingModule from 'src/features/label-editing';
+import keyboardModule from 'src/features/keyboard';
+import modelingModule from 'src/features/modeling';
 
 import {
   createKeyEvent

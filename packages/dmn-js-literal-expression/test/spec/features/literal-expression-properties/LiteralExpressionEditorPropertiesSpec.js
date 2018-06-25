@@ -14,9 +14,9 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import LiteralExpressionPropertiesEditorModule
-  from 'lib/features/literal-expression-properties/editor';
+  from 'src/features/literal-expression-properties/editor';
 
-import ModelingModule from 'lib/features/modeling';
+import ModelingModule from 'src/features/modeling';
 
 
 describe('literal expression properties editor', function() {

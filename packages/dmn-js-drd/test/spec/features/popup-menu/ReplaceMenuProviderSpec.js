@@ -4,9 +4,9 @@ import {
   inject
 } from '../../../TestHelper';
 
-import coreModule from 'lib/core';
-import modelingModule from 'lib/features/modeling';
-import replaceMenuProviderModule from 'lib/features/popup-menu';
+import coreModule from 'src/core';
+import modelingModule from 'src/features/modeling';
+import replaceMenuProviderModule from 'src/features/popup-menu';
 import customRulesModule from '../../../util/custom-rules';
 
 import {

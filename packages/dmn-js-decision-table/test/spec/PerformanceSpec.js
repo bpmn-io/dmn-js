@@ -8,8 +8,8 @@ import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
 import performanceXML from './performance.dmn';
 
-import CoreModule from 'lib/core';
-import ModelingModule from 'lib/features/modeling';
+import CoreModule from 'src/core';
+import ModelingModule from 'src/features/modeling';
 
 describe.skip('Performance', function() {
 
