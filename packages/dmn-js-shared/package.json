@@ -23,7 +23,7 @@
     "min-dom": "^3.0.0",
     "selection-ranges": "^3.0.0",
     "selection-update": "^0.1.2",
-    "table-js": "^5.0.0-0"
+    "table-js": "^5.0.0"
   },
   "babel": {
     "presets": [
