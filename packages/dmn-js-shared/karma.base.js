@@ -30,9 +30,7 @@ module.exports = function(path) {
 
       frameworks: [
         'mocha',
-        'sinon-chai',
-        'source-map-support',
-        'browserify'
+        'sinon-chai'
       ],
 
       files: [
@@ -40,7 +38,7 @@ module.exports = function(path) {
       ],
 
       preprocessors: {
-        'test/**/*Spec.js': [ 'browserify' ]
+        'test/**/*Spec.js': [ 'webpack' ]
       },
 
       customLaunchers: {
@@ -61,24 +59,33 @@ module.exports = function(path) {
       singleRun: true,
       autoWatch: false,
 
-      // browserify configuration
-      browserify: {
-        debug: true,
-        paths: [ path ],
-        transform: [
-          [ 'babelify', {
-            global: true,
-            sourceMapsAbsolute: true
-          } ],
-          [ 'stringify', {
-            global: true,
-            extensions: [
-              '.dmn',
-              '.html',
-              '.css'
-            ]
-          } ]
-        ]
+      webpack: {
+        mode: 'development',
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              use: 'babel-loader'
+            },
+            {
+              test: /\.css|\.dmn$/,
+              use: 'raw-loader'
+            }
+          ]
+        },
+        resolve: {
+          mainFields: [
+            'dev:module',
+            'browser',
+            'module',
+            'main'
+          ],
+          modules: [
+            'node_modules',
+            path
+          ]
+        }
       }
     });
   };
