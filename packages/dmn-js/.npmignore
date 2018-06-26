@@ -1,7 +1,10 @@
-!dist
-tasks
 resources
-test/*
+src
+tasks
+test
+!dist
+!lib
 !test/helper
+.babelrc
 karma.conf.js
 rollup.config.js

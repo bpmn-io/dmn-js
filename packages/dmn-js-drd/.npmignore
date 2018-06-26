@@ -1,4 +1,7 @@
-test/*
+src
+test
+!lib
 !test/helper
 !test/util
+.babelrc
 karma.conf.js
