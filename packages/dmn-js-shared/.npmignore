@@ -1,7 +1,7 @@
 src
-test
+test/*
 !lib
-!test/util
+!test/util/*
 .babelrc
 karma.base.js
 karma.conf.js
