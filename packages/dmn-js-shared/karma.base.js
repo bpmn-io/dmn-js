@@ -56,6 +56,8 @@ module.exports = function(path) {
 
       browsers: browsers,
 
+      browserNoActivityTimeout: 30000,
+
       singleRun: true,
       autoWatch: false,
 
