@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.0.0-0
+
+* `FEAT`: transpile to ES5 + ES modules
+* `CHORE`: bump to `table-js@5`
+* `CHORE`: bump to `diagram-js@2`
+
 ## 4.4.0
 
 * `FEAT(decision-table)`: expose `data-row-id` and `data-col-id` in Viewer ([#357](https://github.com/bpmn-io/dmn-js/issues/357))
