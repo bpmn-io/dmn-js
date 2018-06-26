@@ -34,7 +34,7 @@ const configs = distros.reduce(function(configs, distro) {
   return [
     ...configs,
     {
-      input: `./lib/${input}.js`,
+      input: `./src/${input}.js`,
       output: {
         name: 'DmnJS',
         file: `${outputDir}/${output}.development.js`,
@@ -45,7 +45,7 @@ const configs = distros.reduce(function(configs, distro) {
       ])
     },
     {
-      input: `./lib/${input}.js`,
+      input: `./src/${input}.js`,
       output: {
         name: 'DmnJS',
         file: `${outputDir}/${output}.production.min.js`,
@@ -102,11 +102,7 @@ function pgl(plugins=[]) {
     }),
     babel({
       babelrc: false,
-      plugins: [
-        'inferno',
-        'transform-object-rest-spread',
-        'transform-class-properties'
-      ],
+      exclude: 'node_modules/**',
       presets: [
         [ 'env', { modules: false } ]
       ]
