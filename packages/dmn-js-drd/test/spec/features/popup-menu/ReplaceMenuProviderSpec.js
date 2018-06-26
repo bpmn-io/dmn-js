@@ -66,10 +66,16 @@ describe('features/popup-menu - replace menu provider', function() {
 
     getDrdJS().invoke(function(popupMenu) {
 
-      popupMenu.create('dmn-replace', element);
+      var position = {
+        x: element.x + offset,
+        y: element.y + offset
+      };
 
-      popupMenu.open({ x: element.x + offset, y: element.y + offset });
-
+      popupMenu.open(
+        element,
+        'dmn-replace',
+        position
+      );
     });
   };
 

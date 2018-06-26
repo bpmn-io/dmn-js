@@ -15,7 +15,7 @@
     "inferno-test-utils": "^5.0.5"
   },
   "dependencies": {
-    "diagram-js": "^1.4.0",
+    "diagram-js": "^2.4.0",
     "dmn-moddle": "^5.0.0",
     "ids": "^0.2.0",
     "inferno": "^5.0.5",

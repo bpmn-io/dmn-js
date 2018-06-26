@@ -216,13 +216,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     });
   }
 
-  var replaceMenu;
-
-  if (popupMenu._providers['dmn-replace']) {
-    replaceMenu = popupMenu.create('dmn-replace', element);
-  }
-
-  if (replaceMenu && !replaceMenu.isEmpty()) {
+  if (!popupMenu.isEmpty(element, 'dmn-replace')) {
 
     // Replace menu entry
     assign(actions, {
@@ -232,9 +226,12 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         title: translate('Change type'),
         action: {
           click: function(event, element) {
-            replaceMenu.open(assign(getReplaceMenuPosition(element), {
+
+            var position = assign(getReplaceMenuPosition(element), {
               cursor: { x: event.x, y: event.y }
-            }), element);
+            });
+
+            popupMenu.open(element, 'dmn-replace', position);
           }
         }
       }
