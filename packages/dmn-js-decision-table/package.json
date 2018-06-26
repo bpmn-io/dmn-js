@@ -4,8 +4,11 @@
   "version": "4.4.0",
   "scripts": {
     "test": "karma start",
-    "dev": "npm run test -- --no-single-run --auto-watch"
+    "build": "del lib && babel -s -q -d lib src",
+    "dev": "npm test -- --no-single-run --auto-watch",
+    "prepublishOnly": "npm run build"
   },
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/bpmn-io/dmn-js"
@@ -30,6 +33,11 @@
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0",
     "selection-ranges": "^3.0.0",
-    "table-js": "^4.3.2"
+    "table-js": "^5.0.0-0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }

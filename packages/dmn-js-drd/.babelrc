@@ -3,6 +3,6 @@
     "transform-object-rest-spread"
   ],
   "presets": [
-    "env"
+    [ "env", { "modules": false } ]
   ]
 }

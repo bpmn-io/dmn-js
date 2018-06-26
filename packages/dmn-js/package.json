@@ -7,8 +7,10 @@
     "dev": "npm run test -- --no-single-run --auto-watch",
     "test:distro": "node tasks/test-distro.js",
     "distro": "node tasks/build-distro.js",
-    "prepublishOnly": "run-s distro test:distro"
+    "prepublishOnly": "run-s build distro test:distro",
+    "build": "del lib && babel -s -q -d lib src"
   },
+  "main": "./lib/index.js",
   "author": {
     "name": "Sebastian Stamm",
     "url": "https://github.com/SebastianStamm"
@@ -55,5 +57,10 @@
     "dmn-js-drd": "^4.3.1",
     "dmn-js-literal-expression": "^4.3.1",
     "dmn-js-shared": "^4.3.1"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }

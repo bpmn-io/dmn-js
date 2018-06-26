@@ -6,6 +6,6 @@
     "transform-class-properties"
   ],
   "presets": [
-    "env"
+    [ "env", { "modules": false } ]
   ]
 }

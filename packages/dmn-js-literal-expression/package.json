@@ -4,8 +4,11 @@
   "version": "4.3.1",
   "scripts": {
     "test": "karma start",
-    "dev": "npm run test -- --no-single-run --auto-watch"
+    "build": "del lib && babel -s -q -d lib src",
+    "dev": "npm test -- --no-single-run --auto-watch",
+    "prepublishOnly": "npm run build"
   },
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/bpmn-io/dmn-js"
@@ -28,5 +31,10 @@
     "inferno": "^5.0.5",
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }
