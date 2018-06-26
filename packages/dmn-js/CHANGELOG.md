@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.0.0
+
+_Republished `v5.0.0-1` as stable version_.
+
 ## 5.0.0-1
 
 * `FIX`: don't distribute test assets
