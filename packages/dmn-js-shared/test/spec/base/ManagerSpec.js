@@ -372,6 +372,44 @@ describe('Manager', function() {
 
     });
 
+
+    it('should emit <saveXML.*> events', function(done) {
+
+      var viewer = new TestViewer();
+
+      var events = [];
+
+      viewer.on([
+        'saveXML.start',
+        'saveXML.serialized',
+        'saveXML.done'
+      ], function(e) {
+        // log event type + event arguments
+        events.push([
+          e.type,
+          Object.keys(e).filter(function(key) {
+            return key !== 'type';
+          })
+        ]);
+      });
+
+      viewer.importXML(diagramXML, function(err) {
+
+        // when
+        viewer.saveXML(function(err) {
+
+          // then
+          expect(events).to.eql([
+            [ 'saveXML.start', [ 'definitions' ] ],
+            [ 'saveXML.serialized', ['error', 'xml' ] ],
+            [ 'saveXML.done', ['error', 'xml' ] ]
+          ]);
+
+          done(err);
+        });
+      });
+    });
+
   });
 
 

@@ -163,6 +163,16 @@ export default class Manager {
    * Export the currently displayed DMN 1.1 diagram as
    * a DMN 1.1 XML document.
    *
+   * ## Life-Cycle Events
+   *
+   * During XML saving the viewer will fire life-cycle events:
+   *
+   *   * saveXML.start (before serialization)
+   *   * saveXML.serialized (after xml generation)
+   *   * saveXML.done (everything done)
+   *
+   * You can use these events to hook into the life-cycle.
+   *
    * @param {Object} [options] export options
    * @param {Boolean} [options.format=false] output formated XML
    * @param {Boolean} [options.preamble=true] output preamble
@@ -181,7 +191,29 @@ export default class Manager {
       return done(new Error('no definitions loaded'));
     }
 
-    this._moddle.toXML(definitions, options, done);
+    // allow to fiddle around with definitions
+    definitions = this._emit('saveXML.start', {
+      definitions: definitions
+    }) || definitions;
+
+    this._moddle.toXML(definitions, options, (err, xml) => {
+
+      try {
+        xml = this._emit('saveXML.serialized', {
+          error: err,
+          xml: xml
+        }) || xml;
+
+        this._emit('saveXML.done', {
+          error: err,
+          xml: xml
+        });
+      } catch (e) {
+        console.error('error in saveXML life-cycle listener', e);
+      }
+
+      done(err, xml);
+    });
   }
 
   /**
