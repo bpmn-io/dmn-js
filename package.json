@@ -4,7 +4,7 @@
   "scripts": {
     "all": "run-s lint build test",
     "build-distro": "lerna run prepublishOnly --sort",
-    "clean": "del node_modules packages/*/node_modules",
+    "clean": "del-cli node_modules packages/*/node_modules",
     "distro": "run-s clean reinstall build-distro",
     "dev": "run-s build \"lerna-dev -- {1}\" -- ",
     "lerna-dev": "lerna run dev --stream --scope",
