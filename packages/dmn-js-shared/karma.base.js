@@ -34,11 +34,11 @@ module.exports = function(path) {
       ],
 
       files: [
-        'test/**/*Spec.js'
+        'test/testBundle.js'
       ],
 
       preprocessors: {
-        'test/**/*Spec.js': [ 'webpack' ]
+        'test/testBundle.js': [ 'webpack' ]
       },
 
       customLaunchers: {
