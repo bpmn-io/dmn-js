@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "scripts": {
     "test": "karma start",
     "build": "del-cli lib && babel -s -q -d lib src",
@@ -23,7 +23,7 @@
   "dependencies": {
     "diagram-js": "^2.4.0",
     "diagram-js-direct-editing": "^1.2.0",
-    "dmn-js-shared": "^5.1.0",
+    "dmn-js-shared": "^5.1.1",
     "inherits": "^2.0.1",
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0",
