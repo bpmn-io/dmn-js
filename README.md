@@ -76,7 +76,7 @@ Run tests in individual [packages](./packages):
 npm run dev -- dmn-js
 ```
 
-Please checkout our [contributing guidelines](./CONTRIBUTING.md) if you plan to
+Please checkout our [contributing guidelines](./.github/CONTRIBUTING.md) if you plan to
 file an issue or pull request.
 
 
