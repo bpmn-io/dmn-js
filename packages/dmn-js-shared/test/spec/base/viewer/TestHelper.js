@@ -1,4 +1,6 @@
-import { forEach, uniqueBy } from 'min-dash';
+import {
+  forEach
+} from 'min-dash';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -35,11 +37,9 @@ export function bootstrap(options = {}, locals = {}) {
       mockModule[k] = [ 'value', v ];
     });
 
-    actualOpts.modules = uniqueBy(
-      [].concat(
-        options.modules || [],
-        [ mockModule ]
-      )
+    actualOpts.modules = [].concat(
+      options.modules || [],
+      [ mockModule ]
     );
 
     if (BASE_JS) {
