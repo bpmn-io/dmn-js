@@ -16,7 +16,8 @@ const ID = 'id';
  */
 export default class EditPropertiesHandler {
 
-  constructor(moddle) {
+  constructor(elementRegistry, moddle) {
+    this._elementRegistry = elementRegistry;
     this._moddle = moddle;
   }
 
@@ -75,12 +76,6 @@ export default class EditPropertiesHandler {
 
     const ids = this._moddle.ids;
 
-    if (isIdChange(bo, newProps)) {
-      ids.unclaim(bo[ID]);
-
-      ids.claim(newProps[ID], bo);
-    }
-
     // Reduce over all new properties and return
     //
     // {
@@ -118,6 +113,15 @@ export default class EditPropertiesHandler {
         };
       }
 
+      // handle ID change
+      if (key === ID && isIdChange(bo, value)) {
+        ids.unclaim(bo[ID]);
+
+        this._elementRegistry.updateId(bo, value);
+
+        ids.claim(value, bo);
+      }
+
       // handle plain update
       bo.set(key, value);
 
@@ -134,12 +138,12 @@ export default class EditPropertiesHandler {
 
 }
 
-EditPropertiesHandler.$inject = [ 'moddle' ];
+EditPropertiesHandler.$inject = [ 'elementRegistry', 'moddle' ];
 
 // helpers //////////////////////
 
-function isIdChange(properties, element) {
-  return ID in properties && properties[ID] !== element[ID];
+function isIdChange(element, newId) {
+  return element[ID] !== newId;
 }
 
 

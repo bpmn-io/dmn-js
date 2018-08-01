@@ -1,4 +1,3 @@
-
 export default class ChangeSupport {
   constructor(eventBus) {
     this._listeners = {};
@@ -7,21 +6,8 @@ export default class ChangeSupport {
       this.elementsChanged(elements);
     });
 
-    eventBus.on('root.remove', context => {
-      const oldRootId = context.root.id;
-
-      if (this._listeners[oldRootId]) {
-
-        eventBus.once('root.add', context => {
-          const newRootId = context.root.id;
-
-          this._listeners[newRootId] = this._listeners[oldRootId];
-
-          delete this._listeners[oldRootId];
-        });
-
-      }
-
+    eventBus.on('element.updateId', ({ element, newId }) => {
+      this.updateId(element.id, newId);
     });
   }
 
@@ -73,6 +59,16 @@ export default class ChangeSupport {
       }
     } else {
       this._listeners[id].length = 0;
+    }
+  }
+
+  updateId(oldId, newId) {
+    if (this._listeners[oldId]) {
+
+      this._listeners[newId] = this._listeners[oldId];
+
+      delete this._listeners[oldId];
+
     }
   }
 }

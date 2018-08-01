@@ -1,10 +1,20 @@
-import { bootstrap, inject } from 'test/spec/base/viewer/TestHelper';
+import { bootstrap, inject } from '../TestHelper';
+
+import CoreModule from 'src/base/viewer/core';
+
 
 /* global sinon */
 
 describe('ChangeSupport', function() {
 
-  beforeEach(bootstrap());
+  beforeEach(bootstrap({
+    modules: [
+      {
+        elementRegistry: [ 'type', MockRegistry ]
+      },
+      CoreModule
+    ]
+  }));
 
 
   it('should add listener', inject(function(changeSupport) {
@@ -25,7 +35,6 @@ describe('ChangeSupport', function() {
 
 
   it('should remove listener', inject(function(changeSupport) {
-
     // given
     const listener = () => {};
 
@@ -42,7 +51,6 @@ describe('ChangeSupport', function() {
 
 
   it('should remove all listeners', inject(function(changeSupport) {
-
     // given
     changeSupport.onElementsChanged('foo', () => {});
     changeSupport.onElementsChanged('foo', () => {});
@@ -97,4 +105,54 @@ describe('ChangeSupport', function() {
 
   });
 
+
+  describe('update ID', function() {
+
+    it('should update on elements change after updating ID', inject(
+      function(eventBus, elementRegistry, changeSupport) {
+
+        // given
+        const spy = sinon.spy();
+
+        const element = {
+          id: 'foo'
+        };
+
+        changeSupport.onElementsChanged(element.id, spy);
+
+        // when
+        elementRegistry.updateId(element, 'bar');
+
+        eventBus.fire('elements.changed', {
+          elements: [ element ]
+        });
+
+        // then
+        expect(spy).to.have.been.calledOnce;
+      })
+    );
+
+  });
+
 });
+
+
+// helpers /////////////////////
+
+
+/**
+ * Mocked for test purposes; provided by libraries as appropriate.
+ */
+function MockRegistry(eventBus) {
+
+  this.updateId = function(element, id) {
+
+    eventBus.fire('element.updateId', {
+      element: element,
+      newId: id
+    });
+
+    element.id = id;
+  };
+
+}
