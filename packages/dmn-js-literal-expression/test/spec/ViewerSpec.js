@@ -4,6 +4,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import {
   bootstrapViewer,
+  inject,
   getLiteralExpression
 } from 'test/TestHelper';
 
@@ -47,6 +48,23 @@ describe('Viewer', function() {
 
   it('should import literal expression', function(done) {
     createViewer(simpleXML, done);
+  });
+
+
+  describe('getDecision', function() {
+
+    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+
+    it('should provide viewed decision', inject(function(viewer) {
+
+      // when
+      var decision = viewer.getDecision();
+
+      // then
+      expect(decision).to.exist;
+      expect(decision.id).to.eql('season');
+    }));
+
   });
 
 

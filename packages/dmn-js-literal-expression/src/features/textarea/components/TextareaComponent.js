@@ -9,7 +9,7 @@ export default class TextareaComponent extends Component {
   }
 
   render() {
-    const { text } = this._viewer._decision.literalExpression;
+    const { text } = this._viewer.getDecision();
 
     return (
       <div className="textarea">

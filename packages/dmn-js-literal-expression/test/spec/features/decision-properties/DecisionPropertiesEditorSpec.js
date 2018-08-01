@@ -11,7 +11,9 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import DecisionPropertiesEditorModule from 'src/features/decision-properties/editor';
+
 import ModelingModule from 'src/features/modeling';
+
 
 describe('decision properties editor', function() {
 
@@ -48,7 +50,7 @@ describe('decision properties editor', function() {
     triggerInputEvent(editor, 'foo');
 
     // then
-    expect(viewer._decision.name).to.equal('foo');
+    expect(viewer.getDecision().name).to.equal('foo');
   }));
 
 
@@ -63,7 +65,7 @@ describe('decision properties editor', function() {
     triggerInputEvent(editor, 'foo');
 
     // then
-    expect(viewer._decision.id).to.equal('foo');
+    expect(viewer.getDecision().id).to.equal('foo');
   }));
 
 
@@ -79,7 +81,7 @@ describe('decision properties editor', function() {
     triggerInputEvent(editor, 'foo bar');
 
     // then
-    expect(viewer._decision.id).to.equal('season');
+    expect(viewer.getDecision().id).to.equal('season');
 
     expect(domClasses(decisionId).has('invalid')).to.be.true;
   }));

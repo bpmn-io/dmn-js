@@ -48,10 +48,10 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const viewer = this._viewer = context.injector.get('viewer');
+    this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
 
-    const decision = viewer._decision;
+    const decision = this._viewer.getDecision();
 
     this.state = {
       name: decision.variable.name,

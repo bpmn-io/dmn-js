@@ -8,14 +8,20 @@ export default class TextareaEditorComponent extends Component {
     super(props, context);
 
     this._modeling = context.injector.get('modeling');
-    const viewer = this._viewer = context.injector.get('viewer');
+
+    this._viewer = context.injector.get('viewer');
 
     this.editLiteralExpressionText = this.editLiteralExpressionText.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
 
-    const { id } = viewer._decision.literalExpression;
+    // there is only one single element
+    const { id } = this.getLiteralExpression();
 
     context.changeSupport.onElementsChanged(id, this.onElementsChanged);
+  }
+
+  getLiteralExpression() {
+    return this._viewer.getDecision().literalExpression;
   }
 
   onElementsChanged() {
@@ -27,7 +33,9 @@ export default class TextareaEditorComponent extends Component {
   }
 
   render() {
-    const { text } = this._viewer._decision.literalExpression;
+
+    // there is only one single element
+    const { text } = this.getLiteralExpression();
 
     return (
       <Editor

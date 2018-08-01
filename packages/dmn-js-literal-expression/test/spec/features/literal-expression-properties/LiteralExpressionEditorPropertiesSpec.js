@@ -52,7 +52,7 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, 'foo');
 
     // then
-    expect(viewer._decision.variable.name).to.equal('foo');
+    expect(viewer.getDecision().variable.name).to.equal('foo');
   }));
 
 
@@ -67,7 +67,7 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, 'foo');
 
     // then
-    expect(viewer._decision.variable.typeRef).to.equal('foo');
+    expect(viewer.getDecision().variable.typeRef).to.equal('foo');
   }));
 
 
@@ -80,7 +80,7 @@ describe('literal expression properties editor', function() {
     triggerInputSelectChange(inputSelect, 'boolean', testContainer);
 
     // then
-    expect(viewer._decision.variable.typeRef).to.equal('boolean');
+    expect(viewer.getDecision().variable.typeRef).to.equal('boolean');
   }));
 
 
@@ -97,7 +97,7 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, '');
 
     // then
-    expect(viewer._decision.variable.typeRef).to.not.exist;
+    expect(viewer.getDecision().variable.typeRef).to.not.exist;
   }));
 
 
@@ -112,7 +112,7 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, 'foo');
 
     // then
-    expect(viewer._decision.literalExpression.expressionLanguage)
+    expect(viewer.getDecision().literalExpression.expressionLanguage)
       .to.equal('foo');
   }));
 
@@ -126,7 +126,7 @@ describe('literal expression properties editor', function() {
     triggerInputSelectChange(inputSelect, 'javascript', testContainer);
 
     // then
-    expect(viewer._decision.literalExpression.expressionLanguage)
+    expect(viewer.getDecision().literalExpression.expressionLanguage)
       .to.equal('javascript');
   }));
 
@@ -144,7 +144,8 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, '');
 
     // then
-    expect(viewer._decision.literalExpression.expressionLanguage).to.not.exist;
+    expect(viewer.getDecision().literalExpression.expressionLanguage)
+      .to.not.exist;
   }));
 
 });

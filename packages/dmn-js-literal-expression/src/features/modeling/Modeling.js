@@ -8,10 +8,10 @@ import UpdatePropertiesHandler
 
 export default class Modeling {
 
-  constructor(eventBus, commandStack, viewer) {
-    this._eventBus = eventBus;
+  constructor(commandStack, viewer, eventBus) {
     this._commandStack = commandStack;
     this._viewer = viewer;
+    this._eventBus = eventBus;
 
     eventBus.on('viewer.init', () => {
 
@@ -30,8 +30,12 @@ export default class Modeling {
     };
   }
 
+  getDecision() {
+    return this._viewer.getDecision();
+  }
+
   editDecisionName(name) {
-    const decision = this._viewer._decision;
+    const decision = this.getDecision();
 
     const context = {
       element: decision,
@@ -44,7 +48,7 @@ export default class Modeling {
   }
 
   editDecisionId(id) {
-    const decision = this._viewer._decision;
+    const decision = this.getDecision();
 
     const context = {
       element: decision,
@@ -57,7 +61,7 @@ export default class Modeling {
   }
 
   editLiteralExpressionText(text) {
-    const decision = this._viewer._decision,
+    const decision = this.getDecision(),
           literalExpression = decision.literalExpression;
 
     const context = {
@@ -71,7 +75,7 @@ export default class Modeling {
   }
 
   editExpressionLanguage(expressionLanguage) {
-    const decision = this._viewer._decision,
+    const decision = this.getDecision(),
           literalExpression = decision.literalExpression;
 
     const context = {
@@ -85,7 +89,7 @@ export default class Modeling {
   }
 
   editVariableName(name) {
-    const decision = this._viewer._decision,
+    const decision = this.getDecision(),
           variable = decision.variable;
 
     const context = {
@@ -99,7 +103,7 @@ export default class Modeling {
   }
 
   editVariableType(typeRef) {
-    const decision = this._viewer._decision,
+    const decision = this.getDecision(),
           variable = decision.variable;
 
     const context = {
@@ -113,7 +117,7 @@ export default class Modeling {
   }
 }
 
-Modeling.$inject = [ 'eventBus', 'commandStack', 'viewer' ];
+Modeling.$inject = [ 'commandStack', 'viewer', 'eventBus' ];
 
 
 // helpers //////////////////////

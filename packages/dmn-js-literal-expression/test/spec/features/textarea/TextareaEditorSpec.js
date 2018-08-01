@@ -51,7 +51,7 @@ describe('textarea editor', function() {
     triggerInputEvent(editor, 'foo');
 
     // then
-    expect(viewer._decision.literalExpression.text).to.equal('foo');
+    expect(viewer.getDecision().literalExpression.text).to.equal('foo');
   }));
 
 });

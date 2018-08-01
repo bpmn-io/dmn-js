@@ -20,7 +20,7 @@ describe('Modeling', function() {
     modeling.editDecisionName('foo');
 
     // then
-    expect(viewer._decision.name).to.equal('foo');
+    expect(viewer.getDecision().name).to.equal('foo');
   }));
 
 
@@ -30,7 +30,7 @@ describe('Modeling', function() {
     modeling.editDecisionId('foo');
 
     // then
-    expect(viewer._decision.id).to.equal('foo');
+    expect(viewer.getDecision().id).to.equal('foo');
   }));
 
 
@@ -40,7 +40,7 @@ describe('Modeling', function() {
     modeling.editLiteralExpressionText('foo');
 
     // then
-    expect(viewer._decision.literalExpression.text).to.equal('foo');
+    expect(viewer.getDecision().literalExpression.text).to.equal('foo');
   }));
 
 
@@ -50,7 +50,8 @@ describe('Modeling', function() {
     modeling.editExpressionLanguage('foo');
 
     // then
-    expect(viewer._decision.literalExpression.expressionLanguage).to.equal('foo');
+    expect(viewer.getDecision().literalExpression.expressionLanguage)
+      .to.equal('foo');
   }));
 
 
@@ -60,7 +61,7 @@ describe('Modeling', function() {
     modeling.editVariableName('foo');
 
     // then
-    expect(viewer._decision.variable.name).to.equal('foo');
+    expect(viewer.getDecision().variable.name).to.equal('foo');
   }));
 
 
@@ -70,7 +71,7 @@ describe('Modeling', function() {
     modeling.editVariableType('foo');
 
     // then
-    expect(viewer._decision.variable.typeRef).to.equal('foo');
+    expect(viewer.getDecision().variable.typeRef).to.equal('foo');
   }));
 
 });

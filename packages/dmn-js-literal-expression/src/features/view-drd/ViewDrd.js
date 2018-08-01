@@ -5,7 +5,7 @@ const HIGH_PRIORITY = 1500;
 
 export default class ViewDrd {
 
-  constructor(components, eventBus, injector, viewer) {
+  constructor(components, viewer, eventBus, injector) {
     this._injector = injector;
     this._viewer = viewer;
 
@@ -18,7 +18,8 @@ export default class ViewDrd {
     eventBus.on('showDrd', () => {
       const parent = injector.get('_parent', false);
 
-      const definitions = getDefinitions(viewer._decision);
+      // there is only one single element
+      const definitions = this.getDefinitions();
 
       // open definitions
       const view = parent.getView(definitions);
@@ -34,13 +35,19 @@ export default class ViewDrd {
       return;
     }
 
-    const definitions = getDefinitions(this._viewer._decision);
+    // there is only one single element
+    const definitions = this.getDefinitions();
 
     return !!parent.getView(definitions);
   }
+
+  getDefinitions() {
+    return getDefinitions(this._viewer.getDecision());
+  }
+
 }
 
-ViewDrd.$inject = [ 'components', 'eventBus', 'injector', 'viewer' ];
+ViewDrd.$inject = [ 'components', 'viewer', 'eventBus', 'injector' ];
 
 
 // helpers //////////////////////

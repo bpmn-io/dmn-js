@@ -9,7 +9,9 @@ export default class DecisionPropertiesComponent extends Component {
   }
 
   render() {
-    const { name, id } = this._viewer._decision;
+
+    // there is only one single element
+    const { name, id } = this._viewer.getDecision();
 
     return (
       <div className="decision-properties">

@@ -134,6 +134,15 @@ export default class Viewer extends BaseViewer {
   }
 
   /**
+   * Returns the currently displayed decision.
+   *
+   * @return {ModdleElement}
+   */
+  getDecision() {
+    return this._decision;
+  }
+
+  /**
    * Attach viewer to given parent node.
    *
    * @param  {Element} parentNode

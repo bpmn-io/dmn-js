@@ -10,28 +10,25 @@ export default class DecisionPropertiesEditorComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const viewer = this._viewer = context.injector.get('viewer');
+    this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
 
-    this.setDecisionName = this.setDecisionName.bind(this);
-    this.setDecisionId = this.setDecisionId.bind(this);
-    this.onElementsChanged = this.onElementsChanged.bind(this);
-    this.validateId = this.validateId.bind(this);
-
-    const { id } = viewer._decision;
-
-    this.setupChangeListeners({ bind: id });
-  }
-
-  componentWillUnmount() {
-    const { id } = this._viewer._decision;
-
     this.setupChangeListeners({
-      unbind: id
+      bind: this.getDecision().id
     });
   }
 
-  onElementsChanged() {
+  componentWillUnmount() {
+    this.setupChangeListeners({
+      unbind: this.getDecision().id
+    });
+  }
+
+  getDecision() {
+    return this._viewer.getDecision();
+  }
+
+  onElementsChanged = () => {
     this.forceUpdate();
   }
 
@@ -50,29 +47,26 @@ export default class DecisionPropertiesEditorComponent extends Component {
     }
   }
 
-  setDecisionName(name) {
+  setDecisionName = (name) => {
     this._modeling.editDecisionName(name);
   }
 
-  setDecisionId(id) {
-    const oldId = this._viewer._decision.id;
+  setDecisionId = (id) => {
+    const oldId = this.getDecision().id;
 
     if (oldId === id) {
       return;
     }
 
-    // re-bind change listeners from oldId to new id
-    this.setupChangeListeners({ bind: id, unbind: oldId });
-
     this._modeling.editDecisionId(id);
   }
 
-  validateId(id) {
-    return validateId(this._viewer._decision, id);
+  validateId = (id) => {
+    return validateId(this.getDecision(), id);
   }
 
   render() {
-    const { name, id } = this._viewer._decision;
+    const { name, id } = this.getDecision();
 
     return (
       <header className="decision-properties">
