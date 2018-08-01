@@ -30,7 +30,10 @@ describe('textarea', function() {
   it('should render', function() {
 
     // then
-    expect(domQuery('.textarea', testContainer)).to.exist;
+    const textarea = domQuery('.textarea', testContainer);
+
+    expect(textarea).to.exist;
+    expect(textarea.textContent).to.eql('calendar.getSeason(date)');
   });
 
 });
