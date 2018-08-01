@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.1.2
+
+* `FIX`: update ChangeSupport id binding on <element.updateId> ([#367](https://github.com/bpmn-io/dmn-js/issues/367))
+
 ## 5.1.1
 
 * `FIX`: correct focus handling in IE11 ([#361](https://github.com/bpmn-io/dmn-js/issues/361))
