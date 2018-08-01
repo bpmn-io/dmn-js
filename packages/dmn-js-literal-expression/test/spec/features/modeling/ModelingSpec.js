@@ -2,6 +2,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import simpleStringEditXML from '../../literal-expression.dmn';
 
+import CoreModule from 'src/core';
 import Modeling from 'src/features/modeling';
 
 
@@ -9,6 +10,7 @@ describe('Modeling', function() {
 
   beforeEach(bootstrapModeler(simpleStringEditXML, {
     modules: [
+      CoreModule,
       Modeling
     ],
   }));

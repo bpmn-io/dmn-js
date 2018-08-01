@@ -12,6 +12,7 @@ import literalExpressionXML from '../../literal-expression.dmn';
 
 import DecisionPropertiesEditorModule from 'src/features/decision-properties/editor';
 
+import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
 
 
@@ -19,6 +20,7 @@ describe('decision properties editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
+      CoreModule,
       DecisionPropertiesEditorModule,
       ModelingModule
     ],

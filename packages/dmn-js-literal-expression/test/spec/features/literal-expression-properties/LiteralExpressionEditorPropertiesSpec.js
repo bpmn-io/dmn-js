@@ -16,6 +16,7 @@ import literalExpressionXML from '../../literal-expression.dmn';
 import LiteralExpressionPropertiesEditorModule
   from 'src/features/literal-expression-properties/editor';
 
+import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
 
 
@@ -23,6 +24,7 @@ describe('literal expression properties editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
+      CoreModule,
       LiteralExpressionPropertiesEditorModule,
       ModelingModule
     ],

@@ -6,6 +6,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 
+import CoreModule from 'src/core';
 import DecisionPropertiesModule from 'src/features/decision-properties';
 
 
@@ -13,6 +14,7 @@ describe('decision properties', function() {
 
   beforeEach(bootstrapViewer(literalExpressionXML, {
     modules: [
+      CoreModule,
       DecisionPropertiesModule
     ]
   }));

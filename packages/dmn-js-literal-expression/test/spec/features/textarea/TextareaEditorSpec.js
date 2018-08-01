@@ -10,6 +10,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 
+import CoreModule from 'src/core';
 import TextareaEditorModule
   from 'src/features/textarea/editor';
 
@@ -20,6 +21,7 @@ describe('textarea editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
+      CoreModule,
       TextareaEditorModule,
       ModelingModule
     ],

@@ -9,6 +9,7 @@ import {
   remove as domRemove
 } from 'min-dom';
 
+import CoreModule from './core';
 import DecisionPropertiesModule from './features/decision-properties';
 import LiteralExpressionPropertiesModule from './features/literal-expression-properties';
 import PoweredByModule from './features/powered-by';
@@ -191,6 +192,7 @@ export default class Viewer extends BaseViewer {
 
   static _getModules() {
     return [
+      CoreModule,
       DecisionPropertiesModule,
       LiteralExpressionPropertiesModule,
       PoweredByModule,
