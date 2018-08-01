@@ -89,39 +89,60 @@ describe('decision table properties', function() {
     }));
 
 
-    it('should edit ID if valid', inject(function(sheet) {
+    describe('should edit ID', function() {
 
-      // given
-      const id = queryEditor('.decision-table-id', testContainer);
+      it('accept if valid', inject(function(sheet) {
 
-      id.focus();
+        // given
+        const id = queryEditor('.decision-table-id', testContainer);
 
-      // when
-      triggerInputEvent(id, 'bar');
+        id.focus();
 
-      // then
-      const root = sheet.getRoot();
+        // when
+        triggerInputEvent(id, 'bar');
 
-      expect(root.businessObject.$parent.id).to.equal('bar');
-    }));
+        // then
+        const root = sheet.getRoot();
+
+        expect(root.businessObject.$parent.id).to.equal('bar');
+      }));
 
 
-    it('should not edit ID if invalid', inject(function(sheet) {
+      it('undo edit', inject(function(sheet, commandStack) {
 
-      // given
-      const id = queryEditor('.decision-table-id', testContainer);
+        // given
+        const id = queryEditor('.decision-table-id', testContainer);
 
-      id.focus();
+        id.focus();
 
-      // when
-      triggerInputEvent(id, '!foo');
+        triggerInputEvent(id, 'bar');
 
-      // then
-      const root = sheet.getRoot();
+        // when
+        commandStack.undo();
 
-      expect(root.businessObject.$parent.id).to.equal('decision');
-      expect(domClasses(id.parentNode).has('invalid')).to.be.true;
-    }));
+        // then
+        expect(id.textContent).to.equal('decision');
+      }));
+
+
+      it('reject if invalid', inject(function(sheet) {
+
+        // given
+        const id = queryEditor('.decision-table-id', testContainer);
+
+        id.focus();
+
+        // when
+        triggerInputEvent(id, '!foo');
+
+        // then
+        const root = sheet.getRoot();
+
+        expect(root.businessObject.$parent.id).to.equal('decision');
+        expect(domClasses(id.parentNode).has('invalid')).to.be.true;
+      }));
+
+    });
 
   });
 

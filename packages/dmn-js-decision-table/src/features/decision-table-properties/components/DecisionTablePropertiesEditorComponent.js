@@ -62,16 +62,11 @@ export default class DecisionTablePropertiesComponent extends Component {
 
   setDecisionTableId = (id) => {
 
-    var bo = this.getBusinessObject();
-
-    var oldId = bo.id;
+    var oldId = this.getBusinessObject().id;
 
     if (oldId === id) {
       return;
     }
-
-    // re-bind change listeners from oldId to new id
-    this.setupChangeListeners({ bind: id, unbind: oldId });
 
     this.modeling.editDecisionTableId(id);
   }
