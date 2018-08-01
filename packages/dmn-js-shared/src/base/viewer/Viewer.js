@@ -3,6 +3,9 @@ import { Injector } from 'didi';
 import core from './core';
 
 
+/**
+ * A base for React-style viewers.
+ */
 export default class Viewer {
 
   constructor(options = {}) {
