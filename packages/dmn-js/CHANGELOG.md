@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.2.0
+
+* `CHORE`: bump to `diagram-js@2.6.1`
+
 ## 5.1.2
 
 * `FIX`: update ChangeSupport id binding on <element.updateId> ([#367](https://github.com/bpmn-io/dmn-js/issues/367))
