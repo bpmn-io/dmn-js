@@ -1,8 +1,7 @@
 import {
   bootstrapModeler,
   getDrdJS,
-  getDmnJS,
-  inject
+  getDmnJS
 } from 'test/TestHelper';
 
 import exampleXML from '../../fixtures/dmn/di.dmn';
@@ -111,7 +110,7 @@ describe('DRD - Import', function() {
 
 
 
-  describe('cropping', function(done) {
+  describe('cropping', function() {
 
     beforeEach(bootstrapModeler(multipleDecisionsXML));
 
@@ -122,35 +121,38 @@ describe('DRD - Import', function() {
     });
 
 
-    it('should crop', inject(function(elementRegistry, modeling) {
+    it('should crop', function(done) {
 
-      var connection = modeling.connect(
-        elementRegistry.get('guestCount'),
-        elementRegistry.get('season')
-      );
+      modeler.getActiveViewer().invoke(function(elementRegistry, modeling) {
 
-      var waypoints = connection.waypoints.slice();
+        var connection = modeling.connect(
+          elementRegistry.get('guestCount'),
+          elementRegistry.get('season')
+        );
 
-      modeler.saveXML(function(err, xml) {
+        var waypoints = connection.waypoints.slice();
 
-        modeler.importXML(xml, function() {
+        modeler.saveXML(function(err, xml) {
 
-          var decision = elementRegistry.get('guestCount');
-          var importedConnection = decision.outgoing[0];
+          modeler.importXML(xml, function() {
 
-          expect(
-            pick(importedConnection.waypoints[0], [ 'x', 'y' ])
-          ).to.eql(pick(waypoints[0], [ 'x', 'y' ]));
+            var decision = elementRegistry.get('guestCount');
+            var importedConnection = decision.outgoing[0];
 
-          expect(
-            pick(importedConnection.waypoints[1], [ 'x', 'y' ])
-          ).to.eql(pick(waypoints[1], [ 'x', 'y' ]));
+            expect(
+              pick(importedConnection.waypoints[0], [ 'x', 'y' ])
+            ).to.eql(pick(waypoints[0], [ 'x', 'y' ]));
 
-          done();
+            expect(
+              pick(importedConnection.waypoints[1], [ 'x', 'y' ])
+            ).to.eql(pick(waypoints[1], [ 'x', 'y' ]));
+
+            done();
+          });
         });
       });
 
-    }));
+    });
 
   });
 
