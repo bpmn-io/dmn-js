@@ -150,6 +150,44 @@ describe('Modeler', function() {
 
   });
 
+
+  describe('editor actions support', function() {
+
+    it('should ship all actions', function(done) {
+
+      createModeler(exampleXML, function(err, warnings, modeler) {
+
+        // given
+        var drdJS = modeler.getActiveViewer();
+
+        var expectedActions = [
+          'undo',
+          'redo',
+          'stepZoom',
+          'zoom',
+          'removeSelection',
+          'moveCanvas',
+          'moveSelection',
+          'selectElements',
+          'lassoTool',
+          'directEditing'
+        ];
+
+        // when
+        var editorActions = drdJS.get('editorActions');
+
+        // then
+        var actualActions = editorActions.getActions();
+
+        expect(actualActions).to.eql(expectedActions);
+
+        done();
+      });
+
+    });
+
+  });
+
 });
 
 

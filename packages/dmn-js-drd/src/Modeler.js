@@ -90,29 +90,33 @@ inherits(Modeler, NavigatedViewer);
 // - viewer + navigation modules
 // - modeling modules
 
-import MoveModule from 'diagram-js/lib/features/move';
 import BendpointsModule from 'diagram-js/lib/features/bendpoints';
-import GenerateDiModule from './features/generate-di';
-import EditorActionsModule from './features/editor-actions';
 import ContextPadModule from './features/context-pad';
+import DefinitionPropertiesModule from './features/definition-properties/modeler';
+import EditorActionsModule from './features/editor-actions';
+import GenerateDiModule from './features/generate-di';
 import KeyboardModule from './features/keyboard';
+import KeyboardMoveModule from 'diagram-js/lib/navigation/keyboard-move';
+import KeyboardMoveSelectionModule from 'diagram-js/lib/features/keyboard-move-selection';
 import LabelEditingModule from './features/label-editing';
 import ModelingModule from './features/modeling';
+import MoveModule from 'diagram-js/lib/features/move';
 import PaletteModule from './features/palette';
-import DefinitionPropertiesModule from './features/definition-properties/modeler';
 
 Modeler.prototype._modelingModules = [
   // modeling components
-  MoveModule,
   BendpointsModule,
-  GenerateDiModule,
-  EditorActionsModule,
   ContextPadModule,
+  DefinitionPropertiesModule,
+  EditorActionsModule,
+  GenerateDiModule,
   KeyboardModule,
+  KeyboardMoveModule,
+  KeyboardMoveSelectionModule,
   LabelEditingModule,
   ModelingModule,
-  PaletteModule,
-  DefinitionPropertiesModule
+  MoveModule,
+  PaletteModule
 ];
 
 Modeler.prototype._modules = [].concat(
