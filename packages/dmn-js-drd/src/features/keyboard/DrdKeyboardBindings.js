@@ -58,23 +58,6 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
     }
   });
 
-  // activate space tool
-  // S
-  addListener('spaceTool', function(context) {
-
-    var event = context.keyEvent;
-
-    if (keyboard.hasModifier(event)) {
-      return;
-    }
-
-    if (keyboard.isKey(['s', 'S'], event)) {
-      editorActions.trigger('spaceTool');
-
-      return true;
-    }
-  });
-
   // activate lasso tool
   // L
   addListener('lassoTool', function(context) {
