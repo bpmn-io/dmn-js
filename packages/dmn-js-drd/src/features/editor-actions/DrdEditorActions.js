@@ -3,18 +3,40 @@ import inherits from 'inherits';
 import EditorActions from 'diagram-js/lib/features/editor-actions/EditorActions';
 
 
-export default function DrdEditorActions(
-    injector,
-    canvas,
-    elementRegistry,
-    selection,
-    lassoTool,
-    directEditing) {
-
+export default function DrdEditorActions(injector) {
   injector.invoke(EditorActions, this);
+}
 
-  this.register({
-    selectElements: function() {
+inherits(DrdEditorActions, EditorActions);
+
+DrdEditorActions.$inject = [
+  'injector'
+];
+
+
+/**
+ * Register default actions.
+ *
+ * @param {Injector} injector
+ */
+DrdEditorActions.prototype._registerDefaultActions = function(injector) {
+
+  // (0) invoke super method
+
+  EditorActions.prototype._registerDefaultActions.call(this, injector);
+
+  // (1) retrieve optional components to integrate with
+
+  var canvas = injector.get('canvas', false);
+  var elementRegistry = injector.get('elementRegistry', false);
+  var selection = injector.get('selection', false);
+  var lassoTool = injector.get('lassoTool', false);
+  var directEditing = injector.get('directEditing', false);
+
+  // (2) check components and register actions
+
+  if (canvas && elementRegistry && selection) {
+    this._registerAction('selectElements', function() {
       // select all elements except for the invisible
       // root element
       var rootElement = canvas.getRootElement();
@@ -26,25 +48,22 @@ export default function DrdEditorActions(
       selection.select(elements);
 
       return elements;
-    },
-    lassoTool: function() {
+    });
+  }
+
+  if (lassoTool) {
+    this._registerAction('lassoTool', function() {
       lassoTool.toggle();
-    },
-    directEditing: function() {
+    });
+  }
+
+  if (selection && directEditing) {
+    this._registerAction('directEditing', function() {
       var currentSelection = selection.get();
 
       if (currentSelection.length) {
         directEditing.activate(currentSelection[0]);
       }
-    }
-  });
-}
-
-inherits(DrdEditorActions, EditorActions);
-
-DrdEditorActions.$inject = [
-  'injector',
-  'canvas', 'elementRegistry', 'selection',
-  'lassoTool',
-  'directEditing'
-];
+    });
+  }
+};
