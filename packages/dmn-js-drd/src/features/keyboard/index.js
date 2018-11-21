@@ -1,11 +1,11 @@
-import DiagramKeyboard from 'diagram-js/lib/features/keyboard';
+import KeyboardModule from 'diagram-js/lib/features/keyboard';
 
-import DrdKeyBindings from './DrdKeyBindings';
+import DrdKeyboardBindings from './DrdKeyboardBindings';
 
 export default {
   __depends__: [
-    DiagramKeyboard
+    KeyboardModule
   ],
-  __init__: [ 'drdKeyBindings' ],
-  drdKeyBindings: [ 'type', DrdKeyBindings ]
+  __init__: [ 'keyboardBindings' ],
+  keyboardBindings: [ 'type', DrdKeyboardBindings ]
 };
