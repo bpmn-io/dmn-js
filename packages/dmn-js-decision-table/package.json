@@ -26,14 +26,14 @@
   },
   "dependencies": {
     "css.escape": "^1.5.1",
-    "diagram-js": "^2.6.1",
+    "diagram-js": "^3.0.1",
     "dmn-js-shared": "^5.2.0",
     "escape-html": "^1.0.3",
     "inferno": "~5.0.5",
     "min-dash": "^3.0.0",
     "min-dom": "^3.0.0",
     "selection-ranges": "^3.0.0",
-    "table-js": "^5.0.3"
+    "table-js": "^5.1.0"
   },
   "babel": {
     "presets": [
