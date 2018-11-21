@@ -6,6 +6,18 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.0.0
+
+* `FEAT`: add ability to move canvas and selected elements with keyboard arrows
+* `FEAT`: support `SHIFT` modifier to move elements / canvas with keyboard arrows at accelerated speed
+* `FEAT`: use `Ctrl/Cmd` modifier key to move the canvas via keyboard arrows
+* `CHORE`: bind DRD editor actions and keyboard shortcuts for explicitly added features only
+* `CHORE`: update to [`diagram-js@3.0.0`](https://github.com/bpmn-io/diagram-js/blob/master/CHANGELOG.md#300)
+
+### Breaking Changes
+
+* `EditorActions` / `Keyboard` do not pull in features implicitly anymore. If you roll your own DRD editor, include features you would like to ship with manually to provide the respective actions / keyboard bindings ([`a68c9b68`](https://github.com/bpmn-io/dmn-js/commit/a68c9b68d3633d224fb3bb9809e7ce01d801d6fb))
+
 ## 5.2.0
 
 * `CHORE`: bump to `diagram-js@2.6.1`
