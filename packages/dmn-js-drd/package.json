@@ -21,12 +21,12 @@
     "drd"
   ],
   "dependencies": {
-    "diagram-js": "^3.0.1",
-    "diagram-js-direct-editing": "^1.2.0",
+    "diagram-js": "^3.1.0",
+    "diagram-js-direct-editing": "^1.4.0",
     "dmn-js-shared": "^6.0.0",
     "inherits": "^2.0.1",
     "min-dash": "^3.0.0",
-    "min-dom": "^3.0.0",
+    "min-dom": "^3.1.1",
     "tiny-svg": "^2.0.0"
   },
   "babel": {
