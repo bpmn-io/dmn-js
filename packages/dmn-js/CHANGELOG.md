@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.1.0
+
+* `CHORE`: bump to `diagram-js@3`
+
 ## 6.0.0
 
 * `FEAT`: add ability to move canvas and selected elements with keyboard arrows
