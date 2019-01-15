@@ -12,7 +12,7 @@
     "lerna-publish": "lerna publish -m \"chore(project): publish %s\"",
     "lint": "eslint packages",
     "postinstall": "lerna bootstrap --hoist",
-    "reinstall": "npm install",
+    "reinstall": "npm ci",
     "release": "run-s distro test lerna-publish",
     "test": "lerna run test",
     "travis": "run-s all build-distro"
