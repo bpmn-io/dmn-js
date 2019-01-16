@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.2.0
+
+* `CHORE`: emit `attach` and `detach` events
+
 ## 6.1.0
 
 * `CHORE`: bump to `diagram-js@3`
