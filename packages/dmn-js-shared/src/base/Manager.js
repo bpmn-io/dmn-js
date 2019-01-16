@@ -264,6 +264,8 @@ export default class Manager {
     }
 
     parentNode.appendChild(this._container);
+
+    this._emit('attach', {});
   }
 
   detach() {
