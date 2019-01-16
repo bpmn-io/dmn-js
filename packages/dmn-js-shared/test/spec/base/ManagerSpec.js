@@ -96,6 +96,28 @@ describe('Manager', function() {
 
     describe('events', function() {
 
+      it('should emit <attach> event', function() {
+
+        // given
+        var container = document.createElement('div');
+        var viewer = new TestViewer();
+
+        var events = [];
+
+        viewer.on('attach', function(event) {
+          // log event type + event arguments
+          events.push(event);
+        });
+
+        // when
+        viewer.attachTo(container);
+
+        // then
+        expect(events).to.have.lengthOf(1);
+
+      });
+
+
       it('should emit <import.*> events', function(done) {
 
         // given
