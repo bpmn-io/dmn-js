@@ -269,6 +269,8 @@ export default class Manager {
   }
 
   detach() {
+    this._emit('detach', {});
+
     domRemove(this._container);
   }
 

@@ -114,7 +114,27 @@ describe('Manager', function() {
 
         // then
         expect(events).to.have.lengthOf(1);
+      });
 
+
+      it('should emit <detach> event', function() {
+
+        // given
+        var container = document.createElement('div');
+        var viewer = new TestViewer({ container });
+
+        var events = [];
+
+        viewer.on('detach', function(event) {
+          // log event type + event arguments
+          events.push(event);
+        });
+
+        // when
+        viewer.detach();
+
+        // then
+        expect(events).to.have.lengthOf(1);
       });
 
 
