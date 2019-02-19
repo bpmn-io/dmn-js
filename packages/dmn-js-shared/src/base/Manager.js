@@ -275,7 +275,7 @@ export default class Manager {
   }
 
   destroy() {
-    Object.keys(this._viewers, (viewerId) => {
+    Object.keys(this._viewers).forEach((viewerId) => {
       var viewer = this._viewers[viewerId];
 
       safeExecute(viewer, 'destroy');

@@ -2,6 +2,9 @@ import Manager from 'src/base/Manager';
 
 import TestView from './TestView';
 
+import { spy } from 'sinon';
+
+
 class TestViewer extends Manager {
 
   constructor(viewProviders=[ DECISION_TABLE_VIEW, DRD_VIEW ], options={}) {
@@ -356,6 +359,48 @@ describe('Manager', function() {
 
           // then
           expect(manager.getViews()).to.have.length(2);
+
+          done();
+        });
+
+      });
+
+    });
+
+  });
+
+
+  describe('viewers', function() {
+
+    it('should destroy on manager destruction', function(done) {
+
+      // given
+      var manager = new TestViewer();
+
+      var destroySpies = [];
+
+      manager.on('viewer.created', (event) => {
+        var viewer = event.viewer;
+        var destroySpy = spy(viewer, 'destroy');
+
+        destroySpies.push(destroySpy);
+      });
+
+
+      manager.importXML(diagramXML, function(err) {
+        if (err) {
+          return done(err);
+        }
+
+        manager.open(manager.getViews()[1], function() {
+
+          // when
+          manager.destroy();
+
+          // then
+          destroySpies.forEach(function(destroySpy) {
+            expect(destroySpy).to.have.been.calledOnce;
+          });
 
           done();
         });
