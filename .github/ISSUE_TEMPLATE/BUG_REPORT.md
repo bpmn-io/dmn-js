@@ -24,7 +24,7 @@ Steps to reproduce the behavior:
 1. do this
 2. do that
 
-If you report a modeling related issue, ensure you can reproduce it on [demo.bpmn.io](https://demo.bpmn.io/cmmn/new)
+If you report a modeling related issue, ensure you can reproduce it on [demo.bpmn.io](https://demo.bpmn.io/dmn/new)
 
 When reporting a library error, try to build an example that reproduces your problem. You can use our playgrounds for [viewer](https://jsfiddle.net/x2doq4vn/) or [modeler](https://jsfiddle.net/nrko5hyt/) as a starting point or put a demo up on [GitHub](https://github.com/) for inspection.
 
