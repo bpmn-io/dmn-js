@@ -367,6 +367,38 @@ describe('Manager', function() {
   });
 
 
+  describe('subviewers', function() {
+
+    var manager = new TestViewer();
+
+
+    it('should destroy subviewers on manager destruction', function(done) {
+      manager.importXML(diagramXML, function(err) {
+        if (err) {
+          return done(err);
+        }
+
+        manager._switchView(manager._views[1]);
+        var destroyEventsFired = 0;
+        Object.keys(manager._viewers).forEach(function(viewerKey) {
+          manager._viewers[viewerKey].on('diagram.destroy', function() {
+            destroyEventsFired++;
+          });
+        });
+
+        // when
+        manager.destroy();
+
+        // then
+        expect(destroyEventsFired).to.eql(2);
+
+        done();
+      });
+    });
+
+  });
+
+
   describe('export', function() {
 
     it('should indicate nothing imported', function(done) {

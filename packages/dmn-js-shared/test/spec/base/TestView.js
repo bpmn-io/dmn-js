@@ -66,4 +66,8 @@ export default class TestView extends View {
     this._eventBus.fire(...args);
   }
 
+  destroy() {
+    this._eventBus.fire('diagram.destroy');
+  }
+
 }
