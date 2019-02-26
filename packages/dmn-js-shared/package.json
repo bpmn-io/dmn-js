@@ -9,6 +9,11 @@
     "prepublishOnly": "npm run build"
   },
   "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bpmn-io/dmn-js",
+    "directory": "packages/dmn-js-shared"
+  },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "didi": "^4.0.0",
