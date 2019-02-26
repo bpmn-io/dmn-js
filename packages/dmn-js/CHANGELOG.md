@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.2.3
+
+* `CHORE`: correct `dmn-js-shared` repository meta-data
+
 ## 6.2.2
 
 * `FIX`: properly destroy individual viewers on dmn-js destruction ([#392](https://github.com/bpmn-io/dmn-js/pull/392))
