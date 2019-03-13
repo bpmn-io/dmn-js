@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.3.0
+
+* `FEAT(decision-table)`: show input and output label first in editors ([#346](https://github.com/bpmn-io/dmn-js/issues/346))
+
 ## 6.2.3
 
 * `CHORE`: correct `dmn-js-shared` repository meta-data
