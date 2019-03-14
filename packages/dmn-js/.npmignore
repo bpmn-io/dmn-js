@@ -4,6 +4,7 @@ tasks
 test/*
 !dist
 !lib
+!lib/core
 !test/helper/*
 .babelrc
 karma.conf.js

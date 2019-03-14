@@ -1,5 +1,6 @@
 src
 test
 !lib
+!lib/core
 .babelrc
 karma.conf.js
