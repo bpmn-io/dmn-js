@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.3.2
+
+* `FIX(project)`: fix npmignore
+
 ## 6.3.1
 
 * `FIX(project)`: include core directory in npm packages
