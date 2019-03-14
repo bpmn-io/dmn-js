@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-literal-expression",
   "description": "A literal expression view for dmn-js",
-  "version": "6.2.3",
+  "version": "6.3.1",
   "scripts": {
     "test": "karma start",
     "build": "del-cli lib && babel -s -q -d lib src",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "diagram-js": "^3.1.3",
-    "dmn-js-shared": "^6.2.3",
+    "dmn-js-shared": "^6.3.1",
     "escape-html": "^1.0.3",
     "inferno": "~5.0.5",
     "min-dash": "^3.0.0",
