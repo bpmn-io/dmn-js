@@ -55,9 +55,7 @@ export default function DrdUpdater(
 
   this.executed([
     'connection.layout',
-    'connection.create',
-    'connection.reconnectEnd',
-    'connection.reconnectStart'
+    'connection.create'
   ], cropConnection);
 
   this.reverted([ 'connection.layout' ], function(e) {
