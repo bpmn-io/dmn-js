@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT(drd)`: consistently layout connection on reconnect start and end ([#398](https://github.com/bpmn-io/dmn-js/pull/398))
+
 ## 6.3.2
 
 * `FIX(project)`: fix npmignore
