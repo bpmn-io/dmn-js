@@ -51,7 +51,7 @@ module.exports = function(karma) {
       'test/distro/' + VARIANT + '.js'
     ],
 
-    reporters: [ 'spec' ],
+    reporters: [ 'progress' ],
 
     customLaunchers: {
       ChromeHeadless_Linux: {
