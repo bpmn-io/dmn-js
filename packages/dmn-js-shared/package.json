@@ -20,7 +20,7 @@
     "inferno-test-utils": "~5.0.5"
   },
   "dependencies": {
-    "diagram-js": "^3.3.1",
+    "diagram-js": "^4.0.1",
     "dmn-moddle": "^5.0.0",
     "ids": "^0.2.0",
     "inferno": "~5.0.5",
@@ -28,7 +28,7 @@
     "min-dom": "^3.1.1",
     "selection-ranges": "^3.0.2",
     "selection-update": "^0.1.2",
-    "table-js": "^5.1.0"
+    "table-js": "^6.0.0"
   },
   "babel": {
     "presets": [
