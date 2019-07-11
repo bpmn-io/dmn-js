@@ -45,7 +45,7 @@
     "min-dom": "^3.1.1",
     "mkdirp": "^0.5.1",
     "rollup": "^0.66.6",
-    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-license": "^0.7.0",
@@ -58,10 +58,5 @@
     "dmn-js-drd": "^6.3.3",
     "dmn-js-literal-expression": "^6.3.3",
     "dmn-js-shared": "^6.3.3"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   }
 }

@@ -1,11 +1,11 @@
 {
   "plugins": [
     "inferno",
-    "transform-object-assign",
-    "transform-object-rest-spread",
-    "transform-class-properties"
+    "@babel/plugin-transform-object-assign",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
   ],
   "presets": [
-    [ "env", { "modules": false } ]
+    [ "@babel/preset-env", { "modules": false } ]
   ]
 }

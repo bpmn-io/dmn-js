@@ -29,10 +29,5 @@
     "selection-ranges": "^3.0.2",
     "selection-update": "^0.1.2",
     "table-js": "^6.0.0"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   }
 }
