@@ -29,14 +29,14 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/preset-env": "^7.5.4",
+    "babel-loader": "^8.0.6",
     "babel-plugin-inferno": "~5.0.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "del-cli": "^1.1.0",
     "eslint": "^5.7.0",
@@ -58,5 +58,6 @@
     "sinon": "^7.1.0",
     "sinon-chai": "^2.14.0",
     "webpack": "^4.12.1"
-  }
+  },
+  "dependencies": {}
 }
