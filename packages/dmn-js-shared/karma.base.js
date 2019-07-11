@@ -52,7 +52,7 @@ module.exports = function(path) {
         }
       },
 
-      reporters: [ 'spec' ],
+      reporters: [ 'progress' ],
 
       browsers: browsers,
 
