@@ -96,10 +96,13 @@ function pgl(plugins=[]) {
     }),
     json(),
     nodeResolve({
-      module: true,
-      main: true,
-      browser: true
+      mainFields: [
+        'browser',
+        'module',
+        'main'
+      ]
     }),
+    commonjs(),
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
@@ -107,7 +110,6 @@ function pgl(plugins=[]) {
         [ '@babel/preset-env', { modules: false } ]
       ]
     }),
-    commonjs(),
     ...plugins
   ];
 }
