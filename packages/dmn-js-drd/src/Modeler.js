@@ -92,6 +92,7 @@ inherits(Modeler, NavigatedViewer);
 
 import BendpointsModule from 'diagram-js/lib/features/bendpoints';
 import ContextPadModule from './features/context-pad';
+import ConnectPreviewModule from 'diagram-js/lib/features/connection-preview';
 import DefinitionPropertiesModule from './features/definition-properties/modeler';
 import EditorActionsModule from './features/editor-actions';
 import GenerateDiModule from './features/generate-di';
@@ -107,6 +108,7 @@ Modeler.prototype._modelingModules = [
   // modeling components
   BendpointsModule,
   ContextPadModule,
+  ConnectPreviewModule,
   DefinitionPropertiesModule,
   EditorActionsModule,
   GenerateDiModule,

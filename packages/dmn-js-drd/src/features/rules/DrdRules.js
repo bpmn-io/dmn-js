@@ -55,8 +55,12 @@ DrdRules.prototype.init = function() {
   });
 
   this.addRule('connection.updateWaypoints', function(context) {
-    // OK! but visually ignore
-    return null;
+    const connection = context.connection;
+
+    return {
+      type: connection.type,
+      businessObject: connection.businessObject
+    };
   });
 
   this.addRule('shape.create', function(context) {
@@ -73,6 +77,10 @@ DrdRules.prototype.canMove = canMove;
 
 
 function canConnect(source, target) {
+
+  if (nonExistingOrLabel(source) || nonExistingOrLabel(target)) {
+    return null;
+  }
 
   if (is(source, 'dmn:Definitions') || is(target, 'dmn:Definitions')) {
     return false;
@@ -126,4 +134,12 @@ function canMove(elements, target) {
   }
 
   return false;
+}
+
+function nonExistingOrLabel(element) {
+  return !element || isLabel(element);
+}
+
+export function isLabel(element) {
+  return element && !!element.labelTarget;
 }
