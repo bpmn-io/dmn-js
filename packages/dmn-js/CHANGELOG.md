@@ -6,7 +6,16 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.0.0
+
+* `FEAT(drd)`: add connection previews
+* `CHORE(project)`: upgrade to `babel@7`
+* `CHORE(project)`: bump to `diagram-js@4`
+
+## 6.3.3
+
 * `FEAT(drd)`: consistently layout connection on reconnect start and end ([#398](https://github.com/bpmn-io/dmn-js/pull/398))
+* `FIX(drd)`: prevent HTML injection in direct editing and search
 
 ## 6.3.2
 
