@@ -64,6 +64,10 @@
   border: solid 1px #444;
 }
 
+.dmn-decision-table-container .tjs-table > tbody:empty {
+  display: none;
+}
+
 .dmn-decision-table-container table thead {
   border-bottom: 3px double #444;
 }
