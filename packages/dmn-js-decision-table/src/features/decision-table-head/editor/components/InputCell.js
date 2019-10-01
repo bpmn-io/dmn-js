@@ -8,6 +8,7 @@ import {
   ComponentWithSlots
 } from 'dmn-js-shared/lib/components/mixins';
 
+const DEFAULT_EXPRESSION_LANGUAGE = 'JUEL';
 
 export default class InputCell extends Component {
 
@@ -74,9 +75,11 @@ export default class InputCell extends Component {
     var label = input.get('label');
     var inputVariable = input.get('inputVariable');
 
-    var expressionLanguage = inputExpression.get('expressionLanguage') || 'FEEL';
+    var expressionLanguage = inputExpression.get('expressionLanguage');
 
-    var showLanguageBadge = !label && expressionLanguage != 'FEEL';
+    var showLanguageBadge = !label &&
+      expressionLanguage &&
+      expressionLanguage !== DEFAULT_EXPRESSION_LANGUAGE;
 
     return (
       <th

@@ -6,6 +6,7 @@ import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
+const DEFAULT_EXPRESSION_LANGUAGE = 'JUEL';
 
 export default class InputEditor extends Component {
 
@@ -20,7 +21,7 @@ export default class InputEditor extends Component {
       event.preventDefault();
       event.stopPropagation();
 
-      this.setExpressionLanguage('FEEL');
+      this.setExpressionLanguage(DEFAULT_EXPRESSION_LANGUAGE);
     };
 
     this.handleValue = (text) => {
@@ -30,10 +31,10 @@ export default class InputEditor extends Component {
       let change = { text };
 
       if (isMultiLine(text) && !expressionLanguage) {
-        change.expressionLanguage = 'FEEL';
+        change.expressionLanguage = DEFAULT_EXPRESSION_LANGUAGE;
       }
 
-      if (!isMultiLine(text) && expressionLanguage === 'FEEL') {
+      if (!isMultiLine(text) && expressionLanguage === DEFAULT_EXPRESSION_LANGUAGE) {
         change.expressionLanguage = undefined;
       }
 
@@ -122,7 +123,8 @@ export default class InputEditor extends Component {
         {
           !editScript && (
             <p className="dms-hint">
-              Enter simple <code>FEEL</code> expression or <a href="#"
+              Enter simple <code>{ DEFAULT_EXPRESSION_LANGUAGE }</code> expression
+              or <a href="#"
                 className="ref-make-script"
                 onClick={ this.makeScript }>
                   change to script
