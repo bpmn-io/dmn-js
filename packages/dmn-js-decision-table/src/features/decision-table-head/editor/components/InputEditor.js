@@ -20,7 +20,7 @@ export default class InputEditor extends Component {
       event.preventDefault();
       event.stopPropagation();
 
-      this.setExpressionLanguage('FEEL');
+      this.setExpressionLanguage('JUEL');
     };
 
     this.handleValue = (text) => {
@@ -30,10 +30,10 @@ export default class InputEditor extends Component {
       let change = { text };
 
       if (isMultiLine(text) && !expressionLanguage) {
-        change.expressionLanguage = 'FEEL';
+        change.expressionLanguage = 'JUEL';
       }
 
-      if (!isMultiLine(text) && expressionLanguage === 'FEEL') {
+      if (!isMultiLine(text) && expressionLanguage === 'JUEL') {
         change.expressionLanguage = undefined;
       }
 
