@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.1.0
+
+* `FIX(decision-table)`: fix empty table layout on Firefox ([#380](https://github.com/bpmn-io/dmn-js/issues/380))
+* `FEAT(decision-table)`: add background color to even table rows ([#404](https://github.com/bpmn-io/dmn-js/issues/404))
+
 ## 7.0.0
 
 * `FEAT(drd)`: add connection previews
