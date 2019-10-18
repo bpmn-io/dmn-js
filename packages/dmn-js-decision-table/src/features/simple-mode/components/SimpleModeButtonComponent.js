@@ -42,8 +42,6 @@ export default class SimpleModeButtonComponent extends Component {
         return;
       }
 
-      var isDisabled;
-
       this.setState({
         isVisible: true,
         selection
@@ -51,11 +49,7 @@ export default class SimpleModeButtonComponent extends Component {
 
       const expressionLanguage = getExpressionLanguage(selection);
 
-      if (isDefaultExpressionLanguage(selection, expressionLanguage)) {
-        isDisabled = false;
-      } else {
-        isDisabled = true;
-      }
+      const isDisabled = !isDefaultExpressionLanguage(selection, expressionLanguage);
 
       this.setState({
         isVisible: true,
