@@ -66,6 +66,27 @@ describe('simple mode', function() {
   });
 
 
+  it('should render on cell selection change', function() {
+
+    // given
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    // when
+    triggerClick(cell);
+
+    // then
+    expect(domQuery('.simple-mode-button', testContainer)).to.exist;
+
+    triggerClick(domQuery('.simple-mode-button', testContainer));
+
+    // when
+    triggerClick(cell);
+
+    // then
+    expect(domQuery('.simple-mode-button', testContainer)).to.exist;
+  });
+
+
   it('should render at position', function() {
 
     // given

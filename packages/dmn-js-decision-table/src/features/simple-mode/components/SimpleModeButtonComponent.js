@@ -25,7 +25,8 @@ export default class SimpleModeButtonComponent extends Component {
     const { injector } = context;
 
     const eventBus = this._eventBus = injector.get('eventBus'),
-          simpleMode = injector.get('simpleMode');
+          simpleMode = injector.get('simpleMode'),
+          elementRegistry = context.injector.get('elementRegistry');
 
     this._renderer = injector.get('renderer');
 
@@ -33,7 +34,9 @@ export default class SimpleModeButtonComponent extends Component {
 
     this.updatePosition = this.updatePosition.bind(this);
 
-    eventBus.on('selection.changed', ({ selection }) => {
+    eventBus.on('cellSelection.changed', ({ elementId }) => {
+      const selection = elementRegistry.get(elementId);
+
       if (!selection || !simpleMode.canSimpleEdit(selection)) {
         this.setState({
           isVisible: false
