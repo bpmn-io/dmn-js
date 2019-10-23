@@ -87,7 +87,8 @@ module.exports = function(path) {
             'node_modules',
             path
           ]
-        }
+        },
+        devtool: 'eval-source-map'
       }
     });
   };
