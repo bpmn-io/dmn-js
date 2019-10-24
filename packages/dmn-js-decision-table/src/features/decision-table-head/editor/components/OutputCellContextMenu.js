@@ -49,7 +49,7 @@ export default class OutputCellContextMenu extends Component {
 
     const { unsaved } = this.state;
 
-    return (unsaved && unsaved[attr]) || output.get(attr);
+    return unsaved && attr in unsaved ? unsaved[attr] : output.get(attr);
   }
 
   render() {
