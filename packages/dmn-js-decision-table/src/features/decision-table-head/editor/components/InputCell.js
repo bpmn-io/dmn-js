@@ -65,18 +65,18 @@ export default class InputCell extends Component {
   }
 
   render() {
-    const input = this.props.input;
+    const { input } = this.props;
 
     const {
-      inputExpression
+      inputExpression, defaultExpressionLanguage
     } = input;
 
     var label = input.get('label');
     var inputVariable = input.get('inputVariable');
 
-    var expressionLanguage = inputExpression.get('expressionLanguage') || 'FEEL';
+    var expressionLanguage = inputExpression.get('expressionLanguage') || defaultExpressionLanguage;
 
-    var showLanguageBadge = !label && expressionLanguage != 'FEEL';
+    var showLanguageBadge = !label && expressionLanguage != defaultExpressionLanguage;
 
     return (
       <th

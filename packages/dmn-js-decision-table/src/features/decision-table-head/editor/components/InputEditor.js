@@ -6,21 +6,23 @@ import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
+const defaultExpressionLanguageOptions = [
+  'FEEL',
+  'JUEL',
+  'JavaScript',
+  'Groovy',
+  'Python'
+];
 
 export default class InputEditor extends Component {
 
   constructor(props, context) {
     super(props, context);
 
+    const { defaultExpressionLanguage } = this.props;
+
     this.setExpressionLanguage = (expressionLanguage) => {
       this.handleChange({ expressionLanguage });
-    };
-
-    this.makeScript = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      this.setExpressionLanguage('JUEL');
     };
 
     this.handleValue = (text) => {
@@ -29,12 +31,8 @@ export default class InputEditor extends Component {
 
       let change = { text };
 
-      if (isMultiLine(text) && !expressionLanguage) {
-        change.expressionLanguage = 'JUEL';
-      }
-
-      if (!isMultiLine(text) && expressionLanguage === 'JUEL') {
-        change.expressionLanguage = undefined;
+      if (!expressionLanguage) {
+        change.expressionLanguage = defaultExpressionLanguage;
       }
 
       this.handleChange(change);
@@ -73,20 +71,15 @@ export default class InputEditor extends Component {
 
     const {
       expressionLanguage,
+      defaultExpressionLanguage,
+      expressionLanguageOptions = defaultExpressionLanguageOptions,
       inputVariable,
       label,
       text
     } = this.props;
 
-    var editScript = expressionLanguage || isMultiLine(text);
-
-    var languageOptions = [
-      !isMultiLine(text) && '',
-      'FEEL',
-      'JUEL',
-      'JavaScript',
-      'Groovy',
-      'Python'
+    const languageOptions = [
+      ...new Set([defaultExpressionLanguage].concat(expressionLanguageOptions))
     ].filter(isString).map(o => ({ label: o, value: o }));
 
     return (
@@ -112,46 +105,24 @@ export default class InputEditor extends Component {
             [
               'ref-text',
               'dms-input',
-              editScript ? 'dms-script-input script-editor' : '',
+              'dms-script-input script-editor',
               'dms-fit-row'
             ].join(' ')
           }
           onInput={ this.handleValue }
           value={ text || '' } />
 
-        {
-          !editScript && (
-            <p className="dms-hint">
-              Enter simple <code>FEEL</code> expression or <a href="#"
-                className="ref-make-script"
-                onClick={ this.makeScript }>
-                  change to script
-              </a>.
-            </p>
-          )
-        }
+        <p className="dms-hint">Enter script.</p>
 
-        {
-          editScript && (
-            <p className="dms-hint">
-              Enter script.
-            </p>
-          )
-        }
+        <p>
+          <label className="dms-label">Expression Language</label>
 
-        {
-          editScript && (
-            <p>
-              <label className="dms-label">Expression Language</label>
-
-              <InputSelect
-                className="ref-language"
-                value={ expressionLanguage || '' }
-                onChange={ this.handleLanguageChange }
-                options={ languageOptions } />
-            </p>
-          )
-        }
+          <InputSelect
+            className="ref-language"
+            value={ expressionLanguage || defaultExpressionLanguage }
+            onChange={ this.handleLanguageChange }
+            options={ languageOptions } />
+        </p>
 
         <p className="dms-fill-row">
           <label className="dms-label">Input Variable</label>
@@ -165,10 +136,4 @@ export default class InputEditor extends Component {
       </div>
     );
   }
-}
-
-
-
-function isMultiLine(text) {
-  return text && text.split(/\n/).length > 1;
 }
