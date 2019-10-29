@@ -12,7 +12,10 @@ const HIT_POLICIES = [
   'OUTPUT ORDER'
 ];
 
+const DEFAULT_AGGREGATION = 'NO LIST AGGREGATION';
+
 const LIST_FUNCTIONS = [
+  DEFAULT_AGGREGATION,
   'SUM',
   'MIN',
   'MAX',
@@ -34,12 +37,8 @@ export default class HitPolicyCellContextMenu extends Component {
     this._modeling.editHitPolicy(hitPolicy, undefined);
   }
 
-  onAggregationChange(value) {
-    let aggregation = value === ''
-      ? undefined
-      : value;
-
-    this._modeling.editHitPolicy('COLLECT', aggregation);
+  onAggregationChange(aggregation) {
+    this._modeling.editHitPolicy('COLLECT', aggregation || undefined);
   }
 
   onElementsChanged() {
@@ -88,8 +87,8 @@ export default class HitPolicyCellContextMenu extends Component {
 
     const aggregationOptions = LIST_FUNCTIONS.map(l => {
       return {
-        label: l === 'NONE' ? '-' : l,
-        value: l
+        label: l,
+        value: l === DEFAULT_AGGREGATION ? undefined : l
       };
     });
 
