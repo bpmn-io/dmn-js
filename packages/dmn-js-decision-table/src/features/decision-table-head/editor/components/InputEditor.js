@@ -6,14 +6,6 @@ import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
-const defaultExpressionLanguageOptions = [
-  'FEEL',
-  'JUEL',
-  'JavaScript',
-  'Groovy',
-  'Python'
-];
-
 export default class InputEditor extends Component {
 
   constructor(props, context) {
@@ -72,7 +64,7 @@ export default class InputEditor extends Component {
     const {
       expressionLanguage,
       defaultExpressionLanguage,
-      expressionLanguageOptions = defaultExpressionLanguageOptions,
+      expressionLanguageOptions,
       inputVariable,
       label,
       text

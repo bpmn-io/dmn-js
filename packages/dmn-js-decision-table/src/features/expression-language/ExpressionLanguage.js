@@ -4,25 +4,8 @@ import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
 
-const INPUT_EXPRESSION_LANGUAGE_OPTIONS = [{
-  label: 'FEEL',
-  value: 'feel'
-}, {
-  label: 'JUEL',
-  value: 'juel'
-}, {
-  label: 'JavaScript',
-  value: 'javascript'
-}, {
-  label: 'Groovy',
-  value: 'groovy'
-}, {
-  label: 'Python',
-  value: 'python'
-}, {
-  label: 'JRuby',
-  value: 'jruby'
-}];
+const DEFAULT_INPUT_EXPRESSION_LANGUAGE_OPTIONS = ['FEEL', 'JUEL', 'JavaScript', 'Groovy', 'Python', 'JRuby'];
+const DEFAULT_HEADER_AND_OUTPUT_EXPRESSION_LANGUAGE_OPTIONS = ['JUEL', 'JavaScript', 'Groovy', 'Python', 'JRuby'];
 
 export default class ExpressionLanguage {
   constructor(components, elementRegistry, modeling) {
@@ -44,8 +27,25 @@ export default class ExpressionLanguage {
           return;
         }
 
+        // this needs to come from somewhere
+        const configOptions = {};
+        const {
+          defaultInputExpressionLanguage = 'FEEL',
+          defaultHeaderAndOutputExpressisonLanguage = 'JUEL',
+          inputExpressionLanguageOptions = DEFAULT_INPUT_EXPRESSION_LANGUAGE_OPTIONS,
+          headerAndOutputExpressionLanguageOptions = DEFAULT_HEADER_AND_OUTPUT_EXPRESSION_LANGUAGE_OPTIONS
+        } = configOptions;
+
+        const elementIsInput = isInput(element.col);
+
         const expressionLanguage = element.businessObject.expressionLanguage
-          || (isInput(element.col) ? 'feel' : 'juel');
+          || (elementIsInput ? defaultInputExpressionLanguage : defaultHeaderAndOutputExpressisonLanguage).toLowerCase();
+
+        const expressionLanguageOptions = (elementIsInput ? inputExpressionLanguageOptions : headerAndOutputExpressionLanguageOptions)
+          .map(label => ({
+            label,
+            value: label.toLowerCase()
+          }));
 
         return (
           <div
@@ -58,7 +58,7 @@ export default class ExpressionLanguage {
             <InputSelect
               className="expression-language"
               onChange={ value => this.onChange(element, value) }
-              options={ INPUT_EXPRESSION_LANGUAGE_OPTIONS }
+              options={ expressionLanguageOptions }
               value={ expressionLanguage } />
 
           </div>

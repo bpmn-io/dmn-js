@@ -83,8 +83,8 @@ export default class InputCellContextMenu extends Component {
     return (
       <div className="context-menu-container input-edit">
         <InputEditor
-          defaultExpressionLanguage={ this.getValue('defaultExpressionLanguage') }
-          expressionLanguageOptions={ this.getValue('expressionLanguageOptions') }
+          defaultExpressionLanguage={ this.getValue('defaultInputExpressionLanguage') }
+          expressionLanguageOptions={ this.getValue('inputExpressionLanguageOptions') }
           expressionLanguage={ this.getValue('expressionLanguage') }
           inputVariable={ this.getValue('inputVariable') }
           label={ this.getValue('label') }
