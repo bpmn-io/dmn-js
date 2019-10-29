@@ -117,6 +117,44 @@ describe('features/hit-policy - editor', function() {
       }));
 
 
+      it('should remove aggregation when input is empty', function() {
+
+        // given
+        triggerInputSelectChange(inputSelect, 'COLLECT');
+
+        const aggregationInputSelect = domQuery(
+          '.hit-policy-edit-operator-select',
+          testContainer
+        );
+
+        const input = domQuery('.dms-input', aggregationInputSelect);
+
+        // when
+        triggerInputEvent(input, '');
+
+        // then
+        expect(root.businessObject.aggregation).to.not.exist;
+      });
+
+
+      it('should remove aggregation when NO LIST AGGREGATION is selected', function() {
+
+        // given
+        triggerInputSelectChange(inputSelect, 'COLLECT');
+
+        const aggregationInputSelect = domQuery(
+          '.hit-policy-edit-operator-select',
+          testContainer
+        );
+
+        // when
+        triggerInputSelectChange(aggregationInputSelect);
+
+        // then
+        expect(root.businessObject.aggregation).to.not.exist;
+      });
+
+
       it('should edit aggregation - select', inject(function(sheet) {
 
         // given

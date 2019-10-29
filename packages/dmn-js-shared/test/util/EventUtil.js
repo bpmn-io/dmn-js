@@ -77,7 +77,10 @@ export function triggerKeyEvent(element, event, optionsOrCode) {
 export function triggerInputSelectChange(inputSelect, value, testContainer) {
   triggerClick(inputSelect);
 
-  const option = domQuery(`.option[data-value="${ value }"]`, testContainer);
+  const optionQuery = value ?
+    `.option[data-value="${ value }"]` : '.option:not([data-value])';
+
+  const option = domQuery(optionQuery, testContainer);
 
   return triggerClick(option);
 }
