@@ -18,7 +18,8 @@ import {
   triggerClick,
   triggerInputEvent,
   triggerKeyEvent,
-  triggerFocusIn
+  triggerFocusIn,
+  triggerMouseEvent
 } from 'test/util/EventUtil';
 
 import InputSelect from 'src/components/InputSelect';
@@ -361,6 +362,44 @@ describe('components/InputSelect', function() {
 
   });
 
+
+  describe('integration', function() {
+
+    it('should not allow the mousedown events to propagate when selecting option',
+      function() {
+
+        // given
+        const injector = createInjector({
+          keyboard: getKeyboardMock(testContainer),
+          renderer: getRendererMock(testContainer)
+        });
+
+        const spy = sinon.spy();
+        const renderedTree = renderIntoDocument(
+          <DiContainer injector={ injector } onMousedown={ spy }>
+            <InputSelect
+              options={ OPTIONS }
+            />
+          </DiContainer>
+        );
+
+        // when
+        const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+        triggerClick(input);
+
+        const option = findRenderedDOMElementWithClass(renderedTree, 'option');
+
+        // when
+        triggerMouseEvent(option, 'mousedown');
+        triggerMouseEvent(option, 'mouseup');
+        triggerMouseEvent(option, 'click');
+
+        // then
+        expect(spy).to.not.have.been.called;
+      }
+    );
+  });
 });
 
 // helpers //////////
