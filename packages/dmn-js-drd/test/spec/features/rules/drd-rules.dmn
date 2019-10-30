@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+  <inputData id="InputData_1">
+    <extensionElements>
+      <biodi:bounds x="156" y="200" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <knowledgeSource id="KnowledgeSource_1">
+    <extensionElements>
+      <biodi:bounds x="156" y="300" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1">
+    <extensionElements>
+      <biodi:bounds x="156" y="400" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <decision id="Decision_2">
+    <extensionElements>
+      <biodi:bounds x="400" y="100" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <decision id="Decision_1">
+    <extensionElements>
+      <biodi:bounds x="156" y="100" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <inputData id="InputData_2">
+    <extensionElements>
+      <biodi:bounds x="400" y="200" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <knowledgeSource id="KnowledgeSource_2">
+    <extensionElements>
+      <biodi:bounds x="400" y="300" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_2">
+    <extensionElements>
+      <biodi:bounds x="400" y="400" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <textAnnotation id="TextAnnotation_1">
+    <extensionElements>
+      <biodi:bounds x="600" y="100" width="100" height="80" />
+    </extensionElements>
+  </textAnnotation>
+  <association id="Association_1">
+    <extensionElements>
+      <biodi:edge source="Decision_2">
+        <biodi:waypoints x="490" y="140" />
+        <biodi:waypoints x="650" y="140" />
+      </biodi:edge>
+    </extensionElements>
+    <sourceRef href="#Decision_2" />
+    <targetRef href="#TextAnnotation_1" />
+  </association>
+</definitions>

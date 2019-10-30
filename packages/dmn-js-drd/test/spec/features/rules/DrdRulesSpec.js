@@ -1,54 +1,229 @@
 import {
   bootstrapModeler,
+  getDrdJS,
   inject
 } from '../../../TestHelper';
 
-import drdRulesModule from 'src/features/rules';
 import coreModule from 'src/core';
+import modelingModule from 'src/features/modeling';
 
 
 describe('features/rules', function() {
 
-  var diagramXML = require('../../../fixtures/dmn/connections.dmn');
+  var diagramXML = require('./drd-rules.dmn');
 
-  var testModules = [ coreModule, drdRulesModule ];
+  var testModules = [ coreModule, modelingModule ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
-  it('should not allow connecting from or to definitions', inject(
-    function(drdRules, elementRegistry) {
-      // given
-      var definitions = elementRegistry.get('dish'),
-          textAnnotation = elementRegistry.get('annotation_1'),
-          canConnectFrom, canConnectTo;
 
-      // when
-      canConnectFrom = drdRules.canConnect(definitions, textAnnotation);
-      canConnectTo = drdRules.canConnect(textAnnotation, definitions);
+  describe('connect', function() {
 
-      // then
-      expect(canConnectFrom).to.be.false;
-      expect(canConnectTo).to.be.false;
-    }
-  ));
+    it('self', expectCanConnect(
+      'Decision_1',
+      'Decision_1',
+      false
+    ));
 
 
-  it('should not allow element stacking', inject(
-    function(drdRules, elementRegistry, elementFactory) {
-      // given
-      var definitions = elementRegistry.get('dish'),
-          decision = elementRegistry.get('decision_1'),
-          knowledgeModel = elementRegistry.get('elMenu');
+    it('business knowledge model -> business knowledge model', expectCanConnect(
+      'BusinessKnowledgeModel_1',
+      'BusinessKnowledgeModel_2',
+      { type: 'dmn:KnowledgeRequirement' }
+    ));
 
-      // when
-      var newDecision = elementFactory.create('shape', { type: 'dmn:Decision' });
 
-      // then
-      expect(drdRules.canCreate(newDecision, definitions)).to.be.true;
+    it('business knowledge model -> decision', expectCanConnect(
+      'BusinessKnowledgeModel_1',
+      'Decision_1',
+      { type: 'dmn:KnowledgeRequirement' }
+    ));
 
-      expect(drdRules.canCreate(newDecision, decision)).to.be.false;
-      expect(drdRules.canCreate(newDecision, knowledgeModel)).to.be.false;
-    }
-  ));
+
+    it('business knowledge model -> input data', expectCanConnect(
+      'BusinessKnowledgeModel_1',
+      'InputData_1',
+      false
+    ));
+
+
+    it('business knowledge model -> knowledge source', expectCanConnect(
+      'BusinessKnowledgeModel_1',
+      'KnowledgeSource_1',
+      false
+    ));
+
+
+    it('decision -> business knowledge model', expectCanConnect(
+      'Decision_1',
+      'BusinessKnowledgeModel_1',
+      false
+    ));
+
+
+    it('decision -> decision', expectCanConnect(
+      'Decision_1',
+      'Decision_2',
+      { type: 'dmn:InformationRequirement' }
+    ));
+
+
+    it('decision -> input data', expectCanConnect(
+      'Decision_1',
+      'InputData_1',
+      false
+    ));
+
+
+    it('decision -> knowledge source', expectCanConnect(
+      'Decision_1',
+      'KnowledgeSource_1',
+      { type: 'dmn:AuthorityRequirement' }
+    ));
+
+
+    it('input data -> business knowledge model', expectCanConnect(
+      'InputData_1',
+      'BusinessKnowledgeModel_1',
+      false
+    ));
+
+
+    it('input data -> decision', expectCanConnect(
+      'InputData_1',
+      'Decision_1',
+      { type: 'dmn:InformationRequirement' }
+    ));
+
+
+    it('input data -> input data', expectCanConnect(
+      'InputData_1',
+      'InputData_2',
+      false
+    ));
+
+
+    it('input data -> knowledge source', expectCanConnect(
+      'InputData_1',
+      'KnowledgeSource_1',
+      { type: 'dmn:AuthorityRequirement' }
+    ));
+
+
+    it('knowledge source -> business knowledge model', expectCanConnect(
+      'KnowledgeSource_1',
+      'BusinessKnowledgeModel_1',
+      { type: 'dmn:AuthorityRequirement' }
+    ));
+
+
+    it('knowledge source -> decision', expectCanConnect(
+      'KnowledgeSource_1',
+      'Decision_1',
+      { type: 'dmn:AuthorityRequirement' }
+    ));
+
+
+    it('knowledge source -> input data', expectCanConnect(
+      'KnowledgeSource_1',
+      'InputData_1',
+      false
+    ));
+
+
+    it('knowledge source -> knowledge source', expectCanConnect(
+      'KnowledgeSource_1',
+      'KnowledgeSource_2',
+      { type: 'dmn:AuthorityRequirement' }
+    ));
+
+  });
+
+
+  describe('create', function() {
+
+    it('decision -> definitions', inject(
+      function(drdRules, elementFactory, elementRegistry) {
+
+        // given
+        var decision = elementFactory.create('shape', { type: 'dmn:Decision' });
+
+        var definitions = elementRegistry.get('Definitions_1');
+
+        // when
+        var allowed = drdRules.canCreate(decision, definitions);
+
+        // then
+        expect(allowed).to.be.true;
+      }
+    ));
+
+
+    it('decision -> input data', inject(
+      function(drdRules, elementFactory, elementRegistry) {
+
+        // given
+        var decision = elementFactory.create('shape', { type: 'dmn:Decision' });
+
+        var inputData = elementRegistry.get('InputData_1');
+
+        // when
+        var allowed = drdRules.canCreate(decision, inputData);
+
+        // then
+        expect(allowed).to.be.false;
+      }
+    ));
+
+  });
+
+
+  describe('move', function() {
+
+    it('decision -> definitions', inject(
+      function(drdRules, elementRegistry) {
+
+        // given
+        var decision = elementRegistry.get('Decision_1'),
+            definitions = elementRegistry.get('Definitions_1');
+
+        // when
+        var allowed = drdRules.canMove(decision, definitions);
+
+        // then
+        expect(allowed).to.be.true;
+      }
+    ));
+
+
+    it('decision -> input data', inject(
+      function(drdRules, elementRegistry) {
+
+        // given
+        var decision = elementRegistry.get('Decision_1'),
+            inputData = elementRegistry.get('InputData_1');
+
+        // when
+        var allowed = drdRules.canMove(decision, inputData);
+
+        // then
+        expect(allowed).to.be.false;
+      }
+    ));
+
+  });
 
 });
+
+// helpers //////////
+
+function expectCanConnect(source, target, canConnect) {
+  return function() {
+    getDrdJS().invoke(function(drdRules, elementRegistry) {
+      expect(drdRules.canConnect(
+        elementRegistry.get(source),
+        elementRegistry.get(target)
+      )).to.eql(canConnect);
+    });
+  };
+}
