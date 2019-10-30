@@ -3,7 +3,8 @@ import { bootstrapModeler, inject } from 'test/helper';
 import {
   triggerInputEvent,
   triggerInputSelectChange,
-  triggerClick
+  triggerClick,
+  triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
@@ -152,6 +153,27 @@ describe('features/hit-policy - editor', function() {
         // then
         expect(root.businessObject.aggregation).to.not.exist;
       }));
+
+    });
+
+
+    describe('integration', function() {
+
+      it('should not close context menu when select option is chosen', function() {
+
+        // given
+        triggerMouseEvent(inputSelect, 'click');
+
+        const option = domQuery('.option[data-value="COLLECT"]', testContainer);
+
+        // when
+        triggerMouseEvent(option, 'mousedown');
+        triggerMouseEvent(option, 'mouseup');
+        triggerMouseEvent(option, 'click');
+
+        // then
+        expect(domQuery('.hit-policy-edit-operator-select', testContainer)).to.exist;
+      });
 
     });
 

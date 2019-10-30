@@ -89,10 +89,15 @@ export default class InputSelect extends Component {
     const container = this.renderer.getContainer();
 
     container.appendChild(this._portalEl);
+
+    // suppress mousedown event propagation to handle click events inside the component
+    this._portalEl.addEventListener('mousedown', stopPropagation);
   }
 
   removePortalEl() {
     if (this._portalEl) {
+      this._portalEl.removeEventListener('mousedown', stopPropagation);
+
       domRemove(this._portalEl);
 
       this._portalEl = null;
@@ -333,3 +338,9 @@ export default class InputSelect extends Component {
 }
 
 InputSelect.$inject = [ 'keyboard', 'renderer' ];
+
+
+// helper ////
+function stopPropagation(event) {
+  event.stopPropagation();
+}
