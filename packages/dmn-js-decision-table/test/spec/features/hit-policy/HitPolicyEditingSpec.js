@@ -155,6 +155,28 @@ describe('features/hit-policy - editor', function() {
       });
 
 
+      it('should NOT remove aggregation when COLLECT policy is selected again',
+        function() {
+
+          // given
+          triggerInputSelectChange(inputSelect, 'COLLECT');
+
+          const aggregationInputSelect = domQuery(
+            '.hit-policy-edit-operator-select',
+            testContainer
+          );
+
+          triggerInputSelectChange(aggregationInputSelect, 'SUM');
+
+          // when
+          triggerInputSelectChange(inputSelect, 'COLLECT');
+
+          // then
+          expect(root.businessObject.aggregation).to.equal('SUM');
+        }
+      );
+
+
       it('should edit aggregation - select', inject(function(sheet) {
 
         // given
