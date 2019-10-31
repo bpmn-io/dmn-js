@@ -1,7 +1,6 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {
-  triggerInputEvent,
   triggerInputSelectChange,
   triggerClick,
   triggerMouseEvent
@@ -62,19 +61,6 @@ describe('features/hit-policy - editor', function() {
     }));
 
 
-    it('should edit hit policy - input', inject(function(sheet) {
-
-      // given
-      const input = domQuery('.dms-input', inputSelect);
-
-      // when
-      triggerInputEvent(input, 'foo');
-
-      // then
-      expect(root.businessObject.hitPolicy).to.equal('foo');
-    }));
-
-
     it('should edit hit policy - select', inject(function(sheet) {
 
       // when
@@ -94,46 +80,6 @@ describe('features/hit-policy - editor', function() {
 
         // then
         expect(domQuery('.hit-policy-edit-operator-select', testContainer)).to.exist;
-      });
-
-
-      it('should edit aggregation - input', inject(function(sheet) {
-
-        // given
-        triggerInputSelectChange(inputSelect, 'COLLECT');
-
-        const aggregationInputSelect = domQuery(
-          '.hit-policy-edit-operator-select',
-          testContainer
-        );
-
-        const input = domQuery('.dms-input', aggregationInputSelect);
-
-        // when
-        triggerInputEvent(input, 'foo');
-
-        // then
-        expect(root.businessObject.aggregation).to.equal('foo');
-      }));
-
-
-      it('should remove aggregation when input is empty', function() {
-
-        // given
-        triggerInputSelectChange(inputSelect, 'COLLECT');
-
-        const aggregationInputSelect = domQuery(
-          '.hit-policy-edit-operator-select',
-          testContainer
-        );
-
-        const input = domQuery('.dms-input', aggregationInputSelect);
-
-        // when
-        triggerInputEvent(input, '');
-
-        // then
-        expect(root.businessObject.aggregation).to.not.exist;
       });
 
 
