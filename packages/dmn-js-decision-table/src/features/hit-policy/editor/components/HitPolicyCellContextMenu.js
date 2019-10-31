@@ -34,7 +34,12 @@ export default class HitPolicyCellContextMenu extends Component {
   }
 
   onHitPolicyChange(hitPolicy) {
-    this._modeling.editHitPolicy(hitPolicy, undefined);
+    const root = this._sheet.getRoot(),
+          businessObject = root.businessObject;
+
+    const aggregation = hitPolicy === 'COLLECT' ? businessObject.aggregation : undefined;
+
+    this._modeling.editHitPolicy(hitPolicy, aggregation);
   }
 
   onAggregationChange(aggregation) {
