@@ -43,7 +43,7 @@ export default class HitPolicyCellContextMenu extends Component {
   }
 
   onAggregationChange(aggregation) {
-    this._modeling.editHitPolicy('COLLECT', aggregation || undefined);
+    this._modeling.editHitPolicy('COLLECT', aggregation);
   }
 
   onElementsChanged() {
@@ -103,6 +103,7 @@ export default class HitPolicyCellContextMenu extends Component {
           <label className="dms-label">Hit Policy:</label>
 
           <InputSelect
+            noInput
             className="hit-policy-edit-policy-select"
             onChange={ this.onHitPolicyChange }
             options={ hitPolicyOptions }
@@ -114,6 +115,7 @@ export default class HitPolicyCellContextMenu extends Component {
               <label className="dms-label">Aggregation:</label>
 
               <InputSelect
+                noInput
                 className="hit-policy-edit-operator-select"
                 onChange={ this.onAggregationChange }
                 options={ aggregationOptions }
