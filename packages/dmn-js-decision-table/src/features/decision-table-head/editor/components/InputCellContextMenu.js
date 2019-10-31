@@ -76,7 +76,7 @@ export default class InputCellContextMenu extends Component {
       target = target.inputExpression;
     }
 
-    return (unsaved && unsaved[attr]) || target.get(attr);
+    return unsaved && attr in unsaved ? unsaved[attr] : target.get(attr);
   }
 
   render() {
