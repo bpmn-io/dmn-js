@@ -36,7 +36,7 @@ DrdRules.prototype.init = function() {
   this.addRule('connection.reconnect', function(context) {
     var connection = context.connection,
         source = context.source,
-        target = connection.target;
+        target = context.target;
 
     return canConnect(source, target, connection);
   });
@@ -75,7 +75,6 @@ DrdRules.prototype.canMove = canMove;
 
 
 function canConnect(source, target) {
-
   if (!source || isLabel(source) || !target || isLabel(target)) {
     return null;
   }

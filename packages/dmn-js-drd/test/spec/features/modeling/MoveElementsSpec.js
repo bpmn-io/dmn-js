@@ -17,6 +17,7 @@ describe('features/modeling - move elements', function() {
 
     beforeEach(bootstrapModeler(exampleXML, { modules: testModules }));
 
+
     it('should move', inject(function(elementRegistry, modeling, canvas) {
 
       // given

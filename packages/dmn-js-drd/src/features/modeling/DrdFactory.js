@@ -1,6 +1,6 @@
-import {
-  forEach
-} from 'min-dash';
+import { map } from 'min-dash';
+
+import { isAny } from 'dmn-js-shared/src/util/ModelUtil';
 
 
 export default function DrdFactory(moddle) {
@@ -11,15 +11,14 @@ DrdFactory.$inject = [ 'moddle' ];
 
 
 DrdFactory.prototype._needsId = function(element) {
-  return element.$instanceOf('dmn:DRGElement') ||
-         element.$instanceOf('dmn:Artifact') ||
-         element.$instanceOf('dmn:DMNElement');
+  return isAny(element, [
+    'dmn:Artifact',
+    'dmn:DMNElement',
+    'dmn:DRGElement'
+  ]);
 };
 
 DrdFactory.prototype._ensureId = function(element) {
-
-  // generate semantic ids for elements
-  // dmn:Decision -> Decision_ID
   var prefix = (element.$type || '').replace(/^[^:]*:/g, '') + '_';
 
   if (!element.id && this._needsId(element)) {
@@ -35,28 +34,25 @@ DrdFactory.prototype.create = function(type, attrs) {
   return element;
 };
 
-DrdFactory.prototype.createDi = function() {
-  return this.create('dmn:ExtensionElements', { values: [] });
-};
-
 DrdFactory.prototype.createDiBounds = function(bounds) {
   return this.create('biodi:Bounds', bounds);
 };
 
 DrdFactory.prototype.createDiEdge = function(source, waypoints) {
   var self = this;
-  var semanticWaypoints = [];
-
-  forEach(waypoints || [], function(wp) {
-    semanticWaypoints.push(self.createDiWaypoint(wp));
-  });
 
   return this.create('biodi:Edge', {
-    waypoints: semanticWaypoints,
-    source: source.id
+    source: source.id,
+    waypoints: map(waypoints, function(waypoint) {
+      return self.createDiWaypoint(waypoint);
+    })
   });
 };
 
 DrdFactory.prototype.createDiWaypoint = function(waypoint) {
   return this.create('biodi:Waypoint', waypoint);
+};
+
+DrdFactory.prototype.createExtensionElements = function() {
+  return this.create('dmn:ExtensionElements', { values: [] });
 };

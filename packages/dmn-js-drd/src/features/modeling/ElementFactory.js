@@ -33,7 +33,7 @@ ElementFactory.prototype.create = function(elementType, attrs) {
 ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
   var drdFactory = this._drdFactory;
 
-  var size;
+  var extensionElements, size;
 
   attrs = attrs || {};
 
@@ -52,7 +52,10 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
     elementType !== 'connection' &&
     !businessObject.extensionElements
   ) {
-    businessObject.extensionElements = drdFactory.createDi();
+    extensionElements = businessObject.extensionElements =
+      drdFactory.createExtensionElements();
+
+    extensionElements.$parent = businessObject;
   }
 
   size = this._getDefaultSize(businessObject);

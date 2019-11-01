@@ -7,6 +7,10 @@ import {
   getMid
 } from 'diagram-js/lib/layout/LayoutUtil';
 
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
+import { find } from 'min-dash';
+
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
 
@@ -271,25 +275,36 @@ describe('features/modeling - create connection', function() {
 
   describe('append', function() {
 
-    it('should connect decision to knowledge source', inject(
-      function(canvas, elementRegistry, elementFactory, modeling) {
+    it('should connect input data to decision', inject(
+      function(canvas, elementFactory, elementRegistry, modeling) {
+
         // given
-        var decision = elementRegistry.get('decision_1'),
-            inputData = elementFactory.createShape({ type: 'dmn:InputData' }),
-            rootElement = canvas.getRootElement(),
-            connection;
+        var inputData = elementRegistry.get('inputData_1'),
+            decision = elementFactory.createShape({ type: 'dmn:Decision' }),
+            rootElement = canvas.getRootElement();
 
         // when
-        modeling.appendShape(decision, inputData, { x: 100, y: 300 }, rootElement);
-
-        connection = decision.incoming[0];
+        modeling.appendShape(inputData, decision, { x: 100, y: 100 }, rootElement);
 
         // then
-        expect(connection.type).to.eql('dmn:InformationRequirement');
-        expect(inputData.outgoing[0].type).to.eql('dmn:InformationRequirement');
-        expect(
-          decision.businessObject.extensionElements.values[1].source
-        ).to.equal(inputData.id);
+        expect(inputData.outgoing).to.have.lengthOf(1);
+        expect(decision.incoming).to.have.lengthOf(1);
+
+        var connection = inputData.outgoing[0];
+
+        expect(connection.type).to.equal('dmn:InformationRequirement');
+        expect(connection.source).to.equal(inputData);
+        expect(connection.target).to.equal(decision);
+
+        var decisionBo = decision.businessObject,
+            extensionElements = decisionBo.extensionElements;
+
+        var edge = find(extensionElements.values, function(extensionElement) {
+          return is(extensionElement, 'biodi:Edge');
+        });
+
+        expect(edge).to.exist;
+        expect(edge.source).to.equal(inputData.id);
       })
     );
 
