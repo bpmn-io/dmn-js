@@ -195,9 +195,9 @@ export default class InputDateEdit extends Component {
             value={ dates[0] } />
 
           <p className="dms-hint">
-            <a href="#"
+            <button type="button"
               className="use-today"
-              onClick={ this.onSetStartDateTodayClick }>Use today</a>.
+              onClick={ this.onSetStartDateTodayClick }>Use today</button>.
           </p>
         </div>
 
@@ -220,9 +220,9 @@ export default class InputDateEdit extends Component {
               </ValidatedInput>
 
               <p className="dms-hint">
-                <a href="#"
+                <button type="button"
                   className="use-today"
-                  onClick={ this.onSetEndDateTodayClick }>Use today</a>.
+                  onClick={ this.onSetEndDateTodayClick }>Use today</button>.
               </p>
             </div>
         }
