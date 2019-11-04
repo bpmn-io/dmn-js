@@ -179,10 +179,10 @@ export default class AllowedValuesEditing extends Component {
           {
             !isNull(values)
               && <p class="dms-hint">
-                <a href="#" className="del-values"
+                <button type="button" className="del-values"
                   onClick={ this.handleRemovePredifinedValuesClick }>
                   Clear predefined values.
-                </a>
+                </button>
               </p>
           }
 
