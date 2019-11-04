@@ -187,9 +187,3 @@
 .dmn-literal-expression-container .powered-by-overlay .powered-by-overlay-content div:first-child {
   margin-right: 8px;
 }
-
-.dmn-decision-table-container p.dms-hint {
-  font-size: 0.85em;
-  margin-top: 5px;
-  color: #888;
-}
