@@ -82,9 +82,9 @@ export default class OutputDateEdit extends Component {
           </ValidatedInput>
 
           <p className="dms-hint">
-            Set date <a href="#"
+            Set date <button type="button"
               className="use-today"
-              onClick={ this.onClick }>to today</a>.
+              onClick={ this.onClick }>to today</button>.
           </p>
         </div>
 
