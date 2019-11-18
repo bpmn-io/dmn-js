@@ -1,6 +1,6 @@
 import { map } from 'min-dash';
 
-import { isAny } from 'dmn-js-shared/src/util/ModelUtil';
+import { isAny } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export default function DrdFactory(moddle) {
