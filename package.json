@@ -13,7 +13,7 @@
     "lint": "eslint packages",
     "postinstall": "lerna bootstrap --hoist",
     "reinstall": "npm ci",
-    "release": "run-s distro test lerna-publish",
+    "release": "run-s distro test \"lerna-publish -- {1}\" --",
     "test": "lerna run test",
     "travis": "run-s all build-distro"
   },
