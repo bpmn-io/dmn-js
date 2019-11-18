@@ -75,6 +75,7 @@ describe('Modeler', function() {
         'import.render.complete',
         'import.done'
       ], function(e) {
+
         // log event type + event arguments
         events.push([
           e.type,
@@ -106,6 +107,7 @@ describe('Modeler', function() {
   describe('decisions without DI', function() {
 
     it('should generate ID', function(done) {
+
       // given
       createModeler(noDiXML, function(err, warnings, modeler) {
 

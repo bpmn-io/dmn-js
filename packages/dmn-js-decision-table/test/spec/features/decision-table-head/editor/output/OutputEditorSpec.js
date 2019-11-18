@@ -25,6 +25,7 @@ describe('features/decision-table-head - OutputEditor', function() {
 
 
   it('should render', function() {
+
     // when
     const tree = renderIntoDocument(
       <Root />

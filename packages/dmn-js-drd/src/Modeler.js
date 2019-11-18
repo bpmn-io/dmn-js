@@ -105,6 +105,7 @@ import MoveModule from 'diagram-js/lib/features/move';
 import PaletteModule from './features/palette';
 
 Modeler.prototype._modelingModules = [
+
   // modeling components
   BendpointsModule,
   ContextPadModule,

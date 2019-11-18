@@ -99,6 +99,7 @@ describe('features/modeling - move shape', function() {
     beforeEach(bootstrapModeler(simpleConnectionsXML, { modules: testModules }));
 
     it('should handle bendpoints', inject(function(elementRegistry, modeling) {
+
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           decision = elementRegistry.get('guestCount'),

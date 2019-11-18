@@ -93,6 +93,7 @@ export default class Keyboard {
   }
 
   bind(node) {
+
     // make sure that the keyboard is only bound once to the DOM
     this.unbind();
 

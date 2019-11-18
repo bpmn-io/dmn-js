@@ -77,6 +77,7 @@ SimpleMode.$inject = [
 // helpers //////////
 
 export function isCmd(event) {
+
   // ensure we don't react to AltGr
   // (mapped to CTRL + ALT)
   if (event.altKey) {

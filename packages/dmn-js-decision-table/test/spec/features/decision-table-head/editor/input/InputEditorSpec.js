@@ -24,6 +24,7 @@ describe('decision-table-head/editor - InputEditor', function() {
 
 
   it('should render', function() {
+
     // when
     const tree = renderIntoDocument(
       <Root />

@@ -108,6 +108,7 @@ describe('Manager', function() {
         var events = [];
 
         viewer.on('attach', function(event) {
+
           // log event type + event arguments
           events.push(event);
         });
@@ -129,6 +130,7 @@ describe('Manager', function() {
         var events = [];
 
         viewer.on('detach', function(event) {
+
           // log event type + event arguments
           events.push(event);
         });
@@ -155,6 +157,7 @@ describe('Manager', function() {
           'import.render.complete',
           'import.done'
         ], function(e) {
+
           // log event type + event arguments
           events.push([
             e.type,
@@ -471,6 +474,7 @@ describe('Manager', function() {
         'saveXML.serialized',
         'saveXML.done'
       ], function(e) {
+
         // log event type + event arguments
         events.push([
           e.type,

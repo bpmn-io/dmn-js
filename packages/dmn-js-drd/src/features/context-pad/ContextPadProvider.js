@@ -243,6 +243,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   var deleteAllowed = rules.allowed('elements.delete', { elements: [ element ] });
 
   if (isArray(deleteAllowed)) {
+
     // was the element returned as a deletion candidate?
     deleteAllowed = deleteAllowed[0] === element;
   }

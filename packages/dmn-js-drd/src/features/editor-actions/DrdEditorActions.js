@@ -37,6 +37,7 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
 
   if (canvas && elementRegistry && selection) {
     this._registerAction('selectElements', function() {
+
       // select all elements except for the invisible
       // root element
       var rootElement = canvas.getRootElement();

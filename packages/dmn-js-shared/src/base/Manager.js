@@ -381,15 +381,18 @@ export default class Manager {
         newActiveView;
 
     if (activeView) {
+
       // check the new active view
       newActiveView = find(this._views, function(v) {
         return viewsEqual(activeView, v);
       }) || this._getInitialView(this._views);
 
       if (viewsEqual(activeView, newActiveView)) {
+
         // active view changed
         this._activeView = newActiveView;
       } else {
+
         // active view got deleted
         return this._switchView(null);
       }

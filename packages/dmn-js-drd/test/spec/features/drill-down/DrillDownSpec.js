@@ -143,6 +143,7 @@ describe('features - drilldown', function() {
             var drillSpy = sinon.spy(drillDown, 'drillDown');
 
             eventBus.on('drillDown.click', function(event) {
+
               // prevent default drillDown action
               event.preventDefault();
             });

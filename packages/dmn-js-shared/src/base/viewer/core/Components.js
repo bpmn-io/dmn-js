@@ -104,6 +104,7 @@ export default class Components {
         }
       }
     } else {
+
       // clear listeners
       listeners.length = 0;
     }

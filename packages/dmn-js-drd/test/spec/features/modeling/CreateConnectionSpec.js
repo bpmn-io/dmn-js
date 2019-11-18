@@ -80,6 +80,7 @@ describe('features/modeling - create connection', function() {
 
 
   it('should undo', inject(function(canvas, elementRegistry, commandStack, modeling) {
+
     // given
     var rootElement = canvas.getRootElement(),
         inputShape = elementRegistry.get('inputData_1'),
@@ -161,6 +162,7 @@ describe('features/modeling - create connection', function() {
 
   it('should not contain source and target business object in waypoint data', inject(
     function(canvas, elementRegistry, commandStack, modeling) {
+
       // given
       var rootElement = canvas.getRootElement(),
           inputShape = elementRegistry.get('inputData_1'),
@@ -185,6 +187,7 @@ describe('features/modeling - create connection', function() {
 
     it('should create an association', inject(
       function(canvas, elementRegistry, modeling) {
+
         // given
         var rootElement = canvas.getRootElement(),
             source = elementRegistry.get('inputData_1'),
@@ -231,6 +234,7 @@ describe('features/modeling - create connection', function() {
 
 
     it('should undo', inject(function(canvas, elementRegistry, commandStack, modeling) {
+
       // given
       var rootElement = canvas.getRootElement(),
           source = elementRegistry.get('inputData_1'),
@@ -251,6 +255,7 @@ describe('features/modeling - create connection', function() {
 
 
     it('should redo', inject(function(canvas, elementRegistry, commandStack, modeling) {
+
       // given
       var rootElement = canvas.getRootElement(),
           rootElementBO = rootElement.businessObject,
@@ -315,6 +320,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect decision to knowledge source', inject(
       function(canvas, elementRegistry, commandStack, modeling) {
+
         // given
         var source = elementRegistry.get('decision_1'),
             target = elementRegistry.get('host_ks'),
@@ -331,6 +337,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect business knowledge model to decision', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('elMenu'),
             target = elementRegistry.get('decision_1'),
@@ -347,6 +354,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect knowledge source to decision', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('host_ks'),
             target = elementRegistry.get('decision_1'),
@@ -363,6 +371,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect knowledge source to business knowlege model', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('host_ks'),
             target = elementRegistry.get('elMenu'),
@@ -379,6 +388,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect input data to decision', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('decision_1'),
@@ -395,6 +405,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect input data to knowledge source', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('host_ks'),
@@ -411,6 +422,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect input data to text annotation', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('annotation_1'),

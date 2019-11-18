@@ -40,6 +40,7 @@ describe('features - keyboard', function() {
   describe('drd keyboard bindings', function() {
 
     it('should include triggers inside editorActions', inject(function(editorActions) {
+
       // given
       var expectedActions = [
         'undo',

@@ -233,6 +233,7 @@ Viewer.prototype.open = function(definitions, done) {
   try {
 
     if (this._definitions) {
+
       // clear existing rendered diagram
       this.clear();
     }

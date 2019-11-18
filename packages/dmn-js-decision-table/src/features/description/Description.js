@@ -44,6 +44,7 @@ export default class Description {
       const description = getDescription(element);
 
       if (!description) {
+
         // prevent focus
         event.preventDefault();
       }
