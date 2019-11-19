@@ -122,11 +122,11 @@ export default class InputEditor extends Component {
         {
           !editScript && (
             <p className="dms-hint">
-              Enter simple <code>FEEL</code> expression or <a href="#"
+              Enter simple <code>FEEL</code> expression or <button type="button"
                 className="ref-make-script"
                 onClick={ this.makeScript }>
                   change to script
-              </a>.
+              </button>.
             </p>
           )
         }
