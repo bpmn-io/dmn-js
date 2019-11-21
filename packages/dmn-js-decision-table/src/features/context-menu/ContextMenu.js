@@ -14,7 +14,8 @@ export default class ContextMenu {
       elementRegistry,
       modeling,
       sheet,
-      rules) {
+      rules,
+      translate) {
 
     this._contextMenu = contextMenu;
     this._clipboard = clipboard;
@@ -24,6 +25,7 @@ export default class ContextMenu {
     this._modeling = modeling;
     this._sheet = sheet;
     this._rules = rules;
+    this._translate = translate;
 
     this._getEntries = this._getEntries.bind(this);
 
@@ -39,7 +41,9 @@ export default class ContextMenu {
         if (additionalCellEntries && additionalCellEntries.length) {
           const cellEntriesGroup = (
             <div className="context-menu-group context-menu-group-cell">
-              <h4 className="context-menu-group-title">Cell</h4>
+              <h4 className="context-menu-group-title">
+                { this._translate('Cell') }
+              </h4>
               { additionalCellEntries }
             </div>
           );
@@ -165,48 +169,50 @@ export default class ContextMenu {
 
       entries.push(
         <div className="context-menu-group context-menu-group-rule">
-          <h4 className="context-menu-group-title">Rule</h4>
+          <h4 className="context-menu-group-title">
+            { this._translate('Rule') }
+          </h4>
           <div
             className="context-menu-group-entry context-menu-entry-add-rule-above"
             onClick={ () => handlers.addRuleAbove(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-up"></span>
-            Add Above
+            { this._translate('Add Above') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-add-rule-below"
             onClick={ () => handlers.addRuleBelow(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-down"></span>
-            Add Below
+            { this._translate('Add Below') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-remove-rule"
             onClick={ () => handlers.removeRule(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
-            Remove
+            { this._translate('Remove') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-copy-rule"
             onClick={ () => handlers.copy(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
-            Copy
+            { this._translate('Copy') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-cut-rule"
             onClick={ () => handlers.cut(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
-            Cut
+            { this._translate('Cut') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-rule-above` }
             onClick={ () => handlers.pasteBefore(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            Paste Above
+            { this._translate('Paste Above') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-rule-below` }
             onClick={ () => handlers.pasteAfter(element.row) }>
             <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            Paste Below
+            { this._translate('Paste Below') }
           </div>
         </div>
       );
@@ -226,48 +232,50 @@ export default class ContextMenu {
 
       entries.push(
         <div className="context-menu-group context-menu-group-input">
-          <h4 className="context-menu-group-title">Input</h4>
+          <h4 className="context-menu-group-title">
+            { this._translate('Input') }
+          </h4>
           <div
             className="context-menu-group-entry context-menu-entry-add-input-left"
             onClick={ () => handlers.addInputLeft(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-left"></span>
-            Add Left
+            { this._translate('Add Left') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-add-input-right"
             onClick={ () => handlers.addInputRight(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-right"></span>
-            Add Right
+            { this._translate('Add Right') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-input` }
             onClick={ () => handlers.removeInput(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
-            Remove
+            { this._translate('Remove') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-copy-input"
             onClick={ () => handlers.copy(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
-            Copy
+            { this._translate('Copy') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-input` }
             onClick={ () => handlers.cut(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
-            Cut
+            { this._translate('Cut') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-input-left` }
             onClick={ () => handlers.pasteBefore(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            Paste Left
+            { this._translate('Paste Left') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-input-right` }
             onClick={ () => handlers.pasteAfter(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            Paste Right
+            { this._translate('Paste Right') }
           </div>
         </div>
       );
@@ -285,48 +293,50 @@ export default class ContextMenu {
 
       entries.push(
         <div className="context-menu-group context-menu-group-output">
-          <h4 className="context-menu-group-title">Output</h4>
+          <h4 className="context-menu-group-title">
+            { this._translate('Output') }
+          </h4>
           <div
             className="context-menu-group-entry context-menu-entry-add-output-left"
             onClick={ () => handlers.addOutputLeft(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-left"></span>
-            Add Left
+            { this._translate('Add Left') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-add-output-right"
             onClick={ () => handlers.addOutputRight(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-right"></span>
-            Add Right
+            { this._translate('Add Right') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-output` }
             onClick={ () => handlers.removeOutput(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
-            Remove
+            { this._translate('Remove') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-copy-output"
             onClick={ () => handlers.copy(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
-            Copy
+            { this._translate('Copy') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-output` }
             onClick={ () => handlers.cut(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
-            Cut
+            { this._translate('Cut') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-output-left` }
             onClick={ () => handlers.pasteBefore(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            Paste Left
+            { this._translate('Paste Left') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-output-right` }
             onClick={ () => handlers.pasteAfter(actualElement) }>
             <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            Paste Right
+            { this._translate('Paste Right') }
           </div>
         </div>
       );
@@ -345,7 +355,8 @@ ContextMenu.$inject = [
   'elementRegistry',
   'modeling',
   'sheet',
-  'rules'
+  'rules',
+  'translate'
 ];
 
 // helpers ///////////

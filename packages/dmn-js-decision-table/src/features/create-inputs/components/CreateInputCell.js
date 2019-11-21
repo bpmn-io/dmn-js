@@ -20,9 +20,9 @@ export default class CreateInputsCell extends Component {
       <td
         className="input-cell create-inputs"
         onClick={ this.onClick }
-        title="Add Input">-</td>
+        title={ this.translate('Add Input') }>-</td>
     );
   }
 }
 
-CreateInputsCell.$inject = [ 'editorActions' ];
+CreateInputsCell.$inject = [ 'editorActions', 'translate' ];

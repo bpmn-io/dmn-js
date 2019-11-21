@@ -115,6 +115,7 @@ class TableCellEditor extends EditableComponent {
     super(props, context);
 
     this._expressionLanguages = context.injector.get('expressionLanguages');
+    this._translate = context.injector.get('translate');
   }
 
   isDefaultExpressionLanguage(businessObject) {
@@ -194,7 +195,10 @@ class TableCellEditor extends EditableComponent {
           !isFocussed && (
             <span
               className="dms-badge dmn-expression-language"
-              title={ `Expression Language = ${ expressionLanguageLabel }` }>
+              title={ this._translate(
+                'Expression Language = {expressionLanguageLabel}',
+                { expressionLanguageLabel }
+              ) }>
               <span class="dms-badge-icon dmn-icon-file-code"></span>
               <span class="dms-badge-label">{ expressionLanguageLabel }</span>
             </span>

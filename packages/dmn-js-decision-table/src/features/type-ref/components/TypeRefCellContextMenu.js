@@ -19,6 +19,7 @@ export default class TypeRefCellContextMenu extends Component {
   constructor(props, context) {
     super(props);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
   }
 
@@ -66,7 +67,9 @@ export default class TypeRefCellContextMenu extends Component {
 
     return (
       <div className="type-ref-edit context-menu-container">
-        <label className="dms-label">Type:</label>
+        <label className="dms-label">
+          { this._translate('Type') }:
+        </label>
 
         <InputSelect
           className="type-ref-edit-select"

@@ -10,6 +10,7 @@ export default class AddInput extends Component {
     this._eventBus = context.injector.get('eventBus');
 
     this._changeSupport = context.changeSupport;
+    this._translate = context.injector.get('translate');
   }
 
   onElementsChanged = () => {
@@ -62,9 +63,9 @@ export default class AddInput extends Component {
         onClick={ this.handleClick }
         colspan={ colspan }
       >
-        Input <span
+        { this._translate('Input') } <span
           className="add-input dmn-icon-plus action-icon"
-          title="Add Input"
+          title={ this._translate('Add Input') }
         ></span>
       </th>
     );

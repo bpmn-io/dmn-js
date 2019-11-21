@@ -10,7 +10,6 @@ export default function AnnotationsEditingProvider(components) {
       return AnnotationCell;
     }
   });
-
 }
 
 AnnotationsEditingProvider.$inject = [ 'components' ];
