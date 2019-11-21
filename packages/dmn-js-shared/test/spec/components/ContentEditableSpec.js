@@ -209,6 +209,7 @@ describe('components/ContentEditable', function() {
     describe('ctrlForNewline = false', function() {
 
       it('should insert newline', function() {
+
         // given
         const node = renderToNode(
           <ContentEditable
@@ -236,6 +237,7 @@ describe('components/ContentEditable', function() {
     describe('ctrlForNewline = true', function() {
 
       it('should insert newline', function() {
+
         // given
         const node = renderToNode(
           <ContentEditable
@@ -261,6 +263,7 @@ describe('components/ContentEditable', function() {
 
 
       it('should insert newline / metaKey', function() {
+
         // given
         const node = renderToNode(
           <ContentEditable
@@ -286,6 +289,7 @@ describe('components/ContentEditable', function() {
 
 
       it('should ignore + prevent default without CTRL', function() {
+
         // given
         const node = renderToNode(
           <ContentEditable

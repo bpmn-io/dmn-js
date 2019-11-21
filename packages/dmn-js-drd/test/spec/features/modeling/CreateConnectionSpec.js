@@ -7,6 +7,10 @@ import {
   getMid
 } from 'diagram-js/lib/layout/LayoutUtil';
 
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
+import { find } from 'min-dash';
+
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
 
@@ -76,6 +80,7 @@ describe('features/modeling - create connection', function() {
 
 
   it('should undo', inject(function(canvas, elementRegistry, commandStack, modeling) {
+
     // given
     var rootElement = canvas.getRootElement(),
         inputShape = elementRegistry.get('inputData_1'),
@@ -157,6 +162,7 @@ describe('features/modeling - create connection', function() {
 
   it('should not contain source and target business object in waypoint data', inject(
     function(canvas, elementRegistry, commandStack, modeling) {
+
       // given
       var rootElement = canvas.getRootElement(),
           inputShape = elementRegistry.get('inputData_1'),
@@ -181,6 +187,7 @@ describe('features/modeling - create connection', function() {
 
     it('should create an association', inject(
       function(canvas, elementRegistry, modeling) {
+
         // given
         var rootElement = canvas.getRootElement(),
             source = elementRegistry.get('inputData_1'),
@@ -227,6 +234,7 @@ describe('features/modeling - create connection', function() {
 
 
     it('should undo', inject(function(canvas, elementRegistry, commandStack, modeling) {
+
       // given
       var rootElement = canvas.getRootElement(),
           source = elementRegistry.get('inputData_1'),
@@ -247,6 +255,7 @@ describe('features/modeling - create connection', function() {
 
 
     it('should redo', inject(function(canvas, elementRegistry, commandStack, modeling) {
+
       // given
       var rootElement = canvas.getRootElement(),
           rootElementBO = rootElement.businessObject,
@@ -271,25 +280,36 @@ describe('features/modeling - create connection', function() {
 
   describe('append', function() {
 
-    it('should connect decision to knowledge source', inject(
-      function(canvas, elementRegistry, elementFactory, modeling) {
+    it('should connect input data to decision', inject(
+      function(canvas, elementFactory, elementRegistry, modeling) {
+
         // given
-        var decision = elementRegistry.get('decision_1'),
-            inputData = elementFactory.createShape({ type: 'dmn:InputData' }),
-            rootElement = canvas.getRootElement(),
-            connection;
+        var inputData = elementRegistry.get('inputData_1'),
+            decision = elementFactory.createShape({ type: 'dmn:Decision' }),
+            rootElement = canvas.getRootElement();
 
         // when
-        modeling.appendShape(decision, inputData, { x: 100, y: 300 }, rootElement);
-
-        connection = decision.incoming[0];
+        modeling.appendShape(inputData, decision, { x: 100, y: 100 }, rootElement);
 
         // then
-        expect(connection.type).to.eql('dmn:InformationRequirement');
-        expect(inputData.outgoing[0].type).to.eql('dmn:InformationRequirement');
-        expect(
-          decision.businessObject.extensionElements.values[1].source
-        ).to.equal(inputData.id);
+        expect(inputData.outgoing).to.have.lengthOf(1);
+        expect(decision.incoming).to.have.lengthOf(1);
+
+        var connection = inputData.outgoing[0];
+
+        expect(connection.type).to.equal('dmn:InformationRequirement');
+        expect(connection.source).to.equal(inputData);
+        expect(connection.target).to.equal(decision);
+
+        var decisionBo = decision.businessObject,
+            extensionElements = decisionBo.extensionElements;
+
+        var edge = find(extensionElements.values, function(extensionElement) {
+          return is(extensionElement, 'biodi:Edge');
+        });
+
+        expect(edge).to.exist;
+        expect(edge.source).to.equal(inputData.id);
       })
     );
 
@@ -300,6 +320,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect decision to knowledge source', inject(
       function(canvas, elementRegistry, commandStack, modeling) {
+
         // given
         var source = elementRegistry.get('decision_1'),
             target = elementRegistry.get('host_ks'),
@@ -316,6 +337,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect business knowledge model to decision', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('elMenu'),
             target = elementRegistry.get('decision_1'),
@@ -332,6 +354,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect knowledge source to decision', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('host_ks'),
             target = elementRegistry.get('decision_1'),
@@ -348,6 +371,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect knowledge source to business knowlege model', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('host_ks'),
             target = elementRegistry.get('elMenu'),
@@ -364,6 +388,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect input data to decision', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('decision_1'),
@@ -380,6 +405,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect input data to knowledge source', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('host_ks'),
@@ -396,6 +422,7 @@ describe('features/modeling - create connection', function() {
 
     it('should connect input data to text annotation', inject(
       function(elementRegistry, modeling) {
+
         // given
         var source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('annotation_1'),

@@ -8,6 +8,8 @@ import DrdViewer from '../helper/DrdViewer';
 import DefaultExport from '../../src';
 import DrdView from 'src/Viewer';
 
+import { keys } from 'min-dash';
+
 
 describe('Viewer', function() {
 
@@ -19,7 +21,6 @@ describe('Viewer', function() {
 
 
   function createViewer(xml, done) {
-
     var viewer = new DrdViewer({ container });
 
     viewer.importXML(xml, function(err, warnings) {
@@ -44,6 +45,7 @@ describe('Viewer', function() {
 
 
   it('should re-import simple DRD', function(done) {
+
     // given
     createViewer(exampleXML, function(err, warnings, viewer) {
 
@@ -82,11 +84,10 @@ describe('Viewer', function() {
         'import.render.start',
         'import.render.complete',
         'import.done'
-      ], function(e) {
-        // log event type + event arguments
+      ], function(event) {
         events.push([
-          e.type,
-          Object.keys(e).filter(function(key) {
+          event.type,
+          keys(event).filter(function(key) {
             return key !== 'type';
           })
         ]);
@@ -148,10 +149,8 @@ describe('Viewer', function() {
           return done(err);
         }
 
-        var drd = viewer.getActiveViewer();
-
         // when
-        drd.saveSVG(function(err, svg) {
+        viewer.getActiveViewer().saveSVG(function(err, svg) {
 
           if (err) {
             return done(err);

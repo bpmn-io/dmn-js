@@ -91,6 +91,7 @@ const CLASS_NAMES = {
 };
 
 var diagramXML = require('./diagram.dmn');
+
 // var performanceXML = require('./performance.dmn');
 
 

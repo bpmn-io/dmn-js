@@ -44,6 +44,7 @@ export default class Viewer extends Table {
     try {
 
       if (this._decision) {
+
         // clear existing rendered diagram
         this.clear();
       }

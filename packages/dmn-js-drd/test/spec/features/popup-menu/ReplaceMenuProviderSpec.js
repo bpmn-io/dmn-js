@@ -10,44 +10,13 @@ import replaceMenuProviderModule from 'src/features/popup-menu';
 import customRulesModule from '../../../util/custom-rules';
 
 import {
-  query as domQuery
-} from 'min-dom';
+  createEvent as globalEvent
+} from '../../../util/MockEvents';
 
 import {
-  find,
-  matchPattern
-} from 'min-dash';
-
-function queryEntry(popupMenu, id) {
-  return queryPopup(popupMenu, '[data-id="' + id + '"]');
-}
-
-function queryPopup(popupMenu, selector) {
-  return domQuery(selector, popupMenu._current.container);
-}
-
-/**
- * Gets all menu entries from the current open popup menu
- *
- * @param  {PopupMenu} popupMenu
- *
- * @return {<Array>}
- */
-function getEntries(popupMenu) {
-  var element = popupMenu._current.element;
-
-  return popupMenu._current.provider.getEntries(element);
-}
-
-function triggerAction(entries, id) {
-  var entry = find(entries, matchPattern({ id: id }));
-
-  if (!entry) {
-    throw new Error('entry "'+ id +'" not found in replace menu');
-  }
-
-  entry.action();
-}
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 
 describe('features/popup-menu - replace menu provider', function() {
@@ -88,7 +57,7 @@ describe('features/popup-menu - replace menu provider', function() {
       beforeEach(bootstrapModeler(diagramXMLReplace, { modules: testModules }));
 
       it('should contain all options except the current one',
-        inject(function(popupMenu, drdReplace, elementRegistry) {
+        inject(function(drdReplace, elementRegistry) {
 
           // given
           var decision = elementRegistry.get('decision');
@@ -97,14 +66,15 @@ describe('features/popup-menu - replace menu provider', function() {
           openPopup(decision);
 
           // then
-          expect(queryEntry(popupMenu, 'replace-with-empty-decision')).to.be.null;
-          expect(getEntries(popupMenu)).to.have.length(2);
+          expect(queryEntry('replace-with-empty-decision')).to.be.null;
+          expect(queryEntries()).to.have.length(2);
         })
       );
 
     });
 
   });
+
 
   describe('integration', function() {
 
@@ -114,15 +84,15 @@ describe('features/popup-menu - replace menu provider', function() {
       beforeEach(bootstrapModeler(diagramXMLReplace, { modules: testModules }));
 
       it('should replace empty decision with decision table',
-        inject(function(popupMenu, drdReplace, elementRegistry) {
+        inject(function(drdReplace, elementRegistry) {
 
           // given
           var decision = elementRegistry.get('decision');
 
           // when
           openPopup(decision);
-          var entries = getEntries(popupMenu);
-          triggerAction(entries, 'replace-with-decision-table');
+
+          triggerAction('replace-with-decision-table');
 
           // then
           decision = elementRegistry.get('decision');
@@ -131,15 +101,15 @@ describe('features/popup-menu - replace menu provider', function() {
       );
 
       it('should replace empty decision with literal expression',
-        inject(function(popupMenu, drdReplace, elementRegistry) {
+        inject(function(drdReplace, elementRegistry) {
 
           // given
           var decision = elementRegistry.get('decision');
 
           // when
           openPopup(decision);
-          var entries = getEntries(popupMenu);
-          triggerAction(entries, 'replace-with-literal-expression');
+
+          triggerAction('replace-with-literal-expression');
 
           // then
           decision = elementRegistry.get('decision');
@@ -151,3 +121,30 @@ describe('features/popup-menu - replace menu provider', function() {
 
   });
 });
+
+
+// helpers /////////////////
+
+function queryEntry(id) {
+  var container = getDrdJS().get('canvas').getContainer();
+
+  return domQuery('.djs-popup [data-id="' + id + '"]', container);
+}
+
+function queryEntries() {
+  var container = getDrdJS().get('canvas').getContainer();
+
+  return domQueryAll('.djs-popup .entry', container);
+}
+
+function triggerAction(id) {
+  var entry = queryEntry(id);
+
+  if (!entry) {
+    throw new Error('entry "'+ id +'" not found in replace menu');
+  }
+
+  var popupMenu = getDrdJS().get('popupMenu');
+
+  popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+}

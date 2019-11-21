@@ -12,7 +12,10 @@ const HIT_POLICIES = [
   'OUTPUT ORDER'
 ];
 
+const DEFAULT_AGGREGATION = 'NO LIST AGGREGATION';
+
 const LIST_FUNCTIONS = [
+  DEFAULT_AGGREGATION,
   'SUM',
   'MIN',
   'MAX',
@@ -31,14 +34,15 @@ export default class HitPolicyCellContextMenu extends Component {
   }
 
   onHitPolicyChange(hitPolicy) {
-    this._modeling.editHitPolicy(hitPolicy, undefined);
+    const root = this._sheet.getRoot(),
+          businessObject = root.businessObject;
+
+    const aggregation = hitPolicy === 'COLLECT' ? businessObject.aggregation : undefined;
+
+    this._modeling.editHitPolicy(hitPolicy, aggregation);
   }
 
-  onAggregationChange(value) {
-    let aggregation = value === ''
-      ? undefined
-      : value;
-
+  onAggregationChange(aggregation) {
     this._modeling.editHitPolicy('COLLECT', aggregation);
   }
 
@@ -88,8 +92,8 @@ export default class HitPolicyCellContextMenu extends Component {
 
     const aggregationOptions = LIST_FUNCTIONS.map(l => {
       return {
-        label: l === 'NONE' ? '-' : l,
-        value: l
+        label: l,
+        value: l === DEFAULT_AGGREGATION ? undefined : l
       };
     });
 
@@ -99,6 +103,7 @@ export default class HitPolicyCellContextMenu extends Component {
           <label className="dms-label">Hit Policy:</label>
 
           <InputSelect
+            noInput
             className="hit-policy-edit-policy-select"
             onChange={ this.onHitPolicyChange }
             options={ hitPolicyOptions }
@@ -110,6 +115,7 @@ export default class HitPolicyCellContextMenu extends Component {
               <label className="dms-label">Aggregation:</label>
 
               <InputSelect
+                noInput
                 className="hit-policy-edit-operator-select"
                 onChange={ this.onAggregationChange }
                 options={ aggregationOptions }

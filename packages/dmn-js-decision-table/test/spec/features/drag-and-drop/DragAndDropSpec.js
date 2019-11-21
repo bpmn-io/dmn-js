@@ -308,7 +308,7 @@ function triggerEvent(element, type, data = {}) {
   event.initEvent(type, true, true);
 
   for (const key in data) {
-    if (data.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
       event[key] = data[key];
     }
   }

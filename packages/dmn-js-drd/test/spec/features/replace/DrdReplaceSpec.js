@@ -170,6 +170,7 @@ describe('features/replace - drd replace', function() {
 
     it('should keep references for associations', inject(
       function(elementRegistry, drdReplace) {
+
         // given
         var decision = elementRegistry.get('decision');
 
@@ -196,6 +197,7 @@ describe('features/replace - drd replace', function() {
 
 
     it('should undo', inject(function(elementRegistry, drdReplace, commandStack) {
+
       // given
       var decision = elementRegistry.get('decision');
 
@@ -222,6 +224,7 @@ describe('features/replace - drd replace', function() {
 
 
     it('should redo', inject(function(elementRegistry, drdReplace, commandStack) {
+
       // given
       var decision = elementRegistry.get('decision');
 

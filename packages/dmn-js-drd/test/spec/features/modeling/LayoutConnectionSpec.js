@@ -107,6 +107,7 @@ describe('features/modeling - layout connection', function() {
   describe('redo support', function() {
 
     it('should redo', inject(function(elementRegistry, commandStack, modeling) {
+
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           authorityRequirementConn = knowledgeSource.incoming[0],

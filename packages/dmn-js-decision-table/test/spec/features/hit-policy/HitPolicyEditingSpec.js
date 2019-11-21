@@ -1,9 +1,9 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {
-  triggerInputEvent,
   triggerInputSelectChange,
-  triggerClick
+  triggerClick,
+  triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
@@ -61,19 +61,6 @@ describe('features/hit-policy - editor', function() {
     }));
 
 
-    it('should edit hit policy - input', inject(function(sheet) {
-
-      // given
-      const input = domQuery('.dms-input', inputSelect);
-
-      // when
-      triggerInputEvent(input, 'foo');
-
-      // then
-      expect(root.businessObject.hitPolicy).to.equal('foo');
-    }));
-
-
     it('should edit hit policy - select', inject(function(sheet) {
 
       // when
@@ -96,7 +83,7 @@ describe('features/hit-policy - editor', function() {
       });
 
 
-      it('should edit aggregation - input', inject(function(sheet) {
+      it('should remove aggregation when NO LIST AGGREGATION is selected', function() {
 
         // given
         triggerInputSelectChange(inputSelect, 'COLLECT');
@@ -106,14 +93,34 @@ describe('features/hit-policy - editor', function() {
           testContainer
         );
 
-        const input = domQuery('.dms-input', aggregationInputSelect);
-
         // when
-        triggerInputEvent(input, 'foo');
+        triggerInputSelectChange(aggregationInputSelect);
 
         // then
-        expect(root.businessObject.aggregation).to.equal('foo');
-      }));
+        expect(root.businessObject.aggregation).to.not.exist;
+      });
+
+
+      it('should NOT remove aggregation when COLLECT policy is selected again',
+        function() {
+
+          // given
+          triggerInputSelectChange(inputSelect, 'COLLECT');
+
+          const aggregationInputSelect = domQuery(
+            '.hit-policy-edit-operator-select',
+            testContainer
+          );
+
+          triggerInputSelectChange(aggregationInputSelect, 'SUM');
+
+          // when
+          triggerInputSelectChange(inputSelect, 'COLLECT');
+
+          // then
+          expect(root.businessObject.aggregation).to.equal('SUM');
+        }
+      );
 
 
       it('should edit aggregation - select', inject(function(sheet) {
@@ -152,6 +159,27 @@ describe('features/hit-policy - editor', function() {
         // then
         expect(root.businessObject.aggregation).to.not.exist;
       }));
+
+    });
+
+
+    describe('integration', function() {
+
+      it('should not close context menu when select option is chosen', function() {
+
+        // given
+        triggerMouseEvent(inputSelect, 'click');
+
+        const option = domQuery('.option[data-value="COLLECT"]', testContainer);
+
+        // when
+        triggerMouseEvent(option, 'mousedown');
+        triggerMouseEvent(option, 'mouseup');
+        triggerMouseEvent(option, 'click');
+
+        // then
+        expect(domQuery('.hit-policy-edit-operator-select', testContainer)).to.exist;
+      });
 
     });
 

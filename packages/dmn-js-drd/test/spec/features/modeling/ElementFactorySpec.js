@@ -6,6 +6,10 @@ import {
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
 
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
+import { find } from 'min-dash';
+
 
 describe('features/modeling - create elements', function() {
 
@@ -26,10 +30,17 @@ describe('features/modeling - create elements', function() {
     expect(businessObject.$parent).to.exist;
 
     expect(extensionElements.$parent).to.equal(businessObject);
-    expect(extensionElements.values[0].x).to.equal(element.x);
-    expect(extensionElements.values[0].y).to.equal(element.y);
-    expect(extensionElements.values[0].width).to.equal(attrs.width);
-    expect(extensionElements.values[0].height).to.equal(attrs.height);
+
+    var bounds = find(extensionElements.get('values'), function(extensionElement) {
+      return is(extensionElement, 'biodi:Bounds');
+    });
+
+    expect(bounds).to.have.bounds({
+      x: element.x,
+      y: element.y,
+      width: attrs.width,
+      height: attrs.height
+    });
 
     expect(element.width).to.equal(attrs.width);
     expect(element.height).to.equal(attrs.height);

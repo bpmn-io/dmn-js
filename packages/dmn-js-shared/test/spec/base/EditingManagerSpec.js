@@ -34,6 +34,7 @@ describe('EditingManager', function() {
 
       activeEditor._emit('elements.changed', {
         elements: [
+
           // fake element
           { businessObject: viewer._definitions }
         ]

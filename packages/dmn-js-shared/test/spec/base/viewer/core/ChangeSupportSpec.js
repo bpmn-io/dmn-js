@@ -35,6 +35,7 @@ describe('ChangeSupport', function() {
 
 
   it('should remove listener', inject(function(changeSupport) {
+
     // given
     const listener = () => {};
 
@@ -51,6 +52,7 @@ describe('ChangeSupport', function() {
 
 
   it('should remove all listeners', inject(function(changeSupport) {
+
     // given
     changeSupport.onElementsChanged('foo', () => {});
     changeSupport.onElementsChanged('foo', () => {});

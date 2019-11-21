@@ -15,6 +15,7 @@ export function bootstrap(options = {}, locals = {}) {
   return function() {
 
     let testContainer;
+
     // Make sure the test container is an optional dependency and we fall back
     // to an empty <div> if it does not exist.
     //

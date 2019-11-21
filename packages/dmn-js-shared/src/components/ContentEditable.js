@@ -131,6 +131,7 @@ export default class ContentEditable extends Component {
   }
 
   onKeydown = (event) => {
+
     // enter
     if (event.which === 13) {
 
@@ -205,6 +206,7 @@ function brTag() {
 }
 
 function innerText(node) {
+
   // QUIRK: we must remove the last trailing <br/>, if any
   return node.innerText.replace(/\n$/, '');
 }
@@ -242,8 +244,10 @@ function isIE() {
   var ua = window.navigator.userAgent;
 
   return (
+
     // IE 10 or older
     ua.indexOf('MSIE ') > 0 ||
+
     // IE 11
     ua.indexOf('Trident/') > 0
   );

@@ -35,6 +35,7 @@ describe('features/definition-properties', function() {
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
   it('should display the definitions name', inject(function(definitionPropertiesView) {
+
     // given
     var nameContainer = domQuery(
       '.dmn-definitions-name',
@@ -49,6 +50,7 @@ describe('features/definition-properties', function() {
 
 
   it('should display the definitions id', inject(function(definitionPropertiesView) {
+
     // given
     var nameContainer = domQuery(
       '.dmn-definitions-id',
@@ -64,6 +66,7 @@ describe('features/definition-properties', function() {
 
   it('should apply changes from updated definitions', inject(
     function(definitionPropertiesView, canvas) {
+
       // given
       var definitions = canvas.getRootElement().businessObject;
       var nameContainer = domQuery(
@@ -83,6 +86,7 @@ describe('features/definition-properties', function() {
 
   it('should react to definition name updates', inject(
     function(definitionPropertiesView, definitionPropertiesEdit) {
+
       // given
       var nameContainer = domQuery(
         '.dmn-definitions-name',
@@ -100,6 +104,7 @@ describe('features/definition-properties', function() {
 
   it('should undo', inject(
     function(definitionPropertiesView, definitionPropertiesEdit, commandStack) {
+
       // given
       var nameContainer = domQuery(
         '.dmn-definitions-name',
@@ -118,6 +123,7 @@ describe('features/definition-properties', function() {
 
   it('should redo', inject(
     function(definitionPropertiesView, definitionPropertiesEdit, commandStack) {
+
       // given
       var nameContainer = domQuery(
         '.dmn-definitions-name',
@@ -136,6 +142,7 @@ describe('features/definition-properties', function() {
 
 
   it('should be responsive', inject(function(canvas, eventBus, definitionPropertiesView) {
+
     // given
     var parent = canvas.getContainer();
 

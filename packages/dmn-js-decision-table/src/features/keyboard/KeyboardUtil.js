@@ -8,6 +8,7 @@ export function hasModifier(modifiers) {
 }
 
 export function isCmd(modifiers) {
+
   // ensure we don't react to AltGr
   // (mapped to CTRL + ALT)
   if (modifiers.altKey) {

@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "7.1.0",
+  "version": "7.2.0-beta.1",
   "scripts": {
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch",
@@ -38,25 +38,25 @@
   ],
   "devDependencies": {
     "cpx": "^1.5.0",
-    "del": "^3.0.0",
+    "del": "^5.1.0",
     "diagram-js": "^4.0.1",
     "dmn-font": "^0.4.1",
-    "execa": "^1.0.0",
+    "execa": "^3.3.0",
     "min-dom": "^3.1.1",
     "mkdirp": "^0.5.1",
-    "rollup": "^0.66.6",
+    "rollup": "^1.27.2",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-json": "^3.1.0",
-    "rollup-plugin-license": "^0.7.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-license": "^0.12.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-uglify": "^6.0.0"
   },
   "dependencies": {
-    "dmn-js-decision-table": "^7.1.0",
-    "dmn-js-drd": "^7.0.0",
-    "dmn-js-literal-expression": "^7.0.0",
-    "dmn-js-shared": "^7.0.0"
+    "dmn-js-decision-table": "^7.2.0-beta.1",
+    "dmn-js-drd": "^7.2.0-beta.1",
+    "dmn-js-literal-expression": "^7.2.0-beta.1",
+    "dmn-js-shared": "^7.2.0-beta.1"
   }
 }
