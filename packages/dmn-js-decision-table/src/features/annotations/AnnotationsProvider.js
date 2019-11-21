@@ -12,7 +12,6 @@ export default function AnnotationsProvider(components) {
       return AnnotationCell;
     }
   });
-
 }
 
 AnnotationsProvider.$inject = [ 'components' ];

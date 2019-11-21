@@ -6,8 +6,9 @@ import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export default class ExpressionLanguage {
-  constructor(components, elementRegistry, modeling, expressionLanguages) {
+  constructor(components, elementRegistry, modeling, expressionLanguages, translate) {
     this._modeling = modeling;
+    this._translate = translate;
 
     components.onGetComponent('context-menu-cell-additional', (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
@@ -35,7 +36,7 @@ export default class ExpressionLanguage {
             className="context-menu-group-entry context-menu-entry-set-expression-language">
             <div>
               <span className="context-menu-group-entry-icon dmn-icon-file-code"></span>
-              Expression Language
+              { this._translate('Expression Language') }
             </div>
 
             <InputSelect
@@ -56,4 +57,10 @@ export default class ExpressionLanguage {
   }
 }
 
-ExpressionLanguage.$inject = [ 'components', 'elementRegistry', 'modeling', 'expressionLanguages' ];
+ExpressionLanguage.$inject = [
+  'components',
+  'elementRegistry',
+  'modeling',
+  'expressionLanguages',
+  'translate'
+];

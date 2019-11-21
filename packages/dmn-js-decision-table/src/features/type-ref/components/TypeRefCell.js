@@ -5,8 +5,10 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class TypeRefCell extends Component {
 
-  constructor(props) {
+  constructor(props, context) {
     super(props);
+
+    this._translate = context.injector.get('translate');
   }
 
   onClick = (event) => {
@@ -81,7 +83,7 @@ export default class TypeRefCell extends Component {
 
     return (
       <th
-        title="Data Type"
+        title={ this._translate('Data Type') }
         className={ actualClassName }
         data-col-id={ colId }
         onClick={ this.onClick }

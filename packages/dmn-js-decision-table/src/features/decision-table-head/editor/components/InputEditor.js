@@ -9,6 +9,8 @@ export default class InputEditor extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
+
     const defaultExpressionLanguage = props.defaultExpressionLanguage.value;
 
     this.setExpressionLanguage = (expressionLanguage) => {
@@ -58,6 +60,7 @@ export default class InputEditor extends Component {
 
       this.handleChange({ inputVariable });
     };
+
   }
 
   handleChange(changes) {
@@ -85,7 +88,11 @@ export default class InputEditor extends Component {
       <div className="dms-container ref-input-editor">
 
         <p className="dms-fill-row">
-          <label className="dms-label">Input Label</label>
+          <label className="dms-label">
+            {
+              this.translate('Input Label')
+            }
+          </label>
 
           <Input
             className="ref-input-label"
@@ -95,7 +102,11 @@ export default class InputEditor extends Component {
 
         <hr className="dms-hrule" />
 
-        <h4 className="dms-heading">Input Expression</h4>
+        <h4 className="dms-heading">
+          {
+            this.translate('Input Expression')
+          }
+        </h4>
 
         <ContentEditable
           placeholder="enter expression"
@@ -113,12 +124,22 @@ export default class InputEditor extends Component {
 
         {
           !editScript && (
+
+            // TODO @barmac: Replace with proper i18n tooling
             <p className="dms-hint">
-              Enter simple <code>{ defaultExpressionLanguage.label }</code> expression
-              or <button type="button"
+              {
+                this.translate('Enter simple')
+              }
+              <code>{ defaultExpressionLanguage.label }</code>
+              {
+                this.translate('expression or')
+              }
+              <button type="button"
                 className="ref-make-script"
                 onClick={ this.makeScript }>
-                  change to script
+                {
+                  this.translate('change to script.')
+                }
               </button>.
             </p>
           )
@@ -127,7 +148,9 @@ export default class InputEditor extends Component {
         {
           editScript && (
             <p className="dms-hint">
-              Enter script.
+              {
+                this.translate('Enter script.')
+              }
             </p>
           )
         }
@@ -135,7 +158,11 @@ export default class InputEditor extends Component {
         {
           editScript && (
             <p>
-              <label className="dms-label">Expression Language</label>
+              <label className="dms-label">
+                {
+                  this.translate('Expression Language')
+                }
+              </label>
 
               <InputSelect
                 className="ref-language"
@@ -147,13 +174,17 @@ export default class InputEditor extends Component {
         }
 
         <p className="dms-fill-row">
-          <label className="dms-label">Input Variable</label>
+          <label className="dms-label">
+            {
+              this.translate('Input Variable')
+            }
+          </label>
 
           <Input
             className="ref-input-variable"
             value={ inputVariable || '' }
             onInput={ this.handleInputVariableChange }
-            placeholder="cellInput" />
+            placeholder={ this.translate('cellInput') } />
         </p>
       </div>
     );
@@ -164,4 +195,8 @@ export default class InputEditor extends Component {
 
 function isMultiLine(text) {
   return text && text.split(/\n/).length > 1;
+}
+
+function noopTranslate(str) {
+  return str;
 }

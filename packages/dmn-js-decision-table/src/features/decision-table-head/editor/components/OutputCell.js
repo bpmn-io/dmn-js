@@ -15,6 +15,8 @@ export default class OutputCell extends Component {
     super(props, context);
 
     mixin(this, ComponentWithSlots);
+
+    this._translate = context.injector.get('translate');
   }
 
   onClick = (event) => {
@@ -83,11 +85,11 @@ export default class OutputCell extends Component {
 
         {
           label ? (
-            <span className="output-label" title="Output Label">
+            <span className="output-label" title={ this._translate('Output Label') }>
               { label }
             </span>
           ) : (
-            <span className="output-name" title="Output Expression">
+            <span className="output-name" title={ this._translate('Output Expression') }>
               { name || '-' }
             </span>
           )

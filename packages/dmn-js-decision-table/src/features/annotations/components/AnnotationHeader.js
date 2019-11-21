@@ -1,7 +1,9 @@
-export default function AnnotationHeader() {
+export default function AnnotationHeader(props, context) {
+  const _translate = context.injector.get('translate');
+
   return (
     <th className="annotation header" rowspan="3">
-      Annotation
+      { _translate('Annotation') }
     </th>
   );
 }

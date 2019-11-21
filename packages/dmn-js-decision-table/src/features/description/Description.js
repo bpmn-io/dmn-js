@@ -17,11 +17,12 @@ export default class Description {
 
   constructor(
       components, contextMenu, elementRegistry,
-      eventBus, modeling, renderer) {
+      eventBus, modeling, renderer, translate) {
 
     this._contextMenu = contextMenu;
     this._modeling = modeling;
     this._renderer = renderer;
+    this._translate = translate;
 
 
     eventBus.on('cell.click', LOWER_PRIORITY, (event) => {
@@ -123,7 +124,14 @@ export default class Description {
               className={ `context-menu-group-entry ${ className }` }
               onClick={ onClick }>
               <span className={ `context-menu-group-entry-icon ${ icon }` }></span>
-              { isString(description) ? 'Remove' : 'Add' } Description
+              {
+                isString(description)
+                  ?
+                  this._translate('Remove')
+                  :
+                  this._translate('Add')
+              }
+              { this._translate('Description') }
             </div>
           );
         }
@@ -169,7 +177,8 @@ Description.$inject = [
   'elementRegistry',
   'eventBus',
   'modeling',
-  'renderer'
+  'renderer',
+  'translate'
 ];
 
 // helpers //////////

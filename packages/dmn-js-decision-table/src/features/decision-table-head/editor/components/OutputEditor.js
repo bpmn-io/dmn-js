@@ -8,6 +8,8 @@ export default class OutputEditor extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
+
     this.setName = (name) => {
       name = name || undefined;
 
@@ -30,7 +32,6 @@ export default class OutputEditor extends Component {
     }
   }
 
-
   render() {
 
     const {
@@ -41,7 +42,11 @@ export default class OutputEditor extends Component {
     return (
       <div className="dms-container ref-output-editor">
         <p className="dms-fill-row">
-          <label className="dms-label">Output Label</label>
+          <label className="dms-label">
+            {
+              this.translate('Output Label')
+            }
+          </label>
 
           <Input
             className="ref-output-label"
@@ -50,7 +55,11 @@ export default class OutputEditor extends Component {
         </p>
 
         <p className="dms-fill-row">
-          <label className="dms-label">Output Name</label>
+          <label className="dms-label">
+            {
+              this.translate('Output Name')
+            }
+          </label>
 
           <Input
             className="ref-output-name"
@@ -61,4 +70,10 @@ export default class OutputEditor extends Component {
       </div>
     );
   }
+}
+
+
+
+function noopTranslate(str) {
+  return str;
 }

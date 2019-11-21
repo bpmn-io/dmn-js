@@ -152,7 +152,7 @@ export default class DecisionTableHead extends Component {
 
 // default components ///////////////////////
 
-function DefaultInputHeaderCell(props) {
+function DefaultInputHeaderCell(props, context) {
 
   const {
     input,
@@ -164,6 +164,8 @@ function DefaultInputHeaderCell(props) {
     inputExpression
   } = input;
 
+  const translate = context.injector.get('translate');
+
   const actualClassName = (className || '') + ' input-cell';
 
   return (
@@ -173,11 +175,11 @@ function DefaultInputHeaderCell(props) {
       key={ input.id }>
       {
         label ? (
-          <span className="input-label" title="Input Label">
+          <span className="input-label" title={ translate('Input Label') }>
             { label }
           </span>
         ) : (
-          <span className="input-expression" title="Input Expression">
+          <span className="input-expression" title={ translate('Input Expression') }>
             { inputExpression.text || '-' }
           </span>
         )
@@ -221,7 +223,7 @@ class DefaultInputLabel extends Component {
 }
 
 
-function DefaultOutputHeaderCell(props) {
+function DefaultOutputHeaderCell(props, context) {
 
   const {
     output,
@@ -233,17 +235,19 @@ function DefaultOutputHeaderCell(props) {
     name
   } = output;
 
+  const translate = context.injector.get('translate');
+
   const actualClassName = (className || '') + ' output-cell';
 
   return (
     <th className={ actualClassName } key={ output.id }>
       {
         label ? (
-          <span className="output-label" title="Output Label">
+          <span className="output-label" title={ translate('Output Label') }>
             { label }
           </span>
         ) : (
-          <span className="output-name" title="Output Name">
+          <span className="output-name" title={ translate('Output Name') }>
             { name || '-' }
           </span>
         )
@@ -280,17 +284,19 @@ class DefaultOutputLabel extends Component {
 }
 
 
-function DefaultTypeRefCell(props) {
+function DefaultTypeRefCell(props, context) {
 
   const {
     className,
     element
   } = props;
 
+  const translate = context.injector.get('translate');
+
   const actualClassName = className + ' type-ref';
 
   return (
-    <th className={ actualClassName } title="Data Type">
+    <th className={ actualClassName } title={ translate('Data Type') }>
       { element.typeRef }
     </th>
   );
