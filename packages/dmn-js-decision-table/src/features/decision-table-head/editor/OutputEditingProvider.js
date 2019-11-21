@@ -8,8 +8,9 @@ import OutputCellContextMenu from './components/OutputCellContextMenu';
 
 export default class OutputEditingProvider {
 
-  constructor(components, contextMenu, eventBus, renderer) {
+  constructor(components, contextMenu, eventBus, renderer, translate) {
 
+    this._translate = translate;
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'output-header') {
         return OutputCell;
@@ -56,5 +57,6 @@ OutputEditingProvider.$inject = [
   'components',
   'contextMenu',
   'eventBus',
-  'renderer'
+  'renderer',
+  'translate'
 ];

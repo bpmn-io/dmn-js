@@ -9,6 +9,8 @@ export default class CreateInputsHeaderCell extends Component {
     super(props, context);
 
     inject(this);
+
+    this._translate = context.injector.get('translate');
   }
 
   onClick = (event) => {
@@ -22,7 +24,7 @@ export default class CreateInputsHeaderCell extends Component {
         onClick={ this.onClick }
         rowspan="3"
         title="Add Input">
-        Input <span
+        { this._translate('Input') || 'Input' } <span
           className="add-input dmn-icon-plus action-icon"
           title="Add Input"
         ></span>

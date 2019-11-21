@@ -17,6 +17,7 @@ export default class OutputCellContextMenu extends Component {
     inject(this);
 
     this.persistChanges = this.debounceInput(this.persistChanges);
+    this.translate = context.injector.get('translate');
   }
 
   persistChanges = () => {
@@ -66,5 +67,6 @@ export default class OutputCellContextMenu extends Component {
 
 OutputCellContextMenu.$inject = [
   'debounceInput',
-  'modeling'
+  'modeling',
+  'translate'
 ];

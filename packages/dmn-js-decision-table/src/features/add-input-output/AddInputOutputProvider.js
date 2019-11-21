@@ -3,8 +3,10 @@ import AddOutput from './components/AddOutput';
 
 
 export default function AddInputOutputProvider(
-    components, editorActions, eventBus
+    components, editorActions, eventBus, translate
 ) {
+
+  this._translate = translate;
 
   components.onGetComponent('cell', ({ cellType }) => {
     if (cellType === 'input-label') {
@@ -28,5 +30,6 @@ export default function AddInputOutputProvider(
 AddInputOutputProvider.$inject = [
   'components',
   'editorActions',
-  'eventBus'
+  'eventBus',
+  'translate'
 ];

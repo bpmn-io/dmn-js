@@ -2,7 +2,8 @@ import AnnotationHeader from './components/AnnotationHeader';
 import AnnotationCell from './components/AnnotationCell';
 
 
-export default function AnnotationsProvider(components) {
+export default function AnnotationsProvider(components, translate) {
+  this._translate = translate;
 
   components.onGetComponent('cell', ({ cellType }) => {
 
@@ -12,7 +13,6 @@ export default function AnnotationsProvider(components) {
       return AnnotationCell;
     }
   });
-
 }
 
-AnnotationsProvider.$inject = [ 'components' ];
+AnnotationsProvider.$inject = [ 'components', 'translate' ];

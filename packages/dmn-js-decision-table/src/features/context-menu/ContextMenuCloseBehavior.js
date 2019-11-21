@@ -6,7 +6,8 @@ const COMMANDS = [
 ];
 
 export default class ContextMenuCloseBehavior {
-  constructor(contextMenu, eventBus) {
+  constructor(contextMenu, eventBus, translate) {
+    this._translate = translate;
     eventBus.on('commandStack.executed', ({ command }) => {
 
       // close on certain modeling operations
@@ -23,4 +24,4 @@ export default class ContextMenuCloseBehavior {
   }
 }
 
-ContextMenuCloseBehavior.$inject = [ 'contextMenu', 'eventBus' ];
+ContextMenuCloseBehavior.$inject = [ 'contextMenu', 'eventBus', 'translate' ];

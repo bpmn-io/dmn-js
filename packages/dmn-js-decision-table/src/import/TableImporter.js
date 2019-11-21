@@ -12,10 +12,11 @@ function elementData(semantic, attrs) {
 
 export default class TableImporter {
 
-  constructor(elementFactory, eventBus, sheet) {
+  constructor(elementFactory, eventBus, sheet, translate) {
     this._elementFactory = elementFactory;
     this._eventBus = eventBus;
     this._sheet = sheet;
+    this._translate = translate;
   }
 
   /**
@@ -75,4 +76,4 @@ export default class TableImporter {
   }
 }
 
-TableImporter.$inject = [ 'elementFactory', 'eventBus', 'sheet' ];
+TableImporter.$inject = [ 'elementFactory', 'eventBus', 'sheet', 'translate' ];

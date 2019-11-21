@@ -4,7 +4,8 @@ const LOW_PRIORITY = 500;
 
 
 export default class InputOutputValues {
-  constructor(components) {
+  constructor(components, translate) {
+    this._translate = translate;
     components.onGetComponent('context-menu', LOW_PRIORITY, (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'type-ref-edit') {
         return AllowedValuesEditing;
@@ -13,4 +14,4 @@ export default class InputOutputValues {
   }
 }
 
-InputOutputValues.$inject = [ 'components' ];
+InputOutputValues.$inject = [ 'components', 'translate' ];

@@ -5,7 +5,8 @@ import DecisionRulesCellComponent from './components/DecisionRulesCellComponent'
 
 export default class Rules {
 
-  constructor(components) {
+  constructor(components, translate) {
+    this._translate = translate;
     components.onGetComponent('table.body', () => DecisionRulesBodyComponent);
 
     components.onGetComponent('row', ({ rowType }) => {
@@ -23,4 +24,4 @@ export default class Rules {
 
 }
 
-Rules.$inject = [ 'components' ];
+Rules.$inject = [ 'components', 'translate' ];

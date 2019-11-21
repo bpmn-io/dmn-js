@@ -13,9 +13,7 @@ export default class InputCellContextMenu extends Component {
     super(props, context);
 
     this.state = {};
-
     inject(this);
-
     this.persistChanges = this.debounceInput(this.persistChanges);
   }
 

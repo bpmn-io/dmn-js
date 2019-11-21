@@ -30,7 +30,6 @@ export default class OutputEditor extends Component {
     }
   }
 
-
   render() {
 
     const {
@@ -38,10 +37,23 @@ export default class OutputEditor extends Component {
       label
     } = this.props;
 
+    const { injector } = this.context;
+    if (injector) {
+      this.translate = this.translate ? this.translate : injector.get('translate');
+    }
+
     return (
       <div className="dms-container ref-output-editor">
         <p className="dms-fill-row">
-          <label className="dms-label">Output Label</label>
+          <label className="dms-label">
+            {
+              this.translate
+                ?
+                this.translate('Output Label') || 'Output Label'
+                :
+                'Output Label'
+            }
+          </label>
 
           <Input
             className="ref-output-label"
@@ -50,7 +62,15 @@ export default class OutputEditor extends Component {
         </p>
 
         <p className="dms-fill-row">
-          <label className="dms-label">Output Name</label>
+          <label className="dms-label">
+            {
+              this.translate
+                ?
+                this.translate('Output Name') || 'Output Name'
+                :
+                'Output Name'
+            }
+          </label>
 
           <Input
             className="ref-output-name"

@@ -31,6 +31,7 @@ export default class DecisionRulesEditorCellComponent extends Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
+    this._translate = context.injector.get('translate');
   }
 
 
@@ -95,6 +96,8 @@ export default class DecisionRulesEditorCellComponent extends Component {
 
     const businessObject = cell.businessObject;
 
+    const translate = this._translate;
+
     return (
       <Cell
         className={ className }
@@ -111,7 +114,8 @@ export default class DecisionRulesEditorCellComponent extends Component {
           isFocussed={ isFocussed }
           onChange={ this.changeCellValue }
           value={ businessObject.text }
-          businessObject={ businessObject } />
+          businessObject={ businessObject }
+          translate={ translate } />
       </Cell>
     );
   }
@@ -172,7 +176,8 @@ class TableCellEditor extends EditableComponent {
   render() {
     const {
       businessObject,
-      isFocussed
+      isFocussed,
+      translate
     } = this.props;
 
     const description = this.getDescription(businessObject);
@@ -201,7 +206,8 @@ class TableCellEditor extends EditableComponent {
           !isFocussed && (
             <span
               className="dms-badge dmn-expression-language"
-              title={ `Expression Language = ${ expressionLanguageLabel }` }>
+              title={ `${ translate || 'Expression Language'}
+              = ${ expressionLanguageLabel }` }>
               <span class="dms-badge-icon dmn-icon-file-code"></span>
               <span class="dms-badge-label">{ expressionLanguageLabel }</span>
             </span>

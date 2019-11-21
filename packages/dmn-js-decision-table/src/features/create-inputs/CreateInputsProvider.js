@@ -4,7 +4,8 @@ import CreateInputsCell from './components/CreateInputCell';
 const LOW_PRIORITY = 500;
 
 export default class CreateInputsProvider {
-  constructor(components, sheet) {
+  constructor(components, sheet, translate) {
+    this._translate = translate;
     components.onGetComponent('cell', LOW_PRIORITY, ({ cellType }) => {
       const { businessObject } = sheet.getRoot();
 
@@ -21,4 +22,4 @@ export default class CreateInputsProvider {
   }
 }
 
-CreateInputsProvider.$inject = [ 'components', 'sheet' ];
+CreateInputsProvider.$inject = [ 'components', 'sheet', 'translate' ];

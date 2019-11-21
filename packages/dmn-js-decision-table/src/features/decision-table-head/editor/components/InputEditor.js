@@ -78,6 +78,8 @@ export default class InputEditor extends Component {
       text
     } = this.props;
 
+    const { injector } = this.context;
+
     var editScript = expressionLanguage || isMultiLine(text);
 
     var languageOptions = [
@@ -89,11 +91,23 @@ export default class InputEditor extends Component {
       'Python'
     ].filter(isString).map(o => ({ label: o, value: o }));
 
+    if (injector) {
+      this.translate = this.translate ? this.translate : injector.get('translate');
+    }
+
     return (
       <div className="dms-container ref-input-editor">
 
         <p className="dms-fill-row">
-          <label className="dms-label">Input Label</label>
+          <label className="dms-label">
+            {
+              this.translate
+                ?
+                this.translate('Input Label') || 'Input Label'
+                :
+                'Input Label'
+            }
+          </label>
 
           <Input
             className="ref-input-label"
@@ -103,7 +117,15 @@ export default class InputEditor extends Component {
 
         <hr className="dms-hrule" />
 
-        <h4 className="dms-heading">Input Expression</h4>
+        <h4 className="dms-heading">
+          {
+            this.translate
+              ?
+              this.translate('Input Expression') || 'Input Expression'
+              :
+              'Input Expression'
+          }
+        </h4>
 
         <ContentEditable
           placeholder="enter expression"
@@ -122,10 +144,33 @@ export default class InputEditor extends Component {
         {
           !editScript && (
             <p className="dms-hint">
-              Enter simple <code>FEEL</code> expression or <button type="button"
+              {
+                this.translate
+                  ?
+                  this.translate('Enter') || 'Enter'
+                  + this.translate('simple') || 'simple'
+                  :
+                  'Enter simple'
+              }
+              <code>FEEL</code>
+              {
+                this.translate
+                  ?
+                  this.translate('expression') || 'expression'
+                  + this.translate('or') || 'or'
+                  :
+                  'expression or'
+              }
+              <button type="button"
                 className="ref-make-script"
                 onClick={ this.makeScript }>
-                  change to script
+                {
+                  this.translate
+                    ?
+                    this.translate('change to script') || 'change to script'
+                    :
+                    'change to script'
+                }
               </button>.
             </p>
           )
@@ -134,7 +179,13 @@ export default class InputEditor extends Component {
         {
           editScript && (
             <p className="dms-hint">
-              Enter script.
+              {
+                this.translate
+                  ?
+                  this.translate('Enter script') || 'Enter script.'
+                  :
+                  'Enter script.'
+              }
             </p>
           )
         }
@@ -142,7 +193,15 @@ export default class InputEditor extends Component {
         {
           editScript && (
             <p>
-              <label className="dms-label">Expression Language</label>
+              <label className="dms-label">
+                {
+                  this.translate
+                    ?
+                    this.translate('Expression Language') || 'Expression Language'
+                    :
+                    'Expression Language'
+                }
+              </label>
 
               <InputSelect
                 className="ref-language"
@@ -154,7 +213,15 @@ export default class InputEditor extends Component {
         }
 
         <p className="dms-fill-row">
-          <label className="dms-label">Input Variable</label>
+          <label className="dms-label">
+            {
+              this.translate
+                ?
+                this.translate('Input Variable') || 'Input Variable'
+                :
+                'Input Variable'
+            }
+          </label>
 
           <Input
             className="ref-input-variable"

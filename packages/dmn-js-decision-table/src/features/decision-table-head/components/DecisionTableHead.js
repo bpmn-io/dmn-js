@@ -24,6 +24,7 @@ export default class DecisionTableHead extends Component {
     this._sheet = context.injector.get('sheet');
 
     this._changeSupport = context.changeSupport;
+    this._translate = context.injector.get('translate');
   }
 
   onElementsChanged = () => {

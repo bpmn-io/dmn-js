@@ -8,8 +8,9 @@ import InputCellContextMenu from './components/InputCellContextMenu';
 
 export default class InputCellProvider {
 
-  constructor(components, contextMenu, eventBus, renderer) {
+  constructor(components, contextMenu, eventBus, renderer, translate) {
 
+    this._translate = translate;
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'input-header') {
         return InputCell;
@@ -56,5 +57,6 @@ InputCellProvider.$inject = [
   'components',
   'contextMenu',
   'eventBus',
-  'renderer'
+  'renderer',
+  'translate'
 ];

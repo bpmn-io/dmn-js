@@ -7,6 +7,7 @@ import InputEditingProvider from './InputEditingProvider';
 import TypeRefEditing from '../../type-ref';
 import AllowedValuesEditing from '../../allowed-values';
 import AddInputOutput from '../../add-input-output';
+import Translate from 'diagram-js/lib/i18n/translate';
 
 
 export default {
@@ -15,7 +16,8 @@ export default {
     AllowedValuesEditing,
     ContextMenu,
     DebounceInput,
-    TypeRefEditing
+    TypeRefEditing,
+    Translate
   ],
   __init__: [
     'inputEditingProvider',

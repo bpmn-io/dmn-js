@@ -25,8 +25,9 @@ const INPUT_EXPRESSION_LANGUAGE_OPTIONS = [{
 }];
 
 export default class ExpressionLanguage {
-  constructor(components, elementRegistry, modeling) {
+  constructor(components, elementRegistry, modeling, translate) {
     this._modeling = modeling;
+    this._translate = translate;
 
     components.onGetComponent('context-menu-cell-additional', (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
@@ -52,7 +53,7 @@ export default class ExpressionLanguage {
             className="context-menu-group-entry context-menu-entry-set-expression-language">
             <div>
               <span className="context-menu-group-entry-icon dmn-icon-file-code"></span>
-              Expression Language
+              { this._translate('Expression Language') || 'Expression Language' }
             </div>
 
             <InputSelect
@@ -73,4 +74,4 @@ export default class ExpressionLanguage {
   }
 }
 
-ExpressionLanguage.$inject = [ 'components', 'elementRegistry', 'modeling' ];
+ExpressionLanguage.$inject = [ 'components', 'elementRegistry', 'modeling', 'translate' ];

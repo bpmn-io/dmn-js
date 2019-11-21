@@ -7,7 +7,9 @@ import TypeRefCellContextMenu from './components/TypeRefCellContextMenu';
 
 export default class TypeRef {
 
-  constructor(components, contextMenu, eventBus, renderer) {
+  constructor(components, contextMenu, eventBus, renderer, translate) {
+
+    this._translate = translate;
 
     components.onGetComponent('cell', ({ cellType }) => {
       if (cellType === 'input-header-type-ref' ||
@@ -53,5 +55,6 @@ TypeRef.$inject = [
   'components',
   'contextMenu',
   'eventBus',
-  'renderer'
+  'renderer',
+  'translate'
 ];

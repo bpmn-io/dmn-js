@@ -3,7 +3,8 @@ import ContextMenuComponent from './components/SimpleStringEditContextMenuCompon
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class SimpleStringEdit {
-  constructor(components, simpleMode) {
+  constructor(components, simpleMode, translate) {
+    this._translate = translate;
     simpleMode.registerProvider(element => {
       return (isInput(element.col) || isOutput(element.col))
         && getTypeRef(element) === 'string';
@@ -26,7 +27,7 @@ export default class SimpleStringEdit {
   }
 }
 
-SimpleStringEdit.$inject = [ 'components', 'simpleMode' ];
+SimpleStringEdit.$inject = [ 'components', 'simpleMode', 'translate' ];
 
 
 // helpers //////////////////////
