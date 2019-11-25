@@ -1,4 +1,7 @@
-import { map } from 'min-dash';
+import {
+  map,
+  pick
+} from 'min-dash';
 
 import { isAny } from 'dmn-js-shared/lib/util/ModelUtil';
 
@@ -50,7 +53,7 @@ DrdFactory.prototype.createDiEdge = function(source, waypoints) {
 };
 
 DrdFactory.prototype.createDiWaypoint = function(waypoint) {
-  return this.create('biodi:Waypoint', waypoint);
+  return this.create('biodi:Waypoint', pick(waypoint, [ 'x', 'y' ]));
 };
 
 DrdFactory.prototype.createExtensionElements = function() {

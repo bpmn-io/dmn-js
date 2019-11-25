@@ -144,7 +144,9 @@ describe('features/modeling - DrdUpdater', function() {
 
         expect(edge.waypoints).to.have.lengthOf(2);
         expect(edge.waypoints[ 0 ]).to.include({ x: 347, y: 240 });
+        expect(edge.waypoints[ 0 ].original).not.to.exist;
         expect(edge.waypoints[ 1 ]).to.include({ x: 347, y: 340 });
+        expect(edge.waypoints[ 1 ].original).not.to.exist;
       }
     ));
 
