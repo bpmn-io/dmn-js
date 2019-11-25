@@ -6,6 +6,23 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.2.0
+
+* `FEAT(drd)`: inverse allow inverse connections
+* `FEAT(decision-table)`: only allow standardized hit policy values
+* `FEAT(decision-table)`: preserve aggregation when COLLECT is selected again
+* `FEAT(decision-table)`: allow aggreation to be cleared from dropdown ([#370](https://github.com/bpmn-io/dmn-js/issues/370), [#389](https://github.com/bpmn-io/dmn-js/issues/389))
+* `FEAT(decision-table)`: use JUEL as the default input expression language ([#405](https://github.com/bpmn-io/dmn-js/issues/405))
+* `FIX(drd)`: correct connection rules
+* `FIX(decision-table)`: correctly handle value erasing ([#826](https://github.com/camunda/camunda-modeler/issues/826))
+* `FIX(decision-table)`: correctly display simple mode edit control when cell selection changes ([#341](https://github.com/bpmn-io/dmn-js/issues/341))
+* `FIX(decision-table)`: do not close input on user selection ([#421](https://github.com/bpmn-io/dmn-js/issues/421))
+* `FIX(decision-table)`: do not navigate when clearing pre-defined hints ([#431](https://github.com/bpmn-io/dmn-js/issues/431))
+* `FIX(decision-table)`: prevent context menu jump in larger tables
+* `FIX(decision-table)`: do not close context on user selection
+* `CHORE`: bump to `diagram-js@6`
+* `CHORE`: bump to `table-js@6.0.3`
+
 ## 7.1.0
 
 * `FEAT(decision-table)`: add background color to even table rows ([#404](https://github.com/bpmn-io/dmn-js/issues/404))
