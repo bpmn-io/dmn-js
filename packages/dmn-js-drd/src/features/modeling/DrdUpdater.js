@@ -2,7 +2,8 @@ import {
   assign,
   find,
   forEach,
-  map
+  map,
+  omit
 } from 'min-dash';
 
 import inherits from 'inherits';
@@ -402,7 +403,7 @@ DrdUpdater.prototype.updateConnectionWaypoints = function(context) {
 
   if (edge) {
     edge.waypoints = map(connection.waypoints, function(waypoint) {
-      return drdFactory.createDiWaypoint(waypoint);
+      return drdFactory.createDiWaypoint(omit(waypoint, [ 'original' ]));
     }).map(function(waypoint) {
       waypoint.$parent = edge;
 
