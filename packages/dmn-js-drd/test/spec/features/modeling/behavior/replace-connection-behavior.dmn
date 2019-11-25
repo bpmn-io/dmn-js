@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+  <decision id="Decision_1" name="Decision_1">
+    <extensionElements>
+      <biodi:bounds x="100" y="100" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <decision id="Decision_2" name="Decision_2">
+    <extensionElements>
+      <biodi:bounds x="100" y="200" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <inputData id="InputData_1" name="InputData_1">
+    <extensionElements>
+      <biodi:bounds x="300" y="100" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_2" name="InputData_2">
+    <extensionElements>
+      <biodi:bounds x="300" y="200" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <knowledgeSource id="KnowledgeSource_1" name="KnowledgeSource_1">
+    <extensionElements>
+      <biodi:bounds x="500" y="100" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <knowledgeSource id="KnowledgeSource_2" name="KnowledgeSource_2">
+    <extensionElements>
+      <biodi:bounds x="500" y="200" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1" name="BusinessKnowledgeModel_1">
+    <extensionElements>
+      <biodi:bounds x="700" y="100" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_2" name="BusinessKnowledgeModel_2">
+    <extensionElements>
+      <biodi:bounds x="700" y="200" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <textAnnotation id="TextAnnotation_1">
+    <extensionElements>
+      <biodi:bounds x="900" y="100" width="100" height="80" />
+    </extensionElements>
+    <text>TextAnnotation_1</text>
+  </textAnnotation>
+</definitions>
