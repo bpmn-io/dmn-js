@@ -1,5 +1,4 @@
 import {
-  map,
   pick
 } from 'min-dash';
 
@@ -42,13 +41,17 @@ DrdFactory.prototype.createDiBounds = function(bounds) {
 };
 
 DrdFactory.prototype.createDiEdge = function(source, waypoints) {
-  var self = this;
-
   return this.create('biodi:Edge', {
     source: source.id,
-    waypoints: map(waypoints, function(waypoint) {
-      return self.createDiWaypoint(waypoint);
-    })
+    waypoints: this.createDiWaypoints(waypoints)
+  });
+};
+
+DrdFactory.prototype.createDiWaypoints = function(waypoints) {
+  var self = this;
+
+  return waypoints.map(function(waypoint) {
+    return self.createDiWaypoint(waypoint);
   });
 };
 
