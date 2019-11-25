@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "css.escape": "^1.5.1",
-    "diagram-js": "^6.0.1",
+    "diagram-js": "^6.0.2",
     "dmn-js-shared": "^7.2.0",
     "escape-html": "^1.0.3",
     "inferno": "~5.0.5",
