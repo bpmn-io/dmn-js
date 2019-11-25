@@ -126,7 +126,7 @@ export default function DrdUpdater(
         connectionBo = connection.businessObject,
         target = context.target,
         targetBo = target.businessObject,
-        extensionElements = targetBo.extensionElements,
+        extensionElements = targetBo.get('extensionElements'),
         di = context.di;
 
     if (is(connection, 'dmn:Association')) {
@@ -150,7 +150,7 @@ export default function DrdUpdater(
     var connection = context.connection,
         target = context.target,
         targetBo = target.businessObject,
-        extensionElements = targetBo.extensionElements,
+        extensionElements = targetBo.get('extensionElements'),
         di = context.di;
 
     reverseUpdateParent(context);
@@ -166,7 +166,7 @@ export default function DrdUpdater(
         source = context.source,
         target = context.target,
         targetBo = target.businessObject,
-        extensionElements = targetBo.extensionElements;
+        extensionElements = targetBo.get('extensionElements');
 
     if (is(connection, 'dmn:Association')) {
       return;
@@ -188,7 +188,7 @@ export default function DrdUpdater(
         target = context.target,
         oldDI = context.oldDI,
         targetBo = target.businessObject,
-        extensionElements = targetBo.extensionElements;
+        extensionElements = targetBo.get('extensionElements');
 
     if (!oldDI || is(connection, 'dmn:Association')) {
       return;
@@ -204,10 +204,10 @@ export default function DrdUpdater(
         newSource = context.newSource,
         oldTarget = context.oldTarget,
         oldTargetBo = oldTarget.businessObject,
-        oldTargetBoExtensionElements = oldTargetBo.extensionElements,
+        oldTargetBoExtensionElements = oldTargetBo.get('extensionElements'),
         newTarget = context.newTarget,
         newTargetBo = newTarget.businessObject,
-        newTargetBoExtensionElements = newTargetBo.extensionElements;
+        newTargetBoExtensionElements = newTargetBo.get('extensionElements');
 
     self.updateSemanticParent(connectionBo, newTargetBo);
 
@@ -225,7 +225,9 @@ export default function DrdUpdater(
       remove(oldTargetBoExtensionElements.get('values'), edge);
 
       // (2) add edge to new target
-      newTargetBoExtensionElements.get('values').push(edge);
+      if (!is(newTarget, 'dmn:TextAnnotation')) {
+        newTargetBoExtensionElements.get('values').push(edge);
+      }
 
       // (3) reference new source
       if (newSource) {
@@ -241,10 +243,10 @@ export default function DrdUpdater(
         newSource = context.newSource,
         oldTarget = context.oldTarget,
         oldTargetBo = oldTarget.businessObject,
-        oldTargetBoExtensionElements = oldTargetBo.extensionElements,
+        oldTargetBoExtensionElements = oldTargetBo.get('extensionElements'),
         newTarget = context.newTarget,
         newTargetBo = newTarget.businessObject,
-        newTargetBoExtensionElements = newTargetBo.extensionElements;
+        newTargetBoExtensionElements = newTargetBo.get('extensionElements');
 
     self.updateSemanticParent(connectionBo, oldTargetBo);
 
@@ -260,7 +262,9 @@ export default function DrdUpdater(
     if (edge) {
 
       // (1) remove edge from new target
-      remove(newTargetBoExtensionElements.get('values'), edge);
+      if (!is(newTarget, 'dmn:TextAnnotation')) {
+        remove(newTargetBoExtensionElements.get('values'), edge);
+      }
 
       // (2) add edge to old target
       oldTargetBoExtensionElements.get('values').push(edge);
@@ -288,7 +292,7 @@ export default function DrdUpdater(
     forEach(outgoing, function(connection) {
       var target = connection.target,
           targetBo = target.businessObject,
-          extensionElements = targetBo.extensionElements;
+          extensionElements = targetBo.get('extensionElements');
 
       var edge = find(extensionElements.get('values'), function(extensionElement) {
         return is(extensionElement, 'biodi:Edge') &&
@@ -318,7 +322,7 @@ export default function DrdUpdater(
     forEach(outgoing, function(connection) {
       var target = connection.target,
           targetBo = target.businessObject,
-          extensionElements = targetBo.extensionElements;
+          extensionElements = targetBo.get('extensionElements');
 
       var edge = find(extensionElements.get('values'), function(extensionElement) {
         return is(extensionElement, 'biodi:Edge') &&
@@ -347,7 +351,7 @@ DrdUpdater.prototype.updateBounds = function(shape) {
   var drdFactory = this._drdFactory;
 
   var businessObject = shape.businessObject,
-      extensionElements = businessObject.extensionElements,
+      extensionElements = businessObject.get('extensionElements'),
       bounds;
 
   if (!extensionElements) {
@@ -390,9 +394,9 @@ DrdUpdater.prototype.updateConnectionWaypoints = function(context) {
       extensionElements;
 
   if (is(connection, 'dmn:Association')) {
-    extensionElements = connectionBo.extensionElements;
+    extensionElements = connectionBo.get('extensionElements');
   } else {
-    extensionElements = targetBo.extensionElements;
+    extensionElements = targetBo.get('extensionElements');
   }
 
   var edge = find(extensionElements.get('values'), function(extensionElement) {
