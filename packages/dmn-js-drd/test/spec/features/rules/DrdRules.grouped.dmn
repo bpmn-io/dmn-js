@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="D1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+  <decision id="A1" name="A1">
+    <extensionElements>
+      <biodi:bounds x="208" y="106" width="180" height="80" />
+      <biodi:edge source="A2">
+        <biodi:waypoints x="270" y="272" />
+        <biodi:waypoints x="318" y="186" />
+      </biodi:edge>
+      <biodi:edge source="A2">
+        <biodi:waypoints x="269" y="272" />
+        <biodi:waypoints x="314" y="186" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#Decision_0wia9cc" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#A2" />
+    </informationRequirement>
+  </decision>
+  <decision id="A2" name="A2">
+    <extensionElements>
+      <biodi:bounds x="158" y="272" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <decision id="B2" name="B2">
+    <extensionElements>
+      <biodi:bounds x="453" y="284" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <knowledgeSource id="B1" name="B1">
+    <extensionElements>
+      <biodi:bounds x="571" y="129" width="100" height="63" />
+      <biodi:edge source="B2">
+        <biodi:waypoints x="560" y="284" />
+        <biodi:waypoints x="598" y="192" />
+      </biodi:edge>
+      <biodi:edge source="B2">
+        <biodi:waypoints x="559" y="284" />
+        <biodi:waypoints x="597" y="192" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredDecision href="#Decision_1btgo28" />
+    </authorityRequirement>
+    <authorityRequirement>
+      <requiredDecision href="#B2" />
+    </authorityRequirement>
+  </knowledgeSource>
+  <decision id="C1" name="C1">
+    <extensionElements>
+      <biodi:bounds x="837" y="123" width="180" height="80" />
+      <biodi:edge source="C2">
+        <biodi:waypoints x="832" y="304" />
+        <biodi:waypoints x="900" y="203" />
+      </biodi:edge>
+      <biodi:edge source="C2">
+        <biodi:waypoints x="830" y="304" />
+        <biodi:waypoints x="885" y="203" />
+      </biodi:edge>
+    </extensionElements>
+    <knowledgeRequirement>
+      <requiredKnowledge href="#BusinessKnowledgeModel_0gw4fis" />
+    </knowledgeRequirement>
+    <knowledgeRequirement>
+      <requiredKnowledge href="#C2" />
+    </knowledgeRequirement>
+  </decision>
+  <businessKnowledgeModel id="C2" name="C2">
+    <extensionElements>
+      <biodi:bounds x="749" y="304" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <businessKnowledgeModel id="D2" name="D2">
+    <extensionElements>
+      <biodi:bounds x="1123" y="314" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_03jdvwp" name="D1">
+    <extensionElements>
+      <biodi:bounds x="1196" y="130" width="135" height="46" />
+      <biodi:edge source="D2">
+        <biodi:waypoints x="1201" y="314" />
+        <biodi:waypoints x="1263" y="176" />
+      </biodi:edge>
+      <biodi:edge source="D2">
+        <biodi:waypoints x="1199" y="314" />
+        <biodi:waypoints x="1246" y="176" />
+      </biodi:edge>
+    </extensionElements>
+    <knowledgeRequirement>
+      <requiredKnowledge href="#BusinessKnowledgeModel_13cx568" />
+    </knowledgeRequirement>
+    <knowledgeRequirement>
+      <requiredKnowledge href="#D2" />
+    </knowledgeRequirement>
+  </businessKnowledgeModel>
+  <inputData id="E2" name="E2">
+    <extensionElements>
+      <biodi:bounds x="1413" y="298" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <decision id="E1" name="E1">
+    <extensionElements>
+      <biodi:bounds x="1452" y="109" width="180" height="80" />
+      <biodi:edge source="E2">
+        <biodi:waypoints x="1484" y="298" />
+        <biodi:waypoints x="1521" y="189" />
+      </biodi:edge>
+      <biodi:edge source="InputData_15oy4bd">
+        <biodi:waypoints x="1487" y="298" />
+        <biodi:waypoints x="1542" y="189" />
+      </biodi:edge>
+      <biodi:edge source="E2">
+        <biodi:waypoints x="1484" y="298" />
+        <biodi:waypoints x="1524" y="189" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_15oy4bd" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#E2" />
+    </informationRequirement>
+  </decision>
+  <inputData id="F2" name="F2">
+    <extensionElements>
+      <biodi:bounds x="1688" y="310" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <knowledgeSource id="F1" name="F1">
+    <extensionElements>
+      <biodi:bounds x="1784" y="95" width="100" height="63" />
+      <biodi:edge source="F2">
+        <biodi:waypoints x="1756" y="310" />
+        <biodi:waypoints x="1821" y="158" />
+      </biodi:edge>
+      <biodi:edge source="F2">
+        <biodi:waypoints x="1759" y="310" />
+        <biodi:waypoints x="1809" y="158" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredInput href="#InputData_1xivwf9" />
+    </authorityRequirement>
+    <authorityRequirement>
+      <requiredInput href="#F2" />
+    </authorityRequirement>
+  </knowledgeSource>
+  <knowledgeSource id="G2" name="G2">
+    <extensionElements>
+      <biodi:bounds x="1929" y="299" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <decision id="G1" name="G1">
+    <extensionElements>
+      <biodi:bounds x="1992" y="90" width="180" height="80" />
+      <biodi:edge source="G2">
+        <biodi:waypoints x="1997" y="299" />
+        <biodi:waypoints x="2072" y="170" />
+      </biodi:edge>
+      <biodi:edge source="G2">
+        <biodi:waypoints x="1987" y="299" />
+        <biodi:waypoints x="2021" y="170" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredAuthority href="#KnowledgeSource_0k9w134" />
+    </authorityRequirement>
+    <authorityRequirement>
+      <requiredAuthority href="#G2" />
+    </authorityRequirement>
+  </decision>
+  <knowledgeSource id="H2" name="H2">
+    <extensionElements>
+      <biodi:bounds x="2253" y="291" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <businessKnowledgeModel id="H1" name="H1">
+    <extensionElements>
+      <biodi:bounds x="2344" y="81" width="135" height="46" />
+      <biodi:edge source="H2">
+        <biodi:waypoints x="2319" y="291" />
+        <biodi:waypoints x="2400" y="127" />
+      </biodi:edge>
+      <biodi:edge source="H2">
+        <biodi:waypoints x="2317" y="291" />
+        <biodi:waypoints x="2387" y="127" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredAuthority href="#KnowledgeSource_0hbh1wu" />
+    </authorityRequirement>
+    <authorityRequirement>
+      <requiredAuthority href="#H2" />
+    </authorityRequirement>
+  </businessKnowledgeModel>
+  <knowledgeSource id="I2" name="I2">
+    <extensionElements>
+      <biodi:bounds x="2538" y="289" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <knowledgeSource id="I1" name="I1">
+    <extensionElements>
+      <biodi:bounds x="2619" y="85" width="100" height="63" />
+      <biodi:edge source="I2">
+        <biodi:waypoints x="2603" y="289" />
+        <biodi:waypoints x="2670" y="148" />
+      </biodi:edge>
+      <biodi:edge source="I2">
+        <biodi:waypoints x="2599" y="289" />
+        <biodi:waypoints x="2648" y="148" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredAuthority href="#KnowledgeSource_07j6v5c" />
+    </authorityRequirement>
+    <authorityRequirement>
+      <requiredAuthority href="#I2" />
+    </authorityRequirement>
+  </knowledgeSource>
+  <businessKnowledgeModel id="J2" name="J2">
+    <extensionElements>
+      <biodi:bounds x="142" y="508" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <textAnnotation id="J1">
+    <extensionElements>
+      <biodi:bounds x="294" y="394" width="100" height="80" />
+    </extensionElements>
+    <text>J1</text>
+  </textAnnotation>
+  <association id="Association_0olehc0">
+    <extensionElements>
+      <biodi:edge source="J2">
+        <biodi:waypoints x="210" y="531" />
+        <biodi:waypoints x="344" y="434" />
+      </biodi:edge>
+    </extensionElements>
+    <sourceRef href="#J2" />
+    <targetRef href="#J1" />
+  </association>
+</definitions>
