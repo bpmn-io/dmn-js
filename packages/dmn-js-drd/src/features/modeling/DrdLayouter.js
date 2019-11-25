@@ -17,7 +17,7 @@ DrdLayouter.prototype.layoutConnection = function(connection, hints) {
 
   var source = hints.source || connection.source,
       target = hints.target || connection.target,
-      waypoints = connection.waypoints,
+      waypoints = hints.waypoints || connection.waypoints,
       start = hints.connectionStart,
       end = hints.connectionEnd,
       middle;
