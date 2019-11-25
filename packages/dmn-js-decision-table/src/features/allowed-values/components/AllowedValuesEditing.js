@@ -172,10 +172,10 @@ export default class AllowedValuesEditing extends Component {
               && !values.length
               && <div>
                 <h4 className="dms-heading">
-                  { this._translate('Predefined Values') || 'Predefined Values' }
+                  { this._translate('Predefined Values') }
                 </h4>
                 <span className="placeholder">
-                  { this._translate('No values') || 'No values' }
+                  { this._translate('No values') }
                 </span>
               </div>
           }
@@ -186,15 +186,14 @@ export default class AllowedValuesEditing extends Component {
                 <button type="button" className="del-values"
                   onClick={ this.handleRemovePredifinedValuesClick }>
                   {
-                    this._translate('Clear predefined values') ||
-                    'Clear predefined values.'
+                    this._translate('Clear predefined values')
                   }
                 </button>
               </p>
           }
 
           <h4 className="dms-heading">
-            { this._translate('Add Predefined Values') || 'Add Predefined Values' }
+            { this._translate('Add Predefined Values') }
           </h4>
 
           <ValidatedInput

@@ -60,6 +60,11 @@ export default class InputEditor extends Component {
 
       this.handleChange({ inputVariable });
     };
+
+    const { injector } = context;
+    if (injector) {
+      this.translate = this.translate ? this.translate : injector.get('translate');
+    }
   }
 
   handleChange(changes) {
@@ -79,8 +84,6 @@ export default class InputEditor extends Component {
       text
     } = this.props;
 
-    const { injector } = this.context;
-
     var editScript = expressionLanguage || isMultiLine(text);
 
     var languageOptions = [
@@ -92,10 +95,6 @@ export default class InputEditor extends Component {
       'Python'
     ].filter(isString).map(o => ({ label: o, value: o }));
 
-    if (injector) {
-      this.translate = this.translate ? this.translate : injector.get('translate');
-    }
-
     return (
       <div className="dms-container ref-input-editor">
 
@@ -104,7 +103,7 @@ export default class InputEditor extends Component {
             {
               this.translate
                 ?
-                this.translate('Input Label') || 'Input Label'
+                this.translate('Input Label')
                 :
                 'Input Label'
             }
@@ -122,7 +121,7 @@ export default class InputEditor extends Component {
           {
             this.translate
               ?
-              this.translate('Input Expression') || 'Input Expression'
+              this.translate('Input Expression')
               :
               'Input Expression'
           }
@@ -148,8 +147,8 @@ export default class InputEditor extends Component {
               {
                 this.translate
                   ?
-                  this.translate('Enter') || 'Enter'
-                  + this.translate('simple') || 'simple'
+                  this.translate('Enter')
+                  + this.translate('simple')
                   :
                   'Enter simple'
               }
@@ -157,8 +156,8 @@ export default class InputEditor extends Component {
               {
                 this.translate
                   ?
-                  this.translate('expression') || 'expression'
-                  + this.translate('or') || 'or'
+                  this.translate('expression')
+                  + this.translate('or')
                   :
                   'expression or'
               }
@@ -168,7 +167,7 @@ export default class InputEditor extends Component {
                 {
                   this.translate
                     ?
-                    this.translate('change to script') || 'change to script'
+                    this.translate('change to script')
                     :
                     'change to script'
                 }
@@ -183,7 +182,7 @@ export default class InputEditor extends Component {
               {
                 this.translate
                   ?
-                  this.translate('Enter script') || 'Enter script.'
+                  this.translate('Enter script')
                   :
                   'Enter script.'
               }
@@ -198,7 +197,7 @@ export default class InputEditor extends Component {
                 {
                   this.translate
                     ?
-                    this.translate('Expression Language') || 'Expression Language'
+                    this.translate('Expression Language')
                     :
                     'Expression Language'
                 }
@@ -218,7 +217,7 @@ export default class InputEditor extends Component {
             {
               this.translate
                 ?
-                this.translate('Input Variable') || 'Input Variable'
+                this.translate('Input Variable')
                 :
                 'Input Variable'
             }

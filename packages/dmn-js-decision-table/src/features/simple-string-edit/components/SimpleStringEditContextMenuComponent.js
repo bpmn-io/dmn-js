@@ -287,7 +287,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
       <div class="simple-string-edit context-menu-container">
 
         <h3 class="dms-heading">
-          { this._translate('Edit String') || 'Edit String' }
+          { this._translate('Edit String') }
         </h3>
 
         {
@@ -310,10 +310,10 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         {
           isInputClause
             ? <h4 className="dms-heading">
-              { this._translate('Add Values') || 'Add Values' }
+              { this._translate('Add Values') }
             </h4>
             : <h4 className="dms-heading">
-              { this._translate('Set Value') || 'Set Value' }
+              { this._translate('Set Value') }
             </h4>
         }
 
@@ -337,8 +337,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
             type="text"
             validate={ value => {
               if (!parseString(value)) {
-                return `${ this._translate('Strings must be in double quotes')
-                || 'Strings must be in double quotes.'}`;
+                return `${ this._translate('Strings must be in double quotes.') }`;
               }
             } }
             value={ inputValue } />

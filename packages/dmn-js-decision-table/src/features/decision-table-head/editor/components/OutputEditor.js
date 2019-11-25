@@ -19,6 +19,11 @@ export default class OutputEditor extends Component {
 
       this.handleChange({ label });
     };
+
+    const { injector } = context;
+    if (injector) {
+      this.translate = this.translate ? this.translate : injector.get('translate');
+    }
   }
 
 
@@ -37,11 +42,6 @@ export default class OutputEditor extends Component {
       label
     } = this.props;
 
-    const { injector } = this.context;
-    if (injector) {
-      this.translate = this.translate ? this.translate : injector.get('translate');
-    }
-
     return (
       <div className="dms-container ref-output-editor">
         <p className="dms-fill-row">
@@ -49,7 +49,7 @@ export default class OutputEditor extends Component {
             {
               this.translate
                 ?
-                this.translate('Output Label') || 'Output Label'
+                this.translate('Output Label')
                 :
                 'Output Label'
             }
@@ -66,7 +66,7 @@ export default class OutputEditor extends Component {
             {
               this.translate
                 ?
-                this.translate('Output Name') || 'Output Name'
+                this.translate('Output Name')
                 :
                 'Output Name'
             }

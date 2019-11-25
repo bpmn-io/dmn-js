@@ -127,11 +127,11 @@ export default class Description {
               {
                 isString(description)
                   ?
-                  `${this._translate('Remove') || 'Remove'}`
+                  this._translate('Remove')
                   :
-                  `${this._translate('Add') || 'Add'}`
+                  this._translate('Add')
               }
-              { this._translate('Description') || 'Description' }
+              { this._translate('Description') }
             </div>
           );
         }

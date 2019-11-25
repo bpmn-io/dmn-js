@@ -24,7 +24,7 @@ export default class CreateInputsHeaderCell extends Component {
         onClick={ this.onClick }
         rowspan="3"
         title="Add Input">
-        { this._translate('Input') || 'Input' } <span
+        { this._translate('Input') } <span
           className="add-input dmn-icon-plus action-icon"
           title="Add Input"
         ></span>

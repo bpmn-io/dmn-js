@@ -68,7 +68,7 @@ export default class TypeRefCellContextMenu extends Component {
     return (
       <div className="type-ref-edit context-menu-container">
         <label className="dms-label">
-          { this._translate('Type') || 'Type' }:
+          { this._translate('Type') }:
         </label>
 
         <InputSelect

@@ -53,7 +53,7 @@ export default class ExpressionLanguage {
             className="context-menu-group-entry context-menu-entry-set-expression-language">
             <div>
               <span className="context-menu-group-entry-icon dmn-icon-file-code"></span>
-              { this._translate('Expression Language') || 'Expression Language' }
+              { this._translate('Expression Language') }
             </div>
 
             <InputSelect
