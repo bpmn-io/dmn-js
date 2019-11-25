@@ -3,10 +3,9 @@ import EditorActions from '../editor-actions';
 import TableContextMenu from 'table-js/lib/features/context-menu';
 import ModelingRules from '../rules';
 import ContextMenuCloseBehavior from './ContextMenuCloseBehavior';
-import Translate from 'diagram-js/lib/i18n/translate';
 
 export default {
-  __depends__: [ EditorActions, TableContextMenu, ModelingRules, Translate ],
+  __depends__: [ EditorActions, TableContextMenu, ModelingRules, 'translate' ],
   __init__: [ 'decisionTableContextMenu', 'contextMenuCloseBehavior' ],
   decisionTableContextMenu: [ 'type', ContextMenu ],
   contextMenuCloseBehavior: [ 'type', ContextMenuCloseBehavior ]

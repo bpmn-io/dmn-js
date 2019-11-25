@@ -18,7 +18,6 @@ import decisoinRulesModule from './features/decision-rules';
 import hitPolicyModule from './features/hit-policy';
 import viewDrdModule from './features/view-drd';
 import PoweredByModule from './features/powered-by';
-import translateModule from 'diagram-js/lib/i18n/translate';
 
 
 export default class Viewer extends Table {
@@ -192,8 +191,7 @@ export default class Viewer extends Table {
       decisionRuleIndicesModule,
       decisoinRulesModule,
       hitPolicyModule,
-      viewDrdModule,
-      translateModule
+      viewDrdModule
     ];
   }
 
