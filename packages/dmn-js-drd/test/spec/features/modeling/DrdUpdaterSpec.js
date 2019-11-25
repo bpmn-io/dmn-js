@@ -157,59 +157,89 @@ describe('features/modeling - DrdUpdater', function() {
 
     describe('move edge to new target on reconnect connection', function() {
 
-      var decision,
-          decisionBo,
-          edge;
+      describe('decision', function() {
 
-      beforeEach(inject(function(elementRegistry, modeling) {
+        var decision,
+            decisionBo,
+            edge;
 
-        // given
-        decision = elementRegistry.get('Decision_2');
+        beforeEach(inject(function(elementRegistry, modeling) {
 
-        decisionBo = decision.businessObject;
+          // given
+          decision = elementRegistry.get('Decision_2');
 
-        edge = getEdge(decisionBo);
+          decisionBo = decision.businessObject;
 
-        var connection = decision.incoming[ 0 ];
+          edge = getEdge(decisionBo);
 
-        // when
-        modeling.reconnect(
-          connection,
-          connection.source,
-          elementRegistry.get('Decision_3'),
-          getMid(elementRegistry.get('Decision_3'))
-        );
-      }));
+          var connection = decision.incoming[ 0 ];
+
+          // when
+          modeling.reconnect(
+            connection,
+            connection.source,
+            elementRegistry.get('Decision_3'),
+            getMid(elementRegistry.get('Decision_3'))
+          );
+        }));
 
 
-      it('<do>', function() {
+        it('<do>', function() {
 
-        // then
-        expect(getEdge(decisionBo)).not.to.exist;
+          // then
+          expect(getEdge(decisionBo)).not.to.exist;
+        });
+
+
+        it('<undo>', inject(function(commandStack) {
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(getEdge(decisionBo)).to.equal(edge);
+        }));
+
+
+        it('<redo>', inject(function(commandStack) {
+
+          // given
+          commandStack.undo();
+
+          // when
+          commandStack.redo();
+
+          // then
+          expect(getEdge(decisionBo)).not.to.exist;
+        }));
+
       });
 
 
-      it('<undo>', inject(function(commandStack) {
+      it('should NOT move edge to text annotation', inject(
+        function(elementRegistry, modeling) {
 
-        // when
-        commandStack.undo();
+          // given
+          var decision = elementRegistry.get('Decision_2'),
+              decisionBo = decision.businessObject,
+              textAnnotation = elementRegistry.get('TextAnnotation_1'),
+              textAnnotationBo = textAnnotation.businessObject;
 
-        // then
-        expect(getEdge(decisionBo)).to.equal(edge);
-      }));
+          var connection = decision.incoming[ 0 ];
 
+          // when
+          modeling.reconnect(
+            connection,
+            connection.source,
+            textAnnotation,
+            getMid(textAnnotation)
+          );
 
-      it('<redo>', inject(function(commandStack) {
-
-        // given
-        commandStack.undo();
-
-        // when
-        commandStack.redo();
-
-        // then
-        expect(getEdge(decisionBo)).not.to.exist;
-      }));
+          // then
+          expect(getEdge(decisionBo)).to.not.exist;
+          expect(getEdge(textAnnotationBo)).to.not.exist;
+        })
+      );
 
     });
 
