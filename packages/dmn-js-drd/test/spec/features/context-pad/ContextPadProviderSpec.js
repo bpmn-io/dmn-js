@@ -20,6 +20,10 @@ import modelingModule from 'src/features/modeling';
 import createModule from 'diagram-js/lib/features/create';
 import customRulesModule from '../../../util/custom-rules';
 
+import {
+  createCanvasEvent as canvasEvent
+} from '../../../util/MockEvents';
+
 
 describe('features - context-pad', function() {
 
@@ -260,6 +264,7 @@ describe('features - context-pad', function() {
 
   });
 
+
   describe('replace', function() {
 
     var diagramXML = require('./ContextPad.dmn');
@@ -329,9 +334,55 @@ describe('features - context-pad', function() {
 
   });
 
+
+  describe('append', function() {
+
+    var diagramXML = require('./ContextPad.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+
+    it('should append decision', inject(function(dragging, contextPad, elementRegistry) {
+
+      // given
+      var decision = elementRegistry.get('guestCount');
+
+      var decisionTargets = decision.outgoing.length;
+
+      // when
+      contextPad.open(decision);
+
+      contextPad.trigger('dragstart', padEvent('append.decision'));
+
+      dragging.move(canvasEvent({ x: decision.x, y: decision.y }));
+      dragging.hover({ element: decision.parent });
+      dragging.move(canvasEvent({ x: decision.x - 100, y: decision.y - 90 }));
+      dragging.end();
+
+      // then
+      expect(decision.outgoing).to.have.length(decisionTargets + 1);
+    }));
+
+  });
+
 });
 
 
 function padEntry(element, name) {
   return domQuery('[data-action="' + name + '"]', element);
+}
+
+function padEvent(entry) {
+
+  return getDrdJS().invoke(function(overlays) {
+
+    var target = padEntry(overlays._overlayRoot, entry);
+
+    return {
+      target: target,
+      preventDefault: function() {},
+      clientX: 100,
+      clientY: 100
+    };
+  });
 }
