@@ -6,6 +6,15 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.2.1
+
+* `FIX(drd)`: fix serialization of `biodi:Waypoint` elements ([#437](https://github.com/bpmn-io/dmn-js/pull/437))
+* `FIX(drd)`: allow connections to be moved with DMN elements ([#438](https://github.com/bpmn-io/dmn-js/pull/438))
+* `FIX(drd)`: do not move `biodi:Edge` elements to text annotation targets ([#436](https://github.com/bpmn-io/dmn-js/pull/436))
+* `FIX(drd)`: replace connection on reconnect ([#436](https://github.com/bpmn-io/dmn-js/pull/436))
+* `FIX(drd)`: correct append behavior ([#439](https://github.com/bpmn-io/dmn-js/pull/439))
+* `CHORE`: bump to `diagram-js@6.0.2`
+
 ## 7.2.0
 
 * `FEAT(drd)`: inverse allow inverse connections
