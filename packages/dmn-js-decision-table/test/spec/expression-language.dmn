@@ -26,13 +26,13 @@
         <inputEntry id="inputEntry1" expressionLanguage="javascript">
           <text><![CDATA["bronze"]]></text>
         </inputEntry>
-        <inputEntry id="inputEntry2">
+        <inputEntry id="inputEntry2" expressionLanguage="feel">
           <text></text>
         </inputEntry>
         <outputEntry id="outputEntry1" expressionLanguage="javascript">
           <text><![CDATA["notok"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry2">
+        <outputEntry id="outputEntry2" expressionLanguage="juel">
           <text><![CDATA["work on your status first, as bronze you're not going to get anything"]]></text>
         </outputEntry>
       </rule>

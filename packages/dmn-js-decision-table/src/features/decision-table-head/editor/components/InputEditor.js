@@ -1,17 +1,15 @@
 import { Component } from 'inferno';
 
-import { isString } from 'min-dash';
-
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
-
-const DEFAULT_EXPRESSION_LANGUAGE = 'JUEL';
 
 export default class InputEditor extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    const defaultExpressionLanguage = props.defaultExpressionLanguage.value;
 
     this.setExpressionLanguage = (expressionLanguage) => {
       this.handleChange({ expressionLanguage });
@@ -21,7 +19,7 @@ export default class InputEditor extends Component {
       event.preventDefault();
       event.stopPropagation();
 
-      this.setExpressionLanguage(DEFAULT_EXPRESSION_LANGUAGE);
+      this.setExpressionLanguage(defaultExpressionLanguage);
     };
 
     this.handleValue = (text) => {
@@ -31,10 +29,10 @@ export default class InputEditor extends Component {
       let change = { text };
 
       if (isMultiLine(text) && !expressionLanguage) {
-        change.expressionLanguage = DEFAULT_EXPRESSION_LANGUAGE;
+        change.expressionLanguage = defaultExpressionLanguage;
       }
 
-      if (!isMultiLine(text) && expressionLanguage === DEFAULT_EXPRESSION_LANGUAGE) {
+      if (!isMultiLine(text) && expressionLanguage === defaultExpressionLanguage) {
         change.expressionLanguage = undefined;
       }
 
@@ -73,22 +71,15 @@ export default class InputEditor extends Component {
   render() {
 
     const {
+      defaultExpressionLanguage,
       expressionLanguage,
+      expressionLanguages,
       inputVariable,
       label,
       text
     } = this.props;
 
-    var editScript = expressionLanguage || isMultiLine(text);
-
-    var languageOptions = [
-      !isMultiLine(text) && '',
-      'FEEL',
-      'JUEL',
-      'JavaScript',
-      'Groovy',
-      'Python'
-    ].filter(isString).map(o => ({ label: o, value: o }));
+    const editScript = expressionLanguage || isMultiLine(text);
 
     return (
       <div className="dms-container ref-input-editor">
@@ -123,7 +114,7 @@ export default class InputEditor extends Component {
         {
           !editScript && (
             <p className="dms-hint">
-              Enter simple <code>{ DEFAULT_EXPRESSION_LANGUAGE }</code> expression
+              Enter simple <code>{ defaultExpressionLanguage.label }</code> expression
               or <button type="button"
                 className="ref-make-script"
                 onClick={ this.makeScript }>
@@ -150,7 +141,7 @@ export default class InputEditor extends Component {
                 className="ref-language"
                 value={ expressionLanguage || '' }
                 onChange={ this.handleLanguageChange }
-                options={ languageOptions } />
+                options={ expressionLanguages } />
             </p>
           )
         }

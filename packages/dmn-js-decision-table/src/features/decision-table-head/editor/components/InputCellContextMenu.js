@@ -17,6 +17,8 @@ export default class InputCellContextMenu extends Component {
     inject(this);
 
     this.persistChanges = this.debounceInput(this.persistChanges);
+
+    this._expressionLanguages = context.injector.get('expressionLanguages');
   }
 
   persistChanges = () => {
@@ -80,10 +82,15 @@ export default class InputCellContextMenu extends Component {
   }
 
   render() {
+    const defaultLanguage = this._expressionLanguages.getDefault('inputHeadCell'),
+          expressionLanguages = this._expressionLanguages.getAll();
+
     return (
       <div className="context-menu-container input-edit">
         <InputEditor
           expressionLanguage={ this.getValue('expressionLanguage') }
+          expressionLanguages={ expressionLanguages }
+          defaultExpressionLanguage={ defaultLanguage }
           inputVariable={ this.getValue('inputVariable') }
           label={ this.getValue('label') }
           text={ this.getValue('text') }
@@ -95,7 +102,8 @@ export default class InputCellContextMenu extends Component {
 
 InputCellContextMenu.$inject = [
   'debounceInput',
-  'modeling'
+  'modeling',
+  'injector'
 ];
 
 

@@ -111,7 +111,7 @@ describe('decision-table-head/editor - input', function() {
 
       // then
       expect(inputBo.inputExpression.text).to.equal('foo\nbar');
-      expect(inputBo.inputExpression.expressionLanguage).to.equal('JUEL');
+      expect(inputBo.inputExpression.expressionLanguage).to.equal('juel');
     }));
 
 
@@ -126,7 +126,7 @@ describe('decision-table-head/editor - input', function() {
       triggerClick(makeScriptEl);
 
       // then
-      expect(inputBo.inputExpression.expressionLanguage).to.equal('JUEL');
+      expect(inputBo.inputExpression.expressionLanguage).to.equal('juel');
     }));
 
   });

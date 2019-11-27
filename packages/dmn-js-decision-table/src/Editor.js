@@ -12,6 +12,7 @@ import decisionTableHeadEditorModule from './features/decision-table-head/editor
 import dragAndDropModule from './features/drag-and-drop';
 import descriptionModule from './features/description';
 import expressionLanguageModule from './features/expression-language';
+import expressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
 import tableHeadEditorModule from './features/decision-table-head/editor';
 import tablePropertiesEditorModule from './features/decision-table-properties/editor';
 import editorActionsModule from 'table-js/lib/features/editor-actions';
@@ -53,6 +54,7 @@ export default class Editor extends Viewer {
       dragAndDropModule,
       descriptionModule,
       expressionLanguageModule,
+      expressionLanguagesModule,
       keyboardModule,
       tableHeadEditorModule,
       tablePropertiesEditorModule,

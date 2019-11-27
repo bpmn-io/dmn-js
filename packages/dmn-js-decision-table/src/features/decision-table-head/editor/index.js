@@ -1,5 +1,6 @@
 import ContextMenu from 'table-js/lib/features/context-menu';
 import DebounceInput from 'dmn-js-shared/lib/features/debounce-input';
+import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
 
 import OutputEditingProvider from './OutputEditingProvider';
 import InputEditingProvider from './InputEditingProvider';
@@ -15,6 +16,7 @@ export default {
     AllowedValuesEditing,
     ContextMenu,
     DebounceInput,
+    ExpressionLanguagesModule,
     TypeRefEditing
   ],
   __init__: [
