@@ -8,7 +8,6 @@ import {
   ComponentWithSlots
 } from 'dmn-js-shared/lib/components/mixins';
 
-const DEFAULT_EXPRESSION_LANGUAGE = 'JUEL';
 
 export default class InputCell extends Component {
 
@@ -38,6 +37,13 @@ export default class InputCell extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
+  }
+
+  isDefaultExpressionLanguage(expressionLanguage) {
+    const expressionLanguages = this.context.injector.get('expressionLanguages');
+    const defaultExpressionLanguage = expressionLanguages.getDefault('inputCell').value;
+
+    return expressionLanguage === defaultExpressionLanguage;
   }
 
   componentWillMount() {
@@ -79,7 +85,7 @@ export default class InputCell extends Component {
 
     var showLanguageBadge = !label &&
       expressionLanguage &&
-      expressionLanguage !== DEFAULT_EXPRESSION_LANGUAGE;
+      this.isDefaultExpressionLanguage(expressionLanguage);
 
     return (
       <th

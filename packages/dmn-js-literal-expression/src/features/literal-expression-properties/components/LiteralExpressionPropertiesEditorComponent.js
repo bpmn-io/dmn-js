@@ -3,26 +3,6 @@ import { Component } from 'inferno';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
-const EXPRESSION_LANGUAGE_OPTIONS = [{
-  label: 'FEEL',
-  value: 'feel'
-}, {
-  label: 'JUEL',
-  value: 'juel'
-}, {
-  label: 'JavaScript',
-  value: 'javascript'
-}, {
-  label: 'Groovy',
-  value: 'groovy'
-}, {
-  label: 'Python',
-  value: 'python'
-}, {
-  label: 'JRuby',
-  value: 'jruby'
-}];
-
 const TYPE_REF_OPTIONS = [{
   label: 'string',
   value: 'string'
@@ -50,6 +30,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
+    this._expressionLanguages = context.injector.get('expressionLanguages');
 
     const decision = this._viewer.getDecision();
 
@@ -105,7 +86,9 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 
   render() {
-    let { expressionLanguage, name, typeRef } = this.state;
+    const { expressionLanguage, name, typeRef } = this.state;
+
+    const languageOptions = this._expressionLanguages.getAll();
 
     return (
       <div className="literal-expression-properties">
@@ -138,7 +121,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
               <div className="dms-fill-row">
                 <InputSelect
                   onChange={ this.setExpressionLanguage }
-                  options={ EXPRESSION_LANGUAGE_OPTIONS }
+                  options={ languageOptions }
                   value={ expressionLanguage }
                   className="expression-language-select dms-block" />
               </div>

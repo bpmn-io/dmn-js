@@ -5,6 +5,8 @@ import {
   triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
 
+import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
+
 import {
   query as domQuery
 } from 'min-dom';
@@ -26,6 +28,7 @@ describe('literal expression properties editor', function() {
     modules: [
       CoreModule,
       LiteralExpressionPropertiesEditorModule,
+      ExpressionLanguagesModule,
       ModelingModule
     ],
     debounceInput: false

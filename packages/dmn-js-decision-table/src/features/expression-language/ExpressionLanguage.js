@@ -4,28 +4,9 @@ import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
 
-const INPUT_EXPRESSION_LANGUAGE_OPTIONS = [{
-  label: 'FEEL',
-  value: 'feel'
-}, {
-  label: 'JUEL',
-  value: 'juel'
-}, {
-  label: 'JavaScript',
-  value: 'javascript'
-}, {
-  label: 'Groovy',
-  value: 'groovy'
-}, {
-  label: 'Python',
-  value: 'python'
-}, {
-  label: 'JRuby',
-  value: 'jruby'
-}];
 
 export default class ExpressionLanguage {
-  constructor(components, elementRegistry, modeling) {
+  constructor(components, elementRegistry, modeling, expressionLanguages) {
     this._modeling = modeling;
 
     components.onGetComponent('context-menu-cell-additional', (context = {}) => {
@@ -45,7 +26,9 @@ export default class ExpressionLanguage {
         }
 
         const expressionLanguage = element.businessObject.expressionLanguage
-          || (isInput(element.col) ? 'feel' : 'juel');
+          || expressionLanguages.getDefault(isInput(element.col) ? 'inputCell' : 'outputCell').value;
+
+        const options = expressionLanguages.getAll();
 
         return (
           <div
@@ -58,7 +41,7 @@ export default class ExpressionLanguage {
             <InputSelect
               className="expression-language"
               onChange={ value => this.onChange(element, value) }
-              options={ INPUT_EXPRESSION_LANGUAGE_OPTIONS }
+              options={ options }
               value={ expressionLanguage } />
 
           </div>
@@ -73,4 +56,4 @@ export default class ExpressionLanguage {
   }
 }
 
-ExpressionLanguage.$inject = [ 'components', 'elementRegistry', 'modeling' ];
+ExpressionLanguage.$inject = [ 'components', 'elementRegistry', 'modeling', 'expressionLanguages' ];
