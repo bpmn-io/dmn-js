@@ -23,10 +23,10 @@
       <output id="output2" label="Reason" name="reason" typeRef="string" />
       <rule id="rule1">
         <description>Bronze is really not that good</description>
-        <inputEntry id="inputEntry1" expressionLanguage="javascript">
+        <inputEntry id="inputEntry1" expressionLanguage="jruby">
           <text><![CDATA["bronze"]]></text>
         </inputEntry>
-        <inputEntry id="inputEntry2" expressionLanguage="feel">
+        <inputEntry id="inputEntry2">
           <text></text>
         </inputEntry>
         <outputEntry id="outputEntry1" expressionLanguage="javascript">
