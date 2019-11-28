@@ -37,8 +37,10 @@ describe('ExpressionLanguages', function() {
       const defaultLanguage = expressionLanguages.getDefault('editor');
 
       // then
-      expect(defaultLanguage).to.have.property('value', 'juel');
-      expect(defaultLanguage).to.have.property('label', 'JUEL');
+      expect(defaultLanguage).to.eql({
+        value: 'juel',
+        label: 'JUEL'
+      });
     });
 
 
@@ -51,8 +53,10 @@ describe('ExpressionLanguages', function() {
       const defaultLanguage = expressionLanguages.getDefault('inputCell');
 
       // then
-      expect(defaultLanguage).to.have.property('value', 'feel');
-      expect(defaultLanguage).to.have.property('label', 'FEEL');
+      expect(defaultLanguage).to.eql({
+        value: 'feel',
+        label: 'FEEL'
+      });
     });
 
 
@@ -73,10 +77,14 @@ describe('ExpressionLanguages', function() {
       const inputCellDefault = expressionLanguages.getDefault('inputCell');
 
       // then
-      expect(editorDefault).to.have.property('value', 'javascript');
-      expect(editorDefault).to.have.property('label', 'JavaScript');
-      expect(inputCellDefault).to.have.property('value', 'jruby');
-      expect(inputCellDefault).to.have.property('label', 'JRuby');
+      expect(inputCellDefault).to.eql({
+        value: 'jruby',
+        label: 'JRuby'
+      });
+      expect(editorDefault).to.eql({
+        value: 'javascript',
+        label: 'JavaScript'
+      });
     });
 
 
@@ -93,11 +101,14 @@ describe('ExpressionLanguages', function() {
       const outputCellDefault = expressionLanguages.getDefault('outputCell');
 
       // then
-      expect(inputCellDefault).to.have.property('value', 'jruby');
-      expect(inputCellDefault).to.have.property('label', 'JRuby');
-      expect(outputCellDefault).to.have.property('value', 'javascript');
-      expect(outputCellDefault).to.have.property('label', 'JavaScript');
-
+      expect(inputCellDefault).to.eql({
+        value: 'jruby',
+        label: 'JRuby'
+      });
+      expect(outputCellDefault).to.eql({
+        value: 'javascript',
+        label: 'JavaScript'
+      });
     });
   });
 

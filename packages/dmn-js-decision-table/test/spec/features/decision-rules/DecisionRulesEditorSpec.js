@@ -186,10 +186,10 @@ describe('features/decision-rules', function() {
 
       describe('on input', function() {
 
-        it('should not default', function() {
+        it('should not display default', function() {
 
           // given
-          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+          const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
           // then
           expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
@@ -199,7 +199,7 @@ describe('features/decision-rules', function() {
         it('should display non-default', function() {
 
           // given
-          const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
           // then
           expect(domQuery('.dmn-expression-language', cell)).to.exist;
@@ -209,9 +209,9 @@ describe('features/decision-rules', function() {
         it('should not display if focussed', function() {
 
           // given
-          const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
 
-          const editor = queryEditor('[data-element-id="inputEntry2"]', testContainer);
+          const editor = queryEditor('[data-element-id="inputEntry1"]', testContainer);
 
           // when
           editor.focus();
