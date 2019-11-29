@@ -71,16 +71,18 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       separator: true
     },
     'create.decision': createAction(
-      'dmn:Decision', 'drd', 'dmn-icon-decision'
+      'dmn:Decision', 'drd', 'dmn-icon-decision', translate('Create Decision')
     ),
     'create.input-data': createAction(
-      'dmn:InputData', 'drd', 'dmn-icon-input-data'
+      'dmn:InputData', 'drd', 'dmn-icon-input-data', translate('Create Input Data')
     ),
     'create.knowledge-source': createAction(
-      'dmn:KnowledgeSource', 'drd', 'dmn-icon-knowledge-source'
+      'dmn:KnowledgeSource', 'drd', 'dmn-icon-knowledge-source',
+      translate('Create Knowledge Source')
     ),
     'create.business-knowledge-model': createAction(
-      'dmn:BusinessKnowledgeModel', 'drd', 'dmn-icon-business-knowledge'
+      'dmn:BusinessKnowledgeModel', 'drd', 'dmn-icon-business-knowledge',
+      translate('Create Knowledge Model')
     )
   });
 
