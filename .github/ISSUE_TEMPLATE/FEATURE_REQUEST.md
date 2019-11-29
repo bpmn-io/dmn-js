@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea or general improvement.
-labels: [ "enhancement" ]
+labels: "enhancement"
 ---
 
 

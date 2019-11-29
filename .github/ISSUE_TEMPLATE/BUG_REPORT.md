@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Report a problem and help us fix it.
-labels: [ "bug" ]
+labels: "bug"
 ---
 
 
