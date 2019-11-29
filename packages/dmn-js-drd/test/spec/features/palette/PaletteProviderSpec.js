@@ -32,4 +32,18 @@ describe('features/palette', function() {
     expect(entries.length).to.equal(5);
   }));
 
+
+  it('should provide title for each palette entry', inject(function(canvas) {
+
+    // when
+    var paletteElement = domQuery('.djs-palette', canvas._container);
+    var entries = domQueryAll('.entry', paletteElement);
+
+    // then
+    entries.forEach(function(entry) {
+      expect(entry).to.have.property('title');
+      expect(entry.title).to.have.lengthOf.above(0);
+    });
+  }));
+
 });
