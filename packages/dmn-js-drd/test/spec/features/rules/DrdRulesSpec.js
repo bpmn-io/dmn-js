@@ -7,17 +7,52 @@ import {
 import coreModule from 'src/core';
 import modelingModule from 'src/features/modeling';
 
+var testModules = [ coreModule, modelingModule ];
+
 
 describe('features/rules', function() {
 
-  var diagramXML = require('./drd-rules.dmn');
+  describe('move', function() {
 
-  var testModules = [ coreModule, modelingModule ];
+    var diagramXML = require('./DrdRules.grouped.dmn');
 
-  beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+    beforeEach(bootstrapModeler(diagramXML, {
+      modules: testModules
+    }));
+
+
+    Array.prototype.forEach.call('ABCDEFGHIJ', function(group) {
+
+      it('should move Group <' + group + '>', inject(
+        function(elementRegistry, drdRules) {
+
+          // given
+          var shape_1 = elementRegistry.get(group + '1');
+          var shape_2 = elementRegistry.get(group + '2');
+
+          var connection = shape_1.incoming[0] || shape_1.outgoing[0];
+
+          var parent = shape_1.parent;
+
+          // when
+          var allowed = drdRules.canMove([ shape_1, shape_2, connection ], parent);
+
+          // then
+          expect(allowed).to.be.true;
+        }
+      ));
+
+    });
+
+  });
 
 
   describe('connect', function() {
+
+    var diagramXML = require('./drd-rules.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
 
     it('self', expectCanConnect(
       'Decision_1',
@@ -141,6 +176,11 @@ describe('features/rules', function() {
 
 
   describe('create', function() {
+
+    var diagramXML = require('./drd-rules.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
 
     it('decision -> definitions', inject(
       function(drdRules, elementFactory, elementRegistry) {

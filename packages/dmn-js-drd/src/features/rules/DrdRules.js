@@ -161,7 +161,11 @@ function canMove(elements, target) {
       'dmn:Decision',
       'dmn:InputData',
       'dmn:KnowledgeSource',
-      'dmn:TextAnnotation'
+      'dmn:TextAnnotation',
+      'dmn:InformationRequirement',
+      'dmn:AuthorityRequirement',
+      'dmn:KnowledgeRequirement',
+      'dmn:Association'
     ]);
   }) && is(target, 'dmn:Definitions')) {
     return true;

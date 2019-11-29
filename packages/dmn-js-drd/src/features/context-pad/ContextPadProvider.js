@@ -136,7 +136,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     function appendListener(event, element) {
 
       var shape = elementFactory.createShape(assign({ type: type }, options));
-      create.start(event, shape, element);
+
+      create.start(event, shape, {
+        source: element
+      });
     }
 
     return {
