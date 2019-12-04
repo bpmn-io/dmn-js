@@ -101,6 +101,7 @@ import KeyboardMoveModule from 'diagram-js/lib/navigation/keyboard-move';
 import KeyboardMoveSelectionModule from 'diagram-js/lib/features/keyboard-move-selection';
 import LabelEditingModule from './features/label-editing';
 import ModelingModule from './features/modeling';
+import MouseModule from 'diagram-js/lib/features/mouse';
 import MoveModule from 'diagram-js/lib/features/move';
 import PaletteModule from './features/palette';
 
@@ -118,6 +119,7 @@ Modeler.prototype._modelingModules = [
   KeyboardMoveSelectionModule,
   LabelEditingModule,
   ModelingModule,
+  MouseModule,
   MoveModule,
   PaletteModule
 ];

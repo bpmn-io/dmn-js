@@ -465,3 +465,62 @@
 }
 
 /* end cell description */
+
+/* extract decision table */
+
+.extract-decision-table {
+  float: right;
+  margin-right: 10px;
+}
+
+.button {
+  background: #fff;
+  padding: 8px;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #444;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.button.primary {
+  border-color: #52b415;
+  color: #52b415;
+}
+
+.button.disabled {
+  border-color: #CCC;
+  color: #444;
+  opacity: 0.5;
+}
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.extract-decision-table-modal {
+  z-index: 100000;
+  background: #fff;
+  border: solid 1px #CCC;
+  border-radius: 2px;
+  font-size: 14px;
+  color: #444;
+  z-index: 10;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.extract-decision-table-modal .columns {
+  list-style-type: none;
+  padding: 0;
+}
+
+.extract-decision-table-modal .columns .column.disabled {
+  opacity: 0.5;
+}

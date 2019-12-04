@@ -24,7 +24,7 @@ describe('Modeler', function() {
   }
 
 
-  it('should import simple DRD', function(done) {
+  it.only('should import simple DRD', function(done) {
     createModeler(exampleXML, done);
   });
 

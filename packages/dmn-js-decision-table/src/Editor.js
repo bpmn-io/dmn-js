@@ -12,6 +12,8 @@ import decisionTableHeadEditorModule from './features/decision-table-head/editor
 import dragAndDropModule from './features/drag-and-drop';
 import descriptionModule from './features/description';
 import expressionLanguageModule from './features/expression-language';
+import extractDecisionTableModule from './features/extract-decision-table';
+import mouseModule from 'diagram-js/lib/features/mouse';
 import tableHeadEditorModule from './features/decision-table-head/editor';
 import tablePropertiesEditorModule from './features/decision-table-properties/editor';
 import editorActionsModule from 'table-js/lib/features/editor-actions';
@@ -53,7 +55,9 @@ export default class Editor extends Viewer {
       dragAndDropModule,
       descriptionModule,
       expressionLanguageModule,
+      extractDecisionTableModule,
       keyboardModule,
+      mouseModule,
       tableHeadEditorModule,
       tablePropertiesEditorModule,
       editorActionsModule,

@@ -11,7 +11,7 @@ insertCSS('dmn-js-decision-table.css',
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
 insertCSS('dmn-js-testing.css',
-  '.test-container { height: 500px; }'
+  'html, body, .test-container { height: 100%; margin: 0; overflow: hidden; }'
 );
 
 
@@ -40,15 +40,15 @@ describe('Modeler', function() {
     });
   });
 
-  afterEach(function() {
-    if (editor) {
-      editor.destroy();
+  // afterEach(function() {
+  //   if (editor) {
+  //     editor.destroy();
 
-      editor = null;
-    }
+  //     editor = null;
+  //   }
 
-    document.body.removeChild(container);
-  });
+  //   document.body.removeChild(container);
+  // });
 
 
   it('should open DMN table', function(done) {
@@ -91,7 +91,7 @@ describe('Modeler', function() {
   });
 
 
-  it('should open DRD', function(done) {
+  it.only('should open DRD', function(done) {
 
     editor.importXML(diagram, { open: false }, function(err) {
 
@@ -106,6 +106,12 @@ describe('Modeler', function() {
       expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
       editor.open(drdView, done);
+
+      window.saveXML = () => {
+        editor.saveXML({ format: true }, (err, xml) => {
+          console.log(xml);
+        });
+      };
     });
 
   });

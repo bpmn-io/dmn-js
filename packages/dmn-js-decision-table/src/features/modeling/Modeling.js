@@ -6,6 +6,7 @@ import UpdateAllowedValuesHandler from './cmd/UpdateAllowedValuesHandler';
 import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
 import IdClaimHandler from './cmd/IdClaimHandler';
+import ExtractDecisionTableHandler from './cmd/ExtractDecisionTableHandler';
 
 
 export default class Modeling extends BaseModeling {
@@ -27,7 +28,8 @@ export default class Modeling extends BaseModeling {
     return assign({}, super._getHandlers(), {
       'editAllowedValues': UpdateAllowedValuesHandler,
       'updateProperties': UpdatePropertiesHandler,
-      'id.updateClaim': IdClaimHandler
+      'id.updateClaim': IdClaimHandler,
+      'extractDecisionTable': ExtractDecisionTableHandler
     });
   }
 
@@ -186,6 +188,14 @@ export default class Modeling extends BaseModeling {
     };
 
     this._commandStack.execute('id.updateClaim', context);
+  }
+
+  extractDecisionTable(cols) {
+    const context = {
+      cols
+    };
+
+    this._commandStack.execute('extractDecisionTable', context);
   }
 }
 
