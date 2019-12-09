@@ -1,5 +1,7 @@
 'use strict';
 
+var coverage = process.env.COVERAGE;
+
 // configures browsers to run test against
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE' ]
 var browsers = (
@@ -52,7 +54,13 @@ module.exports = function(path) {
         }
       },
 
-      reporters: [ 'progress' ],
+      reporters: [ 'progress' ].concat(coverage ? 'coverage' : []),
+
+      coverageReporter: {
+        reporters: [
+          { type: 'lcovonly', subdir: '.' },
+        ]
+      },
 
       browsers: browsers,
 
@@ -74,7 +82,18 @@ module.exports = function(path) {
               test: /\.css|\.dmn$/,
               use: 'raw-loader'
             }
-          ]
+          ].concat(coverage ?
+            {
+              test: /\.js$/,
+              use: {
+                loader: 'istanbul-instrumenter-loader',
+                options: { esModules: true }
+              },
+              enforce: 'post',
+              include: /src\.*/,
+              exclude: /node_modules/
+            } : []
+          )
         },
         resolve: {
           mainFields: [

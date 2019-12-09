@@ -7,7 +7,8 @@ jobs:
       addons:
         firefox: 'latest-esr'
       script:
-        - TEST_BROWSERS=Firefox,ChromeHeadless xvfb-run npm run travis
+        - COVERAGE=1 TEST_BROWSERS=Firefox,ChromeHeadless xvfb-run npm run travis
+        - npx codecov
     - stage: update examples
       script: './tasks/stages/update-examples'
 

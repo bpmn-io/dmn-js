@@ -5,3 +5,4 @@ test
 .babelrc
 karma.base.js
 karma.conf.js
+coverage
