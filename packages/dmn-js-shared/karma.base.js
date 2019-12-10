@@ -22,6 +22,7 @@ var browsers = (
     })
 );
 
+const testFile = coverage ? 'test/coverageBundle.js' : 'test/testBundle.js';
 
 module.exports = function(path) {
 
@@ -36,11 +37,11 @@ module.exports = function(path) {
       ],
 
       files: [
-        'test/testBundle.js'
+        testFile
       ],
 
       preprocessors: {
-        'test/testBundle.js': [ 'webpack' ]
+        [testFile]: [ 'webpack' ]
       },
 
       customLaunchers: {

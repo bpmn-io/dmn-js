@@ -1,5 +1,3 @@
-// require all modules ending in "Spec" from the
-// current directory and all subdirectories
-const testsContext = require.context('.', true, /Spec$/);
+const allTests = require.context('.', true, /.*Spec\.js$/);
 
-testsContext.keys().forEach(testsContext);
+allTests.keys().forEach(allTests);
