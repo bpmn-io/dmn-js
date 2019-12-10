@@ -9,3 +9,4 @@ test/*
 .babelrc
 karma.conf.js
 rollup.config.js
+coverage
