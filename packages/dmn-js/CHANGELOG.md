@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.3.0
+
+* `FEAT(decision-table)`: add i18n support ([#446](https://github.com/bpmn-io/dmn-js/pull/446))
+
 ## 7.2.1
 
 * `FIX(drd)`: fix serialization of `biodi:Waypoint` elements ([#437](https://github.com/bpmn-io/dmn-js/pull/437))
