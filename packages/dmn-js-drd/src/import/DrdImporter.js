@@ -7,29 +7,6 @@ import {
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
-function elementData(semantic, attrs) {
-  return assign({
-    id: semantic.id,
-    type: semantic.$type,
-    businessObject: semantic
-  }, attrs);
-}
-
-function getHREF(element) {
-  return element && element.href.slice(1);
-}
-
-function collectWaypoints(edge) {
-  var waypoints = edge.waypoints;
-
-  if (waypoints) {
-    return map(waypoints, function(waypoint) {
-      var position = { x: waypoint.x, y: waypoint.y };
-
-      return assign({ original: position }, position);
-    });
-  }
-}
 
 export default function DrdImporter(
     eventBus,
@@ -51,8 +28,8 @@ DrdImporter.$inject = [
 ];
 
 
-DrdImporter.prototype.root = function(diagram) {
-  var element = this._elementFactory.createRoot(elementData(diagram));
+DrdImporter.prototype.root = function(semantic) {
+  var element = this._elementFactory.createRoot(elementData(semantic));
 
   this._canvas.setRootElement(element);
 
@@ -62,20 +39,22 @@ DrdImporter.prototype.root = function(diagram) {
 /**
  * Add drd element (semantic) to the canvas.
  */
-DrdImporter.prototype.add = function(semantic, di) {
+DrdImporter.prototype.add = function(semantic) {
   var elementFactory = this._elementFactory,
       canvas = this._canvas,
-      eventBus = this._eventBus;
+      eventBus = this._eventBus,
+      di = semantic.di;
 
-  var element, waypoints, sourceShape, targetShape, elementDefinition,
-      sourceID, targetID;
+  var element, waypoints, source, target, elementDefinition, bounds;
 
-  if (di.$instanceOf('biodi:Bounds')) {
+  if (di.$instanceOf('dmndi:DMNShape')) {
+    bounds = di.bounds;
+
     elementDefinition = elementData(semantic, {
-      x: Math.round(di.x),
-      y: Math.round(di.y),
-      width: Math.round(di.width),
-      height: Math.round(di.height)
+      x: Math.round(bounds.x),
+      y: Math.round(bounds.y),
+      width: Math.round(bounds.width),
+      height: Math.round(bounds.height)
     });
 
     element = elementFactory.createShape(elementDefinition);
@@ -84,24 +63,17 @@ DrdImporter.prototype.add = function(semantic, di) {
 
     eventBus.fire('drdElement.added', { element: element, di: di });
 
-  } else if (di.$instanceOf('biodi:Edge')) {
+  } else if (di.$instanceOf('dmndi:DMNEdge')) {
     waypoints = collectWaypoints(di);
 
-    sourceID = di.source;
-    targetID = semantic.$parent.id;
+    source = this._getSource(semantic);
+    target = this._getTarget(semantic);
 
-    if (is(semantic, 'dmn:Association')) {
-      targetID = getHREF(semantic.targetRef);
-    }
-
-    sourceShape = this._getShape(sourceID);
-    targetShape = this._getShape(targetID);
-
-    if (sourceShape && targetShape) {
+    if (source && target) {
       elementDefinition = elementData(semantic, {
         hidden: false,
-        source: sourceShape,
-        target: targetShape,
+        source: source,
+        target: target,
         waypoints: waypoints
       });
 
@@ -119,6 +91,64 @@ DrdImporter.prototype.add = function(semantic, di) {
   return element;
 };
 
+DrdImporter.prototype._getSource = function(semantic) {
+  var href, elementReference;
+
+  if (is(semantic, 'dmn:Association')) {
+    elementReference = semantic.sourceRef;
+  } else if (is(semantic, 'dmn:InformationRequirement')) {
+    elementReference = semantic.requiredDecision || semantic.requiredInput;
+  } else if (is(semantic, 'dmn:KnowledgeRequirement')) {
+    elementReference = semantic.requiredKnowledge;
+  } else if (is(semantic, 'dmn:AuthorityRequirement')) {
+    elementReference = semantic.requiredDecision ||
+      semantic.requiredInput || semantic.requiredAuthority;
+  }
+
+  if (elementReference) {
+    href = elementReference.href;
+  }
+
+  if (href) {
+    return this._getShape(getIdFromHref(href));
+  }
+};
+
+DrdImporter.prototype._getTarget = function(semantic) {
+  if (is(semantic, 'dmn:Association')) {
+    return semantic.targetRef && this._getShape(getIdFromHref(semantic.targetRef.href));
+  }
+
+  return this._getShape(semantic.$parent.id);
+};
+
 DrdImporter.prototype._getShape = function(id) {
   return this._elementRegistry.get(id);
 };
+
+
+
+// helper /////
+function elementData(semantic, attrs) {
+  return assign({
+    id: semantic.id,
+    type: semantic.$type,
+    businessObject: semantic
+  }, attrs);
+}
+
+function collectWaypoints(edge) {
+  var waypoints = edge.waypoint;
+
+  if (waypoints) {
+    return map(waypoints, function(waypoint) {
+      var position = { x: waypoint.x, y: waypoint.y };
+
+      return assign({ original: position }, position);
+    });
+  }
+}
+
+function getIdFromHref(href) {
+  return href.split('#').pop();
+}

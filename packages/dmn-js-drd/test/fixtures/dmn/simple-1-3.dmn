@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="Definitions" namespace="http://www.trisotech.com/definitions/_c3e08836-7973-4e4d-af2b-d46b23725c13" name="Decision Diagram">
+    <inputData name="dateE" id="InputData">
+        <variable typeRef="date" name="dateE"/>
+    </inputData>
+    <decision name="dateCompare" id="Decision">
+        <informationRequirement id="InformationRequirement">
+            <requiredInput href="#InputData"/>
+        </informationRequirement>
+    </decision>
+    <dmndi:DMNDI>
+        <dmndi:DMNDiagram id="Diagram">
+            <dmndi:DMNShape dmnElementRef="InputData" id="InputData_di">
+                <dc:Bounds height="60.0" width="153.0" x="1003.0" y="331.0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape dmnElementRef="Decision" id="Decision_di">
+                <dc:Bounds height="61.0" width="154.0" x="1002.0" y="150.0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNEdge dmnElementRef="InformationRequirement" id="InformationRequirement_di">
+                <di:waypoint x="1079.0" y="331.0"/>
+                <di:waypoint x="1079.0" y="211.0"/>
+            </dmndi:DMNEdge>
+        </dmndi:DMNDiagram>
+    </dmndi:DMNDI>
+</definitions>
