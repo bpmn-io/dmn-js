@@ -4,7 +4,7 @@ import {
   getDmnJS
 } from 'test/TestHelper';
 
-import exampleXML from '../../fixtures/dmn/di.dmn';
+import exampleXML from '../../fixtures/dmn/di-1-3.dmn';
 import multipleDecisionsXML from '../../fixtures/dmn/multiple-decisions.dmn';
 
 import {
@@ -14,15 +14,71 @@ import {
 
 describe('DRD - Import', function() {
 
+  describe('events', function() {
+
+    beforeEach(bootstrapModeler(exampleXML));
+
+
+    it('should fire <import.start> and <import.done>', function(done) {
+
+      // given
+      var dmnJS = getDmnJS(),
+          eventBus = getDrdJS().get('eventBus'),
+          events = [];
+
+      eventBus.on('import.start', function() {
+        events.push('import.start');
+      });
+      eventBus.on('import.done', function() {
+        events.push('import.done');
+      });
+
+      // when
+      dmnJS.importXML(exampleXML, function(error) {
+
+        // then
+        expect(events).to.eql([
+          'import.start',
+          'import.done'
+        ]);
+
+        done(error);
+      });
+    });
+
+
+    it('should fire <drdElement.added>', function(done) {
+
+      // given
+      var dmnJS = getDmnJS(),
+          drdJS = getDrdJS(),
+          eventsCount = 0;
+
+      drdJS.get('eventBus').on('drdElement.added', function(event) {
+        eventsCount++;
+      });
+
+      // when
+      dmnJS.importXML(exampleXML, function(error) {
+
+        // then
+        expect(eventsCount).to.eql(15);
+        done(error);
+      });
+    });
+
+  });
+
+
   describe('should connect', function() {
 
-    function getConnection(sourceType, targetType) {
+    function getConnection(source, target) {
       return getDrdJS().invoke(function(elementRegistry) {
         var match;
 
         elementRegistry.forEach(function(el) {
-          if (el.source && el.source.type === sourceType &&
-             el.target && el.target.type === targetType) {
+          if (el.source && el.source.id === source &&
+             el.target && el.target.id === target) {
             match = el;
           }
         });
@@ -45,18 +101,16 @@ describe('DRD - Import', function() {
 
       // then
       expect(connection.type).to.equal(config.type);
+      expect(connection.waypoints).to.exist;
       expect(connection.waypoints).to.have.length(2);
 
       expect(businessObject.$type).to.equal(config.type);
 
-      if (config.type === 'dmn:Association') {
-        edge = businessObject.extensionElements.values[0];
-      } else {
-        edge = connection.target.businessObject.extensionElements.values[1];
-      }
+      edge = businessObject.di;
 
-      expect(edge.$type).to.equal('biodi:Edge');
-      expect(edge.waypoints).to.have.length(2);
+      expect(edge.$type).to.equal('dmndi:DMNEdge');
+      expect(edge.waypoint).to.exist;
+      expect(edge.waypoint).to.have.length(2);
     }
 
     before(bootstrapModeler(exampleXML));
@@ -64,8 +118,8 @@ describe('DRD - Import', function() {
 
     it('decisions with information requirement', function() {
       expectConnection({
-        source: 'dmn:Decision',
-        target: 'dmn:Decision',
+        source: 'season',
+        target: 'dish',
         type: 'dmn:InformationRequirement'
       });
     });
@@ -73,8 +127,8 @@ describe('DRD - Import', function() {
 
     it('business knowledge model to decision with knowledge requirement', function() {
       expectConnection({
-        source: 'dmn:BusinessKnowledgeModel',
-        target: 'dmn:Decision',
+        source: 'menu',
+        target: 'dish',
         type: 'dmn:KnowledgeRequirement'
       });
     });
@@ -82,8 +136,8 @@ describe('DRD - Import', function() {
 
     it('knowledge source to decision with authority requirement', function() {
       expectConnection({
-        source: 'dmn:KnowledgeSource',
-        target: 'dmn:Decision',
+        source: 'host_ks',
+        target: 'dish',
         type: 'dmn:AuthorityRequirement'
       });
     });
@@ -91,8 +145,8 @@ describe('DRD - Import', function() {
 
     it('input data to decision with information requirement', function() {
       expectConnection({
-        source: 'dmn:InputData',
-        target: 'dmn:Decision',
+        source: 'dayType_id',
+        target: 'guestCount',
         type: 'dmn:InformationRequirement'
       });
     });
@@ -100,8 +154,8 @@ describe('DRD - Import', function() {
 
     it('input data to text annotation with an association', function() {
       expectConnection({
-        source: 'dmn:InputData',
-        target: 'dmn:TextAnnotation',
+        source: 'dayType_id',
+        target: 'TextAnnotation_1t4zaz9',
         type: 'dmn:Association'
       });
     });

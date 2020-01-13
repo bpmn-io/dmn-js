@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="dish-decisions" name="Dish Decisions"
+  namespace="http://www.omg.org/spec/DMN/20180521/dish-example/"
+  xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+  xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"
+  xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/">
+
+  <inputData name="Type of day" id="dayType_id">
+    <variable typeRef="string" name="Type of day" id="dayType_ii"/>
+  </inputData>
+  <inputData name="Weather in Celsius" id="temperature_id">
+    <variable typeRef="integer" name="Weather in Celsius" id="temperature_ii"/>
+  </inputData>
+  <knowledgeSource name="Host" id="host_ks"/>
+  <decision id="dish" name="Dish">
+    <informationRequirement id="season_ir">
+      <requiredDecision href="#season" />
+    </informationRequirement>
+    <informationRequirement id="guestCount_ir">
+      <requiredDecision href="#guestCount" />
+    </informationRequirement>
+    <authorityRequirement id="host_ar">
+      <requiredAuthority href="#host_ks"/>
+    </authorityRequirement>
+    <knowledgeRequirement id="menu_kr">
+      <requiredKnowledge href="#menu" />
+    </knowledgeRequirement>
+  </decision>
+  <decision id="season" name="Season">
+    <informationRequirement id="temperature_ir">
+      <requiredInput href="#temperature_id"/>
+    </informationRequirement>
+  </decision>
+  <decision id="guestCount" name="Guest Count">
+    <informationRequirement id="dayType_ir">
+      <requiredInput href="#dayType_id"/>
+    </informationRequirement>
+  </decision>
+  <textAnnotation id="TextAnnotation_1t4zaz9">
+    <text>foobar</text>
+  </textAnnotation>
+  <association id="Association_1c4jixb">
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#TextAnnotation_1t4zaz9" />
+  </association>
+  <businessKnowledgeModel id="menu" name="El menú" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_di1">
+      <dmndi:DMNShape id="_di2" dmnElementRef="dish">
+        <dc:Bounds x="150" y="10" width="100" height="55" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di3" dmnElementRef="season">
+        <dc:Bounds x="10" y="140" width="140" height="55" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di4" dmnElementRef="guestCount">
+        <dc:Bounds x="230" y="140" width="210" height="55" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di5" dmnElementRef="temperature_id">
+        <dc:Bounds x="5" y="270" width="170" height="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di6" dmnElementRef="dayType_id">
+        <dc:Bounds x="240" y="270" width="200" height="60" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di7" dmnElementRef="host_ks">
+        <dc:Bounds x="495" y="10" width="120" height="75" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="_di8" dmnElementRef="season_ir">
+        <di:waypoint xsi:type="dc:Point" x="80" y="140" />
+        <di:waypoint xsi:type="dc:Point" x="205" y="65" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="_di9" dmnElementRef="guestCount_ir">
+        <di:waypoint xsi:type="dc:Point" x="345" y="140" />
+        <di:waypoint xsi:type="dc:Point" x="205" y="65" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="_di10" dmnElementRef="temperature_ir">
+        <di:waypoint xsi:type="dc:Point" x="80" y="270" />
+        <di:waypoint xsi:type="dc:Point" x="80" y="195" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="_di11" dmnElementRef="dayType_ir">
+        <di:waypoint xsi:type="dc:Point" x="340" y="270" />
+        <di:waypoint xsi:type="dc:Point" x="340" y="195" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="_di12" dmnElementRef="host_ar">
+        <di:waypoint xsi:type="dc:Point" x="495" y="30" />
+        <di:waypoint xsi:type="dc:Point" x="250" y="30" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="TextAnnotation_1t4zaz9_di" dmnElementRef="TextAnnotation_1t4zaz9">
+        <dc:Bounds x="240" y="400" width="125" height="45" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="Association_1c4jixb_di" dmnElementRef="Association_1c4jixb">
+        <di:waypoint xsi:type="dc:Point" x="330" y="330" />
+        <di:waypoint xsi:type="dc:Point" x="300" y="400" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="menu_kr_di" dmnElementRef="menu_kr">
+        <di:waypoint xsi:type="dc:Point" x="110" y="28" />
+        <di:waypoint xsi:type="dc:Point" x="150" y="28" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="menu_di" dmnElementRef="menu">
+        <dc:Bounds x="10" y="10" width="100" height="46" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

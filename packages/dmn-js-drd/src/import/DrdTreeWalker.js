@@ -1,16 +1,16 @@
 import {
-  forEach,
-  find,
-  matchPattern
+  forEach
 } from 'min-dash';
 
-import {
-  is
-} from 'dmn-js-shared/lib/util/ModelUtil';
+import Refs from 'object-refs';
 
-function parseID(element) {
-  return element && element.href.slice(1);
-}
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
+
+var diRefs = new Refs(
+  { name: 'dmnElementRef', enumerable: true },
+  { name: 'di', configurable: true }
+);
 
 export default function DRDTreeWalker(handler, options) {
 
@@ -18,7 +18,7 @@ export default function DRDTreeWalker(handler, options) {
   // prerequisites are drawn
   var deferred = [];
 
-  function visit(element, di) {
+  function visit(element) {
 
     var gfx = element.gfx;
 
@@ -28,106 +28,155 @@ export default function DRDTreeWalker(handler, options) {
     }
 
     // call handler
-    return handler.element(element, di);
+    return handler.element(element);
+  }
+
+  function visitRoot(element) {
+    return handler.root(element);
+  }
+
+  function visitIfDi(element) {
+
+    try {
+      var gfx = element.di && visit(element);
+
+      return gfx;
+    } catch (e) {
+      logError(e.message, { element: element, error: e });
+    }
   }
 
 
   // Semantic handling //////////////////////
 
-  function handleDefinitions(definitions) {
+  /**
+   * Handle definitions and return the rendered diagram (if any)
+   *
+   * @param {ModdleElement} definitions to walk and import
+   * @param {ModdleElement} [diagram] specific diagram to import and display
+   *
+   * @throws {Error} if no diagram to display could be found
+   */
+  function handleDefinitions(definitions, diagram) {
 
     // make sure we walk the correct dmnElement
-    handler.root(definitions);
+    var dmnDI = definitions.dmnDI;
 
-    forEach(['decision', 'drgElements', 'artifacts' ], function(element) {
-      if (definitions[element]) {
-        forEach(definitions[element], handleElement);
-      }
-    });
-
-    handleDeferred(deferred);
-  }
-
-  function handleDeferred(elements) {
-    forEach(elements, function(d) {
-      d();
-    });
-  }
-
-  function handleElement(element) {
-    var edges = [];
-
-    handleDI(element, function(extensionElement) {
-      if (is(extensionElement, 'biodi:Bounds')) {
-        visit(element, extensionElement);
-
-      } else if (is(extensionElement, 'biodi:Edge')) {
-        edges.push(extensionElement);
-      }
-    });
-
-    handleConnections(edges, element);
-  }
-
-
-
-  function handleConnections(edges, element) {
-
-    function deferConnection(semantic, property) {
-      var id = parseID(property),
-          edge = find(edges, matchPattern({ source: id }));
-
-      if (edge) {
-        deferred.push(function() {
-          visit(semantic, edge);
-        });
-      }
+    if (!dmnDI) {
+      throw new Error('no dmndi:DMNDI');
     }
 
-    if (is(element, 'dmn:Association')) {
-      return deferConnection(element, element.sourceRef);
+    var diagrams = dmnDI.diagrams || [];
+
+    if (diagram && diagrams.indexOf(diagram) === -1) {
+      throw new Error('diagram not part of dmndi:DMNDI');
     }
 
+    if (!diagram && diagrams && diagrams.length) {
+      diagram = diagrams[0];
+    }
+
+    // no diagram -> nothing to import
+    if (!diagram) {
+      throw new Error('no diagram to display');
+    }
+
+    // load DI from selected diagram only
+    handleDiagram(diagram);
+
+    visitRoot(definitions);
+
+    handleDrgElements(definitions.get('drgElement'));
+    handleArtifacts(definitions.get('artifact'));
+
+    handleDeferred();
+  }
+
+  function handleDrgElements(elements) {
+    forEach(elements, function(element) {
+      visitIfDi(element);
+
+      handleRequirements(element);
+    });
+  }
+
+  function handleArtifacts(elements) {
+    forEach(elements, function(element) {
+      if (is(element, 'dmn:Association')) {
+        handleAssociation(element);
+      } else {
+        visitIfDi(element);
+      }
+    });
+  }
+
+  /**
+   * Defer association visit until all shapes are visited.
+   *
+   * @param {ModdleElement} element
+   */
+  function handleAssociation(element) {
+    defer(function() {
+      visitIfDi(element);
+    });
+  }
+
+  /**
+   * Defer requirements visiting until all shapes are visited.
+   *
+   * @param {ModdleElement} element
+   */
+  function handleRequirements(element) {
     forEach([
       'informationRequirement',
       'knowledgeRequirement',
       'authorityRequirement'
     ], function(requirements) {
       forEach(element[requirements], function(requirement) {
-        var properties = null;
-
-        // get the href
-        if (is(requirement, 'dmn:InformationRequirement')) {
-          properties = [ 'requiredDecision', 'requiredInput' ];
-
-        } else if (is(requirement, 'dmn:KnowledgeRequirement')) {
-          properties = [ 'requiredKnowledge' ];
-
-        } else if (is(requirement, 'dmn:AuthorityRequirement')) {
-          properties = [ 'requiredDecision', 'requiredInput', 'requiredAuthority' ];
-        }
-
-        if (properties) {
-          forEach(properties, function(property) {
-            if (requirement[property]) {
-              deferConnection(requirement, requirement[property]);
-            }
-          });
-        }
+        defer(function() {
+          visitIfDi(requirement);
+        });
       });
     });
   }
 
-  function handleDI(element, fn) {
-    var extensionElements = element.extensionElements;
-
-    if (!extensionElements) {
-      return;
-    }
-
-    forEach(extensionElements.values, fn);
+  // DI handling //////////////////////
+  function handleDiagram(diagram) {
+    forEach(diagram.diagramElements, handleDiagramElement);
   }
 
+  function handleDiagramElement(diagramElement) {
+    registerDi(diagramElement);
+  }
+
+  function registerDi(di) {
+    var dmnElement = di.dmnElementRef;
+
+    if (dmnElement) {
+      if (dmnElement.di) {
+        logError('multiple DI elements defined for element', { element: dmnElement });
+      } else {
+        diRefs.bind(dmnElement, 'di');
+        dmnElement.di = di;
+      }
+    } else {
+      logError('no DMN element referenced in element', { element: di });
+    }
+  }
+
+  function defer(fn) {
+    deferred.push(fn);
+  }
+
+  function handleDeferred() {
+    forEach(deferred, function(d) {
+      d();
+    });
+  }
+
+  function logError(message, context) {
+    handler.error(message, context);
+  }
 
   // API //////////////////////
 
