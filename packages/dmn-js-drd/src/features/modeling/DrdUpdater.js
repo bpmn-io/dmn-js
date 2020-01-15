@@ -1,6 +1,5 @@
 import {
   assign,
-  find,
   forEach
 } from 'min-dash';
 
@@ -109,12 +108,14 @@ export default function DrdUpdater(
   }
 
   this.executed([
+    'connection.create',
     'connection.layout',
     'connection.move',
     'connection.updateWaypoints'
   ], updateConnectionWaypoints, true);
 
   this.reverted([
+    'connection.create',
     'connection.layout',
     'connection.move',
     'connection.updateWaypoints'
@@ -123,10 +124,9 @@ export default function DrdUpdater(
   this.executed('connection.create', function(context) {
     var connection = context.connection,
         connectionBo = connection.businessObject,
+        di = connectionBo.di,
         target = context.target,
-        targetBo = target.businessObject,
-        extensionElements = targetBo.get('extensionElements'),
-        di = context.di;
+        targetBo = target.businessObject;
 
     if (is(connection, 'dmn:Association')) {
       updateParent(context);
@@ -136,202 +136,41 @@ export default function DrdUpdater(
       self.updateSemanticParent(connectionBo, targetBo);
 
       // fix DI waypoints after connection cropping
-      forEach(di.waypoints, function(waypoint, index) {
+      forEach(di.waypoint, function(waypoint, index) {
         waypoint.x = connection.waypoints[ index ].x;
         waypoint.y = connection.waypoints[ index ].y;
       });
-
-      extensionElements.get('values').push(di);
     }
   }, true);
 
   this.reverted('connection.create', function(context) {
-    var connection = context.connection,
-        target = context.target,
-        targetBo = target.businessObject,
-        extensionElements = targetBo.get('extensionElements'),
-        di = context.di;
-
     reverseUpdateParent(context);
-
-    if (!is(connection, 'dmn:Association') &&
-      includes(extensionElements.get('values'), di)) {
-      remove(extensionElements.get('values'), di);
-    }
-  }, true);
-
-  this.executed('connection.delete', function(context) {
-    var connection = context.connection,
-        source = context.source,
-        target = context.target,
-        targetBo = target.businessObject,
-        extensionElements = targetBo.get('extensionElements');
-
-    if (is(connection, 'dmn:Association')) {
-      return;
-    }
-
-    var edge = find(extensionElements.get('values'), function(extensionElement) {
-      return is(extensionElement, 'biodi:Edge') && extensionElement.source === source.id;
-    });
-
-    if (edge) {
-      context.oldDI = edge;
-
-      remove(extensionElements.get('values'), edge);
-    }
-  }, true);
-
-  this.reverted('connection.delete', function(context) {
-    var connection = context.connection,
-        target = context.target,
-        oldDI = context.oldDI,
-        targetBo = target.businessObject,
-        extensionElements = targetBo.get('extensionElements');
-
-    if (!oldDI || is(connection, 'dmn:Association')) {
-      return;
-    }
-
-    extensionElements.get('values').push(oldDI);
   }, true);
 
   this.executed('connection.reconnect', function(context) {
     var connection = context.connection,
         connectionBo = connection.businessObject,
-        oldSource = context.oldSource,
-        newSource = context.newSource,
-        oldTarget = context.oldTarget,
-        oldTargetBo = oldTarget.businessObject,
-        oldTargetBoExtensionElements = oldTargetBo.get('extensionElements'),
         newTarget = context.newTarget,
-        newTargetBo = newTarget.businessObject,
-        newTargetBoExtensionElements = newTargetBo.get('extensionElements');
+        newTargetBo = newTarget.businessObject;
 
     self.updateSemanticParent(connectionBo, newTargetBo);
-
-    var edge = find(oldTargetBoExtensionElements.get('values'),
-      function(extensionElement) {
-        var source = extensionElement.source;
-
-        return is(extensionElement, 'biodi:Edge') && source === oldSource.id;
-      }
-    );
-
-    if (edge) {
-
-      // (1) remove edge from old target
-      remove(oldTargetBoExtensionElements.get('values'), edge);
-
-      // (2) add edge to new target
-      if (!is(newTarget, 'dmn:TextAnnotation')) {
-        newTargetBoExtensionElements.get('values').push(edge);
-      }
-
-      // (3) reference new source
-      if (newSource) {
-        edge.source = newSource.id;
-      }
-    }
   }, true);
 
   this.reverted('connection.reconnect', function(context) {
     var connection = context.connection,
         connectionBo = connection.businessObject,
-        oldSource = context.oldSource,
-        newSource = context.newSource,
         oldTarget = context.oldTarget,
-        oldTargetBo = oldTarget.businessObject,
-        oldTargetBoExtensionElements = oldTargetBo.get('extensionElements'),
-        newTarget = context.newTarget,
-        newTargetBo = newTarget.businessObject,
-        newTargetBoExtensionElements = newTargetBo.get('extensionElements');
+        oldTargetBo = oldTarget.businessObject;
 
     self.updateSemanticParent(connectionBo, oldTargetBo);
-
-    var edge = find(newTargetBoExtensionElements.get('values'),
-      function(extensionElement) {
-        var source = extensionElement.source;
-
-        return is(extensionElement, 'biodi:Edge') &&
-          source === (newSource || oldSource).id;
-      }
-    );
-
-    if (edge) {
-
-      // (1) remove edge from new target
-      if (!is(newTarget, 'dmn:TextAnnotation')) {
-        remove(newTargetBoExtensionElements.get('values'), edge);
-      }
-
-      // (2) add edge to old target
-      oldTargetBoExtensionElements.get('values').push(edge);
-
-      // (3) reference old source
-      if (oldSource) {
-        edge.source = oldSource.id;
-      }
-    }
   }, true);
 
   this.executed('element.updateProperties', function(context) {
     definitionPropertiesView.update();
-
-    var element = context.element,
-        outgoing = element.outgoing;
-
-    if (!isIdChange(context) || !outgoing) {
-      return;
-    }
-
-    var oldProperties = context.oldProperties,
-        properties = context.properties;
-
-    forEach(outgoing, function(connection) {
-      var target = connection.target,
-          targetBo = target.businessObject,
-          extensionElements = targetBo.get('extensionElements');
-
-      var edge = find(extensionElements.get('values'), function(extensionElement) {
-        return is(extensionElement, 'biodi:Edge') &&
-          extensionElement.source === oldProperties.id;
-      });
-
-      if (edge) {
-        edge.source = properties.id;
-      }
-    });
-
   }, true);
 
   this.reverted('element.updateProperties', function(context) {
     definitionPropertiesView.update();
-
-    var element = context.element,
-        outgoing = element.outgoing;
-
-    if (!isIdChange(context) || !outgoing) {
-      return;
-    }
-
-    var oldProperties = context.oldProperties,
-        properties = context.properties;
-
-    forEach(outgoing, function(connection) {
-      var target = connection.target,
-          targetBo = target.businessObject,
-          extensionElements = targetBo.get('extensionElements');
-
-      var edge = find(extensionElements.get('values'), function(extensionElement) {
-        return is(extensionElement, 'biodi:Edge') &&
-          extensionElement.source === properties.id;
-      });
-
-      if (edge) {
-        edge.source = oldProperties.id;
-      }
-    });
   }, true);
 
 }
@@ -347,71 +186,31 @@ DrdUpdater.$inject = [
 ];
 
 DrdUpdater.prototype.updateBounds = function(shape) {
-  var drdFactory = this._drdFactory;
-
   var businessObject = shape.businessObject,
-      extensionElements = businessObject.get('extensionElements'),
-      bounds;
+      bounds = businessObject.di.bounds;
 
-  if (!extensionElements) {
-    return;
-  }
-
-  bounds = find(extensionElements.get('values'), function(extensionElement) {
-    return is(extensionElement, 'biodi:Bounds');
+  // update bounds
+  assign(bounds, {
+    x: shape.x,
+    y: shape.y,
+    width: shape.width,
+    height: shape.height
   });
-
-  if (bounds) {
-
-    // update bounds
-    assign(bounds, {
-      x: shape.x,
-      y: shape.y,
-      width: shape.width,
-      height: shape.height
-    });
-  } else {
-
-    // create bounds
-    extensionElements.get('values').push(drdFactory.createDiBounds({
-      x: shape.x,
-      y: shape.y,
-      width: shape.width,
-      height: shape.height
-    }));
-  }
 };
 
 DrdUpdater.prototype.updateConnectionWaypoints = function(context) {
   var drdFactory = this._drdFactory;
 
   var connection = context.connection,
-      connectionBo = connection.businessObject,
-      source = connection.source,
-      target = connection.target,
-      targetBo = target.businessObject,
-      extensionElements;
+      businessObject = connection.businessObject,
+      edge = businessObject.di;
 
-  if (is(connection, 'dmn:Association')) {
-    extensionElements = connectionBo.get('extensionElements');
-  } else {
-    extensionElements = targetBo.get('extensionElements');
-  }
+  edge.waypoint = drdFactory.createDiWaypoints(connection.waypoints)
+    .map(function(waypoint) {
+      waypoint.$parent = edge;
 
-  var edge = find(extensionElements.get('values'), function(extensionElement) {
-    return is(extensionElement, 'biodi:Edge') &&
-      extensionElement.source === source.id;
-  });
-
-  if (edge) {
-    edge.waypoints = drdFactory
-      .createDiWaypoints(connection.waypoints)
-      .map(function(waypoint) {
-        waypoint.$parent = edge;
-
-        return waypoint;
-      });
-  }
+      return waypoint;
+    });
 };
 
 DrdUpdater.prototype.updateParent = function(element, oldParent) {
@@ -436,9 +235,9 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
   }
 
   if (is(businessObject, 'dmn:DRGElement')) {
-    containment = 'drgElements';
+    containment = 'drgElement';
   } else if (is(businessObject, 'dmn:Artifact')) {
-    containment = 'artifacts';
+    containment = 'artifact';
   } else if (is(businessObject, 'dmn:InformationRequirement')) {
     containment = 'informationRequirement';
   } else if (is(businessObject, 'dmn:AuthorityRequirement')) {
@@ -471,15 +270,6 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
 };
 
 // helpers //////////
-
-function includes(array, item) {
-  return array.indexOf(item) !== -1;
-}
-
-function isIdChange(context) {
-  return !!context.properties.id;
-}
-
 function remove(array, item) {
   array.splice(array.indexOf(item), 1);
 

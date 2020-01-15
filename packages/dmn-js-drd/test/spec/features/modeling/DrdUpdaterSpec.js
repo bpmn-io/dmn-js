@@ -8,11 +8,7 @@ import {
 import coreModule from 'src/core';
 import modelingModule from 'src/features/modeling';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
-
 import { getMid } from 'diagram-js/lib/layout/LayoutUtil';
-
-import { find } from 'min-dash';
 
 var restore = sinon.restore;
 
@@ -128,245 +124,59 @@ describe('features/modeling - DrdUpdater', function() {
 
   describe('update waypoints', function() {
 
+    it('should update waypoint on connect', inject(
+      function(elementRegistry, modeling) {
+
+        // given
+        var decision1 = elementRegistry.get('Decision_2'),
+            decision2 = elementRegistry.get('Decision_3');
+
+        // when
+        var connection = modeling.connect(decision1, decision2);
+
+        // then
+        var edge = getEdge(connection);
+
+        expect(edge.waypoint).to.have.lengthOf(2);
+        expect(edge.waypoint[ 0 ]).to.include({ x: 247, y: 280 });
+        expect(edge.waypoint[ 0 ].original).not.to.exist;
+        expect(edge.waypoint[ 1 ]).to.include({ x: 247, y: 300 });
+        expect(edge.waypoint[ 1 ].original).not.to.exist;
+      }
+    ));
+
     it('should update waypoints on move', inject(
       function(elementRegistry, modeling) {
 
         // given
         var decision1 = elementRegistry.get('Decision_1'),
-            decision2 = elementRegistry.get('Decision_2');
+            decision2 = elementRegistry.get('Decision_2'),
+            informationRequirement = elementRegistry.get('InformationRequirement_1');
 
         // when
         modeling.moveElements([ decision1, decision2 ], { x: 100, y: 100 });
 
         // then
-        var decision2Bo = decision2.businessObject,
-            edge = getEdge(decision2Bo);
+        var edge = getEdge(informationRequirement);
 
-        expect(edge.waypoints).to.have.lengthOf(2);
-        expect(edge.waypoints[ 0 ]).to.include({ x: 347, y: 240 });
-        expect(edge.waypoints[ 0 ].original).not.to.exist;
-        expect(edge.waypoints[ 1 ]).to.include({ x: 347, y: 340 });
-        expect(edge.waypoints[ 1 ].original).not.to.exist;
+        expect(edge.waypoint).to.have.lengthOf(2);
+        expect(edge.waypoint[ 0 ]).to.include({ x: 347, y: 240 });
+        expect(edge.waypoint[ 0 ].original).not.to.exist;
+        expect(edge.waypoint[ 1 ]).to.include({ x: 347, y: 340 });
+        expect(edge.waypoint[ 1 ].original).not.to.exist;
       }
     ));
 
   });
-
-
-  describe('edges', function() {
-
-    describe('move edge to new target on reconnect connection', function() {
-
-      describe('decision', function() {
-
-        var decision,
-            decisionBo,
-            edge;
-
-        beforeEach(inject(function(elementRegistry, modeling) {
-
-          // given
-          decision = elementRegistry.get('Decision_2');
-
-          decisionBo = decision.businessObject;
-
-          edge = getEdge(decisionBo);
-
-          var connection = decision.incoming[ 0 ];
-
-          // when
-          modeling.reconnect(
-            connection,
-            connection.source,
-            elementRegistry.get('Decision_3'),
-            getMid(elementRegistry.get('Decision_3'))
-          );
-        }));
-
-
-        it('<do>', function() {
-
-          // then
-          expect(getEdge(decisionBo)).not.to.exist;
-        });
-
-
-        it('<undo>', inject(function(commandStack) {
-
-          // when
-          commandStack.undo();
-
-          // then
-          expect(getEdge(decisionBo)).to.equal(edge);
-        }));
-
-
-        it('<redo>', inject(function(commandStack) {
-
-          // given
-          commandStack.undo();
-
-          // when
-          commandStack.redo();
-
-          // then
-          expect(getEdge(decisionBo)).not.to.exist;
-        }));
-
-      });
-
-
-      it('should NOT move edge to text annotation', inject(
-        function(elementRegistry, modeling) {
-
-          // given
-          var decision = elementRegistry.get('Decision_2'),
-              decisionBo = decision.businessObject,
-              textAnnotation = elementRegistry.get('TextAnnotation_1'),
-              textAnnotationBo = textAnnotation.businessObject;
-
-          var connection = decision.incoming[ 0 ];
-
-          // when
-          modeling.reconnect(
-            connection,
-            connection.source,
-            textAnnotation,
-            getMid(textAnnotation)
-          );
-
-          // then
-          expect(getEdge(decisionBo)).to.not.exist;
-          expect(getEdge(textAnnotationBo)).to.not.exist;
-        })
-      );
-
-    });
-
-
-    describe('remove edge from target on remove connection', function() {
-
-      var decision,
-          decisionBo,
-          edge;
-
-      beforeEach(inject(function(elementRegistry, modeling) {
-
-        // given
-        decision = elementRegistry.get('Decision_2');
-
-        decisionBo = decision.businessObject;
-
-        edge = getEdge(decisionBo);
-
-        var connection = decision.incoming[ 0 ];
-
-        // when
-        modeling.removeConnection(connection);
-      }));
-
-
-      it('<do>', function() {
-
-        // then
-        expect(getEdge(decisionBo)).not.to.exist;
-      });
-
-
-      it('<undo>', inject(function(commandStack) {
-
-        // when
-        commandStack.undo();
-
-        // then
-        expect(getEdge(decisionBo)).to.equal(edge);
-      }));
-
-
-      it('<redo>', inject(function(commandStack) {
-
-        // given
-        commandStack.undo();
-
-        // when
-        commandStack.redo();
-
-        // then
-        expect(getEdge(decisionBo)).not.to.exist;
-      }));
-
-    });
-
-
-    describe('update source on update properties', function() {
-
-      var decision,
-          edge;
-
-      beforeEach(inject(function(elementRegistry, modeling) {
-
-        // given
-        decision = elementRegistry.get('Decision_1');
-
-        edge = getEdge(elementRegistry.get('Decision_2').businessObject);
-
-        // when
-        modeling.updateProperties(decision, {
-          id: 'foo'
-        });
-      }));
-
-
-      it('<do>', function() {
-
-        // then
-        expect(edge.source).to.equal('foo');
-      });
-
-
-      it('<undo>', inject(function(commandStack) {
-
-        // when
-        commandStack.undo();
-
-        // then
-        expect(edge.source).to.equal('Decision_1');
-      }));
-
-
-      it('<redo>', inject(function(commandStack) {
-
-        // given
-        commandStack.undo();
-
-        // when
-        commandStack.redo();
-
-        // then
-        expect(edge.source).to.equal('foo');
-      }));
-
-    });
-
-  });
-
 });
 
 
 // helpers //////////
 
 function getBounds(businessObject) {
-  var extensionElements = businessObject.extensionElements;
-
-  return find(extensionElements.values, function(extensionElement) {
-    return is(extensionElement, 'biodi:Bounds');
-  });
+  return businessObject.di.bounds;
 }
 
-function getEdge(businessObject) {
-  var extensionElements = businessObject.extensionElements;
-
-  return find(extensionElements.values, function(extensionElement) {
-    return is(extensionElement, 'biodi:Edge');
-  });
+function getEdge(connection) {
+  return connection.businessObject.di;
 }

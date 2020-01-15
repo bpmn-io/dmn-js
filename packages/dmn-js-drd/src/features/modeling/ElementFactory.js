@@ -33,7 +33,7 @@ ElementFactory.prototype.create = function(elementType, attrs) {
 ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
   var drdFactory = this._drdFactory;
 
-  var extensionElements, size;
+  var size;
 
   attrs = attrs || {};
 
@@ -47,15 +47,16 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
     businessObject = drdFactory.create(attrs.type);
   }
 
-  if (
-    elementType !== 'root' &&
-    elementType !== 'connection' &&
-    !businessObject.extensionElements
-  ) {
-    extensionElements = businessObject.extensionElements =
-      drdFactory.createExtensionElements();
-
-    extensionElements.$parent = businessObject;
+  if (!businessObject.di) {
+    if (elementType === 'connection') {
+      businessObject.di = drdFactory.createDiEdge(businessObject, [], {
+        id: businessObject.id + '_di'
+      });
+    } else if (elementType === 'shape') {
+      businessObject.di = drdFactory.createDiShape(businessObject, {}, {
+        id: businessObject.id + '_di'
+      });
+    }
   }
 
   size = this._getDefaultSize(businessObject);

@@ -6,9 +6,7 @@ import {
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
-
-import { find } from 'min-dash';
+import { forEach } from 'min-dash';
 
 
 describe('features/modeling - create elements', function() {
@@ -20,21 +18,18 @@ describe('features/modeling - create elements', function() {
   beforeEach(bootstrapModeler(emptyDefsXML, { modules: testModules }));
 
 
-  function expectElement(element, attrs) {
+  function expectShapeElement(element, attrs) {
     var businessObject = element.businessObject,
-        extensionElements = businessObject.extensionElements;
+        di = businessObject.di;
 
     expect(element.type).to.equal(attrs.type);
 
     expect(businessObject).to.equal(attrs.businessObject);
     expect(businessObject.$parent).to.exist;
+    expect(di).to.exist;
 
-    expect(extensionElements.$parent).to.equal(businessObject);
-
-    var bounds = find(extensionElements.get('values'), function(extensionElement) {
-      return is(extensionElement, 'biodi:Bounds');
-    });
-
+    var bounds = di.bounds;
+    expect(bounds).to.exist;
     expect(bounds).to.have.bounds({
       x: element.x,
       y: element.y,
@@ -46,143 +41,256 @@ describe('features/modeling - create elements', function() {
     expect(element.height).to.equal(attrs.height);
   }
 
-  it('should create a decision', inject(
-    function(canvas, drdFactory, elementFactory, modeling) {
+  function expectEdgeElement(element, attrs) {
+    var businessObject = element.businessObject,
+        di = businessObject.di;
 
-      // given
-      var rootElement = canvas.getRootElement(),
-          businessObject = drdFactory.create('dmn:Decision', {
-            name: 'Season'
-          }),
-          decision = elementFactory.createShape({
-            type: 'dmn:Decision',
-            businessObject: businessObject
-          });
+    expect(element.type).to.equal(attrs.type);
+
+    expect(businessObject).to.equal(attrs.businessObject);
+    expect(businessObject.$parent).to.exist;
+    expect(di).to.exist;
+
+
+    var waypoints = di.waypoint;
+    forEach(waypoints, function(waypoint, index) {
+      expect(waypoint.x).to.eql(attrs.waypoints[index].x);
+      expect(waypoint.y).to.eql(attrs.waypoints[index].y);
+
+      expect(waypoint.x).to.eql(element.waypoints[index].x);
+      expect(waypoint.y).to.eql(element.waypoints[index].y);
+    });
+  }
+
+
+  describe('basics', function() {
+
+    it('should create dmndi:DMNShape if missing', inject(function(elementFactory) {
 
       // when
+      var decision = elementFactory.createShape({
+        type: 'dmn:Decision'
+      });
+
+      // then
+      var businessObject = decision.businessObject;
+      expect(businessObject).to.exist;
+      expect(businessObject.di).to.exist;
+      expect(businessObject.di.$type).to.eql('dmndi:DMNShape');
+    }));
+
+
+    it('should create dmndi:DMNEdge if missing', inject(function(elementFactory) {
+
+      // when
+      var informationRequirement = elementFactory.createConnection({
+        type: 'dmn:InformationRequirement'
+      });
+
+      // then
+      var businessObject = informationRequirement.businessObject;
+      expect(businessObject).to.exist;
+      expect(businessObject.di).to.exist;
+      expect(businessObject.di.$type).to.eql('dmndi:DMNEdge');
+    }));
+  });
+
+
+  describe('shapes', function() {
+
+    it('should create a decision', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:Decision', {
+              name: 'Season'
+            }),
+            decision = elementFactory.createShape({
+              type: 'dmn:Decision',
+              businessObject: businessObject
+            });
+
+        // when
+        modeling.createShape(decision, { x: 100, y: 100 }, rootElement);
+
+        // then
+        expectShapeElement(decision, {
+          type: 'dmn:Decision',
+          width: 180,
+          height: 80,
+          businessObject: businessObject
+        });
+      }
+    ));
+
+
+    it('should create an input data', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:InputData', {
+              name: 'Guests'
+            }),
+            inputData = elementFactory.createShape({
+              type: 'dmn:InputData',
+              businessObject: businessObject
+            });
+
+        // when
+        modeling.createShape(inputData, { x: 100, y: 100 }, rootElement);
+
+        // then
+        expectShapeElement(inputData, {
+          type: 'dmn:InputData',
+          width: 125,
+          height: 45,
+          businessObject: businessObject
+        });
+      }
+    ));
+
+
+    it('should create a knowledge source', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:KnowledgeSource', {
+              name: 'How to?'
+            }),
+            knowledgeSource = elementFactory.createShape({
+              type: 'dmn:KnowledgeSource',
+              businessObject: businessObject
+            });
+
+        // when
+        modeling.createShape(knowledgeSource, { x: 100, y: 100 }, rootElement);
+
+        // then
+        expectShapeElement(knowledgeSource, {
+          type: 'dmn:KnowledgeSource',
+          width: 100,
+          height: 63,
+          businessObject: businessObject
+        });
+      }
+    ));
+
+
+    it('should create a business knowledge model', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:BusinessKnowledgeModel', {
+              name: 'Plates'
+            }),
+            businessKnowledgeModel = elementFactory.createShape({
+              type: 'dmn:BusinessKnowledgeModel',
+              businessObject: businessObject
+            });
+
+        // when
+        modeling.createShape(
+          businessKnowledgeModel,
+          { x: 100, y: 100 },
+          rootElement
+        );
+
+        // then
+        expectShapeElement(businessKnowledgeModel, {
+          type: 'dmn:BusinessKnowledgeModel',
+          width: 135,
+          height: 46,
+          businessObject: businessObject
+        });
+
+      }
+    ));
+
+
+    it('should create a TextAnnotation', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:TextAnnotation', {
+              text: 'Plates'
+            }),
+            textAnnotation = elementFactory.createShape({
+              type: 'dmn:TextAnnotation',
+              businessObject: businessObject
+            });
+
+        // when
+        modeling.createShape(textAnnotation, { x: 100, y: 100 }, rootElement);
+
+        // then
+        expectShapeElement(textAnnotation, {
+          type: 'dmn:TextAnnotation',
+          width: 100,
+          height: 80,
+          businessObject: businessObject
+        });
+      }
+    ));
+  });
+
+
+  describe('edges', function() {
+
+    var decision, input;
+
+    beforeEach(inject(function(canvas, drdFactory, elementFactory, modeling) {
+      var rootElement = canvas.getRootElement();
+
+      decision = elementFactory.createShape({
+        type: 'dmn:Decision',
+        businessObject: drdFactory.create('dmn:Decision', {
+          text: 'Plates'
+        })
+      });
       modeling.createShape(decision, { x: 100, y: 100 }, rootElement);
 
-      // then
-      expectElement(decision, {
-        type: 'dmn:Decision',
-        width: 180,
-        height: 80,
-        businessObject: businessObject
-      });
-    }
-  ));
-
-
-  it('should create an input data', inject(
-    function(canvas, drdFactory, elementFactory, modeling) {
-
-      // given
-      var rootElement = canvas.getRootElement(),
-          businessObject = drdFactory.create('dmn:InputData', {
-            name: 'Guests'
-          }),
-          inputData = elementFactory.createShape({
-            type: 'dmn:InputData',
-            businessObject: businessObject
-          });
-
-      // when
-      modeling.createShape(inputData, { x: 100, y: 100 }, rootElement);
-
-      // then
-      expectElement(inputData, {
+      input = elementFactory.createShape({
         type: 'dmn:InputData',
-        width: 125,
-        height: 45,
-        businessObject: businessObject
+        businessObject: drdFactory.create('dmn:InputData', {
+          name: 'Guests'
+        })
       });
-    }
-  ));
+      modeling.createShape(input, { x: 300, y: 100 }, rootElement);
+    }));
 
 
-  it('should create a knowledge source', inject(
-    function(canvas, drdFactory, elementFactory, modeling) {
+    it('should create an information requirement', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
 
-      // given
-      var rootElement = canvas.getRootElement(),
-          businessObject = drdFactory.create('dmn:KnowledgeSource', {
-            name: 'How to?'
-          }),
-          knowledgeSource = elementFactory.createShape({
-            type: 'dmn:KnowledgeSource',
-            businessObject: businessObject
-          });
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:InformationRequirement', {
+              name: 'Season'
+            }),
+            informationRequirement = elementFactory.createConnection({
+              type: 'dmn:InformationRequirement',
+              businessObject: businessObject
+            }, []);
 
-      // when
-      modeling.createShape(knowledgeSource, { x: 100, y: 100 }, rootElement);
+        // when
+        modeling.createConnection(input, decision, informationRequirement, rootElement);
 
-      // then
-      expectElement(knowledgeSource, {
-        type: 'dmn:KnowledgeSource',
-        width: 100,
-        height: 63,
-        businessObject: businessObject
-      });
-    }
-  ));
-
-
-  it('should create a business knowledge model', inject(
-    function(canvas, drdFactory, elementFactory, modeling) {
-
-      // given
-      var rootElement = canvas.getRootElement(),
-          businessObject = drdFactory.create('dmn:BusinessKnowledgeModel', {
-            name: 'Plates'
-          }),
-          businessKnowledgeModel = elementFactory.createShape({
-            type: 'dmn:BusinessKnowledgeModel',
-            businessObject: businessObject
-          });
-
-      // when
-      modeling.createShape(
-        businessKnowledgeModel,
-        { x: 100, y: 100 },
-        rootElement
-      );
-
-      // then
-      expectElement(businessKnowledgeModel, {
-        type: 'dmn:BusinessKnowledgeModel',
-        width: 135,
-        height: 46,
-        businessObject: businessObject
-      });
-
-    }
-  ));
-
-
-  it('should create a TextAnnotation', inject(
-    function(canvas, drdFactory, elementFactory, modeling) {
-
-      // given
-      var rootElement = canvas.getRootElement(),
-          businessObject = drdFactory.create('dmn:TextAnnotation', {
-            text: 'Plates'
-          }),
-          textAnnotation = elementFactory.createShape({
-            type: 'dmn:TextAnnotation',
-            businessObject: businessObject
-          });
-
-      // when
-      modeling.createShape(textAnnotation, { x: 100, y: 100 }, rootElement);
-
-      // then
-      expectElement(textAnnotation, {
-        type: 'dmn:TextAnnotation',
-        width: 100,
-        height: 80,
-        businessObject: businessObject
-      });
-    }
-  ));
+        // then
+        expectEdgeElement(informationRequirement, {
+          type: 'dmn:InformationRequirement',
+          businessObject: businessObject,
+          waypoints: [
+            { x: 237, y: 100 },
+            { x: 190, y: 100 }
+          ]
+        });
+      }
+    ));
+  });
 
 });
