@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
-  <decision id="Decision_1">
-    <extensionElements>
-      <biodi:bounds x="157" y="100" width="180" height="80" />
-    </extensionElements>
-  </decision>
-  <decision id="Decision_2">
-    <extensionElements>
-      <biodi:bounds x="157" y="200" width="180" height="80" />
-      <biodi:edge source="Decision_1">
-        <biodi:waypoints x="247" y="140" />
-        <biodi:waypoints x="247" y="240" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporterVersion="3.4.1" exporter="Camunda Modeler">
+  <decision id="Decision_1" name="Decision_1" />
+  <decision id="Decision_2" name="Decision_2">
+    <informationRequirement id="InformationRequirement_1">
       <requiredDecision href="#Decision_1" />
     </informationRequirement>
   </decision>
-  <decision id="Decision_3">
-    <extensionElements>
-      <biodi:bounds x="157" y="300" width="180" height="80" />
-    </extensionElements>
-  </decision>
-  <textAnnotation id="TextAnnotation_1">
-    <extensionElements>
-      <biodi:bounds x="400" y="100" width="100" height="80" />
-    </extensionElements>
-  </textAnnotation>
+  <decision id="Decision_3" name="Decision_3" />
+  <textAnnotation id="TextAnnotation_1" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1">
+        <dc:Bounds height="80" width="180" x="157" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="Decision_2">
+        <dc:Bounds height="80" width="180" x="157" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1">
+        <di:waypoint x="247" y="140" />
+        <di:waypoint x="247" y="240" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="Decision_3">
+        <dc:Bounds height="80" width="180" x="157" y="300" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="TextAnnotation_1">
+        <dc:Bounds height="80" width="100" x="400" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>
