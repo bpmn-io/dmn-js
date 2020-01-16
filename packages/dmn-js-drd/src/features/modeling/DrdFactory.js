@@ -1,4 +1,5 @@
 import {
+  assign,
   pick
 } from 'min-dash';
 
@@ -36,15 +37,23 @@ DrdFactory.prototype.create = function(type, attrs) {
   return element;
 };
 
-DrdFactory.prototype.createDiBounds = function(bounds) {
-  return this.create('biodi:Bounds', bounds);
+DrdFactory.prototype.createDiShape = function(semantic, bounds, attrs) {
+
+  return this.create('dmndi:DMNShape', assign({
+    dmnElementRef: semantic,
+    bounds: this.createDiBounds(bounds)
+  }, attrs));
 };
 
-DrdFactory.prototype.createDiEdge = function(source, waypoints) {
-  return this.create('biodi:Edge', {
-    source: source.id,
-    waypoints: this.createDiWaypoints(waypoints)
-  });
+DrdFactory.prototype.createDiBounds = function(bounds) {
+  return this.create('dc:Bounds', bounds);
+};
+
+DrdFactory.prototype.createDiEdge = function(semantic, waypoints, attrs) {
+  return this.create('dmndi:DMNEdge', {
+    dmnElementRef: semantic,
+    waypoint: this.createDiWaypoints(waypoints)
+  }, attrs);
 };
 
 DrdFactory.prototype.createDiWaypoints = function(waypoints) {
@@ -56,7 +65,7 @@ DrdFactory.prototype.createDiWaypoints = function(waypoints) {
 };
 
 DrdFactory.prototype.createDiWaypoint = function(waypoint) {
-  return this.create('biodi:Waypoint', pick(waypoint, [ 'x', 'y' ]));
+  return this.create('dc:Point', pick(waypoint, [ 'x', 'y' ]));
 };
 
 DrdFactory.prototype.createExtensionElements = function() {
