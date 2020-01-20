@@ -8,6 +8,11 @@
   </decision>
   <decision id="Decision_3" name="Decision_3" />
   <textAnnotation id="TextAnnotation_1" />
+  <textAnnotation id="TextAnnotation_2" />
+  <association id="Association_1">
+    <sourceRef href="#Decision_3" />
+    <targetRef href="#TextAnnotation_2" />
+  </association>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
       <dmndi:DMNShape dmnElementRef="Decision_1">
@@ -25,6 +30,13 @@
       </dmndi:DMNShape>
       <dmndi:DMNShape dmnElementRef="TextAnnotation_1">
         <dc:Bounds height="80" width="100" x="400" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="Association_1">
+        <di:waypoint x="337" y="340" />
+        <di:waypoint x="400" y="450" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="TextAnnotation_2">
+        <dc:Bounds height="80" width="100" x="400" y="400" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
