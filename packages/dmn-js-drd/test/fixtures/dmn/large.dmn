@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="Check Order">
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
-        <inputExpression id="inputExpression1" typeRef="string">        <text>status</text>
-</inputExpression>
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text>status</text>
+        </inputExpression>
       </input>
       <input id="input2" label="Order Sum">
-        <inputExpression id="inputExpression2" typeRef="double">        <text>sum</text>
-</inputExpression>
+        <inputExpression id="inputExpression2" typeRef="double">
+          <text>sum</text>
+        </inputExpression>
       </input>
       <input id="InputClause_1lsn2u1" label="">
         <inputExpression id="LiteralExpression_03gzdkb" typeRef="string" />
@@ -37,140 +39,204 @@
       <output id="OutputClause_1a0ci5c" label="" typeRef="string" />
       <output id="OutputClause_1mwiolw" label="last" typeRef="string" />
       <rule id="rule1">
-        <inputEntry id="inputEntry1">        <text><![CDATA["bronze"]]></text>
-</inputEntry>
-        <inputEntry id="inputEntry2">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_056wjyn">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_1sy5i5g">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_00c2zsb">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0ll521e">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0e3l30s">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0le135p">        <text></text>
-</inputEntry>
-        <outputEntry id="outputEntry1">        <text><![CDATA["notok"]]></text>
-</outputEntry>
-        <outputEntry id="outputEntry2">        <text><![CDATA["work on your status first, as bronze you're not going to get anything"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1l5nzwz">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_16tutwh">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0wlw0f9">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0nkmmf7">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0wpa8wr">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1y6qqj1">        <text></text>
-</outputEntry>
+        <inputEntry id="inputEntry1">
+          <text>"bronze"</text>
+        </inputEntry>
+        <inputEntry id="inputEntry2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_056wjyn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sy5i5g">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00c2zsb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ll521e">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e3l30s">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0le135p">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="outputEntry1">
+          <text>"notok"</text>
+        </outputEntry>
+        <outputEntry id="outputEntry2">
+          <text>"work on your status first, as bronze you're not going to get anything"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1l5nzwz">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16tutwh">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wlw0f9">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0nkmmf7">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wpa8wr">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1y6qqj1">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="rule2">
-        <inputEntry id="inputEntry3">        <text><![CDATA["silver"]]></text>
-</inputEntry>
-        <inputEntry id="inputEntry4">        <text><![CDATA[< 1000]]></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0t1yfqw">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0e6aldb">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_1x8a6kn">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_1tx47xq">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0vf1jwt">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_19kd5jy">        <text></text>
-</inputEntry>
-        <outputEntry id="outputEntry3">        <text><![CDATA["ok"]]></text>
-</outputEntry>
-        <outputEntry id="outputEntry4">        <text><![CDATA["you little fish will get what you want"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_07rgevu">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_17yg2jn">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_120px75">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1vidruu">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1c0pcn5">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0m1nr7l">        <text></text>
-</outputEntry>
+        <inputEntry id="inputEntry3">
+          <text>"silver"</text>
+        </inputEntry>
+        <inputEntry id="inputEntry4">
+          <text>&lt; 1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0t1yfqw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e6aldb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x8a6kn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tx47xq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vf1jwt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19kd5jy">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="outputEntry3">
+          <text>"ok"</text>
+        </outputEntry>
+        <outputEntry id="outputEntry4">
+          <text>"you little fish will get what you want"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_07rgevu">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_17yg2jn">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_120px75">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vidruu">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1c0pcn5">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0m1nr7l">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="rule3">
-        <inputEntry id="inputEntry5">        <text><![CDATA["silver"]]></text>
-</inputEntry>
-        <inputEntry id="inputEntry6">        <text><![CDATA[>= 1000]]></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_08e6per">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_1o7dx8v">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0tztqxv">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_1gad5tk">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0j5pjft">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0qesxlh">        <text></text>
-</inputEntry>
-        <outputEntry id="outputEntry5">        <text><![CDATA["notok"]]></text>
-</outputEntry>
-        <outputEntry id="outputEntry6">        <text><![CDATA["you took too much man, you took too much!"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0j6h8vq">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0ez8hn0">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0f736fa">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0rtoh61">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1fztevg">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0ujg5jb">        <text></text>
-</outputEntry>
+        <inputEntry id="inputEntry5">
+          <text>"silver"</text>
+        </inputEntry>
+        <inputEntry id="inputEntry6">
+          <text>&gt;= 1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08e6per">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o7dx8v">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tztqxv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gad5tk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j5pjft">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qesxlh">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="outputEntry5">
+          <text>"notok"</text>
+        </outputEntry>
+        <outputEntry id="outputEntry6">
+          <text>"you took too much man, you took too much!"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j6h8vq">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ez8hn0">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f736fa">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rtoh61">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fztevg">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ujg5jb">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="rule4">
-        <inputEntry id="inputEntry7">        <text><![CDATA["gold"]]></text>
-</inputEntry>
-        <inputEntry id="inputEntry8">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_1mnsmfs">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0xygjz5">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_18x5qb5">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0ws82dd">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0ipbbh0">        <text></text>
-</inputEntry>
-        <inputEntry id="UnaryTests_0cdu2hd">        <text></text>
-</inputEntry>
-        <outputEntry id="outputEntry7">        <text><![CDATA["ok"]]></text>
-</outputEntry>
-        <outputEntry id="outputEntry8">        <text><![CDATA["you get anything you want"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0yfdyid">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0eechii">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1dln5h1">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0cx05sh">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0h643xa">        <text></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_197nc6w">        <text></text>
-</outputEntry>
+        <inputEntry id="inputEntry7">
+          <text>"gold"</text>
+        </inputEntry>
+        <inputEntry id="inputEntry8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mnsmfs">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xygjz5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18x5qb5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ws82dd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ipbbh0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cdu2hd">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="outputEntry7">
+          <text>"ok"</text>
+        </outputEntry>
+        <outputEntry id="outputEntry8">
+          <text>"you get anything you want"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yfdyid">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0eechii">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dln5h1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cx05sh">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0h643xa">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_197nc6w">
+          <text></text>
+        </outputEntry>
       </rule>
     </decisionTable>
   </decision>

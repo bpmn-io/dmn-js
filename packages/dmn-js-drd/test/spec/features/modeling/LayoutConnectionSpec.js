@@ -27,7 +27,9 @@ describe('features/modeling - layout connection', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           authorityRequirementConn = knowledgeSource.incoming[0],
-          edge = knowledgeSource.businessObject.extensionElements.values[1];
+          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+          businessObject = requirement.businessObject,
+          edge = businessObject.di;
 
       var expectedWaypoints = [
         {
@@ -54,8 +56,8 @@ describe('features/modeling - layout connection', function() {
       expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
 
       // expect cropped waypoints in di
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
-      expect(pick(edge.waypoints[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
+      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
+      expect(pick(edge.waypoint[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
     }));
 
   });
@@ -68,7 +70,9 @@ describe('features/modeling - layout connection', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           authorityRequirementConn = knowledgeSource.incoming[0],
-          edge = knowledgeSource.businessObject.extensionElements.values[1];
+          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+          businessObject = requirement.businessObject,
+          edge = businessObject.di;
 
       var expectedWaypoints = [
         {
@@ -97,8 +101,8 @@ describe('features/modeling - layout connection', function() {
       expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
 
       // expect cropped waypoints in di
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 200, y: 38 });
-      expect(pick(edge.waypoints[2], [ 'x', 'y' ])).eql({ x: 545, y: 182 });
+      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).eql({ x: 200, y: 38 });
+      expect(pick(edge.waypoint[2], [ 'x', 'y' ])).eql({ x: 545, y: 182 });
     }));
 
   });
@@ -111,7 +115,9 @@ describe('features/modeling - layout connection', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           authorityRequirementConn = knowledgeSource.incoming[0],
-          edge = knowledgeSource.businessObject.extensionElements.values[1];
+          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+          businessObject = requirement.businessObject,
+          edge = businessObject.di;
 
       var expectedWaypoints = [
         {
@@ -141,8 +147,8 @@ describe('features/modeling - layout connection', function() {
       expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
 
       // expect cropped waypoints in di
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
-      expect(pick(edge.waypoints[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
+      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
+      expect(pick(edge.waypoint[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
     }));
 
   });

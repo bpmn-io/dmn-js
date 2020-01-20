@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-             xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-             id="definitions" 
-             name="definitions" 
-             namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="decision" name="">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="decision">
     <decisionTable id="decisionTable">
       <input id="input1" label="status" camunda:inputVariable="currentSeason">
-        <inputExpression id="inputExpression1" typeRef="string">        <text>foo</text>
-</inputExpression>
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text>foo</text>
+        </inputExpression>
       </input>
       <output id="output1" label="" name="" typeRef="string" />
       <rule id="row-320062938-1">
-        <inputEntry id="UnaryTests_0gbpqld">        <text></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_1rhvucg">        <text></text>
-</outputEntry>
+        <inputEntry id="UnaryTests_0gbpqld">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rhvucg">
+          <text></text>
+        </outputEntry>
       </rule>
     </decisionTable>
   </decision>

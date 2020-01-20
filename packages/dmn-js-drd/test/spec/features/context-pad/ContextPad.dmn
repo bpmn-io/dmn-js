@@ -1,78 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions id="dish" name="Dish"
-  namespace="http://camunda.org/schema/1.0/dmn"
-  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
-
-  <inputData name="Type of day" id="dayType_id">
-    <extensionElements>
-      <biodi:bounds x="240" y="270" width="125" height="45" />
-    </extensionElements>
-    <variable typeRef="string" name="Type of day" id="dayType_ii"/>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <inputData id="dayType_id" name="Type of day">
+    <variable id="dayType_ii" name="Type of day" typeRef="string" />
   </inputData>
-  <inputData name="Weather in Celsius" id="temperature_id">
-    <extensionElements>
-      <biodi:bounds x="5" y="270" width="125" height="45" />
-    </extensionElements>
-    <variable typeRef="integer" name="Weather in Celsius" id="temperature_ii"/>
+  <inputData id="temperature_id" name="Weather in Celsius">
+    <variable id="temperature_ii" name="Weather in Celsius" typeRef="integer" />
   </inputData>
-  <knowledgeSource name="Host" id="host_ks">
-    <extensionElements>
-      <biodi:bounds x="495" y="10" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
-  <knowledgeSource name="Guest Type" id="guest_ks">
-    <extensionElements>
-      <biodi:bounds x="495" y="150" width="100" height="63" />
-      <biodi:edge source="guestCount">
-        <biodi:waypoint x="440" y="175" />
-        <biodi:waypoint x="495" y="175" />
-      </biodi:edge>
-    </extensionElements>
-    <authorityRequirement>
-      <requiredDecision href="#guestCount"/>
+  <knowledgeSource id="host_ks" name="Host" />
+  <knowledgeSource id="guest_ks" name="Guest Type">
+    <authorityRequirement id="AuthorityRequirement_0jnmzkh">
+      <requiredDecision href="#guestCount" />
     </authorityRequirement>
   </knowledgeSource>
-  <businessKnowledgeModel name="El menú" id="elMenu">
-    <extensionElements>
-      <biodi:bounds x="450" y="250" width="135" height="46" />
-    </extensionElements>
-  </businessKnowledgeModel>
-  <textAnnotation id="TextAnnotation_1t4zaz9">
-    <extensionElements>
-      <biodi:bounds x="240" y="400" width="125" height="45" />
-    </extensionElements>
-    <text>foobar</text>
-  </textAnnotation>
-  <association id="Association_1c4jixb">
-    <sourceRef href="#dayType_id" />
-    <targetRef href="#TextAnnotation_1t4zaz9" />
-    <extensionElements>
-      <biodi:edge source="dayType_id">
-        <biodi:waypoint x="275" y="315" />
-        <biodi:waypoint x="240" y="400" />
-      </biodi:edge>
-    </extensionElements>
-  </association>
+  <businessKnowledgeModel id="elMenu" name="El menú" />
   <decision id="guestCount" name="Guest Count">
-    <extensionElements>
-      <biodi:bounds x="230" y="140" width="210" height="55" />
-      <biodi:edge source="dayType_id">
-        <biodi:waypoint x="340" y="270" />
-        <biodi:waypoint x="340" y="195" />
-      </biodi:edge>
-      <biodi:edge source="elMenu">
-        <biodi:waypoint x="450" y="275" />
-        <biodi:waypoint x="400" y="195" />
-      </biodi:edge>
-    </extensionElements>
-    <knowledgeRequirement>
-      <requiredKnowledge href="#elMenu"/>
-    </knowledgeRequirement>
-    <informationRequirement>
-      <requiredInput href="#dayType_id"/>
+    <informationRequirement id="InformationRequirement_03qcmr7">
+      <requiredInput href="#dayType_id" />
     </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_1xpx7m2">
+      <requiredKnowledge href="#elMenu" />
+    </knowledgeRequirement>
     <decisionTable id="guestCountDecisionTable">
       <input id="typeOfDayInput" label="Type of day">
         <inputExpression id="typeOfDayInputExpression" typeRef="string">
@@ -82,7 +29,7 @@
       <output id="guestCountOutput" label="Guest count" name="guestCount" typeRef="integer" />
       <rule id="row-495762709-8">
         <inputEntry id="UnaryTests_0l72u8n">
-          <text><![CDATA["Weekday"]]></text>
+          <text>"Weekday"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0wuwqaz">
           <text>4</text>
@@ -90,7 +37,7 @@
       </rule>
       <rule id="row-495762709-9">
         <inputEntry id="UnaryTests_03a73o9">
-          <text><![CDATA["Holiday"]]></text>
+          <text>"Holiday"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1whn119">
           <text>10</text>
@@ -98,7 +45,7 @@
       </rule>
       <rule id="row-495762709-10">
         <inputEntry id="UnaryTests_12tygwt">
-          <text><![CDATA["Weekend"]]></text>
+          <text>"Weekend"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1b5k9t8">
           <text>15</text>
@@ -106,4 +53,52 @@
       </rule>
     </decisionTable>
   </decision>
+  <association id="Association_1c4jixb">
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#TextAnnotation_1t4zaz9" />
+  </association>
+  <textAnnotation id="TextAnnotation_1t4zaz9">
+    <text>foobar</text>
+  </textAnnotation>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dayType_id">
+        <dc:Bounds height="45" width="125" x="240" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="temperature_id">
+        <dc:Bounds height="45" width="125" x="5" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="host_ks">
+        <dc:Bounds height="63" width="100" x="495" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="guest_ks">
+        <dc:Bounds height="63" width="100" x="495" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_0jnmzkh">
+        <di:waypoint x="440" y="175" />
+        <di:waypoint x="495" y="175" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="elMenu">
+        <dc:Bounds height="46" width="135" x="450" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="guestCount">
+        <dc:Bounds height="55" width="210" x="230" y="140" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_03qcmr7">
+        <di:waypoint x="340" y="270" />
+        <di:waypoint x="340" y="195" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="KnowledgeRequirement_1xpx7m2">
+        <di:waypoint x="450" y="275" />
+        <di:waypoint x="400" y="195" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="TextAnnotation_1t4zaz9">
+        <dc:Bounds height="45" width="125" x="240" y="400" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="Association_1c4jixb">
+        <di:waypoint x="275" y="315" />
+        <di:waypoint x="240" y="400" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

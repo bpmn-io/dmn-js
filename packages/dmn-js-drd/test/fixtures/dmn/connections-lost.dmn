@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="test" name="My first DRD" namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="Decision_1">
-    <extensionElements>
-      <biodi:bounds x="458" y="158" width="180" height="80" />
-      <biodi:edge source="InputData_1">
-        <biodi:waypoints x="389" y="368" />
-        <biodi:waypoints x="500" y="238" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="test" name="My first DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_1" name="Decision_1">
+    <informationRequirement id="InformationRequirement_0052rou">
       <requiredInput href="#InputData_1" />
     </informationRequirement>
   </decision>
-  <inputData id="InputData_1">
-    <extensionElements>
-      <biodi:bounds x="306" y="368" width="125" height="45" />
-    </extensionElements>
-  </inputData>
+  <inputData id="InputData_1" name="InputData_1" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1">
+        <dc:Bounds height="80" width="180" x="458" y="158" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_0052rou">
+        <di:waypoint x="389" y="368" />
+        <di:waypoint x="500" y="238" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="InputData_1">
+        <dc:Bounds height="45" width="125" x="306" y="368" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

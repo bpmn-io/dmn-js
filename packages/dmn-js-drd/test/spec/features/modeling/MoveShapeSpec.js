@@ -26,7 +26,7 @@ describe('features/modeling - move shape', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           businessObject = knowledgeSource.businessObject,
-          bounds = businessObject.extensionElements.values[0];
+          bounds = businessObject.di.bounds;
 
       var oldPosition = {
         x: knowledgeSource.x,
@@ -49,7 +49,7 @@ describe('features/modeling - move shape', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           businessObject = knowledgeSource.businessObject,
-          bounds = businessObject.extensionElements.values[0];
+          bounds = businessObject.di.bounds;
 
       var oldPosition = {
         x: knowledgeSource.x,
@@ -71,7 +71,7 @@ describe('features/modeling - move shape', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           businessObject = knowledgeSource.businessObject,
-          bounds = businessObject.extensionElements.values[0];
+          bounds = businessObject.di.bounds;
 
 
       modeling.moveShape(knowledgeSource, { x: 0, y: 50 });
@@ -103,22 +103,23 @@ describe('features/modeling - move shape', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           decision = elementRegistry.get('guestCount'),
-          businessObject = knowledgeSource.businessObject,
-          edge = businessObject.extensionElements.values[1],
+          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+          businessObject = requirement.businessObject,
+          edge = businessObject.di,
           sourceWaypoint;
 
       // apply cropping
       modeling.layoutConnection(knowledgeSource.incoming[0]);
 
       // when
-      sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+      sourceWaypoint = pick(edge.waypoint[0], [ 'x', 'y' ]);
 
       modeling.moveShape(decision, { x: 50, y: 0 });
 
       // then
-      expect(edge.waypoints).to.have.length(3);
+      expect(edge.waypoint).to.have.length(3);
 
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
         x: sourceWaypoint.x + 38,
         y: sourceWaypoint.y
       });
@@ -130,20 +131,21 @@ describe('features/modeling - move shape', function() {
       // given
       var knowledgeSource = elementRegistry.get('host_ks'),
           decision = elementRegistry.get('guestCount'),
-          businessObject = knowledgeSource.businessObject,
-          edge = businessObject.extensionElements.values[1],
+          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+          businessObject = requirement.businessObject,
+          edge = businessObject.di,
           sourceWaypoint;
 
       // apply cropping
       modeling.layoutConnection(knowledgeSource.incoming[0]);
 
       // when
-      sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+      sourceWaypoint = pick(edge.waypoint[0], [ 'x', 'y' ]);
 
       modeling.moveShape(decision, { x: 50, y: 0 });
 
       // then
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
         x: sourceWaypoint.x + 38,
         y: sourceWaypoint.y
       });
@@ -156,19 +158,19 @@ describe('features/modeling - move shape', function() {
       var association = elementRegistry.get('Association_1c4jixb'),
           inputData = elementRegistry.get('dayType_id'),
           businessObject = association.businessObject,
-          edge = businessObject.extensionElements.values[0],
+          edge = businessObject.di,
           sourceWaypoint;
 
       // apply cropping
       modeling.layoutConnection(association);
 
       // when
-      sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+      sourceWaypoint = pick(edge.waypoint[0], [ 'x', 'y' ]);
 
       modeling.moveShape(inputData, { x: 50, y: 0 });
 
       // then
-      expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
         x: sourceWaypoint.x + 42,
         y: sourceWaypoint.y
       });
@@ -179,21 +181,21 @@ describe('features/modeling - move shape', function() {
       function(elementRegistry, modeling, commandStack) {
 
         // given
-        var knowledgeSource = elementRegistry.get('host_ks'),
-            decision = elementRegistry.get('guestCount'),
-            businessObject = knowledgeSource.businessObject,
-            edge = businessObject.extensionElements.values[1],
+        var decision = elementRegistry.get('guestCount'),
+            requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+            businessObject = requirement.businessObject,
+            edge = businessObject.di,
             sourceWaypoint;
 
         // when
-        sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+        sourceWaypoint = pick(edge.waypoint[0], [ 'x', 'y' ]);
 
         modeling.moveShape(decision, { x: 50, y: 0 });
 
         commandStack.undo();
 
         // then
-        expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+        expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
           x: sourceWaypoint.x,
           y: sourceWaypoint.y
         });
@@ -207,15 +209,16 @@ describe('features/modeling - move shape', function() {
         // given
         var knowledgeSource = elementRegistry.get('host_ks'),
             decision = elementRegistry.get('guestCount'),
-            businessObject = knowledgeSource.businessObject,
-            edge = businessObject.extensionElements.values[1],
+            requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
+            businessObject = requirement.businessObject,
+            edge = businessObject.di,
             sourceWaypoint;
 
         // apply cropping
         modeling.layoutConnection(knowledgeSource.incoming[0]);
 
         // when
-        sourceWaypoint = pick(edge.waypoints[0], [ 'x', 'y' ]);
+        sourceWaypoint = pick(edge.waypoint[0], [ 'x', 'y' ]);
 
         modeling.moveShape(decision, { x: 50, y: 0 });
 
@@ -224,7 +227,7 @@ describe('features/modeling - move shape', function() {
         commandStack.redo();
 
         // then
-        expect(pick(edge.waypoints[0], [ 'x', 'y' ])).to.eql({
+        expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
           x: sourceWaypoint.x + 38,
           y: sourceWaypoint.y
         });

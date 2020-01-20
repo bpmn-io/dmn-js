@@ -1,244 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="D1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="D1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporterVersion="3.4.1" exporter="Camunda Modeler">
   <decision id="A1" name="A1">
-    <extensionElements>
-      <biodi:bounds x="208" y="106" width="180" height="80" />
-      <biodi:edge source="A2">
-        <biodi:waypoints x="270" y="272" />
-        <biodi:waypoints x="318" y="186" />
-      </biodi:edge>
-      <biodi:edge source="A2">
-        <biodi:waypoints x="269" y="272" />
-        <biodi:waypoints x="314" y="186" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_0jyx6rs">
       <requiredDecision href="#Decision_0wia9cc" />
     </informationRequirement>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_1fifyhg">
       <requiredDecision href="#A2" />
     </informationRequirement>
   </decision>
-  <decision id="A2" name="A2">
-    <extensionElements>
-      <biodi:bounds x="158" y="272" width="180" height="80" />
-    </extensionElements>
-  </decision>
-  <decision id="B2" name="B2">
-    <extensionElements>
-      <biodi:bounds x="453" y="284" width="180" height="80" />
-    </extensionElements>
-  </decision>
+  <decision id="A2" name="A2" />
+  <decision id="B2" name="B2" />
   <knowledgeSource id="B1" name="B1">
-    <extensionElements>
-      <biodi:bounds x="571" y="129" width="100" height="63" />
-      <biodi:edge source="B2">
-        <biodi:waypoints x="560" y="284" />
-        <biodi:waypoints x="598" y="192" />
-      </biodi:edge>
-      <biodi:edge source="B2">
-        <biodi:waypoints x="559" y="284" />
-        <biodi:waypoints x="597" y="192" />
-      </biodi:edge>
-    </extensionElements>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_0x2kgo4">
       <requiredDecision href="#Decision_1btgo28" />
     </authorityRequirement>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_16nf0a0">
       <requiredDecision href="#B2" />
     </authorityRequirement>
   </knowledgeSource>
   <decision id="C1" name="C1">
-    <extensionElements>
-      <biodi:bounds x="837" y="123" width="180" height="80" />
-      <biodi:edge source="C2">
-        <biodi:waypoints x="832" y="304" />
-        <biodi:waypoints x="900" y="203" />
-      </biodi:edge>
-      <biodi:edge source="C2">
-        <biodi:waypoints x="830" y="304" />
-        <biodi:waypoints x="885" y="203" />
-      </biodi:edge>
-    </extensionElements>
-    <knowledgeRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_1hrf6v8">
       <requiredKnowledge href="#BusinessKnowledgeModel_0gw4fis" />
     </knowledgeRequirement>
-    <knowledgeRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_09uh8on">
       <requiredKnowledge href="#C2" />
     </knowledgeRequirement>
   </decision>
-  <businessKnowledgeModel id="C2" name="C2">
-    <extensionElements>
-      <biodi:bounds x="749" y="304" width="135" height="46" />
-    </extensionElements>
-  </businessKnowledgeModel>
-  <businessKnowledgeModel id="D2" name="D2">
-    <extensionElements>
-      <biodi:bounds x="1123" y="314" width="135" height="46" />
-    </extensionElements>
-  </businessKnowledgeModel>
+  <businessKnowledgeModel id="C2" name="C2" />
+  <businessKnowledgeModel id="D2" name="D2" />
   <businessKnowledgeModel id="BusinessKnowledgeModel_03jdvwp" name="D1">
-    <extensionElements>
-      <biodi:bounds x="1196" y="130" width="135" height="46" />
-      <biodi:edge source="D2">
-        <biodi:waypoints x="1201" y="314" />
-        <biodi:waypoints x="1263" y="176" />
-      </biodi:edge>
-      <biodi:edge source="D2">
-        <biodi:waypoints x="1199" y="314" />
-        <biodi:waypoints x="1246" y="176" />
-      </biodi:edge>
-    </extensionElements>
-    <knowledgeRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_1c4ep7e">
       <requiredKnowledge href="#BusinessKnowledgeModel_13cx568" />
     </knowledgeRequirement>
-    <knowledgeRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_0n5a8g0">
       <requiredKnowledge href="#D2" />
     </knowledgeRequirement>
   </businessKnowledgeModel>
-  <inputData id="E2" name="E2">
-    <extensionElements>
-      <biodi:bounds x="1413" y="298" width="125" height="45" />
-    </extensionElements>
-  </inputData>
+  <inputData id="E2" name="E2" />
   <decision id="E1" name="E1">
-    <extensionElements>
-      <biodi:bounds x="1452" y="109" width="180" height="80" />
-      <biodi:edge source="E2">
-        <biodi:waypoints x="1484" y="298" />
-        <biodi:waypoints x="1521" y="189" />
-      </biodi:edge>
-      <biodi:edge source="InputData_15oy4bd">
-        <biodi:waypoints x="1487" y="298" />
-        <biodi:waypoints x="1542" y="189" />
-      </biodi:edge>
-      <biodi:edge source="E2">
-        <biodi:waypoints x="1484" y="298" />
-        <biodi:waypoints x="1524" y="189" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_1bhbnzl">
       <requiredInput href="#InputData_15oy4bd" />
     </informationRequirement>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_1cz3z3g">
       <requiredInput href="#E2" />
     </informationRequirement>
   </decision>
-  <inputData id="F2" name="F2">
-    <extensionElements>
-      <biodi:bounds x="1688" y="310" width="125" height="45" />
-    </extensionElements>
-  </inputData>
+  <inputData id="F2" name="F2" />
   <knowledgeSource id="F1" name="F1">
-    <extensionElements>
-      <biodi:bounds x="1784" y="95" width="100" height="63" />
-      <biodi:edge source="F2">
-        <biodi:waypoints x="1756" y="310" />
-        <biodi:waypoints x="1821" y="158" />
-      </biodi:edge>
-      <biodi:edge source="F2">
-        <biodi:waypoints x="1759" y="310" />
-        <biodi:waypoints x="1809" y="158" />
-      </biodi:edge>
-    </extensionElements>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_071293d">
       <requiredInput href="#InputData_1xivwf9" />
     </authorityRequirement>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_1ty3nlq">
       <requiredInput href="#F2" />
     </authorityRequirement>
   </knowledgeSource>
-  <knowledgeSource id="G2" name="G2">
-    <extensionElements>
-      <biodi:bounds x="1929" y="299" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
+  <knowledgeSource id="G2" name="G2" />
   <decision id="G1" name="G1">
-    <extensionElements>
-      <biodi:bounds x="1992" y="90" width="180" height="80" />
-      <biodi:edge source="G2">
-        <biodi:waypoints x="1997" y="299" />
-        <biodi:waypoints x="2072" y="170" />
-      </biodi:edge>
-      <biodi:edge source="G2">
-        <biodi:waypoints x="1987" y="299" />
-        <biodi:waypoints x="2021" y="170" />
-      </biodi:edge>
-    </extensionElements>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_0jea40t">
       <requiredAuthority href="#KnowledgeSource_0k9w134" />
     </authorityRequirement>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_0gczhis">
       <requiredAuthority href="#G2" />
     </authorityRequirement>
   </decision>
-  <knowledgeSource id="H2" name="H2">
-    <extensionElements>
-      <biodi:bounds x="2253" y="291" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
+  <knowledgeSource id="H2" name="H2" />
   <businessKnowledgeModel id="H1" name="H1">
-    <extensionElements>
-      <biodi:bounds x="2344" y="81" width="135" height="46" />
-      <biodi:edge source="H2">
-        <biodi:waypoints x="2319" y="291" />
-        <biodi:waypoints x="2400" y="127" />
-      </biodi:edge>
-      <biodi:edge source="H2">
-        <biodi:waypoints x="2317" y="291" />
-        <biodi:waypoints x="2387" y="127" />
-      </biodi:edge>
-    </extensionElements>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_0i4l8fs">
       <requiredAuthority href="#KnowledgeSource_0hbh1wu" />
     </authorityRequirement>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_10ng4xf">
       <requiredAuthority href="#H2" />
     </authorityRequirement>
   </businessKnowledgeModel>
-  <knowledgeSource id="I2" name="I2">
-    <extensionElements>
-      <biodi:bounds x="2538" y="289" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
+  <knowledgeSource id="I2" name="I2" />
   <knowledgeSource id="I1" name="I1">
-    <extensionElements>
-      <biodi:bounds x="2619" y="85" width="100" height="63" />
-      <biodi:edge source="I2">
-        <biodi:waypoints x="2603" y="289" />
-        <biodi:waypoints x="2670" y="148" />
-      </biodi:edge>
-      <biodi:edge source="I2">
-        <biodi:waypoints x="2599" y="289" />
-        <biodi:waypoints x="2648" y="148" />
-      </biodi:edge>
-    </extensionElements>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_1a99q78">
       <requiredAuthority href="#KnowledgeSource_07j6v5c" />
     </authorityRequirement>
-    <authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_1q6lira">
       <requiredAuthority href="#I2" />
     </authorityRequirement>
   </knowledgeSource>
-  <businessKnowledgeModel id="J2" name="J2">
-    <extensionElements>
-      <biodi:bounds x="142" y="508" width="135" height="46" />
-    </extensionElements>
-  </businessKnowledgeModel>
-  <textAnnotation id="J1">
-    <extensionElements>
-      <biodi:bounds x="294" y="394" width="100" height="80" />
-    </extensionElements>
-    <text>J1</text>
-  </textAnnotation>
+  <businessKnowledgeModel id="J2" name="J2" />
   <association id="Association_0olehc0">
-    <extensionElements>
-      <biodi:edge source="J2">
-        <biodi:waypoints x="210" y="531" />
-        <biodi:waypoints x="344" y="434" />
-      </biodi:edge>
-    </extensionElements>
     <sourceRef href="#J2" />
     <targetRef href="#J1" />
   </association>
+  <textAnnotation id="J1">
+    <text>J1</text>
+  </textAnnotation>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="A1">
+        <dc:Bounds height="80" width="180" x="208" y="106" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1fifyhg">
+        <di:waypoint x="270" y="272" />
+        <di:waypoint x="318" y="186" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1fifyhg">
+        <di:waypoint x="269" y="272" />
+        <di:waypoint x="314" y="186" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="A2">
+        <dc:Bounds height="80" width="180" x="158" y="272" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="B2">
+        <dc:Bounds height="80" width="180" x="453" y="284" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="B1">
+        <dc:Bounds height="63" width="100" x="571" y="129" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_16nf0a0">
+        <di:waypoint x="560" y="284" />
+        <di:waypoint x="598" y="192" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_16nf0a0">
+        <di:waypoint x="559" y="284" />
+        <di:waypoint x="597" y="192" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="C1">
+        <dc:Bounds height="80" width="180" x="837" y="123" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="KnowledgeRequirement_09uh8on">
+        <di:waypoint x="832" y="304" />
+        <di:waypoint x="900" y="203" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="KnowledgeRequirement_09uh8on">
+        <di:waypoint x="830" y="304" />
+        <di:waypoint x="885" y="203" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="C2">
+        <dc:Bounds height="46" width="135" x="749" y="304" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="D2">
+        <dc:Bounds height="46" width="135" x="1123" y="314" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="BusinessKnowledgeModel_03jdvwp">
+        <dc:Bounds height="46" width="135" x="1196" y="130" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="KnowledgeRequirement_0n5a8g0">
+        <di:waypoint x="1201" y="314" />
+        <di:waypoint x="1263" y="176" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="KnowledgeRequirement_0n5a8g0">
+        <di:waypoint x="1199" y="314" />
+        <di:waypoint x="1246" y="176" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="E2">
+        <dc:Bounds height="45" width="125" x="1413" y="298" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="E1">
+        <dc:Bounds height="80" width="180" x="1452" y="109" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1cz3z3g">
+        <di:waypoint x="1484" y="298" />
+        <di:waypoint x="1521" y="189" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1bhbnzl">
+        <di:waypoint x="1487" y="298" />
+        <di:waypoint x="1542" y="189" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1cz3z3g">
+        <di:waypoint x="1484" y="298" />
+        <di:waypoint x="1524" y="189" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="F2">
+        <dc:Bounds height="45" width="125" x="1688" y="310" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="F1">
+        <dc:Bounds height="63" width="100" x="1784" y="95" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_1ty3nlq">
+        <di:waypoint x="1756" y="310" />
+        <di:waypoint x="1821" y="158" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_1ty3nlq">
+        <di:waypoint x="1759" y="310" />
+        <di:waypoint x="1809" y="158" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="G2">
+        <dc:Bounds height="63" width="100" x="1929" y="299" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="G1">
+        <dc:Bounds height="80" width="180" x="1992" y="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_0gczhis">
+        <di:waypoint x="1997" y="299" />
+        <di:waypoint x="2072" y="170" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_0gczhis">
+        <di:waypoint x="1987" y="299" />
+        <di:waypoint x="2021" y="170" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="H2">
+        <dc:Bounds height="63" width="100" x="2253" y="291" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="H1">
+        <dc:Bounds height="46" width="135" x="2344" y="81" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_10ng4xf">
+        <di:waypoint x="2319" y="291" />
+        <di:waypoint x="2400" y="127" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_10ng4xf">
+        <di:waypoint x="2317" y="291" />
+        <di:waypoint x="2387" y="127" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="I2">
+        <dc:Bounds height="63" width="100" x="2538" y="289" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="I1">
+        <dc:Bounds height="63" width="100" x="2619" y="85" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_1q6lira">
+        <di:waypoint x="2603" y="289" />
+        <di:waypoint x="2670" y="148" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_1q6lira">
+        <di:waypoint x="2599" y="289" />
+        <di:waypoint x="2648" y="148" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="J2">
+        <dc:Bounds height="46" width="135" x="142" y="508" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="J1">
+        <dc:Bounds height="80" width="100" x="294" y="394" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="Association_0olehc0">
+        <di:waypoint x="210" y="531" />
+        <di:waypoint x="344" y="434" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

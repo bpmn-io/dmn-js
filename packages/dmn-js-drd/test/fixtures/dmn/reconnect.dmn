@@ -1,80 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions id="dish" name="Dish"
-  namespace="http://camunda.org/schema/1.0/dmn"
-  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
-
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <inputData id="dayType_id" name="Input Data 1">
-    <extensionElements>
-      <biodi:bounds x="240" y="270" width="125" height="45" />
-    </extensionElements>
-    <variable typeRef="string" name="Input 1" id="input1"/>
+    <variable id="input1" name="Input 1" typeRef="string" />
   </inputData>
-  <knowledgeSource name="Host" id="host_ks">
-    <extensionElements>
-      <biodi:bounds x="495" y="150" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
-  <businessKnowledgeModel name="El menú" id="elMenu">
-    <extensionElements>
-      <biodi:bounds x="450" y="250" width="135" height="46" />
-    </extensionElements>
-  </businessKnowledgeModel>
-  <textAnnotation id="annotation_1">
-    <extensionElements>
-      <biodi:bounds x="240" y="400" width="125" height="45" />
-    </extensionElements>
-    <text>foobar</text>
-  </textAnnotation>
-  <association id="Association_1">
-    <sourceRef href="#dayType_id" />
-    <targetRef href="#annotation_1" />
-    <extensionElements>
-      <biodi:edge source="dayType_id">
-        <biodi:waypoint x="303" y="293" />
-        <biodi:waypoint x="303" y="423" />
-      </biodi:edge>
-    </extensionElements>
-  </association>
+  <knowledgeSource id="host_ks" name="Host" />
+  <businessKnowledgeModel id="elMenu" name="El menú" />
   <decision id="guestCount" name="Guest Count">
-    <extensionElements>
-      <biodi:bounds x="150" y="10" width="100" height="55" />
-      <biodi:edge source="host_ks">
-        <biodi:waypoint x="545" y="182" />
-        <biodi:waypoint x="200" y="38" />
-      </biodi:edge>
-      <biodi:edge source="decision2">
-        <biodi:waypoints x="300" y="32" />
-        <biodi:waypoints x="250" y="32" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+    <variable id="InformationItem_061o645" name="gCount" typeRef="integer" />
+    <informationRequirement id="InformationRequirement_1bgw3jt">
       <requiredDecision href="#decision2" />
     </informationRequirement>
-    <authorityRequirement>
-      <requiredDecision href="#host_ks"/>
+    <authorityRequirement id="AuthorityRequirement_150exec">
+      <requiredDecision href="#host_ks" />
     </authorityRequirement>
-    <variable name="gCount" typeRef="integer" />
-    <literalExpression>
+    <literalExpression id="LiteralExpression_1bbbrz2">
       <text>guestService.getCount(dinnerEvent)</text>
     </literalExpression>
   </decision>
-
   <decision id="decision2" name="Another Decision">
-    <extensionElements>
-      <biodi:bounds x="300" y="10" width="100" height="55" />
-    </extensionElements>
-    <variable name="gCount" typeRef="integer" />
-    <literalExpression>
+    <variable id="InformationItem_08y9086" name="gCount" typeRef="integer" />
+    <literalExpression id="LiteralExpression_1v2at75">
       <text>guestService.getCount(dinnerEvent)</text>
     </literalExpression>
   </decision>
   <decision id="decision3" name="Third decision">
-    <extensionElements>
-      <biodi:bounds x="447" y="10" width="180" height="80" />
-    </extensionElements>
-    <variable id="InformationItem_3" />
+    <variable id="InformationItem_3" name="InformationItem_3" />
     <literalExpression id="LiteralExpression_3" />
   </decision>
+  <association id="Association_1">
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#annotation_1" />
+  </association>
+  <textAnnotation id="annotation_1">
+    <text>foobar</text>
+  </textAnnotation>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dayType_id">
+        <dc:Bounds height="45" width="125" x="240" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="host_ks">
+        <dc:Bounds height="63" width="100" x="495" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="elMenu">
+        <dc:Bounds height="46" width="135" x="450" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="guestCount">
+        <dc:Bounds height="55" width="100" x="150" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_150exec">
+        <di:waypoint x="545" y="182" />
+        <di:waypoint x="200" y="38" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1bgw3jt">
+        <di:waypoint x="300" y="32" />
+        <di:waypoint x="250" y="32" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape dmnElementRef="decision2">
+        <dc:Bounds height="55" width="100" x="300" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="decision3">
+        <dc:Bounds height="80" width="180" x="447" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="annotation_1">
+        <dc:Bounds height="45" width="125" x="240" y="400" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="Association_1">
+        <di:waypoint x="303" y="293" />
+        <di:waypoint x="303" y="423" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

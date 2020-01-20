@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions id="dish" name="Dish"
-  namespace="http://camunda.org/schema/1.0/dmn"
-  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
-
-  <inputData name="Type of day" id="dayType_id">
-    <extensionElements>
-      <biodi:bounds x="240" y="270" width="125" height="45" />
-    </extensionElements>
-    <variable typeRef="string" name="Type of day" id="dayType_ii"/>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <inputData id="dayType_id" name="Type of day">
+    <variable id="dayType_ii" name="Type of day" typeRef="string" />
   </inputData>
-  <textAnnotation id="TextAnnotation_1t4zaz9">
-    <extensionElements>
-      <biodi:bounds x="50" y="150" width="125" height="45" />
-    </extensionElements>
-    <text>foobar</text>
-  </textAnnotation>
   <association id="Association_1c4jixb">
     <sourceRef href="#dayType_id" />
     <targetRef href="#TextAnnotation_1t4zaz9" />
-    <extensionElements>
-      <biodi:edge source="TextAnnotation_1t4zaz9">
-        <biodi:waypoint x="365" y="270" />
-        <biodi:waypoint x="50" y="150" />
-      </biodi:edge>
-    </extensionElements>
   </association>
+  <textAnnotation id="TextAnnotation_1t4zaz9">
+    <text>foobar</text>
+  </textAnnotation>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dayType_id">
+        <dc:Bounds height="45" width="125" x="240" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="TextAnnotation_1t4zaz9">
+        <dc:Bounds height="45" width="125" x="50" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="Association_1c4jixb">
+        <di:waypoint x="365" y="270" />
+        <di:waypoint x="50" y="150" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions id="dish" name="Dish"
-  namespace="http://camunda.org/schema/1.0/dmn"
-  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
-
-  <inputData name="Type of day" id="dayType_id">
-    <extensionElements>
-      <biodi:bounds x="240" y="270" width="125" height="45" />
-    </extensionElements>
-    <variable typeRef="string" name="Type of day" id="dayType_ii"/>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <inputData id="dayType_id" name="Type of day">
+    <variable id="dayType_ii" name="Type of day" typeRef="string" />
   </inputData>
-  <inputData name="Weather in Celsius" id="temperature_id">
-    <extensionElements>
-      <biodi:bounds x="5" y="270" width="125" height="45" />
-    </extensionElements>
-    <variable typeRef="integer" name="Weather in Celsius" id="temperature_ii"/>
+  <inputData id="temperature_id" name="Weather in Celsius">
+    <variable id="temperature_ii" name="Weather in Celsius" typeRef="integer" />
   </inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dayType_id">
+        <dc:Bounds height="45" width="125" x="240" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="temperature_id">
+        <dc:Bounds height="45" width="125" x="5" y="270" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>
