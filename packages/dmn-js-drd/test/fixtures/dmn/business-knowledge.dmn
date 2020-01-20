@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions id="dish" name="Dish"
-  namespace="http://camunda.org/schema/1.0/dmn"
-  xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-  xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-  xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0">
-
-  <businessKnowledgeModel name="El menú" id="elMenu">
-    <extensionElements>
-      <biodi:bounds x="450" y="250" width="125" height="45" />
-    </extensionElements>
-  </businessKnowledgeModel>
-
-  <decision id="dish-decision" name="Dish Decision">
-    <extensionElements>
-      <biodi:bounds x="150" y="10" width="100" height="55" />
-    </extensionElements>
-  </decision>
-
-  <decision id="foo" name="Foo">
-    <extensionElements>
-      <biodi:bounds x="500" y="10" width="100" height="55" />
-    </extensionElements>
-  </decision>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <businessKnowledgeModel id="elMenu" name="El menú" />
+  <decision id="dish-decision" name="Dish Decision" />
+  <decision id="foo" name="Foo" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="elMenu">
+        <dc:Bounds height="45" width="125" x="450" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="dish-decision">
+        <dc:Bounds height="55" width="100" x="150" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="foo">
+        <dc:Bounds height="55" width="100" x="500" y="10" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

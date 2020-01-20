@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="Check Order">
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
@@ -16,58 +16,58 @@
       <output id="output2" label="Reason" name="reason" typeRef="string" />
       <rule id="rule1">
         <inputEntry id="inputEntry1">
-          <text><![CDATA["bronze"]]></text>
+          <text>"bronze"</text>
         </inputEntry>
         <inputEntry id="inputEntry2">
           <text></text>
         </inputEntry>
         <outputEntry id="outputEntry1">
-          <text><![CDATA["notok"]]></text>
+          <text>"notok"</text>
         </outputEntry>
         <outputEntry id="outputEntry2">
-          <text><![CDATA["work on your status first, as bronze you're not going to get anything"]]></text>
+          <text>"work on your status first, as bronze you're not going to get anything"</text>
         </outputEntry>
       </rule>
       <rule id="rule2">
         <inputEntry id="inputEntry3">
-          <text><![CDATA["silver"]]></text>
+          <text>"silver"</text>
         </inputEntry>
         <inputEntry id="inputEntry4">
-          <text><![CDATA[< 1000]]></text>
+          <text>&lt; 1000</text>
         </inputEntry>
         <outputEntry id="outputEntry3">
-          <text><![CDATA["ok"]]></text>
+          <text>"ok"</text>
         </outputEntry>
         <outputEntry id="outputEntry4">
-          <text><![CDATA["you little fish will get what you want"]]></text>
+          <text>"you little fish will get what you want"</text>
         </outputEntry>
       </rule>
       <rule id="rule3">
         <inputEntry id="inputEntry5">
-          <text><![CDATA["silver"]]></text>
+          <text>"silver"</text>
         </inputEntry>
         <inputEntry id="inputEntry6">
-          <text><![CDATA[>= 1000]]></text>
+          <text>&gt;= 1000</text>
         </inputEntry>
         <outputEntry id="outputEntry5">
-          <text><![CDATA["notok"]]></text>
+          <text>"notok"</text>
         </outputEntry>
         <outputEntry id="outputEntry6">
-          <text><![CDATA["you took too much man, you took too much!"]]></text>
+          <text>"you took too much man, you took too much!"</text>
         </outputEntry>
       </rule>
       <rule id="rule4">
         <inputEntry id="inputEntry7">
-          <text><![CDATA["gold"]]></text>
+          <text>"gold"</text>
         </inputEntry>
         <inputEntry id="inputEntry8">
           <text></text>
         </inputEntry>
         <outputEntry id="outputEntry7">
-          <text><![CDATA["ok"]]></text>
+          <text>"ok"</text>
         </outputEntry>
         <outputEntry id="outputEntry8">
-          <text><![CDATA["you get anything you want"]]></text>
+          <text>"you get anything you want"</text>
         </outputEntry>
       </rule>
     </decisionTable>

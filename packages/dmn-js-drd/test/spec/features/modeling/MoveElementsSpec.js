@@ -28,15 +28,15 @@ describe('features/modeling - move elements', function() {
           decision = elementRegistry.get('dish-decision').businessObject,
           inforReqLen = decision.informationRequirement.length,
           authReqLen = decision.authorityRequirement.length,
-          drgElementsLen = rootElement.drgElements.length,
-          artifactsLen = rootElement.artifacts.length;
+          drgElementsLen = rootElement.drgElement.length,
+          artifactsLen = rootElement.get('artifact').length;
 
       // when
       modeling.moveElements(elements, { x: 0, y: 50 });
 
       // then
-      expect(rootElement.drgElements).to.have.length(drgElementsLen);
-      expect(rootElement.artifacts).to.have.length(artifactsLen);
+      expect(rootElement.drgElement).to.have.length(drgElementsLen);
+      expect(rootElement.get('artifact')).to.have.length(artifactsLen);
 
       expect(decision.informationRequirement).to.have.length(inforReqLen);
       expect(decision.authorityRequirement).to.have.length(authReqLen);
@@ -53,8 +53,8 @@ describe('features/modeling - move elements', function() {
           decision = elementRegistry.get('dish-decision').businessObject,
           inforReqLen = decision.informationRequirement.length,
           authReqLen = decision.authorityRequirement.length,
-          drgElementsLen = rootElement.drgElements.length,
-          artifactsLen = rootElement.artifacts.length;
+          drgElementsLen = rootElement.drgElement.length,
+          artifactsLen = rootElement.get('artifact').length;
 
       // when
       modeling.moveElements(elements, { x: 0, y: 50 });
@@ -62,8 +62,8 @@ describe('features/modeling - move elements', function() {
       commandStack.undo();
 
       // then
-      expect(rootElement.drgElements).to.have.length(drgElementsLen);
-      expect(rootElement.artifacts).to.have.length(artifactsLen);
+      expect(rootElement.drgElement).to.have.length(drgElementsLen);
+      expect(rootElement.get('artifact')).to.have.length(artifactsLen);
 
       expect(decision.informationRequirement).to.have.length(inforReqLen);
       expect(decision.authorityRequirement).to.have.length(authReqLen);
@@ -80,8 +80,8 @@ describe('features/modeling - move elements', function() {
           decision = elementRegistry.get('dish-decision').businessObject,
           inforReqLen = decision.informationRequirement.length,
           authReqLen = decision.authorityRequirement.length,
-          drgElementsLen = rootElement.drgElements.length,
-          artifactsLen = rootElement.artifacts.length;
+          drgElementsLen = rootElement.drgElement.length,
+          artifactsLen = rootElement.get('artifact').length;
 
       // when
       modeling.moveElements(elements, { x: 0, y: 50 });
@@ -90,8 +90,8 @@ describe('features/modeling - move elements', function() {
       commandStack.redo();
 
       // then
-      expect(rootElement.drgElements).to.have.length(drgElementsLen);
-      expect(rootElement.artifacts).to.have.length(artifactsLen);
+      expect(rootElement.drgElement).to.have.length(drgElementsLen);
+      expect(rootElement.get('artifact')).to.have.length(artifactsLen);
 
       expect(decision.informationRequirement).to.have.length(inforReqLen);
       expect(decision.authorityRequirement).to.have.length(authReqLen);
@@ -114,13 +114,13 @@ describe('features/modeling - move elements', function() {
           }),
           decision = elementRegistry.get('Decision_1'),
           connection = decision.incoming[0],
-          connectionDI = decision.businessObject.extensionElements.values[1];
+          connectionDI = connection.businessObject.di;
 
       // when
       modeling.moveElements(elements, { x: 0, y: 50 });
 
       // then
-      expect(connectionDI).to.have.waypoints(connection.waypoints);
+      expectCoordinatesToMatch(connectionDI.waypoint, connection.waypoints);
     }));
 
 
@@ -133,7 +133,7 @@ describe('features/modeling - move elements', function() {
             }),
             decision = elementRegistry.get('Decision_1'),
             connection = decision.incoming[0],
-            connectionDI = decision.businessObject.extensionElements.values[1];
+            connectionDI = connection.businessObject.di;
 
         // when
         modeling.moveElements(elements, { x: 0, y: 50 });
@@ -141,10 +141,21 @@ describe('features/modeling - move elements', function() {
         commandStack.undo();
 
         // then
-        expect(connectionDI).to.have.waypoints(connection.waypoints);
+        expectCoordinatesToMatch(connectionDI.waypoint, connection.waypoints);
       }
     ));
 
   });
 
 });
+
+
+// helper /////
+function expectCoordinatesToMatch(waypointsA, waypointsB) {
+  waypointsA.forEach(function(a, index) {
+    const b = waypointsB[index];
+
+    expect(a.x).to.eql(b.x);
+    expect(a.y).to.eql(b.y);
+  });
+}

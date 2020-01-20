@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="decision" name="">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="decision">
     <decisionTable id="decisionTable">
       <output id="output1" label="Result" name="result" typeRef="string" />
       <rule id="row-624115199-1">
-        <outputEntry id="LiteralExpression_090256m"><text></text></outputEntry>
+        <outputEntry id="LiteralExpression_090256m">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="row-624133399-1">
-        <outputEntry id="LiteralExpression_09dd56m"><text></text></outputEntry>
+        <outputEntry id="LiteralExpression_09dd56m">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="row-633315199-1">
-        <outputEntry id="LiteralExpression_090ff6m"><text></text></outputEntry>
+        <outputEntry id="LiteralExpression_090ff6m">
+          <text></text>
+        </outputEntry>
       </rule>
     </decisionTable>
   </decision>

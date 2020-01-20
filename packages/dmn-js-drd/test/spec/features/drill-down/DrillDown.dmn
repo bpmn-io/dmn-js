@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="definitions_198l4os" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="definitions_198l4os" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="Decision_Table" name="A">
-    <extensionElements>
-      <biodi:bounds x="150" y="150" width="180" height="80" />
-    </extensionElements>
     <decisionTable id="decisionTable">
       <input id="input1" label="">
         <inputExpression id="inputExpression1" typeRef="string">
@@ -14,15 +11,21 @@
     </decisionTable>
   </decision>
   <decision id="Decision_LiteralExpression" name="B">
-    <extensionElements>
-      <biodi:bounds x="383" y="151" width="180" height="80" />
-    </extensionElements>
-    <variable id="InformationItem_1amry2v" />
+    <variable id="InformationItem_1amry2v" name="InformationItem_1amry2v" />
     <literalExpression id="LiteralExpression_1gyvidq" />
   </decision>
-  <decision id="Decision_0lnvug5" name="C">
-    <extensionElements>
-      <biodi:bounds x="151" y="268" width="180" height="80" />
-    </extensionElements>
-  </decision>
+  <decision id="Decision_0lnvug5" name="C" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_Table">
+        <dc:Bounds height="80" width="180" x="150" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="Decision_LiteralExpression">
+        <dc:Bounds height="80" width="180" x="383" y="151" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="Decision_0lnvug5">
+        <dc:Bounds height="80" width="180" x="151" y="268" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

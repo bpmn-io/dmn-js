@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="decision" name="decision">
-    <extensionElements>
-      <biodi:bounds x="-191" y="135" width="180" height="80" />
-    </extensionElements>
-  </decision>
-  <textAnnotation id="annotation">
-    <extensionElements>
-      <biodi:bounds x="106" y="137" width="100" height="80" />
-    </extensionElements>
-    <text>Annotation</text>
-  </textAnnotation>
-  <association>
-    <extensionElements>
-      <biodi:edge source="decision">
-        <biodi:waypoints x="-101" y="175" />
-        <biodi:waypoints x="156" y="177" />
-      </biodi:edge>
-    </extensionElements>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="decision" />
+  <association id="Association_0jsajmh">
     <sourceRef href="#decision" />
     <targetRef href="#annotation" />
   </association>
+  <textAnnotation id="annotation">
+    <text>Annotation</text>
+  </textAnnotation>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decision">
+        <dc:Bounds height="80" width="180" x="-191" y="135" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="annotation">
+        <dc:Bounds height="80" width="100" x="106" y="137" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="Association_0jsajmh">
+        <di:waypoint x="-101" y="175" />
+        <di:waypoint x="156" y="177" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

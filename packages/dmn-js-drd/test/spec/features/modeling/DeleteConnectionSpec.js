@@ -31,7 +31,7 @@ describe('features/modeling - #removeConnection', function() {
       // then
       expect(authorityRequirement.$parent).to.be.null;
 
-      expect(knowledgeSource.businessObject.extensionElements.values).to.have.length(1);
+      expect(knowledgeSource.incoming).to.have.length(0);
     }));
   });
 
@@ -53,7 +53,7 @@ describe('features/modeling - #removeConnection', function() {
       // then
       expect(authorityRequirement.$parent).to.exist;
 
-      expect(knowledgeSource.businessObject.extensionElements.values).to.have.length(2);
+      expect(knowledgeSource.incoming).to.have.length(1);
     }));
   });
 
@@ -76,7 +76,7 @@ describe('features/modeling - #removeConnection', function() {
       // then
       expect(authorityRequirement.$parent).to.be.null;
 
-      expect(knowledgeSource.businessObject.extensionElements.values).to.have.length(1);
+      expect(knowledgeSource.incoming).to.have.length(0);
     }));
   });
 

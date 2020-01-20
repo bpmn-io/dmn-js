@@ -191,7 +191,6 @@ describe('features/replace - drd replace', function() {
         var associationBo = association.businessObject;
 
         expect(associationBo.sourceRef.href).to.eql('#decision');
-        expect(associationBo.extensionElements.values[0].source).to.eql('decision');
       }
     ));
 
@@ -219,7 +218,6 @@ describe('features/replace - drd replace', function() {
       var associationBo = association.businessObject;
 
       expect(associationBo.sourceRef.href).to.eql('#decision');
-      expect(associationBo.extensionElements.values[0].source).to.eql('decision');
     }));
 
 
@@ -247,7 +245,6 @@ describe('features/replace - drd replace', function() {
       var associationBo = association.businessObject;
 
       expect(associationBo.sourceRef.href).to.eql('#decision');
-      expect(associationBo.extensionElements.values[0].source).to.eql('decision');
     }));
 
   });
