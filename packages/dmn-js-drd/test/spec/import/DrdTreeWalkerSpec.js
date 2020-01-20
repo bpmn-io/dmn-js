@@ -47,6 +47,26 @@ describe('import - DmnTreeWalker', function() {
   });
 
 
+  it('should assign current diagram to definitions', function(done) {
+
+    // given
+    var walker = createWalker();
+
+    createModdle(simpleXML, function(err, definitions, context, moddle) {
+
+      // when
+      walker.handleDefinitions(definitions);
+
+      // then
+      expect(definitions.di).to.exist;
+      expect(definitions.di.$type).to.eql('dmndi:DMNDiagram');
+
+      done();
+    });
+
+  });
+
+
   it('should error', function(done) {
 
     // given

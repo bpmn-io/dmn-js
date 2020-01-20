@@ -81,6 +81,9 @@ export default function DRDTreeWalker(handler, options) {
       throw new Error('no diagram to display');
     }
 
+    // assign current diagram to definitions so that it can accessed later
+    definitions.di = diagram;
+
     // load DI from selected diagram only
     handleDiagram(diagram);
 
