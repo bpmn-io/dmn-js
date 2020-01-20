@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="dish-decisions" name="Dish Decisions"
+  namespace="http://www.omg.org/spec/DMN/20180521/dish-example/"
+  xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+  xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"
+  xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/">
+  <decision id="foobar" name="Foobar" />
+  <decision id="season" name="Season">
+    <informationRequirement id="temperature_ir">
+      <requiredDecision href="#foobar"/>
+    </informationRequirement>
+  </decision>`
+  <decision id="guestCount" name="Guest Count" />
+  <textAnnotation id="textAnnotation">
+    <text>foobar</text>
+  </textAnnotation>
+  <association id="association">
+    <sourceRef href="#guestCount" />
+    <targetRef href="#textAnnotation" />
+  </association>
+  <businessKnowledgeModel id="menu" name="El menú" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_di1">
+      <dmndi:DMNShape id="_di3" dmnElementRef="season">
+        <dc:Bounds x="10" y="140" width="140" height="55" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di4" dmnElementRef="guestCount">
+        <dc:Bounds x="230" y="140" width="210" height="55" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_di5" dmnElementRef="foobar">
+        <dc:Bounds x="5" y="270" width="170" height="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="textAnnotation_di" dmnElementRef="textAnnotation">
+        <dc:Bounds x="240" y="400" width="125" height="45" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="association_di" dmnElementRef="association">
+        <di:waypoint xsi:type="dc:Point" x="330" y="195" />
+        <di:waypoint xsi:type="dc:Point" x="300" y="400" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="temperature_ir_di" dmnElementRef="temperature_ir">
+        <di:waypoint xsi:type="dc:Point" x="100" y="270" />
+        <di:waypoint xsi:type="dc:Point" x="75" y="195" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
