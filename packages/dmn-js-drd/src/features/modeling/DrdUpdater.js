@@ -5,13 +5,21 @@ import {
 
 import inherits from 'inherits';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import {
+  remove as collectionRemove,
+  add as collectionAdd
+} from 'diagram-js/lib/util/Collections';
+
+import {
+  is,
+  isAny
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 
 /**
- * Update DMN 1.1 information.
+ * Update DMN 1.3 information.
  */
 export default function DrdUpdater(
     connectionDocking,
@@ -224,6 +232,8 @@ DrdUpdater.prototype.updateParent = function(element, oldParent) {
       parentBo = parent && parent.businessObject;
 
   this.updateSemanticParent(businessObject, parentBo);
+
+  this.updateDiParent(businessObject.di, parentBo && parentBo.di);
 };
 
 DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
@@ -251,7 +261,7 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
     // remove from old parent
     children = businessObject.$parent.get(containment);
 
-    remove(children, businessObject);
+    collectionRemove(children, businessObject);
   }
 
   if (parent) {
@@ -269,9 +279,30 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
   }
 };
 
-// helpers //////////
-function remove(array, item) {
-  array.splice(array.indexOf(item), 1);
+DrdUpdater.prototype.updateDiParent = function(di, parentDi) {
 
-  return array;
-}
+  if (di.$parent === parentDi) {
+    return;
+  }
+
+  if (isAny(di, [ 'dmndi:DMNEdge', 'dmndi:DMNShape' ])) {
+
+    var diagram = parentDi || di;
+    while (!is(diagram, 'dmndi:DMNDiagram')) {
+      diagram = diagram.$parent;
+    }
+
+    var diagramElements = diagram.get('diagramElements');
+    if (parentDi) {
+      di.$parent = diagram;
+
+      collectionAdd(diagramElements, di);
+    } else {
+      di.$parent = null;
+
+      collectionRemove(diagramElements, di);
+    }
+  } else {
+    throw new Error('unsupported');
+  }
+};
