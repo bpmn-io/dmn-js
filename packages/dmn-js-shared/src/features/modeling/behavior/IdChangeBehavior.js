@@ -25,8 +25,6 @@ export default class IdChangeBehavior extends CommandInterceptor {
 
     drgElements.forEach(drgElement => {
       updateElementReferences(drgElement, oldProperties.id, properties.id);
-
-      updateEdges(drgElement, oldProperties.id, properties.id);
     });
   }
 
@@ -44,7 +42,7 @@ function isIdChange(oldProperties, properties) {
 function getDrgElements(element) {
   const definitions = element.$parent;
 
-  const drgElements = definitions.drgElements;
+  const drgElements = definitions.get('drgElement');
 
   return drgElements;
 }
@@ -108,22 +106,4 @@ function updateElementReferences(element, oldId, id) {
     }
 
   });
-}
-
-function updateEdges(element, oldId, id) {
-
-  if (element.extensionElements) {
-    element.extensionElements.values.forEach(extensionElement => {
-
-      if (is(extensionElement, 'biodi:Edge')) {
-
-        if (extensionElement.source === oldId) {
-          extensionElement.source = id;
-        }
-
-      }
-
-    });
-  }
-
 }
