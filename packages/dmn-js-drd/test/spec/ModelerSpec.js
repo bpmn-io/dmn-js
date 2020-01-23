@@ -16,7 +16,14 @@ describe('Modeler', function() {
   });
 
   function createModeler(xml, done) {
-    modeler = new DrdModeler({ container: container });
+    modeler = new DrdModeler({
+      container: container,
+      drd: {
+        keyboard: {
+          bindTo: document
+        }
+      }
+    });
 
     modeler.importXML(xml, function(err, warnings) {
       done(err, warnings, modeler);
