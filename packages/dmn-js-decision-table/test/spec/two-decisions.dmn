@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="Check Order">
-    <extensionElements>
-      <biodi:bounds x="150" y="150" width="180" height="80" />
-    </extensionElements>
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
         <inputExpression id="inputExpression1" typeRef="string">
@@ -20,74 +17,67 @@
       <rule id="rule1">
         <description>Bronze is really not that good</description>
         <inputEntry id="inputEntry1">
-          <text><![CDATA["bronze"]]></text>
+          <text>"bronze"</text>
         </inputEntry>
         <inputEntry id="inputEntry2">
           <text></text>
         </inputEntry>
         <outputEntry id="outputEntry1">
-          <text><![CDATA["notok"]]></text>
+          <text>"notok"</text>
         </outputEntry>
         <outputEntry id="outputEntry2">
-          <text><![CDATA["work on your status first, as bronze you're not going to get anything"]]></text>
+          <text>"work on your status first, as bronze you're not going to get anything"</text>
         </outputEntry>
       </rule>
       <rule id="rule2">
         <description>Silver is actually quite okay</description>
         <inputEntry id="inputEntry3">
-          <text><![CDATA["silver"]]></text>
+          <text>"silver"</text>
         </inputEntry>
         <inputEntry id="inputEntry4">
-          <text><![CDATA[< 1000]]></text>
+          <text>&lt; 1000</text>
         </inputEntry>
         <outputEntry id="outputEntry3">
-          <text><![CDATA["ok"]]></text>
+          <text>"ok"</text>
         </outputEntry>
         <outputEntry id="outputEntry4">
-          <text><![CDATA["you little fish will get what you want"]]></text>
+          <text>"you little fish will get what you want"</text>
         </outputEntry>
       </rule>
       <rule id="rule3">
         <description>Same here</description>
         <inputEntry id="inputEntry5">
-          <text><![CDATA["silver"]]></text>
+          <text>"silver"</text>
         </inputEntry>
         <inputEntry id="inputEntry6">
-          <text><![CDATA[>= 1000]]></text>
+          <text>&gt;= 1000</text>
         </inputEntry>
         <outputEntry id="outputEntry5">
-          <text><![CDATA["notok"]]></text>
+          <text>"notok"</text>
         </outputEntry>
         <outputEntry id="outputEntry6">
-          <text><![CDATA["you took too much man, you took too much!"]]></text>
+          <text>"you took too much man, you took too much!"</text>
         </outputEntry>
       </rule>
       <rule id="rule4">
         <description>Gold is really good, try even harder next time though</description>
         <inputEntry id="inputEntry7">
-          <text><![CDATA["gold"]]></text>
+          <text>"gold"</text>
         </inputEntry>
         <inputEntry id="inputEntry8">
           <text></text>
         </inputEntry>
         <outputEntry id="outputEntry7">
-          <text><![CDATA["ok"]]></text>
+          <text>"ok"</text>
         </outputEntry>
         <outputEntry id="outputEntry8">
-          <text><![CDATA["you get anything you want"]]></text>
+          <text>"you get anything you want"</text>
         </outputEntry>
       </rule>
     </decisionTable>
   </decision>
   <decision id="foo" name="Other Decision">
-    <extensionElements>
-      <biodi:bounds x="362" y="149" width="180" height="80" />
-      <biodi:edge source="decision">
-        <biodi:waypoints x="330" y="190" />
-        <biodi:waypoints x="362" y="189" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_0ezayqu">
       <requiredDecision href="#decision" />
     </informationRequirement>
     <decisionTable id="DecisionTable_1qmj0d2">
@@ -97,4 +87,18 @@
       <output id="OutputClause_06kcap5" typeRef="string" />
     </decisionTable>
   </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decision">
+        <dc:Bounds height="80" width="180" x="150" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="foo">
+        <dc:Bounds height="80" width="180" x="362" y="149" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge dmnElementRef="InformationRequirement_0ezayqu">
+        <di:waypoint x="330" y="190" />
+        <di:waypoint x="362" y="189" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

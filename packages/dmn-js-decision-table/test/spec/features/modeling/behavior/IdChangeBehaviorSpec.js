@@ -25,13 +25,13 @@ describe('IdChangeBehavior', function() {
 
     const definitions = decision.$parent;
 
-    const { drgElements } = definitions;
+    const { drgElement } = definitions;
 
-    const dishDecision = drgElements.filter(
+    const dishDecision = drgElement.filter(
       drgElement => drgElement.id === 'dish-decision'
     )[0];
 
-    const seasonDecision = drgElements.filter(
+    const seasonDecision = drgElement.filter(
       drgElement => drgElement.id === 'season'
     )[0];
 
@@ -44,7 +44,6 @@ describe('IdChangeBehavior', function() {
 
       // then
       expect(dishDecision.informationRequirement[0].requiredDecision.href).to.eql('#foo');
-      expect(dishDecision.extensionElements.values[1].source).to.eql('foo');
     });
   }));
 
