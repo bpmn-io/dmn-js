@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="Check Order">
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
@@ -11,16 +11,16 @@
       <rule id="rule1">
         <description>Bronze is really not that good</description>
         <inputEntry id="inputEntry1">
-          <text><![CDATA[date and time("2018-01-25T00:00:00")]]></text>
+          <text>date and time("2018-01-25T00:00:00")</text>
         </inputEntry>
         <outputEntry id="outputEntry1">
-          <text><![CDATA[date and time("2018-01-25T00:00:00")]]></text>
+          <text>date and time("2018-01-25T00:00:00")</text>
         </outputEntry>
       </rule>
       <rule id="rule2">
         <description>Silver is actually quite okay</description>
         <inputEntry id="inputEntry3">
-          <text><![CDATA[< date and time("2018-01-25T00:00:00")]]></text>
+          <text>&lt; date and time("2018-01-25T00:00:00")</text>
         </inputEntry>
         <outputEntry id="outputEntry3">
           <text>foo</text>
@@ -29,7 +29,7 @@
       <rule id="rule3">
         <description>Same here</description>
         <inputEntry id="inputEntry5">
-          <text><![CDATA[> date and time("2018-01-25T00:00:00")]]></text>
+          <text>&gt; date and time("2018-01-25T00:00:00")</text>
         </inputEntry>
         <outputEntry id="outputEntry5">
           <text></text>
@@ -38,7 +38,7 @@
       <rule id="rule4">
         <description>Gold is really good, try even harder next time though</description>
         <inputEntry id="inputEntry7">
-          <text><![CDATA[[date and time("2018-01-25T00:00:00")..date and time("2018-01-25T23:59:59")]]]></text>
+          <text>[date and time("2018-01-25T00:00:00")..date and time("2018-01-25T23:59:59")]</text>
         </inputEntry>
         <outputEntry id="outputEntry7">
           <text></text>

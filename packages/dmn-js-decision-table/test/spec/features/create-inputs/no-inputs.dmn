@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="Foo">
     <decisionTable id="decisionTable">
       <output id="output1" label="Foo" name="foo" typeRef="string" />
       <rule id="rule1">
         <description>Foo</description>
         <outputEntry id="outputEntry1">
-          <text><![CDATA["foo"]]></text>
+          <text>"foo"</text>
         </outputEntry>
       </rule>
     </decisionTable>
