@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_04uxikv" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="Definitions_04uxikv" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="Decision_0" name="Decision 0">
     <decisionTable id="DecisionTable_0">
       <input id="Input_0">
@@ -10,8 +10,7 @@
       <output id="Output_0" typeRef="string" />
     </decisionTable>
   </decision>
-  <decision id="Decision_1">
-    <extensionElements></extensionElements>
+  <decision id="Decision_1" name="Decision_1">
     <decisionTable id="DecisionTable_1">
       <input id="Input_1">
         <inputExpression id="InputExpression_1" typeRef="string" />
@@ -19,10 +18,7 @@
       <output id="Output_1" typeRef="string" />
     </decisionTable>
   </decision>
-  <decision id="Decision_2">
-  </decision>
-  <decision id="Decision_3">
-  </decision>
-  <inputData id="InputData_1">
-  </inputData>
+  <decision id="Decision_2" name="Decision_2" />
+  <decision id="Decision_3" name="Decision_3" />
+  <inputData id="InputData_1" name="InputData_1" />
 </definitions>
