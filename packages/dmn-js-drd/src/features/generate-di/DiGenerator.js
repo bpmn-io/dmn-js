@@ -11,39 +11,41 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
  * @param {ElementFactory} elementFactory
  * @param {EventBus} eventBus
  */
-export default function DiGenerator(drdFactory, elementFactory, eventBus) {
+export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpdater) {
   function createDi(definitions) {
+
+    // retrieve or create dmnDI
+    var dmnDI = definitions.dmnDI;
+
+    if (!dmnDI) {
+      dmnDI = drdFactory.create('dmndi:DMNDI');
+      definitions.set('dmnDI', dmnDI);
+    }
+
+    var diagram = drdFactory.create('dmndi:DMNDiagram');
+
+    dmnDI.set('diagrams', [ diagram ]);
 
     var index = 0;
 
-    forEach(definitions.drgElements, function(drgElement) {
+    forEach(definitions.get('drgElement'), function(drgElement) {
 
       // generate DI for decisions only
       if (!is(drgElement, 'dmn:Decision')) {
         return;
       }
 
-      var extensionElements = drgElement.extensionElements;
-
-      if (!extensionElements) {
-        extensionElements = drgElement.extensionElements =
-          drdFactory.createExtensionElements();
-
-        extensionElements.$parent = drgElement;
-      }
 
       var dimensions = elementFactory._getDefaultSize(drgElement);
 
-      var bounds = drdFactory.createDiBounds({
+      var di = drdFactory.createDiShape(drgElement, {
         x: 150 + (index * 30),
         y: 150 + (index * 30),
         width: dimensions.width,
         height: dimensions.height
       });
 
-      extensionElements.get('values').push(bounds);
-
-      bounds.$parent = extensionElements;
+      drdUpdater.updateDiParent(di, diagram);
 
       index++;
     });
@@ -59,5 +61,6 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus) {
 DiGenerator.$inject = [
   'drdFactory',
   'elementFactory',
-  'eventBus'
+  'eventBus',
+  'drdUpdater'
 ];
