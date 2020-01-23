@@ -349,7 +349,7 @@ export default class Manager {
 
     var viewProviders = this._getViewProviders();
 
-    var displayableElements = [ definitions, ...(definitions.drgElements || []) ];
+    var displayableElements = [ definitions, ...(definitions.drgElement || []) ];
 
     // compute list of available views
     this._views = displayableElements.reduce((views, element) => {
