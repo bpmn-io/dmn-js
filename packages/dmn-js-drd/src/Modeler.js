@@ -2,6 +2,25 @@ import inherits from 'inherits';
 
 import NavigatedViewer from './NavigatedViewer';
 
+import AlignElementsModule from 'diagram-js/lib/features/align-elements';
+import AutoScrollModule from 'diagram-js/lib/features/auto-scroll';
+import BendpointsModule from 'diagram-js/lib/features/bendpoints';
+import ContextPadModule from './features/context-pad';
+import ConnectPreviewModule from 'diagram-js/lib/features/connection-preview';
+import DefinitionPropertiesModule from './features/definition-properties/modeler';
+import DistributeElementsModule from './features/distribute-elements';
+import EditorActionsModule from './features/editor-actions';
+import GenerateDiModule from './features/generate-di';
+import GridSnappingModule from 'diagram-js/lib/features/grid-snapping';
+import KeyboardModule from './features/keyboard';
+import KeyboardMoveModule from 'diagram-js/lib/navigation/keyboard-move';
+import KeyboardMoveSelectionModule from 'diagram-js/lib/features/keyboard-move-selection';
+import LabelEditingModule from './features/label-editing';
+import ModelingModule from './features/modeling';
+import MoveModule from 'diagram-js/lib/features/move';
+import PaletteModule from './features/palette';
+import SnappingModule from 'diagram-js/lib/features/snapping';
+
 /**
  * A modeler for DMN tables.
  *
@@ -90,36 +109,27 @@ inherits(Modeler, NavigatedViewer);
 // - viewer + navigation modules
 // - modeling modules
 
-import BendpointsModule from 'diagram-js/lib/features/bendpoints';
-import ContextPadModule from './features/context-pad';
-import ConnectPreviewModule from 'diagram-js/lib/features/connection-preview';
-import DefinitionPropertiesModule from './features/definition-properties/modeler';
-import EditorActionsModule from './features/editor-actions';
-import GenerateDiModule from './features/generate-di';
-import KeyboardModule from './features/keyboard';
-import KeyboardMoveModule from 'diagram-js/lib/navigation/keyboard-move';
-import KeyboardMoveSelectionModule from 'diagram-js/lib/features/keyboard-move-selection';
-import LabelEditingModule from './features/label-editing';
-import ModelingModule from './features/modeling';
-import MoveModule from 'diagram-js/lib/features/move';
-import PaletteModule from './features/palette';
-
 Modeler.prototype._modelingModules = [
 
   // modeling components
+  AlignElementsModule,
+  AutoScrollModule,
   BendpointsModule,
   ContextPadModule,
   ConnectPreviewModule,
   DefinitionPropertiesModule,
+  DistributeElementsModule,
   EditorActionsModule,
   GenerateDiModule,
+  GridSnappingModule,
   KeyboardModule,
   KeyboardMoveModule,
   KeyboardMoveSelectionModule,
   LabelEditingModule,
   ModelingModule,
   MoveModule,
-  PaletteModule
+  PaletteModule,
+  SnappingModule
 ];
 
 Modeler.prototype._modules = [].concat(
