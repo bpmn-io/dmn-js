@@ -2,13 +2,11 @@ import inherits from 'inherits';
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-import { getMid } from 'diagram-js/lib/layout/LayoutUtil';
-
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 /**
- * Create DI for new connections.
+ * Creates DMN-specific refs for new connection.
  *
  * @param {DrdFactory} drdFactory
  * @param {Injector} injector
@@ -23,14 +21,7 @@ export default function CreateConnectionBehavior(drdFactory, injector) {
         target = context.target,
         elementRef,
         sourceRef,
-        targetRef,
-        extensionElements;
-
-    // create DI
-    var edge = context.di = drdFactory.createDiEdge(source, [
-      getMid(source),
-      getMid(target)
-    ]);
+        targetRef;
 
     if (is(connection, 'dmn:Association')) {
       sourceRef = connectionBo.sourceRef = drdFactory
@@ -46,13 +37,6 @@ export default function CreateConnectionBehavior(drdFactory, injector) {
         });
 
       targetRef.$parent = connectionBo;
-
-      extensionElements = connectionBo.extensionElements = drdFactory
-        .create('dmn:ExtensionElements');
-
-      extensionElements.values = [ edge ];
-
-      edge.$parent = extensionElements;
     } else {
       elementRef = connectionBo[ 'required' + getRequirementType(source) ] = drdFactory
         .create('dmn:DMNElementReference', {

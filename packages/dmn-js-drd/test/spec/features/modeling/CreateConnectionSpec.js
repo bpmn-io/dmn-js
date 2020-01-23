@@ -3,24 +3,8 @@ import {
   inject
 } from 'test/TestHelper';
 
-import {
-  getMid
-} from 'diagram-js/lib/layout/LayoutUtil';
-
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
-
-import { find } from 'min-dash';
-
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
-
-
-function expectWaypoint(waypoint, element) {
-  var midPoint = getMid(element);
-
-  expect(waypoint.x).to.eql(midPoint.x);
-  expect(waypoint.y).to.eql(midPoint.y);
-}
 
 
 describe('features/modeling - create connection', function() {
@@ -40,10 +24,10 @@ describe('features/modeling - create connection', function() {
         input = inputShape.businessObject,
         decisionShape = elementRegistry.get('decision_1'),
         decision = decisionShape.businessObject,
-        decisionExtensionElements = decision.extensionElements.values,
         informationRequirementConnection,
         informationRequirement,
         waypoints,
+        diWaypoints,
         requiredInput;
 
 
@@ -52,7 +36,8 @@ describe('features/modeling - create connection', function() {
 
     informationRequirement = informationRequirementConnection.businessObject;
 
-    waypoints = decisionExtensionElements[1].waypoints;
+    waypoints = informationRequirementConnection.waypoints;
+    diWaypoints = informationRequirement.di.waypoint;
 
     requiredInput = informationRequirement.requiredInput;
 
@@ -71,11 +56,14 @@ describe('features/modeling - create connection', function() {
     expect(decision.informationRequirement).to.include(informationRequirement);
     expect(rootElement.children).to.include(informationRequirementConnection);
 
-    expect(waypoints[0].x).to.eql(decisionExtensionElements[1].waypoints[0].x);
-    expect(waypoints[0].y).to.eql(decisionExtensionElements[1].waypoints[0].y);
+    // di
+    expect(informationRequirement.di.$parent).to.eql(rootElement.businessObject.di);
 
-    expect(waypoints[1].x).to.eql(decisionExtensionElements[1].waypoints[1].x);
-    expect(waypoints[1].y).to.eql(decisionExtensionElements[1].waypoints[1].y);
+    expect(waypoints[0].x).to.eql(diWaypoints[0].x);
+    expect(waypoints[0].y).to.eql(diWaypoints[0].y);
+
+    expect(waypoints[1].x).to.eql(diWaypoints[1].x);
+    expect(waypoints[1].y).to.eql(diWaypoints[1].y);
   }));
 
 
@@ -105,7 +93,7 @@ describe('features/modeling - create connection', function() {
     expect(rootElement.children).to.not.include(informationRequirementConnection);
 
     // di
-    expect(decision.extensionElements.values.length).to.eql(1);
+    expect(informationRequirement.di.$parent).to.be.null;
   }));
 
 
@@ -136,7 +124,7 @@ describe('features/modeling - create connection', function() {
     expect(rootElement.children).to.include(informationRequirementConnection);
 
     // di
-    expect(decision.extensionElements.values.length).to.eql(2);
+    expect(informationRequirement.di.$parent).to.eql(rootElement.businessObject.di);
   }));
 
 
@@ -170,11 +158,11 @@ describe('features/modeling - create connection', function() {
           waypoints;
 
       // when
-      modeling.createConnection(inputShape, decisionShape, {
+      var connection = modeling.createConnection(inputShape, decisionShape, {
         type: 'dmn:InformationRequirement'
       }, rootElement);
 
-      waypoints = decisionShape.businessObject.extensionElements.values[1].waypoints;
+      waypoints = connection.businessObject.di.waypoint;
 
       // then
       expect(waypoints[0].$attrs.type).to.be.undefined;
@@ -192,8 +180,6 @@ describe('features/modeling - create connection', function() {
         var rootElement = canvas.getRootElement(),
             source = elementRegistry.get('inputData_1'),
             target = elementRegistry.get('annotation_1'),
-            sourceBounds = source.businessObject.extensionElements.values[0],
-            targetBounds = target.businessObject.extensionElements.values[0],
             connection,
             connectionBO,
             sourceRef,
@@ -208,7 +194,7 @@ describe('features/modeling - create connection', function() {
         sourceRef = connectionBO.sourceRef;
         targetRef = connectionBO.targetRef;
 
-        waypoints = connectionBO.extensionElements.values[0].waypoints;
+        waypoints = connectionBO.di.waypoint;
 
         // then
         expect(connection).to.exist;
@@ -225,10 +211,12 @@ describe('features/modeling - create connection', function() {
         expect(connectionBO.$parent).to.eql(rootElement.businessObject);
 
         expect(rootElement.children).to.include(connection);
-        expect(rootElement.businessObject.artifacts).to.include(connectionBO);
+        expect(rootElement.businessObject.get('artifact')).to.include(connectionBO);
 
-        expectWaypoint(waypoints[0], sourceBounds);
-        expectWaypoint(waypoints[1], targetBounds);
+        expect(waypoints[0].x).to.eql(connection.waypoints[0].x);
+        expect(waypoints[0].y).to.eql(connection.waypoints[0].y);
+        expect(waypoints[1].x).to.eql(connection.waypoints[1].x);
+        expect(waypoints[1].y).to.eql(connection.waypoints[1].y);
       }
     ));
 
@@ -250,7 +238,7 @@ describe('features/modeling - create connection', function() {
       expect(connectionBO.$parent).to.be.null;
 
       expect(rootElement.children).to.not.include(connection);
-      expect(rootElement.businessObject.artifacts).to.not.include(connectionBO);
+      expect(rootElement.businessObject.get('artifact')).to.not.include(connectionBO);
     }));
 
 
@@ -273,7 +261,7 @@ describe('features/modeling - create connection', function() {
       expect(connectionBO.$parent).to.eql(rootElementBO);
 
       expect(rootElement.children).to.include(connection);
-      expect(rootElementBO.artifacts).to.include(connectionBO);
+      expect(rootElementBO.get('artifact')).to.include(connectionBO);
     }));
 
   });
@@ -301,15 +289,9 @@ describe('features/modeling - create connection', function() {
         expect(connection.source).to.equal(inputData);
         expect(connection.target).to.equal(decision);
 
-        var decisionBo = decision.businessObject,
-            extensionElements = decisionBo.extensionElements;
-
-        var edge = find(extensionElements.values, function(extensionElement) {
-          return is(extensionElement, 'biodi:Edge');
-        });
+        var edge = connection.businessObject.di;
 
         expect(edge).to.exist;
-        expect(edge.source).to.equal(inputData.id);
       })
     );
 

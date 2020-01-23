@@ -20,7 +20,7 @@ describe('features/modeling', function() {
 
   describe('association', function() {
 
-    it('should create DI', inject(function(elementRegistry, modeling) {
+    it('should set sourceRef and targetRef', inject(function(elementRegistry, modeling) {
 
       // given
       var decision = elementRegistry.get('Decision_1'),
@@ -40,16 +40,6 @@ describe('features/modeling', function() {
       expect(targetRef).to.exist;
       expect(targetRef.$parent).to.equal(associationBo);
       expect(targetRef.href).to.equal('#TextAnnotation_1');
-
-      var extensionElements = associationBo.extensionElements;
-
-      expect(extensionElements.values).to.have.lengthOf(1);
-
-      var edge = extensionElements.values[0];
-
-      expect(edge).to.exist;
-      expect(edge.$parent).to.equal(extensionElements);
-      expect(edge.source).to.equal('Decision_1');
     }));
 
   });
@@ -57,7 +47,7 @@ describe('features/modeling', function() {
 
   describe('other', function() {
 
-    it('should create DI', inject(function(elementRegistry, modeling) {
+    it('should create requiredDecision', inject(function(elementRegistry, modeling) {
 
       // given
       var decision1 = elementRegistry.get('Decision_1'),
