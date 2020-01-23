@@ -1,16 +1,16 @@
-<definitions id="dish"
-             name="Desired Dish"
-             namespace="party"
-             xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd"
-             xmlns:camunda="http://camunda.org/schema/1.0/dmn"
-             xmlns:biodi="http://bpmn.io/ns/di">
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Desired Dish" namespace="party">
   <decision id="season" name="Season">
-    <extensionElements>
-      <biodi:bounds x="150" y="10" width="100" height="55" />
-    </extensionElements>
-    <variable name="season" typeRef="string" />
-    <literalExpression expressionLanguage="Javascript">
+    <variable id="InformationItem_16229yj" name="season" typeRef="string" />
+    <literalExpression id="LiteralExpression_0hs8xyn" expressionLanguage="Javascript">
       <text>calendar.getSeason(date)</text>
     </literalExpression>
   </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="season">
+        <dc:Bounds height="55" width="100" x="150" y="10" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>
