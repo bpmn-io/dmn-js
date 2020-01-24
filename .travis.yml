@@ -11,8 +11,12 @@ jobs:
         - npx codecov
     - stage: update examples
       script: './tasks/stages/update-examples'
+    - stage: update demo
+      script: './tasks/stages/update-demo'
 
 stages:
   - test
   - name: update examples
+    if: tag =~ ^v\d
+  - name: update demo
     if: tag =~ ^v\d
