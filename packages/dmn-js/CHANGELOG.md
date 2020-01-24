@@ -6,6 +6,14 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.4.0
+
+* `FEAT(drd)`: add grid snapping
+* `FEAT(drd)`: add element to element snapping
+* `FEAT(drd)`: add keyboard selection move
+* `FEAT(drd)`: add alignment and distribution utilities
+* `CHORE`: bump to `diagram-js@6.3.0`
+
 ## 7.3.0
 
 * `FEAT(decision-table)`: add i18n support ([#446](https://github.com/bpmn-io/dmn-js/pull/446))
