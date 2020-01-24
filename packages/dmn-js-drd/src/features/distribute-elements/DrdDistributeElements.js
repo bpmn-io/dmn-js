@@ -16,9 +16,12 @@ export default function DrdDistributeElements(distributeElements) {
   distributeElements.registerFilter(function(elements) {
     return filter(elements, function(element) {
 
-      // TODO(nikku): add elements that cannot be distributed
       var cannotDistribute = isAny(element, [
-
+        'dmn:AuthorityRequirement',
+        'dmn:InformationRequirement',
+        'dmn:KnowledgeRequirement',
+        'dmn:Association',
+        'dmn:TextAnnotation'
       ]);
 
       return !(element.labelTarget || cannotDistribute);
