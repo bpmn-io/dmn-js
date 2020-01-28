@@ -4,7 +4,7 @@ import {
 
 
 /**
- * A palette provider for DMN 1.1 elements.
+ * A palette provider for DMN elements.
  */
 export default function PaletteProvider(
     palette, create, elementFactory,

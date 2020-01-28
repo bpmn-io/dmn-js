@@ -25,7 +25,7 @@ import {
 
 
 /**
- * A viewer for DMN 1.1 diagrams.
+ * A viewer for DMN diagrams.
  *
  * Have a look at {@link NavigatedViewer} or {@link Modeler} for bundles that include
  * additional features.
@@ -87,7 +87,7 @@ export default function Viewer(options) {
 inherits(Viewer, Diagram);
 
 /**
- * Export the currently displayed DMN 1.1 diagram as
+ * Export the currently displayed DMN diagram as
  * an SVG image.
  *
  * @param {Object} [options]

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=master)](https://travis-ci.org/bpmn-io/dmn-js)
 
-View and edit DMN 1.1 diagrams in the browser.
+View and edit DMN 1.3 diagrams in the browser.
 
 
 ## Installation
@@ -15,10 +15,10 @@ into your node-style web-application.
 ## Usage
 
 To get started, create a [dmn-js](https://github.com/bpmn-io/dmn-js) instance
-and render [DMN 1.1 diagrams](http://www.omg.org/spec/DMN/About-DMN/) in the browser:
+and render [DMN 1.3 diagrams](http://www.omg.org/spec/DMN/About-DMN/) in the browser:
 
 ```javascript
-var xml; // my DMN 1.1 xml
+var xml; // my DMN 1.3 xml
 var viewer = new DmnJS({
   container: 'body'
 });
@@ -65,7 +65,7 @@ viewer.detach();
 
 dmn-js builds on top of a few additional powerful tools:
 
-* [dmn-moddle](https://github.com/bpmn-io/dmn-moddle): Read / write support for DMN 1.1 XML
+* [dmn-moddle](https://github.com/bpmn-io/dmn-moddle): Read / write support for DMN 1.3 XML
 * [diagram-js](https://github.com/bpmn-io/diagram-js): Diagram rendering and editing toolkit
 * [table-js](https://github.com/bpmn-io/table-js): Table rendering and editing toolkit
 

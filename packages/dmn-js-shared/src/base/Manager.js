@@ -49,7 +49,7 @@ export default class Manager {
   }
 
   /**
-   * Parse and render a DMN 1.1 diagram.
+   * Parse and render a DMN diagram.
    *
    * Once finished the viewer reports back the result to the
    * provided callback function with (err, warnings).
@@ -66,7 +66,7 @@ export default class Manager {
    *
    * You can use these events to hook into the life-cycle.
    *
-   * @param {String} xml the DMN 1.1 xml
+   * @param {String} xml the DMN xml
    * @param {Object} [options]
    * @param {Boolean} [options.open=true]
    * @param {Function} [done] invoked with (err, warnings=[])
@@ -162,8 +162,8 @@ export default class Manager {
   }
 
   /**
-   * Export the currently displayed DMN 1.1 diagram as
-   * a DMN 1.1 XML document.
+   * Export the currently displayed DMN diagram as
+   * a DMN XML document.
    *
    * ## Life-Cycle Events
    *
@@ -551,7 +551,7 @@ function ensureUnit(val) {
 
 function checkValidationError(err) {
 
-  // check if we can help the user by indicating wrong DMN 1.1 xml
+  // check if we can help the user by indicating wrong DMN 1.3 xml
   // (in case he or the exporting tool did not get that right)
 
   var pattern = /unparsable content <([^>]+)> detected([\s\S]*)$/,
@@ -560,7 +560,7 @@ function checkValidationError(err) {
   if (match) {
     err.message =
       'unparsable content <' + match[1] + '> detected; ' +
-      'this may indicate an invalid DMN 1.1 diagram file' + match[2];
+      'this may indicate an invalid DMN 1.3 diagram file' + match[2];
   }
 
   return err;

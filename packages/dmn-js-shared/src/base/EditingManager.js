@@ -62,7 +62,7 @@ export default class EditingManager extends Manager {
     var moddle = super._createModdle(options);
 
     // attach ids to moddle to be able to track
-    // and validated ids in the DMN 1.1 XML document
+    // and validated ids in the DMN XML document
     // tree
     moddle.ids = new Ids([ 32, 36, 1 ]);
 
