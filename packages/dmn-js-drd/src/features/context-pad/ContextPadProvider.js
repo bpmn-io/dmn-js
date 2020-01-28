@@ -14,7 +14,7 @@ import {
 
 
 /**
-* A provider for DMN 1.1 elements context pad
+* A provider for DMN elements context pad
 */
 export default function ContextPadProvider(
     eventBus, contextPad, modeling,

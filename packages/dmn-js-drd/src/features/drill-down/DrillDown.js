@@ -29,7 +29,7 @@ var PROVIDERS = [
 
 /**
  * Displays overlays that can be clicked in order to drill
- * down into a DMN 1.1 element.
+ * down into a DMN element.
  */
 export default class DrillDown {
 

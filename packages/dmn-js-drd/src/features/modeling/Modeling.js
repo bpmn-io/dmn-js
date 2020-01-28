@@ -7,7 +7,7 @@ import IdClaimHandler from './cmd/IdClaimHandler.js';
 
 
 /**
- * DMN 1.1 modeling.
+ * DMN modeling.
  *
  * @param {Canvas} canvas
  * @param {CommandStack} commandStack
