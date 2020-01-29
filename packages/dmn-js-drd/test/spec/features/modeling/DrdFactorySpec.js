@@ -20,23 +20,32 @@ describe('features/modeling - DrdFactory', function() {
 
     it('should return instance', inject(function(drdFactory) {
 
+      // when
       var task = drdFactory.create('dmn:Decision');
+
+      // then
       expect(task).to.exist;
       expect(task.$type).to.equal('dmn:Decision');
     }));
 
 
     it('should assign id for dmn:DecisionTable', inject(function(drdFactory) {
+
+      // when
       var task = drdFactory.create('dmn:DecisionTable');
 
+      // then
       expect(task.$type).to.equal('dmn:DecisionTable');
       expect(task.id).to.match(/^DecisionTable_/g);
     }));
 
 
     it('should assign id for dmn:InformationRequirement', inject(function(drdFactory) {
+
+      // when
       var task = drdFactory.create('dmn:InformationRequirement');
 
+      // then
       expect(task.$type).to.equal('dmn:InformationRequirement');
       expect(task.id).to.match(/^InformationRequirement/g);
     }));
@@ -61,10 +70,7 @@ describe('features/modeling - DrdFactory', function() {
       // then
       expect(result.$type).to.eql('dc:Bounds');
 
-      expect(result.x).to.eql(bounds.x);
-      expect(result.y).to.eql(bounds.y);
-      expect(result.height).to.eql(bounds.height);
-      expect(result.width).to.eql(bounds.width);
+      expect(result).to.have.bounds(bounds);
     }));
 
     it('should create waypoints', inject(function(drdFactory) {
@@ -91,6 +97,7 @@ describe('features/modeling - DrdFactory', function() {
       });
     }));
 
+
     it('should create dmndi:DMNShape', inject(function(drdFactory) {
 
       // given
@@ -108,14 +115,10 @@ describe('features/modeling - DrdFactory', function() {
       // then
       expect(result.$type).to.eql('dmndi:DMNShape');
       expect(result.dmnElementRef).to.eql(decision);
+      expect(result).to.have.bounds(bounds);
 
       var shapeBounds = result.bounds;
-      expect(shapeBounds).to.exist;
       expect(shapeBounds.$type).to.eql('dc:Bounds');
-      expect(shapeBounds.x).to.eql(bounds.x);
-      expect(shapeBounds.y).to.eql(bounds.y);
-      expect(shapeBounds.height).to.eql(bounds.height);
-      expect(shapeBounds.width).to.eql(bounds.width);
     }));
 
 
