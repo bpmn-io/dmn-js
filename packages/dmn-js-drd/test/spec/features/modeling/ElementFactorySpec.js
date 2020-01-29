@@ -18,7 +18,7 @@ describe('features/modeling - create elements', function() {
   beforeEach(bootstrapModeler(emptyDefsXML, { modules: testModules }));
 
 
-  function expectShapeElement(element, attrs) {
+  function expectShape(element, attrs) {
     var businessObject = element.businessObject,
         di = businessObject.di;
 
@@ -41,7 +41,7 @@ describe('features/modeling - create elements', function() {
     expect(element.height).to.equal(attrs.height);
   }
 
-  function expectEdgeElement(element, attrs) {
+  function expectEdge(element, attrs) {
     var businessObject = element.businessObject,
         di = businessObject.di;
 
@@ -115,7 +115,7 @@ describe('features/modeling - create elements', function() {
         modeling.createShape(decision, { x: 100, y: 100 }, rootElement);
 
         // then
-        expectShapeElement(decision, {
+        expectShape(decision, {
           type: 'dmn:Decision',
           width: 180,
           height: 80,
@@ -142,7 +142,7 @@ describe('features/modeling - create elements', function() {
         modeling.createShape(inputData, { x: 100, y: 100 }, rootElement);
 
         // then
-        expectShapeElement(inputData, {
+        expectShape(inputData, {
           type: 'dmn:InputData',
           width: 125,
           height: 45,
@@ -169,7 +169,7 @@ describe('features/modeling - create elements', function() {
         modeling.createShape(knowledgeSource, { x: 100, y: 100 }, rootElement);
 
         // then
-        expectShapeElement(knowledgeSource, {
+        expectShape(knowledgeSource, {
           type: 'dmn:KnowledgeSource',
           width: 100,
           height: 63,
@@ -200,7 +200,7 @@ describe('features/modeling - create elements', function() {
         );
 
         // then
-        expectShapeElement(businessKnowledgeModel, {
+        expectShape(businessKnowledgeModel, {
           type: 'dmn:BusinessKnowledgeModel',
           width: 135,
           height: 46,
@@ -228,7 +228,7 @@ describe('features/modeling - create elements', function() {
         modeling.createShape(textAnnotation, { x: 100, y: 100 }, rootElement);
 
         // then
-        expectShapeElement(textAnnotation, {
+        expectShape(textAnnotation, {
           type: 'dmn:TextAnnotation',
           width: 100,
           height: 80,
@@ -281,7 +281,7 @@ describe('features/modeling - create elements', function() {
         modeling.createConnection(input, decision, informationRequirement, rootElement);
 
         // then
-        expectEdgeElement(informationRequirement, {
+        expectEdge(informationRequirement, {
           type: 'dmn:InformationRequirement',
           businessObject: businessObject,
           waypoints: [
