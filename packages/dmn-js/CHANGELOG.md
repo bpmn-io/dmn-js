@@ -6,6 +6,19 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.0.0-alpha.0
+
+* `FEAT`: migrate to DMN 1.3 ([#452](https://github.com/bpmn-io/dmn-js/pull/452))
+* `FEAT(drd)`: bind current diagram to `dmn:Definitions#di`
+* `CHORE`: bump to `dmn-moddle@8.0.0`
+
+### Breaking Changes
+
+* Dropped DMN 1.1 support. Migration to DMN 1.3 necessary (c.f. [@bpmn-io/dmn-migrate](https://github.com/bpmn-io/dmn-migrate)).
+* `DrdFactory` uses `dmndi` namespace instead of `biodi`.
+* DI waypoints of new dmn:Association no longer point to middle of source and target and have same
+  coordinates as connection waypoints.
+
 ## 7.3.0
 
 * `FEAT(drd)`: add grid snapping
