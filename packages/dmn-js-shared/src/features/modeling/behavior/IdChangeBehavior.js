@@ -2,7 +2,10 @@ import { forEach } from 'min-dash';
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-import { is } from '../../../util/ModelUtil';
+import {
+  is,
+  getBusinessObject
+} from '../../../util/ModelUtil';
 
 const ID = 'id';
 
@@ -11,17 +14,22 @@ export default class IdChangeBehavior extends CommandInterceptor {
   constructor(eventBus) {
     super(eventBus);
 
-    this.executed('updateProperties', this.updateIds.bind(this));
+    this.executed([
+      'element.updateProperties',
+      'updateProperties'
+    ], this.updateIds.bind(this));
   }
 
   updateIds({ context }) {
     const { element, oldProperties, properties } = context;
 
-    if (!is(element, 'dmn:DRGElement') || !isIdChange(oldProperties, properties)) {
+    const bo = getBusinessObject(element);
+
+    if (!is(bo, 'dmn:DRGElement') || !isIdChange(oldProperties, properties)) {
       return;
     }
 
-    const drgElements = getDrgElements(element);
+    const drgElements = getDrgElements(bo);
 
     drgElements.forEach(drgElement => {
       updateElementReferences(drgElement, oldProperties.id, properties.id);
@@ -42,11 +50,27 @@ function isIdChange(oldProperties, properties) {
 }
 
 function getDrgElements(element) {
-  const definitions = element.$parent;
+  const definitions = getDefinitions(element);
 
   const drgElements = definitions.drgElements;
 
   return drgElements;
+}
+
+
+/**
+ * Walk up the tree until at the root to get to dmn:Definitions.
+ *
+ * @param {ModdleElement} element
+ */
+function getDefinitions(element) {
+  let definitions = element;
+
+  while (!is(definitions, 'dmn:Definitions')) {
+    definitions = definitions.$parent;
+  }
+
+  return definitions;
 }
 
 function updateElementReferences(element, oldId, id) {
