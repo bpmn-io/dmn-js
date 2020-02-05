@@ -11,7 +11,7 @@ export default class AllowedValuesUpdateBehavior extends CommandInterceptor {
   constructor(eventBus, modeling) {
     super(eventBus);
 
-    this.postExecuted('updateProperties', event => {
+    this.postExecuted('element.updateProperties', event => {
       const {
         element,
         properties

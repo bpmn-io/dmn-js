@@ -26,7 +26,7 @@ export default class Modeling extends BaseModeling {
   static _getHandlers() {
     return assign({}, super._getHandlers(), {
       'editAllowedValues': UpdateAllowedValuesHandler,
-      'updateProperties': UpdatePropertiesHandler,
+      'element.updateProperties': UpdatePropertiesHandler,
       'id.updateClaim': IdClaimHandler
     });
   }
@@ -43,7 +43,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editDecisionTableId(id) {
@@ -58,7 +58,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editHitPolicy(hitPolicy, aggregation) {
@@ -73,7 +73,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   updateProperties(el, props) {
@@ -82,7 +82,7 @@ export default class Modeling extends BaseModeling {
       properties: props
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editInputExpression(inputExpression, props) {
@@ -91,7 +91,7 @@ export default class Modeling extends BaseModeling {
       properties: props
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editOutputName(output, name) {
@@ -102,7 +102,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editInputExpressionTypeRef(inputExpression, typeRef) {
@@ -113,7 +113,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editOutputTypeRef(output, typeRef) {
@@ -124,7 +124,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editCell(cell, text) {
@@ -135,7 +135,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editAnnotation(rule, description) {
@@ -146,7 +146,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   editAllowedValues(element, allowedValues) {
@@ -166,7 +166,7 @@ export default class Modeling extends BaseModeling {
       }
     };
 
-    this._commandStack.execute('updateProperties', context);
+    this._commandStack.execute('element.updateProperties', context);
   }
 
   claimId(id, moddleElement) {
