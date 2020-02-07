@@ -12,7 +12,7 @@ export default {
     'replaceElementBehavior'
   ],
   createConnectionBehavior: [ 'type', CreateConnectionBehavior ],
-  'idChangeBehavior': [ 'type', IdChangeBehavior ],
+  idChangeBehavior: [ 'type', IdChangeBehavior ],
   replaceConnectionBehavior: [ 'type', ReplaceConnectionBehavior ],
   replaceElementBehavior: [ 'type', ReplaceElementBehavior ]
 };
