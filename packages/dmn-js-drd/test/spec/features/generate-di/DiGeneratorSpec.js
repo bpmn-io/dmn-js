@@ -1,5 +1,5 @@
 import {
-  bootstrapViewer,
+  bootstrapModeler,
   inject
 } from 'test/TestHelper';
 
@@ -13,7 +13,7 @@ import emptyDefinitionsXML from 'test/fixtures/dmn/empty-definitions.dmn';
 
 describe('features - generate-di', function() {
 
-  beforeEach(bootstrapViewer(noDiXML, {
+  beforeEach(bootstrapModeler(noDiXML, {
     modules: [
       coreModule,
       modelingModule,
@@ -32,6 +32,20 @@ describe('features - generate-di', function() {
   }));
 
 
+  it('should generate deciisions DMNDI', inject(function(canvas) {
+
+    // when
+    var rootElement = canvas.getRootElement();
+
+    var definitions = rootElement.businessObject;
+
+    // then
+    expect(definitions.dmnDI).to.exist;
+    expect(definitions.dmnDI.diagrams).to.have.length(1);
+    expect(definitions.dmnDI.diagrams[0].diagramElements).to.have.length(4);
+  }));
+
+
   it('should not render non-decision elements', inject(function(elementRegistry) {
 
     // when
@@ -44,7 +58,7 @@ describe('features - generate-di', function() {
 
   describe('empty definitions', function() {
 
-    beforeEach(bootstrapViewer(emptyDefinitionsXML, {
+    beforeEach(bootstrapModeler(emptyDefinitionsXML, {
       modules: [
         coreModule,
         modelingModule,
