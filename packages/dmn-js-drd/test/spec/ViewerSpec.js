@@ -39,11 +39,6 @@ describe('Viewer', function() {
   });
 
 
-  it('should import empty definitions', function(done) {
-    createViewer(emptyDefsXML, done);
-  });
-
-
   it('should re-import simple DRD', function(done) {
 
     // given
@@ -163,6 +158,23 @@ describe('Viewer', function() {
         });
       });
 
+    });
+
+  });
+
+
+  describe('error handling', function() {
+
+    it('should throw error due to missing diagram', function(done) {
+
+      // when
+      createViewer(emptyDefsXML, function(err) {
+
+        // then
+        expect(err.message).to.eql('no dmndi:DMNDI');
+
+        done();
+      });
     });
 
   });
