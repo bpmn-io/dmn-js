@@ -16,14 +16,14 @@
   </decision>
   <decision id="Decision_0lnvug5" name="C" />
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="Decision_Table">
+    <dmndi:DMNDiagram id="DMNDiagram_0kvydih">
+      <dmndi:DMNShape id="Decision_Table_di" dmnElementRef="Decision_Table">
         <dc:Bounds height="80" width="180" x="150" y="150" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="Decision_LiteralExpression">
+      <dmndi:DMNShape id="Decision_LiteralExpression_di" dmnElementRef="Decision_LiteralExpression">
         <dc:Bounds height="80" width="180" x="383" y="151" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="Decision_0lnvug5">
+      <dmndi:DMNShape id="Decision_0lnvug5_di" dmnElementRef="Decision_0lnvug5">
         <dc:Bounds height="80" width="180" x="151" y="268" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<dmn:definitions xmlns:dmn="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <dmn:decision id="decision" name="Check Order">
     <dmn:decisionTable id="decisionTable">
       <dmn:input id="input1" label="DateInput">
-        <dmn:inputExpression id="inputExpression1" typeRef="date">        <dmn:text>dateVar</dmn:text>
-</dmn:inputExpression>
+        <dmn:inputExpression id="inputExpression1" typeRef="date">
+          <dmn:text>dateVar</dmn:text>
+        </dmn:inputExpression>
       </dmn:input>
       <dmn:output id="output1" label="DateOutput" name="reason" typeRef="date" />
       <dmn:rule id="rule1">
-        <dmn:inputEntry id="inputEntry1">        <dmn:text></dmn:text>
-</dmn:inputEntry>
-        <dmn:outputEntry id="outputEntry1">        <dmn:text></dmn:text>
-</dmn:outputEntry>
+        <dmn:inputEntry id="inputEntry1">
+          <dmn:text></dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="outputEntry1">
+          <dmn:text></dmn:text>
+        </dmn:outputEntry>
       </dmn:rule>
       <dmn:rule id="rule2">
-        <dmn:inputEntry id="inputEntry2">        <dmn:text>date and time("2016-11-11T11:11:11")</dmn:text>
-</dmn:inputEntry>
-        <dmn:outputEntry id="outputEntry2">        <dmn:text></dmn:text>
-</dmn:outputEntry>
+        <dmn:inputEntry id="inputEntry2">
+          <dmn:text>date and time("2016-11-11T11:11:11")</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="outputEntry2">
+          <dmn:text></dmn:text>
+        </dmn:outputEntry>
       </dmn:rule>
     </dmn:decisionTable>
   </dmn:decision>

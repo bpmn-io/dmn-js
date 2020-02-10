@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="Definitions_1" namespace="http://camunda.org/schema/1.0/dmn" exporterVersion="3.3.5" exporter="Camunda Modeler">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="Definitions_1" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
   <inputData id="InputData_1" name="InputData_1" />
   <knowledgeSource id="KnowledgeSource_1" name="KnowledgeSource_1" />
   <businessKnowledgeModel id="BusinessKnowledgeModel_1" name="BusinessKnowledgeModel_1" />
@@ -8,41 +8,41 @@
   <inputData id="InputData_2" name="InputData_2" />
   <knowledgeSource id="KnowledgeSource_2" name="KnowledgeSource_2" />
   <businessKnowledgeModel id="BusinessKnowledgeModel_2" name="BusinessKnowledgeModel_2" />
+  <textAnnotation id="TextAnnotation_1" />
   <association id="Association_1">
     <sourceRef href="#Decision_2" />
     <targetRef href="#TextAnnotation_1" />
   </association>
-  <textAnnotation id="TextAnnotation_1" />
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="InputData_1">
+    <dmndi:DMNDiagram id="DMNDiagram_13nujl0">
+      <dmndi:DMNShape id="InputData_1_di" dmnElementRef="InputData_1">
         <dc:Bounds height="45" width="125" x="156" y="200" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="KnowledgeSource_1">
+      <dmndi:DMNShape id="KnowledgeSource_1_di" dmnElementRef="KnowledgeSource_1">
         <dc:Bounds height="63" width="100" x="156" y="300" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="BusinessKnowledgeModel_1">
+      <dmndi:DMNShape id="BusinessKnowledgeModel_1_di" dmnElementRef="BusinessKnowledgeModel_1">
         <dc:Bounds height="46" width="135" x="156" y="400" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="Decision_2">
+      <dmndi:DMNShape id="Decision_2_di" dmnElementRef="Decision_2">
         <dc:Bounds height="80" width="180" x="400" y="100" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="Decision_1">
+      <dmndi:DMNShape id="Decision_1_di" dmnElementRef="Decision_1">
         <dc:Bounds height="80" width="180" x="156" y="100" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="InputData_2">
+      <dmndi:DMNShape id="InputData_2_di" dmnElementRef="InputData_2">
         <dc:Bounds height="45" width="125" x="400" y="200" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="KnowledgeSource_2">
+      <dmndi:DMNShape id="KnowledgeSource_2_di" dmnElementRef="KnowledgeSource_2">
         <dc:Bounds height="63" width="100" x="400" y="300" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="BusinessKnowledgeModel_2">
+      <dmndi:DMNShape id="BusinessKnowledgeModel_2_di" dmnElementRef="BusinessKnowledgeModel_2">
         <dc:Bounds height="46" width="135" x="400" y="400" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="TextAnnotation_1">
+      <dmndi:DMNShape id="TextAnnotation_1_di" dmnElementRef="TextAnnotation_1">
         <dc:Bounds height="80" width="100" x="600" y="100" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="Association_1">
+      <dmndi:DMNEdge id="Association_1_di" dmnElementRef="Association_1">
         <di:waypoint x="490" y="140" />
         <di:waypoint x="650" y="140" />
       </dmndi:DMNEdge>

@@ -4,14 +4,14 @@
   <decision id="dish-decision" name="Dish Decision" />
   <decision id="foo" name="Foo" />
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="elMenu">
+    <dmndi:DMNDiagram id="DMNDiagram_0fx17vy">
+      <dmndi:DMNShape id="elMenu_di" dmnElementRef="elMenu">
         <dc:Bounds height="45" width="125" x="450" y="250" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="dish-decision">
+      <dmndi:DMNShape id="dish-decision_di" dmnElementRef="dish-decision">
         <dc:Bounds height="55" width="100" x="150" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="foo">
+      <dmndi:DMNShape id="foo_di" dmnElementRef="foo">
         <dc:Bounds height="55" width="100" x="500" y="10" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

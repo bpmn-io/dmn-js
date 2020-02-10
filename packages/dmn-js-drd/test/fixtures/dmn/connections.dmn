@@ -6,8 +6,8 @@
   <knowledgeSource id="host_ks" name="Host" />
   <businessKnowledgeModel id="elMenu" name="El menú" />
   <decision id="decision_1" name="Decision 1">
-    <variable id="InformationItem_1jr6o79" name="gCount" typeRef="integer" />
-    <literalExpression id="LiteralExpression_1gaquvj">
+    <variable id="InformationItem_1bbyjr2" name="gCount" typeRef="integer" />
+    <literalExpression id="LiteralExpression_0cmq5tf">
       <text>guestService.getCount(dinnerEvent)</text>
     </literalExpression>
   </decision>
@@ -15,20 +15,20 @@
     <text>foobar</text>
   </textAnnotation>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="inputData_1">
+    <dmndi:DMNDiagram id="DMNDiagram_1jpkaca">
+      <dmndi:DMNShape id="inputData_1_di" dmnElementRef="inputData_1">
         <dc:Bounds height="45" width="125" x="240" y="270" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="host_ks">
+      <dmndi:DMNShape id="host_ks_di" dmnElementRef="host_ks">
         <dc:Bounds height="63" width="100" x="495" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="elMenu">
+      <dmndi:DMNShape id="elMenu_di" dmnElementRef="elMenu">
         <dc:Bounds height="46" width="135" x="450" y="250" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="decision_1">
+      <dmndi:DMNShape id="decision_1_di" dmnElementRef="decision_1">
         <dc:Bounds height="55" width="100" x="150" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="annotation_1">
+      <dmndi:DMNShape id="annotation_1_di" dmnElementRef="annotation_1">
         <dc:Bounds height="45" width="125" x="240" y="400" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

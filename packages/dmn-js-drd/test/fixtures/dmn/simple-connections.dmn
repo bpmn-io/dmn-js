@@ -10,41 +10,41 @@
   </knowledgeSource>
   <businessKnowledgeModel id="elMenu" name="El menú" />
   <decision id="guestCount" name="Guest Count">
-    <variable id="InformationItem_0vjedqp" name="gCount" typeRef="integer" />
+    <variable id="InformationItem_0z36lcq" name="gCount" typeRef="integer" />
     <literalExpression id="LiteralExpression_000b4ir">
       <text>guestService.getCount(dinnerEvent)</text>
     </literalExpression>
   </decision>
+  <textAnnotation id="annotation_1">
+    <text>foobar</text>
+  </textAnnotation>
   <association id="Association_1c4jixb">
     <sourceRef href="#dayType_id" />
     <targetRef href="#annotation_1" />
   </association>
-  <textAnnotation id="annotation_1">
-    <text>foobar</text>
-  </textAnnotation>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="dayType_id">
+    <dmndi:DMNDiagram id="DMNDiagram_13js2vo">
+      <dmndi:DMNShape id="dayType_id_di" dmnElementRef="dayType_id">
         <dc:Bounds height="45" width="125" x="240" y="270" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="host_ks">
+      <dmndi:DMNShape id="host_ks_di" dmnElementRef="host_ks">
         <dc:Bounds height="63" width="100" x="495" y="150" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_0jdv0hj">
+      <dmndi:DMNEdge id="AuthorityRequirement_0jdv0hj_di" dmnElementRef="AuthorityRequirement_0jdv0hj">
         <di:waypoint x="200" y="38" />
         <di:waypoint x="250" y="150" />
         <di:waypoint x="545" y="182" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="elMenu">
+      <dmndi:DMNShape id="elMenu_di" dmnElementRef="elMenu">
         <dc:Bounds height="46" width="135" x="450" y="250" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="guestCount">
+      <dmndi:DMNShape id="guestCount_di" dmnElementRef="guestCount">
         <dc:Bounds height="55" width="100" x="150" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="annotation_1">
+      <dmndi:DMNShape id="annotation_1_di" dmnElementRef="annotation_1">
         <dc:Bounds height="45" width="125" x="240" y="400" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="Association_1c4jixb">
+      <dmndi:DMNEdge id="Association_1c4jixb_di" dmnElementRef="Association_1c4jixb">
         <di:waypoint x="303" y="293" />
         <di:waypoint x="303" y="423" />
       </dmndi:DMNEdge>

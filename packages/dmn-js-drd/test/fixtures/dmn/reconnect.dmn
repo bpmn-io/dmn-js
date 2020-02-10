@@ -6,20 +6,20 @@
   <knowledgeSource id="host_ks" name="Host" />
   <businessKnowledgeModel id="elMenu" name="El menú" />
   <decision id="guestCount" name="Guest Count">
-    <variable id="InformationItem_061o645" name="gCount" typeRef="integer" />
-    <informationRequirement id="InformationRequirement_1bgw3jt">
+    <variable id="InformationItem_1y7c6ds" name="gCount" typeRef="integer" />
+    <informationRequirement id="InformationRequirement_1c8n4ow">
       <requiredDecision href="#decision2" />
     </informationRequirement>
-    <authorityRequirement id="AuthorityRequirement_150exec">
+    <authorityRequirement id="AuthorityRequirement_0vzxgng">
       <requiredDecision href="#host_ks" />
     </authorityRequirement>
-    <literalExpression id="LiteralExpression_1bbbrz2">
+    <literalExpression id="LiteralExpression_19c51yw">
       <text>guestService.getCount(dinnerEvent)</text>
     </literalExpression>
   </decision>
   <decision id="decision2" name="Another Decision">
-    <variable id="InformationItem_08y9086" name="gCount" typeRef="integer" />
-    <literalExpression id="LiteralExpression_1v2at75">
+    <variable id="InformationItem_16olgj9" name="gCount" typeRef="integer" />
+    <literalExpression id="LiteralExpression_0ecinhb">
       <text>guestService.getCount(dinnerEvent)</text>
     </literalExpression>
   </decision>
@@ -27,45 +27,45 @@
     <variable id="InformationItem_3" name="InformationItem_3" />
     <literalExpression id="LiteralExpression_3" />
   </decision>
+  <textAnnotation id="annotation_1">
+    <text>foobar</text>
+  </textAnnotation>
   <association id="Association_1">
     <sourceRef href="#dayType_id" />
     <targetRef href="#annotation_1" />
   </association>
-  <textAnnotation id="annotation_1">
-    <text>foobar</text>
-  </textAnnotation>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="dayType_id">
+    <dmndi:DMNDiagram id="DMNDiagram_0twqe5k">
+      <dmndi:DMNShape id="dayType_id_di" dmnElementRef="dayType_id">
         <dc:Bounds height="45" width="125" x="240" y="270" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="host_ks">
+      <dmndi:DMNShape id="host_ks_di" dmnElementRef="host_ks">
         <dc:Bounds height="63" width="100" x="495" y="150" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="elMenu">
+      <dmndi:DMNShape id="elMenu_di" dmnElementRef="elMenu">
         <dc:Bounds height="46" width="135" x="450" y="250" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="guestCount">
+      <dmndi:DMNShape id="guestCount_di" dmnElementRef="guestCount">
         <dc:Bounds height="55" width="100" x="150" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_150exec">
+      <dmndi:DMNEdge id="AuthorityRequirement_0vzxgng_di" dmnElementRef="AuthorityRequirement_0vzxgng">
         <di:waypoint x="545" y="182" />
         <di:waypoint x="200" y="38" />
       </dmndi:DMNEdge>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1bgw3jt">
+      <dmndi:DMNEdge id="InformationRequirement_1c8n4ow_di" dmnElementRef="InformationRequirement_1c8n4ow">
         <di:waypoint x="300" y="32" />
         <di:waypoint x="250" y="32" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="decision2">
+      <dmndi:DMNShape id="decision2_di" dmnElementRef="decision2">
         <dc:Bounds height="55" width="100" x="300" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="decision3">
+      <dmndi:DMNShape id="decision3_di" dmnElementRef="decision3">
         <dc:Bounds height="80" width="180" x="447" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="annotation_1">
+      <dmndi:DMNShape id="annotation_1_di" dmnElementRef="annotation_1">
         <dc:Bounds height="45" width="125" x="240" y="400" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="Association_1">
+      <dmndi:DMNEdge id="Association_1_di" dmnElementRef="Association_1">
         <di:waypoint x="303" y="293" />
         <di:waypoint x="303" y="423" />
       </dmndi:DMNEdge>

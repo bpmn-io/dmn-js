@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="decision" />
-  <association id="Association_0jsajmh">
-    <sourceRef href="#decision" />
-    <targetRef href="#annotation" />
-  </association>
   <textAnnotation id="annotation">
     <text>Annotation</text>
   </textAnnotation>
+  <association id="Association_0tcs84h">
+    <sourceRef href="#decision" />
+    <targetRef href="#annotation" />
+  </association>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="decision">
+    <dmndi:DMNDiagram id="DMNDiagram_0mtz5mv">
+      <dmndi:DMNShape id="decision_di" dmnElementRef="decision">
         <dc:Bounds height="80" width="180" x="-191" y="135" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="annotation">
+      <dmndi:DMNShape id="annotation_di" dmnElementRef="annotation">
         <dc:Bounds height="80" width="100" x="106" y="137" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="Association_0jsajmh">
+      <dmndi:DMNEdge id="Association_0tcs84h_di" dmnElementRef="Association_0tcs84h">
         <di:waypoint x="-101" y="175" />
         <di:waypoint x="156" y="177" />
       </dmndi:DMNEdge>

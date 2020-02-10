@@ -7,11 +7,11 @@
     <variable id="temperature_ii" name="Weather in Celsius" typeRef="integer" />
   </inputData>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="dayType_id">
+    <dmndi:DMNDiagram id="DMNDiagram_119cwpi">
+      <dmndi:DMNShape id="dayType_id_di" dmnElementRef="dayType_id">
         <dc:Bounds height="45" width="125" x="240" y="270" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="temperature_id">
+      <dmndi:DMNShape id="temperature_id_di" dmnElementRef="temperature_id">
         <dc:Bounds height="45" width="125" x="5" y="270" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

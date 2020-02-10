@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="season" name="Season">
-    <variable id="InformationItem_1a1y6pk" name="season" typeRef="string" />
-    <literalExpression id="LiteralExpression_00s1kdm" expressionLanguage="Javascript">
+    <variable id="InformationItem_1940nig" name="season" typeRef="string" />
+    <literalExpression id="LiteralExpression_1evfc9y" expressionLanguage="Javascript">
       <text>calendar.getSeason(date)</text>
     </literalExpression>
   </decision>
@@ -122,14 +122,14 @@
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="season">
+    <dmndi:DMNDiagram id="DMNDiagram_10q4s8f">
+      <dmndi:DMNShape id="season_di" dmnElementRef="season">
         <dc:Bounds height="80" width="180" x="150" y="150" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="dish-decision">
+      <dmndi:DMNShape id="dish-decision_di" dmnElementRef="dish-decision">
         <dc:Bounds height="80" width="180" x="150" y="10" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="guestCount">
+      <dmndi:DMNShape id="guestCount_di" dmnElementRef="guestCount">
         <dc:Bounds height="80" width="180" x="400" y="140" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
