@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="dish-decision" name="Dish Decision">
-    <informationRequirement id="InformationRequirement_1gnpq6g">
+    <informationRequirement id="InformationRequirement_0v56f5d">
       <requiredDecision href="#season" />
     </informationRequirement>
     <decisionTable id="dishDecisionTable">
@@ -119,15 +119,15 @@
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="dish-decision">
+    <dmndi:DMNDiagram id="DMNDiagram_09ow721">
+      <dmndi:DMNShape id="dish-decision_di" dmnElementRef="dish-decision">
         <dc:Bounds height="80" width="180" x="140" y="5" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1gnpq6g">
+      <dmndi:DMNEdge id="InformationRequirement_0v56f5d_di" dmnElementRef="InformationRequirement_0v56f5d">
         <di:waypoint x="80" y="132" />
         <di:waypoint x="140" y="81" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="season">
+      <dmndi:DMNShape id="season_di" dmnElementRef="season">
         <dc:Bounds height="80" width="180" x="10" y="132" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

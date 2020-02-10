@@ -77,7 +77,7 @@
     </decisionTable>
   </decision>
   <decision id="foo" name="Other Decision">
-    <informationRequirement id="InformationRequirement_0ezayqu">
+    <informationRequirement id="InformationRequirement_1mslyvq">
       <requiredDecision href="#decision" />
     </informationRequirement>
     <decisionTable id="DecisionTable_1qmj0d2">
@@ -88,14 +88,14 @@
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="decision">
+    <dmndi:DMNDiagram id="DMNDiagram_1u4l1sr">
+      <dmndi:DMNShape id="decision_di" dmnElementRef="decision">
         <dc:Bounds height="80" width="180" x="150" y="150" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="foo">
+      <dmndi:DMNShape id="foo_di" dmnElementRef="foo">
         <dc:Bounds height="80" width="180" x="362" y="149" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_0ezayqu">
+      <dmndi:DMNEdge id="InformationRequirement_1mslyvq_di" dmnElementRef="InformationRequirement_1mslyvq">
         <di:waypoint x="330" y="190" />
         <di:waypoint x="362" y="189" />
       </dmndi:DMNEdge>
