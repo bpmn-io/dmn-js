@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="test" name="My first DRD" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="Decision_1" name="Decision_1">
-    <informationRequirement id="InformationRequirement_0052rou">
+    <informationRequirement id="InformationRequirement_1thynwg">
       <requiredInput href="#InputData_1" />
     </informationRequirement>
   </decision>
   <inputData id="InputData_1" name="InputData_1" />
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="Decision_1">
+    <dmndi:DMNDiagram id="DMNDiagram_1agu0wv">
+      <dmndi:DMNShape id="Decision_1_di" dmnElementRef="Decision_1">
         <dc:Bounds height="80" width="180" x="458" y="158" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_0052rou">
+      <dmndi:DMNEdge id="InformationRequirement_1thynwg_di" dmnElementRef="InformationRequirement_1thynwg">
         <di:waypoint x="389" y="368" />
         <di:waypoint x="500" y="238" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="InputData_1">
+      <dmndi:DMNShape id="InputData_1_di" dmnElementRef="InputData_1">
         <dc:Bounds height="45" width="125" x="306" y="368" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

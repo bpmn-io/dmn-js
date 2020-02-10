@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="Decision_06y3t0o" name="Decision_06y3t0o">
+  <decision id="Decision_1fwxhem" name="Decision_1fwxhem">
     <decisionTable id="decisionTable">
       <input id="input1" label="">
         <inputExpression id="inputExpression1" typeRef="string">

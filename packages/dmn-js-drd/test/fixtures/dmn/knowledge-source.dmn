@@ -2,8 +2,8 @@
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <knowledgeSource id="host_ks" name="Master of None" />
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="host_ks">
+    <dmndi:DMNDiagram id="DMNDiagram_1sfcc3c">
+      <dmndi:DMNShape id="host_ks_di" dmnElementRef="host_ks">
         <dc:Bounds height="65" width="100" x="100" y="10" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

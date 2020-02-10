@@ -13,7 +13,7 @@ describe('features/modeling - create elements', function() {
 
   var testModules = [ coreModule, modelingModule ];
 
-  var emptyDefsXML = require('../../../fixtures/dmn/empty-definitions.dmn');
+  var emptyDefsXML = require('./ElementFactory.dmn');
 
   beforeEach(bootstrapModeler(emptyDefsXML, { modules: testModules }));
 

@@ -72,7 +72,7 @@ describe('features/connection-preview', function() {
       // given
       var target = elementRegistry.get('guest_ks'),
           targetGfx = canvas.getGraphics(target),
-          connection = elementRegistry.get('InformationRequirement_1u3ggdx');
+          connection = elementRegistry.get('InformationRequirement');
 
 
       // when
@@ -109,7 +109,7 @@ describe('features/connection-preview', function() {
       // given
       var target = elementRegistry.get('dish-decision'),
           targetGfx = canvas.getGraphics(target),
-          connection = elementRegistry.get('KnowledgeRequirement_06uzgx4');
+          connection = elementRegistry.get('KnowledgeRequirement');
 
       // when
       bendpointMove.start(canvasEvent({ x: 450, y: 275 }), connection, 1);

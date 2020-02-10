@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1eaixwa" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0-dev.20200210">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1eaixwa" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0-dev.20200210">
   <decision id="A" name="A">
-    <extensionElements>
-      <biodi:bounds x="537" y="81" width="180" height="80" />
-      <biodi:edge source="D">
-        <biodi:waypoints x="738" y="300" />
-        <biodi:waypoints x="684" y="161" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_1hkvdig">
       <requiredDecision href="#Decision_0w08gvb" />
     </informationRequirement>
     <decisionTable id="decisionTable_1">
@@ -20,19 +13,27 @@
       <output id="output_1" typeRef="string" />
     </decisionTable>
   </decision>
-  <decision id="D" name="D">
-    <extensionElements>
-      <biodi:bounds x="710" y="300" width="180" height="80" />
-    </extensionElements>
-  </decision>
-  <decision id="B" name="B">
-    <extensionElements>
-      <biodi:bounds x="470" y="300" width="180" height="80" />
-    </extensionElements>
-  </decision>
-  <decision id="C" name="C">
-    <extensionElements>
-      <biodi:bounds x="160" y="300" width="180" height="80" />
-    </extensionElements>
-  </decision>
+  <decision id="D" name="D" />
+  <decision id="B" name="B" />
+  <decision id="C" name="C" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_16pvbh9">
+      <dmndi:DMNShape id="A_di" dmnElementRef="A">
+        <dc:Bounds height="80" width="180" x="537" y="81" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="InformationRequirement_1hkvdig_di" dmnElementRef="InformationRequirement_1hkvdig">
+        <di:waypoint x="738" y="300" />
+        <di:waypoint x="684" y="161" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="D_di" dmnElementRef="D">
+        <dc:Bounds height="80" width="180" x="710" y="300" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="B_di" dmnElementRef="B">
+        <dc:Bounds height="80" width="180" x="470" y="300" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="C_di" dmnElementRef="C">
+        <dc:Bounds height="80" width="180" x="160" y="300" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>
