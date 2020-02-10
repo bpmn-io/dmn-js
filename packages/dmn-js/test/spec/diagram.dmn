@@ -8,19 +8,19 @@
   </inputData>
   <knowledgeSource id="host_ks" name="Host" />
   <knowledgeSource id="guest_ks" name="Guest Type">
-    <authorityRequirement id="AuthorityRequirement_04cnqj5">
+    <authorityRequirement id="AuthorityRequirement_0x98j4l">
       <requiredDecision href="#guestCount" />
     </authorityRequirement>
   </knowledgeSource>
   <businessKnowledgeModel id="elMenu" name="El menú" />
   <decision id="dish-decision" name="Dish Decision">
-    <informationRequirement id="InformationRequirement_0tysaih">
+    <informationRequirement id="InformationRequirement_0o55akq">
       <requiredDecision href="#season" />
     </informationRequirement>
-    <informationRequirement id="InformationRequirement_0q2n6w2">
+    <informationRequirement id="InformationRequirement_0t6tyvp">
       <requiredDecision href="#guestCount" />
     </informationRequirement>
-    <authorityRequirement id="AuthorityRequirement_0gfalay">
+    <authorityRequirement id="AuthorityRequirement_1ti2tzr">
       <requiredAuthority href="#host_ks" />
     </authorityRequirement>
     <decisionTable id="dishDecisionTable">
@@ -123,7 +123,7 @@ else
     </decisionTable>
   </decision>
   <decision id="season" name="Season decision">
-    <informationRequirement id="InformationRequirement_1dla552">
+    <informationRequirement id="InformationRequirement_1phxthj">
       <requiredInput href="#temperature_id" />
     </informationRequirement>
     <decisionTable id="seasonDecisionTable">
@@ -160,10 +160,10 @@ else
     </decisionTable>
   </decision>
   <decision id="guestCount" name="Guest Count">
-    <informationRequirement id="InformationRequirement_1w1qupa">
+    <informationRequirement id="InformationRequirement_1rcpuy1">
       <requiredInput href="#dayType_id" />
     </informationRequirement>
-    <knowledgeRequirement id="KnowledgeRequirement_137wcuy">
+    <knowledgeRequirement id="KnowledgeRequirement_0gybckk">
       <requiredKnowledge href="#elMenu" />
     </knowledgeRequirement>
     <decisionTable id="guestCountDecisionTable">
@@ -213,66 +213,66 @@ else
     <targetRef href="#TextAnnotation_1t4zaz9" />
   </association>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="dayType_id">
+    <dmndi:DMNDiagram id="DMNDiagram_0q4jld3">
+      <dmndi:DMNShape id="dayType_id_di" dmnElementRef="dayType_id">
         <dc:Bounds height="45" width="125" x="240" y="270" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="temperature_id">
+      <dmndi:DMNShape id="temperature_id_di" dmnElementRef="temperature_id">
         <dc:Bounds height="45" width="125" x="5" y="270" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="host_ks">
+      <dmndi:DMNShape id="host_ks_di" dmnElementRef="host_ks">
         <dc:Bounds height="63" width="100" x="493" y="4" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="guest_ks">
+      <dmndi:DMNShape id="guest_ks_di" dmnElementRef="guest_ks">
         <dc:Bounds height="63" width="100" x="495" y="147" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_04cnqj5">
+      <dmndi:DMNEdge id="AuthorityRequirement_0x98j4l_di" dmnElementRef="AuthorityRequirement_0x98j4l">
         <di:waypoint x="410" y="172" />
         <di:waypoint x="495" y="172" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="elMenu">
+      <dmndi:DMNShape id="elMenu_di" dmnElementRef="elMenu">
         <dc:Bounds height="46" width="135" x="450" y="250" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="dish-decision">
+      <dmndi:DMNShape id="dish-decision_di" dmnElementRef="dish-decision">
         <dc:Bounds height="80" width="180" x="140" y="5" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_0tysaih">
+      <dmndi:DMNEdge id="InformationRequirement_0o55akq_di" dmnElementRef="InformationRequirement_0o55akq">
         <di:waypoint x="80" y="132" />
         <di:waypoint x="140" y="81" />
       </dmndi:DMNEdge>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_0q2n6w2">
+      <dmndi:DMNEdge id="InformationRequirement_0t6tyvp_di" dmnElementRef="InformationRequirement_0t6tyvp">
         <di:waypoint x="345" y="138" />
         <di:waypoint x="257" y="85" />
       </dmndi:DMNEdge>
-      <dmndi:DMNEdge dmnElementRef="AuthorityRequirement_0gfalay">
+      <dmndi:DMNEdge id="AuthorityRequirement_1ti2tzr_di" dmnElementRef="AuthorityRequirement_1ti2tzr">
         <di:waypoint x="493" y="24" />
         <di:waypoint x="320" y="25" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="season">
+      <dmndi:DMNShape id="season_di" dmnElementRef="season">
         <dc:Bounds height="80" width="180" x="10" y="132" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1dla552">
+      <dmndi:DMNEdge id="InformationRequirement_1phxthj_di" dmnElementRef="InformationRequirement_1phxthj">
         <di:waypoint x="80" y="270" />
         <di:waypoint x="80" y="212" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="guestCount">
+      <dmndi:DMNShape id="guestCount_di" dmnElementRef="guestCount">
         <dc:Bounds height="80" width="180" x="230" y="138" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="InformationRequirement_1w1qupa">
+      <dmndi:DMNEdge id="InformationRequirement_1rcpuy1_di" dmnElementRef="InformationRequirement_1rcpuy1">
         <di:waypoint x="340" y="270" />
         <di:waypoint x="340" y="218" />
       </dmndi:DMNEdge>
-      <dmndi:DMNEdge dmnElementRef="KnowledgeRequirement_137wcuy">
+      <dmndi:DMNEdge id="KnowledgeRequirement_0gybckk_di" dmnElementRef="KnowledgeRequirement_0gybckk">
         <di:waypoint x="450" y="275" />
         <di:waypoint x="410" y="209" />
       </dmndi:DMNEdge>
-      <dmndi:DMNShape dmnElementRef="Decision_1koag35">
+      <dmndi:DMNShape id="Decision_1koag35_di" dmnElementRef="Decision_1koag35">
         <dc:Bounds height="80" width="180" x="670" y="141" />
       </dmndi:DMNShape>
-      <dmndi:DMNShape dmnElementRef="TextAnnotation_1t4zaz9">
+      <dmndi:DMNShape id="TextAnnotation_1t4zaz9_di" dmnElementRef="TextAnnotation_1t4zaz9">
         <dc:Bounds height="45" width="125" x="240" y="400" />
       </dmndi:DMNShape>
-      <dmndi:DMNEdge dmnElementRef="Association_1c4jixb">
+      <dmndi:DMNEdge id="Association_1c4jixb_di" dmnElementRef="Association_1c4jixb">
         <di:waypoint x="275" y="315" />
         <di:waypoint x="240" y="400" />
       </dmndi:DMNEdge>
