@@ -5,8 +5,8 @@
     <literalExpression id="LiteralExpression_1la0dth" />
   </decision>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="Decision_13nychf">
+    <dmndi:DMNDiagram id="DMNDiagram_1qdr0s3">
+      <dmndi:DMNShape id="Decision_13nychf_di" dmnElementRef="Decision_13nychf">
         <dc:Bounds height="80" width="180" x="200" y="200" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
