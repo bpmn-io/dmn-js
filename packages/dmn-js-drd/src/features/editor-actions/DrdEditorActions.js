@@ -2,7 +2,6 @@ import inherits from 'inherits';
 
 import EditorActions from 'diagram-js/lib/features/editor-actions/EditorActions';
 
-
 export default function DrdEditorActions(injector) {
   injector.invoke(EditorActions, this);
 }
@@ -32,6 +31,8 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
   var selection = injector.get('selection', false);
   var lassoTool = injector.get('lassoTool', false);
   var directEditing = injector.get('directEditing', false);
+  var distributeElements = injector.get('distributeElements', false);
+  var alignElements = injector.get('alignElements', false);
 
   // (2) check components and register actions
 
@@ -49,6 +50,28 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
       selection.select(elements);
 
       return elements;
+    });
+  }
+
+  if (selection && distributeElements) {
+    this._registerAction('distributeElements', function(opts) {
+      var currentSelection = selection.get(),
+          type = opts.type;
+
+      if (currentSelection.length > 2) {
+        distributeElements.trigger(currentSelection, type);
+      }
+    });
+  }
+
+  if (selection && alignElements) {
+    this._registerAction('alignElements', function(opts) {
+      var currentSelection = selection.get(),
+          type = opts.type;
+
+      if (currentSelection.length > 1) {
+        alignElements.trigger(currentSelection, type);
+      }
     });
   }
 
