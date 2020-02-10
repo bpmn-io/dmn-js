@@ -73,6 +73,7 @@ describe('features/modeling - DrdFactory', function() {
       expect(result).to.have.bounds(bounds);
     }));
 
+
     it('should create waypoints', inject(function(drdFactory) {
 
       // given
@@ -98,6 +99,18 @@ describe('features/modeling - DrdFactory', function() {
     }));
 
 
+    it('should create dmndi:DMNDiagram', inject(function(drdFactory) {
+
+      // given
+      var diagram = drdFactory.create('dmndi:DMNDiagram');
+
+      // then
+      expect(diagram.$type).to.eql('dmndi:DMNDiagram');
+
+      expect(diagram).to.have.property('id');
+    }));
+
+
     it('should create dmndi:DMNShape', inject(function(drdFactory) {
 
       // given
@@ -116,6 +129,7 @@ describe('features/modeling - DrdFactory', function() {
       expect(result.$type).to.eql('dmndi:DMNShape');
       expect(result.dmnElementRef).to.eql(decision);
       expect(result).to.have.bounds(bounds);
+      expect(result).to.have.property('id');
 
       var shapeBounds = result.bounds;
       expect(shapeBounds.$type).to.eql('dc:Bounds');
@@ -137,6 +151,7 @@ describe('features/modeling - DrdFactory', function() {
       // then
       expect(result.$type).to.eql('dmndi:DMNEdge');
       expect(result.dmnElementRef).to.eql(informationRequirement);
+      expect(result).to.have.property('id');
 
       var edgeWaypoints = result.waypoint;
       expect(edgeWaypoints).to.exist;
