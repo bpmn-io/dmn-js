@@ -5,7 +5,7 @@ import {
 } from 'min-dom';
 
 
-export default function DefinitionIdView(eventBus, canvas) {
+export default function DefinitionPropertiesView(eventBus, canvas) {
   this._eventBus = eventBus;
   this._canvas = canvas;
 
@@ -14,21 +14,23 @@ export default function DefinitionIdView(eventBus, canvas) {
   }, this);
 
   eventBus.on('import.done', function(event) {
-    this.update();
+    if (!event.error) {
+      this.update();
+    }
   }, this);
 }
 
-DefinitionIdView.$inject = [ 'eventBus', 'canvas' ];
+DefinitionPropertiesView.$inject = [ 'eventBus', 'canvas' ];
 
 /**
  * Initialize
  */
-DefinitionIdView.prototype._init = function() {
+DefinitionPropertiesView.prototype._init = function() {
   var canvas = this._canvas,
       eventBus = this._eventBus;
 
   var parent = canvas.getContainer(),
-      container = this._container = domify(DefinitionIdView.HTML_MARKUP);
+      container = this._container = domify(DefinitionPropertiesView.HTML_MARKUP);
 
   parent.appendChild(container);
 
@@ -48,7 +50,7 @@ DefinitionIdView.prototype._init = function() {
   });
 };
 
-DefinitionIdView.prototype.update = function(newName) {
+DefinitionPropertiesView.prototype.update = function() {
   var businessObject = this._canvas.getRootElement().businessObject;
 
   this.nameElement.textContent = businessObject.name;
@@ -58,7 +60,7 @@ DefinitionIdView.prototype.update = function(newName) {
 
 /* markup definition */
 
-DefinitionIdView.HTML_MARKUP =
+DefinitionPropertiesView.HTML_MARKUP =
   '<div class="dmn-definitions">' +
     '<div class="dmn-definitions-name" title="Definition Name"></div>' +
     '<div class="dmn-definitions-id" title="Definition ID"></div>' +
