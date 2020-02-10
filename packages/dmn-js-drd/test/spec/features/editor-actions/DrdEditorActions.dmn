@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1eaixwa" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0-dev.20200210">
+  <decision id="A" name="A">
+    <extensionElements>
+      <biodi:bounds x="537" y="81" width="180" height="80" />
+      <biodi:edge source="D">
+        <biodi:waypoints x="738" y="300" />
+        <biodi:waypoints x="684" y="161" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#Decision_0w08gvb" />
+    </informationRequirement>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="D" name="D">
+    <extensionElements>
+      <biodi:bounds x="710" y="300" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <decision id="B" name="B">
+    <extensionElements>
+      <biodi:bounds x="470" y="300" width="180" height="80" />
+    </extensionElements>
+  </decision>
+  <decision id="C" name="C">
+    <extensionElements>
+      <biodi:bounds x="160" y="300" width="180" height="80" />
+    </extensionElements>
+  </decision>
+</definitions>

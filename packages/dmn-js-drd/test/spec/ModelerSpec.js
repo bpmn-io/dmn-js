@@ -179,6 +179,8 @@ describe('Modeler', function() {
           'moveCanvas',
           'moveSelection',
           'selectElements',
+          'distributeElements',
+          'alignElements',
           'lassoTool',
           'directEditing'
         ];
