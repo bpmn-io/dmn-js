@@ -17,7 +17,9 @@ DrdFactory.prototype._needsId = function(element) {
   return isAny(element, [
     'dmn:Artifact',
     'dmn:DMNElement',
-    'dmn:DRGElement'
+    'dmn:DRGElement',
+    'dmndi:DMNDiagram',
+    'dmndi:DMNDiagramElement'
   ]);
 };
 
