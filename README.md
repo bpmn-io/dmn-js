@@ -1,3 +1,6 @@
+> __Starting with `dmn-js@8` the library displays and saves DMN 1.3 diagrams only.__ To open older DMN files, [migrate them](https://github.com/bpmn-io/dmn-migrate) before loading them with `dmn-js`.
+
+
 # dmn-js - DMN for the web
 
 [![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=develop)](https://travis-ci.org/bpmn-io/dmn-js)
