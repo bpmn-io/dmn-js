@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.4.2
+
+* `FIX(decision-table)`: do not show misleading `-` placeholder for output cells
+
 ## 7.4.1
 
 * `FIX`: correctly handle source element ID change ([#467](https://github.com/bpmn-io/dmn-js/issues/467))
