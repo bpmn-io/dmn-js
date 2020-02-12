@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions_1y78itg" name="definitions" namespace="http://camunda.org/schema/1.0/dmn" exporter="dmn-js (https://demo.bpmn.io/dmn)" exporterVersion="7.4.1">
+  <decision id="decision_1" name="decision_1">
+    <decisionTable id="decisionTable_1">
+      <input id="input1" label="">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="" name="" typeRef="string" />
+      <rule id="decisionRule_1">
+        <inputEntry id="unaryTest_1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_1">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
