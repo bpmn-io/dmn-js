@@ -82,13 +82,12 @@ export default class DecisionRulesEditorCellComponent extends Component {
 
     const { isFocussed } = this.state;
 
-    const className = is(cell, 'dmn:UnaryTests') ? 'input-cell' : 'output-cell';
-
+    const isUnaryTest = is(cell, 'dmn:UnaryTests');
     const businessObject = cell.businessObject;
 
     return (
       <Cell
-        className={ className }
+        className={ isUnaryTest ? 'input-cell' : 'output-cell' }
         elementId={ cell.id }
         coords={ `${rowIndex}:${colIndex}` }
         data-row-id={ row.id }
@@ -96,6 +95,7 @@ export default class DecisionRulesEditorCellComponent extends Component {
       >
         <TableCellEditor
           className="cell-editor"
+          placeholder={ isUnaryTest ? '-' : '' }
           ctrlForNewline={ true }
           onFocus={ this.onFocus }
           onBlur={ this.onBlur }

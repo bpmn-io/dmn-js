@@ -9,6 +9,7 @@ import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
+import emptyRuleXML from './empty-rule.dmn';
 import languageExpressionXML from '../../expression-language.dmn';
 
 import CoreModule from 'src/core';
@@ -262,6 +263,41 @@ describe('features/decision-rules', function() {
       });
 
     });
+
+  });
+
+
+  describe('placeholder', function() {
+
+    beforeEach(bootstrapModeler(emptyRuleXML, {
+      modules: [
+        CoreModule,
+        ModelingModule,
+        DecisionRulesModule,
+        DecisionRulesEditorModule
+      ],
+      debounceInput: false
+    }));
+
+
+    it('should show <-> input placeholder', inject(function() {
+
+      // when
+      const editor = queryEditor('[data-element-id="unaryTest_1"]', testContainer);
+
+      // then
+      expect(editor.textContent).to.eql('-');
+    }));
+
+
+    it('should NOT show <-> output placeholder', inject(function() {
+
+      // when
+      const editor = queryEditor('[data-element-id="outputEntry_1"]', testContainer);
+
+      // then
+      expect(editor.textContent).to.eql('');
+    }));
 
   });
 
