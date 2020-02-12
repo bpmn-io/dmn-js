@@ -140,7 +140,8 @@ export default class EditableComponent extends Component {
   getDisplayValue() {
 
     var {
-      value
+      value,
+      placeholder
     } = this.props;
 
     var {
@@ -153,7 +154,7 @@ export default class EditableComponent extends Component {
     }
 
     if (!value) {
-      value = focussed ? '' : '-';
+      value = focussed ? '' : (placeholder || '');
     }
 
     return value;
