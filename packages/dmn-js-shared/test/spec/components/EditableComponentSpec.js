@@ -75,6 +75,18 @@ describe('components/EditableComponent', function() {
     );
 
     // then
+    expect(innerText(node)).to.eql('');
+  });
+
+
+  it('should render with placeholder value', function() {
+
+    // when
+    const node = renderToNode(
+      <TestComponent value={ null } placeholder="-" />
+    );
+
+    // then
     expect(innerText(node)).to.eql('-');
   });
 
