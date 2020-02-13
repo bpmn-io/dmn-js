@@ -35,9 +35,21 @@ describe('add input output', function() {
   it('should render table foot', function() {
 
     // then
-    expect(domQuery('.add-rule', testContainer)).to.exist;
+    const addRuleEl = domQuery('.add-rule', testContainer);
+
+    expect(addRuleEl).to.exist;
   });
 
+
+  it('should render cell placeholders', function() {
+
+    // then
+    const addRuleEl = domQuery('.add-rule', testContainer);
+
+    // structure = INPUT | INPUT || OUTPUT | OUTPUT | ANNOTATION
+    // placeholders shown for the two inputs only
+    expect(addRuleEl.textContent).to.eql('--');
+  });
 
   it('should add rule on click', inject(function(sheet) {
 

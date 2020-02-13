@@ -47,9 +47,12 @@ export default class AddRuleFootComponent extends Component {
 
       const businessObject = cols[i] && cols[i].businessObject;
 
+      let placeholder = '';
+
       if (businessObject) {
         if (businessObject.$instanceOf('dmn:InputClause')) {
           className += ' input-cell';
+          placeholder = '-';
         }
 
         if (businessObject.$instanceOf('dmn:OutputClause')) {
@@ -57,7 +60,7 @@ export default class AddRuleFootComponent extends Component {
         }
       }
 
-      cells.push(<td className={ className }>-</td>);
+      cells.push(<td className={ className }>{placeholder}</td>);
     }
 
     return (
