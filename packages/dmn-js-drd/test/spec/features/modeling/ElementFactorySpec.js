@@ -75,8 +75,11 @@ describe('features/modeling - create elements', function() {
       // then
       var businessObject = decision.businessObject;
       expect(businessObject).to.exist;
-      expect(businessObject.di).to.exist;
-      expect(businessObject.di.$type).to.eql('dmndi:DMNShape');
+
+      var di = businessObject.di;
+      expect(di).to.exist;
+      expect(di.$type).to.eql('dmndi:DMNShape');
+      expect(di.id).to.match(/DMNShape_/);
     }));
 
 
@@ -90,8 +93,11 @@ describe('features/modeling - create elements', function() {
       // then
       var businessObject = informationRequirement.businessObject;
       expect(businessObject).to.exist;
-      expect(businessObject.di).to.exist;
-      expect(businessObject.di.$type).to.eql('dmndi:DMNEdge');
+
+      var di = businessObject.di;
+      expect(di).to.exist;
+      expect(di.$type).to.eql('dmndi:DMNEdge');
+      expect(di.id).to.match(/DMNEdge_/);
     }));
   });
 
