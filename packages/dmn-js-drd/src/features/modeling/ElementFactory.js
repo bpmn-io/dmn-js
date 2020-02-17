@@ -49,13 +49,9 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
 
   if (!businessObject.di) {
     if (elementType === 'connection') {
-      businessObject.di = drdFactory.createDiEdge(businessObject, [], {
-        id: businessObject.id + '_di'
-      });
+      businessObject.di = drdFactory.createDiEdge(businessObject, []);
     } else if (elementType === 'shape') {
-      businessObject.di = drdFactory.createDiShape(businessObject, {}, {
-        id: businessObject.id + '_di'
-      });
+      businessObject.di = drdFactory.createDiShape(businessObject, {});
     }
   }
 
