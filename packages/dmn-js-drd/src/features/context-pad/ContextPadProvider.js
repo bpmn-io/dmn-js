@@ -138,7 +138,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
       var shape = elementFactory.createShape(assign({ type: type }, options));
 
       create.start(event, shape, {
-        source: element
+        source: element,
+        hints: {
+          connectionTarget: element
+        }
       });
     }
 
@@ -153,14 +156,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     };
   }
 
-  if (
-    isAny(businessObject, [
-      'dmn:InputData',
-      'dmn:BusinessKnowledgeModel',
-      'dmn:KnowledgeSource',
-      'dmn:Decision'
-    ])
-  ) {
+  if (is(businessObject, 'dmn:Decision')) {
     assign(actions, {
       'append.decision': appendAction('dmn:Decision', 'dmn-icon-decision')
     });
@@ -168,7 +164,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   if (
     isAny(businessObject, [
-      'dmn:InputData',
+      'dmn:BusinessKnowledgeModel',
       'dmn:Decision',
       'dmn:KnowledgeSource'
     ])
@@ -181,7 +177,10 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     });
   }
 
-  if (isAny(businessObject, [ 'dmn:BusinessKnowledgeModel', 'dmn:KnowledgeSource' ])) {
+  if (isAny(businessObject, [
+    'dmn:BusinessKnowledgeModel',
+    'dmn:Decision'
+  ])) {
     assign(actions, {
       'append.business-knowledge-model': appendAction(
         'dmn:BusinessKnowledgeModel',
@@ -190,7 +189,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     });
   }
 
-  if (isAny(businessObject, [ 'dmn:Decision' ])) {
+  if (isAny(businessObject, [ 'dmn:Decision', 'dmn:KnowledgeSource' ])) {
     assign(actions, {
       'append.input-data': appendAction('dmn:InputData', 'dmn-icon-input-data')
     });
