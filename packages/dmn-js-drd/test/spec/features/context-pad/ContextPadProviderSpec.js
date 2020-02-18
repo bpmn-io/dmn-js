@@ -207,13 +207,14 @@ describe('features - context-pad', function() {
     it('should provide entries for Decision', inject(function() {
 
       expectContextPadEntries('guestCount', [
-        'connect',
-        'replace',
-        'delete',
-        'append.knowledge-source',
+        'append.business-knowledge-model',
+        'append.decision',
         'append.input-data',
+        'append.knowledge-source',
         'append.text-annotation',
-        'append.decision'
+        'connect',
+        'delete',
+        'replace'
       ]);
     }));
 
@@ -221,11 +222,9 @@ describe('features - context-pad', function() {
     it('should provide entries for InputData', inject(function() {
 
       expectContextPadEntries('dayType_id', [
-        'connect',
-        'delete',
         'append.text-annotation',
-        'append.knowledge-source',
-        'append.decision'
+        'connect',
+        'delete'
       ]);
     }));
 
@@ -233,12 +232,11 @@ describe('features - context-pad', function() {
     it('should provide entries for KnowledgeSource', inject(function() {
 
       expectContextPadEntries('host_ks', [
-        'connect',
-        'delete',
-        'append.text-annotation',
+        'append.input-data',
         'append.knowledge-source',
-        'append.decision',
-        'append.business-knowledge-model'
+        'append.text-annotation',
+        'connect',
+        'delete'
       ]);
     }));
 
@@ -246,11 +244,11 @@ describe('features - context-pad', function() {
     it('should provide entries for BusinessKnowledgeModel', inject(function() {
 
       expectContextPadEntries('elMenu', [
-        'connect',
-        'delete',
+        'append.business-knowledge-model',
+        'append.knowledge-source',
         'append.text-annotation',
-        'append.decision',
-        'append.business-knowledge-model'
+        'connect',
+        'delete'
       ]);
     }));
 
@@ -347,7 +345,7 @@ describe('features - context-pad', function() {
       // given
       var decision = elementRegistry.get('guestCount');
 
-      var decisionTargets = decision.outgoing.length;
+      var incomingLength = decision.incoming.length;
 
       // when
       contextPad.open(decision);
@@ -360,7 +358,7 @@ describe('features - context-pad', function() {
       dragging.end();
 
       // then
-      expect(decision.outgoing).to.have.length(decisionTargets + 1);
+      expect(decision.incoming).to.have.length(incomingLength + 1);
     }));
 
   });
