@@ -3,10 +3,13 @@ import Viewer from 'src/Viewer';
 import DefaultExport from '../../src';
 
 
-describe('Viewer', function() {
+var diagram = require('./diagram.dmn');
+var noDi = require('./no-di.dmn');
 
-  var diagram = require('./diagram.dmn');
-  var noDi = require('./no-di.dmn');
+var dmn_11 = require('./dmn-11.dmn');
+
+
+describe('Viewer', function() {
 
   var container;
 
@@ -130,4 +133,28 @@ describe('Viewer', function() {
     });
 
   });
+
+
+  describe('DMN compatibility', function(done) {
+
+    it('should indicate DMN 1.1 incompatibility', function(done) {
+
+      var editor = new Viewer({ container: container });
+
+      editor.importXML(dmn_11, function(err) {
+
+        if (!err) {
+          return done(new Error('expected error'));
+        }
+
+        expect(err.message).to.match(
+          /unsupported DMN 1\.1 file detected; only DMN 1\.3 files can be opened/
+        );
+
+        done();
+      });
+    });
+
+  });
+
 });
