@@ -101,7 +101,7 @@ export default class Manager {
       this._setDefinitions(definitions);
 
       if (err) {
-        err = checkValidationError(err);
+        err = checkDMNCompatibilityError(err, xml) || checkValidationError(err) || err;
       }
 
       if (err || !options.open) {
@@ -549,6 +549,38 @@ function ensureUnit(val) {
   return val + (isNumber(val) ? 'px' : '');
 }
 
+function checkDMNCompatibilityError(err, xml) {
+
+  // check if we can indicate opening of old DMN 1.1 or DMN 1.2 diagrams
+
+  if (err.message !== 'failed to parse document as <dmn:Definitions>') {
+    return null;
+  }
+
+  var olderDMNVersion = (
+    (xml.indexOf('"http://www.omg.org/spec/DMN/20151101/dmn.xsd"') !== -1 && '1.1') ||
+    (xml.indexOf('"http://www.omg.org/spec/DMN/20180521/MODEL/"') !== -1 && '1.2')
+  );
+
+  if (!olderDMNVersion) {
+    return null;
+  }
+
+  err = new Error(
+    'unsupported DMN ' + olderDMNVersion + ' file detected; ' +
+    'only DMN 1.3 files can be opened'
+  );
+
+  console.error(
+    'Cannot open what looks like a DMN ' + olderDMNVersion + ' diagram. ' +
+    'Please refer to https://bpmn.io/l/dmn-compatibility.html ' +
+    'to learn how to make the toolkit compatible with older DMN files',
+    err
+  );
+
+  return err;
+}
+
 function checkValidationError(err) {
 
   // check if we can help the user by indicating wrong DMN 1.3 xml
@@ -557,11 +589,13 @@ function checkValidationError(err) {
   var pattern = /unparsable content <([^>]+)> detected([\s\S]*)$/,
       match = pattern.exec(err.message);
 
-  if (match) {
-    err.message =
-      'unparsable content <' + match[1] + '> detected; ' +
-      'this may indicate an invalid DMN 1.3 diagram file' + match[2];
+  if (!match) {
+    return null;
   }
+
+  err.message =
+    'unparsable content <' + match[1] + '> detected; ' +
+    'this may indicate an invalid DMN 1.3 diagram file' + match[2];
 
   return err;
 }

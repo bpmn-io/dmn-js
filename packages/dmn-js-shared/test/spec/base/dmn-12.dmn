@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions exporter="DMN Modeler" exporterVersion="6.1.2" namespace="http://www.trisotech.com/definitions/_a3ebbd98-af09-42f3-9099-4ae2204a1f54" name="multi-output-table" triso:logoChoice="Default" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54" xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <extensionElements/>
+    <itemDefinition isCollection="false" name="tApproval" label="tApproval">
+        <itemComponent isCollection="false" name="Status" id="_20dfeb44-1c36-43cf-8819-63ce36819e90">
+            <typeRef>string</typeRef>
+        </itemComponent>
+        <itemComponent isCollection="false" name="Rate" id="_858ef6e6-69ca-4b50-a654-10f4b981f43c">
+            <typeRef>string</typeRef>
+        </itemComponent>
+    </itemDefinition>
+    <decision name="Approval" id="_3b2953a3-745f-4d2e-b55d-75c8c5ae653c">
+        <variable typeRef="tApproval" name="Approval" id="_726bba98-e108-4ee4-b22b-9b9f4da43a88"/>
+        <informationRequirement id="_70cb0712-3439-47de-9d2a-2124c52ab84f">
+            <requiredInput href="#_5a4bdb64-f0ef-4978-9e03-6f1ae64a1f17"/>
+        </informationRequirement>
+        <informationRequirement id="_141c68b1-39ad-45ac-a29d-d691ec57879c">
+            <requiredInput href="#_41effb45-b3c4-46ac-b1da-122b3e428a98"/>
+        </informationRequirement>
+        <informationRequirement id="_8844434d-7d67-4a6b-8a3a-0a2946a461a4">
+            <requiredInput href="#_8ff18665-84e9-49f2-a8df-8981b1844549"/>
+        </informationRequirement>
+        <decisionTable hitPolicy="FIRST" outputLabel="Approval" typeRef="tApproval" id="_d81c5a51-b7c3-493c-ae8a-07ff798fb1bd">
+            <input id="_bf7fc56f-ea82-464e-a541-f3221dc07e78">
+                <inputExpression typeRef="number">
+                    <text>Age</text>
+                </inputExpression>
+            </input>
+            <input id="_bb73bf86-b399-490a-a635-c6f2c04ff75d">
+                <inputExpression typeRef="string">
+                    <text>RiskCategory</text>
+                </inputExpression>
+                <inputValues triso:constraintsType="enumeration">
+                    <text>"High", "Low", "Medium"</text>
+                </inputValues>
+            </input>
+            <input id="_af5e5c2a-5124-4277-9409-d07421dcb5a4">
+                <inputExpression typeRef="boolean">
+                    <text>isAffordable</text>
+                </inputExpression>
+            </input>
+            <output name="Status" typeRef="string" id="_bffba7a1-f0a2-4679-b6e2-50e27bb27968">
+                <outputValues triso:constraintsType="enumeration">
+                    <text>"Approved", "Declined"</text>
+                </outputValues>
+                <defaultOutputEntry>
+                    <text>"Declined"</text>
+                </defaultOutputEntry>
+            </output>
+            <output name="Rate" typeRef="string" id="_f07f9e98-3a1e-4add-a200-7cee75b550b3">
+                <outputValues triso:constraintsType="enumeration">
+                    <text>"Best", "Standard"</text>
+                </outputValues>
+                <defaultOutputEntry>
+                    <text>"Standard"</text>
+                </defaultOutputEntry>
+            </output>
+            <rule id="_ca85854c-27a3-4001-b2ac-23a164ca5940">
+                <inputEntry id="_ca85854c-27a3-4001-b2ac-23a164ca5940-0">
+                    <text>&gt;=18</text>
+                </inputEntry>
+                <inputEntry id="_ca85854c-27a3-4001-b2ac-23a164ca5940-1">
+                    <text>"Medium"</text>
+                </inputEntry>
+                <inputEntry id="_ca85854c-27a3-4001-b2ac-23a164ca5940-2">
+                    <text>true</text>
+                </inputEntry>
+                <outputEntry id="_ca85854c-27a3-4001-b2ac-23a164ca5940-3">
+                    <text>"Approved"</text>
+                </outputEntry>
+                <outputEntry id="_ca85854c-27a3-4001-b2ac-23a164ca5940-4">
+                    <text>"Best"</text>
+                </outputEntry>
+            </rule>
+            <rule id="_7f03803d-2636-40ab-8346-7fd7f38ab695">
+                <inputEntry id="_7f03803d-2636-40ab-8346-7fd7f38ab695-0">
+                    <text>&gt;=12</text>
+                </inputEntry>
+                <inputEntry id="_7f03803d-2636-40ab-8346-7fd7f38ab695-1">
+                    <text>"Medium"</text>
+                </inputEntry>
+                <inputEntry id="_7f03803d-2636-40ab-8346-7fd7f38ab695-2">
+                    <text>true</text>
+                </inputEntry>
+                <outputEntry id="_7f03803d-2636-40ab-8346-7fd7f38ab695-3">
+                    <text>"Approved"</text>
+                </outputEntry>
+                <outputEntry id="_7f03803d-2636-40ab-8346-7fd7f38ab695-4">
+                    <text>"Standard"</text>
+                </outputEntry>
+            </rule>
+            <rule id="_887acecd-40fc-42da-9443-eeba476f5516">
+                <inputEntry id="_887acecd-40fc-42da-9443-eeba476f5516-0">
+                    <text>&lt;12</text>
+                </inputEntry>
+                <inputEntry id="_887acecd-40fc-42da-9443-eeba476f5516-1">
+                    <text>"Low"</text>
+                </inputEntry>
+                <inputEntry id="_887acecd-40fc-42da-9443-eeba476f5516-2">
+                    <text>true</text>
+                </inputEntry>
+                <outputEntry id="_887acecd-40fc-42da-9443-eeba476f5516-3">
+                    <text>"Declined"</text>
+                </outputEntry>
+                <outputEntry id="_887acecd-40fc-42da-9443-eeba476f5516-4">
+                    <text>"Standard"</text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+    <inputData name="Age" id="_41effb45-b3c4-46ac-b1da-122b3e428a98">
+        <variable typeRef="number" name="Age" id="_b6681d58-50f4-42a1-9daf-8daa45ac458e"/>
+    </inputData>
+    <inputData name="RiskCategory" id="_5a4bdb64-f0ef-4978-9e03-6f1ae64a1f17">
+        <variable typeRef="string" name="RiskCategory" id="_97a8d30d-d396-49d9-948b-b2c95eac8db8"/>
+    </inputData>
+    <inputData name="isAffordable" id="_8ff18665-84e9-49f2-a8df-8981b1844549">
+        <variable typeRef="boolean" name="isAffordable" id="_3b975105-0d93-4b1a-b31d-9cce3b897721"/>
+    </inputData>
+    <dmndi:DMNDI>
+        <dmndi:DMNDiagram id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_D1">
+            <dmndi:Size height="650.0" width="879.0"/>
+            <dmndi:DMNShape dmnElementRef="_3b2953a3-745f-4d2e-b55d-75c8c5ae653c" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_s1">
+                <dc:Bounds height="61.0" width="154.0" x="362.0" y="150.0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape dmnElementRef="_41effb45-b3c4-46ac-b1da-122b3e428a98" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_s2">
+                <dc:Bounds height="60.0" width="153.0" x="150.0" y="331.0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape dmnElementRef="_5a4bdb64-f0ef-4978-9e03-6f1ae64a1f17" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_s3">
+                <dc:Bounds height="60.0" width="153.0" x="363.0" y="331.0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape dmnElementRef="_8ff18665-84e9-49f2-a8df-8981b1844549" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_s4">
+                <dc:Bounds height="60.0" width="153.0" x="576.0" y="331.0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNEdge dmnElementRef="_70cb0712-3439-47de-9d2a-2124c52ab84f" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_e1">
+                <di:waypoint x="439.0" y="331.0"/>
+                <di:waypoint x="439.0" y="211.0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge dmnElementRef="_141c68b1-39ad-45ac-a29d-d691ec57879c" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_e2">
+                <di:waypoint x="226.0" y="331.0"/>
+                <di:waypoint x="439.0" y="211.0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge dmnElementRef="_8844434d-7d67-4a6b-8a3a-0a2946a461a4" id="_a3ebbd98-af09-42f3-9099-4ae2204a1f54_e3">
+                <di:waypoint x="652.0" y="331.0"/>
+                <di:waypoint x="439.0" y="211.0"/>
+            </dmndi:DMNEdge>
+        </dmndi:DMNDiagram>
+    </dmndi:DMNDI>
+</definitions>
