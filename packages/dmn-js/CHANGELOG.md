@@ -6,6 +6,24 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.0.0
+
+* `FEAT`: migrate to DMN 1.3 ([#452](https://github.com/bpmn-io/dmn-js/pull/452))
+* `FEAT(drd)`: generate DMN standards compliant DI information
+* `FEAT(drd)`: make alignment and distribution utilities available as editor actions
+* `FIX(decision-table)`: correct placeholders shown in table footer
+* `FIX(decision-table)`: do not show misleading `-` placeholder for output cells
+* `FIX(drd)`: correctly handle source element ID change ([#467](https://github.com/bpmn-io/dmn-js/issues/467))
+* `CHORE`: bump to `dmn-moddle@8.0.0`
+
+### Breaking Changes
+
+* Dropped DMN 1.1 support. To keep opening DMN 1.1 diagrams those must be migrated to DMN 1.3 before passing them over to the toolkit. Cf. [release blog post](https://bpmn.io/blog/posts/2020-dmn-js-8-0-0.html), [DMN compatibility example](https://github.com/bpmn-io/dmn-js-examples/tree/master/dmn-compatibility).
+* Grapical information is now stored using standardized `DMNDI` and support for the DI vendor extension is removed.
+* DI waypoints of new `dmn:Association` elements no longer point to middle of source and target and have same
+  coordinates as connection waypoints.
+* Renamed `updateProperties` command in `dmn-js-drd` to `element.updateProperties` to align with other libraries
+
 ## 7.4.3
 
 * `FIX(decision-table)`: correct placeholders shown in table footer
@@ -16,7 +34,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 7.4.1
 
-* `FIX`: correctly handle source element ID change ([#467](https://github.com/bpmn-io/dmn-js/issues/467))
+* `FIX(drd)`: correctly handle source element ID change ([#467](https://github.com/bpmn-io/dmn-js/issues/467))
 
 ## 7.4.0
 
