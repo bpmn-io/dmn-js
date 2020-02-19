@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn" exporter="dmn-js (https://demo.bpmn.io/dmn)" exporterVersion="7.4.3">
+  <inputData id="dayType_id" name="Type of day">
+    <extensionElements>
+      <biodi:bounds x="354" y="355" width="125" height="45" />
+    </extensionElements>
+    <variable id="dayType_ii" name="Type of day" typeRef="string" />
+  </inputData>
+  <inputData id="temperature_id" name="Weather in Celsius">
+    <extensionElements>
+      <biodi:bounds x="156" y="308" width="125" height="45" />
+    </extensionElements>
+    <variable id="temperature_ii" name="Weather in Celsius" typeRef="integer" />
+  </inputData>
+  <knowledgeSource id="host_ks" name="Host">
+    <extensionElements>
+      <biodi:bounds x="646" y="48" width="100" height="63" />
+    </extensionElements>
+  </knowledgeSource>
+  <knowledgeSource id="guest_ks" name="Guest Type">
+    <extensionElements>
+      <biodi:bounds x="638" y="186" width="100" height="63" />
+      <biodi:edge source="guestCount">
+        <biodi:waypoints x="561" y="218" />
+        <biodi:waypoints x="638" y="218" />
+      </biodi:edge>
+    </extensionElements>
+    <authorityRequirement>
+      <requiredDecision href="#guestCount" />
+    </authorityRequirement>
+  </knowledgeSource>
+  <businessKnowledgeModel id="elMenu" name="El menú">
+    <extensionElements>
+      <biodi:bounds x="593" y="356" width="135" height="46" />
+    </extensionElements>
+  </businessKnowledgeModel>
+  <decision id="dish-decision" name="Dish Decision">
+    <extensionElements>
+      <biodi:bounds x="301" y="48" width="180" height="80" />
+      <biodi:edge source="guestCount">
+        <biodi:waypoints x="446" y="178" />
+        <biodi:waypoints x="416" y="128" />
+      </biodi:edge>
+      <biodi:edge source="season">
+        <biodi:waypoints x="294" y="178" />
+        <biodi:waypoints x="348" y="128" />
+      </biodi:edge>
+      <biodi:edge source="host_ks">
+        <biodi:waypoints x="646" y="81" />
+        <biodi:waypoints x="481" y="86" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#guestCount" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#season" />
+    </informationRequirement>
+    <authorityRequirement>
+      <requiredAuthority href="#host_ks" />
+    </authorityRequirement>
+    <decisionTable id="dishDecisionTable">
+      <input id="seasonInput" label="Season">
+        <inputExpression id="seasonInputExpression" typeRef="string">
+          <text>season</text>
+        </inputExpression>
+      </input>
+      <input id="guestCountInput" label="How many guests">
+        <inputExpression id="guestCountInputExpression" typeRef="integer">
+          <text>guestCount</text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="Dish" name="desiredDish" typeRef="string" />
+      <rule id="row-495762709-1">
+        <inputEntry id="UnaryTests_1nxcsjr">
+          <text>"Winter"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r9yorj">
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mtwzqz">
+          <text>"Spareribs"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-495762709-2">
+        <inputEntry id="UnaryTests_1lxjbif">
+          <text>"Winter"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nhiedb">
+          <text>&gt; 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h30r12">
+          <text>"Pasta"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-495762709-3">
+        <inputEntry id="UnaryTests_0ifgmfm">
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12cib9m">
+          <text>&gt; 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wgaegy">
+          <text>"Light salad"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-495762709-7">
+        <inputEntry id="UnaryTests_0ozm9s7">
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sesgov">
+          <text>&lt;= 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dvc5x3">
+          <text>"Beans salad"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-445981423-3">
+        <inputEntry id="UnaryTests_1er0je1">
+          <text>"Spring"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uzqner">
+          <text>&lt; 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pxy4g1">
+          <text>"Stew"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-445981423-4">
+        <inputEntry id="UnaryTests_06or48g">
+          <text>"Spring"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wa71sy">
+          <text>&gt;= 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09ggol9">
+          <text>"Steak"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="season" name="Season decision">
+    <extensionElements>
+      <biodi:bounds x="161" y="178" width="180" height="80" />
+      <biodi:edge source="temperature_id">
+        <biodi:waypoints x="231" y="308" />
+        <biodi:waypoints x="242" y="258" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#temperature_id" />
+    </informationRequirement>
+    <decisionTable id="seasonDecisionTable">
+      <input id="temperatureInput" label="Weather in Celsius">
+        <inputExpression id="temperatureInputExpression" typeRef="integer">
+          <text>temperature</text>
+        </inputExpression>
+      </input>
+      <output id="seasonOutput" label="season" name="season" typeRef="string" />
+      <rule id="row-495762709-5">
+        <inputEntry id="UnaryTests_1fd0eqo">
+          <text>&gt;30</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0l98klb">
+          <text>"Summer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-495762709-6">
+        <inputEntry id="UnaryTests_1nz6at2">
+          <text>&lt;10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08moy1k">
+          <text>"Winter"</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-445981423-2">
+        <inputEntry id="UnaryTests_1a0imxy">
+          <text>[10..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1poftw4">
+          <text>"Spring"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="guestCount" name="Guest Count">
+    <extensionElements>
+      <biodi:bounds x="381" y="178" width="180" height="80" />
+      <biodi:edge source="elMenu">
+        <biodi:waypoints x="642" y="356" />
+        <biodi:waypoints x="561" y="257" />
+      </biodi:edge>
+      <biodi:edge source="dayType_id">
+        <biodi:waypoints x="420" y="355" />
+        <biodi:waypoints x="456" y="258" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#dayType_id" />
+    </informationRequirement>
+    <knowledgeRequirement>
+      <requiredKnowledge href="#elMenu" />
+    </knowledgeRequirement>
+    <decisionTable id="guestCountDecisionTable">
+      <input id="typeOfDayInput" label="Type of day">
+        <inputExpression id="typeOfDayInputExpression" typeRef="string">
+          <text>dayType</text>
+        </inputExpression>
+      </input>
+      <output id="guestCountOutput" label="Guest count" name="guestCount" typeRef="integer" />
+      <rule id="row-495762709-8">
+        <inputEntry id="UnaryTests_0l72u8n">
+          <text>"Weekday"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wuwqaz">
+          <text>4</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-495762709-9">
+        <inputEntry id="UnaryTests_03a73o9">
+          <text>"Holiday"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1whn119">
+          <text>10</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-495762709-10">
+        <inputEntry id="UnaryTests_12tygwt">
+          <text>"Weekend"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1b5k9t8">
+          <text>15</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <textAnnotation id="TextAnnotation_1">
+    <extensionElements>
+      <biodi:bounds x="324" y="458" width="125" height="45" />
+    </extensionElements>
+    <text>Week day or week end</text>
+  </textAnnotation>
+  <association id="Association_18hoj4i">
+    <extensionElements>
+      <biodi:edge source="dayType_id">
+        <biodi:waypoints x="417" y="400" />
+        <biodi:waypoints x="387" y="458" />
+      </biodi:edge>
+    </extensionElements>
+    <sourceRef href="#dayType_id" />
+    <targetRef href="#TextAnnotation_1" />
+  </association>
+</definitions>

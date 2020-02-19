@@ -34,6 +34,9 @@ const DRD_VIEW = {
 
 var diagramXML = require('./diagram.dmn');
 
+var dmn_11 = require('./dmn-11.dmn');
+var dmn_12 = require('./dmn-12.dmn');
+
 
 describe('Manager', function() {
 
@@ -563,6 +566,48 @@ describe('Manager', function() {
 
       done();
     });
+  });
+
+
+  describe('DMN compatibility', function() {
+
+    it('should indicate DMN 1.1 incompatibility', function(done) {
+
+      var dummy = new TestViewer();
+
+      dummy.importXML(dmn_11, function(err) {
+
+        if (!err) {
+          return done(new Error('expected error'));
+        }
+
+        expect(err.message).to.match(
+          /unsupported DMN 1\.1 file detected; only DMN 1\.3 files can be opened/
+        );
+
+        done();
+      });
+    });
+
+
+    it('should indicate DMN 1.2 incompatibility', function(done) {
+
+      var dummy = new TestViewer();
+
+      dummy.importXML(dmn_12, function(err) {
+
+        if (!err) {
+          return done(new Error('expected error'));
+        }
+
+        expect(err.message).to.match(
+          /unsupported DMN 1\.2 file detected; only DMN 1\.3 files can be opened/
+        );
+
+        done();
+      });
+    });
+
   });
 
 });
