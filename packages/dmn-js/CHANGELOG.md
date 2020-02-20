@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.0.1
+
+* `CHORE`: bump to `dmn-moddle@8.0.3`
+
 ## 8.0.0
 
 * `FEAT`: migrate to DMN 1.3 ([#452](https://github.com/bpmn-io/dmn-js/pull/452))
