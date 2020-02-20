@@ -22,7 +22,7 @@
   "dependencies": {
     "camunda-dmn-moddle": "^1.0.0",
     "diagram-js": "^6.3.0",
-    "dmn-moddle": "^8.0.0",
+    "dmn-moddle": "^8.0.3",
     "ids": "^0.2.0",
     "inferno": "~5.0.5",
     "min-dash": "^3.0.0",
