@@ -20,7 +20,9 @@ export default function ContextPadProvider(
     eventBus, contextPad, modeling,
     elementFactory, connect, create,
     rules, popupMenu, canvas,
-    translate) {
+    translate, config, injector) {
+
+  config = config || {};
 
   contextPad.registerProvider(this);
 
@@ -35,6 +37,10 @@ export default function ContextPadProvider(
   this._popupMenu = popupMenu;
   this._canvas = canvas;
   this._translate = translate;
+
+  if (config.autoPlace !== false) {
+    this._autoPlace = injector.get('autoPlace', false);
+  }
 
 
   eventBus.on('create.end', 250, function(event) {
@@ -62,7 +68,9 @@ ContextPadProvider.$inject = [
   'rules',
   'popupMenu',
   'canvas',
-  'translate'
+  'translate',
+  'config.contextPad',
+  'injector'
 ];
 
 
@@ -77,7 +85,8 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
       canvas = this._canvas,
       contextPad = this._contextPad,
       rules = this._rules,
-      translate = this._translate;
+      translate = this._translate,
+      autoPlace = this._autoPlace;
 
   var actions = {};
 
@@ -133,7 +142,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
       title = translate('Append {type}', { type: type.replace(/^dmn:/, '') });
     }
 
-    function appendListener(event, element) {
+    function appendStart(event, element) {
 
       var shape = elementFactory.createShape(assign({ type: type }, options));
 
@@ -145,13 +154,21 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
       });
     }
 
+    var append = autoPlace ? function(event, element) {
+      var shape = elementFactory.createShape(assign({ type: type }, options));
+
+      autoPlace.append(element, shape, {
+        connectionTarget: element
+      });
+    } : appendStart;
+
     return {
       group: 'model',
       className: className,
       title: title,
       action: {
-        dragstart: appendListener,
-        click: appendListener
+        dragstart: appendStart,
+        click: append
       }
     };
   }
