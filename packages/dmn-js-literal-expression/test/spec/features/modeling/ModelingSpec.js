@@ -42,7 +42,7 @@ describe('Modeling', function() {
     modeling.editLiteralExpressionText('foo');
 
     // then
-    expect(viewer.getDecision().literalExpression.text).to.equal('foo');
+    expect(viewer.getDecision().decisionLogic.text).to.equal('foo');
   }));
 
 
@@ -52,7 +52,7 @@ describe('Modeling', function() {
     modeling.editExpressionLanguage('foo');
 
     // then
-    expect(viewer.getDecision().literalExpression.expressionLanguage)
+    expect(viewer.getDecision().decisionLogic.expressionLanguage)
       .to.equal('foo');
   }));
 

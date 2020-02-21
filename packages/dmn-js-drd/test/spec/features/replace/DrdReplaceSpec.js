@@ -48,9 +48,12 @@ describe('features/replace - drd replace', function() {
       var businessObject = newElement.businessObject;
 
       expect(newElement).to.exist;
+
       expect(is(businessObject, 'dmn:Decision')).to.be.true;
 
-      var decisionTable = businessObject.decisionTable;
+      var decisionTable = businessObject.decisionLogic;
+
+      expect(is(decisionTable, 'dmn:DecisionTable')).to.be.true;
 
       expect(decisionTable).to.exist;
 
@@ -81,8 +84,8 @@ describe('features/replace - drd replace', function() {
 
       expect(newElement).to.exist;
       expect(is(businessObject, 'dmn:Decision')).to.be.true;
-      expect(businessObject.decisionTable).to.not.exist;
-      expect(businessObject.literalExpression).to.exist;
+
+      expect(is(businessObject.decisionLogic, 'dmn:LiteralExpression')).to.be.true;
     }));
 
 
@@ -105,8 +108,8 @@ describe('features/replace - drd replace', function() {
 
       expect(newElement).to.exist;
       expect(is(businessObject, 'dmn:Decision')).to.be.true;
-      expect(businessObject.decisionTable).to.not.exist;
-      expect(businessObject.literalExpression).to.not.exist;
+
+      expect(businessObject.decisionLogic).not.to.exist;
     }));
 
 
@@ -130,8 +133,8 @@ describe('features/replace - drd replace', function() {
 
       expect(newElement).to.exist;
       expect(is(businessObject, 'dmn:Decision')).to.be.true;
-      expect(businessObject.decisionTable).to.exist;
-      expect(businessObject.literalExpression).to.not.exist;
+
+      expect(is(businessObject.decisionLogic, 'dmn:DecisionTable')).to.be.true;
     }));
 
 
@@ -156,8 +159,8 @@ describe('features/replace - drd replace', function() {
 
       expect(newElement).to.exist;
       expect(is(businessObject, 'dmn:Decision')).to.be.true;
-      expect(businessObject.decisionTable).to.not.exist;
-      expect(businessObject.literalExpression).to.exist;
+
+      expect(is(businessObject.decisionLogic, 'dmn:LiteralExpression')).to.be.true;
     }));
   });
 

@@ -30,7 +30,7 @@ export default function TableTreeWalker(handler, options) {
       decision.id = 'decision';
     }
 
-    const table = decision.decisionTable;
+    const table = decision.decisionLogic;
 
     if (table) {
 

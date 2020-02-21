@@ -12,7 +12,11 @@ export default class DecisionTableViewer extends Manager {
         id: 'decisionTable',
         constructor: Viewer,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.decisionTable;
+          return (
+            element.$type === 'dmn:Decision' &&
+            element.decisionLogic &&
+            element.decisionLogic.$type === 'dmn:DecisionTable'
+          );
         }
       }
     ];

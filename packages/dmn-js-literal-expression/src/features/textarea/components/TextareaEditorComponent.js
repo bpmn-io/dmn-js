@@ -21,7 +21,7 @@ export default class TextareaEditorComponent extends Component {
   }
 
   getLiteralExpression() {
-    return this._viewer.getDecision().literalExpression;
+    return this._viewer.getDecision().decisionLogic;
   }
 
   onElementsChanged() {

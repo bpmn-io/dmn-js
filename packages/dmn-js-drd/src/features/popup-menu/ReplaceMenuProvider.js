@@ -67,15 +67,15 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
     var options = filter(replaceOptions.DECISION, function(option) {
       var notEmpty = (
         option.actionName === 'replace-with-empty-decision' &&
-          (businessObject.decisionTable || businessObject.literalExpression)
+        businessObject.decisionLogic
       );
       var notTable = (
         option.actionName === 'replace-with-decision-table' &&
-          !businessObject.decisionTable
+        !is(businessObject.decisionLogic, 'dmn:DecisionTable')
       );
       var notExp = (
         option.actionName === 'replace-with-literal-expression' &&
-          !businessObject.literalExpression
+        !is(businessObject.decisionLogic, 'dmn:LiteralExpression')
       );
 
       return notEmpty || notTable || notExp;

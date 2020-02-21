@@ -41,8 +41,9 @@ describe('features/modeling - replace element', function() {
           bo = newDecision.businessObject,
           associationBo = elementRegistry.get('association').businessObject;
 
-      expect(bo.decisionTable).to.exist;
       expect(is(bo, 'dmn:Decision')).to.be.true;
+      expect(is(bo.decisionLogic, 'dmn:DecisionTable')).to.be.true;
+
       expect(associationBo.sourceRef.href).to.eql('#guestCount');
       expect(associationBo.targetRef.href).to.eql('#textAnnotation');
     }
@@ -66,8 +67,9 @@ describe('features/modeling - replace element', function() {
           bo = newDecision.businessObject,
           connectionBo = newDecision.outgoing[0].businessObject;
 
-      expect(bo.decisionTable).to.exist;
       expect(is(bo, 'dmn:Decision')).to.be.true;
+      expect(is(bo.decisionLogic, 'dmn:DecisionTable')).to.be.true;
+
       expect(connectionBo.requiredDecision.href).to.eql('#foobar');
     }
   ));

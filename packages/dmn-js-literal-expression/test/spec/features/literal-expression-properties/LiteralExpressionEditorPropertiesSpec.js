@@ -117,7 +117,7 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, 'foo');
 
     // then
-    expect(viewer.getDecision().literalExpression.expressionLanguage)
+    expect(viewer.getDecision().decisionLogic.expressionLanguage)
       .to.equal('foo');
   }));
 
@@ -131,7 +131,7 @@ describe('literal expression properties editor', function() {
     triggerInputSelectChange(inputSelect, 'javascript', testContainer);
 
     // then
-    expect(viewer.getDecision().literalExpression.expressionLanguage)
+    expect(viewer.getDecision().decisionLogic.expressionLanguage)
       .to.equal('javascript');
   }));
 
@@ -149,7 +149,7 @@ describe('literal expression properties editor', function() {
     triggerInputEvent(input, '');
 
     // then
-    expect(viewer.getDecision().literalExpression.expressionLanguage)
+    expect(viewer.getDecision().decisionLogic.expressionLanguage)
       .to.not.exist;
   }));
 

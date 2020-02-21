@@ -4,6 +4,10 @@ import {
   inject
 } from '../../../TestHelper';
 
+import {
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
+
 import coreModule from 'src/core';
 import modelingModule from 'src/features/modeling';
 import replaceMenuProviderModule from 'src/features/popup-menu';
@@ -78,7 +82,6 @@ describe('features/popup-menu - replace menu provider', function() {
 
   describe('integration', function() {
 
-
     describe('decisions', function() {
 
       beforeEach(bootstrapModeler(diagramXMLReplace, { modules: testModules }));
@@ -96,9 +99,13 @@ describe('features/popup-menu - replace menu provider', function() {
 
           // then
           decision = elementRegistry.get('decision');
-          expect(decision.businessObject.decisionTable).to.exist;
+
+          expect(
+            is(decision.businessObject.decisionLogic, 'dmn:DecisionTable')
+          ).to.be.true;
         })
       );
+
 
       it('should replace empty decision with literal expression',
         inject(function(drdReplace, elementRegistry) {
@@ -113,7 +120,10 @@ describe('features/popup-menu - replace menu provider', function() {
 
           // then
           decision = elementRegistry.get('decision');
-          expect(decision.businessObject.literalExpression).to.exist;
+
+          expect(
+            is(decision.businessObject.decisionLogic, 'dmn:LiteralExpression')
+          ).to.be.true;
         })
       );
 

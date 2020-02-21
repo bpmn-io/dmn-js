@@ -13,7 +13,10 @@ var PROVIDERS = [
     matches: function(el) {
       var businessObject = el.businessObject;
 
-      return is(businessObject, 'dmn:Decision') && businessObject.decisionTable;
+      return (
+        is(businessObject, 'dmn:Decision') &&
+        is(businessObject.decisionLogic, 'dmn:DecisionTable')
+      );
     }
   },
   {
@@ -21,7 +24,10 @@ var PROVIDERS = [
     matches: function(el) {
       var businessObject = el.businessObject;
 
-      return is(businessObject, 'dmn:Decision') && businessObject.literalExpression;
+      return (
+        is(businessObject, 'dmn:Decision') &&
+        is(businessObject.decisionLogic, 'dmn:LiteralExpression')
+      );
     }
   }
 ];
