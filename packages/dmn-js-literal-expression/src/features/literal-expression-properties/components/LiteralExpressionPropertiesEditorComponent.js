@@ -37,7 +37,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
     this.state = {
       name: decision.variable.name,
       typeRef: decision.variable.typeRef,
-      expressionLanguage: getExpressionLanguage(decision.literalExpression)
+      expressionLanguage: getExpressionLanguage(decision.decisionLogic)
     };
 
     this.setVariableName = this.setVariableName.bind(this);

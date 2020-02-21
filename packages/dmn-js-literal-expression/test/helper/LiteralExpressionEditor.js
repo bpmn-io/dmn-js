@@ -12,7 +12,11 @@ export default class LiteralExpressionEditor extends EditingManager {
         id: 'literalExpression',
         constructor: Editor,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.literalExpression;
+          return (
+            element.$type === 'dmn:Decision' &&
+            element.decisionLogic &&
+            element.decisionLogic.$type === 'dmn:LiteralExpression'
+          );
         }
       }
     ];

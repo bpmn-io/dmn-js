@@ -25,14 +25,20 @@ export default class Modeler extends EditingManager {
         id: 'decisionTable',
         constructor: DecisionTableEditor,
         opens(element) {
-          return is(element, 'dmn:Decision') && element.decisionTable;
+          return (
+            is(element, 'dmn:Decision') &&
+            is(element.decisionLogic, 'dmn:DecisionTable')
+          );
         }
       },
       {
         id: 'literalExpression',
         constructor: LiteralExpressionEditor,
         opens(element) {
-          return is(element, 'dmn:Decision') && element.literalExpression;
+          return (
+            is(element, 'dmn:Decision') &&
+            is(element.decisionLogic, 'dmn:LiteralExpression')
+          );
         }
       }
     ];

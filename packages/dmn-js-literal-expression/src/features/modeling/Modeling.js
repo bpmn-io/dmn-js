@@ -62,7 +62,7 @@ export default class Modeling {
 
   editLiteralExpressionText(text) {
     const decision = this.getDecision(),
-          literalExpression = decision.literalExpression;
+          literalExpression = decision.decisionLogic;
 
     const context = {
       element: literalExpression,
@@ -76,7 +76,7 @@ export default class Modeling {
 
   editExpressionLanguage(expressionLanguage) {
     const decision = this.getDecision(),
-          literalExpression = decision.literalExpression;
+          literalExpression = decision.decisionLogic;
 
     const context = {
       element: literalExpression,

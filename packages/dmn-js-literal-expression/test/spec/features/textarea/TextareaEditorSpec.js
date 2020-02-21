@@ -53,7 +53,7 @@ describe('textarea editor', function() {
     triggerInputEvent(editor, 'foo');
 
     // then
-    expect(viewer.getDecision().literalExpression.text).to.equal('foo');
+    expect(viewer.getDecision().decisionLogic.text).to.equal('foo');
   }));
 
 });

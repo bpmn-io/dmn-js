@@ -12,7 +12,11 @@ export default class DecisionTableEditor extends EditingManager {
         id: 'decisionTable',
         constructor: Editor,
         opens(element) {
-          return element.$type === 'dmn:Decision' && element.decisionTable;
+          return (
+            element.$type === 'dmn:Decision' &&
+            element.decisionLogic &&
+            element.decisionLogic.$type === 'dmn:DecisionTable'
+          );
         }
       }
     ];

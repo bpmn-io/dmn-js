@@ -34,7 +34,7 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
 
     if (target.table) {
       var table = drdFactory.create('dmn:DecisionTable');
-      newBusinessObject.decisionTable = table;
+      newBusinessObject.decisionLogic = table;
       table.$parent = newBusinessObject;
 
       var output = drdFactory.create('dmn:OutputClause');
@@ -56,7 +56,7 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
     }
 
     if (target.expression) {
-      newBusinessObject.literalExpression = drdFactory.create('dmn:LiteralExpression');
+      newBusinessObject.decisionLogic = drdFactory.create('dmn:LiteralExpression');
       newBusinessObject.variable = drdFactory.create('dmn:InformationItem');
     }
 
