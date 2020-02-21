@@ -14,11 +14,12 @@ import {
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import autoPlaceModule from 'src/features/auto-place';
 import contextPadModule from 'src/features/context-pad';
 import coreModule from 'src/core';
-import modelingModule from 'src/features/modeling';
 import createModule from 'diagram-js/lib/features/create';
 import customRulesModule from '../../../util/custom-rules';
+import modelingModule from 'src/features/modeling';
 
 import {
   createCanvasEvent as canvasEvent
@@ -360,6 +361,80 @@ describe('features - context-pad', function() {
       // then
       expect(decision.incoming).to.have.length(incomingLength + 1);
     }));
+
+  });
+
+
+  describe('auto place', function() {
+
+    var diagramXML = require('./ContextPad.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, {
+      modules: testModules.concat(autoPlaceModule)
+    }));
+
+
+    it('should trigger', inject(function(elementRegistry, contextPad) {
+
+      // given
+      var decision = elementRegistry.get('guestCount');
+
+      contextPad.open(decision);
+
+      // mock event
+      var event = padEvent('append.decision');
+
+      // when
+      contextPad.trigger('click', event);
+
+      // then
+      expect(decision.outgoing).to.have.length(1);
+    }));
+
+  });
+
+
+  describe('disabled auto-place', function() {
+
+    var diagramXML = require('./ContextPad.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, {
+      modules: testModules.concat(autoPlaceModule),
+      contextPad: {
+        autoPlace: false
+      }
+    }));
+
+    var container;
+
+    beforeEach(function() {
+      container = TestContainer.get(this);
+    });
+
+
+    it('should default to drag start', inject(
+      function(elementRegistry, contextPad, dragging) {
+
+        // given
+        var decision = elementRegistry.get('guestCount');
+
+        contextPad.open(decision);
+
+        // mock event
+        var event = {
+          clientX: 100,
+          clientY: 100,
+          target: padEntry(container, 'append.decision'),
+          preventDefault: function() {}
+        };
+
+        // when
+        contextPad.trigger('click', event);
+
+        // then
+        expect(dragging.context()).to.exist;
+      }
+    ));
 
   });
 

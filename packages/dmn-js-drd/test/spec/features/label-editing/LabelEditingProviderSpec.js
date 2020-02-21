@@ -4,11 +4,12 @@ import {
   inject
 } from 'test/TestHelper';
 
-import labelEditingModule from 'src/features/label-editing';
-import modelingModule from 'src/features/modeling';
+import autoPlaceModule from 'lib/features/auto-place';
 import coreModule from 'src/core';
 import createModule from 'diagram-js/lib/features/create';
 import draggingModule from 'diagram-js/lib/features/dragging';
+import labelEditingModule from 'src/features/label-editing';
+import modelingModule from 'src/features/modeling';
 
 import { getLabel } from 'src/features/label-editing/LabelUtil';
 
@@ -26,6 +27,7 @@ describe('features - label-editing', function() {
   var diagramXML = require('../../../fixtures/dmn/di.dmn');
 
   var testModules = [
+    autoPlaceModule,
     coreModule,
     createModule,
     draggingModule,
@@ -267,6 +269,29 @@ describe('features - label-editing', function() {
       // then
       expect(getBusinessObject(decision).name).not.to.exist;
     });
+
+
+    it('should complete on auto place', inject(
+      function(elementRegistry, directEditing, elementFactory, autoPlace) {
+
+        // given
+        var shape = elementRegistry.get('dish-decision'),
+            task = shape.businessObject;
+
+        directEditing.activate(shape);
+
+        directEditing._textbox.content.textContent = 'FOO BAR';
+
+        // when
+        autoPlace.append(shape, elementFactory.create(
+          'shape',
+          { type: 'dmn:Decision' }
+        ));
+
+        // then
+        expect(task.name).to.equal('FOO BAR');
+      }
+    ));
 
   });
 

@@ -59,6 +59,10 @@ export default function LabelEditingProvider(
       directEditing.activate(element);
     }
   });
+
+  eventBus.on('autoPlace.end', 500, function(event) {
+    directEditing.activate(event.shape);
+  });
 }
 
 LabelEditingProvider.$inject = [
