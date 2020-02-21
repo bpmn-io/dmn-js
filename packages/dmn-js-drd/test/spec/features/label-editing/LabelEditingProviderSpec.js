@@ -3,10 +3,11 @@ import {
   inject
 } from 'test/TestHelper';
 
-import labelEditingModule from 'src/features/label-editing';
-import modelingModule from 'src/features/modeling';
+import autoPlaceModule from 'lib/features/auto-place';
 import coreModule from 'src/core';
 import draggingModule from 'diagram-js/lib/features/dragging';
+import labelEditingModule from 'src/features/label-editing';
+import modelingModule from 'src/features/modeling';
 
 import {
   getLabel
@@ -30,7 +31,13 @@ describe('features - label-editing', function() {
 
   var diagramXML = require('../../../fixtures/dmn/di.dmn');
 
-  var testModules = [ labelEditingModule, coreModule, draggingModule, modelingModule ];
+  var testModules = [
+    autoPlaceModule,
+    coreModule,
+    draggingModule,
+    labelEditingModule,
+    modelingModule
+  ];
 
   beforeEach(bootstrapViewer(diagramXML, { modules: testModules }));
 
@@ -113,6 +120,29 @@ describe('features - label-editing', function() {
 
         // then
         expect(decision.name).to.equal('FOO BAR');
+      }
+    ));
+
+
+    it('should complete on auto place', inject(
+      function(elementRegistry, directEditing, elementFactory, autoPlace) {
+
+        // given
+        var shape = elementRegistry.get('dish-decision'),
+            task = shape.businessObject;
+
+        directEditing.activate(shape);
+
+        directEditing._textbox.content.textContent = 'FOO BAR';
+
+        // when
+        autoPlace.append(shape, elementFactory.create(
+          'shape',
+          { type: 'dmn:Decision' }
+        ));
+
+        // then
+        expect(task.name).to.equal('FOO BAR');
       }
     ));
 

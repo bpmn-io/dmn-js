@@ -27,6 +27,7 @@ export default function LabelEditingProvider(
 
   // complete on followup canvas operation
   eventBus.on([
+    'autoPlace.start',
     'element.mousedown',
     'drag.init',
     'canvas.viewbox.changed'
@@ -48,6 +49,10 @@ export default function LabelEditingProvider(
 
       directEditing.activate(element);
     }
+  });
+
+  eventBus.on('autoPlace.end', 500, function(event) {
+    directEditing.activate(event.shape);
   });
 }
 
