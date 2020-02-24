@@ -1,5 +1,5 @@
 import {
-  bootstrapViewer,
+  bootstrapModeler,
   inject
 } from 'test/TestHelper';
 
@@ -39,7 +39,7 @@ describe('features - label-editing', function() {
     modelingModule
   ];
 
-  beforeEach(bootstrapViewer(diagramXML, { modules: testModules }));
+  beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
   var setText;
 
@@ -136,10 +136,9 @@ describe('features - label-editing', function() {
         directEditing._textbox.content.textContent = 'FOO BAR';
 
         // when
-        autoPlace.append(shape, elementFactory.create(
-          'shape',
-          { type: 'dmn:Decision' }
-        ));
+        autoPlace.append(shape, elementFactory.createShape({ type: 'dmn:Decision' }), {
+          connectionTarget: shape
+        });
 
         // then
         expect(task.name).to.equal('FOO BAR');

@@ -30,13 +30,81 @@ describe('features/auto-place', function() {
 
     describe('should place dmn:Decision', function() {
 
-      it('at default distance after Decision_1', autoPlace({
-        element: 'dmn:Decision',
+      describe('should place dmn:Decision', function() {
+
+        it('at default distance after Decision_1', autoPlace({
+          element: 'dmn:Decision',
+          behind: 'Decision_1',
+          expectedBounds: {
+            x: 160,
+            y: 330,
+            width: 180,
+            height: 80
+          }
+        }));
+
+
+        it('at default distance after Decision_2 next to Decision_3', autoPlace({
+          element: 'dmn:Decision',
+          behind: 'Decision_2',
+          expectedBounds: {
+            x: 580,
+            y: 330,
+            width: 180,
+            height: 80
+          }
+        }));
+
+
+        it('at distance of Decision_5 after Decision_4 next to Decision_5', autoPlace({
+          element: 'dmn:Decision',
+          behind: 'Decision_4',
+          expectedBounds: {
+            x: 880,
+            y: 370,
+            width: 180,
+            height: 80
+          }
+        }));
+
+
+        it('at default distance of Decision_6 ignoring Decision_7', autoPlace({
+          element: 'dmn:Decision',
+          behind: 'Decision_6',
+          expectedBounds: {
+            x: 790,
+            y: 330,
+            width: 180,
+            height: 80
+          }
+        }));
+
+      });
+
+    });
+
+
+    describe('should place dmn:TextAnnotation', function() {
+
+      it('top right of source', autoPlace({
+        element: 'dmn:TextAnnotation',
         behind: 'Decision_1',
         expectedBounds: {
-          x: 230,
-          y: 0,
-          width: 180,
+          x: 340,
+          y: 70,
+          width: 100,
+          height: 80
+        }
+      }));
+
+
+      it('above existing', autoPlace({
+        element: 'dmn:TextAnnotation',
+        behind: 'Decision_2',
+        expectedBounds: {
+          x: 550,
+          y: -30,
+          width: 100,
           height: 80
         }
       }));
@@ -128,7 +196,9 @@ function autoPlace(cfg) {
     var shape = elementFactory.createShape(element);
 
     // when
-    var placedShape = autoPlace.append(sourceEl, shape);
+    var placedShape = autoPlace.append(sourceEl, shape, {
+      connectionTarget: sourceEl
+    });
 
     // then
     expect(placedShape).to.have.bounds(expectedBounds);
