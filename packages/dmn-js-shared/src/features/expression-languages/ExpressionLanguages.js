@@ -1,4 +1,7 @@
-import { assign } from 'min-dash';
+import {
+  assign,
+  find
+} from 'min-dash';
 
 
 const EXPRESSION_LANGUAGE_OPTIONS = [{
@@ -126,7 +129,7 @@ export default class ExpressionLanguages {
   }
 
   _getLanguageByValue(value) {
-    return this.getAll().find(language => value === language.value);
+    return find(this.getAll(), language => value === language.value);
   }
 }
 
