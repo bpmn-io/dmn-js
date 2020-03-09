@@ -43,9 +43,13 @@ export default function LabelEditingProvider(
 
     var element = e.shape;
 
-    if (is(element, 'dmn:Decision') || is(element, 'dmn:InputData') ||
-        is(element, 'dmn:BusinessKnowledgeModel') || is(element, 'dmn:KnowledgeSource')) {
-
+    if (
+      is(element, 'dmn:Decision') ||
+      is(element, 'dmn:InputData') ||
+      is(element, 'dmn:BusinessKnowledgeModel') ||
+      is(element, 'dmn:KnowledgeSource') ||
+      is(element, 'dmn:TextAnnotation')
+    ) {
       directEditing.activate(element);
     }
   });

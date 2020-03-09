@@ -1,16 +1,21 @@
 import {
-  bootstrapViewer,
+  bootstrapModeler,
   inject
 } from 'test/TestHelper';
 
 import labelEditingModule from 'src/features/label-editing';
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
+import createModule from 'diagram-js/lib/features/create';
 import draggingModule from 'diagram-js/lib/features/dragging';
 
 import {
   getLabel
 } from 'src/features/label-editing/LabelUtil';
+
+import {
+  createCanvasEvent as canvasEvent
+} from 'test/util/MockEvents';
 
 
 function triggerKeyEvent(element, event, code) {
@@ -30,9 +35,15 @@ describe('features - label-editing', function() {
 
   var diagramXML = require('../../../fixtures/dmn/di.dmn');
 
-  var testModules = [ labelEditingModule, coreModule, draggingModule, modelingModule ];
+  var testModules = [
+    modelingModule,
+    labelEditingModule,
+    coreModule,
+    createModule,
+    draggingModule
+  ];
 
-  beforeEach(bootstrapViewer(diagramXML, { modules: testModules }));
+  beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
   var setText;
 
@@ -220,6 +231,83 @@ describe('features - label-editing', function() {
         expect(directEditing.isActive()).to.be.false;
       }
     ));
+
+  });
+
+  describe('after create', function() {
+
+    var createElement;
+
+    beforeEach(inject(
+      function(canvas, create, dragging, elementFactory, elementRegistry) {
+
+        createElement = function(type) {
+
+          var shape = elementFactory.create('shape', { type: type }),
+              parent = canvas.getRootElement(),
+              parentGfx = elementRegistry.getGraphics(parent);
+
+          create.start(canvasEvent({ x: 0, y: 0 }), shape);
+
+          dragging.hover({
+            element: parent,
+            gfx: parentGfx
+          });
+
+          dragging.move(canvasEvent({ x: 400, y: 250 }));
+          dragging.end();
+        };
+      }
+    ));
+
+    it('should activate on Decision', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:Decision');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on InputData', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:InputData');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on BusinessKnowledgeModel', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:BusinessKnowledgeModel');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on KnowledgeSource', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:KnowledgeSource');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on TextAnnotation', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:TextAnnotation');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
 
   });
 
