@@ -33,14 +33,16 @@ import {
  * @param {Config} config
  * @param {EventBus} eventBus
  * @param {EditorActions} editorActions
+ * @param {CellSelection} cellSelection
  */
 export default class Keyboard {
 
-  constructor(config, eventBus, editorActions) {
+  constructor(config, eventBus, editorActions, cellSelection) {
 
     this._config = config || {};
     this._editorActions = editorActions;
     this._eventBus = eventBus;
+    this._cellSelection = cellSelection;
 
     this._listeners = [];
 
@@ -135,6 +137,8 @@ export default class Keyboard {
 
     var editorActions = this._editorActions;
 
+    var cellSelection = this._cellSelection;
+
     // init default listeners
 
     // undo
@@ -170,9 +174,8 @@ export default class Keyboard {
     listeners.push(redo);
 
 
-    function selectCell(key, event) {
-
-      if (key !== 13 || isCmd(event)) {
+    function selectCellAbove(key, event) {
+      if (key !== 13 || isCmd(event) || !isShift(event)) {
         return;
       }
 
@@ -180,14 +183,41 @@ export default class Keyboard {
         return;
       }
 
-      const cmd = isShift(event) ? 'selectCellAbove' : 'selectCellBelow';
-
-      editorActions.trigger(cmd);
+      editorActions.trigger('selectCellAbove');
 
       return true;
     }
 
-    listeners.push(selectCell);
+    listeners.push(selectCellAbove);
+
+
+    function selectCellBelow(key, event) {
+
+      if (key !== 13 || isCmd(event) || isShift(event)) {
+        return;
+      }
+
+      if (!findSelectableAncestor(event.target)) {
+        return;
+      }
+
+      const changed = editorActions.trigger('selectCellBelow');
+
+      const selectedCell = cellSelection.getCellSelection();
+
+      // add new rule if no next rule
+      if (!changed && selectedCell && !isDecisionTableIdCell(selectedCell)) {
+        const rule = editorActions.trigger('addRule');
+
+        editorActions.trigger('selectCellBelow');
+
+        return rule;
+      }
+
+      return true;
+    }
+
+    listeners.push(selectCellBelow);
   }
 
 
@@ -210,5 +240,13 @@ export default class Keyboard {
 Keyboard.$inject = [
   'config.keyboard',
   'eventBus',
-  'editorActions'
+  'editorActions',
+  'cellSelection'
 ];
+
+
+// helpers //////////////////
+
+function isDecisionTableIdCell(cell) {
+  return cell === '__decisionProperties_id';
+}
