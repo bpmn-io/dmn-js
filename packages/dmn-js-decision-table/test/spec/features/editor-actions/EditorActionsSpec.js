@@ -5,8 +5,7 @@ import simpleXML from '../../simple.dmn';
 import CoreModule from 'src/core';
 import EditorActionsModule from 'src/features/editor-actions';
 import ModelingModule from 'src/features/modeling';
-import DecisionRulesModule from 'src/features/decision-rules';
-
+import RulesEditorModule from 'src/features/decision-rules/editor';
 
 describe('features/editor-actions', function() {
 
@@ -17,7 +16,7 @@ describe('features/editor-actions', function() {
       CoreModule,
       EditorActionsModule,
       ModelingModule,
-      DecisionRulesModule
+      RulesEditorModule
     ]
   }));
 
@@ -588,6 +587,66 @@ describe('features/editor-actions', function() {
       rule4,
       newRule1
     ]);
+  }));
+
+
+  it('selectCellAbove', inject(function(editorActions, selection) {
+
+    // given
+    selection.select('inputEntry3');
+
+    // when
+    editorActions.trigger('selectCellAbove');
+
+    // then
+    var currentSelection = selection.get();
+
+    expect(currentSelection.id).to.equal('inputEntry1');
+  }));
+
+
+  it('selectCellAbove - none available', inject(function(editorActions, selection) {
+
+    // given
+    selection.select('inputEntry1');
+
+    // when
+    editorActions.trigger('selectCellAbove');
+
+    // then
+    var currentSelection = selection.get();
+
+    expect(currentSelection.id).to.equal('inputEntry1');
+  }));
+
+
+  it('selectCellBelow', inject(function(editorActions, selection) {
+
+    // given
+    selection.select('inputEntry1');
+
+    // when
+    editorActions.trigger('selectCellBelow');
+
+    // then
+    var currentSelection = selection.get();
+
+    expect(currentSelection.id).to.equal('inputEntry3');
+  }));
+
+
+  it('selectCellBelow - none available', inject(function(editorActions, selection) {
+
+    // given
+    selection.select('inputEntry7');
+
+    // when
+    editorActions.trigger('selectCellBelow');
+
+    // then
+    var currentSelection = selection.get();
+
+    expect(currentSelection.id).to.equal('inputEntry7');
   }));
 
 });
