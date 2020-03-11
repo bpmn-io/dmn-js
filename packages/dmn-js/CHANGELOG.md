@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.4.4
+
+* `CHORE`: use `min-dash#find` as polyfill for `Array.prototype.find`
+
 ## 7.4.3
 
 * `FIX(decision-table)`: correct placeholders shown in table footer
