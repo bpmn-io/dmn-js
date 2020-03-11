@@ -48,4 +48,41 @@ describe('IdChangeBehavior', function() {
     });
   }));
 
+
+  it('should update IDs on decision ID change', inject(function(modeling, sheet) {
+
+    // given
+    const root = sheet.getRoot(),
+          decisionTable = root.businessObject;
+
+    const decision = decisionTable.$parent;
+
+    const definitions = decision.$parent;
+
+    const {
+      artifacts,
+      drgElements
+    } = definitions;
+
+    const dishDecision = drgElements.filter(
+      drgElement => drgElement.id === 'dish-decision'
+    )[0];
+
+    const association = artifacts.filter(
+      element => element.id === 'Association'
+    )[0];
+
+    const dmnJS = getDmnJS();
+
+    dmnJS._viewers.decisionTable.open(dishDecision, () => {
+
+      // when
+      modeling.editDecisionTableId('foo');
+
+      // then
+      expect(association.sourceRef.href).to.eql('#foo');
+      expect(association.extensionElements.values[0].source).to.eql('foo');
+    });
+  }));
+
 });
