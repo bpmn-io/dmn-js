@@ -19,6 +19,7 @@ import LabelEditingModule from './features/label-editing';
 import ModelingModule from './features/modeling';
 import MoveModule from 'diagram-js/lib/features/move';
 import PaletteModule from './features/palette';
+import ResizeModule from 'diagram-js/lib/features/resize';
 import SnappingModule from 'diagram-js/lib/features/snapping';
 
 /**
@@ -129,6 +130,7 @@ Modeler.prototype._modelingModules = [
   ModelingModule,
   MoveModule,
   PaletteModule,
+  ResizeModule,
   SnappingModule
 ];
 
