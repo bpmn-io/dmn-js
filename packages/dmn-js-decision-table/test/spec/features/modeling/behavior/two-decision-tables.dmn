@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.8.0-dev.20200311">
   <decision id="dish-decision" name="Dish Decision">
     <informationRequirement id="InformationRequirement_0v56f5d">
       <requiredDecision href="#season" />
@@ -118,18 +118,30 @@
       </rule>
     </decisionTable>
   </decision>
+  <textAnnotation id="TextAnnotation" />
+  <association id="Association">
+    <sourceRef href="#dish-decision" />
+    <targetRef href="#TextAnnotation" />
+  </association>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_09ow721">
       <dmndi:DMNShape id="dish-decision_di" dmnElementRef="dish-decision">
-        <dc:Bounds height="80" width="180" x="140" y="5" />
+        <dc:Bounds height="80" width="180" x="290" y="85" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="InformationRequirement_0v56f5d_di" dmnElementRef="InformationRequirement_0v56f5d">
-        <di:waypoint x="80" y="132" />
-        <di:waypoint x="140" y="81" />
+        <di:waypoint x="230" y="212" />
+        <di:waypoint x="290" y="161" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="season_di" dmnElementRef="season">
-        <dc:Bounds height="80" width="180" x="10" y="132" />
+        <dc:Bounds height="80" width="180" x="160" y="212" />
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1bh4flf" dmnElementRef="TextAnnotation">
+        <dc:Bounds height="80" width="100" x="540" y="220" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1jrelfp" dmnElementRef="Association">
+        <di:waypoint x="442" y="165" />
+        <di:waypoint x="540" y="228" />
+      </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>

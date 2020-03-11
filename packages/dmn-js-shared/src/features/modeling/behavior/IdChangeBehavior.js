@@ -22,17 +22,27 @@ export default class IdChangeBehavior extends CommandInterceptor {
 
     const bo = getBusinessObject(element);
 
-    if (!is(bo, 'dmn:DRGElement') || !isIdChange(oldProperties, properties)) {
+    if (this.shouldSkipUpdate(bo, oldProperties, properties)) {
       return;
     }
 
-    const drgElements = getDrgElements(bo);
+    const definitions = getDefinitions(bo);
 
+    const drgElements = definitions.get('drgElement');
     drgElements.forEach(drgElement => {
       updateElementReferences(drgElement, oldProperties.id, properties.id);
     });
+
+    const artifacts = definitions.get('artifact');
+    artifacts.forEach(artifact => {
+      updateAssociationReferences(artifact, oldProperties.id, properties.id);
+    });
   }
 
+  shouldSkipUpdate(bo, oldProperties, newProperties) {
+    return !isIdChange(oldProperties, newProperties) ||
+     (!is(bo, 'dmn:DRGElement') && !is(bo, 'dmn:TextAnnotation'));
+  }
 }
 
 IdChangeBehavior.$inject = [ 'eventBus' ];
@@ -42,14 +52,6 @@ IdChangeBehavior.$inject = [ 'eventBus' ];
 
 function isIdChange(oldProperties, properties) {
   return ID in oldProperties && ID in properties;
-}
-
-function getDrgElements(element) {
-  const definitions = getDefinitions(element);
-
-  const drgElements = definitions.get('drgElement');
-
-  return drgElements;
 }
 
 
@@ -118,6 +120,34 @@ function updateElementReferences(element, oldId, id) {
       });
     }
 
+  };
+
+  forEach(handlers, (handler, key) => {
+
+    if (element[key]) {
+      handler();
+    }
+
+  });
+}
+
+function updateAssociationReferences(element, oldId, id) {
+
+  const handlers = {
+    sourceRef: () => {
+      const { sourceRef } = element;
+
+      if (sourceRef.href === `#${oldId}`) {
+        sourceRef.href = `#${id}`;
+      }
+    },
+    targetRef: () => {
+      const { targetRef } = element;
+
+      if (targetRef.href === `#${oldId}`) {
+        targetRef.href = `#${id}`;
+      }
+    }
   };
 
   forEach(handlers, (handler, key) => {
