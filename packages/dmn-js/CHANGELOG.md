@@ -32,6 +32,10 @@ ___Note:__ Yet to be released changes appear here._
   coordinates as connection waypoints.
 * Renamed `updateProperties` command in `dmn-js-drd` to `element.updateProperties` to align with other libraries
 
+## 7.4.4
+
+* `CHORE`: use `min-dash#find` as polyfill for `Array.prototype.find`
+
 ## 7.4.3
 
 * `FIX(decision-table)`: correct placeholders shown in table footer
