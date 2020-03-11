@@ -253,6 +253,21 @@ describe('features/rules', function() {
 
   });
 
+
+  describe('resize', function() {
+
+    var diagramXML = require('./drd-rules.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+
+    it('decision', expectCanResize('Decision_1', false));
+
+
+    it('text annotation', expectCanResize('TextAnnotation_1', true));
+
+  });
+
 });
 
 // helpers //////////
@@ -264,6 +279,19 @@ function expectCanConnect(source, target, canConnect) {
         elementRegistry.get(source),
         elementRegistry.get(target)
       )).to.eql(canConnect);
+    });
+  };
+}
+
+function expectCanResize(shape, canResize) {
+  return function() {
+    getDrdJS().invoke(function(rules, elementRegistry) {
+      expect(rules.allowed(
+        'shape.resize',
+        {
+          shape: elementRegistry.get(shape)
+        }
+      )).to.equal(canResize);
     });
   };
 }

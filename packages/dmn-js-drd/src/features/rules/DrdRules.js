@@ -65,6 +65,12 @@ DrdRules.prototype.init = function() {
     return canCreate(shape, target);
   });
 
+  this.addRule('shape.resize', function(context) {
+    var shape = context.shape;
+
+    return is(shape, 'dmn:TextAnnotation');
+  });
+
 };
 
 DrdRules.prototype.canConnect = canConnect;
