@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "diagram-js": "^6.3.0",
-    "diagram-js-direct-editing": "^1.5.0",
+    "diagram-js-direct-editing": "^1.6.1",
     "dmn-js-shared": "^8.0.2",
     "inherits": "^2.0.1",
     "min-dash": "^3.0.0",
