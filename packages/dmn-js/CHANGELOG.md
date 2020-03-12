@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.0.2
+
+* `CHORE`: use `min-dash#find` as polyfill for `Array.prototype.find`
+
 ## 8.0.1
 
 * `CHORE`: bump to `dmn-moddle@8.0.3`
@@ -27,6 +31,10 @@ ___Note:__ Yet to be released changes appear here._
 * DI waypoints of new `dmn:Association` elements no longer point to middle of source and target and have same
   coordinates as connection waypoints.
 * Renamed `updateProperties` command in `dmn-js-drd` to `element.updateProperties` to align with other libraries
+
+## 7.4.4
+
+* `CHORE`: use `min-dash#find` as polyfill for `Array.prototype.find`
 
 ## 7.4.3
 

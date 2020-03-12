@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "scripts": {
     "test": "karma start",
     "build": "del-cli lib && babel -s -q -d lib src",
@@ -28,7 +28,7 @@
   "dependencies": {
     "css.escape": "^1.5.1",
     "diagram-js": "^6.3.0",
-    "dmn-js-shared": "^8.0.1",
+    "dmn-js-shared": "^8.0.2",
     "escape-html": "^1.0.3",
     "inferno": "~5.0.5",
     "min-dash": "^3.0.0",
