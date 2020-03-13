@@ -2,8 +2,9 @@ import inherits from 'inherits';
 
 import BaseModeling from 'diagram-js/lib/features/modeling/Modeling';
 
-import UpdatePropertiesHandler from './cmd/UpdatePropertiesHandler.js';
 import IdClaimHandler from './cmd/IdClaimHandler.js';
+import UpdateLabelHandler from '../label-editing/cmd/UpdateLabelHandler.js';
+import UpdatePropertiesHandler from './cmd/UpdatePropertiesHandler.js';
 
 
 /**
@@ -56,8 +57,9 @@ Modeling.prototype.connect = function(source, target, attrs, hints) {
 Modeling.prototype.getHandlers = function() {
   var handlers = BaseModeling.prototype.getHandlers.call(this);
 
-  handlers['element.updateProperties'] = UpdatePropertiesHandler;
   handlers['id.updateClaim'] = IdClaimHandler;
+  handlers['element.updateLabel'] = UpdateLabelHandler;
+  handlers['element.updateProperties'] = UpdatePropertiesHandler;
 
   return handlers;
 };
@@ -73,5 +75,14 @@ Modeling.prototype.updateProperties = function(element, properties) {
   this._commandStack.execute('element.updateProperties', {
     element: element,
     properties: properties
+  });
+};
+
+Modeling.prototype.updateLabel = function(element, newLabel, newBounds, hints) {
+  this._commandStack.execute('element.updateLabel', {
+    element: element,
+    newLabel: newLabel,
+    newBounds: newBounds,
+    hints: hints || {}
   });
 };

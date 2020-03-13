@@ -1,24 +1,29 @@
-import UpdateLabelHandler from './cmd/UpdateLabelHandler';
+import { getLabel } from './LabelUtil';
 
 import {
-  getLabel
-} from './LabelUtil';
-
-import {
-  is
+  is,
+  isAny
 } from 'dmn-js-shared/lib/util/ModelUtil';
+
+import {
+  assign,
+  isDefined
+} from 'min-dash';
 
 
 export default function LabelEditingProvider(
-    eventBus, canvas, directEditing, commandStack
+    canvas,
+    directEditing,
+    eventBus,
+    modeling,
+    textRenderer
 ) {
 
   this._canvas = canvas;
-  this._commandStack = commandStack;
+  this._modeling = modeling;
+  this._textRenderer = textRenderer;
 
   directEditing.registerProvider(this);
-
-  commandStack.registerHandler('element.updateLabel', UpdateLabelHandler);
 
   // listen to dblclick on non-root elements
   eventBus.on('element.dblclick', function(event) {
@@ -27,10 +32,12 @@ export default function LabelEditingProvider(
 
   // complete on followup canvas operation
   eventBus.on([
-    'element.mousedown',
+    'autoPlace.start',
+    'canvas.viewbox.changing',
     'drag.init',
-    'canvas.viewbox.changed'
-  ], function(event) {
+    'element.mousedown',
+    'popupMenu.open'
+  ], function() {
     directEditing.complete();
   });
 
@@ -39,23 +46,22 @@ export default function LabelEditingProvider(
     directEditing.cancel();
   });
 
-  eventBus.on('create.end', 500, function(e) {
+  eventBus.on('create.end', 500, function(event) {
+    var element = event.shape;
 
-    var element = e.shape;
-
-    if (
-      is(element, 'dmn:Decision') ||
-      is(element, 'dmn:InputData') ||
-      is(element, 'dmn:BusinessKnowledgeModel') ||
-      is(element, 'dmn:KnowledgeSource') ||
-      is(element, 'dmn:TextAnnotation')
-    ) {
+    if (isAny(element, [ 'dmn:DMNElement', 'dmn:TextAnnotation' ])) {
       directEditing.activate(element);
     }
   });
 }
 
-LabelEditingProvider.$inject = [ 'eventBus', 'canvas', 'directEditing', 'commandStack' ];
+LabelEditingProvider.$inject = [
+  'canvas',
+  'directEditing',
+  'eventBus',
+  'modeling',
+  'textRenderer'
+];
 
 
 /**
@@ -69,15 +75,39 @@ LabelEditingProvider.prototype.activate = function(element) {
 
   var text = getLabel(element);
 
-  if (text === undefined) {
+  if (!isDefined(text)) {
     return;
   }
 
-  var properties = this.getEditingBBox(element);
+  var context = {
+    text: text
+  };
 
-  properties.text = text;
+  var editingBBox = this.getEditingBBox(element);
 
-  return properties;
+  assign(context, editingBBox);
+
+  var options = {};
+
+  // DRG elements
+  if (is(element, 'dmn:DRGElement')) {
+    assign(options, {
+      centerVertically: true
+    });
+  }
+
+  // text annotations
+  if (is(element, 'dmn:TextAnnotation')) {
+    assign(options, {
+      resizable: true
+    });
+  }
+
+  assign(context, {
+    options: options
+  });
+
+  return context;
 };
 
 
@@ -100,44 +130,90 @@ LabelEditingProvider.prototype.getEditingBBox = function(element) {
   // default position
   var bounds = { x: bbox.x, y: bbox.y };
 
-  var style = {},
-      zoom;
+  var zoom = canvas.zoom();
 
-  zoom = canvas.zoom();
+  var defaultStyle = this._textRenderer.getDefaultStyle();
 
-  // fixed size for internal labels:
-  // on high zoom levels: text box size === bbox size
-  // on low zoom levels: text box size === bbox size at 100% zoom
-  // This ensures minimum bounds at low zoom levels
-  if (zoom > 1) {
-    bounds.width = bbox.width;
-    bounds.height = bbox.height;
-  } else {
-    bounds.width = bbox.width / zoom;
-    bounds.height = bbox.height / zoom;
-  }
+  // take zoom into account
+  var defaultFontSize = defaultStyle.fontSize * zoom,
+      defaultLineHeight = defaultStyle.lineHeight;
 
-  // centering overlapping text box size at low zoom levels
-  if (zoom < 1) {
-    bounds.x = bbox.x - (bounds.width / 2 - bbox.width / 2);
-    bounds.y = bbox.y - (bounds.height / 2 - bbox.height / 2);
+  var style = {
+    fontFamily: this._textRenderer.getDefaultStyle().fontFamily,
+    fontWeight: this._textRenderer.getDefaultStyle().fontWeight
+  };
+
+  // DRG elements
+  if (is(element, 'dmn:DRGElement')) {
+    assign(bounds, {
+      width: bbox.width,
+      height: bbox.height
+    });
+
+    assign(style, {
+      fontSize: defaultFontSize + 'px',
+      lineHeight: defaultLineHeight,
+      paddingTop: (7 * zoom) + 'px',
+      paddingBottom: (7 * zoom) + 'px',
+      paddingLeft: (5 * zoom) + 'px',
+      paddingRight: (5 * zoom) + 'px'
+    });
   }
 
   // text annotations
   if (is(element, 'dmn:TextAnnotation')) {
-    bounds.minWidth = 100;
-    bounds.height = element.height;
+    assign(bounds, {
+      width: bbox.width,
+      height: bbox.height,
+      minWidth: 30 * zoom,
+      minHeight: 10 * zoom
+    });
 
-    style.textAlign = 'left';
+    assign(style, {
+      textAlign: 'left',
+      paddingTop: (5 * zoom) + 'px',
+      paddingBottom: (7 * zoom) + 'px',
+      paddingLeft: (7 * zoom) + 'px',
+      paddingRight: (5 * zoom) + 'px',
+      fontSize: defaultFontSize + 'px',
+      lineHeight: defaultLineHeight
+    });
   }
 
   return { bounds: bounds, style: style };
 };
 
 
-LabelEditingProvider.prototype.update = function(element, newLabel) {
-  this._commandStack.execute('element.updateLabel', {
-    element: element,
-    newLabel: newLabel
-  });
+LabelEditingProvider.prototype.update = function(
+    element,
+    newLabel,
+    activeContextText,
+    bounds
+) {
+  var newBounds,
+      bbox;
+
+  if (is(element, 'dmn:TextAnnotation')) {
+
+    bbox = this._canvas.getAbsoluteBBox(element);
+
+    newBounds = {
+      x: element.x,
+      y: element.y,
+      width: element.width / bbox.width * bounds.width,
+      height: element.height / bbox.height * bounds.height
+    };
+  }
+
+  if (isEmptyText(newLabel)) {
+    newLabel = null;
+  }
+
+  this._modeling.updateLabel(element, newLabel, newBounds);
 };
+
+// helpers //////////
+
+function isEmptyText(label) {
+  return !label || !label.trim();
+}
