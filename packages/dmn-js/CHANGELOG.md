@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.5.0
+
+* `FEAT(decision-table)`: add new rule on bottom rule \<enter> ([#345](https://github.com/bpmn-io/dmn-js/issues/345))
+* `FEAT(drd)`: activate direct editing after text annotation create ([#185](https://github.com/bpmn-io/dmn-js/issues/185))
+* `FIX`: update association's refs on element id change([#397](https://github.com/bpmn-io/dmn-js/issues/397))
+
 ## 7.4.4
 
 * `CHORE`: use `min-dash#find` as polyfill for `Array.prototype.find`
