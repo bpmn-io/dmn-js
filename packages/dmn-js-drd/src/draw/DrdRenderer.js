@@ -18,7 +18,6 @@ import {
 } from 'tiny-svg';
 
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
-import TextUtil from 'diagram-js/lib/util/Text';
 
 import {
   createLine
@@ -30,19 +29,9 @@ import {
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
-export default function DrdRenderer(eventBus, pathMap, styles) {
+export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
 
   BaseRenderer.call(this, eventBus);
-
-  var LABEL_STYLE = {
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '12px'
-  };
-
-  var textUtil = new TextUtil({
-    style: LABEL_STYLE,
-    size: { width: 100 }
-  });
 
   var markers = {};
 
@@ -207,7 +196,7 @@ export default function DrdRenderer(eventBus, pathMap, styles) {
   }
 
   function renderLabel(p, label, options) {
-    var text = textUtil.createText(label || '', options);
+    var text = textRenderer.createText(label || '', options);
 
     domAttr(text, 'class', 'djs-label');
 
@@ -305,23 +294,29 @@ export default function DrdRenderer(eventBus, pathMap, styles) {
         'fill': 'none',
         'stroke': 'none'
       };
-      var textElement = drawRect(p, element.width, element.height, 0, 0, style),
-          textPathData = pathMap.getScaledPath('TEXT_ANNOTATION', {
-            xScaleFactor: 1,
-            yScaleFactor: 1,
-            containerWidth: element.width,
-            containerHeight: element.height,
-            position: {
-              mx: 0.0,
-              my: 0.0
-            }
-          });
+
+      var textElement = drawRect(p, element.width, element.height, 0, 0, style);
+
+      var textPathData = pathMap.getScaledPath('TEXT_ANNOTATION', {
+        xScaleFactor: 1,
+        yScaleFactor: 1,
+        containerWidth: element.width,
+        containerHeight: element.height,
+        position: {
+          mx: 0.0,
+          my: 0.0
+        }
+      });
 
       drawPath(p, textPathData);
 
       var text = getSemantic(element).text || '';
 
-      renderLabel(p, text, { box: element, align: 'left-middle', padding: 5 });
+      renderLabel(p, text, {
+        box: element,
+        align: 'left-top',
+        padding: 5
+      });
 
       return textElement;
     },
@@ -445,7 +440,8 @@ inherits(DrdRenderer, BaseRenderer);
 DrdRenderer.$inject = [
   'eventBus',
   'pathMap',
-  'styles'
+  'styles',
+  'textRenderer'
 ];
 
 
