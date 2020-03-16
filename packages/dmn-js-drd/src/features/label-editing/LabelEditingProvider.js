@@ -1,8 +1,7 @@
 import { getLabel } from './LabelUtil';
 
 import {
-  is,
-  isAny
+  is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
@@ -46,10 +45,17 @@ export default function LabelEditingProvider(
     directEditing.cancel();
   });
 
-  eventBus.on('create.end', 500, function(event) {
-    var element = event.shape;
+  eventBus.on('create.end', 500, function(e) {
 
-    if (isAny(element, [ 'dmn:DMNElement', 'dmn:TextAnnotation' ])) {
+    var element = e.shape;
+
+    if (
+      is(element, 'dmn:Decision') ||
+      is(element, 'dmn:InputData') ||
+      is(element, 'dmn:BusinessKnowledgeModel') ||
+      is(element, 'dmn:KnowledgeSource') ||
+      is(element, 'dmn:TextAnnotation')
+    ) {
       directEditing.activate(element);
     }
   });

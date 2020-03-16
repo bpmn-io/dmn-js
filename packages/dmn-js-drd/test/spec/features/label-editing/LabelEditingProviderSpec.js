@@ -375,6 +375,83 @@ describe('features - label-editing', function() {
 
   });
 
+  describe('after create', function() {
+
+    var createElement;
+
+    beforeEach(inject(
+      function(canvas, create, dragging, elementFactory, elementRegistry) {
+
+        createElement = function(type) {
+
+          var shape = elementFactory.create('shape', { type: type }),
+              parent = canvas.getRootElement(),
+              parentGfx = elementRegistry.getGraphics(parent);
+
+          create.start(canvasEvent({ x: 0, y: 0 }), shape);
+
+          dragging.hover({
+            element: parent,
+            gfx: parentGfx
+          });
+
+          dragging.move(canvasEvent({ x: 400, y: 250 }));
+          dragging.end();
+        };
+      }
+    ));
+
+    it('should activate on Decision', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:Decision');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on InputData', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:InputData');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on BusinessKnowledgeModel', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:BusinessKnowledgeModel');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on KnowledgeSource', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:KnowledgeSource');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+
+    it('should activate on TextAnnotation', inject(function(directEditing) {
+
+      // when
+      createElement('dmn:TextAnnotation');
+
+      // then
+      expect(directEditing.isActive()).to.be.true;
+    }));
+
+  });
+
 });
 
 // helpers //////////

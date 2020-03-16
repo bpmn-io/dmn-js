@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.1.0
+
+* `FEAT(decision-table)`: add new rule on bottom rule \<enter> ([#345](https://github.com/bpmn-io/dmn-js/issues/345))
+* `FEAT(drd)`: activate direct editing after text annotation create ([#185](https://github.com/bpmn-io/dmn-js/issues/185))
+* `FIX`: update association's refs on element id change([#397](https://github.com/bpmn-io/dmn-js/issues/397))
+
 ## 8.0.2
 
 * `CHORE`: use `min-dash#find` as polyfill for `Array.prototype.find`
@@ -31,6 +37,12 @@ ___Note:__ Yet to be released changes appear here._
 * DI waypoints of new `dmn:Association` elements no longer point to middle of source and target and have same
   coordinates as connection waypoints.
 * Renamed `updateProperties` command in `dmn-js-drd` to `element.updateProperties` to align with other libraries
+
+## 7.5.0
+
+* `FEAT(decision-table)`: add new rule on bottom rule \<enter> ([#345](https://github.com/bpmn-io/dmn-js/issues/345))
+* `FEAT(drd)`: activate direct editing after text annotation create ([#185](https://github.com/bpmn-io/dmn-js/issues/185))
+* `FIX`: update association's refs on element id change([#397](https://github.com/bpmn-io/dmn-js/issues/397))
 
 ## 7.4.4
 
