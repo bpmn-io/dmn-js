@@ -28,7 +28,7 @@ describe('ExpressionLanguages', function() {
 
   describe('defaults', () => {
 
-    it('should set default editor expression language to JUEL', () => {
+    it('should set default editor expression language to FEEL', () => {
 
       // given
       const expressionLanguages = createExpressionLanguages();
@@ -38,8 +38,8 @@ describe('ExpressionLanguages', function() {
 
       // then
       expect(defaultLanguage).to.eql({
-        value: 'juel',
-        label: 'JUEL'
+        value: 'feel',
+        label: 'FEEL'
       });
     });
 

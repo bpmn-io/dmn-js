@@ -32,7 +32,7 @@
         <outputEntry id="outputEntry1" expressionLanguage="javascript">
           <text>"notok"</text>
         </outputEntry>
-        <outputEntry id="outputEntry2" expressionLanguage="juel">
+        <outputEntry id="outputEntry2" expressionLanguage="feel">
           <text>"work on your status first, as bronze you're not going to get anything"</text>
         </outputEntry>
       </rule>

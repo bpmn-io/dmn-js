@@ -60,8 +60,7 @@ export default class ExpressionLanguages {
     this._config = {
       options: EXPRESSION_LANGUAGE_OPTIONS,
       defaults: {
-        editor: 'juel',
-        inputCell: 'feel'
+        editor: 'feel'
       }
     };
 
