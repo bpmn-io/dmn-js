@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.2.0
+
+* `FEAT(drd)`: improve label editing ([#487](https://github.com/bpmn-io/dmn-js/pull/487))
+* `FEAT(decision-table)`: set FEEL as default expression language ([#491](https://github.com/bpmn-io/dmn-js/pull/491))
+
 ## 8.1.0
 
 * `FEAT(decision-table)`: add new rule on bottom rule \<enter> ([#345](https://github.com/bpmn-io/dmn-js/issues/345))
