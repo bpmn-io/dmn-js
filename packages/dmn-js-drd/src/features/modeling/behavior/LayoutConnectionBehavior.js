@@ -2,14 +2,23 @@ import inherits from 'inherits';
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import {
+  is,
+  isAny
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
+  asTRBL,
   getMid,
   getOrientation
 } from 'diagram-js/lib/layout/LayoutUtil';
 
-import { assign } from 'min-dash';
+import {
+  assign,
+  forEach
+} from 'min-dash';
+
+var LOW_PRIORITY = 500;
 
 
 export default function LayoutConnectionBehavior(injector, layouter, modeling, rules) {
@@ -47,53 +56,65 @@ export default function LayoutConnectionBehavior(injector, layouter, modeling, r
     assign(context.hints, getConnectionHints(source, target, orientation));
   }, true);
 
+  /**
+   * Update incoming information requirements.
+   *
+   * @param {djs.model.Shape} target
+   * @param {Array<djs.model.Connection>} [informationRequirements]
+   * @param {string} [orientation]
+   */
   function updateInformationRequirements(target, informationRequirements, orientation) {
 
-    // (1) sort information requirements
-    informationRequirements = sortInformationRequirements(
-      informationRequirements,
-      orientation
-    );
-
-    // (2) get new docking points
-    var dockingPoints = informationRequirements.map(function(_, index) {
-      if (orientation.includes('bottom')) {
-        return {
-          x: target.x + target.width / (informationRequirements.length + 1) * (index + 1),
-          y: target.y + target.height
-        };
-      } else if (orientation.includes('top')) {
-        return {
-          x: target.x + target.width / (informationRequirements.length + 1) * (index + 1),
-          y: target.y
-        };
-      } else if (orientation.includes('right')) {
-        return {
-          x: target.x + target.width,
-          y: target.y + target.height / (informationRequirements.length + 1) * (index + 1)
-        };
-      } else {
-        return {
-          x: target.x,
-          y: target.y + target.height / (informationRequirements.length + 1) * (index + 1)
-        };
-      }
-    });
-
-    // (4) reconnection information requirements
-    informationRequirements.forEach((informationRequirement, index) => {
-      var dockingPoint = dockingPoints[ index ];
-
-      var waypoints = layouter.layoutConnection(informationRequirement, {
-        connectionStart: informationRequirement.waypoints[ 0 ],
-        connectionEnd: dockingPoint
+    // (1) get information requirements
+    if (!informationRequirements) {
+      informationRequirements = target.incoming.filter(function(incoming) {
+        return is(incoming, 'dmn:InformationRequirement');
       });
+    }
 
-      modeling.updateWaypoints(informationRequirement, waypoints);
-    });
+    var incomingInformationRequirementsByOrientation = {};
+
+    // (2) get information requirements per orientation
+    if (orientation) {
+      incomingInformationRequirementsByOrientation[ orientation ] =
+        informationRequirements;
+    } else {
+      incomingInformationRequirementsByOrientation =
+        getInformationRequirementsByOrientation(target, informationRequirements);
+    }
+
+    // (3) update information requirements per orientation
+    forEach(incomingInformationRequirementsByOrientation,
+      function(informationRequirements, orientation) {
+
+        // (3.1) sort information requirements
+        informationRequirements = sortInformationRequirements(
+          informationRequirements,
+          orientation
+        );
+
+        // (3.2) get new connection start and end
+        var connectionStartEnd =
+          getConnectionsStartEnd(informationRequirements, target, orientation);
+
+        // (3.3) update information requirements
+        informationRequirements.forEach((informationRequirement, index) => {
+          var connectionStart = connectionStartEnd[ index ].start,
+              connectionEnd = connectionStartEnd[ index ].end;
+
+          var waypoints = layouter.layoutConnection(informationRequirement, {
+            connectionStart: connectionStart,
+            connectionEnd: connectionEnd
+          });
+
+          modeling.updateWaypoints(informationRequirement, waypoints);
+        });
+      }
+    );
   }
 
-  // lay out information requirements on connection create and delete and reconnect
+  // update information requirements on connection create and delete
+  // update information requirements of new target on connection reconnect
   this.postExecuted([
     'connection.create',
     'connection.delete',
@@ -111,8 +132,10 @@ export default function LayoutConnectionBehavior(injector, layouter, modeling, r
 
     // update all information requirements with same orientation
     var informationRequirements = target.incoming.filter(incoming => {
+      var incomingOrientation = getOrientation(incoming.source, incoming.target);
+
       return is(incoming, 'dmn:InformationRequirement')
-        && sameOrientation(getOrientation(incoming.source, incoming.target), orientation);
+        && isSameOrientation(incomingOrientation, orientation);
     });
 
     if (!informationRequirements.length) {
@@ -122,6 +145,7 @@ export default function LayoutConnectionBehavior(injector, layouter, modeling, r
     updateInformationRequirements(target, informationRequirements, orientation);
   }, true);
 
+  // update information requirements of old target on connection reconnect
   this.preExecute('connection.reconnect', function(context) {
     var connection = context.connection,
         source = connection.source,
@@ -135,9 +159,11 @@ export default function LayoutConnectionBehavior(injector, layouter, modeling, r
 
     // update all information requirements with same orientation except reconnected
     var informationRequirements = target.incoming.filter(incoming => {
+      var incomingOrientation = getOrientation(incoming.source, incoming.target);
+
       return incoming !== connection
         && is(incoming, 'dmn:InformationRequirement')
-        && sameOrientation(getOrientation(incoming.source, incoming.target), orientation);
+        && isSameOrientation(incomingOrientation, orientation);
     });
 
     if (!informationRequirements.length) {
@@ -145,6 +171,39 @@ export default function LayoutConnectionBehavior(injector, layouter, modeling, r
     }
 
     updateInformationRequirements(target, informationRequirements, orientation);
+  }, true);
+
+  // update information requirements on elements move
+  this.postExecuted('elements.move', LOW_PRIORITY, function(context) {
+    var shapes = context.shapes,
+        closure = context.closure,
+        enclosedConnections = closure.enclosedConnections;
+
+    shapes.forEach(function(shape) {
+      if (!isAny(shape, [ 'dmn:Decision', 'dmn:InputData' ])) {
+        return;
+      }
+
+      // (1) update incoming information requirements
+      var incomingInformationRequirements = shape.incoming.filter(function(incoming) {
+        return is(incoming, 'dmn:InformationRequirement')
+          && !enclosedConnections[ incoming.id ];
+      });
+
+      if (incomingInformationRequirements.length) {
+        updateInformationRequirements(shape, incomingInformationRequirements);
+      }
+
+      // (2) update outgoing information requirements
+      shape.outgoing.forEach(function(outgoing) {
+        if (!is(outgoing, 'dmn:InformationRequirement')
+          || enclosedConnections[ outgoing.id ]) {
+          return;
+        }
+
+        updateInformationRequirements(outgoing.target);
+      });
+    });
   }, true);
 }
 
@@ -183,7 +242,100 @@ function getConnectionHints(source, target, orientation) {
   };
 }
 
-function sameOrientation(orientationA, orientationB) {
+/**
+ * Get connections start and end based on number of information requirements and
+ * orientation.
+ *
+ * @param {Array<djs.model.Connection>} informationRequirements
+ * @param {djs.model.Shape} target
+ * @param {string} orientation
+ *
+ * @returns {Array<Object>}
+ */
+function getConnectionsStartEnd(informationRequirements, target, orientation) {
+  return informationRequirements.map(
+    function(informationRequirement, index) {
+      var source = informationRequirement.source,
+          sourceMid = getMid(source),
+          sourceTrbl = asTRBL(source),
+          targetTrbl = asTRBL(target);
+
+      var length = informationRequirements.length;
+
+      if (orientation.includes('bottom')) {
+        return {
+          start: {
+            x: sourceMid.x,
+            y: sourceTrbl.top
+          },
+          end: {
+            x: targetTrbl.left + target.width / (length + 1) * (index + 1),
+            y: targetTrbl.bottom
+          }
+        };
+      } else if (orientation.includes('top')) {
+        return {
+          start: {
+            x: sourceMid.x,
+            y: sourceTrbl.bottom
+          },
+          end: {
+            x: targetTrbl.left + target.width / (length + 1) * (index + 1),
+            y: targetTrbl.top
+          }
+        };
+      } else if (orientation.includes('right')) {
+        return {
+          start: {
+            x: sourceTrbl.left,
+            y: sourceMid.y
+          },
+          end: {
+            x: targetTrbl.right,
+            y: targetTrbl.top + target.height / (length + 1) * (index + 1)
+          }
+        };
+      } else {
+        return {
+          start: {
+            x: sourceTrbl.right,
+            y: sourceMid.y
+          },
+          end: {
+            x: targetTrbl.left,
+            y: targetTrbl.top + target.height / (length + 1) * (index + 1)
+          }
+        };
+      }
+    }
+  );
+}
+
+/**
+ * Get information requirements by orientation.
+ *
+ * @param {djs.model.shape} target
+ * @param {Array<djs.model.Connection>} informationRequirements
+ *
+ * @returns {Object}
+ */
+function getInformationRequirementsByOrientation(target, informationRequirements) {
+  var incomingInformationRequirementsByOrientation = {};
+
+  informationRequirements.forEach(function(incoming) {
+    var orientation = getOrientation(incoming.source, target).split('-').shift();
+
+    if (!incomingInformationRequirementsByOrientation[ orientation ]) {
+      incomingInformationRequirementsByOrientation[ orientation ] = [];
+    }
+
+    incomingInformationRequirementsByOrientation[ orientation ].push(incoming);
+  });
+
+  return incomingInformationRequirementsByOrientation;
+}
+
+function isSameOrientation(orientationA, orientationB) {
   return orientationA
     && orientationB
     && orientationA.split('-').shift() === orientationB.split('-').shift();
