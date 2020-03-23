@@ -263,6 +263,73 @@ describe('features/modeling - layout connection', function() {
 
     });
 
+
+    describe('elements move', function() {
+
+      it('should update information requirements', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision2 = elementRegistry.get('Decision_2'),
+              decision4 = elementRegistry.get('Decision_4'),
+              informationRequirement = elementRegistry.get('InformationRequirement_1');
+
+          var connection = modeling.connect(decision2, decision4);
+
+          // when
+          modeling.moveElements([ decision4 ], { x: -250, y: -150 });
+
+          // then
+          expect(informationRequirement.waypoints).to.eql([
+            {
+              original: {
+                x: 670,
+                y: 230
+              },
+              x: 670,
+              y: 230
+            },
+            {
+              x: 720,
+              y: 220
+            },
+            {
+              original: {
+                x: 740,
+                y: 220
+              },
+              x: 740,
+              y: 220
+            }
+          ]);
+
+          expect(connection.waypoints).to.eql([
+            {
+              original: {
+                x: 610,
+                y: 340
+              },
+              x: 610,
+              y: 340
+            },
+            {
+              x: 580,
+              y: 290
+            },
+            {
+              original: {
+                x: 580,
+                y: 270
+              },
+              x: 580,
+              y: 270
+            }
+          ]);
+        }
+      ));
+
+    });
+
   });
 
 });
