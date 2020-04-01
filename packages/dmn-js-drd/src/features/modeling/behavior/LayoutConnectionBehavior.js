@@ -12,7 +12,7 @@ import {
 import { assign } from 'min-dash';
 
 
-export default function LayoutConnectionBehavior(injector, modeling, rules) {
+export default function LayoutConnectionBehavior(injector, layouter, modeling, rules) {
   injector.invoke(CommandInterceptor, this);
 
   // specify connection start and end on connection create
@@ -47,35 +47,15 @@ export default function LayoutConnectionBehavior(injector, modeling, rules) {
     assign(context.hints, getConnectionHints(source, target, orientation));
   }, true);
 
-  // reconnection information requirements on connection create and delete
-  this.postExecute([
-    'connection.create',
-    'connection.delete'
-  ], function(context) {
-    var connection = context.connection,
-        source = context.source,
-        target = context.target;
+  function updateInformationRequirements(target, informationRequirements, orientation) {
 
-    if (!is(connection, 'dmn:InformationRequirement')) {
-      return;
-    }
+    // (1) sort information requirements
+    informationRequirements = sortInformationRequirements(
+      informationRequirements,
+      orientation
+    );
 
-    var orientation = getOrientation(source, target);
-
-    // (1) get information requirements that need to be reconnected
-    var informationRequirements = target.incoming.filter(connection => {
-      return is(connection, 'dmn:InformationRequirement')
-        && getOrientation(connection.source, connection.target).split('-').shift() === orientation.split('-').shift();
-    });
-
-    if (!informationRequirements.length) {
-      return;
-    }
-
-    // (2) sort information requirements
-    informationRequirements = sortInformationRequirements(informationRequirements, orientation);
-
-    // (3) get new docking points
+    // (2) get new docking points
     var dockingPoints = informationRequirements.map(function(_, index) {
       if (orientation.includes('bottom')) {
         return {
@@ -104,13 +84,73 @@ export default function LayoutConnectionBehavior(injector, modeling, rules) {
     informationRequirements.forEach((informationRequirement, index) => {
       var dockingPoint = dockingPoints[ index ];
 
-      modeling.reconnectEnd(informationRequirement, target, dockingPoint);
+      var waypoints = layouter.layoutConnection(informationRequirement, {
+        connectionStart: informationRequirement.waypoints[ 0 ],
+        connectionEnd: dockingPoint
+      });
+
+      modeling.updateWaypoints(informationRequirement, waypoints);
     });
+  }
+
+  // lay out information requirements on connection create and delete and reconnect
+  this.postExecuted([
+    'connection.create',
+    'connection.delete',
+    'connection.reconnect'
+  ], function(context) {
+    var connection = context.connection,
+        source = connection.source || context.source,
+        target = connection.target || context.target;
+
+    if (!is(connection, 'dmn:InformationRequirement')) {
+      return;
+    }
+
+    var orientation = getOrientation(source, target);
+
+    // update all information requirements with same orientation
+    var informationRequirements = target.incoming.filter(incoming => {
+      return is(incoming, 'dmn:InformationRequirement')
+        && sameOrientation(getOrientation(incoming.source, incoming.target), orientation);
+    });
+
+    if (!informationRequirements.length) {
+      return;
+    }
+
+    updateInformationRequirements(target, informationRequirements, orientation);
+  }, true);
+
+  this.preExecute('connection.reconnect', function(context) {
+    var connection = context.connection,
+        source = connection.source,
+        target = connection.target;
+
+    if (!is(connection, 'dmn:InformationRequirement')) {
+      return;
+    }
+
+    var orientation = getOrientation(source, target);
+
+    // update all information requirements with same orientation except reconnected
+    var informationRequirements = target.incoming.filter(incoming => {
+      return incoming !== connection
+        && is(incoming, 'dmn:InformationRequirement')
+        && sameOrientation(getOrientation(incoming.source, incoming.target), orientation);
+    });
+
+    if (!informationRequirements.length) {
+      return;
+    }
+
+    updateInformationRequirements(target, informationRequirements, orientation);
   }, true);
 }
 
 LayoutConnectionBehavior.$inject = [
   'injector',
+  'layouter',
   'modeling',
   'rules'
 ];
@@ -141,6 +181,12 @@ function getConnectionHints(source, target, orientation) {
     connectionStart: connectionStart,
     connectionEnd: connectionEnd
   };
+}
+
+function sameOrientation(orientationA, orientationB) {
+  return orientationA
+    && orientationB
+    && orientationA.split('-').shift() === orientationB.split('-').shift();
 }
 
 function sortInformationRequirements(informationRequirements, orientation) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.8.0-dev.20200317">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.8.0-dev.20200320">
   <decision id="Decision_1" name="Decision_1" />
   <decision id="Decision_2" name="Decision_2" />
   <knowledgeSource id="KnowledgeSource_1" name="KnowledgeSource_1" />
@@ -9,6 +9,26 @@
     </informationRequirement>
   </decision>
   <decision id="Decision_4" name="Decision_4" />
+  <decision id="Decision_5" name="Decision_5">
+    <informationRequirement id="InformationRequirement_2">
+      <requiredDecision href="#Decision_6" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_3">
+      <requiredDecision href="#Decision_7" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_6" name="Decision_6" />
+  <decision id="Decision_7" name="Decision_7" />
+  <decision id="Decision_9" name="Decision_9" />
+  <decision id="Decision_8" name="Decision_8">
+    <informationRequirement id="InformationRequirement_4">
+      <requiredDecision href="#Decision_9" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_5">
+      <requiredDecision href="#Decision_10" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_10" name="Decision_10" />
   <textAnnotation id="TextAnnotation_1" />
   <dmndi:DMNDI>
     <dmndi:DMNDiagram>
@@ -33,6 +53,40 @@
       <dmndi:DMNEdge id="DMNEdge_7" dmnElementRef="InformationRequirement_1">
         <di:waypoint x="830" y="340" />
         <di:waypoint x="830" y="260" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1epu4ql" dmnElementRef="Decision_5">
+        <dc:Bounds height="80" width="180" x="960" y="180" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0z33ayz" dmnElementRef="Decision_6">
+        <dc:Bounds height="80" width="180" x="960" y="340" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_09brx24" dmnElementRef="Decision_7">
+        <dc:Bounds height="80" width="180" x="1180" y="340" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_16ga33m" dmnElementRef="Decision_9">
+        <dc:Bounds height="80" width="180" x="1400" y="340" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1giqbd9" dmnElementRef="Decision_8">
+        <dc:Bounds height="80" width="180" x="1400" y="180" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1vy081o" dmnElementRef="Decision_10">
+        <dc:Bounds height="80" width="180" x="1620" y="340" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_007r4m0" dmnElementRef="InformationRequirement_2">
+        <di:waypoint x="1050" y="340" />
+        <di:waypoint x="1050" y="260" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0kkjfij" dmnElementRef="InformationRequirement_3">
+        <di:waypoint x="1215" y="340" />
+        <di:waypoint x="1105" y="260" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_15r6p6p" dmnElementRef="InformationRequirement_4">
+        <di:waypoint x="1490" y="340" />
+        <di:waypoint x="1490" y="260" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0hcf0i7" dmnElementRef="InformationRequirement_5">
+        <di:waypoint x="1655" y="340" />
+        <di:waypoint x="1545" y="260" />
       </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
