@@ -114,7 +114,7 @@ describe('features/modeling - layout connection', function() {
               informationRequirement = elementRegistry.get('InformationRequirement_1');
 
           // when
-          modeling.reconnectEnd(informationRequirement, decision2);
+          modeling.reconnectEnd(informationRequirement, decision2, getMid(decision2));
 
           // then
           expect(informationRequirement.waypoints).to.eql([
@@ -147,11 +147,11 @@ describe('features/modeling - layout connection', function() {
   });
 
 
-  describe('reconnect information requirements', function() {
+  describe('update information requirements', function() {
 
     describe('connection create', function() {
 
-      it('should reconnect information requirements', inject(
+      it('should update information requirements', inject(
         function(elementRegistry, modeling) {
 
           // given
@@ -188,7 +188,7 @@ describe('features/modeling - layout connection', function() {
 
     describe('connection remove', function() {
 
-      it('should reconnect information requirements', inject(
+      it('should update information requirements', inject(
         function(elementRegistry, modeling) {
 
           // given
@@ -208,6 +208,54 @@ describe('features/modeling - layout connection', function() {
               y: 260
             },
             x: 830,
+            y: 260
+          });
+        }
+      ));
+
+    });
+
+
+    describe('connection reconnect', function() {
+
+      it('should update information requirements', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision8 = elementRegistry.get('Decision_8'),
+              informationRequirement2 = elementRegistry.get('InformationRequirement_2'),
+              informationRequirement3 = elementRegistry.get('InformationRequirement_3'),
+              informationRequirement4 = elementRegistry.get('InformationRequirement_4'),
+              informationRequirement5 = elementRegistry.get('InformationRequirement_5');
+
+          // when
+          modeling.reconnectEnd(informationRequirement2, decision8, getMid(decision8));
+
+          // then
+          expect(getLastWaypoint(informationRequirement3)).to.eql({
+            original: {
+              x: 1050,
+              y: 260
+            },
+            x: 1050,
+            y: 260
+          });
+
+          expect(getLastWaypoint(informationRequirement4)).to.eql({
+            original: {
+              x: 1490,
+              y: 260
+            },
+            x: 1490,
+            y: 260
+          });
+
+          expect(getLastWaypoint(informationRequirement5)).to.eql({
+            original: {
+              x: 1535,
+              y: 260
+            },
+            x: 1535,
             y: 260
           });
         }
