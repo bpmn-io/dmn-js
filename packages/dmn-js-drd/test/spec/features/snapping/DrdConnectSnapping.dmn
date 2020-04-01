@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.8.0-dev.20200319">
+  <decision id="Decision_1" name="Decision_1" />
+  <decision id="Decision_2" name="Decision_2" />
+  <decision id="Decision_3" name="Decision_3" />
+  <decision id="Decision_4" name="Decision_4" />
+  <decision id="Decision_5" name="Decision_5" />
+  <knowledgeSource id="KnowledgeSource_1" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_16v6fqn" dmnElementRef="Decision_1">
+        <dc:Bounds height="80" width="180" x="520" y="240" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_05bg0xh" dmnElementRef="Decision_2">
+        <dc:Bounds height="80" width="180" x="540" y="400" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0qkmko2" dmnElementRef="Decision_3">
+        <dc:Bounds height="80" width="180" x="880" y="220" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0855jyk" dmnElementRef="Decision_4">
+        <dc:Bounds height="80" width="180" x="500" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0xp7u7a" dmnElementRef="Decision_5">
+        <dc:Bounds height="80" width="180" x="160" y="260" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1aprlpx" dmnElementRef="KnowledgeSource_1">
+        <dc:Bounds height="63" width="100" x="920" y="409" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
