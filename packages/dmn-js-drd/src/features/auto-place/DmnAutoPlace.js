@@ -2,7 +2,7 @@ import { getNewShapePosition } from './DmnAutoPlaceUtil';
 
 
 /**
- * BPMN auto-place behavior.
+ * DMN auto-place behavior.
  *
  * @param {EventBus} eventBus
  */
@@ -11,7 +11,7 @@ export default function AutoPlace(eventBus) {
     var shape = context.shape,
         source = context.source;
 
-    getNewShapePosition(source, shape);
+    return getNewShapePosition(source, shape);
   });
 }
 

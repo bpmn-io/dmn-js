@@ -80,8 +80,26 @@ describe('features - label-editing', function() {
   ));
 
 
-  // TODO(philippfromme): add test once auto place has been added
-  it.skip('should complete on auto place');
+  it('should complete on auto place', inject(
+    function(elementRegistry, directEditing, elementFactory, autoPlace) {
+
+      // given
+      var shape = elementRegistry.get('dish-decision'),
+          task = shape.businessObject;
+
+      directEditing.activate(shape);
+
+      directEditing._textbox.content.textContent = 'FOO BAR';
+
+      // when
+      autoPlace.append(shape, elementFactory.createShape({ type: 'dmn:Decision' }), {
+        connectionTarget: shape
+      });
+
+      // then
+      expect(task.name).to.equal('FOO BAR');
+    }
+  ));
 
 
   it('should complete on drag start', inject(
@@ -269,29 +287,6 @@ describe('features - label-editing', function() {
       // then
       expect(getBusinessObject(decision).name).not.to.exist;
     });
-
-
-    it('should complete on auto place', inject(
-      function(elementRegistry, directEditing, elementFactory, autoPlace) {
-
-        // given
-        var shape = elementRegistry.get('dish-decision'),
-            task = shape.businessObject;
-
-        directEditing.activate(shape);
-
-        directEditing._textbox.content.textContent = 'FOO BAR';
-
-        // when
-        autoPlace.append(shape, elementFactory.create(
-          'shape',
-          { type: 'dmn:Decision' }
-        ));
-
-        // then
-        expect(task.name).to.equal('FOO BAR');
-      }
-    ));
 
   });
 
