@@ -10,6 +10,12 @@ import {
 
 import BaseElementFactory from 'diagram-js/lib/core/ElementFactory';
 
+export var BUSINESS_KNOWLEDGE_MODEL_SIZE = { width: 135, height: 46 };
+export var DECISION_SIZE = { width: 180, height: 80 };
+export var INPUT_DATA_SIZE = { width: 125, height: 45 };
+export var KNOWLEDGE_SOURCE_SIZE = { width: 100, height: 63 };
+
+
 /**
  * A drd-aware factory for diagram-js shapes
  */
@@ -67,21 +73,20 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
 
 
 ElementFactory.prototype._getDefaultSize = function(semantic) {
+  if (is(semantic, 'dmn:BusinessKnowledgeModel')) {
+    return BUSINESS_KNOWLEDGE_MODEL_SIZE;
+  }
 
   if (is(semantic, 'dmn:Decision')) {
-    return { width: 180, height: 80 };
+    return DECISION_SIZE;
   }
 
   if (is(semantic, 'dmn:InputData')) {
-    return { width: 125, height: 45 };
+    return INPUT_DATA_SIZE;
   }
 
   if (is(semantic, 'dmn:KnowledgeSource')) {
-    return { width: 100, height: 63 };
-  }
-
-  if (is(semantic, 'dmn:BusinessKnowledgeModel')) {
-    return { width: 135, height: 46 };
+    return KNOWLEDGE_SOURCE_SIZE;
   }
 
   return { width: 100, height: 80 };
