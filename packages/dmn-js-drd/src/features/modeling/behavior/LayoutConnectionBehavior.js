@@ -12,14 +12,27 @@ import {
 import { assign } from 'min-dash';
 
 
-export default function LayoutConnectionBehavior(injector, modeling) {
+export default function LayoutConnectionBehavior(injector, modeling, rules) {
   injector.invoke(CommandInterceptor, this);
 
   // specify connection start and end on connection create
-  this.preExecute('connection.create', function(context) {
+  this.preExecute([
+    'connection.create',
+    'connection.reconnect'
+  ], function(context) {
     var connection = context.connection,
-        source = context.source,
-        target = context.target;
+        source = context.newSource || context.source,
+        target = context.newTarget || context.target;
+
+    if (is(connection, 'dmn:InformationRequirement')
+      && !rules.allowed('connection.connect', {
+        connection: connection,
+        source: source,
+        target: target
+      })
+    ) {
+      return;
+    }
 
     if (!is(connection, 'dmn:InformationRequirement')) {
       return;
@@ -98,7 +111,8 @@ export default function LayoutConnectionBehavior(injector, modeling) {
 
 LayoutConnectionBehavior.$inject = [
   'injector',
-  'modeling'
+  'modeling',
+  'rules'
 ];
 
 inherits(LayoutConnectionBehavior, CommandInterceptor);

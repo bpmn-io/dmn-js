@@ -23,9 +23,9 @@ describe('features/modeling - layout connection', function() {
   }));
 
 
-  describe('connection create', function() {
+  describe('specify connection start and end', function() {
 
-    describe('specify connection start and end', function() {
+    describe('connection create', function() {
 
       it('should specify connection start and end for dmn:Decision', inject(
         function(elementRegistry, modeling) {
@@ -104,7 +104,52 @@ describe('features/modeling - layout connection', function() {
     });
 
 
-    describe('reconnect information requirements', function() {
+    describe('connection reconnect', function() {
+
+      it('should specify connection start and end for dmn:Decision', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision2 = elementRegistry.get('Decision_2'),
+              informationRequirement = elementRegistry.get('InformationRequirement_1');
+
+          // when
+          modeling.reconnectEnd(informationRequirement, decision2);
+
+          // then
+          expect(informationRequirement.waypoints).to.eql([
+            {
+              original: {
+                x: 740,
+                y: 380
+              },
+              x: 740,
+              y: 380
+            },
+            {
+              x: 720,
+              y: 380
+            },
+            {
+              original: {
+                x: 700,
+                y: 380
+              },
+              x: 700,
+              y: 380
+            }
+          ]);
+        }
+      ));
+
+    });
+
+  });
+
+
+  describe('reconnect information requirements', function() {
+
+    describe('connection create', function() {
 
       it('should reconnect information requirements', inject(
         function(elementRegistry, modeling) {
@@ -140,35 +185,35 @@ describe('features/modeling - layout connection', function() {
 
     });
 
-  });
 
+    describe('connection remove', function() {
 
-  describe('connection remove', function() {
+      it('should reconnect information requirements', inject(
+        function(elementRegistry, modeling) {
 
-    it('should reconnect information requirements', inject(
-      function(elementRegistry, modeling) {
+          // given
+          var decision2 = elementRegistry.get('Decision_2'),
+              decision3 = elementRegistry.get('Decision_3'),
+              informationRequirement = elementRegistry.get('InformationRequirement_1');
 
-        // given
-        var decision2 = elementRegistry.get('Decision_2'),
-            decision3 = elementRegistry.get('Decision_3'),
-            informationRequirement = elementRegistry.get('InformationRequirement_1');
+          var connection = modeling.connect(decision2, decision3);
 
-        var connection = modeling.connect(decision2, decision3);
+          // when
+          modeling.removeConnection(connection);
 
-        // when
-        modeling.removeConnection(connection);
-
-        // then
-        expect(getLastWaypoint(informationRequirement)).eql({
-          original: {
+          // then
+          expect(getLastWaypoint(informationRequirement)).eql({
+            original: {
+              x: 830,
+              y: 260
+            },
             x: 830,
             y: 260
-          },
-          x: 830,
-          y: 260
-        });
-      }
-    ));
+          });
+        }
+      ));
+
+    });
 
   });
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="Definitions_1" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.8.0-dev.20200320">
+  <decision id="Decision_1" name="Decision_1">
+    <informationRequirement id="InformationRequirement_1">
+      <requiredDecision href="#Decision_2" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_2" name="Decision_2" />
+  <decision id="Decision_3" name="Decision_3" />
+  <decision id="Decision_4" name="Decision_4">
+    <informationRequirement id="InformationRequirement_2">
+      <requiredDecision href="#Decision_3" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_5" name="Decision_5" />
+  <decision id="Decision_6" name="Decision_6">
+    <informationRequirement id="InformationRequirement_3">
+      <requiredDecision href="#Decision_5" />
+    </informationRequirement>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_16240bp" dmnElementRef="Decision_1">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0umbif8" dmnElementRef="Decision_2">
+        <dc:Bounds height="80" width="180" x="180" y="260" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1nyuqii" dmnElementRef="InformationRequirement_1">
+        <di:waypoint x="265" y="260" />
+        <di:waypoint x="255" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1d0xtb8" dmnElementRef="Decision_3">
+        <dc:Bounds height="80" width="180" x="520" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1mislmn" dmnElementRef="Decision_4">
+        <dc:Bounds height="80" width="180" x="500" y="120" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1fo237p" dmnElementRef="InformationRequirement_2">
+        <di:waypoint x="605" y="280" />
+        <di:waypoint x="595" y="200" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_104be3t" dmnElementRef="Decision_5">
+        <dc:Bounds height="80" width="180" x="880" y="260" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_05zo5sv" dmnElementRef="Decision_6">
+        <dc:Bounds height="80" width="180" x="1240" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1lxuxpj" dmnElementRef="InformationRequirement_3">
+        <di:waypoint x="1060" y="305" />
+        <di:waypoint x="1240" y="315" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
