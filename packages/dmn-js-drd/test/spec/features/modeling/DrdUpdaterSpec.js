@@ -446,11 +446,13 @@ describe('features/modeling - DrdUpdater', function() {
         // then
         var edge = getEdge(connection);
 
-        expect(edge.waypoint).to.have.lengthOf(2);
+        expect(edge.waypoint).to.have.lengthOf(3);
         expect(edge.waypoint[ 0 ]).to.include({ x: 247, y: 280 });
         expect(edge.waypoint[ 0 ].original).not.to.exist;
-        expect(edge.waypoint[ 1 ]).to.include({ x: 247, y: 300 });
+        expect(edge.waypoint[ 1 ]).to.include({ x: 247, y: 280 });
         expect(edge.waypoint[ 1 ].original).not.to.exist;
+        expect(edge.waypoint[ 2 ]).to.include({ x: 247, y: 300 });
+        expect(edge.waypoint[ 2 ].original).not.to.exist;
       }
     ));
 

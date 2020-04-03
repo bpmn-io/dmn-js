@@ -8,6 +8,11 @@ import coreModule from 'src/core';
 
 import { forEach } from 'min-dash';
 
+import {
+  asTRBL,
+  getMid
+} from 'diagram-js/lib/layout/LayoutUtil';
+
 
 describe('features/modeling - create elements', function() {
 
@@ -287,12 +292,27 @@ describe('features/modeling - create elements', function() {
         modeling.createConnection(input, decision, informationRequirement, rootElement);
 
         // then
+        var decisionMid = getMid(decision),
+            decisionTrbl = asTRBL(decision),
+            inputMid = getMid(input),
+            inputTrbl = asTRBL(input);
+
         expectEdge(informationRequirement, {
           type: 'dmn:InformationRequirement',
           businessObject: businessObject,
           waypoints: [
-            { x: 237, y: 100 },
-            { x: 190, y: 100 }
+            {
+              x: inputTrbl.left,
+              y: inputMid.y
+            },
+            {
+              x: decisionTrbl.right + 20,
+              y: decisionMid.y
+            },
+            {
+              x: decisionTrbl.right,
+              y: decisionMid.y
+            }
           ]
         });
       }

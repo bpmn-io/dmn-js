@@ -98,33 +98,6 @@ describe('features/modeling - move shape', function() {
 
     beforeEach(bootstrapModeler(simpleConnectionsXML, { modules: testModules }));
 
-    it('should handle bendpoints', inject(function(elementRegistry, modeling) {
-
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks'),
-          decision = elementRegistry.get('guestCount'),
-          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
-          businessObject = requirement.businessObject,
-          edge = businessObject.di,
-          sourceWaypoint;
-
-      // apply cropping
-      modeling.layoutConnection(knowledgeSource.incoming[0]);
-
-      // when
-      sourceWaypoint = pick(edge.waypoint[0], [ 'x', 'y' ]);
-
-      modeling.moveShape(decision, { x: 50, y: 0 });
-
-      // then
-      expect(edge.waypoint).to.have.length(3);
-
-      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
-        x: sourceWaypoint.x + 38,
-        y: sourceWaypoint.y
-      });
-    }));
-
 
     it('should update requirement', inject(function(elementRegistry, modeling) {
 
@@ -146,7 +119,7 @@ describe('features/modeling - move shape', function() {
 
       // then
       expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
-        x: sourceWaypoint.x + 38,
+        x: sourceWaypoint.x + 50,
         y: sourceWaypoint.y
       });
     }));
@@ -171,7 +144,7 @@ describe('features/modeling - move shape', function() {
 
       // then
       expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
-        x: sourceWaypoint.x + 42,
+        x: sourceWaypoint.x + 50,
         y: sourceWaypoint.y
       });
     }));
@@ -228,7 +201,7 @@ describe('features/modeling - move shape', function() {
 
         // then
         expect(pick(edge.waypoint[0], [ 'x', 'y' ])).to.eql({
-          x: sourceWaypoint.x + 38,
+          x: sourceWaypoint.x + 50,
           y: sourceWaypoint.y
         });
       }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.0.0-alpha.1">
   <inputData id="dayType_id" name="Input Data 1">
     <variable id="input1" name="Input 1" typeRef="string" />
   </inputData>
@@ -9,12 +9,7 @@
     </authorityRequirement>
   </knowledgeSource>
   <businessKnowledgeModel id="elMenu" name="El menú" />
-  <decision id="guestCount" name="Guest Count">
-    <variable id="InformationItem_0z36lcq" name="gCount" typeRef="integer" />
-    <literalExpression id="LiteralExpression_000b4ir">
-      <text>guestService.getCount(dinnerEvent)</text>
-    </literalExpression>
-  </decision>
+  <decision id="guestCount" name="Guest Count" />
   <textAnnotation id="annotation_1">
     <text>foobar</text>
   </textAnnotation>
@@ -25,29 +20,28 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_13js2vo">
       <dmndi:DMNShape id="dayType_id_di" dmnElementRef="dayType_id">
-        <dc:Bounds height="45" width="125" x="240" y="270" />
+        <dc:Bounds height="45" width="125" x="406" y="85" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="host_ks_di" dmnElementRef="host_ks">
-        <dc:Bounds height="63" width="100" x="495" y="150" />
+        <dc:Bounds height="63" width="100" x="150" y="208" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="AuthorityRequirement_0jdv0hj_di" dmnElementRef="AuthorityRequirement_0jdv0hj">
-        <di:waypoint x="200" y="38" />
-        <di:waypoint x="250" y="150" />
-        <di:waypoint x="545" y="182" />
+        <di:waypoint x="200" y="135" />
+        <di:waypoint x="200" y="208" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="elMenu_di" dmnElementRef="elMenu">
-        <dc:Bounds height="46" width="135" x="450" y="250" />
-      </dmndi:DMNShape>
-      <dmndi:DMNShape id="guestCount_di" dmnElementRef="guestCount">
-        <dc:Bounds height="55" width="100" x="150" y="10" />
+        <dc:Bounds height="46" width="135" x="682" y="85" />
       </dmndi:DMNShape>
       <dmndi:DMNShape id="annotation_1_di" dmnElementRef="annotation_1">
-        <dc:Bounds height="45" width="125" x="240" y="400" />
+        <dc:Bounds height="45" width="125" x="407" y="217" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="Association_1c4jixb_di" dmnElementRef="Association_1c4jixb">
-        <di:waypoint x="303" y="293" />
-        <di:waypoint x="303" y="423" />
+        <di:waypoint x="469" y="130" />
+        <di:waypoint x="470" y="217" />
       </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_098w9on" dmnElementRef="guestCount">
+        <dc:Bounds height="55" width="100" x="150" y="80" />
+      </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>
