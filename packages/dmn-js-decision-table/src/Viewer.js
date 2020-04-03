@@ -104,7 +104,7 @@ export default class Viewer extends Table {
    *
    * Remove a previously added listener via {@link #off(event, callback)}.
    *
-   * @param {String} event
+   * @param {string} event
    * @param {Number} [priority]
    * @param {Function} callback
    * @param {Object} [that]
@@ -116,7 +116,7 @@ export default class Viewer extends Table {
   /**
    * De-register an event listener
    *
-   * @param {String} event
+   * @param {string} event
    * @param {Function} callback
    */
   off(event, callback) {
@@ -126,7 +126,7 @@ export default class Viewer extends Table {
   /**
    * Emit an event on the underlying {@link EventBus}
    *
-   * @param  {String} type
+   * @param  {string} type
    * @param  {Object} event
    *
    * @return {Object} event processing result (if any)

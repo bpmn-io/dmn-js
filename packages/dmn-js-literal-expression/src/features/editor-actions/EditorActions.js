@@ -28,7 +28,7 @@ export default class EditorActions {
   /**
    * Triggers a registered action
    *
-   * @param  {String} action
+   * @param  {string} action
    * @param  {Object} opts
    *
    * @return {Unknown} Returns what the registered listener returns
@@ -60,7 +60,7 @@ export default class EditorActions {
   /**
    * Registers a listener to an action key
    *
-   * @param  {String} action
+   * @param  {string} action
    * @param  {Function} listener
    */
   _registerAction(action, listener) {
@@ -74,7 +74,7 @@ export default class EditorActions {
   /**
    * Unregister an existing action
    *
-   * @param {String} action
+   * @param {string} action
    */
   unregister(action) {
     if (!this.isRegistered(action)) {
@@ -88,7 +88,7 @@ export default class EditorActions {
   /**
    * Checks wether the given action is registered
    *
-   * @param {String} action
+   * @param {string} action
    *
    * @return {Boolean}
    */

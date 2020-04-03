@@ -147,7 +147,7 @@ Viewer.prototype.destroy = function() {
  *
  * Remove a previously added listener via {@link #off(event, callback)}.
  *
- * @param {String} event
+ * @param {string} event
  * @param {Number} [priority]
  * @param {Function} callback
  * @param {Object} [that]
@@ -159,7 +159,7 @@ Viewer.prototype.on = function(event, priority, callback, target) {
 /**
  * De-register an event listener
  *
- * @param {String} event
+ * @param {string} event
  * @param {Function} callback
  */
 Viewer.prototype.off = function(event, callback) {
@@ -209,7 +209,7 @@ Viewer.prototype._init = function(container, options) {
 /**
  * Emit an event on the underlying {@link EventBus}
  *
- * @param  {String} type
+ * @param  {string} type
  * @param  {Object} event
  *
  * @return {Object} event processing result (if any)

@@ -14,7 +14,7 @@ import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
  *   values: [ "foo", "bar, baz" ]
  * }
  *
- * @param {String} string - Input/Output entry as string e.g. "foo", "bar".
+ * @param {string} string - Input/Output entry as string e.g. "foo", "bar".
  */
 export function parseString(string) {
 

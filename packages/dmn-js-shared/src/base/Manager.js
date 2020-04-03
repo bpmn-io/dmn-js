@@ -66,7 +66,7 @@ export default class Manager {
    *
    * You can use these events to hook into the life-cycle.
    *
-   * @param {String} xml the DMN xml
+   * @param {string} xml the DMN xml
    * @param {Object} [options]
    * @param {Boolean} [options.open=true]
    * @param {Function} [done] invoked with (err, warnings=[])
@@ -223,7 +223,7 @@ export default class Manager {
    *
    * Remove a previously added listener via {@link #off(event, callback)}.
    *
-   * @param {String} event
+   * @param {string} event
    * @param {Number} [priority]
    * @param {Function} callback
    * @param {Object} [that]
@@ -235,7 +235,7 @@ export default class Manager {
   /**
    * De-register an event listener
    *
-   * @param {String} event
+   * @param {string} event
    * @param {Function} callback
    */
   off(...args) {
@@ -245,7 +245,7 @@ export default class Manager {
   /**
    * Register a listener to be invoked once only.
    *
-   * @param {String} event
+   * @param {string} event
    * @param {Number} [priority]
    * @param {Function} callback
    * @param {Object} [that]

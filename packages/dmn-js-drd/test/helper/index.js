@@ -187,7 +187,7 @@ export function injectAsync(doneFn) {
  *
  * });
  *
- * @param  {String} xml document to display
+ * @param  {string} xml document to display
  * @param  {Object} [options]
  *         optional options to be passed to the diagram upon instantiation
  * @param  {Object|Function} locals
@@ -219,7 +219,7 @@ export function bootstrapModeler(diagram, options, locals) {
  *
  * });
  *
- * @param  {String} xml document to display
+ * @param  {string} xml document to display
  * @param  {Object} [options]
  *         optional options to be passed to the diagram upon instantiation
  * @param  {Object|Function} locals

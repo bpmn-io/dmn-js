@@ -35,7 +35,7 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
    * Add keyboard binding if respective editor action
    * is registered.
    *
-   * @param {String} action name
+   * @param {string} action name
    * @param {Function} fn that implements the key binding
    */
   function addListener(action, fn) {
