@@ -15,7 +15,7 @@ export default function UpdateLabelHandler() {
    * Element parameter can be label itself or connection (i.e. sequence flow).
    *
    * @param {djs.model.Base} element
-   * @param {String} text
+   * @param {string} text
    */
   function setText(element, text) {
 

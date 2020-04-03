@@ -12,9 +12,9 @@ const PLACEHOLDER_REGEX = /\$\{([^}]*)\}/g;
  * Validates an ID.
  *
  * @param {ModdleElement} businessObject
- * @param {String} id
+ * @param {string} id
  *
- * @return {String} error message
+ * @return {string} error message
  */
 export function validateId(businessObject, id) {
   const assigned = businessObject.$model.ids.assigned(id);

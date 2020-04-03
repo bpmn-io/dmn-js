@@ -29,7 +29,7 @@ export default class View {
   /**
    * Subscribe to the given event.
    *
-   * @param  {String}         event
+   * @param  {string}         event
    * @param  {Array<Object>}  args
    */
   on(event, ...args) { }
@@ -37,7 +37,7 @@ export default class View {
   /**
    * Unsubscribe from given event.
    *
-   * @param  {String}         event
+   * @param  {string}         event
    * @param  {Array<Object>}  args
    */
   off(event, ...args) { }

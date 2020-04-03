@@ -167,7 +167,7 @@ export default function CellSelection(
   /**
    * Get the currently active cellSelection.
    *
-   * @return {String} selection
+   * @return {string} selection
    */
   this.getCellSelection = function() {
     return lastSelection;
@@ -179,7 +179,7 @@ export default function CellSelection(
    * Returns true on success; false on fail (i.e. if no next selection
    * in direction could be found).
    *
-   * @param {String} direction
+   * @param {string} direction
    *
    * @return {Boolean}
    */
