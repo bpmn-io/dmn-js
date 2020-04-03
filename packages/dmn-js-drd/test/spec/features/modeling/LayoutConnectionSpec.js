@@ -3,152 +3,288 @@ import {
   inject
 } from 'test/TestHelper';
 
-import {
-  pick
-} from 'min-dash';
-
-import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
+import modelingModule from 'src/features/modeling';
+
+import {
+  asTRBL,
+  getMid
+} from 'diagram-js/lib/layout/LayoutUtil';
+import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 describe('features/modeling - layout connection', function() {
 
-  var diagramXML = require('../../../fixtures/dmn/simple-connections.dmn');
+  var diagramXML = require('./LayoutConnection.dmn');
 
-  var testModules = [ coreModule, modelingModule ];
+  var testModules = [
+    coreModule,
+    modelingModule
+  ];
 
-  beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+  beforeEach(bootstrapModeler(diagramXML, {
+    modules: testModules
+  }));
 
 
-  describe('connection handling', function() {
+  describe('dmn:InformationRequirement', function() {
 
-    it('should execute', inject(function(elementRegistry, modeling, drdFactory) {
+    var decision1,
+        decision2,
+        informationRequirement,
+        informationRequirementDi;
 
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks'),
-          authorityRequirementConn = knowledgeSource.incoming[0],
-          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
-          businessObject = requirement.businessObject,
-          edge = businessObject.di;
+    beforeEach(inject(function(canvas, elementFactory, elementRegistry, modeling) {
+      decision1 = elementRegistry.get('Decision_1');
+      decision2 = elementRegistry.get('Decision_2');
 
-      var expectedWaypoints = [
-        {
-          original: { x: 200, y: 38 },
-          x: 212, y: 65
+      informationRequirement = elementFactory.createConnection({
+        type: 'dmn:InformationRequirement',
+        source: decision2,
+        target: decision1,
+        waypoints: [
+          getMid(decision2),
+          getMid(decision1)
+        ]
+      });
+
+      informationRequirementDi = getBusinessObject(informationRequirement).di;
+
+      canvas.addConnection(informationRequirement, canvas.getRootElement());
+
+      modeling.layoutConnection(informationRequirement, {
+        connectionStart: {
+          x: getMid(decision2).x,
+          y: asTRBL(decision2).top
         },
-        {
-          original: { x: 250, y: 150 },
-          x: 250, y: 150
-        },
-        {
-          original: { x: 545, y: 182 },
-          x: 495, y: 177
+        connectionEnd: {
+          x: getMid(decision1).x,
+          y: asTRBL(decision1).bottom
         }
-      ];
-
-      // when
-      modeling.layoutConnection(authorityRequirementConn);
-
-      // then
-
-      // expect cropped, repaired connection
-      // that was not actually modified
-      expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
-
-      // expect cropped waypoints in di
-      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
-      expect(pick(edge.waypoint[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
+      });
     }));
 
-  });
 
-
-  describe('undo support', function() {
-
-    it('should undo', inject(function(elementRegistry, commandStack, modeling) {
-
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks'),
-          authorityRequirementConn = knowledgeSource.incoming[0],
-          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
-          businessObject = requirement.businessObject,
-          edge = businessObject.di;
-
-      var expectedWaypoints = [
-        {
-          original: { x: 200, y: 38 },
-          x: 200, y: 38
-        },
-        {
-          original: { x: 250, y: 150 },
-          x: 250, y: 150
-        },
-        {
-          original: { x: 545, y: 182 },
-          x: 545, y: 182
-        }
-      ];
-
-      // when
-      modeling.layoutConnection(authorityRequirementConn);
+    it('<do>', function() {
 
       // then
+      expect(informationRequirement.waypoints).to.eql([{
+        original: {
+          x: 290,
+          y: 200
+        },
+        x: 290,
+        y: 200
+      }, {
+        x: 90,
+        y: 100
+      }, {
+        original: {
+          x: 90,
+          y: 80
+        },
+        x: 90,
+        y: 80
+      }]);
 
+      expect(informationRequirementDi.waypoint[ 0 ]).to.include({
+        x: 290,
+        y: 200
+      });
+
+      expect(informationRequirementDi.waypoint[ 1 ]).to.include({
+        x: 90,
+        y: 100
+      });
+
+      expect(informationRequirementDi.waypoint[ 2 ]).to.include({
+        x: 90,
+        y: 80
+      });
+    });
+
+
+    it('<undo>', inject(function(commandStack) {
+
+      // when
       commandStack.undo();
 
-      // expect cropped, repaired connection
-      // that was not actually modified
-      expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
+      // then
+      expect(informationRequirement.waypoints).to.eql([
+        getMid(decision2),
+        getMid(decision1)
+      ]);
 
-      // expect cropped waypoints in di
-      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).eql({ x: 200, y: 38 });
-      expect(pick(edge.waypoint[2], [ 'x', 'y' ])).eql({ x: 545, y: 182 });
+      expect(informationRequirementDi.waypoint[ 0 ]).to.include(getMid(decision2));
+
+      expect(informationRequirementDi.waypoint[ 1 ]).to.include(getMid(decision1));
     }));
 
-  });
 
-
-  describe('redo support', function() {
-
-    it('should redo', inject(function(elementRegistry, commandStack, modeling) {
-
-      // given
-      var knowledgeSource = elementRegistry.get('host_ks'),
-          authorityRequirementConn = knowledgeSource.incoming[0],
-          requirement = elementRegistry.get('AuthorityRequirement_0jdv0hj'),
-          businessObject = requirement.businessObject,
-          edge = businessObject.di;
-
-      var expectedWaypoints = [
-        {
-          original: { x: 200, y: 38 },
-          x: 212, y: 65
-        },
-        {
-          original: { x: 250, y: 150 },
-          x: 250, y: 150
-        },
-        {
-          original: { x: 545, y: 182 },
-          x: 495, y: 177
-        }
-      ];
+    it('<redo>', inject(function(commandStack) {
 
       // when
-      modeling.layoutConnection(authorityRequirementConn);
-
-      // then
-
       commandStack.undo();
       commandStack.redo();
 
-      // expect cropped, repaired connection
-      // that was not actually modified
-      expect(authorityRequirementConn.waypoints).to.eql(expectedWaypoints);
+      // then
+      expect(informationRequirement.waypoints).to.eql([{
+        original: {
+          x: 290,
+          y: 200
+        },
+        x: 290,
+        y: 200
+      }, {
+        x: 90,
+        y: 100
+      }, {
+        original: {
+          x: 90,
+          y: 80
+        },
+        x: 90,
+        y: 80
+      }]);
 
-      // expect cropped waypoints in di
-      expect(pick(edge.waypoint[0], [ 'x', 'y' ])).eql({ x: 212, y: 65 });
-      expect(pick(edge.waypoint[2], [ 'x', 'y' ])).eql({ x: 495, y: 177 });
+      expect(informationRequirementDi.waypoint[ 0 ]).to.include({
+        x: 290,
+        y: 200
+      });
+
+      expect(informationRequirementDi.waypoint[ 1 ]).to.include({
+        x: 90,
+        y: 100
+      });
+
+      expect(informationRequirementDi.waypoint[ 2 ]).to.include({
+        x: 90,
+        y: 80
+      });
+    }));
+
+  });
+
+
+  describe('dmn:AuthorityRequirement', function() {
+
+    var decision2,
+        knowledgeSource,
+        authorityRequirement,
+        authorityRequirementDi;
+
+    beforeEach(inject(function(canvas, elementFactory, elementRegistry, modeling) {
+      decision2 = elementRegistry.get('Decision_2');
+      knowledgeSource = elementRegistry.get('KnowledgeSource_1');
+
+      authorityRequirement = elementFactory.createConnection({
+        type: 'dmn:AuthorityRequirement',
+        source: knowledgeSource,
+        target: decision2,
+        waypoints: [
+          getMid(knowledgeSource),
+          getMid(decision2)
+        ]
+      });
+
+      authorityRequirementDi = getBusinessObject(authorityRequirement).di;
+
+      canvas.addConnection(authorityRequirement, canvas.getRootElement());
+
+      modeling.layoutConnection(authorityRequirement, {
+        connectionStart: {
+          x: getMid(knowledgeSource).x,
+          y: asTRBL(knowledgeSource).top
+        },
+        connectionEnd: {
+          x: getMid(decision2).x,
+          y: asTRBL(decision2).bottom
+        }
+      });
+    }));
+
+
+    it('<do>', function() {
+
+      // then
+      expect(authorityRequirement.waypoints).to.eql([{
+        original: {
+          x: 50,
+          y: 400
+        },
+        x: 50,
+        y: 400
+      }, {
+        original: {
+          x: 290,
+          y: 280
+        },
+        x: 290,
+        y: 280
+      }]);
+
+      expect(authorityRequirementDi.waypoint[ 0 ]).to.include({
+        x: 50,
+        y: 400
+      });
+
+      expect(authorityRequirementDi.waypoint[ 1 ]).to.include({
+        x: 290,
+        y: 280
+      });
+
+    });
+
+
+    it('<undo>', inject(function(commandStack) {
+
+      // when
+      commandStack.undo();
+
+      // then
+      expect(authorityRequirement.waypoints).to.eql([
+        getMid(knowledgeSource),
+        getMid(decision2)
+      ]);
+
+      expect(authorityRequirementDi.waypoint[ 0 ]).to.include(getMid(knowledgeSource));
+
+      expect(authorityRequirementDi.waypoint[ 1 ]).to.include(getMid(decision2));
+    }));
+
+
+    it('<redo>', inject(function(commandStack) {
+
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(authorityRequirement.waypoints).to.eql([{
+        original: {
+          x: 50,
+          y: 400
+        },
+        x: 50,
+        y: 400
+      }, {
+        original: {
+          x: 290,
+          y: 280
+        },
+        x: 290,
+        y: 280
+      }]);
+
+      expect(authorityRequirementDi.waypoint[ 0 ]).to.include({
+        x: 50,
+        y: 400
+      });
+
+      expect(authorityRequirementDi.waypoint[ 1 ]).to.include({
+        x: 290,
+        y: 280
+      });
     }));
 
   });
