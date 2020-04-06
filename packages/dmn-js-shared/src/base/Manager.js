@@ -224,7 +224,7 @@ export default class Manager {
    * Remove a previously added listener via {@link #off(event, callback)}.
    *
    * @param {string} event
-   * @param {Number} [priority]
+   * @param {number} [priority]
    * @param {Function} callback
    * @param {Object} [that]
    */
@@ -246,7 +246,7 @@ export default class Manager {
    * Register a listener to be invoked once only.
    *
    * @param {string} event
-   * @param {Number} [priority]
+   * @param {number} [priority]
    * @param {Function} callback
    * @param {Object} [that]
    */

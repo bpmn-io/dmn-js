@@ -148,7 +148,7 @@ Viewer.prototype.destroy = function() {
  * Remove a previously added listener via {@link #off(event, callback)}.
  *
  * @param {string} event
- * @param {Number} [priority]
+ * @param {number} [priority]
  * @param {Function} callback
  * @param {Object} [that]
  */

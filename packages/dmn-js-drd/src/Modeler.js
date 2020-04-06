@@ -89,8 +89,8 @@ import SnappingModule from 'diagram-js/lib/features/snapping';
  * @param {Object} [options] configuration options to pass to the viewer
  * @param {DOMElement} [options.container]
  *        the container to render the viewer in, defaults to body.
- * @param {string|Number} [options.width] the width of the viewer
- * @param {string|Number} [options.height] the height of the viewer
+ * @param {string|number} [options.width] the width of the viewer
+ * @param {string|number} [options.height] the height of the viewer
  * @param {Object} [options.moddleExtensions]
  *        extension packages to provide
  * @param {Array<didi.Module>} [options.modules]
