@@ -68,7 +68,7 @@ export default class Manager {
    *
    * @param {string} xml the DMN xml
    * @param {Object} [options]
-   * @param {Boolean} [options.open=true]
+   * @param {boolean} [options.open=true]
    * @param {Function} [done] invoked with (err, warnings=[])
    */
   importXML(xml, options, done) {
@@ -176,8 +176,8 @@ export default class Manager {
    * You can use these events to hook into the life-cycle.
    *
    * @param {Object} [options] export options
-   * @param {Boolean} [options.format=false] output formated XML
-   * @param {Boolean} [options.preamble=true] output preamble
+   * @param {boolean} [options.format=false] output formated XML
+   * @param {boolean} [options.preamble=true] output preamble
    * @param {Function} done invoked with (err, xml)
    */
   saveXML(options, done) {

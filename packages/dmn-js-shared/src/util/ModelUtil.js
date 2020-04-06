@@ -6,7 +6,7 @@ import { some } from 'min-dash';
  * @param  {tjs.model.Base|ModdleElement} element
  * @param  {string} type
  *
- * @return {Boolean}
+ * @return {boolean}
  */
 export function is(element, type) {
   var bo = getBusinessObject(element);
@@ -53,7 +53,7 @@ export function getName(element) {
  * @param {djs.model.Base} element
  * @param {Array<string>} types
  *
- * @return {Boolean}
+ * @return {boolean}
  */
 export function isAny(element, types) {
   return some(types, function(t) {

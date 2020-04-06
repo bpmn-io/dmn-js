@@ -158,7 +158,7 @@ export default function CellSelection(
   /**
    * Return true if a cell is currently selected.
    *
-   * @return {Boolean}
+   * @return {boolean}
    */
   this.isCellSelected = function() {
     return !!lastSelection;
@@ -181,7 +181,7 @@ export default function CellSelection(
    *
    * @param {string} direction
    *
-   * @return {Boolean}
+   * @return {boolean}
    */
   this.selectCell = function(direction) {
 
