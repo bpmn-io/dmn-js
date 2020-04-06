@@ -90,7 +90,7 @@ export default class EditorActions {
    *
    * @param {string} action
    *
-   * @return {Boolean}
+   * @return {boolean}
    */
   isRegistered(action) {
     return !!this._actions[action];

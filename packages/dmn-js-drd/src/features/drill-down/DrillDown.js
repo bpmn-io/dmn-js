@@ -122,7 +122,7 @@ export default class DrillDown {
    *
    * @param  {djs.model.Base} element
    *
-   * @return {Boolean} whether drill down was executed
+   * @return {boolean} whether drill down was executed
    */
   drillDown(element) {
 
