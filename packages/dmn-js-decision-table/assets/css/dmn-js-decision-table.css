@@ -213,17 +213,11 @@
   max-width: 50%;
 }
 
-.dmn-decision-table-container .decision-table-name,
-.dmn-decision-table-container .decision-table-id {
+.dmn-decision-table-container .decision-table-name {
   margin: 0;
   padding: 3px 6px;
   text-align: center;
   white-space: pre;
-}
-
-.dmn-decision-table-container .decision-table-id.invalid {
-  background: #f4cecd;
-  color: #c9302c;
 }
 
 .dmn-decision-table-container .decision-table-name {
@@ -231,12 +225,6 @@
   line-height: 30px;
   padding: .3em;
   font-weight: bold;
-}
-
-.dmn-decision-table-container .decision-table-id {
-  border-top: 1px solid #444;
-  font-family: monospace;
-  font-size: 18px;
 }
 
 /* end decision table properties */

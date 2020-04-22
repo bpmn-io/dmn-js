@@ -1,7 +1,5 @@
 import { Component } from 'inferno';
 
-import { validateId } from 'dmn-js-shared/lib/util/IdsUtil';
-
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
 import {
@@ -60,26 +58,10 @@ export default class DecisionTablePropertiesComponent extends Component {
     this.modeling.editDecisionTableName(name);
   }
 
-  setDecisionTableId = (id) => {
-
-    var oldId = this.getBusinessObject().id;
-
-    if (oldId === id) {
-      return;
-    }
-
-    this.modeling.editDecisionTableId(id);
-  }
-
-  validateId = (id) => {
-    var bo = this.getBusinessObject();
-    return validateId(bo, id);
-  }
-
   render() {
     const bo = this.getBusinessObject();
 
-    const { id, name } = bo;
+    const { name } = bo;
 
     return (
       <header className="decision-table-properties">
@@ -90,15 +72,6 @@ export default class DecisionTablePropertiesComponent extends Component {
           onChange={ this.setDecisionTableName }
           elementId={ '__decisionProperties_name' }
           coords={ '0:__decisionProperties' }
-        />
-        <DecisionTableId
-          className="decision-table-id"
-          value={ id }
-          ctrlForNewline={ true }
-          validate={ this.validateId }
-          onChange={ this.setDecisionTableId }
-          elementId={ '__decisionProperties_id' }
-          coords={ '1:__decisionProperties' }
         />
       </header>
     );
@@ -136,35 +109,6 @@ class DecisionTableName extends EditableComponent {
       >
         { this.getEditor() }
       </h3>
-    );
-  }
-
-}
-
-class DecisionTableId extends EditableComponent {
-
-  constructor(props, context) {
-    super(props, context);
-
-    mixin(this, SelectionAware);
-  }
-
-  render() {
-
-    const className = classNames(
-      this.getSelectionClasses(),
-      this.getClassName()
-    );
-
-    return (
-      <h5
-        className={ className }
-        title="Decision Id"
-        data-element-id={ this.props.elementId }
-        data-coords={ this.props.coords }
-      >
-        { this.getEditor() }
-      </h5>
     );
   }
 

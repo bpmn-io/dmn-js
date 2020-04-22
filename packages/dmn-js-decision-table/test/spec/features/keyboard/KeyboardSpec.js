@@ -139,18 +139,18 @@ describe('features/keyboard', function() {
     ));
 
 
-    it('should NOT create new rule on decision id cell <ENTER>', inject(
+    it('should NOT create new rule on decision name <ENTER>', inject(
       function(cellSelection, sheet) {
 
         // given
-        const gfx = getGraphics('__decisionProperties_id', testContainer);
+        const gfx = getGraphics('__decisionProperties_name', testContainer);
         const root = sheet.getRoot();
         const rowCount = getRowCount(root);
 
         triggerMouseEvent(gfx, 'click');
 
         // assure
-        expect(cellSelection.getCellSelection()).to.equal('__decisionProperties_id');
+        expect(cellSelection.getCellSelection()).to.equal('__decisionProperties_name');
 
         // when
         triggerKeyEvent(gfx, 'keydown', {
@@ -158,7 +158,7 @@ describe('features/keyboard', function() {
         });
 
         // then
-        expect(rowCount).to.equal(getRowCount(root));
+        expect(getRowCount(root)).to.equal(rowCount);
       }
     ));
 
