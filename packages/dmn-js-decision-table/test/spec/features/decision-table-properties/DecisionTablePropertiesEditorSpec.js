@@ -1,7 +1,6 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {
-  classes as domClasses,
   query as domQuery
 } from 'min-dom';
 
@@ -87,62 +86,6 @@ describe('decision table properties', function() {
 
       expect(name.innerHTML).to.equal('foo<br>bar<br>');
     }));
-
-
-    describe('should edit ID', function() {
-
-      it('accept if valid', inject(function(sheet) {
-
-        // given
-        const id = queryEditor('.decision-table-id', testContainer);
-
-        id.focus();
-
-        // when
-        triggerInputEvent(id, 'bar');
-
-        // then
-        const root = sheet.getRoot();
-
-        expect(root.businessObject.$parent.id).to.equal('bar');
-      }));
-
-
-      it('undo edit', inject(function(sheet, commandStack) {
-
-        // given
-        const id = queryEditor('.decision-table-id', testContainer);
-
-        id.focus();
-
-        triggerInputEvent(id, 'bar');
-
-        // when
-        commandStack.undo();
-
-        // then
-        expect(id.textContent).to.equal('decision');
-      }));
-
-
-      it('reject if invalid', inject(function(sheet) {
-
-        // given
-        const id = queryEditor('.decision-table-id', testContainer);
-
-        id.focus();
-
-        // when
-        triggerInputEvent(id, '!foo');
-
-        // then
-        const root = sheet.getRoot();
-
-        expect(root.businessObject.$parent.id).to.equal('decision');
-        expect(domClasses(id.parentNode).has('invalid')).to.be.true;
-      }));
-
-    });
 
   });
 

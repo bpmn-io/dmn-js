@@ -52,16 +52,6 @@ describe('features/cell-selection', function() {
         expect(hasFocus('__decisionProperties_name')).to.be.true;
       }));
 
-
-      it('id', inject(function(cellSelection) {
-
-        // when
-        click('__decisionProperties_id');
-
-        // then
-        expect(hasFocus('__decisionProperties_id')).to.be.true;
-      }));
-
     });
 
 
@@ -178,21 +168,6 @@ describe('features/cell-selection', function() {
         currentSelection: 'outputEntry5',
         direction: 'right',
         expectedSelection: 'outputEntry6'
-      }));
-
-
-      it('in decision properties', inject(function(cellSelection) {
-
-        // given
-        click('__decisionProperties_id');
-
-        // when
-        const changed = cellSelection.selectCell('above');
-
-        // then
-        expect(hasFocus('__decisionProperties_name')).to.be.true;
-
-        expect(changed).to.be.true;
       }));
 
     });
