@@ -70,7 +70,7 @@ function getDRGElementPosition(source, element) {
       sourceMid = getMid(source);
 
   function getWeight(connection) {
-    return connection.target === source ? 5 : 1;
+    return connection.target === source ? 1 : -1;
   }
 
   var verticalDistance = getConnectedDistance(source, {
