@@ -85,4 +85,48 @@ describe('IdChangeBehavior', function() {
     });
   }));
 
+
+  it('should NOT update IDs if no oldProperties given', inject(function(eventBus, sheet) {
+
+    // given
+    const root = sheet.getRoot(),
+          decisionTable = root.businessObject;
+
+    const decision = decisionTable.$parent;
+
+    const definitions = decision.$parent;
+
+    const {
+      artifacts,
+      drgElements
+    } = definitions;
+
+    const dishDecision = drgElements.filter(
+      drgElement => drgElement.id === 'dish-decision'
+    )[0];
+
+    const association = artifacts.filter(
+      element => element.id === 'Association'
+    )[0];
+
+    const event = {
+      context: {
+        oldProperties: null
+      }
+    };
+
+    const dmnJS = getDmnJS();
+
+    dmnJS._viewers.decisionTable.open(dishDecision, () => {
+
+      // when
+      eventBus.fire('commandStack.element.updateProperties.executed', event);
+
+      // then
+      expect(association.sourceRef.href).to.eql('#dish-decision');
+      expect(association.extensionElements.values[0].source).to.eql('dish-decision');
+    });
+  }));
+
+
 });

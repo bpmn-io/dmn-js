@@ -47,7 +47,8 @@ export default class IdChangeBehavior extends CommandInterceptor {
   }
 
   shouldSkipUpdate(bo, oldProperties, newProperties) {
-    return !isIdChange(oldProperties, newProperties) ||
+    return !oldProperties ||
+     !isIdChange(oldProperties, newProperties) ||
      (!is(bo, 'dmn:DRGElement') && !is(bo, 'dmn:TextAnnotation'));
   }
 }
