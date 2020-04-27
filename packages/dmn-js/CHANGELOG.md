@@ -6,6 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.3.0
+
+* `FEAT(drd)`: change layout of information requirements ([#492](https://github.com/bpmn-io/dmn-js/pull/492))
+* `FEAT(drd)`: add auto-place feature ([#492](https://github.com/bpmn-io/dmn-js/pull/492))
+* `FEAT(drd)`: connect from new shape to source on append ([#492](https://github.com/bpmn-io/dmn-js/pull/492))
+* `CHORE(drd)`: bump to diagram-js@6.6.1
+
 ## 8.2.0
 
 * `FEAT(drd)`: improve label editing ([#487](https://github.com/bpmn-io/dmn-js/pull/487))
