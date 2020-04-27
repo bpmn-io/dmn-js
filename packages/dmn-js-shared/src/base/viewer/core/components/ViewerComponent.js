@@ -1,7 +1,7 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 
-export default class ViewerComponent extends Component {
+export default class ViewerComponent extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -13,6 +13,7 @@ export default class ViewerComponent extends Component {
     this._renderer = injector.get('renderer');
   }
 
+  // child components will have access to these things
   getChildContext() {
     return {
       changeSupport: this._changeSupport,

@@ -1,4 +1,4 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 import ContentEditable from './ContentEditable';
 
@@ -32,7 +32,7 @@ import ContentEditable from './ContentEditable';
  * * invalid
  *
  */
-export default class EditableComponent extends Component {
+export default class EditableComponent extends PureComponent {
 
   constructor(props, context) {
     super(props, context);

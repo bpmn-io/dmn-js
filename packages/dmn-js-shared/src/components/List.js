@@ -1,4 +1,4 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 import { groupBy } from 'min-dash';
 
@@ -19,7 +19,7 @@ const REMOVE_BTN_CLS =
  *   { value: 'baz', isCheckable: false, group: 'baz' }
  * ]
  */
-export default class List extends Component {
+export default class List extends PureComponent {
 
   constructor(props, context) {
     super(props, context);
@@ -31,7 +31,7 @@ export default class List extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const { items } = props;
 
     this.setState({

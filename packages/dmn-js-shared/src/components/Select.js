@@ -1,7 +1,7 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 
-export default class Select extends Component {
+export default class Select extends PureComponent {
 
   constructor(props, context) {
     super(props, context);
@@ -13,7 +13,7 @@ export default class Select extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const { value } = props;
 
     this.setState({

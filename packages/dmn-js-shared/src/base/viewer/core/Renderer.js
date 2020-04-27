@@ -1,4 +1,4 @@
-import { render } from 'inferno';
+import { render } from 'react-dom';
 
 import ViewerComponent from './components/ViewerComponent';
 

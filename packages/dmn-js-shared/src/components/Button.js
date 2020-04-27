@@ -1,7 +1,7 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 
-export default class Button extends Component {
+export default class Button extends PureComponent {
   constructor(props, context) {
     super(props, context);
   }

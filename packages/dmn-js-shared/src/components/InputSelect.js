@@ -1,4 +1,5 @@
-import { Component, createPortal } from 'inferno';
+import React, { PureComponent } from 'react';
+import { createPortal } from 'react-dom';
 
 import {
   inject
@@ -12,7 +13,7 @@ import {
 } from 'min-dom';
 
 
-export default class InputSelect extends Component {
+export default class InputSelect extends PureComponent {
 
   constructor(props, context) {
     super(props, context);
@@ -45,7 +46,7 @@ export default class InputSelect extends Component {
     this.removePortalEl();
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const { value } = props;
 
     this.setState({
@@ -53,7 +54,7 @@ export default class InputSelect extends Component {
     });
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
     const { optionsVisible } = nextState;
 
     if (optionsVisible) {

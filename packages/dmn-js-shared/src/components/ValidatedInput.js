@@ -1,4 +1,4 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 // eslint-disable-next-line
 import Input from './Input';
@@ -6,7 +6,7 @@ import Input from './Input';
 /**
  * Input with optional validation.
  */
-export default class ValidatedInput extends Component {
+export default class ValidatedInput extends PureComponent {
 
   constructor(props, context) {
     super(props, context);
@@ -25,7 +25,7 @@ export default class ValidatedInput extends Component {
     this.onKeyUp = this.onKeyUp.bind(this);
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const { validate, value } = props;
 
     const validationWarning = validate ? validate(value || '') : undefined;

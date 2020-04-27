@@ -1,4 +1,4 @@
-import { Component } from 'inferno';
+import React, { PureComponent } from 'react';
 
 import escapeHtml from 'escape-html';
 
@@ -39,7 +39,7 @@ import selectionUpdate from 'selection-update';
  * }
  *
  */
-export default class ContentEditable extends Component {
+export default class ContentEditable extends PureComponent {
 
   constructor(props, context) {
     super(props, context);
@@ -66,7 +66,7 @@ export default class ContentEditable extends Component {
     }
   }
 
-  componentWillUpdate(newProps, newState) {
+  UNSAFE_componentWillUpdate(newProps, newState) {
 
     // save old selection + text for later
     var node = this.node;

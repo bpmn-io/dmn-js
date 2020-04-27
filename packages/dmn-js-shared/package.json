@@ -16,6 +16,7 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
+    "@babel/preset-react": "^7.9.4",
     "didi": "^4.0.0",
     "inferno-test-utils": "~5.0.5"
   },
@@ -27,6 +28,8 @@
     "inferno": "~5.0.5",
     "min-dash": "^3.0.0",
     "min-dom": "^3.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "selection-ranges": "^3.0.2",
     "selection-update": "^0.1.2",
     "table-js": "^6.0.3"
