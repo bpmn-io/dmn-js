@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.5.1
+
+* `FIX`: prevent id updates if `oldProperties` is not populated ([`bd4de696`](https://github.com/bpmn-io/dmn-js/commit/bd4de69686a699b994feef7a05d28cd370f1abb7))
+
 ## 7.5.0
 
 * `FEAT(decision-table)`: add new rule on bottom rule \<enter> ([#345](https://github.com/bpmn-io/dmn-js/issues/345))
