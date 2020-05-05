@@ -36,7 +36,7 @@ export default class DecisionTableHead extends Component {
     this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
 
-  componentWillUnmout() {
+  componentWillUnmount() {
     const root = this._sheet.getRoot();
 
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
