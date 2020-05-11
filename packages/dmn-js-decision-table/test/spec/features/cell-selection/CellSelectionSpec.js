@@ -14,10 +14,10 @@ import {
 } from 'src/features/cell-selection/CellSelectionUtil';
 
 import CoreModule from 'src/core';
+import DecisionTableHead from 'src/features/decision-table-head';
 import CellSelectionModule from 'src/features/cell-selection';
 import DecisionRulesModule from 'src/features/decision-rules';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
-import PropertiesModule from 'src/features/decision-table-properties';
 import PropertiesEditorModule from 'src/features/decision-table-properties/editor';
 import ModelingModule from 'src/features/modeling';
 
@@ -29,11 +29,11 @@ describe('features/cell-selection', function() {
   beforeEach(bootstrapModeler(testDiagram, {
     modules: [
       CoreModule,
+      DecisionTableHead,
+      PropertiesEditorModule,
       CellSelectionModule,
       DecisionRulesModule,
       DecisionRulesEditorModule,
-      PropertiesModule,
-      PropertiesEditorModule,
       ModelingModule
     ]
   }));

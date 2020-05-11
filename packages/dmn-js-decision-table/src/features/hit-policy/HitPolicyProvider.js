@@ -1,10 +1,8 @@
-import HitPolicyCell from './components/HitPolicyCell';
+import HitPolicy from './components/HitPolicy';
 
 export default function HitPolicyProvider(components) {
-  components.onGetComponent('cell', ({ cellType }) => {
-    if (cellType === 'before-label-cells') {
-      return HitPolicyCell;
-    }
+  components.onGetComponent('hit-policy', () => {
+    return HitPolicy;
   });
 }
 

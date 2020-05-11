@@ -12,6 +12,7 @@ import TestContainer from 'mocha-test-container-support';
 import CoreModule from 'src/core';
 import KeyboardModule from 'src/features/keyboard';
 import ModelingModule from 'src/features/modeling';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 import TablePropertiesEditorModule from 'src/features/decision-table-properties/editor';
 import SelectionModule from 'table-js/lib/features/selection';
@@ -32,6 +33,7 @@ describe('features/keyboard', function() {
       CoreModule,
       ModelingModule,
       KeyboardModule,
+      DecisionTableHeadModule,
       DecisionRulesEditorModule,
       TablePropertiesEditorModule,
       SelectionModule

@@ -7,6 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import simpleXML from '../../simple.dmn';
 
 import CoreModule from 'src/core';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
 import DecisionTablePropertiesModule from 'src/features/decision-table-properties';
 
 describe('decision table properties', function() {
@@ -14,6 +15,7 @@ describe('decision table properties', function() {
   beforeEach(bootstrapViewer(simpleXML, {
     modules: [
       CoreModule,
+      DecisionTableHeadModule,
       DecisionTablePropertiesModule
     ]
   }));

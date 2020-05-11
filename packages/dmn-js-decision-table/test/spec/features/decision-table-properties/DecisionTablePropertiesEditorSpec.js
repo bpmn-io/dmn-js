@@ -13,8 +13,7 @@ import twoDecisionsXML from '../../two-decisions.dmn';
 
 import CoreModule from 'src/core';
 
-import DecisionTablePropertiesModule
-  from 'src/features/decision-table-properties';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
 
 import DecisionTablePropertiesEditorModule
   from 'src/features/decision-table-properties/editor';
@@ -27,7 +26,7 @@ describe('decision table properties', function() {
   beforeEach(bootstrapModeler(twoDecisionsXML, {
     modules: [
       CoreModule,
-      DecisionTablePropertiesModule,
+      DecisionTableHeadModule,
       DecisionTablePropertiesEditorModule,
       ModelingModule
     ],

@@ -2,17 +2,18 @@ import { Component } from 'inferno';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { inject } from 'table-js/lib/components';
 
 export default class DecisionTablePropertiesComponent extends Component {
 
-  componentWillMount() {
-    const { injector } = this.context;
+  constructor(props, context) {
+    super(props, context);
 
-    this._sheet = injector.get('sheet');
+    inject(this);
   }
 
   render() {
-    const root = this._sheet.getRoot();
+    const root = this.sheet.getRoot();
 
     if (!is(root, 'dmn:DMNElement')) {
       return null;
@@ -20,10 +21,23 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     const { name } = root.businessObject.$parent;
 
+    const HitPolicy = this.components.getComponent('hit-policy') || NullComponent;
+
     return (
-      <header className="decision-table-properties">
-        <h3 className="decision-table-name" title="Decision Name">{ name }</h3>
-      </header>
+      <div className="decision-table-properties">
+        <p className="decision-table-name" title={ 'Decision Name: ' + name }>{ name }</p>
+        <span className="decision-table-header-separator" />
+        <HitPolicy />
+      </div>
     );
   }
+}
+
+DecisionTablePropertiesComponent.$inject = [
+  'sheet',
+  'components'
+];
+
+function NullComponent() {
+  return null;
 }
