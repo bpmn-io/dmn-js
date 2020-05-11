@@ -8,6 +8,7 @@ import simpleXML from '../../simple.dmn';
 
 import CoreModule from 'src/core';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTablePropertiesModule from 'src/features/decision-table-properties';
 import HitPolicyModule from 'src/features/hit-policy';
 
 
@@ -17,6 +18,7 @@ describe('features/hit-policy', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
+      DecisionTablePropertiesModule,
       HitPolicyModule
     ]
   }));
@@ -31,7 +33,7 @@ describe('features/hit-policy', function() {
   it('should render hit policy cell', function() {
 
     // then
-    expect(domQuery('th.hit-policy', testContainer)).to.exist;
+    expect(domQuery('.hit-policy', testContainer)).to.exist;
   });
 
 });

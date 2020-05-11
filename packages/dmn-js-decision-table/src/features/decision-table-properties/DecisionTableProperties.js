@@ -2,7 +2,7 @@ import Component from './components/DecisionTablePropertiesComponent';
 
 export default class DecisionTableProperties {
   constructor(components) {
-    components.onGetComponent('table.before', () => {
+    components.onGetComponent('table.header', () => {
       return Component;
     });
   }

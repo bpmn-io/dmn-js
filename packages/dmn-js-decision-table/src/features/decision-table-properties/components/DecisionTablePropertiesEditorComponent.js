@@ -19,13 +19,6 @@ export default class DecisionTablePropertiesComponent extends Component {
   }
 
   componentWillMount() {
-    const {
-      injector
-    } = this.context;
-
-    this.sheet = injector.get('sheet');
-    this.modeling = injector.get('modeling');
-
     this.setupChangeListeners({ bind: this.getBusinessObject().id });
   }
 
@@ -63,8 +56,10 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     const { name } = bo;
 
+    const HitPolicy = this.components.getComponent('hit-policy') || NullComponent;
+
     return (
-      <header className="decision-table-properties">
+      <div className="decision-table-properties">
         <DecisionTableName
           className="decision-table-name"
           value={ name }
@@ -73,7 +68,9 @@ export default class DecisionTablePropertiesComponent extends Component {
           elementId={ '__decisionProperties_name' }
           coords={ '0:__decisionProperties' }
         />
-      </header>
+        <span className="decision-table-header-separator" />
+        <HitPolicy />
+      </div>
     );
   }
 }
@@ -81,7 +78,8 @@ export default class DecisionTablePropertiesComponent extends Component {
 DecisionTablePropertiesComponent.$inject = [
   'sheet',
   'modeling',
-  'changeSupport'
+  'changeSupport',
+  'components'
 ];
 
 
@@ -95,21 +93,27 @@ class DecisionTableName extends EditableComponent {
 
   render() {
 
+    const name = this.props.value;
+
     const className = classNames(
       this.getSelectionClasses(),
       this.getClassName()
     );
 
     return (
-      <h3
+      <p
         className={ className }
         data-element-id={ this.props.elementId }
         data-coords={ this.props.coords }
-        title="Decision Name"
+        title={ 'Decision Name: ' + name }
       >
         { this.getEditor() }
-      </h3>
+      </p>
     );
   }
 
+}
+
+function NullComponent() {
+  return null;
 }

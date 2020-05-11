@@ -95,11 +95,9 @@
   white-space: pre;
 }
 
-.dmn-decision-table-container th.hit-policy {
+.dmn-decision-table-container th.index-column {
   width: 40px;
   min-width: 40px;
-
-  vertical-align: top;
 }
 
 .dmn-decision-table-container th {
@@ -201,30 +199,47 @@
   position: relative;
 }
 
+/* decision table header */
+.dmn-decision-table-container .decision-table-header {
+  text-align: left;
+
+  padding: 10px;
+}
+
+
+.dmn-decision-table-container .decision-table-header * {
+  vertical-align: middle;
+}
+
 /* decision table properties */
-.dmn-decision-table-container .decision-table-properties {
-  color: #444;
-  background-color: #fff;
+.dmn-decision-table-container .decision-table-name {
   display: inline-block;
-  border: solid 1px #444;
-  margin-bottom: -1px;
-  position: relative;
-  min-width: 100px;
-  max-width: 50%;
-}
-
-.dmn-decision-table-container .decision-table-name {
   margin: 0;
-  padding: 3px 6px;
-  text-align: center;
-  white-space: pre;
+
+  max-width: 600px;
+
+  font-size: 21px;
+  font-weight: normal;
 }
 
-.dmn-decision-table-container .decision-table-name {
-  font-size: 24px;
-  line-height: 30px;
-  padding: .3em;
-  font-weight: bold;
+.dmn-decision-table-container .decision-table-name.focussed {
+  max-width: unset;
+}
+
+.dmn-decision-table-container .decision-table-name:not(.editable),
+.dmn-decision-table-container .decision-table-name .content-editable {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.dmn-decision-table-container .decision-table-header-separator {
+  display: inline-block;
+  height: 32px;
+
+  border-left: 2px solid #bfbfbf;
+
+  margin: 0 10px;
 }
 
 /* end decision table properties */
