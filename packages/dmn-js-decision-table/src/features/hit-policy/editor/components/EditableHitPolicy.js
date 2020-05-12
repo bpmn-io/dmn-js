@@ -63,6 +63,7 @@ export default class EditableHitPolicy extends Component {
           noInput
           title={ 'Hit Policy = ' + hitPolicyEntry.label }
         />
+        <span className="hit-policy-explanation">{ hitPolicyEntry.explanation }</span>
       </span>
     );
   }

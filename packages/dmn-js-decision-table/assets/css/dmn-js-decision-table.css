@@ -242,6 +242,11 @@
   margin: 0 10px;
 }
 
+.dmn-decision-table-container .hit-policy-explanation {
+  margin-left: 5px;
+  color: #545454;
+}
+
 /* end decision table properties */
 
 /* view drd */
