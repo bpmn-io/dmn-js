@@ -70,6 +70,29 @@ describe('components/InputSelect', function() {
   });
 
 
+  it('should use provided title', function() {
+
+    // given
+    const injector = createInjector({
+      keyboard: getKeyboardMock(testContainer),
+      renderer: getRendererMock(testContainer)
+    });
+    const title = 'Title';
+
+    // when
+    const renderedTree = renderIntoDocument(
+      <DiContainer injector={ injector }>
+        <InputSelect title={ title } />
+      </DiContainer>
+    );
+
+    // then
+    const element = findRenderedDOMElementWithClass(renderedTree, 'dms-input-select');
+
+    expect(element.getAttribute('title')).to.eql(title);
+  });
+
+
   describe('interaction', function() {
 
     let injector;

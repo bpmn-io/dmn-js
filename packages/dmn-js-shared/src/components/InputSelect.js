@@ -289,7 +289,8 @@ export default class InputSelect extends Component {
     const {
       className,
       options,
-      noInput
+      noInput,
+      title
     } = this.props;
 
     const {
@@ -303,6 +304,7 @@ export default class InputSelect extends Component {
 
     return (
       <div
+        title={ title }
         ref={ node => this.parentNode = node }
         className={ [ className || '', 'dms-input-select' ].join(' ') }
         onClick={ this.onInputClick }>
