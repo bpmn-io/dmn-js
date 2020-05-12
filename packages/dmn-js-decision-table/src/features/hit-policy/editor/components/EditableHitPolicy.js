@@ -50,15 +50,20 @@ export default class EditableHitPolicy extends Component {
     });
 
     return (
-      <InputSelect
-        className="hit-policy hit-policy-edit-policy-select"
-        onChange={ this.onChange }
-        options={ HIT_POLICIES }
-        value={ hitPolicyEntry.value }
-        data-hit-policy="true"
-        noInput
-        title={ 'Hit Policy = ' + hitPolicyEntry.label }
-      />
+      <span className="hit-policy">
+        <label className="dms-label">
+          Hit Policy:
+        </label>
+        <InputSelect
+          className="hit-policy-edit-policy-select"
+          onChange={ this.onChange }
+          options={ HIT_POLICIES }
+          value={ hitPolicyEntry.value }
+          data-hit-policy="true"
+          noInput
+          title={ 'Hit Policy = ' + hitPolicyEntry.label }
+        />
+      </span>
     );
   }
 }
