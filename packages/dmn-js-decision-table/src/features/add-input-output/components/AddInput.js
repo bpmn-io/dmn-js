@@ -44,30 +44,12 @@ export default class AddInput extends Component {
   }
 
   render() {
-
-    const {
-      businessObject
-    } = this.getRoot();
-
-    const inputs = businessObject.input;
-
-    if (!inputs || !inputs.length) {
-      return null;
-    }
-
-    const colspan = inputs.length;
-
     return (
-      <th
-        className="input-cell inputs-label actionable add-input header"
+      <span
         onClick={ this.handleClick }
-        colspan={ colspan }
-      >
-        { this._translate('Input') } <span
-          className="add-input dmn-icon-plus action-icon"
-          title={ this._translate('Add Input') }
-        ></span>
-      </th>
+        className="add-input actionable dmn-icon-plus action-icon"
+        title={ this._translate('Add Input') }
+      ></span>
     );
   }
 

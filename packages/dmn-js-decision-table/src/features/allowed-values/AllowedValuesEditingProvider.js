@@ -6,7 +6,9 @@ const LOW_PRIORITY = 500;
 export default class InputOutputValues {
   constructor(components) {
     components.onGetComponent('context-menu', LOW_PRIORITY, (context = {}) => {
-      if (context.contextMenuType && context.contextMenuType === 'type-ref-edit') {
+      const { contextMenuType } = context;
+
+      if (contextMenuType === 'input-edit' || contextMenuType === 'output-edit') {
         return AllowedValuesEditing;
       }
     });

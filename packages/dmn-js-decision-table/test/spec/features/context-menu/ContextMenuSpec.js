@@ -655,20 +655,6 @@ describe('context menu', function() {
         expect(domQuery('.context-menu', testContainer)).to.exist;
       });
 
-
-      it('type ref', function() {
-
-        // given
-        const cell =
-          domQuery('.input-cell.type-ref[data-col-id="input1"]', testContainer);
-
-        // when
-        triggerMouseEvent(cell, 'contextmenu');
-
-        // then
-        expect(domQuery('.context-menu', testContainer)).to.exist;
-      });
-
     });
 
 
@@ -1017,20 +1003,6 @@ describe('context menu', function() {
         // given
         const cell =
           domQuery('.output-cell.output-editor[data-col-id="output1"]', testContainer);
-
-        // when
-        triggerMouseEvent(cell, 'contextmenu');
-
-        // then
-        expect(domQuery('.context-menu', testContainer)).to.exist;
-      });
-
-
-      it('type ref', function() {
-
-        // given
-        const cell =
-          domQuery('.output-cell.type-ref[data-col-id="output1"]', testContainer);
 
         // when
         triggerMouseEvent(cell, 'contextmenu');

@@ -86,7 +86,7 @@ export default class AllowedValuesEditing extends Component {
   }
 
   getAllowedValuesTarget() {
-    const { element } = this.props.context;
+    const element = this.getElement();
 
     if (is(element, 'dmn:LiteralExpression')) {
       return element.$parent;
@@ -147,8 +147,12 @@ export default class AllowedValuesEditing extends Component {
     this.setPredefinedValues(null);
   }
 
+  getElement() {
+    return this.props.context.output || this.props.context.input.inputExpression;
+  }
+
   render() {
-    const { element } = this.props.context;
+    const element = this.getElement();
 
     const {
       inputValue,

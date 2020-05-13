@@ -41,13 +41,6 @@ export default class InputCell extends Component {
     this.forceUpdate();
   }
 
-  isDefaultExpressionLanguage(expressionLanguage) {
-    const expressionLanguages = this.context.injector.get('expressionLanguages');
-    const defaultExpressionLanguage = expressionLanguages.getDefault('inputCell').value;
-
-    return expressionLanguage === defaultExpressionLanguage;
-  }
-
   componentWillMount() {
     const { injector } = this.context;
 
@@ -74,20 +67,18 @@ export default class InputCell extends Component {
   }
 
   render() {
-    const input = this.props.input;
+    const {
+      input,
+      index,
+      inputsLength
+    } = this.props;
 
     const {
-      inputExpression
+      inputExpression,
+      inputValues
     } = input;
 
     var label = input.get('label');
-    var inputVariable = input.get('inputVariable');
-
-    var expressionLanguage = inputExpression.get('expressionLanguage');
-
-    var showLanguageBadge = !label &&
-      expressionLanguage &&
-      this.isDefaultExpressionLanguage(expressionLanguage);
 
     return (
       <th
@@ -101,50 +92,41 @@ export default class InputCell extends Component {
             type: 'cell-inner',
             context: {
               cellType: 'input-cell',
-              col: this._elementRegistry.get(input.id)
+              col: this._elementRegistry.get(input.id),
+              index,
+              inputsLength
             },
             col: input
           })
         }
 
+        <div className="clause">
+          { index === 0 ? this._translate('When') : this._translate('And') }
+        </div>
+
         {
           label ? (
-            <span className="input-label" title={ this._translate('Input Label') }>
+            <div className="input-label" title={ this._translate('Input Label') }>
               { label }
-            </span>
+            </div>
           ) : (
-            <span
+            <div
               className="input-expression"
               title={ this._translate('Input Expression') }>
               { inputExpression.text || '-' }
-            </span>
+            </div>
           )
         }
 
-        {
-          inputVariable && (
-            <span
-              className="dms-badge dmn-variable-name input-variable"
-              title="Input Variable">
-              { inputVariable }
-            </span>
-          )
-        }
-
-        {
-          showLanguageBadge && (
-            <span
-              className="dms-badge dmn-expression-language input-expression-language"
-              title={ this._translate(
-                'Input Expression Language = {expressionLanguage}',
-                { expressionLanguage }
-              ) }
-            >
-              <span className="dms-badge-icon dmn-icon-file-code"></span>
-              <span className="dms-badge-label">{ expressionLanguage }</span>
-            </span>
-          )
-        }
+        <div
+          className="input-variable"
+          title={
+            inputValues && inputValues.text ? this._translate('Input Values') :
+              this._translate('Input Type')
+          }
+        >
+          { inputValues && inputValues.text || inputExpression.typeRef }
+        </div>
       </th>
     );
   }

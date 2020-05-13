@@ -153,8 +153,8 @@
 
 .dmn-decision-table-container th .dmn-icon-drag {
   position: absolute;
-  left: 4px;
-  top: 50%;
+  right: 4px;
+  top: 10px;
   transform: translateY(-50%);
 }
 

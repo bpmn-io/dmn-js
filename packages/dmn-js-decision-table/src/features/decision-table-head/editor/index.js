@@ -8,6 +8,7 @@ import InputEditingProvider from './InputEditingProvider';
 import TypeRefEditing from '../../type-ref';
 import AllowedValuesEditing from '../../allowed-values';
 import AddInputOutput from '../../add-input-output';
+import KeyboardModule from '../../../features/keyboard';
 
 
 export default {
@@ -17,6 +18,7 @@ export default {
     ContextMenu,
     DebounceInput,
     ExpressionLanguagesModule,
+    KeyboardModule,
     TypeRefEditing
   ],
   __init__: [

@@ -40,20 +40,6 @@ describe('decision table head', function() {
   });
 
 
-  it('should render input label', function() {
-
-    // then
-    expect(domQuery('.inputs-label', testContainer)).to.exist;
-  });
-
-
-  it('should render output label', function() {
-
-    // then
-    expect(domQuery('.outputs-label', testContainer)).to.exist;
-  });
-
-
   it('should allow rendering before labels', inject(
     function(components, eventBus, sheet) {
 

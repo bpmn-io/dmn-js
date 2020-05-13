@@ -24,9 +24,7 @@ export default class TypeRefCellContextMenu extends Component {
   }
 
   onTypeChange = (value) => {
-    const {
-      element
-    } = this.props.context;
+    const element = this.getElement();
 
     const actualElement = is(element, 'dmn:LiteralExpression')
       ? element.$parent
@@ -49,8 +47,12 @@ export default class TypeRefCellContextMenu extends Component {
     this._modeling.updateProperties(actualElement, newProperties);
   }
 
+  getElement() {
+    return this.props.context.input || this.props.context.output;
+  }
+
   render() {
-    const { element } = this.props.context;
+    const element = this.getElement();
 
     const typeRef = (
       is(element, 'dmn:InputClause') ?

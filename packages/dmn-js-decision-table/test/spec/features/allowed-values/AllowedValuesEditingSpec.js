@@ -23,6 +23,7 @@ import inputOutputValuesXML from './AllowedValues.dmn';
 
 import CoreModule from 'src/core';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
 
 import AllowedValuesEditingModule
   from 'src/features/allowed-values';
@@ -38,6 +39,7 @@ describe('decision-table-head/allowed-values', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
       AllowedValuesEditingModule,
       TypeRefEditingModule,
       ModelingModule,
@@ -58,7 +60,7 @@ describe('decision-table-head/allowed-values', function() {
     let allowedValuesEdit;
 
     beforeEach(function() {
-      const cell = domQuery('.input-cell.type-ref', testContainer);
+      const cell = domQuery('.input-cell', testContainer);
 
       triggerClick(cell);
 
@@ -264,7 +266,7 @@ describe('decision-table-head/allowed-values', function() {
     let allowedValuesEdit;
 
     beforeEach(function() {
-      const cell = domQuery('.output-cell.type-ref', testContainer);
+      const cell = domQuery('.output-cell', testContainer);
 
       triggerClick(cell);
 
