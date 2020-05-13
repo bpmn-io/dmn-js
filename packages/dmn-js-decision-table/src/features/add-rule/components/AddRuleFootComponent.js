@@ -58,6 +58,8 @@ export default class AddRuleFootComponent extends Component {
         if (businessObject.$instanceOf('dmn:OutputClause')) {
           className += ' output-cell';
         }
+      } else {
+        className += ' annotation';
       }
 
       cells.push(<td className={ className }>{placeholder}</td>);

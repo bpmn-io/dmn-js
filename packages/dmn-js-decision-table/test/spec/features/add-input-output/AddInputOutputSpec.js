@@ -12,6 +12,7 @@ import simpleXML from '../../simple.dmn';
 
 import AddInputOutputModule from 'src/features/add-input-output';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
 import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
 
@@ -23,6 +24,7 @@ describe('features/add-input-output', function() {
       AddInputOutputModule,
       CoreModule,
       DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
       ModelingModule
     ]
   }));
@@ -56,17 +58,6 @@ describe('features/add-input-output', function() {
 
       expect(root.cols).to.have.lengthOf(5);
     }));
-
-
-    it('should update col span', inject(function(eventBus) {
-
-      // when
-      eventBus.fire('addInput');
-
-      // then
-      expect(domQuery('.add-input', testContainer).colSpan).to.equal(3);
-    }));
-
   });
 
 
@@ -92,17 +83,6 @@ describe('features/add-input-output', function() {
 
       expect(root.cols).to.have.lengthOf(5);
     }));
-
-
-    it('should update col span', inject(function(eventBus) {
-
-      // when
-      eventBus.fire('addOutput');
-
-      // then
-      expect(domQuery('.add-output', testContainer).colSpan).to.equal(3);
-    }));
-
   });
 
 });

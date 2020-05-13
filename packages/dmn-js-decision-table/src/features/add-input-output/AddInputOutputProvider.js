@@ -6,12 +6,14 @@ export default function AddInputOutputProvider(
     components, editorActions, eventBus
 ) {
 
-  components.onGetComponent('cell', ({ cellType }) => {
-    if (cellType === 'input-label') {
+  components.onGetComponent('cell-inner', (context = {}) => {
+    const { cellType, index, inputsLength, outputsLength } = context;
+
+    if (cellType === 'input-cell' && index === inputsLength - 1) {
       return AddInput;
     }
 
-    if (cellType === 'output-label') {
+    if (cellType === 'output-cell' && index === outputsLength -1) {
       return AddOutput;
     }
   });

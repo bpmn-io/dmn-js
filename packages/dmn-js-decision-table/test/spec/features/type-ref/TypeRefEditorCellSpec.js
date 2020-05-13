@@ -13,6 +13,7 @@ import typeRefXML from './TypeRef.dmn';
 
 import CoreModule from 'src/core';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
 import ModelingModule from 'src/features/modeling';
 import TypeRefModule from 'src/features/type-ref';
 import KeyboardModule from 'src/features/keyboard';
@@ -24,6 +25,7 @@ describe('features/type-ref', function() {
     modules: [
       CoreModule,
       DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
       ModelingModule,
       TypeRefModule,
       KeyboardModule
@@ -40,7 +42,7 @@ describe('features/type-ref', function() {
   it('should edit type ref', inject(function(elementRegistry) {
 
     // given
-    const cell = domQuery('.type-ref', testContainer);
+    const cell = domQuery('.input-label', testContainer);
 
     triggerClick(cell);
 
