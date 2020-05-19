@@ -38,7 +38,9 @@ export default class HitPolicy extends Component {
         <label className="dms-label">
           Hit Policy:
         </label>
-        { hitPolicyEntry.label}
+        <span className="hit-policy-value">
+          { hitPolicyEntry.label}
+        </span>
         <span className="hit-policy-explanation">{ hitPolicyEntry.explanation }</span>
       </span>
     );
