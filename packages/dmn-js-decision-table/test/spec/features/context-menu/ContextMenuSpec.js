@@ -337,18 +337,23 @@ describe('context menu', function() {
   });
 
 
-  describe('input - cell', function() {
+  describe('input - col', function() {
 
-    it('should open on right click', function() {
+    describe('should open on right click', function() {
 
-      // given
-      const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+      it('input', function() {
 
-      // when
-      triggerMouseEvent(cell, 'contextmenu');
+        // given
+        const cell =
+          domQuery('.input-cell.input-editor[data-col-id="input1"]', testContainer);
 
-      // then
-      expect(domQuery('.context-menu', testContainer)).to.exist;
+        // when
+        triggerMouseEvent(cell, 'contextmenu');
+
+        // then
+        expect(domQuery('.context-menu', testContainer)).to.exist;
+      });
+
     });
 
 
@@ -357,11 +362,25 @@ describe('context menu', function() {
       let cell, anotherCell;
 
       beforeEach(function() {
-        cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+        cell = domQuery('[data-col-id="input1"]', testContainer);
         anotherCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
         triggerMouseEvent(cell, 'contextmenu');
       });
+
+
+      it('should NOT contain cell entries', inject(function(components) {
+
+        // given
+        components.onGetComponent('context-menu-cell-additional', () => {
+          return <div>FOO</div>;
+        });
+
+        const contextMenu = domQuery('.context-menu', testContainer);
+
+        // then
+        expect(domQuery('.context-menu-group-cell', contextMenu)).to.not.exist;
+      }));
 
 
       it('should close on click elsewhere', function() {
@@ -563,7 +582,7 @@ describe('context menu', function() {
                     testContainer
                   ),
                   cell = domQuery(
-                    '[data-element-id="inputEntry2"]',
+                    '[data-col-id="input2"]',
                     testContainer
                   );
 
@@ -638,15 +657,15 @@ describe('context menu', function() {
   });
 
 
-  describe('input - col', function() {
+  describe('output - col', function() {
 
     describe('should open on right click', function() {
 
-      it('input', function() {
+      it('output', function() {
 
         // given
         const cell =
-          domQuery('.input-cell.input-editor[data-col-id="input1"]', testContainer);
+          domQuery('.output-cell.output-editor[data-col-id="output1"]', testContainer);
 
         // when
         triggerMouseEvent(cell, 'contextmenu');
@@ -660,10 +679,11 @@ describe('context menu', function() {
 
     describe('entries', function() {
 
-      let cell;
+      let cell, anotherCell;
 
       beforeEach(function() {
-        cell = domQuery('[data-col-id="input1"]', testContainer);
+        cell = domQuery('[data-col-id="output1"]', testContainer);
+        anotherCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
         triggerMouseEvent(cell, 'contextmenu');
       });
@@ -681,37 +701,6 @@ describe('context menu', function() {
         // then
         expect(domQuery('.context-menu-group-cell', contextMenu)).to.not.exist;
       }));
-
-    });
-
-  });
-
-
-  describe('output - cell', function() {
-
-    it('should open on right click', function() {
-
-      // given
-      const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
-
-      // when
-      triggerMouseEvent(cell, 'contextmenu');
-
-      // then
-      expect(domQuery('.context-menu', testContainer)).to.exist;
-    });
-
-
-    describe('entries', function() {
-
-      let cell, anotherCell;
-
-      beforeEach(function() {
-        cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
-        anotherCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
-
-        triggerMouseEvent(cell, 'contextmenu');
-      });
 
 
       it('should close on click elsewhere', function() {
@@ -919,7 +908,7 @@ describe('context menu', function() {
                     testContainer
                   ),
                   cell = domQuery(
-                    '[data-element-id="outputEntry2"]',
+                    '[data-col-id="output2"]',
                     testContainer
                   );
 
@@ -988,55 +977,6 @@ describe('context menu', function() {
         });
 
       });
-
-    });
-
-  });
-
-
-  describe('output - col', function() {
-
-    describe('should open on right click', function() {
-
-      it('output', function() {
-
-        // given
-        const cell =
-          domQuery('.output-cell.output-editor[data-col-id="output1"]', testContainer);
-
-        // when
-        triggerMouseEvent(cell, 'contextmenu');
-
-        // then
-        expect(domQuery('.context-menu', testContainer)).to.exist;
-      });
-
-    });
-
-
-    describe('entries', function() {
-
-      let cell;
-
-      beforeEach(function() {
-        cell = domQuery('[data-col-id="output1"]', testContainer);
-
-        triggerMouseEvent(cell, 'contextmenu');
-      });
-
-
-      it('should NOT contain cell entries', inject(function(components) {
-
-        // given
-        components.onGetComponent('context-menu-cell-additional', () => {
-          return <div>FOO</div>;
-        });
-
-        const contextMenu = domQuery('.context-menu', testContainer);
-
-        // then
-        expect(domQuery('.context-menu-group-cell', contextMenu)).to.not.exist;
-      }));
 
     });
 

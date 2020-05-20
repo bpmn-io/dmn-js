@@ -131,6 +131,25 @@
   margin: 0;
 }
 
+.dmn-decision-table-container .context-menu-group .context-menu-separator {
+  display: block;
+
+  margin: 0 8px;
+  border-bottom: 1px solid #cdcdcd;
+  height: 1px;
+}
+
+.dmn-decision-table-container .context-menu-group.context-menu-group-input .context-menu-group-entry,
+.dmn-decision-table-container .context-menu-group.context-menu-group-output .context-menu-group-entry {
+  padding: 8px 16px;
+}
+
+.dmn-decision-table-container .context-menu-group.context-menu-group-input .context-menu-group-entry:hover,
+.dmn-decision-table-container .context-menu-group.context-menu-group-output .context-menu-group-entry:hover {
+  background-color: #efefef;
+  color: unset;
+}
+
 /* expression language */
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language {
   flex-direction: column;
