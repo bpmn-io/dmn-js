@@ -216,9 +216,7 @@ export default class ContextMenu {
           </div>
         </div>
       );
-    }
-
-    if (is(element, 'dmn:InputClause') || is(element.col, 'dmn:InputClause')) {
+    } else if (is(element, 'dmn:InputClause') || is(element.col, 'dmn:InputClause')) {
       const actualElement = is(element, 'dmn:InputClause') ? element : element.col;
 
       const canRemove = this._rules.allowed('col.remove', {
@@ -232,50 +230,41 @@ export default class ContextMenu {
 
       entries.push(
         <div className="context-menu-group context-menu-group-input">
-          <h4 className="context-menu-group-title">
-            { this._translate('Input') }
-          </h4>
           <div
-            className="context-menu-group-entry context-menu-entry-add-input-left"
-            onClick={ () => handlers.addInputLeft(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-left"></span>
-            { this._translate('Add Left') }
-          </div>
-          <div
-            className="context-menu-group-entry context-menu-entry-add-input-right"
-            onClick={ () => handlers.addInputRight(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-right"></span>
-            { this._translate('Add Right') }
-          </div>
-          <div
-            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-input` }
-            onClick={ () => handlers.removeInput(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
-            { this._translate('Remove') }
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-input` }
+            onClick={ () => handlers.cut(actualElement) }>
+            { this._translate('Cut Column') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-copy-input"
             onClick={ () => handlers.copy(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
-            { this._translate('Copy') }
-          </div>
-          <div
-            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-input` }
-            onClick={ () => handlers.cut(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
-            { this._translate('Cut') }
+            { this._translate('Copy Column') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-input-left` }
             onClick={ () => handlers.pasteBefore(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            { this._translate('Paste Left') }
+            { this._translate('Paste Column Left') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-input-right` }
             onClick={ () => handlers.pasteAfter(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            { this._translate('Paste Right') }
+            { this._translate('Paste Column Right') }
+          </div>
+          <div className="context-menu-separator" />
+          <div
+            className="context-menu-group-entry context-menu-entry-add-input-left"
+            onClick={ () => handlers.addInputLeft(actualElement) }>
+            { this._translate('Add Column Left') }
+          </div>
+          <div
+            className="context-menu-group-entry context-menu-entry-add-input-right"
+            onClick={ () => handlers.addInputRight(actualElement) }>
+            { this._translate('Add Column Right') }
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-input` }
+            onClick={ () => handlers.removeInput(actualElement) }>
+            { this._translate('Remove Column') }
           </div>
         </div>
       );
@@ -293,50 +282,41 @@ export default class ContextMenu {
 
       entries.push(
         <div className="context-menu-group context-menu-group-output">
-          <h4 className="context-menu-group-title">
-            { this._translate('Output') }
-          </h4>
           <div
-            className="context-menu-group-entry context-menu-entry-add-output-left"
-            onClick={ () => handlers.addOutputLeft(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-left"></span>
-            { this._translate('Add Left') }
-          </div>
-          <div
-            className="context-menu-group-entry context-menu-entry-add-output-right"
-            onClick={ () => handlers.addOutputRight(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-right"></span>
-            { this._translate('Add Right') }
-          </div>
-          <div
-            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-output` }
-            onClick={ () => handlers.removeOutput(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-clear"></span>
-            { this._translate('Remove') }
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-output` }
+            onClick={ () => handlers.cut(actualElement) }>
+            { this._translate('Cut Column') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-copy-output"
             onClick={ () => handlers.copy(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-copy"></span>
-            { this._translate('Copy') }
-          </div>
-          <div
-            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-cut-output` }
-            onClick={ () => handlers.cut(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-cut"></span>
-            { this._translate('Cut') }
+            { this._translate('Copy Column') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-output-left` }
             onClick={ () => handlers.pasteBefore(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            { this._translate('Paste Left') }
+            { this._translate('Paste Column Left') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-output-right` }
             onClick={ () => handlers.pasteAfter(actualElement) }>
-            <span className="context-menu-group-entry-icon dmn-icon-paste"></span>
-            { this._translate('Paste Right') }
+            { this._translate('Paste Column Right') }
+          </div>
+          <div className="context-menu-separator" />
+          <div
+            className="context-menu-group-entry context-menu-entry-add-output-left"
+            onClick={ () => handlers.addOutputLeft(actualElement) }>
+            { this._translate('Add Column Left') }
+          </div>
+          <div
+            className="context-menu-group-entry context-menu-entry-add-output-right"
+            onClick={ () => handlers.addOutputRight(actualElement) }>
+            { this._translate('Add Column Right') }
+          </div>
+          <div
+            className={ `context-menu-group-entry ${ canRemove ? '' : 'disabled' } context-menu-entry-remove-output` }
+            onClick={ () => handlers.removeOutput(actualElement) }>
+            { this._translate('Remove Column') }
           </div>
         </div>
       );
