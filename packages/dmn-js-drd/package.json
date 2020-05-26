@@ -30,5 +30,8 @@
     "min-dom": "^3.1.1",
     "object-refs": "^0.3.0",
     "tiny-svg": "^2.2.1"
+  },
+  "devDependencies": {
+    "dmn-font": "^0.5.0"
   }
 }
