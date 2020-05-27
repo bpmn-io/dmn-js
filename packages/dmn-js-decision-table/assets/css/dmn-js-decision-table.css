@@ -291,8 +291,9 @@
   color: white;
 }
 
-.dmn-decision-table-container .action-icon.add-input:before,
-.dmn-decision-table-container .action-icon.add-output:before {
+.dmn-decision-table-container .create-inputs .action-icon,
+.dmn-decision-table-container .add-input .action-icon,
+.dmn-decision-table-container .add-output .action-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,25 +306,19 @@
 
   color: white;
   background-color: #545454;
-
-  cursor: pointer;
 }
 
-.dmn-decision-table-container .input-editor .action-icon.add-input,
-.dmn-decision-table-container .output-editor .action-icon.add-output {
+.dmn-decision-table-container .input-editor .add-input,
+.dmn-decision-table-container .output-editor .add-output {
   position: absolute;
 
   top: 50%;
   right: 0;
-
   transform: translate(50%, -50%);
-  z-index: 1;
-}
 
-.dmn-decision-table-container .actionable:hover .action-icon.add-input,
-.dmn-decision-table-container .actionable:hover .action-icon.add-output {
-  background-color: unset;
-  color: unset;
+  z-index: 1;
+
+  padding: 8px;
 }
 
 /** end actionable icon */

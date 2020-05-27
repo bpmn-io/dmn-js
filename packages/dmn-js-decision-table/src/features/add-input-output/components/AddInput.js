@@ -45,11 +45,15 @@ export default class AddInput extends Component {
 
   render() {
     return (
-      <span
+      <div
         onClick={ this.handleClick }
-        className="add-input actionable dmn-icon-plus action-icon"
+        className="add-input actionable"
         title={ this._translate('Add Input') }
-      ></span>
+      >
+        <span
+          className="dmn-icon-plus action-icon"
+        />
+      </div>
     );
   }
 
