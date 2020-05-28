@@ -350,13 +350,7 @@
 /* powered by */
 .dmn-decision-table-container .powered-by-logo {
   float: right;
-  width: 38px;
   z-index: 10;
-  cursor: pointer;
-}
-
-.dmn-decision-table-container .powered-by-logo .logo {
-  width: 100%;
 }
 
 .dmn-decision-table-container .powered-by-overlay {
@@ -373,19 +367,23 @@
 }
 
 .dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  max-width: 260px;
+
   background: #fff;
-  padding: 8px;
+  color: #444;
   border: solid 1px #CCC;
   border-radius: 2px;
   font-size: 14px;
-  color: #444;
-  display: flex;
-  flex-direction: row;
-  max-width: 260px;
 }
 
-.dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content div:first-child {
-  margin-right: 8px;
+.dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content .logo {
+  margin: 15px 20px 15px 10px;
+
+  color: #404040;
 }
 
 /* end powered by */
