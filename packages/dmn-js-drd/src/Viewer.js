@@ -311,6 +311,7 @@ Viewer.prototype._modules = [
 
 import {
   BPMNIO_IMG,
+  LINK_STYLES,
   open as openPoweredBy
 } from './util/PoweredByUtil';
 
@@ -327,15 +328,15 @@ import {
  * @param {Element} container
  */
 function addProjectLogo(container) {
-  var img = BPMNIO_IMG;
-
   var linkMarkup =
     '<a href="http://bpmn.io" ' +
        'target="_blank" ' +
        'class="bjs-powered-by" ' +
        'title="Powered by bpmn.io" ' +
-       'style="position: absolute; bottom: 15px; right: 15px; z-index: 100">' +
-      img +
+       'style="position: absolute; bottom: 15px; right: 15px; z-index: 100; ' +
+       LINK_STYLES +
+      '">' +
+      BPMNIO_IMG +
     '</a>';
 
   var linkElement = domify(linkMarkup);
