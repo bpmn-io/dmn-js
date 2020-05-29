@@ -114,16 +114,10 @@ export default class Description {
               ? () => this.removeDescription(element)
               : () => this.addDescription(element);
 
-          const icon =
-            existingDescription
-              ? 'dmn-icon-clear'
-              : 'dmn-icon-plus';
-
           return (
             <div
               className={ `context-menu-group-entry ${ className }` }
               onClick={ onClick }>
-              <span className={ `context-menu-group-entry-icon ${ icon }` }></span>
               {
                 isString(description)
                   ?
