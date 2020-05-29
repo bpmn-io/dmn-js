@@ -1,4 +1,4 @@
-import { bootstrapModeler, inject } from 'test/helper';
+import { bootstrapModeler, getDecisionTable, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -6,8 +6,7 @@ import TestContainer from 'mocha-test-container-support';
 
 import {
   triggerInputEvent,
-  triggerInputSelectChange,
-  triggerMouseEvent
+  triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleXML from '../../simple.dmn';
@@ -42,10 +41,16 @@ describe('expression language', function() {
     testContainer = TestContainer.get(this);
   });
 
-  function openContextMenu(elementId, elementRegistry) {
-    const cell = domQuery(`[data-element-id="${ elementId }"]`, testContainer);
-
-    triggerMouseEvent(cell, 'contextmenu');
+  function openContextMenu(elementId) {
+    getDecisionTable().invoke(function(contextMenu) {
+      contextMenu.open({
+        x: 0,
+        y: 0
+      }, {
+        contextMenuType: 'expression-language',
+        id: elementId
+      });
+    });
 
     return domQuery('.expression-language', testContainer);
   }

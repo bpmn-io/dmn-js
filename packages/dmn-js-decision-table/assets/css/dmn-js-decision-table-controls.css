@@ -114,6 +114,10 @@
   flex-direction: column;
 }
 
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language:hover {
+  background-color: unset;
+}
+
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language .expression-language {
   margin-top: 8px;
 }
