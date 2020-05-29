@@ -400,14 +400,9 @@ describe('context menu', function() {
       it('should contain correct entries', function() {
 
         // given
-        const contextMenu = domQuery('.context-menu', testContainer),
-              inputEntriesGroup = domQuery('.context-menu-group-input', contextMenu);
+        const contextMenu = domQuery('.context-menu', testContainer);
 
         // then
-        expect(
-          domQueryAll('.context-menu-group-entry', inputEntriesGroup)
-        ).to.have.lengthOf(7);
-
         expectEntries([
           '.context-menu-entry-add-input-left',
           '.context-menu-entry-add-input-right',
@@ -416,23 +411,22 @@ describe('context menu', function() {
           '.context-menu-entry-cut-input',
           '.context-menu-entry-paste-input-left',
           '.context-menu-entry-paste-input-right',
-        ], inputEntriesGroup);
+        ], contextMenu);
       });
 
 
       it('should contain disabled paste entries', function() {
 
         // given
-        const contextMenu = domQuery('.context-menu', testContainer),
-              inputEntriesGroup = domQuery('.context-menu-group-input', contextMenu);
+        const contextMenu = domQuery('.context-menu', testContainer);
 
         // then
         expect(domClasses(
-          domQuery('.context-menu-entry-paste-input-left', inputEntriesGroup)
+          domQuery('.context-menu-entry-paste-input-left', contextMenu)
         ).has('disabled')).to.be.true;
 
         expect(domClasses(
-          domQuery('.context-menu-entry-paste-input-right', inputEntriesGroup)
+          domQuery('.context-menu-entry-paste-input-right', contextMenu)
         ).has('disabled')).to.be.true;
       });
 
@@ -720,14 +714,9 @@ describe('context menu', function() {
       it('should contain correct entries', function() {
 
         // given
-        const contextMenu = domQuery('.context-menu', testContainer),
-              outputEntriesGroup = domQuery('.context-menu-group-output', contextMenu);
+        const contextMenu = domQuery('.context-menu', testContainer);
 
         // then
-        expect(
-          domQueryAll('.context-menu-group-entry', outputEntriesGroup)
-        ).to.have.lengthOf(7);
-
         expectEntries([
           '.context-menu-entry-add-output-left',
           '.context-menu-entry-add-output-right',
@@ -736,23 +725,22 @@ describe('context menu', function() {
           '.context-menu-entry-cut-output',
           '.context-menu-entry-paste-output-left',
           '.context-menu-entry-paste-output-right',
-        ], outputEntriesGroup);
+        ], contextMenu);
       });
 
 
       it('should contain disabled paste entries', function() {
 
         // given
-        const contextMenu = domQuery('.context-menu', testContainer),
-              outputEntriesGroup = domQuery('.context-menu-group-output', contextMenu);
+        const contextMenu = domQuery('.context-menu', testContainer);
 
         // then
         expect(domClasses(
-          domQuery('.context-menu-entry-paste-output-left', outputEntriesGroup)
+          domQuery('.context-menu-entry-paste-output-left', contextMenu)
         ).has('disabled')).to.be.true;
 
         expect(domClasses(
-          domQuery('.context-menu-entry-paste-output-right', outputEntriesGroup)
+          domQuery('.context-menu-entry-paste-output-right', contextMenu)
         ).has('disabled')).to.be.true;
       });
 

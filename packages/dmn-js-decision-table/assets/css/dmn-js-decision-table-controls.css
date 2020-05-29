@@ -66,39 +66,7 @@
 
 .dmn-decision-table-container .context-menu .context-menu-flex {
   display: flex;
-}
-
-.dmn-decision-table-container .context-menu.vertical .context-menu-flex {
   flex-direction: column;
-}
-
-.dmn-decision-table-container .context-menu.horizontal .context-menu-flex {
-  flex-direction: row;
-}
-
-.dmn-decision-table-container .context-menu.vertical .context-menu-group {
-  padding-bottom: 6px;
-  margin-bottom: 6px;
-  border-bottom: solid 1px #ccc;
-}
-
-.dmn-decision-table-container .context-menu.vertical .context-menu-group:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-}
-
-.dmn-decision-table-container .context-menu.horizontal .context-menu-group {
-  border-right: solid 1px #ccc;
-}
-
-.dmn-decision-table-container .context-menu.horizontal .context-menu-group:last-child {
-  border-right: none;
-}
-
-.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-title {
-  font-weight: bold;
-  color: #444;
-  margin: 6px 9px 6px 9px;
 }
 
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry {
@@ -106,18 +74,18 @@
   flex-direction: row;
   align-items: stretch;
   width: 100%;
+  padding: 8px 16px;
+
   white-space: nowrap;
-  padding: 4px 9px 4px 9px;
-  cursor: pointer;
+}
+
+.dmn-decision-table-container .context-menu-group .context-menu-group-entry:hover {
+  background-color: #efefef;
 }
 
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry.disabled {
   pointer-events: none;
   color: #ccc;
-}
-
-.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry:hover {
-  color: #52b415;
 }
 
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
@@ -131,23 +99,14 @@
   margin: 0;
 }
 
-.dmn-decision-table-container .context-menu-group .context-menu-separator {
+.dmn-decision-table-container .context-menu-group:not(:last-child):after {
+  content: '';
+
   display: block;
 
   margin: 0 8px;
   border-bottom: 1px solid #cdcdcd;
   height: 1px;
-}
-
-.dmn-decision-table-container .context-menu-group.context-menu-group-input .context-menu-group-entry,
-.dmn-decision-table-container .context-menu-group.context-menu-group-output .context-menu-group-entry {
-  padding: 8px 16px;
-}
-
-.dmn-decision-table-container .context-menu-group.context-menu-group-input .context-menu-group-entry:hover,
-.dmn-decision-table-container .context-menu-group.context-menu-group-output .context-menu-group-entry:hover {
-  background-color: #efefef;
-  color: unset;
 }
 
 /* expression language */
