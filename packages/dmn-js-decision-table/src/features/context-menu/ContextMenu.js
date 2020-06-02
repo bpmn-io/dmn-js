@@ -68,6 +68,7 @@ export default class ContextMenu {
         y: event.pageY
       }, {
         contextMenuType: 'context-menu',
+        event,
         id
       });
     });
