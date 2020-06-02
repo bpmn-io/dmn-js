@@ -47,7 +47,7 @@ export default class ContextMenu {
 
           return () => (
             <div className="context-menu-flex">
-              { [ cellEntriesGroup ].concat(entries || []) }
+              { (entries || []).concat(cellEntriesGroup) }
             </div>
           );
         } else {
