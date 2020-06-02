@@ -13,7 +13,10 @@ export default class ExpressionLanguage {
     components.onGetComponent('context-menu-cell-additional', (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
 
-        const { id } = context;
+        const {
+          event,
+          id
+        } = context;
 
         if (!id) {
           return;
@@ -26,10 +29,10 @@ export default class ExpressionLanguage {
           return;
         }
 
-        const openMenu = event => {
+        const openMenu = clickEvent => {
           contextMenu.open({
-            x: event.pageX,
-            y: event.pageY
+            x: (event || clickEvent).pageX,
+            y: (event || clickEvent).pageY
           }, {
             contextMenuType: 'expression-language',
             id
