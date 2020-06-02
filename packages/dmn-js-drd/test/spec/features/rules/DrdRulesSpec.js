@@ -172,6 +172,20 @@ describe('features/rules', function() {
       { type: 'dmn:AuthorityRequirement' }
     ));
 
+
+    it('decision -> text annotation', expectCanConnect(
+      'Decision_2',
+      'TextAnnotation_1',
+      { type: 'dmn:Association' }
+    ));
+
+
+    it('text annotation -> decision', expectCanConnect(
+      'TextAnnotation_1',
+      'Decision_2',
+      { type: 'dmn:Association' }
+    ));
+
   });
 
 

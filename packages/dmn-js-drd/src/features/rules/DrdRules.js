@@ -134,7 +134,8 @@ function canConnect(source, target) {
     return { type: 'dmn:AuthorityRequirement' };
   }
 
-  if (is(target, 'dmn:TextAnnotation')) {
+  if ((is(source, 'dmn:TextAnnotation') && !is(target, 'dmn:TextAnnotation'))
+  || (!is(source, 'dmn:TextAnnotation') && is(target, 'dmn:TextAnnotation'))) {
     return { type: 'dmn:Association' };
   }
 
