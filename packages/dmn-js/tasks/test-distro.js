@@ -30,6 +30,9 @@ function test() {
   runTest('dmn-modeler', 'development');
   runTest('dmn-modeler', 'production');
 
+  runTest('dmn-navigated-viewer', 'development');
+  runTest('dmn-navigated-viewer', 'production');
+
   runTest('dmn-viewer', 'development');
   runTest('dmn-viewer', 'production');
 
