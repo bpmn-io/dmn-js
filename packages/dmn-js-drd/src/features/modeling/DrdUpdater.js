@@ -1,7 +1,4 @@
-import {
-  assign,
-  forEach
-} from 'min-dash';
+import { assign } from 'min-dash';
 
 import inherits from 'inherits';
 
@@ -132,7 +129,6 @@ export default function DrdUpdater(
   this.executed('connection.create', function(context) {
     var connection = context.connection,
         connectionBo = connection.businessObject,
-        di = connectionBo.di,
         target = context.target,
         targetBo = target.businessObject;
 
@@ -142,12 +138,6 @@ export default function DrdUpdater(
 
       // parent is target
       self.updateSemanticParent(connectionBo, targetBo);
-
-      // fix DI waypoints after connection cropping
-      forEach(di.waypoint, function(waypoint, index) {
-        waypoint.x = connection.waypoints[ index ].x;
-        waypoint.y = connection.waypoints[ index ].y;
-      });
     }
   }, true);
 
