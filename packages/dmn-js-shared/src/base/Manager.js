@@ -2,7 +2,7 @@ import EventBus from 'diagram-js/lib/core/EventBus';
 
 import DmnModdle from 'dmn-moddle';
 
-import CamundaModdle from 'camunda-dmn-moddle/resources/camunda';
+import CamundaModdle from 'camunda-dmn-moddle/resources/camunda.json';
 
 import {
   domify,
