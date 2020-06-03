@@ -20,6 +20,10 @@ const distros = [
     output: 'dmn-viewer'
   },
   {
+    input: 'NavigatedViewer',
+    output: 'dmn-navigated-viewer'
+  },
+  {
     input: 'Modeler',
     output: 'dmn-modeler'
   }
