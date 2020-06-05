@@ -13,6 +13,10 @@ import {
 import {
   assign,
   debounce,
+  every,
+  find,
+  isDefined,
+  isFunction,
   isNumber
 } from 'min-dash';
 
@@ -354,30 +358,33 @@ export default class Manager {
     var displayableElements = [ definitions, ...(definitions.drgElement || []) ];
 
     // compute list of available views
-    this._views = displayableElements.reduce((views, element) => {
+    var views = this._views,
+        newViews = displayableElements.reduce((views, element) => {
 
-      var provider = find(viewProviders, function(provider) {
-        if (typeof provider.opens === 'string') {
-          return provider.opens === element.$type;
-        } else {
-          return provider.opens(element);
-        }
-      });
+          var provider = find(viewProviders, function(provider) {
+            if (typeof provider.opens === 'string') {
+              return provider.opens === element.$type;
+            } else {
+              return provider.opens(element);
+            }
+          });
 
-      if (!provider) {
-        return views;
-      }
+          if (!provider) {
+            return views;
+          }
 
-      var view = {
-        element,
-        type: provider.id
-      };
+          var view = {
+            element,
+            id: element.id,
+            name: element.name,
+            type: provider.id
+          };
 
-      return [
-        ...views,
-        view
-      ];
-    }, []);
+          return [
+            ...views,
+            view
+          ];
+        }, []);
 
     var activeView = this._activeView,
         newActiveView;
@@ -385,22 +392,34 @@ export default class Manager {
     if (activeView) {
 
       // check the new active view
-      newActiveView = find(this._views, function(v) {
-        return viewsEqual(activeView, v);
-      }) || this._getInitialView(this._views);
+      newActiveView = find(newViews, function(view) {
+        return viewsEqual(activeView, view);
+      }) || this._getInitialView(newViews);
 
-      if (viewsEqual(activeView, newActiveView)) {
-
-        // active view changed
-        this._activeView = newActiveView;
-      } else {
-
-        // active view got deleted
+      if (!newActiveView) {
         return this._switchView(null);
       }
     }
 
-    this._viewsChanged();
+    // Views have changed if
+    // active view has changed OR
+    // number of views has changed OR
+    // not all views equal
+    var activeViewChanged = !viewsEqual(activeView, newActiveView),
+        viewsChanged =
+          views.length !== newViews.length
+          || !every(newViews, function(newView) {
+            return find(views, function(view) {
+              return viewsEqual(view, newView);
+            });
+          });
+
+    this._activeView = newActiveView;
+    this._views = newViews;
+
+    if (activeViewChanged || viewsChanged) {
+      this._viewsChanged();
+    }
   }
 
   _getInitialView(views) {
@@ -594,37 +613,32 @@ function checkValidationError(err) {
   }
 
   err.message =
-    'unparsable content <' + match[1] + '> detected; ' +
-    'this may indicate an invalid DMN 1.3 diagram file' + match[2];
+    'unparsable content <' + match[ 1 ] + '> detected; ' +
+    'this may indicate an invalid DMN 1.3 diagram file' + match[ 2 ];
 
   return err;
 }
 
-function find(arr, fn) {
-  return arr.filter(fn)[0];
-}
-
-
 function viewsEqual(a, b) {
-
-  if (typeof a === 'undefined') {
-    if (typeof b === 'undefined') {
+  if (!isDefined(a)) {
+    if (!isDefined(b)) {
       return true;
     } else {
       return false;
     }
   }
 
-  if (typeof b === 'undefined') {
+  if (!isDefined(b)) {
     return false;
   }
 
-  // compare by element _or_ element ID equality
-  return a.element === b.element || a.element.id === b.element.id;
+  // compare by element OR element ID equality AND element name equality
+  return (a.element === b.element || a.id === b.id)
+    && a.name === b.name;
 }
 
 function safeExecute(viewer, method) {
-  if (typeof viewer[method] === 'function') {
-    viewer[method]();
+  if (isFunction(viewer[ method ])) {
+    viewer[ method ]();
   }
 }

@@ -1,3 +1,5 @@
+/* global sinon */
+
 import Manager from 'src/base/Manager';
 
 import TestView from './TestView';
@@ -237,6 +239,50 @@ describe('Manager', function() {
             });
 
             manager.open(manager.getViews()[1]);
+          });
+        });
+
+
+        it('should NOT emit if no changes', function() {
+
+          // given
+          var manager = new TestViewer();
+
+          // when
+          manager.importXML(diagramXML);
+
+          manager.once('import.done', function() {
+
+            const spy = sinon.spy(manager, '_viewsChanged');
+
+            // recompute views without actual change
+            manager._updateViews();
+
+            // then
+            expect(spy).not.to.have.been.called;
+          });
+        });
+
+
+        it('should emit if name changed', function() {
+
+          // given
+          var manager = new TestViewer();
+
+          manager.importXML(diagramXML);
+
+          manager.once('import.done', function() {
+
+            const spy = sinon.spy(manager, '_viewsChanged');
+
+            // when
+            manager.getViews()[ 0 ].element.name = 'Foo';
+
+            // recompute views
+            manager._updateViews();
+
+            // then
+            expect(spy).to.have.been.called;
           });
         });
 
