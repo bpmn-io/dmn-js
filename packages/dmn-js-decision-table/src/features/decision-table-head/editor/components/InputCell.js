@@ -83,7 +83,7 @@ export default class InputCell extends Component {
     return (
       <th
         data-col-id={ input.id }
-        onClick={ this.onClick }
+        onDoubleClick={ this.onClick }
         onContextmenu={ this.onContextmenu }
         className="input-cell input-editor">
 
