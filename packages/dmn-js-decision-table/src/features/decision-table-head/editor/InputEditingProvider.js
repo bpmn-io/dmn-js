@@ -25,27 +25,18 @@ export default class InputCellProvider {
     });
 
     eventBus.on('input.edit', ({ event, input }) => {
-
       const { target } = event;
 
       const node = domClosest(target, 'th', true);
 
-      const { left, top, width, height } = node.getBoundingClientRect();
-
-      const container = renderer.getContainer();
+      const { left, top } = node.getBoundingClientRect();
 
       contextMenu.open({
-        x: left + container.parentNode.scrollLeft,
-        y: top + container.parentNode.scrollTop,
-        width,
-        height
+        x: left,
+        y: top
       }, {
         contextMenuType: 'input-edit',
-        input,
-        offset: {
-          x: 4,
-          y: 4
-        }
+        input
       });
     });
   }
