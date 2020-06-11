@@ -162,58 +162,63 @@ export default class AllowedValuesEditing extends Component {
     return (
       element.typeRef === 'string' ?
         <div className="context-menu-container allowed-values-edit">
-          <hr className="dms-hrule" />
-          {
-            !isNull(values)
+          <div className="dms-form-control">
+            {
+              !isNull(values)
               && values.length > 0
               && <List
+                labelComponent={ Label }
                 items={ values }
                 onChange={ this.onListChange } />
-          }
+            }
 
-          {
-            !isNull(values)
+            {
+              !isNull(values)
               && !values.length
               && <div>
-                <h4 className="dms-heading">
+                <label className="dms-label">
                   { this._translate('Predefined Values') }
-                </h4>
+                </label>
                 <span className="placeholder">
                   { this._translate('No values') }
                 </span>
               </div>
-          }
+            }
 
-          {
-            !isNull(values)
+            {
+              !isNull(values)
               && <p class="dms-hint">
                 <button type="button" className="del-values"
                   onClick={ this.handleRemovePredifinedValuesClick }>
                   { this._translate('Clear predefined values.') }
                 </button>
               </p>
-          }
+            }
 
-          <h4 className="dms-heading">
-            { this._translate('Add Predefined Values') }
-          </h4>
+            <label className="dms-label">
+              { this._translate('Add Predefined Values') }
+            </label>
 
-          <ValidatedInput
-            onInput={ this.onInput }
-            onKeyDown={ this.onKeyDown }
-            placeholder={ '"value", "value", ...' }
-            type="text"
-            validate={ value => {
-              if (!parseString(value)) {
-                return this._translate('Strings must be in double quotes.');
-              }
-            } }
-            value={ inputValue } />
-
+            <ValidatedInput
+              onInput={ this.onInput }
+              onKeyDown={ this.onKeyDown }
+              placeholder={ '"value", "value", ...' }
+              type="text"
+              validate={ value => {
+                if (!parseString(value)) {
+                  return this._translate('Strings must be in double quotes.');
+                }
+              } }
+              value={ inputValue } />
+          </div>
         </div>
         : null
     );
   }
+}
+
+function Label(label) {
+  return <label className="dms-label">{ label }</label>;
 }
 
 

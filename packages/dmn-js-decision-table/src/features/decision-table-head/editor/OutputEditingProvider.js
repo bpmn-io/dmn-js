@@ -1,5 +1,6 @@
 import {
-  closest as domClosest
+  closest as domClosest,
+  matches as domMatches
 } from 'min-dom';
 
 import OutputCell from './components/OutputCell';
@@ -25,27 +26,21 @@ export default class OutputEditingProvider {
     });
 
     eventBus.on('output.edit', ({ event, output }) => {
-
       const { target } = event;
 
       const node = domClosest(target, 'th', true);
 
-      const { left, top, width, height } = node.getBoundingClientRect();
+      const { left, top } = node.getBoundingClientRect();
 
-      const container = renderer.getContainer();
+      const offset = getOffset(node);
 
       contextMenu.open({
-        x: left + container.parentNode.scrollLeft,
-        y: top + container.parentNode.scrollTop,
-        width,
-        height
+        x: left,
+        y: top
       }, {
         contextMenuType: 'output-edit',
         output,
-        offset: {
-          x: 4,
-          y: 4
-        }
+        offset
       });
     });
   }
@@ -58,3 +53,9 @@ OutputEditingProvider.$inject = [
   'eventBus',
   'renderer'
 ];
+
+function getOffset(element) {
+  if (!domMatches(element, '.output-cell + .output-cell')) {
+    return { x: -1, y: 0 };
+  }
+}

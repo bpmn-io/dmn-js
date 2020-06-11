@@ -17,13 +17,6 @@ export default class InputEditor extends Component {
       this.handleChange({ expressionLanguage });
     };
 
-    this.makeScript = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      this.setExpressionLanguage(defaultExpressionLanguage);
-    };
-
     this.handleValue = (text) => {
 
       let { expressionLanguage } = this.props;
@@ -74,7 +67,6 @@ export default class InputEditor extends Component {
   render() {
 
     const {
-      defaultExpressionLanguage,
       expressionLanguage,
       expressionLanguages,
       inputVariable,
@@ -82,98 +74,51 @@ export default class InputEditor extends Component {
       text
     } = this.props;
 
-    const editScript = expressionLanguage || isMultiLine(text);
-
     return (
-      <div className="dms-container ref-input-editor">
+      <div className="context-menu-container ref-input-editor input-edit">
 
-        <p className="dms-fill-row">
+        <div className="dms-form-control">
+          <ContentEditable
+            className="dms-input-label"
+            value={ label || '' }
+            singleLine
+            onInput={ this.handleLabelChange } />
+        </div>
+
+        <div className="dms-form-control">
           <label className="dms-label">
             {
-              this.translate('Input Label')
+              this.translate('Expression')
             }
           </label>
 
-          <Input
-            className="ref-input-label"
-            value={ label || '' }
-            onInput={ this.handleLabelChange } />
-        </p>
+          <ContentEditable
+            placeholder="enter expression"
+            className={
+              [
+                'ref-text',
+                'dms-input'
+              ].join(' ')
+            }
+            onInput={ this.handleValue }
+            value={ text || '' } />
+        </div>
 
-        <hr className="dms-hrule" />
+        <div className="dms-form-control">
+          <label className="dms-label">
+            {
+              this.translate('Expression Language')
+            }
+          </label>
 
-        <h4 className="dms-heading">
-          {
-            this.translate('Input Expression')
-          }
-        </h4>
+          <InputSelect
+            className="ref-language"
+            value={ expressionLanguage || '' }
+            onChange={ this.handleLanguageChange }
+            options={ expressionLanguages } />
+        </div>
 
-        <ContentEditable
-          placeholder="enter expression"
-          ctrlForNewline={ true }
-          className={
-            [
-              'ref-text',
-              'dms-input',
-              editScript ? 'dms-script-input script-editor' : '',
-              'dms-fit-row'
-            ].join(' ')
-          }
-          onInput={ this.handleValue }
-          value={ text || '' } />
-
-        {
-          !editScript && (
-
-            // TODO @barmac: Replace with proper i18n tooling
-            <p className="dms-hint">
-              {
-                this.translate('Enter simple')
-              }
-              <code>{ defaultExpressionLanguage.label }</code>
-              {
-                this.translate('expression or')
-              }
-              <button type="button"
-                className="ref-make-script"
-                onClick={ this.makeScript }>
-                {
-                  this.translate('change to script.')
-                }
-              </button>.
-            </p>
-          )
-        }
-
-        {
-          editScript && (
-            <p className="dms-hint">
-              {
-                this.translate('Enter script.')
-              }
-            </p>
-          )
-        }
-
-        {
-          editScript && (
-            <p>
-              <label className="dms-label">
-                {
-                  this.translate('Expression Language')
-                }
-              </label>
-
-              <InputSelect
-                className="ref-language"
-                value={ expressionLanguage || '' }
-                onChange={ this.handleLanguageChange }
-                options={ expressionLanguages } />
-            </p>
-          )
-        }
-
-        <p className="dms-fill-row">
+        <div className="dms-form-control">
           <label className="dms-label">
             {
               this.translate('Input Variable')
@@ -185,13 +130,11 @@ export default class InputEditor extends Component {
             value={ inputVariable || '' }
             onInput={ this.handleInputVariableChange }
             placeholder={ this.translate('cellInput') } />
-        </p>
+        </div>
       </div>
     );
   }
 }
-
-
 
 function isMultiLine(text) {
   return text && text.split(/\n/).length > 1;

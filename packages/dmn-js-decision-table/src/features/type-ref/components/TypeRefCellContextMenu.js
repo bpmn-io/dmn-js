@@ -69,15 +69,17 @@ export default class TypeRefCellContextMenu extends Component {
 
     return (
       <div className="type-ref-edit context-menu-container">
-        <label className="dms-label">
-          { this._translate('Type') }:
-        </label>
+        <div className="dms-form-control">
+          <label className="dms-label">
+            { this._translate('Type') }:
+          </label>
 
-        <InputSelect
-          className="type-ref-edit-select"
-          onChange={ this.onTypeChange }
-          options={ typeRefOptions }
-          value={ typeRef } />
+          <InputSelect
+            className="type-ref-edit-select"
+            onChange={ this.onTypeChange }
+            options={ typeRefOptions }
+            value={ typeRef } />
+        </div>
       </div>
     );
   }

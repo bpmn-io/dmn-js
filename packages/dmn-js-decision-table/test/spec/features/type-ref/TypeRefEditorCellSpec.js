@@ -1,8 +1,8 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {
-  triggerClick,
-  triggerInputSelectChange
+  triggerInputSelectChange,
+  triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
@@ -44,7 +44,7 @@ describe('features/type-ref', function() {
     // given
     const cell = domQuery('.input-label', testContainer);
 
-    triggerClick(cell);
+    triggerMouseEvent(cell, 'dblclick');
 
     const input = domQuery('.type-ref-edit-select', testContainer);
 

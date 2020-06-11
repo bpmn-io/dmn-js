@@ -54,12 +54,10 @@ export default class OutputCellContextMenu extends Component {
 
   render() {
     return (
-      <div className="context-menu-container output-edit">
-        <OutputEditor
-          name={ this.getValue('name') }
-          label={ this.getValue('label') }
-          onChange={ this.handleChange } />
-      </div>
+      <OutputEditor
+        name={ this.getValue('name') }
+        label={ this.getValue('label') }
+        onChange={ this.handleChange } />
     );
   }
 }
