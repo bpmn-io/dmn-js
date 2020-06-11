@@ -2,7 +2,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import {
   triggerInputEvent,
-  triggerClick
+  triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
@@ -37,7 +37,7 @@ describe('decision-table-head/editor - output', function() {
     const cellEl = domQuery('.output-editor', testContainer);
 
     // open output editor
-    triggerClick(cellEl);
+    triggerMouseEvent(cellEl, 'dblclick');
   });
 
 
@@ -87,7 +87,7 @@ describe('decision-table-head/editor - output', function() {
       // given
       const outputBo = elementRegistry.get('output1').businessObject;
 
-      const outputEl = getControl('.ref-output-label', testContainer);
+      const outputEl = getControl('.dms-output-label', testContainer);
 
       outputEl.focus();
 
@@ -104,7 +104,7 @@ describe('decision-table-head/editor - output', function() {
       // given
       const outputBo = elementRegistry.get('output1').businessObject;
 
-      const outputEl = getControl('.ref-output-label', testContainer);
+      const outputEl = getControl('.dms-output-label', testContainer);
 
       outputEl.focus();
 

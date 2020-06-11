@@ -1,5 +1,6 @@
 import { Component } from 'inferno';
 
+import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
 import Input from 'dmn-js-shared/lib/components/Input';
 
 
@@ -40,21 +41,17 @@ export default class OutputEditor extends Component {
     } = this.props;
 
     return (
-      <div className="dms-container ref-output-editor">
-        <p className="dms-fill-row">
-          <label className="dms-label">
-            {
-              this.translate('Output Label')
-            }
-          </label>
+      <div className="context-menu-container ref-output-editor output-edit">
 
-          <Input
-            className="ref-output-label"
+        <div className="dms-form-control">
+          <ContentEditable
+            className="dms-output-label"
             value={ label || '' }
+            singleLine
             onInput={ this.setLabel } />
-        </p>
+        </div>
 
-        <p className="dms-fill-row">
+        <div className="dms-form-control">
           <label className="dms-label">
             {
               this.translate('Output Name')
@@ -65,8 +62,7 @@ export default class OutputEditor extends Component {
             className="ref-output-name"
             value={ name || '' }
             onInput={ this.setName } />
-        </p>
-
+        </div>
       </div>
     );
   }

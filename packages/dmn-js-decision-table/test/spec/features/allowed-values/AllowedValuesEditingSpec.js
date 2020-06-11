@@ -7,8 +7,7 @@ import {
   triggerInputEvent,
   triggerInputSelectChange,
   triggerKeyEvent,
-  triggerMouseEvent,
-  triggerClick
+  triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import {
@@ -62,7 +61,7 @@ describe('decision-table-head/allowed-values', function() {
     beforeEach(function() {
       const cell = domQuery('.input-cell', testContainer);
 
-      triggerClick(cell);
+      triggerMouseEvent(cell, 'dblclick');
 
       allowedValuesEdit = domQuery('.allowed-values-edit', testContainer);
     });
@@ -268,7 +267,7 @@ describe('decision-table-head/allowed-values', function() {
     beforeEach(function() {
       const cell = domQuery('.output-cell', testContainer);
 
-      triggerClick(cell);
+      triggerMouseEvent(cell, 'dblclick');
 
       allowedValuesEdit = domQuery('.allowed-values-edit', testContainer);
     });

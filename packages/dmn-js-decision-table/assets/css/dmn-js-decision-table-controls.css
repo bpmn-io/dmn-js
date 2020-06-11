@@ -109,6 +109,55 @@
   height: 1px;
 }
 
+/* input/output editor */
+
+.dmn-decision-table-container .context-menu .context-menu-container.input-edit,
+.dmn-decision-table-container .context-menu .context-menu-container.output-edit {
+  margin: 34px 10px 10px 10px;
+}
+
+.dmn-decision-table-container .context-menu .context-menu-container.type-ref-edit,
+.dmn-decision-table-container .context-menu .context-menu-container.allowed-values-edit {
+  margin: 10px;
+}
+
+.dmn-decision-table-container .dms-output-label,
+.dmn-decision-table-container .dms-input-label {
+  padding-right: 30px;
+  padding-left: 0;
+
+  border: none;
+
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.dmn-decision-table-container .dms-form-control:first-child {
+  padding-top: 0;
+}
+
+.dmn-decision-table-container .dms-form-control {
+  padding: 9px 0;
+}
+
+.dmn-decision-table-container .dms-form-control .dms-label {
+  display: block;
+  margin: unset;
+  margin-bottom: 6px;
+
+  color: #909090;
+  font-weight: normal;
+}
+
+.dmn-decision-table-container .dms-form-control .dms-input {
+  padding-right: 24px;
+  border-radius: 3px;
+}
+
+.dmn-decision-table-container .dms-form-control .dms-list-component {
+  max-width: 179px;
+}
+
 /* expression language */
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language {
   flex-direction: column;

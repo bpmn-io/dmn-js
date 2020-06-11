@@ -4,6 +4,10 @@ import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
+import {
+  triggerMouseEvent
+} from 'dmn-js-shared/test/util/EventUtil';
+
 import diagramXML from './DecisionTableHeadEditor.dmn';
 
 import CoreModule from 'src/core';
@@ -99,9 +103,9 @@ describe('decision-table-head/editor', function() {
 
         // given
         const inputCell = domQuery('th[data-col-id="input2"]', testContainer);
-        inputCell.click();
+        doubleClick(inputCell);
 
-        const input = domQuery('.ref-input-label', testContainer);
+        const input = domQuery('.dms-input-label', testContainer);
 
         setValue(input, 'to-erase');
         debounceInput.flush();
@@ -120,9 +124,9 @@ describe('decision-table-head/editor', function() {
 
         // given
         const outputCell = domQuery('th[data-col-id="output2"]', testContainer);
-        outputCell.click();
+        doubleClick(outputCell);
 
-        const input = domQuery('.ref-output-label', testContainer);
+        const input = domQuery('.dms-output-label', testContainer);
 
         setValue(input, 'to-erase');
         debounceInput.flush();
@@ -159,4 +163,8 @@ function setValue(element, value) {
 
   element.value = value;
   element.dispatchEvent(event);
+}
+
+function doubleClick(element) {
+  triggerMouseEvent(element, 'dblclick');
 }

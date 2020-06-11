@@ -2,7 +2,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import {
   triggerInputEvent,
-  triggerClick
+  triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import { query as domQuery } from 'min-dom';
@@ -42,7 +42,7 @@ describe('decision-table-head/editor - input', function() {
     const cellEl = domQuery(`[data-col-id="${columnId}"]`, testContainer);
 
     // open input editor
-    triggerClick(cellEl);
+    triggerMouseEvent(cellEl, 'dblclick');
 
     // return input editor
     return domQuery('.input-edit', testContainer);
@@ -113,22 +113,6 @@ describe('decision-table-head/editor - input', function() {
       expect(inputBo.inputExpression.text).to.equal('foo\nbar');
       expect(inputBo.inputExpression.expressionLanguage).to.equal('feel');
     }));
-
-
-    it('via link', inject(function(elementRegistry) {
-
-      // given
-      const inputBo = elementRegistry.get('input1').businessObject;
-
-      const makeScriptEl = getControl('.ref-make-script', testContainer);
-
-      // when
-      triggerClick(makeScriptEl);
-
-      // then
-      expect(inputBo.inputExpression.expressionLanguage).to.equal('feel');
-    }));
-
   });
 
 
@@ -216,7 +200,7 @@ describe('decision-table-head/editor - input', function() {
       // given
       const inputBo = elementRegistry.get('input1').businessObject;
 
-      const inputEl = getControl('.ref-input-label', testContainer);
+      const inputEl = getControl('.dms-input-label', testContainer);
 
       inputEl.focus();
 
@@ -233,7 +217,7 @@ describe('decision-table-head/editor - input', function() {
       // given
       const inputBo = elementRegistry.get('input1').businessObject;
 
-      const inputEl = getControl('.ref-input-label', testContainer);
+      const inputEl = getControl('.dms-input-label', testContainer);
 
       inputEl.focus();
 

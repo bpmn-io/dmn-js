@@ -76,7 +76,7 @@ export default class OutputCell extends Component {
     return (
       <th
         data-col-id={ output.id }
-        onClick={ this.onClick }
+        onDoubleClick={ this.onClick }
         onContextmenu={ this.onContextmenu }
         className="output-cell output-editor">
 
