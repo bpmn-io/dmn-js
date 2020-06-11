@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.3.1
+
+* `FIX`: allow to connect text annotations in both directions ([#519](https://github.com/bpmn-io/dmn-js/pull/519))
+* `FIX`: fix missing extension in camunda-bpmn-moddle import ([#517](https://github.com/bpmn-io/dmn-js/issues/517))
+* `CHORE`: remove redundant waypoints update ([#522](https://github.com/bpmn-io/dmn-js/pull/522))
+
 ## 8.3.0
 
 * `FEAT(drd)`: change layout of information requirements ([#492](https://github.com/bpmn-io/dmn-js/pull/492))
