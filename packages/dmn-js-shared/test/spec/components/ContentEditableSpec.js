@@ -206,6 +206,40 @@ describe('components/ContentEditable', function() {
     });
 
 
+    describe('singleLine', function() {
+
+      it('should NOT insert newline on Enter', function() {
+
+        // given
+        const node = renderToNode(
+          <ContentEditable
+            singleLine
+            onInput={ onInput }
+            value={ 'FOO' } />
+        );
+
+        setRange(node, { start: 1, end: 1 });
+
+        // when
+        const execDefault = triggerKeyEvent(node, 'keydown', {
+          which: ENTER_KEY
+        });
+
+        // then
+        expect(execDefault).to.be.false;
+
+        expect(onInput).not.to.have.been.called;
+        expect(globalOnKeydown).to.have.been.called;
+      });
+
+
+      // Cannot be tested due to paste events not affecting document's contents per
+      // default.
+      // Cf. https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event
+      it.skip('should NOT insert newline on paste');
+    });
+
+
     describe('ctrlForNewline = false', function() {
 
       it('should insert newline', function() {
