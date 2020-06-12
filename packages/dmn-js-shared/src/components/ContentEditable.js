@@ -50,7 +50,7 @@ export default class ContentEditable extends Component {
     if (isIE()) {
 
       // onInput shim for IE <= 11
-      this.onPaste = this.onKeypress = (event) => {
+      this.onInputIEPolyfill = (event) => {
 
         var oldText = this.node.innerHTML;
 
@@ -142,6 +142,10 @@ export default class ContentEditable extends Component {
         return;
       }
 
+      if (this.props.singleLine) {
+        return;
+      }
+
       event.stopPropagation();
 
       insertLineBreak();
@@ -164,11 +168,28 @@ export default class ContentEditable extends Component {
     propsInput(text);
   }
 
-  // stubs for modern browsers; actual implementation
-  // for IE 11 to polyfill missing <input> event on [contentediable]
-  onPaste = noop;
-  onKeypress = noop;
+  // TODO(barmac): remove once we drop IE 11 support
+  onKeyPress = (event) => {
+    if (this.onInputIEPolyfill) {
+      this.onInputIEPolyfill(event);
+    }
+  }
 
+  onPaste = (event) => {
+
+    // TODO(barmac): remove once we drop IE 11 support
+    if (this.onInputIEPolyfill) {
+      this.onInputIEPolyfill(event);
+    }
+
+    if (this.props.singleLine) {
+      const text = (event.clipboardData || window.clipboardData).getData('text');
+
+      // replace newline with space
+      document.execCommand('insertText', false, text.replace(/\n/g, ' '));
+      event.preventDefault();
+    }
+  }
 
   render(props) {
 
@@ -237,8 +258,6 @@ function insertLineBreak() {
 
   applyRange(newRange);
 }
-
-function noop() { }
 
 function isIE() {
   var ua = window.navigator.userAgent;
