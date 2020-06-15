@@ -48,6 +48,27 @@ describe('components/List', function() {
   });
 
 
+  it('should render with custom label', function() {
+
+    // given
+    function CustomLabel(label) {
+      return <label className="custom-label">{ label }</label>;
+    }
+    const items = [
+      { value: 1, group: 'a' }
+    ];
+
+    // when
+    const renderedTree = renderIntoDocument(
+      <List items={ items } labelComponent={ CustomLabel } />);
+
+    // then
+    expect(
+      findRenderedDOMElementWithClass(renderedTree, 'custom-label')
+    ).to.exist;
+  });
+
+
   describe('checkboxes', function() {
 
     let renderedTree,
