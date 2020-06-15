@@ -94,7 +94,7 @@ export default class List extends Component {
   }
 
   render() {
-    const { className, items, type } = this.props;
+    const { className, items, type, labelComponent } = this.props;
 
     const classes = [
       'dms-list-component'
@@ -120,7 +120,8 @@ export default class List extends Component {
             return (
               <div className="group">
 
-                <h4 className="dms-heading">{ groupTitle }</h4>
+                { labelComponent && labelComponent(groupTitle) ||
+                  <h4 className="dms-heading">{ groupTitle }</h4> }
 
                 <ul className="items no-wrap">
                   {
