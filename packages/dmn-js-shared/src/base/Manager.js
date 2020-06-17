@@ -359,32 +359,30 @@ export default class Manager {
 
     // compute list of available views
     var views = this._views,
-        newViews = displayableElements.reduce((views, element) => {
+        newViews = [];
 
-          var provider = find(viewProviders, function(provider) {
-            if (typeof provider.opens === 'string') {
-              return provider.opens === element.$type;
-            } else {
-              return provider.opens(element);
-            }
-          });
+    for (var element of displayableElements) {
+      var provider = find(viewProviders, function(provider) {
+        if (typeof provider.opens === 'string') {
+          return provider.opens === element.$type;
+        } else {
+          return provider.opens(element);
+        }
+      });
 
-          if (!provider) {
-            return views;
-          }
+      if (!provider) {
+        continue;
+      }
 
-          var view = {
-            element,
-            id: element.id,
-            name: element.name,
-            type: provider.id
-          };
+      var view = {
+        element,
+        id: element.id,
+        name: element.name,
+        type: provider.id
+      };
 
-          return [
-            ...views,
-            view
-          ];
-        }, []);
+      newViews.push(view);
+    }
 
     var activeView = this._activeView,
         newActiveView;
