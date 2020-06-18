@@ -403,14 +403,15 @@ export default class Manager {
     // active view has changed OR
     // number of views has changed OR
     // not all views equal
-    var activeViewChanged = !viewsEqual(activeView, newActiveView),
-        viewsChanged =
-          views.length !== newViews.length
-          || !every(newViews, function(newView) {
-            return find(views, function(view) {
-              return viewsEqual(view, newView);
-            });
+    var activeViewChanged = !viewsEqual(activeView, newActiveView)
+      || viewNameChanged(activeView, newActiveView);
+
+    var viewsChanged = views.length !== newViews.length
+        || !every(newViews, function(newView) {
+          return find(views, function(view) {
+            return viewsEqual(view, newView) && !viewNameChanged(view, newView);
           });
+        });
 
     this._activeView = newActiveView;
     this._views = newViews;
@@ -630,9 +631,12 @@ function viewsEqual(a, b) {
     return false;
   }
 
-  // compare by element OR element ID equality AND element name equality
-  return (a.element === b.element || a.id === b.id)
-    && a.name === b.name;
+  // compare by element OR element ID equality
+  return a.element === b.element || a.id === b.id;
+}
+
+function viewNameChanged(a, b) {
+  return !a || !b || a.name !== b.name;
 }
 
 function safeExecute(viewer, method) {
