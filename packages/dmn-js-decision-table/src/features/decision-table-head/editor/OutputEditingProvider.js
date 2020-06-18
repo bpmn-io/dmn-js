@@ -36,7 +36,8 @@ export default class OutputEditingProvider {
 
       contextMenu.open({
         x: left,
-        y: top
+        y: top,
+        align: 'bottom-right'
       }, {
         contextMenuType: 'output-edit',
         output,
