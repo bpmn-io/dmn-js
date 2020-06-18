@@ -33,7 +33,8 @@ export default class InputCellProvider {
 
       contextMenu.open({
         x: left,
-        y: top
+        y: top,
+        align: 'bottom-right'
       }, {
         contextMenuType: 'input-edit',
         input
