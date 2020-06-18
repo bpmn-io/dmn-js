@@ -248,19 +248,29 @@ describe('Manager', function() {
           // given
           var manager = new TestViewer();
 
-          // when
-          manager.importXML(diagramXML);
-
           manager.once('import.done', function() {
+            const viewsChangedSpy = sinon.spy(manager, '_viewsChanged');
 
-            const spy = sinon.spy(manager, '_viewsChanged');
+            const dishDecisionView = manager.getViews().find(({ id }) => {
+              return id === 'dish-decision';
+            });
 
-            // recompute views without actual change
+            manager.open(dishDecisionView);
+
+            // assume
+            expect(manager.getActiveView().id).to.equal('dish-decision');
+
+            // when
             manager._updateViews();
 
             // then
-            expect(spy).not.to.have.been.called;
+            expect(viewsChangedSpy).to.have.been.called;
+
+            expect(manager.getActiveView().id).to.equal('dish-decision');
+            expect(manager.getViews()).to.length(4);
           });
+
+          manager.importXML(diagramXML);
         });
 
 
@@ -269,21 +279,31 @@ describe('Manager', function() {
           // given
           var manager = new TestViewer();
 
-          manager.importXML(diagramXML);
-
           manager.once('import.done', function() {
+            const viewsChangedSpy = sinon.spy(manager, '_viewsChanged');
 
-            const spy = sinon.spy(manager, '_viewsChanged');
+            const dishDecisionView = manager.getViews().find(({ id }) => {
+              return id === 'dish-decision';
+            });
+
+            manager.open(dishDecisionView);
+
+            // assume
+            expect(manager.getActiveView().id).to.equal('dish-decision');
 
             // when
-            manager.getViews()[ 0 ].element.name = 'Foo';
+            dishDecisionView.element.name = 'Foo';
 
-            // recompute views
             manager._updateViews();
 
             // then
-            expect(spy).to.have.been.called;
+            expect(viewsChangedSpy).to.have.been.called;
+
+            expect(manager.getActiveView().id).to.equal('dish-decision');
+            expect(manager.getViews()).to.length(4);
           });
+
+          manager.importXML(diagramXML);
         });
 
       });
