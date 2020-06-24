@@ -54,23 +54,7 @@ export default class DecisionTableHead extends Component {
     const inputs = businessObject.input,
           outputs = businessObject.output;
 
-    // |index|n-inputs|n-outputs|annotation|
-    const columnsCount =
-      (inputs && inputs.length || 1) + (outputs && outputs.length || 1) + 2;
-
     return <thead>
-      <tr>
-        <th
-          colspan={ columnsCount }
-          className="decision-table-header"
-        >
-          {
-            this.slotFill({
-              type: 'table.header'
-            })
-          }
-        </th>
-      </tr>
       <tr>
         <th
           className="index-column"

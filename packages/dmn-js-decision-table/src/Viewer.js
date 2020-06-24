@@ -190,11 +190,11 @@ export default class Viewer extends Table {
       coreModule,
       TranslateModule,
       decisionTableHeadModule,
-      decisionTablePropertiesModule,
       decisionRuleIndicesModule,
       decisoinRulesModule,
       hitPolicyModule,
-      viewDrdModule
+      viewDrdModule,
+      decisionTablePropertiesModule
     ];
   }
 
