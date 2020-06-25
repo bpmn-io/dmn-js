@@ -72,11 +72,9 @@
 }
 
 .dmn-decision-table-container .tjs-table tr .annotation {
-  border-left: 3px double #444;
-}
+  width: 192px;
 
-.dmn-decision-table-container th {
-  min-width: 192px;
+  border-left: 3px double #444;
 }
 
 .dmn-decision-table-container th.index-column {
@@ -254,8 +252,6 @@
 /* input and output headers */
 .dmn-decision-table-container thead .input-cell,
 .dmn-decision-table-container thead .output-cell {
-  max-width: 192px;
-
   text-align: left;
 }
 

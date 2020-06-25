@@ -69,13 +69,16 @@ export default class DecisionTableHead extends Component {
 
         {
           inputs && inputs.map((input, index) => {
+            const width = input.width || '192px';
+
             return this.slotFill({
               type: 'cell',
               context: {
                 cellType: 'input-header',
                 input,
                 index,
-                inputsLength: inputs.length
+                inputsLength: inputs.length,
+                width
               },
               key: input.id
             }, DefaultInputHeaderCell);

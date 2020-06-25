@@ -226,3 +226,14 @@
 }
 
 /* end description editor */
+
+.dmn-decision-table-container .resize-column-handle {
+  width: 20px;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  cursor: col-resize;
+}
