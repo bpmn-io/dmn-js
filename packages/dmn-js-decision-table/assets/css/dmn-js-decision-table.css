@@ -75,16 +75,14 @@
   border-left: 3px double #444;
 }
 
-.dmn-decision-table-container th {
-  min-width: 192px;
-}
-
 .dmn-decision-table-container th.index-column {
   width: 40px;
   min-width: 40px;
 }
 
 .dmn-decision-table-container th {
+  width: 192px;
+
   font-weight: normal;
 }
 
@@ -256,8 +254,6 @@
 /* input and output headers */
 .dmn-decision-table-container thead .input-cell,
 .dmn-decision-table-container thead .output-cell {
-  max-width: 192px;
-
   text-align: left;
 }
 

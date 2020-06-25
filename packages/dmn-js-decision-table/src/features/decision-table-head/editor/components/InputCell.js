@@ -78,14 +78,18 @@ export default class InputCell extends Component {
       inputValues
     } = input;
 
-    var label = input.get('label');
+    const label = input.get('label');
+
+    const width = input.width ? input.width + 'px' : '192px';
 
     return (
       <th
         data-col-id={ input.id }
         onDoubleClick={ this.onClick }
         onContextmenu={ this.onContextmenu }
-        className="input-cell input-editor">
+        className="input-cell input-editor"
+        style={ { width } }
+      >
 
         {
           this.slotFills({

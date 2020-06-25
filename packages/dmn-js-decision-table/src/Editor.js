@@ -27,6 +27,7 @@ import simpleDateEditModule from './features/simple-date-edit';
 import simpleNumberEditModule from './features/simple-number-edit';
 import simpleStringEditModule from './features/simple-string-edit';
 import cellSelectionModule from './features/cell-selection';
+import columnResizeModule from './features/column-resize';
 
 
 export default class Editor extends Viewer {
@@ -50,6 +51,7 @@ export default class Editor extends Viewer {
       decisionTableContextMenu,
       decisionTableEditorActionsModule,
       decisionTableHeadEditorModule,
+      columnResizeModule,
       dragAndDropModule,
       descriptionModule,
       expressionLanguageModule,
