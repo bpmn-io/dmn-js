@@ -73,12 +73,16 @@ export default class OutputCell extends Component {
       typeRef
     } = output;
 
+    const width = output.width ? output.width + 'px' : '192px';
+
     return (
       <th
         data-col-id={ output.id }
         onDoubleClick={ this.onClick }
         onContextmenu={ this.onContextmenu }
-        className="output-cell output-editor">
+        className="output-cell output-editor"
+        style={ { width } }
+      >
 
         {
           this.slotFills({
