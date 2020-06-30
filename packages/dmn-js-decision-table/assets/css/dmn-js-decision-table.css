@@ -233,11 +233,6 @@
   display: inline-block;
 }
 
-.dmn-decision-table-container .hit-policy-value::after {
-  content: '—';
-  margin-left: 5px;
-}
-
 .dmn-decision-table-container .hit-policy-explanation {
   margin-left: 5px;
   color: #545454;
