@@ -33,7 +33,7 @@ export default class HitPolicy extends Component {
     return (
       <span
         className="hit-policy header"
-        title={ 'Hit Policy = ' + hitPolicy }
+        title={ hitPolicyEntry.explanation }
       >
         <label className="dms-label">
           Hit Policy:
@@ -41,7 +41,6 @@ export default class HitPolicy extends Component {
         <span className="hit-policy-value">
           { hitPolicyEntry.label}
         </span>
-        <span className="hit-policy-explanation">{ hitPolicyEntry.explanation }</span>
       </span>
     );
   }
