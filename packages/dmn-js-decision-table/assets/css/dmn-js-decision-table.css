@@ -183,18 +183,28 @@
 }
 
 /* decision table properties */
+.dmn-decision-table-container .decision-table-properties {
+  display: flex;
+  border: 1px solid black;
+  border-bottom: none;
+  padding: 10px;
+
+  align-items: center;
+}
+
 .dmn-decision-table-container .decision-table-name {
   display: inline-block;
   margin: 0;
 
-  max-width: 600px;
+  min-width: 100px;
+  max-width: 300px;
 
   font-size: 21px;
   font-weight: normal;
 }
 
-.dmn-decision-table-container .decision-table-name.focussed {
-  max-width: unset;
+.dmn-decision-table-container .decision-table-name.focussed .content-editable {
+  text-overflow: unset;
 }
 
 .dmn-decision-table-container .decision-table-name:not(.editable),
@@ -211,6 +221,10 @@
   border-left: 2px solid #bfbfbf;
 
   margin: 0 10px;
+}
+
+.dmn-decision-table-container .hit-policy {
+  display: inline-block;
 }
 
 .dmn-decision-table-container .hit-policy-value::after {
