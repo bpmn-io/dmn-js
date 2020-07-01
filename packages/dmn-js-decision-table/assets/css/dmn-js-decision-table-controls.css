@@ -184,7 +184,7 @@
 
 .dmn-decision-table-container th .dmn-icon-drag {
   position: absolute;
-  right: 4px;
+  left: 4px;
   top: 10px;
   transform: translateY(-50%);
 }
@@ -192,6 +192,11 @@
 .dmn-decision-table-container th:hover .dmn-icon-drag,
 .dmn-decision-table-container td:hover .dmn-icon-drag {
   color: #999;
+}
+
+.dmn-decision-table-container .input-cell:hover .clause,
+.dmn-decision-table-container .output-cell:hover .clause {
+  visibility: hidden;
 }
 
 .dmn-icon-drag.horizontal,
