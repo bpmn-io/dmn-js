@@ -69,11 +69,6 @@
   min-width: 192px;
 }
 
-.dmn-decision-table-container th,
-.dmn-decision-table-container td {
-  white-space: pre;
-}
-
 .dmn-decision-table-container th.index-column {
   width: 40px;
   min-width: 40px;
@@ -104,6 +99,11 @@
 .dmn-decision-table-container .input-cell.add-rule,
 .dmn-decision-table-container .input-cell :not(.focussed).empty {
   text-align: center;
+
+}
+
+.dmn-decision-table-container .cell {
+  white-space: pre-wrap;
 }
 
 /* end basic table styles */
