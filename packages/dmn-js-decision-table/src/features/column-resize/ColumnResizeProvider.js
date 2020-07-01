@@ -8,7 +8,11 @@ export default function ColumnResizeProvider(
   components.onGetComponent('cell-inner', (context = {}) => {
     const { cellType } = context;
 
-    if (cellType === 'input-cell' || cellType === 'output-cell') {
+    if (
+      cellType === 'input-cell' ||
+      cellType === 'output-cell' ||
+      cellType === 'annotations'
+    ) {
       return ResizeColumn;
     }
   });

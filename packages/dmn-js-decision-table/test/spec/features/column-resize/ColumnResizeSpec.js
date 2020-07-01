@@ -10,6 +10,7 @@ import { triggerMouseEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import simpleXML from '../../simple.dmn';
 
+import AnnotationsEditorModule from 'src/features/annotations/editor';
 import CoreModule from 'src/core';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
 import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
@@ -23,6 +24,7 @@ describe('column resize', function() {
 
   beforeEach(bootstrapModeler(simpleXML, {
     modules: [
+      AnnotationsEditorModule,
       CoreModule,
       DecisionTableHeadModule,
       DecisionTableHeadEditorModule,
@@ -118,6 +120,47 @@ describe('column resize', function() {
     const finalWidth = widthAsNumber(getComputedStyle(outputHeader).width);
 
     expect(finalWidth).to.be.eql(150);
+  });
+
+
+  it('should resize annotation', function() {
+
+    // given
+    const annotationHeader = domQuery('.annotation', testContainer);
+    const resizeHandle = domQuery('.resize-column-handle', annotationHeader);
+    const initialWidth = widthAsNumber(getComputedStyle(annotationHeader).width);
+
+    const initialX = resizeHandle.getBoundingClientRect().left + 10;
+
+    // when
+    triggerMouseEvent(resizeHandle, 'mousedown', initialX, 0);
+    triggerMouseEvent(document, 'mousemove', initialX + 50, 0);
+    triggerMouseEvent(document, 'mouseup', initialX + 50, 0);
+
+    // then
+    const finalWidth = widthAsNumber(getComputedStyle(annotationHeader).width);
+
+    expect(finalWidth).to.be.eql(initialWidth + 50);
+  });
+
+
+  it('should NOT resize annotation below 400px', function() {
+
+    // given
+    const annotationHeader = domQuery('.annotation', testContainer);
+    const resizeHandle = domQuery('.resize-column-handle', annotationHeader);
+
+    const initialX = resizeHandle.getBoundingClientRect().left + 10;
+
+    // when
+    triggerMouseEvent(resizeHandle, 'mousedown', initialX, 0);
+    triggerMouseEvent(document, 'mousemove', initialX - 50, 0);
+    triggerMouseEvent(document, 'mouseup', initialX - 50, 0);
+
+    // then
+    const finalWidth = widthAsNumber(getComputedStyle(annotationHeader).width);
+
+    expect(finalWidth).to.be.eql(400);
   });
 });
 
