@@ -64,6 +64,7 @@ export default class DecisionTablePropertiesComponent extends Component {
           className="decision-table-name"
           value={ name }
           ctrlForNewline={ true }
+          onBlur={ resetScroll }
           onChange={ this.setDecisionTableName }
           elementId={ '__decisionProperties_name' }
           coords={ '0:__decisionProperties' }
@@ -116,4 +117,8 @@ class DecisionTableName extends EditableComponent {
 
 function NullComponent() {
   return null;
+}
+
+function resetScroll(event) {
+  event.target.scroll(0, 0);
 }
