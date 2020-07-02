@@ -106,7 +106,7 @@ export default class ContentEditable extends Component {
     setRange(node, newRange);
   }
 
-  onFocus = () => {
+  onFocus = event => {
     var propsFocus = this.props.onFocus;
 
     this.setState({
@@ -114,11 +114,11 @@ export default class ContentEditable extends Component {
     });
 
     if (typeof propsFocus === 'function') {
-      propsFocus();
+      propsFocus(event);
     }
   }
 
-  onBlur = () => {
+  onBlur = event => {
     var propsBlur = this.props.onBlur;
 
     this.setState({
@@ -126,7 +126,7 @@ export default class ContentEditable extends Component {
     });
 
     if (typeof propsBlur === 'function') {
-      propsBlur();
+      propsBlur(event);
     }
   }
 
