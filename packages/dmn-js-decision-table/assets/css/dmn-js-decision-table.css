@@ -32,7 +32,17 @@
   font-size: 14px;
 }
 
+.dmn-decision-table-container .tjs-container {
+  display: grid;
+  grid-template-columns: min-content auto;
+
+}
+
 .dmn-decision-table-container .tjs-table {
+  grid-column: 1;
+  grid-row: 3;
+
+  width: min-content;
   table-layout: fixed;
   border-collapse: collapse;
 
@@ -189,6 +199,9 @@
 
 /* decision table properties */
 .dmn-decision-table-container .decision-table-properties {
+  grid-column: 1;
+  grid-row: 2;
+
   display: flex;
   border: 1px solid black;
   border-bottom: none;
@@ -344,6 +357,9 @@
 
 /* view drd */
 .dmn-decision-table-container .view-drd {
+  grid-column: 1;
+  grid-row: 1;
+
   margin-bottom: 10px;
 }
 
@@ -367,8 +383,18 @@
 
 
 /* powered by */
-.dmn-decision-table-container .powered-by-logo {
-  float: right;
+.dmn-decision-table-container .powered-by {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+
+  grid-column: 1;
+  grid-row: 2;
+
+  padding-right: 10px;
+}
+
+.dmn-decision-table-container .powered-by__logo {
   z-index: 10;
 }
 
