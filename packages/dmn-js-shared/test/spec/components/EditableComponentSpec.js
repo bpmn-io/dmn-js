@@ -112,6 +112,7 @@ describe('components/EditableComponent', function() {
 
       // then
       expect(onFocus).to.have.been.called;
+      expect(onFocus.getCalls()[0].args[0]).to.be.instanceOf(Event);
       expect(onBlur).not.to.have.been.called;
 
       // when (2)
@@ -119,10 +120,11 @@ describe('components/EditableComponent', function() {
 
       // then
       expect(onBlur).to.have.been.called;
+      expect(onBlur.getCalls()[0].args[0]).to.be.instanceOf(Event);
     });
 
 
-    it('should dispatch onFocus / onBlur', function() {
+    it('should dispatch onChange', function() {
 
       // given
       var onChange = sinon.spy();
