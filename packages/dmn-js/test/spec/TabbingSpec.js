@@ -41,7 +41,6 @@ insertCSS('tabs.css', `
 
   .tjs-container,
   .viewer-container {
-    display: table;
     width: 100%;
     padding: 10px;
   }

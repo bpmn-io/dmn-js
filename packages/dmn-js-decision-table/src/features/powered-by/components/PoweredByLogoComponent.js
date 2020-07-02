@@ -18,12 +18,15 @@ export default class PoweredByLogoComponent extends Component {
 
   render() {
     return (
-      <div
-        onClick={ this.onClick }
-        className='powered-by-logo'
-        title='Powered by bpmn.io'
-        ref={ node => this.node = node }>
-        <Logo />
+      <div className='powered-by'>
+        <div
+          className='powered-by__logo'
+          title='Powered by bpmn.io'
+          onClick={ this.onClick }
+          ref={ node => this.node = node }
+        >
+          <Logo />
+        </div>
       </div>
     );
   }
