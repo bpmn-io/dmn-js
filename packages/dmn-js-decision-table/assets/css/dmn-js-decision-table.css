@@ -33,15 +33,23 @@
 }
 
 .dmn-decision-table-container .tjs-container {
-  display: grid;
   grid-template-columns: min-content auto;
+  display: grid;
+  /* TODO(barmac): remove when IE11 is dropped */
+  display: -ms-grid;
+  -ms-grid-columns: min-content auto;
 
 }
 
 .dmn-decision-table-container .tjs-table {
   grid-column: 1;
   grid-row: 3;
+  /* TODO(barmac): remove when IE11 is dropped */
+  -ms-grid-column: 1;
+  -ms-grid-row: 3;
 
+  /* TODO(barmac): remove when IE11 is dropped */
+  width: 100px;
   width: min-content;
   table-layout: fixed;
   border-collapse: collapse;
@@ -193,6 +201,9 @@
 .dmn-decision-table-container .decision-table-properties {
   grid-column: 1;
   grid-row: 2;
+  /* TODO(barmac): remove when IE11 is dropped */
+  -ms-grid-column: 1;
+  -ms-grid-row: 2;
 
   display: flex;
   border: 1px solid black;
@@ -349,6 +360,9 @@
 .dmn-decision-table-container .view-drd {
   grid-column: 1;
   grid-row: 1;
+  /* TODO(barmac): remove when IE11 is dropped */
+  -ms-grid-column: 1;
+  -ms-grid-row: 1;
 
   margin-bottom: 10px;
 }
@@ -380,6 +394,9 @@
 
   grid-column: 1;
   grid-row: 2;
+  /* TODO(barmac): remove when IE11 is dropped */
+  -ms-grid-column: 1;
+  -ms-grid-row: 2;
 
   padding-right: 10px;
 }
