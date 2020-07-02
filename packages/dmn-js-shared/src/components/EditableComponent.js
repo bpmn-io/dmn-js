@@ -81,7 +81,7 @@ export default class EditableComponent extends Component {
     };
   }
 
-  onFocus = () => {
+  onFocus = event => {
     this.setState({
       focussed: true
     });
@@ -89,11 +89,11 @@ export default class EditableComponent extends Component {
     var { onFocus } = this.props;
 
     if (typeof onFocus === 'function') {
-      onFocus();
+      onFocus(event);
     }
   }
 
-  onBlur = (property) => {
+  onBlur = event => {
     this.setState({
       focussed: false
     });
@@ -110,7 +110,7 @@ export default class EditableComponent extends Component {
     const { onBlur } = this.props;
 
     if (typeof onBlur === 'function') {
-      onBlur();
+      onBlur(event);
     }
   }
 
