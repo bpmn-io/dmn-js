@@ -276,9 +276,11 @@
 
 /** actionable icon */
 .dmn-decision-table-container .action-icon {
-  border-radius: 2px;
-  color: #52b415;
   margin-left: 5px;
+  
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px 2px white;
+  color: #52b415;
 }
 
 .dmn-decision-table-container .action-icon:before {
@@ -313,12 +315,14 @@
   position: absolute;
 
   top: 50%;
-  right: 0;
+  right: -1px;
   transform: translate(50%, -50%);
 
   z-index: 1;
 
-  padding: 8px;
+  border-radius: 100%;
+
+  padding: 6px;
 }
 
 /** end actionable icon */
