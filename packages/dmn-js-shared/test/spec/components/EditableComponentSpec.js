@@ -91,6 +91,38 @@ describe('components/EditableComponent', function() {
   });
 
 
+  describe('empty class', function() {
+    it('should render with empty class', function() {
+
+      // when
+      const node = renderToNode(
+        <TestComponent value={ null } placeholder="-" />
+      );
+
+      // then
+      expect(node.classList.contains('empty'), 'should set empty').to.be.true;
+    });
+
+
+    it('should NOT render with empty class if value is changing', function() {
+
+      // given
+      var debounceInput = createDebouncer();
+      const node = renderToNode(
+        <TestComponent value={ null } placeholder="-" />,
+        { debounceInput }
+      );
+      const editor = node.querySelector('.content-editable');
+
+      // when
+      triggerInputEvent(editor, 'ab');
+
+      // then
+      expect(node.classList.contains('empty'), 'should not set empty').to.be.false;
+    });
+  });
+
+
   describe('hooks', function() {
 
     it('should dispatch onFocus / onBlur', function() {

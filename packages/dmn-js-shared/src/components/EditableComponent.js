@@ -116,10 +116,12 @@ export default class EditableComponent extends Component {
 
   getClassName() {
     var {
-      className
+      className,
+      value
     } = this.props;
 
     var {
+      changing,
       focussed,
       invalid
     } = this.state;
@@ -132,6 +134,10 @@ export default class EditableComponent extends Component {
 
     if (invalid) {
       className += ' invalid';
+    }
+
+    if (!value && !changing) {
+      className += ' empty';
     }
 
     return className;
