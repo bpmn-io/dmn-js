@@ -87,7 +87,9 @@ export default class InputCellContextMenu extends Component {
 
     return (
       <InputEditor
-        expressionLanguage={ this.getValue('expressionLanguage') }
+        expressionLanguage={
+          this.getValue('expressionLanguage') || defaultLanguage.value
+        }
         expressionLanguages={ expressionLanguages }
         defaultExpressionLanguage={ defaultLanguage }
         inputVariable={ this.getValue('inputVariable') }
