@@ -90,60 +90,6 @@ describe('decision-table-head/editor - input', function() {
   }));
 
 
-  describe('should transform to script', function() {
-
-    beforeEach(function() {
-      openEditor('input1');
-    });
-
-
-    it('via input', inject(function(elementRegistry) {
-
-      // given
-      const inputBo = elementRegistry.get('input1').businessObject;
-
-      const inputEl = getControl('.ref-text', testContainer);
-
-      inputEl.focus();
-
-      // when
-      triggerInputEvent(inputEl, 'foo<br>bar<br>');
-
-      // then
-      expect(inputBo.inputExpression.text).to.equal('foo\nbar');
-      expect(inputBo.inputExpression.expressionLanguage).to.equal('feel');
-    }));
-  });
-
-
-  describe('should transform back to expression', function() {
-
-    beforeEach(function() {
-      openEditor('input1');
-    });
-
-
-    it('via input', inject(function(elementRegistry) {
-
-      // given
-      const inputBo = elementRegistry.get('input1').businessObject;
-
-      const inputEl = getControl('.ref-text', testContainer);
-
-      inputEl.focus();
-
-      // when
-      triggerInputEvent(inputEl, 'foo<br>bar<br>');
-      triggerInputEvent(inputEl, 'foo');
-
-      // then
-      expect(inputBo.inputExpression.text).to.equal('foo');
-      expect(inputBo.inputExpression.expressionLanguage).not.to.exist;
-    }));
-
-  });
-
-
   describe('should edit input variable', function() {
 
     beforeEach(function() {
