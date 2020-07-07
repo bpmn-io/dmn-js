@@ -1,6 +1,6 @@
 import DecisionPropertiesComponent from './components/DecisionPropertiesComponent';
 
-const HIGH_PRIORITY = 2000;
+const HIGH_PRIORITY = 1500;
 
 export default class DecisionProperties {
   constructor(components) {

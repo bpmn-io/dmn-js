@@ -57,6 +57,7 @@ export default class DecisionPropertiesEditorComponent extends Component {
         <DecisionName
           className="decision-name editor"
           value={ name }
+          onBlur={ resetScroll }
           onChange={ this.setDecisionName } />
       </header>
     );
@@ -74,4 +75,8 @@ class DecisionName extends EditableComponent {
     );
   }
 
+}
+
+function resetScroll(event) {
+  event.target.scroll(0, 0);
 }

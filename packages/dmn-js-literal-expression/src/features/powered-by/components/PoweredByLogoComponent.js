@@ -21,10 +21,12 @@ export default class PoweredByLogoComponent extends Component {
     return (
       <div
         onClick={ this.onClick }
-        className="powered-by-logo"
+        className="powered-by"
         title="Powered by bpmn.io"
         ref={ node => this.node = node }>
-        <Logo />
+        <div className="powered-by__logo">
+          <Logo />
+        </div>
       </div>
     );
   }
