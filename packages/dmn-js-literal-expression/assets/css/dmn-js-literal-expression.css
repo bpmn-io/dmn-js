@@ -8,20 +8,31 @@
   position: relative;
 }
 
+.dmn-literal-expression-container .viewer-container {
+  display: grid;
+  grid-template-columns: auto;
+
+  width: 100%;
+}
+
 .dmn-literal-expression-container * {
   box-sizing: border-box;
 }
 
 /* decision properties */
 .dmn-literal-expression-container .decision-properties {
-  color: #444;
-  background-color: #fff;
-  display: inline-block;
+  grid-column: 1;
+  grid-row: 2;
+
   border: 1px solid #444;
   border-bottom: none;
+  padding: 10px;
+  padding-right: 75px;
+
+  color: #444;
+  background-color: #fff;
   position: relative;
   min-width: 192px;
-  max-width: 50%;
 }
 
 .dmn-literal-expression-container .decision-name:not(.editor) {
@@ -30,12 +41,6 @@
 
 .dmn-literal-expression-container .decision-name.editor {
   cursor: text;
-}
-
-.dmn-literal-expression-container .decision-name {
-  margin: 0;
-  padding: 3px 6px;
-  white-space: pre;
 }
 
 .dmn-literal-expression-container .decision-name div {
@@ -47,14 +52,28 @@
 }
 
 .dmn-literal-expression-container .decision-name {
-  font-size: 24px;
-  line-height: 30px;
-  padding: .3em;
-  font-weight: bold;
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: normal;
+  white-space: pre;
+}
+
+.dmn-literal-expression-container .decision-name.focussed .content-editable {
+  text-overflow: unset;
+}
+
+.dmn-literal-expression-container .decision-name:not(.editable),
+.dmn-literal-expression-container .decision-name .content-editable {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* textarea */
 .dmn-literal-expression-container .textarea {
+  grid-row: 3;
+
   box-sizing: border-box;
   width: 100%;
   font-family: monospace;
@@ -64,6 +83,8 @@
   font-size: 14px;
   color: #444;
   height: 250px;
+
+  overflow: auto;
 }
 
 .dmn-literal-expression-container .textarea .content,
@@ -74,7 +95,6 @@
 .dmn-literal-expression-container .textarea .content-editable {
   height: 100%;
   box-sizing: border-box;
-  overflow-y: auto;
 }
 
 .dmn-literal-expression-container .textarea div:focus {
@@ -91,6 +111,8 @@
 
 /* literal expression properties */
 .dmn-literal-expression-container .literal-expression-properties {
+  grid-row: 4;
+
   box-sizing: border-box;
   width: 100%;
   padding:  0;
@@ -112,10 +134,16 @@
   min-width: 100px;
 }
 
+.dmn-literal-expression-container .literal-expression-properties .variable-name-input {
+  width: 100%;
+}
+
 /* view drd */
 .dmn-literal-expression-container .view-drd {
-  float: right;
+  grid-row: 1;
+
   margin-right: 10px;
+  padding-bottom: 10px;
 }
 
 .dmn-literal-expression-container .view-drd .view-drd-button {
@@ -135,8 +163,18 @@
 }
 
 /* powered by */
-.dmn-literal-expression-container .powered-by-logo {
-  float: right;
+.dmn-literal-expression-container .powered-by {
+  grid-column: 1;
+  grid-row: 2;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  padding-right: 10px;
+}
+
+.dmn-literal-expression-container .powered-by__logo {
   z-index: 10;
 }
 
