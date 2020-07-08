@@ -138,23 +138,14 @@
 /* selection styles */
 
 .dmn-decision-table-container th,
-.dmn-decision-table-container td,
 .dmn-decision-table-container h3,
 .dmn-decision-table-container h5 {
   position: relative;
 }
 
-.dmn-decision-table-container .selected:after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  bottom: -1px;
-  right: -1px;
-  border: solid 2px #4285f4;
-  z-index: 1;
-  pointer-events: none;
+.dmn-decision-table-container .selected {
+  outline: solid 2px #4285f4;
+  outline-offset: -1px;
 }
 
 .dmn-decision-table-container th.selected:not(.focussed) {
@@ -178,6 +169,10 @@
 .dmn-decision-table-container tfoot.add-rule:hover td {
   border-color: #444;
   color: #444;
+}
+
+.dmn-decision-table-container tfoot.add-rule .output-cell {
+  border-left-color: #AAA;
 }
 
 
