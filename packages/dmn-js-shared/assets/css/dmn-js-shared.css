@@ -1,3 +1,53 @@
+/* Color definitions */
+.dmn-js-parent {
+  --blue-base-65: #4D90FF;
+  --blue-darken-48: #005DF7;
+  --blue-darken-55: #1A70FF;
+  --blue-lighten-82: #A2C5FF;
+  --red-base-62: #FF3D3D;
+  --red-lighten-85: #FFB3B3;
+  --black-opacity-0-1: rgba(0, 0, 0, 0.1);
+  --black-opacity-0-2: rgba(0, 0, 0, 0.2);
+  --blue-darken-48-opacity-0-3: rgba(0, 93, 247, 0.3);
+  --white: #FFFFFF;
+  --white-smoke: #EFEFEF;
+  --white-smoke-shade-2: #F6F6F6;
+  --gray-25: #404040;
+  --gray-98: #FAFAFA;
+  --gray-80: #CCCCCC;
+  --medium-light-gray: #AAAAAA;
+  --medium-light-gray-shade-2: #888888;
+  --medium-light-gray-shade-3: #999999;
+  --medium-dark-gray: #666666;
+  --medium-dark-gray-shade-2: #444444;
+  --silver-darken-80: #CDCDCD;
+  --suva-grey: #909090;
+  --alabaster: #F8F8F8;
+  --silver-75: #BFBFBF;
+  --matterhorn: #545454;
+  --gainsboro: #DDDDDD;
+
+  --hrule-border-top-color: var(--gainsboro);
+  --hint-button-color: var(--blue-base-65);
+  --hint-button-hover-color: var(--blue-darken-48);
+  --validation-warning-color: var(--red-base-62);
+  --select-border-color: var(--gray-80);
+  --select-color: var(--medium-dark-gray-shade-2);
+  --select-focus-border-color: var(--blue-darken-55);
+  --select-focus-box-shadow-color: var(--blue-lighten-82);
+  --select-focus-box-shadow-inset-color: var(--silver-darken-80);
+  --select-focus-invalid-border-color: var(--red-base-62);
+  --select-focus-invalid-box-shadow-color: var(--red-lighten-85);
+  --select-non-focus-invalid-border-color: var(--red-base-62);
+  --select-non-focus-invalid-color: var(--red-base-62);
+  --select-options-background-color: var(--white);
+  --select-options-border-color: var(--gray-80);
+  --select-options-text-color: var(--medium-dark-gray-shade-2);
+  --select-options-box-shadow-color: var(--black-opacity-0-1);
+  --select-active-option-color: var(--blue-darken-48);
+  --select-option-hover-background-color: var(--black-opacity-0-1);
+}
+
 .dms-list-component .items {
   margin: 0;
   padding: 0;
@@ -31,7 +81,7 @@
 
 .dms-hrule {
   border: 0;
-  border-top: dotted 1px #DDD;
+  border-top: dotted 1px var(--hrule-border-top-color);
 
   margin: 10px auto;
 }
@@ -42,7 +92,7 @@
 }
 
 p.dms-hint button {
-  color: #3960a2;
+  color: var(--hint-button-color);
   text-decoration: none;
   display: inline;
   border: none;
@@ -54,12 +104,12 @@ p.dms-hint button {
 }
 
 p.dms-hint button:hover {
-  color: #4285f4;
+  color: var(--hint-button-hover-color);
 }
 
 /* validated input */
 p.dms-validation-warning {
-  color: #c9302c;
+  color: var(--validation-warning-color);
 }
 
 h3.dms-heading {
@@ -80,10 +130,10 @@ h4.dms-heading {
 .dms-select {
   outline: none;
   padding: 3px 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--select-border-color);
   background: none;
   font-size: 14px;
-  color: #444;
+  color: var(--select-color);
   min-height: 26px;
 }
 
@@ -98,19 +148,20 @@ h4.dms-heading {
 
 .dms-input:focus,
 .dms-select:focus {
-  border-color: #52B415;
+  border: solid 1px var(--select-focus-border-color);
+  box-shadow: 0 0 0 2px var(--select-focus-box-shadow-color), 0 0 0 1px var(--select-focus-box-shadow-inset-color) inset;
 }
 
 .dms-select.invalid:focus,
 .dms-input.invalid:focus {
-  border-color: #c9302c;
+  border: solid 1px var(--select-focus-invalid-border-color);
+  box-shadow: 0 0 0 2px var(--select-focus-invalid-box-shadow-color), 0 0 0 1px var(--select-focus-box-shadow-inset-color) inset;
 }
 
 .dms-input.invalid,
 .dms-select.invalid {
-  background: #f4cecd;
-  border-color: #c9302c;
-  color: #c9302c;
+  border-color: var(--select-non-focus-invalid-border-color);
+  color: var(--select-non-focus-invalid-color);
 }
 
 .dms-script-input {
@@ -139,17 +190,17 @@ h4.dms-heading {
 }
 
 .dms-input-select .options {
-  background: #fff;
+  background: var(--select-options-background-color);
 }
 
 .dms-select-options {
   position: fixed;
-  background-color: #fff;
-  border: solid 1px #CCC;
+  background-color: var(--select-options-background-color);
+  border: solid 1px var(--select-options-border-color);
   border-radius: 2px;
   font-size: 14px;
-  color: #444;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  color: var(--select-options-text-color);
+  box-shadow: 1px 1px 1px 1px var(--select-options-box-shadow-color);
   z-index: 20;
   cursor: pointer;
 }
@@ -159,10 +210,10 @@ h4.dms-heading {
 }
 
 .dms-select-options .option.active {
-  background: #FAFAF0;
+  color: var(--select-active-option-color);
 }
 
 .dms-select-options .option:focus,
 .dms-select-options .option:hover {
-  color: #52B415;
+  background-color: var(--select-option-hover-background-color);
 }

@@ -1,3 +1,21 @@
+.dmn-decision-table-container {
+  --allowed-values-placeholder-color: var(--gray-80);
+  --create-inputs-border-color: var(--medium-light-gray);
+  --create-inputs-color: var(--medium-light-gray);
+  --create-inputs-hover-color: var(--medium-dark-gray-shade-2);
+  --context-menu-background-color: var(--white);
+  --context-menu-border-color: var(--gray-80);
+  --context-menu-color: var(--medium-dark-gray-shade-2);
+  --context-menu-box-shadow-color: var(--black-opacity-0-1);
+  --context-menu-description-editor-border-left-color: var(--medium-dark-gray-shade-2);
+  --context-menu-group-entry-hover-background-color: var(--white-smoke);
+  --context-menu-group-entry-disabled-color: var(--gray-80);
+  --context-menu-group-entry-border-bottom-color: var(--silver-darken-80);
+  --form-control-label-color: var(--suva-grey);
+  --hint-color: var(--medium-light-gray-shade-2);
+  --drag-icon-color: var(--medium-light-gray-shade-3);
+  --drag-icon-hover-color: var(--medium-dark-gray-shade-2);
+}
 
 /* simple string edit */
 .dmn-decision-table-container .simple-string-edit,
@@ -15,14 +33,14 @@
 }
 
 .dmn-decision-table-container .allowed-values-edit .placeholder {
-  color: #ccc;
+  color: var(--allowed-values-placeholder-color);
 }
 
 /** create inputs **/
 .dmn-decision-table-container .create-inputs {
   white-space: normal;
-  border-color: #AAA;
-  color: #AAA;
+  border-color: var(--create-inputs-border-color);
+  color: var(--create-inputs-color);
   min-width: 50px;
   width: 50px;
 }
@@ -34,8 +52,8 @@
 }
 
 .dmn-decision-table-container .create-inputs:hover {
-  border-color: #444;
-  color: #444;
+  border-color: var(--create-inputs-hover-color);
+  color: var(--create-inputs-hover-color);
 }
 
 .dmn-decision-table-container th.create-inputs {
@@ -47,13 +65,13 @@
 /* TODO(nikku): namespace and refactor context menu styles */
 .dmn-decision-table-container .context-menu {
   position: absolute;
-  background: #fff;
-  border: solid 1px #CCC;
+  background: var(--context-menu-background-color);
+  border: solid 1px var(--context-menu-border-color);
   border-radius: 2px;
   font-size: 14px;
-  color: #444;
+  color: var(--context-menu-color);
   z-index: 10;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 1px 1px var(--context-menu-box-shadow-color);
 }
 
 .dmn-decision-table-container .context-menu .context-menu-container {
@@ -80,12 +98,12 @@
 }
 
 .dmn-decision-table-container .context-menu-group .context-menu-group-entry:hover {
-  background-color: #efefef;
+  background-color: var(--context-menu-group-entry-hover-background-color);
 }
 
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry.disabled {
   pointer-events: none;
-  color: #ccc;
+  color: var(--context-menu-group-entry-disabled-color);
 }
 
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
@@ -105,7 +123,7 @@
   display: block;
 
   margin: 0 8px;
-  border-bottom: 1px solid #cdcdcd;
+  border-bottom: 1px solid var(--context-menu-group-entry-border-bottom-color);
   height: 1px;
 }
 
@@ -145,7 +163,7 @@
   margin: unset;
   margin-bottom: 6px;
 
-  color: #909090;
+  color: var(--form-control-label-color);
   font-weight: normal;
 }
 
@@ -174,7 +192,7 @@
 .dmn-decision-table-container p.dms-hint {
   font-size: 0.85em;
   margin-top: 5px;
-  color: #888;
+  color: var(--hint-color);
 }
 
 /* drag and drop */
@@ -191,7 +209,7 @@
 
 .dmn-decision-table-container th:hover .dmn-icon-drag,
 .dmn-decision-table-container td:hover .dmn-icon-drag {
-  color: #999;
+  color: var(--drag-icon-color);
 }
 
 .dmn-decision-table-container .input-cell:hover .clause,
@@ -208,7 +226,7 @@
 }
 
 .dmn-icon-drag:hover {
-  color: #444;
+  color: var(--drag-icon-hover-color);
 }
 
 /* description editor */
@@ -217,7 +235,7 @@
   margin: 0;
   padding: 5px 0;
   width: 192px;
-  border-left: solid 3px #444;
+  border-left: solid 3px var(--context-menu-description-editor-border-left-color);
 }
 
 .dmn-decision-table-container .description-editor .dms-input {

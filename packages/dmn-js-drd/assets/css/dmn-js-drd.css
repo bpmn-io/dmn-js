@@ -1,4 +1,12 @@
 .dmn-drd-container {
+  --drill-down-overlay-background-color: var(--blue-base-65);
+  --drill-down-overlay-color: var(--white);
+  --dmn-definitions-background-color: var(--gray-98);
+  --dmn-definitions-border-color: var(--gray-80);
+  --dmn-definitions-editable-content-focus-color: var(--medium-light-gray);
+}
+
+.dmn-drd-container {
   width: 100%;
   height: 100%;
   position: relative;
@@ -10,8 +18,8 @@
 
 .djs-overlay .drill-down-overlay {
   font-size: 16px;
-  background: #52b415;
-  color: white;
+  background: var(--drill-down-overlay-background-color);
+  color: var(--drill-down-overlay-color);
   text-align: left;
   border-radius: 1px;
   padding: 0 2px;
@@ -21,8 +29,8 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #FAFAFA;
-  border: solid 1px #CCC;
+  background-color: var(--dmn-definitions-background-color);
+  border: solid 1px var(--dmn-definitions-border-color);
   border-radius: 2px;
   padding: 4px;
 }
@@ -51,7 +59,7 @@
   padding: 2px;
   background-color: white;
   border-radius: 2px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid var(--dmn-definitions-editable-content-focus-color);
 }
 
 .djs-container.with-palette .dmn-definitions {
