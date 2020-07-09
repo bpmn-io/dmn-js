@@ -6,6 +6,37 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.0.0
+
+* `FEAT`: add decision table columns resizing ([#500](https://github.com/bpmn-io/dmn-js/issues/500))
+* `FEAT`: move drag'n'drop handle to top left of decision table head cells ([`518bfd5`](https://github.com/bpmn-io/dmn-js/commit/518bfd5d403c708d8539f90ccea5223da88d6fa2))
+* `FEAT`: move hit policy explanations to title prop ([`be21448`](https://github.com/bpmn-io/dmn-js/commit/be2144819ce3c70c0b638c123cd1be2c76fcb370))
+* `FEAT`: wrap decision rule cells content ([`844a505`](https://github.com/bpmn-io/dmn-js/commit/844a505bd8ca3c0853e12052d1172eb64ebce569))
+* `FEAT`: re-design decision table head ([`5734b49`](https://github.com/bpmn-io/dmn-js/commit/5734b4930dd6814800bf882a508f609633811315))
+* `FEAT`: re-design literal expression layout ([#515](https://github.com/bpmn-io/dmn-js/issues/515))
+* `FEAT`: pass actual event to blur and focus handlers for EditableComponent ([`93c1d92`](https://github.com/bpmn-io/dmn-js/commit/93c1d92f69b98579cf44dcf3d931cd76f64fe6c4))
+* `FEAT`: display FEEL as default expression language for inputs ([#527](https://github.com/bpmn-io/dmn-js/issues/527))
+* `FEAT`: center placeholder for empty input rules ([#533](https://github.com/bpmn-io/dmn-js/issues/533))
+* `FEAT`: set `.empty` class on EditableComponent ([`f52cb3e`](https://github.com/bpmn-io/dmn-js/commit/f52cb3e6aa71a70fad831121137d302267508b84))
+* `FIX`: correctly display decision table bottom borders ([#540](https://github.com/bpmn-io/dmn-js/issues/540))
+* `FIX`: correct title for add output button ([#532](https://github.com/bpmn-io/dmn-js/pull/532))
+* `FIX`: set correct active view when views change ([#528](https://github.com/bpmn-io/dmn-js/issues/528))
+* `CHORE`: bump to dmn-moddle@9.1.0
+* `CHORE`: bump to table-js@6.1.0
+
+### Breaking Changes
+
+* Dropped IE 11 support. Migrate to modern browsers or use 8.x series.
+* Literal expression and decision table viewers no longer allow to change decision ID. Use [dmn-js-properties-panel](https://github.com/bpmn-io/dmn-js-properties-panel) or other custom module to allow that.
+
+## 8.4.0-alpha.0
+
+* `FEAT`: rework input/output editing ([#501](https://github.com/bpmn-io/dmn-js/issues/501))
+* `FEAT`: allow to provide custom label component for List ([`f99bae4`](https://github.com/bpmn-io/dmn-js/commit/f99bae43faad675e02ac2a50370fdfb5e6c0caa8))
+* `FEAT`: rework decision table head ([#497](https://github.com/bpmn-io/dmn-js/issues/497), [#498](https://github.com/bpmn-io/dmn-js/issues/498), [#499](https://github.com/bpmn-io/dmn-js/issues/499))
+* `FEAT`: rework context menu for input/output columns ([#495](https://github.com/bpmn-io/dmn-js/issues/495))
+* `FIX`: fire `views.changed` only on actual change ([#388](https://github.com/bpmn-io/dmn-js/issues/388))
+
 ## 8.3.1
 
 * `FIX`: allow to connect text annotations in both directions ([#519](https://github.com/bpmn-io/dmn-js/pull/519))
