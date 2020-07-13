@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.0.1
+
+* `FIX`: open input/output editing at correct position ([#545](https://github.com/bpmn-io/dmn-js/pull/545))
+
 ## 9.0.0
 
 * `FEAT`: add decision table columns resizing ([#500](https://github.com/bpmn-io/dmn-js/issues/500))
