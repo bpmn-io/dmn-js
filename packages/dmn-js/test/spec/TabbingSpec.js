@@ -78,7 +78,7 @@ insertCSS('tabs.css', `
 
   .editor-tabs .tab.active,
   .editor-tabs .tab:hover {
-    border-bottom: solid 3px #52b415;
+    border-bottom: solid 3px #4D90FF;
     margin-bottom: 0;
   }
 `);
