@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: complete direct-editing after drill down ([#547](https://github.com/bpmn-io/dmn-js/issues/547))
+
 ## 9.0.1
 
 * `FIX`: open input/output editing at correct position ([#545](https://github.com/bpmn-io/dmn-js/pull/545))
