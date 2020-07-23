@@ -8,6 +8,7 @@ import autoPlaceModule from 'lib/features/auto-place';
 import coreModule from 'src/core';
 import createModule from 'diagram-js/lib/features/create';
 import draggingModule from 'diagram-js/lib/features/dragging';
+import drillDownModule from 'src/features/drill-down';
 import labelEditingModule from 'src/features/label-editing';
 import modelingModule from 'src/features/modeling';
 
@@ -31,6 +32,7 @@ describe('features - label-editing', function() {
     coreModule,
     createModule,
     draggingModule,
+    drillDownModule,
     labelEditingModule,
     modelingModule
   ];
@@ -145,6 +147,33 @@ describe('features - label-editing', function() {
       // change + <element.mousedown>
 
       eventBus.fire('element.mousedown', { element: canvas.getRootElement() });
+
+      // then
+      expect(directEditing.isActive()).to.be.false;
+      expect(decision.name).to.equal(newName);
+    }
+  ));
+
+
+  it('should complete on drill down click', inject(
+    function(elementRegistry, directEditing, eventBus) {
+
+      // given
+      var shape = elementRegistry.get('dish-decision'),
+          decision = shape.businessObject;
+
+      // activate
+      eventBus.fire('element.dblclick', { element: shape });
+
+      var newName = 'CHANGED';
+
+      // a <textarea /> element
+      var content = directEditing._textbox.content;
+
+      content.innerText = newName;
+
+      // when
+      eventBus.fire('drillDown.click');
 
       // then
       expect(directEditing.isActive()).to.be.false;

@@ -1,10 +1,10 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "scripts": {
     "test": "karma start",
-    "build": "del-cli lib && babel -s -q -d lib src",
+    "build": "shx rm -rf lib && babel -s -q -d lib src",
     "dev": "npm test -- --no-single-run --auto-watch",
     "prepublishOnly": "npm run build"
   },

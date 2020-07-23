@@ -34,6 +34,7 @@ export default function LabelEditingProvider(
     'autoPlace.start',
     'canvas.viewbox.changing',
     'drag.init',
+    'drillDown.click',
     'element.mousedown',
     'popupMenu.open'
   ], function() {
