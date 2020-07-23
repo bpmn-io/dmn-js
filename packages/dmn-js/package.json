@@ -8,7 +8,7 @@
     "test:distro": "node tasks/test-distro.js",
     "distro": "node tasks/build-distro.js",
     "prepublishOnly": "run-s build distro test:distro",
-    "build": "del-cli lib && babel -s -q -d lib src"
+    "build": "shx rm -rf lib && babel -s -q -d lib src"
   },
   "main": "./lib/index.js",
   "author": {
