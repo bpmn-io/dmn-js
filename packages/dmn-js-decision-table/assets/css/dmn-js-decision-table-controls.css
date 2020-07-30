@@ -9,6 +9,11 @@
   width: 300px;
 }
 
+.dmn-decision-table-container .allowed-values-edit .dms-form-control {
+  display: flex;
+  flex-direction: column;
+}
+
 .dmn-decision-table-container .allowed-values-edit .values {
   display: flex;
   flex-wrap: wrap;
