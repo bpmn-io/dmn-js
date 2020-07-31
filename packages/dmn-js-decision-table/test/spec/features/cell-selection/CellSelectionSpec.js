@@ -1,3 +1,5 @@
+import TestContainer from 'mocha-test-container-support';
+
 import {
   bootstrapModeler,
   inject,
@@ -22,6 +24,8 @@ import PropertiesEditorModule from 'src/features/decision-table-properties/edito
 import ModelingModule from 'src/features/modeling';
 
 import testDiagram from './cell-selection.dmn';
+
+/* global sinon */
 
 
 describe('features/cell-selection', function() {
@@ -209,6 +213,32 @@ describe('features/cell-selection', function() {
     });
   });
 
+
+  describe('integration', function() {
+
+    let container, spy;
+
+    beforeEach(function() {
+      spy = sinon.spy();
+      container = TestContainer.get(this);
+
+      container.addEventListener('click', spy);
+    });
+
+    afterEach(function() {
+      container.removeEventListener('click', spy);
+    });
+
+
+    it('should allow click events to bubble up', function() {
+
+      // when
+      click('outputEntry5');
+
+      // then
+      expect(spy).to.have.been.calledOnce;
+    });
+  });
 });
 
 
