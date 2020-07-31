@@ -1,7 +1,8 @@
 import { bootstrapModeler } from 'test/helper';
 
 import {
-  query as domQuery
+  query as domQuery,
+  queryAll as domQueryAll
 } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
@@ -161,6 +162,66 @@ describe('column resize', function() {
     const finalWidth = widthAsNumber(getComputedStyle(annotationHeader).width);
 
     expect(finalWidth).to.be.eql(400);
+  });
+
+
+  it('should extend hitbox for last input', function() {
+
+    // given
+    const inputResizeHandles = domQueryAll(
+      '.input-cell .resize-column-handle', testContainer);
+
+    // when
+    const { width, right } = inputResizeHandles[1].style;
+
+    // then
+    expect(width).to.eql('27px');
+    expect(right).to.eql('-7px');
+  });
+
+
+  it('should extend hitbox for last output', function() {
+
+    // given
+    const outputResizeHandles = domQueryAll(
+      '.input-cell .resize-column-handle', testContainer);
+
+    // when
+    const { width, right } = outputResizeHandles[1].style;
+
+    // then
+    expect(width).to.eql('27px');
+    expect(right).to.eql('-7px');
+  });
+
+
+  it('should NOT change hitbox for first input', function() {
+
+    // given
+    const inputResizeHandle = domQuery(
+      '.input-cell .resize-column-handle', testContainer);
+
+    // when
+    const { width, right } = inputResizeHandle.style;
+
+    // then
+    expect(width).to.eql('');
+    expect(right).to.eql('');
+  });
+
+
+  it('should NOT change hitbox for first output', function() {
+
+    // given
+    const outputResizeHandle = domQuery(
+      '.output-cell .resize-column-handle', testContainer);
+
+    // when
+    const { width, right } = outputResizeHandle.style;
+
+    // then
+    expect(width).to.eql('');
+    expect(right).to.eql('');
   });
 });
 

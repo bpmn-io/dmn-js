@@ -6,7 +6,7 @@ import {
   closest as domClosest
 } from 'min-dom';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is, getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export default class ResizeColumn extends Component {
@@ -15,6 +15,26 @@ export default class ResizeColumn extends Component {
     super(props, context);
 
     inject(this);
+  }
+
+  componentDidMount() {
+    const root = this.getRoot();
+
+    this.changeSupport.onElementsChanged(root, this.onElementsChanged);
+  }
+
+  componentWillUnmount() {
+    const root = this.getRoot();
+
+    this.changeSupport.offElementsChanged(root, this.onElementsChanged);
+  }
+
+  getRoot() {
+    return this.sheet.getRoot();
+  }
+
+  onElementsChanged = () => {
+    this.forceUpdate();
   }
 
   handleMouseDown = event => {
@@ -42,12 +62,34 @@ export default class ResizeColumn extends Component {
     this.modeling.updateProperties(col, update);
   }
 
+  isLastInputOrOutput() {
+    const { col } = this.props,
+          root = this.getRoot(),
+          bo = getBusinessObject(root);
+
+    if (is(col, 'dmn:InputClause')) {
+      const inputs = bo.get('input');
+
+      return inputs.indexOf(col) === inputs.length - 1;
+    } else if (is(col, 'dmn:OutputClause')) {
+      const outputs = bo.get('output');
+
+      return outputs.indexOf(col) === outputs.length - 1;
+    }
+  }
+
   render() {
+    const style = this.isLastInputOrOutput() ? {
+      right: '-7px',
+      width: '27px'
+    } : null;
+
     return (
       <div
         onMouseDown={ this.handleMouseDown }
         className="resize-column-handle"
         title={ this.translate('Resize') }
+        style={ style }
       />
     );
   }
