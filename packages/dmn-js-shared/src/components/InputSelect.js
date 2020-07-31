@@ -30,7 +30,7 @@ export default class InputSelect extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.onGlobalClick);
+    document.addEventListener('mousedown', this.onGlobalClick);
     document.addEventListener('focusin', this.onFocusChanged);
 
     this.keyboard.addListener(this.onKeyboard);
@@ -38,7 +38,7 @@ export default class InputSelect extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('focusin', this.onFocusChanged);
-    document.removeEventListener('click', this.onGlobalClick);
+    document.removeEventListener('mousedown', this.onGlobalClick);
 
     this.keyboard.removeListener(this.onKeyboard);
 
