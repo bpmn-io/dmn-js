@@ -1,20 +1,26 @@
 .dmn-decision-table-container {
   --allowed-values-placeholder-color: var(--color-cccccc);
+
+  --cell-description-editor-border-color: var(--color-444444);
+
   --create-inputs-border-color: var(--color-aaaaaa);
   --create-inputs-color: var(--color-aaaaaa);
   --create-inputs-hover-color: var(--color-444444);
-  --context-menu-background-color: var(--white);
+
+  --context-menu-background-color: var(--color-ffffff);
   --context-menu-border-color: var(--color-cccccc);
   --context-menu-color: var(--color-444444);
-  --context-menu-box-shadow-color: var(--black-opacity-10);
-  --context-menu-description-editor-border-left-color: var(--color-444444);
-  --context-menu-group-entry-hover-background-color: var(--color-efefef);
+  --context-menu-box-shadow-color: var(--color-000000-opacity-10);
+  --context-menu-group-entry-border-color: var(--silver-darken-80);
   --context-menu-group-entry-disabled-color: var(--color-cccccc);
-  --context-menu-group-entry-border-bottom-color: var(--silver-darken-80);
+  --context-menu-group-entry-hover-background-color: var(--color-efefef);
+
+  --drag-and-drop-handle-color: var(--color-999999);
+  --drag-and-drop-handle-hover-color: var(--color-444444);
+
   --form-control-label-color: var(--color-909090);
+
   --hint-color: var(--color-888888);
-  --drag-icon-color: var(--color-999999);
-  --drag-icon-hover-color: var(--color-444444);
 }
 
 /* simple string edit */
@@ -128,7 +134,7 @@
   display: block;
 
   margin: 0 8px;
-  border-bottom: 1px solid var(--context-menu-group-entry-border-bottom-color);
+  border-bottom: 1px solid var(--context-menu-group-entry-border-color);
   height: 1px;
 }
 
@@ -214,7 +220,7 @@
 
 .dmn-decision-table-container th:hover .dmn-icon-drag,
 .dmn-decision-table-container td:hover .dmn-icon-drag {
-  color: var(--drag-icon-color);
+  color: var(--drag-and-drop-handle-color);
 }
 
 .dmn-decision-table-container .input-cell:hover .clause,
@@ -231,7 +237,7 @@
 }
 
 .dmn-icon-drag:hover {
-  color: var(--drag-icon-hover-color);
+  color: var(--drag-and-drop-handle-hover-color);
 }
 
 /* description editor */
@@ -240,7 +246,7 @@
   margin: 0;
   padding: 5px 0;
   width: 192px;
-  border-left: solid 3px var(--context-menu-description-editor-border-left-color);
+  border-left: solid 3px var(--cell-description-editor-border-color);
 }
 
 .dmn-decision-table-container .description-editor .dms-input {
