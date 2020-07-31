@@ -233,12 +233,13 @@
 /* end description editor */
 
 .dmn-decision-table-container .resize-column-handle {
-  width: 20px;
+  width: 25px;
   height: 100%;
 
   position: absolute;
   top: 0;
-  right: 0;
+  right: -5px;
+  z-index: 1;
 
   cursor: col-resize;
 }
