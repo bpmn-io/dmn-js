@@ -512,6 +512,10 @@
 /* end cell expression language */
 
 /* drag and drop */
+.dmn-decision-table-container .dragover {
+  position: relative;
+}
+
 .dmn-decision-table-container .dragover:before {
   content: '';
   display: block;
