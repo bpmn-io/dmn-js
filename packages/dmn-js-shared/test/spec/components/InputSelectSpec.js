@@ -175,6 +175,30 @@ describe('components/InputSelect', function() {
     });
 
 
+    it('should hide options on mousedown event outside', function() {
+
+      // given
+      const renderedTree = renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect
+            options={ OPTIONS } />
+        </DiContainer>
+      );
+
+      const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+      triggerClick(input);
+
+      // when
+      triggerMouseEvent(testContainer, 'mousedown');
+
+      // then
+      const options = findRenderedDOMElementWithClass(renderedTree, 'options');
+
+      expect(options).to.not.exist;
+    });
+
+
     describe('keyboard controls', function() {
 
       const ARROW_DOWN_KEY = 40;
