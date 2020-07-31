@@ -1,44 +1,55 @@
 .dmn-decision-table-container {
-  --text-color: var(--color-444444);
-  --table-border-color: var(--color-444444);
-  --table-thead-color: var(--color-444444);
-  --table-th-color: var(--color-444444);
-  --table-tr-border-left-color: var(--color-444444);
-  --table-tr-nth-child-background-color: var(--color-f8f8f8);
-  --selected-border-color: var(--blue-darken-48);
-  --dmn-decision-table-container-selected-not-focused-border-color: var(--blue-base-65);
-  --tfoot-add-rule-border-color: var(--color-aaaaaa);
-  --tfoot-add-rule-color: var(--color-aaaaaa);
-  --tfoot-add-rule-hover-border-color: var(--color-444444);
-  --tfoot-add-rule-hover-color: var(--color-444444);
-  --header-separator-border-left-color: var(--color-bfbfbf);
-  --hit-policy-explanation-color: var(--color-545454);
-  --output-variable-color: var(--color-545454);
   --action-icon-color: var(--blue-base-65);
   --action-icon-hover-background-color: var(--blue-darken-48);
-  --action-icon-hover-color: var(--white);
-  --add-output-icon-color: var(--white);
-  --add-output-icon-background-color: var(--color-545454);
-  --view-drd-button-background-color: var(--white);
-  --view-drd-button-border-color: var(--color-cccccc);
-  --view-drd-button-color: var(--color-444444);
-  --view-drd-button-hover-background-color: var(--color-f6f6f6);
-  --powered-by-overlay-background-color: var(--black-opacity-20);
-  --powered-by-overlay-content-background-color: var(--white);
+  --action-icon-hover-color: var(--color-ffffff);
+  
+  --add-column-icon-color: var(--color-ffffff);
+  --add-column-icon-background-color: var(--color-545454);
+
+  --decision-table-color: var(--color-444444);
+  
+  --dmn-expression-language-background-color: var(--blue-darken-48-opacity-30);
+  --dmn-expression-language-color: var(--color-ffffff);
+  --dmn-expression-language-hover-background-color: var(--blue-base-65);
+  
+  --drag-and-drop-drag-color: var(--color-999999);
+  --drag-and-drop-drop-marker-color: var(--color-666666);
+  
+  --hit-policy-explanation-color: var(--color-545454);
+  
+  --powered-by-overlay-background-color: var(--color-000000-opacity-20);
+  --powered-by-overlay-content-background-color: var(--color-ffffff);
   --powered-by-overlay-content-color: var(--color-444444);
   --powered-by-overlay-content-border-color: var(--color-cccccc);
   --powered-by-overlay-content-logo-color: var(--color-404040);
+  
   --simple-mode-button-color: var(--color-444444);
   --simple-mode-button-background-color: var(--color-f6f6f6);
-  --simple-mode-button-background: var(--white);
   --simple-mode-button-border-color: var(--color-cccccc);
-  --simple-mode-button-box-shadow-color: var(--black-opacity-10);
-  --simple-mode-button-disabled-hover-color: var(--color-cccccc);
-  --dmn-expression-language-background-color: var(--blue-darken-48-opacity-30);
-  --dmn-expression-language-color: var(--white);
-  --dmn-expression-language-hover-background-color: var(--blue-base-65);
-  --dragover-before-background-color: var(--color-666666);
-  --dragged-color: var(--color-999999);
+  --simple-mode-button-box-shadow-color: var(--color-000000-opacity-10);
+  --simple-mode-button-disabled-color: var(--color-cccccc);
+  
+  --table-border-color: var(--color-444444);
+  
+  --table-cell-border-color: var(--color-444444);
+  --table-cell-selected-outline-color: var(--blue-darken-48);
+
+  --table-foot-add-rule-border-color: var(--color-aaaaaa);
+  --table-foot-add-rule-color: var(--color-aaaaaa);
+  --table-foot-add-rule-hover-border-color: var(--color-444444);
+  --table-foot-add-rule-hover-color: var(--color-444444);
+  
+  --table-head-border-color: var(--color-444444);
+  --table-head-clause-color: var(--color-545454);
+  --table-head-separator-color: var(--color-bfbfbf);
+  --table-head-variable-color: var(--color-545454);
+  
+  --table-row-alternative-background-color: var(--color-f8f8f8);
+
+  --view-drd-button-background-color: var(--color-ffffff);
+  --view-drd-button-border-color: var(--color-cccccc);
+  --view-drd-button-color: var(--color-444444);
+  --view-drd-button-hover-background-color: var(--color-f6f6f6);
 
   width: 100%;
   height: 100%;
@@ -58,7 +69,7 @@
 /* basic styles */
 
 .dmn-decision-table-container {
-  color: var(--text-color);
+  color: var(--table-color);
 
   max-height: 100%;
 }
@@ -95,21 +106,21 @@
 }
 
 .dmn-decision-table-container table thead {
-  border-bottom: 3px double var(--table-thead-color);
+  border-bottom: 3px double var(--table-head-border-color);
 }
 
 .dmn-decision-table-container td,
 .dmn-decision-table-container th {
-  border: solid 1px var(--table-th-color);
+  border: solid 1px var(--table-cell-border-color);
   padding: 4px;
 }
 
 .dmn-decision-table-container .tjs-table tr .output-cell {
-  border-left: 3px double var(--table-tr-border-left-color);
+  border-left: 3px double var(--table-cell-border-color);
 }
 
 .dmn-decision-table-container .tjs-table tr .output-cell + .output-cell {
-  border-left: 1px solid var(--table-tr-border-left-color);
+  border-left: 1px solid var(--table-cell-border-color);
 }
 
 .dmn-decision-table-container .tjs-table tr .annotation {
@@ -141,7 +152,7 @@
 }
 
 .dmn-decision-table-container .tjs-table tbody tr:nth-child(2n) {
-  background-color: var(--table-tr-nth-child-background-color);
+  background-color: var(--table-row-alternative-background-color);
 }
 
 .dmn-decision-table-container .input-cell.add-rule,
@@ -166,7 +177,7 @@
 }
 
 .dmn-decision-table-container .selected {
-  outline: var(--selected-border-color);;
+  outline: var(--table-cell-selected-outline-color);
   outline-offset: -1px;
 }
 
@@ -184,17 +195,17 @@
 }
 
 .dmn-decision-table-container tfoot.add-rule td {
-  border-color: var(--tfoot-add-rule-border-color);
-  color: var(--tfoot-add-rule-color);
+  border-color: var(--table-foot-add-rule-border-color);
+  color: var(--table-foot-add-rule-color);
 }
 
 .dmn-decision-table-container tfoot.add-rule:hover td {
-  border-color: var(--tfoot-add-rule-hover-border-color);
-  color: var(--tfoot-add-rule-hover-color);
+  border-color: var(--table-foot-add-rule-hover-border-color);
+  color: var(--table-foot-add-rule-hover-color);
 }
 
 .dmn-decision-table-container tfoot.add-rule .output-cell {
-  border-left-color: var(--tfoot-add-rule-border-color);
+  border-left-color: var(--table-foot-add-rule-border-color);
 }
 
 
@@ -236,7 +247,7 @@
   grid-row: 2;
 
   display: flex;
-  border: 1px solid black;
+  border: 1px solid var(--color-000000);
   border-bottom: none;
   padding: 10px;
 
@@ -270,7 +281,7 @@
   display: inline-block;
   height: 32px;
 
-  border-left: 2px solid var(--header-separator-border-left-color);
+  border-left: 2px solid var(--table-head-separator-color);
 
   margin: 0 10px;
 }
@@ -314,12 +325,17 @@
 }
 
 .dmn-decision-table-container thead .input-cell .clause,
-.dmn-decision-table-container thead .output-cell .clause,
+.dmn-decision-table-container thead .output-cell .clause {
+  font-size: 12px;
+
+  color: var(--table-head-clause-color);
+}
+
 .dmn-decision-table-container thead .input-cell .input-variable,
 .dmn-decision-table-container thead .output-cell .output-variable {
   font-size: 12px;
 
-  color: var(--output-variable-color);
+  color: var(--table-head-variable-color);
 }
 
 .dmn-decision-table-container thead .input-cell .clause,
@@ -365,8 +381,8 @@
 
   border-radius: 50%;
 
-  color: var(--add-output-icon-color);
-  background-color: var(--add-output-icon-background-color);
+  color: var(--add-column-icon-color);
+  background-color: var(--add-column-icon-background-color);
 }
 
 .dmn-decision-table-container .input-editor .add-input,
@@ -471,7 +487,6 @@
   color: var(--simple-mode-button-color);
   background-color: var(--simple-mode-button-background-color);
   position: absolute;
-  background: var(--simple-mode-button-background);
   padding: 4px;
   border-radius: 2px;
   border: solid 1px var(--simple-mode-button-border-color);
@@ -488,7 +503,7 @@
 
 .dmn-decision-table-container .simple-mode-button.disabled,
 .dmn-decision-table-container .simple-mode-button.disabled:hover {
-  color: var(--simple-mode-button-disabled-hover-color);
+  color: var(--simple-mode-button-disabled-olor);
 }
 
 /* end simple mode  */
@@ -557,7 +572,7 @@
   content: '';
   display: block;
   position: absolute;
-  background-color: var(--dragover-before-background-color);
+  background-color: var(--drag-and-drop-drop-marker-color);
   border-radius: 5px;
   z-index: 2;
   pointer-events: none;
@@ -596,7 +611,7 @@
 }
 
 .dmn-decision-table-container .dragged {
-  color: var(--dragged-color);
+  color: var(--drag-and-drop-drag-color);
 }
 
 /* cell description */
@@ -607,7 +622,7 @@
   right: -4px;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid var(--color-000000);
   transform: rotate(45deg);
   transform-origin: top;
 }
