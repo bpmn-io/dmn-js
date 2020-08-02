@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.1.0
+
+* `FEAT`: align colors with Camunda Modeler ([#542](https://github.com/bpmn-io/dmn-js/pull/542))
+* `FIX`: correct target indicator for drag and drop ([#557](https://github.com/bpmn-io/dmn-js/pull/557))
+* `FIX`: correct layout in decision tables ([`a66d4140`](https://github.com/bpmn-io/dmn-js/commit/a66d414062e11b73ff6369f680653217f05c6f53))
 * `FIX`: complete direct-editing after drill down ([#547](https://github.com/bpmn-io/dmn-js/issues/547))
 
 ## 9.0.1
