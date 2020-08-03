@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.1.1
+
+* `FIX`: broken style ([`7ac2031e`](https://github.com/bpmn-io/dmn-js/commit/7ac2031ecda2fba4a2e08c79c871663057bec59b))
+
 ## 9.1.0
 
 * `FEAT`: align colors with Camunda Modeler ([#542](https://github.com/bpmn-io/dmn-js/pull/542))
