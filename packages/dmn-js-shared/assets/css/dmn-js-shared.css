@@ -30,7 +30,7 @@
   --color-f8f8f8: #f8f8f8;
   --color-fafafa: #fafafa;
   --color-ffffff: #ffffff;
-  
+
   --hint-button-color: var(--blue-base-65);
   --hint-button-hover-color: var(--blue-darken-48);
   --hint-invalid-color: var(--red-base-62);
@@ -113,9 +113,9 @@ p.dms-hint button {
 p.dms-hint button:hover {
   color: var(--hint-button-hover-color);
 }
-color: var(--hint-invalid-color);
 
-/* validated input */
+p.dms-validation-warning {
+  color: var(--hint-invalid-color);
 }
 
 h3.dms-heading {
