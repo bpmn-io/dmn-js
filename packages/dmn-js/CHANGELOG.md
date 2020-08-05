@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.2.0
+
+* `FEAT`: close select (i.a. decision table hit policy select) whenever there is user interaction outside of it ([#546](https://github.com/bpmn-io/dmn-js/issues/546), [#559](https://github.com/bpmn-io/dmn-js/issues/559))
+* `FEAT`: center decision table resize column hitbox ([#554](https://github.com/bpmn-io/dmn-js/issues/554))
+* `FIX`: remove unnecessary click event cancel action ([#558](https://github.com/bpmn-io/dmn-js/pull/558))
+
 ## 9.1.1
 
 * `FIX`: broken style ([`7ac2031e`](https://github.com/bpmn-io/dmn-js/commit/7ac2031ecda2fba4a2e08c79c871663057bec59b))
