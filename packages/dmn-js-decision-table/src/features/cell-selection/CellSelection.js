@@ -66,8 +66,6 @@ export default function CellSelection(
     const focussed = !event.defaultPrevented;
 
     realSelect(elementId, focussed);
-
-    event.stopPropagation();
   }
 
   function focus(event) {
