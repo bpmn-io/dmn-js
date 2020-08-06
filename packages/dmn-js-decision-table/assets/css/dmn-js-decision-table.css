@@ -162,6 +162,7 @@
 }
 
 .dmn-decision-table-container .cell {
+  position: relative;
   white-space: pre-wrap;
 }
 
