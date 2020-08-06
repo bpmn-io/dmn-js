@@ -16,7 +16,7 @@ export default class DecisionRulesIndexCellComponent extends Component {
       }
     );
 
-    return <td className="rule-index" data-row-id={ row.id }>
+    return <td className="rule-index" data-element-id={ row.id } data-row-id={ row.id }>
       {
         innerComponents
           && innerComponents.map(InnerComponent => {

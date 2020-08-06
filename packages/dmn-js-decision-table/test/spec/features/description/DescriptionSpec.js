@@ -27,6 +27,7 @@ import ModelingModule from 'src/features/modeling';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 import DescriptionModule from 'src/features/description';
 import ContextMenuModule from 'src/features/context-menu';
+import DecisionRuleIndicesModule from 'src/features/decision-rule-indices';
 
 
 describe('description', function() {
@@ -38,7 +39,8 @@ describe('description', function() {
       ModelingModule,
       DecisionRulesEditorModule,
       DescriptionModule,
-      ContextMenuModule
+      ContextMenuModule,
+      DecisionRuleIndicesModule
     ],
     debounceInput: false
   }));
@@ -147,4 +149,16 @@ describe('description', function() {
     expect(hasDescriptionIndicator('inputEntry2')).to.be.false;
   }));
 
+
+  it('should not open description editor for rule index', function() {
+
+    // given
+    const annotation = domQuery('.rule-index', testContainer);
+
+    // when
+    triggerClick(annotation);
+
+    // then
+    expect(queryEditor('.description-editor', testContainer)).to.not.exist;
+  });
 });
