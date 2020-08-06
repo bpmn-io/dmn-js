@@ -1,5 +1,7 @@
 import { isString } from 'min-dash';
 
+import { isAny } from 'dmn-js-shared/lib/util/ModelUtil';
+
 import {
   getNodeById
 } from '../cell-selection/CellSelectionUtil';
@@ -38,7 +40,7 @@ export default class Description {
 
       const element = elementRegistry.get(id);
 
-      if (!element) {
+      if (!isAny(element, [ 'dmn:UnaryTests', 'dmn:LiteralExpression' ])) {
         return;
       }
 

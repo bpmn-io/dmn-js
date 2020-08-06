@@ -25,6 +25,8 @@ import DecisionTableHeadEditorModule from 'src/features/decision-table-head/edit
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'src/features/modeling';
 import DecisionRulesModule from 'src/features/decision-rules';
+import AnnotationsEditorModule from 'src/features/annotations/editor';
+import DecisionRuleIndicesModule from 'src/features/decision-rule-indices';
 
 
 describe('context menu', function() {
@@ -37,7 +39,9 @@ describe('context menu', function() {
       DecisionTableHeadEditorModule,
       InteractionEventsModule,
       ModelingModule,
-      DecisionRulesModule
+      DecisionRulesModule,
+      AnnotationsEditorModule,
+      DecisionRuleIndicesModule
     ]
   }));
 
@@ -48,7 +52,296 @@ describe('context menu', function() {
   });
 
 
-  describe('rules', function() {
+  describe('indices', function() {
+
+    it('should open on right click', function() {
+
+      // given
+      const cell = domQuery('.rule-index[data-element-id="rule1"]', testContainer);
+
+      // when
+      triggerMouseEvent(cell, 'contextmenu');
+
+      // then
+      expect(domQuery('.context-menu', testContainer)).to.exist;
+    });
+
+
+    describe('entries', function() {
+
+      let cell, anotherCell;
+
+      beforeEach(function() {
+        cell = domQuery('.rule-index[data-element-id="rule1"]', testContainer);
+        anotherCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+
+        triggerMouseEvent(cell, 'contextmenu');
+      });
+
+
+      it('should close on click elsewhere', function() {
+
+        // TODO(philippfromme): make this work without timeout
+        setTimeout(() => {
+
+          // when
+          triggerClick(anotherCell);
+
+          // then
+          expect(domQuery('.context-menu', testContainer)).not.to.exist;
+        }, 0);
+      });
+
+
+      it('should contain correct entries', function() {
+
+        // given
+        const contextMenu = domQuery('.context-menu', testContainer),
+              ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
+
+        // then
+        expect(domQueryAll(
+          '.context-menu-group-entry',
+          ruleEntriesGroup
+        )).to.have.lengthOf(7);
+
+        expectEntries([
+          '.context-menu-entry-add-rule-above',
+          '.context-menu-entry-add-rule-below',
+          '.context-menu-entry-remove-rule',
+          '.context-menu-entry-copy-rule',
+          '.context-menu-entry-cut-rule',
+          '.context-menu-entry-paste-rule-above',
+          '.context-menu-entry-paste-rule-below',
+        ], ruleEntriesGroup);
+      });
+
+
+      it('should contain disabled paste entries', function() {
+
+        // given
+        const contextMenu = domQuery('.context-menu', testContainer),
+              ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
+
+        // then
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-rule-above', ruleEntriesGroup)
+        ).has('disabled')).to.be.true;
+
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-rule-below', ruleEntriesGroup)
+        ).has('disabled')).to.be.true;
+      });
+
+
+      describe('actions', function() {
+
+        let rule1, rule2, rule3, rule4;
+
+        beforeEach(inject(function(sheet) {
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          rule1 = rows[0];
+          rule2 = rows[1];
+          rule3 = rows[2];
+          rule4 = rows[3];
+        }));
+
+
+        it('should add rule above', inject(function(sheet) {
+
+          // given
+          const addRuleAboveEntry = domQuery(
+            '.context-menu-entry-add-rule-above',
+            testContainer
+          );
+
+          // when
+          triggerClick(addRuleAboveEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(5);
+
+          expect(rows[1]).to.equal(rule1);
+          expect(rows[2]).to.equal(rule2);
+          expect(rows[3]).to.equal(rule3);
+          expect(rows[4]).to.equal(rule4);
+        }));
+
+
+        it('should add rule below', inject(function(sheet) {
+
+          // given
+          const addRuleBelowEntry = domQuery(
+            '.context-menu-entry-add-rule-below',
+            testContainer
+          );
+
+          // when
+          triggerClick(addRuleBelowEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(5);
+
+          expect(rows[0]).to.equal(rule1);
+          expect(rows[2]).to.equal(rule2);
+          expect(rows[3]).to.equal(rule3);
+          expect(rows[4]).to.equal(rule4);
+        }));
+
+
+        it('should remove rule', inject(function(sheet) {
+
+          // given
+          const removeRuleEntry = domQuery(
+            '.context-menu-entry-remove-rule',
+            testContainer
+          );
+
+          // when
+          triggerClick(removeRuleEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(3);
+
+          expectOrder(rows, [
+            rule2,
+            rule3,
+            rule4
+          ]);
+        }));
+
+
+        it('should copy rule', inject(function(clipboard, sheet) {
+
+          // given
+          const copyRule = domQuery('.context-menu-entry-copy-rule', testContainer);
+
+          // when
+          triggerClick(copyRule);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(4);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        it('should cut rule', inject(function(clipboard, sheet) {
+
+          // given
+          const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer);
+
+          // when
+          triggerClick(cutRuleEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(3);
+
+          expectOrder(rows, [
+            rule2,
+            rule3,
+            rule4
+          ]);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        describe('paste', function() {
+
+          beforeEach(function() {
+            const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer),
+                  cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
+
+            triggerClick(cutRuleEntry);
+
+            // open context menu again
+            triggerMouseEvent(cell, 'contextmenu');
+          });
+
+
+          it('should paste rule above', inject(function(elementRegistry, sheet) {
+
+            // given
+            const pasteRuleAboveEntry = domQuery(
+              '.context-menu-entry-paste-rule-above',
+              testContainer
+            );
+
+            // when
+            triggerClick(pasteRuleAboveEntry);
+
+            // then
+            const newRule1 = elementRegistry.get('rule1');
+
+            const root = sheet.getRoot(),
+                  { rows } = root;
+
+            expect(rows).to.have.lengthOf(4);
+
+            expectOrder(rows, [
+              newRule1,
+              rule2,
+              rule3,
+              rule4
+            ]);
+          }));
+
+
+          it('should paste rule below', inject(function(elementRegistry, sheet) {
+
+            // given
+            const pasteRuleBelowEntry = domQuery(
+              '.context-menu-entry-paste-rule-below',
+              testContainer
+            );
+
+            // when
+            triggerClick(pasteRuleBelowEntry);
+
+            // then
+            const newRule1 = elementRegistry.get('rule1');
+
+            const root = sheet.getRoot(),
+                  { rows } = root;
+
+            expect(rows).to.have.lengthOf(4);
+
+            expectOrder(rows, [
+              rule2,
+              newRule1,
+              rule3,
+              rule4
+            ]);
+          }));
+
+        });
+
+      });
+
+    });
+
+  });
+
+
+  describe('input entries', function() {
 
     it('should open on right click', function() {
 
@@ -70,6 +363,295 @@ describe('context menu', function() {
       beforeEach(function() {
         cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
         anotherCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+
+        triggerMouseEvent(cell, 'contextmenu');
+      });
+
+
+      it('should close on click elsewhere', function() {
+
+        // TODO(philippfromme): make this work without timeout
+        setTimeout(() => {
+
+          // when
+          triggerClick(anotherCell);
+
+          // then
+          expect(domQuery('.context-menu', testContainer)).not.to.exist;
+        }, 0);
+      });
+
+
+      it('should contain correct entries', function() {
+
+        // given
+        const contextMenu = domQuery('.context-menu', testContainer),
+              ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
+
+        // then
+        expect(domQueryAll(
+          '.context-menu-group-entry',
+          ruleEntriesGroup
+        )).to.have.lengthOf(7);
+
+        expectEntries([
+          '.context-menu-entry-add-rule-above',
+          '.context-menu-entry-add-rule-below',
+          '.context-menu-entry-remove-rule',
+          '.context-menu-entry-copy-rule',
+          '.context-menu-entry-cut-rule',
+          '.context-menu-entry-paste-rule-above',
+          '.context-menu-entry-paste-rule-below',
+        ], ruleEntriesGroup);
+      });
+
+
+      it('should contain disabled paste entries', function() {
+
+        // given
+        const contextMenu = domQuery('.context-menu', testContainer),
+              ruleEntriesGroup = domQuery('.context-menu-group-rule', contextMenu);
+
+        // then
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-rule-above', ruleEntriesGroup)
+        ).has('disabled')).to.be.true;
+
+        expect(domClasses(
+          domQuery('.context-menu-entry-paste-rule-below', ruleEntriesGroup)
+        ).has('disabled')).to.be.true;
+      });
+
+
+      describe('actions', function() {
+
+        let rule1, rule2, rule3, rule4;
+
+        beforeEach(inject(function(sheet) {
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          rule1 = rows[0];
+          rule2 = rows[1];
+          rule3 = rows[2];
+          rule4 = rows[3];
+        }));
+
+
+        it('should add rule above', inject(function(sheet) {
+
+          // given
+          const addRuleAboveEntry = domQuery(
+            '.context-menu-entry-add-rule-above',
+            testContainer
+          );
+
+          // when
+          triggerClick(addRuleAboveEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(5);
+
+          expect(rows[1]).to.equal(rule1);
+          expect(rows[2]).to.equal(rule2);
+          expect(rows[3]).to.equal(rule3);
+          expect(rows[4]).to.equal(rule4);
+        }));
+
+
+        it('should add rule below', inject(function(sheet) {
+
+          // given
+          const addRuleBelowEntry = domQuery(
+            '.context-menu-entry-add-rule-below',
+            testContainer
+          );
+
+          // when
+          triggerClick(addRuleBelowEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(5);
+
+          expect(rows[0]).to.equal(rule1);
+          expect(rows[2]).to.equal(rule2);
+          expect(rows[3]).to.equal(rule3);
+          expect(rows[4]).to.equal(rule4);
+        }));
+
+
+        it('should remove rule', inject(function(sheet) {
+
+          // given
+          const removeRuleEntry = domQuery(
+            '.context-menu-entry-remove-rule',
+            testContainer
+          );
+
+          // when
+          triggerClick(removeRuleEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(3);
+
+          expectOrder(rows, [
+            rule2,
+            rule3,
+            rule4
+          ]);
+        }));
+
+
+        it('should copy rule', inject(function(clipboard, sheet) {
+
+          // given
+          const copyRule = domQuery('.context-menu-entry-copy-rule', testContainer);
+
+          // when
+          triggerClick(copyRule);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(4);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        it('should cut rule', inject(function(clipboard, sheet) {
+
+          // given
+          const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer);
+
+          // when
+          triggerClick(cutRuleEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+          expect(rows).to.have.lengthOf(3);
+
+          expectOrder(rows, [
+            rule2,
+            rule3,
+            rule4
+          ]);
+
+          expect(clipboard.isEmpty()).to.be.false;
+        }));
+
+
+        describe('paste', function() {
+
+          beforeEach(function() {
+            const cutRuleEntry = domQuery('.context-menu-entry-cut-rule', testContainer),
+                  cell = domQuery('[data-element-id="inputEntry3"]', testContainer);
+
+            triggerClick(cutRuleEntry);
+
+            // open context menu again
+            triggerMouseEvent(cell, 'contextmenu');
+          });
+
+
+          it('should paste rule above', inject(function(elementRegistry, sheet) {
+
+            // given
+            const pasteRuleAboveEntry = domQuery(
+              '.context-menu-entry-paste-rule-above',
+              testContainer
+            );
+
+            // when
+            triggerClick(pasteRuleAboveEntry);
+
+            // then
+            const newRule1 = elementRegistry.get('rule1');
+
+            const root = sheet.getRoot(),
+                  { rows } = root;
+
+            expect(rows).to.have.lengthOf(4);
+
+            expectOrder(rows, [
+              newRule1,
+              rule2,
+              rule3,
+              rule4
+            ]);
+          }));
+
+
+          it('should paste rule below', inject(function(elementRegistry, sheet) {
+
+            // given
+            const pasteRuleBelowEntry = domQuery(
+              '.context-menu-entry-paste-rule-below',
+              testContainer
+            );
+
+            // when
+            triggerClick(pasteRuleBelowEntry);
+
+            // then
+            const newRule1 = elementRegistry.get('rule1');
+
+            const root = sheet.getRoot(),
+                  { rows } = root;
+
+            expect(rows).to.have.lengthOf(4);
+
+            expectOrder(rows, [
+              rule2,
+              newRule1,
+              rule3,
+              rule4
+            ]);
+          }));
+
+        });
+
+      });
+
+    });
+
+  });
+
+
+  describe('output entries', function() {
+
+    it('should open on right click', function() {
+
+      // given
+      const cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
+
+      // when
+      triggerMouseEvent(cell, 'contextmenu');
+
+      // then
+      expect(domQuery('.context-menu', testContainer)).to.exist;
+    });
+
+
+    describe('entries', function() {
+
+      let cell, anotherCell;
+
+      beforeEach(function() {
+        cell = domQuery('[data-element-id="outputEntry1"]', testContainer);
+        anotherCell = domQuery('[data-element-id="outputEntry2"]', testContainer);
 
         triggerMouseEvent(cell, 'contextmenu');
       });

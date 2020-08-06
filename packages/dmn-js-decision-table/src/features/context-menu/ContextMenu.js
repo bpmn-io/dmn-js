@@ -159,54 +159,55 @@ export default class ContextMenu {
 
     const entries = [];
 
-    if (is(element.row, 'dmn:DecisionRule')) {
+    const row = element.row || element;
+    if (is(row, 'dmn:DecisionRule')) {
       const canPaste = this._rules.allowed('paste', {
         data: clipboardData.elements,
-        target: element.row
+        target: row
       });
 
       entries.push(
         <div className="context-menu-group">
           <div
             className="context-menu-group-entry context-menu-entry-copy-rule"
-            onClick={ () => handlers.copy(element.row) }>
+            onClick={ () => handlers.copy(row) }>
             { this._translate('Copy Rule') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-cut-rule"
-            onClick={ () => handlers.cut(element.row) }>
+            onClick={ () => handlers.cut(row) }>
             { this._translate('Cut Rule') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-rule-above` }
-            onClick={ () => handlers.pasteBefore(element.row) }>
+            onClick={ () => handlers.pasteBefore(row) }>
             { this._translate('Paste Rule Above') }
           </div>
           <div
             className={ `context-menu-group-entry ${ canPaste ? '' : 'disabled' } context-menu-entry-paste-rule-below` }
-            onClick={ () => handlers.pasteAfter(element.row) }>
+            onClick={ () => handlers.pasteAfter(row) }>
             { this._translate('Paste Rule Below') }
           </div>
         </div>,
         <div className="context-menu-group">
           <div
             className="context-menu-group-entry context-menu-entry-add-rule-above"
-            onClick={ () => handlers.addRuleAbove(element.row) }>
+            onClick={ () => handlers.addRuleAbove(row) }>
             { this._translate('Add Rule Above') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-add-rule-below"
-            onClick={ () => handlers.addRuleBelow(element.row) }>
+            onClick={ () => handlers.addRuleBelow(row) }>
             { this._translate('Add Rule Below') }
           </div>
           <div
             className="context-menu-group-entry context-menu-entry-remove-rule"
-            onClick={ () => handlers.removeRule(element.row) }>
+            onClick={ () => handlers.removeRule(row) }>
             { this._translate('Remove Rule') }
           </div>
         </div>
       );
-    } else if (is(element, 'dmn:InputClause') || is(element.col, 'dmn:InputClause')) {
+    } else if (is(element, 'dmn:InputClause')) {
       const actualElement = is(element, 'dmn:InputClause') ? element : element.col;
 
       const canRemove = this._rules.allowed('col.remove', {
