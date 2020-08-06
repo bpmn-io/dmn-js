@@ -56,7 +56,7 @@ export default class EditableAnnotationCell extends Component {
         onChange={ this.setAnnotationValue }
         coords={ `${rowIndex}:annotation` }
         value={ description }
-        elementId={ id + '__annotation' }
+        elementId={ id }
         data-row-id={ row.id }>
 
         <AnnotationEditor
