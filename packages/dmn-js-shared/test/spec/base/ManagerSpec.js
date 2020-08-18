@@ -6,6 +6,7 @@ import TestView from './TestView';
 
 import { spy } from 'sinon';
 
+import { find } from 'min-dash';
 
 class TestViewer extends Manager {
 
@@ -190,7 +191,39 @@ describe('Manager', function() {
 
           done(err);
         });
+      });
 
+
+      it('should accept xml modifications on <import.parse.start>', function(done) {
+
+        // given
+        var viewer = new TestViewer();
+
+        var findElement = function(elements, id) {
+          return !!find(elements, function(element) {
+            return element.id === id;
+          });
+        };
+
+        viewer.once('import.parse.start', function(event) {
+          var xml = event.xml;
+
+          return xml.replace('dish-decision', 'dish-decision1');
+        });
+
+        viewer.on('import.parse.complete', function(event) {
+          var definitions = event.definitions,
+              drgElements = definitions.get('drgElement');
+
+          // then
+          expect(findElement(drgElements, 'dish-decision')).to.be.false;
+          expect(findElement(drgElements, 'dish-decision1')).to.be.true;
+
+          done();
+        });
+
+        // when
+        viewer.importXML(diagramXML);
       });
 
 
