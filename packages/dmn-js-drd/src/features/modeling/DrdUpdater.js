@@ -104,9 +104,9 @@ export default function DrdUpdater(
     self.updateBounds(shape);
   }
 
-  this.executed([ 'shape.create', 'shape.move' ], updateBounds, true);
+  this.executed([ 'shape.create', 'shape.move', 'shape.resize' ], updateBounds, true);
 
-  this.reverted([ 'shape.create', 'shape.move' ], updateBounds, true);
+  this.reverted([ 'shape.create', 'shape.move', 'shape.resize' ], updateBounds, true);
 
   function updateConnectionWaypoints(context) {
     self.updateConnectionWaypoints(context);
