@@ -533,7 +533,7 @@ export default class Manager {
    * Emit an event.
    */
   _emit(...args) {
-    this._eventBus.fire(...args);
+    return this._eventBus.fire(...args);
   }
 
   _createModdle(options) {

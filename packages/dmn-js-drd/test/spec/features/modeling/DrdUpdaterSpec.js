@@ -428,6 +428,29 @@ describe('features/modeling - DrdUpdater', function() {
       }
     ));
 
+
+    it('should update bounds on resize', inject(
+      function(elementRegistry, modeling) {
+
+        // given
+        var textAnnotation = elementRegistry.get('TextAnnotation_1');
+
+        // when
+        modeling.resizeShape(textAnnotation, { width: 150, height: 180, y: 0, x: 400 });
+
+        // then
+        var bo = textAnnotation.businessObject,
+            bounds = getBounds(bo);
+
+        expect(bounds).to.include({
+          x: 400,
+          y: 0,
+          width: 150,
+          height: 180
+        });
+      }
+    ));
+
   });
 
 
