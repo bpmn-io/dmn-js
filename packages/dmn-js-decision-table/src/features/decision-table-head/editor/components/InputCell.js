@@ -117,7 +117,7 @@ export default class InputCell extends Component {
             <div
               className="input-expression"
               title={ this._translate('Input Expression') }>
-              { inputExpression.text || '-' }
+              { inputExpression.text }
             </div>
           )
         }
