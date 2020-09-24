@@ -7,7 +7,7 @@
 
   --literal-expression-properties-border-color: var(--color-444444);
   --literal-expression-properties-color: var(--color-444444);
-  
+
   --powered-by-overlay-background-color: var(--color-000000-opacity-20);
   --powered-by-overlay-content-background-color: var(--color-ffffff);
   --powered-by-overlay-content-border-color: var(--color-cccccc);
@@ -187,15 +187,23 @@
 }
 
 /* powered by */
+.dmn-literal-expression-container {
+  /* required to apply position: fixed correctly */
+  transform: translate(0);
+}
+
 .dmn-literal-expression-container .powered-by {
-  grid-column: 1;
-  grid-row: 2;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 100;
 
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
 
-  padding-right: 10px;
+  padding: 5px;
+  background-color: var(--color-ffffff);
 }
 
 .dmn-literal-expression-container .powered-by__logo {
