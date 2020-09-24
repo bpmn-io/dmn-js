@@ -108,7 +108,7 @@ export default class OutputCell extends Component {
             </div>
           ) : (
             <div className="output-name" title={ this._translate('Output Name') }>
-              { name || '-' }
+              { name }
             </div>
           )
         }
