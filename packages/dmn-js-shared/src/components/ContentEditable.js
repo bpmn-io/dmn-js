@@ -191,11 +191,25 @@ export default class ContentEditable extends Component {
     }
   }
 
+  getClassName() {
+    const {
+      className,
+      placeholder,
+      value
+    } = this.props;
+
+    return [
+      className || '',
+      'content-editable',
+      (!value && placeholder) ? 'content-editable--with-placeholder' : ''
+    ].join(' ');
+  }
+
   render(props) {
 
     var {
       value,
-      className
+      placeholder
     } = props;
 
     // QUIRK: must add trailing <br/> for line
@@ -206,9 +220,10 @@ export default class ContentEditable extends Component {
 
     return (
       <div
-        className={ [ className || '', 'content-editable' ].join(' ') }
+        className={ this.getClassName() }
         contentEditable="true"
         spellcheck="false"
+        data-placeholder={ placeholder || '' }
         onInput={ this.onInput }
         onKeypress={ this.onKeypress }
         onPaste={ this.onPaste }

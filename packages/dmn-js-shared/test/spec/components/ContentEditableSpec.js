@@ -72,6 +72,28 @@ describe('components/ContentEditable', function() {
   });
 
 
+  it('should render placeholder', function() {
+
+    // given
+    const placeholder = 'placeholder';
+
+    // when
+    const node = renderToNode(
+      <ContentEditable
+        className={ 'other' }
+        value={ '' }
+        placeholder={ placeholder }
+      />
+    );
+
+    // then
+    expect(node).to.exist;
+    expect(innerText(node)).to.eql('');
+
+    expect(matches(node, '.content-editable--with-placeholder.other')).to.be.true;
+  });
+
+
   describe('selection', function() {
 
     it('should update on value change', function() {
