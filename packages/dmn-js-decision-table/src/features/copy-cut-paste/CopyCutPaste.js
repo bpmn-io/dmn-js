@@ -110,6 +110,12 @@ export default class CutPaste {
       ...position
     });
 
+    // @bpmn-io: Clear clipboard to work around
+    // https://github.com/camunda/camunda-modeler/issues/1246 which breaks native copy &
+    // paste when row or column is copied or cut
+    this._clipboard.clear();
+
+    // Return true to stop propagation and prevent native paste
     return true;
   }
 
