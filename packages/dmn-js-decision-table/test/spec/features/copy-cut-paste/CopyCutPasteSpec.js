@@ -203,20 +203,8 @@ describe('features/copy-cut-paste', function() {
         // when (paste 2nd time)
         const pastedAgain = copyCutPaste.pasteAfter(newRule);
 
-        expect(rows).to.have.length(6);
-
-        const anotherNewRule = rows[rows.length - 1];
-
-        expect(anotherNewRule).to.exist;
-        expect(pastedAgain).to.be.true;
-
-        const anotherNewRuleBo = anotherNewRule.businessObject;
-
-        expect(anotherNewRuleBo.id).to.not.equal('rule1');
-        expect(anotherNewRuleBo.inputEntry[0].id).to.not.equal('inputEntry1');
-        expect(anotherNewRuleBo.inputEntry[1].id).to.not.equal('inputEntry2');
-        expect(anotherNewRuleBo.outputEntry[0].id).to.not.equal('outputEntry1');
-        expect(anotherNewRuleBo.outputEntry[1].id).to.not.equal('outputEntry1');
+        // then
+        expect(pastedAgain).to.be.undefined;
       }
     ));
 
@@ -251,19 +239,11 @@ describe('features/copy-cut-paste', function() {
         // when (paste 2nd time)
         const pastedAgain = copyCutPaste.pasteAfter(newInput);
 
-        expect(cols).to.have.length(6);
-
-        const anotherNewInput = cols[cols.indexOf(newInput) + 1];
-
-        expect(anotherNewInput).to.exist;
-        expect(pastedAgain).to.be.true;
-
-        const anotherNewInputBo = anotherNewInput.businessObject;
-
-        expect(anotherNewInputBo.id).to.not.equal('input1');
-        expect(anotherNewInputBo.inputExpression.id).to.not.equal('inputExpression1');
+        // then
+        expect(pastedAgain).to.be.undefined;
       }
     ));
+
 
     it('should paste output', inject(
       function(copyCutPaste, elementRegistry, sheet) {
@@ -289,15 +269,10 @@ describe('features/copy-cut-paste', function() {
         expect(newOutput.businessObject.id).to.not.equal('output1');
 
         // when (paste 2nd time)
-        copyCutPaste.pasteAfter(newOutput);
+        const pastedAgain = copyCutPaste.pasteAfter(newOutput);
 
-        expect(cols).to.have.length(6);
-
-        const anotherNewOutput = cols[cols.indexOf(newOutput) + 1];
-
-        expect(anotherNewOutput).to.exist;
-
-        expect(anotherNewOutput.businessObject.id).to.not.equal('output1');
+        // then
+        expect(pastedAgain).to.be.undefined;
       }
     ));
 
@@ -336,21 +311,10 @@ describe('features/copy-cut-paste', function() {
         expect(newRule1Bo.outputEntry[1].id).to.equal('outputEntry2');
 
         // when (paste 2nd time)
-        copyCutPaste.pasteAfter(newRule1);
+        const pastedAgain = copyCutPaste.pasteAfter(newRule1);
 
-        expect(rows).to.have.length(5);
-
-        const newRule = rows[rows.length - 1];
-
-        expect(newRule).to.exist;
-
-        const newRuleBo = newRule.businessObject;
-
-        expect(newRuleBo.id).to.not.equal('rule1');
-        expect(newRuleBo.inputEntry[0].id).to.not.equal('inputEntry1');
-        expect(newRuleBo.inputEntry[1].id).to.not.equal('inputEntry2');
-        expect(newRuleBo.outputEntry[0].id).to.not.equal('outputEntry1');
-        expect(newRuleBo.outputEntry[1].id).to.not.equal('outputEntry1');
+        // then
+        expect(pastedAgain).to.be.undefined;
       }
     ));
 
@@ -382,18 +346,10 @@ describe('features/copy-cut-paste', function() {
         expect(newInput1Bo.inputExpression.id).to.equal('inputExpression1');
 
         // when (paste 2nd time)
-        copyCutPaste.pasteAfter(newInput1);
+        const pastedAgain = copyCutPaste.pasteAfter(newInput1);
 
-        expect(cols).to.have.length(5);
-
-        const newInput = cols[cols.indexOf(newInput1) + 1];
-
-        expect(newInput).to.exist;
-
-        const newInputBo = newInput.businessObject;
-
-        expect(newInputBo.id).to.not.equal('input1');
-        expect(newInputBo.inputExpression.id).to.not.equal('inputExpression1');
+        // then
+        expect(pastedAgain).to.be.undefined;
       }
     ));
 
@@ -422,15 +378,10 @@ describe('features/copy-cut-paste', function() {
         expect(newOutput1.businessObject.id).to.equal('output1');
 
         // when (paste 2nd time)
-        copyCutPaste.pasteAfter(newOutput1);
+        const pastedAgain = copyCutPaste.pasteAfter(newOutput1);
 
-        expect(cols).to.have.length(5);
-
-        const newOutput = cols[cols.indexOf(newOutput1) + 1];
-
-        expect(newOutput).to.exist;
-
-        expect(newOutput.businessObject.id).to.not.equal('output1');
+        // then
+        expect(pastedAgain).to.be.undefined;
       }
     ));
 
