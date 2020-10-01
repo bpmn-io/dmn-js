@@ -4,6 +4,15 @@
 # dmn-js - DMN for the web
 
 [![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=develop)](https://travis-ci.org/bpmn-io/dmn-js)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) 
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
+[![Twitter__follow](https://img.shields.io/twitter/follow/Camunda?style=social)](https://twitter.com/Camunda)
+![npm](https://img.shields.io/npm/v/dmn-js)
+![npm](https://img.shields.io/npm/dw/dmn-js) 
+[![GitHub issues](https://img.shields.io/github/issues-raw/bpmn-io/dmn-js?logo=github)](https://github.com/bpmn-io/dmn-js/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/bpmn-io/dmn-js?logo=git)](https://github.com/bpmn-io/dmn-js/pulls)
+
+
 
 View and edit DMN 1.3 diagrams in the browser.
 
