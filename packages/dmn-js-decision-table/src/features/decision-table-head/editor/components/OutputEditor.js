@@ -11,6 +11,13 @@ export default class OutputEditor extends Component {
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
 
+    this.setNameCheck = (name) => {
+      let chars = [' ', '\t', '\n'];
+      if (!chars.some(char => name.includes(char))) {
+        this.setName(name);
+      }
+    };
+
     this.setName = (name) => {
       name = name || undefined;
 
@@ -62,7 +69,7 @@ export default class OutputEditor extends Component {
           <Input
             className="ref-output-name"
             value={ name || '' }
-            onInput={ this.setName } />
+            onInput={ this.setNameCheck } />
         </div>
       </div>
     );
