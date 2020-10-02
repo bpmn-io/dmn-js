@@ -286,7 +286,7 @@
   border-left: 2px solid var(--table-head-separator-color);
 
   margin: 0 10px;
-  
+  margin-left: auto;
 }
 
 .dmn-decision-table-container .hit-policy {
