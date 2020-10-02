@@ -81,7 +81,6 @@ export default class InputEditor extends Component {
           <ContentEditable
             className="dms-input-label"
             value={ label || '' }
-            placeholder={ this.translate('Input') }
             singleLine
             onInput={ this.handleLabelChange } />
         </div>
