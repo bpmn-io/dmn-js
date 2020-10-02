@@ -47,6 +47,7 @@ export default class OutputEditor extends Component {
           <ContentEditable
             className="dms-output-label"
             value={ label || '' }
+            placeholder={ this.translate('Output') }
             singleLine
             onInput={ this.setLabel } />
         </div>

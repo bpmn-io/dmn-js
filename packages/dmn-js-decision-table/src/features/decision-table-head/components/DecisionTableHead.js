@@ -150,7 +150,7 @@ function DefaultInputHeaderCell(props, context) {
           <div
             className="input-expression"
             title={ translate('Input Expression') }>
-            { inputExpression.text || '-' }
+            { inputExpression.text }
           </div>
         )
       }
@@ -204,7 +204,7 @@ function DefaultOutputHeaderCell(props, context) {
           <div
             className="output-name"
             title={ translate('Output Name') }>
-            { name || '-' }
+            { name }
           </div>
         )
       }

@@ -319,6 +319,16 @@
   text-overflow: ellipsis;
 }
 
+.dmn-decision-table-container thead .input-expression:empty:before {
+  content: 'Input';
+  opacity: 0.5;
+}
+
+.dmn-decision-table-container thead .output-name:empty:before {
+  content: 'Output';
+  opacity: 0.5;
+}
+
 .dmn-decision-table-container thead .input-variable,
 .dmn-decision-table-container thead .output-variable {
   white-space: nowrap;
