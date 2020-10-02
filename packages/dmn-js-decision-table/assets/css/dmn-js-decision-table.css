@@ -276,6 +276,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  padding-right: 790px;
 }
 
 .dmn-decision-table-container .decision-table-header-separator {
@@ -285,6 +286,7 @@
   border-left: 2px solid var(--table-head-separator-color);
 
   margin: 0 10px;
+  
 }
 
 .dmn-decision-table-container .hit-policy {
