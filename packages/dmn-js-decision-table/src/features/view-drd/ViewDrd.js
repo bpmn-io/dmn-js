@@ -1,12 +1,13 @@
 import ViewDrdComponent from './components/ViewDrdComponent';
 
 export default class ViewDrd {
-  constructor(components, eventBus, injector, sheet) {
+  constructor(components, eventBus, injector, sheet, config) {
     this._injector = injector;
     this._sheet = sheet;
+    this._config = config || { enabled: true };
 
     components.onGetComponent('table.before', () => {
-      if (this.canViewDrd()) {
+      if (this.canViewDrd() && this._config.enabled) {
         return ViewDrdComponent;
       }
     });
