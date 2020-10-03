@@ -10,8 +10,8 @@ export default class OutputEditor extends Component {
     super(props, context);
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
-    
-     this.reformatName = name => {
+
+    this.reformatName = name => {
       return name.replace(/\W+(.)/g, (match, firstChar) => {
         return firstChar.toUpperCase();
       });
