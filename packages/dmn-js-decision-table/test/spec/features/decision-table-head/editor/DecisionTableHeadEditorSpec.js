@@ -138,6 +138,24 @@ describe('decision-table-head/editor', function() {
         expect(input.value).to.eql('');
       })
     );
+
+    function hasSpace(name) {
+      return /\s/.test(name);
+    }
+
+    it('should render warning', function() {
+
+      // when
+      const nameEl = domQuery('.output-name', testContainer);
+
+      if (hasSpace(nameEl.textContent)) {
+        const warningEl = domQuery('.output-warning', testContainer);
+
+        // then
+        expect(warningEl).to.exist;
+        expect(warningEl.textContent).to.eql('Whitespaces not allowed');
+      }
+    });
   });
 });
 
