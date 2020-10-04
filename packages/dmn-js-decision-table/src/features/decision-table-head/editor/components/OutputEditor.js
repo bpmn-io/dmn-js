@@ -10,9 +10,15 @@ export default class OutputEditor extends Component {
     super(props, context);
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
+    this.isNameInvalid = false;
+
+    this.validateName = (name) => {
+      this.isNameInvalid = /\s/.test(name);
+    };
 
     this.setName = (name) => {
       name = name || undefined;
+      this.validateName(name);
 
       this.handleChange({ name });
     };
@@ -33,12 +39,24 @@ export default class OutputEditor extends Component {
     }
   }
 
+  renderValidation() {
+    if (this.isNameInvalid) {
+      return (
+        <div className='output-warning' style={ { color: 'red' } }>
+          Whitespaces not allowed
+        </div>
+      );
+    }
+    return (<div><br /></div>);
+  }
+
   render() {
 
     const {
       name,
       label
     } = this.props;
+    this.validateName(name);
 
     return (
       <div className="context-menu-container ref-output-editor output-edit">
@@ -51,6 +69,8 @@ export default class OutputEditor extends Component {
             singleLine
             onInput={ this.setLabel } />
         </div>
+
+        { this.renderValidation() }
 
         <div className="dms-form-control">
           <label className="dms-label">
