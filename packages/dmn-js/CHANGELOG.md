@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.2.1
+
+* `FIX`: display indicator within cell ([#562](https://github.com/bpmn-io/dmn-js/issues/562))
+
 ## 9.2.0
 
 * `FEAT`: close select (i.a. decision table hit policy select) whenever there is user interaction outside of it ([#546](https://github.com/bpmn-io/dmn-js/issues/546), [#559](https://github.com/bpmn-io/dmn-js/issues/559))
