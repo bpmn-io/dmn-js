@@ -6,6 +6,17 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.3.0
+
+* `FEAT`: enable context-menu for index cells ([#555](https://github.com/bpmn-io/dmn-js/issues/555))
+* `FEAT`: enable context-menu for annotations ([`eb280e52`](https://github.com/bpmn-io/dmn-js/commit/eb280e5232714d39a09d27766a6c145bd7ed2ca9))
+* `FEAT`: place project logo in bottom-right corner ([#573](https://github.com/bpmn-io/dmn-js/issues/573))
+* `FEAT`: allow placeholder for ContentEditable ([`79369fbf`](https://github.com/bpmn-io/dmn-js/commit/79369fbf2a7f5c6d5f650ddd5b12c566334de240))
+* `FEAT`: display input/output placeholders for decision table head ([#552](https://github.com/bpmn-io/dmn-js/issues/552))
+* `FIX`: make event listeners return values ([#568](https://github.com/bpmn-io/dmn-js/issues/568))
+* `FIX`: update bounds on shape resize for drd ([`c838fcc4`](https://github.com/bpmn-io/dmn-js/commit/c838fcc429b897a37684c0a195a0275d3a8253cd))
+* `FIX`: clear clipboard after pasting ([`01da4bec`](https://github.com/bpmn-io/dmn-js/commit/01da4bec0264a5d9ec49906cecf7882dc8d7fa39))
+
 ## 9.2.1
 
 * `FIX`: display indicator within cell ([#562](https://github.com/bpmn-io/dmn-js/issues/562))
