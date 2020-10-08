@@ -74,13 +74,27 @@ export default class InputSelect extends Component {
       return;
     }
 
-    const { top, left, width, height } = this.inputNode.getBoundingClientRect();
+    const optionsBounds = this.getOptionsBounds();
 
-    assign(this._portalEl.style, {
-      top: `${top + height}px`,
+    assign(this._portalEl.style, optionsBounds);
+  }
+
+  getOptionsBounds() {
+    const container = this.renderer.getContainer();
+    const { top: containerTop, left: containerLeft } = container.getBoundingClientRect();
+
+    const {
+      top: inputTop, left: inputLeft, width, height
+    } = this.inputNode.getBoundingClientRect();
+
+    const top = inputTop + height - containerTop + container.scrollTop;
+    const left = inputLeft - containerLeft + container.scrollLeft;
+
+    return {
+      top: `${top}px`,
       left: `${left}px`,
       width: `${width}px`
-    });
+    };
   }
 
   addPortalEl() {

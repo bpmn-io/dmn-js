@@ -132,6 +132,34 @@ describe('components/InputSelect', function() {
     });
 
 
+    it('should show options with correct position', function() {
+
+      // given
+      const renderedTree = renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect
+            options={ OPTIONS } />
+        </DiContainer>
+      );
+      const container = injector.get('renderer').getContainer();
+      container.style.transform = 'translate(2px)';
+
+      const inputSelect =
+        findRenderedDOMElementWithClass(renderedTree, 'dms-input-select');
+
+      // when
+      triggerClick(inputSelect);
+
+      // then
+      const options = findRenderedDOMElementWithClass(renderedTree, 'options');
+      const inputSelectBounds = inputSelect.getBoundingClientRect();
+      const optionsBounds = options.getBoundingClientRect();
+
+      expect(optionsBounds.top).to.eql(inputSelectBounds.height + inputSelectBounds.top);
+      expect(optionsBounds.left).to.eql(inputSelectBounds.left);
+    });
+
+
     it('should hide options on blur', function() {
 
       // given
