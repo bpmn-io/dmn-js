@@ -200,7 +200,7 @@ h4.dms-heading {
 }
 
 .dms-select-options {
-  position: fixed;
+  position: absolute;
   background-color: var(--select-options-background-color);
   border: solid 1px var(--select-options-border-color);
   border-radius: 2px;
