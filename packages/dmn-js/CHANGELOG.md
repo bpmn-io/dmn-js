@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.3.2
+
+* `FIX`: use absolute position for InputSelect options ([#590](https://github.com/bpmn-io/dmn-js/pull/590))
+
 ## 9.3.1
 
 * `CHORE`: bump to diagram-js@6.7.1
