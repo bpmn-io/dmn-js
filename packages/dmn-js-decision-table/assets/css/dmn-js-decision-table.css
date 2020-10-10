@@ -455,7 +455,7 @@
   align-items: center;
   flex-direction: row-reverse;
 
-  padding: 5px;
+  margin: 10px;
   background-color: var(--color-ffffff);
 }
 
