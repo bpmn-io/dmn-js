@@ -10,7 +10,9 @@
     "lerna-dev": "lerna run dev --stream --scope",
     "build": "lerna run build --parallel --stream",
     "lerna-publish": "lerna publish -m \"chore(project): publish %s\"",
-    "lint": "eslint packages",
+    "lint": "run-s lint:*",
+    "lint:js": "eslint packages",
+    "lint:style": "stylelint \"packages/**/*.css\"",
     "postinstall": "lerna bootstrap --hoist",
     "reinstall": "npm ci",
     "release": "run-s distro test \"lerna-publish -- {1}\" --",
@@ -58,6 +60,8 @@
     "shx": "^0.3.2",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0",
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0",
     "webpack": "^4.41.2"
   }
 }
