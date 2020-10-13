@@ -2,7 +2,7 @@
 
 Contributors should adhere to our [commit message guidelines](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit?pli=1).
 
-The goal is to achive better readability of the projects commit log and eventually use the log as a low level change tracker.
+The goal is to achieve better readability and understanding of the projects commit log and eventually use the log as a low level change tracker.
 
 ```plain
 feat(context-pad): add delete button
@@ -68,7 +68,7 @@ Related to #12
 
 
 ```plain
-fix(modeling): generate valid semantic ids
+fix(modeling): generate valid semantic IDs
 
 IDs in XML documents must not start with a number as per XML spec.
 
