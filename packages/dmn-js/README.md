@@ -1,6 +1,6 @@
 # dmn-js - DMN for the web
 
-[![Build Status](https://travis-ci.org/bpmn-io/dmn-js.svg?branch=master)](https://travis-ci.org/bpmn-io/dmn-js)
+[![Build Status](https://travis-ci.com/bpmn-io/dmn-js.svg?branch=master)](https://travis-ci.com/bpmn-io/dmn-js)
 
 View and edit DMN 1.3 diagrams in the browser.
 
