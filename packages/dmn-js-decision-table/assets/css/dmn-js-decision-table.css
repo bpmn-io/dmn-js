@@ -85,7 +85,7 @@
 }
 
 .dmn-decision-table-container .tjs-container {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: min-content auto;
 
 }
@@ -258,10 +258,12 @@
 .dmn-decision-table-container .decision-table-name {
   position: relative;
   display: inline-block;
+  flex-grow: 1;
   margin: 0;
 
+  width: 0;
   min-width: 100px;
-  max-width: 300px;
+  max-width: min-content;
 
   font-size: 21px;
   font-weight: normal;
