@@ -1,12 +1,9 @@
 .dmn-decision-table-container {
   --allowed-values-placeholder-color: var(--color-cccccc);
-
   --cell-description-editor-border-color: var(--color-444444);
-
   --create-inputs-border-color: var(--color-aaaaaa);
   --create-inputs-color: var(--color-aaaaaa);
   --create-inputs-hover-color: var(--color-444444);
-
   --context-menu-background-color: var(--color-ffffff);
   --context-menu-border-color: var(--color-cccccc);
   --context-menu-color: var(--color-444444);
@@ -14,12 +11,9 @@
   --context-menu-group-entry-border-color: var(--silver-darken-80);
   --context-menu-group-entry-disabled-color: var(--color-cccccc);
   --context-menu-group-entry-hover-background-color: var(--color-efefef);
-
   --drag-and-drop-handle-color: var(--color-999999);
   --drag-and-drop-handle-hover-color: var(--color-444444);
-
   --form-control-label-color: var(--color-909090);
-
   --hint-color: var(--color-888888);
 }
 
@@ -31,6 +25,10 @@
 
 .dmn-decision-table-container .input-expression-edit {
   width: 300px;
+}
+
+.dmn-decision-table-container .dms-form-control {
+  padding: 9px 0;
 }
 
 .dmn-decision-table-container .allowed-values-edit .dms-form-control {
@@ -70,8 +68,8 @@
 .dmn-decision-table-container th.create-inputs {
   vertical-align: top;
 }
-/** end create inputs **/
 
+/** end create inputs **/
 
 /* TODO(nikku): namespace and refactor context menu styles */
 .dmn-decision-table-container .context-menu {
@@ -104,7 +102,6 @@
   align-items: stretch;
   width: 100%;
   padding: 8px 16px;
-
   white-space: nowrap;
 }
 
@@ -124,15 +121,13 @@
   margin-right: 6px;
 }
 
-.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon:before {
+.dmn-decision-table-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon::before {
   margin: 0;
 }
 
-.dmn-decision-table-container .context-menu-group:not(:last-child):after {
+.dmn-decision-table-container .context-menu-group:not(:last-child)::after {
   content: '';
-
   display: block;
-
   margin: 0 8px;
   border-bottom: 1px solid var(--context-menu-group-entry-border-color);
   height: 1px;
@@ -154,9 +149,7 @@
 .dmn-decision-table-container .dms-input-label {
   padding-right: 30px;
   padding-left: 0;
-
   border: none;
-
   font-size: 16px;
   white-space: nowrap;
 }
@@ -165,15 +158,10 @@
   padding-top: 0;
 }
 
-.dmn-decision-table-container .dms-form-control {
-  padding: 9px 0;
-}
-
 .dmn-decision-table-container .dms-form-control .dms-label {
   display: block;
   margin: unset;
   margin-bottom: 6px;
-
   color: var(--form-control-label-color);
   font-weight: normal;
 }
@@ -211,6 +199,10 @@
   color: transparent;
 }
 
+.dmn-icon-drag:hover {
+  color: var(--drag-and-drop-handle-hover-color);
+}
+
 .dmn-decision-table-container th .dmn-icon-drag {
   position: absolute;
   left: 4px;
@@ -230,14 +222,9 @@
 
 .dmn-icon-drag.horizontal,
 .dmn-icon-drag.vertical {
-
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
-}
-
-.dmn-icon-drag:hover {
-  color: var(--drag-and-drop-handle-hover-color);
 }
 
 /* description editor */
@@ -259,11 +246,9 @@
 .dmn-decision-table-container .resize-column-handle {
   width: 25px;
   height: 100%;
-
   position: absolute;
   top: 0;
   right: -5px;
   z-index: 1;
-
   cursor: col-resize;
 }
