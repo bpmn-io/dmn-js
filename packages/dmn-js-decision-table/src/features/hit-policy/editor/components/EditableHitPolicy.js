@@ -50,7 +50,7 @@ export default class EditableHitPolicy extends Component {
     });
 
     return (
-      <span className="hit-policy" title={ hitPolicyEntry.explanation }>
+      <div className="hit-policy" title={ hitPolicyEntry.explanation }>
         <label className="dms-label">
           Hit Policy:
         </label>
@@ -62,7 +62,7 @@ export default class EditableHitPolicy extends Component {
           data-hit-policy="true"
           noInput
         />
-      </span>
+      </div>
     );
   }
 }

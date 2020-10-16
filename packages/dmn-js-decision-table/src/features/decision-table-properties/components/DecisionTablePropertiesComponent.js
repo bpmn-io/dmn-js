@@ -25,8 +25,10 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     return (
       <div className="decision-table-properties">
-        <p className="decision-table-name" title={ 'Decision Name: ' + name }>{ name }</p>
-        <span className="decision-table-header-separator" />
+        <div className="decision-table-name" title={ 'Decision Name: ' + name }>
+          { name }
+        </div>
+        <div className="decision-table-header-separator" />
         <HitPolicy />
       </div>
     );

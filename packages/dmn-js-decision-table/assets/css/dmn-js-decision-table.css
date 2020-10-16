@@ -257,7 +257,7 @@
 
 .dmn-decision-table-container .decision-table-name {
   position: relative;
-  display: inline-block;
+  display: block;
   flex-grow: 1;
   margin: 0;
 
@@ -281,7 +281,7 @@
 }
 
 .dmn-decision-table-container .decision-table-header-separator {
-  display: inline-block;
+  display: block;
   height: 32px;
 
   border-left: 2px solid var(--table-head-separator-color);
@@ -290,7 +290,7 @@
 }
 
 .dmn-decision-table-container .hit-policy {
-  display: inline-block;
+  display: block;
 }
 
 .dmn-decision-table-container .hit-policy-explanation {
