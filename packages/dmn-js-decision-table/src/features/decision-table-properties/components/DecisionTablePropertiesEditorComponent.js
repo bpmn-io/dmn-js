@@ -69,7 +69,7 @@ export default class DecisionTablePropertiesComponent extends Component {
           elementId={ '__decisionProperties_name' }
           coords={ '0:__decisionProperties' }
         />
-        <span className="decision-table-header-separator" />
+        <div className="decision-table-header-separator" />
         <HitPolicy />
       </div>
     );
@@ -102,14 +102,14 @@ class DecisionTableName extends EditableComponent {
     );
 
     return (
-      <p
+      <div
         className={ className }
         data-element-id={ this.props.elementId }
         data-coords={ this.props.coords }
         title={ 'Decision Name: ' + name }
       >
         { this.getEditor() }
-      </p>
+      </div>
     );
   }
 
