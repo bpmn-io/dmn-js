@@ -1,17 +1,20 @@
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
-import { query as domQuery } from 'min-dom';
 
 export default class PostAddRuleBehavior extends CommandInterceptor {
-  constructor(eventBus) {
+  constructor(eventBus, selection) {
     super(eventBus);
 
     this.postExecuted('row.add', (event) => {
-      const firstColId = event.context.row.businessObject.inputEntry[0].id;
 
-      console.log(firstColId);
-      console.log(domQuery(`[data-element-id=${firstColId}]`));
+      eventBus.once('elements.changed', 500, function() {
+
+        const firstColId = event.context.row.cells[0].id;
+        selection.select(firstColId);
+
+      });
+
     });
   }
 }
 
-PostAddRuleBehavior.$inject = [ 'eventBus' ];
+PostAddRuleBehavior.$inject = [ 'eventBus', 'selection' ];
