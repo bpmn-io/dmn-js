@@ -17,4 +17,8 @@ export default class PostAddRuleBehavior extends CommandInterceptor {
   }
 }
 
+<<<<<<< HEAD
 PostAddRuleBehavior.$inject = [ 'eventBus', 'selection' ];
+=======
+PostAddRuleBehavior.$inject = [ 'eventBus', 'selection' ];
+>>>>>>> feat(add-rule) : adding a rule focuses the newly created cell + test file
