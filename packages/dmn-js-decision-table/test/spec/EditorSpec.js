@@ -11,7 +11,7 @@ describe('DecisionTable', function() {
 
   let dmnJS;
 
-  afterEach(function() {
+  false && afterEach(function() {
     if (dmnJS) {
       dmnJS.destroy();
       dmnJS = null;
@@ -38,7 +38,7 @@ describe('DecisionTable', function() {
   }
 
 
-  it('should import simple decision', function(done) {
+  it.only('should import simple decision', function(done) {
     createDecisionTableEditor(diagramXML, done);
   });
 
