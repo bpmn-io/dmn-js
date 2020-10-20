@@ -62,7 +62,7 @@ describe('DecisionTable', function() {
   });
 
 
-  it.only('should import complex decision', function(done) {
+  it('should import complex decision', function(done) {
     createDecisionTable(complexDiagramXML, done);
   });
 
