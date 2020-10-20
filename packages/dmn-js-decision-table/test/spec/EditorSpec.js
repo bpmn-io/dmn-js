@@ -2,7 +2,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
-import diagramXML from './simple.dmn';
+import simpleDiagramXML from './simple.dmn';
+import complexDiagramXML from './complex.dmn';
 
 
 describe('DecisionTable', function() {
@@ -39,7 +40,12 @@ describe('DecisionTable', function() {
 
 
   it('should import simple decision', function(done) {
-    createDecisionTableEditor(diagramXML, done);
+    createDecisionTableEditor(simpleDiagramXML, done);
+  });
+
+
+  it('should import complex decision', function(done) {
+    createDecisionTableEditor(complexDiagramXML, done);
   });
 
 });

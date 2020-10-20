@@ -16,7 +16,8 @@ import {
   domify
 } from 'min-dom';
 
-import simpleXML from './simple.dmn';
+import simpleDiagramXML from './simple.dmn';
+import complexDiagramXML from './complex.dmn';
 
 
 describe('DecisionTable', function() {
@@ -29,7 +30,7 @@ describe('DecisionTable', function() {
 
   let dmnJS;
 
-  afterEach(function() {
+  false && afterEach(function() {
     if (dmnJS) {
       dmnJS.destroy();
       dmnJS = null;
@@ -57,7 +58,12 @@ describe('DecisionTable', function() {
 
 
   it('should import simple decision', function(done) {
-    createDecisionTable(simpleXML, done);
+    createDecisionTable(simpleDiagramXML, done);
+  });
+
+
+  it.only('should import complex decision', function(done) {
+    createDecisionTable(complexDiagramXML, done);
   });
 
 
@@ -65,7 +71,7 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, {
+    beforeEach(bootstrapViewer(simpleDiagramXML, {
       container: testContainer
     }));
 
@@ -110,7 +116,7 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, {
+    beforeEach(bootstrapViewer(simpleDiagramXML, {
       container: testContainer
     }));
 
@@ -150,7 +156,7 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, {
+    beforeEach(bootstrapViewer(simpleDiagramXML, {
       container: testContainer
     }));
 
@@ -175,7 +181,7 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+    beforeEach(bootstrapViewer(simpleDiagramXML, { container: testContainer }));
 
     beforeEach(function() {
       decisionTableViewer = getDecisionTable();
@@ -201,7 +207,7 @@ describe('DecisionTable', function() {
 
     let decisionTableViewer;
 
-    beforeEach(bootstrapViewer(simpleXML, {
+    beforeEach(bootstrapViewer(simpleDiagramXML, {
       container: testContainer
     }));
 
