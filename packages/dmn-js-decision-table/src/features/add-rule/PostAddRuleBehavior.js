@@ -17,4 +17,8 @@ export default class PostAddRuleBehavior extends CommandInterceptor {
   }
 }
 
+<<<<<<< HEAD
 PostAddRuleBehavior.$inject = [ 'eventBus', 'selection' ];
+=======
+PostAddRuleBehavior.$inject = [ 'eventBus', 'selection' ];
+>>>>>>> 75ad3813ae712c6c5a1a7b90af909721193f24c5
