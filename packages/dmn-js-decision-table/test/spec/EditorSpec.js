@@ -45,6 +45,8 @@ describe('DecisionTable', function() {
 
 
   it('should import complex decision', function(done) {
+    this.timeout(5000);
+
     createDecisionTableEditor(complexDiagramXML, done);
   });
 
