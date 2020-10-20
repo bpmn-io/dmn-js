@@ -21,6 +21,7 @@
   --powered-by-overlay-content-background-color: var(--color-ffffff);
   --powered-by-overlay-content-color: var(--color-444444);
   --powered-by-overlay-content-border-color: var(--color-cccccc);
+  --powered-by-overlay-content-logo-color: var(--color-404040);
 
   --simple-mode-button-color: var(--color-444444);
   --simple-mode-button-background-color: var(--color-f6f6f6);
@@ -494,6 +495,8 @@
 
 .dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content .logo {
   margin: 15px 20px 15px 10px;
+
+  color: var(--powered-by-overlay-content-logo-color);
 }
 
 /* end powered by */
