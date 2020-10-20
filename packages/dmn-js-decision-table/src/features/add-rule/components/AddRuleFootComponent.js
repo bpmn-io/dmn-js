@@ -20,11 +20,11 @@ export default class AddRuleFootComponent extends Component {
   handleClick = (e) => {
     e.stopPropagation();
 
-    this.addRule();
+    this.addRule(e.target.dataset.colIndex);
   }
 
-  addRule() {
-    this._eventBus.fire('addRule');
+  addRule(colIndex) {
+    this._eventBus.fire('addRule', { colIndex });
   }
 
   render() {
@@ -62,7 +62,7 @@ export default class AddRuleFootComponent extends Component {
         className += ' annotation';
       }
 
-      cells.push(<td className={ className }>{placeholder}</td>);
+      cells.push(<td className={ className } data-col-index={ i }>{placeholder}</td>);
     }
 
     return (

@@ -51,6 +51,7 @@ describe('add input output', function() {
     expect(addRuleEl.textContent).to.eql('--');
   });
 
+
   it('should add rule on click', inject(function(sheet) {
 
     // given
@@ -64,6 +65,44 @@ describe('add input output', function() {
 
     expect(root.rows).to.have.lengthOf(5);
   }));
+
+
+  it('should select cell in column which was clicked',
+    inject(function(cellSelection, sheet) {
+
+      // given
+      const addRuleCell = domQuery('.add-rule[data-col-index="2"]', testContainer);
+
+      // when
+      triggerClick(addRuleCell);
+
+      // then
+      const rootRows = sheet.getRoot().rows;
+      const addedCell = rootRows[rootRows.length - 1].cells[2].id;
+      const selectedCell = cellSelection.getCellSelection();
+
+      expect(addedCell).to.equal(selectedCell);
+    })
+  );
+
+
+  it('should focus on the first cell when the plus button is clicked',
+    inject(function(cellSelection, sheet) {
+
+      // given
+      const plusButton = domQuery('.add-rule-add', testContainer);
+
+      // when
+      triggerClick(plusButton);
+
+      // then
+      const rootRows = sheet.getRoot().rows;
+      const addedCell = rootRows[rootRows.length - 1].cells[0].id;
+      const selectedCell = cellSelection.getCellSelection();
+
+      expect(addedCell).to.equal(selectedCell);
+    })
+  );
 
 
   // TODO(philippfromme): should not be hard coded to include indices and annotations
