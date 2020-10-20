@@ -16,13 +16,8 @@ cd "$EXAMPLES_DIR"
 TOOLKIT_VERSION="${TRAVIS_TAG:1}"
 echo "Updating toolkit versions to $TOOLKIT_VERSION"
 
+sed -i -E "s#(\"dmn-js[a-z-]*\": )\"[^\"]+\"#\1\"^$TOOLKIT_VERSION\"#" **/package.json
 sed -i -E "s#/dmn-js@[^/]+/#/dmn-js@$TOOLKIT_VERSION/#" **/*.{html,md}
-
-# update via npm if possible
-for dir in $(ls -d */)
-do
-  (cd $dir && [[ -f "package.json" ]] && npm install "dmn-js@$TOOLKIT_VERSION")
-done
 
 if [[ "x$SKIP_COMMIT" = "x" ]]; then
 
