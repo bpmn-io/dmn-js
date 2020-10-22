@@ -15,6 +15,7 @@ import {
   getNodeById
 } from 'src/features/cell-selection/CellSelectionUtil';
 
+import AnnotationsModule from 'src/features/annotations';
 import CoreModule from 'src/core';
 import DecisionTableHead from 'src/features/decision-table-head';
 import CellSelectionModule from 'src/features/cell-selection';
@@ -32,6 +33,7 @@ describe('features/cell-selection', function() {
 
   beforeEach(bootstrapModeler(testDiagram, {
     modules: [
+      AnnotationsModule,
       CoreModule,
       DecisionTableHead,
       PropertiesEditorModule,
@@ -172,6 +174,13 @@ describe('features/cell-selection', function() {
         currentSelection: 'outputEntry5',
         direction: 'right',
         expectedSelection: 'outputEntry6'
+      }));
+
+
+      it.only('should select', verifySelect({
+        currentSelection: 'rule1__annotation',
+        direction: 'below',
+        expectedSelection: 'rule2__annotation'
       }));
 
     });
