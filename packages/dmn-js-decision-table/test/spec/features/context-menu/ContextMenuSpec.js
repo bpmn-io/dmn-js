@@ -924,7 +924,7 @@ describe('context menu', function() {
     it('should open on right click', function() {
 
       // given
-      const cell = domQuery('.annotation[data-element-id="rule1"]', testContainer);
+      const cell = domQuery('.annotation[data-element-id="rule1__annotation"]', testContainer);
 
       // when
       triggerMouseEvent(cell, 'contextmenu');
@@ -939,7 +939,7 @@ describe('context menu', function() {
       let cell, anotherCell;
 
       beforeEach(function() {
-        cell = domQuery('.annotation[data-element-id="rule1"]', testContainer);
+        cell = domQuery('.annotation[data-element-id="rule1__annotation"]', testContainer);
         anotherCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
 
         triggerMouseEvent(cell, 'contextmenu');

@@ -125,7 +125,7 @@ describe('features/cell-selection', function() {
 
   describe('#selectCell', function() {
 
-    describe.only('should select', function() {
+    describe('should select', function() {
 
       function verifySelect({
         currentSelection,
