@@ -15,7 +15,7 @@ import {
   getNodeById
 } from 'src/features/cell-selection/CellSelectionUtil';
 
-import AnnotationsModule from 'src/features/annotations';
+import AnnotationsModule from 'src/features/annotations/editor';
 import CoreModule from 'src/core';
 import DecisionTableHead from 'src/features/decision-table-head';
 import CellSelectionModule from 'src/features/cell-selection';
@@ -125,7 +125,7 @@ describe('features/cell-selection', function() {
 
   describe('#selectCell', function() {
 
-    describe('should select', function() {
+    describe.only('should select', function() {
 
       function verifySelect({
         currentSelection,
@@ -142,6 +142,7 @@ describe('features/cell-selection', function() {
           const changed = cellSelection.selectCell(direction);
 
           // then
+
           expect(hasFocus(expectedSelection)).to.be.true;
 
           expect(changed).to.be.true;
@@ -177,10 +178,32 @@ describe('features/cell-selection', function() {
       }));
 
 
-      it.only('should select', verifySelect({
-        currentSelection: 'rule1__annotation',
+      it('annotation below', verifySelect({
+        currentSelection: 'rule2__annotation',
         direction: 'below',
-        expectedSelection: 'rule2__annotation'
+        expectedSelection: 'rule3__annotation'
+      }));
+
+
+      it('annotation above', verifySelect({
+        currentSelection: 'rule2__annotation',
+        direction: 'above',
+        expectedSelection: 'rule1__annotation'
+      }));
+
+      // TODO: left and right cell selection doesn't work
+      //       for annotations because of coords being NaN (azeghers)
+      it.skip('output left', verifySelect({
+        currentSelection: 'rule2__annotation',
+        direction: 'left',
+        expectedSelection: 'outputEntry4'
+      }));
+
+
+      it.skip('input new row', verifySelect({
+        currentSelection: 'rule2__annotation',
+        direction: 'right',
+        expectedSelection: 'inputEntry5'
       }));
 
     });
