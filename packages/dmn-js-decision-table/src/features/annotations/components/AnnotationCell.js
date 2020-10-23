@@ -12,7 +12,7 @@ export default function AnnotationCell(props) {
   } = row.businessObject;
 
   return (
-    <Cell className="annotation" elementId={ id + '__annotation' }>
+    <Cell className="annotation" elementId={ id }>
       { description || '-' }
     </Cell>
   );

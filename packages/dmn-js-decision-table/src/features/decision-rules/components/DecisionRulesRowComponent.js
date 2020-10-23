@@ -62,6 +62,7 @@ export default class DecisionRulesRowComponent extends Component {
             type: 'cell',
             context: {
               cellType: 'after-rule-cells',
+              colIndex: cols.length,
               row,
               rowIndex
             }
