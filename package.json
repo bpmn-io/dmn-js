@@ -4,7 +4,7 @@
   "scripts": {
     "all": "run-s lint build test",
     "build-distro": "lerna run prepublishOnly --sort",
-    "clean": "shx rm -rf node_modules && shx rm -rf packages/*/node_modules",
+    "clean": "shx rm -rf packages/*/node_modules && shx rm -rf node_modules",
     "distro": "run-s clean reinstall build-distro",
     "dev": "run-s build \"lerna-dev -- {1}\" -- ",
     "lerna-dev": "lerna run dev --stream --scope",
