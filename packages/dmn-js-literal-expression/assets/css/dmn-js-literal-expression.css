@@ -15,11 +15,13 @@
   --view-drd-button-border-color: var(--color-cccccc);
   --view-drd-button-color: var(--color-444444);
   --view-drd-button-hover-background-color: var(--color-f6f6f6);
+
   font-family: 'Arial', sans-serif;
   position: relative;
   color: var(--literal-expression-color);
   width: 100%;
   height: 100%;
+
   /* required to apply position: fixed correctly */
   transform: translate(0);
 }
