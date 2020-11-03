@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.4.0
+
+* `FEAT`: allow decision name to take empty space ([#579](https://github.com/bpmn-io/dmn-js/issues/579))
+* `FEAT`: improve rule focus behavior on `ENTER` ([`e17931fb`](https://github.com/bpmn-io/dmn-js/commit/e17931fbc681c2921390522bbc8029e5a94f554a))
+
 ## 9.3.2
 
 * `FIX`: use absolute position for InputSelect options ([#590](https://github.com/bpmn-io/dmn-js/pull/590))
