@@ -1,4 +1,4 @@
-import { bootstrapModeler } from 'test/helper';
+import { bootstrapModeler } from 'test/TestHelper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -12,6 +12,11 @@ import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'src/features/modeling';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
+import DecisionTablePropertiesEditorModule
+  from 'src/features/decision-table-properties/editor';
+import DecisionRuleIndicesModule from 'src/features/decision-rule-indices';
 import SimpleModeModule from 'src/features/simple-mode';
 
 import FooProvider from './FooProvider';
@@ -31,6 +36,10 @@ describe('simple mode', function() {
       InteractionEventsModule,
       ModelingModule,
       DecisionRulesEditorModule,
+      DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
+      DecisionTablePropertiesEditorModule,
+      DecisionRuleIndicesModule,
       SimpleModeModule,
       {
         __init__: [ 'fooProvider' ],
@@ -87,7 +96,7 @@ describe('simple mode', function() {
   });
 
 
-  it('should render at position', function() {
+  it('should render at top right corner', function() {
 
     // given
     const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
@@ -96,10 +105,15 @@ describe('simple mode', function() {
     triggerClick(cell);
 
     // then
-    const simpleModeButton = domQuery('.simple-mode-button', testContainer);
+    const cellBounds = cell.getBoundingClientRect();
 
-    expect(simpleModeButton.style.top).to.not.equal('0px');
-    expect(simpleModeButton.style.left).to.not.equal('px');
+    const simpleModeButton = domQuery('.simple-mode-button', testContainer),
+          simpleModeButtonBounds = simpleModeButton.getBoundingClientRect();
+
+    expect(simpleModeButton.classList.contains('right')).to.be.true;
+    expect(simpleModeButton.classList.contains('bottom')).to.be.true;
+    expect(simpleModeButtonBounds.left + 4).to.be.closeTo(cellBounds.right, 1);
+    expect(simpleModeButtonBounds.bottom - 4).to.be.closeTo(cellBounds.top, 1);
   });
 
 

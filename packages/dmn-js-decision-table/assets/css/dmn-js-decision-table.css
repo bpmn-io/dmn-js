@@ -5,6 +5,7 @@
   --add-column-icon-color: var(--color-ffffff);
   --add-column-icon-background-color: var(--color-545454);
   --decision-table-color: var(--color-444444);
+  --decision-table-background-color: var(--color-ffffff);
   --dmn-expression-language-background-color: var(--blue-darken-48-opacity-30);
   --dmn-expression-language-color: var(--color-ffffff);
   --dmn-expression-language-hover-background-color: var(--blue-base-65);
@@ -20,7 +21,6 @@
   --simple-mode-button-border-color: var(--color-cccccc);
   --simple-mode-button-box-shadow-color: var(--color-000000-opacity-10);
   --simple-mode-button-disabled-color: var(--color-cccccc);
-  --table-border-color: var(--color-444444);
   --table-cell-border-color: var(--color-444444);
   --table-cell-selected-outline-color: var(--blue-darken-48);
   --table-foot-add-rule-border-color: var(--color-aaaaaa);
@@ -39,7 +39,7 @@
 
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   font-family: 'Arial', sans-serif;
   font-size: 14px;
@@ -47,74 +47,130 @@
   max-height: 100%;
 }
 
+/* basic styles */
+
 .dmn-decision-table-container * {
   box-sizing: border-box;
 }
 
+.dmn-decision-table-container .tjs-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: min-content;
+  max-width: 100%;
+  height: 100%;
+}
+
+/* end basic styles */
+
 /* basic table styles */
 
-.dmn-decision-table-container .tjs-container {
-  display: inline-grid;
-  grid-template-columns: min-content auto;
+.dmn-decision-table-container .tjs-table-container {
+  overflow: auto;
+  border: solid 1px var(--table-cell-border-color);
+  border-top: none;
 }
 
 .dmn-decision-table-container .tjs-table {
-  grid-column: 1;
-  grid-row: 3;
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  width: 100%; /* Fallback for legacy Edge */
   width: min-content;
   table-layout: fixed;
-  border-collapse: collapse;
-  border: solid 1px var(--table-border-color);
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.dmn-decision-table-container .tjs-table > tbody:empty {
-  display: none;
+.dmn-decision-table-container th,
+.dmn-decision-table-container td {
+  position: relative;
+  white-space: pre-wrap;
+  background-clip: padding-box;
 }
 
-.dmn-decision-table-container table thead {
+.dmn-decision-table-container thead th {
+  text-align: center;
+  width: 192px;
+  font-weight: normal;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--decision-table-background-color);
   border-bottom: 3px double var(--table-head-border-color);
 }
 
-.dmn-decision-table-container td,
-.dmn-decision-table-container th {
-  border: solid 1px var(--table-cell-border-color);
-  padding: 4px;
+.dmn-decision-table-container thead th.output-editor {
+  z-index: 2;
 }
 
-/* input and output headers */
-
-.dmn-decision-table-container thead .input-cell,
-.dmn-decision-table-container thead .output-cell {
-  text-align: left;
+.dmn-decision-table-container thead th.create-inputs,
+.dmn-decision-table-container thead th.input-editor {
+  z-index: 3;
 }
 
-.dmn-decision-table-container tfoot.add-rule .output-cell {
-  border-left-color: var(--table-foot-add-rule-border-color);
+.dmn-decision-table-container tbody td {
+  border-top: solid 1px var(--table-cell-border-color);
 }
 
-.dmn-decision-table-container .tjs-table tr .output-cell {
+.dmn-decision-table-container th.input-cell + th.output-cell,
+.dmn-decision-table-container td.input-cell + td.output-cell {
   border-left: 3px double var(--table-cell-border-color);
 }
 
-.dmn-decision-table-container .tjs-table tr .output-cell + .output-cell {
-  border-left: 1px solid var(--table-cell-border-color);
+.dmn-decision-table-container th:not(:first-child),
+.dmn-decision-table-container td:not(:first-child) {
+  padding: 4px;
+  border-left: solid 1px var(--table-cell-border-color);
 }
 
-.dmn-decision-table-container .tjs-table tr .annotation {
-  border-left: 3px double var(--tr-border-left-color);
+.dmn-decision-table-container thead {
+  background-color: var(--decision-table-background-color);
+}
+
+.dmn-decision-table-container thead th:first-child {
+  left: 0;
+  z-index: 4;
+}
+
+.dmn-decision-table-container tfoot td:first-child {
+  border-right: solid 1px var(--table-foot-add-rule-border-color);
+}
+
+.dmn-decision-table-container tbody td:first-child,
+.dmn-decision-table-container tfoot td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: var(--decision-table-background-color);
+  z-index: 1;
+}
+
+.dmn-decision-table-container tbody:empty {
+  display: none;
+}
+
+.dmn-decision-table-container thead th:first-child,
+.dmn-decision-table-container tbody td:first-child {
+  border-right: solid 1px var(--table-cell-border-color);
+}
+
+.dmn-decision-table-container thead th:nth-child(2),
+.dmn-decision-table-container tbody td:nth-child(2),
+.dmn-decision-table-container tfoot td:nth-child(2) {
+  border-left: none;
+}
+
+.dmn-decision-table-container tbody tr:last-child td {
+  border-bottom: solid 1px var(--table-cell-border-color);
+}
+
+.dmn-decision-table-container tbody tr:first-child td {
+  border-top: none;
 }
 
 .dmn-decision-table-container th.index-column {
   width: 56px;
-}
-
-.dmn-decision-table-container th {
-  width: 192px;
-  font-weight: normal;
-}
-
-.dmn-decision-table-container th.header {
-  text-align: center;
 }
 
 .dmn-decision-table-container td.rule-index {
@@ -122,30 +178,19 @@
   padding-right: 8px;
 }
 
-.dmn-decision-table-container thead .type-ref,
-.dmn-decision-table-container .script-editor {
-  font-family: monospace;
-}
-
-.dmn-decision-table-container .tjs-table tbody tr:nth-child(2n) {
+.dmn-decision-table-container tbody tr:nth-child(2n) {
   background-color: var(--table-row-alternative-background-color);
 }
 
-.dmn-decision-table-container .input-cell.add-rule,
-.dmn-decision-table-container .input-cell :not(.focussed).empty {
+.dmn-decision-table-container td.input-cell.add-rule,
+.dmn-decision-table-container td.input-cell:not(.focussed).empty {
   text-align: center;
-}
-
-.dmn-decision-table-container .cell {
-  position: relative;
-  white-space: pre-wrap;
 }
 
 /* end basic table styles */
 
 /* selection styles */
 
-.dmn-decision-table-container th,
 .dmn-decision-table-container h3,
 .dmn-decision-table-container h5 {
   position: relative;
@@ -164,13 +209,22 @@
 
 /* footer styles */
 
-.dmn-decision-table-container tfoot.add-rule td.add-rule-add {
-  text-align: right;
+.dmn-decision-table-container tfoot td.input-cell + td.output-cell {
+  border-left: 3px double var(--table-foot-add-rule-border-color);
 }
 
-.dmn-decision-table-container tfoot.add-rule td {
+.dmn-decision-table-container tfoot.add-rule td.add-rule-add {
+  text-align: right;
+  padding-right: 4px;
+}
+
+.dmn-decision-table-container tfoot.add-rule tr td {
   border-color: var(--table-foot-add-rule-border-color);
   color: var(--table-foot-add-rule-color);
+}
+
+.dmn-decision-table-container tfoot.add-rule:hover td.input-cell + td.output-cell {
+  border-left-color: var(--table-cell-border-color);
 }
 
 .dmn-decision-table-container tfoot.add-rule:hover td {
@@ -189,8 +243,6 @@
 
 /* end content editable styles */
 
-/* context menu styles */
-
 /* decision table header */
 .dmn-decision-table-container .decision-table-header {
   text-align: left;
@@ -203,11 +255,9 @@
 
 /* decision table properties */
 .dmn-decision-table-container .decision-table-properties {
-  grid-column: 1;
-  grid-row: 2;
   display: flex;
-  border: 1px solid var(--color-000000);
-  border-bottom: none;
+  border: 1px solid var(--table-cell-border-color);
+  background-color: var(--decision-table-background-color);
   padding: 10px;
   align-items: center;
 }
@@ -301,17 +351,12 @@
   color: var(--table-head-variable-color);
 }
 
-/** actionable icon */
-.dmn-decision-table-container .action-icon {
-  margin-left: 5px;
-  border-radius: 2px;
-  box-shadow: 0 0 0 2px white;
-  color: var(--action-icon-color);
-}
+/* actionable icon */
 
-.dmn-decision-table-container .action-icon::before {
-  margin-left: 0.1em;
-  margin-right: 0.1em;
+.dmn-decision-table-container .action-icon {
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px var(--decision-table-background-color);
+  color: var(--action-icon-color);
 }
 
 .dmn-decision-table-container .create-inputs .action-icon,
@@ -333,8 +378,13 @@
   color: var(--action-icon-hover-color);
 }
 
-.dmn-decision-table-container .input-editor .add-input,
-.dmn-decision-table-container .output-editor .add-output {
+.dmn-decision-table-container .action-icon::before {
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+}
+
+.dmn-decision-table-container .add-input,
+.dmn-decision-table-container .add-output {
   position: absolute;
   top: 50%;
   right: -1px;
@@ -344,12 +394,10 @@
   padding: 6px;
 }
 
-/** end actionable icon */
+/* end actionable icon */
 
 /* view drd */
 .dmn-decision-table-container .view-drd {
-  grid-column: 1;
-  grid-row: 1;
   margin-bottom: 10px;
 }
 
@@ -381,16 +429,12 @@
   position: fixed;
   bottom: 10px;
   right: 10px;
-  z-index: 100;
+  z-index: 9999;
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   margin: 10px;
   background-color: var(--color-ffffff);
-}
-
-.dmn-decision-table-container .powered-by__logo {
-  z-index: 10;
 }
 
 .dmn-decision-table-container .powered-by-overlay {
@@ -436,7 +480,7 @@
   border: solid 1px var(--simple-mode-button-border-color);
   cursor: pointer;
   font-size: 14px;
-  z-index: 2;
+  z-index: 5;
   opacity: 0.8;
   box-shadow: 1px 1px 1px 1px var(--simple-mode-button-box-shadow-color);
 }
@@ -452,9 +496,8 @@
 
 /* end simple mode  */
 
-/**
- * badges
- */
+/* badges */
+
 .dms-badge {
   border-radius: 2px;
   padding: 3px 6px;
@@ -512,46 +555,42 @@
 /* end cell expression language */
 
 /* drag and drop */
-.dmn-decision-table-container .dragover {
-  position: relative;
-}
 
 .dmn-decision-table-container .dragover::before {
   content: '';
   display: block;
   position: absolute;
   background-color: var(--drag-and-drop-drop-marker-color);
-  border-radius: 5px;
   z-index: 2;
   pointer-events: none;
 }
 
 .dmn-decision-table-container .dragover.top::before {
-  left: -6px;
-  right: -6px;
+  left: 0;
+  right: 0;
   height: 5px;
-  top: -3px;
+  top: 0;
 }
 
 .dmn-decision-table-container .dragover.right::before {
-  top: -6px;
-  bottom: -6px;
+  top: 0;
+  bottom: 0;
   width: 5px;
-  right: -3px;
+  right: 0;
 }
 
 .dmn-decision-table-container .dragover.bottom::before {
-  left: -6px;
-  right: -6px;
+  left: 0;
+  right: 0;
   height: 5px;
-  bottom: -3px;
+  bottom: 0;
 }
 
 .dmn-decision-table-container .dragover.left::before {
-  top: -6px;
-  bottom: -6px;
+  top: 0;
+  bottom: 0;
   width: 5px;
-  left: -3px;
+  left: 0;
 }
 
 .dmn-decision-table-container .dragged {

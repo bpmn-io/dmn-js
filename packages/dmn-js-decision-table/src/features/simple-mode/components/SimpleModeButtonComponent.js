@@ -2,6 +2,8 @@ import { Component } from 'inferno';
 
 import { assign } from 'min-dash';
 
+import { closest as domClosest } from 'min-dom';
+
 import {
   getNodeById
 } from '../../cell-selection/CellSelectionUtil';
@@ -71,11 +73,14 @@ export default class SimpleModeButtonComponent extends Component {
   updatePosition() {
     const { selection } = this.state;
 
-    if (!selection || !this.node) {
+    const { node } = this;
+
+    if (!selection || !node) {
       return;
     }
 
-    const container = this._container = this._renderer.getContainer();
+    const container = this._renderer.getContainer(),
+          containerBounds = container.getBoundingClientRect();
 
     const cellNode = getNodeById(selection.id, container);
 
@@ -83,49 +88,64 @@ export default class SimpleModeButtonComponent extends Component {
 
     const nodeBounds = this.node.getBoundingClientRect();
 
-    const containerBounds = container.getBoundingClientRect();
-
-    const { scrollLeft, scrollTop } = container;
+    const { scrollLeft, scrollTop } = getTableContainerScroll(node);
 
     const nodePosition = {};
 
     if (cellBounds.left + (cellBounds.width / 2) > containerBounds.width / 2) {
+
+      // left
       nodePosition.left =
-        (window.scrollX
-        - containerBounds.left
+        (-containerBounds.left
         + cellBounds.left
         - nodeBounds.width
         + OFFSET
         + scrollLeft)
         + 'px';
+
+      node.classList.remove('right');
+      node.classList.add('left');
     } else {
+
+      // right
       nodePosition.left =
-        (window.scrollX
-        - containerBounds.left
+        (-containerBounds.left
         + cellBounds.left
         + cellBounds.width
         - OFFSET
         + scrollLeft)
         + 'px';
+
+      node.classList.remove('left');
+      node.classList.add('right');
     }
 
     if (cellBounds.top + (cellBounds.height / 2) > containerBounds.height / 2) {
+
+      // bottom
       nodePosition.top =
-        (window.scrollY
-        - containerBounds.top
+        (-containerBounds.top
         + cellBounds.top
         - nodeBounds.height
         + OFFSET
         + scrollTop)
         + 'px';
+
+      node.classList.remove('top');
+      node.classList.add('bottom');
+
     } else {
+
+      // top
       nodePosition.top =
-        (window.scrollY
-        - containerBounds.top
+        (-containerBounds.top
         + cellBounds.top
         - OFFSET
         + scrollTop)
         + 'px';
+
+      node.classList.remove('bottom');
+      node.classList.add('top');
     }
 
     assign(this.node.style, nodePosition);
@@ -204,4 +224,22 @@ function getDefaultExpressionLanguage(cell, expressionLanguages) {
   } else if (isOutput(cell.col)) {
     return expressionLanguages.getDefault('outputCell').value;
   }
+}
+
+function getTableContainerScroll(node) {
+  const tableContainer = domClosest(node, '.tjs-table-container');
+
+  if (!tableContainer) {
+    return {
+      scrollTop: 0,
+      scrollLeft: 0
+    };
+  }
+
+  const { scrollLeft, scrollTop } = tableContainer;
+
+  return {
+    scrollTop,
+    scrollLeft
+  };
 }
