@@ -6,6 +6,15 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.0.0-alpha.0
+
+* `FEAT`: make first row and column of decision table sticky ([#606](https://github.com/bpmn-io/dmn-js/pull/606))
+* `CHORE`: bump to table-js@7.0.0-alpha.0
+
+### Breaking Changes
+
+* table element now wrapped in an additional container which might affect your styles
+
 ## 9.4.0
 
 * `FEAT`: allow decision name to take empty space ([#579](https://github.com/bpmn-io/dmn-js/issues/579))
