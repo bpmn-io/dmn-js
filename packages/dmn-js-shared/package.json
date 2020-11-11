@@ -4,7 +4,7 @@
   "version": "9.4.0",
   "scripts": {
     "test": "karma start",
-    "build": "shx rm -rf lib && babel -s -q -d lib src",
+    "build": "del-cli lib && babel -s -q -d lib src",
     "dev": "npm test -- --no-single-run --auto-watch",
     "prepublishOnly": "npm run build"
   },
