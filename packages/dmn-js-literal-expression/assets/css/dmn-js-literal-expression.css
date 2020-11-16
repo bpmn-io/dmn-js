@@ -27,9 +27,9 @@
 }
 
 .dmn-literal-expression-container .viewer-container {
-  display: grid;
-  grid-template-columns: auto;
   width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 .dmn-literal-expression-container * {
@@ -38,8 +38,6 @@
 
 /* decision properties */
 .dmn-literal-expression-container .decision-properties {
-  grid-column: 1;
-  grid-row: 2;
   border: 1px solid var(--decision-properties-border-color);
   border-bottom: none;
   padding: 10px;
@@ -96,7 +94,6 @@
 
 /* textarea */
 .dmn-literal-expression-container .textarea {
-  grid-row: 3;
   box-sizing: border-box;
   width: 100%;
   font-family: monospace;
@@ -123,7 +120,6 @@
 
 /* literal expression properties */
 .dmn-literal-expression-container .literal-expression-properties {
-  grid-row: 4;
   box-sizing: border-box;
   width: 100%;
   padding: 0;
@@ -151,7 +147,6 @@
 
 /* view drd */
 .dmn-literal-expression-container .view-drd {
-  grid-row: 1;
   margin-right: 10px;
   padding-bottom: 10px;
 }
