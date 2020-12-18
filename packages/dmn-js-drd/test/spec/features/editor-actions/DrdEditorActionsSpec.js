@@ -7,8 +7,11 @@ import {
 import drdEditorActionsModule from 'src/features/editor-actions';
 import modelingModule from 'src/features/modeling';
 import alignElementsModule from 'diagram-js/lib/features/align-elements';
+import lassoToolModule from 'diagram-js/lib/features/lasso-tool';
+import handToolModule from 'diagram-js/lib/features/hand-tool';
 import distributeElementsModule from 'src/features/distribute-elements';
 import coreModule from 'src/core';
+import lassoTool from 'diagram-js/lib/features/lasso-tool';
 
 var diagramXML = require('./DrdEditorActions.dmn');
 
@@ -21,7 +24,10 @@ describe('features/editor-actions', function() {
       modelingModule,
       drdEditorActionsModule,
       alignElementsModule,
-      distributeElementsModule
+      distributeElementsModule,
+      lassoToolModule,
+      handToolModule,
+      lassoTool
     ]
   }));
 
@@ -66,6 +72,46 @@ describe('features/editor-actions', function() {
 
       // then
       expect(b.x).to.eql(435);
+    }));
+
+  });
+
+
+  describe('handTool', function() {
+
+    it('should toggle', inject(function(editorActions, handTool) {
+
+      // given
+      editorActions.trigger('handTool');
+
+      // assume
+      expect(handTool.isActive()).to.be.true;
+
+      // when
+      editorActions.trigger('handTool');
+
+      // then
+      expect(!!handTool.isActive()).to.be.false;
+    }));
+
+  });
+
+
+  describe('lassoTool', function() {
+
+    it('should toggle', inject(function(editorActions, lassoTool) {
+
+      // given
+      editorActions.trigger('lassoTool');
+
+      // assume
+      expect(lassoTool.isActive()).to.be.true;
+
+      // when
+      editorActions.trigger('lassoTool');
+
+      // then
+      expect(!!lassoTool.isActive()).to.be.false;
     }));
 
   });

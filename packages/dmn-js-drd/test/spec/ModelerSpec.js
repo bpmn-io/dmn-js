@@ -182,6 +182,7 @@ describe('Modeler', function() {
           'distributeElements',
           'alignElements',
           'lassoTool',
+          'handTool',
           'directEditing'
         ];
 
