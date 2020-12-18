@@ -30,6 +30,7 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
   var elementRegistry = injector.get('elementRegistry', false);
   var selection = injector.get('selection', false);
   var lassoTool = injector.get('lassoTool', false);
+  var handTool = injector.get('handTool', false);
   var directEditing = injector.get('directEditing', false);
   var distributeElements = injector.get('distributeElements', false);
   var alignElements = injector.get('alignElements', false);
@@ -78,6 +79,12 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
   if (lassoTool) {
     this._registerAction('lassoTool', function() {
       lassoTool.toggle();
+    });
+  }
+
+  if (handTool) {
+    this._registerAction('handTool', function() {
+      handTool.toggle();
     });
   }
 

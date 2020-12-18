@@ -11,6 +11,7 @@ import coreModule from 'src/core';
 import editorActionsModule from 'src/features/editor-actions';
 import labelEditingModule from 'src/features/label-editing';
 import lassoToolModule from 'diagram-js/lib/features/lasso-tool';
+import handToolModule from 'diagram-js/lib/features/hand-tool';
 import keyboardModule from 'src/features/keyboard';
 import modelingModule from 'src/features/modeling';
 
@@ -30,6 +31,7 @@ describe('features - keyboard', function() {
       coreModule,
       labelEditingModule,
       lassoToolModule,
+      handToolModule,
       keyboardModule,
       editorActionsModule,
       modelingModule
@@ -49,6 +51,7 @@ describe('features - keyboard', function() {
         'removeSelection',
         'selectElements',
         'lassoTool',
+        'handTool',
         'directEditing'
       ];
 
@@ -62,7 +65,7 @@ describe('features - keyboard', function() {
       it('should trigger lasso tool for key ' + key, inject(
         function(keyboard, lassoTool) {
 
-          sinon.spy(lassoTool, 'activateSelection');
+          sinon.spy(lassoTool, 'toggle');
 
           // given
           var e = createKeyEvent(key);
@@ -71,7 +74,28 @@ describe('features - keyboard', function() {
           keyboard._keyHandler(e);
 
           // then
-          expect(lassoTool.activateSelection).to.have.been.calledOnce;
+          expect(lassoTool.toggle).to.have.been.calledOnce;
+        }
+      ));
+
+    });
+
+
+    forEach(['h', 'H'], function(key) {
+
+      it('should trigger hand tool for key ' + key, inject(
+        function(keyboard, handTool) {
+
+          sinon.spy(handTool, 'toggle');
+
+          // given
+          var e = createKeyEvent(key);
+
+          // when
+          keyboard._keyHandler(e);
+
+          // then
+          expect(handTool.toggle).to.have.been.calledOnce;
         }
       ));
 

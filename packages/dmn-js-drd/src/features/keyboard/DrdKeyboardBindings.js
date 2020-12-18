@@ -75,6 +75,23 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
     }
   });
 
+  // activate hand tool
+  // H
+  addListener('handTool', function(context) {
+
+    var event = context.keyEvent;
+
+    if (keyboard.hasModifier(event)) {
+      return;
+    }
+
+    if (keyboard.isKey(['h', 'H'], event)) {
+      editorActions.trigger('handTool');
+
+      return true;
+    }
+  });
+
   // activate direct editing
   // E
   addListener('directEditing', function(context) {

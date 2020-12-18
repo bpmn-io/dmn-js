@@ -17,7 +17,11 @@ describe('features/palette', function() {
 
   var diagramXML = require('../../../fixtures/dmn/input-data.dmn');
 
-  var testModules = [ coreModule, modelingModule, paletteModule ];
+  var testModules = [
+    coreModule,
+    modelingModule,
+    paletteModule
+  ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 
@@ -29,7 +33,7 @@ describe('features/palette', function() {
     var entries = domQueryAll('.entry', paletteElement);
 
     // then
-    expect(entries.length).to.equal(5);
+    expect(entries.length).to.equal(6);
   }));
 
 

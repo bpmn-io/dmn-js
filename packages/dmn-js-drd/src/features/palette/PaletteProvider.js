@@ -8,11 +8,12 @@ import {
  */
 export default function PaletteProvider(
     palette, create, elementFactory,
-    lassoTool, translate) {
+    handTool, lassoTool, translate) {
 
   this._palette = palette;
   this._create = create;
   this._elementFactory = elementFactory;
+  this._handTool = handTool;
   this._lassoTool = lassoTool;
   this._translate = translate;
 
@@ -23,6 +24,7 @@ PaletteProvider.$inject = [
   'palette',
   'create',
   'elementFactory',
+  'handTool',
   'lassoTool',
   'translate'
 ];
@@ -33,6 +35,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
   var actions = {},
       create = this._create,
       elementFactory = this._elementFactory,
+      handTool = this._handTool,
       lassoTool = this._lassoTool,
       translate = this._translate;
 
@@ -56,6 +59,16 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
   }
 
   assign(actions, {
+    'hand-tool': {
+      group: 'tools',
+      className: 'dmn-icon-hand-tool',
+      title: translate('Activate the hand tool'),
+      action: {
+        click: function(event) {
+          handTool.activateHand(event);
+        }
+      }
+    },
     'lasso-tool': {
       group: 'tools',
       className: 'dmn-icon-lasso-tool',
