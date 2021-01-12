@@ -23,13 +23,13 @@
   ],
   "devDependencies": {
     "dmn-font": "^0.5.0",
-    "inferno-test-utils": "~5.0.5"
+    "inferno-test-utils": "~5.6.1"
   },
   "dependencies": {
     "diagram-js": "^7.0.0",
     "dmn-js-shared": "^10.0.0",
     "escape-html": "^1.0.3",
-    "inferno": "~5.0.5",
+    "inferno": "~5.6.1",
     "min-dash": "^3.5.2",
     "min-dom": "^3.1.3"
   }
