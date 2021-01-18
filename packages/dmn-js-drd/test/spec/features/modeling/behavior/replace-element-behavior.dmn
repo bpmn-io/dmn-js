@@ -11,7 +11,7 @@
     <informationRequirement id="temperature_ir">
       <requiredDecision href="#foobar"/>
     </informationRequirement>
-  </decision>`
+  </decision>
   <decision id="guestCount" name="Guest Count" />
   <textAnnotation id="textAnnotation">
     <text>foobar</text>
