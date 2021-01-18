@@ -112,7 +112,7 @@ describe('features/decision-rules', function() {
         });
 
 
-        it('should not display if focussed', function() {
+        skipFF('should not display if focussed', function() {
 
           // given
           const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
@@ -151,7 +151,7 @@ describe('features/decision-rules', function() {
         });
 
 
-        it('should not display if focussed', function() {
+        skipFF('should not display if focussed', function() {
 
 
           // given
@@ -207,7 +207,7 @@ describe('features/decision-rules', function() {
         });
 
 
-        it('should not display if focussed', function() {
+        skipFF('should not display if focussed', function() {
 
           // given
           const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
@@ -246,7 +246,7 @@ describe('features/decision-rules', function() {
         });
 
 
-        it('should not display expression language if focussed', function() {
+        skipFF('should not display expression language if focussed', function() {
 
           // given
           const cell = domQuery('[data-element-id="outputEntry2"]', testContainer);
@@ -302,3 +302,14 @@ describe('features/decision-rules', function() {
   });
 
 });
+
+
+// helpers //////////////////
+
+function isFirefox() {
+  return /Firefox/.test(window.navigator.userAgent);
+}
+
+function skipFF() {
+  return isFirefox() ? it.only : it;
+}
