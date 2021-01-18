@@ -19,7 +19,7 @@ describe('IdChangeBehavior', function() {
 
 
   it('should update IDs on decision ID change', inject(
-    function(elementRegistry,modeling) {
+    function(elementRegistry, modeling) {
 
       // given
       const decision = elementRegistry.get('guestCount'),
@@ -35,7 +35,7 @@ describe('IdChangeBehavior', function() {
 
 
   it('should update association sourceRef on source ID change', inject(
-    function(elementRegistry,modeling) {
+    function(elementRegistry, modeling) {
 
       // given
       const source = elementRegistry.get('dayType_id'),
@@ -51,7 +51,7 @@ describe('IdChangeBehavior', function() {
 
 
   it('should update association targetRef on target ID change', inject(
-    function(elementRegistry,modeling) {
+    function(elementRegistry, modeling) {
 
       // given
       const target = elementRegistry.get('annotation_1'),
