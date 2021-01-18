@@ -151,6 +151,10 @@ export default function DrdUpdater(
         newTarget = context.newTarget,
         newTargetBo = newTarget.businessObject;
 
+    if (is(connectionBo, 'dmn:Association')) {
+      return;
+    }
+
     self.updateSemanticParent(connectionBo, newTargetBo);
   }, true);
 
@@ -159,6 +163,10 @@ export default function DrdUpdater(
         connectionBo = connection.businessObject,
         oldTarget = context.oldTarget,
         oldTargetBo = oldTarget.businessObject;
+
+    if (is(connectionBo, 'dmn:Association')) {
+      return;
+    }
 
     self.updateSemanticParent(connectionBo, oldTargetBo);
   }, true);

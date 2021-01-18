@@ -131,76 +131,134 @@ describe('features/modeling - DrdUpdater', function() {
     ));
 
 
-    it('should update parent when information requirement is created', inject(
-      function(elementRegistry, modeling) {
+    describe('connections', function() {
 
-        // given
-        var decision1 = elementRegistry.get('Decision_2'),
-            decision2 = elementRegistry.get('Decision_3');
+      describe('information requirement', function() {
 
-        // when
-        var informationRequirement = modeling.connect(decision1, decision2),
-            informationRequirementBo = informationRequirement.businessObject;
+        it('should update parent when information requirement is created', inject(
+          function(elementRegistry, modeling) {
 
-        // then
-        expect(informationRequirementBo.$parent).to.eql(decision2.businessObject);
-      }
-    ));
+            // given
+            var decision1 = elementRegistry.get('Decision_2'),
+                decision2 = elementRegistry.get('Decision_3');
 
+            // when
+            var informationRequirement = modeling.connect(decision1, decision2),
+                informationRequirementBo = informationRequirement.businessObject;
 
-    it('should update parent when information requirement is removed', inject(
-      function(elementRegistry, modeling) {
-
-        // given
-        var informationRequirement = elementRegistry.get('InformationRequirement_1'),
-            informationRequirementBo = informationRequirement.businessObject;
-
-        // when
-        modeling.removeConnection(informationRequirement);
-
-        // then
-        expect(informationRequirementBo.$parent).to.be.null;
-      }
-    ));
+            // then
+            expect(informationRequirementBo.$parent).to.eql(decision2.businessObject);
+          }
+        ));
 
 
-    it('should update parent when association is created', inject(
-      function(elementRegistry, modeling) {
+        it('should update parent when information requirement is removed', inject(
+          function(elementRegistry, modeling) {
 
-        // given
-        var definitions = elementRegistry.get('Definitions_1'),
-            definitionsBo = definitions.businessObject,
-            textAnnotation = elementRegistry.get('TextAnnotation_1'),
-            decision = elementRegistry.get('Decision_3');
+            // given
+            var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+                informationRequirementBo = informationRequirement.businessObject;
 
-        // when
-        var association = modeling.connect(textAnnotation, decision),
-            associationBo = association.businessObject;
+            // when
+            modeling.removeConnection(informationRequirement);
 
-        // then
-        expect(associationBo.$parent).to.eql(definitionsBo);
-        expect(definitionsBo.get('artifact')).to.include(associationBo);
-      }
-    ));
+            // then
+            expect(informationRequirementBo.$parent).to.be.null;
+          }
+        ));
+
+      });
 
 
-    it('should update parent when association is removed', inject(
-      function(elementRegistry, modeling) {
+      describe('association', function() {
 
-        // given
-        var definitions = elementRegistry.get('Definitions_1'),
-            definitionsBo = definitions.businessObject,
-            association = elementRegistry.get('Association_1'),
-            associationBo = association.businessObject;
+        it('should update parent when association is created', inject(
+          function(elementRegistry, modeling) {
 
-        // when
-        modeling.removeConnection(association);
+            // given
+            var definitions = elementRegistry.get('Definitions_1'),
+                definitionsBo = definitions.businessObject,
+                textAnnotation = elementRegistry.get('TextAnnotation_1'),
+                decision = elementRegistry.get('Decision_3');
 
-        // then
-        expect(associationBo.$parent).to.be.null;
-        expect(definitionsBo.get('artifact')).to.not.include(associationBo);
-      }
-    ));
+            // when
+            var association = modeling.connect(textAnnotation, decision),
+                associationBo = association.businessObject;
+
+            // then
+            expect(associationBo.$parent).to.eql(definitionsBo);
+            expect(definitionsBo.get('artifact')).to.include(associationBo);
+          }
+        ));
+
+
+        describe('should not update parent when association is reconnected', function() {
+
+          it('<do>', inject(
+            function(elementRegistry, modeling) {
+
+              // given
+              var definitions = elementRegistry.get('Definitions_1'),
+                  definitionsBo = definitions.businessObject,
+                  association = elementRegistry.get('Association_1'),
+                  decision = elementRegistry.get('Decision_2'),
+                  associationBo = association.businessObject;
+
+              // when
+              modeling.reconnectStart(association, decision, getMid(decision));
+
+              // then
+              expect(associationBo.$parent).to.eql(definitionsBo);
+              expect(definitionsBo.get('artifact')).to.include(associationBo);
+            }
+          ));
+
+
+          it('<undo>', inject(
+            function(commandStack, elementRegistry, modeling) {
+
+              // given
+              var definitions = elementRegistry.get('Definitions_1'),
+                  definitionsBo = definitions.businessObject,
+                  association = elementRegistry.get('Association_1'),
+                  decision = elementRegistry.get('Decision_2'),
+                  associationBo = association.businessObject;
+
+              modeling.reconnectStart(association, decision, getMid(decision));
+
+              // when
+              commandStack.undo();
+
+              // then
+              expect(associationBo.$parent).to.eql(definitionsBo);
+              expect(definitionsBo.get('artifact')).to.include(associationBo);
+            }
+          ));
+
+        });
+
+
+        it('should update parent when association is removed', inject(
+          function(elementRegistry, modeling) {
+
+            // given
+            var definitions = elementRegistry.get('Definitions_1'),
+                definitionsBo = definitions.businessObject,
+                association = elementRegistry.get('Association_1'),
+                associationBo = association.businessObject;
+
+            // when
+            modeling.removeConnection(association);
+
+            // then
+            expect(associationBo.$parent).to.be.null;
+            expect(definitionsBo.get('artifact')).to.not.include(associationBo);
+          }
+        ));
+
+      });
+
+    });
 
   });
 
