@@ -3,7 +3,7 @@
 
 # dmn-js - DMN for the web
 
-[![Build Status](https://travis-ci.com/bpmn-io/dmn-js.svg?branch=develop)](https://travis-ci.com/bpmn-io/dmn-js)
+[![CI](https://github.com/bpmn-io/dmn-js/workflows/CI/badge.svg)](https://github.com/bpmn-io/dmn-js/actions?query=workflow%3ACI)
 
 View and edit DMN 1.3 diagrams in the browser.
 
