@@ -32,6 +32,6 @@
     "tiny-svg": "^2.2.1"
   },
   "devDependencies": {
-    "dmn-font": "^0.6.0"
+    "dmn-font": "^0.6.1"
   }
 }
