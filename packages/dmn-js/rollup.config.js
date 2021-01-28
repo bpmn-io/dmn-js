@@ -94,17 +94,20 @@ function banner(bundleName, minified) {
 }
 
 function pgl(plugins=[]) {
+
+  const NODE_ENV = process.env.NODE_ENV || 'production';
+
   return [
     replace({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
     json(),
     nodeResolve({
-      mainFields: [
+      mainFields: (NODE_ENV === 'development' ? [ 'dev:module' ] : []).concat([
         'browser',
         'module',
         'main'
-      ]
+      ])
     }),
     commonjs(),
     babel({
