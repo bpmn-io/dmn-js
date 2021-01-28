@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.1.0-alpha.1
+
+* `CHORE`: build with `NODE_ENV=production`
+* `CHORE`: add `npm start` script
+* `FIX`: restore missing drill-down icons
+
 ## 10.1.0-alpha.0
 
 ### General
