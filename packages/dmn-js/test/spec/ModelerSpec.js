@@ -14,6 +14,8 @@ insertCSS('dmn-js-testing.css',
   '.test-container { height: 500px; }'
 );
 
+var singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
+
 
 describe('Modeler', function() {
 
@@ -40,7 +42,7 @@ describe('Modeler', function() {
     });
   });
 
-  afterEach(function() {
+  singleStart || afterEach(function() {
     if (editor) {
       editor.destroy();
 
@@ -91,7 +93,7 @@ describe('Modeler', function() {
   });
 
 
-  it('should open DRD', function(done) {
+  (singleStart ? it.only : it)('should open DRD', function(done) {
 
     editor.importXML(diagram, { open: false }, function(err) {
 

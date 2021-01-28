@@ -8,6 +8,8 @@ var noDi = require('./no-di.dmn');
 
 var dmn_11 = require('./dmn-11.dmn');
 
+var singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
+
 
 describe('Viewer', function() {
 
@@ -20,7 +22,7 @@ describe('Viewer', function() {
     document.body.appendChild(container);
   });
 
-  false && afterEach(function() {
+  singleStart || afterEach(function() {
     document.body.removeChild(container);
   });
 
@@ -92,7 +94,7 @@ describe('Viewer', function() {
   });
 
 
-  it('should open DRD', function(done) {
+  (singleStart ? it.only : it)('should open DRD', function(done) {
 
     var editor = new Viewer({ container: container });
 
