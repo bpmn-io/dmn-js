@@ -22,7 +22,7 @@
     "decision table"
   ],
   "devDependencies": {
-    "dmn-font": "^0.5.0",
+    "dmn-font": "^0.6.0",
     "inferno-test-utils": "~5.6.2"
   },
   "dependencies": {
