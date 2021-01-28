@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-shared",
   "description": "Shared components used by dmn-js",
-  "version": "10.1.0-alpha.0",
+  "version": "10.1.0-alpha.1",
   "scripts": {
     "test": "karma start",
     "build": "del-cli lib && babel -s -q -d lib src",
