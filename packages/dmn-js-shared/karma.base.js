@@ -2,6 +2,8 @@
 
 var coverage = process.env.COVERAGE;
 
+var singleStart = process.env.SINGLE_START;
+
 // configures browsers to run test against
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE' ]
 var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(/\s*,\s*/g);
@@ -11,7 +13,8 @@ const testFile = coverage ? 'test/coverageBundle.js' : 'test/testBundle.js';
 module.exports = function(path) {
 
   return function(karma) {
-    karma.set({
+
+    const config = {
 
       basePath: path,
 
@@ -25,7 +28,7 @@ module.exports = function(path) {
       ],
 
       preprocessors: {
-        [testFile]: [ 'webpack' ]
+        [testFile]: [ 'webpack', 'env' ]
       },
 
       reporters: [ 'progress' ].concat(coverage ? 'coverage' : []),
@@ -83,7 +86,14 @@ module.exports = function(path) {
         },
         devtool: 'eval-source-map'
       }
-    });
+    };
+
+    if (singleStart) {
+      config.browsers = [].concat(config.browsers, 'Debug');
+      config.envPreprocessor = [].concat(config.envPreprocessor || [], 'SINGLE_START');
+    }
+
+    karma.set(config);
   };
 
 };

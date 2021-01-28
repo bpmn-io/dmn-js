@@ -6,6 +6,8 @@ var noDi = require('./no-di.dmn');
 
 var dmn_11 = require('./dmn-11.dmn');
 
+var singleStart = window.__env__ && window.__env__.SINGLE_START === 'navigated-viewer';
+
 
 describe('NavigatedViewer', function() {
 
@@ -18,7 +20,7 @@ describe('NavigatedViewer', function() {
     document.body.appendChild(container);
   });
 
-  false && afterEach(function() {
+  singleStart || afterEach(function() {
     document.body.removeChild(container);
   });
 
@@ -85,7 +87,7 @@ describe('NavigatedViewer', function() {
   });
 
 
-  it('should open DRD', function(done) {
+  (singleStart ? it.only : it)('should open DRD', function(done) {
 
     var editor = new NavigatedViewer({ container: container });
 
