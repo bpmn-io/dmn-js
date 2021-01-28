@@ -18,7 +18,7 @@
     "reinstall": "npm ci",
     "release": "run-s distro test \"lerna-publish -- {1}\" --",
     "test": "lerna run test",
-    "travis": "run-s all build-distro"
+    "ci": "run-s all build-distro"
   },
   "contributors": [
     {

@@ -1,0 +1,44 @@
+name: CI
+on: [ push, pull_request ]
+jobs:
+  Build:
+
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        node-version: [ 14 ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Cache Node.js modules
+      uses: actions/cache@v2
+      with:
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: ~/.npm
+        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
+    - name: Install dependencies
+      run: npm ci
+    - name: Build
+      if: matrix.os == 'ubuntu-latest'
+      env:
+        COVERAGE: 1
+        TEST_BROWSERS: Firefox,ChromeHeadless
+      run: xvfb-run npm run ci
+    - name: Build
+      if: matrix.os != 'ubuntu-latest'
+      env:
+        TEST_BROWSERS: ChromeHeadless
+      run: npm run ci
+    - name: Upload Coverage
+      run: npx codecov
+      if: matrix.os == 'ubuntu-latest'
