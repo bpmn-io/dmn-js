@@ -6,6 +6,19 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.1.0-alpha.0
+
+### General
+
+* `CHORE`: bump to `diagram-js@7.2`
+* `CHORE`: bump to `table-js@7.1.0-alpha.0`
+* `CHORE`: bump to `inferno@5.6`
+
+### DRD
+
+* `FEAT`: add hand tool ([`2249767f`](https://github.com/bpmn-io/dmn-js/commit/2249767f064c8bcb6263e6733be61ab58d3e755a))
+* `FIX`: do not update association parent ([`96c2b113`](https://github.com/bpmn-io/dmn-js/commit/96c2b1130462ac77f8bf675ea8a0b9b212e40b78))
+
 ## 10.0.0
 
 * `FEAT`: make first row and column of decision table sticky ([#606](https://github.com/bpmn-io/dmn-js/pull/606))
