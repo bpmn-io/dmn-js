@@ -6,23 +6,15 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
-## 10.1.0-alpha.2
-
-* `FIX`: corect icon padding
-
-## 10.1.0-alpha.1
-
-* `CHORE`: build with `NODE_ENV=production`
-* `CHORE`: add `npm start` script
-* `FIX`: restore missing drill-down icons
-
-## 10.1.0-alpha.0
+## 10.1.0
 
 ### General
 
 * `CHORE`: bump to `diagram-js@7.2`
-* `CHORE`: bump to `table-js@7.1.0-alpha.0`
+* `CHORE`: bump to `table-js@7.1.0`
 * `CHORE`: bump to `inferno@5.6`
+* `CHORE`: build with `NODE_ENV=production`
+* `CHORE`: add `npm start` script
 
 ### DRD
 
