@@ -235,6 +235,22 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     });
   }
 
+  if (is(businessObject, 'dmn:TextAnnotation')) {
+    assign(actions, {
+      'connect': {
+        group: 'connect',
+        className: 'dmn-icon-connection-multi',
+        title: translate(
+          'Connect using association'
+        ),
+        action: {
+          click: startConnect,
+          dragstart: startConnect
+        }
+      }
+    });
+  }
+
   if (!popupMenu.isEmpty(element, 'dmn-replace')) {
 
     // Replace menu entry
