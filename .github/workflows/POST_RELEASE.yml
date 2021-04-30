@@ -30,7 +30,7 @@ jobs:
           ${{ runner.OS }}-node-
           ${{ runner.OS }}-
     - name: Get tag
-      run: echo '::set-output TAG=$(git describe --tags --abbrev=0)'
+      run: echo '::set-output name=TAG::$(git describe --tags --abbrev=0)'
       id: get-tag
     - name: Read tag
       run: |
