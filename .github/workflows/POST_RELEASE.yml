@@ -32,6 +32,10 @@ jobs:
     - name: Get tag
       run: echo '::set-output TAG=$(git describe --abbrev=0)'
       id: get-tag
+    - name: Read tag
+      run: |
+        git describe --abbrev=0
+        echo "${{ steps.get-tag.outputs.TAG }}ń"
     - name: Update demo
       env:
         GH_AUTH: ${{ secrets.GH_AUTH }}
