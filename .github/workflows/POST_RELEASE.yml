@@ -30,7 +30,7 @@ jobs:
           ${{ runner.OS }}-node-
           ${{ runner.OS }}-
     - name: Set TAG
-      run: echo 'TAG=$(git describe --tags --abbrev=0)' >> $GITHUB_ENV
+      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
     - name: Read tag
       run: |
         echo $TAG
