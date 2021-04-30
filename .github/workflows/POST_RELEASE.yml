@@ -29,18 +29,16 @@ jobs:
         restore-keys: |
           ${{ runner.OS }}-node-
           ${{ runner.OS }}-
-    - name: Get tag
-      run: echo '::set-output name=TAG::$(git describe --tags --abbrev=0)'
-      id: get-tag
+    - name: Set TAG
+      run: echo 'TAG=$(git describe --tags --abbrev=0)' >> $GITHUB_ENV
     - name: Read tag
       run: |
-        git describe --tags --abbrev=0
-        echo "${{ steps.get-tag.outputs.TAG }}"
+        echo $TAG
     - name: Update demo
       env:
         GH_AUTH: ${{ secrets.GH_AUTH }}
         BPMN_IO_EMAIL: ${{ secrets.BPMN_IO_EMAIL }}
         BPMN_IO_USERNAME: ${{ secrets.BPMN_IO_USERNAME }}
         BPMN_IO_DEMO_ENDPOINT: ${{ secrets.BPMN_IO_DEMO_ENDPOINT }}
-        TAG: ${{ steps.get-tag.outputs.TAG }}
+        TAG: ${{ env.TAG }}
       run: bash tasks/stages/update-demo
