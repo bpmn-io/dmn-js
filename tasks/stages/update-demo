@@ -20,7 +20,7 @@ git config user.name "$BPMN_IO_USERNAME"
 git config push.default simple
 
 git add -A
-git commit -m "chore: bump dmn-js to $TAG"
+git commit -m "deps: bump dmn-js to $TAG"
 git tag "dmn-js-$TAG"
 git push -q &2>/dev/null
 git push --tags -q &2>/dev/null
