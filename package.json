@@ -1,6 +1,7 @@
 {
   "name": "dmn-js-build",
   "version": "1.1.0",
+  "private": true,
   "scripts": {
     "all": "run-s lint build test",
     "build-distro": "lerna run prepublishOnly --sort",
