@@ -2,6 +2,10 @@
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
   "version": "10.2.2",
+  "files": [
+    "assets",
+    "lib"
+  ],
   "scripts": {
     "test": "karma start",
     "build": "del-cli lib && babel -s -q -d lib src",
