@@ -1,7 +1,0 @@
-src
-test
-!lib
-!core
-.babelrc
-karma.conf.js
-coverage
