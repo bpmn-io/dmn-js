@@ -115,7 +115,8 @@ export default class DecisionTableEditorActions {
         const root = sheet.getRoot(),
               businessObject = root.businessObject;
 
-        const { input, output } = businessObject;
+        const input = businessObject.get('input'),
+              output = businessObject.get('output');
 
         return modeling.addCol(
           { type: 'dmn:OutputClause' },
