@@ -6,6 +6,16 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.2.1
+
+* `FIX`: allow to add output if dmn:Input is missing ([#635](https://github.com/bpmn-io/dmn-js/pull/635))
+
+## 10.2.0
+
+### DRD
+
+* `FEAT`: enable connect tool for text annotation ([#628](https://github.com/bpmn-io/dmn-js/pull/628))
+
 ## 10.1.0
 
 ### General

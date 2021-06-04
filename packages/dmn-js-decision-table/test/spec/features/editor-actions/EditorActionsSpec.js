@@ -1,6 +1,7 @@
 import { bootstrapModeler, inject } from 'test/helper';
 
 import simpleXML from '../../simple.dmn';
+import noInputsXML from '../../no-inputs.dmn';
 
 import CoreModule from 'src/core';
 import EditorActionsModule from 'src/features/editor-actions';
@@ -649,6 +650,35 @@ describe('features/editor-actions', function() {
     expect(currentSelection.id).to.equal('inputEntry7');
   }));
 
+
+
+  describe('missing inputs', function() {
+
+    beforeEach(bootstrapModeler(noInputsXML, {
+      modules: [
+        CoreModule,
+        EditorActionsModule,
+        ModelingModule,
+        RulesEditorModule
+      ]
+    }));
+
+    it('should add output if inputs are missing', inject(function(sheet, editorActions) {
+
+      // given
+      const root = sheet.getRoot();
+      const existingOutput = root.cols[0];
+
+      // when
+      const newOutput = editorActions.trigger('addOutput');
+
+      // then
+      expectOrder(root.cols, [
+        existingOutput,
+        newOutput
+      ]);
+    }));
+  });
 });
 
 
