@@ -36,31 +36,65 @@ export default class Viewer extends Table {
     this._container = container;
   }
 
-  open(decision, done) {
+  /**
+   * @typedef {Object} OpenResult
+   *
+   * @property {Array<string>} warnings - Warnings occured during opening
+   */
 
-    var err;
+  /**
+    * @typedef {Error} OpenError
+    *
+    * @property {Array<string>} warnings - Warnings occured during opening
+    */
 
-    // use try/catch to not swallow synchronous exceptions
-    // that may be raised during model parsing
-    try {
+  /**
+   * Open diagram element.
+   *
+   * @param  {ModdleElement} decision
+   * @returns {Promise} Resolves with {OpenResult} when successful
+   * or rejects with {OpenError}
+   */
+  open(decision) {
+    var self = this;
 
-      if (this._decision) {
+    return new Promise((resolve, reject) => {
+      var err;
 
-        // clear existing rendered diagram
-        this.clear();
+      // use try/catch to not swallow synchronous exceptions
+      // that may be raised during model parsing
+      try {
+
+        if (self._decision) {
+
+          // clear existing rendered diagram
+          self.clear();
+        }
+
+        // update decision
+        self._decision = decision;
+
+        // perform import
+        return importDecision(self, decision, function(err, warnings) {
+          if (err) {
+            err.warnings = warnings || [];
+            reject(err);
+          } else {
+            resolve({ warnings: warnings || [] });
+          }
+        });
+      } catch (e) {
+        err = e;
       }
 
-      // update decision
-      this._decision = decision;
-
-      // perform import
-      return importDecision(this, decision, done);
-    } catch (e) {
-      err = e;
-    }
-
-    // handle synchronously thrown exception
-    return done(err);
+      // handle synchronously thrown exception
+      if (err) {
+        err.warnings = err.warnings || [];
+        reject(err);
+      } else {
+        resolve({ warnings: [] });
+      }
+    });
   }
 
   /**

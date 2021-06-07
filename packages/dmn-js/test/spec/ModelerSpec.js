@@ -67,7 +67,12 @@ describe('Modeler', function() {
       // can open decisions
       expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      editor.open(decisionView, done);
+      editor.open(decisionView)
+        .then(
+          result => done(result.warnings[0]))
+        .catch(
+          error => done(error)
+        );
     });
 
   });
@@ -87,7 +92,12 @@ describe('Modeler', function() {
       // can open decisions
       expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      editor.open(decisionView, done);
+      editor.open(decisionView)
+        .then(
+          result => done(result.warnings[0]))
+        .catch(
+          error => done(error)
+        );
     });
 
   });
@@ -107,7 +117,12 @@ describe('Modeler', function() {
       // can open decisions
       expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
-      editor.open(drdView, done);
+      editor.open(drdView)
+        .then(
+          result => done(result.warnings[0]))
+        .catch(
+          error => done(error)
+        );
     });
 
   });
@@ -210,25 +225,30 @@ describe('Modeler', function() {
       var views = editor.getViews();
       var tableView = views.filter(v => v.type === 'decisionTable')[0];
 
-      editor.open(tableView, function(err) {
+      editor.open(tableView)
+        .then(
+          result => {
+            editor.importXML(diagram, function(err) {
 
-        editor.importXML(diagram, function(err) {
+              var activeView = editor.getActiveView();
 
-          var activeView = editor.getActiveView();
+              var element = activeView.element;
 
-          var element = activeView.element;
+              expect(result.warnings[0]).to.be.undefined;
 
-          expect(activeView.type).to.eql('decisionTable');
-          expect(element.$instanceOf('dmn:Decision')).to.be.true;
-          expect(element.id).to.eql(tableView.element.id);
+              expect(activeView.type).to.eql('decisionTable');
+              expect(element.$instanceOf('dmn:Decision')).to.be.true;
+              expect(element.id).to.eql(tableView.element.id);
 
-          done();
-        });
-      });
+              done();
+            });
+          })
+        .catch(
+          error => done(error)
+        );
 
     });
 
   });
 
 });
-

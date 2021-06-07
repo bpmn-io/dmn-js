@@ -224,30 +224,64 @@ Viewer.prototype._createContainer = function() {
   );
 };
 
-Viewer.prototype.open = function(definitions, done) {
+/**
+ * @typedef {Object} OpenResult
+ *
+ * @property {Array<string>} warnings - Warnings occured during opening
+ */
 
-  var err;
+/**
+  * @typedef {Error} OpenError
+  *
+  * @property {Array<string>} warnings - Warnings occured during opening
+  */
 
-  // use try/catch to not swallow synchronous exceptions
-  // that may be raised during model parsing
-  try {
+/**
+ * Open diagram element.
+ *
+ * @param  {ModdleElement} definitions
+ * @returns {Promise} Resolves with {OpenResult} when successful
+ * or rejects with {OpenError}
+ */
+Viewer.prototype.open = function(definitions) {
+  var self = this;
 
-    if (this._definitions) {
+  return new Promise((resolve, reject) => {
+    var err;
 
-      // clear existing rendered diagram
-      this.clear();
+    // use try/catch to not swallow synchronous exceptions
+    // that may be raised during model parsing
+    try {
+
+      if (self._definitions) {
+
+        // clear existing rendered diagram
+        self.clear();
+      }
+
+      // update definitions
+      self._definitions = definitions;
+
+      // perform graphical import
+      return importDRD(self, definitions, function(err, warnings) {
+        if (err) {
+          err.warnigns = warnings || [];
+          reject(err);
+        } else {
+          resolve({ warnings: warnings || [] });
+        }
+      });
+    } catch (e) {
+      err = e;
     }
 
-    // update definitions
-    this._definitions = definitions;
-
-    // perform graphical import
-    return importDRD(this, definitions, done);
-  } catch (e) {
-    err = e;
-  }
-
-  return done(err);
+    if (err) {
+      err.warnings = err.warnings || [];
+      reject(err);
+    } else {
+      resolve({ warnings: [] });
+    }
+  });
 };
 
 /**
