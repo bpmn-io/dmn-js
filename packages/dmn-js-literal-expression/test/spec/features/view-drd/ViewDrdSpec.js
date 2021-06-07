@@ -27,10 +27,21 @@ describe('view drd', function() {
 
       expect(view).to.exist;
 
+      if (err) {
+        done(err);
+      }
+
       // open decision table
-      viewer.open(view, function(_err) {
-        return done(err || _err, warnings, viewer);
-      });
+      viewer.open(view)
+        .then(
+          result => {
+            done(err || warnings[0] || result.warnings[0]);
+          })
+        .catch(
+          error => {
+            done(error);
+          }
+        );
     });
   }
 

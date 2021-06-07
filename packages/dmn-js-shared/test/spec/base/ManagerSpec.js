@@ -10,7 +10,9 @@ import { find } from 'min-dash';
 
 class TestViewer extends Manager {
 
-  constructor(viewProviders=[ DECISION_TABLE_VIEW, DRD_VIEW ], options={}) {
+  constructor(
+      viewProviders=[ DECISION_TABLE_VIEW, DRD_VIEW ],
+      options={}) {
     super(options);
 
     this._viewProviders = viewProviders;
@@ -18,6 +20,37 @@ class TestViewer extends Manager {
 
   _getViewProviders() {
     return this._viewProviders;
+  }
+
+}
+
+class ReturnWarningsView extends TestView {
+
+  constructor(options) {
+    super(options);
+  }
+
+  open(view) {
+    return new Promise(function(resolve, reject) {
+      resolve({ warnings: [ 'warning1', 'warning2' ] });
+    });
+  }
+
+}
+
+class ReturnErrorView extends TestView {
+
+  constructor(options) {
+    super(options);
+  }
+
+  open(view) {
+    return new Promise(function(resolve, reject) {
+      const err = new Error('foobar');
+      err.warnings = [ 'warning1', 'warning2' ];
+
+      reject(err);
+    });
   }
 
 }
@@ -32,6 +65,18 @@ const DRD_VIEW = {
   id: 'drd',
   opens: 'dmn:Definitions',
   constructor: TestView
+};
+
+const LOG_WARNING_VIEW = {
+  id: 'drd',
+  opens: 'dmn:Definitions',
+  constructor: ReturnWarningsView
+};
+
+const ERRORS_VIEW = {
+  id: 'drd',
+  opens: 'dmn:Definitions',
+  constructor: ReturnErrorView
 };
 
 
@@ -418,6 +463,7 @@ describe('Manager', function() {
     });
 
 
+    // TODO @maxtru: remove done as soon as importXML is promisified
     it('should switch', function(done) {
 
       manager.importXML(diagramXML, function(err) {
@@ -428,17 +474,16 @@ describe('Manager', function() {
         var views = manager.getViews();
 
         // when
-        manager.open(views[3], function(err) {
+        manager.open(views[3])
+          .then(
+            result => {
+              expect(manager.getActiveView()).to.eql(manager.getViews()[3]);
 
-          if (err) {
-            return done(err);
-          }
-
-          // then
-          expect(manager.getActiveView()).to.eql(manager.getViews()[3]);
-
-          done();
-        });
+              done();
+            })
+          .catch(
+            error => done(error)
+          );
 
       });
 
@@ -477,6 +522,7 @@ describe('Manager', function() {
 
   describe('viewers', function() {
 
+    // TODO @maxtru: remove done as soon as importXML is promisified
     it('should destroy on manager destruction', function(done) {
 
       // given
@@ -497,18 +543,83 @@ describe('Manager', function() {
           return done(err);
         }
 
-        manager.open(manager.getViews()[1], function() {
+        manager.open(manager.getViews()[1])
+          .then(
+            result => {
 
-          // when
-          manager.destroy();
+              // when
+              manager.destroy();
 
-          // then
-          destroySpies.forEach(function(destroySpy) {
-            expect(destroySpy).to.have.been.calledOnce;
-          });
+              // then
+              destroySpies.forEach(function(destroySpy) {
+                expect(destroySpy).to.have.been.calledOnce;
+              });
 
-          done();
-        });
+              done();
+            })
+          .catch(
+            error => done(error)
+          );
+
+      });
+
+    });
+
+
+    it('should provide warnings on resolve', function(done) {
+
+      // given
+      var manager = new TestViewer([ LOG_WARNING_VIEW ]);
+
+      manager.importXML(diagramXML, function() {
+
+        // when
+        manager.open(manager.getViews()[0])
+          .then(
+            result => {
+
+              // then
+              expect(result.warnings).to.exist;
+              expect(result.warnings).to.be.an.instanceof(Array);
+              expect(result.warnings).to.have.length(2);
+
+              done();
+            })
+          .catch(
+            error => done(error)
+          );
+
+      });
+
+    });
+
+
+    it('should provide error and warnings on reject', function(done) {
+
+      // given
+      var manager = new TestViewer([ ERRORS_VIEW ]);
+
+      manager.importXML(diagramXML, function() {
+
+        // when
+        manager.open(manager.getViews()[0])
+          .catch(
+            error => {
+
+              // then
+              expect(error).to.exist;
+              expect(error).to.be.an.instanceof(Error);
+              expect(error.message).to.equal('foobar');
+
+              expect(error.warnings).to.exist;
+              expect(error.warnings).to.be.an.instanceof(Array);
+              expect(error.warnings).to.have.length(2);
+
+              done();
+            })
+          .catch(
+            error => done(error)
+          );
 
       });
 

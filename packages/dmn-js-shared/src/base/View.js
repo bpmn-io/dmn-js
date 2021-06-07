@@ -17,13 +17,27 @@ export default class View {
   detach() { }
 
   /**
-   * Open view on the given element.
-   *
-   * @param  {View}   view
-   * @param  {Function} [done]
+   * @typedef {Object} OpenResult
+   * @property {Array<string>} warnings - Warnings occured during opening
    */
-  open(view, done=noop) {
-    done();
+
+  /**
+    * @typedef {Object} OpenError
+    * @property {Error} error
+    * @property {Array<string>} warnings - Warnings occured during opening
+    */
+
+  /**
+   * Open diagram element.
+   *
+   * @param  {ModdleElement} view
+   * @returns {Promise} Resolves with {OpenResult} when successful
+   * or rejects with {OpenError}
+   */
+  open(view) {
+    return new Promise(function(resolve, reject) {
+      resolve({ warnings: [] });
+    });
   }
 
   /**
@@ -52,8 +66,3 @@ export default class View {
    */
   destroy() {}
 }
-
-
-// helpers //////////////////////
-
-function noop() { }

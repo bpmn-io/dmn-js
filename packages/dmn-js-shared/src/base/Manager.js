@@ -76,7 +76,6 @@ export default class Manager {
    * @param {Function} [done] invoked with (err, warnings=[])
    */
   importXML(xml, options, done) {
-
     if (typeof options !== 'object') {
       done = options;
       options = { open: true };
@@ -120,14 +119,26 @@ export default class Manager {
         return done(new Error('no displayable contents'));
       }
 
-      this.open(view, (err, warnings) => {
+      var self = this;
 
-        var allWarnings = [].concat(parseWarnings, warnings || []);
+      this.open(view)
+        .then(
+          result => {
+            var allWarnings = [].concat(parseWarnings, result.warnings);
 
-        this._emit('import.done', { error: err, warnings: allWarnings });
+            self._emit('import.done', { error: err, warnings: allWarnings });
 
-        done(err, allWarnings);
-      });
+            done(err, allWarnings);
+          })
+        .catch(
+          error => {
+            var allWarnings = [].concat(parseWarnings, error.warnings);
+
+            self._emit('import.done', { error: error, warnings: allWarnings });
+
+            done(error, allWarnings);
+          }
+        );
     });
   }
 
@@ -316,13 +327,26 @@ export default class Manager {
   }
 
   /**
+   * @typedef {Object} OpenResult
+   *
+   * @property {Array<string>} warnings - Warnings occured during opening
+   */
+
+  /**
+    * @typedef {Error} OpenError
+    *
+    * @property {Array<string>} warnings - Warnings occured during opening
+    */
+
+  /**
    * Open diagram element.
    *
-   * @param  {ModdleElement}   element
-   * @param  {Function} [done]
+   * @param  {ModdleElement} view
+   * @returns {Promise} Resolves with {OpenResult} when successful
+   * or rejects with {OpenError}
    */
-  open(view, done=noop) {
-    this._switchView(view, done);
+  open(view) {
+    return this._switchView(view);
   }
 
   _setDefinitions(definitions) {
@@ -395,7 +419,8 @@ export default class Manager {
       }) || this._getInitialView(newViews);
 
       if (!newActiveView) {
-        return this._switchView(null);
+        this._switchView(null);
+        return;
       }
     }
 
@@ -429,59 +454,81 @@ export default class Manager {
    * Switch to another view.
    *
    * @param  {View} newView
-   * @param  {Function} [done]
+   * @returns {Promise} Resolves with {OpenResult} when successful
+   * or rejects with {OpenError}
    */
-  _switchView(newView, done=noop) {
+  _switchView(newView) {
+    var self = this;
 
-    var complete = (err, warnings) => {
-      this._viewsChanged();
+    return new Promise(function(resolve, reject) {
+      var complete = (openError, openResult) => {
+        self._viewsChanged();
 
-      done(err, warnings);
-    };
+        if (openError) {
+          reject(openError);
+        } else {
+          resolve(openResult);
+        }
+      };
 
-    var activeView = this.getActiveView(),
-        activeViewer;
+      var activeView = self.getActiveView(),
+          activeViewer;
 
-    var newViewer = newView && this._getViewer(newView),
-        element = newView && newView.element;
+      var newViewer = newView && self._getViewer(newView),
+          element = newView && newView.element;
 
-    if (activeView) {
-      activeViewer = this._getViewer(activeView);
+      if (activeView) {
+        activeViewer = self._getViewer(activeView);
 
-      if (activeViewer !== newViewer) {
-        safeExecute(activeViewer, 'clear');
+        if (activeViewer !== newViewer) {
+          safeExecute(activeViewer, 'clear');
 
-        activeViewer.detach();
-      }
-    }
-
-    this._activeView = newView;
-
-    if (newViewer) {
-
-      if (activeViewer !== newViewer) {
-        newViewer.attachTo(this._container);
+          activeViewer.detach();
+        }
       }
 
-      this._emit('import.render.start', {
-        view: newView,
-        element: element
-      });
+      self._activeView = newView;
 
-      return newViewer.open(element, (err, warnings) => {
+      if (newViewer) {
 
-        this._emit('import.render.complete', {
+        if (activeViewer !== newViewer) {
+          newViewer.attachTo(self._container);
+        }
+
+        self._emit('import.render.start', {
           view: newView,
-          error: err,
-          warnings: warnings
+          element: element
         });
 
-        complete(err, warnings);
-      });
-    }
+        newViewer.open(element)
+          .then(
+            result => {
+              self._emit('import.render.complete', {
+                view: newView,
+                error: null,
+                warnings: result.warnings
+              });
 
-    // no active view
-    complete();
+              complete(null, result);
+            })
+          .catch(
+            error => {
+              self._emit('import.render.complete', {
+                view: newView,
+                error: error,
+                warnings: error.warnings
+              });
+
+              complete(error, null);
+            }
+          );
+
+        return;
+      }
+
+      // no active view
+      complete();
+    });
   }
 
   _getViewer(view) {

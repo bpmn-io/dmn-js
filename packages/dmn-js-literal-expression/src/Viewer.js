@@ -31,36 +31,63 @@ export default class Viewer extends BaseViewer {
     this._container = container;
   }
 
-  open(decision, done) {
+  /**
+   * @typedef {Object} OpenResult
+   *
+   * @property {Array<string>} warnings - Warnings occured during opening
+   */
 
-    var err;
+  /**
+    * @typedef {Error} OpenError
+    *
+    * @property {Array<string>} warnings - Warnings occured during opening
+    */
 
-    // use try/catch to not swallow synchronous exceptions
-    // that may be raised during model parsing
-    try {
+  /**
+   * Open diagram element.
+   *
+   * @param  {ModdleElement} decision
+   * @returns {Promise} Resolves with {OpenResult} when successful
+   * or rejects with {OpenError}
+   */
+  open(decision) {
+    var self = this;
 
-      if (this._decision) {
+    return new Promise(function(resolve, reject) {
+      var err;
 
-        // clear existing literal expression
-        this.clear();
+      // use try/catch to not swallow synchronous exceptions
+      // that may be raised during model parsing
+      try {
 
-        // unmount first
-        this.get('eventBus').fire('renderer.unmount');
+        if (self._decision) {
+
+          // clear existing literal expression
+          self.clear();
+
+          // unmount first
+          self.get('eventBus').fire('renderer.unmount');
+        }
+
+        // update literal expression
+        self._decision = decision;
+
+        // let others know about import
+        self.get('eventBus').fire('import', decision);
+
+        self.get('eventBus').fire('renderer.mount');
+      } catch (e) {
+        err = e;
       }
 
-      // update literal expression
-      this._decision = decision;
-
-      // let others know about import
-      this.get('eventBus').fire('import', decision);
-
-      this.get('eventBus').fire('renderer.mount');
-    } catch (e) {
-      err = e;
-    }
-
-    // handle synchronously thrown exception
-    return done(err);
+      // handle synchronously thrown exception
+      if (err) {
+        err.warnings = err.warnings || [];
+        reject(err);
+      } else {
+        resolve({ warnings: [] });
+      }
+    });
   }
 
   /**

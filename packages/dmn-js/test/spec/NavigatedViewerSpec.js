@@ -59,7 +59,12 @@ describe('NavigatedViewer', function() {
       // can open decisions
       expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      editor.open(decisionView, done);
+      editor.open(decisionView)
+        .then(
+          result => done(result.warnings[0]))
+        .catch(
+          error => done(error)
+        );
     });
 
   });
@@ -81,7 +86,12 @@ describe('NavigatedViewer', function() {
       // can open decisions
       expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      editor.open(decisionView, done);
+      editor.open(decisionView)
+        .then(
+          result => done(result.warnings[0]))
+        .catch(
+          error => done(error)
+        );
     });
 
   });
@@ -103,7 +113,12 @@ describe('NavigatedViewer', function() {
       // can open decisions
       expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
-      editor.open(drdView, done);
+      editor.open(drdView)
+        .then(
+          result => done(result.warnings[0]))
+        .catch(
+          error => done(error)
+        );
     });
 
   });
