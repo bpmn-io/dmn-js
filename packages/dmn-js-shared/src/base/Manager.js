@@ -115,7 +115,7 @@ export default class Manager {
       }
 
       if (err || !options.open) {
-        this._emit('import.done', { error: err, warmings: parseWarnings });
+        this._emit('import.done', { error: err, warnings: parseWarnings });
 
         return done(err, parseWarnings);
       }

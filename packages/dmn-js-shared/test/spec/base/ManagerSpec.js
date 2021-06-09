@@ -239,6 +239,35 @@ describe('Manager', function() {
       });
 
 
+      it('should include warnings in <import.done> events', function(done) {
+
+        // given
+        var viewer = new TestViewer();
+
+        var doneEvent;
+
+        viewer.on([ 'import.done' ], function(e) {
+          doneEvent = e;
+        });
+
+        // when
+        viewer.importXML(diagramXML, { open: false }, function(err) {
+
+          if (err) {
+            return done(err);
+          }
+
+          // then
+          expect(doneEvent).to.exist;
+
+          expect(doneEvent.error).to.be.undefined;
+          expect(doneEvent.warnings).to.exist;
+
+          done();
+        });
+      });
+
+
       it('should accept xml modifications on <import.parse.start>', function(done) {
 
         // given
