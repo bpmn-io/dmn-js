@@ -321,7 +321,7 @@ describe('Manager', function() {
         });
 
 
-        it('should NOT emit if no changes', function() {
+        it('should NOT emit if no changes', function(done) {
 
           // given
           var manager = new TestViewer();
@@ -342,17 +342,19 @@ describe('Manager', function() {
             manager._updateViews();
 
             // then
-            expect(viewsChangedSpy).to.have.been.called;
+            expect(viewsChangedSpy).to.not.have.been.called;
 
             expect(manager.getActiveView().id).to.equal('dish-decision');
             expect(manager.getViews()).to.length(4);
+
+            done();
           });
 
           manager.importXML(diagramXML);
         });
 
 
-        it('should emit if name changed', function() {
+        it('should emit if name changed', function(done) {
 
           // given
           var manager = new TestViewer();
@@ -379,6 +381,8 @@ describe('Manager', function() {
 
             expect(manager.getActiveView().id).to.equal('dish-decision');
             expect(manager.getViews()).to.length(4);
+
+            done();
           });
 
           manager.importXML(diagramXML);
