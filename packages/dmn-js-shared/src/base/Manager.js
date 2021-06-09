@@ -20,6 +20,10 @@ import {
   isNumber
 } from 'min-dash';
 
+import {
+  wrapForCompatibility
+} from '../util/CompatibilityUtils';
+
 
 const DEFAULT_CONTAINER_OPTIONS = {
   width: '100%',
@@ -48,6 +52,9 @@ export default class Manager {
 
     this._views = [];
     this._viewers = {};
+
+    // keep support for callbacks
+    this.open = wrapForCompatibility(this.open.bind(this));
 
     this._init(options);
   }
@@ -339,9 +346,9 @@ export default class Manager {
     */
 
   /**
-   * Open diagram element.
+   * Open diagram view.
    *
-   * @param  {ModdleElement} view
+   * @param  {View} view
    * @returns {Promise} Resolves with {OpenResult} when successful
    * or rejects with {OpenError}
    */
