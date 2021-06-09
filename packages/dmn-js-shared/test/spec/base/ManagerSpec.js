@@ -820,4 +820,148 @@ describe('Manager', function() {
 
   });
 
+
+  describe('Callback compatibility', function() {
+
+    describe('#open', function() {
+
+      beforeEach(function() {
+        sinon.spy(console, 'warn');
+      });
+
+      afterEach(function() {
+        console.warn.restore();
+      });
+
+
+      describe('resolve', function() {
+
+        it('should allow Promise based call without warning', function(done) {
+
+          // given
+          var manager = new TestViewer([ LOG_WARNING_VIEW ]);
+
+          manager.importXML(diagramXML, function() {
+
+            // when
+            manager.open(manager.getViews()[0])
+              .then(
+                result => {
+
+                  // then
+                  expect(result.warnings).to.exist;
+                  expect(result.warnings).to.be.an.instanceof(Array);
+                  expect(result.warnings).to.have.length(2);
+
+                  expect(console.warn).to.not.have.been.called;
+
+                  done();
+                })
+              .catch(
+                error => done(error)
+              );
+
+          });
+
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+          // given
+          var manager = new TestViewer([ LOG_WARNING_VIEW ]);
+
+          manager.importXML(diagramXML, function() {
+
+            // when
+            manager.open(manager.getViews()[0], function(err, warnings) {
+
+              // then
+              expect(err).not.to.exist;
+
+              expect(warnings).to.exist;
+              expect(warnings).to.be.an.instanceof(Array);
+              expect(warnings).to.have.length(2);
+
+              expect(console.warn).to.have.been.calledOnce;
+
+              done();
+            });
+
+          });
+
+        });
+
+      });
+
+
+      describe('reject', function() {
+
+        it('should allow Promise based call without warning', function(done) {
+
+          // given
+          var manager = new TestViewer([ ERRORS_VIEW ]);
+
+          manager.importXML(diagramXML, function() {
+
+            // when
+            manager.open(manager.getViews()[0])
+              .then(
+                result => done(result)
+              )
+              .catch(
+                error => {
+
+                  // then
+                  expect(error).to.exist;
+                  expect(error).to.be.an.instanceof(Error);
+
+                  expect(error.warnings).to.exist;
+                  expect(error.warnings).to.be.an.instanceof(Array);
+                  expect(error.warnings).to.have.length(2);
+
+                  expect(console.warn).to.not.have.been.called;
+
+                  done();
+                }
+              );
+
+          });
+
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+          // given
+          var manager = new TestViewer([ ERRORS_VIEW ]);
+
+          manager.importXML(diagramXML, function() {
+
+            // when
+            manager.open(manager.getViews()[0], function(err, warnings) {
+
+              // then
+              expect(err).to.exist;
+              expect(err).to.be.an.instanceof(Error);
+
+              expect(warnings).to.exist;
+              expect(warnings).to.be.an.instanceof(Array);
+              expect(warnings).to.have.length(2);
+
+              expect(console.warn).to.have.been.calledOnce;
+
+              done();
+            });
+
+          });
+
+        });
+
+      });
+
+    });
+
+  });
+
 });
