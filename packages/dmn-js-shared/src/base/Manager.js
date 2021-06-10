@@ -25,6 +25,15 @@ import {
 } from '../util/CompatibilityUtils';
 
 
+/**
+ * @typedef {import('./View').OpenResult} OpenResult
+ */
+
+/**
+ * @typedef {import('./View').OpenError} OpenError
+ */
+
+
 const DEFAULT_CONTAINER_OPTIONS = {
   width: '100%',
   height: '100%',
@@ -332,18 +341,6 @@ export default class Manager {
       this.attachTo(options.container);
     }
   }
-
-  /**
-   * @typedef {Object} OpenResult
-   *
-   * @property {Array<string>} warnings - Warnings occured during opening
-   */
-
-  /**
-    * @typedef {Error} OpenError
-    *
-    * @property {Array<string>} warnings - Warnings occured during opening
-    */
 
   /**
    * Open diagram view.

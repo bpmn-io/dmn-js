@@ -23,6 +23,14 @@ import {
   innerSVG
 } from 'tiny-svg';
 
+/**
+ * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
+ */
+
+/**
+ * @typedef {import('../../dmn-js-shared/src/base/View).OpenError} OpenError
+ */
+
 
 /**
  * A viewer for DMN diagrams.
@@ -223,18 +231,6 @@ Viewer.prototype._createContainer = function() {
     '<div class="dmn-drd-container"></div>'
   );
 };
-
-/**
- * @typedef {Object} OpenResult
- *
- * @property {Array<string>} warnings - Warnings occured during opening
- */
-
-/**
-  * @typedef {Error} OpenError
-  *
-  * @property {Array<string>} warnings - Warnings occured during opening
-  */
 
 /**
  * Open diagram element.
