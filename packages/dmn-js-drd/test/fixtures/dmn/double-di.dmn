@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="DRD1" name="DRD1" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.8.1">
+  <decision id="Decision1" name="Decision1">
+    <decisionTable id="DecisionTable_03vp04x">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" typeRef="string" />
+      <rule id="DecisionRule_0afm9v9">
+        <inputEntry id="UnaryTests_07i03f8">
+          <text>a</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ujkeq2">
+          <text>b</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="LiteralExpression1" name="LiteralExpression1">
+    <variable id="InformationItem_0jrdrgb" />
+    <literalExpression id="LiteralExpression_1d9ne0a" />
+  </decision>
+  <inputData id="SomeInputData" name="SomeInputData" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision1">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+            <dmndi:DMNShape dmnElementRef="Decision1">
+        <dc:Bounds height="80" width="180" x="161" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1meahod" dmnElementRef="LiteralExpression1">
+        <dc:Bounds height="80" width="180" x="390" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1ihyu76" dmnElementRef="SomeInputData">
+        <dc:Bounds height="45" width="125" x="308" y="248" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

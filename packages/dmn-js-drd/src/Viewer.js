@@ -261,7 +261,7 @@ Viewer.prototype.open = function(definitions) {
       // perform graphical import
       return importDRD(self, definitions, function(err, warnings) {
         if (err) {
-          err.warnigns = warnings || [];
+          err.warnings = warnings || [];
           reject(err);
         } else {
           resolve({ warnings: warnings || [] });
