@@ -1,3 +1,4 @@
+import doubleDiXML from '../fixtures/dmn/double-di.dmn';
 import exampleXML from '../fixtures/dmn/di.dmn';
 import noDiXML from '../fixtures/dmn/no-di.dmn';
 import emptyDefsXML from '../fixtures/dmn/empty-definitions.dmn';
@@ -193,6 +194,39 @@ describe('Modeler', function() {
         var actualActions = editorActions.getActions();
 
         expect(actualActions).to.eql(expectedActions);
+
+        done();
+      });
+
+    });
+
+  });
+
+
+  describe('#open', function() {
+
+    it('should be able to provide warnings', function(done) {
+
+      // given
+      container = TestContainer.get(this);
+
+      var drdModeler = new DrdModeler({
+        container: container,
+        drd: {
+          keyboard: {
+            bindTo: document
+          }
+        }
+      });
+
+      // when
+      drdModeler.importXML(doubleDiXML, function(err, warnings) {
+
+        // then
+        expect(warnings).to.exist;
+        expect(warnings).to.have.length(1);
+
+        expect(warnings[0].message).to.equal('multiple DI elements defined for element');
 
         done();
       });
