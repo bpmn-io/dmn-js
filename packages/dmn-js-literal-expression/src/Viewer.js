@@ -16,6 +16,14 @@ import PoweredByModule from './features/powered-by';
 import TextareaModule from './features/textarea';
 import ViewDrdModule from './features/view-drd';
 
+/**
+ * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
+ */
+
+/**
+ * @typedef {import('../../dmn-js-shared/src/base/View).OpenError} OpenError
+ */
+
 
 export default class Viewer extends BaseViewer {
 
@@ -30,18 +38,6 @@ export default class Viewer extends BaseViewer {
 
     this._container = container;
   }
-
-  /**
-   * @typedef {Object} OpenResult
-   *
-   * @property {Array<string>} warnings - Warnings occured during opening
-   */
-
-  /**
-    * @typedef {Error} OpenError
-    *
-    * @property {Array<string>} warnings - Warnings occured during opening
-    */
 
   /**
    * Open diagram element.

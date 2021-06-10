@@ -21,6 +21,14 @@ import hitPolicyModule from './features/hit-policy';
 import viewDrdModule from './features/view-drd';
 import PoweredByModule from './features/powered-by';
 
+/**
+ * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
+ */
+
+/**
+ * @typedef {import('../../dmn-js-shared/src/base/View).OpenError} OpenError
+ */
+
 
 export default class Viewer extends Table {
 
@@ -35,18 +43,6 @@ export default class Viewer extends Table {
 
     this._container = container;
   }
-
-  /**
-   * @typedef {Object} OpenResult
-   *
-   * @property {Array<string>} warnings - Warnings occured during opening
-   */
-
-  /**
-    * @typedef {Error} OpenError
-    *
-    * @property {Array<string>} warnings - Warnings occured during opening
-    */
 
   /**
    * Open diagram element.
