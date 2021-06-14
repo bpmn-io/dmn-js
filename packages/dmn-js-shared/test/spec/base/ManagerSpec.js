@@ -228,7 +228,8 @@ describe('Manager', function() {
           // then
           expect(events).to.eql([
             [ 'import.parse.start', [ 'xml' ] ],
-            [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
+            [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+              'references', 'warnings', 'context' ] ],
             [ 'import.render.start', [ 'view', 'element' ] ],
             [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
             [ 'import.done', [ 'error', 'warnings' ] ]
@@ -237,6 +238,45 @@ describe('Manager', function() {
           done(err);
         });
       });
+
+
+      // TODO: remove with future dmn-js version
+      it('should wrap deprecated context in <import.parse.complete> event',
+        function(done) {
+
+          // given
+          var viewer = new TestViewer();
+
+          var parseCompleteEvent;
+
+          viewer.on([
+            'import.parse.complete'
+          ], function(e) {
+
+            parseCompleteEvent = e;
+          });
+
+          // when
+          viewer.importXML(diagramXML, function(err) {
+
+            if (err) {
+              return done(err);
+            }
+
+            // then
+            var context = parseCompleteEvent.context;
+
+            expect(parseCompleteEvent).to.exist;
+
+            expect(context).to.exist;
+
+            expect(context.warnings).to.equal(parseCompleteEvent.warnings);
+            expect(context.elementsById).to.equal(parseCompleteEvent.elementsById);
+            expect(context.references).to.equal(parseCompleteEvent.references);
+
+            done();
+          });
+        });
 
 
       it('should include warnings in <import.done> events', function(done) {
@@ -260,7 +300,7 @@ describe('Manager', function() {
           // then
           expect(doneEvent).to.exist;
 
-          expect(doneEvent.error).to.be.undefined;
+          expect(doneEvent.error).to.be.null;
           expect(doneEvent.warnings).to.exist;
 
           done();
