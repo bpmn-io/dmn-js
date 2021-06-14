@@ -173,6 +173,29 @@ describe('context menu', function() {
         }));
 
 
+        it('should focus on rule added above', inject(function(sheet, cellSelection) {
+
+          // given
+          const addRuleAboveEntry = domQuery(
+            '.context-menu-entry-add-rule-above',
+            testContainer
+          );
+
+          // when
+          triggerClick(addRuleAboveEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+
+          const addedCell = rows[0].cells[0].id;
+          const selectedCell = cellSelection.getCellSelection();
+
+          expect(addedCell).to.equal(selectedCell);
+        }));
+
+
         it('should add rule below', inject(function(sheet) {
 
           // given
@@ -194,6 +217,29 @@ describe('context menu', function() {
           expect(rows[2]).to.equal(rule2);
           expect(rows[3]).to.equal(rule3);
           expect(rows[4]).to.equal(rule4);
+        }));
+
+
+        it('should focus on rule added below', inject(function(sheet, cellSelection) {
+
+          // given
+          const addRuleBelowEntry = domQuery(
+            '.context-menu-entry-add-rule-below',
+            testContainer
+          );
+
+          // when
+          triggerClick(addRuleBelowEntry);
+
+          // then
+          const root = sheet.getRoot(),
+                { rows } = root;
+
+
+          const addedCell = rows[1].cells[0].id;
+          const selectedCell = cellSelection.getCellSelection();
+
+          expect(addedCell).to.equal(selectedCell);
         }));
 
 
