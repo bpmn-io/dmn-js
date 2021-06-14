@@ -99,7 +99,8 @@ describe('Modeler', function() {
         // then
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
+          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+            'references', 'warnings', 'context' ] ],
           [ 'import.render.start', [ 'view', 'element' ] ],
           [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
           [ 'import.done', [ 'error', 'warnings' ] ]

@@ -92,6 +92,8 @@ export default class Manager {
    * @param {Function} [done] invoked with (err, warnings=[])
    */
   importXML(xml, options, done) {
+    var self = this;
+
     if (typeof options !== 'object') {
       done = options;
       options = { open: true };
@@ -105,46 +107,60 @@ export default class Manager {
     // allow xml manipulation
     xml = this._emit('import.parse.start', { xml: xml }) || xml;
 
-    this._moddle.fromXML(xml, 'dmn:Definitions', (err, definitions, context) => {
+    this._moddle.fromXML(xml, 'dmn:Definitions').then((parseResult) => {
+
+      var definitions = parseResult.rootElement;
+      var references = parseResult.references;
+      var elementsById = parseResult.elementsById;
+      var parseWarnings = parseResult.warnings;
 
       // hook in post parse listeners +
       // allow definitions manipulation
-      definitions = this._emit('import.parse.complete', {
-        error: err,
+      definitions = self._emit('import.parse.complete', ParseCompleteEvent({
+        error: null,
         definitions: definitions,
-        context: context
-      }) || definitions;
+        elementsById: elementsById,
+        references: references,
+        warnings: parseWarnings
+      })) || definitions;
+      self._setDefinitions(definitions);
 
-      var parseWarnings = context.warnings;
+      if (!options.open) {
+        self._emit('import.done', { error: null, warnings: parseWarnings });
 
-      this._setDefinitions(definitions);
-
-      if (err) {
-        err = checkDMNCompatibilityError(err, xml) || checkValidationError(err) || err;
+        return done(null, parseWarnings);
       }
 
-      if (err || !options.open) {
-        this._emit('import.done', { error: err, warnings: parseWarnings });
+      return { parseWarnings };
+    }).catch((parseError) => {
 
-        return done(err, parseWarnings);
-      }
+      var parseWarnings = parseError.warnings;
 
-      var view = this._activeView || this._getInitialView(this._views);
+      parseError = checkDMNCompatibilityError(parseError, xml) ||
+        checkValidationError(parseError) ||
+        parseError;
+
+      self._emit('import.done', { error: parseError, warnings: parseWarnings });
+
+      return done(parseError, parseWarnings);
+    }).then((result) => {
+
+      var parseWarnings = result.parseWarnings;
+
+      var view = self._activeView || self._getInitialView(self._views);
 
       if (!view) {
         return done(new Error('no displayable contents'));
       }
 
-      var self = this;
-
-      this.open(view)
+      self.open(view)
         .then(
           result => {
             var allWarnings = [].concat(parseWarnings, result.warnings);
 
-            self._emit('import.done', { error: err, warnings: allWarnings });
+            self._emit('import.done', { error: null, warnings: allWarnings });
 
-            done(err, allWarnings);
+            done(null, allWarnings);
           })
         .catch(
           error => {
@@ -156,6 +172,31 @@ export default class Manager {
           }
         );
     });
+
+    // TODO: remove with future dmn-js version
+    function ParseCompleteEvent(data) {
+
+      var event = self._eventBus.createEvent(data);
+
+      Object.defineProperty(event, 'context', {
+        enumerable: true,
+        get: function() {
+
+          console.warn(new Error(
+            'import.parse.complete <context> is deprecated ' +
+            'and will be removed in future library versions'
+          ));
+
+          return {
+            warnings: data.warnings,
+            references: data.references,
+            elementsById: data.elementsById
+          };
+        }
+      });
+
+      return event;
+    }
   }
 
   getDefinitions() {
@@ -212,6 +253,7 @@ export default class Manager {
    * @param {Function} done invoked with (err, xml)
    */
   saveXML(options, done) {
+    var self = this;
 
     if (typeof options === 'function') {
       done = options;
@@ -229,23 +271,34 @@ export default class Manager {
       definitions: definitions
     }) || definitions;
 
-    this._moddle.toXML(definitions, options, (err, xml) => {
+    this._moddle.toXML(definitions, options).then(function(result) {
+
+      var xml = result.xml;
+
+      return { xml };
+    }).catch((error) => {
+
+      return { error };
+    }).then((result) => {
+
+      var xml = result.xml;
+      var error = result.error;
 
       try {
-        xml = this._emit('saveXML.serialized', {
-          error: err,
+        xml = self._emit('saveXML.serialized', {
+          error: error,
           xml: xml
         }) || xml;
 
-        this._emit('saveXML.done', {
-          error: err,
+        self._emit('saveXML.done', {
+          error: error,
           xml: xml
         });
       } catch (e) {
         console.error('error in saveXML life-cycle listener', e);
       }
 
-      done(err, xml);
+      done(error, xml);
     });
   }
 

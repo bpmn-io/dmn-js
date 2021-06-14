@@ -14,7 +14,7 @@ export default class EditingManager extends Manager {
     // hook ID collection into the modeler
     this.on('import.parse.complete', (event) => {
       if (!event.error) {
-        this._collectIds(event.definitions, event.context);
+        this._collectIds(event.definitions, event.elementsById);
       }
     });
 
@@ -42,9 +42,9 @@ export default class EditingManager extends Manager {
    * definitions object.
    *
    * @param {ModdleElement} definitions
-   * @param {Context} context
+   * @param {Array<ModdleElement>} elementsById
    */
-  _collectIds(definitions, context) {
+  _collectIds(definitions, elementsById) {
 
     var moddle = definitions.$model,
         ids = moddle.ids,
@@ -53,8 +53,8 @@ export default class EditingManager extends Manager {
     // remove references from previous import
     ids.clear();
 
-    for (id in context.elementsById) {
-      ids.claim(id, context.elementsById[id]);
+    for (id in elementsById) {
+      ids.claim(id, elementsById[id]);
     }
   }
 
