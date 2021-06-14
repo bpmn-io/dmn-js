@@ -12,91 +12,92 @@ describe('import - DmnTreeWalker', function() {
   it('should expose API', function() {
 
     // when
-    var walker = createWalker();
+    const walker = createWalker();
 
     // then
     expect(walker.handleDefinitions).to.exist;
   });
 
 
-  it('should walk dmn:Definitions', function(done) {
+  it('should walk dmn:Definitions', async function() {
 
     // given
-    var elementSpy = sinon.spy(),
-        rootSpy = sinon.spy(),
-        errorSpy = sinon.spy();
+    const elementSpy = sinon.spy(),
+          rootSpy = sinon.spy(),
+          errorSpy = sinon.spy();
 
-    var walker = createWalker({
+    const walker = createWalker({
       element: elementSpy,
       root: rootSpy,
       error: errorSpy
     });
 
-    createModdle(simpleXML, function(err, definitions, context, moddle) {
+    const parseResult = await createModdle(simpleXML);
 
-      // when
-      walker.handleDefinitions(definitions);
+    const {
+      rootElement: definitions
+    } = parseResult;
 
-      // then
-      expect(elementSpy.callCount).to.equal(3);
-      expect(rootSpy.calledOnce).to.be.true;
-      expect(errorSpy.notCalled).to.be.true;
+    walker.handleDefinitions(definitions);
 
-      done();
-    });
+    // then
+    expect(elementSpy.callCount).to.equal(3);
+    expect(rootSpy.calledOnce).to.be.true;
+    expect(errorSpy.notCalled).to.be.true;
   });
 
 
-  it('should assign current diagram to definitions', function(done) {
+  it('should assign current diagram to definitions', async function() {
 
     // given
-    var walker = createWalker();
+    const walker = createWalker();
 
-    createModdle(simpleXML, function(err, definitions, context, moddle) {
+    const parseResult = await createModdle(simpleXML);
 
-      // when
-      walker.handleDefinitions(definitions);
+    const {
+      rootElement: definitions
+    } = parseResult;
 
-      // then
-      expect(definitions.di).to.exist;
-      expect(definitions.di.$type).to.eql('dmndi:DMNDiagram');
+    // when
+    walker.handleDefinitions(definitions);
 
-      done();
-    });
-
+    // then
+    expect(definitions.di).to.exist;
+    expect(definitions.di.$type).to.eql('dmndi:DMNDiagram');
   });
 
 
-  it('should error', function(done) {
+  it('should error', async function() {
 
     // given
-    var elementSpy = sinon.spy(),
-        rootSpy = sinon.spy(),
-        errorSpy = sinon.spy();
+    const elementSpy = sinon.spy(),
+          rootSpy = sinon.spy(),
+          errorSpy = sinon.spy();
 
-    var walker = createWalker({
+    const walker = createWalker({
       element: elementSpy,
       root: rootSpy,
       error: errorSpy
     });
 
-    createModdle(simpleXML, function(err, definitions, context, moddle) {
+    const parseResult = await createModdle(simpleXML);
 
-      var element = findElementWithId(definitions, 'InputData');
+    const {
+      rootElement: definitions
+    } = parseResult;
 
-      // will error
-      element.di = 'DI';
+    const element = findElementWithId(definitions, 'InputData');
 
-      // when
-      walker.handleDefinitions(definitions);
+    // will error
+    element.di = 'DI';
 
-      // then
-      expect(elementSpy.callCount).to.equal(3);
-      expect(rootSpy.calledOnce).to.be.true;
-      expect(errorSpy.calledOnce).to.be.true;
+    // when
+    walker.handleDefinitions(definitions);
 
-      done();
-    });
+    // then
+    expect(elementSpy.callCount).to.equal(3);
+    expect(rootSpy.calledOnce).to.be.true;
+    expect(errorSpy.calledOnce).to.be.true;
   });
 
 });
@@ -104,19 +105,17 @@ describe('import - DmnTreeWalker', function() {
 
 // helpers //////////
 
-function createModdle(xml, done) {
-  var moddle = new DmnModdle();
+function createModdle(xml) {
+  const moddle = new DmnModdle();
 
-  moddle.fromXML(xml, 'dmn:Definitions', function(err, definitions, context) {
-    done(err, definitions, context, moddle);
-  });
+  return moddle.fromXML(xml, 'dmn:Definitions');
 }
 
 function createWalker(listeners) {
 
   listeners = listeners || {};
 
-  var visitor = {
+  const visitor = {
     element: function(element, parent) {
       listeners.element && listeners.element(element, parent);
     },
