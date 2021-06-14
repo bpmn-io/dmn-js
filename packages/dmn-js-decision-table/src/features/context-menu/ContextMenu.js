@@ -13,6 +13,7 @@ export default class ContextMenu {
       eventBus,
       elementRegistry,
       modeling,
+      selection,
       sheet,
       rules,
       translate) {
@@ -23,6 +24,7 @@ export default class ContextMenu {
     this._elementRegistry = elementRegistry;
     this._eventBus = eventBus;
     this._modeling = modeling;
+    this._selection = selection;
     this._sheet = sheet;
     this._rules = rules;
     this._translate = translate;
@@ -77,12 +79,26 @@ export default class ContextMenu {
   _getEntries(context) {
     const handlers = {
       addRuleAbove: (rule) => {
-        this._editorActions.trigger('addRuleAbove', { rule });
+        const selectedIndex = rule.cells.map(cell => cell.id).indexOf(context.id);
+        const newRule = this._editorActions.trigger('addRuleAbove', { rule });
+
+        if (newRule.cells[selectedIndex]) {
+          this._selection.select(newRule.cells[selectedIndex]);
+        } else {
+          this._selection.select(newRule.cells[0]);
+        }
 
         this._contextMenu.close();
       },
       addRuleBelow: (rule) => {
-        this._editorActions.trigger('addRuleBelow', { rule });
+        const selectedIndex = rule.cells.map(cell => cell.id).indexOf(context.id);
+        const newRule = this._editorActions.trigger('addRuleBelow', { rule });
+
+        if (newRule.cells[selectedIndex]) {
+          this._selection.select(newRule.cells[selectedIndex]);
+        } else {
+          this._selection.select(newRule.cells[0]);
+        }
 
         this._contextMenu.close();
       },
@@ -327,6 +343,7 @@ ContextMenu.$inject = [
   'eventBus',
   'elementRegistry',
   'modeling',
+  'selection',
   'sheet',
   'rules',
   'translate'
