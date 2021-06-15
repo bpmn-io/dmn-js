@@ -20,9 +20,10 @@ describe('features/auto-place', function() {
 
     before(bootstrapModeler(diagramXML, {
       modules: [
-        coreModule,
-        modelingModule,
         autoPlaceModule,
+        coreModule,
+        labelEditingModule,
+        modelingModule,
         selectionModule
       ]
     }));
