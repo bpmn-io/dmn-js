@@ -26,7 +26,7 @@ export function wrapForCompatibility(api) {
 
       // TODO(maxtru): document dmn-js promisification guide under a specific URL
       console.warn(new Error(
-        'Passing callbacks to ' + api.name +
+        'Passing callbacks to ' + replaceBoundPrefix(api.name) +
         ' is deprecated and will be removed in a future major release. ' +
         'Please switch to promises: https://bpmn.io/l/moving-to-promises.html'
       ));
@@ -53,4 +53,19 @@ export function wrapForCompatibility(api) {
       return api.apply(this, arguments);
     }
   };
+}
+
+
+// helper ////////
+
+/**
+ * replaceBoundPrefix - replace the <bound > prefix from a string. Can be used
+ * when logging the name of an API, not being sure whether is was bound or not.
+ *
+ * @param  {string} string
+ * @return {string} the string without the <bound > prefix. If no <bound > prefix
+ * was present, the same string will be returned.
+ */
+function replaceBoundPrefix(string) {
+  return string.replace('bound ', '');
 }
