@@ -778,14 +778,85 @@ describe('Manager', function() {
           // then
           expect(events).to.eql([
             [ 'saveXML.start', [ 'definitions' ] ],
-            [ 'saveXML.serialized', ['error', 'xml' ] ],
-            [ 'saveXML.done', ['error', 'xml' ] ]
+            [ 'saveXML.serialized', [ 'xml' ] ],
+            [ 'saveXML.done', [ 'xml' ] ]
           ]);
 
           done(err);
         });
       });
     });
+
+
+    it('should allow to hook into <saveXML.serialzied> event, updating the xml',
+      function(done) {
+
+        // given
+        var viewer = new TestViewer();
+
+        viewer.on([
+          'saveXML.serialized',
+        ], function(e) {
+
+          return 'my invalid xml';
+        });
+
+        viewer.importXML(diagramXML, function(err) {
+
+          // when
+          viewer.saveXML(function(err, xml) {
+
+            // then
+            expect(xml).to.equal('my invalid xml');
+
+            done();
+          });
+        });
+      });
+
+
+    it('should allow to handle errors thrown hooked into <saveXML.serialzied> event',
+      function(done) {
+
+        // given
+        var viewer = new TestViewer();
+
+        var userGeneratedError = new Error('user generated error');
+
+        viewer.on([
+          'saveXML.serialized',
+        ], function(e) {
+
+          throw userGeneratedError;
+        });
+
+        var doneEvent;
+
+        viewer.on([
+          'saveXML.done',
+        ], function(e) {
+
+          doneEvent = e;
+        });
+
+        viewer.importXML(diagramXML, function(err) {
+
+          // when
+          viewer.saveXML(function(err, xml) {
+
+            // then
+            expect(err).to.equal(userGeneratedError);
+            expect(xml).to.be.undefined;
+
+            expect(doneEvent).to.exist;
+            expect(doneEvent.xml).to.not.exist;
+            expect(doneEvent.error).to.equal(userGeneratedError);
+
+            done();
+          });
+        });
+
+      });
 
   });
 

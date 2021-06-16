@@ -275,30 +275,19 @@ export default class Manager {
 
       var xml = result.xml;
 
+      xml = self._emit('saveXML.serialized', {
+        xml: xml
+      }) || xml;
+
       return { xml };
     }).catch((error) => {
 
       return { error };
     }).then((result) => {
 
-      var xml = result.xml;
-      var error = result.error;
+      self._emit('saveXML.done', result);
 
-      try {
-        xml = self._emit('saveXML.serialized', {
-          error: error,
-          xml: xml
-        }) || xml;
-
-        self._emit('saveXML.done', {
-          error: error,
-          xml: xml
-        });
-      } catch (e) {
-        console.error('error in saveXML life-cycle listener', e);
-      }
-
-      done(error, xml);
+      done(result.error, result.xml);
     });
   }
 
