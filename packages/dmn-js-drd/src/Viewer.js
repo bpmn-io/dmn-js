@@ -95,42 +95,50 @@ export default function Viewer(options) {
 inherits(Viewer, Diagram);
 
 /**
+ * The saveSVG result.
+ *
+ * @typedef {Object} SaveSVGResult
+ *
+ * @property {string} svg
+ */
+
+/**
  * Export the currently displayed DMN diagram as
  * an SVG image.
  *
  * @param {Object} [options]
- * @param {Function} done invoked with (err, svgStr)
+ *
+ * @return {Promise<SaveSVGResult>}
  */
-Viewer.prototype.saveSVG = function(options, done) {
+Viewer.prototype.saveSVG = function(options) {
+  var self = this;
 
-  if (!done) {
-    done = options;
-    options = {};
-  }
+  return new Promise(function(resolve) {
 
-  var canvas = this.get('canvas');
+    var canvas = self.get('canvas');
 
-  var contentNode = canvas.getDefaultLayer(),
-      defsNode = domQuery('defs', canvas._svg);
+    var contentNode = canvas.getDefaultLayer(),
+        defsNode = domQuery('defs', canvas._svg);
 
-  var contents = innerSVG(contentNode),
-      defs = (defsNode && defsNode.outerHTML) || '';
+    var contents = innerSVG(contentNode),
+        defs = (defsNode && defsNode.outerHTML) || '';
 
-  var bbox = contentNode.getBBox();
+    var bbox = contentNode.getBBox();
 
-  /* eslint-disable max-len */
-  var svg =
-    '<?xml version="1.0" encoding="utf-8"?>\n' +
-    '<!-- created with dmn-js / http://bpmn.io -->\n' +
-    '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n' +
-    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ' +
-         'width="' + bbox.width + '" height="' + bbox.height + '" ' +
-         'viewBox="' + bbox.x + ' ' + bbox.y + ' ' + bbox.width + ' ' + bbox.height + '" version="1.1">' +
-      defs + contents +
-    '</svg>';
-  /* eslint-enable */
+    /* eslint-disable max-len */
+    var svg =
+      '<?xml version="1.0" encoding="utf-8"?>\n' +
+      '<!-- created with dmn-js / http://bpmn.io -->\n' +
+      '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n' +
+      '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ' +
+           'width="' + bbox.width + '" height="' + bbox.height + '" ' +
+           'viewBox="' + bbox.x + ' ' + bbox.y + ' ' + bbox.width + ' ' + bbox.height + '" version="1.1">' +
+        defs + contents +
+      '</svg>';
+    /* eslint-enable */
 
-  done(null, svg);
+    resolve({ svg });
+  });
 };
 
 Viewer.prototype.getModules = function() {

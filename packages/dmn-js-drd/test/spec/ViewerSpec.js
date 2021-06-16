@@ -146,19 +146,16 @@ describe('Viewer', function() {
         }
 
         // when
-        viewer.getActiveViewer().saveSVG(function(err, svg) {
+        viewer.getActiveViewer().saveSVG().then((saveSvgResult) => {
 
-          if (err) {
-            return done(err);
-          }
+          var svg = saveSvgResult.svg;
 
           // then
           expectValidSVG(svg);
 
           done();
-        });
+        }).catch(error => done(error));
       });
-
     });
 
   });
