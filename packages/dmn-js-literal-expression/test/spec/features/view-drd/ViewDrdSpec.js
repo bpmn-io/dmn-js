@@ -16,63 +16,36 @@ describe('view drd', function() {
     testContainer = TestContainer.get(this);
   });
 
-  function createViewer(Viewer, xml, done) {
+  function createViewer(Viewer, xml) {
     const viewer = new Viewer({
       container: testContainer
     });
 
-    viewer.importXML(xml, { open: false }, (err, warnings) => {
+    return viewer.importXML(xml, { open: false }).then((importXMLResult) => {
 
       const view = viewer._views.filter(v => v.type === 'literalExpression')[0];
 
       expect(view).to.exist;
 
-      if (err) {
-        done(err);
-      }
-
       // open decision table
-      viewer.open(view)
-        .then(
-          result => {
-            done(err || warnings[0] || result.warnings[0]);
-          })
-        .catch(
-          error => {
-            done(error);
-          }
-        );
+      return viewer.open(view);
     });
   }
 
 
-  it('should not show view drd button', function(done) {
-    createViewer(DmnLiteralExpressionViewer, simpleXML, function(err) {
+  it('should not show view drd button', async function() {
+    await createViewer(DmnLiteralExpressionViewer, simpleXML);
 
-      if (err) {
-        return done(err);
-      }
-
-      // then
-      expect(domQuery('.view-drd-button', testContainer)).to.not.exist;
-
-      return done();
-    });
+    // then
+    expect(domQuery('.view-drd-button', testContainer)).to.not.exist;
   });
 
 
-  it('should show view drd button', function(done) {
-    createViewer(MockViewer, simpleXML, function(err) {
+  it('should show view drd button', async function() {
+    await createViewer(MockViewer, simpleXML);
 
-      if (err) {
-        return done(err);
-      }
-
-      // then
-      expect(domQuery('.view-drd-button', testContainer)).to.exist;
-
-      return done();
-    });
+    // then
+    expect(domQuery('.view-drd-button', testContainer)).to.exist;
   });
 
 });

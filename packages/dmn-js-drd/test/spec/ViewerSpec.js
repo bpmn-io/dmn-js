@@ -13,19 +13,17 @@ import { keys } from 'min-dash';
 
 describe('Viewer', function() {
 
-  var container;
+  let container, viewer;
 
   beforeEach(function() {
     container = TestContainer.get(this);
   });
 
 
-  function createViewer(xml, done) {
-    var viewer = new DrdViewer({ container });
+  function createViewer(xml) {
+    viewer = new DrdViewer({ container });
 
-    viewer.importXML(xml, function(err, warnings) {
-      done(err, warnings, viewer);
-    });
+    return viewer.importXML(xml);
   }
 
 
@@ -34,44 +32,34 @@ describe('Viewer', function() {
   });
 
 
-  it('should import simple DRD', function(done) {
-    createViewer(exampleXML, done);
+  it('should import simple DRD', function() {
+    return createViewer(exampleXML);
   });
 
 
-  it('should re-import simple DRD', function(done) {
+  it('should re-import simple DRD', async function() {
 
     // given
-    createViewer(exampleXML, function(err, warnings, viewer) {
+    await createViewer(exampleXML);
 
-      if (err) {
-        return done(err);
-      }
 
-      // when
-      // mimic re-import of same diagram
-      viewer.importXML(exampleXML, function(err, warnings) {
+    // when
+    // mimic re-import of same diagram
+    const { warnings } = await viewer.importXML(exampleXML);
 
-        // then
-        expect(err).to.not.exist;
-        expect(warnings).to.have.length(0);
-
-        done();
-      });
-
-    });
-
+    // then
+    expect(warnings).to.have.length(0);
   });
 
 
   describe('import events', function() {
 
-    it('should emit <import.*> events', function(done) {
+    it('should emit <import.*> events', async function() {
 
       // given
-      var viewer = new DrdViewer({ container: container });
+      const viewer = new DrdViewer({ container: container });
 
-      var events = [];
+      const events = [];
 
       viewer.on([
         'import.parse.start',
@@ -89,20 +77,17 @@ describe('Viewer', function() {
       });
 
       // when
-      viewer.importXML(exampleXML, function(err) {
+      await viewer.importXML(exampleXML);
 
-        // then
-        expect(events).to.eql([
-          [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
-            'references', 'warnings', 'context' ] ],
-          [ 'import.render.start', [ 'view', 'element' ] ],
-          [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
-          [ 'import.done', [ 'error', 'warnings' ] ]
-        ]);
-
-        done(err);
-      });
+      // then
+      expect(events).to.eql([
+        [ 'import.parse.start', [ 'xml' ] ],
+        [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+          'references', 'warnings', 'context' ] ],
+        [ 'import.render.start', [ 'view', 'element' ] ],
+        [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
+        [ 'import.done', [ 'error', 'warnings' ] ]
+      ]);
 
     });
 
@@ -112,8 +97,8 @@ describe('Viewer', function() {
   describe('export', function() {
 
     function expectValidSVG(svg) {
-      var expectedStart = '<?xml version="1.0" encoding="utf-8"?>';
-      var expectedEnd = '</svg>';
+      const expectedStart = '<?xml version="1.0" encoding="utf-8"?>';
+      const expectedEnd = '</svg>';
 
       expect(svg.indexOf(expectedStart)).to.equal(0);
       expect(svg.indexOf(expectedEnd)).to.equal(svg.length - expectedEnd.length);
@@ -125,8 +110,8 @@ describe('Viewer', function() {
       expect(svg.indexOf('<svg width="100%" height="100%">')).to.equal(-1);
       expect(svg.indexOf('<g class="viewport"')).to.equal(-1);
 
-      var parser = new DOMParser();
-      var svgNode = parser.parseFromString(svg, 'image/svg+xml');
+      const parser = new DOMParser();
+      const svgNode = parser.parseFromString(svg, 'image/svg+xml');
 
       // [comment, <!DOCTYPE svg>, svg]
       expect(svgNode.childNodes).to.have.length(3);
@@ -136,26 +121,16 @@ describe('Viewer', function() {
     }
 
 
-    it('should export svg', function(done) {
+    it('should export svg', async function() {
 
       // given
-      createViewer(exampleXML, function(err, warnings, viewer) {
+      await createViewer(exampleXML);
 
-        if (err) {
-          return done(err);
-        }
+      // when
+      const { svg } = await viewer.getActiveViewer().saveSVG();
 
-        // when
-        viewer.getActiveViewer().saveSVG().then((saveSvgResult) => {
-
-          var svg = saveSvgResult.svg;
-
-          // then
-          expectValidSVG(svg);
-
-          done();
-        }).catch(error => done(error));
-      });
+      // then
+      expectValidSVG(svg);
     });
 
   });
@@ -163,15 +138,15 @@ describe('Viewer', function() {
 
   describe('error handling', function() {
 
-    it('should throw error due to missing diagram', function(done) {
+    it('should throw error due to missing diagram', function() {
 
       // when
-      createViewer(emptyDefsXML, function(err) {
+      return createViewer(emptyDefsXML).then(function() {
+        throw new Error('should not have rejected');
+      }).catch(function(err) {
 
         // then
         expect(err.message).to.eql('no dmndi:DMNDI');
-
-        done();
       });
     });
 

@@ -81,10 +81,10 @@ const ERRORS_VIEW = {
 };
 
 
-var diagramXML = require('./diagram.dmn');
+const diagramXML = require('./diagram.dmn');
 
-var dmn_11 = require('./dmn-11.dmn');
-var dmn_12 = require('./dmn-12.dmn');
+const dmn_11 = require('./dmn-11.dmn');
+const dmn_12 = require('./dmn-12.dmn');
 
 
 describe('Manager', function() {
@@ -94,7 +94,7 @@ describe('Manager', function() {
     it('should create without options', function() {
 
       // when
-      var manager = new Manager();
+      const manager = new Manager();
 
       // then
       expect(manager).to.be.instanceOf(Manager);
@@ -105,47 +105,39 @@ describe('Manager', function() {
 
   describe('import', function() {
 
-    it('should import and open DMN file', function(done) {
+    it('should import and open DMN file', async function() {
 
       // given
-      var manager = new TestViewer();
+      const manager = new TestViewer();
 
       // assume
       expect(manager.getDefinitions()).not.to.exist;
 
       // when
-      manager.importXML(diagramXML, function(err) {
+      await manager.importXML(diagramXML);
 
-        var activeView = manager.getActiveView();
+      const activeView = manager.getActiveView();
 
-        // then
-        // we show the first active view
-        expect(activeView).to.eql(manager.getViews()[0]);
-        expect(activeView.type).to.eql('drd');
+      // then
+      // we show the first active view
+      expect(activeView).to.eql(manager.getViews()[0]);
+      expect(activeView.type).to.eql('drd');
 
-        expect(manager.getDefinitions()).to.equal(manager._definitions);
-
-        done(err);
-      });
-
+      expect(manager.getDefinitions()).to.equal(manager._definitions);
     });
 
 
-    it('should import DMN file', function(done) {
+    it('should import DMN file', async function() {
 
       // given
-      var manager = new TestViewer();
+      const manager = new TestViewer();
 
       // when
-      manager.importXML(diagramXML, { open: false }, function(err) {
+      await manager.importXML(diagramXML, { open: false });
 
-        // then
-        // we don't show anything yet
-        expect(manager.getActiveView()).not.to.exist;
-
-        done(err);
-      });
-
+      // then
+      // we don't show anything yet
+      expect(manager.getActiveView()).not.to.exist;
     });
 
 
@@ -154,10 +146,10 @@ describe('Manager', function() {
       it('should emit <attach> event', function() {
 
         // given
-        var container = document.createElement('div');
-        var viewer = new TestViewer();
+        const container = document.createElement('div');
+        const viewer = new TestViewer();
 
-        var events = [];
+        const events = [];
 
         viewer.on('attach', function(event) {
 
@@ -176,10 +168,10 @@ describe('Manager', function() {
       it('should emit <detach> event', function() {
 
         // given
-        var container = document.createElement('div');
-        var viewer = new TestViewer({ container });
+        const container = document.createElement('div');
+        const viewer = new TestViewer({ container });
 
-        var events = [];
+        const events = [];
 
         viewer.on('detach', function(event) {
 
@@ -195,12 +187,12 @@ describe('Manager', function() {
       });
 
 
-      it('should emit <import.*> events', function(done) {
+      it('should emit <import.*> events', async function() {
 
         // given
-        var viewer = new TestViewer();
+        const viewer = new TestViewer();
 
-        var events = [];
+        const events = [];
 
         viewer.on([
           'import.parse.start',
@@ -220,35 +212,28 @@ describe('Manager', function() {
         });
 
         // when
-        viewer.importXML(diagramXML, function(err) {
+        await viewer.importXML(diagramXML);
 
-          if (err) {
-            return done(err);
-          }
-
-          // then
-          expect(events).to.eql([
-            [ 'import.parse.start', [ 'xml' ] ],
-            [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
-              'references', 'warnings', 'context' ] ],
-            [ 'import.render.start', [ 'view', 'element' ] ],
-            [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
-            [ 'import.done', [ 'error', 'warnings' ] ]
-          ]);
-
-          done(err);
-        });
+        // then
+        expect(events).to.eql([
+          [ 'import.parse.start', [ 'xml' ] ],
+          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+            'references', 'warnings', 'context' ] ],
+          [ 'import.render.start', [ 'view', 'element' ] ],
+          [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
+          [ 'import.done', [ 'error', 'warnings' ] ]
+        ]);
       });
 
 
       // TODO: remove with future dmn-js version
       it('should wrap deprecated context in <import.parse.complete> event',
-        function(done) {
+        async function() {
 
           // given
-          var viewer = new TestViewer();
+          const viewer = new TestViewer();
 
-          var parseCompleteEvent;
+          let parseCompleteEvent;
 
           viewer.on([
             'import.parse.complete'
@@ -258,77 +243,63 @@ describe('Manager', function() {
           });
 
           // when
-          viewer.importXML(diagramXML, function(err) {
+          await viewer.importXML(diagramXML);
 
-            if (err) {
-              return done(err);
-            }
+          // then
+          const context = parseCompleteEvent.context;
 
-            // then
-            var context = parseCompleteEvent.context;
+          expect(parseCompleteEvent).to.exist;
 
-            expect(parseCompleteEvent).to.exist;
+          expect(context).to.exist;
 
-            expect(context).to.exist;
-
-            expect(context.warnings).to.equal(parseCompleteEvent.warnings);
-            expect(context.elementsById).to.equal(parseCompleteEvent.elementsById);
-            expect(context.references).to.equal(parseCompleteEvent.references);
-
-            done();
-          });
+          expect(context.warnings).to.equal(parseCompleteEvent.warnings);
+          expect(context.elementsById).to.equal(parseCompleteEvent.elementsById);
+          expect(context.references).to.equal(parseCompleteEvent.references);
         });
 
 
-      it('should include warnings in <import.done> events', function(done) {
+      it('should include warnings in <import.done> events', async function() {
 
         // given
-        var viewer = new TestViewer();
+        const viewer = new TestViewer();
 
-        var doneEvent;
+        let doneEvent;
 
         viewer.on([ 'import.done' ], function(e) {
           doneEvent = e;
         });
 
         // when
-        viewer.importXML(diagramXML, { open: false }, function(err) {
+        await viewer.importXML(diagramXML, { open: false });
 
-          if (err) {
-            return done(err);
-          }
+        // then
+        expect(doneEvent).to.exist;
 
-          // then
-          expect(doneEvent).to.exist;
-
-          expect(doneEvent.error).to.be.null;
-          expect(doneEvent.warnings).to.exist;
-
-          done();
-        });
+        expect(doneEvent.error).to.be.null;
+        expect(doneEvent.warnings).to.exist;
       });
 
 
       it('should accept xml modifications on <import.parse.start>', function(done) {
 
         // given
-        var viewer = new TestViewer();
+        const viewer = new TestViewer();
 
-        var findElement = function(elements, id) {
+        const findElement = function(elements, id) {
           return !!find(elements, function(element) {
             return element.id === id;
           });
         };
 
         viewer.once('import.parse.start', function(event) {
-          var xml = event.xml;
+          const xml = event.xml;
 
           return xml.replace('dish-decision', 'dish-decision1');
         });
 
         viewer.on('import.parse.complete', function(event) {
-          var definitions = event.definitions,
-              drgElements = definitions.get('drgElement');
+          const definitions = event.definitions,
+                drgElements = definitions.get('drgElement');
 
           // then
           expect(findElement(drgElements, 'dish-decision')).to.be.false;
@@ -347,7 +318,7 @@ describe('Manager', function() {
         it('should emit on import', function(done) {
 
           // given
-          var manager = new TestViewer();
+          const manager = new TestViewer();
 
           // when
           manager.importXML(diagramXML);
@@ -356,7 +327,7 @@ describe('Manager', function() {
           // expect single views.changed event
           manager.on('views.changed', function(event) {
 
-            var { views, activeView } = event;
+            const { views, activeView } = event;
 
             expect(views).to.eql(manager.getViews());
             expect(activeView).to.eql(manager.getActiveView());
@@ -369,7 +340,7 @@ describe('Manager', function() {
         it('should emit on open', function(done) {
 
           // given
-          var manager = new TestViewer();
+          const manager = new TestViewer();
 
           // when
           manager.importXML(diagramXML);
@@ -378,7 +349,7 @@ describe('Manager', function() {
 
             manager.on('views.changed', function(event) {
 
-              var { views, activeView } = event;
+              const { views, activeView } = event;
 
               expect(views).to.eql(manager.getViews());
               expect(activeView).to.eql(manager.getActiveView());
@@ -394,7 +365,7 @@ describe('Manager', function() {
         it('should NOT emit if no changes', function(done) {
 
           // given
-          var manager = new TestViewer();
+          const manager = new TestViewer();
 
           manager.once('import.done', function() {
             const viewsChangedSpy = sinon.spy(manager, '_viewsChanged');
@@ -427,7 +398,7 @@ describe('Manager', function() {
         it('should emit if name changed', function(done) {
 
           // given
-          var manager = new TestViewer();
+          const manager = new TestViewer();
 
           manager.once('import.done', function() {
             const viewsChangedSpy = sinon.spy(manager, '_viewsChanged');
@@ -467,30 +438,31 @@ describe('Manager', function() {
 
   describe('error handling', function() {
 
-    it('should indicate no displayable contents', function(done) {
+    it('should indicate no displayable contents', function() {
 
       // given
-      var manager = new Manager();
+      const manager = new Manager();
 
       // when
-      manager.importXML(diagramXML, function(err) {
+      return manager.importXML(diagramXML).then(function(importXMLResult) {
+        throw new Error('#importXML should not resolve when no displayable conents');
+      }).catch(function(error) {
 
-        expect(err.message).to.match(/no displayable contents/);
-
-        done();
+        // then
+        expect(error).to.be.an.instanceOf(Error);
+        expect(error.message).to.match(/no displayable contents/);
       });
-
     });
 
 
     it('should emit <import.parse.start>,' +
       ' <import.parse.complete> and <import.done> when no displayable contents',
-    function(done) {
+    function() {
 
       // given
-      var manager = new Manager();
+      const manager = new Manager();
 
-      var events = [];
+      const events = [];
 
       manager.on([
         'import.parse.start',
@@ -509,7 +481,7 @@ describe('Manager', function() {
         ]);
       });
 
-      var err;
+      let err;
 
       manager.on([
         'import.done'
@@ -519,12 +491,14 @@ describe('Manager', function() {
       });
 
       // when
-      manager.importXML(diagramXML, function(e) {
+      return manager.importXML(diagramXML).then(function(importXMLResult) {
+        throw new Error('#importXML should not resolve when no displayable conents');
+      }).catch(function(error) {
 
         // then
-        expect(e).to.exist;
-        expect(e).to.be.an.instanceOf(Error);
-        expect(e.message).to.match(/no displayable contents/);
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceOf(Error);
+        expect(error.message).to.match(/no displayable contents/);
 
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
@@ -536,37 +510,35 @@ describe('Manager', function() {
         expect(err).to.exist;
         expect(err).to.be.an.instanceOf(Error);
         expect(err.message).to.match(/no displayable contents/);
-
-        done();
       });
     });
 
 
-    it('should indicate broken XML', function(done) {
+    it('should indicate broken XML', function() {
 
       // given
-      var manager = new Manager();
+      const manager = new Manager();
 
       // when
-      manager.importXML('<foo&&', function(err) {
+      return manager.importXML('<foo&&').then(function(importXMLResult) {
+        throw new Error('#importXML should not resolve when XML is broken');
+      }).catch(function(err) {
 
+        // then
         expect(err).to.exist;
         expect(err.message).to.match(/unparsable content <foo&& detected/);
-
-        done();
       });
-
     });
 
 
     it('should emit <import.parse.start>, <import.parse.complete>' +
-      ' and <import.done> events with broken XML',
-    function(done) {
+        ' and <import.done> events with broken XML',
+    function() {
 
       // given
-      var manager = new Manager();
+      const manager = new Manager();
 
-      var events = [];
+      const events = [];
 
       manager.on([
         'import.parse.start',
@@ -585,7 +557,7 @@ describe('Manager', function() {
         ]);
       });
 
-      var err;
+      let err;
 
       manager.on([
         'import.done'
@@ -595,12 +567,14 @@ describe('Manager', function() {
       });
 
       // when
-      manager.importXML('<foo&&', function(e) {
+      return manager.importXML('<foo&&').then(function(importXMLResult) {
+        throw new Error('#importXML should not resolve when XML is broken');
+      }).catch(function(error) {
 
         // then
-        expect(e).to.exist;
-        expect(e).to.be.an.instanceOf(Error);
-        expect(e.message).to.match(/unparsable content <foo&& detected/);
+        expect(error).to.exist;
+        expect(error).to.be.an.instanceOf(Error);
+        expect(error.message).to.match(/unparsable content <foo&& detected/);
 
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
@@ -611,8 +585,6 @@ describe('Manager', function() {
         expect(err).to.exist;
         expect(err).to.be.an.instanceOf(Error);
         expect(err.message).to.match(/unparsable content <foo&& detected/);
-
-        done();
       });
     });
 
@@ -621,91 +593,59 @@ describe('Manager', function() {
 
   describe('views', function() {
 
-    var manager = new TestViewer();
+    const manager = new TestViewer();
 
 
-    it('should expose views', function(done) {
+    it('should expose views', async function() {
 
       // when
-      manager.importXML(diagramXML, function(err) {
-        if (err) {
-          return done(err);
-        }
+      await manager.importXML(diagramXML);
 
-        var views = manager.getViews();
+      const views = manager.getViews();
 
-        // then
-        expect(views).to.have.length(4);
-        expect(manager.getActiveView()).to.eql(views[0]);
+      // then
+      expect(views).to.have.length(4);
+      expect(manager.getActiveView()).to.eql(views[0]);
 
-        var elementIds = views.map(function(view) {
-          return { type: view.type, element: view.element.id };
+      const elementIds = views.map(function(view) {
+        return { type: view.type, element: view.element.id };
+      });
+
+      expect(elementIds).to.eql([
+        { type: 'drd', element: 'dish' },
+        { type: 'decisionTable', element: 'dish-decision' },
+        { type: 'decisionTable', element: 'season' },
+        { type: 'decisionTable', element: 'guestCount' }
+      ]);
+    });
+
+
+    it('should switch', async function() {
+
+      await manager.importXML(diagramXML);
+
+      const views = manager.getViews();
+
+      // when
+      manager.open(views[3])
+        .then(function(result) {
+          expect(manager.getActiveView()).to.eql(manager.getViews()[3]);
         });
-
-        expect(elementIds).to.eql([
-          { type: 'drd', element: 'dish' },
-          { type: 'decisionTable', element: 'dish-decision' },
-          { type: 'decisionTable', element: 'season' },
-          { type: 'decisionTable', element: 'guestCount' }
-        ]);
-
-        done();
-      });
     });
 
 
-    // TODO @maxtru: remove done as soon as importXML is promisified
-    it('should switch', function(done) {
-
-      manager.importXML(diagramXML, function(err) {
-        if (err) {
-          return done(err);
-        }
-
-        var views = manager.getViews();
-
-        // when
-        manager.open(views[3])
-          .then(
-            result => {
-              expect(manager.getActiveView()).to.eql(manager.getViews()[3]);
-
-              done();
-            })
-          .catch(
-            error => done(error)
-          );
-
-      });
-
-    });
-
-
-    it('should update on re-import', function(done) {
+    it('should update on re-import', async function() {
 
       // given
-      var otherXML = require('./one-decision.dmn');
+      const otherXML = require('./one-decision.dmn');
 
-      manager.importXML(diagramXML, function(err) {
-        if (err) {
-          return done(err);
-        }
+      await manager.importXML(diagramXML);
 
-        // when
-        manager.importXML(otherXML, function(err) {
+      // when
+      await manager.importXML(otherXML);
 
-          if (err) {
-            return done(err);
-          }
-
-          // then
-          expect(manager.getViews()).to.have.length(2);
-
-          done();
-        });
-
-      });
-
+      // then
+      expect(manager.getViews()).to.have.length(2);
     });
 
   });
@@ -713,105 +653,75 @@ describe('Manager', function() {
 
   describe('viewers', function() {
 
-    // TODO @maxtru: remove done as soon as importXML is promisified
-    it('should destroy on manager destruction', function(done) {
+    it('should destroy on manager destruction', async function() {
 
       // given
-      var manager = new TestViewer();
+      const manager = new TestViewer();
 
-      var destroySpies = [];
+      const destroySpies = [];
 
-      manager.on('viewer.created', (event) => {
-        var viewer = event.viewer;
-        var destroySpy = spy(viewer, 'destroy');
+      manager.on('viewer.created', function(event) {
+        const viewer = event.viewer;
+        const destroySpy = spy(viewer, 'destroy');
 
         destroySpies.push(destroySpy);
       });
 
 
-      manager.importXML(diagramXML, function(err) {
-        if (err) {
-          return done(err);
-        }
+      await manager.importXML(diagramXML);
 
-        manager.open(manager.getViews()[1])
-          .then(
-            result => {
+      manager.open(manager.getViews()[1])
+        .then(function(result) {
 
-              // when
-              manager.destroy();
+          // when
+          manager.destroy();
 
-              // then
-              destroySpies.forEach(function(destroySpy) {
-                expect(destroySpy).to.have.been.calledOnce;
-              });
+          // then
+          destroySpies.forEach(function(destroySpy) {
+            expect(destroySpy).to.have.been.calledOnce;
+          });
 
-              done();
-            })
-          .catch(
-            error => done(error)
-          );
-
-      });
-
+        });
     });
 
 
-    it('should provide warnings on resolve', function(done) {
+    it('should provide warnings on resolve', async function() {
 
       // given
-      var manager = new TestViewer([ LOG_WARNING_VIEW ]);
+      const manager = new TestViewer([ LOG_WARNING_VIEW ]);
 
-      manager.importXML(diagramXML, function() {
+      await manager.importXML(diagramXML);
 
-        // when
-        manager.open(manager.getViews()[0])
-          .then(
-            result => {
+      // when
+      manager.open(manager.getViews()[0])
+        .then(function(result) {
 
-              // then
-              expect(result.warnings).to.exist;
-              expect(result.warnings).to.be.an.instanceof(Array);
-              expect(result.warnings).to.have.length(2);
-
-              done();
-            })
-          .catch(
-            error => done(error)
-          );
-
-      });
-
+          // then
+          expect(result.warnings).to.exist;
+          expect(result.warnings).to.be.an.instanceof(Array);
+          expect(result.warnings).to.have.length(2);
+        });
     });
 
 
-    it('should provide error and warnings on reject', function(done) {
+    it('should provide error and warnings on reject', async function() {
 
       // given
-      var manager = new TestViewer([ ERRORS_VIEW ]);
+      const manager = new TestViewer([ ERRORS_VIEW ]);
 
-      manager.importXML(diagramXML, function() {
+      // when
+      return manager.importXML(diagramXML).then(function(openResult) {
+        throw new Error('getViews should not resolve given  error');
+      }).catch(function(openError) {
 
-        // when
-        manager.open(manager.getViews()[0])
-          .catch(
-            error => {
+        // then
+        expect(openError).to.exist;
+        expect(openError).to.be.an.instanceof(Error);
+        expect(openError.message).to.equal('foobar');
 
-              // then
-              expect(error).to.exist;
-              expect(error).to.be.an.instanceof(Error);
-              expect(error.message).to.equal('foobar');
-
-              expect(error.warnings).to.exist;
-              expect(error.warnings).to.be.an.instanceof(Array);
-              expect(error.warnings).to.have.length(2);
-
-              done();
-            })
-          .catch(
-            error => done(error)
-          );
-
+        expect(openError.warnings).to.exist;
+        expect(openError.warnings).to.be.an.instanceof(Array);
+        expect(openError.warnings).to.have.length(2);
       });
 
     });
@@ -821,57 +731,43 @@ describe('Manager', function() {
 
   describe('export', function() {
 
-    it('should indicate nothing imported', function(done) {
+    it('should indicate nothing imported', function() {
 
       // given
-      var viewer = new TestViewer();
+      const viewer = new TestViewer();
 
       // then
-      viewer.saveXML(function(err, xml) {
-
-        expect(err.message).to.match(/no definitions loaded/);
-
-        done();
+      return viewer.saveXML().then(function(saveXMLResult) {
+        throw new Error('#saveXML should not resolve when nothing was imported');
+      }).catch(function(error) {
+        expect(error).to.be.an.instanceOf(Error);
+        expect(error.message).to.match(/no definitions loaded/);
       });
-
     });
 
 
-    it('should export XML', function(done) {
+    it('should export XML', async function() {
 
       // given
-      var viewer = new TestViewer();
+      const viewer = new TestViewer();
 
-      viewer.importXML(diagramXML, function(err, warnings) {
+      await viewer.importXML(diagramXML);
 
-        if (err) {
-          return done(err);
-        }
+      // when
+      const { xml } = await viewer.saveXML({ format: true });
 
-        // when
-        viewer.saveXML({ format: true }, function(err, xml) {
-
-          if (err) {
-            return done(err);
-          }
-
-          // then
-          expect(xml).to.contain('<?xml version="1.0" encoding="UTF-8"?>');
-          expect(xml).to.contain('definitions');
-          expect(xml).to.contain('  ');
-
-          done();
-        });
-      });
-
+      // then
+      expect(xml).to.contain('<?xml version="1.0" encoding="UTF-8"?>');
+      expect(xml).to.contain('definitions');
+      expect(xml).to.contain('  ');
     });
 
 
-    it('should emit <saveXML.*> events', function(done) {
+    it('should emit <saveXML.*> events', async function() {
 
-      var viewer = new TestViewer();
+      const viewer = new TestViewer();
 
-      var events = [];
+      const events = [];
 
       viewer.on([
         'saveXML.start',
@@ -888,58 +784,53 @@ describe('Manager', function() {
         ]);
       });
 
-      viewer.importXML(diagramXML, function(err) {
+      await viewer.importXML(diagramXML);
 
-        // when
-        viewer.saveXML(function(err) {
-
-          // then
-          expect(events).to.eql([
-            [ 'saveXML.start', [ 'definitions' ] ],
-            [ 'saveXML.serialized', [ 'xml' ] ],
-            [ 'saveXML.done', [ 'xml' ] ]
-          ]);
-
-          done(err);
-        });
-      });
-    });
-
-
-    it('should error only not emitting events when nothing was imported', function(done) {
-
-      // given
-      var viewer = new TestViewer();
-
-      var events = [];
-
-      viewer.on([
-        'saveXML.start',
-        'saveXML.serialized',
-        'saveXML.done'
-      ], function(e) {
-
-        events.push(e);
-      });
+      // when
+      await viewer.saveXML();
 
       // then
-      viewer.saveXML(function(err, xml) {
-
-        expect(err.message).to.match(/no definitions loaded/);
-
-        expect(events).to.have.length(0);
-
-        done();
-      });
-
+      expect(events).to.eql([
+        [ 'saveXML.start', [ 'definitions' ] ],
+        [ 'saveXML.serialized', [ 'xml' ] ],
+        [ 'saveXML.done', [ 'xml' ] ]
+      ]);
     });
+
+
+    it('should error only not emitting events when nothing was imported',
+      async function() {
+
+        // given
+        const viewer = new TestViewer();
+
+        const events = [];
+
+        viewer.on([
+          'saveXML.start',
+          'saveXML.serialized',
+          'saveXML.done'
+        ], function(e) {
+
+          events.push(e);
+        });
+
+        // then
+        return viewer.saveXML().then(function(saveXMLResult) {
+          throw new Error('should not resolve given nothing was imported');
+        }).catch(function(err) {
+          expect(err.message).to.match(/no definitions loaded/);
+          expect(events).to.have.length(0);
+        });
+
+      });
 
 
     it('should allow to hook into <saveXML.serialzied> event, updating the xml',
-      function(done) {
+      async function() {
 
         // given
-        var viewer = new TestViewer();
+        const viewer = new TestViewer();
 
         viewer.on([
           'saveXML.serialized',
@@ -948,27 +839,23 @@ describe('Manager', function() {
           return 'my invalid xml';
         });
 
-        viewer.importXML(diagramXML, function(err) {
+        await viewer.importXML(diagramXML);
 
-          // when
-          viewer.saveXML(function(err, xml) {
+        // when
+        const { xml } = await viewer.saveXML();
 
-            // then
-            expect(xml).to.equal('my invalid xml');
-
-            done();
-          });
-        });
+        // then
+        expect(xml).to.equal('my invalid xml');
       });
 
 
     it('should allow to handle errors thrown hooked into <saveXML.serialzied> event',
-      function(done) {
+      async function() {
 
         // given
-        var viewer = new TestViewer();
+        const viewer = new TestViewer();
 
-        var userGeneratedError = new Error('user generated error');
+        const userGeneratedError = new Error('user generated error');
 
         viewer.on([
           'saveXML.serialized',
@@ -977,7 +864,7 @@ describe('Manager', function() {
           throw userGeneratedError;
         });
 
-        var doneEvent;
+        let doneEvent;
 
         viewer.on([
           'saveXML.done',
@@ -986,57 +873,47 @@ describe('Manager', function() {
           doneEvent = e;
         });
 
-        viewer.importXML(diagramXML, function(err) {
+        await viewer.importXML(diagramXML);
 
-          // when
-          viewer.saveXML(function(err, xml) {
+        // when
+        return viewer.saveXML().then(function(saveXMLResult) {
+          throw new Error('saveXMl should not resolve given an error');
+        }).catch(function(err) {
 
-            // then
-            expect(err).to.equal(userGeneratedError);
-            expect(xml).to.be.undefined;
+          // then
+          expect(err).to.equal(userGeneratedError);
 
-            expect(doneEvent).to.exist;
-            expect(doneEvent.xml).to.not.exist;
-            expect(doneEvent.error).to.equal(userGeneratedError);
-
-            done();
-          });
+          expect(doneEvent).to.exist;
+          expect(doneEvent.xml).to.not.exist;
+          expect(doneEvent.error).to.equal(userGeneratedError);
         });
-
       });
 
   });
 
 
-  it('should provide { _parent, moddle } to viewers', function(done) {
+  it('should provide { _parent, moddle } to viewers', async function() {
 
     // given
-    var dummy = new TestViewer([ DECISION_TABLE_VIEW ]);
+    const dummy = new TestViewer([ DECISION_TABLE_VIEW ]);
 
-    dummy.importXML(diagramXML, function(err, warnings) {
+    await dummy.importXML(diagramXML);
 
-      if (err) {
-        return done(err);
-      }
+    // when
+    const activeViewer = dummy.getActiveViewer();
 
-      // when
-      var activeViewer = dummy.getActiveViewer();
+    // then
+    expect(activeViewer).is.instanceOf(TestView);
 
-      // then
-      expect(activeViewer).is.instanceOf(TestView);
-
-      expect(activeViewer.get('_parent')).to.equal(dummy);
-      expect(activeViewer.get('moddle')).to.equal(dummy._moddle);
-
-      done();
-    });
+    expect(activeViewer.get('_parent')).to.equal(dummy);
+    expect(activeViewer.get('moddle')).to.equal(dummy._moddle);
   });
 
 
-  it('should provide options to viewers', function(done) {
+  it('should provide options to viewers', async function() {
 
     // given
-    var dummy = new TestViewer([ DECISION_TABLE_VIEW ], {
+    const dummy = new TestViewer([ DECISION_TABLE_VIEW ], {
       common: {
         blub: {},
         common: true
@@ -1047,66 +924,59 @@ describe('Manager', function() {
       }
     });
 
-    dummy.importXML(diagramXML, function(err, warnings) {
+    await dummy.importXML(diagramXML);
 
-      if (err) {
-        return done(err);
-      }
+    // when
+    const activeViewer = dummy.getActiveViewer();
 
-      // when
-      var activeViewer = dummy.getActiveViewer();
+    const config = activeViewer.get('config');
 
-      var config = activeViewer.get('config');
-
-      // then
-      expect(config).to.eql({
-        blub: 'AAA',
-        common: true,
-        foo: 'BAR'
-      });
-
-      done();
+    // then
+    expect(config).to.eql({
+      blub: 'AAA',
+      common: true,
+      foo: 'BAR'
     });
   });
 
 
   describe('DMN compatibility', function() {
 
-    it('should indicate DMN 1.1 incompatibility', function(done) {
+    it('should indicate DMN 1.1 incompatibility', function() {
 
-      var dummy = new TestViewer();
+      // given
+      const dummy = new TestViewer();
 
-      dummy.importXML(dmn_11, function(err) {
+      // when
+      return dummy.importXML(dmn_11).then(function(importXMLResult) {
+        throw new Error('should not resolve given incompatability');
+      }).catch(function(err) {
 
-        if (!err) {
-          return done(new Error('expected error'));
-        }
-
+        // then
         expect(err.message).to.match(
           /unsupported DMN 1\.1 file detected; only DMN 1\.3 files can be opened/
         );
-
-        done();
       });
+
     });
 
 
-    it('should indicate DMN 1.2 incompatibility', function(done) {
+    it('should indicate DMN 1.2 incompatibility', function() {
 
-      var dummy = new TestViewer();
+      // given
+      const dummy = new TestViewer();
 
-      dummy.importXML(dmn_12, function(err) {
+      // when
+      return dummy.importXML(dmn_12).then(function(importXMLResult) {
+        throw new Error('should not resolve given incompatability');
+      }).catch(function(err) {
 
-        if (!err) {
-          return done(new Error('expected error'));
-        }
-
+        // then
         expect(err.message).to.match(
           /unsupported DMN 1\.2 file detected; only DMN 1\.3 files can be opened/
         );
-
-        done();
       });
+
     });
 
   });
@@ -1130,39 +1000,36 @@ describe('Manager', function() {
         it('should allow Promise based call without warning', function(done) {
 
           // given
-          var manager = new TestViewer([ LOG_WARNING_VIEW ]);
+          const manager = new TestViewer([ LOG_WARNING_VIEW ]);
 
-          manager.importXML(diagramXML, function() {
+          manager.importXML(diagramXML).then(() => {
 
             // when
             manager.open(manager.getViews()[0])
-              .then(
-                result => {
+              .then(function(result) {
 
-                  // then
-                  expect(result.warnings).to.exist;
-                  expect(result.warnings).to.be.an.instanceof(Array);
-                  expect(result.warnings).to.have.length(2);
+                // then
+                expect(result.warnings).to.exist;
+                expect(result.warnings).to.be.an.instanceof(Array);
+                expect(result.warnings).to.have.length(2);
 
-                  expect(console.warn).to.not.have.been.called;
+                expect(console.warn).to.not.have.been.called;
 
-                  done();
-                })
-              .catch(
-                error => done(error)
-              );
-
+                done();
+              })
+              .catch(function(error) {
+                done(error);
+              });
           });
-
         });
 
 
         it('should log warning on Callback based call', function(done) {
 
           // given
-          var manager = new TestViewer([ LOG_WARNING_VIEW ]);
+          const manager = new TestViewer([ LOG_WARNING_VIEW ]);
 
-          manager.importXML(diagramXML, function() {
+          manager.importXML(diagramXML).then(() => {
 
             // when
             manager.open(manager.getViews()[0], function(err, warnings) {
@@ -1178,7 +1045,6 @@ describe('Manager', function() {
 
               done();
             });
-
           });
 
         });
@@ -1191,43 +1057,42 @@ describe('Manager', function() {
         it('should allow Promise based call without warning', function(done) {
 
           // given
-          var manager = new TestViewer([ ERRORS_VIEW ]);
+          const manager = new TestViewer([ ERRORS_VIEW ]);
 
-          manager.importXML(diagramXML, function() {
+          manager.importXML(diagramXML).catch(() => {
+
+            // don't handle the error during import, we want to test #open
 
             // when
             manager.open(manager.getViews()[0])
-              .then(
-                result => done(result)
-              )
-              .catch(
-                error => {
+              .then(result => done(result))
+              .catch(function(error) {
 
-                  // then
-                  expect(error).to.exist;
-                  expect(error).to.be.an.instanceof(Error);
+                // then
+                expect(error).to.exist;
+                expect(error).to.be.an.instanceof(Error);
 
-                  expect(error.warnings).to.exist;
-                  expect(error.warnings).to.be.an.instanceof(Array);
-                  expect(error.warnings).to.have.length(2);
+                expect(error.warnings).to.exist;
+                expect(error.warnings).to.be.an.instanceof(Array);
+                expect(error.warnings).to.have.length(2);
 
-                  expect(console.warn).to.not.have.been.called;
+                expect(console.warn).to.not.have.been.called;
 
-                  done();
-                }
+                done();
+              }
               );
-
           });
-
         });
 
 
         it('should log warning on Callback based call', function(done) {
 
           // given
-          var manager = new TestViewer([ ERRORS_VIEW ]);
+          const manager = new TestViewer([ ERRORS_VIEW ]);
 
-          manager.importXML(diagramXML, function() {
+          manager.importXML(diagramXML).catch(() => {
+
+            // don't handle the error during import, we want to test #open
 
             // when
             manager.open(manager.getViews()[0], function(err, warnings) {

@@ -37,14 +37,12 @@ describe('DecisionTable', function() {
     }
   });
 
-  function createDecisionTable(xml, done) {
+  function createDecisionTable(xml) {
     dmnJS = new DmnDecisionTableViewer({
       container: testContainer
     });
 
-    dmnJS.importXML(xml, (err, warnings) => {
-      done(err, warnings, dmnJS);
-    });
+    return dmnJS.importXML(xml);
   }
 
 
@@ -57,15 +55,15 @@ describe('DecisionTable', function() {
   it.skip('should re-open, clearing the previous diagram');
 
 
-  it('should import simple decision', function(done) {
-    createDecisionTable(simpleDiagramXML, done);
+  it('should import simple decision', function() {
+    return createDecisionTable(simpleDiagramXML);
   });
 
 
-  it('should import complex decision', function(done) {
+  it('should import complex decision', function() {
     this.timeout(5000);
 
-    createDecisionTable(complexDiagramXML, done);
+    return createDecisionTable(complexDiagramXML);
   });
 
 

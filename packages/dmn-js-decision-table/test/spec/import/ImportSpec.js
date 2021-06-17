@@ -20,46 +20,41 @@ describe('import', function() {
   });
 
 
-  it('should import without errors and warnings', function(done) {
-    viewer.importXML(simpleXML, (err, importWarnings) => {
-      expect(err).not.to.exist;
-      expect(importWarnings).to.have.lengthOf(0);
+  it('should import without errors and warnings', async function() {
+    const { warnings: importWarnings } = await viewer.importXML(simpleXML);
 
-      done();
-    });
+    expect(importWarnings).to.have.lengthOf(0);
   });
 
 
   describe('errors', function() {
 
-    it('should handle missing input(s)', function(done) {
-      viewer.importXML(noInputXML, (err, importWarnings) => {
-        expect(err).not.to.exist;
-
-        done();
-      });
+    it('should handle missing input(s)', function() {
+      return viewer.importXML(noInputXML);
     });
 
 
-    it('should handle missing output(s)', function(done) {
-      viewer.importXML(noOutputXML, (err, importWarnings) => {
-
-        expect(err).to.exist;
-        expect(err.message).to.match(/missing output/);
-
-        done();
-      });
+    it('should handle missing output(s)', function() {
+      return viewer.importXML(noOutputXML)
+        .then(() => {
+          throw new Error('should not have resolved');
+        })
+        .catch(err => {
+          expect(err).to.exist;
+          expect(err.message).to.match(/missing output/);
+        });
     });
 
 
-    it('should handle missing table', function(done) {
-      viewer.importXML(noTableXML, (err, importWarnings) => {
-
-        expect(err).to.exist;
-        expect(err.message).to.match(/no displayable contents/);
-
-        done();
-      });
+    it('should handle missing table', function() {
+      return viewer.importXML(noTableXML)
+        .then(() => {
+          throw new Error('should not have resolved');
+        })
+        .catch(err => {
+          expect(err).to.exist;
+          expect(err.message).to.match(/no displayable contents/);
+        });
     });
 
   });

@@ -41,7 +41,7 @@ var OPTIONS, DMN_JS;
  */
 function bootstrapDmnJS(DmnJS, diagram, options, locals) {
 
-  return function(done) {
+  return async function() {
 
     var testContainer;
 
@@ -112,7 +112,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
 
     DMN_JS = new DmnJS(_options);
 
-    DMN_JS.importXML(diagram, done);
+    await DMN_JS.importXML(diagram);
 
     return DMN_JS;
   };
