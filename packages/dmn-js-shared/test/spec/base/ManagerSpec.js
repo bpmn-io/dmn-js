@@ -906,6 +906,35 @@ describe('Manager', function() {
     });
 
 
+    it('should error only not emitting events when nothing was imported', function(done) {
+
+      // given
+      var viewer = new TestViewer();
+
+      var events = [];
+
+      viewer.on([
+        'saveXML.start',
+        'saveXML.serialized',
+        'saveXML.done'
+      ], function(e) {
+
+        events.push(e);
+      });
+
+      // then
+      viewer.saveXML(function(err, xml) {
+
+        expect(err.message).to.match(/no definitions loaded/);
+
+        expect(events).to.have.length(0);
+
+        done();
+      });
+
+    });
+
+
     it('should allow to hook into <saveXML.serialzied> event, updating the xml',
       function(done) {
 
