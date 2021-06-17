@@ -19,12 +19,12 @@ describe('DRD - Import', function() {
     beforeEach(bootstrapModeler(exampleXML));
 
 
-    it('should fire <import.start> and <import.done>', function(done) {
+    it('should fire <import.start> and <import.done>', async function() {
 
       // given
-      var dmnJS = getDmnJS(),
-          eventBus = getDrdJS().get('eventBus'),
-          events = [];
+      const dmnJS = getDmnJS(),
+            eventBus = getDrdJS().get('eventBus'),
+            events = [];
 
       eventBus.on('import.start', function() {
         events.push('import.start');
@@ -34,37 +34,32 @@ describe('DRD - Import', function() {
       });
 
       // when
-      dmnJS.importXML(exampleXML, function(error) {
+      await dmnJS.importXML(exampleXML);
 
-        // then
-        expect(events).to.eql([
-          'import.start',
-          'import.done'
-        ]);
-
-        done(error);
-      });
+      // then
+      expect(events).to.eql([
+        'import.start',
+        'import.done'
+      ]);
     });
 
 
-    it('should fire <drdElement.added>', function(done) {
+    it('should fire <drdElement.added>', async function() {
 
       // given
-      var dmnJS = getDmnJS(),
-          drdJS = getDrdJS(),
-          eventsCount = 0;
+      const dmnJS = getDmnJS(),
+            drdJS = getDrdJS();
+      let eventsCount = 0;
 
       drdJS.get('eventBus').on('drdElement.added', function(event) {
         eventsCount++;
       });
 
       // when
-      dmnJS.importXML(exampleXML, function(error) {
+      await dmnJS.importXML(exampleXML);
 
-        // then
-        expect(eventsCount).to.eql(15);
-        done(error);
-      });
+      // then
+      expect(eventsCount).to.eql(15);
     });
 
   });
@@ -74,7 +69,7 @@ describe('DRD - Import', function() {
 
     function getConnection(source, target) {
       return getDrdJS().invoke(function(elementRegistry) {
-        var match;
+        let match;
 
         elementRegistry.forEach(function(el) {
           if (el.source && el.source.id === source &&
@@ -90,14 +85,14 @@ describe('DRD - Import', function() {
     function expectConnection(config) {
 
       // given
-      var connection = getConnection(config.source, config.target);
+      const connection = getConnection(config.source, config.target);
 
       // then
       expect(connection).to.exist;
 
       // when
-      var businessObject = connection.businessObject,
-          edge;
+      const businessObject = connection.businessObject;
+      let edge;
 
       // then
       expect(connection.type).to.equal(config.type);
@@ -168,30 +163,30 @@ describe('DRD - Import', function() {
 
     beforeEach(bootstrapModeler(multipleDecisionsXML));
 
-    var modeler;
+    let modeler;
 
     beforeEach(function() {
       modeler = getDmnJS();
     });
 
 
-    it('should crop', function(done) {
+    it('should crop', function() {
 
-      modeler.getActiveViewer().invoke(function(elementRegistry, modeling) {
+      return modeler.getActiveViewer().invoke(function(elementRegistry, modeling) {
 
-        var connection = modeling.connect(
+        const connection = modeling.connect(
           elementRegistry.get('guestCount'),
           elementRegistry.get('season')
         );
 
-        var waypoints = connection.waypoints.slice();
+        const waypoints = connection.waypoints.slice();
 
-        modeler.saveXML(function(err, xml) {
+        return modeler.saveXML().then(({ xml }) => {
 
-          modeler.importXML(xml, function() {
+          return modeler.importXML(xml).then(function() {
 
-            var decision = elementRegistry.get('guestCount');
-            var importedConnection = decision.outgoing[0];
+            const decision = elementRegistry.get('guestCount');
+            const importedConnection = decision.outgoing[0];
 
             expect(
               pick(importedConnection.waypoints[0], [ 'x', 'y' ])
@@ -200,8 +195,6 @@ describe('DRD - Import', function() {
             expect(
               pick(importedConnection.waypoints[1], [ 'x', 'y' ])
             ).to.eql(pick(waypoints[1], [ 'x', 'y' ]));
-
-            done();
           });
         });
       });

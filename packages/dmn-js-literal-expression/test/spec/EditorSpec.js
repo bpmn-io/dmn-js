@@ -13,19 +13,17 @@ describe('Editor', function() {
     testContainer = TestContainer.get(this);
   });
 
-  function createEditor(xml, done) {
+  function createEditor(xml) {
     const dmnLiteralExpressionEditor = window.editor = new DmnLiteralExpressionEditor({
       container: testContainer
     });
 
-    dmnLiteralExpressionEditor.importXML(xml, (err, warnings) => {
-      done(err, warnings, dmnLiteralExpressionEditor);
-    });
+    return dmnLiteralExpressionEditor.importXML(xml);
   }
 
 
-  it('should import literal expression', function(done) {
-    createEditor(simpleXML, done);
+  it('should import literal expression', function() {
+    return createEditor(simpleXML);
   });
 
 });

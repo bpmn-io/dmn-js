@@ -69,6 +69,22 @@ export default class Manager {
   }
 
   /**
+  * The importXML result.
+  *
+  * @typedef {Object} ImportXMLResult
+  *
+  * @property {Array<string>} warnings
+  */
+
+  /**
+  * The importXML error.
+  *
+  * @typedef {Error} ImportXMLError
+  *
+  * @property {Array<string>} warnings
+  */
+
+  /**
    * Parse and render a DMN diagram.
    *
    * Once finished the viewer reports back the result to the
@@ -89,98 +105,102 @@ export default class Manager {
    * @param {string} xml the DMN xml
    * @param {Object} [options]
    * @param {boolean} [options.open=true]
-   * @param {Function} [done] invoked with (err, warnings=[])
+   *
+   * @return {Promise<ImportXMLResult, ImportXMLError>}
    */
-  importXML(xml, options, done) {
+  importXML(xml, options) {
     var self = this;
 
-    if (typeof options !== 'object') {
-      done = options;
-      options = { open: true };
-    }
+    options = options || { open: true };
 
-    if (typeof done !== 'function') {
-      done = noop;
-    }
+    return new Promise(function(resolve, reject) {
 
-    // hook in pre-parse listeners +
-    // allow xml manipulation
-    xml = this._emit('import.parse.start', { xml: xml }) || xml;
+      // hook in pre-parse listeners +
+      // allow xml manipulation
+      xml = self._emit('import.parse.start', { xml: xml }) || xml;
 
-    this._moddle.fromXML(xml, 'dmn:Definitions').then((parseResult) => {
+      var parseWarnings;
 
-      var definitions = parseResult.rootElement;
-      var references = parseResult.references;
-      var elementsById = parseResult.elementsById;
-      var parseWarnings = parseResult.warnings;
+      self._moddle.fromXML(xml, 'dmn:Definitions').then((parseResult) => {
 
-      // hook in post parse listeners +
-      // allow definitions manipulation
-      definitions = self._emit('import.parse.complete', ParseCompleteEvent({
-        error: null,
-        definitions: definitions,
-        elementsById: elementsById,
-        references: references,
-        warnings: parseWarnings
-      })) || definitions;
-      self._setDefinitions(definitions);
+        var definitions = parseResult.rootElement;
+        var references = parseResult.references;
+        var elementsById = parseResult.elementsById;
+        parseWarnings = parseResult.warnings;
 
-      if (!options.open) {
-        self._emit('import.done', { error: null, warnings: parseWarnings });
+        // hook in post parse listeners +
+        // allow definitions manipulation
+        definitions = self._emit('import.parse.complete', ParseCompleteEvent({
+          error: null,
+          definitions: definitions,
+          elementsById: elementsById,
+          references: references,
+          warnings: parseWarnings
+        })) || definitions;
+        self._setDefinitions(definitions);
 
-        return done(null, parseWarnings);
-      }
+        if (!options.open) {
+          self._emit('import.done', { error: null, warnings: parseWarnings });
 
-      return { parseWarnings };
-    }).catch((parseError) => {
+          resolve({ warnings: parseWarnings });
+          return;
+        }
 
-      var parseWarnings = parseError.warnings;
+        return { parseWarnings };
+      }).catch((parseError) => {
 
-      parseError = checkDMNCompatibilityError(parseError, xml) ||
-        checkValidationError(parseError) ||
-        parseError;
+        parseWarnings = parseError.warnings;
 
-      self._emit('import.parse.complete', ParseCompleteEvent({
-        error: parseError,
-        warnings: parseWarnings
-      }));
+        parseError = checkDMNCompatibilityError(parseError, xml) ||
+          checkValidationError(parseError) ||
+          parseError;
 
-      self._emit('import.done', { error: parseError, warnings: parseWarnings });
+        self._emit('import.parse.complete', ParseCompleteEvent({
+          error: parseError,
+          warnings: parseWarnings
+        }));
 
-      return done(parseError, parseWarnings);
-    }).then((result) => {
+        self._emit('import.done', { error: parseError, warnings: parseWarnings });
 
-      var parseWarnings = result.parseWarnings;
+        parseError.warnings = parseWarnings;
 
-      var view = self._activeView || self._getInitialView(self._views);
+        return reject(parseError);
+      }).then((result) => {
 
-      if (!view) {
-        var noDisplayableContentsErr = new Error('no displayable contents');
+        parseWarnings = result.parseWarnings;
 
-        this._emit('import.done',
-          { error: noDisplayableContentsErr, warnings: parseWarnings });
+        var view = self._activeView || self._getInitialView(self._views);
 
-        return done(noDisplayableContentsErr);
-      }
+        if (!view) {
+          var noDisplayableContentsErr = new Error('no displayable contents');
 
-      self.open(view)
-        .then(
-          result => {
+          self._emit('import.done',
+            { error: noDisplayableContentsErr, warnings: parseWarnings });
+
+          noDisplayableContentsErr.warnings = parseWarnings;
+
+          return reject(noDisplayableContentsErr);
+        }
+
+        self.open(view)
+          .then(result => ({ warnings: result.warnings }))
+          .catch(error => ({ error: error, warnings: error.warnings }))
+          .then(result => {
             var allWarnings = [].concat(parseWarnings, result.warnings);
 
-            self._emit('import.done', { error: null, warnings: allWarnings });
+            self._emit('import.done', { error: result.error, warnings: allWarnings });
 
-            done(null, allWarnings);
-          })
-        .catch(
-          error => {
-            var allWarnings = [].concat(parseWarnings, error.warnings);
+            if (result.error) {
+              result.error.warnings = allWarnings;
+              reject(result.error);
+            } else {
+              resolve({ warnings: allWarnings });
+            }
 
-            self._emit('import.done', { error: error, warnings: allWarnings });
+          });
 
-            done(error, allWarnings);
-          }
-        );
+      });
+
     });
 
     // TODO: remove with future dmn-js version
@@ -244,6 +264,14 @@ export default class Manager {
   }
 
   /**
+   * The saveXML result.
+   *
+   * @typedef {Object} SaveXMLResult
+   *
+   * @property {string} xml
+   */
+
+  /**
    * Export the currently displayed DMN diagram as
    * a DMN XML document.
    *
@@ -260,45 +288,52 @@ export default class Manager {
    * @param {Object} [options] export options
    * @param {boolean} [options.format=false] output formated XML
    * @param {boolean} [options.preamble=true] output preamble
-   * @param {Function} done invoked with (err, xml)
+   *
+   * @return {Promise<SaveXMLResult, Error>}
    */
-  saveXML(options, done) {
+  saveXML(options) {
     var self = this;
 
-    if (typeof options === 'function') {
-      done = options;
-      options = {};
-    }
+    options = options || {};
 
     var definitions = this._definitions;
 
-    if (!definitions) {
-      return done(new Error('no definitions loaded'));
-    }
+    return new Promise(function(resolve, reject) {
 
-    // allow to fiddle around with definitions
-    definitions = this._emit('saveXML.start', {
-      definitions: definitions
-    }) || definitions;
+      if (!definitions) {
+        reject(new Error('no definitions loaded'));
+        return;
+      }
 
-    this._moddle.toXML(definitions, options).then(function(result) {
+      // allow to fiddle around with definitions
+      definitions = self._emit('saveXML.start', {
+        definitions: definitions
+      }) || definitions;
 
-      var xml = result.xml;
+      self._moddle.toXML(definitions, options)
+        .then(function(result) {
 
-      xml = self._emit('saveXML.serialized', {
-        xml: xml
-      }) || xml;
+          var xml = result.xml;
 
-      return { xml };
-    }).catch((error) => {
+          xml = self._emit('saveXML.serialized', {
+            xml: xml
+          }) || xml;
 
-      return { error };
-    }).then((result) => {
+          return { xml };
+        }).catch((error) => ({ error }))
+        .then((result) => {
 
-      self._emit('saveXML.done', result);
+          self._emit('saveXML.done', result);
 
-      done(result.error, result.xml);
+          if (result.error) {
+            reject(result.error);
+          } else {
+            resolve({ xml: result.xml });
+          }
+        });
+
     });
+
   }
 
   /**
@@ -660,8 +695,6 @@ export default class Manager {
 
 
 // helpers //////////////////////
-
-function noop() {}
 
 /**
  * Ensure the passed argument is a proper unit (defaulting to px)

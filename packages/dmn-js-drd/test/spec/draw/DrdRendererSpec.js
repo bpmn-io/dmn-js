@@ -5,35 +5,35 @@ import {
 
 describe('draw - DrdRenderer', function() {
 
-  it('Knowledge Source', function(done) {
+  it('Knowledge Source', function() {
     var xml = require('../../fixtures/dmn/knowledge-source.dmn');
 
-    bootstrapViewer(xml)(done);
+    return bootstrapViewer(xml);
   });
 
-  it('Business Knowledge Model', function(done) {
+  it('Business Knowledge Model', function() {
     var xml = require('../../fixtures/dmn/business-knowledge.dmn');
 
-    bootstrapViewer(xml)(done);
+    return bootstrapViewer(xml);
   });
 
-  it('Input Data', function(done) {
+  it('Input Data', function() {
     var xml = require('../../fixtures/dmn/input-data.dmn');
 
-    bootstrapViewer(xml)(done);
+    return bootstrapViewer(xml);
   });
 
-  it('Literal Expression', function(done) {
+  it('Literal Expression', function() {
     var xml = require('../../fixtures/dmn/literal-expression.dmn');
 
-    bootstrapViewer(xml, { loadDiagram: true })(done);
+    return bootstrapViewer(xml, { loadDiagram: true });
 
   });
 
-  it('Text Annotation', function(done) {
+  it('Text Annotation', function() {
     var xml = require('../../fixtures/dmn/text-annotation.dmn');
 
-    bootstrapViewer(xml, { loadDiagram: true })(done);
+    return bootstrapViewer(xml, { loadDiagram: true });
   });
 
 });

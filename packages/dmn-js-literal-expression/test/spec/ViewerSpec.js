@@ -26,14 +26,12 @@ describe('Viewer', function() {
     testContainer = TestContainer.get(this);
   });
 
-  function createViewer(xml, done) {
+  function createViewer(xml) {
     const dmnLiteralExpressionViewer = new DmnLiteralExpressionViewer({
       container: testContainer
     });
 
-    dmnLiteralExpressionViewer.importXML(xml, (err, warnings) => {
-      done(err, warnings, dmnLiteralExpressionViewer);
-    });
+    return dmnLiteralExpressionViewer.importXML(xml);
   }
 
 
@@ -46,8 +44,8 @@ describe('Viewer', function() {
   it.skip('should re-open, clearing the previous diagram');
 
 
-  it('should import literal expression', function(done) {
-    createViewer(simpleXML, done);
+  it('should import literal expression', function() {
+    return createViewer(simpleXML);
   });
 
 

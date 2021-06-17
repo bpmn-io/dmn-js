@@ -3,17 +3,17 @@ import Viewer from 'src/Viewer';
 import DefaultExport from '../../src';
 
 
-var diagram = require('./diagram.dmn');
-var noDi = require('./no-di.dmn');
+const diagram = require('./diagram.dmn');
+const noDi = require('./no-di.dmn');
 
-var dmn_11 = require('./dmn-11.dmn');
+const dmn_11 = require('./dmn-11.dmn');
 
-var singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
 
 
 describe('Viewer', function() {
 
-  var container;
+  let container;
 
   beforeEach(function() {
     container = document.createElement('div');
@@ -35,7 +35,7 @@ describe('Viewer', function() {
   it('should allow to configure container size', function() {
 
     // when
-    var editor = new Viewer({
+    const editor = new Viewer({
       width: '300px',
       height: 200,
       position: 'absolute'
@@ -50,123 +50,86 @@ describe('Viewer', function() {
   });
 
 
-  it('should open DMN table', function(done) {
+  it('should open DMN table', async function() {
 
-    var editor = new Viewer({ container: container });
+    const editor = new Viewer({ container: container });
 
-    editor.importXML(diagram, { open: false }, function(err) {
+    await editor.importXML(diagram, { open: false });
 
-      if (err) {
-        return done(err);
-      }
 
-      var views = editor.getViews();
-      var decisionView = views.filter(v => v.type === 'decisionTable')[0];
+    const views = editor.getViews();
+    const decisionView = views.filter(v => v.type === 'decisionTable')[0];
 
-      // can open decisions
-      expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    // can open decisions
+    expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      editor.open(decisionView)
-        .then(
-          result => done(result.warnings[0]))
-        .catch(
-          error => done(error)
-        );
-    });
+    const { warnings } = await editor.open(decisionView);
 
+    expect(warnings).to.have.lengthOf(0);
   });
 
 
-  it('should open DMN literal expression', function(done) {
+  it('should open DMN literal expression', async function() {
 
-    var editor = new Viewer({ container: container });
+    const editor = new Viewer({ container: container });
 
-    editor.importXML(diagram, { open: false }, function(err) {
+    await editor.importXML(diagram, { open: false });
 
-      if (err) {
-        return done(err);
-      }
+    const views = editor.getViews();
+    const decisionView = views.filter(v => v.type === 'literalExpression')[0];
 
-      var views = editor.getViews();
-      var decisionView = views.filter(v => v.type === 'literalExpression')[0];
+    // can open decisions
+    expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      // can open decisions
-      expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    const { warnings } = await editor.open(decisionView);
 
-      editor.open(decisionView)
-        .then(
-          result => done(result.warnings[0]))
-        .catch(
-          error => done(error)
-        );
-    });
-
+    expect(warnings).to.have.lengthOf(0);
   });
 
 
-  (singleStart ? it.only : it)('should open DRD', function(done) {
+  (singleStart ? it.only : it)('should open DRD', async function() {
 
-    var editor = new Viewer({ container: container });
+    const editor = new Viewer({ container: container });
 
-    editor.importXML(diagram, { open: false }, function(err) {
+    await editor.importXML(diagram, { open: false });
 
-      if (err) {
-        return done(err);
-      }
+    const views = editor.getViews();
+    const drdView = views.filter(v => v.type === 'drd')[0];
 
-      var views = editor.getViews();
-      var drdView = views.filter(v => v.type === 'drd')[0];
+    // can open decisions
+    expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
-      // can open decisions
-      expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
+    const { warnings } = await editor.open(drdView);
 
-      editor.open(drdView).then(
-        result => done(result.warnings[0]),
-        error => done(error)
-      );
-    });
-
+    expect(warnings).to.have.lengthOf(0);
   });
 
 
-  it('should open Table (if no DI)', function(done) {
+  it('should open Table (if no DI)', async function() {
 
-    var editor = new Viewer({ container: container });
+    const editor = new Viewer({ container: container });
 
-    editor.importXML(noDi, function(err) {
+    await editor.importXML(noDi);
 
-      if (err) {
-        return done(err);
-      }
+    const activeView = editor.getActiveView();
 
-      var activeView = editor.getActiveView();
-
-      expect(activeView.type).to.eql('decisionTable');
-      expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
-
-      done();
-    });
-
+    expect(activeView.type).to.eql('decisionTable');
+    expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
   });
 
 
-  describe('DMN compatibility', function(done) {
+  describe('DMN compatibility', function() {
 
-    it('should indicate DMN 1.1 incompatibility', function(done) {
+    it('should indicate DMN 1.1 incompatibility', function() {
 
-      var editor = new Viewer({ container: container });
+      const editor = new Viewer({ container: container });
 
-      editor.importXML(dmn_11, function(err) {
-
-        if (!err) {
-          return done(new Error('expected error'));
-        }
-
+      return editor.importXML(dmn_11).then(() => {
+        throw new Error('should not have resolved');
+      }).catch(err => {
         expect(err.message).to.match(
           /unsupported DMN 1\.1 file detected; only DMN 1\.3 files can be opened/
         );
-
-        done();
       });
     });
 

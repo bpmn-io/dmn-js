@@ -10,13 +10,13 @@ import DrdModeler from '../helper/DrdModeler';
 
 describe('Modeler', function() {
 
-  var container, modeler;
+  let container, modeler;
 
   beforeEach(function() {
     container = TestContainer.get(this);
   });
 
-  function createModeler(xml, done) {
+  function createModeler(xml) {
     modeler = new DrdModeler({
       container: container,
       drd: {
@@ -26,55 +26,42 @@ describe('Modeler', function() {
       }
     });
 
-    modeler.importXML(xml, function(err, warnings) {
-      done(err, warnings, modeler);
-    });
+    return modeler.importXML(xml);
   }
 
 
-  it('should import simple DRD', function(done) {
-    createModeler(exampleXML, done);
+  it('should import simple DRD', function() {
+    return createModeler(exampleXML);
   });
 
 
-  it('should import empty definitions', function(done) {
-    createModeler(emptyDefsXML, done);
+  it('should import empty definitions', function() {
+    return createModeler(emptyDefsXML);
   });
 
 
-  it('should re-import simple DRD', function(done) {
+  it('should re-import simple DRD', async function() {
 
     // given
-    createModeler(exampleXML, function(err, warnings, modeler) {
+    await createModeler(exampleXML);
 
-      if (err) {
-        return done(err);
-      }
+    // when
+    // mimic re-import of same diagram
+    const { warnings } = await modeler.importXML(exampleXML);
 
-      // when
-      // mimic re-import of same diagram
-      modeler.importXML(exampleXML, function(err, warnings) {
-
-        // then
-        expect(err).to.not.exist;
-        expect(warnings).to.have.length(0);
-
-        done();
-      });
-
-    });
-
+    // then
+    expect(warnings).to.have.length(0);
   });
 
 
   describe('import events', function() {
 
-    it('should emit <import.*> events', function(done) {
+    it('should emit <import.*> events', async function() {
 
       // given
-      var modeler = new DrdModeler({ container: container });
+      const modeler = new DrdModeler({ container: container });
 
-      var events = [];
+      const events = [];
 
       modeler.on([
         'import.parse.start',
@@ -94,20 +81,18 @@ describe('Modeler', function() {
       });
 
       // when
-      modeler.importXML(exampleXML, function(err) {
+      await modeler.importXML(exampleXML);
 
-        // then
-        expect(events).to.eql([
-          [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
-            'references', 'warnings', 'context' ] ],
-          [ 'import.render.start', [ 'view', 'element' ] ],
-          [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
-          [ 'import.done', [ 'error', 'warnings' ] ]
-        ]);
+      // then
+      expect(events).to.eql([
+        [ 'import.parse.start', [ 'xml' ] ],
+        [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+          'references', 'warnings', 'context' ] ],
+        [ 'import.render.start', [ 'view', 'element' ] ],
+        [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
+        [ 'import.done', [ 'error', 'warnings' ] ]
+      ]);
 
-        done(err);
-      });
     });
 
   });
@@ -115,47 +100,40 @@ describe('Modeler', function() {
 
   describe('decisions without DI', function() {
 
-    it('should generate ID', function(done) {
+    it('should generate ID', async function() {
 
       // given
-      createModeler(noDiXML, function(err, warnings, modeler) {
+      await createModeler(noDiXML);
 
-        if (err) {
-          return done(err);
-        }
+      const drdJS = modeler.getActiveViewer();
 
-        var drdJS = modeler.getActiveViewer();
+      const elementRegistry = drdJS.get('elementRegistry');
 
-        var elementRegistry = drdJS.get('elementRegistry');
+      // when
+      const decision1 = elementRegistry.get('Decision_1');
+      const decision3 = elementRegistry.get('Decision_3');
+      const inputData = elementRegistry.get('InputData_1');
 
-        // when
-        var decision1 = elementRegistry.get('Decision_1');
-        var decision3 = elementRegistry.get('Decision_3');
-        var inputData = elementRegistry.get('InputData_1');
+      // then
+      expect(decision1).to.exist;
+      expect(decision3).to.exist;
 
-        // then
-        expect(decision1).to.exist;
-        expect(decision3).to.exist;
+      // we generate DI for decisions, only
+      expect(inputData).not.to.exist;
 
-        // we generate DI for decisions, only
-        expect(inputData).not.to.exist;
+      expect(bounds(decision1)).to.eql({
+        x: 180,
+        y: 180,
+        width: 180,
+        height: 80
+      });
 
-        expect(bounds(decision1)).to.eql({
-          x: 180,
-          y: 180,
-          width: 180,
-          height: 80
-        });
-
-        // we stack decision elements on top of each other
-        expect(bounds(decision3)).to.eql({
-          x: 240,
-          y: 240,
-          width: 180,
-          height: 80
-        });
-
-        done();
+      // we stack decision elements on top of each other
+      expect(bounds(decision3)).to.eql({
+        x: 240,
+        y: 240,
+        width: 180,
+        height: 80
       });
 
     });
@@ -165,39 +143,36 @@ describe('Modeler', function() {
 
   describe('editor actions support', function() {
 
-    it('should ship all actions', function(done) {
+    it('should ship all actions', async function() {
 
-      createModeler(exampleXML, function(err, warnings, modeler) {
+      await createModeler(exampleXML);
 
-        // given
-        var drdJS = modeler.getActiveViewer();
+      // given
+      const drdJS = modeler.getActiveViewer();
 
-        var expectedActions = [
-          'undo',
-          'redo',
-          'stepZoom',
-          'zoom',
-          'removeSelection',
-          'moveCanvas',
-          'moveSelection',
-          'selectElements',
-          'distributeElements',
-          'alignElements',
-          'lassoTool',
-          'handTool',
-          'directEditing'
-        ];
+      const expectedActions = [
+        'undo',
+        'redo',
+        'stepZoom',
+        'zoom',
+        'removeSelection',
+        'moveCanvas',
+        'moveSelection',
+        'selectElements',
+        'distributeElements',
+        'alignElements',
+        'lassoTool',
+        'handTool',
+        'directEditing'
+      ];
 
-        // when
-        var editorActions = drdJS.get('editorActions');
+      // when
+      const editorActions = drdJS.get('editorActions');
 
-        // then
-        var actualActions = editorActions.getActions();
+      // then
+      const actualActions = editorActions.getActions();
 
-        expect(actualActions).to.eql(expectedActions);
-
-        done();
-      });
+      expect(actualActions).to.eql(expectedActions);
 
     });
 
@@ -206,12 +181,12 @@ describe('Modeler', function() {
 
   describe('#open', function() {
 
-    it('should be able to provide warnings', function(done) {
+    it('should be able to provide warnings', async function() {
 
       // given
       container = TestContainer.get(this);
 
-      var drdModeler = new DrdModeler({
+      const drdModeler = new DrdModeler({
         container: container,
         drd: {
           keyboard: {
@@ -221,16 +196,13 @@ describe('Modeler', function() {
       });
 
       // when
-      drdModeler.importXML(doubleDiXML, function(err, warnings) {
+      const { warnings } = await drdModeler.importXML(doubleDiXML);
 
-        // then
-        expect(warnings).to.exist;
-        expect(warnings).to.have.length(1);
+      // then
+      expect(warnings).to.exist;
+      expect(warnings).to.have.length(1);
 
-        expect(warnings[0].message).to.equal('multiple DI elements defined for element');
-
-        done();
-      });
+      expect(warnings[0].message).to.equal('multiple DI elements defined for element');
 
     });
 

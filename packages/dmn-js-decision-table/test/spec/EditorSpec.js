@@ -23,7 +23,7 @@ describe('DecisionTable', function() {
     testContainer = TestContainer.get(this);
   });
 
-  function createDecisionTableEditor(xml, done) {
+  function createDecisionTableEditor(xml) {
     dmnJS = new DmnDecisionTableEditor({
       container: testContainer,
       decisionTable: {
@@ -33,21 +33,19 @@ describe('DecisionTable', function() {
       }
     });
 
-    dmnJS.importXML(xml, (err, warnings) => {
-      done(err, warnings, dmnJS);
-    });
+    return dmnJS.importXML(xml);
   }
 
 
-  it('should import simple decision', function(done) {
-    createDecisionTableEditor(simpleDiagramXML, done);
+  it('should import simple decision', function() {
+    return createDecisionTableEditor(simpleDiagramXML);
   });
 
 
-  it('should import complex decision', function(done) {
+  it('should import complex decision', function() {
     this.timeout(5000);
 
-    createDecisionTableEditor(complexDiagramXML, done);
+    return createDecisionTableEditor(complexDiagramXML);
   });
 
 });

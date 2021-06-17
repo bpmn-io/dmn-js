@@ -14,17 +14,17 @@ insertCSS('dmn-js-testing.css',
   '.test-container { height: 500px; }'
 );
 
-var singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
 
 
 describe('Modeler', function() {
 
-  var diagram = require('./diagram.dmn');
-  var noDi = require('./no-di.dmn');
-  var noDisplayableContents = require('./no-displayable-contents.dmn');
+  const diagram = require('./diagram.dmn');
+  const noDi = require('./no-di.dmn');
+  const noDisplayableContents = require('./no-displayable-contents.dmn');
 
-  var container;
-  var editor;
+  let container;
+  let editor;
 
   beforeEach(function() {
     container = document.createElement('div');
@@ -53,121 +53,77 @@ describe('Modeler', function() {
   });
 
 
-  it('should open DMN table', function(done) {
+  it('should open DMN table', async function() {
 
-    editor.importXML(diagram, { open: false }, function(err) {
+    await editor.importXML(diagram, { open: false });
 
-      if (err) {
-        return done(err);
-      }
+    const views = editor.getViews();
+    const decisionView = views.filter(v => v.type === 'decisionTable')[0];
 
-      var views = editor.getViews();
-      var decisionView = views.filter(v => v.type === 'decisionTable')[0];
+    // can open decisions
+    expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      // can open decisions
-      expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    const { warnings } = await editor.open(decisionView);
 
-      editor.open(decisionView)
-        .then(
-          result => done(result.warnings[0]))
-        .catch(
-          error => done(error)
-        );
-    });
-
+    expect(warnings).to.have.lengthOf(0);
   });
 
 
-  it('should open DMN literal expression', function(done) {
+  it('should open DMN literal expression', async function() {
 
-    editor.importXML(diagram, { open: false }, function(err) {
+    await editor.importXML(diagram, { open: false });
 
-      if (err) {
-        return done(err);
-      }
+    const views = editor.getViews();
+    const decisionView = views.filter(v => v.type === 'literalExpression')[0];
 
-      var views = editor.getViews();
-      var decisionView = views.filter(v => v.type === 'literalExpression')[0];
+    // can open decisions
+    expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
-      // can open decisions
-      expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    const { warnings } = await editor.open(decisionView);
 
-      editor.open(decisionView)
-        .then(
-          result => done(result.warnings[0]))
-        .catch(
-          error => done(error)
-        );
-    });
-
+    expect(warnings).to.have.lengthOf(0);
   });
 
 
-  (singleStart ? it.only : it)('should open DRD', function(done) {
+  (singleStart ? it.only : it)('should open DRD', async function() {
 
-    editor.importXML(diagram, { open: false }, function(err) {
+    await editor.importXML(diagram, { open: false });
 
-      if (err) {
-        return done(err);
-      }
+    const views = editor.getViews();
+    const drdView = views.filter(v => v.type === 'drd')[0];
 
-      var views = editor.getViews();
-      var drdView = views.filter(v => v.type === 'drd')[0];
+    // can open decisions
+    expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
 
-      // can open decisions
-      expect(drdView.element.$instanceOf('dmn:Definitions')).to.be.true;
+    const { warnings } = await editor.open(drdView);
 
-      editor.open(drdView)
-        .then(
-          result => done(result.warnings[0]))
-        .catch(
-          error => done(error)
-        );
-    });
-
+    expect(warnings).to.have.lengthOf(0);
   });
 
 
   describe('should open Table (if no DI)', function() {
 
-    it('initial open', function(done) {
+    it('initial open', async function() {
 
-      editor.importXML(noDi, function(err) {
+      await editor.importXML(noDi);
 
-        if (err) {
-          return done(err);
-        }
+      const activeView = editor.getActiveView();
 
-        var activeView = editor.getActiveView();
-
-        expect(activeView.type).to.eql('decisionTable');
-        expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
-
-        done();
-      });
-
+      expect(activeView.type).to.eql('decisionTable');
+      expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
     });
 
 
-    it('on re-import', function(done) {
+    it('on re-import', async function() {
 
-      editor.importXML(diagram, function(err) {
+      await editor.importXML(diagram);
 
-        editor.importXML(noDi, function(err) {
+      await editor.importXML(noDi);
 
-          if (err) {
-            return done(err);
-          }
+      const activeView = editor.getActiveView();
 
-          var activeView = editor.getActiveView();
-
-          expect(activeView.type).to.eql('decisionTable');
-          expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
-
-          done();
-        });
-      });
-
+      expect(activeView.type).to.eql('decisionTable');
+      expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
     });
 
   });
@@ -175,80 +131,55 @@ describe('Modeler', function() {
 
   describe('should open DRD (if no DI / no displayable contents)', function() {
 
-    it('initial open', function(done) {
+    it('initial open', async function() {
 
-      editor.importXML(noDisplayableContents, function(err) {
+      await editor.importXML(noDisplayableContents);
 
-        if (err) {
-          return done(err);
-        }
+      const activeView = editor.getActiveView();
 
-        var activeView = editor.getActiveView();
-
-        expect(activeView.type).to.eql('drd');
-        expect(activeView.element.$instanceOf('dmn:Definitions')).to.be.true;
-
-        done();
-      });
-
+      expect(activeView.type).to.eql('drd');
+      expect(activeView.element.$instanceOf('dmn:Definitions')).to.be.true;
     });
 
 
-    it('on re-import', function(done) {
+    it('on re-import', async function() {
 
-      editor.importXML(diagram, function(err) {
+      await editor.importXML(diagram);
 
-        editor.importXML(noDisplayableContents, function(err) {
+      await editor.importXML(noDisplayableContents);
 
-          if (err) {
-            return done(err);
-          }
+      const activeView = editor.getActiveView();
 
-          var activeView = editor.getActiveView();
-
-          expect(activeView.type).to.eql('drd');
-          expect(activeView.element.$instanceOf('dmn:Definitions')).to.be.true;
-
-          done();
-        });
-      });
-
+      expect(activeView.type).to.eql('drd');
+      expect(activeView.element.$instanceOf('dmn:Definitions')).to.be.true;
     });
 
   });
 
 
-  it('should keep view on re-import', function(done) {
+  it('should keep view on re-import', async function() {
 
-    editor.importXML(diagram, function(err) {
+    // given
+    await editor.importXML(diagram);
 
-      var views = editor.getViews();
-      var tableView = views.filter(v => v.type === 'decisionTable')[0];
+    const views = editor.getViews();
+    const tableView = views.filter(v => v.type === 'decisionTable')[0];
 
-      editor.open(tableView)
-        .then(
-          result => {
-            editor.importXML(diagram, function(err) {
+    const { warnings } = await editor.open(tableView);
 
-              var activeView = editor.getActiveView();
+    // when
+    await editor.importXML(diagram);
 
-              var element = activeView.element;
+    // then
+    const activeView = editor.getActiveView();
 
-              expect(result.warnings[0]).to.be.undefined;
+    const element = activeView.element;
 
-              expect(activeView.type).to.eql('decisionTable');
-              expect(element.$instanceOf('dmn:Decision')).to.be.true;
-              expect(element.id).to.eql(tableView.element.id);
+    expect(warnings[0]).to.be.undefined;
 
-              done();
-            });
-          })
-        .catch(
-          error => done(error)
-        );
-
-    });
-
+    expect(activeView.type).to.eql('decisionTable');
+    expect(element.$instanceOf('dmn:Decision')).to.be.true;
+    expect(element.id).to.eql(tableView.element.id);
   });
 
 });
