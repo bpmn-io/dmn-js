@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.2.2
+
+* `DEPS`: update to `diagram-js-direct-editing@1.6.3`
+
 ## 10.2.1
 
 * `FIX`: allow to add output if dmn:Input is missing ([#635](https://github.com/bpmn-io/dmn-js/pull/635))
