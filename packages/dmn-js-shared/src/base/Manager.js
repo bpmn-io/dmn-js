@@ -140,6 +140,11 @@ export default class Manager {
         checkValidationError(parseError) ||
         parseError;
 
+      self._emit('import.parse.complete', ParseCompleteEvent({
+        error: parseError,
+        warnings: parseWarnings
+      }));
+
       self._emit('import.done', { error: parseError, warnings: parseWarnings });
 
       return done(parseError, parseWarnings);
@@ -150,7 +155,12 @@ export default class Manager {
       var view = self._activeView || self._getInitialView(self._views);
 
       if (!view) {
-        return done(new Error('no displayable contents'));
+        var noDisplayableContentsErr = new Error('no displayable contents');
+
+        this._emit('import.done',
+          { error: noDisplayableContentsErr, warnings: parseWarnings });
+
+        return done(noDisplayableContentsErr);
       }
 
       self.open(view)

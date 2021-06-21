@@ -6,6 +6,7 @@ import TestView from './TestView';
 
 import { spy } from 'sinon';
 
+
 import { find } from 'min-dash';
 
 class TestViewer extends Manager {
@@ -482,6 +483,65 @@ describe('Manager', function() {
     });
 
 
+    it('should emit <import.parse.start>,' +
+      ' <import.parse.complete> and <import.done> when no displayable contents',
+    function(done) {
+
+      // given
+      var manager = new Manager();
+
+      var events = [];
+
+      manager.on([
+        'import.parse.start',
+        'import.parse.complete',
+        'import.render.start',
+        'import.render.complete',
+        'import.done'
+      ], function(e) {
+
+        // log event type + event arguments
+        events.push([
+          e.type,
+          Object.keys(e).filter(function(key) {
+            return key !== 'type';
+          })
+        ]);
+      });
+
+      var err;
+
+      manager.on([
+        'import.done'
+      ], function(e) {
+
+        err = e.error;
+      });
+
+      // when
+      manager.importXML(diagramXML, function(e) {
+
+        // then
+        expect(e).to.exist;
+        expect(e).to.be.an.instanceOf(Error);
+        expect(e.message).to.match(/no displayable contents/);
+
+        expect(events).to.eql([
+          [ 'import.parse.start', [ 'xml' ] ],
+          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+            'references', 'warnings', 'context' ] ],
+          [ 'import.done', ['error', 'warnings' ] ]
+        ]);
+
+        expect(err).to.exist;
+        expect(err).to.be.an.instanceOf(Error);
+        expect(err.message).to.match(/no displayable contents/);
+
+        done();
+      });
+    });
+
+
     it('should indicate broken XML', function(done) {
 
       // given
@@ -496,6 +556,64 @@ describe('Manager', function() {
         done();
       });
 
+    });
+
+
+    it('should emit <import.parse.start>, <import.parse.complete>' +
+      ' and <import.done> events with broken XML',
+    function(done) {
+
+      // given
+      var manager = new Manager();
+
+      var events = [];
+
+      manager.on([
+        'import.parse.start',
+        'import.parse.complete',
+        'import.render.start',
+        'import.render.complete',
+        'import.done'
+      ], function(e) {
+
+        // log event type + event arguments
+        events.push([
+          e.type,
+          Object.keys(e).filter(function(key) {
+            return key !== 'type';
+          })
+        ]);
+      });
+
+      var err;
+
+      manager.on([
+        'import.done'
+      ], function(e) {
+
+        err = e.error;
+      });
+
+      // when
+      manager.importXML('<foo&&', function(e) {
+
+        // then
+        expect(e).to.exist;
+        expect(e).to.be.an.instanceOf(Error);
+        expect(e.message).to.match(/unparsable content <foo&& detected/);
+
+        expect(events).to.eql([
+          [ 'import.parse.start', [ 'xml' ] ],
+          [ 'import.parse.complete', ['error', 'warnings', 'context' ] ],
+          [ 'import.done', ['error', 'warnings' ] ]
+        ]);
+
+        expect(err).to.exist;
+        expect(err).to.be.an.instanceOf(Error);
+        expect(err.message).to.match(/unparsable content <foo&& detected/);
+
+        done();
+      });
     });
 
   });
