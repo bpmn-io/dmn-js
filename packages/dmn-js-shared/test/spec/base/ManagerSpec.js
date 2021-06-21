@@ -365,8 +365,8 @@ describe('Manager', function() {
     });
 
 
-    it('should emit <import.parse.start> and' +
-      ' <import.parse.complete> when no displayable contents',
+    it('should emit <import.parse.start>,' +
+      ' <import.parse.complete> and <import.done> when no displayable contents',
     function(done) {
 
       // given
@@ -394,7 +394,7 @@ describe('Manager', function() {
       var err;
 
       manager.on([
-        'import.parse.complete'
+        'import.done'
       ], function(e) {
 
         err = e.error;
@@ -406,13 +406,17 @@ describe('Manager', function() {
         // then
         expect(e).to.exist;
         expect(e).to.be.an.instanceOf(Error);
+        expect(e.message).to.match(/no displayable contents/);
 
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'definitions', 'context' ] ]
+          [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
+          [ 'import.done', ['error', 'warnings' ] ]
         ]);
 
-        expect(err).to.be.undefined;
+        expect(err).to.exist;
+        expect(err).to.be.an.instanceOf(Error);
+        expect(err.message).to.match(/no displayable contents/);
 
         done();
       });
@@ -482,7 +486,7 @@ describe('Manager', function() {
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
           [ 'import.parse.complete', ['error', 'definitions', 'context' ] ],
-          [ 'import.done', ['error', 'warmings' ] ]
+          [ 'import.done', ['error', 'warnings' ] ]
         ]);
 
         expect(err).to.exist;
