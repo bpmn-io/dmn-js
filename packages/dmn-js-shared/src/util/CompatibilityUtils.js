@@ -24,7 +24,6 @@ export function wrapForCompatibility(api) {
 
       var callback = arguments[argLen - 1];
 
-      // TODO(maxtru): document dmn-js promisification guide under a specific URL
       console.warn(new Error(
         'Passing callbacks to ' + replaceBoundPrefix(api.name) +
         ' is deprecated and will be removed in a future major release. ' +
