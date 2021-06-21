@@ -64,6 +64,8 @@ export default class Manager {
 
     // keep support for callbacks
     this.open = wrapForCompatibility(this.open.bind(this));
+    this.importXML = wrapForCompatibility(this.importXML.bind(this));
+    this.saveXML = wrapForCompatibility(this.saveXML.bind(this));
 
     this._init(options);
   }

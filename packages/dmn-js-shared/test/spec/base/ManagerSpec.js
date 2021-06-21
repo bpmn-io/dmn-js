@@ -1118,6 +1118,209 @@ describe('Manager', function() {
 
     });
 
+
+    describe('#importXML', function() {
+
+      beforeEach(function() {
+        sinon.spy(console, 'warn');
+      });
+
+      afterEach(function() {
+        console.warn.restore();
+      });
+
+
+      describe('resolve', function() {
+
+        it('should allow Promise based call without warning', async function() {
+
+          // given
+          const manager = new TestViewer([ LOG_WARNING_VIEW ]);
+
+          // when
+          const { warnings } = await manager.importXML(diagramXML);
+
+          // then
+          expect(warnings).to.exist;
+          expect(warnings).to.be.an.instanceof(Array);
+          expect(warnings).to.have.length(2);
+
+          expect(console.warn).to.not.have.been.called;
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+          // given
+          const manager = new TestViewer([ LOG_WARNING_VIEW ]);
+
+          // when
+          manager.importXML(diagramXML, function(err, warnings) {
+
+            // then
+            expect(err).not.to.exist;
+
+            expect(warnings).to.exist;
+            expect(warnings).to.be.an.instanceof(Array);
+            expect(warnings).to.have.length(2);
+
+            expect(console.warn).to.have.been.calledOnce;
+
+            done();
+          });
+
+        });
+
+      });
+
+
+      describe('reject', function() {
+
+        it('should allow Promise based call without warning', function() {
+
+          // given
+          const manager = new TestViewer([ ERRORS_VIEW ]);
+
+          // when
+          return manager.importXML(diagramXML).catch(error => {
+
+            // then
+            expect(error).to.exist;
+            expect(error).to.be.an.instanceof(Error);
+
+            expect(error.warnings).to.exist;
+            expect(error.warnings).to.be.an.instanceof(Array);
+            expect(error.warnings).to.have.length(2);
+
+            expect(console.warn).to.not.have.been.called;
+          });
+
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+          // given
+          const manager = new TestViewer([ ERRORS_VIEW ]);
+
+          manager.importXML(diagramXML, function(err, warnings) {
+
+            // then
+            expect(err).to.exist;
+            expect(err).to.be.an.instanceof(Error);
+
+            expect(warnings).to.exist;
+            expect(warnings).to.be.an.instanceof(Array);
+            expect(warnings).to.have.length(2);
+
+            expect(console.warn).to.have.been.calledOnce;
+
+            done();
+          });
+
+        });
+
+      });
+
+    });
+
+
+    describe('#saveXML', function() {
+
+      beforeEach(function() {
+        sinon.spy(console, 'warn');
+      });
+
+      afterEach(function() {
+        console.warn.restore();
+      });
+
+
+      describe('resolve', function() {
+
+        it('should allow Promise based call without warning', async function() {
+
+          // given
+          const manager = new TestViewer();
+
+          await manager.importXML(diagramXML);
+
+          // when
+          await manager.saveXML();
+
+          // then
+          expect(console.warn).to.not.have.been.called;
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+          // given
+          const manager = new TestViewer();
+
+          manager.importXML(diagramXML).then(function() {
+
+            // when
+            manager.saveXML({ format: true }, function(err, xml) {
+
+              // then
+              expect(err).not.to.exist;
+
+              expect(xml).to.exist;
+
+              expect(console.warn).to.have.been.calledOnce;
+
+              done();
+            });
+          });
+
+        });
+
+      });
+
+
+      describe('reject', function() {
+
+        it('should allow Promise based call without warning', function() {
+
+          // given
+          const manager = new TestViewer();
+
+          // when
+          return manager.saveXML({ format: true }).catch((error) => {
+
+            // then
+            expect(error).to.exist;
+            expect(error).to.be.an.instanceof(Error);
+
+
+            expect(console.warn).to.not.have.been.called;
+          });
+
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+          // given
+          const manager = new TestViewer();
+
+          // when
+          manager.saveXML({ format: true }, function(err, xml) {
+
+            // then
+            expect(err).to.exist;
+
+            expect(console.warn).to.have.been.calledOnce;
+
+            done();
+          });
+        });
+
+      });
+
+    });
+
   });
 
 });
