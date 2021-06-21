@@ -1,3 +1,5 @@
+/* global sinon */
+
 import exampleXML from '../fixtures/dmn/di.dmn';
 import emptyDefsXML from '../fixtures/dmn/empty-definitions.dmn';
 
@@ -148,6 +150,62 @@ describe('Viewer', function() {
         // then
         expect(err.message).to.eql('no dmndi:DMNDI');
       });
+    });
+
+  });
+
+
+  describe('Callback compatibility', function() {
+
+    describe('#saveSVG', function() {
+
+      beforeEach(function() {
+        sinon.spy(console, 'warn');
+      });
+
+      afterEach(function() {
+        console.warn.restore();
+      });
+
+
+      describe('resolve', function() {
+
+        it('should allow Promise based call without warning', async function() {
+
+          // given
+          await createViewer(exampleXML);
+
+          // when
+          const { svg } = await viewer.getActiveViewer().saveSVG();
+
+          // then
+          expect(svg).to.exist;
+
+          expect(console.warn).to.not.have.been.called;
+        });
+
+
+        it('should log warning on Callback based call', function(done) {
+
+
+          // given
+          createViewer(exampleXML).then(() => {
+
+            // when
+            viewer.getActiveViewer().saveSVG({}, function(err, svg) {
+
+              // then
+              expect(svg).to.exist;
+
+              expect(console.warn).to.have.been.calledOnce;
+
+              done();
+            });
+          });
+        });
+
+      });
+
     });
 
   });

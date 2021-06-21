@@ -23,6 +23,11 @@ import {
   innerSVG
 } from 'tiny-svg';
 
+import {
+  wrapForCompatibility
+} from '../../dmn-js-shared/src/util/CompatibilityUtils';
+
+
 /**
  * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
  */
@@ -110,7 +115,7 @@ inherits(Viewer, Diagram);
  *
  * @return {Promise<SaveSVGResult>}
  */
-Viewer.prototype.saveSVG = function(options) {
+Viewer.prototype.saveSVG = wrapForCompatibility(function(options) {
   var self = this;
 
   return new Promise(function(resolve) {
@@ -139,7 +144,7 @@ Viewer.prototype.saveSVG = function(options) {
 
     resolve({ svg });
   });
-};
+});
 
 Viewer.prototype.getModules = function() {
   return this._modules;
