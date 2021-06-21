@@ -21,19 +21,18 @@ To get started, create a [dmn-js](https://github.com/bpmn-io/dmn-js) instance
 and render [DMN 1.3 diagrams](http://www.omg.org/spec/DMN/About-DMN/) in the browser:
 
 ```javascript
-var xml; // my DMN 1.3 xml
-var viewer = new DmnJS({
+const xml; // my DMN 1.3 xml
+const viewer = new DmnJS({
   container: 'body'
 });
 
-viewer.importXML(xml, function(err) {
+try {
+  const { warnings } = await viewer.importXML(xml);
 
-  if (err) {
-    console.log('error rendering', err);
-  } else {
-    console.log('rendered');
-  }
-});
+  console.log('rendered');
+} catch (err) {
+  console.log('error rendering', err)
+}
 ```
 
 Checkout our [examples](https://github.com/bpmn-io/dmn-js-examples) for
@@ -45,7 +44,7 @@ more supported usage scenarios.
 You may attach or detach the viewer dynamically to any element on the page, too:
 
 ```javascript
-var viewer = new DmnJS();
+const viewer = new DmnJS();
 
 // attach it to some element
 viewer.attachTo('#container');
