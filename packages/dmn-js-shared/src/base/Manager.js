@@ -109,7 +109,7 @@ export default class Manager {
       }
 
       if (err || !options.open) {
-        this._emit('import.done', { error: err, warmings: parseWarnings });
+        this._emit('import.done', { error: err, warnings: parseWarnings });
 
         return done(err, parseWarnings);
       }
@@ -117,7 +117,12 @@ export default class Manager {
       var view = this._activeView || this._getInitialView(this._views);
 
       if (!view) {
-        return done(new Error('no displayable contents'));
+        err = new Error('no displayable contents');
+
+        this._emit('import.done',
+          { error: err, warnings: parseWarnings });
+
+        return done(err);
       }
 
       this.open(view, (err, warnings) => {
