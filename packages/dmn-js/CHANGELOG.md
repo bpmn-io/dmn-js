@@ -6,6 +6,18 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.0.0
+
+* `FEAT`: make `#fromXML`, `#saveXML`, `#saveSVG`, and `#open` APIs awaitable ([#514](https://github.com/bpmn-io/dmn-js/issues/514))
+* `FIX`: correct event life-cycle of `#importXML` API for error case ([`49fcb1b`](https://github.com/bpmn-io/dmn-js/commit/49fcb1b986aa95bb7fce9935029f62bc7151ee90))
+* `FIX`: fix typo in `import.done` event property `warnings` ([`4ef46e0`](https://github.com/bpmn-io/dmn-js/commit/4ef46e073f45e0bd2d09c4ea0d9cb21d4555318c))
+* `CHORE`: deprecated `import.parse.complete` context payload ([`9739df4`](https://github.com/bpmn-io/dmn-js/commit/9739df4f737ed1d6f75aed22893fff1fcecdafd1))
+* `CHORE`: bump to `dmn-moddle@10.0.0` ([`b9ddbad`](https://github.com/bpmn-io/dmn-js/commit/b9ddbadb1b2b245a9519af2befe84cf4a6110ab7))
+
+### Breaking Changes
+
+* The toolkit now requires the ES6 `Promise` to be present. To support IE11 you must polyfill it.
+
 ## 10.3.0
 
 * `FEAT`: focus on row added via context menu ([#638](https://github.com/bpmn-io/dmn-js/pull/638))
