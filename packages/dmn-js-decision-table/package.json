@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "10.3.0",
+  "version": "11.0.0",
   "files": [
     "assets",
     "lib"
@@ -32,7 +32,7 @@
   "dependencies": {
     "css.escape": "^1.5.1",
     "diagram-js": "^7.2.0",
-    "dmn-js-shared": "^10.3.0",
+    "dmn-js-shared": "^11.0.0",
     "escape-html": "^1.0.3",
     "inferno": "~5.6.2",
     "min-dash": "^3.5.2",
