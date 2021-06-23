@@ -6,7 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
-* `FIX`: correctly use inter-package imports ([45beb23](https://github.com/bpmn-io/dmn-js/pull/643/commits/45beb231bbe9968cb1ec5e8c4c3da43059307234))
+
+## 11.0.1
+
+* `FIX`: correctly use inter-package imports ([beaec56](https://github.com/bpmn-io/dmn-js/commit/beaec56e3b8a4fb35684ae528c007c1b52200600))
 
 ## 11.0.0
 
