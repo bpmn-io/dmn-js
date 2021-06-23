@@ -22,11 +22,11 @@ import viewDrdModule from './features/view-drd';
 import PoweredByModule from './features/powered-by';
 
 /**
- * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
+ * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
  */
 
 /**
- * @typedef {import('../../dmn-js-shared/src/base/View).OpenError} OpenError
+ * @typedef {import('dmn-js-shared/lib/base/View).OpenError} OpenError
  */
 
 

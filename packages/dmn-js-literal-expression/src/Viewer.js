@@ -17,11 +17,11 @@ import TextareaModule from './features/textarea';
 import ViewDrdModule from './features/view-drd';
 
 /**
- * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
+ * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
  */
 
 /**
- * @typedef {import('../../dmn-js-shared/src/base/View).OpenError} OpenError
+ * @typedef {import('dmn-js-shared/lib/base/View).OpenError} OpenError
  */
 
 
