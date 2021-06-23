@@ -148,29 +148,6 @@ export default class Manager {
           return;
         }
 
-        return { parseWarnings };
-      }).catch((parseError) => {
-
-        parseWarnings = parseError.warnings;
-
-        parseError = checkDMNCompatibilityError(parseError, xml) ||
-          checkValidationError(parseError) ||
-          parseError;
-
-        self._emit('import.parse.complete', ParseCompleteEvent({
-          error: parseError,
-          warnings: parseWarnings
-        }));
-
-        self._emit('import.done', { error: parseError, warnings: parseWarnings });
-
-        parseError.warnings = parseWarnings;
-
-        return reject(parseError);
-      }).then((result) => {
-
-        parseWarnings = result.parseWarnings;
-
         var view = self._activeView || self._getInitialView(self._views);
 
         if (!view) {
@@ -200,7 +177,24 @@ export default class Manager {
             }
 
           });
+      }).catch((parseError) => {
 
+        parseWarnings = parseError.warnings;
+
+        parseError = checkDMNCompatibilityError(parseError, xml) ||
+          checkValidationError(parseError) ||
+          parseError;
+
+        self._emit('import.parse.complete', ParseCompleteEvent({
+          error: parseError,
+          warnings: parseWarnings
+        }));
+
+        self._emit('import.done', { error: parseError, warnings: parseWarnings });
+
+        parseError.warnings = parseWarnings;
+
+        return reject(parseError);
       });
 
     });
