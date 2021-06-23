@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: correctly use inter-package imports ([45beb23](https://github.com/bpmn-io/dmn-js/pull/643/commits/45beb231bbe9968cb1ec5e8c4c3da43059307234))
+
 ## 11.0.0
 
 * `FEAT`: make `#fromXML`, `#saveXML`, `#saveSVG`, and `#open` APIs awaitable ([#514](https://github.com/bpmn-io/dmn-js/issues/514))

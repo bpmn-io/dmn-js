@@ -25,15 +25,15 @@ import {
 
 import {
   wrapForCompatibility
-} from '../../dmn-js-shared/src/util/CompatibilityUtils';
+} from 'dmn-js-shared/lib/util/CompatibilityUtils';
 
 
 /**
- * @typedef {import('../../dmn-js-shared/src/base/View).OpenResult} OpenResult
+ * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
  */
 
 /**
- * @typedef {import('../../dmn-js-shared/src/base/View).OpenError} OpenError
+ * @typedef {import('dmn-js-shared/lib/base/View).OpenError} OpenError
  */
 
 
