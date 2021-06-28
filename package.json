@@ -46,6 +46,7 @@
     "del-cli": "^3.0.1",
     "eslint": "^6.6.0",
     "eslint-plugin-bpmn-io": "^0.10.0",
+    "eslint-plugin-import": "^2.23.4",
     "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^6.3.4",
     "karma-chrome-launcher": "^3.1.0",
