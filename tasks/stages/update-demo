@@ -1,5 +1,8 @@
 #! /bin/bash
 
+set -euo pipefail
+shopt -s inherit_errexit nullglob
+
 # bumps dmn-js and diagram-js dependencies in bpmn-io-demo
 
 PWD="$(pwd)"
