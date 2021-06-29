@@ -33,20 +33,20 @@ jobs:
       run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
     - name: Update demo
       env:
-        GH_AUTH: ${{ secrets.GH_AUTH }}
+        BPMN_IO_TOKEN: ${{ secrets.BPMN_IO_TOKEN }}
         BPMN_IO_EMAIL: ${{ secrets.BPMN_IO_EMAIL }}
         BPMN_IO_USERNAME: ${{ secrets.BPMN_IO_USERNAME }}
         BPMN_IO_DEMO_ENDPOINT: ${{ secrets.BPMN_IO_DEMO_ENDPOINT }}
       run: bash tasks/stages/update-demo
     - name: Update examples
       env:
-        GH_AUTH: ${{ secrets.GH_AUTH }}
+        BPMN_IO_TOKEN: ${{ secrets.BPMN_IO_TOKEN }}
         BPMN_IO_EMAIL: ${{ secrets.BPMN_IO_EMAIL }}
         BPMN_IO_USERNAME: ${{ secrets.BPMN_IO_USERNAME }}
       run: bash tasks/stages/update-examples
     - name: Update website
       env:
-        GH_AUTH: ${{ secrets.GH_AUTH }}
+        BPMN_IO_TOKEN: ${{ secrets.BPMN_IO_TOKEN }}
         BPMN_IO_EMAIL: ${{ secrets.BPMN_IO_EMAIL }}
         BPMN_IO_USERNAME: ${{ secrets.BPMN_IO_USERNAME }}
       run: bash tasks/stages/update-website
