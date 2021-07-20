@@ -16,7 +16,7 @@ import coreModule from './core';
 import decisionTableHeadModule from './features/decision-table-head';
 import decisionTablePropertiesModule from './features/decision-table-properties';
 import decisionRuleIndicesModule from './features/decision-rule-indices';
-import decisoinRulesModule from './features/decision-rules';
+import decisionRulesModule from './features/decision-rules';
 import hitPolicyModule from './features/hit-policy';
 import viewDrdModule from './features/view-drd';
 import PoweredByModule from './features/powered-by';
@@ -222,7 +222,7 @@ export default class Viewer extends Table {
       decisionTableHeadModule,
       decisionTablePropertiesModule,
       decisionRuleIndicesModule,
-      decisoinRulesModule,
+      decisionRulesModule,
       hitPolicyModule,
       viewDrdModule
     ];
