@@ -87,6 +87,7 @@
 .dmn-decision-table-container td {
   position: relative;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
   background-clip: padding-box;
 }
 
