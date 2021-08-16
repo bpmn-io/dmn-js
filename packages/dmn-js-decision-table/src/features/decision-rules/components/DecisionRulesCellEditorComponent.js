@@ -9,7 +9,7 @@ import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 import { Cell } from 'table-js/lib/components';
 
 
-export default class DecisionRulesEditorCellComponent extends Component {
+export default class DecisionRulesCellEditorComponent extends Component {
 
   constructor(props, context) {
     super(props, context);
