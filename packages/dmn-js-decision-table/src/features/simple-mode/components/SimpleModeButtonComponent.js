@@ -4,6 +4,8 @@ import { assign } from 'min-dash';
 
 import { closest as domClosest } from 'min-dom';
 
+import { inject } from 'table-js/lib/components';
+
 import {
   getNodeById
 } from '../../cell-selection/CellSelectionUtil';
@@ -11,7 +13,6 @@ import {
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 const OFFSET = 4;
-
 
 export default class SimpleModeButtonComponent extends Component {
   constructor(props, context) {
@@ -21,52 +22,98 @@ export default class SimpleModeButtonComponent extends Component {
       top: 0,
       left: 0,
       isVisible: false,
-      isDisabled: true
+      isDisabled: false,
+      selection: null
     };
 
-    const { injector } = context;
+    inject(this);
 
-    const eventBus = this._eventBus = injector.get('eventBus'),
-          simpleMode = injector.get('simpleMode'),
-          elementRegistry = context.injector.get('elementRegistry'),
-          expressionLanguages = context.injector.get('expressionLanguages');
-
-    this._renderer = injector.get('renderer');
-
-    this._selection = context.injector.get('selection');
-
-    this.updatePosition = this.updatePosition.bind(this);
-
-    eventBus.on('cellSelection.changed', ({ elementId }) => {
-      const selection = elementRegistry.get(elementId);
-
-      if (!selection || !simpleMode.canSimpleEdit(selection)) {
-        this.setState({
-          isVisible: false
-        });
-
-        return;
-      }
-
-      this.setState({
-        isVisible: true,
-        selection
-      }, this.updatePosition);
-
-      const expressionLanguage = getExpressionLanguage(selection);
-
-      const isDisabled = !isDefaultExpressionLanguage(
-        selection, expressionLanguage, expressionLanguages
-      );
-
-      this.setState({
-        isVisible: true,
-        selection,
-        isDisabled
-      }, this.updatePosition);
-    });
+    const { debounceInput } = this;
 
     this.onClick = this.onClick.bind(this);
+
+    this.handleSelectionChanged = this.handleSelectionChanged.bind(this);
+    this.hideAndShowDebounced = this.hideAndShowDebounced.bind(this);
+    this.showDebounced = debounceInput(this.showDebounced.bind(this));
+    this.updatePosition = this.updatePosition.bind(this);
+  }
+
+  componentDidMount() {
+    const { eventBus } = this;
+
+    eventBus.on('cellSelection.changed', this.handleSelectionChanged);
+
+    eventBus.on('commandStack.changed', this.updatePosition);
+
+    eventBus.on('sheet.scroll', this.hideAndShowDebounced);
+  }
+
+  componentWillUnmount() {
+    const { eventBus } = this;
+
+    eventBus.off('cellSelection.changed', this.handleSelectionChanged);
+
+    eventBus.off('commandStack.changed', this.updatePosition);
+
+    eventBus.off('sheet.scroll', this.hideAndShowDebounced);
+  }
+
+  hideAndShowDebounced() {
+    this.hide();
+
+    this.showDebounced();
+  }
+
+  showDebounced() {
+    this.show();
+  }
+
+  hide(state = {}) {
+    this.setState({
+      ...state,
+      isVisible: false
+    });
+  }
+
+  show(state = {}) {
+    this.setState({
+      ...state,
+      isVisible: true
+    });
+
+    this.updatePosition();
+  }
+
+  handleSelectionChanged({ elementId }) {
+    const {
+      elementRegistry,
+      expressionLanguages,
+      simpleMode
+    } = this;
+
+    const selection = elementRegistry.get(elementId);
+
+    if (!selection || !simpleMode.canSimpleEdit(selection)) {
+      this.hide({
+        isDisabled: false,
+        selection: null
+      });
+
+      return;
+    }
+
+    const expressionLanguage = getExpressionLanguage(selection);
+
+    const isDisabled = !isDefaultExpressionLanguage(
+      selection,
+      expressionLanguage,
+      expressionLanguages
+    );
+
+    this.show({
+      isDisabled,
+      selection
+    });
   }
 
   // position button always on opposite site of context menu
@@ -79,7 +126,9 @@ export default class SimpleModeButtonComponent extends Component {
       return;
     }
 
-    const container = this._renderer.getContainer(),
+    const { renderer } = this;
+
+    const container = renderer.getContainer(),
           containerBounds = container.getBoundingClientRect();
 
     const cellNode = getNodeById(selection.id, container);
@@ -152,30 +201,37 @@ export default class SimpleModeButtonComponent extends Component {
   }
 
   onClick() {
+    const { eventBus } = this;
+
     const { isDisabled } = this.state;
 
     if (isDisabled) {
       return;
     }
 
-    const element = this._selection.get();
+    const { selection } = this;
+
+    const element = selection.get();
 
     if (!element) {
       return;
     }
 
-    this._eventBus.fire('simpleMode.open', {
+    eventBus.fire('simpleMode.open', {
       element,
       node: getNodeById(element.id, this._container)
     });
 
-    this.setState({
-      isVisible: false
-    });
+    this.hide();
   }
 
   render() {
-    const { isDisabled, isVisible, top, left } = this.state;
+    const {
+      isDisabled,
+      isVisible,
+      top,
+      left
+    } = this.state;
 
     const classes = [
       'simple-mode-button',
@@ -201,6 +257,15 @@ export default class SimpleModeButtonComponent extends Component {
   }
 }
 
+SimpleModeButtonComponent.$inject = [
+  'debounceInput',
+  'elementRegistry',
+  'eventBus',
+  'expressionLanguages',
+  'renderer',
+  'selection',
+  'simpleMode'
+];
 
 // helpers //////////////////////
 

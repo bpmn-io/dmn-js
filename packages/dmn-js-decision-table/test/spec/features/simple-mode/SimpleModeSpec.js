@@ -163,4 +163,29 @@ describe('simple mode', function() {
     expect(domQuery('.foo', testContainer)).to.exist;
   });
 
+
+  it('should hide and show debounced when scrolling container', function(done) {
+
+    // given
+    const tableContainer = domQuery('.tjs-table-container', testContainer);
+
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    triggerClick(cell, 0, 0);
+
+    // when
+    tableContainer.dispatchEvent(new Event('scroll'));
+
+    // then
+    expect(domQuery('.simple-mode-button', testContainer)).not.to.exist;
+
+    setTimeout(() => {
+
+      // but then
+      expect(domQuery('.simple-mode-button', testContainer)).to.exist;
+
+      done();
+    }, 300);
+  });
+
 });
