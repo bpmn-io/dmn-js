@@ -7,6 +7,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 ___Note:__ Yet to be released changes appear here._
 
 
+## 11.0.2
+
+* `FIX`: update simple mode button position in decision table view ([#543](https://github.com/bpmn-io/dmn-js/issues/543))
+* `FIX`: consistently display decision entries in viewer and editor ([#651](https://github.com/bpmn-io/dmn-js/issues/651))
+* `DEPS`: update to `table-js@7.2.0` ([f472b1f](https://github.com/bpmn-io/dmn-js/commit/f472b1f6882b47d59663a1668be71611703601fc))
+
 ## 11.0.1
 
 * `FIX`: correctly use inter-package imports ([beaec56](https://github.com/bpmn-io/dmn-js/commit/beaec56e3b8a4fb35684ae528c007c1b52200600))
