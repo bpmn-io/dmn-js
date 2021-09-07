@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "11.0.1",
+  "version": "11.0.2",
   "files": [
     "dist",
     "lib",
@@ -59,9 +59,9 @@
     "rollup-plugin-uglify": "^6.0.0"
   },
   "dependencies": {
-    "dmn-js-decision-table": "^11.0.1",
-    "dmn-js-drd": "^11.0.1",
-    "dmn-js-literal-expression": "^11.0.1",
-    "dmn-js-shared": "^11.0.0"
+    "dmn-js-decision-table": "^11.0.2",
+    "dmn-js-drd": "^11.0.2",
+    "dmn-js-literal-expression": "^11.0.2",
+    "dmn-js-shared": "^11.0.2"
   }
 }
