@@ -1,9 +1,9 @@
-#! /bin/bash
+#!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 shopt -s inherit_errexit nullglob
 
-# bumps dmn-js and diagram-js dependencies in bpmn-io-demo
+# bumps dmn-js dependencies in bpmn-io-demo
 
 PWD="$(pwd)"
 WORKDIR="$(pwd)/tmp"
@@ -16,16 +16,21 @@ git clone --depth=1 "https://$BPMN_IO_TOKEN@github.com/$BPMN_IO_DEMO_ENDPOINT.gi
 
 cd "$CLONE_DIR"
 
-npm install --save dmn-js@latest diagram-js@latest
+npm install --save dmn-js@$TAG diagram-js@latest
 
-git config user.email "$BPMN_IO_EMAIL"
-git config user.name "$BPMN_IO_USERNAME"
-git config push.default simple
+if [[ "x$SKIP_COMMIT" = "x" ]]; then
 
-git add -A
-git commit -m "deps: bump dmn-js to $TAG"
-git tag "dmn-js-$TAG"
-git push -q &2>/dev/null
-git push --tags -q &2>/dev/null
+  git config user.email "$BPMN_IO_EMAIL"
+  git config user.name "$BPMN_IO_USERNAME"
+  git config push.default simple
+
+  git add -A
+  git commit -m "deps: bump to dmn-js@$TAG"
+  git tag "dmn-js-$TAG"
+  git push -q &2>/dev/null
+  git push --tags -q &2>/dev/null
+else
+  echo "Skipping commit (SKIP_COMMIT=$SKIP_COMMIT)"
+fi
 
 cd "$PWD"

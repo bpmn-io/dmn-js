@@ -1,6 +1,6 @@
-#! /bin/bash
+#!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 shopt -s inherit_errexit nullglob
 
 # update dmn-js version in the <dmn-js-examples> project
@@ -17,14 +17,17 @@ git clone --depth=1 "https://$BPMN_IO_TOKEN@github.com/bpmn-io/dmn-js-examples.g
 cd "$EXAMPLES_DIR"
 
 TOOLKIT_VERSION="${TAG:1}"
-echo "Updating toolkit versions to $TOOLKIT_VERSION"
+echo "Updating to dmn-js@$TOOLKIT_VERSION"
 
+# update links to static resources
 sed -i -E "s#/dmn-js@[^/]+/#/dmn-js@$TOOLKIT_VERSION/#" **/*.{html,md}
 
 # update via npm if possible
 for dir in $(ls -d */)
 do
-  (cd $dir && [[ -f "package.json" ]] && npm install "dmn-js@$TOOLKIT_VERSION")
+  if [[ -f "$dir/package.json" ]]; then
+    (cd $dir && npm install "dmn-js@$TOOLKIT_VERSION")
+  fi
 done
 
 if [[ "x$SKIP_COMMIT" = "x" ]]; then
@@ -35,7 +38,7 @@ if [[ "x$SKIP_COMMIT" = "x" ]]; then
 
   # add all resources
   git add -A
-  git commit -m "deps: bump dmn-js to $TAG"
+  git commit -m "deps: bump to dmn-js@$TAG"
   git tag "$TAG"
   git push -q &2>/dev/null
   git push --tags -q &2>/dev/null
