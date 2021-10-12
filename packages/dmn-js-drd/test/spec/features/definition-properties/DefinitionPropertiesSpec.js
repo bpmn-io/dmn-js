@@ -1,5 +1,6 @@
 import {
-  query as domQuery
+  query as domQuery,
+  classes as domClasses
 } from 'min-dom';
 
 import {
@@ -98,6 +99,57 @@ describe('features/definition-properties', function() {
 
       // then
       expect(nameContainer.textContent).to.eql('new Name');
+    }
+  ));
+
+
+  it('should react to invalid id updates', inject(
+    function(definitionPropertiesView, definitionPropertiesEdit) {
+
+      // given
+      var idContainer = domQuery(
+        '.dmn-definitions-id',
+        definitionPropertiesView._container
+      );
+
+      // when
+      const originalId = idContainer.textContent;
+      const duplicateId = 'decision';
+
+      definitionPropertiesEdit.update('id', duplicateId);
+
+      const errorLabel = idContainer.parentElement.lastChild;
+
+      // then
+      expect(idContainer.textContent).to.eql(originalId);
+      expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.true;
+      expect(domClasses(errorLabel).has('dmn-definitions-error-label')).to.be.true;
+    }
+  ));
+
+
+  it('should clear invalid id validation', inject(
+    function(definitionPropertiesView, definitionPropertiesEdit) {
+
+      // given
+      var idContainer = domQuery(
+        '.dmn-definitions-id',
+        definitionPropertiesView._container
+      );
+
+      // when
+      const duplicateId = 'decision';
+
+      definitionPropertiesEdit.update('id', duplicateId);
+      definitionPropertiesEdit.update('id', 'newId');
+
+      const errorLabel = idContainer.parentElement.lastChild;
+
+      // then
+      expect(idContainer.textContent).to.eql('newId');
+      expect(domClasses(idContainer).has('dmn-definition-error')).to.be.false;
+      expect(domClasses(errorLabel).has('dmn-definitions-error-label')).to.be.false;
+
     }
   ));
 

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" id="drd-id" name="drd-name" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="drd-id" name="drd-name" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.11.0-nightly.20211007">
+  <decision id="decision" name="Some decision">
+    <decisionTable id="DecisionTable_0sj4irb">
+      <input id="InputClause_1rh9gy1">
+        <inputExpression id="LiteralExpression_0qis3as" typeRef="string" />
+      </input>
+      <output id="OutputClause_0j0a1xz" typeRef="string" />
+    </decisionTable>
+  </decision>
   <dmndi:DMNDI>
-    <dmndi:DMNDiagram id="Diagram_1" />
+    <dmndi:DMNDiagram id="Diagram_1">
+      <dmndi:DMNShape id="DMNShape_1tzr6po" dmnElementRef="decision">
+        <dc:Bounds height="80" width="180" x="190" y="110" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>
