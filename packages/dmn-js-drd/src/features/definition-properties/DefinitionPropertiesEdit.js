@@ -5,8 +5,18 @@ import {
 var DEBOUNCE_DELAY = 300;
 
 import {
+  domify,
+  classes as domClasses,
   query as domQuery
 } from 'min-dom';
+
+import {
+  getBusinessObject
+} from 'dmn-js-shared/lib/util/ModelUtil';
+
+import {
+  validateId
+} from 'dmn-js-shared/src/util/IdsUtil';
 
 
 export default function DefinitionIdEdit(eventBus, modeling, canvas) {
@@ -15,9 +25,9 @@ export default function DefinitionIdEdit(eventBus, modeling, canvas) {
   this._canvas = canvas;
 
   eventBus.on('definitionIdView.create', function(event) {
-    var container = event.html,
-        nameElement = domQuery('.dmn-definitions-name', container),
-        idElement = domQuery('.dmn-definitions-id', container);
+    this._container = event.html;
+    var nameElement = domQuery('.dmn-definitions-name', this._container),
+        idElement = domQuery('.dmn-definitions-id', this._container);
 
     this._setup(nameElement, 'name');
     this._setup(idElement, 'id');
@@ -32,10 +42,22 @@ DefinitionIdEdit.$inject = [
 
 
 DefinitionIdEdit.prototype.update = function(type, newValue) {
+  var element = this._canvas.getRootElement();
   var newProperties = {};
   newProperties[type] = newValue;
 
-  this._modeling.updateProperties(this._canvas.getRootElement(), newProperties);
+  if (type === 'id') {
+    var validationHint = validateId(getBusinessObject(element), newValue);
+
+    if (validationHint) {
+      addErrorMessage(this._container, validationHint);
+      return;
+    }
+
+    clearErrorMessage(this._container);
+  }
+
+  this._modeling.updateProperties(element, newProperties);
 };
 
 DefinitionIdEdit.prototype._setup = function(node, type) {
@@ -56,4 +78,42 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
     }
   });
 
+  node.addEventListener('blur', function(evt) {
+    clearErrorMessage(self._container);
+
+    self._eventBus.fire('definitionIdEdit.blur', {
+      html: evt.target
+    });
+  });
+
 };
+
+
+/* helper */
+
+function addErrorMessage(container, errorMessage) {
+  const errorHTML =
+    '<span class="dmn-definitions-error-label">' +
+    `${errorMessage}` +
+    '</span>';
+
+  var idElement = domQuery('.dmn-definitions-id', container);
+
+  // clear existing validation messages
+  clearErrorMessage(container);
+
+  // add current validation messages
+  domClasses(idElement).add('dmn-definitions-error');
+  idElement.parentElement.appendChild(domify(errorHTML));
+}
+
+function clearErrorMessage(container) {
+  var idElement = domQuery('.dmn-definitions-id', container);
+
+  if (domClasses(idElement).has('dmn-definitions-error')) {
+    domClasses(idElement).remove('dmn-definitions-error');
+
+    const errorLabel = domQuery('.dmn-definitions-error-label', container);
+    idElement.parentNode.removeChild(errorLabel);
+  }
+}
