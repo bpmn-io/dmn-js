@@ -61,7 +61,7 @@ DefinitionPropertiesView.prototype.update = function() {
 /* markup definition */
 
 DefinitionPropertiesView.HTML_MARKUP =
-  '<div class="dmn-definitions">' +
+  '<div class="dmn-definitions" input-handle-modified-keys="z,y">' +
     '<div class="dmn-definitions-name" title="Definition Name"></div>' +
     '<div class="dmn-definitions-id" title="Definition ID"></div>' +
   '</div>';
