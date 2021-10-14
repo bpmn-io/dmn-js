@@ -26,7 +26,7 @@
     "drd"
   ],
   "dependencies": {
-    "diagram-js": "^7.2.0",
+    "diagram-js": "^7.5.0",
     "diagram-js-direct-editing": "^1.6.3",
     "dmn-js-shared": "^11.0.2",
     "inherits": "^2.0.1",
