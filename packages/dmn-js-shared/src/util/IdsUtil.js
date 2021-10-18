@@ -21,8 +21,12 @@ export function validateId(businessObject, id) {
 
   const idExists = assigned && assigned !== businessObject;
 
-  if (!id || idExists) {
-    return 'Element must have an unique id.';
+  if (!id) {
+    return 'Element must have ID.';
+  }
+
+  if (idExists) {
+    return 'Element must have unique ID.';
   }
 
   return validateIdFormat(id);
