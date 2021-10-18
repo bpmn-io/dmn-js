@@ -220,7 +220,7 @@ describe('features/definition-properties', function() {
       }));
 
 
-      it('should not edit definition ID and show error message', inject(
+      it('should not edit definition ID and show error message (ID not unique)', inject(
         function(canvas, definitionPropertiesEdit, definitionPropertiesView) {
 
           // given
@@ -242,6 +242,37 @@ describe('features/definition-properties', function() {
           );
 
           expect(errorMessage).to.exist;
+          expect(errorMessage.textContent).to.equal('Element must have unique ID.');
+          expect(getBusinessObject(rootElement).get('id')).to.equal(id);
+          expect(idContainer.textContent).to.equal(id);
+          expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.true;
+        }
+      ));
+
+
+      it('should not edit definition ID and show error message (ID empty)', inject(
+        function(canvas, definitionPropertiesEdit, definitionPropertiesView) {
+
+          // given
+          var rootElement = canvas.getRootElement(),
+              id = getBusinessObject(rootElement).get('id');
+
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
+
+          // when
+          definitionPropertiesEdit.update('id', '');
+
+          // then
+          var errorMessage = domQuery(
+            '.dmn-definitions-error-message',
+            definitionPropertiesView._container
+          );
+
+          expect(errorMessage).to.exist;
+          expect(errorMessage.textContent).to.equal('Element must have ID.');
           expect(getBusinessObject(rootElement).get('id')).to.equal(id);
           expect(idContainer.textContent).to.equal(id);
           expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.true;
