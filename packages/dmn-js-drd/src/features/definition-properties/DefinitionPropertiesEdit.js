@@ -50,10 +50,11 @@ DefinitionIdEdit.prototype.update = function(type, newValue) {
   newProperties[type] = newValue;
 
   if (type === 'id') {
-    var validationHint = validateId(getBusinessObject(element), newValue);
+    var errorMessage = validateId(getBusinessObject(element), newValue);
 
-    if (validationHint) {
-      addErrorMessage(this._container, validationHint);
+    if (errorMessage) {
+      addErrorMessage(this._container, errorMessage);
+
       return;
     }
 
