@@ -34,7 +34,7 @@
 }
 
 .dmn-definitions .dmn-definitions-name {
-  font-size: 1.5em;
+  font-size: 24px;
   padding: 3px;
 }
 
@@ -62,20 +62,14 @@
 
 .dmn-definitions .dmn-definitions-error-message {
   color: var(--red-base-62);
+  display: block;
   font-size: 12px;
-  font-family: 'Arial', sans-serif;
+  margin-top: 6px;
 }
 
-.dmn-definitions .dmn-definitions-error,
-.dmn-definitions .dmn-definitions-error:hover,
-.dmn-definitions .dmn-definitions-error:focus {
-  padding: 2px;
-  border-radius: 2px;
-  border: 1px solid var(--red-base-62);
-}
-
-.dmn-definitions .dmn-definitions-error:focus {
-  box-shadow: 0 0 0 2px #ffb3b3, 0 0 0 1px #cdcdcd inset;
+.dmn-definitions .dmn-definitions-id.dmn-definitions-error {
+  border-color: var(--red-base-62);
+  background-color: var(--color-fff0f0);
 }
 
 .djs-container.with-palette .dmn-definitions {
