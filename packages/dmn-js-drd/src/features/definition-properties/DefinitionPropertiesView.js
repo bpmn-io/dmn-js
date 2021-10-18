@@ -62,6 +62,8 @@ DefinitionPropertiesView.prototype.update = function() {
 
 DefinitionPropertiesView.HTML_MARKUP =
   '<div class="dmn-definitions">' +
-    '<div class="dmn-definitions-name" title="Definition Name"></div>' +
-    '<div class="dmn-definitions-id" title="Definition ID"></div>' +
+    '<div class="dmn-definitions-name" title="Definition Name" spellcheck="false">' +
+    '</div>' +
+    '<div class="dmn-definitions-id" title="Definition ID" spellcheck="false">' +
+    '</div>' +
   '</div>';
