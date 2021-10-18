@@ -1,7 +1,9 @@
 import {
-  query as domQuery,
-  classes as domClasses
+  classes as domClasses,
+  query as domQuery
 } from 'min-dom';
+
+import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
   bootstrapModeler,
@@ -20,7 +22,6 @@ import {
   clickElement
 } from 'test/util/EventUtils';
 
-
 describe('features/definition-properties', function() {
 
   var testModules = [
@@ -34,6 +35,7 @@ describe('features/definition-properties', function() {
   var diagramXML = require('./definitionProperties.dmn');
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
 
   it('should display the definitions name', inject(function(definitionPropertiesView) {
 
@@ -99,57 +101,6 @@ describe('features/definition-properties', function() {
 
       // then
       expect(nameContainer.textContent).to.eql('new Name');
-    }
-  ));
-
-
-  it('should react to invalid id updates', inject(
-    function(definitionPropertiesView, definitionPropertiesEdit) {
-
-      // given
-      var idContainer = domQuery(
-        '.dmn-definitions-id',
-        definitionPropertiesView._container
-      );
-
-      // when
-      const originalId = idContainer.textContent;
-      const duplicateId = 'decision';
-
-      definitionPropertiesEdit.update('id', duplicateId);
-
-      const errorLabel = idContainer.parentElement.lastChild;
-
-      // then
-      expect(idContainer.textContent).to.eql(originalId);
-      expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.true;
-      expect(domClasses(errorLabel).has('dmn-definitions-error-label')).to.be.true;
-    }
-  ));
-
-
-  it('should clear invalid id validation', inject(
-    function(definitionPropertiesView, definitionPropertiesEdit) {
-
-      // given
-      var idContainer = domQuery(
-        '.dmn-definitions-id',
-        definitionPropertiesView._container
-      );
-
-      // when
-      const duplicateId = 'decision';
-
-      definitionPropertiesEdit.update('id', duplicateId);
-      definitionPropertiesEdit.update('id', 'newId');
-
-      const errorLabel = idContainer.parentElement.lastChild;
-
-      // then
-      expect(idContainer.textContent).to.eql('newId');
-      expect(domClasses(idContainer).has('dmn-definition-error')).to.be.false;
-      expect(domClasses(errorLabel).has('dmn-definitions-error-label')).to.be.false;
-
     }
   ));
 
@@ -241,30 +192,120 @@ describe('features/definition-properties', function() {
     }));
 
 
-    it('should edit definition ID', injectAsync(function(done) {
-      return function(canvas, definitionPropertiesView, eventBus) {
+    describe('id', function() {
 
-        // given
-        var definitions = canvas.getRootElement().businessObject;
-        var idContainer = domQuery(
-          '.dmn-definitions-id',
-          definitionPropertiesView._container
-        );
+      it('should edit definition ID', injectAsync(function(done) {
+        return function(canvas, definitionPropertiesView, eventBus) {
 
-        clickElement(idContainer);
+          // given
+          var definitions = canvas.getRootElement().businessObject;
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
 
-        // when
-        eventBus.on('commandStack.element.updateProperties.postExecute', function() {
+          clickElement(idContainer);
+
+          // when
+          eventBus.on('commandStack.element.updateProperties.postExecute', function() {
+
+            // then
+            expect(definitions.id).to.equal('world');
+
+            done();
+          });
+
+          inputEvent(idContainer, 'world');
+        };
+      }));
+
+
+      it('should not edit definition ID and show error message', inject(
+        function(canvas, definitionPropertiesEdit, definitionPropertiesView) {
+
+          // given
+          var rootElement = canvas.getRootElement(),
+              id = getBusinessObject(rootElement).get('id');
+
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
+
+          // when
+          definitionPropertiesEdit.update('id', 'decision');
 
           // then
-          expect(definitions.id).to.equal('world');
+          var errorMessage = domQuery(
+            '.dmn-definitions-error-message',
+            definitionPropertiesView._container
+          );
 
-          done();
-        });
+          expect(errorMessage).to.exist;
+          expect(getBusinessObject(rootElement).get('id')).to.equal(id);
+          expect(idContainer.textContent).to.equal(id);
+          expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.true;
+        }
+      ));
 
-        inputEvent(idContainer, 'world');
-      };
-    }));
+
+      it('should edit definition ID and clear error message', inject(
+        function(canvas, definitionPropertiesEdit, definitionPropertiesView) {
+
+          // given
+          var rootElement = canvas.getRootElement();
+
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
+
+          // when
+          definitionPropertiesEdit.update('id', 'decision');
+          definitionPropertiesEdit.update('id', 'foo');
+
+          // then
+          var errorMessage = domQuery(
+            '.dmn-definitions-error-message',
+            definitionPropertiesView._container
+          );
+
+          expect(errorMessage).not.to.exist;
+          expect(getBusinessObject(rootElement).get('id')).to.equal('foo');
+          expect(idContainer.textContent).to.equal('foo');
+          expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.false;
+        }
+      ));
+
+
+      it('should clear error message on blur', inject(
+        function(definitionPropertiesEdit, definitionPropertiesView) {
+
+          // given
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
+
+          idContainer.focus();
+
+          // when
+          definitionPropertiesEdit.update('id', 'decision');
+
+          idContainer.blur();
+
+          // then
+          var errorMessage = domQuery(
+            '.dmn-definitions-error-message',
+            definitionPropertiesView._container
+          );
+
+          expect(errorMessage).not.to.exist;
+          expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.false;
+        }
+      ));
+
+    });
 
   });
 
