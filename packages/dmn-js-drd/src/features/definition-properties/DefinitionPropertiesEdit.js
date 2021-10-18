@@ -19,10 +19,12 @@ import {
 } from 'dmn-js-shared/src/util/IdsUtil';
 
 
-export default function DefinitionIdEdit(eventBus, modeling, canvas) {
+export default function DefinitionIdEdit(
+    eventBus, modeling, canvas, definitionPropertiesView) {
   this._eventBus = eventBus;
   this._modeling = modeling;
   this._canvas = canvas;
+  this._definitionPropertiesView = definitionPropertiesView;
 
   eventBus.on('definitionIdView.create', function(event) {
     this._container = event.html;
@@ -37,7 +39,8 @@ export default function DefinitionIdEdit(eventBus, modeling, canvas) {
 DefinitionIdEdit.$inject = [
   'eventBus',
   'modeling',
-  'canvas'
+  'canvas',
+  'definitionPropertiesView'
 ];
 
 
@@ -78,14 +81,11 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
     }
   });
 
-  node.addEventListener('blur', function(evt) {
+  node.addEventListener('blur', function() {
     clearErrorMessage(self._container);
 
-    self._eventBus.fire('definitionIdEdit.blur', {
-      html: evt.target
-    });
+    self._definitionPropertiesView.update();
   });
-
 };
 
 

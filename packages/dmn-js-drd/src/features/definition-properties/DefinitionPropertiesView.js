@@ -48,10 +48,6 @@ DefinitionPropertiesView.prototype._init = function() {
   eventBus.fire('definitionIdView.create', {
     html: container
   });
-
-  eventBus.on('definitionIdEdit.blur', function() {
-    this.update();
-  }, this);
 };
 
 DefinitionPropertiesView.prototype.update = function() {
