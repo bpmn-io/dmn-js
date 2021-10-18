@@ -91,8 +91,8 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
 
 DefinitionIdEdit.prototype._addErrorMessage = function(errorMessage) {
   const errorHTML =
-    '<span class="dmn-definitions-error-label">' +
-    `${errorMessage}` +
+    '<span class="dmn-definitions-error-message">' +
+    errorMessage +
     '</span>';
 
   var idElement = domQuery('.dmn-definitions-id', this._container);
@@ -111,7 +111,7 @@ DefinitionIdEdit.prototype._clearErrorMessage = function() {
   if (domClasses(idElement).has('dmn-definitions-error')) {
     domClasses(idElement).remove('dmn-definitions-error');
 
-    const errorLabel = domQuery('.dmn-definitions-error-label', this._container);
+    const errorLabel = domQuery('.dmn-definitions-error-message', this._container);
     idElement.parentNode.removeChild(errorLabel);
   }
 };

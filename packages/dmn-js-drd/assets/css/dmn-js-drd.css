@@ -60,7 +60,7 @@
   border: 1px solid var(--dmn-definitions-focus-border-color);
 }
 
-.dmn-definitions .dmn-definitions-error-label {
+.dmn-definitions .dmn-definitions-error-message {
   color: var(--red-base-62);
   font-size: 12px;
   font-family: 'Arial', sans-serif;
