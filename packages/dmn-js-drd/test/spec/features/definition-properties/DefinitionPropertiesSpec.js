@@ -309,7 +309,7 @@ describe('features/definition-properties', function() {
       ));
 
 
-      it('should clear error message on blur', inject(
+      skipFF()('should clear error message on blur', inject(
         function(definitionPropertiesEdit, definitionPropertiesView) {
 
           // given
@@ -341,3 +341,13 @@ describe('features/definition-properties', function() {
   });
 
 });
+
+// helpers //////////////////
+
+function isFirefox() {
+  return /Firefox/.test(window.navigator.userAgent);
+}
+
+function skipFF() {
+  return isFirefox() ? it.only : it;
+}
