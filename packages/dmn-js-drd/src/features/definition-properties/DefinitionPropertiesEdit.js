@@ -53,12 +53,12 @@ DefinitionIdEdit.prototype.update = function(type, newValue) {
     var errorMessage = validateId(getBusinessObject(element), newValue);
 
     if (errorMessage) {
-      addErrorMessage(this._container, errorMessage);
+      this._addErrorMessage(errorMessage);
 
       return;
     }
 
-    clearErrorMessage(this._container);
+    this._clearErrorMessage();
   }
 
   this._modeling.updateProperties(element, newProperties);
@@ -83,38 +83,35 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
   });
 
   node.addEventListener('blur', function() {
-    clearErrorMessage(self._container);
+    self._clearErrorMessage();
 
     self._definitionPropertiesView.update();
   });
 };
 
-
-/* helper */
-
-function addErrorMessage(container, errorMessage) {
+DefinitionIdEdit.prototype._addErrorMessage = function(errorMessage) {
   const errorHTML =
     '<span class="dmn-definitions-error-label">' +
     `${errorMessage}` +
     '</span>';
 
-  var idElement = domQuery('.dmn-definitions-id', container);
+  var idElement = domQuery('.dmn-definitions-id', this._container);
 
-  // clear existing validation messages
-  clearErrorMessage(container);
+  // clear previous error message
+  this._clearErrorMessage();
 
-  // add current validation messages
+  // add current error message
   domClasses(idElement).add('dmn-definitions-error');
   idElement.parentElement.appendChild(domify(errorHTML));
-}
+};
 
-function clearErrorMessage(container) {
-  var idElement = domQuery('.dmn-definitions-id', container);
+DefinitionIdEdit.prototype._clearErrorMessage = function() {
+  var idElement = domQuery('.dmn-definitions-id', this._container);
 
   if (domClasses(idElement).has('dmn-definitions-error')) {
     domClasses(idElement).remove('dmn-definitions-error');
 
-    const errorLabel = domQuery('.dmn-definitions-error-label', container);
+    const errorLabel = domQuery('.dmn-definitions-error-label', this._container);
     idElement.parentNode.removeChild(errorLabel);
   }
-}
+};
