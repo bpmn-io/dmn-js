@@ -36,12 +36,13 @@
   --view-drd-button-border-color: var(--color-cccccc);
   --view-drd-button-color: var(--color-444444);
   --view-drd-button-hover-background-color: var(--color-f6f6f6);
+  --decision-table-font-family: 'Arial', sans-serif;
 
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
-  font-family: 'Arial', sans-serif;
+  font-family: var(--decision-table-font-family);
   font-size: 14px;
   color: var(--table-color);
   max-height: 100%;

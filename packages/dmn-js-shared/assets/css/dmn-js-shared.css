@@ -126,6 +126,7 @@ h4.dms-heading {
   border: 1px solid var(--input-border-color);
   background: none;
   font-size: 14px;
+  font-family: inherit;
   color: var(--input-color);
   min-height: 26px;
 }
