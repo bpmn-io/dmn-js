@@ -4,6 +4,7 @@
   --dmn-definitions-focus-border-color: var(--color-aaaaaa);
   --drill-down-overlay-background-color: var(--blue-base-65);
   --drill-down-overlay-color: var(--color-ffffff);
+  --drd-font-family-monospace: monospace;
 
   width: 100%;
   height: 100%;
@@ -43,7 +44,7 @@
 }
 
 .dmn-definitions .dmn-definitions-id {
-  font-family: monospace;
+  font-family: var(--drd-font-family-monospace);
   margin-top: 2px;
   padding: 3px;
 }

@@ -15,8 +15,10 @@
   --view-drd-button-border-color: var(--color-cccccc);
   --view-drd-button-color: var(--color-444444);
   --view-drd-button-hover-background-color: var(--color-f6f6f6);
+  --literal-expression-font-family: 'Arial', sans-serif;
+  --literal-expression-font-family-monospace: monospace;
 
-  font-family: 'Arial', sans-serif;
+  font-family: var(--literal-expression-font-family);
   position: relative;
   color: var(--literal-expression-color);
   width: 100%;
@@ -96,7 +98,7 @@
 .dmn-literal-expression-container .textarea {
   box-sizing: border-box;
   width: 100%;
-  font-family: monospace;
+  font-family: var(--literal-expression-font-family-monospace);
   border: 1px solid var(--textarea-border-color);
   border-bottom-width: 1px;
   white-space: pre;
