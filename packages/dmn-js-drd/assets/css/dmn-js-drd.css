@@ -1,9 +1,12 @@
 .dmn-drd-container {
-  --dmn-definitions-background-color: var(--color-fafafa);
-  --dmn-definitions-border-color: var(--color-cccccc);
-  --dmn-definitions-focus-border-color: var(--color-aaaaaa);
-  --drill-down-overlay-background-color: var(--blue-base-65);
-  --drill-down-overlay-color: var(--color-ffffff);
+  --dmn-definitions-background-color: var(--color-grey-225-10-97);
+  --dmn-definitions-border-color: var(--color-grey-225-10-75);
+  --dmn-definitions-focus-border-color: var(--color-grey-225-10-75);
+  --dmn-definitions-error-color: var(--color-red-360-100-45);
+  --dmn-definitions-error-border-color: var(--color-red-360-100-45);
+  --dmn-definitions-error-background-color: var(--color-red-360-100-97);
+  --drill-down-overlay-background-color: var(--color-blue-205-100-50);
+  --drill-down-overlay-color: var(--color-white);
   --drd-font-family-monospace: monospace;
 
   width: 100%;
@@ -56,21 +59,21 @@
 .dmn-definitions > [contenteditable]:hover,
 .dmn-definitions > [contenteditable]:focus {
   padding: 2px;
-  background-color: var(--color-ffffff);
+  background-color: var(--color-white);
   border-radius: 2px;
   border: 1px solid var(--dmn-definitions-focus-border-color);
 }
 
 .dmn-definitions .dmn-definitions-error-message {
-  color: var(--red-base-62);
+  color: var(--dmn-definitions-error-color);
   display: block;
   font-size: 12px;
   margin-top: 6px;
 }
 
 .dmn-definitions .dmn-definitions-id.dmn-definitions-error {
-  border-color: var(--red-base-62);
-  background-color: var(--color-fff0f0);
+  border-color: var(--dmn-definitions-error-border-color);
+  background-color: var(--dmn-definitions-error-background-color);
 }
 
 .djs-container.with-palette .dmn-definitions {
