@@ -1,20 +1,20 @@
 .dmn-decision-table-container {
-  --allowed-values-placeholder-color: var(--color-cccccc);
-  --cell-description-editor-border-color: var(--color-444444);
-  --create-inputs-border-color: var(--color-aaaaaa);
-  --create-inputs-color: var(--color-aaaaaa);
-  --create-inputs-hover-color: var(--color-444444);
-  --context-menu-background-color: var(--color-ffffff);
-  --context-menu-border-color: var(--color-cccccc);
-  --context-menu-color: var(--color-444444);
-  --context-menu-box-shadow-color: var(--color-000000-opacity-10);
-  --context-menu-group-entry-border-color: var(--silver-darken-80);
-  --context-menu-group-entry-disabled-color: var(--color-cccccc);
-  --context-menu-group-entry-hover-background-color: var(--color-efefef);
-  --drag-and-drop-handle-color: var(--color-999999);
-  --drag-and-drop-handle-hover-color: var(--color-444444);
-  --form-control-label-color: var(--color-909090);
-  --hint-color: var(--color-888888);
+  --allowed-values-placeholder-color: var(--color-grey-225-10-75);
+  --cell-description-editor-border-color: var(--color-grey-225-10-15);
+  --create-inputs-border-color: var(--color-grey-225-10-75);
+  --create-inputs-color: var(--color-grey-225-10-75);
+  --create-inputs-hover-color: var(--color-grey-225-10-15);
+  --context-menu-background-color: var(--color-white);
+  --context-menu-border-color: var(--color-grey-225-10-75);
+  --context-menu-color: var(--color-grey-225-10-15);
+  --context-menu-box-shadow-color: var(--color-black-opacity-10);
+  --context-menu-group-entry-border-color: var(--color-grey-225-10-75);
+  --context-menu-group-entry-disabled-color: var(--color-grey-225-10-75);
+  --context-menu-group-entry-hover-background-color: var(--color-grey-225-10-95);
+  --drag-and-drop-handle-color: var(--color-grey-225-10-55);
+  --drag-and-drop-handle-hover-color: var(--color-grey-225-10-15);
+  --form-control-label-color: var(--color-grey-225-10-55);
+  --hint-color: var(--color-grey-225-10-55);
 }
 
 /* simple string edit */
