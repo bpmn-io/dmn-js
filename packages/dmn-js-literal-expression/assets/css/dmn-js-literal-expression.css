@@ -1,20 +1,20 @@
 .dmn-literal-expression-container {
-  --decision-properties-background-color: var(--color-ffffff);
-  --decision-properties-border-color: var(--color-444444);
-  --decision-properties-color: var(--color-444444);
-  --literal-expression-color: var(--color-444444);
-  --literal-expression-properties-border-color: var(--color-444444);
-  --literal-expression-properties-color: var(--color-444444);
-  --powered-by-overlay-background-color: var(--color-000000-opacity-20);
-  --powered-by-overlay-content-background-color: var(--color-ffffff);
-  --powered-by-overlay-content-border-color: var(--color-cccccc);
-  --powered-by-overlay-content-color: var(--color-444444);
-  --textarea-border-color: var(--color-444444);
-  --textarea-color: var(--color-444444);
-  --view-drd-button-background-color: var(--color-ffffff);
-  --view-drd-button-border-color: var(--color-cccccc);
-  --view-drd-button-color: var(--color-444444);
-  --view-drd-button-hover-background-color: var(--color-f6f6f6);
+  --decision-properties-background-color: var(--color-white);
+  --decision-properties-border-color: var(--color-grey-225-10-15);
+  --decision-properties-color: var(--color-grey-225-10-15);
+  --literal-expression-color: var(--color-grey-225-10-15);
+  --literal-expression-properties-border-color: var(--color-grey-225-10-15);
+  --literal-expression-properties-color: var(--color-grey-225-10-15);
+  --powered-by-overlay-background-color: var(--color-black-opacity-20);
+  --powered-by-overlay-content-background-color: var(--color-white);
+  --powered-by-overlay-content-border-color: var(--color-grey-225-10-75);
+  --powered-by-overlay-content-color: var(--color-grey-225-10-15);
+  --textarea-border-color: var(--color-grey-225-10-15);
+  --textarea-color: var(--color-grey-225-10-15);
+  --view-drd-button-background-color: var(--color-white);
+  --view-drd-button-border-color: var(--color-grey-225-10-75);
+  --view-drd-button-color: var(--color-grey-225-10-15);
+  --view-drd-button-hover-background-color: var(--color-grey-225-10-97);
   --literal-expression-font-family: 'Arial', sans-serif;
   --literal-expression-font-family-monospace: monospace;
 
@@ -180,7 +180,7 @@
   flex-direction: row-reverse;
   align-items: center;
   padding: 5px;
-  background-color: var(--color-ffffff);
+  background-color: var(--color-white);
 }
 
 .dmn-literal-expression-container .powered-by__logo {
