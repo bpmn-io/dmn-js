@@ -1,41 +1,43 @@
 .dmn-decision-table-container {
-  --action-icon-color: var(--blue-base-65);
-  --action-icon-hover-background-color: var(--blue-darken-48);
-  --action-icon-hover-color: var(--color-ffffff);
-  --add-column-icon-color: var(--color-ffffff);
-  --add-column-icon-background-color: var(--color-545454);
-  --decision-table-color: var(--color-444444);
-  --decision-table-background-color: var(--color-ffffff);
-  --dmn-expression-language-background-color: var(--blue-darken-48-opacity-30);
-  --dmn-expression-language-color: var(--color-ffffff);
-  --dmn-expression-language-hover-background-color: var(--blue-base-65);
-  --drag-and-drop-drag-color: var(--color-999999);
-  --drag-and-drop-drop-marker-color: var(--color-666666);
-  --hit-policy-explanation-color: var(--color-545454);
-  --powered-by-overlay-background-color: var(--color-000000-opacity-20);
-  --powered-by-overlay-content-background-color: var(--color-ffffff);
-  --powered-by-overlay-content-color: var(--color-444444);
-  --powered-by-overlay-content-border-color: var(--color-cccccc);
-  --simple-mode-button-color: var(--color-444444);
-  --simple-mode-button-background-color: var(--color-f6f6f6);
-  --simple-mode-button-border-color: var(--color-cccccc);
-  --simple-mode-button-box-shadow-color: var(--color-000000-opacity-10);
-  --simple-mode-button-disabled-color: var(--color-cccccc);
-  --table-cell-border-color: var(--color-444444);
-  --table-cell-selected-outline-color: var(--blue-darken-48);
-  --table-foot-add-rule-border-color: var(--color-aaaaaa);
-  --table-foot-add-rule-color: var(--color-aaaaaa);
-  --table-foot-add-rule-hover-border-color: var(--color-444444);
-  --table-foot-add-rule-hover-color: var(--color-444444);
-  --table-head-border-color: var(--color-444444);
-  --table-head-clause-color: var(--color-545454);
-  --table-head-separator-color: var(--color-bfbfbf);
-  --table-head-variable-color: var(--color-545454);
-  --table-row-alternative-background-color: var(--color-f8f8f8);
-  --view-drd-button-background-color: var(--color-ffffff);
-  --view-drd-button-border-color: var(--color-cccccc);
-  --view-drd-button-color: var(--color-444444);
-  --view-drd-button-hover-background-color: var(--color-f6f6f6);
+  --action-icon-color: var(--color-blue-205-100-50);
+  --action-icon-hover-background-color: var(--color-blue-205-100-45);
+  --action-icon-hover-color: var(--color-white);
+  --add-column-icon-color: var(--color-white);
+  --add-column-icon-background-color: var(--color-grey-225-10-35);
+  --decision-table-color: var(--color-grey-225-10-15);
+  --decision-table-background-color: var(--color-white);
+  --decision-table-properties-color: var(--color-grey-225-10-15);
+  --dmn-expression-language-background-color: var(--color-blue-205-100-45-opacity-30);
+  --dmn-expression-language-color: var(--color-white);
+  --dmn-expression-language-hover-background-color: var(--color-blue-205-100-50);
+  --drag-and-drop-drag-color: var(--color-grey-225-10-55);
+  --drag-and-drop-drop-marker-color: var(--color-grey-225-10-35);
+  --hit-policy-explanation-color: var(--color-grey-225-10-35);
+  --powered-by-overlay-background-color: var(--color-black-opacity-20);
+  --powered-by-overlay-content-background-color: var(--color-white);
+  --powered-by-overlay-content-color: var(--color-grey-225-10-15);
+  --powered-by-overlay-content-border-color: var(--color-grey-225-10-75);
+  --simple-mode-button-color: var(--color-grey-225-10-15);
+  --simple-mode-button-background-color: var(--color-grey-225-10-97);
+  --simple-mode-button-border-color: var(--color-grey-225-10-75);
+  --simple-mode-button-box-shadow-color: var(--color-black-opacity-10);
+  --simple-mode-button-disabled-color: var(--color-grey-225-10-75);
+  --table-cell-color: var(--color-grey-225-10-15);
+  --table-cell-border-color: var(--color-grey-225-10-15);
+  --table-cell-selected-outline-color: var(--color-blue-205-100-45);
+  --table-foot-add-rule-border-color: var(--color-grey-225-10-75);
+  --table-foot-add-rule-color: var(--color-grey-225-10-75);
+  --table-foot-add-rule-hover-border-color: var(--color-grey-225-10-15);
+  --table-foot-add-rule-hover-color: var(--color-grey-225-10-15);
+  --table-head-border-color: var(--color-grey-225-10-15);
+  --table-head-clause-color: var(--color-grey-225-10-35);
+  --table-head-separator-color: var(--color-grey-225-10-75);
+  --table-head-variable-color: var(--color-grey-225-10-35);
+  --table-row-alternative-background-color: var(--color-grey-225-10-97);
+  --view-drd-button-background-color: var(--color-white);
+  --view-drd-button-border-color: var(--color-grey-225-10-75);
+  --view-drd-button-color: var(--color-grey-225-10-15);
+  --view-drd-button-hover-background-color: var(--color-grey-225-10-97);
   --decision-table-font-family: 'Arial', sans-serif;
 
   width: 100%;
@@ -114,6 +116,15 @@
 
 .dmn-decision-table-container tbody td {
   border-top: solid 1px var(--table-cell-border-color);
+}
+
+.dmn-decision-table-container th.input-cell,
+.dmn-decision-table-container td.input-cell,
+.dmn-decision-table-container th.output-cell,
+.dmn-decision-table-container td.output-cell,
+.dmn-decision-table-container th.annotation,
+.dmn-decision-table-container td.annotation {
+  color: var(--table-cell-color);
 }
 
 .dmn-decision-table-container th.input-cell + th.output-cell,
@@ -258,6 +269,7 @@
 /* decision table properties */
 .dmn-decision-table-container .decision-table-properties {
   display: flex;
+  color: var(--decision-table-properties-color);
   border: 1px solid var(--table-cell-border-color);
   background-color: var(--decision-table-background-color);
   padding: 10px;
@@ -436,7 +448,7 @@
   align-items: center;
   flex-direction: row-reverse;
   margin: 10px;
-  background-color: var(--color-ffffff);
+  background-color: var(--color-white);
 }
 
 .dmn-decision-table-container .powered-by-overlay {
@@ -607,7 +619,7 @@
   right: -4px;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-bottom: 4px solid var(--color-000000);
+  border-bottom: 4px solid var(--color-black);
   transform: rotate(45deg);
   transform-origin: top;
 }
