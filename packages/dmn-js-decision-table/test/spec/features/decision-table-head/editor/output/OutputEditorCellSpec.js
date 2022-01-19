@@ -5,7 +5,10 @@ import {
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
-import { query as domQuery } from 'min-dom';
+import {
+  query as domQuery,
+  classes as domClasses,
+} from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
@@ -48,7 +51,7 @@ describe('decision-table-head/editor - output', function() {
       // given
       const outputBo = elementRegistry.get('output1').businessObject;
 
-      const outputEl = getControl('.ref-output-name', testContainer);
+      const outputEl = getControl('.dms-input', testContainer);
 
       outputEl.focus();
 
@@ -65,7 +68,7 @@ describe('decision-table-head/editor - output', function() {
       // given
       const outputBo = elementRegistry.get('output1').businessObject;
 
-      const outputEl = getControl('.ref-output-name', testContainer);
+      const outputEl = getControl('.dms-input', testContainer);
 
       outputEl.focus();
 
@@ -74,6 +77,27 @@ describe('decision-table-head/editor - output', function() {
 
       // then
       expect(outputBo.name).not.to.exist;
+    }));
+
+
+    it('validate', inject(function(elementRegistry) {
+
+      // given
+      const outputBo = elementRegistry.get('output1').businessObject;
+
+      const outputEl = getControl('.dms-input', testContainer);
+
+      outputEl.focus();
+
+      // when
+      triggerInputEvent(outputEl, 'foo bar');
+
+      // then
+      expect(domClasses(outputEl).has('invalid')).to.be.true;
+
+      expect(outputBo.name).to.not.equal('foo bar');
+
+      expect(outputEl.value).to.eql('foo bar');
     }));
 
   });

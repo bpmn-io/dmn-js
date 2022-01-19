@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
-import Input from 'dmn-js-shared/lib/components/Input';
+import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
 
 export default class OutputEditor extends Component {
@@ -11,17 +11,16 @@ export default class OutputEditor extends Component {
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
 
-    this.setName = (name) => {
-      name = name || undefined;
-
-      this.handleChange({ name });
-    };
-
     this.setLabel = (label) => {
       label = label || undefined;
 
       this.handleChange({ label });
     };
+
+    this.state = {
+      name: props.name
+    };
+
   }
 
 
@@ -33,12 +32,26 @@ export default class OutputEditor extends Component {
     }
   }
 
+  onNameInput = ({ isValid, value }) => {
+
+    const name = value || undefined;
+
+    this.setState({ name });
+
+    if (isValid) {
+      this.handleChange({ name });
+    }
+  }
+
   render() {
 
     const {
-      name,
       label
     } = this.props;
+
+    const {
+      name
+    } = this.state;
 
     return (
       <div className="context-menu-container ref-output-editor output-edit">
@@ -59,10 +72,17 @@ export default class OutputEditor extends Component {
             }
           </label>
 
-          <Input
+          <ValidatedInput
             className="ref-output-name"
             value={ name || '' }
-            onInput={ this.setName } />
+            onInput={ this.onNameInput }
+            type="text"
+            validate={ value => {
+              if (/\s/g.test(value)) {
+                return 'Output name must not contain whitespaces.';
+              }
+            } }
+          />
         </div>
       </div>
     );
