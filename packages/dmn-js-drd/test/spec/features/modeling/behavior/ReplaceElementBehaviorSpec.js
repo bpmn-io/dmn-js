@@ -74,4 +74,25 @@ describe('features/modeling - replace element', function() {
     }
   ));
 
+
+  it('should select new shape', inject(
+    function(elementRegistry, drdReplace, selection) {
+
+      // given
+      var decision = elementRegistry.get('foobar');
+
+      // when
+      drdReplace.replaceElement(decision, {
+        type: 'dmn:Decision',
+        table: true
+      });
+
+      // then
+      const selected = selection.get();
+
+      expect(selected).to.have.lengthOf(1);
+      expect(selected[0].id).to.eql('foobar');
+    }
+  ));
+
 });
