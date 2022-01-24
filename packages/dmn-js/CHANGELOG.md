@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.1.0
+
+* `FEAT`: use reduced color palette ([#663](https://github.com/bpmn-io/dmn-js/issues/663))
+* `FEAT`: use CSS variables for fonts ([#662](https://github.com/bpmn-io/dmn-js/pull/662))
+* `FIX`: keep selection of a replaced element ([#667](https://github.com/bpmn-io/dmn-js/pull/667))
+* `FIX`: validate definitions ID ([#611](https://github.com/bpmn-io/dmn-js/issues/611))
 
 ## 11.0.2
 
