@@ -12,6 +12,7 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: use CSS variables for fonts ([#662](https://github.com/bpmn-io/dmn-js/pull/662))
 * `FIX`: keep selection of a replaced element ([#667](https://github.com/bpmn-io/dmn-js/pull/667))
 * `FIX`: validate definitions ID ([#611](https://github.com/bpmn-io/dmn-js/issues/611))
+* `DEPS`: update dev dependencies
 
 ## 11.0.2
 
