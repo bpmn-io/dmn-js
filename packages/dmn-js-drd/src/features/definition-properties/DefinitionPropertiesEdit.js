@@ -16,7 +16,7 @@ import {
 
 import {
   validateId
-} from 'dmn-js-shared/src/util/IdsUtil';
+} from 'dmn-js-shared/lib/util/IdsUtil';
 
 
 export default function DefinitionIdEdit(
