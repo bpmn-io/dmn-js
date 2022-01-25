@@ -3,7 +3,6 @@
     "plugin:bpmn-io/es6",
     "plugin:bpmn-io/jsx"
   ],
-  "plugins": [ "import" ],
   "env": {
     "browser": true
   },
@@ -12,15 +11,8 @@
   },
   "rules": {
     "max-len": [ 2, { "code": 90 } ],
-    "import/no-restricted-paths": [ 2, {
-      "basePath": "./packages",
-      "zones": [
-        { "target": "dmn-js-drd/src", "from": ".", "except": [ "dmn-js-drd" ] },
-        { "target": "dmn-js/src", "from": ".", "except": [ "dmn-js" ] },
-        { "target": "dmn-js-literal-expression/src", "from": ".", "except": [ "dmn-js-literal-expression" ] },
-        { "target": "dmn-js-decision-table/src", "from": ".", "except": [ "dmn-js-decision-table" ] },
-        { "target": "dmn-js-shared/src", "from": ".", "except": [ "dmn-js-shared" ]  }
-      ]
-    }]
+    "no-restricted-imports": [ 2, {
+      "patterns": [ "dmn-js/src", "dmn-js-*/src" ]
+    } ]
   }
 }
