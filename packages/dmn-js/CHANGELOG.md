@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.1.2
+
+* `FIX`: fix a broken import ([#671](https://github.com/bpmn-io/dmn-js/pull/671))
+
 ## 11.1.1
 
 * `FIX`: show context pad on top ([#657](https://github.com/bpmn-io/dmn-js/issues/657))
