@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "camunda-dmn-moddle": "^1.0.0",
-    "diagram-js": "^7.2.0",
+    "diagram-js": "^7.8.2",
     "dmn-moddle": "^10.0.0",
     "ids": "^0.2.0",
     "inferno": "~5.6.2",
