@@ -20,9 +20,33 @@ import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 import KeyboardModule from 'src/features/keyboard';
 
 
+const CUSTOM_EXPRESSION_LANGUAGES = [{
+  label: 'FEEL',
+  value: 'feel'
+}, {
+  label: 'JUEL',
+  value: 'juel'
+}, {
+  label: 'JavaScript',
+  value: 'javascript'
+}, {
+  label: 'Groovy',
+  value: 'groovy'
+}, {
+  label: 'Python',
+  value: 'python'
+}, {
+  label: 'JRuby',
+  value: 'jruby'
+}];
+
+
 describe('expression language', function() {
 
   beforeEach(bootstrapModeler(simpleXML, {
+    expressionLanguages: {
+      options: CUSTOM_EXPRESSION_LANGUAGES
+    },
     modules: [
       ContextMenuModule,
       CoreModule,

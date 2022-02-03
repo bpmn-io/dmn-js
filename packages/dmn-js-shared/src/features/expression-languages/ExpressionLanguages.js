@@ -7,21 +7,6 @@ import {
 const EXPRESSION_LANGUAGE_OPTIONS = [{
   label: 'FEEL',
   value: 'feel'
-}, {
-  label: 'JUEL',
-  value: 'juel'
-}, {
-  label: 'JavaScript',
-  value: 'javascript'
-}, {
-  label: 'Groovy',
-  value: 'groovy'
-}, {
-  label: 'Python',
-  value: 'python'
-}, {
-  label: 'JRuby',
-  value: 'jruby'
 }];
 
 /**
