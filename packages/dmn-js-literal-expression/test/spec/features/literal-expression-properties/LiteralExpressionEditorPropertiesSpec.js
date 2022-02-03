@@ -22,9 +22,33 @@ import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
 
 
+const CUSTOM_EXPRESSION_LANGUAGES = [{
+  label: 'FEEL',
+  value: 'feel'
+}, {
+  label: 'JUEL',
+  value: 'juel'
+}, {
+  label: 'JavaScript',
+  value: 'javascript'
+}, {
+  label: 'Groovy',
+  value: 'groovy'
+}, {
+  label: 'Python',
+  value: 'python'
+}, {
+  label: 'JRuby',
+  value: 'jruby'
+}];
+
+
 describe('literal expression properties editor', function() {
 
   beforeEach(bootstrapModeler(literalExpressionXML, {
+    expressionLanguages: {
+      options: CUSTOM_EXPRESSION_LANGUAGES
+    },
     modules: [
       CoreModule,
       LiteralExpressionPropertiesEditorModule,

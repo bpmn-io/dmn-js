@@ -17,6 +17,26 @@ import ModelingModule from 'src/features/modeling';
 import DecisionRulesModule from 'src/features/decision-rules';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 
+const CUSTOM_EXPRESSION_LANGUAGES = [{
+  label: 'FEEL',
+  value: 'feel'
+}, {
+  label: 'JUEL',
+  value: 'juel'
+}, {
+  label: 'JavaScript',
+  value: 'javascript'
+}, {
+  label: 'Groovy',
+  value: 'groovy'
+}, {
+  label: 'Python',
+  value: 'python'
+}, {
+  label: 'JRuby',
+  value: 'jruby'
+}];
+
 
 describe('features/decision-rules', function() {
 
@@ -81,6 +101,9 @@ describe('features/decision-rules', function() {
     describe('no default expression language', function() {
 
       beforeEach(bootstrapModeler(languageExpressionXML, {
+        expressionLanguages: {
+          options: CUSTOM_EXPRESSION_LANGUAGES
+        },
         modules: [
           CoreModule,
           ModelingModule,
@@ -174,6 +197,9 @@ describe('features/decision-rules', function() {
     describe('configured default expression language', function() {
 
       beforeEach(bootstrapModeler(languageExpressionXML, {
+        expressionLanguages: {
+          options: CUSTOM_EXPRESSION_LANGUAGES
+        },
         modules: [
           CoreModule,
           ModelingModule,

@@ -6,6 +6,11 @@ import ExpressionLanguagesModule from 'lib/features/expression-languages';
 const DEFAULT_OPTIONS = [{
   label: 'FEEL',
   value: 'feel'
+}];
+
+const CUSTOM_OPTIONS = [{
+  label: 'FEEL',
+  value: 'feel'
 }, {
   label: 'JUEL',
   value: 'juel'
@@ -65,6 +70,7 @@ describe('ExpressionLanguages', function() {
       // given
       const expressionLanguages = createExpressionLanguages({
         expressionLanguages: {
+          options: CUSTOM_OPTIONS,
           defaults: {
             editor: 'javascript',
             inputCell: 'jruby'
@@ -92,6 +98,9 @@ describe('ExpressionLanguages', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages({
+        expressionLanguages: {
+          options: CUSTOM_OPTIONS,
+        },
         defaultInputExpressionLanguage: 'jruby',
         defaultOutputExpressionLanguage: 'javascript'
       });
@@ -131,10 +140,9 @@ describe('ExpressionLanguages', function() {
     it('should use provided options', () => {
 
       // given
-      const providedOptions = DEFAULT_OPTIONS.slice(1, 3);
       const expressionLanguages = createExpressionLanguages({
         expressionLanguages: {
-          options: providedOptions
+          options: CUSTOM_OPTIONS
         }
       });
 
@@ -142,7 +150,7 @@ describe('ExpressionLanguages', function() {
       const options = expressionLanguages.getAll();
 
       // then
-      expect(options).to.deep.eql(providedOptions);
+      expect(options).to.deep.eql(CUSTOM_OPTIONS);
     });
   });
 });
