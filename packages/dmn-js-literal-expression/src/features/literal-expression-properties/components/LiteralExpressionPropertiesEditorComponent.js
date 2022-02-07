@@ -3,26 +3,6 @@ import { Component } from 'inferno';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
-const TYPE_REF_OPTIONS = [{
-  label: 'string',
-  value: 'string'
-}, {
-  label: 'boolean',
-  value: 'boolean'
-}, {
-  label: 'integer',
-  value: 'integer'
-}, {
-  label: 'long',
-  value: 'long'
-}, {
-  label: 'double',
-  value: 'double'
-}, {
-  label: 'date',
-  value: 'date'
-}];
-
 
 export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
@@ -30,6 +10,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
+    this._dataTypes = context.injector.get('dataTypes');
 
     const decision = this._viewer.getDecision();
 
@@ -69,6 +50,13 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   render() {
     const { name, typeRef } = this.state;
 
+    const typeRefOptions = this._dataTypes.getAll().map(t => {
+      return {
+        label: t,
+        value: t
+      };
+    });
+
     return (
       <div className="literal-expression-properties">
         <table>
@@ -88,7 +76,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
               <div className="dms-fill-row">
                 <InputSelect
                   onChange={ this.setVariableType }
-                  options={ TYPE_REF_OPTIONS }
+                  options={ typeRefOptions }
                   value={ typeRef }
                   className="variable-type-select dms-block" />
               </div>
