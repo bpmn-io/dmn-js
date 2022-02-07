@@ -4,15 +4,6 @@ import { is, isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
-const TYPES = [
-  'string',
-  'boolean',
-  'integer',
-  'long',
-  'double',
-  'date'
-];
-
 
 export default class TypeRefCellContextMenu extends Component {
 
@@ -21,6 +12,7 @@ export default class TypeRefCellContextMenu extends Component {
 
     this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
+    this._dataTypes = context.injector.get('dataTypes');
   }
 
   onTypeChange = (value) => {
@@ -60,7 +52,7 @@ export default class TypeRefCellContextMenu extends Component {
         element
     ).typeRef;
 
-    const typeRefOptions = TYPES.map(t => {
+    const typeRefOptions = this._dataTypes.getAll().map(t => {
       return {
         label: t,
         value: t

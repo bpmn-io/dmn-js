@@ -9,7 +9,7 @@ export default class SimpleNumberEdit {
       const typeRef = getTypeRef(element);
 
       return (isInput(element.col) || isOutput(element.col))
-        && (typeRef === 'integer' || typeRef === 'long' || typeRef === 'double');
+        && isNumber(typeRef);
     });
 
     components.onGetComponent('context-menu', (context = {}) => {
@@ -49,6 +49,13 @@ function getTypeRef(element) {
   }
 }
 
+const numberTypes = [
+  'number',
+  'integer',
+  'long',
+  'double'
+];
+
 function isNumber(typeRef) {
-  return typeRef === 'integer' || typeRef === 'long' || typeRef === 'double';
+  return numberTypes.includes(typeRef);
 }

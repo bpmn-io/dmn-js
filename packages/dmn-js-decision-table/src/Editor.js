@@ -6,6 +6,7 @@ import contextMenuModule from 'table-js/lib/features/context-menu';
 import copyCutPasteModule from './features/copy-cut-paste';
 import copyCutPasteKeybindingsModule from './features/copy-cut-paste/key-bindings';
 import createInputsModule from './features/create-inputs';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 import decisionTableContextMenu from './features/context-menu';
 import decisionTableEditorActionsModule from './features/editor-actions';
 import decisionTableHeadEditorModule from './features/decision-table-head/editor';
@@ -48,6 +49,7 @@ export default class Editor extends Viewer {
       copyCutPasteModule,
       copyCutPasteKeybindingsModule,
       createInputsModule,
+      dataTypesModule,
       decisionTableContextMenu,
       decisionTableEditorActionsModule,
       decisionTableHeadEditorModule,

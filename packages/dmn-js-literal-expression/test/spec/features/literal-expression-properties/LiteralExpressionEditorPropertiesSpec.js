@@ -6,6 +6,7 @@ import {
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
+import DataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 import {
   query as domQuery
@@ -46,6 +47,14 @@ const CUSTOM_EXPRESSION_LANGUAGES = [{
 
 describe('literal expression properties editor', function() {
 
+  const testModules = [
+    CoreModule,
+    LiteralExpressionPropertiesEditorModule,
+    ModelingModule,
+    ExpressionLanguagesModule,
+    DataTypesModule
+  ];
+
   let testContainer;
 
   beforeEach(function() {
@@ -56,12 +65,7 @@ describe('literal expression properties editor', function() {
   describe('basics', function() {
 
     beforeEach(bootstrapModeler(literalExpressionXML, {
-      modules: [
-        CoreModule,
-        LiteralExpressionPropertiesEditorModule,
-        ExpressionLanguagesModule,
-        ModelingModule
-      ],
+      modules: testModules,
       debounceInput: false
     }));
 
@@ -144,12 +148,7 @@ describe('literal expression properties editor', function() {
   describe('non-default expression language', function() {
 
     beforeEach(bootstrapModeler(nonDefaultExpressionLanguageXML, {
-      modules: [
-        CoreModule,
-        LiteralExpressionPropertiesEditorModule,
-        ExpressionLanguagesModule,
-        ModelingModule
-      ],
+      modules: testModules,
       debounceInput: false
     }));
 
@@ -177,12 +176,7 @@ describe('literal expression properties editor', function() {
       expressionLanguages: {
         options: CUSTOM_EXPRESSION_LANGUAGES
       },
-      modules: [
-        CoreModule,
-        LiteralExpressionPropertiesEditorModule,
-        ExpressionLanguagesModule,
-        ModelingModule
-      ],
+      modules: testModules,
       debounceInput: false
     }));
 
