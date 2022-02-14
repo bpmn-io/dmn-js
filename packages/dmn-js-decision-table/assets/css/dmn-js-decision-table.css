@@ -508,6 +508,10 @@
   color: var(--simple-mode-button-disabled-olor);
 }
 
+.dmn-decision-table-container .dms-input-duration-edit-row {
+  align-items: flex-start;
+}
+
 /* end simple mode  */
 
 /* badges */
