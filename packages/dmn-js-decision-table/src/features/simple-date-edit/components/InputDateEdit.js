@@ -168,7 +168,7 @@ export default class InputDateEdit extends Component {
     return (
       <div class="context-menu-container simple-date-edit">
 
-        <h3 class="dms-heading">Edit Date</h3>
+        <h3 class="dms-heading">Edit date</h3>
 
         <div className="dms-fill-row">
           <InputSelect
@@ -181,8 +181,8 @@ export default class InputDateEdit extends Component {
         <h4 class="dms-heading">
           {
             type === BETWEEN
-              ? 'Edit Start Date'
-              : 'Set Date'
+              ? 'Edit start date'
+              : 'Set date'
           }
         </h4>
 
@@ -204,7 +204,7 @@ export default class InputDateEdit extends Component {
         {
           type === BETWEEN
             && <h4 class="dms-heading">
-              Edit End Date
+              Edit end date
             </h4>
         }
 

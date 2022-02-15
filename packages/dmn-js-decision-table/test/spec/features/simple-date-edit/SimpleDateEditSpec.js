@@ -82,7 +82,7 @@ describe('simple date edit', function() {
 
       // then
       expect(inputEntry1.businessObject.text).to
-        .equal('< date and time("2018-01-25T00:00:00")');
+        .equal('< date("2018-01-25")');
     }));
 
 
@@ -96,11 +96,11 @@ describe('simple date edit', function() {
       const input = domQuery('.start-date-input .dms-input', simpleDateEdit);
 
       // when
-      triggerInputEvent(input, '2000-01-01T00:00:00');
+      triggerInputEvent(input, '2000-01-01');
 
       // then
       expect(inputEntry1.businessObject.text).to
-        .equal('date and time("2000-01-01T00:00:00")');
+        .equal('date("2000-01-01")');
     }));
 
 
@@ -118,7 +118,7 @@ describe('simple date edit', function() {
 
       // then
       expect(inputEntry1.businessObject.text).to
-        .equal('date and time("2018-01-25T00:00:00")');
+        .equal('date("2018-01-25")');
     }));
 
 
@@ -136,7 +136,7 @@ describe('simple date edit', function() {
 
       // then
       expect(inputEntry1.businessObject.text).to
-        .equal(`date and time("${ getSampleDate() }")`);
+        .equal(`date("${ getSampleDate() }")`);
     }));
 
 
@@ -150,13 +150,13 @@ describe('simple date edit', function() {
       const input = domQuery('.end-date-input .dms-input', simpleDateEdit);
 
       // when
-      triggerInputEvent(input, '2000-01-01T00:00:00');
+      triggerInputEvent(input, '2000-01-01');
 
       // then
       expect(inputEntry7.businessObject.text).to
 
         // eslint-disable-next-line
-        .equal('[date and time("2018-01-25T00:00:00")..date and time("2000-01-01T00:00:00")]');
+        .equal('[date("2018-01-25")..date("2000-01-01")]');
     }));
 
 
@@ -176,7 +176,7 @@ describe('simple date edit', function() {
       expect(inputEntry7.businessObject.text).to
 
         // eslint-disable-next-line
-        .equal('[date and time("2018-01-25T00:00:00")..date and time("2018-01-25T23:59:59")]');
+        .equal('[date("2018-01-25")..date("2018-01-25")]');
     }));
 
 
@@ -196,7 +196,7 @@ describe('simple date edit', function() {
       expect(inputEntry7.businessObject.text).to
 
         // eslint-disable-next-line
-        .equal(`[date and time("2018-01-25T00:00:00")..date and time("${ getSampleDate() }")]`);
+        .equal(`[date("2018-01-25")..date("${ getSampleDate() }")]`);
     }));
 
 
@@ -233,7 +233,7 @@ describe('simple date edit', function() {
         expect(inputEntry8.businessObject.text).to
 
           // eslint-disable-next-line
-          .equal(`[date and time("${ getSampleDate() }")..date and time("${ getSampleDate() }")]`);
+          .equal(`[date("${ getSampleDate() }")..date("${ getSampleDate() }")]`);
       }));
 
     });
@@ -263,11 +263,11 @@ describe('simple date edit', function() {
       const input = domQuery('.dms-input', simpleDateEdit);
 
       // when
-      triggerInputEvent(input, '2000-01-01T00:00:00');
+      triggerInputEvent(input, '2000-01-01');
 
       // then
       expect(outputEntry1.businessObject.text).to
-        .equal('date and time("2000-01-01T00:00:00")');
+        .equal('date("2000-01-01")');
     }));
 
 
@@ -285,7 +285,7 @@ describe('simple date edit', function() {
 
       // then
       expect(outputEntry1.businessObject.text).to
-        .equal('date and time("2018-01-25T00:00:00")');
+        .equal('date("2018-01-25")');
     }));
 
 
@@ -303,7 +303,7 @@ describe('simple date edit', function() {
 
       // then
       expect(outputEntry1.businessObject.text).to
-        .equal(`date and time("${ getSampleDate() }")`);
+        .equal(`date("${ getSampleDate() }")`);
     }));
 
   });
