@@ -11,16 +11,16 @@
       <rule id="rule1">
         <description>Bronze is really not that good</description>
         <inputEntry id="inputEntry1">
-          <text>date and time("2018-01-25T00:00:00")</text>
+          <text>date("2018-01-25")</text>
         </inputEntry>
         <outputEntry id="outputEntry1">
-          <text>date and time("2018-01-25T00:00:00")</text>
+          <text>date("2018-01-25")</text>
         </outputEntry>
       </rule>
       <rule id="rule2">
         <description>Silver is actually quite okay</description>
         <inputEntry id="inputEntry3">
-          <text>&lt; date and time("2018-01-25T00:00:00")</text>
+          <text>&lt; date("2018-01-25")</text>
         </inputEntry>
         <outputEntry id="outputEntry3">
           <text>foo</text>
@@ -29,7 +29,7 @@
       <rule id="rule3">
         <description>Same here</description>
         <inputEntry id="inputEntry5">
-          <text>&gt; date and time("2018-01-25T00:00:00")</text>
+          <text>&gt; date("2018-01-25")</text>
         </inputEntry>
         <outputEntry id="outputEntry5">
           <text></text>
@@ -38,7 +38,7 @@
       <rule id="rule4">
         <description>Gold is really good, try even harder next time though</description>
         <inputEntry id="inputEntry7">
-          <text>[date and time("2018-01-25T00:00:00")..date and time("2018-01-25T23:59:59")]</text>
+          <text>[date("2018-01-25")..date("2018-01-25")]</text>
         </inputEntry>
         <outputEntry id="outputEntry7">
           <text></text>

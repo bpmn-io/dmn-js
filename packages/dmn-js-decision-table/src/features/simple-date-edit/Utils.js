@@ -1,12 +1,12 @@
-const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d$/;
+const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}$/;
 
 // eslint-disable-next-line
-const BETWEEN_DATE_REGEX = /^\[date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d)"\)..date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d)"/;
+const BETWEEN_DATE_REGEX = /^\[date\("(\d{4}(?:-\d\d){2})"\)..date\("(\d{4}(?:-\d\d){2})"/;
 
 // eslint-disable-next-line
-const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d)"\)/;
+const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date\("(\d{4}(?:-\d\d){2})"\)/;
 
-const EXACT_DATE_REGEX = /^date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d)"\)$/;
+const EXACT_DATE_REGEX = /^date\("(\d{4}(?:-\d\d){2})"\)$/;
 
 const EXACT = 'exact',
       BEFORE = 'before',
@@ -15,19 +15,19 @@ const EXACT = 'exact',
 
 export function validateISOString(string) {
   if (!ISO_DATE_REGEX.test(string.trim())) {
-    return 'Date must match pattern yyyy-MM-ddTHH:mm:ss.';
+    return 'Date must match pattern yyyy-MM-dd.';
   }
 }
 
 export function getDateString(type, dates) {
   if (type === EXACT) {
-    return `date and time("${ dates[0] }")`;
+    return `date("${ dates[0] }")`;
   } else if (type === BEFORE) {
-    return `< date and time("${ dates[0] }")`;
+    return `< date("${ dates[0] }")`;
   } else if (type === AFTER) {
-    return `> date and time("${ dates[0] }")`;
+    return `> date("${ dates[0] }")`;
   } else if (type === BETWEEN) {
-    return `[date and time("${ dates[0] }")..date and time("${ dates[1] }")]`;
+    return `[date("${ dates[0] }")..date("${ dates[1] }")]`;
   }
 }
 
@@ -36,7 +36,7 @@ export function getSampleDate() {
 
   date.setUTCHours(0, 0, 0, 0);
 
-  return date.toISOString().slice(0,-5);
+  return date.toISOString().slice(0, 10);
 }
 
 export function parseString(string) {

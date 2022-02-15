@@ -46,7 +46,7 @@ export default class OutputDateEdit extends Component {
       date
     });
 
-    this.editCell(element.businessObject, `date and time("${ date }")`);
+    this.editCell(element.businessObject, `date("${ date }")`);
   }
 
   onInput({ isValid, value }) {
@@ -57,7 +57,7 @@ export default class OutputDateEdit extends Component {
         date: value
       });
 
-      this.debouncedEditCell(element.businessObject, `date and time("${ value }")`);
+      this.debouncedEditCell(element.businessObject, `date("${ value }")`);
 
     }
   }
@@ -68,9 +68,9 @@ export default class OutputDateEdit extends Component {
     return (
       <div class="context-menu-container simple-date-edit">
 
-        <h3 class="dms-heading">Edit Date</h3>
+        <h3 class="dms-heading">Edit date</h3>
 
-        <h4 class="dms-heading">Set Date</h4>
+        <h4 class="dms-heading">Set date</h4>
 
         <div>
           <ValidatedInput
