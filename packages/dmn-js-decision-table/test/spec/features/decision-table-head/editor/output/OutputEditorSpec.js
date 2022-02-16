@@ -46,7 +46,6 @@ class Root extends Component {
     this.state = {
       text: '',
       expressionLanguage: '',
-      inputVariable: null,
       label: null
     };
   }

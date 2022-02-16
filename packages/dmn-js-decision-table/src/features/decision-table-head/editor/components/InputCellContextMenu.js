@@ -31,16 +31,11 @@ export default class InputCellContextMenu extends Component {
     }
 
     const {
-      inputVariable,
       label,
       ...inputExpressionProperties
     } = unsaved;
 
     var changes = { };
-
-    if ('inputVariable' in unsaved) {
-      changes.inputVariable = inputVariable;
-    }
 
     if ('label' in unsaved) {
       changes.label = label;
@@ -92,7 +87,6 @@ export default class InputCellContextMenu extends Component {
         }
         expressionLanguages={ expressionLanguages }
         defaultExpressionLanguage={ defaultLanguage }
-        inputVariable={ this.getValue('inputVariable') }
         label={ this.getValue('label') }
         text={ this.getValue('text') }
         onChange={ this.handleChange } />

@@ -101,50 +101,6 @@ describe('decision-table-head/editor - input', function() {
   });
 
 
-  describe('should edit input variable', function() {
-
-    beforeEach(function() {
-      openEditor('input1');
-    });
-
-
-    it('set', inject(function(elementRegistry) {
-
-      // given
-      const inputBo = elementRegistry.get('input1').businessObject;
-
-      const inputEl = getControl('.ref-input-variable', testContainer);
-
-      inputEl.focus();
-
-      // when
-      triggerInputEvent(inputEl, 'foo bar');
-
-      // then
-      expect(inputBo.get('camunda:inputVariable')).to.equal('foo bar');
-    }));
-
-
-    it('unset', inject(function(elementRegistry) {
-
-      // given
-      const inputBo = elementRegistry.get('input1').businessObject;
-
-      const inputEl = getControl('.ref-input-variable', testContainer);
-
-      inputEl.focus();
-
-      // when
-      triggerInputEvent(inputEl, 'foo bar');
-      triggerInputEvent(inputEl, '');
-
-      // then
-      expect(inputBo.get('camunda:inputVariable')).not.to.exist;
-    }));
-
-  });
-
-
   describe('should edit input label', function() {
 
     beforeEach(function() {
