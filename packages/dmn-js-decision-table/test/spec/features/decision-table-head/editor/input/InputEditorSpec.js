@@ -63,7 +63,6 @@ class Root extends Component {
         value: 'feel',
         label: 'FEEL'
       },
-      inputVariable: null,
       label: null
     };
   }

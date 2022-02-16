@@ -1,7 +1,6 @@
 import { Component } from 'inferno';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
-import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 export default class InputEditor extends Component {
@@ -45,15 +44,6 @@ export default class InputEditor extends Component {
 
       this.handleChange({ label });
     };
-
-    this.handleInputVariableChange = (value) => {
-
-      // default to <undefined> for empty string
-      var inputVariable = value || undefined;
-
-      this.handleChange({ inputVariable });
-    };
-
   }
 
   handleChange(changes) {
@@ -69,7 +59,6 @@ export default class InputEditor extends Component {
     const {
       expressionLanguage,
       expressionLanguages,
-      inputVariable,
       label,
       text
     } = this.props;
@@ -117,20 +106,6 @@ export default class InputEditor extends Component {
             value={ expressionLanguage || '' }
             onChange={ this.handleLanguageChange }
             options={ expressionLanguages } />
-        </div>
-
-        <div className="dms-form-control">
-          <label className="dms-label">
-            {
-              this.translate('Input Variable')
-            }
-          </label>
-
-          <Input
-            className="ref-input-variable"
-            value={ inputVariable || '' }
-            onInput={ this.handleInputVariableChange }
-            placeholder={ this.translate('cellInput') } />
         </div>
       </div>
     );
