@@ -2,8 +2,6 @@ import EventBus from 'diagram-js/lib/core/EventBus';
 
 import DmnModdle from 'dmn-moddle';
 
-import CamundaModdle from 'camunda-dmn-moddle/resources/camunda.json';
-
 import {
   domify,
   query as domQuery,
@@ -671,9 +669,7 @@ export default class Manager {
   }
 
   _createModdle(options) {
-    return new DmnModdle(assign({
-      camunda: CamundaModdle
-    }, options.moddleExtensions));
+    return new DmnModdle(options.moddleExtensions);
   }
 
   /**
