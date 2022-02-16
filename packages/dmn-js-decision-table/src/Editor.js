@@ -25,6 +25,7 @@ import selectionModule from 'table-js/lib/features/selection';
 import simpleModeModule from './features/simple-mode';
 import simpleBooleanEditModule from './features/simple-boolean-edit';
 import simpleDateEditModule from './features/simple-date-edit';
+import simpleDateTimeEditModule from './features/simple-date-time-edit';
 import simpleDurationEditModule from './features/simple-duration-edit';
 import simpleNumberEditModule from './features/simple-number-edit';
 import simpleStringEditModule from './features/simple-string-edit';
@@ -70,6 +71,7 @@ export default class Editor extends Viewer {
       simpleModeModule,
       simpleBooleanEditModule,
       simpleDateEditModule,
+      simpleDateTimeEditModule,
       simpleDurationEditModule,
       simpleNumberEditModule,
       simpleStringEditModule
