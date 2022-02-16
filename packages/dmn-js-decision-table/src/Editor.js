@@ -29,6 +29,7 @@ import simpleDateTimeEditModule from './features/simple-date-time-edit';
 import simpleDurationEditModule from './features/simple-duration-edit';
 import simpleNumberEditModule from './features/simple-number-edit';
 import simpleStringEditModule from './features/simple-string-edit';
+import simpleTimeEditModule from './features/simple-time-edit';
 import cellSelectionModule from './features/cell-selection';
 import columnResizeModule from './features/column-resize';
 
@@ -74,7 +75,8 @@ export default class Editor extends Viewer {
       simpleDateTimeEditModule,
       simpleDurationEditModule,
       simpleNumberEditModule,
-      simpleStringEditModule
+      simpleStringEditModule,
+      simpleTimeEditModule
     ];
   }
 
