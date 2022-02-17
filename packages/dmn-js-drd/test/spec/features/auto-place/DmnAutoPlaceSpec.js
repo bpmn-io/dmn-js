@@ -3,10 +3,10 @@ import {
   inject
 } from 'test/TestHelper';
 
-import autoPlaceModule from 'lib/features/auto-place';
-import coreModule from 'lib/core';
-import labelEditingModule from 'lib/features/label-editing';
-import modelingModule from 'lib/features/modeling';
+import autoPlaceModule from 'src/features/auto-place';
+import coreModule from 'src/core';
+import labelEditingModule from 'src/features/label-editing';
+import modelingModule from 'src/features/modeling';
 import selectionModule from 'diagram-js/lib/features/selection';
 
 import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';

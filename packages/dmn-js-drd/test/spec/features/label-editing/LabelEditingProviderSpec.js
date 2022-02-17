@@ -4,7 +4,7 @@ import {
   inject
 } from 'test/TestHelper';
 
-import autoPlaceModule from 'lib/features/auto-place';
+import autoPlaceModule from 'src/features/auto-place';
 import coreModule from 'src/core';
 import createModule from 'diagram-js/lib/features/create';
 import draggingModule from 'diagram-js/lib/features/dragging';

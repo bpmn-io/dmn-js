@@ -6,8 +6,8 @@ import {
 import connectionPreviewModule from 'diagram-js/lib/features/connection-preview';
 import bendpointsModule from 'diagram-js/lib/features/bendpoints';
 import connectModule from 'diagram-js/lib/features/connect';
-import coreModule from 'lib/core';
-import modelingModule from 'lib/features/modeling';
+import coreModule from 'src/core';
+import modelingModule from 'src/features/modeling';
 import createModule from 'diagram-js/lib/features/create';
 
 import {
