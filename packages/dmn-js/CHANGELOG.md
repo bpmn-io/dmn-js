@@ -6,6 +6,29 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.0.0
+
+* `FEAT`: remove Camunda Platform-specific features ([#673](https://github.com/bpmn-io/dmn-js/issues/673))
+* `FEAT`: drop `camunda:inputVariable` support ([#680](https://github.com/bpmn-io/dmn-js/issues/680))
+* `FEAT`: make data types configurable ([#677](https://github.com/bpmn-io/dmn-js/issues/677))
+* `FEAT`: use FEEL data types ([#674](https://github.com/bpmn-io/dmn-js/issues/674))
+* `FEAT`: allow to change expression language only when other option available ([#686](https://github.com/bpmn-io/dmn-js/issues/686))
+* `FEAT`: drop Camunda Platform expression languages ([#675](https://github.com/bpmn-io/dmn-js/issues/675))
+* `DEPS`: drop `camunda-dmn-moddle` ([#682](https://github.com/bpmn-io/dmn-js/issues/682))
+
+### Breaking Changes
+
+* `camunda` namespace moddle extension is no longer part of the package.
+  Consider using [camunda/camunda-dmn-js](https://github.com/camunda/camunda-dmn-js) to support Camunda Platform.
+* The input variable field is removed. Use [camunda/camunda-dmn-js](https://github.com/camunda/camunda-dmn-js)
+  to support adding and modifying `camunda:inputVariable`.
+* The only expression language selectable per default is FEEL.
+  To change the list, pass respective ELs via `expressionLanguages`
+  configuration.
+* Types `integer`, `double`, and `long` have been replaced with `number`.
+* Simple edit for `date` uses now FEEL date. For FEEL `date and time`,
+  use `dateTime` type.
+
 ## 11.1.2
 
 * `FIX`: fix a broken import ([#671](https://github.com/bpmn-io/dmn-js/pull/671))
