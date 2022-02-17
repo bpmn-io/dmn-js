@@ -1,6 +1,6 @@
 /* global sinon */
 
-import DrdTreeWalker from 'lib/import/DrdTreeWalker';
+import DrdTreeWalker from 'src/import/DrdTreeWalker';
 
 import DmnModdle from 'dmn-moddle';
 

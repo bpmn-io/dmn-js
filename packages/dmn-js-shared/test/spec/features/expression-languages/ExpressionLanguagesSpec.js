@@ -1,6 +1,6 @@
 import { bootstrap, getViewerJS } from '../../base/viewer/TestHelper';
 
-import ExpressionLanguagesModule from 'lib/features/expression-languages';
+import ExpressionLanguagesModule from 'src/features/expression-languages';
 
 
 const DEFAULT_OPTIONS = [{
