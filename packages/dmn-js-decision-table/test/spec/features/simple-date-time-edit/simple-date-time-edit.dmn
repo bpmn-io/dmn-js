@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.0.0-alpha.0">
   <decision id="decision" name="Check Order">
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
@@ -32,7 +32,7 @@
           <text>&gt; date and time("2018-01-25T00:00:00Z")</text>
         </inputEntry>
         <outputEntry id="outputEntry5">
-          <text></text>
+          <text>date and time("2018-01-25T10:31:10+01:00")</text>
         </outputEntry>
       </rule>
       <rule id="rule4">
@@ -41,7 +41,7 @@
           <text>[date and time("2018-01-25T00:00:00Z")..date and time("2018-01-25T23:59:59Z")]</text>
         </inputEntry>
         <outputEntry id="outputEntry7">
-          <text></text>
+          <text>date and time("2018-01-25T08:00:00@Europe/Berlin")</text>
         </outputEntry>
       </rule>
       <rule id="rule5">

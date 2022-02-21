@@ -21,10 +21,38 @@ describe('simple time edit - utils', function() {
 
   describe('validateISOString', function() {
 
-    it('should be ISO time string', function() {
+    it('should be ISO time string (UTC)', function() {
 
       // then
       expect(validateISOString('08:00:00Z')).to.not.exist;
+    });
+
+
+    it('should be ISO time string (positive offset)', function() {
+
+      // then
+      expect(validateISOString('08:00:00+01:00')).to.not.exist;
+    });
+
+
+    it('should be ISO time string (negative offset)', function() {
+
+      // then
+      expect(validateISOString('08:00:00-01:00')).to.not.exist;
+    });
+
+
+    it('should be ISO time string (location time zone)', function() {
+
+      // then
+      expect(validateISOString('08:00:00@Europe/Berlin')).to.not.exist;
+    });
+
+
+    it('should be ISO time string (local time)', function() {
+
+      // then
+      expect(validateISOString('08:00:00')).to.not.exist;
     });
 
 
@@ -32,14 +60,14 @@ describe('simple time edit - utils', function() {
 
       // then
       expect(validateISOString('foo'))
-        .to.equal('Time must match pattern hh:mm:ssZ.');
+        .to.equal('Time must match pattern hh:mm:ss[time zone].');
     });
 
     it('empty string should not be ISO time string', function() {
 
       // then
       expect(validateISOString(''))
-        .to.equal('Time must match pattern hh:mm:ssZ.');
+        .to.equal('Time must match pattern hh:mm:ss[time zone].');
     });
 
   });
@@ -56,22 +84,22 @@ describe('simple time edit - utils', function() {
 
     it('before time', expectTimeString(
       'before',
-      [ '08:00:00Z', '' ],
-      '< time("08:00:00Z")'
+      [ '08:00:00@Europe/Berlin', '' ],
+      '< time("08:00:00@Europe/Berlin")'
     ));
 
 
     it('after time', expectTimeString(
       'after',
-      [ '08:00:00Z', '' ],
-      '> time("08:00:00Z")'
+      [ '08:00:00+01:00', '' ],
+      '> time("08:00:00+01:00")'
     ));
 
 
     it('between times', expectTimeString(
       'between',
-      [ '08:00:00Z', '08:00:00Z' ],
-      '[time("08:00:00Z")..time("08:00:00Z")]'
+      [ '08:00:00-02:00', '08:00:00Z' ],
+      '[time("08:00:00-02:00")..time("08:00:00Z")]'
     ));
 
   });
@@ -79,9 +107,9 @@ describe('simple time edit - utils', function() {
 
   describe('parseString', function() {
 
-    it('exact', expectParsed('time("08:00:00Z")', {
+    it('exact', expectParsed('time("08:00:00")', {
       type: 'exact',
-      time: '08:00:00Z'
+      time: '08:00:00'
     }));
 
 

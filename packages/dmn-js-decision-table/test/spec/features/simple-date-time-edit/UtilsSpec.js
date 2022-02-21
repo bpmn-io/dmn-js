@@ -21,10 +21,38 @@ describe('simple date edit - utils', function() {
 
   describe('validateISOString', function() {
 
-    it('should be ISO date string', function() {
+    it('should be ISO date string (UTC)', function() {
 
       // then
       expect(validateISOString('2000-01-01T12:00:00Z')).to.not.exist;
+    });
+
+
+    it('should be ISO date string (positive offset)', function() {
+
+      // then
+      expect(validateISOString('2000-01-01T12:00:00+01:00')).to.not.exist;
+    });
+
+
+    it('should be ISO date string (negative offset)', function() {
+
+      // then
+      expect(validateISOString('2000-01-01T12:00:00-05:30')).to.not.exist;
+    });
+
+
+    it('should be ISO date string (location time zone)', function() {
+
+      // then
+      expect(validateISOString('2000-01-01T12:00:00@Europe/Berlin')).to.not.exist;
+    });
+
+
+    it('should be ISO date string (local time)', function() {
+
+      // then
+      expect(validateISOString('2000-01-01T12:00:00')).to.not.exist;
     });
 
 
@@ -32,14 +60,15 @@ describe('simple date edit - utils', function() {
 
       // then
       expect(validateISOString('foo'))
-        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ssZ.');
+        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone].');
     });
+
 
     it('empty string should not be ISO date string', function() {
 
       // then
       expect(validateISOString(''))
-        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ssZ.');
+        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone].');
     });
 
   });
