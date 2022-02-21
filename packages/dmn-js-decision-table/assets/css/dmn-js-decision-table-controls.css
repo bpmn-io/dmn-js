@@ -90,10 +90,6 @@
   margin: 8px;
 }
 
-.dmn-decision-table-container .context-menu p {
-  margin: 10px 0;
-}
-
 .dmn-decision-table-container .context-menu .context-menu-flex {
   display: flex;
   flex-direction: column;
@@ -190,12 +186,6 @@
 
 .dmn-decision-table-container .context-menu .context-menu-group .context-menu-entry-set-expression-language .expression-language {
   margin-top: 8px;
-}
-
-.dmn-decision-table-container p.dms-hint {
-  font-size: 0.85em;
-  margin-top: 5px;
-  color: var(--hint-color);
 }
 
 /* drag and drop */

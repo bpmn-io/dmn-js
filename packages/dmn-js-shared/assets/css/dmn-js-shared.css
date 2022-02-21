@@ -86,7 +86,13 @@
   font-weight: bold;
 }
 
-p.dms-hint button {
+.dms-hint {
+  font-size: 12px;
+  margin-top: 5px;
+  color: var(--hint-color);
+}
+
+.dms-hint button {
   color: var(--hint-button-color);
   text-decoration: none;
   display: inline;
@@ -98,11 +104,11 @@ p.dms-hint button {
   background: none;
 }
 
-p.dms-hint button:hover {
+.dms-hint button:hover {
   color: var(--hint-button-hover-color);
 }
 
-p.dms-validation-warning {
+.dms-validation-warning {
   color: var(--hint-invalid-color);
 }
 
