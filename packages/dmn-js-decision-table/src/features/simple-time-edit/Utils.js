@@ -1,12 +1,12 @@
-const ISO_TIME_REGEX = /^(?:\d\d:){2}\d\dZ$/;
+const ISO_TIME_REGEX = /^(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?$/;
 
 // eslint-disable-next-line
-const BETWEEN_TIME_REGEX = /^\[time\("((?:\d\d:){2}\d\dZ)"\)..time\("((?:\d\d:){2}\d\dZ)"/;
+const BETWEEN_TIME_REGEX = /^\[time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)..time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"/;
 
 // eslint-disable-next-line
-const BEFORE_AFTER_TIME_REGEX = /^(<|>)\s*time\("((?:\d\d:){2}\d\dZ)"\)/;
+const BEFORE_AFTER_TIME_REGEX = /^(<|>)\s*time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)/;
 
-const EXACT_TIME_REGEX = /^time\("((?:\d\d:){2}\d\dZ)"\)$/;
+const EXACT_TIME_REGEX = /^time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)$/;
 
 const EXACT = 'exact',
       BEFORE = 'before',
@@ -15,7 +15,7 @@ const EXACT = 'exact',
 
 export function validateISOString(string) {
   if (!ISO_TIME_REGEX.test(string.trim())) {
-    return 'Time must match pattern hh:mm:ssZ.';
+    return 'Time must match pattern hh:mm:ss[time zone].';
   }
 }
 

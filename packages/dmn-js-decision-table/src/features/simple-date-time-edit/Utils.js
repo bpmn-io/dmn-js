@@ -1,12 +1,13 @@
-const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\dZ$/;
+const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?$/;
 
 // eslint-disable-next-line
-const BETWEEN_DATE_REGEX = /^\[date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\dZ)"\)..date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\dZ)"/;
+const BETWEEN_DATE_REGEX = /^\[date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)..date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"/;
 
 // eslint-disable-next-line
-const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\dZ)"\)/;
+const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)/;
 
-const EXACT_DATE_REGEX = /^date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\dZ)"\)$/;
+// eslint-disable-next-line
+const EXACT_DATE_REGEX = /^date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)$/;
 
 const EXACT = 'exact',
       BEFORE = 'before',
@@ -15,7 +16,7 @@ const EXACT = 'exact',
 
 export function validateISOString(string) {
   if (!ISO_DATE_REGEX.test(string.trim())) {
-    return 'Date and time must match pattern yyyy-MM-ddTHH:mm:ssZ.';
+    return 'Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone].';
   }
 }
 
