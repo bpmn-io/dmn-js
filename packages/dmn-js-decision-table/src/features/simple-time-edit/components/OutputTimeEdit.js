@@ -49,17 +49,14 @@ export default class OutputTimeEdit extends Component {
     this.editCell(element.businessObject, `time("${ date }")`);
   }
 
-  onInput({ isValid, value }) {
-    if (isValid) {
-      const { element } = this.props.context;
+  onInput({ value }) {
+    const { element } = this.props.context;
 
-      this.setState({
-        date: value
-      });
+    this.setState({
+      date: value
+    });
 
-      this.debouncedEditCell(element.businessObject, `time("${ value }")`);
-
-    }
+    this.debouncedEditCell(element.businessObject, `time("${ value }")`);
   }
 
   render() {

@@ -104,7 +104,7 @@ describe('simple time edit', function() {
     }));
 
 
-    it('should validate start time', inject(function(elementRegistry) {
+    it('should commit invalid start time', inject(function(elementRegistry) {
 
       // given
       const inputEntry1 = elementRegistry.get('inputEntry1');
@@ -118,7 +118,7 @@ describe('simple time edit', function() {
 
       // then
       expect(inputEntry1.businessObject.text).to
-        .equal('time("08:00:00Z")');
+        .equal('time("foo")');
     }));
 
 
@@ -160,7 +160,7 @@ describe('simple time edit', function() {
     }));
 
 
-    it('should validate end time', inject(function(elementRegistry) {
+    it('should commit invalid end time', inject(function(elementRegistry) {
 
       // given
       const inputEntry7 = elementRegistry.get('inputEntry7');
@@ -176,7 +176,7 @@ describe('simple time edit', function() {
       expect(inputEntry7.businessObject.text).to
 
         // eslint-disable-next-line
-        .equal('[time("08:00:00Z")..time("17:00:00Z")]');
+        .equal('[time("08:00:00Z")..time("foo")]');
     }));
 
 
@@ -198,46 +198,6 @@ describe('simple time edit', function() {
         // eslint-disable-next-line
         .equal(`[time("08:00:00Z")..time("${ getSampleTime() }")]`);
     }));
-
-
-    describe('empty', function() {
-
-      it('should only set once valid', inject(function(elementRegistry) {
-
-        // given
-        const inputEntry8 = elementRegistry.get('inputEntry8');
-
-        const simpleDateEdit = openSimpleTimeEdit('inputEntry8');
-
-        const select = domQuery('.dms-input-select', simpleDateEdit);
-
-        // when
-        triggerInputSelectChange(select, 'between', testContainer);
-
-        // then
-        // expect not to have been set yet
-        expect(inputEntry8.businessObject.text).to.equal('');
-
-        // when
-        const buttons = domQueryAll('.use-now', simpleDateEdit);
-
-        triggerClick(buttons[0]);
-
-        // expect not to have been set yet
-        expect(inputEntry8.businessObject.text).to.equal('');
-
-        // when
-        triggerClick(buttons[1]);
-
-        // expect not to have been set yet
-        expect(inputEntry8.businessObject.text).to
-
-          // eslint-disable-next-line
-          .equal(`[time("${ getSampleTime() }")..time("${ getSampleTime() }")]`);
-      }));
-
-    });
-
   });
 
 
@@ -271,7 +231,7 @@ describe('simple time edit', function() {
     }));
 
 
-    it('should validate time', inject(function(elementRegistry) {
+    it('should commit invalid time', inject(function(elementRegistry) {
 
       // given
       const outputEntry1 = elementRegistry.get('outputEntry1');
@@ -285,7 +245,7 @@ describe('simple time edit', function() {
 
       // then
       expect(outputEntry1.businessObject.text).to
-        .equal('time("08:00:00Z")');
+        .equal('time("foo")');
     }));
 
 

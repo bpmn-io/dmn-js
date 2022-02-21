@@ -49,17 +49,14 @@ export default class OutputDateEdit extends Component {
     this.editCell(element.businessObject, `date("${ date }")`);
   }
 
-  onInput({ isValid, value }) {
-    if (isValid) {
-      const { element } = this.props.context;
+  onInput({ value }) {
+    const { element } = this.props.context;
 
-      this.setState({
-        date: value
-      });
+    this.setState({
+      date: value
+    });
 
-      this.debouncedEditCell(element.businessObject, `date("${ value }")`);
-
-    }
+    this.debouncedEditCell(element.businessObject, `date("${ value }")`);
   }
 
   render() {

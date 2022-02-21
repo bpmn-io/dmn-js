@@ -112,40 +112,34 @@ export default class InputDateEdit extends Component {
     }
   }
 
-  onStartDateInput({ isValid, value }) {
-    if (isValid) {
-      const { element } = this.props.context;
+  onStartDateInput({ value }) {
+    const { element } = this.props.context;
 
-      const { dates, type } = this.state;
+    const { dates, type } = this.state;
 
-      this.setState({
-        dates: [ value, dates[1] ]
-      });
+    this.setState({
+      dates: [ value, dates[1] ]
+    });
 
-      this.debouncedEditCell(
-        element.businessObject,
-        getDateString(type, [ value, dates[1] ])
-      );
-
-    }
+    this.debouncedEditCell(
+      element.businessObject,
+      getDateString(type, [ value, dates[1] ])
+    );
   }
 
-  onEndDateInput({ isValid, value }) {
-    if (isValid) {
-      const { element } = this.props.context;
+  onEndDateInput({ value }) {
+    const { element } = this.props.context;
 
-      const { dates, type } = this.state;
+    const { dates, type } = this.state;
 
-      this.setState({
-        dates: [ dates[0], value ]
-      });
+    this.setState({
+      dates: [ dates[0], value ]
+    });
 
-      this.debouncedEditCell(
-        element.businessObject,
-        getDateString(type, [ dates[0], value ])
-      );
-
-    }
+    this.debouncedEditCell(
+      element.businessObject,
+      getDateString(type, [ dates[0], value ])
+    );
   }
 
   render() {
