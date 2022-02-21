@@ -16,6 +16,12 @@ insertCSS('dmn-js-testing.css',
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
 
+if (singleStart) {
+  insertCSS('dmn-js-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
+
 
 describe('Modeler', function() {
 
