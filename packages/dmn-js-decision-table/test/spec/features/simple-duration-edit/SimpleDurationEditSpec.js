@@ -50,15 +50,7 @@ describe('simple duration edit', function() {
           inputEntry4;
 
       beforeEach(inject(function(elementRegistry) {
-        const cell = domQuery('[data-element-id="inputEntry4"]', testContainer);
-
-        triggerClick(cell);
-
-        const button = domQuery('.simple-mode-button', testContainer);
-
-        triggerClick(button);
-
-        simpleDurationEdit = domQuery('.simple-duration-edit', testContainer);
+        simpleDurationEdit = openSimpleEdit('inputEntry4', testContainer);
 
         inputEntry4 = elementRegistry.get('inputEntry4');
       }));
@@ -80,7 +72,8 @@ describe('simple duration edit', function() {
         triggerInputSelectChange(select, 'range', testContainer);
 
         // then
-        expect(inputEntry4.businessObject.text).to.equal('[duration("")..duration("")]');
+        expect(
+          inputEntry4.businessObject.text).to.equal('[duration("P1M")..duration("")]');
       });
 
 
@@ -97,6 +90,23 @@ describe('simple duration edit', function() {
         // then
         expect(inputEntry4.businessObject.text).to.equal('< duration("P1M")');
       });
+
+
+      it('should set to first value of range when set to comparison', inject(
+        function(elementRegistry) {
+
+          // given
+          const simpleDurationEdit = openSimpleEdit('inputEntry2', testContainer);
+          const select = domQuery('.dms-input-select', simpleDurationEdit);
+          const inputEntry2 = elementRegistry.get('inputEntry2');
+
+          // when
+          triggerInputSelectChange(select, 'comparison', testContainer);
+
+          // then
+          expect(inputEntry2.businessObject.text).to.equal('duration("P1M")');
+        })
+      );
 
 
       it('should edit operator', function() {
@@ -133,15 +143,7 @@ describe('simple duration edit', function() {
           inputEntry2;
 
       beforeEach(inject(function(elementRegistry) {
-        const cell = domQuery('[data-element-id="inputEntry2"]', testContainer);
-
-        triggerClick(cell);
-
-        const button = domQuery('.simple-mode-button', testContainer);
-
-        triggerClick(button);
-
-        simpleDurationEdit = domQuery('.simple-duration-edit', testContainer);
+        simpleDurationEdit = openSimpleEdit('inputEntry2', testContainer);
 
         inputEntry2 = elementRegistry.get('inputEntry2');
       }));
@@ -163,7 +165,7 @@ describe('simple duration edit', function() {
         triggerInputSelectChange(select, 'comparison', testContainer);
 
         // then
-        expect(inputEntry2.businessObject.text).to.equal('duration("")');
+        expect(inputEntry2.businessObject.text).to.equal('duration("P1M")');
       });
 
 
@@ -249,15 +251,7 @@ describe('simple duration edit', function() {
         outputEntry9;
 
     beforeEach(inject(function(elementRegistry) {
-      const cell = domQuery('[data-element-id="outputEntry9"]', testContainer);
-
-      triggerClick(cell);
-
-      const button = domQuery('.simple-mode-button', testContainer);
-
-      triggerClick(button);
-
-      simpleDurationEdit = domQuery('.simple-duration-edit', testContainer);
+      simpleDurationEdit = openSimpleEdit('outputEntry9', testContainer);
 
       outputEntry9 = elementRegistry.get('outputEntry9');
     }));
@@ -283,7 +277,7 @@ describe('simple duration edit', function() {
     });
 
 
-    it('should not commit invalid value', function() {
+    it('should commit invalid value', function() {
 
       // given
       const input = domQuery('.dms-input', simpleDurationEdit);
@@ -292,9 +286,23 @@ describe('simple duration edit', function() {
       triggerInputEvent(input, '42');
 
       // then
-      expect(outputEntry9.businessObject.text).to.equal('duration("P2DT4H")');
+      expect(outputEntry9.businessObject.text).to.equal('duration("42")');
     });
 
   });
 
 });
+
+
+// helper //////////
+function openSimpleEdit(elementId, container) {
+  const cell = domQuery(`[data-element-id="${elementId}"]`, container);
+
+  triggerClick(cell);
+
+  const button = domQuery('.simple-mode-button', container);
+
+  triggerClick(button);
+
+  return domQuery('.simple-duration-edit', container);
+}

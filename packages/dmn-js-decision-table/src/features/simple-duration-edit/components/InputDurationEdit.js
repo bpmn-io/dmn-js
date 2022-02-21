@@ -30,9 +30,8 @@ export default class InputDurationEdit extends Component {
       this.state = {
         type: parsedString.type,
         comparisonOperator: parsedString.operator || 'equals',
-        comparisonValue: parsedString.value || '',
-        rangeStartValue: parsedString.values ? parsedString.values[0] : '',
-        rangeEndValue: parsedString.values ? parsedString.values[1] : '',
+        startValue: parsedString.values[0] || '',
+        endValue: parsedString.values[1] || '',
         rangeStartType: parsedString.start || 'include',
         rangeEndType: parsedString.end || 'include'
       };
@@ -40,9 +39,8 @@ export default class InputDurationEdit extends Component {
       this.state = {
         type: COMPARISON,
         comparisonOperator: 'equals',
-        comparisonValue: '',
-        rangeStartValue: '',
-        rangeEndValue: '',
+        startValue: '',
+        endValue: '',
         rangeStartType: 'include',
         rangeEndType: 'include'
       };
@@ -71,9 +69,8 @@ export default class InputDurationEdit extends Component {
 
     const {
       comparisonOperator,
-      comparisonValue,
-      rangeStartValue,
-      rangeEndValue,
+      startValue,
+      endValue,
       rangeStartType,
       rangeEndType
     } = this.state;
@@ -81,12 +78,12 @@ export default class InputDurationEdit extends Component {
     if (value === COMPARISON) {
       this.editCell(
         element.businessObject,
-        getComparisonString(comparisonOperator, comparisonValue)
+        getComparisonString(comparisonOperator, startValue)
       );
     } else {
       this.editCell(
         element.businessObject,
-        getRangeString(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType)
+        getRangeString(startValue, endValue, rangeStartType, rangeEndType)
       );
     }
 
@@ -98,10 +95,10 @@ export default class InputDurationEdit extends Component {
   onComparisonOperatorChange(value) {
     const { element } = this.props.context;
 
-    const { type, comparisonValue } = this.state;
+    const { type, startValue } = this.state;
 
     if (type === COMPARISON) {
-      this.editCell(element.businessObject, getComparisonString(value, comparisonValue));
+      this.editCell(element.businessObject, getComparisonString(value, startValue));
 
       this.setState({
         comparisonOperator: value
@@ -121,7 +118,7 @@ export default class InputDurationEdit extends Component {
       );
 
       this.setState({
-        comparisonValue
+        startValue: comparisonValue
       });
     }
   }
@@ -129,12 +126,12 @@ export default class InputDurationEdit extends Component {
   onRangeStartTypeChange(value) {
     const { element } = this.props.context;
 
-    const { type, rangeStartValue, rangeEndValue, rangeEndType } = this.state;
+    const { type, startValue, endValue, rangeEndType } = this.state;
 
     if (type === RANGE) {
       this.editCell(
         element.businessObject,
-        getRangeString(rangeStartValue, rangeEndValue, value, rangeEndType)
+        getRangeString(startValue, endValue, value, rangeEndType)
       );
 
       this.setState({
@@ -146,16 +143,16 @@ export default class InputDurationEdit extends Component {
   onRangeStartValueChange(value) {
     const { element } = this.props.context;
 
-    const { type, rangeEndValue, rangeStartType, rangeEndType } = this.state;
+    const { type, endValue, rangeStartType, rangeEndType } = this.state;
 
     if (type === RANGE) {
       this.editCell(
         element.businessObject,
-        getRangeString(value, rangeEndValue, rangeStartType, rangeEndType)
+        getRangeString(value, endValue, rangeStartType, rangeEndType)
       );
 
       this.setState({
-        rangeStartValue: value
+        startValue: value
       });
     }
   }
@@ -163,12 +160,12 @@ export default class InputDurationEdit extends Component {
   onRangeEndTypeChange(value) {
     const { element } = this.props.context;
 
-    const { type, rangeStartValue, rangeEndValue, rangeStartType } = this.state;
+    const { type, startValue, endValue, rangeStartType } = this.state;
 
     if (type === RANGE) {
       this.editCell(
         element.businessObject,
-        getRangeString(rangeStartValue, rangeEndValue, rangeStartType, value)
+        getRangeString(startValue, endValue, rangeStartType, value)
       );
 
       this.setState({
@@ -180,16 +177,16 @@ export default class InputDurationEdit extends Component {
   onRangeEndValueChange(value) {
     const { element } = this.props.context;
 
-    const { type, rangeStartValue, rangeStartType, rangeEndType } = this.state;
+    const { type, startValue, rangeStartType, rangeEndType } = this.state;
 
     if (type === RANGE) {
       this.editCell(
         element.businessObject,
-        getRangeString(rangeStartValue, value, rangeStartType, rangeEndType)
+        getRangeString(startValue, value, rangeStartType, rangeEndType)
       );
 
       this.setState({
-        rangeEndValue: value
+        endValue: value
       });
     }
   }
@@ -294,9 +291,8 @@ export default class InputDurationEdit extends Component {
     const {
       type,
       comparisonOperator,
-      comparisonValue,
-      rangeStartValue,
-      rangeEndValue,
+      startValue,
+      endValue,
       rangeStartType,
       rangeEndType
     } = this.state;
@@ -324,14 +320,14 @@ export default class InputDurationEdit extends Component {
 
         {
           type === COMPARISON
-            && this.renderComparison(comparisonOperator, comparisonValue)
+            && this.renderComparison(comparisonOperator, startValue)
         }
 
         {
           type === RANGE
             && this.renderRange(
-              rangeStartValue,
-              rangeEndValue,
+              startValue,
+              endValue,
               rangeStartType,
               rangeEndType
             )
