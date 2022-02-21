@@ -104,7 +104,7 @@ describe('simple date time edit', function() {
     }));
 
 
-    it('should validate start date', inject(function(elementRegistry) {
+    it('should commit invalid start date', inject(function(elementRegistry) {
 
       // given
       const inputEntry1 = elementRegistry.get('inputEntry1');
@@ -118,7 +118,7 @@ describe('simple date time edit', function() {
 
       // then
       expect(inputEntry1.businessObject.text).to
-        .equal('date and time("2018-01-25T00:00:00Z")');
+        .equal('date and time("foo")');
     }));
 
 
@@ -160,7 +160,7 @@ describe('simple date time edit', function() {
     }));
 
 
-    it('should validate end date', inject(function(elementRegistry) {
+    it('should commit invalid end date', inject(function(elementRegistry) {
 
       // given
       const inputEntry7 = elementRegistry.get('inputEntry7');
@@ -176,7 +176,7 @@ describe('simple date time edit', function() {
       expect(inputEntry7.businessObject.text).to
 
         // eslint-disable-next-line
-        .equal('[date and time("2018-01-25T00:00:00Z")..date and time("2018-01-25T23:59:59Z")]');
+        .equal('[date and time("2018-01-25T00:00:00Z")..date and time("foo")]');
     }));
 
 
@@ -198,46 +198,6 @@ describe('simple date time edit', function() {
         // eslint-disable-next-line
         .equal(`[date and time("2018-01-25T00:00:00Z")..date and time("${ getSampleDate() }")]`);
     }));
-
-
-    describe('empty', function() {
-
-      it('should only set once valid', inject(function(elementRegistry) {
-
-        // given
-        const inputEntry8 = elementRegistry.get('inputEntry8');
-
-        const simpleDateEdit = openSimpleDateEdit('inputEntry8');
-
-        const select = domQuery('.dms-input-select', simpleDateEdit);
-
-        // when
-        triggerInputSelectChange(select, 'between', testContainer);
-
-        // then
-        // expect not to have been set yet
-        expect(inputEntry8.businessObject.text).to.equal('');
-
-        // when
-        const buttons = domQueryAll('.use-today', simpleDateEdit);
-
-        triggerClick(buttons[0]);
-
-        // expect not to have been set yet
-        expect(inputEntry8.businessObject.text).to.equal('');
-
-        // when
-        triggerClick(buttons[1]);
-
-        // expect not to have been set yet
-        expect(inputEntry8.businessObject.text).to
-
-          // eslint-disable-next-line
-          .equal(`[date and time("${ getSampleDate() }")..date and time("${ getSampleDate() }")]`);
-      }));
-
-    });
-
   });
 
 
@@ -271,7 +231,7 @@ describe('simple date time edit', function() {
     }));
 
 
-    it('should validate date', inject(function(elementRegistry) {
+    it('should commit invalid date', inject(function(elementRegistry) {
 
       // given
       const outputEntry1 = elementRegistry.get('outputEntry1');
@@ -285,7 +245,7 @@ describe('simple date time edit', function() {
 
       // then
       expect(outputEntry1.businessObject.text).to
-        .equal('date and time("2018-01-25T00:00:00Z")');
+        .equal('date and time("foo")');
     }));
 
 

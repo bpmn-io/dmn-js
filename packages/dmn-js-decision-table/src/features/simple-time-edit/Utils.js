@@ -1,12 +1,10 @@
 const ISO_TIME_REGEX = /^(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?$/;
 
-// eslint-disable-next-line
-const BETWEEN_TIME_REGEX = /^\[time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)..time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"/;
+const BETWEEN_TIME_REGEX = /^\[time\("([^"]*)"\)..time\("([^"]*)"\)\]$/;
 
-// eslint-disable-next-line
-const BEFORE_AFTER_TIME_REGEX = /^(<|>)\s*time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)/;
+const BEFORE_AFTER_TIME_REGEX = /^(<|>)\s*time\("([^"]*)"\)$/;
 
-const EXACT_TIME_REGEX = /^time\("((?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)$/;
+const EXACT_TIME_REGEX = /^time\("([^"]*)"\)$/;
 
 const EXACT = 'exact',
       BEFORE = 'before',

@@ -1,12 +1,12 @@
 const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}$/;
 
 // eslint-disable-next-line
-const BETWEEN_DATE_REGEX = /^\[date\("(\d{4}(?:-\d\d){2})"\)..date\("(\d{4}(?:-\d\d){2})"/;
+const BETWEEN_DATE_REGEX = /^\[date\("([^"]*)"\)..date\("([^"]*)"\)\]$/;
 
 // eslint-disable-next-line
-const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date\("(\d{4}(?:-\d\d){2})"\)/;
+const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date\("([^"]*)"\)$/;
 
-const EXACT_DATE_REGEX = /^date\("(\d{4}(?:-\d\d){2})"\)$/;
+const EXACT_DATE_REGEX = /^date\("([^"]*)"\)$/;
 
 const EXACT = 'exact',
       BEFORE = 'before',

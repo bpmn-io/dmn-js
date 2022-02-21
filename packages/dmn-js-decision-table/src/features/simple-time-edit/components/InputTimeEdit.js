@@ -112,40 +112,34 @@ export default class InputTimeEdit extends Component {
     }
   }
 
-  onStartTimeInput({ isValid, value }) {
-    if (isValid) {
-      const { element } = this.props.context;
+  onStartTimeInput({ value }) {
+    const { element } = this.props.context;
 
-      const { times, type } = this.state;
+    const { times, type } = this.state;
 
-      this.setState({
-        times: [ value, times[1] ]
-      });
+    this.setState({
+      times: [ value, times[1] ]
+    });
 
-      this.debouncedEditCell(
-        element.businessObject,
-        getTimeString(type, [ value, times[1] ])
-      );
-
-    }
+    this.debouncedEditCell(
+      element.businessObject,
+      getTimeString(type, [ value, times[1] ])
+    );
   }
 
-  onEndTimeInput({ isValid, value }) {
-    if (isValid) {
-      const { element } = this.props.context;
+  onEndTimeInput({ value }) {
+    const { element } = this.props.context;
 
-      const { times, type } = this.state;
+    const { times, type } = this.state;
 
-      this.setState({
-        times: [ times[0], value ]
-      });
+    this.setState({
+      times: [ times[0], value ]
+    });
 
-      this.debouncedEditCell(
-        element.businessObject,
-        getTimeString(type, [ times[0], value ])
-      );
-
-    }
+    this.debouncedEditCell(
+      element.businessObject,
+      getTimeString(type, [ times[0], value ])
+    );
   }
 
   render() {

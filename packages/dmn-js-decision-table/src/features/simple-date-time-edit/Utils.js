@@ -1,13 +1,13 @@
 const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?$/;
 
 // eslint-disable-next-line
-const BETWEEN_DATE_REGEX = /^\[date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)..date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"/;
+const BETWEEN_DATE_REGEX = /^\[date and time\("([^"]*)"\)..date and time\("([^"]*)"\)\]$/;
 
 // eslint-disable-next-line
-const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)/;
+const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date and time\("([^"]*)"\)$/;
 
 // eslint-disable-next-line
-const EXACT_DATE_REGEX = /^date and time\("(\d{4}(?:-\d\d){2}T(?:\d\d:){2}\d\d(?:Z|(?:[@+-][^")]+))?)"\)$/;
+const EXACT_DATE_REGEX = /^date and time\("([^"]*)"\)$/;
 
 const EXACT = 'exact',
       BEFORE = 'before',
