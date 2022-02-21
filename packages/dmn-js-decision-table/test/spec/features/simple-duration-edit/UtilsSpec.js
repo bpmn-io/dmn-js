@@ -15,42 +15,49 @@ describe('simple duration edit - utils', function() {
 
     it('duration("P1D")', expectParsed('duration("P1D")', {
       type: 'comparison',
-      value: 'P1D',
+      values: [ 'P1D' ],
       operator: 'equals'
     }));
 
 
     it('= duration("P1D")', expectParsed('= duration("P1D")', {
       type: 'comparison',
-      value: 'P1D',
+      values: [ 'P1D' ],
       operator: 'equals'
     }));
 
 
     it('< duration("P1D")', expectParsed('< duration("P1D")', {
       type: 'comparison',
-      value: 'P1D',
+      values: [ 'P1D' ],
       operator: 'less'
     }));
 
 
     it('<= duration("P1D")', expectParsed('<= duration("P1D")', {
       type: 'comparison',
-      value: 'P1D',
+      values: [ 'P1D' ],
       operator: 'lessEquals'
     }));
 
 
     it('> duration("P1D")', expectParsed('> duration("P1D")', {
       type: 'comparison',
-      value: 'P1D',
+      values: [ 'P1D' ],
       operator: 'greater'
     }));
 
 
     it('>= duration("P1D")', expectParsed('>= duration("P1D")', {
       type: 'comparison',
-      value: 'P1D',
+      values: [ 'P1D' ],
+      operator: 'greaterEquals'
+    }));
+
+
+    it('>= duration("nonsense")', expectParsed('>= duration("nonsense")', {
+      type: 'comparison',
+      values: [ 'nonsense' ],
       operator: 'greaterEquals'
     }));
 

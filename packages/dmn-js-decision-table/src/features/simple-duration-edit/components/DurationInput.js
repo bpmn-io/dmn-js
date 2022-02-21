@@ -24,11 +24,7 @@ export class DurationInput extends Component {
     };
   }
 
-  onInput({ isValid, value }) {
-    if (!isValid) {
-      return;
-    }
-
+  onInput({ value }) {
     this.setState({
       value
     });

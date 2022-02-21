@@ -86,7 +86,7 @@ function parseComparison(text) {
     return {
       type: 'comparison',
       operator: 'equals',
-      value: exactValue
+      values: [ exactValue ]
     };
   }
 
@@ -98,7 +98,7 @@ function parseComparison(text) {
   if (operator && value) {
     return {
       type: 'comparison',
-      value,
+      values: [ value ],
       operator: getOperatorName(operator)
     };
   }
