@@ -17,8 +17,6 @@ export default class InputCellContextMenu extends Component {
     inject(this);
 
     this.persistChanges = this.debounceInput(this.persistChanges);
-
-    this._expressionLanguages = context.injector.get('expressionLanguages');
   }
 
   persistChanges = () => {
@@ -69,7 +67,7 @@ export default class InputCellContextMenu extends Component {
     let target = input;
 
     // input variable stored in parent
-    if (attr === 'expressionLanguage' || attr === 'text') {
+    if (attr === 'text') {
       target = target.inputExpression;
     }
 
@@ -77,16 +75,8 @@ export default class InputCellContextMenu extends Component {
   }
 
   render() {
-    const defaultLanguage = this._expressionLanguages.getDefault('inputHeadCell'),
-          expressionLanguages = this._expressionLanguages.getAll();
-
     return (
       <InputEditor
-        expressionLanguage={
-          this.getValue('expressionLanguage') || defaultLanguage.value
-        }
-        expressionLanguages={ expressionLanguages }
-        defaultExpressionLanguage={ defaultLanguage }
         label={ this.getValue('label') }
         text={ this.getValue('text') }
         onChange={ this.handleChange } />
