@@ -90,17 +90,6 @@ describe('decision-table-head/editor - input', function() {
   }));
 
 
-  it('should display FEEL per default', function() {
-
-    // given
-    const editorEl = openEditor('input1');
-    const inputEl = getControl('.ref-language input', editorEl);
-
-    // then
-    expect(inputEl).to.have.property('value', 'feel');
-  });
-
-
   describe('should edit input label', function() {
 
     beforeEach(function() {

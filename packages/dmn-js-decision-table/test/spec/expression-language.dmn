@@ -3,7 +3,7 @@
   <decision id="decision" name="Check Order">
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
-        <inputExpression id="inputExpression1" typeRef="string">
+        <inputExpression id="inputExpression1" expressionLanguage="jruby" typeRef="string">
           <text>status</text>
         </inputExpression>
         <inputValues id="UnaryTests_1e76ebn">

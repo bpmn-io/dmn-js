@@ -1,14 +1,18 @@
-/* eslint-disable max-len */
-
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
-import { isInput } from 'dmn-js-shared/lib/util/ModelUtil';
+import {
+  getBusinessObject,
+  isInput
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export default class ExpressionLanguage {
-  constructor(components, elementRegistry, modeling, expressionLanguages, translate, contextMenu) {
+  constructor(
+      components, elementRegistry, modeling, expressionLanguages,
+      translate, contextMenu) {
     this._modeling = modeling;
     this._translate = translate;
+    this._expressionLanguages = expressionLanguages;
 
     components.onGetComponent('context-menu-cell-additional', (context = {}) => {
       if (context.contextMenuType && context.contextMenuType === 'context-menu') {
@@ -26,6 +30,10 @@ export default class ExpressionLanguage {
 
         // element might not be in element registry (e.g. cut)
         if (!element) {
+          return;
+        }
+
+        if (!this._shouldDisplayContextMenuEntry(element)) {
           return;
         }
 
@@ -67,16 +75,19 @@ export default class ExpressionLanguage {
           return;
         }
 
-        const expressionLanguage = element.businessObject.expressionLanguage
-          || expressionLanguages.getDefault(isInput(element.col) ? 'inputCell' : 'outputCell').value;
+        const expressionLanguage = this._getElementExpressionLanguage(element);
 
         const options = expressionLanguages.getAll();
+
+        const className = 'context-menu-group-entry ' +
+          'context-menu-entry-set-expression-language';
 
         return () => (
           <div
             className="context-menu-flex">
             <div className="context-menu-group">
-              <div className="context-menu-group-entry context-menu-entry-set-expression-language">
+              <div
+                className={ className }>
                 <div>
                   { this._translate('Expression Language') }
                 </div>
@@ -93,10 +104,66 @@ export default class ExpressionLanguage {
       }
 
     });
+
+    components.onGetComponent('context-menu', (context = {}) => {
+      if (
+        context.contextMenuType === 'input-edit'
+      ) {
+        return () => {
+          const { inputExpression } = context.input;
+
+          if (!this._shouldDisplayContextMenuEntry(inputExpression)) {
+            return;
+          }
+
+          const expressionLanguage = this._getElementExpressionLanguage(inputExpression);
+
+          const options = expressionLanguages.getAll();
+
+          return <div className="context-menu-container ref-language">
+            <div className="dms-form-control">
+              <label className="dms-label">
+                {
+                  this._translate('Expression Language')
+                }
+              </label>
+
+              <InputSelect
+                className="ref-language"
+                value={ expressionLanguage || '' }
+                onChange={ value => this.onChange(inputExpression, value) }
+                options={ options } />
+            </div>
+          </div>;
+        };
+      }
+    });
   }
 
-  onChange(cell, expressionLanguage) {
-    this._modeling.editExpressionLanguage(cell.businessObject, expressionLanguage);
+  onChange(element, expressionLanguage) {
+    this._modeling.editExpressionLanguage(element, expressionLanguage);
+  }
+
+  _shouldDisplayContextMenuEntry(element) {
+    const expressionLanguages = this._expressionLanguages.getAll();
+
+    if (expressionLanguages.length > 1) {
+      return true;
+    }
+
+    const expressionLanguage = this._getElementExpressionLanguage(element);
+
+    return expressionLanguage !== this._getDefaultElementExpressionLanguage(element);
+  }
+
+  _getElementExpressionLanguage(element) {
+    return getBusinessObject(element).expressionLanguage
+    || this._getDefaultElementExpressionLanguage(element);
+  }
+
+  _getDefaultElementExpressionLanguage(element) {
+    return this._expressionLanguages.getDefault(
+      isInput(element.col) ? 'inputCell' : 'outputCell').value;
   }
 }
 

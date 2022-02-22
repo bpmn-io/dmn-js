@@ -1,7 +1,6 @@
 import { Component } from 'inferno';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
-import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 export default class InputEditor extends Component {
 
@@ -10,31 +9,11 @@ export default class InputEditor extends Component {
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
 
-    const defaultExpressionLanguage = props.defaultExpressionLanguage.value;
-
-    this.setExpressionLanguage = (expressionLanguage) => {
-      this.handleChange({ expressionLanguage });
-    };
-
     this.handleValue = (text) => {
-
-      let { expressionLanguage } = this.props;
 
       let change = { text };
 
-      if (isMultiLine(text) && !expressionLanguage) {
-        change.expressionLanguage = defaultExpressionLanguage;
-      }
-
-      if (!isMultiLine(text) && expressionLanguage === defaultExpressionLanguage) {
-        change.expressionLanguage = undefined;
-      }
-
       this.handleChange(change);
-    };
-
-    this.handleLanguageChange = (language) => {
-      this.setExpressionLanguage(language);
     };
 
     this.handleLabelChange = (value) => {
@@ -57,8 +36,6 @@ export default class InputEditor extends Component {
   render() {
 
     const {
-      expressionLanguage,
-      expressionLanguages,
       label,
       text
     } = this.props;
@@ -93,27 +70,9 @@ export default class InputEditor extends Component {
             onInput={ this.handleValue }
             value={ text || '' } />
         </div>
-
-        <div className="dms-form-control">
-          <label className="dms-label">
-            {
-              this.translate('Expression Language')
-            }
-          </label>
-
-          <InputSelect
-            className="ref-language"
-            value={ expressionLanguage || '' }
-            onChange={ this.handleLanguageChange }
-            options={ expressionLanguages } />
-        </div>
       </div>
     );
   }
-}
-
-function isMultiLine(text) {
-  return text && text.split(/\n/).length > 1;
 }
 
 function noopTranslate(str) {
