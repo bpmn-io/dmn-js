@@ -17,14 +17,16 @@ const DEFAULT_DATA_TYPES = [
  *
  * // The data types will include multiple number types: integer, long, and double.
  * const editor = new DmnJS({
- *   dataTypes: [
- *     'string',
- *     'boolean',
- *     'integer',
- *     'long',
- *     'double',
- *     'date'
- *   ]
+ *   common: {
+ *     dataTypes: [
+ *       'string',
+ *       'boolean',
+ *       'integer',
+ *       'long',
+ *       'double',
+ *       'date'
+ *     ]
+ *   }
  * })
  */
 export default class DataTypes {
