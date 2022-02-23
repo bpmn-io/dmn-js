@@ -14,6 +14,7 @@ import {
 import TestContainer from 'mocha-test-container-support';
 
 import literalExpressionXML from '../../literal-expression.dmn';
+import nonDefaultExpressionLanguageXML from '../../expression-language.dmn';
 
 import LiteralExpressionPropertiesEditorModule
   from 'src/features/literal-expression-properties/editor';
@@ -45,19 +46,6 @@ const CUSTOM_EXPRESSION_LANGUAGES = [{
 
 describe('literal expression properties editor', function() {
 
-  beforeEach(bootstrapModeler(literalExpressionXML, {
-    expressionLanguages: {
-      options: CUSTOM_EXPRESSION_LANGUAGES
-    },
-    modules: [
-      CoreModule,
-      LiteralExpressionPropertiesEditorModule,
-      ExpressionLanguagesModule,
-      ModelingModule
-    ],
-    debounceInput: false
-  }));
-
   let testContainer;
 
   beforeEach(function() {
@@ -65,116 +53,167 @@ describe('literal expression properties editor', function() {
   });
 
 
-  it('should render', function() {
+  describe('basics', function() {
 
-    // then
-    expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    beforeEach(bootstrapModeler(literalExpressionXML, {
+      modules: [
+        CoreModule,
+        LiteralExpressionPropertiesEditorModule,
+        ExpressionLanguagesModule,
+        ModelingModule
+      ],
+      debounceInput: false
+    }));
+
+    it('should render', function() {
+
+      // then
+      expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    });
+
+
+    it('should edit variable name', inject(function(viewer) {
+
+      // given
+      const input = domQuery('.variable-name-input', testContainer);
+
+      // when
+      triggerInputEvent(input, 'foo');
+
+      // then
+      expect(viewer.getDecision().variable.name).to.equal('foo');
+    }));
+
+
+    it('should edit variable type - input', inject(function(viewer) {
+
+      // given
+      const inputSelect = domQuery('.variable-type-select', testContainer);
+
+      const input = domQuery('.dms-input', inputSelect);
+
+      // when
+      triggerInputEvent(input, 'foo');
+
+      // then
+      expect(viewer.getDecision().variable.typeRef).to.equal('foo');
+    }));
+
+
+    it('should edit variable type - select', inject(function(viewer) {
+
+      // given
+      const inputSelect = domQuery('.variable-type-select', testContainer);
+
+      // when
+      triggerInputSelectChange(inputSelect, 'boolean', testContainer);
+
+      // then
+      expect(viewer.getDecision().variable.typeRef).to.equal('boolean');
+    }));
+
+
+    it('should remove variable type', inject(function(viewer) {
+
+      // given
+      const inputSelect = domQuery('.variable-type-select', testContainer);
+
+      triggerInputSelectChange(inputSelect, 'boolean', testContainer);
+
+      const input = domQuery('.dms-input', inputSelect);
+
+      // when
+      triggerInputEvent(input, '');
+
+      // then
+      expect(viewer.getDecision().variable.typeRef).to.not.exist;
+    }));
+
+
+    it('should NOT display expression language if decision\'s EL is default', function() {
+
+      // given
+      const inputSelect = domQuery('.expression-language-select', testContainer);
+
+      // then
+      expect(inputSelect).not.to.exist;
+    });
   });
 
 
-  it('should edit variable name', inject(function(viewer) {
+  describe('non-default expression language', function() {
 
-    // given
-    const input = domQuery('.variable-name-input', testContainer);
-
-    // when
-    triggerInputEvent(input, 'foo');
-
-    // then
-    expect(viewer.getDecision().variable.name).to.equal('foo');
-  }));
-
-
-  it('should edit variable type - input', inject(function(viewer) {
-
-    // given
-    const inputSelect = domQuery('.variable-type-select', testContainer);
-
-    const input = domQuery('.dms-input', inputSelect);
-
-    // when
-    triggerInputEvent(input, 'foo');
-
-    // then
-    expect(viewer.getDecision().variable.typeRef).to.equal('foo');
-  }));
+    beforeEach(bootstrapModeler(nonDefaultExpressionLanguageXML, {
+      modules: [
+        CoreModule,
+        LiteralExpressionPropertiesEditorModule,
+        ExpressionLanguagesModule,
+        ModelingModule
+      ],
+      debounceInput: false
+    }));
 
 
-  it('should edit variable type - select', inject(function(viewer) {
+    it('should edit expression language - input', inject(function(viewer) {
 
-    // given
-    const inputSelect = domQuery('.variable-type-select', testContainer);
+      // given
+      const inputSelect = domQuery('.expression-language-select', testContainer);
 
-    // when
-    triggerInputSelectChange(inputSelect, 'boolean', testContainer);
+      const input = domQuery('.dms-input', inputSelect);
 
-    // then
-    expect(viewer.getDecision().variable.typeRef).to.equal('boolean');
-  }));
+      // when
+      triggerInputEvent(input, 'foo');
 
-
-  it('should remove variable type', inject(function(viewer) {
-
-    // given
-    const inputSelect = domQuery('.variable-type-select', testContainer);
-
-    triggerInputSelectChange(inputSelect, 'boolean', testContainer);
-
-    const input = domQuery('.dms-input', inputSelect);
-
-    // when
-    triggerInputEvent(input, '');
-
-    // then
-    expect(viewer.getDecision().variable.typeRef).to.not.exist;
-  }));
+      // then
+      expect(viewer.getDecision().decisionLogic.expressionLanguage)
+        .to.equal('foo');
+    }));
+  });
 
 
-  it('should edit expression language - input', inject(function(viewer) {
+  describe('custom expression languages', function() {
 
-    // given
-    const inputSelect = domQuery('.expression-language-select', testContainer);
-
-    const input = domQuery('.dms-input', inputSelect);
-
-    // when
-    triggerInputEvent(input, 'foo');
-
-    // then
-    expect(viewer.getDecision().decisionLogic.expressionLanguage)
-      .to.equal('foo');
-  }));
-
-
-  it('should edit expression language - select', inject(function(viewer) {
-
-    // given
-    const inputSelect = domQuery('.expression-language-select', testContainer);
-
-    // when
-    triggerInputSelectChange(inputSelect, 'javascript', testContainer);
-
-    // then
-    expect(viewer.getDecision().decisionLogic.expressionLanguage)
-      .to.equal('javascript');
-  }));
+    beforeEach(bootstrapModeler(literalExpressionXML, {
+      expressionLanguages: {
+        options: CUSTOM_EXPRESSION_LANGUAGES
+      },
+      modules: [
+        CoreModule,
+        LiteralExpressionPropertiesEditorModule,
+        ExpressionLanguagesModule,
+        ModelingModule
+      ],
+      debounceInput: false
+    }));
 
 
-  it('should remove expression language', inject(function(viewer) {
+    it('should edit expression language - select', inject(function(viewer) {
 
-    // given
-    const inputSelect = domQuery('.expression-language-select', testContainer);
+      // given
+      const inputSelect = domQuery('.expression-language-select', testContainer);
 
-    triggerInputSelectChange(inputSelect, 'python', testContainer);
+      // when
+      triggerInputSelectChange(inputSelect, 'javascript', testContainer);
 
-    const input = domQuery('.dms-input', inputSelect);
+      // then
+      expect(viewer.getDecision().decisionLogic.expressionLanguage)
+        .to.equal('javascript');
+    }));
 
-    // when
-    triggerInputEvent(input, '');
 
-    // then
-    expect(viewer.getDecision().decisionLogic.expressionLanguage)
-      .to.not.exist;
-  }));
+    it('should remove expression language', inject(function(viewer) {
+
+      // given
+      const inputSelect = domQuery('.expression-language-select', testContainer);
+      const input = domQuery('.dms-input', inputSelect);
+
+      // when
+      triggerInputEvent(input, '');
+
+      // then
+      expect(viewer.getDecision().decisionLogic.expressionLanguage)
+        .to.not.exist;
+    }));
+  });
 
 });
