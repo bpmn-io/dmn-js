@@ -22,16 +22,18 @@ const EXPRESSION_LANGUAGE_OPTIONS = [{
  *
  * // there will be two languages available with FEEL as default
  * const editor = new DmnJS({
- *   expressionLanguages: {
- *     options: [{
- *       value: 'feel',
- *       label: 'FEEL'
- *     }, {
- *       value: 'juel',
- *       label: 'JUEL'
- *     }],
- *     defaults: {
- *       editor: 'feel'
+ *   common: {
+ *     expressionLanguages: {
+ *       options: [{
+ *         value: 'feel',
+ *         label: 'FEEL'
+ *       }, {
+ *         value: 'juel',
+ *         label: 'JUEL'
+ *       }],
+ *       defaults: {
+ *         editor: 'feel'
+ *       }
  *     }
  *   }
  * })
