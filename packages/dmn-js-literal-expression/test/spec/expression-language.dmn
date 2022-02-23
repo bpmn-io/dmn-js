@@ -2,7 +2,7 @@
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Desired Dish" namespace="party">
   <decision id="season" name="Season">
     <variable id="InformationItem_16229yj" name="season" typeRef="string" />
-    <literalExpression id="LiteralExpression_0hs8xyn">
+    <literalExpression id="LiteralExpression_0hs8xyn" expressionLanguage="Javascript">
       <text>calendar.getSeason(date)</text>
     </literalExpression>
   </decision>

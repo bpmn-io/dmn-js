@@ -122,11 +122,34 @@ class ExpressionLanguage extends Component {
 
   _getExpressionLanguage() {
     const decision = this._viewer.getDecision();
+    const literalExpression = decision.decisionLogic;
 
-    return getExpressionLanguage(decision.decisionLogic);
+    return (literalExpression && literalExpression.expressionLanguage)
+      ? literalExpression.expressionLanguage.toLowerCase()
+      : this._getDefaultExpressionLanguage();
+  }
+
+  _getDefaultExpressionLanguage() {
+    return this._expressionLanguages.getDefault().value;
+  }
+
+  _shouldRender() {
+    const expressionLanguages = this._expressionLanguages.getAll();
+
+    if (expressionLanguages.length > 1) {
+      return true;
+    }
+
+    const expressionLanguage = this._getExpressionLanguage();
+
+    return expressionLanguage !== this._getDefaultExpressionLanguage();
   }
 
   render() {
+    if (!this._shouldRender()) {
+      return null;
+    }
+
     const expressionLanguage = this._getExpressionLanguage();
 
     const languageOptions = this._expressionLanguages.getAll();
@@ -146,13 +169,4 @@ class ExpressionLanguage extends Component {
       </tr>
     );
   }
-}
-
-
-// helpers //////////////////////
-
-function getExpressionLanguage(literalExpression) {
-  return (literalExpression && literalExpression.expressionLanguage)
-    ? literalExpression.expressionLanguage.toLowerCase()
-    : undefined;
 }
