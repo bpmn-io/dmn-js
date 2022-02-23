@@ -30,19 +30,16 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
-    this._expressionLanguages = context.injector.get('expressionLanguages');
 
     const decision = this._viewer.getDecision();
 
     this.state = {
       name: decision.variable.name,
-      typeRef: decision.variable.typeRef,
-      expressionLanguage: getExpressionLanguage(decision.decisionLogic)
+      typeRef: decision.variable.typeRef
     };
 
     this.setVariableName = this.setVariableName.bind(this);
     this.setVariableType = this.setVariableType.bind(this);
-    this.setExpressionLanguage = this.setExpressionLanguage.bind(this);
   }
 
   setVariableName(name) {
@@ -69,26 +66,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
     }
   }
 
-  setExpressionLanguage(expressionLanguage) {
-    if (expressionLanguage === '') {
-      this._modeling.editExpressionLanguage(undefined);
-
-      this.setState({
-        expressionLanguage: undefined
-      });
-    } else {
-      this._modeling.editExpressionLanguage(expressionLanguage);
-
-      this.setState({
-        expressionLanguage
-      });
-    }
-  }
-
   render() {
-    const { expressionLanguage, name, typeRef } = this.state;
-
-    const languageOptions = this._expressionLanguages.getAll();
+    const { name, typeRef } = this.state;
 
     return (
       <div className="literal-expression-properties">
@@ -115,20 +94,56 @@ export default class LiteralExpressionPropertiesComponent extends Component {
               </div>
             </td>
           </tr>
-          <tr>
-            <td>Expression Language:</td>
-            <td>
-              <div className="dms-fill-row">
-                <InputSelect
-                  onChange={ this.setExpressionLanguage }
-                  options={ languageOptions }
-                  value={ expressionLanguage }
-                  className="expression-language-select dms-block" />
-              </div>
-            </td>
-          </tr>
+          <ExpressionLanguage />
         </table>
       </div>
+    );
+  }
+}
+
+class ExpressionLanguage extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this._viewer = context.injector.get('viewer');
+    this._modeling = context.injector.get('modeling');
+    this._expressionLanguages = context.injector.get('expressionLanguages');
+
+    this.setExpressionLanguage = this.setExpressionLanguage.bind(this);
+  }
+
+  setExpressionLanguage(expressionLanguage) {
+    if (expressionLanguage === '') {
+      this._modeling.editExpressionLanguage(undefined);
+    } else {
+      this._modeling.editExpressionLanguage(expressionLanguage);
+    }
+  }
+
+  _getExpressionLanguage() {
+    const decision = this._viewer.getDecision();
+
+    return getExpressionLanguage(decision.decisionLogic);
+  }
+
+  render() {
+    const expressionLanguage = this._getExpressionLanguage();
+
+    const languageOptions = this._expressionLanguages.getAll();
+
+    return (
+      <tr>
+        <td>Expression Language:</td>
+        <td>
+          <div className="dms-fill-row">
+            <InputSelect
+              onChange={ this.setExpressionLanguage }
+              options={ languageOptions }
+              value={ expressionLanguage }
+              className="expression-language-select dms-block" />
+          </div>
+        </td>
+      </tr>
     );
   }
 }
