@@ -188,4 +188,37 @@ describe('Modeler', function() {
     expect(element.id).to.eql(tableView.element.id);
   });
 
+
+  describe('config', function() {
+
+    it('should use data types provided via <common.dataTypes>', async function() {
+
+      // given
+      editor = new Modeler({
+        container: container,
+        common: {
+          keyboard: {
+            bindTo: document
+          },
+          dataTypes: [
+            'double',
+            'long'
+          ]
+        }
+      });
+      await editor.importXML(diagram);
+      const decisionTableView = editor.getViews().find(v => v.type === 'decisionTable');
+      editor.open(decisionTableView);
+
+      // when
+      const dataTypes = editor.getActiveViewer().get('dataTypes');
+      const dataTypesList = dataTypes.getAll();
+
+      // then
+      expect(dataTypesList).to.eql([
+        'double',
+        'long'
+      ]);
+    });
+  });
 });
