@@ -42,6 +42,29 @@ describe('simple duration edit', function() {
   });
 
 
+  describe('basics', function() {
+
+    it('should open empty input', function() {
+
+      // when
+      const simpleEdit = openSimpleEdit('emptyInputEntry', testContainer);
+
+      // then
+      expect(simpleEdit).to.exist;
+    });
+
+
+    it('should open empty output', function() {
+
+      // when
+      const simpleEdit = openSimpleEdit('emptyOutputEntry', testContainer);
+
+      // then
+      expect(simpleEdit).to.exist;
+    });
+  });
+
+
   describe('InputClause', function() {
 
     describe('comparison', function() {
