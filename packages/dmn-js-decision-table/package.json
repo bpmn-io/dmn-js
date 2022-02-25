@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "12.0.0",
+  "version": "12.0.1",
   "files": [
     "assets",
     "lib"
