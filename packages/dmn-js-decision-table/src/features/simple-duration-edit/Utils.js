@@ -17,7 +17,8 @@ function getOperatorName(string) {
 export function parseDuration(text) {
   if (!text || isEmptyString(text.trim())) {
     return {
-      type: 'comparison'
+      type: 'comparison',
+      values: []
     };
   }
 
