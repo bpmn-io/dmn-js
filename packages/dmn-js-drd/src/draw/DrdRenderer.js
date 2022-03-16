@@ -1,7 +1,8 @@
 import inherits from 'inherits';
 
+import Ids from 'ids';
+
 import {
-  isArray,
   isObject,
   assign
 } from 'min-dash';
@@ -28,141 +29,153 @@ import {
   getName
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
+var RENDERER_IDS = new Ids();
 
-export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
+export default function DrdRenderer(
+    config, eventBus, pathMap, styles, textRenderer, canvas) {
 
   BaseRenderer.call(this, eventBus);
 
+  var rendererId = RENDERER_IDS.next();
+
+  var computeStyle = styles.computeStyle;
+
   var markers = {};
 
-  function addMarker(id, element) {
-    markers[id] = element;
+  var defaultFillColor = config && config.defaultFillColor || 'white',
+      defaultStrokeColor = config && config.defaultStrokeColor || 'black',
+      defaultLabelColor = config && config.defaultLabelColor;
+
+  function marker(type, fill, stroke) {
+    var id = type + '-' + colorEscape(fill) +
+      '-' + colorEscape(stroke) + '-' + rendererId;
+
+    if (!markers[id]) {
+      createMarker(id, type, fill, stroke);
+    }
+
+    return 'url(#' + id + ')';
   }
 
-  function marker(id) {
-    var marker = markers[id];
+  function addMarker(id, options) {
+    var attrs = assign({
+      strokeWidth: 1,
+      strokeLinecap: 'round',
+      strokeDasharray: 'none'
+    }, options.attrs);
 
-    return 'url(#' + marker.id + ')';
+    var ref = options.ref || { x: 0, y: 0 };
+
+    var scale = options.scale || 1;
+
+    // fix for safari / chrome / firefox bug not correctly
+    // resetting stroke dash array
+    if (attrs.strokeDasharray === 'none') {
+      attrs.strokeDasharray = [ 10000, 1 ];
+    }
+
+    var marker = svgCreate('marker');
+
+    svgAttr(options.element, attrs);
+
+    svgAppend(marker, options.element);
+
+    svgAttr(marker, {
+      id: id,
+      viewBox: '0 0 20 20',
+      refX: ref.x,
+      refY: ref.y,
+      markerWidth: 20 * scale,
+      markerHeight: 20 * scale,
+      orient: 'auto'
+    });
+
+    var defs = domQuery('defs', canvas._svg);
+
+    if (!defs) {
+      defs = svgCreate('defs');
+
+      svgAppend(canvas._svg, defs);
+    }
+
+    svgAppend(defs, marker);
+
+    markers[id] = marker;
   }
 
-  function initMarkers(svg) {
+  function createMarker(id, type, fill, stroke) {
 
-    function createMarker(id, options) {
-      var attrs = assign({
-        strokeWidth: 1,
-        strokeLinecap: 'round',
-        strokeDasharray: 'none'
-      }, options.attrs);
+    if (type === 'association-start') {
+      var associationStart = svgCreate('path');
+      svgAttr(associationStart, { d: 'M 11 5 L 1 10 L 11 15' });
 
-      var ref = options.ref || { x: 0, y: 0 };
-
-      var scale = options.scale || 1;
-
-      // fix for safari / chrome / firefox bug not correctly
-      // resetting stroke dash array
-      if (attrs.strokeDasharray === 'none') {
-        attrs.strokeDasharray = [10000, 1];
-      }
-
-      var marker = svgCreate('marker');
-
-      svgAttr(options.element, attrs);
-
-      svgAppend(marker, options.element);
-
-      svgAttr(marker, {
-        id: id,
-        viewBox: '0 0 20 20',
-        refX: ref.x,
-        refY: ref.y,
-        markerWidth: 20 * scale,
-        markerHeight: 20 * scale,
-        orient: 'auto'
+      addMarker(id, {
+        element: associationStart,
+        attrs: {
+          fill: 'none',
+          stroke: stroke,
+          strokeWidth: 1.5
+        },
+        ref: { x: 1, y: 10 },
+        scale: 0.5
       });
 
-      var defs = domQuery('defs', svg);
+    } else if (type === 'association-end') {
+      var associationEnd = svgCreate('path');
+      svgAttr(associationEnd, { d: 'M 1 5 L 11 10 L 1 15' });
 
-      if (!defs) {
-        defs = svgCreate('defs');
+      addMarker(id, {
+        element: associationEnd,
+        attrs: {
+          fill: 'none',
+          stroke: stroke,
+          strokeWidth: 1.5
+        },
+        ref: { x: 12, y: 10 },
+        scale: 0.5
+      });
+    } else if (type === 'information-requirement-end') {
+      var informationRequirementEnd = svgCreate('path');
+      svgAttr(informationRequirementEnd, { d: 'M 1 5 L 11 10 L 1 15 Z' });
 
-        svgAppend(svg, defs);
-      }
+      addMarker(id, {
+        element: informationRequirementEnd,
+        attrs: {
+          fill: stroke,
+          stroke: 'none'
+        },
+        ref: { x: 11, y: 10 },
+        scale: 1
+      });
+    } else if (type === 'knowledge-requirement-end') {
+      var knowledgeRequirementEnd = svgCreate('path');
+      svgAttr(knowledgeRequirementEnd, { d: 'M 1 3 L 11 10 L 1 17' });
 
-      svgAppend(defs, marker);
+      addMarker(id, {
+        element: knowledgeRequirementEnd,
+        attrs: {
+          fill: 'none',
+          stroke: stroke,
+          strokeWidth: 2
+        },
+        ref: { x: 11, y: 10 },
+        scale: 0.8
+      });
+    } else if (type === 'authority-requirement-end') {
+      var authorityRequirementEnd = svgCreate('circle');
+      svgAttr(authorityRequirementEnd, { cx: 3, cy: 3, r: 3 });
 
-      return addMarker(id, marker);
+      addMarker(id, {
+        element: authorityRequirementEnd,
+        attrs: {
+          fill: stroke,
+          stroke: 'none'
+        },
+        ref: { x: 3, y: 3 },
+        scale: 0.9
+      });
     }
-
-    var associationStart = svgCreate('path');
-    svgAttr(associationStart, { d: 'M 11 5 L 1 10 L 11 15' });
-
-    createMarker('association-start', {
-      element: associationStart,
-      attrs: {
-        fill: 'none',
-        stroke: 'black',
-        strokeWidth: 1.5
-      },
-      ref: { x: 1, y: 10 },
-      scale: 0.5
-    });
-
-    var associationEnd = svgCreate('path');
-    svgAttr(associationEnd, { d: 'M 1 5 L 11 10 L 1 15' });
-
-    createMarker('association-end', {
-      element: associationEnd,
-      attrs: {
-        fill: 'none',
-        stroke: 'black',
-        strokeWidth: 1.5
-      },
-      ref: { x: 12, y: 10 },
-      scale: 0.5
-    });
-
-    var informationRequirementEnd = svgCreate('path');
-    svgAttr(informationRequirementEnd, { d: 'M 1 5 L 11 10 L 1 15 Z' });
-
-    createMarker('information-requirement-end', {
-      element: informationRequirementEnd,
-      ref: { x: 11, y: 10 },
-      scale: 1
-    });
-
-    var knowledgeRequirementEnd = svgCreate('path');
-    svgAttr(knowledgeRequirementEnd, { d: 'M 1 3 L 11 10 L 1 17' });
-
-    createMarker('knowledge-requirement-end', {
-      element: knowledgeRequirementEnd,
-      attrs: {
-        fill: 'none',
-        stroke: 'black',
-        strokeWidth: 2
-      },
-      ref: { x: 11, y: 10 },
-      scale: 0.8
-    });
-
-    var authorityRequirementEnd = svgCreate('circle');
-    svgAttr(authorityRequirementEnd, { cx: 3, cy: 3, r: 3 });
-
-    createMarker('authority-requirement-end', {
-      element: authorityRequirementEnd,
-      ref: { x: 3, y: 3 },
-      scale: 0.9
-    });
   }
-
-  function computeStyle(custom, traits, defaultStyles) {
-    if (!isArray(traits)) {
-      defaultStyles = traits;
-      traits = [];
-    }
-
-    return styles.style(traits || [], assign(defaultStyles, custom || {}));
-  }
-
 
   function drawRect(p, width, height, r, offset, attrs) {
 
@@ -205,9 +218,19 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
     return text;
   }
 
-  function renderEmbeddedLabel(p, element, align) {
+  function renderEmbeddedLabel(p, element, align, options) {
     var name = getName(element);
-    return renderLabel(p, name, { box: element, align: align, padding: 5 });
+
+    options = assign({
+      box: element,
+      align: align,
+      padding: 5,
+      style: {
+        fill: getLabelColor(element, defaultLabelColor, defaultStrokeColor)
+      }
+    }, options);
+
+    return renderLabel(p, name, options);
   }
 
   function drawPath(p, d, attrs) {
@@ -228,14 +251,17 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
 
 
   var handlers = {
-    'dmn:Decision': function(p, element, attrs) {
-      var rect = drawRect(p, element.width, element.height, 0, attrs);
+    'dmn:Decision': function(p, element) {
+      var rect = drawRect(p, element.width, element.height, 0, {
+        stroke: getStrokeColor(element, defaultStrokeColor),
+        fill: getFillColor(element, defaultFillColor)
+      });
 
       renderEmbeddedLabel(p, element, 'center-middle');
 
       return rect;
     },
-    'dmn:KnowledgeSource': function(p, element, attrs) {
+    'dmn:KnowledgeSource': function(p, element) {
 
       var pathData = pathMap.getScaledPath('KNOWLEDGE_SOURCE', {
         xScaleFactor: 1.021,
@@ -250,15 +276,15 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
 
       var knowledgeSource = drawPath(p, pathData, {
         strokeWidth: 2,
-        fill: 'white',
-        stroke: 'black'
+        fill: getFillColor(element, defaultFillColor),
+        stroke: getStrokeColor(element, defaultStrokeColor)
       });
 
       renderEmbeddedLabel(p, element, 'center-middle');
 
       return knowledgeSource;
     },
-    'dmn:BusinessKnowledgeModel': function(p, element, attrs) {
+    'dmn:BusinessKnowledgeModel': function(p, element) {
 
       var pathData = pathMap.getScaledPath('BUSINESS_KNOWLEDGE_MODEL', {
         xScaleFactor: 1,
@@ -273,23 +299,26 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
 
       var businessKnowledge = drawPath(p, pathData, {
         strokeWidth: 2,
-        fill: 'white',
-        stroke: 'black'
+        fill: getFillColor(element, defaultFillColor),
+        stroke: getStrokeColor(element, defaultStrokeColor)
       });
 
       renderEmbeddedLabel(p, element, 'center-middle');
 
       return businessKnowledge;
     },
-    'dmn:InputData': function(p, element, attrs) {
+    'dmn:InputData': function(p, element) {
 
-      var rect = drawRect(p, element.width, element.height, 22, attrs);
+      var rect = drawRect(p, element.width, element.height, 22, {
+        stroke: getStrokeColor(element, defaultStrokeColor),
+        fill: getFillColor(element, defaultFillColor)
+      });
 
       renderEmbeddedLabel(p, element, 'center-middle');
 
       return rect;
     },
-    'dmn:TextAnnotation': function(p, element, attrs) {
+    'dmn:TextAnnotation': function(p, element) {
       var style = {
         'fill': 'none',
         'stroke': 'none'
@@ -308,11 +337,16 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
         }
       });
 
-      drawPath(p, textPathData);
+      drawPath(p, textPathData, {
+        stroke: getStrokeColor(element, defaultStrokeColor),
+      });
 
       var text = getSemantic(element).text || '';
 
       renderLabel(p, text, {
+        style: {
+          fill: getLabelColor(element, defaultLabelColor, defaultStrokeColor)
+        },
         box: element,
         align: 'left-top',
         padding: 5
@@ -320,59 +354,71 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
 
       return textElement;
     },
-    'dmn:Association': function(p, element, attrs) {
+    'dmn:Association': function(p, element) {
       var semantic = getSemantic(element);
 
-      attrs = assign({
-        strokeDasharray: '0.5, 5',
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        fill: 'none'
-      }, attrs || {});
+      var fill = getFillColor(element, defaultFillColor),
+          stroke = getStrokeColor(element, defaultStrokeColor),
+          attrs = {
+            stroke: stroke,
+            strokeDasharray: '0.5, 5',
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            fill: 'none'
+          };
 
       if (semantic.associationDirection === 'One' ||
           semantic.associationDirection === 'Both') {
-        attrs.markerEnd = marker('association-end');
+        attrs.markerEnd = marker('association-end', fill, stroke);
       }
 
       if (semantic.associationDirection === 'Both') {
-        attrs.markerStart = marker('association-start');
+        attrs.markerStart = marker('association-start', fill, stroke);
       }
 
       return drawLine(p, element.waypoints, attrs);
     },
-    'dmn:InformationRequirement': function(p, element, attrs) {
+    'dmn:InformationRequirement': function(p, element) {
 
-      attrs = assign({
-        strokeWidth: 1,
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        markerEnd: marker('information-requirement-end')
-      }, attrs || {});
+      var fill = getFillColor(element, defaultFillColor),
+          stroke = getStrokeColor(element, defaultStrokeColor),
+          attrs = {
+            stroke: stroke,
+            strokeWidth: 1,
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            markerEnd: marker('information-requirement-end', fill, stroke)
+          };
 
       return drawLine(p, element.waypoints, attrs);
     },
-    'dmn:KnowledgeRequirement': function(p, element, attrs) {
+    'dmn:KnowledgeRequirement': function(p, element) {
 
-      attrs = assign({
+      var fill = getFillColor(element, defaultFillColor),
+          stroke = getStrokeColor(element, defaultStrokeColor);
+      var attrs = {
+        stroke: stroke,
         strokeWidth: 1,
         strokeDasharray: 5,
         strokeLinecap: 'round',
         strokeLinejoin: 'round',
-        markerEnd: marker('knowledge-requirement-end')
-      }, attrs || {});
+        markerEnd: marker('knowledge-requirement-end', fill, stroke)
+      };
 
       return drawLine(p, element.waypoints, attrs);
     },
-    'dmn:AuthorityRequirement': function(p, element, attrs) {
+    'dmn:AuthorityRequirement': function(p, element) {
 
-      attrs = assign({
-        strokeWidth: 1.5,
-        strokeDasharray: 5,
-        strokeLinecap: 'round',
-        strokeLinejoin: 'round',
-        markerEnd: marker('authority-requirement-end')
-      }, attrs || {});
+      var fill = getFillColor(element, defaultFillColor),
+          stroke = getStrokeColor(element, defaultStrokeColor),
+          attrs = {
+            stroke: stroke,
+            strokeWidth: 1.5,
+            strokeDasharray: 5,
+            strokeLinecap: 'round',
+            strokeLinejoin: 'round',
+            markerEnd: marker('authority-requirement-end', fill, stroke)
+          };
 
       return drawLine(p, element.waypoints, attrs);
     }
@@ -425,23 +471,17 @@ export default function DrdRenderer(eventBus, pathMap, styles, textRenderer) {
 
   this.drawShape = drawShape;
   this.drawConnection = drawConnection;
-
-
-  // hook onto canvas init event to initialize
-  // connection start/end markers on svg
-  eventBus.on('canvas.init', function(event) {
-    initMarkers(event.svg);
-  });
-
 }
 
 inherits(DrdRenderer, BaseRenderer);
 
 DrdRenderer.$inject = [
+  'config.drdRenderer',
   'eventBus',
   'pathMap',
   'styles',
-  'textRenderer'
+  'textRenderer',
+  'canvas'
 ];
 
 
@@ -449,4 +489,22 @@ DrdRenderer.$inject = [
 
 function getSemantic(element) {
   return element.businessObject;
+}
+
+function colorEscape(str) {
+
+  // only allow characters and numbers
+  return str.replace(/[^0-9a-zA-z]+/g, '_');
+}
+
+function getStrokeColor(element, defaultColor) {
+  return defaultColor;
+}
+
+function getFillColor(element, defaultColor) {
+  return defaultColor;
+}
+
+function getLabelColor(element, defaultColor, defaultStrokeColor) {
+  return defaultColor || getStrokeColor(element, defaultStrokeColor);
 }
