@@ -31,6 +31,34 @@ import {
 
 var RENDERER_IDS = new Ids();
 
+/**
+ * Renderer for the DRD view. The default colors are configurable.
+ * When default label color is not provided, it will take the default
+ * stroke color.
+ *
+ * @example
+ * ```javascript
+ * // for simple DRD viewer
+ * const viewer = new DrdViewer({
+ *   drdRenderer: {
+ *     defaultFillColor: '#ffd700',
+ *     defaultStrokeColor: '#0057b8',
+ *     defaultLabelColor: '#0057b8'
+ *   }
+ * });
+ *
+ * // in dmn-js
+ * const modeler = new DmnModeler({
+ *   drd: {
+ *     drdRenderer: {
+ *       defaultFillColor: '#ffd700',
+ *       defaultStrokeColor: '#0057b8',
+ *       defaultLabelColor: '#0057b8'
+ *     }
+ *   }
+ * });
+ * ```
+ */
 export default function DrdRenderer(
     config, eventBus, pathMap, styles, textRenderer, canvas) {
 
