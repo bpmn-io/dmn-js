@@ -81,20 +81,34 @@ export default class InputSelect extends Component {
 
   getOptionsBounds() {
     const container = this.renderer.getContainer();
-    const { top: containerTop, left: containerLeft } = container.getBoundingClientRect();
+    const {
+      top: containerTop, left: containerLeft, bottom: containerBottom
+    } = container.getBoundingClientRect();
 
     const {
-      top: inputTop, left: inputLeft, width, height
+      top: inputTop, left: inputLeft, width, height, bottom: inputBottom
     } = this.inputNode.getBoundingClientRect();
 
     const top = inputTop + height - containerTop + container.scrollTop;
     const left = inputLeft - containerLeft + container.scrollLeft;
 
-    return {
+    const bounds = {
       top: `${top}px`,
       left: `${left}px`,
-      width: `${width}px`
+      width: `${width}px`,
+      'max-height': `calc(100% - ${top}px)`
     };
+
+    // open the options upwards when not even one option (=input height) fits
+    if (containerBottom - inputBottom < height) {
+      const bottom = containerBottom - inputTop;
+      bounds.bottom = `${bottom}px`;
+      bounds['max-height'] = `calc(100% - ${bottom})`;
+
+      delete bounds.top;
+    }
+
+    return bounds;
   }
 
   addPortalEl() {
