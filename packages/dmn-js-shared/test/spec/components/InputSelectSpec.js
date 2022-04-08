@@ -160,6 +160,36 @@ describe('components/InputSelect', function() {
     });
 
 
+    it('should open options upwards if there is not enough space below', function() {
+
+      // given
+      const renderedTree = renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect
+            options={ OPTIONS } />
+        </DiContainer>
+      );
+      const container = injector.get('renderer').getContainer();
+      container.style.display = 'flex';
+      container.style['flex-direction'] = 'column-reverse';
+
+      const inputSelect =
+        findRenderedDOMElementWithClass(renderedTree, 'dms-input-select');
+
+      // when
+      triggerClick(inputSelect);
+
+      // then
+      const options = findRenderedDOMElementWithClass(renderedTree, 'options');
+      const inputSelectBounds = inputSelect.getBoundingClientRect();
+      const optionsBounds = options.getBoundingClientRect();
+
+      expect(optionsBounds.top).to.be.lessThan(inputSelectBounds.top);
+      expect(optionsBounds.bottom).to.eql(inputSelectBounds.top);
+      expect(optionsBounds.left).to.eql(inputSelectBounds.left);
+    });
+
+
     it('should hide options on blur', function() {
 
       // given
