@@ -16,28 +16,41 @@ describe('DRD - Import', function() {
 
   describe('events', function() {
 
-    beforeEach(bootstrapModeler(exampleXML));
+    let events = [];
+
+    const TRACKED_EVENTS = [
+      'import.start',
+      'import.done',
+      'drdElement.added'
+    ];
+
+    beforeEach(bootstrapModeler(exampleXML, {
+      additionalModules: [{
+        __init__: [ 'eventListener' ],
+        eventListener: [ 'type', createEventListener(TRACKED_EVENTS, events) ]
+      }]
+    }));
+
+    beforeEach(function() {
+      events.length = 0;
+    });
 
 
     it('should fire <import.start> and <import.done>', async function() {
 
       // given
-      const dmnJS = getDmnJS(),
-            eventBus = getDrdJS().get('eventBus'),
-            events = [];
-
-      eventBus.on('import.start', function() {
-        events.push('import.start');
-      });
-      eventBus.on('import.done', function() {
-        events.push('import.done');
-      });
+      const dmnJS = getDmnJS();
 
       // when
       await dmnJS.importXML(exampleXML);
 
       // then
-      expect(events).to.eql([
+      const filteredEvents = events.filter(event => [
+        'import.start',
+        'import.done'
+      ].includes(event));
+
+      expect(filteredEvents).to.eql([
         'import.start',
         'import.done'
       ]);
@@ -47,19 +60,15 @@ describe('DRD - Import', function() {
     it('should fire <drdElement.added>', async function() {
 
       // given
-      const dmnJS = getDmnJS(),
-            drdJS = getDrdJS();
-      let eventsCount = 0;
-
-      drdJS.get('eventBus').on('drdElement.added', function(event) {
-        eventsCount++;
-      });
+      const dmnJS = getDmnJS();
 
       // when
       await dmnJS.importXML(exampleXML);
 
       // then
-      expect(eventsCount).to.eql(15);
+      const filteredEvents = events.filter(event => event === 'drdElement.added');
+
+      expect(filteredEvents).to.have.lengthOf(15);
     });
 
   });
@@ -185,6 +194,8 @@ describe('DRD - Import', function() {
 
           return modeler.importXML(xml).then(function() {
 
+            const elementRegistry = modeler.getActiveViewer().get('elementRegistry');
+
             const decision = elementRegistry.get('guestCount');
             const importedConnection = decision.outgoing[0];
 
@@ -204,3 +215,11 @@ describe('DRD - Import', function() {
   });
 
 });
+
+function createEventListener(eventNames, events) {
+  return function(eventBus) {
+    eventBus.on(eventNames, function(event) {
+      events.push(event.type);
+    });
+  };
+}

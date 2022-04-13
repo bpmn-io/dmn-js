@@ -2,11 +2,14 @@ import Viewer from 'src/Viewer';
 
 import DefaultExport from '../../src';
 
+import { query as domQuery } from 'min-dom';
+
 
 const diagram = require('./diagram.dmn');
 const noDi = require('./no-di.dmn');
 
 const dmn_11 = require('./dmn-11.dmn');
+const drdOnly = require('./drd-only.dmn');
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
 
@@ -115,6 +118,55 @@ describe('Viewer', function() {
 
     expect(activeView.type).to.eql('decisionTable');
     expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
+  });
+
+
+  it('should keep view on re-import', async function() {
+
+    // given
+    const editor = new Viewer({ container: container });
+    await editor.importXML(diagram);
+
+    const views = editor.getViews();
+    const tableView = views.filter(v => v.type === 'decisionTable')[0];
+
+    const { warnings } = await editor.open(tableView);
+
+    // when
+    await editor.importXML(diagram);
+
+    // then
+    const activeView = editor.getActiveView();
+
+    const element = activeView.element;
+
+    expect(warnings[0]).to.be.undefined;
+
+    expect(activeView.type).to.eql('decisionTable');
+    expect(element.$instanceOf('dmn:Decision')).to.be.true;
+    expect(element.id).to.eql(tableView.element.id);
+  });
+
+
+  it('should clear diagram during re-import', async function() {
+
+    // given
+    const editor = new Viewer({ container: container });
+    await editor.importXML(diagram, { open: false });
+
+    const views = editor.getViews();
+    const decisionView = views.filter(v => v.type === 'decisionTable')[0];
+
+    await editor.open(decisionView);
+
+    // when
+    await editor.importXML(drdOnly);
+
+    // then
+    const decisionTableContainer = domQuery('.dmn-decision-table-container', container);
+
+    expect(decisionTableContainer).not.to.exist;
+    expect(domQuery('.dmn-drd-container', container)).to.exist;
   });
 
 

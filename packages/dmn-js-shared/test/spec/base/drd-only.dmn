@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="drd-only" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="dish-decision-without-table" name="Dish Decision" />  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0ag5a00">
+      <dmndi:DMNShape id="dish-decision_di" dmnElementRef="dish-decision">
+        <dc:Bounds height="80" width="180" x="150" y="10" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

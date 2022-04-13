@@ -114,87 +114,97 @@ export default class Manager {
     options = options || { open: true };
 
     return new Promise(function(resolve, reject) {
+      var previousActiveView = self._activeView;
 
-      // hook in pre-parse listeners +
-      // allow xml manipulation
-      xml = self._emit('import.parse.start', { xml: xml }) || xml;
+      // clean up previously rendered diagram before new import
+      self._clear().then(() => {
 
-      var parseWarnings;
+        // hook in pre-parse listeners +
+        // allow xml manipulation
+        xml = self._emit('import.parse.start', { xml: xml }) || xml;
 
-      self._moddle.fromXML(xml, 'dmn:Definitions').then((parseResult) => {
+        var parseWarnings;
 
-        var definitions = parseResult.rootElement;
-        var references = parseResult.references;
-        var elementsById = parseResult.elementsById;
-        parseWarnings = parseResult.warnings;
+        self._moddle.fromXML(xml, 'dmn:Definitions').then((parseResult) => {
 
-        // hook in post parse listeners +
-        // allow definitions manipulation
-        definitions = self._emit('import.parse.complete', ParseCompleteEvent({
-          error: null,
-          definitions: definitions,
-          elementsById: elementsById,
-          references: references,
-          warnings: parseWarnings
-        })) || definitions;
-        self._setDefinitions(definitions);
+          var definitions = parseResult.rootElement;
+          var references = parseResult.references;
+          var elementsById = parseResult.elementsById;
+          parseWarnings = parseResult.warnings;
 
-        if (!options.open) {
-          self._emit('import.done', { error: null, warnings: parseWarnings });
+          // hook in post parse listeners +
+          // allow definitions manipulation
+          definitions = self._emit('import.parse.complete', ParseCompleteEvent({
+            error: null,
+            definitions: definitions,
+            elementsById: elementsById,
+            references: references,
+            warnings: parseWarnings
+          })) || definitions;
+          self._setDefinitions(definitions);
 
-          resolve({ warnings: parseWarnings });
-          return;
-        }
+          if (!options.open) {
+            self._emit('import.done', { error: null, warnings: parseWarnings });
 
-        var view = self._activeView || self._getInitialView(self._views);
+            resolve({ warnings: parseWarnings });
+            return;
+          }
 
-        if (!view) {
-          var noDisplayableContentsErr = new Error('no displayable contents');
+          // open either previously active view or view of the same type if available
+          var view = self._getInitialView(self._views, previousActiveView);
 
-          self._emit('import.done',
-            { error: noDisplayableContentsErr, warnings: parseWarnings });
+          if (!view) {
+            var noDisplayableContentsErr = new Error('no displayable contents');
 
-          noDisplayableContentsErr.warnings = parseWarnings;
+            self._emit('import.done',
+              { error: noDisplayableContentsErr, warnings: parseWarnings });
 
-          return reject(noDisplayableContentsErr);
-        }
+            noDisplayableContentsErr.warnings = parseWarnings;
 
-        self.open(view)
-          .then(result => ({ warnings: result.warnings }))
-          .catch(error => ({ error: error, warnings: error.warnings }))
-          .then(result => {
-            var allWarnings = [].concat(parseWarnings, result.warnings);
+            return reject(noDisplayableContentsErr);
+          }
 
-            self._emit('import.done', { error: result.error, warnings: allWarnings });
+          self.open(view)
+            .then(result => ({ warnings: result.warnings }))
+            .catch(error => ({ error: error, warnings: error.warnings }))
+            .then(result => {
+              var allWarnings = [].concat(parseWarnings, result.warnings);
 
-            if (result.error) {
-              result.error.warnings = allWarnings;
-              reject(result.error);
-            } else {
-              resolve({ warnings: allWarnings });
-            }
+              self._emit('import.done', { error: result.error, warnings: allWarnings });
 
-          });
-      }).catch((parseError) => {
+              if (result.error) {
+                result.error.warnings = allWarnings;
+                reject(result.error);
+              } else {
+                resolve({ warnings: allWarnings });
+              }
 
-        parseWarnings = parseError.warnings;
+            });
+        }).catch((parseError) => {
 
-        parseError = checkDMNCompatibilityError(parseError, xml) ||
-          checkValidationError(parseError) ||
-          parseError;
+          parseWarnings = parseError.warnings;
 
-        self._emit('import.parse.complete', ParseCompleteEvent({
-          error: parseError,
-          warnings: parseWarnings
-        }));
+          parseError = checkDMNCompatibilityError(parseError, xml) ||
+            checkValidationError(parseError) ||
+            parseError;
 
-        self._emit('import.done', { error: parseError, warnings: parseWarnings });
+          self._emit('import.parse.complete', ParseCompleteEvent({
+            error: parseError,
+            warnings: parseWarnings
+          }));
 
-        parseError.warnings = parseWarnings;
+          self._emit('import.done', { error: parseError, warnings: parseWarnings });
 
-        return reject(parseError);
+          parseError.warnings = parseWarnings;
+
+          return reject(parseError);
+        });
+      }).catch(clearError => {
+        self._emit('import.done', { error: clearError, warnings: [] });
+        clearError.warnings = [];
+
+        return reject(clearError);
       });
-
     });
 
     // TODO: remove with future dmn-js version
@@ -423,6 +433,10 @@ export default class Manager {
     }
   }
 
+  _clear() {
+    return this._switchView(null);
+  }
+
   /**
    * Open diagram view.
    *
@@ -531,8 +545,18 @@ export default class Manager {
     }
   }
 
-  _getInitialView(views) {
-    return views[0];
+  _getInitialView(views, preferredView) {
+    var initialView;
+
+    if (preferredView) {
+      initialView = find(views, function(view) {
+        return viewsEqual(view, preferredView);
+      }) || find(views, function(view) {
+        return view.type === preferredView;
+      });
+    }
+
+    return initialView || views[0];
   }
 
   /**
