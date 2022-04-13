@@ -1,6 +1,7 @@
 /* global sinon */
 
 import Manager from 'src/base/Manager';
+import { is } from 'src/util/ModelUtil';
 
 import TestView from './TestView';
 
@@ -58,7 +59,9 @@ class ReturnErrorView extends TestView {
 
 const DECISION_TABLE_VIEW = {
   id: 'decisionTable',
-  opens: 'dmn:Decision',
+  opens(element) {
+    return is(element, 'dmn:Decision') && is(element.decisionLogic, 'dmn:DecisionTable');
+  },
   constructor: TestView
 };
 
@@ -85,6 +88,7 @@ const diagramXML = require('./diagram.dmn');
 
 const dmn_11 = require('./dmn-11.dmn');
 const dmn_12 = require('./dmn-12.dmn');
+const drdOnly = require('./drd-only.dmn');
 
 
 describe('Manager', function() {
@@ -588,6 +592,45 @@ describe('Manager', function() {
       });
     });
 
+
+    it('should emit <import.done> when diagram clear fails', async () => {
+
+      // given
+      class ClearErrorView extends TestView {
+        clear() {
+          throw new Error('clear failed');
+        }
+      }
+
+      const manager = new TestViewer([{
+        id: 'drd',
+        opens: 'dmn:Definitions',
+        constructor: ClearErrorView
+      }]);
+      await manager.importXML(diagramXML);
+
+      const events = [];
+      manager.on([
+        'import.parse.start',
+        'import.parse.complete',
+        'import.render.start',
+        'import.render.complete',
+        'import.done'
+      ], event => {
+        events.push(event.type);
+      });
+
+      // when
+      return manager.importXML(diagramXML).then(() => {
+        throw new Error('should not resolve');
+      }, error => {
+
+        // then
+        expect(error.message).to.eql('clear failed');
+        expect(error.warnings).to.eql([]);
+        expect(events).to.eql([ 'import.done' ]);
+      });
+    });
   });
 
 
@@ -1171,6 +1214,27 @@ describe('Manager', function() {
 
         });
 
+
+        it('should detach old active view during re-import', async function() {
+
+          // given
+          const manager = new TestViewer();
+          await manager.importXML(diagramXML);
+          const views = manager.getViews(),
+                activeView = manager.getActiveView(),
+                activeViewer = manager.getActiveViewer();
+          const detachSpy = sinon.spy(activeViewer, 'detach');
+
+          // when
+          await manager.importXML(drdOnly);
+          const newViews = manager.getViews(),
+                newActiveView = manager.getActiveView();
+
+          // then
+          expect(newViews).not.to.eql(views);
+          expect(newActiveView).not.to.eql(activeView);
+          expect(detachSpy).to.have.been.calledOnce;
+        });
       });
 
 

@@ -7,6 +7,8 @@ import LiteralExpressionEditor from 'dmn-js-literal-expression/lib/Editor';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
 
+import { find } from 'min-dash';
+
 
 /**
  * The dmn editor.
@@ -45,29 +47,21 @@ export default class Modeler extends EditingManager {
 
   }
 
-  _getInitialView(views) {
+  _getInitialView(views, ...rest) {
+    let initialView = super._getInitialView(views, ...rest);
 
-    var definitionsView;
-
-    for (var i = 0; i < views.length; i++) {
-
-      const view = views[i];
-      const el = view.element;
-
-      if (is(el, 'dmn:Decision')) {
-        return view;
-      }
-
-      if (is(el, 'dmn:Definitions')) {
-        definitionsView = view;
-
-        if (containsDi(el)) {
-          return view;
-        }
-      }
+    if (!initialView) {
+      return;
     }
 
-    return definitionsView || views[0];
-  }
+    const element = initialView.element;
 
+    // if initial view is definitions without DI, try to open another view
+    if (is(element, 'dmn:Definitions') && !containsDi(element)) {
+      initialView =
+        find(views, view => !is(view.element, 'dmn:Definitions')) || initialView;
+    }
+
+    return initialView;
+  }
 }
