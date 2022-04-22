@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.1.1
+
+* `FIX`: clear active view during re-import ([#697](https://github.com/bpmn-io/dmn-js/issues/697))
+* `FIX`: make sure Input Select options are always accessible ([#695](https://github.com/bpmn-io/dmn-js/pull/695))
+
 ## 12.1.0
 
 * `FEAT`: add configuration for default colors in DRD ([#679](https://github.com/bpmn-io/dmn-js/issues/679))
