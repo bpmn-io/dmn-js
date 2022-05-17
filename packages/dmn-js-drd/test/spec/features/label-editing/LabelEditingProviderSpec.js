@@ -182,6 +182,33 @@ describe('features - label-editing', function() {
   ));
 
 
+  it('should complete on selection changed', inject(
+    function(elementRegistry, directEditing, eventBus, selection) {
+
+      // given
+      var shape = elementRegistry.get('dish-decision'),
+          decision = shape.businessObject;
+
+      // activate
+      eventBus.fire('element.dblclick', { element: shape });
+
+      var newName = 'CHANGED';
+
+      // a <textarea /> element
+      var content = directEditing._textbox.content;
+
+      content.innerText = newName;
+
+      // when
+      selection.select();
+
+      // then
+      expect(directEditing.isActive()).to.be.false;
+      expect(decision.name).to.equal(newName);
+    }
+  ));
+
+
   describe('activate on create', function() {
 
     var createElement;
