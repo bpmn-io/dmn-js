@@ -36,7 +36,8 @@ export default function LabelEditingProvider(
     'drag.init',
     'drillDown.click',
     'element.mousedown',
-    'popupMenu.open'
+    'popupMenu.open',
+    'selection.changed'
   ], function() {
     directEditing.complete();
   });
