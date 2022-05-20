@@ -31,6 +31,8 @@ import {
 
 var RENDERER_IDS = new Ids();
 
+var black = 'hsl(225, 10%, 15%)';
+
 /**
  * Renderer for the DRD view. The default colors are configurable.
  * When default label color is not provided, it will take the default
@@ -71,7 +73,7 @@ export default function DrdRenderer(
   var markers = {};
 
   var defaultFillColor = config && config.defaultFillColor || 'white',
-      defaultStrokeColor = config && config.defaultStrokeColor || 'black',
+      defaultStrokeColor = config && config.defaultStrokeColor || black,
       defaultLabelColor = config && config.defaultLabelColor;
 
   function marker(type, fill, stroke) {
@@ -215,7 +217,7 @@ export default function DrdRenderer(
     offset = offset || 0;
 
     attrs = computeStyle(attrs, {
-      stroke: 'black',
+      stroke: black,
       strokeWidth: 2,
       fill: 'white'
     });
@@ -265,7 +267,7 @@ export default function DrdRenderer(
 
     attrs = computeStyle(attrs, [ 'no-fill' ], {
       strokeWidth: 2,
-      stroke: 'black'
+      stroke: black
     });
 
     var path = svgCreate('path');
@@ -478,7 +480,7 @@ export default function DrdRenderer(
 
   function drawLine(p, waypoints, attrs) {
     attrs = computeStyle(attrs, [ 'no-fill' ], {
-      stroke: 'black',
+      stroke: black,
       strokeWidth: 2,
       fill: 'none'
     });
