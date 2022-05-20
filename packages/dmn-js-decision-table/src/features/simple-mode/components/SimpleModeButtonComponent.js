@@ -59,9 +59,10 @@ export default class SimpleModeButtonComponent extends Component {
   }
 
   hideAndShowDebounced() {
-    this.hide();
-
-    this.showDebounced();
+    if (this.state.isVisible) {
+      this.hide();
+      this.showDebounced();
+    }
   }
 
   showDebounced() {
