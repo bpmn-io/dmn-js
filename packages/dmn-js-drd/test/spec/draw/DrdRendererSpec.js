@@ -54,8 +54,8 @@ describe('draw - DrdRenderer', function() {
 
       // then
       expect(domQuery('rect', visual).style.fill).to.equal('white');
-      expect(domQuery('rect', visual).style.stroke).to.equal('black');
-      expect(domQuery('text', visual).style.fill).to.equal('black');
+      expect(domQuery('rect', visual).style.stroke).to.equal('rgb(34, 36, 42)');
+      expect(domQuery('text', visual).style.fill).to.equal('rgb(34, 36, 42)');
     });
 
 
