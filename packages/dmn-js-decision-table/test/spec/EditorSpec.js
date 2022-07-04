@@ -4,6 +4,7 @@ import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
 import simpleDiagramXML from './simple.dmn';
 import complexDiagramXML from './complex.dmn';
+import bkmXML from './bkm.dmn';
 
 
 describe('DecisionTable', function() {
@@ -48,4 +49,8 @@ describe('DecisionTable', function() {
     return createDecisionTableEditor(complexDiagramXML);
   });
 
+
+  it('should open BKM', function() {
+    return createDecisionTableEditor(bkmXML);
+  });
 });
