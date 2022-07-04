@@ -2,6 +2,8 @@ import { Component } from 'inferno';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
+import { getBusinessObject, is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 import {
   inject,
   mixin,
@@ -40,7 +42,7 @@ export default class DecisionTablePropertiesComponent extends Component {
   }
 
   getBusinessObject() {
-    return this.sheet.getRoot().businessObject.$parent;
+    return getDMNElement(this.sheet.getRoot().businessObject.$parent);
   }
 
   onElementsChanged = () => {
@@ -121,4 +123,14 @@ function NullComponent() {
 
 function resetScroll(event) {
   event.target.scroll(0, 0);
+}
+
+function getDMNElement(root) {
+  let parent = getBusinessObject(root).$parent;
+
+  while (parent && !is(parent, 'dmn:DMNElement')) {
+    parent = parent.$parent;
+  }
+
+  return parent;
 }
