@@ -1,4 +1,8 @@
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import {
+  getBoxedExpression,
+  getBusinessObject,
+  is
+} from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
   classes as domClasses,
@@ -10,7 +14,7 @@ var PROVIDERS = [
   {
     className: 'dmn-icon-decision-table',
     matches: function(el) {
-      var businessObject = el.businessObject;
+      var businessObject = getBusinessObject(el);
 
       return (
         is(businessObject, 'dmn:Decision') &&
@@ -22,12 +26,9 @@ var PROVIDERS = [
   {
     className: 'dmn-icon-literal-expression',
     matches: function(el) {
-      var businessObject = el.businessObject;
+      var boxedExpression = getBoxedExpression(el);
 
-      return (
-        is(businessObject, 'dmn:Decision') &&
-        is(businessObject.decisionLogic, 'dmn:LiteralExpression')
-      );
+      return is(boxedExpression, 'dmn:LiteralExpression');
     },
     title: 'Open literal expression'
   }

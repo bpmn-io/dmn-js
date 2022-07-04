@@ -249,7 +249,8 @@ describe('features - context-pad', function() {
         'append.knowledge-source',
         'append.text-annotation',
         'connect',
-        'delete'
+        'delete',
+        'replace'
       ]);
     }));
 

@@ -1,3 +1,5 @@
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 /**
  * This module takes care of replacing DRD elements
  */
@@ -34,7 +36,6 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
 
     if (target.table) {
       var table = drdFactory.create('dmn:DecisionTable');
-      newBusinessObject.decisionLogic = table;
       table.$parent = newBusinessObject;
 
       var output = drdFactory.create('dmn:OutputClause');
@@ -53,11 +54,15 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
       inputExpression.$parent = input;
 
       table.input = [ input ];
+
+      setBoxedExpression(newBusinessObject, table, drdFactory);
     }
 
     if (target.expression) {
-      newBusinessObject.decisionLogic = drdFactory.create('dmn:LiteralExpression');
-      newBusinessObject.variable = drdFactory.create('dmn:InformationItem');
+      var literalExpression = drdFactory.create('dmn:LiteralExpression'),
+          variable = drdFactory.create('dmn:InformationItem');
+
+      setBoxedExpression(newBusinessObject, literalExpression, drdFactory, variable);
     }
 
     return replace.replaceElement(element, newElement, hints);
@@ -72,3 +77,23 @@ DrdReplace.$inject = [
   'selection',
   'modeling'
 ];
+
+// helper //////////////////////////////////////////////////////////////
+function setBoxedExpression(bo, expression, drdFactory, variable) {
+  if (is(bo, 'dmn:Decision')) {
+    bo.decisionLogic = expression;
+    expression.$parent = bo;
+  } else if (is(bo, 'dmn:BusinessKnowledgeModel')) {
+    var encapsulatedLogic = drdFactory.create('dmn:FunctionDefinition', {
+      body: expression });
+
+    bo.encapsulatedLogic = encapsulatedLogic;
+    encapsulatedLogic.$parent = bo;
+    expression.$parent = encapsulatedLogic;
+  }
+
+  if (variable) {
+    bo.variable = variable;
+    variable.$parent = bo;
+  }
+}
