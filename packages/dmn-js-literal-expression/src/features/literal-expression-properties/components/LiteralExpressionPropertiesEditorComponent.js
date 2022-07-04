@@ -3,6 +3,8 @@ import { Component } from 'inferno';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
+
 
 export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
@@ -110,7 +112,7 @@ class ExpressionLanguage extends Component {
 
   _getExpressionLanguage() {
     const decision = this._viewer.getDecision();
-    const literalExpression = decision.decisionLogic;
+    const literalExpression = getBoxedExpression(decision);
 
     return (literalExpression && literalExpression.expressionLanguage)
       ? literalExpression.expressionLanguage.toLowerCase()

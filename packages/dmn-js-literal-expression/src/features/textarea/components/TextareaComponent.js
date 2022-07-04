@@ -1,5 +1,7 @@
 import { Component } from 'inferno';
 
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
+
 
 export default class TextareaComponent extends Component {
   constructor(props, context) {
@@ -9,7 +11,7 @@ export default class TextareaComponent extends Component {
   }
 
   render() {
-    const { text } = this._viewer.getDecision().decisionLogic;
+    const { text } = getBoxedExpression(this._viewer.getDecision());
 
     return (
       <div className="textarea">

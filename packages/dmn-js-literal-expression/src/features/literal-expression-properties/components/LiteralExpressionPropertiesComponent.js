@@ -1,5 +1,6 @@
 import { Component } from 'inferno';
 
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
@@ -9,10 +10,10 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 
   render() {
-    const {
-      decisionLogic: literalExpression,
-      variable
-    } = this._viewer.getDecision();
+    const decision = this._viewer.getDecision();
+
+    const literalExpression = getBoxedExpression(decision);
+    const variable = decision.variable;
 
     return (
       <div className="literal-expression-properties">

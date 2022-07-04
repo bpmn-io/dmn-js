@@ -5,6 +5,7 @@ import {
 import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
 
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class Modeling {
 
@@ -62,7 +63,7 @@ export default class Modeling {
 
   editLiteralExpressionText(text) {
     const decision = this.getDecision(),
-          literalExpression = decision.decisionLogic;
+          literalExpression = getBoxedExpression(decision);
 
     const context = {
       element: literalExpression,
@@ -76,7 +77,7 @@ export default class Modeling {
 
   editExpressionLanguage(expressionLanguage) {
     const decision = this.getDecision(),
-          literalExpression = decision.decisionLogic;
+          literalExpression = getBoxedExpression(decision);
 
     const context = {
       element: literalExpression,

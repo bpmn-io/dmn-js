@@ -2,6 +2,7 @@ import { Component } from 'inferno';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class TextareaEditorComponent extends Component {
   constructor(props, context) {
@@ -21,7 +22,7 @@ export default class TextareaEditorComponent extends Component {
   }
 
   getLiteralExpression() {
-    return this._viewer.getDecision().decisionLogic;
+    return getBoxedExpression(this._viewer.getDecision());
   }
 
   onElementsChanged() {
