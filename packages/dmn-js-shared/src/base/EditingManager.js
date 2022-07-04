@@ -4,6 +4,11 @@ import Ids from 'ids';
 
 import { isAny } from '../util/ModelUtil';
 
+const VIEWABLE_ELEMENTS = [
+  'dmn:Decision',
+  'dmn:Definitions',
+  'dmn:BusinessKnowledgeModel'
+];
 
 export default class EditingManager extends Manager {
 
@@ -27,7 +32,7 @@ export default class EditingManager extends Manager {
       viewer.on('elements.changed', ({ elements }) => {
 
         var viewsChanged = elements.some(function(e) {
-          return isAny(e, [ 'dmn:Decision', 'dmn:Definitions', 'dmn:BusinessKnowledgeModel' ]);
+          return isAny(e, VIEWABLE_ELEMENTS);
         });
 
         if (viewsChanged) {
