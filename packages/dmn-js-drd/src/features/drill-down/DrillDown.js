@@ -1,4 +1,4 @@
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { getBoxedExpression, is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
   domify,
@@ -11,23 +11,17 @@ var PROVIDERS = [
   {
     className: 'dmn-icon-decision-table',
     matches: function(el) {
-      var businessObject = el.businessObject;
+      var boxedExpression = getBoxedExpression(el);
 
-      return (
-        is(businessObject, 'dmn:Decision') &&
-        is(businessObject.decisionLogic, 'dmn:DecisionTable')
-      );
+      return is(boxedExpression, 'dmn:DecisionTable');
     }
   },
   {
     className: 'dmn-icon-literal-expression',
     matches: function(el) {
-      var businessObject = el.businessObject;
+      var boxedExpression = getBoxedExpression(el);
 
-      return (
-        is(businessObject, 'dmn:Decision') &&
-        is(businessObject.decisionLogic, 'dmn:LiteralExpression')
-      );
+      return is(boxedExpression, 'dmn:LiteralExpression');
     }
   }
 ];
