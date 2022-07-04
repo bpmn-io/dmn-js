@@ -87,7 +87,7 @@ function setBoxedExpression(bo, expression, drdFactory, variable) {
     var encapsulatedLogic = drdFactory.create('dmn:FunctionDefinition', {
       body: expression });
 
-    bo.encapsulatedLogic = expression;
+    bo.encapsulatedLogic = encapsulatedLogic;
     encapsulatedLogic.$parent = bo;
     expression.$parent = encapsulatedLogic;
   }
