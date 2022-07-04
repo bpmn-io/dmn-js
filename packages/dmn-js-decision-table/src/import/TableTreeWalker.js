@@ -1,3 +1,4 @@
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 import { forEach } from 'min-dash';
 
 import { elementToString } from './Util';
@@ -24,35 +25,33 @@ export default function TableTreeWalker(handler, options) {
 
   // Semantic handling //////////////////////
 
-  function handleDecision(decision) {
+  function handleDMNElement(element) {
+    const table = getBoxedExpression(element);
 
-    if (!decision.id) {
-      decision.id = 'decision';
+    if (!table) {
+      throw new Error(`no table for ${ elementToString(element) }`);
     }
 
-    const table = decision.decisionLogic;
+    handleDecisionTable(table);
+  }
 
-    if (table) {
+  function handleDecisionTable(table) {
 
-      if (!table.output) {
-        throw new Error(`missing output for ${ elementToString(table) }`);
-      }
-
-      const ctx = visitTable(table);
-
-      if (table.input) {
-        handleClauses(table.input, ctx, table);
-      }
-
-      handleClauses(table.output, ctx, table);
-
-      // if any input or output clauses (columns) were added
-      // make sure that for each rule the according input/output entry is created
-      handleRules(table.rule, ctx, table);
-    } else {
-      throw new Error(`no table for ${ elementToString(decision) }`);
+    if (!table.output) {
+      throw new Error(`missing output for ${ elementToString(table) }`);
     }
 
+    const ctx = visitTable(table);
+
+    if (table.input) {
+      handleClauses(table.input, ctx, table);
+    }
+
+    handleClauses(table.output, ctx, table);
+
+    // if any input or output clauses (columns) were added
+    // make sure that for each rule the according input/output entry is created
+    handleRules(table.rule, ctx, table);
   }
 
   function handleClauses(clauses, context, definitions) {
@@ -81,6 +80,6 @@ export default function TableTreeWalker(handler, options) {
   // API //////////////////////
 
   return {
-    handleDecision: handleDecision
+    handleDecision: handleDMNElement
   };
 }
