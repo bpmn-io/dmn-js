@@ -6,6 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.2.0
+
+* `FEAT`: change default black to off black ([#701](https://github.com/bpmn-io/dmn-js/pull/701))
+* `FIX`: do not display simple button without reason ([#668](https://github.com/bpmn-io/dmn-js/issues/668))
+* `FIX`: complete direct editing when selection changes ([#700](https://github.com/bpmn-io/dmn-js/pull/700))
+* `DEPS`: update to `diagram-js@8.7.0`
+
 ## 12.1.1
 
 * `FIX`: clear active view during re-import ([#697](https://github.com/bpmn-io/dmn-js/issues/697))
