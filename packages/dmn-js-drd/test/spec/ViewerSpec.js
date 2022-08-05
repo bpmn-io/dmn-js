@@ -181,6 +181,8 @@ describe('Viewer', function() {
           // then
           expect(svg).to.exist;
 
+          // should not be empty
+          expect(svg.includes('viewBox="0 0 0 0"')).to.be.false;
           expect(console.warn).to.not.have.been.called;
         });
 

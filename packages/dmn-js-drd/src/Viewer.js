@@ -122,7 +122,7 @@ Viewer.prototype.saveSVG = wrapForCompatibility(function(options) {
 
     var canvas = self.get('canvas');
 
-    var contentNode = canvas.getDefaultLayer(),
+    var contentNode = canvas.getActiveLayer(),
         defsNode = domQuery('defs', canvas._svg);
 
     var contents = innerSVG(contentNode),
