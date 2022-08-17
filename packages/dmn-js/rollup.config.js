@@ -104,7 +104,6 @@ function pgl(plugins=[]) {
     json(),
     nodeResolve({
       mainFields: (NODE_ENV === 'development' ? [ 'dev:module' ] : []).concat([
-        'browser',
         'module',
         'main'
       ])

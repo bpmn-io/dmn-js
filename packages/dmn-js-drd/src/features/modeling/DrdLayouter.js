@@ -1,4 +1,4 @@
-import inherits from 'inherits';
+import inherits from 'inherits-browser';
 
 import BaseLayouter from 'diagram-js/lib/layout/BaseLayouter';
 
