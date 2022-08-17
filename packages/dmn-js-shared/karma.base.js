@@ -22,6 +22,7 @@ module.exports = function(path) {
       basePath: path,
 
       frameworks: [
+        'webpack',
         'mocha',
         'sinon-chai'
       ],
