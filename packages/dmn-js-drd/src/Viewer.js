@@ -13,7 +13,7 @@ import {
 
 import Diagram from 'diagram-js';
 
-import inherits from 'inherits';
+import inherits from 'inherits-browser';
 
 import {
   importDRD

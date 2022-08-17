@@ -3,7 +3,7 @@ import {
   isAny
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import inherits from 'inherits';
+import inherits from 'inherits-browser';
 
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 

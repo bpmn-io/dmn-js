@@ -90,7 +90,6 @@ module.exports = function(path) {
         resolve: {
           mainFields: [
             'dev:module',
-            'browser',
             'module',
             'main'
           ],
