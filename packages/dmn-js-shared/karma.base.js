@@ -39,7 +39,7 @@ module.exports = function(path) {
 
       coverageReporter: {
         reporters: [
-          { type: 'lcovonly', subdir: '.' },
+          { type: 'lcov', subdir: '.' },
         ]
       },
 
