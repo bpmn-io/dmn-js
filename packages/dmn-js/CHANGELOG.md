@@ -6,9 +6,15 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.3.0
+
+* `DEPS`: use `inherits-browser`
+* `DEPS`: update DRD editor to `diagram-js@8.8.0`
+* `DEPS`: update to `table-js@7.3.0`
+
 ## 12.2.1
 
-- `FIX`: fix DRD SVG creation ([#708](https://github.com/bpmn-io/dmn-js/pull/708))
+* `FIX`: fix DRD SVG creation ([#708](https://github.com/bpmn-io/dmn-js/pull/708))
 
 ## 12.2.0
 
