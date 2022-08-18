@@ -28,6 +28,9 @@
       "url": "https://github.com/bpmn-io"
     }
   ],
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bpmn-io/dmn-js"
@@ -58,7 +61,7 @@
     "karma-mocha": "^2.0.1",
     "karma-sinon-chai": "^2.0.2",
     "karma-webpack": "^5.0.0",
-    "lerna": "^3.22.1",
+    "lerna": "^5.4.3",
     "mocha": "^8.4.0",
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all": "^4.1.3",
