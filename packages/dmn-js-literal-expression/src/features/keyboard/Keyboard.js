@@ -56,14 +56,14 @@ export default class Keyboard {
     this._registerDefaultBindings();
 
     this._fire('init');
-  }
+  };
 
   _destroy = () => {
     this._fire('destroy');
 
     this.unbind();
     this._listeners = null;
-  }
+  };
 
   // our key handler is a singleton that passes
   // (keycode, modifiers) to each listener.
@@ -85,7 +85,7 @@ export default class Keyboard {
         return;
       }
     }
-  }
+  };
 
   bind(node) {
 
@@ -115,7 +115,7 @@ export default class Keyboard {
     }
 
     this._node = null;
-  }
+  };
 
   _fire(event) {
     this._eventBus.fire('keyboard.' + event, {

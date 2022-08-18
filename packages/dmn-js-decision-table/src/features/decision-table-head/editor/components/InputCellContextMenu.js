@@ -48,7 +48,7 @@ export default class InputCellContextMenu extends Component {
     this.setState({
       unsaved: false
     });
-  }
+  };
 
   handleChange = (changes) => {
     this.setState({

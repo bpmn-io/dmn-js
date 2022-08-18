@@ -28,7 +28,7 @@ export default class DecisionPropertiesEditorComponent extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   setupChangeListeners({ bind, unbind }) {
 
@@ -47,7 +47,7 @@ export default class DecisionPropertiesEditorComponent extends Component {
 
   setDecisionName = (name) => {
     this._modeling.editDecisionName(name);
-  }
+  };
 
   render() {
     const { name } = this.getDecision();

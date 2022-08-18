@@ -116,7 +116,7 @@ export default class ContentEditable extends Component {
     if (typeof propsFocus === 'function') {
       propsFocus(event);
     }
-  }
+  };
 
   onBlur = event => {
     var propsBlur = this.props.onBlur;
@@ -128,7 +128,7 @@ export default class ContentEditable extends Component {
     if (typeof propsBlur === 'function') {
       propsBlur(event);
     }
-  }
+  };
 
   onKeydown = (event) => {
 
@@ -153,7 +153,7 @@ export default class ContentEditable extends Component {
       this.onInput(event);
     }
 
-  }
+  };
 
   onInput = (event) => {
 
@@ -166,14 +166,14 @@ export default class ContentEditable extends Component {
     var text = innerText(this.node);
 
     propsInput(text);
-  }
+  };
 
   // TODO(barmac): remove once we drop IE 11 support
   onKeyPress = (event) => {
     if (this.onInputIEPolyfill) {
       this.onInputIEPolyfill(event);
     }
-  }
+  };
 
   onPaste = (event) => {
 
@@ -189,7 +189,7 @@ export default class ContentEditable extends Component {
       document.execCommand('insertText', false, text.replace(/\n/g, ' '));
       event.preventDefault();
     }
-  }
+  };
 
   getClassName() {
     const {

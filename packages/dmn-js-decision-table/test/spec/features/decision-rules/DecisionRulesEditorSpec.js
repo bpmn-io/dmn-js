@@ -17,7 +17,7 @@ import ModelingModule from 'src/features/modeling';
 import DecisionRulesModule from 'src/features/decision-rules';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 
-const CUSTOM_EXPRESSION_LANGUAGES = [{
+const CUSTOM_EXPRESSION_LANGUAGES = [ {
   label: 'FEEL',
   value: 'feel'
 }, {
@@ -35,7 +35,7 @@ const CUSTOM_EXPRESSION_LANGUAGES = [{
 }, {
   label: 'JRuby',
   value: 'jruby'
-}];
+} ];
 
 
 describe('features/decision-rules', function() {

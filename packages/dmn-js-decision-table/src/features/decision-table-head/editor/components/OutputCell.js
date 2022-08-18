@@ -26,7 +26,7 @@ export default class OutputCell extends Component {
       event,
       output
     });
-  }
+  };
 
   onContextmenu = (event) => {
     const { id } = this.props.output;
@@ -35,11 +35,11 @@ export default class OutputCell extends Component {
       event,
       id
     });
-  }
+  };
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentWillMount() {
     const { injector } = this.context;

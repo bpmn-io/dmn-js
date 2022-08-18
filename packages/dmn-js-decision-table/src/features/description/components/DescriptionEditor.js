@@ -22,7 +22,7 @@ export default class DescriptionEditor extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentWillMount() {
     if (this._element) {
@@ -59,7 +59,7 @@ export default class DescriptionEditor extends Component {
     this._modeling.updateProperties(this._element, {
       description: value
     });
-  }
+  };
 
   render() {
     if (!this._element) {

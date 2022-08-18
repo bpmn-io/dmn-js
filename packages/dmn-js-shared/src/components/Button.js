@@ -14,7 +14,7 @@ export default class Button extends Component {
     }
 
     onClick(event);
-  }
+  };
 
   onMouseDown = (event) => {
     const { onMouseDown } = this.props;
@@ -24,7 +24,7 @@ export default class Button extends Component {
     }
 
     onMouseDown(event);
-  }
+  };
 
   onMouseUp = (event) => {
     const { onMouseUp } = this.props;
@@ -34,7 +34,7 @@ export default class Button extends Component {
     }
 
     onMouseUp(event);
-  }
+  };
 
   render() {
     const {

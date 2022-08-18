@@ -45,11 +45,11 @@ export default class DecisionTablePropertiesComponent extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   setDecisionTableName = (name) => {
     this.modeling.editDecisionTableName(name);
-  }
+  };
 
   render() {
     const bo = this.getBusinessObject();

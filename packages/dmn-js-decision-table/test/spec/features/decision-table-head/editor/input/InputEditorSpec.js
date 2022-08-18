@@ -63,7 +63,7 @@ class Root extends Component {
 
   handleChanged = (newProps) => {
     this.setState(newProps);
-  }
+  };
 
   render() {
     return (

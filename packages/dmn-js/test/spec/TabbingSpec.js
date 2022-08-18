@@ -118,13 +118,13 @@ describe('tabs', function() {
 
     const translateModules = {
       drd: {
-        additionalModules: [translateModule]
+        additionalModules: [ translateModule ]
       },
       decisionTable: {
-        additionalModules: [translateModule]
+        additionalModules: [ translateModule ]
       },
       literalExpression: {
-        additionalModules: [translateModule]
+        additionalModules: [ translateModule ]
       },
     };
 

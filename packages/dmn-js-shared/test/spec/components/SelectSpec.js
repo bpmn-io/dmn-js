@@ -47,13 +47,13 @@ describe('components/Select', function() {
   it('should render options', function() {
 
     // given
-    const options = [{
+    const options = [ {
       label: 'Foo',
       value: 'foo'
     }, {
       label: 'Bar',
       value: 'bar'
-    }];
+    } ];
 
     // when
     const renderedTree = renderIntoDocument(<Select options={ options } />);
@@ -68,13 +68,13 @@ describe('components/Select', function() {
   it('should new value on change', function() {
 
     // given
-    const options = [{
+    const options = [ {
       label: 'Foo',
       value: 'foo'
     }, {
       label: 'Bar',
       value: 'bar'
-    }];
+    } ];
 
     const renderedTree = renderIntoDocument(
       <Select
@@ -94,13 +94,13 @@ describe('components/Select', function() {
   it('should notify on change', function() {
 
     // given
-    const options = [{
+    const options = [ {
       label: 'Foo',
       value: 'foo'
     }, {
       label: 'Bar',
       value: 'bar'
-    }];
+    } ];
 
     const spy = sinon.spy();
 

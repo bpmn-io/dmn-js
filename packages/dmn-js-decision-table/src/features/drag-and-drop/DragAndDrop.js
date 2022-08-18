@@ -298,7 +298,7 @@ export default class DragAndDrop {
 
       this._dragImage = null;
     }
-  }
+  };
 
 }
 

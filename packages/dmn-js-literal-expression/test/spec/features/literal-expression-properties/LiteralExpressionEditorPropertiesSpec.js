@@ -25,7 +25,7 @@ import ModelingModule from 'src/features/modeling';
 import TranslateModule from 'diagram-js/lib/i18n/translate';
 
 
-const CUSTOM_EXPRESSION_LANGUAGES = [{
+const CUSTOM_EXPRESSION_LANGUAGES = [ {
   label: 'FEEL',
   value: 'feel'
 }, {
@@ -43,7 +43,7 @@ const CUSTOM_EXPRESSION_LANGUAGES = [{
 }, {
   label: 'JRuby',
   value: 'jruby'
-}];
+} ];
 
 
 describe('literal expression properties editor', function() {

@@ -35,7 +35,7 @@ export default class ResizeColumn extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   handleMouseDown = event => {
     const cell = domClosest(event.target, 'th', false);
@@ -46,7 +46,7 @@ export default class ResizeColumn extends Component {
       minWidth: this.props.minWidth || 150,
       onEnd: this.saveWidth
     });
-  }
+  };
 
   saveWidth = newWidth => {
     const { col } = this.props;
@@ -60,7 +60,7 @@ export default class ResizeColumn extends Component {
     }
 
     this.modeling.updateProperties(col, update);
-  }
+  };
 
   isLastInputOrOutput() {
     const { col } = this.props,

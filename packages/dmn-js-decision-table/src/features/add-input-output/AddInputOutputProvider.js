@@ -13,7 +13,7 @@ export default function AddInputOutputProvider(
       return AddInput;
     }
 
-    if (cellType === 'output-cell' && index === outputsLength -1) {
+    if (cellType === 'output-cell' && index === outputsLength - 1) {
       return AddOutput;
     }
   });

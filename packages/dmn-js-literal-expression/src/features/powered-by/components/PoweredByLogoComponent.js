@@ -15,7 +15,7 @@ export default class PoweredByLogoComponent extends Component {
 
   onClick = () => {
     this._eventBus.fire('poweredBy.show');
-  }
+  };
 
   render() {
     return (

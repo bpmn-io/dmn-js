@@ -37,7 +37,7 @@ export default class TypeRefCellContextMenu extends Component {
     }
 
     this._modeling.updateProperties(actualElement, newProperties);
-  }
+  };
 
   getElement() {
     return this.props.context.input || this.props.context.output;

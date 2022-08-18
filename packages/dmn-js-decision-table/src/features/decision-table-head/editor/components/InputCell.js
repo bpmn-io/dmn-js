@@ -26,7 +26,7 @@ export default class InputCell extends Component {
       event,
       input
     });
-  }
+  };
 
   onContextmenu = (event) => {
     const { id } = this.props.input;
@@ -35,11 +35,11 @@ export default class InputCell extends Component {
       event,
       id
     });
-  }
+  };
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentWillMount() {
     const { injector } = this.context;

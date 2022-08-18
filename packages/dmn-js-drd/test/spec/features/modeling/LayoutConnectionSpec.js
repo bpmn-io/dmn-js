@@ -68,7 +68,7 @@ describe('features/modeling - layout connection', function() {
     it('<do>', function() {
 
       // then
-      expect(informationRequirement.waypoints).to.eql([{
+      expect(informationRequirement.waypoints).to.eql([ {
         original: {
           x: 290,
           y: 200
@@ -85,7 +85,7 @@ describe('features/modeling - layout connection', function() {
         },
         x: 90,
         y: 80
-      }]);
+      } ]);
 
       expect(informationRequirementDi.waypoint[ 0 ]).to.include({
         x: 290,
@@ -128,7 +128,7 @@ describe('features/modeling - layout connection', function() {
       commandStack.redo();
 
       // then
-      expect(informationRequirement.waypoints).to.eql([{
+      expect(informationRequirement.waypoints).to.eql([ {
         original: {
           x: 290,
           y: 200
@@ -145,7 +145,7 @@ describe('features/modeling - layout connection', function() {
         },
         x: 90,
         y: 80
-      }]);
+      } ]);
 
       expect(informationRequirementDi.waypoint[ 0 ]).to.include({
         x: 290,
@@ -207,7 +207,7 @@ describe('features/modeling - layout connection', function() {
     it('<do>', function() {
 
       // then
-      expect(authorityRequirement.waypoints).to.eql([{
+      expect(authorityRequirement.waypoints).to.eql([ {
         original: {
           x: 50,
           y: 400
@@ -221,7 +221,7 @@ describe('features/modeling - layout connection', function() {
         },
         x: 290,
         y: 280
-      }]);
+      } ]);
 
       expect(authorityRequirementDi.waypoint[ 0 ]).to.include({
         x: 50,
@@ -260,7 +260,7 @@ describe('features/modeling - layout connection', function() {
       commandStack.redo();
 
       // then
-      expect(authorityRequirement.waypoints).to.eql([{
+      expect(authorityRequirement.waypoints).to.eql([ {
         original: {
           x: 50,
           y: 400
@@ -274,7 +274,7 @@ describe('features/modeling - layout connection', function() {
         },
         x: 290,
         y: 280
-      }]);
+      } ]);
 
       expect(authorityRequirementDi.waypoint[ 0 ]).to.include({
         x: 50,

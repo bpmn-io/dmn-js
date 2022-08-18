@@ -144,7 +144,7 @@ export default class InputSelect extends Component {
     }
 
     onChange(value);
-  }
+  };
 
   onInputClick = (event) => {
     event.preventDefault();
@@ -153,13 +153,13 @@ export default class InputSelect extends Component {
     this.setOptionsVisible(!this.state.optionsVisible);
 
     this.focusInput();
-  }
+  };
 
   onInput = (event) => {
     const { value } = event.target;
 
     this.onChange(value);
-  }
+  };
 
   onOptionClick = (value, event) => {
     event.preventDefault();
@@ -170,7 +170,7 @@ export default class InputSelect extends Component {
     this.onChange(value);
 
     this.focusInput();
-  }
+  };
 
   /**
    * Focus input node
@@ -197,11 +197,11 @@ export default class InputSelect extends Component {
 
   onFocusChanged = (evt) => {
     this.checkClose(evt.target);
-  }
+  };
 
   onGlobalClick = (evt) => {
     this.checkClose(evt.target);
-  }
+  };
 
   select(direction) {
 
@@ -275,7 +275,7 @@ export default class InputSelect extends Component {
         this.setOptionsVisible(false);
       }
     }
-  }
+  };
 
   onKeyboard = (keycode) => {
     const { optionsVisible } = this.state;
@@ -290,7 +290,7 @@ export default class InputSelect extends Component {
 
       return true;
     }
-  }
+  };
 
   renderOptions(options, activeOption) {
     return (
@@ -338,19 +338,24 @@ export default class InputSelect extends Component {
         onClick={ this.onInputClick }>
         {
           noInput
-            ? <div
-              className="dms-input"
-              tabindex="0"
-              onKeyDown={ this.onKeyDown }
-              ref={ node => this.inputNode = node }>{ label }</div>
-            : <input
-              className="dms-input"
-              onInput={ this.onInput }
-              onKeyDown={ this.onKeyDown }
-              spellcheck="false"
-              ref={ node => this.inputNode = node }
-              type="text"
-              value={ value } />
+            ? (
+              <div
+                className="dms-input"
+                tabindex="0"
+                onKeyDown={ this.onKeyDown }
+                ref={ node => this.inputNode = node }
+              >{ label }</div>
+            ) : (
+              <input
+                className="dms-input"
+                onInput={ this.onInput }
+                onKeyDown={ this.onKeyDown }
+                spellcheck="false"
+                ref={ node => this.inputNode = node }
+                type="text"
+                value={ value }
+              />
+            )
         }
         <span
           className={ [

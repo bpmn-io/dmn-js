@@ -3,12 +3,12 @@ import { bootstrap, getViewerJS } from '../../base/viewer/TestHelper';
 import ExpressionLanguagesModule from 'src/features/expression-languages';
 
 
-const DEFAULT_OPTIONS = [{
+const DEFAULT_OPTIONS = [ {
   label: 'FEEL',
   value: 'feel'
-}];
+} ];
 
-const CUSTOM_OPTIONS = [{
+const CUSTOM_OPTIONS = [ {
   label: 'FEEL',
   value: 'feel'
 }, {
@@ -26,7 +26,7 @@ const CUSTOM_OPTIONS = [{
 }, {
   label: 'JRuby',
   value: 'jruby'
-}];
+} ];
 
 
 describe('ExpressionLanguages', function() {

@@ -4,10 +4,10 @@ import {
 } from 'min-dash';
 
 
-const EXPRESSION_LANGUAGE_OPTIONS = [{
+const EXPRESSION_LANGUAGE_OPTIONS = [ {
   label: 'FEEL',
   value: 'feel'
-}];
+} ];
 
 /**
  * @typedef ExpressionLanguageDescriptor

@@ -47,7 +47,7 @@ export default class BooleanEdit extends Component {
   render() {
     const { value } = this.state;
 
-    const options = [{
+    const options = [ {
       label: '-',
       value: NONE
     }, {
@@ -56,7 +56,7 @@ export default class BooleanEdit extends Component {
     }, {
       label: this._translate('No'),
       value: FALSE
-    }];
+    } ];
 
     return (
       <div class="simple-boolean-edit context-menu-container">

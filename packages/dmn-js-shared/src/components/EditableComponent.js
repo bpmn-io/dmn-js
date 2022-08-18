@@ -91,7 +91,7 @@ export default class EditableComponent extends Component {
     if (typeof onFocus === 'function') {
       onFocus(event);
     }
-  }
+  };
 
   onBlur = event => {
     this.setState({
@@ -112,7 +112,7 @@ export default class EditableComponent extends Component {
     if (typeof onBlur === 'function') {
       onBlur(event);
     }
-  }
+  };
 
   getClassName() {
     var {

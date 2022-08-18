@@ -51,7 +51,7 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
 
     var event = context.keyEvent;
 
-    if (keyboard.isKey(['a', 'A'], event) && keyboard.isCmd(event)) {
+    if (keyboard.isKey([ 'a', 'A' ], event) && keyboard.isCmd(event)) {
       editorActions.trigger('selectElements');
 
       return true;
@@ -68,7 +68,7 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
       return;
     }
 
-    if (keyboard.isKey(['l', 'L'], event)) {
+    if (keyboard.isKey([ 'l', 'L' ], event)) {
       editorActions.trigger('lassoTool');
 
       return true;
@@ -85,7 +85,7 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
       return;
     }
 
-    if (keyboard.isKey(['h', 'H'], event)) {
+    if (keyboard.isKey([ 'h', 'H' ], event)) {
       editorActions.trigger('handTool');
 
       return true;
@@ -102,7 +102,7 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
       return;
     }
 
-    if (keyboard.isKey(['e', 'E'], event)) {
+    if (keyboard.isKey([ 'e', 'E' ], event)) {
       editorActions.trigger('directEditing');
 
       return true;

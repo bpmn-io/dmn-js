@@ -13,7 +13,7 @@ export default class CreateInputsCell extends Component {
 
   onClick = (event) => {
     this.editorActions.trigger('addInput');
-  }
+  };
 
   render() {
     return (

@@ -25,10 +25,10 @@ describe('DRD - Import', function() {
     ];
 
     beforeEach(bootstrapModeler(exampleXML, {
-      additionalModules: [{
+      additionalModules: [ {
         __init__: [ 'eventListener' ],
         eventListener: [ 'type', createEventListener(TRACKED_EVENTS, events) ]
-      }]
+      } ]
     }));
 
     beforeEach(function() {

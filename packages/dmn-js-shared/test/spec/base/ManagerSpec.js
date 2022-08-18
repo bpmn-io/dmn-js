@@ -13,8 +13,8 @@ import { find } from 'min-dash';
 class TestViewer extends Manager {
 
   constructor(
-      viewProviders=[ DECISION_TABLE_VIEW, DRD_VIEW ],
-      options={}) {
+      viewProviders = [ DECISION_TABLE_VIEW, DRD_VIEW ],
+      options = {}) {
     super(options);
 
     this._viewProviders = viewProviders;
@@ -221,7 +221,7 @@ describe('Manager', function() {
         // then
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+          [ 'import.parse.complete', [ 'error', 'definitions', 'elementsById',
             'references', 'warnings', 'context' ] ],
           [ 'import.render.start', [ 'view', 'element' ] ],
           [ 'import.render.complete', [ 'view', 'error', 'warnings' ] ],
@@ -506,9 +506,9 @@ describe('Manager', function() {
 
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'definitions', 'elementsById',
+          [ 'import.parse.complete', [ 'error', 'definitions', 'elementsById',
             'references', 'warnings', 'context' ] ],
-          [ 'import.done', ['error', 'warnings' ] ]
+          [ 'import.done', [ 'error', 'warnings' ] ]
         ]);
 
         expect(err).to.exist;
@@ -582,8 +582,8 @@ describe('Manager', function() {
 
         expect(events).to.eql([
           [ 'import.parse.start', [ 'xml' ] ],
-          [ 'import.parse.complete', ['error', 'warnings', 'context' ] ],
-          [ 'import.done', ['error', 'warnings' ] ]
+          [ 'import.parse.complete', [ 'error', 'warnings', 'context' ] ],
+          [ 'import.done', [ 'error', 'warnings' ] ]
         ]);
 
         expect(err).to.exist;
@@ -602,11 +602,11 @@ describe('Manager', function() {
         }
       }
 
-      const manager = new TestViewer([{
+      const manager = new TestViewer([ {
         id: 'drd',
         opens: 'dmn:Definitions',
         constructor: ClearErrorView
-      }]);
+      } ]);
       await manager.importXML(diagramXML);
 
       const events = [];

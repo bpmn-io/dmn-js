@@ -15,7 +15,7 @@ export default class Input extends Component {
     }
 
     onInput(event.target.value);
-  }
+  };
 
   onKeyDown = (event) => {
     const { onKeyDown } = this.props;
@@ -25,7 +25,7 @@ export default class Input extends Component {
     }
 
     onKeyDown(event);
-  }
+  };
 
   onKeyUp = (event) => {
     const { onKeyUp } = this.props;
@@ -35,7 +35,7 @@ export default class Input extends Component {
     }
 
     onKeyUp(event);
-  }
+  };
 
   render() {
     const {

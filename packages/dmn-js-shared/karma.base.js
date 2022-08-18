@@ -68,12 +68,12 @@ module.exports = function(path) {
                     } ]
                   ] : [],
                   presets: [
-                    ['@babel/preset-env', {
+                    [ '@babel/preset-env', {
                       modules: false,
                       targets: {
                         chrome: '91'
                       }
-                    }]
+                    } ]
                   ]
                 }
               }

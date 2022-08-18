@@ -82,9 +82,9 @@ describe('ChangeSupport', function() {
 
       // when
       eventBus.fire('elements.changed', {
-        elements: [{
+        elements: [ {
           id: 'foo'
-        }]
+        } ]
       });
 
       // then
@@ -96,9 +96,9 @@ describe('ChangeSupport', function() {
 
       // when
       eventBus.fire('elements.changed', {
-        elements: [{
+        elements: [ {
           id: 'bar'
-        }]
+        } ]
       });
 
       // then

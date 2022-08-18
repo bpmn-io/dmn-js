@@ -155,7 +155,7 @@ export default class Description {
         y: 4
       }
     });
-  }
+  };
 
   removeDescription = (cell) => {
     this._modeling.updateProperties(cell, {
@@ -163,7 +163,7 @@ export default class Description {
     });
 
     this._contextMenu.close();
-  }
+  };
 }
 
 Description.$inject = [
