@@ -323,7 +323,7 @@ describe('context menu', function() {
           });
 
 
-          it('should paste rule above', inject(function(elementRegistry, sheet) {
+          it.only('should paste rule above', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteRuleAboveEntry = domQuery(
@@ -351,7 +351,7 @@ describe('context menu', function() {
           }));
 
 
-          it('should paste rule below', inject(function(elementRegistry, sheet) {
+          it.only('should paste rule below', inject(function(elementRegistry, sheet) {
 
             // given
             const pasteRuleBelowEntry = domQuery(

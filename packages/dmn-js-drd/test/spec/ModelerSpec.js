@@ -18,12 +18,7 @@ describe('Modeler', function() {
 
   function createModeler(xml) {
     modeler = new DrdModeler({
-      container: container,
-      drd: {
-        keyboard: {
-          bindTo: document
-        }
-      }
+      container: container
     });
 
     return modeler.importXML(xml);
@@ -187,12 +182,7 @@ describe('Modeler', function() {
       container = TestContainer.get(this);
 
       const drdModeler = new DrdModeler({
-        container: container,
-        drd: {
-          keyboard: {
-            bindTo: document
-          }
-        }
+        container: container
       });
 
       // when
