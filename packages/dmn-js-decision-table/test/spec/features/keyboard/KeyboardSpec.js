@@ -1,13 +1,12 @@
 import {
   bootstrapModeler,
-  inject
+  inject,
+  getDecisionTable
 } from 'test/helper';
 
 import {
   query as domQuery
 } from 'min-dom';
-
-import TestContainer from 'mocha-test-container-support';
 
 import CoreModule from 'src/core';
 import KeyboardModule from 'src/features/keyboard';
@@ -24,9 +23,8 @@ import {
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
-describe('features/keyboard', function() {
 
-  const keyboardTarget = document.createElement('div');
+describe('features/keyboard', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: [
@@ -37,16 +35,32 @@ describe('features/keyboard', function() {
       DecisionRulesEditorModule,
       TablePropertiesEditorModule,
       SelectionModule
-    ],
-    keyboard: {
-      bindTo: keyboardTarget
-    }
+    ]
   }));
+
+  function getContainer() {
+    return getDecisionTable().invoke((config) => {
+      return config.renderer.container;
+    });
+  }
+
+  function getGraphics(elementId) {
+    const container = getContainer();
+
+    return domQuery('[data-element-id="' + elementId + '"]', container);
+  }
+
+  function getKeyboardTarget() {
+    return getContainer();
+  }
 
   describe('keyboard binding', function() {
 
     it('should integrate with <attach> + <detach> events', inject(
-      function(keyboard, eventBus) {
+      function(config, keyboard, eventBus) {
+
+        // given
+        const keyboardTarget = getKeyboardTarget();
 
         // assume
         expect(keyboard._node).to.eql(keyboardTarget);
@@ -66,20 +80,15 @@ describe('features/keyboard', function() {
 
   describe('default listeners', function() {
 
-    let testContainer;
-
-    beforeEach(function() {
-      testContainer = TestContainer.get(this);
-    });
-
     beforeEach(inject(function(keyboard) {
-      keyboard.bind(testContainer);
+      keyboard.bind();
     }));
+
 
     it('should select cell below on <ENTER>', inject(function(cellSelection) {
 
       // given
-      const gfx = getGraphics('inputEntry1', testContainer);
+      const gfx = getGraphics('inputEntry1');
 
       triggerMouseEvent(gfx, 'click');
 
@@ -99,7 +108,7 @@ describe('features/keyboard', function() {
     it('should select cell above on <SHIFT+ENTER>', inject(function(cellSelection) {
 
       // given
-      const gfx = getGraphics('inputEntry3', testContainer);
+      const gfx = getGraphics('inputEntry3');
 
       triggerMouseEvent(gfx, 'click');
 
@@ -121,7 +130,7 @@ describe('features/keyboard', function() {
       function(cellSelection, sheet) {
 
         // given
-        const gfx = getGraphics('inputEntry7', testContainer);
+        const gfx = getGraphics('inputEntry7');
         const root = sheet.getRoot();
         const rowCount = getRowCount(root);
 
@@ -145,7 +154,7 @@ describe('features/keyboard', function() {
       function(cellSelection, sheet) {
 
         // given
-        const gfx = getGraphics('__decisionProperties_name', testContainer);
+        const gfx = getGraphics('__decisionProperties_name');
         const root = sheet.getRoot();
         const rowCount = getRowCount(root);
 
@@ -170,10 +179,6 @@ describe('features/keyboard', function() {
 
 
 // helpers ///////////////
-
-function getGraphics(elementId, container) {
-  return domQuery('[data-element-id="' + elementId + '"]', container);
-}
 
 function getRowCount(root) {
   return root.rows.length;

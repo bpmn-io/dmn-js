@@ -1,5 +1,5 @@
 import importModule from '../import';
-import renderModule from 'table-js/lib/render';
+import renderModule from '../renderer';
 
 export default {
   __depends__: [

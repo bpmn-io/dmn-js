@@ -11,6 +11,10 @@ import {
   isShift
 } from './KeyboardUtil';
 
+const compatMessage =
+  'Explicit binding of keyboard to an element got removed. For more ' +
+  'information, see https://github.com/bpmn-io/diagram-js/issues/661';
+
 
 /**
  * A keyboard abstraction that may be activated and
@@ -37,22 +41,35 @@ import {
  */
 export default class Keyboard {
 
-  constructor(config, eventBus, editorActions, cellSelection) {
+  constructor(config, eventBus, editorActions, cellSelection, rendererConfig) {
 
-    this._config = config || {};
+    this._config = config = config || {};
     this._editorActions = editorActions;
     this._eventBus = eventBus;
     this._cellSelection = cellSelection;
+
+    if (!rendererConfig.container) {
+      throw new Error('missing <renderer.container> configuration');
+    }
+
+    this._target = rendererConfig.container;
 
     this._listeners = [];
 
     eventBus.on('table.destroy', this._destroy);
     eventBus.on('table.init', this._init);
 
+    if (config.bindTo) {
+      console.error(
+        'unsupported configuration <keyboard.bindTo>',
+        new Error(compatMessage)
+      );
+    }
+
     eventBus.on('attach', () => {
 
-      if (this._config.bindTo) {
-        this.bind(config.bindTo);
+      if (config.bind !== false) {
+        this.bind();
       }
     });
 
@@ -96,10 +113,14 @@ export default class Keyboard {
 
   bind(node) {
 
+    if (node) {
+      console.error('unsupported argument <node>', new Error(compatMessage));
+    }
+
     // make sure that the keyboard is only bound once to the DOM
     this.unbind();
 
-    this._node = node;
+    node = this._node = this._target;
 
     // bind key events
     domEvent.bind(node, 'keydown', this._keyHandler, true);
@@ -241,7 +262,8 @@ Keyboard.$inject = [
   'config.keyboard',
   'eventBus',
   'editorActions',
-  'cellSelection'
+  'cellSelection',
+  'config.renderer'
 ];
 
 

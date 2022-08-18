@@ -1,13 +1,12 @@
 import {
   bootstrapModeler,
+  getDecisionTable,
   inject
 } from 'test/helper';
 
 import {
   setRange
 } from 'selection-ranges';
-
-import TestContainer from 'mocha-test-container-support';
 
 import {
   queryEditor
@@ -30,8 +29,6 @@ import diagramXML from './copy-cut-paste-key-bindings.dmn';
 
 describe('features/copy-cut-paste/key-bindings', function() {
 
-  const keyboardTarget = document.createElement('div');
-
   beforeEach(bootstrapModeler(diagramXML, {
     modules: [
       CoreModule,
@@ -41,18 +38,25 @@ describe('features/copy-cut-paste/key-bindings', function() {
       DecisionRulesEditorModule,
       CopyCutPasteKeyBindingsModule,
       SelectionModule
-    ],
-    keyboard: {
-      bindTo: keyboardTarget
-    }
+    ]
   }));
 
 
-  let testContainer;
+  function getContainer() {
+    return getDecisionTable().invoke((config) => {
+      return config.renderer.container;
+    });
+  }
 
-  beforeEach(function() {
-    testContainer = TestContainer.get(this);
-  });
+  function getGraphics(elementId) {
+    const container = getContainer();
+
+    return domQuery('[data-element-id="' + elementId + '"]', container);
+  }
+
+  function getKeyboardTarget() {
+    return getContainer();
+  }
 
 
   describe('should copy', function() {
@@ -63,7 +67,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       selection.select('inputEntry1');
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 67,
         ctrlKey: true
       });
@@ -79,7 +83,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       selection.select('inputEntry1');
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 67,
         ctrlKey: true,
         shiftKey: true
@@ -95,8 +99,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       // given
       selection.select('inputEntry1');
 
-      const selectedCell =
-        domQuery('[data-element-id="inputEntry1"]', testContainer);
+      const selectedCell = getGraphics('inputEntry1');
 
       const editor = queryEditor('', selectedCell);
 
@@ -106,7 +109,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       });
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 67,
         ctrlKey: true,
         shiftKey: true
@@ -127,7 +130,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       selection.select('inputEntry1');
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 88,
         ctrlKey: true
       });
@@ -143,7 +146,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       selection.select('inputEntry1');
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 88,
         ctrlKey: true,
         shiftKey: true
@@ -159,8 +162,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       // given
       selection.select('inputEntry1');
 
-      const selectedCell =
-        domQuery('[data-element-id="inputEntry1"]', testContainer);
+      const selectedCell = getGraphics('inputEntry1');
 
       const editor = queryEditor('', selectedCell);
 
@@ -170,7 +172,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       });
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 88,
         ctrlKey: true,
         shiftKey: true
@@ -214,7 +216,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       // given
       selection.select('inputEntry1');
 
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 88,
         ctrlKey: true
       });
@@ -222,7 +224,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       selection.select('inputEntry7');
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 86,
         ctrlKey: true
       });
@@ -244,7 +246,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       // given
       selection.select('inputEntry1');
 
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 88,
         ctrlKey: true,
         shiftKey: true
@@ -253,7 +255,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
       selection.select('inputEntry2');
 
       // when
-      triggerEvent(keyboardTarget, 'keydown', {
+      triggerEvent(getKeyboardTarget(), 'keydown', {
         keyCode: 86,
         ctrlKey: true,
         shiftKey: true
@@ -279,15 +281,14 @@ describe('features/copy-cut-paste/key-bindings', function() {
         // given
         selection.select('inputEntry1');
 
-        triggerEvent(keyboardTarget, 'keydown', {
+        triggerEvent(getKeyboardTarget(), 'keydown', {
           keyCode: 88,
           ctrlKey: true
         });
 
         selection.select('inputEntry7');
 
-        const selectedCell =
-          domQuery('[data-element-id="inputEntry7"]', testContainer);
+        const selectedCell = getGraphics('inputEntry7');
 
         const editor = queryEditor('', selectedCell);
 
@@ -297,7 +298,7 @@ describe('features/copy-cut-paste/key-bindings', function() {
         });
 
         // when
-        triggerEvent(keyboardTarget, 'keydown', {
+        triggerEvent(getKeyboardTarget(), 'keydown', {
           keyCode: 86,
           ctrlKey: true
         });
