@@ -80,7 +80,7 @@ module.exports = function(path) {
             },
             {
               test: /\.css|\.dmn$/,
-              use: 'raw-loader'
+              type: 'asset/source'
             }
           ]
         },
