@@ -116,12 +116,7 @@ describe('tabs', function() {
     var editor = new Modeler({
       container: $container,
       height: 500,
-      width: '100%',
-      common: {
-        keyboard: {
-          bindTo: document
-        }
-      }
+      width: '100%'
     });
 
     domDelegate.bind($tabs, '.tab', 'click', function(e) {

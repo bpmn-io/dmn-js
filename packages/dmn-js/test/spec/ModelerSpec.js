@@ -39,12 +39,7 @@ describe('Modeler', function() {
     document.body.appendChild(container);
 
     editor = new Modeler({
-      container: container,
-      common: {
-        keyboard: {
-          bindTo: document
-        }
-      }
+      container: container
     });
   });
 
@@ -197,9 +192,6 @@ describe('Modeler', function() {
       editor = new Modeler({
         container: container,
         common: {
-          keyboard: {
-            bindTo: document
-          },
           dataTypes: [
             'double',
             'long'
