@@ -18,6 +18,7 @@ export default class SimpleModeButtonComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this.state = {
       top: 0,
       left: 0,
@@ -251,8 +252,8 @@ export default class SimpleModeButtonComponent extends Component {
           ref={ node => this.node = node }
           style={ { top, left } }
           title={ isDisabled
-            ? 'Editing not supported for set expression language'
-            : 'Edit' }><span className="dmn-icon-edit"></span></div>
+            ? this._translate('Editing not supported for set expression language')
+            : this._translate('Edit') }><span className="dmn-icon-edit"></span></div>
         : null
     );
   }

@@ -20,11 +20,12 @@ import {
 
 
 export default function DefinitionIdEdit(
-    eventBus, modeling, canvas, definitionPropertiesView) {
+    eventBus, modeling, canvas, definitionPropertiesView, translate) {
   this._eventBus = eventBus;
   this._modeling = modeling;
   this._canvas = canvas;
   this._definitionPropertiesView = definitionPropertiesView;
+  this._translate = translate;
 
   eventBus.on('definitionIdView.create', function(event) {
     this._container = event.html;
@@ -40,7 +41,8 @@ DefinitionIdEdit.$inject = [
   'eventBus',
   'modeling',
   'canvas',
-  'definitionPropertiesView'
+  'definitionPropertiesView',
+  'translate'
 ];
 
 
@@ -92,7 +94,7 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
 DefinitionIdEdit.prototype._addErrorMessage = function(errorMessage) {
   const errorHTML =
     '<span class="dmn-definitions-error-message">' +
-    errorMessage +
+    this._translate(errorMessage) +
     '</span>';
 
   var idElement = domQuery('.dmn-definitions-id', this._container);

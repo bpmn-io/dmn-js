@@ -22,6 +22,7 @@ export default class InputDateEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -146,23 +147,23 @@ export default class InputDateEdit extends Component {
     const { dates, type } = this.state;
 
     const options = [{
-      label: 'Exactly',
+      label: this._translate('Exactly'),
       value: EXACT
     }, {
-      label: 'Before',
+      label: this._translate('Before'),
       value: BEFORE
     }, {
-      label: 'After',
+      label: this._translate('After'),
       value: AFTER
     }, {
-      label: 'Between',
+      label: this._translate('Between'),
       value: BETWEEN
     }];
 
     return (
       <div class="context-menu-container simple-date-edit">
 
-        <h3 class="dms-heading">Edit date and time</h3>
+        <h3 class="dms-heading">{ this._translate('Edit date and time') }</h3>
 
         <div className="dms-fill-row">
           <InputSelect
@@ -175,8 +176,8 @@ export default class InputDateEdit extends Component {
         <h4 class="dms-heading">
           {
             type === BETWEEN
-              ? 'Edit start date'
-              : 'Set date'
+              ? this._translate('Edit start date')
+              : this._translate('Set date')
           }
         </h4>
 
@@ -184,21 +185,26 @@ export default class InputDateEdit extends Component {
           <ValidatedInput
             className="start-date-input dms-block"
             onInput={ this.onStartDateInput }
-            placeholder={ `e.g. ${ getSampleDate() }` }
-            validate={ validateISOString }
+            placeholder={ this._translate('e.g. { sample }', {
+              sample: getSampleDate()
+            }) }
+            validate={ string => validateISOString(string) &&
+              this._translate(validateISOString(string)) }
             value={ dates[0] } />
 
           <p className="dms-hint">
             <button type="button"
               className="use-today"
-              onClick={ this.onSetStartDateTodayClick }>Use today</button>.
+              onClick={ this.onSetStartDateTodayClick }>
+              { this._translate('Use today') }
+            </button>.
           </p>
         </div>
 
         {
           type === BETWEEN
             && <h4 class="dms-heading">
-              Edit end date
+              { this._translate('Edit end date') }
             </h4>
         }
 
@@ -208,15 +214,20 @@ export default class InputDateEdit extends Component {
               <ValidatedInput
                 className="end-date-input dms-block"
                 onInput={ this.onEndDateInput }
-                placeholder={ `e.g. ${ getSampleDate() }` }
-                validate={ validateISOString }
+                placeholder={ this._translate('e.g. { sample }', {
+                  sample: getSampleDate()
+                }) }
+                validate={ string => validateISOString(string) &&
+                  this._translate(validateISOString(string)) }
                 value={ dates[1] }>
               </ValidatedInput>
 
               <p className="dms-hint">
                 <button type="button"
                   className="use-today"
-                  onClick={ this.onSetEndDateTodayClick }>Use today</button>.
+                  onClick={ this.onSetEndDateTodayClick }>
+                  { this._translate('Use today') }
+                </button>.
               </p>
             </div>
         }

@@ -89,6 +89,8 @@ class DecisionTableName extends EditableComponent {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
+
     mixin(this, SelectionAware);
   }
 
@@ -106,7 +108,7 @@ class DecisionTableName extends EditableComponent {
         className={ className }
         data-element-id={ this.props.elementId }
         data-coords={ this.props.coords }
-        title={ 'Decision Name: ' + name }
+        title={ this._translate('Decision Name: ') + name }
       >
         { this.getEditor() }
       </div>

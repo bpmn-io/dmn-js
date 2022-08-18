@@ -18,6 +18,7 @@ export default class InputDurationEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -193,19 +194,19 @@ export default class InputDurationEdit extends Component {
 
   renderComparison(comparisonOperator, comparisonValue) {
     const comparisonOperatorOptions = [{
-      label: 'Equals',
+      label: this._translate('Equals'),
       value: 'equals'
     }, {
-      label: 'Less',
+      label: this._translate('Less'),
       value: 'less'
     }, {
-      label: 'Less or equals',
+      label: this._translate('Less or equals'),
       value: 'lessEquals'
     }, {
-      label: 'Greater',
+      label: this._translate('Greater'),
       value: 'greater'
     }, {
-      label: 'Greater or equals',
+      label: this._translate('Greater or equals'),
       value: 'greaterEquals'
     }];
 
@@ -236,16 +237,16 @@ export default class InputDurationEdit extends Component {
 
   renderRange(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType) {
     const rangeTypeOptions = [{
-      label: 'Include',
+      label: this._translate('Include'),
       value: 'include'
     }, {
-      label: 'Exclude',
+      label: this._translate('Exclude'),
       value: 'exclude'
     }];
 
     return (
       <div className="range">
-        <h4 className="dms-heading">Start value</h4>
+        <h4 className="dms-heading">{ this._translate('Start value') }</h4>
 
         <div className="dms-fill-row dms-input-duration-edit-row">
           <InputSelect
@@ -264,7 +265,7 @@ export default class InputDurationEdit extends Component {
         </div>
 
         <h4 className="dms-heading">
-          End value
+          { this._translate('End value') }
         </h4>
 
         <div className="dms-fill-row dms-input-duration-edit-row">
@@ -298,17 +299,17 @@ export default class InputDurationEdit extends Component {
     } = this.state;
 
     const typeOptions = [{
-      label: 'Comparison',
+      label: this._translate('Comparison'),
       value: COMPARISON
     }, {
-      label: 'Range',
+      label: this._translate('Range'),
       value: RANGE
     }];
 
     return (
       <div class="context-menu-container simple-duration-edit">
 
-        <h3 class="dms-heading">Edit duration</h3>
+        <h3 class="dms-heading">{ this._translate('Edit duration') }</h3>
 
         <div className="dms-fill-row">
           <InputSelect

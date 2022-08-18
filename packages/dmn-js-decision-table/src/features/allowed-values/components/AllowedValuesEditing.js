@@ -37,7 +37,7 @@ export default class AllowedValuesEditing extends Component {
             value,
             isCheckable: false,
             isRemovable: true,
-            group: 'Predefined Values'
+            group: this._translate('Predefined Values')
           };
         }),
         inputValue: ''
@@ -126,7 +126,7 @@ export default class AllowedValuesEditing extends Component {
           value,
           isCheckable: false,
           isRemovable: true,
-          group: 'Predefined Values'
+          group: this._translate('Predefined Values')
         };
       })));
 
@@ -202,7 +202,7 @@ export default class AllowedValuesEditing extends Component {
             <ValidatedInput
               onInput={ this.onInput }
               onKeyDown={ this.onKeyDown }
-              placeholder={ '"value", "value", ...' }
+              placeholder={ this._translate('"value", "value", ...') }
               type="text"
               validate={ value => {
                 if (!parseString(value)) {

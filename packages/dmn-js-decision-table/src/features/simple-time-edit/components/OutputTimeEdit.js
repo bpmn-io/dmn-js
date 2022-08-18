@@ -7,6 +7,7 @@ import {
   validateISOString,
   parseString
 } from '../Utils';
+import { getSampleDate } from '../../simple-date-edit/Utils';
 
 
 export default class OutputTimeEdit extends Component {
@@ -14,6 +15,7 @@ export default class OutputTimeEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -65,23 +67,26 @@ export default class OutputTimeEdit extends Component {
     return (
       <div class="context-menu-container simple-time-edit">
 
-        <h3 class="dms-heading">Edit Date</h3>
+        <h3 class="dms-heading">{ this._translate('Edit Date') }</h3>
 
-        <h4 class="dms-heading">Set Date</h4>
+        <h4 class="dms-heading">{ this._translate('Set Date') }</h4>
 
         <div>
           <ValidatedInput
             onInput={ this.onInput }
-            placeholder={ `e.g. ${ getSampleTime() }` }
-            validate={ validateISOString }
+            placeholder={ this._translate('e.g. { example } ', {
+              example: getSampleDate()
+            }) }
+            validate={ string => validateISOString(string) &&
+              this._translate(validateISOString(string)) }
             value={ date }
             className="dms-block">
           </ValidatedInput>
 
           <p className="dms-hint">
-            Set date <button type="button"
+            { this._translate('Set date') } <button type="button"
               className="use-now"
-              onClick={ this.onClick }>to now</button>.
+              onClick={ this.onClick }>{ this._translate('to now') }</button>.
           </p>
         </div>
 

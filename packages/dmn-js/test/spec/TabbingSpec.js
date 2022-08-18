@@ -9,6 +9,7 @@ import {
 
 
 import { insertCSS } from 'test/helper';
+import { translateModule } from 'dmn-js-shared/test/util/TranslateUtil';
 
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
@@ -83,6 +84,8 @@ insertCSS('tabs.css', `
   }
 `);
 
+const testTranslate = window.__env__ && window.__env__.SINGLE_START === 'translate';
+
 const CLASS_NAMES = {
   drd: 'dmn-icon-lasso-tool',
   decisionTable: 'dmn-icon-decision-table',
@@ -113,6 +116,18 @@ describe('tabs', function() {
     var $tabs = domQuery('.editor-tabs', $parent);
 
 
+    const translateModules = {
+      drd: {
+        additionalModules: [translateModule]
+      },
+      decisionTable: {
+        additionalModules: [translateModule]
+      },
+      literalExpression: {
+        additionalModules: [translateModule]
+      },
+    };
+
     var editor = new Modeler({
       container: $container,
       height: 500,
@@ -121,7 +136,8 @@ describe('tabs', function() {
         keyboard: {
           bindTo: document
         }
-      }
+      },
+      ...(testTranslate && translateModules)
     });
 
     domDelegate.bind($tabs, '.tab', 'click', function(e) {

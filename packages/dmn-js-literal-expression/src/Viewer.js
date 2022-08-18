@@ -9,6 +9,8 @@ import {
   remove as domRemove
 } from 'min-dom';
 
+import TranslateModule from 'diagram-js/lib/i18n/translate';
+
 import CoreModule from './core';
 import DecisionPropertiesModule from './features/decision-properties';
 import LiteralExpressionPropertiesModule from './features/literal-expression-properties';
@@ -216,6 +218,7 @@ export default class Viewer extends BaseViewer {
   static _getModules() {
     return [
       CoreModule,
+      TranslateModule,
       DecisionPropertiesModule,
       LiteralExpressionPropertiesModule,
       PoweredByModule,

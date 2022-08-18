@@ -14,6 +14,7 @@ export class DurationInput extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._type = props.type;
 
     this.onInput = this.onInput.bind(this);
@@ -34,15 +35,15 @@ export class DurationInput extends Component {
 
   validate(value) {
     if (!validateDuration(this._type, value)) {
-      return ERROR_MESSAGE[this._type];
+      return this._translate(ERROR_MESSAGE[this._type]);
     }
   }
 
   _getPlaceholder() {
     if (this._type === 'yearMonthDuration') {
-      return 'e.g. P1Y2M';
+      return this._translate('e.g. { sample }', { sample: 'P1Y2M' });
     } else if (this._type === 'dayTimeDuration') {
-      return 'e.g. P1DT2H';
+      this._translate('e.g. { sample }', { sample: 'P1DT2H' });
     }
   }
 

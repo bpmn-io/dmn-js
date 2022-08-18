@@ -14,6 +14,7 @@ export default class BooleanEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -50,19 +51,19 @@ export default class BooleanEdit extends Component {
       label: '-',
       value: NONE
     }, {
-      label: 'Yes',
+      label: this._translate('Yes'),
       value: TRUE
     }, {
-      label: 'No',
+      label: this._translate('No'),
       value: FALSE
     }];
 
     return (
       <div class="simple-boolean-edit context-menu-container">
 
-        <h3 class="dms-heading">Edit Boolean</h3>
+        <h3 class="dms-heading">{this._translate('Edit Boolean')}</h3>
 
-        <h4 class="dms-heading">Set Value</h4>
+        <h4 class="dms-heading">{this._translate('Set Value')}</h4>
 
         <InputSelect
           noInput={ true }

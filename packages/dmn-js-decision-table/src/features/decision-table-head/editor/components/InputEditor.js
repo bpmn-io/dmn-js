@@ -60,7 +60,7 @@ export default class InputEditor extends Component {
           </label>
 
           <ContentEditable
-            placeholder="enter expression"
+            placeholder={ this.translate('enter expression') }
             className={
               [
                 'ref-text',

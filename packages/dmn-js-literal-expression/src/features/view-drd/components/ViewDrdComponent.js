@@ -8,6 +8,7 @@ export default class ViewDrdComponent extends Component {
 
     const { injector } = context;
 
+    this._translate = injector.get('translate');
     this._eventBus = injector.get('eventBus');
   }
 
@@ -22,9 +23,11 @@ export default class ViewDrdComponent extends Component {
         ref={ node => this.node = node }>
         <button
           onClick={ this.onClick }
-          className="view-drd-button">View DRD</button>
+          className="view-drd-button">{ this._translate('View DRD') }</button>
       </div>
     );
   }
 
 }
+
+ViewDrdComponent.$inject = [ 'translate' ];

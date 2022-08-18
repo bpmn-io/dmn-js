@@ -5,9 +5,10 @@ import {
 } from 'min-dom';
 
 
-export default function DefinitionPropertiesView(eventBus, canvas) {
+export default function DefinitionPropertiesView(eventBus, canvas, translate) {
   this._eventBus = eventBus;
   this._canvas = canvas;
+  this._translate = translate;
 
   eventBus.on('diagram.init', function() {
     this._init();
@@ -18,9 +19,23 @@ export default function DefinitionPropertiesView(eventBus, canvas) {
       this.update();
     }
   }, this);
+
+  /* markup definition */
+
+  this.HTML_MARKUP =
+    '<div class="dmn-definitions">' +
+    '<div class="dmn-definitions-name" title="' +
+      this._translate('Definition Name') +
+    '" spellcheck="false">' +
+    '</div>' +
+    '<div class="dmn-definitions-id" title="' +
+      this._translate('Definition ID') +
+    '" spellcheck="false">' +
+    '</div>' +
+    '</div>';
 }
 
-DefinitionPropertiesView.$inject = [ 'eventBus', 'canvas' ];
+DefinitionPropertiesView.$inject = [ 'eventBus', 'canvas', 'translate' ];
 
 /**
  * Initialize
@@ -30,7 +45,7 @@ DefinitionPropertiesView.prototype._init = function() {
       eventBus = this._eventBus;
 
   var parent = canvas.getContainer(),
-      container = this._container = domify(DefinitionPropertiesView.HTML_MARKUP);
+      container = this._container = domify(this.HTML_MARKUP);
 
   parent.appendChild(container);
 
@@ -58,12 +73,3 @@ DefinitionPropertiesView.prototype.update = function() {
 };
 
 
-/* markup definition */
-
-DefinitionPropertiesView.HTML_MARKUP =
-  '<div class="dmn-definitions">' +
-    '<div class="dmn-definitions-name" title="Definition Name" spellcheck="false">' +
-    '</div>' +
-    '<div class="dmn-definitions-id" title="Definition ID" spellcheck="false">' +
-    '</div>' +
-  '</div>';

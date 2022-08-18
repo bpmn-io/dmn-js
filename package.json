@@ -9,6 +9,7 @@
     "distro": "run-s clean reinstall build-distro",
     "dev": "run-s build \"lerna-dev -- {@}\" -- ",
     "start": "cross-env SINGLE_START=modeler npm run dev -- dmn-js",
+    "start:translate": "cross-env SINGLE_START=translate npm run dev -- dmn-js",
     "lerna-dev": "lerna run dev --stream --scope",
     "build": "lerna run build --parallel --stream",
     "lerna-publish": "lerna publish -m \"chore(project): publish %s\"",

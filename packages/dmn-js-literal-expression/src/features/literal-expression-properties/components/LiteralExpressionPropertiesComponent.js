@@ -5,6 +5,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._viewer = context.injector.get('viewer');
   }
 
@@ -18,19 +19,19 @@ export default class LiteralExpressionPropertiesComponent extends Component {
       <div className="literal-expression-properties">
         <table>
           <tr>
-            <td>Variable Name:</td>
+            <td>{ this._translate('Variable Name:') }</td>
             <td>
               <span>{ variable.name || '-' }</span>
             </td>
           </tr>
           <tr>
-            <td>Variable Type:</td>
+            <td>{ this._translate('Variable Type:') }</td>
             <td>
-              <span>{ variable.typeRef || '-' }</span>
+              <span>{ this._translate(variable.typeRef) || '-' }</span>
             </td>
           </tr>
           <tr>
-            <td>Expression Language:</td>
+            <td>{ this._translate('Expression Language:') }</td>
             <td>
               <span>{ literalExpression.expressionLanguage || '-' }</span>
             </td>
