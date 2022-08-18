@@ -15,7 +15,7 @@ export default class AddInput extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentWillMount() {
     const root = this.getRoot();
@@ -37,11 +37,11 @@ export default class AddInput extends Component {
     e.stopPropagation();
 
     this.add();
-  }
+  };
 
   add = () => {
     this._eventBus.fire('addInput');
-  }
+  };
 
   render() {
     return (

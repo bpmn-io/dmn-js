@@ -52,7 +52,7 @@ export default class AllowedValuesEditing extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentWillMount() {
     const target = this.getAllowedValuesTarget();
@@ -79,11 +79,11 @@ export default class AllowedValuesEditing extends Component {
       target,
       values && getValuesArray(values)
     );
-  }
+  };
 
   onListChange = (values) => {
     this.setPredefinedValues(values);
-  }
+  };
 
   getAllowedValuesTarget() {
     const element = this.getElement();
@@ -99,7 +99,7 @@ export default class AllowedValuesEditing extends Component {
     this.setState({
       inputValue: value
     });
-  }
+  };
 
   /**
    * Add new value on ENTER.
@@ -135,17 +135,17 @@ export default class AllowedValuesEditing extends Component {
       });
 
     }
-  }
+  };
 
   handleRemovePredifinedValuesClick = (e) => {
     e.stopPropagation();
 
     this.removePredefinedValues();
-  }
+  };
 
   removePredefinedValues = () => {
     this.setPredefinedValues(null);
-  }
+  };
 
   getElement() {
     return this.props.context.output || this.props.context.input.inputExpression;

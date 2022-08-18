@@ -75,7 +75,7 @@ describe('components/List', function() {
         spy;
 
     beforeEach(function() {
-      const items = [{
+      const items = [ {
         value: 'foo1',
         isChecked: false,
         group: 'foo',
@@ -88,7 +88,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: true,
         group: 'bar'
-      }];
+      } ];
 
       spy = sinon.spy();
 
@@ -123,7 +123,7 @@ describe('components/List', function() {
       triggerClick(checkbox);
 
       // then
-      expect(spy).to.have.been.calledWith([{
+      expect(spy).to.have.been.calledWith([ {
         value: 'foo1',
         isChecked: true,
         group: 'foo',
@@ -136,7 +136,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: true,
         group: 'bar'
-      }]);
+      } ]);
     });
 
 
@@ -149,7 +149,7 @@ describe('components/List', function() {
       triggerClick(checkbox);
 
       // then
-      expect(spy).to.have.been.calledWith([{
+      expect(spy).to.have.been.calledWith([ {
         value: 'foo1',
         isChecked: false,
         group: 'foo',
@@ -162,7 +162,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: true,
         group: 'bar'
-      }]);
+      } ]);
     });
 
 
@@ -175,7 +175,7 @@ describe('components/List', function() {
       triggerMouseEvent(checkbox, 'click');
 
       // then
-      expect(spy).to.have.been.calledWith([{
+      expect(spy).to.have.been.calledWith([ {
         value: 'foo2',
         isChecked: true,
         group: 'foo'
@@ -183,7 +183,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: true,
         group: 'bar'
-      }]);
+      } ]);
     });
 
   });
@@ -195,7 +195,7 @@ describe('components/List', function() {
         spy;
 
     beforeEach(function() {
-      const items = [{
+      const items = [ {
         value: 'foo1',
         isChecked: false,
         group: 'foo',
@@ -208,7 +208,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: false,
         group: 'bar'
-      }];
+      } ];
 
       spy = sinon.spy();
 
@@ -243,7 +243,7 @@ describe('components/List', function() {
       triggerClick(checkbox);
 
       // then
-      expect(spy).to.have.been.calledWith([{
+      expect(spy).to.have.been.calledWith([ {
         value: 'foo1',
         isChecked: true,
         group: 'foo',
@@ -256,7 +256,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: false,
         group: 'bar'
-      }]);
+      } ]);
     });
 
 
@@ -269,7 +269,7 @@ describe('components/List', function() {
       triggerMouseEvent(checkbox, 'click');
 
       // then
-      expect(spy).to.have.been.calledWith([{
+      expect(spy).to.have.been.calledWith([ {
         value: 'foo2',
         isChecked: true,
         group: 'foo'
@@ -277,7 +277,7 @@ describe('components/List', function() {
         value: 'bar',
         isChecked: false,
         group: 'bar'
-      }]);
+      } ]);
     });
 
   });
@@ -289,7 +289,7 @@ describe('components/List', function() {
         spy;
 
     beforeEach(function() {
-      const items = [{
+      const items = [ {
         value: 'foo1',
         group: 'foo',
         isRemovable: true
@@ -299,7 +299,7 @@ describe('components/List', function() {
       }, {
         value: 'bar',
         group: 'bar'
-      }];
+      } ];
 
       spy = sinon.spy();
 
@@ -328,13 +328,13 @@ describe('components/List', function() {
       triggerMouseEvent(checkbox, 'click');
 
       // then
-      expect(spy).to.have.been.calledWith([{
+      expect(spy).to.have.been.calledWith([ {
         value: 'foo2',
         group: 'foo'
       }, {
         value: 'bar',
         group: 'bar'
-      }]);
+      } ]);
     });
 
   });

@@ -32,7 +32,7 @@ export default class AnnotationHeader extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   getRoot() {
     return this.sheet.getRoot();

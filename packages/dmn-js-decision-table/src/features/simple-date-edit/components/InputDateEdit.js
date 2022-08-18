@@ -146,7 +146,7 @@ export default class InputDateEdit extends Component {
   render() {
     const { dates, type } = this.state;
 
-    const options = [{
+    const options = [ {
       label: this._translate('Exactly'),
       value: EXACT
     }, {
@@ -158,7 +158,7 @@ export default class InputDateEdit extends Component {
     }, {
       label: this._translate('Between'),
       value: BETWEEN
-    }];
+    } ];
 
     return (
       <div class="context-menu-container simple-date-edit">

@@ -133,7 +133,7 @@ function snapToTarget(event, orientation) {
   var dx = 0,
       dy = 0;
 
-  if (orientation.includes('top') ||orientation.includes('bottom')) {
+  if (orientation.includes('top') || orientation.includes('bottom')) {
     dy = event.y - connectionEnd.y;
   } else {
     dx = event.x - connectionEnd.x;

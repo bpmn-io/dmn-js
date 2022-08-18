@@ -33,7 +33,7 @@ export default class OutputCellContextMenu extends Component {
     this.setState({
       unsaved: false
     });
-  }
+  };
 
   handleChange = (changes) => {
     this.setState({

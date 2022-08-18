@@ -52,7 +52,7 @@ export default class Manager {
    *
    * @return {Manager}
    */
-  constructor(options={}) {
+  constructor(options = {}) {
     this._eventBus = new EventBus();
 
     this._viewsChanged = debounce(this._viewsChanged, 0);
@@ -459,7 +459,7 @@ export default class Manager {
       views: this._views,
       activeView: this._activeView
     });
-  }
+  };
 
   /**
    * Recompute changed views after elements in

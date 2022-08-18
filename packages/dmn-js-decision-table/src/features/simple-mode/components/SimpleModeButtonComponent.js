@@ -246,15 +246,16 @@ export default class SimpleModeButtonComponent extends Component {
 
     return (
       isVisible
-        ? <div
-          className={ classes.join(' ') }
-          onClick={ this.onClick }
-          ref={ node => this.node = node }
-          style={ { top, left } }
-          title={ isDisabled
-            ? this._translate('Editing not supported for set expression language')
-            : this._translate('Edit') }><span className="dmn-icon-edit"></span></div>
-        : null
+        ? (
+          <div
+            className={ classes.join(' ') }
+            onClick={ this.onClick }
+            ref={ node => this.node = node }
+            style={ { top, left } }
+            title={ isDisabled
+              ? this._translate('Editing not supported for set expression language')
+              : this._translate('Edit') }><span className="dmn-icon-edit"></span></div>
+        ) : null
     );
   }
 }

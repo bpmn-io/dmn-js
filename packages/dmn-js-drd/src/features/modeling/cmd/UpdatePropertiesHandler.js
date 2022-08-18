@@ -38,7 +38,7 @@ UpdatePropertiesHandler.$inject = [ 'elementRegistry', 'moddle' ];
 UpdatePropertiesHandler.prototype.execute = function(context) {
 
   var element = context.element,
-      changed = [ element];
+      changed = [ element ];
 
   if (!element) {
     throw new Error('element required');

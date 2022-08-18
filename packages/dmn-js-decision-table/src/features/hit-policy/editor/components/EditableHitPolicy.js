@@ -23,11 +23,11 @@ export default class EditableHitPolicy extends Component {
 
   onChange = ({ aggregation, hitPolicy }) => {
     this.modeling.editHitPolicy(hitPolicy, aggregation);
-  }
+  };
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentDidMount() {
     this.changeSupport.onElementsChanged(this.getRoot().id, this.onElementsChanged);

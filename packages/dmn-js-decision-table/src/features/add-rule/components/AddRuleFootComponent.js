@@ -21,7 +21,7 @@ export default class AddRuleFootComponent extends Component {
     e.stopPropagation();
 
     this.addRule(e.target.dataset.colIndex);
-  }
+  };
 
   addRule(colIndex) {
     this._eventBus.fire('addRule', { colIndex });

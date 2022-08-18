@@ -70,12 +70,12 @@ describe('modeling rules', function() {
   describe('paste', function() {
 
     const rowData = {
-      root: [{
+      root: [ {
         type: 'row',
         businessObject: {
           $type: 'dmn:DecisionRule'
         },
-        cells: [{
+        cells: [ {
           type: 'cell',
           businessObject: {
             $type: 'dmn:UnaryTests'
@@ -95,17 +95,17 @@ describe('modeling rules', function() {
           businessObject: {
             $type: 'dmn:LiteralExpression'
           }
-        }]
-      }]
+        } ]
+      } ]
     };
 
     const colData = {
-      root: [{
+      root: [ {
         type: 'col',
         businessObject: {
           $type: 'dmn:InputClause'
         },
-        cells: [{
+        cells: [ {
           type: 'cell',
           businessObject: {
             $type: 'dmn:UnaryTests'
@@ -125,8 +125,8 @@ describe('modeling rules', function() {
           businessObject: {
             $type: 'dmn:UnaryTests'
           }
-        }]
-      }]
+        } ]
+      } ]
     };
 
 

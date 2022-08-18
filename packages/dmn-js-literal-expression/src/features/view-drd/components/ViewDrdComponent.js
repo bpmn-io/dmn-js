@@ -14,7 +14,7 @@ export default class ViewDrdComponent extends Component {
 
   onClick = () => {
     this._eventBus.fire('showDrd');
-  }
+  };
 
   render() {
     return (

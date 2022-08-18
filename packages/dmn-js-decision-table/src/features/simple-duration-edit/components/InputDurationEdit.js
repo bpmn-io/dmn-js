@@ -193,7 +193,7 @@ export default class InputDurationEdit extends Component {
   }
 
   renderComparison(comparisonOperator, comparisonValue) {
-    const comparisonOperatorOptions = [{
+    const comparisonOperatorOptions = [ {
       label: this._translate('Equals'),
       value: 'equals'
     }, {
@@ -208,7 +208,7 @@ export default class InputDurationEdit extends Component {
     }, {
       label: this._translate('Greater or equals'),
       value: 'greaterEquals'
-    }];
+    } ];
 
     return (
       <div className="comparison">
@@ -236,13 +236,13 @@ export default class InputDurationEdit extends Component {
   }
 
   renderRange(rangeStartValue, rangeEndValue, rangeStartType, rangeEndType) {
-    const rangeTypeOptions = [{
+    const rangeTypeOptions = [ {
       label: this._translate('Include'),
       value: 'include'
     }, {
       label: this._translate('Exclude'),
       value: 'exclude'
-    }];
+    } ];
 
     return (
       <div className="range">
@@ -298,13 +298,13 @@ export default class InputDurationEdit extends Component {
       rangeEndType
     } = this.state;
 
-    const typeOptions = [{
+    const typeOptions = [ {
       label: this._translate('Comparison'),
       value: COMPARISON
     }, {
       label: this._translate('Range'),
       value: RANGE
-    }];
+    } ];
 
     return (
       <div class="context-menu-container simple-duration-edit">

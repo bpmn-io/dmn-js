@@ -45,7 +45,7 @@ export default class List extends Component {
 
       this.removeItem(item);
     };
-  }
+  };
 
   getToggleClickHandler = (item) => {
     return (e) => {
@@ -53,7 +53,7 @@ export default class List extends Component {
 
       this.toggleItem(item);
     };
-  }
+  };
 
   removeItem = (item) => {
     const { onChange } = this.props;
@@ -66,7 +66,7 @@ export default class List extends Component {
     });
 
     onChange && onChange(newItems);
-  }
+  };
 
   toggleItem = (item) => {
     const { onChange, type } = this.props;
@@ -91,7 +91,7 @@ export default class List extends Component {
     });
 
     onChange && onChange(newItems);
-  }
+  };
 
   render() {
     const { className, items, type, labelComponent } = this.props;
@@ -172,7 +172,7 @@ function toPairs(object) {
   const entrys = [];
 
   for (let key in object) {
-    entrys.push([key, object[key]]);
+    entrys.push([ key, object[key] ]);
   }
 
   return entrys;

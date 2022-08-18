@@ -14,14 +14,14 @@ export default class PoweredByLogoComponent extends Component {
 
   onClick = () => {
     this._eventBus.fire('poweredBy.show');
-  }
+  };
 
   render() {
     return (
-      <div className='powered-by'>
+      <div className="powered-by">
         <div
-          className='powered-by__logo'
-          title='Powered by bpmn.io'
+          className="powered-by__logo"
+          title="Powered by bpmn.io"
           onClick={ this.onClick }
           ref={ node => this.node = node }
         >

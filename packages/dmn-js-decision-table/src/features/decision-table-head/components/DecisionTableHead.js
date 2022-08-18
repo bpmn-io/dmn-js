@@ -28,7 +28,7 @@ export default class DecisionTableHead extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   componentWillMount() {
     const root = this._sheet.getRoot();

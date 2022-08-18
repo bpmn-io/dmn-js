@@ -285,7 +285,7 @@ class PersistentTestContainer extends Component {
     this.setState({
       value: newValue
     });
-  }
+  };
 
   render() {
     return (

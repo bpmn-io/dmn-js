@@ -8,7 +8,7 @@ export default class MockViewer extends Manager {
 
   _getViewProviders() {
 
-    return [{
+    return [ {
       id: 'decisionTable',
       constructor: Viewer,
       opens(element) {
@@ -22,7 +22,7 @@ export default class MockViewer extends Manager {
       id: 'drd',
       constructor: View,
       opens: 'dmn:Definitions'
-    }];
+    } ];
   }
 
 }

@@ -60,7 +60,7 @@ describe('features - keyboard', function() {
     }));
 
 
-    forEach(['l', 'L'], function(key) {
+    forEach([ 'l', 'L' ], function(key) {
 
       it('should trigger lasso tool for key ' + key, inject(
         function(keyboard, lassoTool) {
@@ -81,7 +81,7 @@ describe('features - keyboard', function() {
     });
 
 
-    forEach(['h', 'H'], function(key) {
+    forEach([ 'h', 'H' ], function(key) {
 
       it('should trigger hand tool for key ' + key, inject(
         function(keyboard, handTool) {
@@ -102,7 +102,7 @@ describe('features - keyboard', function() {
     });
 
 
-    forEach(['e', 'E'], function(key) {
+    forEach([ 'e', 'E' ], function(key) {
 
       it('should trigger direct editing', inject(
         function(keyboard, selection, elementRegistry, directEditing) {
@@ -127,7 +127,7 @@ describe('features - keyboard', function() {
     });
 
 
-    forEach(['a', 'A'], function(key) {
+    forEach([ 'a', 'A' ], function(key) {
 
       it('should select all elements',
         inject(function(canvas, keyboard, selection, elementRegistry) {

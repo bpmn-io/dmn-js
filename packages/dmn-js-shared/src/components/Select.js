@@ -35,7 +35,7 @@ export default class Select extends Component {
     }
 
     onChange(value);
-  }
+  };
 
   render() {
     const {

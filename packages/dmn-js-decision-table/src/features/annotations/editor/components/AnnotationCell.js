@@ -30,13 +30,13 @@ export default class EditableAnnotationCell extends Component {
 
   onElementsChanged = () => {
     this.forceUpdate();
-  }
+  };
 
   setAnnotationValue = (text) => {
     const { row } = this.props;
 
     this.modeling.editAnnotation(row.businessObject, text);
-  }
+  };
 
 
   render() {

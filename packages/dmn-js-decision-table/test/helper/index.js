@@ -88,7 +88,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
       var mockModule = {};
 
       forEach(_locals, function(v, k) {
-        mockModule[k] = ['value', v];
+        mockModule[k] = [ 'value', v ];
       });
 
       _modules = [].concat(_modules, [ mockModule ]);

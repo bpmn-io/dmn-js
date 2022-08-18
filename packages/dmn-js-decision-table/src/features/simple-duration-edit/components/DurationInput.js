@@ -48,12 +48,15 @@ export class DurationInput extends Component {
   }
 
   render() {
-    return <ValidatedInput
-      type="text"
-      onInput={ this.onInput }
-      placeholder={ this._getPlaceholder() }
-      validate={ this.validate }
-      value={ this.state.value }
-      className={ this.props.className } />;
+    return (
+      <ValidatedInput
+        type="text"
+        onInput={ this.onInput }
+        placeholder={ this._getPlaceholder() }
+        validate={ this.validate }
+        value={ this.state.value }
+        className={ this.props.className }
+      />
+    );
   }
 }

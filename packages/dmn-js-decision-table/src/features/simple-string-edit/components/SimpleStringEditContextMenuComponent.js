@@ -271,13 +271,13 @@ export default class SimpleStringEditContextMenuComponent extends Component {
 
     const { inputValue, isOutputValueInputChecked, items, unaryTestsType } = this.state;
 
-    const options = [{
+    const options = [ {
       label: this._translate('Match one'),
       value: DISJUNCTION
     }, {
       label: this._translate('Match none'),
       value: NEGATION
-    }];
+    } ];
 
     const isInputClause = isInput(element.col);
 

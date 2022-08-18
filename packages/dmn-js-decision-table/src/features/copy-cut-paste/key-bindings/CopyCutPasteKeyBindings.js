@@ -53,7 +53,7 @@ export default class CopyPasteKeyBindings {
 
   _clearClipboard = () => {
     this._clipboard.clear();
-  }
+  };
 
   /**
    * Return the selected cell within the decision table.
@@ -197,7 +197,7 @@ export default class CopyPasteKeyBindings {
     [ copy, cut, paste ].forEach((l) => {
       this._keyboard.addListener(l);
     });
-  }
+  };
 
 }
 

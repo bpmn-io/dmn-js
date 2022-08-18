@@ -24,10 +24,10 @@ import {
 
 import InputSelect from 'src/components/InputSelect';
 
-const OPTIONS =[{
+const OPTIONS = [ {
   label: 'Foo',
   value: 'foo'
-}];
+} ];
 
 
 describe('components/InputSelect', function() {

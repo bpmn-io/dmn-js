@@ -41,7 +41,7 @@ export function triggerMouseEvent(element, event, clientX, clientY, ctrlKey = fa
   return element.dispatchEvent(e);
 }
 
-export function triggerEvent(element, name, eventType, bubbles=false) {
+export function triggerEvent(element, name, eventType, bubbles = false) {
   const event = document.createEvent(eventType);
 
   event.initEvent(name, bubbles, true);

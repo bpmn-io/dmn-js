@@ -11,5 +11,5 @@ const customTranslate = (template, replacements) => {
 };
 
 export const translateModule = {
-  translate: ['value', customTranslate],
+  translate: [ 'value', customTranslate ],
 };

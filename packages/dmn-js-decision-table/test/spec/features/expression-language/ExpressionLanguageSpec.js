@@ -21,7 +21,7 @@ import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
 import KeyboardModule from 'src/features/keyboard';
 
 
-const CUSTOM_EXPRESSION_LANGUAGES = [{
+const CUSTOM_EXPRESSION_LANGUAGES = [ {
   label: 'FEEL',
   value: 'feel'
 }, {
@@ -39,7 +39,7 @@ const CUSTOM_EXPRESSION_LANGUAGES = [{
 }, {
   label: 'JRuby',
   value: 'jruby'
-}];
+} ];
 
 
 describe('expression language', function() {
