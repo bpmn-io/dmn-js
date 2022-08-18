@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 12.3.0
 
-* `FEAT`: add missing translations ([#710](https://github.com/bpmn-io/dmn-js/pull/710))
+* `FEAT`: add missing translations ([#710](https://github.com/bpmn-io/dmn-js/pull/710), [#88](https://github.com/bpmn-io/dmn-js/issues/88))
 * `DEPS`: update to `didi@8`
 * `DEPS`: use `inherits-browser`
 * `DEPS`: update DRD editor to `diagram-js@8.8.0`
