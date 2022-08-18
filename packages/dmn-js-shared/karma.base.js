@@ -60,6 +60,13 @@ module.exports = function(path) {
               use: {
                 loader: 'babel-loader',
                 options: {
+                  plugins: coverage ? [
+                    [ 'istanbul', {
+                      include: [
+                        'src/**'
+                      ]
+                    } ]
+                  ] : [],
                   presets: [
                     ['@babel/preset-env', {
                       modules: false,
@@ -75,18 +82,7 @@ module.exports = function(path) {
               test: /\.css|\.dmn$/,
               use: 'raw-loader'
             }
-          ].concat(coverage ?
-            {
-              test: /\.js$/,
-              use: {
-                loader: 'istanbul-instrumenter-loader',
-                options: { esModules: true }
-              },
-              enforce: 'post',
-              include: /src\.*/,
-              exclude: /node_modules/
-            } : []
-          )
+          ]
         },
         resolve: {
           mainFields: [
