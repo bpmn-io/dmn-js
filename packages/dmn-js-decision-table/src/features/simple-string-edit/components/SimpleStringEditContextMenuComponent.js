@@ -51,7 +51,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         value,
         isChecked: includes(parsedString.values, value),
         isRemovable: false,
-        group: isInputClause ? INPUT_VALUES_LABEL : OUTPUT_VALUES_LABEL
+        group: isInputClause ?
+          this._translate(INPUT_VALUES_LABEL) :
+          this._translate(OUTPUT_VALUES_LABEL)
       };
     });
 
@@ -61,7 +63,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
           value,
           isChecked: true,
           isRemovable: true,
-          group: INPUT_ENTRY_VALUES_LABEL
+          group: this._translate(INPUT_ENTRY_VALUES_LABEL)
         };
       }));
     }
@@ -254,7 +256,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         value,
         isChecked: true,
         isRemovable: true,
-        group: 'Custom Values'
+        group: this._translate('Custom Values')
       };
     }));
 
@@ -270,10 +272,10 @@ export default class SimpleStringEditContextMenuComponent extends Component {
     const { inputValue, isOutputValueInputChecked, items, unaryTestsType } = this.state;
 
     const options = [{
-      label: 'Match one',
+      label: this._translate('Match one'),
       value: DISJUNCTION
     }, {
-      label: 'Match none',
+      label: this._translate('Match none'),
       value: NEGATION
     }];
 
@@ -333,7 +335,9 @@ export default class SimpleStringEditContextMenuComponent extends Component {
             className="dms-block"
             onKeyDown={ this.onKeyDown }
             onInput={ this.onInput }
-            placeholder={ isInputClause ? '"value", "value", ...' : '"value"' }
+            placeholder={ isInputClause ?
+              this._translate('"value", "value", ...') :
+              this._translate('"value"') }
             type="text"
             validate={ value => {
               if (!parseString(value)) {

@@ -13,6 +13,8 @@ export default class HitPolicy extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
+
     inject(this);
   }
 
@@ -33,13 +35,13 @@ export default class HitPolicy extends Component {
     return (
       <div
         className="hit-policy header"
-        title={ hitPolicyEntry.explanation }
+        title={ this._translate(hitPolicyEntry.explanation) }
       >
         <label className="dms-label">
-          Hit Policy:
+          { this._translate('Hit Policy:') }
         </label>
         <span className="hit-policy-value">
-          { hitPolicyEntry.label}
+          { this._translate(hitPolicyEntry.label) }
         </span>
       </div>
     );

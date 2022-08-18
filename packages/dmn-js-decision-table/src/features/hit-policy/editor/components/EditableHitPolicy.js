@@ -16,6 +16,8 @@ export default class EditableHitPolicy extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
+
     inject(this);
   }
 
@@ -50,14 +52,15 @@ export default class EditableHitPolicy extends Component {
     });
 
     return (
-      <div className="hit-policy" title={ hitPolicyEntry.explanation }>
+      <div className="hit-policy" title={ this._translate(hitPolicyEntry.explanation) }>
         <label className="dms-label">
-          Hit Policy:
+          { this._translate('Hit Policy:') }
         </label>
         <InputSelect
           className="hit-policy-edit-policy-select"
           onChange={ this.onChange }
-          options={ HIT_POLICIES }
+          options={ HIT_POLICIES.map(entry =>
+            ({ ...entry, label: this._translate(entry.label) })) }
           value={ hitPolicyEntry.value }
           data-hit-policy="true"
           noInput

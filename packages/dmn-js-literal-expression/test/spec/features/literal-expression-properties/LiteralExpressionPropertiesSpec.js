@@ -9,6 +9,7 @@ import literalExpressionXML from '../../literal-expression.dmn';
 import CoreModule from 'src/core';
 import LiteralExpressionPropertiesModule
   from 'src/features/literal-expression-properties';
+import TranslateModule from 'diagram-js/lib/i18n/translate';
 
 
 describe('literal expression properties', function() {
@@ -16,6 +17,7 @@ describe('literal expression properties', function() {
   beforeEach(bootstrapViewer(literalExpressionXML, {
     modules: [
       CoreModule,
+      TranslateModule,
       LiteralExpressionPropertiesModule
     ]
   }));

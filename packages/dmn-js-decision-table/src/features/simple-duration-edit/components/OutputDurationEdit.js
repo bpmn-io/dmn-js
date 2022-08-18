@@ -9,6 +9,7 @@ export default class OutputDurationEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -40,9 +41,9 @@ export default class OutputDurationEdit extends Component {
     return (
       <div class="context-menu-container simple-duration-edit">
 
-        <h3 class="dms-heading">Edit duration</h3>
+        <h3 class="dms-heading">{ this._translate('Edit duration') }</h3>
 
-        <h4 class="dms-heading">Set duration</h4>
+        <h4 class="dms-heading">{ this._translate('Set duration') }</h4>
 
         <DurationInput
           onInput={ this.onInput }

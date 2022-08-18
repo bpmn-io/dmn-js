@@ -10,6 +10,7 @@ export default class OutputNumberEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -54,9 +55,9 @@ export default class OutputNumberEdit extends Component {
     return (
       <div class="context-menu-container simple-number-edit">
 
-        <h3 class="dms-heading">Edit Number</h3>
+        <h3 class="dms-heading">{ this._translate('Edit Number') }</h3>
 
-        <h4 class="dms-heading">Set Value</h4>
+        <h4 class="dms-heading">{ this._translate('Set Value') }</h4>
 
         <Input
           onInput={ this.onInput }

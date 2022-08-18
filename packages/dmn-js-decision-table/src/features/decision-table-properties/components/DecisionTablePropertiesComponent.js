@@ -9,6 +9,8 @@ export default class DecisionTablePropertiesComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
+
     inject(this);
   }
 
@@ -25,7 +27,8 @@ export default class DecisionTablePropertiesComponent extends Component {
 
     return (
       <div className="decision-table-properties">
-        <div className="decision-table-name" title={ 'Decision Name: ' + name }>
+        <div className="decision-table-name" title={
+          this._translate('Decision Name: ') + name }>
           { name }
         </div>
         <div className="decision-table-header-separator" />

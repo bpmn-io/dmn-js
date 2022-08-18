@@ -8,6 +8,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
     this._dataTypes = context.injector.get('dataTypes');
@@ -52,7 +53,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     const typeRefOptions = this._dataTypes.getAll().map(t => {
       return {
-        label: t,
+        label: this._translate(t),
         value: t
       };
     });
@@ -61,7 +62,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
       <div className="literal-expression-properties">
         <table>
           <tr>
-            <td>Variable Name:</td>
+            <td>{ this._translate('Variable Name:') }</td>
             <td>
               <Input
                 className="variable-name-input"
@@ -71,7 +72,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             </td>
           </tr>
           <tr>
-            <td>Variable Type:</td>
+            <td>{ this._translate('Variable Type:') }</td>
             <td>
               <div className="dms-fill-row">
                 <InputSelect
@@ -93,6 +94,7 @@ class ExpressionLanguage extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
     this._expressionLanguages = context.injector.get('expressionLanguages');
@@ -144,7 +146,7 @@ class ExpressionLanguage extends Component {
 
     return (
       <tr>
-        <td>Expression Language:</td>
+        <td>{ this._translate('Expression Language:') }</td>
         <td>
           <div className="dms-fill-row">
             <InputSelect

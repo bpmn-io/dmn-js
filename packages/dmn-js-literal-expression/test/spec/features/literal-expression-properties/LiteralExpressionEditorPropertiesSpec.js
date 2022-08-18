@@ -22,6 +22,7 @@ import LiteralExpressionPropertiesEditorModule
 
 import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
+import TranslateModule from 'diagram-js/lib/i18n/translate';
 
 
 const CUSTOM_EXPRESSION_LANGUAGES = [{
@@ -49,6 +50,7 @@ describe('literal expression properties editor', function() {
 
   const testModules = [
     CoreModule,
+    TranslateModule,
     LiteralExpressionPropertiesEditorModule,
     ModelingModule,
     ExpressionLanguagesModule,

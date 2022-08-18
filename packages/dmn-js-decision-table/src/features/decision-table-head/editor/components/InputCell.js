@@ -129,7 +129,7 @@ export default class InputCell extends Component {
               this._translate('Input Type')
           }
         >
-          { inputValues && inputValues.text || inputExpression.typeRef }
+          { inputValues && inputValues.text || this._translate(inputExpression.typeRef) }
         </div>
       </th>
     );

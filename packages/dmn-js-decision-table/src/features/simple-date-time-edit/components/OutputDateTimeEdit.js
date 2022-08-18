@@ -14,6 +14,7 @@ export default class OutputDateEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._translate = context.injector.get('translate');
     this._modeling = context.injector.get('modeling');
 
     const { element } = this.props.context;
@@ -65,23 +66,26 @@ export default class OutputDateEdit extends Component {
     return (
       <div class="context-menu-container simple-date-edit">
 
-        <h3 class="dms-heading">Edit date and time</h3>
+        <h3 class="dms-heading">{ this._translate('Edit date and time') }</h3>
 
-        <h4 class="dms-heading">Set date and time</h4>
+        <h4 class="dms-heading">{ this._translate('Set date and time') }</h4>
 
         <div>
           <ValidatedInput
             onInput={ this.onInput }
-            placeholder={ `e.g. ${ getSampleDate() }` }
-            validate={ validateISOString }
+            placeholder={ this._translate('e.g. { sample }', {
+              sample: getSampleDate()
+            }) }
+            validate={ string => validateISOString(string) &&
+              this._translate(validateISOString(string)) }
             value={ date }
             className="dms-block">
           </ValidatedInput>
 
           <p className="dms-hint">
-            Use <button type="button"
+            {this._translate('Use')} <button type="button"
               className="use-today"
-              onClick={ this.onClick }>today</button>.
+              onClick={ this.onClick }>{this._translate('today')}</button>.
           </p>
         </div>
 
