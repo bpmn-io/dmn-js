@@ -6,6 +6,14 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 13.0.0
+
+* `FEAT`: use ES2018 syntax ([#717](https://github.com/bpmn-io/bpmn-js/pull/717))
+
+### Breaking Changes
+
+* Migrated to ES2018 syntax. [Read the blog post with details and a migration guide](https://bpmn.io/blog/posts/2022-core-libraries-migrated-to-es2018.html).
+
 ## 12.3.0
 
 * `FEAT`: add missing translations ([#710](https://github.com/bpmn-io/dmn-js/pull/710), [#88](https://github.com/bpmn-io/dmn-js/issues/88))
