@@ -6,6 +6,14 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.0.0
+* `DEPS`: update to `diagram-js@11.3.0` ([#772](https://github.com/bpmn-io/dmn-js/pull/722))
+* `DEPS`: update to `table-js@8.0.1` ([#772](https://github.com/bpmn-io/dmn-js/pull/722))
+
+### Breaking Changes
+
+* New popup menu UI introduced with `diagram-js@11`. See [`diagram-js` breaking changes and migration guide](https://github.com/bpmn-io/diagram-js/blob/develop/CHANGELOG.md#breaking-changes).
+
 ## 13.0.0
 
 * `FEAT`: use ES2018 syntax ([#717](https://github.com/bpmn-io/bpmn-js/pull/717))
