@@ -136,13 +136,13 @@ describe('features/popup-menu - replace menu provider', function() {
 // helpers /////////////////
 
 function queryEntry(id) {
-  var container = getDrdJS().get('canvas').getContainer();
+  var container = getMenuContainer();
 
   return domQuery('.djs-popup [data-id="' + id + '"]', container);
 }
 
 function queryEntries() {
-  var container = getDrdJS().get('canvas').getContainer();
+  var container = getMenuContainer();
 
   return domQueryAll('.djs-popup .entry', container);
 }
@@ -157,4 +157,9 @@ function triggerAction(id) {
   var popupMenu = getDrdJS().get('popupMenu');
 
   popupMenu.trigger(globalEvent(entry, { x: 0, y: 0 }));
+}
+
+function getMenuContainer() {
+  const popup = getDrdJS().get('popupMenu');
+  return popup._current.container;
 }
