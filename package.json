@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "all": "run-s lint build test",
-    "build-distro": "lerna run prepublishOnly --sort",
+    "build-distro": "lerna run prepublishOnly --sort --stream",
     "clean": "del-cli node_modules \"packages/*/node_modules\"",
     "distro": "run-s clean reinstall build-distro",
     "dev": "run-s build \"lerna-dev -- {@}\" -- ",
