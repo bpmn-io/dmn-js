@@ -4,6 +4,8 @@ var coverage = process.env.COVERAGE;
 
 var singleStart = process.env.SINGLE_START;
 
+var mode = process.env.NODE_ENV || 'development';
+
 // use puppeteer provided Chrome for testing
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
@@ -51,7 +53,8 @@ module.exports = function(path) {
       autoWatch: false,
 
       webpack: {
-        mode: 'development',
+        mode,
+
         module: {
           rules: [
             {
@@ -85,17 +88,18 @@ module.exports = function(path) {
           ]
         },
         resolve: {
-          mainFields: [
-            'dev:module',
+          mainFields: [].concat(mode !== 'production' ? [
+            'dev:module'
+          ] : [], [
             'module',
             'main'
-          ],
+          ]),
           modules: [
             'node_modules',
             path
           ]
         },
-        devtool: 'eval-source-map'
+        devtool: mode === 'production' ? 'source-map' : 'eval-source-map'
       }
     };
 
