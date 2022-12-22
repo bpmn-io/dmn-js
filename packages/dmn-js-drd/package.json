@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "files": [
     "assets",
     "lib"
@@ -28,7 +28,7 @@
   "dependencies": {
     "diagram-js": "^11.4.1",
     "diagram-js-direct-editing": "^2.0.0",
-    "dmn-js-shared": "^14.0.1",
+    "dmn-js-shared": "^14.0.2",
     "inherits-browser": "^0.1.0",
     "min-dash": "^4.0.0",
     "min-dom": "^4.0.3",
