@@ -15,5 +15,5 @@ do
   fi
 
   i=$((var+1))
-  sleep 15s
+  sleep 30s
 done
