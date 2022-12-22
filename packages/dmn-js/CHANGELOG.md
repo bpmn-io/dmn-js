@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.0.1
+
+* `DEPS`: update to `diagram-js-direct-editing@2`
+
 ## 14.0.0
 * `FIX`: add `type=button` to view drd button ([#721](https://github.com/bpmn-io/dmn-js/pull/721))
 * `DEPS`: update to `diagram-js@11.3.0` ([#772](https://github.com/bpmn-io/dmn-js/pull/722))
