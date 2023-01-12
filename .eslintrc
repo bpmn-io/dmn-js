@@ -1,18 +1,25 @@
 {
   "extends": [
-    "plugin:bpmn-io/es6",
+    "plugin:bpmn-io/browser",
     "plugin:bpmn-io/jsx"
   ],
-  "env": {
-    "browser": true
-  },
-  "globals": {
-    "Promise": true
+  "parserOptions": {
+    "ecmaVersion": "latest"
   },
   "rules": {
     "max-len": [ 2, { "code": 90 } ],
     "no-restricted-imports": [ 2, {
       "patterns": [ "dmn-js/src", "dmn-js-*/src" ]
     } ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "karma.base.js",
+        "karma.conf.js",
+        "rollup.config.js"
+      ],
+      "extends": "plugin:bpmn-io/node"
+    }
+  ]
 }
