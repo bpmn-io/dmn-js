@@ -103,11 +103,15 @@ export default class OutputCell extends Component {
 
         {
           label ? (
-            <div className="output-label" title={ this._translate('Output Label') }>
+            <div
+              className="output-label"
+              title={ this._translate('Output Label: ') + label }>
               { label }
             </div>
           ) : (
-            <div className="output-name" title={ this._translate('Output Name') }>
+            <div
+              className="output-name"
+              title={ this._translate('Output Name: ') + name }>
               { name }
             </div>
           )

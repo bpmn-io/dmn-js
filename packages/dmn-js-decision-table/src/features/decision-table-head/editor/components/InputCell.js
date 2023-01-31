@@ -110,13 +110,15 @@ export default class InputCell extends Component {
 
         {
           label ? (
-            <div className="input-label" title={ this._translate('Input Label') }>
+            <div
+              className="input-label"
+              title={ this._translate('Input Label: ') + label }>
               { label }
             </div>
           ) : (
             <div
               className="input-expression"
-              title={ this._translate('Input Expression') }>
+              title={ this._translate('Input Expression: ') + inputExpression.text }>
               { inputExpression.text }
             </div>
           )
