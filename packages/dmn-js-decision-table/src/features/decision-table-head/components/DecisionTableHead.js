@@ -143,13 +143,15 @@ function DefaultInputHeaderCell(props, context) {
 
       {
         label ? (
-          <div className="input-label" title={ translate('Input Label') }>
+          <div
+            className="input-label"
+            title={ translate('Input Label: ') + label }>
             { label }
           </div>
         ) : (
           <div
             className="input-expression"
-            title={ translate('Input Expression') }>
+            title={ translate('Input Expression: ') + inputExpression.text }>
             { inputExpression.text }
           </div>
         )
