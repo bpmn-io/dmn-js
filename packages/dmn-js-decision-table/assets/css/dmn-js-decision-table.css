@@ -323,7 +323,6 @@
 .dmn-decision-table-container thead .output-name {
   margin: 16px 6px;
   font-size: 16px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -331,7 +330,9 @@
 .dmn-decision-table-container .input-cell .input-label,
 .dmn-decision-table-container .input-cell .output-label,
 .dmn-decision-table-container .input-cell .output-name {
-  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .dmn-decision-table-container thead .input-expression:empty::before {
