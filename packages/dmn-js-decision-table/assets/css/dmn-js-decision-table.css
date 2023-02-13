@@ -321,16 +321,11 @@
 .dmn-decision-table-container thead .input-expression,
 .dmn-decision-table-container thead .output-label,
 .dmn-decision-table-container thead .output-name {
+  display: -webkit-box;
   margin: 16px 6px;
   font-size: 16px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.dmn-decision-table-container .input-cell .input-label,
-.dmn-decision-table-container .input-cell .output-label,
-.dmn-decision-table-container .input-cell .output-name {
-  display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
