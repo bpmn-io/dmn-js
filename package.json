@@ -44,7 +44,7 @@
     "@babel/plugin-transform-object-assign": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^9.0.0",
-    "babel-plugin-inferno": "~5.0.0",
+    "babel-plugin-inferno": "~5.1.0",
     "babel-plugin-istanbul": "^6.1.1",
     "chai": "^4.3.4",
     "cross-env": "^7.0.3",
