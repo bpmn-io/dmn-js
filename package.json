@@ -48,7 +48,7 @@
     "babel-plugin-istanbul": "^6.1.1",
     "chai": "^4.3.4",
     "cross-env": "^7.0.3",
-    "del-cli": "^4.0.1",
+    "del-cli": "^5.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
     "karma": "^6.4.0",
