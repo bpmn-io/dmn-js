@@ -49,7 +49,7 @@ var NODE_ENV = process.env.NODE_ENV;
   try {
     process.env.NODE_ENV = env;
 
-    exec('rollup', [ '-c' ], {
+    exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
       stdio: 'inherit'
     });
   } catch (e) {
