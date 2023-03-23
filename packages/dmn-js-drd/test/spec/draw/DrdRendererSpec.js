@@ -139,7 +139,7 @@ describe('draw - DrdRenderer', function() {
               visual = domQuery('.djs-visual', gfx);
 
           // then
-          expect(domQuery('polyline', visual).style.stroke).to.equal('red');
+          expect(domQuery('path', visual).style.stroke).to.equal('red');
         }
       ));
 
@@ -152,7 +152,7 @@ describe('draw - DrdRenderer', function() {
               visual = domQuery('.djs-visual', gfx);
 
           // then
-          expect(domQuery('polyline', visual).style.stroke).to.equal('red');
+          expect(domQuery('path', visual).style.stroke).to.equal('red');
         }
       ));
 
@@ -165,7 +165,7 @@ describe('draw - DrdRenderer', function() {
               visual = domQuery('.djs-visual', gfx);
 
           // then
-          expect(domQuery('polyline', visual).style.stroke).to.equal('red');
+          expect(domQuery('path', visual).style.stroke).to.equal('red');
         }
       ));
 
@@ -192,7 +192,7 @@ describe('draw - DrdRenderer', function() {
               visual = domQuery('.djs-visual', gfx);
 
           // then
-          expect(domQuery('polyline', visual).style.stroke).to.equal('red');
+          expect(domQuery('path', visual).style.stroke).to.equal('red');
         }
       ));
 
