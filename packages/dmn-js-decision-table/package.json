@@ -27,7 +27,7 @@
   ],
   "devDependencies": {
     "dmn-font": "^0.6.2",
-    "inferno-test-utils": "~5.6.2"
+    "inferno-test-utils": "~8.1.0"
   },
   "dependencies": {
     "css.escape": "^1.5.1",
