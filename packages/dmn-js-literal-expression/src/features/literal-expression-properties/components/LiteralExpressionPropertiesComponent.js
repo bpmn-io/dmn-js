@@ -27,7 +27,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
           <tr>
             <td>{ this._translate('Variable Type:') }</td>
             <td>
-              <span>{ this._translate(variable.typeRef) || '-' }</span>
+              <span>{ this._translate(variable.typeRef || '') || '-' }</span>
+
             </td>
           </tr>
           <tr>
