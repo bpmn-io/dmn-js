@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.1.2
+
+* `FIX`: fix crash in literal expression viewer when `typeRef` is not defined ([#748](https://github.com/bpmn-io/dmn-js/pull/748))
+
 ## 14.1.1
 
 * `FIX`: break additional table headers ([#737](https://github.com/bpmn-io/dmn-js/issues/737))
@@ -13,6 +17,7 @@ ___Note:__ Yet to be released changes appear here._
 ## 14.1.0
 
 * `FEAT`: break long table headers in multiple lines ([#719](https://github.com/bpmn-io/dmn-js/issues/719))
+
 
 ## 14.0.2
 
