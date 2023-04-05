@@ -16,6 +16,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 import nonDefaultExpressionLanguageXML from '../../expression-language.dmn';
+import literalExpressionNoTypeRefXML
+  from './LiteralExpressionEditorProperties.no-type-ref.dmn';
 
 import LiteralExpressionPropertiesEditorModule
   from 'src/features/literal-expression-properties/editor';
@@ -210,6 +212,23 @@ describe('literal expression properties editor', function() {
       expect(viewer.getDecision().decisionLogic.expressionLanguage)
         .to.not.exist;
     }));
+  });
+
+
+  describe('no typeRef', function() {
+
+    beforeEach(bootstrapModeler(literalExpressionNoTypeRefXML, {
+      modules: testModules,
+      debounceInput: false
+    }));
+
+
+    it('should render', function() {
+
+      // then
+      expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    });
+
   });
 
 });

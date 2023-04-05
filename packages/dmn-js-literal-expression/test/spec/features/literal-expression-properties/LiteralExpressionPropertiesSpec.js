@@ -5,6 +5,8 @@ import { query as domQuery } from 'min-dom';
 import TestContainer from 'mocha-test-container-support';
 
 import literalExpressionXML from '../../literal-expression.dmn';
+import literalExpressionNoTypeRefXML
+  from './LiteralExpressionEditorProperties.no-type-ref.dmn';
 
 import CoreModule from 'src/core';
 import LiteralExpressionPropertiesModule
@@ -14,25 +16,54 @@ import TranslateModule from 'diagram-js/lib/i18n/translate';
 
 describe('literal expression properties', function() {
 
-  beforeEach(bootstrapViewer(literalExpressionXML, {
-    modules: [
-      CoreModule,
-      TranslateModule,
-      LiteralExpressionPropertiesModule
-    ]
-  }));
+  describe('basic', function() {
 
-  let testContainer;
+    beforeEach(bootstrapViewer(literalExpressionXML, {
+      modules: [
+        CoreModule,
+        TranslateModule,
+        LiteralExpressionPropertiesModule
+      ]
+    }));
 
-  beforeEach(function() {
-    testContainer = TestContainer.get(this);
+    let testContainer;
+
+    beforeEach(function() {
+      testContainer = TestContainer.get(this);
+    });
+
+
+    it('should render', function() {
+
+      // then
+      expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    });
   });
 
 
-  it('should render', function() {
+  describe('no typeRef', function() {
 
-    // then
-    expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    beforeEach(bootstrapViewer(literalExpressionNoTypeRefXML, {
+      modules: [
+        CoreModule,
+        TranslateModule,
+        LiteralExpressionPropertiesModule
+      ]
+    }));
+
+    let testContainer;
+
+    beforeEach(function() {
+      testContainer = TestContainer.get(this);
+    });
+
+
+    it('should render', function() {
+
+      // then
+      expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    });
+
   });
 
 });
