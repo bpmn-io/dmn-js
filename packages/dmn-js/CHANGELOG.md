@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.1.3
+
+* `FIX`: fix crash in decision table editor when `typeRef` is not defined ([#750](https://github.com/bpmn-io/dmn-js/pull/750))
+
 ## 14.1.2
 
 * `FIX`: fix crash in literal expression viewer when `typeRef` is not defined ([#748](https://github.com/bpmn-io/dmn-js/pull/748))
