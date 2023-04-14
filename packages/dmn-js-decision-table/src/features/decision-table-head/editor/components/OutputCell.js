@@ -124,7 +124,7 @@ export default class OutputCell extends Component {
               this._translate('Output Type')
           }
         >
-          { outputValues && outputValues.text || this._translate(typeRef) }
+          { outputValues && outputValues.text || this._translate(typeRef || '') }
         </div>
       </th>
     );

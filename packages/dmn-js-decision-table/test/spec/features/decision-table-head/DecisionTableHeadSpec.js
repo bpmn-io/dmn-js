@@ -1,10 +1,11 @@
-import { bootstrapViewer, inject } from 'test/helper';
+import { bootstrapViewer, getDmnJS, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
 import TestContainer from 'mocha-test-container-support';
 
 import simpleXML from '../../simple.dmn';
+import missingTypeRefXML from './missing-type-ref.dmn';
 
 import CoreModule from 'src/core';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
@@ -79,4 +80,15 @@ describe('decision table head', function() {
     expect(domQuery('.foo', testContainer)).to.exist;
   }));
 
+
+  it('should render with missing typeRef', function() {
+
+    // given
+    const dmnjs = getDmnJS();
+
+    // when
+    return dmnjs.importXML(missingTypeRefXML).then(function({ warnings }) {
+      expect(warnings).to.be.empty;
+    });
+  });
 });

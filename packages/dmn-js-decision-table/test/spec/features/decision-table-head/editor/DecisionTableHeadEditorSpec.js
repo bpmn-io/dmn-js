@@ -1,4 +1,4 @@
-import { bootstrapModeler, inject } from 'test/helper';
+import { bootstrapModeler, getDmnJS, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -9,6 +9,7 @@ import {
 } from 'dmn-js-shared/test/util/EventUtil';
 
 import diagramXML from './DecisionTableHeadEditor.dmn';
+import missingTypeRefXML from '../missing-type-ref.dmn';
 
 import CoreModule from 'src/core';
 import DecisionTableHeadModule from 'src/features/decision-table-head';
@@ -79,6 +80,18 @@ describe('decision-table-head/editor', function() {
       // then
       expect(labelEl).to.exist;
       expect(labelEl.textContent).to.eql('Customer Status');
+    });
+
+
+    it('should render with missing typeRef', function() {
+
+      // given
+      const dmnjs = getDmnJS();
+
+      // when
+      return dmnjs.importXML(missingTypeRefXML).then(function({ warnings }) {
+        expect(warnings).to.be.empty;
+      });
     });
   });
 

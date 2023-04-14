@@ -1,0 +1,21 @@
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="decision">
+    <decisionTable id="decisionTable">
+      <input id="InputA">
+        <inputExpression id="InputExpression1044165151">
+          <text>pincode</text>
+        </inputExpression>
+      </input>
+      <output id="OutputB" name="isNegativeArea"/>
+      <rule id="excelRow2">
+        <description>yes</description>
+        <inputEntry id="A2">
+          <text>515004</text>
+        </inputEntry>
+        <outputEntry id="B2">
+          <text>"no"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
