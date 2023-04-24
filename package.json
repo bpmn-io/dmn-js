@@ -68,7 +68,7 @@
     "puppeteer": "^19.4.1",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.7.0",
-    "stylelint": "^13.13.1",
+    "stylelint": "^15.0.0",
     "stylelint-config-standard": "^20.0.0",
     "webpack": "^5.74.0"
   }
