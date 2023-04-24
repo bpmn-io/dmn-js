@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-shared",
   "description": "Shared components used by dmn-js",
-  "version": "14.0.2",
+  "version": "14.1.4",
   "files": [
     "assets",
     "lib"
