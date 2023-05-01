@@ -34,7 +34,7 @@
     "diagram-js": "^12.0.0",
     "dmn-js-shared": "^14.1.5",
     "escape-html": "^1.0.3",
-    "inferno": "~5.6.2",
+    "inferno": "~8.1.0",
     "min-dash": "^4.0.0",
     "min-dom": "^4.0.3",
     "selection-ranges": "^3.0.2",
