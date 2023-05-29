@@ -1,6 +1,7 @@
 import { Component } from 'inferno';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
+import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
 export default class InputEditor extends Component {
 
@@ -59,7 +60,7 @@ export default class InputEditor extends Component {
             }
           </label>
 
-          <ContentEditable
+          <LiteralExpression
             placeholder={ this.translate('enter expression') }
             className={
               [

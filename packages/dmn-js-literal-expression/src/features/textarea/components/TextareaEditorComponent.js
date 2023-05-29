@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
+import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
 
 export default class TextareaEditorComponent extends Component {
@@ -38,23 +38,10 @@ export default class TextareaEditorComponent extends Component {
     const { text } = this.getLiteralExpression();
 
     return (
-      <Editor
+      <LiteralExpression
         className="textarea editor"
         value={ text }
         onChange={ this.editLiteralExpressionText } />
     );
   }
-}
-
-class Editor extends EditableComponent {
-
-  render() {
-
-    return (
-      <div className={ this.getClassName() }>
-        { this.getEditor() }
-      </div>
-    );
-  }
-
 }

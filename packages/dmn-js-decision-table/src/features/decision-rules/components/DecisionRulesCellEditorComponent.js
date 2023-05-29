@@ -5,6 +5,7 @@ import { isString } from 'min-dash';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
+import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
 import { Cell } from 'table-js/lib/components';
 
@@ -93,16 +94,12 @@ export default class DecisionRulesCellEditorComponent extends Component {
         data-row-id={ row.id }
         data-col-id={ col.id }
       >
-        <TableCellEditor
+        <LiteralExpression
           className="cell-editor"
-          placeholder={ isUnaryTest ? '-' : '' }
-          ctrlForNewline={ true }
           onFocus={ this.onFocus }
           onBlur={ this.onBlur }
-          isFocussed={ isFocussed }
-          onChange={ this.changeCellValue }
-          value={ businessObject.text }
-          businessObject={ businessObject } />
+          onInput={ this.changeCellValue }
+          value={ businessObject.text } />
       </Cell>
     );
   }
