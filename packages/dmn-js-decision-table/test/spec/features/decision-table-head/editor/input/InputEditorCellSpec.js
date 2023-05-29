@@ -49,45 +49,140 @@ describe('decision-table-head/editor - input', function() {
   }
 
 
-  it('should add input expression text', inject(function(elementRegistry) {
+  describe('input expression', function() {
 
-    // given
-    const editorEl = openEditor('input2');
+    describe('FEEL', function() {
 
-    const inputBo = elementRegistry.get('input2').businessObject;
+      it('should display FEEL editor if expression language is FEEL',
+        function() {
 
-    const inputEl = getControl('.ref-text', editorEl);
+          // when
+          const editorEl = openEditor('input2');
+          const control = getControl('.ref-text', editorEl);
 
-    // assume
-    expect(inputEl.textContent).to.eql('');
-
-    inputEl.focus();
-
-    // when
-    triggerInputEvent(inputEl, 'foo');
-
-    // then
-    expect(inputBo.inputExpression.text).to.equal('foo');
-  }));
+          // then
+          expect(control.matches('.literal-expression')).to.be.true;
+        }
+      );
 
 
-  it('should edit input expression text', inject(function(elementRegistry) {
+      it('should add input expression text', inject(async function(elementRegistry) {
 
-    // given
-    const editorEl = openEditor('input1');
+        // given
+        const editorEl = openEditor('input2');
 
-    const inputBo = elementRegistry.get('input1').businessObject;
+        const inputBo = elementRegistry.get('input2').businessObject;
 
-    const inputEl = getControl('.ref-text', editorEl);
+        const control = getControl('.ref-text', editorEl);
 
-    inputEl.focus();
+        // assume
+        expect(control.textContent).to.eql('');
 
-    // when
-    triggerInputEvent(inputEl, 'foo');
+        // when
+        const input = control.querySelector('[role="textbox"]');
+        await changeInput(input, 'foo');
 
-    // then
-    expect(inputBo.inputExpression.text).to.equal('foo');
-  }));
+        // then
+        expect(inputBo.inputExpression.text).to.equal('foo');
+      }));
+
+
+      it('should edit input expression text', inject(async function(elementRegistry) {
+
+        // given
+        const editorEl = openEditor('input1');
+
+        const inputBo = elementRegistry.get('input1').businessObject;
+
+        const control = getControl('.ref-text', editorEl);
+
+        // when
+        const input = control.querySelector('[role="textbox"]');
+        await changeInput(input, 'foo');
+
+        // then
+        expect(inputBo.inputExpression.text).to.equal('foo');
+      }));
+    });
+
+
+    describe('non-FEEL', function() {
+
+
+      beforeEach(bootstrapModeler(simpleXML, {
+        modules: [
+          CoreModule,
+          DecisionTableHeadModule,
+          DecisionTableHeadEditorModule,
+          ModelingModule,
+          KeyboardModule
+        ],
+        debounceInput: false,
+        expressionLanguages: {
+          options: [
+            {
+              value: 'javascript',
+              label: 'JavaScript'
+            }
+          ]
+        }
+      }));
+
+
+      it('should display content-editable if expression language is not FEEL',
+        function() {
+
+          // when
+          const editorEl = openEditor('input2');
+          const control = getControl('.ref-text', editorEl);
+
+          // then
+          expect(control.matches('.content-editable')).to.be.true;
+        }
+      );
+
+
+      it('should add input expression text', inject(function(elementRegistry) {
+
+        // given
+        const editorEl = openEditor('input2');
+
+        const inputBo = elementRegistry.get('input2').businessObject;
+
+        const inputEl = getControl('.ref-text', editorEl);
+
+        // assume
+        expect(inputEl.textContent).to.eql('');
+
+        inputEl.focus();
+
+        // when
+        triggerInputEvent(inputEl, 'foo');
+
+        // then
+        expect(inputBo.inputExpression.text).to.equal('foo');
+      }));
+
+
+      it('should edit input expression text', inject(function(elementRegistry) {
+
+        // given
+        const editorEl = openEditor('input1');
+
+        const inputBo = elementRegistry.get('input1').businessObject;
+
+        const inputEl = getControl('.ref-text', editorEl);
+
+        inputEl.focus();
+
+        // when
+        triggerInputEvent(inputEl, 'foo');
+
+        // then
+        expect(inputBo.inputExpression.text).to.equal('foo');
+      }));
+    });
+  });
 
 
   describe('should edit input label', function() {
@@ -138,4 +233,18 @@ describe('decision-table-head/editor - input', function() {
 
 function getControl(selector, parent) {
   return domQuery('.ref-input-editor ' + selector, parent);
+}
+
+/**
+ * @param {HTMLElement} input
+ * @param {string} value
+ */
+function changeInput(input, value) {
+  input.textContent = value;
+
+  return new Promise(resolve => {
+    requestAnimationFrame(() => {
+      resolve();
+    });
+  });
 }

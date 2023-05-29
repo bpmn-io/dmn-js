@@ -1,6 +1,7 @@
 import { Component } from 'inferno';
 
 import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
+import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
 export default class InputEditor extends Component {
 
@@ -8,6 +9,7 @@ export default class InputEditor extends Component {
     super(props, context);
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
+    this.expressionLanguages = context.injector.get('expressionLanguages', false);
 
     this.handleValue = (text) => {
 
@@ -33,12 +35,23 @@ export default class InputEditor extends Component {
     }
   }
 
+  getExpressionEditorComponent() {
+    if (this.expressionLanguages &&
+      this.expressionLanguages.getDefault('inputCell').value !== 'feel') {
+      return ContentEditable;
+    }
+
+    return LiteralExpression;
+  }
+
   render() {
 
     const {
       label,
       text
     } = this.props;
+
+    const ExpressionEditor = this.getExpressionEditorComponent();
 
     return (
       <div className="context-menu-container ref-input-editor input-edit">
@@ -59,7 +72,7 @@ export default class InputEditor extends Component {
             }
           </label>
 
-          <ContentEditable
+          <ExpressionEditor
             placeholder={ this.translate('enter expression') }
             className={
               [
