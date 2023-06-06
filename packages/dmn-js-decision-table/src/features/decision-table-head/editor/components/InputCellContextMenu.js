@@ -75,8 +75,10 @@ export default class InputCellContextMenu extends Component {
   }
 
   render() {
+    const variables = this.variableResolver.getVariables(this.props.context.input);
     return (
       <InputEditor
+        variables={ variables }
         label={ this.getValue('label') }
         text={ this.getValue('text') }
         onChange={ this.handleChange } />
@@ -87,6 +89,7 @@ export default class InputCellContextMenu extends Component {
 InputCellContextMenu.$inject = [
   'debounceInput',
   'modeling',
+  'variableResolver',
   'injector'
 ];
 

@@ -30,6 +30,7 @@
     "inferno-test-utils": "~5.6.2"
   },
   "dependencies": {
+    "@bpmn-io/dmn-variable-resolver": "github:bpmn-io/dmn-variable-resolver",
     "css.escape": "^1.5.1",
     "diagram-js": "^12.0.0",
     "dmn-js-shared": "^14.1.5",

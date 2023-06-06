@@ -15,8 +15,15 @@ export default class LiteralExpression extends Component {
     this.editor = new FeelEditor({
       container: this.node,
       onChange: this.props.onInput,
-      value: this.props.value
+      value: this.props.value,
+      variables: this.props.variables || []
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!jsonEqual(prevProps.variables, this.props.variables)) {
+      this.editor.setVariables(this.props.variables);
+    }
   }
 
   handleMouseEvent = (event) => {
@@ -43,4 +50,8 @@ export default class LiteralExpression extends Component {
       />
     );
   }
+}
+
+function jsonEqual(a, b) {
+  return JSON.stringify(a) === JSON.stringify(b);
 }

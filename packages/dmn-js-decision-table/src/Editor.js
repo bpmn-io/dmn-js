@@ -1,3 +1,5 @@
+import { DmnVariableResolverModule } from '@bpmn-io/dmn-variable-resolver';
+
 import Viewer from './Viewer';
 
 import addRuleModule from './features/add-rule';
@@ -76,7 +78,8 @@ export default class Editor extends Viewer {
       simpleDurationEditModule,
       simpleNumberEditModule,
       simpleStringEditModule,
-      simpleTimeEditModule
+      simpleTimeEditModule,
+      DmnVariableResolverModule
     ];
   }
 

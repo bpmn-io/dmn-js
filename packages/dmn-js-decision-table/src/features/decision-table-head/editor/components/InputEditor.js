@@ -69,7 +69,9 @@ export default class InputEditor extends Component {
               ].join(' ')
             }
             onInput={ this.handleValue }
-            value={ text || '' } />
+            value={ text || '' }
+            variables={ this.props.variables }
+          />
         </div>
       </div>
     );
