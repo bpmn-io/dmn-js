@@ -49,7 +49,7 @@
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.0",
     "cpx": "^1.5.0",
-    "del": "^5.1.0",
+    "del": "^7.0.0",
     "del-cli": "^5.0.0",
     "diagram-js": "^12.0.0",
     "dmn-font": "^0.6.2",
