@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.1.6
+
+* `DEPS`: update to diagram-js@12.2.0
+* `DEPS`: update dev dependencies
+
 ## 14.1.5
 
 * `DEPS`: use table-js@8.0.2
