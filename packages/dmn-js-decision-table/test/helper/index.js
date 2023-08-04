@@ -156,7 +156,7 @@ export function inject(fn) {
       throw new Error('DecisionTable instance not found');
     }
 
-    view.invoke(fn);
+    return view.invoke(fn);
   };
 }
 
