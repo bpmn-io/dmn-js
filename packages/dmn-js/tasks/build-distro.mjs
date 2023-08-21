@@ -1,16 +1,16 @@
-'use strict';
+import path from 'node:path';
+import fs from 'node:fs';
 
-var path = require('path');
-var fs = require('fs');
+import { copySync as cp } from 'cpx';
+import { sync as del } from 'del';
+import { execaSync as exec } from 'execa';
 
-var exec = require('execa').sync,
-    cp = require('cpx').copySync,
-    del = require('del').sync;
+import { createRequire } from 'node:module';
 
 var dest = process.env.DISTRO_DIST || 'dist';
 
-
 function resolve(module, sub) {
+  var require = createRequire(import.meta.url);
   var pkg = require.resolve(module + '/package.json');
 
   return path.dirname(pkg) + sub;
@@ -20,7 +20,7 @@ console.log('clean ' + dest);
 del(dest);
 
 console.log('mkdir -p ' + dest);
-fs.mkdirSync({ recursive: true });
+fs.mkdirSync(dest, { recursive: true });
 
 console.log('copy dmn-font to ' + dest + '/dmn-font');
 cp(resolve('dmn-font', '/dist/{font,css}/**'), dest + '/assets/dmn-font');
