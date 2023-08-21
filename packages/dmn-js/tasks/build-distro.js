@@ -1,9 +1,9 @@
 'use strict';
 
 var path = require('path');
+var fs = require('fs');
 
 var exec = require('execa').sync,
-    mkdirp = require('mkdirp').sync,
     cp = require('cpx').copySync,
     del = require('del').sync;
 
@@ -20,7 +20,7 @@ console.log('clean ' + dest);
 del(dest);
 
 console.log('mkdir -p ' + dest);
-mkdirp(dest);
+fs.mkdirSync({ recursive: true });
 
 console.log('copy dmn-font to ' + dest + '/dmn-font');
 cp(resolve('dmn-font', '/dist/{font,css}/**'), dest + '/assets/dmn-font');
