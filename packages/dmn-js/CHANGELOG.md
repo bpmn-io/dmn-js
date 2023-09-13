@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.2.0
+
+* `FEAT`: use FEEL editor for input expression ([#768](https://github.com/bpmn-io/dmn-js/issues/768))
+
 ## 14.1.6
 
 * `DEPS`: update to diagram-js@12.2.0
