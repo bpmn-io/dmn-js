@@ -7,7 +7,6 @@ import {
 import cssEscape from 'css.escape';
 
 import {
-  setRange,
   getRange
 } from 'selection-ranges';
 
@@ -109,6 +108,6 @@ export function ensureFocus(el) {
   const range = getRange(focusEl);
 
   if (!range || range.end === 0) {
-    setRange(focusEl, { start: 5000, end: 5000 });
+    window.getSelection().setPosition(focusEl.firstChild, focusEl.firstChild.length);
   }
 }

@@ -1,4 +1,4 @@
-import { bootstrapModeler, inject } from 'test/helper';
+import { bootstrapModeler, inject, act } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -8,7 +8,6 @@ import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import TestContainer from 'mocha-test-container-support';
 
-import simpleXML from '../../simple.dmn';
 import emptyRuleXML from './empty-rule.dmn';
 import languageExpressionXML from '../../expression-language.dmn';
 
@@ -49,18 +48,55 @@ describe('features/decision-rules', function() {
 
   describe('editing', function() {
 
-    beforeEach(bootstrapModeler(simpleXML, {
+    beforeEach(bootstrapModeler(languageExpressionXML, {
       modules: [
         CoreModule,
         ModelingModule,
         DecisionRulesModule,
         DecisionRulesEditorModule
       ],
-      debounceInput: false
+      debounceInput: false,
+      expressionLanguages: {
+        options: CUSTOM_EXPRESSION_LANGUAGES
+      },
     }));
 
 
-    it('should edit cell', inject(function(elementRegistry) {
+    it('should edit cell (FEEL)', inject(async function(elementRegistry) {
+
+      // given
+      const editor = queryEditor('[data-element-id="outputEntry2"]', testContainer);
+
+      await act(() => editor.focus());
+
+      // when
+      await changeInput(document.activeElement, 'foo');
+
+      // then
+      expect(elementRegistry.get('outputEntry2').businessObject.text).to.equal('foo');
+    }));
+
+
+    it('should edit cell - line breaks (FEEL)', inject(async function(elementRegistry) {
+
+      // given
+      let editor = queryEditor('[data-element-id="outputEntry2"]', testContainer);
+
+      await act(() => editor.focus());
+      editor = document.activeElement;
+
+      // when
+      await changeInput(editor, 'foo\nbar');
+
+      editor.blur();
+
+      // then
+      expect(elementRegistry.get('outputEntry2').businessObject.text)
+        .to.equal('foo\nbar');
+    }));
+
+
+    it('should edit cell (non-FEEL)', inject(function(elementRegistry) {
 
       // given
       const editor = queryEditor('[data-element-id="inputEntry1"]', testContainer);
@@ -75,7 +111,7 @@ describe('features/decision-rules', function() {
     }));
 
 
-    it('should edit cell - line breaks', inject(function(elementRegistry) {
+    it('should edit cell - line breaks (non-FEEL)', inject(function(elementRegistry) {
 
       // given
       const editor = queryEditor('[data-element-id="inputEntry1"]', testContainer);
@@ -146,7 +182,8 @@ describe('features/decision-rules', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
+          const badge = domQuery('.dmn-expression-language', cell);
+          expect(badge).to.satisfy(isNotDisplayed);
         });
 
       });
@@ -186,7 +223,8 @@ describe('features/decision-rules', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
+          const badge = domQuery('.dmn-expression-language', cell);
+          expect(badge).to.satisfy(isNotDisplayed);
         });
 
       });
@@ -244,7 +282,8 @@ describe('features/decision-rules', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
+          const badge = domQuery('.dmn-expression-language', cell);
+          expect(badge).to.satisfy(isNotDisplayed);
         });
 
       });
@@ -283,7 +322,8 @@ describe('features/decision-rules', function() {
           editor.focus();
 
           // then
-          expect(domQuery('.dmn-expression-language', cell)).to.not.exist;
+          const badge = domQuery('.dmn-expression-language', cell);
+          expect(badge).to.satisfy(isNotDisplayed);
         });
 
       });
@@ -329,8 +369,20 @@ describe('features/decision-rules', function() {
 
 });
 
-
 // helpers //////////////////
+function isNotDisplayed(element) {
+  return !element || getComputedStyle(element).display === 'none';
+}
+
+/**
+ * @param {HTMLElement} input
+ * @param {string} value
+ */
+function changeInput(input, value) {
+  return act(() => {
+    input.textContent = value;
+  });
+}
 
 function isFirefox() {
   return /Firefox/.test(window.navigator.userAgent);

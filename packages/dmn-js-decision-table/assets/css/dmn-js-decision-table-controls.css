@@ -251,3 +251,18 @@
   width: 20px;
   right: 0;
 }
+
+/* cell editor */
+.dmn-decision-table-container .cell-editor__placeholder {
+  position: absolute;
+}
+
+.dmn-decision-table-container .cell-editor:focus-within .cell-editor__placeholder,
+.dmn-decision-table-container .cell-editor:focus-within .dmn-expression-language {
+  display: none;
+}
+
+.dmn-decision-table-container .cell-editor,
+.dmn-decision-table-container .cell-editor .cm-scroller {
+  line-height: normal;
+}

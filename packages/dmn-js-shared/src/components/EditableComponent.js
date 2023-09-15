@@ -171,7 +171,7 @@ export default class EditableComponent extends Component {
     return (
       <ContentEditable
         className={ props.className }
-        ctrlForNewline={ props.ctrlForNewline }
+        ctrlForNewline={ this.props.ctrlForNewline }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
         onInput={ this.onInput }

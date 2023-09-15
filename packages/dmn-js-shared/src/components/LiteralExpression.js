@@ -6,7 +6,7 @@ import FeelEditor from '@bpmn-io/feel-editor';
  * A drop-in replacement for ContentEditable which uses FEEL editor under the hood.
  * It does not support placeholder.
  *
- * The callback `onInput(text)` recieves text (including line breaks)
+ * The callback `onInput(text)` receives text (including line breaks)
  * only. Updating the value via props will update the selection
  * if needed, too.
  *
@@ -33,6 +33,7 @@ export default class LiteralExpression extends Component {
   constructor(props, context) {
     super(props, context);
 
+    /** @type {HTMLElement} */
     this.node = null;
     this.editor = null;
 
@@ -49,6 +50,14 @@ export default class LiteralExpression extends Component {
     });
 
     this.node.addEventListener('mousedown', this.handleMouseEvent);
+
+    // `capture: true` is needed to precede Keyboard handlers
+    this.node.addEventListener('keydown', this.handleKeyDownCapture, true);
+    this.node.addEventListener('keydown', this.handleKeyDown);
+
+    if (this.props.autoFocus) {
+      this.editor.focus(this.state.value.length);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -65,16 +74,42 @@ export default class LiteralExpression extends Component {
 
   componentWillUnmount() {
     this.node.removeEventListener('mousedown', this.handleMouseEvent);
+
+    // `capture: true` is needed to precede FEEL editor default handling
+    this.node.removeEventListener('keydown', this.handleKeyDownCapture, true);
+    this.node.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  handleMouseEvent = (event) => {
+  handleMouseEvent = event => {
     event.stopPropagation();
   };
 
-  handleKeyDown = (event) => {
+  handleKeyDownCapture = event => {
     if (event.key === 'Enter') {
+      if (isAutocompleteOpen(this.node)) {
+        event.triggeredFromAutocomplete = true;
+        return;
+      }
+
+      // supress non cmd+enter newline
+      if (this.props.ctrlForNewline && !isCmd(event)) {
+        event.preventDefault();
+      }
+
+      if (this.props.singleLine) {
+        event.preventDefault();
+      }
+    }
+  };
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  handleKeyDown = event => {
+
+    // contain the event in the component to not trigger global handlers
+    if ([ 'Enter', 'Escape' ].includes(event.key) && event.triggeredFromAutocomplete) {
       event.stopPropagation();
-      event.preventDefault();
     }
   };
 
@@ -90,16 +125,27 @@ export default class LiteralExpression extends Component {
     }
   };
 
+  setNode = node => {
+    this.node = node;
+  };
+
   render() {
     return (
       <div
         className={ [ 'literal-expression', this.props.className || '' ].join(' ') }
-        ref={ node => this.node = node }
+        ref={ this.setNode }
         onClick={ this.handleMouseEvent }
-        onKeyDown={ this.handleKeyDown }
         onFocusIn={ this.props.onFocus }
         onFocusOut={ this.props.onBlur }
       />
     );
   }
+}
+
+function isCmd(event) {
+  return event.metaKey || event.ctrlKey;
+}
+
+function isAutocompleteOpen(node) {
+  return node.querySelector('.cm-tooltip-autocomplete');
 }
