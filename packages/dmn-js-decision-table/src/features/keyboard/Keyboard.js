@@ -102,7 +102,7 @@ export default class Keyboard {
     this._node = node;
 
     // bind key events
-    domEvent.bind(node, 'keydown', this._keyHandler, true);
+    domEvent.bind(node, 'keydown', this._keyHandler);
 
     this._fire('bind');
   }
@@ -118,7 +118,7 @@ export default class Keyboard {
       this._fire('unbind');
 
       // unbind key events
-      domEvent.unbind(node, 'keydown', this._keyHandler, true);
+      domEvent.unbind(node, 'keydown', this._keyHandler);
     }
 
     this._node = null;

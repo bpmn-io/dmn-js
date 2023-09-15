@@ -4,7 +4,8 @@ import { isString } from 'min-dash';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
+import ContentEditable from 'dmn-js-shared/lib/components/ContentEditable';
+import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
 import { Cell } from 'table-js/lib/components';
 
@@ -14,21 +15,13 @@ export default class DecisionRulesCellEditorComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      isFocussed: false
-    };
-
     this.changeCellValue = this.changeCellValue.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
   }
-
 
   onElementsChanged() {
     this.forceUpdate();
   }
-
 
   componentWillMount() {
     const { injector } = this.context;
@@ -42,34 +35,17 @@ export default class DecisionRulesCellEditorComponent extends Component {
     changeSupport.onElementsChanged(cell.id, this.onElementsChanged);
   }
 
-
   componentWillUnmount() {
     const { cell } = this.props;
 
     this._changeSupport.offElementsChanged(cell.id, this.onElementsChanged);
   }
 
-
   changeCellValue(value) {
     const { cell } = this.props;
 
     this._modeling.editCell(cell.businessObject, value);
   }
-
-
-  onFocus() {
-    this.setState({
-      isFocussed: true
-    });
-  }
-
-
-  onBlur() {
-    this.setState({
-      isFocussed: false
-    });
-  }
-
 
   render() {
     const {
@@ -79,8 +55,6 @@ export default class DecisionRulesCellEditorComponent extends Component {
       col,
       colIndex
     } = this.props;
-
-    const { isFocussed } = this.state;
 
     const isUnaryTest = is(cell, 'dmn:UnaryTests');
     const businessObject = cell.businessObject;
@@ -94,12 +68,7 @@ export default class DecisionRulesCellEditorComponent extends Component {
         data-col-id={ col.id }
       >
         <TableCellEditor
-          className="cell-editor"
           placeholder={ isUnaryTest ? '-' : '' }
-          ctrlForNewline={ true }
-          onFocus={ this.onFocus }
-          onBlur={ this.onBlur }
-          isFocussed={ isFocussed }
           onChange={ this.changeCellValue }
           value={ businessObject.text }
           businessObject={ businessObject } />
@@ -108,8 +77,42 @@ export default class DecisionRulesCellEditorComponent extends Component {
   }
 }
 
+class FeelEditor extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = { focussed: false };
 
-class TableCellEditor extends EditableComponent {
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+  }
+
+  onFocus() {
+    this.setState({ focussed: true });
+  }
+
+  onBlur() {
+    this.setState({ focussed: false });
+  }
+
+  render() {
+    if (this.state.focussed) {
+      return <LiteralExpression
+        { ...this.props }
+        autoFocus={ true }
+        onBlur={ this.onBlur }
+      />;
+    }
+
+    return <div onClick={ this.onFocus }>
+      <ContentEditable
+        { ...this.props }
+        onFocus={ this.onFocus }
+      />
+    </div>;
+  }
+}
+
+class TableCellEditor extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -164,10 +167,27 @@ class TableCellEditor extends EditableComponent {
     return this._expressionLanguages.getDefault(elementType);
   }
 
+  getEditor() {
+    return this.isFEEL() ? FeelEditor : ContentEditable;
+  }
+
+  isFEEL() {
+    return this.getExpressionLanguage() === 'feel';
+  }
+
+  getExpressionLanguage() {
+    const { businessObject } = this.props;
+
+    return businessObject.expressionLanguage ||
+      this.getDefaultExpressionLanguage(businessObject).value;
+  }
+
   render() {
     const {
       businessObject,
-      isFocussed
+      placeholder,
+      value,
+      onChange
     } = this.props;
 
     const description = this.getDescription(businessObject);
@@ -178,21 +198,23 @@ class TableCellEditor extends EditableComponent {
 
     const isScript = this.isScript(businessObject);
 
+    const Editor = this.getEditor();
+
     return (
-      <div className={ this.getClassName() }>
+      <div className="cell-editor">
         {
           isString(description)
-            && !isFocussed
             && <div className="description-indicator"></div>
         }
+        <Editor
+          className={ isScript ? 'script-editor' : null }
+          ctrlForNewline={ true }
+          onInput={ onChange }
+          value={ value }
+          placeholder={ placeholder }
+        />
         {
-          this.getEditor({
-            className: isScript ? 'script-editor' : null
-          })
-        }
-        {
-          !isDefaultExpressionLanguage &&
-          !isFocussed && (
+          !isDefaultExpressionLanguage && (
             <span
               className="dms-badge dmn-expression-language"
               title={ this._translate(
