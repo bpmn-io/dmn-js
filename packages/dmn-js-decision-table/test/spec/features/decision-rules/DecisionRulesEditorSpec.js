@@ -352,7 +352,7 @@ describe('features/decision-rules', function() {
       const editor = queryEditor('[data-element-id="unaryTest_1"]', testContainer);
 
       // then
-      expect(editor.textContent).to.eql('-');
+      expect(editor.matches('[data-placeholder="-"]')).to.be.true;
     }));
 
 
@@ -362,7 +362,7 @@ describe('features/decision-rules', function() {
       const editor = queryEditor('[data-element-id="outputEntry_1"]', testContainer);
 
       // then
-      expect(editor.textContent).to.eql('');
+      expect(editor.matches('[data-placeholder="-"]')).to.be.false;
     }));
 
   });
