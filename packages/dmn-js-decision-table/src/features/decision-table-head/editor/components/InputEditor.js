@@ -44,6 +44,16 @@ export default class InputEditor extends Component {
     return LiteralExpression;
   }
 
+  /**
+   * Supress default menu closure on enter.
+   * @param {KeyboardEvent} event
+   */
+  handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      event.stopPropagation();
+    }
+  };
+
   render() {
 
     const {
@@ -54,7 +64,8 @@ export default class InputEditor extends Component {
     const ExpressionEditor = this.getExpressionEditorComponent();
 
     return (
-      <div className="context-menu-container ref-input-editor input-edit">
+      <div className="context-menu-container ref-input-editor input-edit"
+        onKeyDown={ this.handleKeyDown }>
 
         <div className="dms-form-control">
           <ContentEditable
