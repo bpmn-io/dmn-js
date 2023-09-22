@@ -95,17 +95,22 @@ class FeelEditor extends Component {
   }
 
   render() {
-    if (this.state.focussed) {
-      return <LiteralExpression
-        { ...this.props }
-        autoFocus={ true }
-        onBlur={ this.onBlur }
-      />;
-    }
+    const { focussed } = this.state;
+    const className = `feel-editor${focussed ? ' focussed' : ''}`;
 
-    return <div onClick={ this.onFocus }>
+    // TODO(@barmac): display only a single editor;
+    // required to workaround "replaceChild" error
+    return <div className={ className } onClick={ this.onFocus }>
+      { focussed &&
+        <LiteralExpression
+          { ...this.props }
+          autoFocus={ true }
+          onBlur={ this.onBlur }
+        />
+      }
       <ContentEditable
         { ...this.props }
+        onInput={ () => {} }
         onFocus={ this.onFocus }
       />
     </div>;
@@ -207,7 +212,7 @@ class TableCellEditor extends Component {
             && <div className="description-indicator"></div>
         }
         <Editor
-          className={ isScript ? 'script-editor' : null }
+          className={ isScript ? 'script-editor' : '' }
           ctrlForNewline={ true }
           onInput={ onChange }
           value={ value }
