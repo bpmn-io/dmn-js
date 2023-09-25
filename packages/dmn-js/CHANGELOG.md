@@ -8,6 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 14.3.0
 
+* `FEAT`: change table cell font to `monospace` ([`4643870`](https://github.com/bpmn-io/dmn-js/commit/46438706f75c6d99f9d92140685a7fec31101ba5))
 * `FEAT`: use FEEL editor for decision table cell ([#774](https://github.com/bpmn-io/dmn-js/issues/774))
 * `FIX`: do not close input editor on enter
 
