@@ -264,7 +264,8 @@
 
 .dmn-decision-table-container .cell-editor,
 .dmn-decision-table-container .cell-editor .cm-scroller {
-  line-height: normal;
+  line-height: 1;
+  font-family: monospace;
 }
 
 .dmn-decision-table-container .cell-editor .feel-editor.focussed > :nth-child(2) {
