@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.3.1
+
+* `FIX`: display FEEL autocomplete suggestions in correct position
+
 ## 14.3.0
 
 * `FEAT`: change table cell font to `monospace` ([`4643870`](https://github.com/bpmn-io/dmn-js/commit/46438706f75c6d99f9d92140685a7fec31101ba5))

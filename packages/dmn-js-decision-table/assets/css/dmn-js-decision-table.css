@@ -59,7 +59,6 @@
 .dmn-decision-table-container .tjs-container {
   display: flex;
   flex-direction: column;
-  position: relative;
   width: min-content;
   max-width: 100%;
   height: 100%;
@@ -430,13 +429,9 @@
 /* end view drd */
 
 /* powered by */
-.dmn-js-parent {
-  /* required to apply position: fixed correctly */
-  transform: translate(0);
-}
 
 .dmn-decision-table-container .powered-by {
-  position: fixed;
+  position: absolute;
   bottom: 10px;
   right: 10px;
   z-index: 9999;
@@ -448,7 +443,7 @@
 }
 
 .dmn-decision-table-container .powered-by-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
