@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.3.0
+
+* `FEAT`: use FEEL editor for decision table cell ([#774](https://github.com/bpmn-io/dmn-js/issues/774))
+* `FIX`: do not close input editor on enter
+
 ## 14.2.0
 
 * `FEAT`: use FEEL editor for input expression ([#768](https://github.com/bpmn-io/dmn-js/issues/768))
