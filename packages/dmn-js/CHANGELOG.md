@@ -9,6 +9,7 @@ ___Note:__ Yet to be released changes appear here._
 ## 14.3.1
 
 * `FIX`: display FEEL autocomplete suggestions in correct position
+* `FIX`: increase line height in decision table cell editor
 
 ## 14.3.0
 

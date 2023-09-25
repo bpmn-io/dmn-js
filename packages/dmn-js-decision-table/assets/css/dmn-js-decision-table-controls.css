@@ -264,7 +264,7 @@
 
 .dmn-decision-table-container .cell-editor,
 .dmn-decision-table-container .cell-editor .cm-scroller {
-  line-height: 1;
+  line-height: 1.4;
   font-family: monospace;
 }
 
