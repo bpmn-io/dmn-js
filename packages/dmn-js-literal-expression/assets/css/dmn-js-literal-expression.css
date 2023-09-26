@@ -70,15 +70,10 @@
 }
 
 .dmn-literal-expression-container .decision-name:not(.editable),
-.dmn-literal-expression-container .decision-name .content-editable {
+.dmn-literal-expression-container .decision-name [contenteditable="true"] {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-
-.dmn-literal-expression-container .textarea .content,
-.dmn-literal-expression-container .textarea .content-editable {
-  padding: 12px;
 }
 
 .dmn-literal-expression-container .textarea .content-editable {
@@ -98,7 +93,9 @@
 .dmn-literal-expression-container .textarea {
   box-sizing: border-box;
   width: 100%;
+  padding: 12px;
   font-family: var(--literal-expression-font-family-monospace);
+  line-height: 1.4;
   border: 1px solid var(--textarea-border-color);
   border-bottom-width: 1px;
   white-space: pre;
