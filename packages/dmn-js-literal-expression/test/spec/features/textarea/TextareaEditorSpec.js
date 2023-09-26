@@ -4,6 +4,8 @@ import { query as domQuery } from 'min-dom';
 
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
+import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
+
 import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import TestContainer from 'mocha-test-container-support';
@@ -23,7 +25,8 @@ describe('textarea editor', function() {
     modules: [
       CoreModule,
       TextareaEditorModule,
-      ModelingModule
+      ModelingModule,
+      ExpressionLanguagesModule
     ],
     debounceInput: false
   }));
@@ -42,9 +45,25 @@ describe('textarea editor', function() {
   });
 
 
-  it('should edit literal expression text', inject(function(viewer) {
+  it('should edit literal expression text (FEEL)', inject(async function(viewer) {
 
     // given
+    const editor = queryEditor('.textarea', testContainer);
+
+    editor.focus();
+
+    // when
+    await changeInput(editor, 'foo');
+
+    // then
+    expect(viewer.getDecision().decisionLogic.text).to.equal('foo');
+  }));
+
+
+  it('should edit literal expression text (non-FEEL)', inject(function(viewer) {
+
+    // given
+    viewer.get('modeling').editExpressionLanguage('javascript');
     const editor = queryEditor('.textarea', testContainer);
 
     editor.focus();
@@ -57,3 +76,19 @@ describe('textarea editor', function() {
   }));
 
 });
+
+// helpers //////////
+
+/**
+ * @param {HTMLElement} input
+ * @param {string} value
+ */
+function changeInput(input, value) {
+  input.textContent = value;
+
+  return new Promise(resolve => {
+    requestAnimationFrame(() => {
+      resolve();
+    });
+  });
+}

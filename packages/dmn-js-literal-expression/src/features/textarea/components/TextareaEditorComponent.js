@@ -1,6 +1,7 @@
 import { Component } from 'inferno';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
+import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
 
 export default class TextareaEditorComponent extends Component {
@@ -10,6 +11,7 @@ export default class TextareaEditorComponent extends Component {
     this._modeling = context.injector.get('modeling');
 
     this._viewer = context.injector.get('viewer');
+    this._expressionLanguages = context.injector.get('expressionLanguages');
 
     this.editLiteralExpressionText = this.editLiteralExpressionText.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
@@ -32,10 +34,26 @@ export default class TextareaEditorComponent extends Component {
     this._modeling.editLiteralExpressionText(text);
   }
 
+  getEditor() {
+    return this.isFeel() ? FeelEditor : Editor;
+  }
+
+  isFeel() {
+    return this.getExpressionLanguage() === 'feel';
+  }
+
+  getExpressionLanguage() {
+    const businessObject = this.getLiteralExpression();
+
+    return businessObject.expressionLanguage ||
+      this._expressionLanguages.getDefault().value;
+  }
+
   render() {
 
     // there is only one single element
     const { text } = this.getLiteralExpression();
+    const Editor = this.getEditor();
 
     return (
       <Editor
@@ -43,6 +61,16 @@ export default class TextareaEditorComponent extends Component {
         value={ text }
         onChange={ this.editLiteralExpressionText } />
     );
+  }
+}
+
+class FeelEditor extends Component {
+  render() {
+    return <LiteralExpression
+      className={ this.props.className }
+      value={ this.props.value }
+      onChange={ this.props.onChange }
+    />;
   }
 }
 
