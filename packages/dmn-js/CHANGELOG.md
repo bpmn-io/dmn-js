@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.4.0
+
+* `FEAT`: use FEEL editor in literal expression ([#780](https://github.com/bpmn-io/dmn-js/issues/780))
+
 ## 14.3.1
 
 * `FIX`: display FEEL autocomplete suggestions in correct position
