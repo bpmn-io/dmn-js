@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.4.2
+
+* `FIX`: correctly position autocomplete in literal expression
+
 ## 14.4.1
 
 * `DEPS`: update to `@bpmn-io/feel-editor@0.9.1`
