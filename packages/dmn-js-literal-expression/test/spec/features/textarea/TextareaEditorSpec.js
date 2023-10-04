@@ -50,10 +50,10 @@ describe('textarea editor', function() {
     // given
     const editor = queryEditor('.textarea', testContainer);
 
-    editor.focus();
+    await act(() => editor.focus());
 
     // when
-    await changeInput(editor, 'foo');
+    await changeInput(document.activeElement, 'foo');
 
     // then
     expect(viewer.getDecision().decisionLogic.text).to.equal('foo');
@@ -84,8 +84,11 @@ describe('textarea editor', function() {
  * @param {string} value
  */
 function changeInput(input, value) {
-  input.textContent = value;
+  return act(() => input.textContent = value);
+}
 
+function act(fn) {
+  fn();
   return new Promise(resolve => {
     requestAnimationFrame(() => {
       resolve();

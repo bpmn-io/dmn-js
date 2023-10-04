@@ -69,7 +69,7 @@ class FeelEditor extends Component {
     return <LiteralExpression
       className={ this.props.className }
       value={ this.props.value }
-      onChange={ this.props.onChange }
+      onInput={ this.props.onChange }
     />;
   }
 }
