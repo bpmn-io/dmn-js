@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-literal-expression",
   "description": "A literal expression view for dmn-js",
-  "version": "14.4.2",
+  "version": "14.4.3",
   "files": [
     "assets",
     "lib"
