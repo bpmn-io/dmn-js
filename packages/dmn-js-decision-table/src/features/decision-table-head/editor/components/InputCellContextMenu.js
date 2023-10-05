@@ -79,6 +79,7 @@ export default class InputCellContextMenu extends Component {
       <InputEditor
         label={ this.getValue('label') }
         text={ this.getValue('text') }
+        element={ this.props.context.input }
         onChange={ this.handleChange } />
     );
   }

@@ -46,7 +46,8 @@ export default class LiteralExpression extends Component {
     this.editor = new FeelEditor({
       container: this.node,
       onChange: this.handleChange,
-      value: this.state.value
+      value: this.state.value,
+      variables: this.props.variables || [],
     });
 
     this.node.addEventListener('mousedown', this.handleMouseEvent);
@@ -69,6 +70,10 @@ export default class LiteralExpression extends Component {
       }, () => {
         this.editor.setValue(value);
       });
+    }
+
+    if (prevProps.variables !== this.props.variables) {
+      this.editor.setVariables(this.props.variables);
     }
   }
 

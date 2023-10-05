@@ -10,6 +10,7 @@ export default class InputEditor extends Component {
 
     this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
     this.expressionLanguages = context.injector.get('expressionLanguages', false);
+    this.variableResolver = context.injector.get('variableResolver', false);
 
     this.handleValue = (text) => {
 
@@ -54,6 +55,11 @@ export default class InputEditor extends Component {
     }
   };
 
+  _getVariables() {
+    return this.variableResolver &&
+      this.variableResolver.getVariables(this.props.element);
+  }
+
   render() {
 
     const {
@@ -62,6 +68,8 @@ export default class InputEditor extends Component {
     } = this.props;
 
     const ExpressionEditor = this.getExpressionEditorComponent();
+
+    const variables = this._getVariables();
 
     return (
       <div className="context-menu-container ref-input-editor input-edit"
@@ -92,7 +100,8 @@ export default class InputEditor extends Component {
               ].join(' ')
             }
             onInput={ this.handleValue }
-            value={ text || '' } />
+            value={ text || '' }
+            variables={ variables } />
         </div>
       </div>
     );
