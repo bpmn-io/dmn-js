@@ -72,7 +72,7 @@ export default class LiteralExpression extends Component {
       });
     }
 
-    if (prevProps.variables !== this.props.variables) {
+    if (!deepEqual(prevProps.variables, this.props.variables)) {
       this.editor.setVariables(this.props.variables);
     }
   }
@@ -153,4 +153,8 @@ function isCmd(event) {
 
 function isAutocompleteOpen(node) {
   return node.querySelector('.cm-tooltip-autocomplete');
+}
+
+function deepEqual(a, b) {
+  return JSON.stringify(a) === JSON.stringify(b);
 }
