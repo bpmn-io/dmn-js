@@ -1,3 +1,5 @@
+import { DmnVariableResolverModule } from '@bpmn-io/dmn-variable-resolver';
+
 import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
 import DataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
@@ -26,7 +28,8 @@ export default class Editor extends Viewer {
       ModelingModule,
       ExpressionLanguagesModule,
       DataTypesModule,
-      TextareaEditorComponent
+      TextareaEditorComponent,
+      DmnVariableResolverModule
     ];
   }
 }
