@@ -55,7 +55,7 @@
     "dmn-font": "^0.6.2",
     "execa": "^8.0.0",
     "min-dom": "^4.0.3",
-    "rollup": "^3.20.0",
+    "rollup": "^4.0.0",
     "rollup-plugin-license": "^3.0.1"
   },
   "dependencies": {
