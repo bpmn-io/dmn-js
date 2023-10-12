@@ -12,6 +12,7 @@ import handToolModule from 'diagram-js/lib/features/hand-tool';
 import distributeElementsModule from 'src/features/distribute-elements';
 import coreModule from 'src/core';
 import lassoTool from 'diagram-js/lib/features/lasso-tool';
+import searchModule from 'src/features/search';
 
 var diagramXML = require('./DrdEditorActions.dmn');
 
@@ -27,7 +28,8 @@ describe('features/editor-actions', function() {
       distributeElementsModule,
       lassoToolModule,
       handToolModule,
-      lassoTool
+      lassoTool,
+      searchModule
     ]
   }));
 
@@ -112,6 +114,26 @@ describe('features/editor-actions', function() {
 
       // then
       expect(!!lassoTool.isActive()).to.be.false;
+    }));
+
+  });
+
+
+  describe('lassoTool', function() {
+
+    it('should toggle', inject(function(editorActions, searchPad) {
+
+      // given
+      editorActions.trigger('find');
+
+      // assume
+      expect(searchPad.isOpen()).to.be.true;
+
+      // when
+      editorActions.trigger('find');
+
+      // then
+      expect(!!searchPad.isOpen()).to.be.false;
     }));
 
   });
