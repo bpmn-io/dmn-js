@@ -14,6 +14,7 @@ import lassoToolModule from 'diagram-js/lib/features/lasso-tool';
 import handToolModule from 'diagram-js/lib/features/hand-tool';
 import keyboardModule from 'src/features/keyboard';
 import modelingModule from 'src/features/modeling';
+import searchModule from 'src/features/search';
 
 import {
   createKeyEvent
@@ -34,7 +35,8 @@ describe('features - keyboard', function() {
       handToolModule,
       keyboardModule,
       editorActionsModule,
-      modelingModule
+      modelingModule,
+      searchModule
     ]
   }));
 
@@ -52,7 +54,8 @@ describe('features - keyboard', function() {
         'selectElements',
         'lassoTool',
         'handTool',
-        'directEditing'
+        'directEditing',
+        'find'
       ];
 
       // then
@@ -146,6 +149,25 @@ describe('features - keyboard', function() {
 
           expect(selectedElements).to.have.length(allElements.length - 1);
           expect(selectedElements).not.to.contain(rootElement);
+        })
+      );
+
+    });
+
+
+    forEach([ 'f', 'F' ], function(key) {
+
+      it('should open search',
+        inject(function(keyboard, searchPad) {
+
+          // given
+          const e = createKeyEvent(key, { ctrlKey: true });
+
+          // when
+          keyboard._keyHandler(e);
+
+          // then
+          expect(searchPad.isOpen()).to.be.true;
         })
       );
 
