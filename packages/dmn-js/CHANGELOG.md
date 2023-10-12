@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.5.0
+
+* `FEAT`: add variable suggestions to literal expression ([#785](https://github.com/bpmn-io/dmn-js/issues/785))
+
 ## 14.4.3
 
 * `FIX`: make FEEL editor in literal expression save value ([#786](https://github.com/bpmn-io/dmn-js/issues/786))
