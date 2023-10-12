@@ -1,9 +1,11 @@
-import { bootstrapModeler, inject } from 'test/helper';
+import { bootstrapModeler, inject, act } from 'test/helper';
 
 import {
   triggerInputEvent,
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
+
+import { DmnVariableResolverModule } from '@bpmn-io/dmn-variable-resolver';
 
 import { query as domQuery } from 'min-dom';
 
@@ -26,7 +28,8 @@ describe('decision-table-head/editor - input', function() {
       DecisionTableHeadModule,
       DecisionTableHeadEditorModule,
       ModelingModule,
-      KeyboardModule
+      KeyboardModule,
+      DmnVariableResolverModule
     ],
     debounceInput: false
   }));
@@ -182,6 +185,32 @@ describe('decision-table-head/editor - input', function() {
         expect(inputBo.inputExpression.text).to.equal('foo');
       }));
     });
+
+
+    describe('integration', function() {
+
+      it('should pass variables to editor', async function() {
+
+        // given
+        const editorEl = openEditor('input2');
+        const input = getControl('.ref-text [role="textbox"]', editorEl);
+
+        // when
+        await changeInput(input, 'Var');
+
+        // then
+        await expectEventually(() => {
+          const options = testContainer.querySelectorAll('[role="option"]');
+
+          expect(options).to.exist;
+          expect(options).to.satisfy(options => {
+            const result = Array.from(options).some(
+              option => option.textContent === 'Variable');
+            return result;
+          });
+        });
+      });
+    });
   });
 
 
@@ -240,11 +269,22 @@ function getControl(selector, parent) {
  * @param {string} value
  */
 function changeInput(input, value) {
-  input.textContent = value;
-
-  return new Promise(resolve => {
-    requestAnimationFrame(() => {
-      resolve();
-    });
+  return act(() => {
+    input.textContent = value;
   });
+}
+
+async function expectEventually(fn) {
+  for (let i = 0; i < 10; i++) {
+    try {
+      await act(() => {});
+      await fn();
+      return;
+    } catch (e) {
+
+      // wait
+    }
+  }
+
+  return fn();
 }

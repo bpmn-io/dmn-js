@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.11.0">
   <decision id="decision" name="Check Order">
+    <informationRequirement id="InformationRequirement_1klmiyt">
+      <requiredInput href="#InputData_1j8tsl1" />
+    </informationRequirement>
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status" camunda:inputVariable="">
         <inputExpression id="inputExpression1" typeRef="string" expressionLanguage="">
@@ -86,4 +89,20 @@ else
       </rule>
     </decisionTable>
   </decision>
+  <inputData id="InputData_1j8tsl1" name="Variable" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1ibs1io">
+      <dmndi:DMNShape id="DMNShape_0ce24mr" dmnElementRef="decision">
+        <dc:Bounds height="80" width="180" x="150" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1t81hpb" dmnElementRef="InputData_1j8tsl1">
+        <dc:Bounds height="45" width="125" x="177" y="317" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_01a9t3u" dmnElementRef="InformationRequirement_1klmiyt">
+        <di:waypoint x="240" y="317" />
+        <di:waypoint x="240" y="180" />
+        <di:waypoint x="240" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

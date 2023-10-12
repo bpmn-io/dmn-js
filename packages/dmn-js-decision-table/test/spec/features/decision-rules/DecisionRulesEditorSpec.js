@@ -2,6 +2,8 @@ import { bootstrapModeler, inject, act } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
+import { DmnVariableResolverModule } from '@bpmn-io/dmn-variable-resolver';
+
 import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
@@ -367,6 +369,44 @@ describe('features/decision-rules', function() {
 
   });
 
+
+  describe('integration', function() {
+
+    beforeEach(bootstrapModeler(emptyRuleXML, {
+      modules: [
+        CoreModule,
+        ModelingModule,
+        DecisionRulesModule,
+        DecisionRulesEditorModule,
+        DmnVariableResolverModule
+      ],
+      debounceInput: false
+    }));
+
+
+    it('should pass variables to editor', async function() {
+
+      // given
+      const editor = queryEditor('[data-element-id="unaryTest_1"]', testContainer);
+
+      await act(() => editor.focus());
+
+      // when
+      await changeInput(document.activeElement, 'Var');
+
+      // then
+      await expectEventually(() => {
+        const options = testContainer.querySelectorAll('[role="option"]');
+
+        expect(options).to.exist;
+        expect(options).to.satisfy(options => {
+          const result = Array.from(options).some(
+            option => option.textContent === 'Variable');
+          return result;
+        });
+      });
+    });
+  });
 });
 
 // helpers //////////////////
@@ -390,4 +430,19 @@ function isFirefox() {
 
 function skipFF() {
   return isFirefox() ? it.only : it;
+}
+
+async function expectEventually(fn) {
+  for (let i = 0; i < 10; i++) {
+    try {
+      await act(() => {});
+      await fn();
+      return;
+    } catch (e) {
+
+      // wait
+    }
+  }
+
+  return fn();
 }
