@@ -2,6 +2,11 @@ import inherits from 'inherits-browser';
 
 import Viewer from './Viewer';
 
+import ZoomScroll from 'diagram-js/lib/navigation/zoomscroll';
+import MoveCanvas from 'diagram-js/lib/navigation/movecanvas';
+import TouchModule from 'diagram-js/lib/navigation/touch';
+
+import DmnSearchModule from './features/search';
 
 /**
  * A viewer that includes mouse navigation facilities
@@ -14,14 +19,12 @@ export default function NavigatedViewer(options) {
 
 inherits(NavigatedViewer, Viewer);
 
-import ZoomScroll from 'diagram-js/lib/navigation/zoomscroll';
-import MoveCanvas from 'diagram-js/lib/navigation/movecanvas';
-import TouchModule from 'diagram-js/lib/navigation/touch';
 
 NavigatedViewer.prototype._navigationModules = [
   ZoomScroll,
   MoveCanvas,
-  TouchModule
+  TouchModule,
+  DmnSearchModule
 ];
 
 NavigatedViewer.prototype._modules = [].concat(

@@ -26,14 +26,15 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
 
   // (1) retrieve optional components to integrate with
 
-  var canvas = injector.get('canvas', false);
-  var elementRegistry = injector.get('elementRegistry', false);
-  var selection = injector.get('selection', false);
-  var lassoTool = injector.get('lassoTool', false);
-  var handTool = injector.get('handTool', false);
-  var directEditing = injector.get('directEditing', false);
-  var distributeElements = injector.get('distributeElements', false);
-  var alignElements = injector.get('alignElements', false);
+  const canvas = injector.get('canvas', false),
+        elementRegistry = injector.get('elementRegistry', false),
+        selection = injector.get('selection', false),
+        lassoTool = injector.get('lassoTool', false),
+        handTool = injector.get('handTool', false),
+        directEditing = injector.get('directEditing', false),
+        distributeElements = injector.get('distributeElements', false),
+        alignElements = injector.get('alignElements', false),
+        searchPad = injector.get('searchPad', false);
 
   // (2) check components and register actions
 
@@ -95,6 +96,12 @@ DrdEditorActions.prototype._registerDefaultActions = function(injector) {
       if (currentSelection.length) {
         directEditing.activate(currentSelection[0]);
       }
+    });
+  }
+
+  if (selection && searchPad) {
+    this._registerAction('find', function() {
+      searchPad.toggle();
     });
   }
 };

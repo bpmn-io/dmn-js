@@ -163,7 +163,8 @@ describe('Modeler', function() {
         'alignElements',
         'lassoTool',
         'handTool',
-        'directEditing'
+        'directEditing',
+        'find'
       ];
 
       // when

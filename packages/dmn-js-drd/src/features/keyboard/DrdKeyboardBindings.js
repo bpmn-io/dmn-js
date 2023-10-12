@@ -109,4 +109,16 @@ DrdKeyboardBindings.prototype.registerBindings = function(keyboard, editorAction
     }
   });
 
+  // search labels
+  // CTRL + F
+  addListener('find', function(context) {
+
+    var event = context.keyEvent;
+
+    if (keyboard.isKey([ 'f', 'F' ], event) && keyboard.isCmd(event)) {
+      editorActions.trigger('find');
+
+      return true;
+    }
+  });
 };
