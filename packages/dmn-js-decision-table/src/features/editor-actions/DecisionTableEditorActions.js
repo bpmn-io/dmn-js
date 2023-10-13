@@ -2,7 +2,8 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 export default class DecisionTableEditorActions {
 
-  constructor(copyCutPaste, editorActions, modeling, selection, cellSelection, sheet) {
+  constructor(copyCutPaste, editorActions, modeling, selection, cellSelection, sheet,
+      injector) {
     const actions = {
       addRule() {
         return modeling.addRow({ type: 'dmn:DecisionRule' });
@@ -243,6 +244,17 @@ export default class DecisionTableEditorActions {
     };
 
     editorActions.register(actions);
+
+
+    debugger;
+    const searchPad = injector.get('searchPad', false);
+    if (selection && searchPad) {
+      editorActions.register({
+        find() {
+          searchPad.toggle();
+        }
+      });
+    }
   }
 }
 
@@ -252,5 +264,6 @@ DecisionTableEditorActions.$inject = [
   'modeling',
   'selection',
   'cellSelection',
-  'sheet'
+  'sheet',
+  'injector'
 ];

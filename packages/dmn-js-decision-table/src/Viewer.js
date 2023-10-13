@@ -20,6 +20,7 @@ import decisionRulesModule from './features/decision-rules';
 import hitPolicyModule from './features/hit-policy';
 import viewDrdModule from './features/view-drd';
 import PoweredByModule from './features/powered-by';
+import SearchModule from './features/search';
 
 /**
  * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
@@ -224,7 +225,8 @@ export default class Viewer extends Table {
       decisionRuleIndicesModule,
       decisionRulesModule,
       hitPolicyModule,
-      viewDrdModule
+      viewDrdModule,
+      SearchModule
     ];
   }
 

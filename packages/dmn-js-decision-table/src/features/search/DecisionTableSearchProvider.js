@@ -4,12 +4,7 @@ import {
   sortBy
 } from 'min-dash';
 
-import {
-  getLabel
-} from '../label-editing/LabelUtil';
-
 /**
- * @typedef {import('diagram-js/lib/core/Canvas').default} Canvas
  * @typedef {import('diagram-js/lib/core/ElementRegistry').default} ElementRegistry
  * @typedef {import('diagram-js/lib/features/search-pad/SearchPad').default} SearchPad
  *
@@ -47,38 +42,38 @@ DmnSearchProvider.prototype.find = function(pattern) {
   debugger;
 
 
-  const rootElement = this._canvas.getRootElement();
+  // const rootElement = this._canvas.getRootElement();
 
-  let elements = this._elementRegistry.filter(function(element) {
-    if (element.labelTarget) {
-      return false;
-    }
-    return true;
-  });
+  // let elements = this._elementRegistry.filter(function(element) {
+  //   if (element.labelTarget) {
+  //     return false;
+  //   }
+  //   return true;
+  // });
 
-  // do not include root element
-  elements = filter(elements, function(element) {
-    return element !== rootElement;
-  });
+  // // do not include root element
+  // elements = filter(elements, function(element) {
+  //   return element !== rootElement;
+  // });
 
-  elements = map(elements, function(element) {
-    return {
-      primaryTokens: matchAndSplit(getLabel(element), pattern),
-      secondaryTokens: matchAndSplit(element.id, pattern),
-      element: element
-    };
-  });
+  // elements = map(elements, function(element) {
+  //   return {
+  //     primaryTokens: matchAndSplit(getLabel(element), pattern),
+  //     secondaryTokens: matchAndSplit(element.id, pattern),
+  //     element: element
+  //   };
+  // });
 
-  // exclude non-matched elements
-  elements = filter(elements, function(element) {
-    return hasMatched(element.primaryTokens) || hasMatched(element.secondaryTokens);
-  });
+  // // exclude non-matched elements
+  // elements = filter(elements, function(element) {
+  //   return hasMatched(element.primaryTokens) || hasMatched(element.secondaryTokens);
+  // });
 
-  elements = sortBy(elements, function(element) {
-    return getLabel(element.element) + element.element.id;
-  });
+  // elements = sortBy(elements, function(element) {
+  //   return getLabel(element.element) + element.element.id;
+  // });
 
-  return elements;
+  // return elements;
 };
 
 /**

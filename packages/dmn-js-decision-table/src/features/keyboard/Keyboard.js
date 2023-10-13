@@ -218,6 +218,20 @@ export default class Keyboard {
     }
 
     listeners.push(selectCellBelow);
+
+    // search labels
+    // CTRL + F
+    debugger;
+    if (editorActions.isRegistered('find')) {
+      debugger;
+      this.addListener(function(_, event) {
+        if ([ 'f', 'F' ].includes(event.key) && isCmd(event)) {
+          editorActions.trigger('find');
+
+          return true;
+        }
+      });
+    }
   }
 
 
