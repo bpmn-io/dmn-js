@@ -37,6 +37,12 @@ import columnResizeModule from './features/column-resize';
 
 export default class Editor extends Viewer {
 
+  constructor(...args) {
+    super(...args);
+
+    window.DMN = this;
+  }
+
   getModules() {
     return [
       ...Viewer._getModules(),
