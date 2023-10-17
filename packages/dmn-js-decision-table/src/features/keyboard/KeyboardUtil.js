@@ -21,3 +21,7 @@ export function isCmd(modifiers) {
 export function isShift(modifiers) {
   return modifiers.shiftKey;
 }
+
+export function isKey(key, event) {
+  return event.key === key;
+}

@@ -221,9 +221,7 @@ export default class Keyboard {
 
     // search labels
     // CTRL + F
-    debugger;
     if (editorActions.isRegistered('find')) {
-      debugger;
       this.addListener(function(_, event) {
         if ([ 'f', 'F' ].includes(event.key) && isCmd(event)) {
           editorActions.trigger('find');

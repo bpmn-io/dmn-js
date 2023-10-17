@@ -246,9 +246,8 @@ export default class DecisionTableEditorActions {
     editorActions.register(actions);
 
 
-    debugger;
     const searchPad = injector.get('searchPad', false);
-    if (selection && searchPad) {
+    if (searchPad) {
       editorActions.register({
         find() {
           searchPad.toggle();
