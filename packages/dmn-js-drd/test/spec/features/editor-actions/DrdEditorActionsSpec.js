@@ -119,7 +119,7 @@ describe('features/editor-actions', function() {
   });
 
 
-  describe('lassoTool', function() {
+  describe('search', function() {
 
     it('should toggle', inject(function(editorActions, searchPad) {
 
