@@ -67,7 +67,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
               <Input
                 className="variable-name-input"
                 onInput={ this.setVariableName }
-                placeholder={ 'name' }
+                placeholder={ this._translate('name') }
                 value={ name || '' } />
             </td>
           </tr>

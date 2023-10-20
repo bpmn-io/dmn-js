@@ -32,7 +32,10 @@ export default class AddRuleFootComponent extends Component {
 
     const cells = [
       <td className="add-rule-add">
-        <span className="dmn-icon-plus action-icon" title="Add Rule"></span>
+        <span
+          className="dmn-icon-plus action-icon"
+          title={ this.translate('Add Rule') }>
+        </span>
       </td>
     ];
 
@@ -77,4 +80,4 @@ export default class AddRuleFootComponent extends Component {
   }
 }
 
-AddRuleFootComponent.$inject = [ 'sheet' ];
+AddRuleFootComponent.$inject = [ 'sheet', 'translate' ];
