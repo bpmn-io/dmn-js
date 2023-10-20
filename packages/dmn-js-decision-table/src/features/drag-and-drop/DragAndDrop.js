@@ -21,13 +21,14 @@ export default class DragAndDrop {
 
   constructor(
       components, elementRegistry, eventBus,
-      dragAndDrop, renderer, rules, sheet) {
+      dragAndDrop, renderer, rules, sheet, translate) {
 
     this._elementRegistry = elementRegistry;
     this._dragAndDrop = dragAndDrop;
     this._renderer = renderer;
     this._rules = rules;
     this._sheet = sheet;
+    this._translate = translate;
 
     // provide drag handle for drag and drop
     components.onGetComponent('cell-inner', ({ cellType, col, row }) => {
@@ -36,7 +37,7 @@ export default class DragAndDrop {
           draggable="true"
           onDragStart={ e => this.startDrag(row, e) }
           className="dmn-icon-drag vertical"
-          title="Move rule">&nbsp;</span>;
+          title={ this._translate('Move rule') }>&nbsp;</span>;
       } else if (cellType === 'input-cell' || cellType === 'output-cell') {
 
         let title = `Move ${isInput(col) ? 'Input' : 'Output' }`;
@@ -309,7 +310,8 @@ DragAndDrop.$inject = [
   'dragAndDrop',
   'renderer',
   'rules',
-  'sheet'
+  'sheet',
+  'translate'
 ];
 
 // helpers //////////
