@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
-  "version": "14.5.0",
+  "version": "14.6.0",
   "files": [
     "assets",
     "lib"
