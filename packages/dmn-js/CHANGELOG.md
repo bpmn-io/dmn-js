@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.6.0
+
+* `FEAT`: implement search in DRD ([#792](https://github.com/bpmn-io/dmn-js/pull/792))
+* `FIX`: add missing translations ([#793](https://github.com/bpmn-io/dmn-js/issues/793))
+
 ## 14.5.0
 
 * `FEAT`: add variable suggestions to literal expression ([#785](https://github.com/bpmn-io/dmn-js/issues/785))
