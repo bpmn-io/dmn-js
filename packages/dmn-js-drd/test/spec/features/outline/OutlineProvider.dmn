@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_11grvik" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="Decision" name="Decision 1">
+    <decisionTable id="DecisionTable_16u0nds">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <inputData id="InputData" />
+  <knowledgeSource id="KnowledgeSource" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_06ii2yj" dmnElementRef="InputData">
+        <dc:Bounds height="45" width="125" x="388" y="108" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1toe7qd" dmnElementRef="KnowledgeSource">
+        <dc:Bounds height="63" width="100" x="190" y="239" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1gqa9oy" dmnElementRef="BusinessKnowledgeModel">
+        <dc:Bounds height="46" width="135" x="384" y="248" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

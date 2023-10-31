@@ -19,6 +19,7 @@ import KeyboardMoveSelectionModule from 'diagram-js/lib/features/keyboard-move-s
 import LabelEditingModule from './features/label-editing';
 import ModelingModule from './features/modeling';
 import MoveModule from 'diagram-js/lib/features/move';
+import OutlineProvider from './features/outline';
 import PaletteModule from './features/palette';
 import ResizeModule from 'diagram-js/lib/features/resize';
 import SnappingModule from './features/snapping';
@@ -131,6 +132,7 @@ Modeler.prototype._modelingModules = [
   LabelEditingModule,
   ModelingModule,
   MoveModule,
+  OutlineProvider,
   PaletteModule,
   ResizeModule,
   SnappingModule
