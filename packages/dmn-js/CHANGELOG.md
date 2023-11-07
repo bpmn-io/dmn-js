@@ -6,6 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 14.7.0
+
+* `FEAT`: adjust selection outline to shapes ([#799](https://github.com/bpmn-io/dmn-js/issues/799))
+* `FIX`: make literal expression box grow with content ([#789](https://github.com/bpmn-io/dmn-js/issues/789))
+* `DEPS`: update dependency @bpmn-io/feel-editor to v1
+* `DEPS`: update to `diagram-js@12.7.1`
+
 ## 14.6.0
 
 * `FEAT`: implement search in DRD ([#792](https://github.com/bpmn-io/dmn-js/pull/792))
