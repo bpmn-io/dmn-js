@@ -3,6 +3,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 import {
   domify,
   classes as domClasses,
+  attr as domAttr,
   delegate as domDelegate
 } from 'min-dom';
 
@@ -71,7 +72,7 @@ export default class DrillDown {
   addOverlay(element, className) {
     const html = domify(`
       <div class="drill-down-overlay">
-        <span class="${className}"></span>
+        <button class="${className}"></button>
       </div>
     `);
 
@@ -86,6 +87,9 @@ export default class DrillDown {
     // TODO(nikku): can we remove renamed to drillDown.enabled
     if (this._config.enabled !== false) {
       domClasses(html).add('interactive');
+
+      // Add tabindex attr. to allow keyboard tab focus on Drilldown button
+      domAttr(html, 'tabindex', '0');
 
       this.bindEventListener(element, html, overlayId);
     }
