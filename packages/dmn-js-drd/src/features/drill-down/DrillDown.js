@@ -87,10 +87,6 @@ export default class DrillDown {
     // TODO(nikku): can we remove renamed to drillDown.enabled
     if (this._config.enabled !== false) {
       domClasses(html).add('interactive');
-
-      // Add tabindex attr. to allow keyboard tab focus on Drilldown button
-      domAttr(html, 'tabindex', '0');
-
       this.bindEventListener(element, html, overlayId);
     }
   }
