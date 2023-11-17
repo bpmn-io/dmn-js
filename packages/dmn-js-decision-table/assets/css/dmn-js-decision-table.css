@@ -426,11 +426,6 @@
   background: var(--view-drd-button-hover-background-color);
 }
 
-/* Adds the missing focus outline to button */
-/* .dmn-decision-table-container .view-drd .view-drd-button:focus {
-  border: 1px solid var(--view-drd-button-focus-border-color);
-} */
-
 /* end view drd */
 
 /* powered by */
