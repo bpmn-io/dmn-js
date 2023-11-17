@@ -420,7 +420,6 @@
   color: var(--view-drd-button-color);
   font-weight: bold;
   cursor: pointer;
-  outline: none;
 }
 
 .dmn-decision-table-container .view-drd .view-drd-button:hover {
@@ -428,9 +427,9 @@
 }
 
 /* Adds the missing focus outline to button */
-.dmn-decision-table-container .view-drd .view-drd-button:focus {
+/* .dmn-decision-table-container .view-drd .view-drd-button:focus {
   border: 1px solid var(--view-drd-button-focus-border-color);
-}
+} */
 
 /* end view drd */
 

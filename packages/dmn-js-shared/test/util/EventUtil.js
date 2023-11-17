@@ -70,7 +70,6 @@ export function triggerKeyEvent(element, event, optionsOrCode) {
     e.keyCode = optionsOrCode;
     e.which = optionsOrCode;
   }
-
   return element.dispatchEvent(e);
 }
 

@@ -22,7 +22,6 @@ export default class ViewDrdComponent extends Component {
         className="view-drd"
         ref={ node => this.node = node }>
         <button
-          tabindex="0"
           type="button"
           onClick={ this.onClick }
           className="view-drd-button">{ this._translate('View DRD') }</button>
