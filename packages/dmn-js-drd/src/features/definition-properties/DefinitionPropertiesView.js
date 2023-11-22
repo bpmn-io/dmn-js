@@ -25,7 +25,7 @@ export default function DefinitionPropertiesView(eventBus, canvas, translate) {
   this.HTML_MARKUP =
     '<div class="dmn-definitions">' +
     '<div class="dmn-definitions-name" title="' +
-      this._translate('Definition Name') +
+      this._translate('Definition name') +
     '" spellcheck="false">' +
     '</div>' +
     '<div class="dmn-definitions-id" title="' +

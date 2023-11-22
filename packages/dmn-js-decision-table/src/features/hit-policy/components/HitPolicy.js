@@ -38,7 +38,7 @@ export default class HitPolicy extends Component {
         title={ this._translate(hitPolicyEntry.explanation) }
       >
         <label className="dms-label">
-          { this._translate('Hit Policy:') }
+          { this._translate('Hit policy:') }
         </label>
         <span className="hit-policy-value">
           { this._translate(hitPolicyEntry.label) }

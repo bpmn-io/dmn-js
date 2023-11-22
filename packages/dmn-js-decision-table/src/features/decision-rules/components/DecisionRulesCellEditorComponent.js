@@ -233,7 +233,7 @@ class TableCellEditor extends Component {
             <span
               className="dms-badge dmn-expression-language"
               title={ this._translate(
-                'Expression Language = {expressionLanguageLabel}',
+                'Expression language: {expressionLanguageLabel}',
                 { expressionLanguageLabel }
               ) }>
               <span class="dms-badge-icon dmn-icon-file-code"></span>

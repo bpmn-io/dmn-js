@@ -13,7 +13,7 @@ const EXACT = 'exact',
 
 export function validateISOString(string) {
   if (!ISO_TIME_REGEX.test(string.trim())) {
-    return 'Time must match pattern hh:mm:ss[time zone].';
+    return 'Time must match pattern hh:mm:ss[time zone]';
   }
 }
 

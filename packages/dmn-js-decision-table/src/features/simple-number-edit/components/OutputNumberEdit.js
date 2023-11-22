@@ -55,9 +55,9 @@ export default class OutputNumberEdit extends Component {
     return (
       <div class="context-menu-container simple-number-edit">
 
-        <h3 class="dms-heading">{ this._translate('Edit Number') }</h3>
+        <h3 class="dms-heading">{ this._translate('Edit number') }</h3>
 
-        <h4 class="dms-heading">{ this._translate('Set Value') }</h4>
+        <h4 class="dms-heading">{ this._translate('Set value') }</h4>
 
         <Input
           onInput={ this.onInput }

@@ -32,14 +32,14 @@ describe('simple date edit - utils', function() {
 
       // then
       expect(validateISOString('foo'))
-        .to.equal('Date must match pattern yyyy-MM-dd.');
+        .to.equal('Date must match pattern yyyy-MM-dd');
     });
 
     it('empty string should not be ISO date string', function() {
 
       // then
       expect(validateISOString(''))
-        .to.equal('Date must match pattern yyyy-MM-dd.');
+        .to.equal('Date must match pattern yyyy-MM-dd');
     });
 
   });

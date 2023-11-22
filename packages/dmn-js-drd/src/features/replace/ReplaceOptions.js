@@ -11,7 +11,7 @@ export default {
       }
     },
     {
-      label: 'Decision Table',
+      label: 'Decision table',
       actionName: 'replace-with-decision-table',
       className: 'dmn-icon-decision-table',
       target: {
@@ -21,7 +21,7 @@ export default {
       }
     },
     {
-      label: 'Literal Expression',
+      label: 'Literal expression',
       actionName: 'replace-with-literal-expression',
       className: 'dmn-icon-literal-expression',
       target: {

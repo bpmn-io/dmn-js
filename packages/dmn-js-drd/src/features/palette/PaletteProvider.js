@@ -62,7 +62,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'hand-tool': {
       group: 'tools',
       className: 'dmn-icon-hand-tool',
-      title: translate('Activate the hand tool'),
+      title: translate('Activate hand tool'),
       action: {
         click: function(event) {
           handTool.activateHand(event);
@@ -72,7 +72,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'lasso-tool': {
       group: 'tools',
       className: 'dmn-icon-lasso-tool',
-      title: translate('Activate the lasso tool'),
+      title: translate('Activate lasso tool'),
       action: {
         click: function(event) {
           lassoTool.activateSelection(event);
@@ -84,18 +84,18 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       separator: true
     },
     'create.decision': createAction(
-      'dmn:Decision', 'drd', 'dmn-icon-decision', translate('Create Decision')
+      'dmn:Decision', 'drd', 'dmn-icon-decision', translate('Create decision')
     ),
     'create.input-data': createAction(
-      'dmn:InputData', 'drd', 'dmn-icon-input-data', translate('Create Input Data')
+      'dmn:InputData', 'drd', 'dmn-icon-input-data', translate('Create input data')
     ),
     'create.knowledge-source': createAction(
       'dmn:KnowledgeSource', 'drd', 'dmn-icon-knowledge-source',
-      translate('Create Knowledge Source')
+      translate('Create knowledge source')
     ),
     'create.business-knowledge-model': createAction(
       'dmn:BusinessKnowledgeModel', 'drd', 'dmn-icon-business-knowledge',
-      translate('Create Knowledge Model')
+      translate('Create knowledge model')
     )
   });
 

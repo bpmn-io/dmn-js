@@ -28,7 +28,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     return (
       <div className="decision-table-properties">
         <div className="decision-table-name" title={
-          this._translate('Decision Name: ') + name }>
+          this._translate('Decision name: ') + name }>
           { name }
         </div>
         <div className="decision-table-header-separator" />

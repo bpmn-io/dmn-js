@@ -67,9 +67,9 @@ export default class OutputTimeEdit extends Component {
     return (
       <div class="context-menu-container simple-time-edit">
 
-        <h3 class="dms-heading">{ this._translate('Edit Date') }</h3>
+        <h3 class="dms-heading">{ this._translate('Edit date') }</h3>
 
-        <h4 class="dms-heading">{ this._translate('Set Date') }</h4>
+        <h4 class="dms-heading">{ this._translate('Set date') }</h4>
 
         <div>
           <ValidatedInput
@@ -84,9 +84,9 @@ export default class OutputTimeEdit extends Component {
           </ValidatedInput>
 
           <p className="dms-hint">
-            { this._translate('Set date') } <button type="button"
+            <button type="button"
               className="use-now"
-              onClick={ this.onClick }>{ this._translate('to now') }</button>.
+              onClick={ this.onClick }>{ this._translate('Use now') }</button>.
           </p>
         </div>
 

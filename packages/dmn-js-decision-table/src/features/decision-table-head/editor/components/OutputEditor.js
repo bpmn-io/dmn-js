@@ -55,7 +55,7 @@ export default class OutputEditor extends Component {
         <div className="dms-form-control">
           <label className="dms-label">
             {
-              this.translate('Output Name')
+              this.translate('Output name')
             }
           </label>
 

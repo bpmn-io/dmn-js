@@ -145,13 +145,13 @@ function DefaultInputHeaderCell(props, context) {
         label ? (
           <div
             className="input-label"
-            title={ translate('Input Label: ') + label }>
+            title={ translate('Input label: ') + label }>
             { label }
           </div>
         ) : (
           <div
             className="input-expression"
-            title={ translate('Input Expression: ') + inputExpression.text }>
+            title={ translate('Input expression: ') + inputExpression.text }>
             { inputExpression.text }
           </div>
         )
@@ -160,8 +160,8 @@ function DefaultInputHeaderCell(props, context) {
       <div
         className="input-variable"
         title={
-          inputValues && inputValues.text ? translate('Input Values') :
-            translate('Input Type')
+          inputValues && inputValues.text ? translate('Input values') :
+            translate('Input type')
         }
       >
         { inputValues && inputValues.text || inputExpression.typeRef }
@@ -199,13 +199,13 @@ function DefaultOutputHeaderCell(props, context) {
 
       {
         label ? (
-          <div className="output-label" title={ translate('Output Label') }>
+          <div className="output-label" title={ translate('Output label') }>
             { label }
           </div>
         ) : (
           <div
             className="output-name"
-            title={ translate('Output Name') }>
+            title={ translate('Output name') }>
             { name }
           </div>
         )
@@ -214,8 +214,8 @@ function DefaultOutputHeaderCell(props, context) {
       <div
         className="output-variable"
         title={
-          outputValues && outputValues.text ? translate('Output Values') :
-            translate('Output Type')
+          outputValues && outputValues.text ? translate('Output values') :
+            translate('Output type')
         }
       >
         { outputValues && outputValues.text || typeRef }

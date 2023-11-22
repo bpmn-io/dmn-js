@@ -48,7 +48,7 @@ export default class AddInput extends Component {
       <div
         onClick={ this.handleClick }
         className="add-input actionable"
-        title={ this._translate('Add Input') }
+        title={ this._translate('Add input') }
       >
         <span
           className="dmn-icon-plus action-icon"

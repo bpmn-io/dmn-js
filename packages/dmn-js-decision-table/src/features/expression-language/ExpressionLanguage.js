@@ -52,7 +52,7 @@ export default class ExpressionLanguage {
             className="context-menu-group-entry"
             onClick={ openMenu }
           >
-            { this._translate('Change Cell Expression Language') }
+            { this._translate('Change cell expression language') }
           </div>
         );
 
@@ -89,7 +89,7 @@ export default class ExpressionLanguage {
               <div
                 className={ className }>
                 <div>
-                  { this._translate('Expression Language') }
+                  { this._translate('Expression language') }
                 </div>
 
                 <InputSelect
@@ -124,7 +124,7 @@ export default class ExpressionLanguage {
             <div className="dms-form-control">
               <label className="dms-label">
                 {
-                  this._translate('Expression Language')
+                  this._translate('Expression language')
                 }
               </label>
 

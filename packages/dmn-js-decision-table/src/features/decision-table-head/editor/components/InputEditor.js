@@ -92,7 +92,7 @@ export default class InputEditor extends Component {
           </label>
 
           <ExpressionEditor
-            placeholder={ this.translate('enter expression') }
+            placeholder={ this.translate('Enter expression') }
             className={
               [
                 'ref-text',

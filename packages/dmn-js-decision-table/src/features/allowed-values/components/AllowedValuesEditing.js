@@ -37,7 +37,7 @@ export default class AllowedValuesEditing extends Component {
             value,
             isCheckable: false,
             isRemovable: true,
-            group: this._translate('Predefined Values')
+            group: this._translate('Predefined values')
           };
         }),
         inputValue: ''
@@ -126,7 +126,7 @@ export default class AllowedValuesEditing extends Component {
           value,
           isCheckable: false,
           isRemovable: true,
-          group: this._translate('Predefined Values')
+          group: this._translate('Predefined values')
         };
       })));
 
@@ -177,7 +177,7 @@ export default class AllowedValuesEditing extends Component {
               && !values.length
               && <div>
                 <label className="dms-label">
-                  { this._translate('Predefined Values') }
+                  { this._translate('Predefined values') }
                 </label>
                 <span className="placeholder">
                   { this._translate('No values') }
@@ -190,13 +190,13 @@ export default class AllowedValuesEditing extends Component {
               && <p class="dms-hint">
                 <button type="button" className="del-values"
                   onClick={ this.handleRemovePredifinedValuesClick }>
-                  { this._translate('Clear predefined values.') }
+                  { this._translate('Clear predefined values') }
                 </button>
               </p>
             }
 
             <label className="dms-label">
-              { this._translate('Add Predefined Values') }
+              { this._translate('Add predefined values') }
             </label>
 
             <ValidatedInput
@@ -206,7 +206,7 @@ export default class AllowedValuesEditing extends Component {
               type="text"
               validate={ value => {
                 if (!parseString(value)) {
-                  return this._translate('Strings must be in double quotes.');
+                  return this._translate('Strings must be in double quotes');
                 }
               } }
               value={ inputValue } />

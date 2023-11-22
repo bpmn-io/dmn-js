@@ -130,17 +130,12 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   *
   * @param {string} type
   * @param {string} className
-  * @param {string} [title]
+  * @param {string} title
   * @param {Object} [options]
   *
   * @return {Object} descriptor
   */
   function appendAction(type, className, title, options) {
-
-    if (typeof title !== 'string') {
-      options = title;
-      title = translate('Append {type}', { type: type.replace(/^dmn:/, '') });
-    }
 
     function appendStart(event, element) {
 
@@ -175,7 +170,11 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   if (is(businessObject, 'dmn:Decision')) {
     assign(actions, {
-      'append.decision': appendAction('dmn:Decision', 'dmn-icon-decision')
+      'append.decision': appendAction(
+        'dmn:Decision',
+        'dmn-icon-decision',
+        translate('Append decision')
+      )
     });
   }
 
@@ -189,7 +188,8 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     assign(actions, {
       'append.knowledge-source': appendAction(
         'dmn:KnowledgeSource',
-        'dmn-icon-knowledge-source'
+        'dmn-icon-knowledge-source',
+        translate('Append knowledge source')
       )
     });
   }
@@ -201,14 +201,19 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     assign(actions, {
       'append.business-knowledge-model': appendAction(
         'dmn:BusinessKnowledgeModel',
-        'dmn-icon-business-knowledge'
+        'dmn-icon-business-knowledge',
+        translate('Append business knowledge model')
       )
     });
   }
 
   if (isAny(businessObject, [ 'dmn:Decision', 'dmn:KnowledgeSource' ])) {
     assign(actions, {
-      'append.input-data': appendAction('dmn:InputData', 'dmn-icon-input-data')
+      'append.input-data': appendAction(
+        'dmn:InputData',
+        'dmn-icon-input-data',
+        translate('Append input data')
+      )
     });
   }
 
@@ -224,8 +229,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         group: 'connect',
         className: 'dmn-icon-connection-multi',
         title: translate(
-          'Connect using Information/Knowledge' +
-          '/Authority Requirement or Association'
+          'Connect using authority/information/knowledge requirement or association'
         ),
         action: {
           click: startConnect,
