@@ -13,9 +13,9 @@ import { getInputOrOutputValues, parseString } from '../Utils';
 const DISJUNCTION = 'disjunction',
       NEGATION = 'negation';
 
-const INPUT_VALUES_LABEL = 'Predefined Values',
-      OUTPUT_VALUES_LABEL = 'Predefined Values',
-      INPUT_ENTRY_VALUES_LABEL = 'Custom Values';
+const INPUT_VALUES_LABEL = 'Predefined values',
+      OUTPUT_VALUES_LABEL = 'Predefined values',
+      INPUT_ENTRY_VALUES_LABEL = 'Custom values';
 
 
 export default class SimpleStringEditContextMenuComponent extends Component {
@@ -256,7 +256,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         value,
         isChecked: true,
         isRemovable: true,
-        group: this._translate('Custom Values')
+        group: this._translate('Custom values')
       };
     }));
 
@@ -289,7 +289,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
       <div class="simple-string-edit context-menu-container">
 
         <h3 class="dms-heading">
-          { this._translate('Edit String') }
+          { this._translate('Edit string') }
         </h3>
 
         {
@@ -312,10 +312,10 @@ export default class SimpleStringEditContextMenuComponent extends Component {
         {
           isInputClause
             ? <h4 className="dms-heading">
-              { this._translate('Add Values') }
+              { this._translate('Add values') }
             </h4>
             : <h4 className="dms-heading">
-              { this._translate('Set Value') }
+              { this._translate('Set value') }
             </h4>
         }
 
@@ -341,7 +341,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
             type="text"
             validate={ value => {
               if (!parseString(value)) {
-                return this._translate('Strings must be in double quotes.');
+                return this._translate('Strings must be in double quotes');
               }
             } }
             value={ inputValue } />

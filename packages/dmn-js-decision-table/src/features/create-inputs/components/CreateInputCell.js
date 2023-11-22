@@ -20,7 +20,7 @@ export default class CreateInputsCell extends Component {
       <td
         className="input-cell create-inputs"
         onClick={ this.onClick }
-        title={ this.translate('Add Input') }>-</td>
+        title={ this.translate('Add input') }>-</td>
     );
   }
 }

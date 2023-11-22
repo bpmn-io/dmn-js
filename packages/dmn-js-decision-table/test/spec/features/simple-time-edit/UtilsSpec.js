@@ -60,14 +60,14 @@ describe('simple time edit - utils', function() {
 
       // then
       expect(validateISOString('foo'))
-        .to.equal('Time must match pattern hh:mm:ss[time zone].');
+        .to.equal('Time must match pattern hh:mm:ss[time zone]');
     });
 
     it('empty string should not be ISO time string', function() {
 
       // then
       expect(validateISOString(''))
-        .to.equal('Time must match pattern hh:mm:ss[time zone].');
+        .to.equal('Time must match pattern hh:mm:ss[time zone]');
     });
 
   });

@@ -5,8 +5,8 @@ import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 import { validateDuration } from '../Utils';
 
 const ERROR_MESSAGE = {
-  yearMonthDuration: 'Must match PnYnM.',
-  dayTimeDuration: 'Must match PnDTnH.'
+  yearMonthDuration: 'Must match PnYnM',
+  dayTimeDuration: 'Must match PnDTnH'
 };
 
 

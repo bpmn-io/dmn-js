@@ -60,7 +60,7 @@ describe('simple date edit - utils', function() {
 
       // then
       expect(validateISOString('foo'))
-        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone].');
+        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone]');
     });
 
 
@@ -68,7 +68,7 @@ describe('simple date edit - utils', function() {
 
       // then
       expect(validateISOString(''))
-        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone].');
+        .to.equal('Date and time must match pattern yyyy-MM-ddTHH:mm:ss[time zone]');
     });
 
   });

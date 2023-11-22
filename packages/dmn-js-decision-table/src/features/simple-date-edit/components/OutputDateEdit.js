@@ -83,9 +83,9 @@ export default class OutputDateEdit extends Component {
           </ValidatedInput>
 
           <p className="dms-hint">
-            { this._translate('Set date') } <button type="button"
+            <button type="button"
               className="use-today"
-              onClick={ this.onClick }>{ this._translate('to today') }</button>.
+              onClick={ this.onClick }>{ this._translate('Use today') }</button>
           </p>
         </div>
 

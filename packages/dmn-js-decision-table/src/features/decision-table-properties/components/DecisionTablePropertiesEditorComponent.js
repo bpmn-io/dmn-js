@@ -108,7 +108,7 @@ class DecisionTableName extends EditableComponent {
         className={ className }
         data-element-id={ this.props.elementId }
         data-coords={ this.props.coords }
-        title={ this._translate('Decision Name: ') + name }
+        title={ this._translate('Decision name: ') + name }
       >
         { this.getEditor() }
       </div>

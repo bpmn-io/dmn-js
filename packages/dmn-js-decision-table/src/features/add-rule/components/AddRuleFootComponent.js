@@ -34,7 +34,7 @@ export default class AddRuleFootComponent extends Component {
       <td className="add-rule-add">
         <span
           className="dmn-icon-plus action-icon"
-          title={ this.translate('Add Rule') }>
+          title={ this.translate('Add rule') }>
         </span>
       </td>
     ];

@@ -123,9 +123,9 @@ export default class Description {
               {
                 isString(description)
                   ?
-                  this._translate('Remove Cell Description')
+                  this._translate('Remove cell description')
                   :
-                  this._translate('Add Cell Description')
+                  this._translate('Add cell description')
               }
             </div>
           );

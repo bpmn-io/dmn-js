@@ -197,7 +197,7 @@ export default class InputDateEdit extends Component {
               className="use-today"
               onClick={ this.onSetStartDateTodayClick }>
               { this._translate('Use today') }
-            </button>.
+            </button>
           </p>
         </div>
 
@@ -227,7 +227,7 @@ export default class InputDateEdit extends Component {
                   className="use-today"
                   onClick={ this.onSetEndDateTodayClick }>
                   { this._translate('Use today') }
-                </button>.
+                </button>
               </p>
             </div>
         }

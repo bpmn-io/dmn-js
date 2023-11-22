@@ -62,7 +62,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
       <div className="literal-expression-properties">
         <table>
           <tr>
-            <td>{ this._translate('Variable Name:') }</td>
+            <td>{ this._translate('Variable name:') }</td>
             <td>
               <Input
                 className="variable-name-input"
@@ -72,7 +72,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             </td>
           </tr>
           <tr>
-            <td>{ this._translate('Variable Type:') }</td>
+            <td>{ this._translate('Variable type:') }</td>
             <td>
               <div className="dms-fill-row">
                 <InputSelect
@@ -146,7 +146,7 @@ class ExpressionLanguage extends Component {
 
     return (
       <tr>
-        <td>{ this._translate('Expression Language:') }</td>
+        <td>{ this._translate('Expression language:') }</td>
         <td>
           <div className="dms-fill-row">
             <InputSelect

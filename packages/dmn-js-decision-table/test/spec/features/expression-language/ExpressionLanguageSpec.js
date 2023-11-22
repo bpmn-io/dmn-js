@@ -108,7 +108,7 @@ describe('expression language', function() {
       // then
       const entries = domQueryAll('.context-menu-group-entry', testContainer);
       const entry = find(entries, entry => {
-        return entry.textContent === 'Change Cell Expression Language';
+        return entry.textContent === 'Change cell expression language';
       });
 
       expect(entry).to.exist;
@@ -141,7 +141,7 @@ describe('expression language', function() {
         // then
         const entries = domQueryAll('.context-menu-group-entry', testContainer);
         const entry = find(entries, entry => {
-          return entry.textContent === 'Change Cell Expression Language';
+          return entry.textContent === 'Change cell expression Language';
         });
 
         expect(entry).not.to.exist;
@@ -210,7 +210,7 @@ describe('expression language', function() {
       // then
       const entries = domQueryAll('.context-menu-group-entry', testContainer);
       const entry = find(entries, entry => {
-        return entry.textContent === 'Change Cell Expression Language';
+        return entry.textContent === 'Change cell expression language';
       });
 
       expect(entry).to.exist;

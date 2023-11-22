@@ -48,7 +48,7 @@ export default class AddOutput extends Component {
       <div
         onClick={ this.handleClick }
         className="add-output actionable"
-        title={ this._translate('Add Output') }
+        title={ this._translate('Add output') }
       >
         <span
           className="dmn-icon-plus action-icon"

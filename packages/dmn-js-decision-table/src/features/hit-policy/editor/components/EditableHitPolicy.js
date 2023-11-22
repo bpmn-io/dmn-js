@@ -54,7 +54,7 @@ export default class EditableHitPolicy extends Component {
     return (
       <div className="hit-policy" title={ this._translate(hitPolicyEntry.explanation) }>
         <label className="dms-label">
-          { this._translate('Hit Policy:') }
+          { this._translate('Hit policy:') }
         </label>
         <InputSelect
           className="hit-policy-edit-policy-select"

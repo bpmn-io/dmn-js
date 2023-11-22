@@ -61,9 +61,9 @@ export default class BooleanEdit extends Component {
     return (
       <div class="simple-boolean-edit context-menu-container">
 
-        <h3 class="dms-heading">{this._translate('Edit Boolean')}</h3>
+        <h3 class="dms-heading">{this._translate('Edit boolean')}</h3>
 
-        <h4 class="dms-heading">{this._translate('Set Value')}</h4>
+        <h4 class="dms-heading">{this._translate('Set value')}</h4>
 
         <InputSelect
           noInput={ true }
