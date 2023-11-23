@@ -3,7 +3,6 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 import {
   domify,
   classes as domClasses,
-  attr as domAttr,
   delegate as domDelegate
 } from 'min-dom';
 
