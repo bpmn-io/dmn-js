@@ -25,7 +25,7 @@
   "dependencies": {
     "@bpmn-io/feel-editor": "^1.0.0",
     "diagram-js": "^12.7.1",
-    "didi": "^9.0.0",
+    "didi": "^10.0.1",
     "dmn-moddle": "^10.0.0",
     "ids": "^1.0.0",
     "inferno": "~5.6.2",
