@@ -71,7 +71,7 @@ export default class DrillDown {
   addOverlay(element, className) {
     const html = domify(`
       <div class="drill-down-overlay">
-        <button class="${className}"></button>
+        <button type="button" class="${className}"></button>
       </div>
     `);
 
