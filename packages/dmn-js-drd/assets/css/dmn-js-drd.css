@@ -6,7 +6,6 @@
   --dmn-definitions-error-border-color: var(--color-red-360-100-45);
   --dmn-definitions-error-background-color: var(--color-red-360-100-97);
   --drill-down-overlay-background-color: var(--color-blue-205-100-50);
-  --drill-down-button-background-color: var(--color-blue-205-100-50);
   --drill-down-overlay-color: var(--color-white);
   --drd-font-family-monospace: monospace;
 
@@ -19,22 +18,20 @@
   box-sizing: border-box;
 }
 
-.dmn-icon-decision-table {
-  background: var(--drill-down-button-background-color);
-  color: var(--drill-down-overlay-color);
-}
-
-.dmn-icon-literal-expression {
-  background: var(--drill-down-button-background-color);
-  color: var(--drill-down-overlay-color);
-}
-
 .djs-overlay .drill-down-overlay {
   font-size: 16px;
-  color: var(--drill-down-overlay-color);
   text-align: left;
+  padding: 1px;
+}
+
+.djs-overlay .drill-down-overlay > button {
+  padding: 2px 4px;
+  margin: 0;
+  border: none;
   border-radius: 1px;
-  padding: 0 2px;
+  background: var(--drill-down-overlay-background-color);
+  color: var(--drill-down-overlay-color);
+  font-size: inherit;
 }
 
 .dmn-definitions {
