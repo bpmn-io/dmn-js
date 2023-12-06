@@ -192,7 +192,7 @@ describe('features - drilldown', function() {
       });
 
 
-      describe('should show correct icon', function() {
+      describe.only('should show correct icon', function() {
 
         verify(
           'decision table',
@@ -217,6 +217,7 @@ describe('features - drilldown', function() {
 
             // then
             expect(matches(overlayEl, '.interactive')).to.be.false;
+            expect(query('button', overlayEl)).to.be.null;
             expect(iconEl).to.exist;
           });
 
@@ -254,8 +255,9 @@ describe('features - drilldown', function() {
       }
     ));
 
-    // FIXME:
-    xit('on Enter key pressed', inject(
+    // TODO(@barmac): browser emits 'click' event on ENTER key press
+    // but not for synthetic events
+    it.skip('on Enter key pressed', inject(
       function(eventBus, drillDown, elementRegistry) {
 
         // given
