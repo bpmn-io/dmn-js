@@ -192,7 +192,7 @@ describe('features - drilldown', function() {
       });
 
 
-      describe.only('should show correct icon', function() {
+      describe('should show correct icon', function() {
 
         verify(
           'decision table',
