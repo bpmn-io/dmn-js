@@ -17,7 +17,9 @@ import {
 } from 'min-dom';
 
 import {
-  triggerClick
+  triggerClick,
+  triggerFocusIn,
+  triggerKeyEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 
 var diagramXML = require('./DrillDown.dmn');
@@ -215,6 +217,7 @@ describe('features - drilldown', function() {
 
             // then
             expect(matches(overlayEl, '.interactive')).to.be.false;
+            expect(query('button', overlayEl)).to.be.null;
             expect(iconEl).to.exist;
           });
 
@@ -249,6 +252,29 @@ describe('features - drilldown', function() {
         // then
         // no drill down, as no Decision Table editor is mounted
         expect(success).to.be.false;
+      }
+    ));
+
+    // TODO(@barmac): browser emits 'click' event on ENTER key press
+    // but not for synthetic events
+    it.skip('on Enter key pressed', inject(
+      function(eventBus, drillDown, elementRegistry) {
+
+        // given
+        var drillSpy = sinon.spy(drillDown, 'drillDown');
+
+        var overlayEl = queryOverlay('Decision_Table');
+        console.log(overlayEl.innerHTML);
+
+        // when
+        // press ENTER
+        triggerFocusIn(overlayEl);
+        triggerKeyEvent(overlayEl, 'keydown', 13);
+
+        // then
+        expect(drillSpy).to.have.been.calledOnce;
+
+        expect(drillSpy).to.have.been.calledWith(overlayEl);
       }
     ));
 

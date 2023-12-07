@@ -157,7 +157,6 @@
   color: var(--view-drd-button-color);
   font-weight: bold;
   cursor: pointer;
-  outline: none;
 }
 
 .dmn-literal-expression-container .view-drd .view-drd-button:hover {

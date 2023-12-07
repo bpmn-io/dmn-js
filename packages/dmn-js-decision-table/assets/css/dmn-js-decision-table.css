@@ -419,7 +419,6 @@
   color: var(--view-drd-button-color);
   font-weight: bold;
   cursor: pointer;
-  outline: none;
 }
 
 .dmn-decision-table-container .view-drd .view-drd-button:hover {

@@ -20,11 +20,21 @@
 
 .djs-overlay .drill-down-overlay {
   font-size: 16px;
+  text-align: left;
+  padding: 1px;
+}
+
+.djs-overlay .drill-down-overlay > button,
+.djs-overlay .drill-down-overlay > span {
+  display: block;
+  padding: 2px 4px;
+  margin: 0;
+  border: none;
+  border-radius: 1px;
   background: var(--drill-down-overlay-background-color);
   color: var(--drill-down-overlay-color);
-  text-align: left;
-  border-radius: 1px;
-  padding: 0 2px;
+  font-size: inherit;
+  outline-offset: 2px;
 }
 
 .dmn-definitions {

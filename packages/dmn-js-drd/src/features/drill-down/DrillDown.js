@@ -69,9 +69,12 @@ export default class DrillDown {
    *        CSS class that will be added to overlay in order to display icon.
    */
   addOverlay(element, className) {
+    const enabled = this._config.enabled !== false;
+
     const html = domify(`
       <div class="drill-down-overlay">
-        <span class="${className}"></span>
+        ${ enabled ? `<button type="button" class="${className}"></button>` :
+    `<span class="${className}"></span>`}
       </div>
     `);
 
@@ -84,9 +87,8 @@ export default class DrillDown {
     });
 
     // TODO(nikku): can we remove renamed to drillDown.enabled
-    if (this._config.enabled !== false) {
+    if (enabled) {
       domClasses(html).add('interactive');
-
       this.bindEventListener(element, html, overlayId);
     }
   }
