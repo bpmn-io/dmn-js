@@ -10,6 +10,10 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: make drilldown buttons navigable via keyboard ([#778](https://github.com/bpmn-io/dmn-js/issues/778))
 * `FEAT`: adjust titles and labels ([#801](https://github.com/bpmn-io/dmn-js/issues/801))
+* `DEPS`: update to didi@10
+* `DEPS`: update to table-js@9.0.0
+* `DEPS`: update to diagram-js@13.0.0
+* `DEPS`: update to lerna@8
 
 ### Breakin changes
 
