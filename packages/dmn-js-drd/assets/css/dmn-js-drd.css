@@ -34,7 +34,6 @@
   background: var(--drill-down-overlay-background-color);
   color: var(--drill-down-overlay-color);
   font-size: inherit;
-
   outline-offset: 2px;
 }
 
