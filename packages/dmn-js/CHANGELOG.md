@@ -6,6 +6,15 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 15.0.0
+
+* `FEAT`: make drilldown buttons navigable via keyboard ([#778](https://github.com/bpmn-io/dmn-js/issues/778))
+* `FEAT`: adjust titles and labels ([#801](https://github.com/bpmn-io/dmn-js/issues/801))
+
+### Breakin changes
+
+* Several translation labels changed. Make sure to update your translations accordingly.
+
 ## 14.7.0
 
 * `FEAT`: adjust selection outline to shapes ([#799](https://github.com/bpmn-io/dmn-js/issues/799))
