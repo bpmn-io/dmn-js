@@ -15,7 +15,7 @@ ___Note:__ Yet to be released changes appear here._
 * `DEPS`: update to diagram-js@13.0.0
 * `DEPS`: update to lerna@8
 
-### Breakin changes
+### Breaking Changes
 
 * Several translation labels changed. Make sure to update your translations accordingly.
 
