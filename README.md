@@ -10,8 +10,8 @@ View and edit DMN 1.3 diagrams in the browser.
 
 ## Installation
 
-Use the library [pre-packaged](https://github.com/bpmn-io/dmn-js-examples/tree/master/pre-packaged)
-or include it [via npm](https://github.com/bpmn-io/dmn-js-examples/tree/master/bundling)
+Use the library [pre-packaged](https://github.com/bpmn-io/dmn-js-examples/tree/main/pre-packaged)
+or include it [via npm](https://github.com/bpmn-io/dmn-js-examples/tree/main/bundling)
 into your node-style web-application.
 
 
@@ -96,7 +96,7 @@ file an issue or pull request.
 
 ## Code of Conduct
 
-By participating to this project, please uphold to our [Code of Conduct](https://github.com/bpmn-io/.github/blob/master/.github/CODE_OF_CONDUCT.md).
+By participating to this project, please uphold to our [Code of Conduct](https://github.com/bpmn-io/.github/blob/main/.github/CODE_OF_CONDUCT.md).
 
 
 ## License
