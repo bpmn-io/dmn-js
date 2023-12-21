@@ -137,7 +137,7 @@
 
 .dmn-decision-table-container .context-menu .context-menu-container.input-edit,
 .dmn-decision-table-container .context-menu .context-menu-container.output-edit {
-  margin: 34px 10px 10px 10px;
+  margin: 34px 10px 10px;
 }
 
 .dmn-decision-table-container .context-menu .context-menu-container.type-ref-edit,
@@ -217,8 +217,6 @@
 .dmn-icon-drag.horizontal,
 .dmn-icon-drag.vertical {
   cursor: grab;
-  cursor: -moz-grab;
-  cursor: -webkit-grab;
 }
 
 /* description editor */
@@ -253,11 +251,6 @@
 }
 
 /* cell editor */
-.dmn-decision-table-container .cell-editor__placeholder {
-  position: absolute;
-}
-
-.dmn-decision-table-container .cell-editor:focus-within .cell-editor__placeholder,
 .dmn-decision-table-container .cell-editor:focus-within .dmn-expression-language {
   display: none;
 }

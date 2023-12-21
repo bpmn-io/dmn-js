@@ -124,7 +124,7 @@ describe('components/LiteralExpression', function() {
     expect(node).to.exist;
     expect(innerText(node)).to.eql('');
 
-    expect(matches(node, '.content-editable--with-placeholder.other')).to.be.true;
+    expect(matches(node, '.content-editable.placeholder.other')).to.be.true;
   });
 
 
