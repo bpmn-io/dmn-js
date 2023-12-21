@@ -201,7 +201,7 @@ export default class ContentEditable extends Component {
     return [
       className || '',
       'content-editable',
-      (!value && placeholder) ? 'content-editable--with-placeholder' : ''
+      (!value && placeholder) ? 'placeholder' : ''
     ].join(' ');
   }
 

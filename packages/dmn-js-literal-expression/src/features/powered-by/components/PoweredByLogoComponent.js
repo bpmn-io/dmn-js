@@ -24,7 +24,7 @@ export default class PoweredByLogoComponent extends Component {
         className="powered-by"
         title="Powered by bpmn.io"
         ref={ node => this.node = node }>
-        <div className="powered-by__logo">
+        <div className="logo">
           <Logo />
         </div>
       </div>
