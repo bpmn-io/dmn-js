@@ -27,6 +27,10 @@ import {
   wrapForCompatibility
 } from 'dmn-js-shared/lib/util/CompatibilityUtils';
 
+import {
+  addProjectLogo
+} from './util/PoweredByUtil';
+
 
 /**
  * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
@@ -350,44 +354,3 @@ Viewer.prototype._modules = [
   DrillDownModule
 ];
 
-/* <project-logo> */
-
-import {
-  BPMNIO_IMG,
-  open as openPoweredBy
-} from './util/PoweredByUtil';
-
-import {
-  event as domEvent
-} from 'min-dom';
-
-/**
- * Adds the project logo to the diagram container as
- * required by the bpmn.io license.
- *
- * @see http://bpmn.io/license
- *
- * @param {Element} container
- */
-function addProjectLogo(container) {
-  var linkMarkup =
-    '<a href="http://bpmn.io" ' +
-       'target="_blank" ' +
-       'class="bjs-powered-by" ' +
-       'title="Powered by bpmn.io" ' +
-       'style="position: absolute; bottom: 15px; right: 15px; z-index: 100;">' +
-      BPMNIO_IMG +
-    '</a>';
-
-  var linkElement = domify(linkMarkup);
-
-  container.appendChild(linkElement);
-
-  domEvent.bind(linkElement, 'click', function(event) {
-    openPoweredBy();
-
-    event.preventDefault();
-  });
-}
-
-/* </project-logo> */
