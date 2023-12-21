@@ -29,7 +29,7 @@ import {
 
 import {
   addProjectLogo
-} from './util/PoweredByUtil';
+} from 'dmn-js-shared/lib/util/PoweredByUtil';
 
 
 /**

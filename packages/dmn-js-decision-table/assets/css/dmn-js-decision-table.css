@@ -427,49 +427,6 @@
 
 /* end view drd */
 
-/* powered by */
-
-.dmn-decision-table-container .powered-by {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  margin: 10px;
-  background-color: var(--color-white);
-}
-
-.dmn-decision-table-container .powered-by-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--powered-by-overlay-background-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
-
-.dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 10px;
-  max-width: 260px;
-  background: var(--powered-by-overlay-content-background-color);
-  color: var(--powered-by-overlay-content-color);
-  border: solid 1px var(--powered-by-overlay-content-border-color);
-  border-radius: 2px;
-  font-size: 14px;
-}
-
-.dmn-decision-table-container .powered-by-overlay .powered-by-overlay-content .logo {
-  margin: 15px 20px 15px 10px;
-}
-
-/* end powered by */
-
 /* simple mode */
 
 .dmn-decision-table-container .simple-mode-button {
