@@ -2,7 +2,7 @@ import {
   forEach
 } from 'min-dash';
 
-import Refs from 'object-refs';
+import { Refs } from 'object-refs';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
