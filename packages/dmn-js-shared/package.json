@@ -23,7 +23,7 @@
     "inferno-test-utils": "~5.6.2"
   },
   "dependencies": {
-    "@bpmn-io/feel-editor": "^1.0.0",
+    "@bpmn-io/feel-editor": "^1.1.0",
     "diagram-js": "^13.0.0",
     "didi": "^10.0.1",
     "dmn-moddle": "^10.0.0",
