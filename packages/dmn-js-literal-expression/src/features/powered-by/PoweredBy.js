@@ -1,18 +1,13 @@
-import PoweredByLogoComponent from './components/PoweredByLogoComponent';
-import PoweredByOverlayComponent from './components/PoweredByOverlayComponent';
+import { PoweredByComponent } from 'dmn-js-shared/lib/util/PoweredByUtil';
 
 const HIGHER_PRIORITY = 2000;
 
 export default class PoweredBy {
-  constructor(components, eventBus) {
+  constructor(components) {
     components.onGetComponent('viewer', HIGHER_PRIORITY, () => {
-      return PoweredByLogoComponent;
-    });
-
-    components.onGetComponent('viewer', () => {
-      return PoweredByOverlayComponent;
+      return PoweredByComponent;
     });
   }
 }
 
-PoweredBy.$inject = [ 'components', 'eventBus' ];
+PoweredBy.$inject = [ 'components' ];
