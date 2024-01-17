@@ -222,14 +222,15 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     assign(actions, {
       'append.text-annotation': appendAction(
         'dmn:TextAnnotation',
-        'dmn-icon-text-annotation'
+        'dmn-icon-text-annotation',
+        translate('Add text annotation')
       ),
 
       'connect': {
         group: 'connect',
         className: 'dmn-icon-connection-multi',
         title: translate(
-          'Connect using authority/information/knowledge requirement or association'
+          'Connect to other element'
         ),
         action: {
           click: startConnect,
@@ -245,7 +246,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         group: 'connect',
         className: 'dmn-icon-connection-multi',
         title: translate(
-          'Connect using association'
+          'Connect to other element'
         ),
         action: {
           click: startConnect,
@@ -292,7 +293,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
       'delete': {
         group: 'edit',
         className: 'dmn-icon-trash',
-        title: translate('Remove'),
+        title: translate('Delete'),
         action: {
           click: removeElement
         }
