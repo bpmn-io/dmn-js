@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 15.1.0
+
+* `FEAT`: user friendly context pad entries' titles ([#818](https://github.com/bpmn-io/dmn-js/pull/818))
+* `DEPS`: update to `diagram-js@13.4.0`
+* `DEPS`: update to `@bpmn-io/feel-editor@1.1.0`
+
 ## 15.0.0
 
 * `FEAT`: make drilldown buttons navigable via keyboard ([#778](https://github.com/bpmn-io/dmn-js/issues/778))
