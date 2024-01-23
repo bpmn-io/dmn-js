@@ -5,12 +5,12 @@ labels: "bug"
 ---
 
 
-__Describe the Bug__
+### Describe the Bug
 
 A clear and concise description of what the bug is.
 
 
-__Steps to Reproduce__
+### Steps to Reproduce
 
 Steps to reproduce the behavior:
 
@@ -22,12 +22,12 @@ If you report a modeling related issue, ensure you can reproduce it on [demo.bpm
 When reporting a library error, try to build an example that reproduces your problem. You can use our playgrounds for [viewer](https://jsfiddle.net/x2doq4vn/) or [modeler](https://jsfiddle.net/nrko5hyt/) as a starting point or put a demo up on [GitHub](https://github.com/) for inspection.
 
 
-__Expected Behavior__
+### Expected Behavior
 
 A clear and concise description of what you expected to happen.
 
 
-__Environment__
+### Environment
 
 Please complete the following information:
 
