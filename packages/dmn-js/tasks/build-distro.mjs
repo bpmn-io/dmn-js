@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
-import { copySync as cp } from 'cpx';
+import { copySync as cp } from 'cpx2';
 import { sync as del } from 'del';
 import { execaSync as exec } from 'execa';
 
