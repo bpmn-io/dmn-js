@@ -1,11 +1,13 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
-import { copySync as cp } from 'cpx2';
+import cpx from 'cpx2';
 import { sync as del } from 'del';
 import { execaSync as exec } from 'execa';
 
 import { createRequire } from 'node:module';
+
+const { copySync: cp } = cpx;
 
 var dest = process.env.DISTRO_DIST || 'dist';
 
