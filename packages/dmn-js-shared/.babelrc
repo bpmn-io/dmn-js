@@ -1,7 +1,6 @@
 {
   "extends": "../../babel.config.json",
   "plugins": [
-    "inferno",
-    "@babel/plugin-proposal-class-properties"
+    "inferno"
   ]
 }

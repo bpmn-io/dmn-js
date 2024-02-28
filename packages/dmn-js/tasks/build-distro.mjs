@@ -15,7 +15,7 @@ function resolve(module, sub) {
   var require = createRequire(import.meta.url);
   var pkg = require.resolve(module + '/package.json');
 
-  return path.dirname(pkg) + sub;
+  return `./${path.dirname(pkg) + sub}`;
 }
 
 console.log('clean ' + dest);

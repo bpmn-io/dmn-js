@@ -99,7 +99,8 @@ function pgl(plugins = []) {
 
   return [
     replace({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      preventAssignment: true
     }),
     json(),
     nodeResolve({
@@ -110,11 +111,10 @@ function pgl(plugins = []) {
     }),
     commonjs(),
     babel({
+      babelHelpers: 'bundled',
       babelrc: false,
       exclude: 'node_modules/**',
-      presets: [
-        [ '@babel/preset-env', { modules: false } ]
-      ]
+      configFile: '../../babel.config.json'
     }),
     ...plugins
   ];
