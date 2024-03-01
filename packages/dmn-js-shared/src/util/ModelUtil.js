@@ -62,7 +62,7 @@ export function isAny(element, types) {
 }
 
 /**
- * Return logic of a given decision or BKM.
+ * Return main boxed expression of a given decision or BKM.
  *
  * @param {ModdleElement} decisionOrBkm - the decision or business knowledge model
  * @returns {ModdleElement|undefined}
