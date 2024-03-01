@@ -8,6 +8,14 @@ insertCSS('dmn-js-decision-table.css',
   require('dmn-js-decision-table/assets/css/dmn-js-decision-table.css')
 );
 
+insertCSS('dmn-js-literal-expression.css',
+  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css')
+);
+
+insertCSS('dmn-js-boxed-expression.css',
+  require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression.css')
+);
+
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
 insertCSS('dmn-js-testing.css',

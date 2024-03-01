@@ -27,7 +27,11 @@ export default class EditingManager extends Manager {
       viewer.on('elements.changed', ({ elements }) => {
 
         var viewsChanged = elements.some(function(e) {
-          return isAny(e, [ 'dmn:Decision', 'dmn:Definitions', 'dmn:BusinessKnowledgeModel' ]);
+          return isAny(e, [
+            'dmn:Decision',
+            'dmn:Definitions',
+            'dmn:BusinessKnowledgeModel'
+          ]);
         });
 
         if (viewsChanged) {

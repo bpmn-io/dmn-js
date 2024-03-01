@@ -1,0 +1,41 @@
+{
+  "name": "dmn-js-boxed-expression",
+  "description": "A boxed expression view for dmn-js",
+  "version": "15.1.0",
+  "files": [
+    "assets",
+    "lib"
+  ],
+  "scripts": {
+    "test": "karma start",
+    "build": "del-cli lib && babel -s --quiet -d lib src",
+    "dev": "npm test -- --no-single-run --auto-watch",
+    "prepublishOnly": "npm run build"
+  },
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bpmn-io/dmn-js",
+    "directory": "packages/dmn-js-boxed-expression"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "dmn",
+    "dmn-js",
+    "dmn-js-view",
+    "boxed expression"
+  ],
+  "devDependencies": {
+    "dmn-font": "^0.6.2",
+    "inferno-test-utils": "~5.6.2"
+  },
+  "dependencies": {
+    "@bpmn-io/dmn-variable-resolver": "^0.4.0",
+    "diagram-js": "^14.0.0",
+    "dmn-js-shared": "^15.1.0",
+    "inferno": "~5.6.2",
+    "min-dash": "^4.0.0",
+    "min-dom": "^4.0.3",
+    "table-js": "^9.0.0"
+  }
+}

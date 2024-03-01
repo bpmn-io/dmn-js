@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Desired Dish" namespace="party" exporter="Camunda Modeler" exporterVersion="5.11.0">
+  <decision id="season" name="Season">
+    <variable id="InformationItem_16229yj" name="season" typeRef="string" />
+    <informationRequirement id="InformationRequirement_13flr3u">
+      <requiredInput href="#InputData_0wikdil" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_0hs8xyn">
+      <text>calendar.getSeason(date)</text>
+    </literalExpression>
+  </decision>
+  <inputData id="InputData_0wikdil" name="Variable" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="season">
+        <dc:Bounds height="55" width="100" x="150" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1ds1jom" dmnElementRef="InputData_0wikdil">
+        <dc:Bounds height="45" width="125" x="138" y="198" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0qwszuo" dmnElementRef="InformationRequirement_13flr3u">
+        <di:waypoint x="201" y="198" />
+        <di:waypoint x="200" y="155" />
+        <di:waypoint x="200" y="135" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

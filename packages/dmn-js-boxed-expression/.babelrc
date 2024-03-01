@@ -1,0 +1,6 @@
+{
+  "extends": "../../babel.config.json",
+  "plugins": [
+    "inferno"
+  ]
+}
