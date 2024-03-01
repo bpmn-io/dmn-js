@@ -47,6 +47,9 @@ async function run() {
   console.log('copy dmn-js-literal-expression assets to ' + dest);
   await cp(resolve('dmn-js-literal-expression', '/assets/css/**'), dest + '/assets');
 
+  console.log('copy dmn-js-boxed-expression assets to ' + dest);
+  await cp(resolve('dmn-js-boxed-expression', '/assets/css/**'), dest + '/assets');
+
   console.log('building pre-packaged distributions');
 
   var NODE_ENV = process.env.NODE_ENV;
