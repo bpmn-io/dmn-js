@@ -316,6 +316,7 @@ export default class InputSelect extends Component {
   render() {
     const {
       className,
+      id,
       options,
       noInput,
       title
@@ -354,6 +355,7 @@ export default class InputSelect extends Component {
                 ref={ node => this.inputNode = node }
                 type="text"
                 value={ value }
+                id={ id }
               />
             )
         }

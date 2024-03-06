@@ -93,6 +93,29 @@ describe('components/InputSelect', function() {
   });
 
 
+  it('should pass id', function() {
+
+    // given
+    const injector = createInjector({
+      keyboard: getKeyboardMock(testContainer),
+      renderer: getRendererMock(testContainer)
+    });
+    const id = `id-${(Math.random() * 1000).toFixed(0)}`;
+
+    // when
+    renderIntoDocument(
+      <DiContainer injector={ injector }>
+        <InputSelect id={ id } />
+      </DiContainer>
+    );
+
+    // then
+    const input = testContainer.querySelector('#' + id);
+
+    expect(input).to.exist;
+  });
+
+
   describe('interaction', function() {
 
     let injector;
