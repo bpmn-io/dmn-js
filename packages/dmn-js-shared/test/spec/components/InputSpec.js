@@ -114,4 +114,22 @@ describe('components/Input', function() {
     expect(spy).to.have.been.called;
   });
 
+
+  it('should pass id', function() {
+
+    // given
+    const id = `id-${(Math.random() * 1000).toFixed(0)}`;
+
+    // when
+    renderIntoDocument(
+      <Input
+        id={ id } />
+    );
+
+    // then
+    const input = container.querySelector('#' + id);
+
+    expect(input).to.exist;
+  });
+
 });
