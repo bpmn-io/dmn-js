@@ -41,6 +41,7 @@ export default class Input extends Component {
     const {
       className,
       label,
+      id,
       placeholder,
       type,
       value
@@ -56,7 +57,8 @@ export default class Input extends Component {
         onKeyUp={ this.onKeyUp }
         spellcheck="false"
         type={ type || 'text' }
-        value={ value } />
+        value={ value }
+        id={ id } />
     );
   }
 }
