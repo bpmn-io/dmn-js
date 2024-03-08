@@ -4,7 +4,6 @@ import Viewer from './Viewer';
 
 import ZoomScroll from 'diagram-js/lib/navigation/zoomscroll';
 import MoveCanvas from 'diagram-js/lib/navigation/movecanvas';
-import TouchModule from 'diagram-js/lib/navigation/touch';
 
 import DmnSearchModule from './features/search';
 
@@ -23,7 +22,6 @@ inherits(NavigatedViewer, Viewer);
 NavigatedViewer.prototype._navigationModules = [
   ZoomScroll,
   MoveCanvas,
-  TouchModule,
   DmnSearchModule
 ];
 
