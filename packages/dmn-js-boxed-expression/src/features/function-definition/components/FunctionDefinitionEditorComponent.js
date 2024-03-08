@@ -9,27 +9,17 @@ export const FunctionDefinitionEditorComponent = withChangeSupport(
 );
 
 function _FunctionDefinitionEditorComponent({ expression }, context) {
-  const parameters = expression.get('formalParameter');
-  const body = expression.get('body');
+  const functionDefinition = context.injector.get('functionDefinition');
 
-  const modeling = context.injector.get('modeling'),
-        dmnFactory = context.injector.get('dmnFactory');
+  const parameters = functionDefinition.getParameters(expression);
+  const body = functionDefinition.getBody(expression);
 
   const addParameter = () => {
-    const parameter = dmnFactory.create('dmn:InformationItem', {
-      name: '',
-      typeRef: ''
-    });
-
-    modeling.updateProperties(expression, {
-      formalParameter: parameters.concat(parameter)
-    });
+    functionDefinition.addParameter(expression);
   };
 
   const removeParameter = parameter => {
-    modeling.updateProperties(expression, {
-      formalParameter: parameters.filter(e => e !== parameter)
-    });
+    functionDefinition.removeParameter(expression, parameter);
   };
 
   return (
@@ -73,16 +63,16 @@ function FormalParameters({ add, parameters, remove }) {
 }
 
 const Parameter = withChangeSupport(function({ parameter, remove }, context) {
-  const modeling = context.injector.get('modeling');
   const dataTypes = context.injector.get('dataTypes');
   const translate = context.injector.get('translate');
+  const functionDefinition = context.injector.get('functionDefinition');
 
   const onNameChange = name => {
-    modeling.updateProperties(parameter, { name });
+    functionDefinition.updateParameter(parameter, { name });
   };
 
   const onTypeRefChange = typeRef => {
-    modeling.updateProperties(parameter, { typeRef });
+    functionDefinition.updateParameter(parameter, { typeRef });
   };
 
   const typeRefOptions = dataTypes.getAll().map(t => {
