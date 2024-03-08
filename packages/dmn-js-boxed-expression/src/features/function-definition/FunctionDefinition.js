@@ -14,4 +14,8 @@ export class FunctionDefinition {
       }
     });
   }
+
+  getParameters(element) {
+    return element.get('formalParameter');
+  }
 }

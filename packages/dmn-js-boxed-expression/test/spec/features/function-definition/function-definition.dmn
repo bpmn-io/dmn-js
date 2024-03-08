@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Desired Dish" namespace="party" exporter="Camunda Modeler" exporterVersion="5.11.0">
+  <businessKnowledgeModel id="season" name="Season">
+    <variable id="InformationItem_16229yj" name="season" typeRef="string" />
+    <encapsulatedLogic>
+      <formalParameter name="a" typeRef="String" />
+      <formalParameter name="b" typeRef="Number" />
+      <formalParameter name="c" typeRef="Any" />
+      <literalExpression id="LiteralExpression_0hs8xyn">
+        <text>calendar.getSeason(date)</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="season">
+        <dc:Bounds height="55" width="100" x="150" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

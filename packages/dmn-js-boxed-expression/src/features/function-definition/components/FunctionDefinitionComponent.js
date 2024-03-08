@@ -1,6 +1,8 @@
 export function FunctionDefinitionComponent({ expression }, context) {
-  const parameters = expression.get('formalParameter');
-  const body = expression.get('body');
+  const functionDefinition = context.injector.get('functionDefinition');
+
+  const parameters = functionDefinition.getParameters(expression);
+  const body = functionDefinition.getBody(expression);
 
   const BodyExpression = context.components.getComponent('expression', {
     expression: body
