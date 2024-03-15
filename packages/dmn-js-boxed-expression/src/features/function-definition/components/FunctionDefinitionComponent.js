@@ -1,4 +1,18 @@
-export function FunctionDefinitionComponent({ expression }, context) {
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
+export class FunctionDefinitionComponentProvider {
+  $inject = [ 'components' ];
+
+  constructor(components) {
+    components.onGetComponent('expression', ({ expression }) => {
+      if (is(expression, 'dmn:FunctionDefinition')) {
+        return FunctionDefinitionComponent;
+      }
+    });
+  }
+}
+
+function FunctionDefinitionComponent({ expression }, context) {
   const functionDefinition = context.injector.get('functionDefinition');
 
   const parameters = functionDefinition.getParameters(expression);
