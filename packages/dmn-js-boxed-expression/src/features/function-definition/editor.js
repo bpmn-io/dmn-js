@@ -1,6 +1,10 @@
 import { FunctionDefinitionEditor } from './FunctionDefinitionEditor';
+import {
+  FunctionDefinitionComponentProvider
+} from './components/FunctionDefinitionEditorComponent';
 
 export default {
-  __init__: [ 'functionDefinition' ],
-  functionDefinition: [ 'type', FunctionDefinitionEditor ]
+  __init__: [ 'functionDefinitionComponent' ],
+  functionDefinition: [ 'type', FunctionDefinitionEditor ],
+  functionDefinitionComponent: [ 'type', FunctionDefinitionComponentProvider ]
 };

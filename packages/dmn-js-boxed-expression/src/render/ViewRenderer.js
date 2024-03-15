@@ -1,5 +1,5 @@
 export class ViewRenderer {
-  $inject = [ 'components' ];
+  static $inject = [ 'components' ];
 
   constructor(components) {
     components.onGetComponent('viewer', () => {

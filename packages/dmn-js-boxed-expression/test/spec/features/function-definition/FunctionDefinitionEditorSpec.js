@@ -44,6 +44,23 @@ describe('FunctionDefinitionEditor', function() {
   });
 
 
+  describe('#getKind', function() {
+
+    it('should return FEEL per default', inject(function(viewer, functionDefinition) {
+
+      // given
+      const bkm = viewer.getRootElement();
+      const expression = bkm.get('encapsulatedLogic');
+
+      // when
+      const kind = functionDefinition.getKind(expression);
+
+      // then
+      expect(kind).to.eql('FEEL');
+    }));
+  });
+
+
   describe('#addParameter', function() {
 
     it('should add parameter', inject(

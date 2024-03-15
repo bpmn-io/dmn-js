@@ -1,35 +1,19 @@
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { FunctionDefinition } from './FunctionDefinition';
 
-import {
-  FunctionDefinitionEditorComponent
-} from './components/FunctionDefinitionEditorComponent';
+export class FunctionDefinitionEditor extends FunctionDefinition {
+  static $inject = [ 'modeling', 'dmnFactory' ];
 
-export class FunctionDefinitionEditor {
-  $inject = [ 'components', 'modeling', 'dmnFactory' ];
+  constructor(modeling, dmnFactory) {
+    super();
 
-  constructor(components, modeling, dmnFactory) {
     this._modeling = modeling;
     this._dmnFactory = dmnFactory;
-
-    components.onGetComponent('expression', ({ expression }) => {
-      if (is(expression, 'dmn:FunctionDefinition')) {
-        return FunctionDefinitionEditorComponent;
-      }
-    });
   }
 
-  getParameters(element) {
-    return element.get('formalParameter');
-  }
-
-  getBody(element) {
-    return element.get('body');
-  }
-
-  addParameter(element) {
-    this._modeling.updateProperties(element, {
+  addParameter(functionDefinition) {
+    this._modeling.updateProperties(functionDefinition, {
       formalParameter: [
-        ...this.getParameters(element),
+        ...this.getParameters(functionDefinition),
         this._dmnFactory.create('dmn:InformationItem', {
           name: '',
           typeRef: ''
@@ -38,9 +22,9 @@ export class FunctionDefinitionEditor {
     });
   }
 
-  removeParameter(element, parameter) {
-    this._modeling.updateProperties(element, {
-      formalParameter: this.getParameters(element).filter(p => p !== parameter)
+  removeParameter(functionDefinition, parameter) {
+    this._modeling.updateProperties(functionDefinition, {
+      formalParameter: this.getParameters(functionDefinition).filter(p => p !== parameter)
     });
   }
 

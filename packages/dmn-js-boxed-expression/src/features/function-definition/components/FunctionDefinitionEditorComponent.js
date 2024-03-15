@@ -1,9 +1,23 @@
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
 
-export const FunctionDefinitionEditorComponent = withChangeSupport(
+export class FunctionDefinitionComponentProvider {
+  static $inject = [ 'components' ];
+
+  constructor(components) {
+    components.onGetComponent('expression', ({ expression }) => {
+      if (is(expression, 'dmn:FunctionDefinition')) {
+        return FunctionDefinitionEditorComponent;
+      }
+    });
+  }
+}
+
+const FunctionDefinitionEditorComponent = withChangeSupport(
   _FunctionDefinitionEditorComponent,
   props => [ props.expression ]
 );
