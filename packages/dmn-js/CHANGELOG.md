@@ -6,6 +6,19 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.0.0
+
+* `CHORE`: remove broken touch interaction from DRD editor ([bpmn-io/diagram-js#796](https://github.com/bpmn-io/diagram-js/issues/796))
+* `DEPS`: update to `diagram-js@14.3.1`
+* `DEPS`: update to `table-js@9.1.0`
+* `DEPS`: update to `@bpmn-io/feel-editor@1.3.0`
+* `DEPS`: update to `diagram-js-direct-editing@2.1.2`
+* `DEPS`: update to `ids@1.0.5`
+
+### Breaking Changes
+
+* Migrated to `diagram-js@14` which removes touch interaction module, and dependency on unsupported `hammerjs` package. If you rely on touch interaction, you need to support touch interaction on your own.
+
 ## 15.1.0
 
 * `FEAT`: user friendly context pad entries' titles ([#818](https://github.com/bpmn-io/dmn-js/pull/818))
