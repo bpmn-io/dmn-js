@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.0.1
+
+* `FIX`: correct `dist` assets missing from package
+
 ## 16.0.0
 
 * `CHORE`: remove broken touch interaction from DRD editor ([bpmn-io/diagram-js#796](https://github.com/bpmn-io/diagram-js/issues/796))
