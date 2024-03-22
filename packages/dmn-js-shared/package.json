@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@bpmn-io/feel-editor": "^1.1.0",
-    "diagram-js": "^14.0.0",
+    "diagram-js": "^14.3.0",
     "didi": "^10.2.2",
     "dmn-moddle": "^10.0.0",
     "ids": "^1.0.5",
