@@ -82,7 +82,6 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
       connect = this._connect,
       create = this._create,
       popupMenu = this._popupMenu,
-      canvas = this._canvas,
       contextPad = this._contextPad,
       rules = this._rules,
       translate = this._translate,
@@ -108,18 +107,13 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
     var Y_OFFSET = 5;
 
-    var diagramContainer = canvas.getContainer(),
-        pad = contextPad.getPad(element).html;
+    var pad = contextPad.getPad(element).html;
 
-    var diagramRect = diagramContainer.getBoundingClientRect(),
-        padRect = pad.getBoundingClientRect();
-
-    var top = padRect.top - diagramRect.top;
-    var left = padRect.left - diagramRect.left;
+    var padRect = pad.getBoundingClientRect();
 
     var pos = {
-      x: left,
-      y: top + padRect.height + Y_OFFSET
+      x: padRect.left,
+      y: padRect.bottom + Y_OFFSET
     };
 
     return pos;
