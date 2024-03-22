@@ -52,14 +52,14 @@ async function run() {
   var NODE_ENV = process.env.NODE_ENV;
 
   try {
-    [ 'production', 'development' ].forEach(function(env) {
+    for (const env of [ 'production', 'development' ]) {
 
       process.env.NODE_ENV = env;
 
-      exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
+      await exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
         stdio: 'inherit'
       });
-    });
+    }
   } finally {
     process.env.NODE_ENV = NODE_ENV;
   }
