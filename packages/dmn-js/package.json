@@ -48,7 +48,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-replace": "^5.0.5",
     "@rollup/plugin-terser": "^0.4.4",
-    "cpx2": "^7.0.0",
+    "cpy": "^11.0.1",
     "del": "^5.1.0",
     "del-cli": "^5.0.0",
     "diagram-js": "^14.3.1",

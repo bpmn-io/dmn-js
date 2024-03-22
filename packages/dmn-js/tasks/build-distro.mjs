@@ -1,13 +1,12 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
-import cpx from 'cpx2';
-import { sync as del } from 'del';
-import { execaSync as exec } from 'execa';
+import cp from 'cpy';
+import del from 'del';
+
+import { execa as exec } from 'execa';
 
 import { createRequire } from 'node:module';
-
-const { copySync: cp } = cpx;
 
 var dest = process.env.DISTRO_DIST || 'dist';
 
@@ -15,52 +14,61 @@ function resolve(module, sub) {
   var require = createRequire(import.meta.url);
   var pkg = require.resolve(module + '/package.json');
 
-  return `./${path.dirname(pkg) + sub}`;
+  return path.dirname(pkg) + sub;
 }
 
-console.log('clean ' + dest);
-del(dest);
+async function run() {
 
-console.log('mkdir -p ' + dest);
-fs.mkdirSync(dest, { recursive: true });
+  console.log('clean ' + dest);
+  await del(dest);
 
-console.log('copy dmn-font to ' + dest + '/dmn-font');
-cp(resolve('dmn-font', '/dist/{font,css}/**'), dest + '/assets/dmn-font');
+  console.log('mkdir -p ' + dest);
+  fs.mkdirSync(dest, { recursive: true });
 
-console.log('copy diagram-js.css to ' + dest);
-cp(resolve('diagram-js', '/assets/**'), dest + '/assets');
+  console.log('copy dmn-font to ' + dest + '/dmn-font');
+  await cp(resolve('dmn-font', '/dist/css/**'), dest + '/assets/dmn-font/css');
+  await cp(resolve('dmn-font', '/dist/font/**'), dest + '/assets/dmn-font/font');
 
-console.log('copy dmn-js-shared assets to ' + dest);
-cp(resolve('dmn-js-shared', '/assets/css/**'), dest + '/assets');
+  console.log('copy diagram-js.css to ' + dest);
+  await cp(resolve('diagram-js', '/assets/**'), dest + '/assets');
 
-console.log('copy dmn-js-drd assets to ' + dest);
-cp(resolve('dmn-js-drd', '/assets/css/**'), dest + '/assets');
+  console.log('copy bpmn-js.css to ' + dest);
+  await cp('./assets/*.css', dest + '/assets');
 
-console.log('copy dmn-js-decision-table assets to ' + dest);
-cp(resolve('dmn-js-decision-table', '/assets/css/**'), dest + '/assets');
+  console.log('copy dmn-js-shared assets to ' + dest);
+  await cp(resolve('dmn-js-shared', '/assets/css/**'), dest + '/assets');
 
-console.log('copy dmn-js-literal-expression assets to ' + dest);
-cp(resolve('dmn-js-literal-expression', '/assets/css/**'), dest + '/assets');
+  console.log('copy dmn-js-drd assets to ' + dest);
+  await cp(resolve('dmn-js-drd', '/assets/css/**'), dest + '/assets');
 
-console.log('building pre-packaged distributions');
+  console.log('copy dmn-js-decision-table assets to ' + dest);
+  await cp(resolve('dmn-js-decision-table', '/assets/css/**'), dest + '/assets');
 
-var NODE_ENV = process.env.NODE_ENV;
+  console.log('copy dmn-js-literal-expression assets to ' + dest);
+  await cp(resolve('dmn-js-literal-expression', '/assets/css/**'), dest + '/assets');
 
-[ 'production', 'development' ].forEach(function(env) {
+  console.log('building pre-packaged distributions');
+
+  var NODE_ENV = process.env.NODE_ENV;
 
   try {
-    process.env.NODE_ENV = env;
+    [ 'production', 'development' ].forEach(function(env) {
 
-    exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
-      stdio: 'inherit'
+      process.env.NODE_ENV = env;
+
+      exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
+        stdio: 'inherit'
+      });
     });
-  } catch (e) {
-    console.error('failed to build pre-package distributions', e);
-
-    process.exit(1);
+  } finally {
+    process.env.NODE_ENV = NODE_ENV;
   }
 
-  process.env.NODE_ENV = NODE_ENV;
-});
+  console.log('done.');
+}
 
-console.log('done.');
+run().catch(e => {
+  console.error('failed to build distribution', e);
+
+  process.exit(1);
+});
