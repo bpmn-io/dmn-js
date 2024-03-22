@@ -33,6 +33,6 @@
     "min-dom": "^4.0.3",
     "selection-ranges": "^4.0.0",
     "selection-update": "^0.1.2",
-    "table-js": "^9.0.0"
+    "table-js": "^9.1.0"
   }
 }
