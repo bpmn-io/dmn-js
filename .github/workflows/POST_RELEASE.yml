@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+
 jobs:
   post-release:
 
@@ -14,19 +15,24 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Set TAG
-      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-    - name: Wait for published
-      env:
-        PKG: 'dmn-js@${{ env.TAG }}'
-      run: tasks/stages/await-published
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - name: Set TAG
+      run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+    - name: Wait for published
+      env:
+        PKG: 'dmn-js@${{ env.TAG }}'
+      run: tasks/stages/await-published
+
     - name: Update demo
       env:
         BPMN_IO_TOKEN: ${{ secrets.BPMN_IO_TOKEN }}
@@ -34,12 +40,14 @@ jobs:
         BPMN_IO_USERNAME: ${{ secrets.BPMN_IO_USERNAME }}
         BPMN_IO_DEMO_ENDPOINT: ${{ secrets.BPMN_IO_DEMO_ENDPOINT }}
       run: tasks/stages/update-demo
+
     - name: Update examples
       env:
         BPMN_IO_TOKEN: ${{ secrets.BPMN_IO_TOKEN }}
         BPMN_IO_EMAIL: ${{ secrets.BPMN_IO_EMAIL }}
         BPMN_IO_USERNAME: ${{ secrets.BPMN_IO_USERNAME }}
       run: tasks/stages/update-examples
+
     - name: Update website
       env:
         BPMN_IO_TOKEN: ${{ secrets.BPMN_IO_TOKEN }}
