@@ -3,7 +3,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 const FALLBACK_PRIORITY = 100;
 
 export default class ElementLogic {
-  $inject = [ 'components' ];
+  static $inject = [ 'components' ];
 
   constructor(components) {
     components.onGetComponent('body', () => {
