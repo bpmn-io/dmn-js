@@ -6,7 +6,7 @@ import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 import { withChangeSupport } from '../../../util/withChangeSupport';
 
 export class FunctionDefinitionComponentProvider {
-  $inject = [ 'components' ];
+  static $inject = [ 'components' ];
 
   constructor(components) {
     components.onGetComponent('expression', ({ expression }) => {

@@ -1,7 +1,7 @@
 import { FunctionDefinition } from './FunctionDefinition';
 
 export class FunctionDefinitionEditor extends FunctionDefinition {
-  $inject = [ 'modeling', 'dmnFactory' ];
+  static $inject = [ 'modeling', 'dmnFactory' ];
 
   constructor(modeling, dmnFactory) {
     super();
