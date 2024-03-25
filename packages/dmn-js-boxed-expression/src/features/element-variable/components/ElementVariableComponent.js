@@ -1,11 +1,21 @@
 const VARIABLE_TYPE_ID = 'dmn-boxed-expression-variable-type';
 
-export default function ElementVariableComponent(_, context) {
-  const viewer = context.injector.get('viewer');
+
+export default class ElementVariableComponentProvider {
+  static $inject = [ 'components' ];
+
+  constructor(components) {
+    components.onGetComponent('footer', () => ElementVariableComponent);
+  }
+}
+
+
+function ElementVariableComponent(_, context) {
+  const elementVariable = context.injector.get('elementVariable');
 
   // there is only one single element
-  const { name, variable } = viewer.getRootElement();
-  const type = variable ? variable.get('typeRef') : 'Any';
+  const name = elementVariable.getName();
+  const type = elementVariable.getType();
 
   return (
     <div className="element-variable">
