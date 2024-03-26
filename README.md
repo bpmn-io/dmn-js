@@ -86,7 +86,7 @@ dmn-js builds on top of a few additional powerful tools:
 * [dmn-moddle](https://github.com/bpmn-io/dmn-moddle): Read / write support for DMN 1.3 XML
 * [diagram-js](https://github.com/bpmn-io/diagram-js): Diagram rendering and editing toolkit
 * [table-js](https://github.com/bpmn-io/table-js): Table rendering and editing toolkit
-
+* [dmn-migrate](https://github.com/bpmn-io/dmn-migrate): Migrate your DMN diagrams to DMN 1.3
 
 ## Contributing
 
