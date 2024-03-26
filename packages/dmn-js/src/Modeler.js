@@ -4,7 +4,7 @@ import DrdModeler from 'dmn-js-drd/lib/Modeler';
 import DecisionTableEditor from 'dmn-js-decision-table/lib/Editor';
 import LiteralExpressionEditor from 'dmn-js-literal-expression/lib/Editor';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { getBoxedExpression, is } from 'dmn-js-shared/lib/util/ModelUtil';
 import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
 
 import { find } from 'min-dash';
@@ -27,20 +27,18 @@ export default class Modeler extends EditingManager {
         id: 'decisionTable',
         constructor: DecisionTableEditor,
         opens(element) {
-          return (
-            is(element, 'dmn:Decision') &&
-            is(element.decisionLogic, 'dmn:DecisionTable')
-          );
+          const boxedExpression = getBoxedExpression(element);
+
+          return is(boxedExpression, 'dmn:DecisionTable');
         }
       },
       {
         id: 'literalExpression',
         constructor: LiteralExpressionEditor,
         opens(element) {
-          return (
-            is(element, 'dmn:Decision') &&
-            is(element.decisionLogic, 'dmn:LiteralExpression')
-          );
+          const boxedExpression = getBoxedExpression(element);
+
+          return is(boxedExpression, 'dmn:LiteralExpression');
         }
       }
     ];

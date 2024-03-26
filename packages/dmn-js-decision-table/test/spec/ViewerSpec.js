@@ -18,6 +18,7 @@ import {
 
 import simpleDiagramXML from './simple.dmn';
 import complexDiagramXML from './complex.dmn';
+import bkmXML from './bkm.dmn';
 
 
 describe('DecisionTable', function() {
@@ -64,6 +65,11 @@ describe('DecisionTable', function() {
     this.timeout(5000);
 
     return createDecisionTable(complexDiagramXML);
+  });
+
+
+  it('should open BKM', function() {
+    return createDecisionTable(bkmXML);
   });
 
 

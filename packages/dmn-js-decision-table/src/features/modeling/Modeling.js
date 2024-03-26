@@ -7,6 +7,8 @@ import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
 import IdClaimHandler from './cmd/IdClaimHandler';
 
+import { getBusinessObject, is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 
 export default class Modeling extends BaseModeling {
 
@@ -32,12 +34,10 @@ export default class Modeling extends BaseModeling {
   }
 
   editDecisionTableName(name) {
-    const root = this._sheet.getRoot(),
-          businessObject = root.businessObject,
-          parentBusinessObject = businessObject.$parent;
+    const parentElement = getDMNElement(this._sheet.getRoot());
 
     const context = {
-      element: parentBusinessObject,
+      element: parentElement,
       properties: {
         name
       }
@@ -47,12 +47,10 @@ export default class Modeling extends BaseModeling {
   }
 
   editDecisionTableId(id) {
-    const root = this._sheet.getRoot(),
-          businessObject = root.businessObject,
-          parentBusinessObject = businessObject.$parent;
+    const parentElement = getDMNElement(this._sheet.getRoot());
 
     const context = {
-      element: parentBusinessObject,
+      element: parentElement,
       properties: {
         id
       }
@@ -190,3 +188,13 @@ export default class Modeling extends BaseModeling {
 }
 
 Modeling.$inject = [ 'eventBus', 'elementFactory', 'commandStack', 'sheet' ];
+
+function getDMNElement(root) {
+  let parent = getBusinessObject(root).$parent;
+
+  while (parent && !is(parent, 'dmn:DMNElement')) {
+    parent = parent.$parent;
+  }
+
+  return parent;
+}

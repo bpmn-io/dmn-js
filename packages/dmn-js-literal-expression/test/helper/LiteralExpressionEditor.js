@@ -1,5 +1,7 @@
 import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
+import { getBoxedExpression, is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 import Editor from 'src/Editor';
 
 
@@ -12,11 +14,9 @@ export default class LiteralExpressionEditor extends EditingManager {
         id: 'literalExpression',
         constructor: Editor,
         opens(element) {
-          return (
-            element.$type === 'dmn:Decision' &&
-            element.decisionLogic &&
-            element.decisionLogic.$type === 'dmn:LiteralExpression'
-          );
+          const boxedExpression = getBoxedExpression(element);
+
+          return is(boxedExpression, 'dmn:LiteralExpression');
         }
       }
     ];

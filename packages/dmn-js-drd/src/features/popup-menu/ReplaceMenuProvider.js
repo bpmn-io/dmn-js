@@ -1,4 +1,5 @@
 import {
+  getBoxedExpression,
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
@@ -56,26 +57,52 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
 
   var businessObject = element.businessObject;
 
-  var rules = this._rules;
+  var rules = this._rules,
+      options,
+      boxedExpression;
 
   if (!rules.allowed('shape.replace', { element: element })) {
     return [];
   }
 
   if (is(businessObject, 'dmn:Decision')) {
+    boxedExpression = getBoxedExpression(businessObject);
 
-    var options = filter(replaceOptions.DECISION, function(option) {
+    options = filter(replaceOptions.DECISION, function(option) {
       var notEmpty = (
         option.actionName === 'replace-with-empty-decision' &&
-        businessObject.decisionLogic
+        boxedExpression
       );
       var notTable = (
         option.actionName === 'replace-with-decision-table' &&
-        !is(businessObject.decisionLogic, 'dmn:DecisionTable')
+        !is(boxedExpression, 'dmn:DecisionTable')
       );
       var notExp = (
         option.actionName === 'replace-with-literal-expression' &&
-        !is(businessObject.decisionLogic, 'dmn:LiteralExpression')
+        !is(boxedExpression, 'dmn:LiteralExpression')
+      );
+
+      return notEmpty || notTable || notExp;
+    });
+
+    return this._createEntries(element, options);
+  }
+
+  if (is(businessObject, 'dmn:BusinessKnowledgeModel')) {
+    boxedExpression = getBoxedExpression(businessObject);
+
+    options = filter(replaceOptions.BKM, function(option) {
+      var notEmpty = (
+        option.actionName === 'replace-with-empty' &&
+        boxedExpression
+      );
+      var notTable = (
+        option.actionName === 'replace-with-decision-table' &&
+        !is(boxedExpression, 'dmn:DecisionTable')
+      );
+      var notExp = (
+        option.actionName === 'replace-with-literal-expression' &&
+        !is(boxedExpression, 'dmn:LiteralExpression')
       );
 
       return notEmpty || notTable || notExp;

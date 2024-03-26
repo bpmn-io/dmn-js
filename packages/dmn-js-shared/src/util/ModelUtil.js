@@ -60,3 +60,21 @@ export function isAny(element, types) {
     return is(element, t);
   });
 }
+
+/**
+ * Return logic of a given decision or BKM.
+ *
+ * @param {ModdleElement} decisionOrBkm - the decision or business knowledge model
+ * @returns {ModdleElement|undefined}
+ */
+export function getBoxedExpression(decisionOrBkm) {
+  var bo = getBusinessObject(decisionOrBkm);
+
+  if (is(bo, 'dmn:Decision')) {
+    return bo.get('decisionLogic');
+  } else if (is(bo, 'dmn:BusinessKnowledgeModel')) {
+    var encapsulatedLogic = bo.get('encapsulatedLogic');
+
+    return encapsulatedLogic && encapsulatedLogic.get('body');
+  }
+}

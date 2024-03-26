@@ -1,4 +1,5 @@
 import Manager from 'dmn-js-shared/lib/base/Manager';
+import { getBoxedExpression, is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import Viewer from 'src/Viewer';
 
@@ -12,11 +13,9 @@ export default class DecisionTableViewer extends Manager {
         id: 'decisionTable',
         constructor: Viewer,
         opens(element) {
-          return (
-            element.$type === 'dmn:Decision' &&
-            element.decisionLogic &&
-            element.decisionLogic.$type === 'dmn:DecisionTable'
-          );
+          const boxedExpression = getBoxedExpression(element);
+
+          return is(boxedExpression, 'dmn:DecisionTable');
         }
       }
     ];

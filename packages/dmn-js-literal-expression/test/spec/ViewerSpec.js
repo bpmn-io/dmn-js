@@ -16,6 +16,7 @@ import DmnLiteralExpressionViewer from '../helper/LiteralExpressionViewer';
 import { domify } from 'min-dom';
 
 import simpleXML from './literal-expression.dmn';
+import bkmXML from './bkm.dmn';
 
 
 describe('Viewer', function() {
@@ -46,6 +47,11 @@ describe('Viewer', function() {
 
   it('should import literal expression', function() {
     return createViewer(simpleXML);
+  });
+
+
+  it('should open BKM', function() {
+    return createViewer(bkmXML);
   });
 
 
