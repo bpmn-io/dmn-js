@@ -88,6 +88,37 @@ describe('features - drilldown', function() {
 
       });
 
+
+      describe('accessibility', function() {
+
+
+        verify(
+          'decision table',
+          'Decision_Table',
+          'Open decision table'
+        );
+
+        verify(
+          'literal expression',
+          'Decision_LiteralExpression',
+          'Open literal expression'
+        );
+
+        function verify(type, element, title) {
+
+          it(`has an accessible title for ${type}`, function() {
+
+            // when
+            var overlayEl = queryOverlay(element);
+            var button = query('button', overlayEl);
+
+            // then
+            expect(button).to.have.property('title', title);
+          });
+
+        }
+      });
+
     });
 
 

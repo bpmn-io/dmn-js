@@ -1,7 +1,6 @@
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
-  domify,
   classes as domClasses,
   delegate as domDelegate
 } from 'min-dom';
@@ -17,7 +16,8 @@ var PROVIDERS = [
         is(businessObject, 'dmn:Decision') &&
         is(businessObject.decisionLogic, 'dmn:DecisionTable')
       );
-    }
+    },
+    title: 'Open decision table'
   },
   {
     className: 'dmn-icon-literal-expression',
@@ -28,7 +28,8 @@ var PROVIDERS = [
         is(businessObject, 'dmn:Decision') &&
         is(businessObject.decisionLogic, 'dmn:LiteralExpression')
       );
-    }
+    },
+    title: 'Open literal expression'
   }
 ];
 
@@ -39,10 +40,11 @@ var PROVIDERS = [
  */
 export default class DrillDown {
 
-  constructor(injector, eventBus, overlays, config) {
+  constructor(injector, eventBus, overlays, config, translate) {
     this._injector = injector;
     this._eventBus = eventBus;
     this._overlays = overlays;
+    this._translate = translate;
 
     this._config = config || { enabled: true };
 
@@ -50,12 +52,12 @@ export default class DrillDown {
 
       for (let i = 0; i < PROVIDERS.length; i++) {
 
-        const { matches, className } = PROVIDERS[i];
+        const { matches, className, title } = PROVIDERS[i];
 
         var editable = matches && matches(element);
 
         if (editable) {
-          this.addOverlay(element, className);
+          this.addOverlay(element, className, title);
         }
       }
     });
@@ -67,30 +69,48 @@ export default class DrillDown {
    * @param {Object} element Element to add overlay to.
    * @param {string} className
    *        CSS class that will be added to overlay in order to display icon.
+   * @param {string} title added to the button
    */
-  addOverlay(element, className) {
+  addOverlay(element, className, title) {
     const enabled = this._config.enabled !== false;
 
-    const html = domify(`
-      <div class="drill-down-overlay">
-        ${ enabled ? `<button type="button" class="${className}"></button>` :
-    `<span class="${className}"></span>`}
-      </div>
-    `);
+    const node = this._getOverlayNode(className, title, enabled);
 
     const overlayId = this._overlays.add(element, {
       position: {
         top: 2,
         left: 2
       },
-      html
+      html: node
     });
 
     // TODO(nikku): can we remove renamed to drillDown.enabled
     if (enabled) {
-      domClasses(html).add('interactive');
-      this.bindEventListener(element, html, overlayId);
+      domClasses(node).add('interactive');
+      this.bindEventListener(element, node, overlayId);
     }
+  }
+
+  _getOverlayNode(className, title, enabled) {
+    const container = document.createElement('div');
+    container.className = 'drill-down-overlay';
+
+    if (!enabled) {
+      const icon = document.createElement('span');
+      icon.className = className;
+      container.appendChild(icon);
+
+      return container;
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = className;
+    button.title = this._translate(title);
+
+    container.appendChild(button);
+
+    return container;
   }
 
   /**
@@ -153,5 +173,6 @@ DrillDown.$inject = [
   'injector',
   'eventBus',
   'overlays',
-  'config.drillDown'
+  'config.drillDown',
+  'translate'
 ];
