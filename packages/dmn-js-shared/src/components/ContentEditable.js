@@ -208,6 +208,7 @@ export default class ContentEditable extends Component {
   render(props) {
 
     var {
+      label,
       value,
       placeholder
     } = props;
@@ -220,6 +221,7 @@ export default class ContentEditable extends Component {
 
     return (
       <div
+        aria-label={ label }
         className={ this.getClassName() }
         contentEditable="true"
         spellcheck="false"
