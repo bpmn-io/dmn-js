@@ -71,6 +71,26 @@ describe('components/LiteralExpression', function() {
   });
 
 
+  it('should render label', function() {
+
+    // given
+    var label = 'label';
+
+    // when
+    const node = renderToNode(
+      <LiteralExpression
+        value={ '' }
+        label={ label } />
+    );
+
+    // then
+    const editor = getEditor(node);
+
+    expect(editor).to.exist;
+    expect(matches(editor, '[aria-label=label]')).to.be.true;
+  });
+
+
   it('should update on value change', async function() {
 
     // given
