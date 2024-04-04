@@ -48,6 +48,13 @@ describe('textarea editor', function() {
   });
 
 
+  it('should have accessible label', function() {
+
+    // then
+    expect(domQuery('[aria-label]', testContainer)).to.exist;
+  });
+
+
   it('should edit literal expression text (FEEL)', inject(async function(viewer) {
 
     // given

@@ -13,6 +13,7 @@ export default class TextareaEditorComponent extends Component {
     this._viewer = context.injector.get('viewer');
     this._expressionLanguages = context.injector.get('expressionLanguages');
     this._variableResolver = context.injector.get('variableResolver', false);
+    this._translate = context.injector.get('translate');
 
     this.editLiteralExpressionText = this.editLiteralExpressionText.bind(this);
     this.onElementsChanged = this.onElementsChanged.bind(this);
@@ -66,6 +67,7 @@ export default class TextareaEditorComponent extends Component {
 
     return (
       <Editor
+        label={ this._translate('Literal expression editor') }
         className="textarea editor"
         value={ text }
         onChange={ this.editLiteralExpressionText }
@@ -77,6 +79,7 @@ export default class TextareaEditorComponent extends Component {
 class FeelEditor extends Component {
   render() {
     return <LiteralExpression
+      label={ this.props.label }
       className={ this.props.className }
       value={ this.props.value }
       onInput={ this.props.onChange }
