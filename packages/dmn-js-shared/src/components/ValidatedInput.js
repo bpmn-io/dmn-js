@@ -95,7 +95,12 @@ export default class ValidatedInput extends Component {
   }
 
   render() {
-    const { placeholder, type, className } = this.props;
+    const {
+      placeholder,
+      type,
+      className,
+      label
+    } = this.props;
 
     const { validationWarning, value } = this.state;
 
@@ -115,6 +120,7 @@ export default class ValidatedInput extends Component {
 
         <Input
           className={ inputClasses }
+          label={ label }
           onInput={ this.onInput }
           onKeyDown={ this.onKeyDown }
           onKeyUp={ this.onKeyUp }
