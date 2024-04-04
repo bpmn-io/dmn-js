@@ -40,6 +40,7 @@ export default class Input extends Component {
   render() {
     const {
       className,
+      label,
       placeholder,
       type,
       value
@@ -47,6 +48,7 @@ export default class Input extends Component {
 
     return (
       <input
+        aria-label={ label }
         className={ [ className || '', 'dms-input' ].join(' ') }
         placeholder={ placeholder || '' }
         onInput={ this.onInput }

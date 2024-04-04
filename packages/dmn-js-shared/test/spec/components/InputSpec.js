@@ -43,6 +43,18 @@ describe('components/Input', function() {
   });
 
 
+  it('should render accessible label', function() {
+
+    // when
+    const renderedTree = renderIntoDocument(<Input label="label" />);
+
+    // then
+    const node = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+    expect(node.getAttribute('aria-label')).to.eql('label');
+  });
+
+
   it('should notify on input', function() {
 
     // given
