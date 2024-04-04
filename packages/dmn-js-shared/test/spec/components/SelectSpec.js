@@ -44,6 +44,18 @@ describe('components/Select', function() {
   });
 
 
+  it('should render accessible label', function() {
+
+    // when
+    const renderedTree = renderIntoDocument(<Select label="label" />);
+
+    // then
+    const node = findRenderedDOMElementWithClass(renderedTree, 'dms-select');
+
+    expect(node.getAttribute('aria-label')).to.eql('label');
+  });
+
+
   it('should render options', function() {
 
     // given
