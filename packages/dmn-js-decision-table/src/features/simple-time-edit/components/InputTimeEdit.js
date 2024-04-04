@@ -168,6 +168,7 @@ export default class InputTimeEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('Time') }
             noInput={ true }
             onChange={ this.onTypeChange }
             options={ options }
@@ -184,6 +185,7 @@ export default class InputTimeEdit extends Component {
 
         <div>
           <ValidatedInput
+            label={ this._translate('Start time') }
             className="start-time-input dms-block"
             onInput={ this.onStartTimeInput }
             placeholder={ this._translate('e.g. { example } ', {
@@ -213,6 +215,7 @@ export default class InputTimeEdit extends Component {
           type === BETWEEN
             && <div>
               <ValidatedInput
+                label={ this._translate('End time') }
                 className="end-time-input dms-block"
                 onInput={ this.onEndTimeInput }
                 placeholder={ this._translate('e.g. { example } ', {

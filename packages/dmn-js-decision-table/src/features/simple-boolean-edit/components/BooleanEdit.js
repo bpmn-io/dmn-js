@@ -66,6 +66,7 @@ export default class BooleanEdit extends Component {
         <h4 class="dms-heading">{this._translate('Set value')}</h4>
 
         <InputSelect
+          label={ this._translate('Boolean value') }
           noInput={ true }
           className="dms-block"
           onChange={ this.onChange }

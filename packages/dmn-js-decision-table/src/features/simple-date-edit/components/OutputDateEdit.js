@@ -72,6 +72,7 @@ export default class OutputDateEdit extends Component {
 
         <div>
           <ValidatedInput
+            label={ this._translate('Date value') }
             onInput={ this.onInput }
             placeholder={ this._translate('e.g. { example } ', {
               example: getSampleDate()
