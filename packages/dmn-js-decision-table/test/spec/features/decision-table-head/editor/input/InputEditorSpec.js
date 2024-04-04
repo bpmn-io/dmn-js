@@ -1,4 +1,7 @@
 import { Component, render } from 'inferno';
+import {
+  findRenderedDOMElementWithClass
+} from 'inferno-test-utils';
 
 import TestContainerSupport from 'mocha-test-container-support';
 
@@ -25,7 +28,7 @@ describe('decision-table-head/editor - InputEditor', function() {
     injector = createInjector({
       keyboard: getKeyboardMock(container),
       renderer: getRendererMock(container),
-      translate: () => {}
+      translate: value => value
     });
   });
 
@@ -45,6 +48,38 @@ describe('decision-table-head/editor - InputEditor', function() {
 
     // then
     expect(tree).to.exist;
+  });
+
+
+  it('should render accessible label for input label', function() {
+
+    // when
+    const tree = renderIntoDocument(
+      <DiContainer injector={ injector }>
+        <Root />
+      </DiContainer>
+    );
+
+    // then
+    const node = findRenderedDOMElementWithClass(tree, 'dms-input-label');
+
+    expect(node.getAttribute('aria-label')).to.exist;
+  });
+
+
+  it('should render accessible label for input name', function() {
+
+    // when
+    const tree = renderIntoDocument(
+      <DiContainer injector={ injector }>
+        <Root />
+      </DiContainer>
+    );
+
+    // then
+    const node = findRenderedDOMElementWithClass(tree, 'ref-text');
+
+    expect(node.querySelector('[aria-label]')).to.exist;
   });
 
 });
