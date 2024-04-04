@@ -1,4 +1,7 @@
 import { Component, render } from 'inferno';
+import {
+  findRenderedDOMElementWithClass
+} from 'inferno-test-utils';
 
 import TestContainerSupport from 'mocha-test-container-support';
 
@@ -33,6 +36,34 @@ describe('features/decision-table-head - OutputEditor', function() {
 
     // then
     expect(tree).to.exist;
+  });
+
+
+  it('should render accessible label for output label', function() {
+
+    // when
+    const tree = renderIntoDocument(
+      <Root />
+    );
+
+    // then
+    const node = findRenderedDOMElementWithClass(tree, 'dms-output-label');
+
+    expect(node.getAttribute('aria-label')).to.exist;
+  });
+
+
+  it('should render accessible label for output name', function() {
+
+    // when
+    const tree = renderIntoDocument(
+      <Root />
+    );
+
+    // then
+    const node = findRenderedDOMElementWithClass(tree, 'ref-output-name');
+
+    expect(node.getAttribute('aria-label')).to.exist;
   });
 
 });
