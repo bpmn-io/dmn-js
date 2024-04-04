@@ -93,6 +93,52 @@ describe('components/InputSelect', function() {
   });
 
 
+  it('should set accessible label when provided', function() {
+
+    // given
+    const injector = createInjector({
+      keyboard: getKeyboardMock(testContainer),
+      renderer: getRendererMock(testContainer)
+    });
+    const label = 'label';
+
+    // when
+    const renderedTree = renderIntoDocument(
+      <DiContainer injector={ injector }>
+        <InputSelect label={ label } />
+      </DiContainer>
+    );
+
+    // then
+    const element = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+    expect(element.getAttribute('aria-label')).to.eql(label);
+  });
+
+
+  it('should set accessible label when provided (noInput)', function() {
+
+    // given
+    const injector = createInjector({
+      keyboard: getKeyboardMock(testContainer),
+      renderer: getRendererMock(testContainer)
+    });
+    const label = 'label';
+
+    // when
+    const renderedTree = renderIntoDocument(
+      <DiContainer injector={ injector }>
+        <InputSelect noInput label={ label } />
+      </DiContainer>
+    );
+
+    // then
+    const element = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+    expect(element.getAttribute('aria-label')).to.eql(label);
+  });
+
+
   describe('interaction', function() {
 
     let injector;
