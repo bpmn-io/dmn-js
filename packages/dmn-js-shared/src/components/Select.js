@@ -40,6 +40,7 @@ export default class Select extends Component {
   render() {
     const {
       className,
+      label,
       options
     } = this.props;
 
@@ -47,6 +48,7 @@ export default class Select extends Component {
 
     return (
       <select
+        aria-label={ label }
         className={ [ className || '', 'dms-select' ].join(' ') }
         onChange={ this.onChange }
         value={ value }>
