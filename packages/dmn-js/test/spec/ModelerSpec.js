@@ -1,6 +1,6 @@
 import Modeler from 'src/Modeler';
 
-import { insertCSS } from 'test/helper';
+import { expectToBeAccessible, insertCSS } from 'test/helper';
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
@@ -232,5 +232,32 @@ describe('Modeler', function() {
         'long'
       ]);
     });
+  });
+
+
+  describe('accessibility', function() {
+
+    for (const viewType of [
+      'drd',
+      'literalExpression',
+      'decisionTable',
+      'boxedExpression'
+    ]) {
+      it(`should report no issues (${viewType})`, async function() {
+
+        // given
+        const editor = new Modeler({ container: container });
+        await editor.importXML(diagram, { open: false });
+
+        const views = editor.getViews();
+        const decisionView = views.filter(v => v.type === viewType)[0];
+
+        // when
+        await editor.open(decisionView);
+
+        // then
+        await expectToBeAccessible(container);
+      });
+    }
   });
 });

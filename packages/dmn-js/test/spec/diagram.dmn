@@ -12,7 +12,14 @@
       <requiredDecision href="#guestCount" />
     </authorityRequirement>
   </knowledgeSource>
-  <businessKnowledgeModel id="elMenu" name="El menú" />
+  <businessKnowledgeModel id="elMenu" name="El menú">
+    <encapsulatedLogic>
+      <formalParameter name="menu" />
+      <literalExpression>
+        <text>menu</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
   <decision id="dish-decision" name="Dish Decision">
     <informationRequirement id="InformationRequirement_0o55akq">
       <requiredDecision href="#season" />

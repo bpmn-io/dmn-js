@@ -4,6 +4,8 @@ import DefaultExport from '../../src';
 
 import { query as domQuery } from 'min-dom';
 
+import { expectToBeAccessible } from 'test/helper';
+
 
 const diagram = require('./diagram.dmn');
 const noDi = require('./no-di.dmn');
@@ -187,4 +189,30 @@ describe('Viewer', function() {
 
   });
 
+
+  describe('accessibility', function() {
+
+    for (const viewType of [
+      'drd',
+      'literalExpression',
+      'decisionTable',
+      'boxedExpression'
+    ]) {
+      it(`should report no issues (${viewType})`, async function() {
+
+        // given
+        const editor = new Viewer({ container: container });
+        await editor.importXML(diagram, { open: false });
+
+        const views = editor.getViews();
+        const decisionView = views.filter(v => v.type === viewType)[0];
+
+        // when
+        await editor.open(decisionView);
+
+        // then
+        await expectToBeAccessible(container);
+      });
+    }
+  });
 });
