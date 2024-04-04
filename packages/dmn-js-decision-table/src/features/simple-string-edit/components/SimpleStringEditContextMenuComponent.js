@@ -296,6 +296,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
           isInputClause &&
             <p>
               <InputSelect
+                label={ this._translate('String value') }
                 noInput={ true }
                 ref={ node => this.selectNode = node }
                 onChange={ this.onUnaryTestsTypeChange }
@@ -332,6 +333,7 @@ export default class SimpleStringEditContextMenuComponent extends Component {
           }
 
           <ValidatedInput
+            label={ isInputClause ? this._translate('Values') : this._translate('Value') }
             className="dms-block"
             onKeyDown={ this.onKeyDown }
             onInput={ this.onInput }

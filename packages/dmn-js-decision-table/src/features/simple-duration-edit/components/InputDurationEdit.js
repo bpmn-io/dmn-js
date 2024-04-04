@@ -217,6 +217,7 @@ export default class InputDurationEdit extends Component {
 
         <div className="dms-fill-row dms-input-duration-edit-row">
           <InputSelect
+            label={ this._translate('Comparison operator') }
             noInput={ true }
             onChange={ this.onComparisonOperatorChange }
             options={ comparisonOperatorOptions }
@@ -225,6 +226,7 @@ export default class InputDurationEdit extends Component {
           &nbsp;
 
           <DurationInput
+            label={ this._translate('Duration value') }
             type={ this._type }
             className="comparison-duration-input"
             onInput={ this.onComparisonValueChange }
@@ -250,6 +252,7 @@ export default class InputDurationEdit extends Component {
 
         <div className="dms-fill-row dms-input-duration-edit-row">
           <InputSelect
+            label={ this._translate('Range start operator') }
             noInput={ true }
             onChange={ this.onRangeStartTypeChange }
             options={ rangeTypeOptions }
@@ -258,6 +261,7 @@ export default class InputDurationEdit extends Component {
           &nbsp;
 
           <DurationInput
+            label={ this._translate('Range start value') }
             type={ this._type }
             className="range-start-duration-input"
             onInput={ this.onRangeStartValueChange }
@@ -270,6 +274,7 @@ export default class InputDurationEdit extends Component {
 
         <div className="dms-fill-row dms-input-duration-edit-row">
           <InputSelect
+            label={ this._translate('Range end operator') }
             noInput={ true }
             onChange={ this.onRangeEndTypeChange }
             options={ rangeTypeOptions }
@@ -278,6 +283,7 @@ export default class InputDurationEdit extends Component {
           &nbsp;
 
           <DurationInput
+            label={ this._translate('Range end value') }
             type={ this._type }
             className="range-end-duration-input"
             onInput={ this.onRangeEndValueChange }
@@ -313,6 +319,7 @@ export default class InputDurationEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('Test type') }
             noInput={ true }
             onChange={ this.onTypeChange }
             options={ typeOptions }

@@ -82,6 +82,8 @@ export default class ExpressionLanguage {
         const className = 'context-menu-group-entry ' +
           'context-menu-entry-set-expression-language';
 
+        const label = this._translate('Expression language');
+
         return () => (
           <div
             className="context-menu-flex">
@@ -89,10 +91,11 @@ export default class ExpressionLanguage {
               <div
                 className={ className }>
                 <div>
-                  { this._translate('Expression language') }
+                  { label }
                 </div>
 
                 <InputSelect
+                  label={ label }
                   className="expression-language"
                   onChange={ value => this.onChange(element, value) }
                   options={ options }

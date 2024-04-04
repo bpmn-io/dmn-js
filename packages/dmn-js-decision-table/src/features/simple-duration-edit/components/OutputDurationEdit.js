@@ -46,6 +46,7 @@ export default class OutputDurationEdit extends Component {
         <h4 class="dms-heading">{ this._translate('Set duration') }</h4>
 
         <DurationInput
+          label={ this._translate('Duration value') }
           onInput={ this.onInput }
           value={ value }
           type={ this._type }

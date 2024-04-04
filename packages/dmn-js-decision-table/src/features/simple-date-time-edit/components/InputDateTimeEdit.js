@@ -167,6 +167,7 @@ export default class InputDateEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('Test type') }
             noInput={ true }
             onChange={ this.onTypeChange }
             options={ options }
@@ -176,13 +177,15 @@ export default class InputDateEdit extends Component {
         <h4 class="dms-heading">
           {
             type === BETWEEN
-              ? this._translate('Edit start date')
-              : this._translate('Set date')
+              ? this._translate('Edit start date and time')
+              : this._translate('Set date and time')
           }
         </h4>
 
         <div>
           <ValidatedInput
+            label={ type === BETWEEN ?
+              this._translate('Start date and time') : this._translate('Date and time') }
             className="start-date-input dms-block"
             onInput={ this.onStartDateInput }
             placeholder={ this._translate('e.g. { sample }', {
@@ -204,7 +207,7 @@ export default class InputDateEdit extends Component {
         {
           type === BETWEEN
             && <h4 class="dms-heading">
-              { this._translate('Edit end date') }
+              { this._translate('Edit end date and time') }
             </h4>
         }
 
@@ -212,6 +215,7 @@ export default class InputDateEdit extends Component {
           type === BETWEEN
             && <div>
               <ValidatedInput
+                label={ this._translate('End date and time') }
                 className="end-date-input dms-block"
                 onInput={ this.onEndDateInput }
                 placeholder={ this._translate('e.g. { sample }', {
