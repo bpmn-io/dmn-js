@@ -65,6 +65,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>{ this._translate('Variable name:') }</td>
             <td>
               <Input
+                label={ this._translate('Variable name') }
                 className="variable-name-input"
                 onInput={ this.setVariableName }
                 placeholder={ this._translate('name') }
@@ -76,6 +77,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
             <td>
               <div className="dms-fill-row">
                 <InputSelect
+                  label={ this._translate('Variable type') }
                   onChange={ this.setVariableType }
                   options={ typeRefOptions }
                   value={ typeRef }
@@ -150,6 +152,7 @@ class ExpressionLanguage extends Component {
         <td>
           <div className="dms-fill-row">
             <InputSelect
+              label={ this._translate('Expression language') }
               onChange={ this.setExpressionLanguage }
               options={ languageOptions }
               value={ expressionLanguage }
