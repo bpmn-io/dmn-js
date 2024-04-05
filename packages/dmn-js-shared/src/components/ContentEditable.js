@@ -222,6 +222,9 @@ export default class ContentEditable extends Component {
     return (
       <div
         aria-label={ label }
+        role="textbox"
+        aria-multiline={ !this.props.singleLine }
+        tabIndex="0"
         className={ this.getClassName() }
         contentEditable="true"
         spellcheck="false"
