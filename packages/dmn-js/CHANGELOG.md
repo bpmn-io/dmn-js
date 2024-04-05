@@ -6,6 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.1.0
+
+* `FEAT`: allow to provide accessible names to form fields ([#843](https://github.com/bpmn-io/dmn-js/pull/843))
+* `FIX`: add accessible names to multiple components ([#843](https://github.com/bpmn-io/dmn-js/pull/843))
+* `FIX`: improve contrast
+* `FIX`: make table cells visible to screen readers ([#821](https://github.com/bpmn-io/dmn-js/issue/821))
+
 ## 16.0.2
 
 * `FIX`: correct DRD replace menu position
