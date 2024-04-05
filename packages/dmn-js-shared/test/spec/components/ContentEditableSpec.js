@@ -94,6 +94,28 @@ describe('components/ContentEditable', function() {
   });
 
 
+  it('should render label', function() {
+
+    // given
+    const label = 'label';
+
+    // when
+    const node = renderToNode(
+      <ContentEditable
+        className={ 'other' }
+        value={ '' }
+        label={ label }
+      />
+    );
+
+    // then
+    expect(node).to.exist;
+    expect(innerText(node)).to.eql('');
+
+    expect(matches(node, '.content-editable[aria-label=label]')).to.be.true;
+  });
+
+
   describe('selection', function() {
 
     it('should update on value change', function() {

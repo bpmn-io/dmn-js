@@ -217,6 +217,7 @@ export default class InputNumberEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('Comparison operator') }
             noInput={ true }
             onChange={ this.onComparisonOperatorChange }
             options={ comparisonOperatorOptions }
@@ -225,6 +226,7 @@ export default class InputNumberEdit extends Component {
           &nbsp;
 
           <Input
+            label={ this._translate('Value') }
             className="comparison-number-input"
             onInput={ this.onComparisonValueChange }
             type="number"
@@ -250,6 +252,7 @@ export default class InputNumberEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('Start value') }
             noInput={ true }
             onChange={ this.onRangeStartTypeChange }
             options={ rangeTypeOptions }
@@ -270,6 +273,7 @@ export default class InputNumberEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('End value') }
             noInput={ true }
             onChange={ this.onRangeEndTypeChange }
             options={ rangeTypeOptions }
@@ -314,6 +318,7 @@ export default class InputNumberEdit extends Component {
 
         <div className="dms-fill-row">
           <InputSelect
+            label={ this._translate('Test type') }
             noInput={ true }
             onChange={ this.onTypeChange }
             options={ typeOptions }

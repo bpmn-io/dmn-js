@@ -58,6 +58,7 @@ export default class EditableHitPolicy extends Component {
         </label>
         <InputSelect
           className="hit-policy-edit-policy-select"
+          label={ this._translate('Hit policy') }
           onChange={ this.onChange }
           options={ HIT_POLICIES.map(entry =>
             ({ ...entry, label: this._translate(entry.label) })) }

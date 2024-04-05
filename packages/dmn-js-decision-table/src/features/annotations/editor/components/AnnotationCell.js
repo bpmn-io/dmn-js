@@ -60,6 +60,7 @@ export default class EditableAnnotationCell extends Component {
         data-row-id={ row.id }>
 
         <AnnotationEditor
+          label={ this.translate('Annotation') }
           ctrlForNewline={ true }
           className="annotation-editor"
           onChange={ this.setAnnotationValue }
@@ -72,7 +73,8 @@ export default class EditableAnnotationCell extends Component {
 
 EditableAnnotationCell.$inject = [
   'changeSupport',
-  'modeling'
+  'modeling',
+  'translate'
 ];
 
 

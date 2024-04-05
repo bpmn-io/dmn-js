@@ -8,7 +8,7 @@ export default class InputEditor extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.translate = context.injector ? context.injector.get('translate') : noopTranslate;
+    this.translate = context.injector.get('translate');
     this.expressionLanguages = context.injector.get('expressionLanguages', false);
     this.variableResolver = context.injector.get('variableResolver', false);
 
@@ -77,6 +77,7 @@ export default class InputEditor extends Component {
 
         <div className="dms-form-control">
           <ContentEditable
+            label={ this.translate('Input label') }
             className="dms-input-label"
             value={ label || '' }
             placeholder={ this.translate('Input') }
@@ -92,6 +93,7 @@ export default class InputEditor extends Component {
           </label>
 
           <ExpressionEditor
+            label={ this.translate('Input expression') }
             placeholder={ this.translate('Enter expression') }
             className={
               [
@@ -106,8 +108,4 @@ export default class InputEditor extends Component {
       </div>
     );
   }
-}
-
-function noopTranslate(str) {
-  return str;
 }

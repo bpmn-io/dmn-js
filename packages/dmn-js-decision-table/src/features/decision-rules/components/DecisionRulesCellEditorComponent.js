@@ -130,9 +130,7 @@ class TableCellEditor extends Component {
   isDefaultExpressionLanguage(businessObject) {
     const { expressionLanguage } = businessObject;
 
-    const defaultExpressionLanguage = this.getDefaultExpressionLanguage(
-      businessObject
-    ).value;
+    const defaultExpressionLanguage = this.getDefaultExpressionLanguage().value;
 
     return !expressionLanguage || expressionLanguage === defaultExpressionLanguage;
   }
@@ -144,18 +142,18 @@ class TableCellEditor extends Component {
   getExpressionLanguageLabel(businessObject) {
     const { expressionLanguage } = businessObject;
 
-    const defaultExpressionLanguage = this.getDefaultExpressionLanguage(businessObject);
+    const defaultExpressionLanguage = this.getDefaultExpressionLanguage();
 
     return this._expressionLanguages.getLabel(expressionLanguage) ||
       defaultExpressionLanguage.label;
   }
 
-  isScript(businessObject) {
-    const defaultExpressionLanguage = this.getDefaultExpressionLanguage(businessObject);
+  isScript() {
+    const { businessObject } = this.props;
 
-    const isInputCell = is(businessObject, 'dmn:UnaryTests');
+    const defaultExpressionLanguage = this.getDefaultExpressionLanguage();
 
-    if (!isInputCell) {
+    if (!this._isInputCell()) {
       return false;
     }
 
@@ -167,8 +165,12 @@ class TableCellEditor extends Component {
       businessObject.expressionLanguage !== defaultExpressionLanguage;
   }
 
-  getDefaultExpressionLanguage(businessObject) {
-    const elementType = is(businessObject, 'dmn:UnaryTests') ? 'inputCell' : 'outputCell';
+  _isInputCell() {
+    return is(this.props.businessObject, 'dmn:UnaryTests');
+  }
+
+  getDefaultExpressionLanguage() {
+    const elementType = this._isInputCell() ? 'inputCell' : 'outputCell';
 
     return this._expressionLanguages.getDefault(elementType);
   }
@@ -185,7 +187,7 @@ class TableCellEditor extends Component {
     const { businessObject } = this.props;
 
     return businessObject.expressionLanguage ||
-      this.getDefaultExpressionLanguage(businessObject).value;
+      this.getDefaultExpressionLanguage().value;
   }
 
   _getVariables() {
@@ -193,6 +195,11 @@ class TableCellEditor extends Component {
 
     return this._variableResolver &&
       this._variableResolver.getVariables(businessObject);
+  }
+
+  _getLabel() {
+    return this._isInputCell() ?
+      this._translate('Input') : this._translate('Output');
   }
 
   render() {
@@ -209,7 +216,7 @@ class TableCellEditor extends Component {
 
     const expressionLanguageLabel = this.getExpressionLanguageLabel(businessObject);
 
-    const isScript = this.isScript(businessObject);
+    const isScript = this.isScript();
 
     const Editor = this.getEditor();
     const variables = this._getVariables();
@@ -221,6 +228,7 @@ class TableCellEditor extends Component {
             && <div className="description-indicator"></div>
         }
         <Editor
+          label={ this._getLabel() }
           className={ isScript ? 'script-editor' : '' }
           ctrlForNewline={ true }
           onInput={ onChange }

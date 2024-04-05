@@ -67,12 +67,13 @@ export default class OutputTimeEdit extends Component {
     return (
       <div class="context-menu-container simple-time-edit">
 
-        <h3 class="dms-heading">{ this._translate('Edit date') }</h3>
+        <h3 class="dms-heading">{ this._translate('Edit time') }</h3>
 
-        <h4 class="dms-heading">{ this._translate('Set date') }</h4>
+        <h4 class="dms-heading">{ this._translate('Set time') }</h4>
 
         <div>
           <ValidatedInput
+            label={ this._translate('Time value') }
             onInput={ this.onInput }
             placeholder={ this._translate('e.g. { example } ', {
               example: getSampleDate()

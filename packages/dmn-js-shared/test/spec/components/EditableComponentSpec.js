@@ -91,6 +91,18 @@ describe('components/EditableComponent', function() {
   });
 
 
+  it('should render with label', function() {
+
+    // when
+    const node = renderToNode(
+      <TestComponent value={ null } label="label" />
+    );
+
+    // then
+    expect(node.innerHTML).to.match(/aria-label="label"/);
+  });
+
+
   describe('empty class', function() {
     it('should render with empty class', function() {
 

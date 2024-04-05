@@ -80,6 +80,26 @@ describe('literal expression properties editor', function() {
     });
 
 
+    it('should render accessible label for name', function() {
+
+      // given
+      const nameInput = domQuery('.variable-name-input', testContainer);
+
+      // then
+      expect(nameInput.getAttribute('aria-label')).to.exist;
+    });
+
+
+    it('should render accessible label for type', function() {
+
+      // given
+      const type = domQuery('.variable-type-select', testContainer);
+
+      // then
+      expect(domQuery('[aria-label]', type)).to.exist;
+    });
+
+
     it('should edit variable name', inject(function(viewer) {
 
       // given

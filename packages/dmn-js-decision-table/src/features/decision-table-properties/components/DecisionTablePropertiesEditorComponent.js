@@ -61,6 +61,7 @@ export default class DecisionTablePropertiesComponent extends Component {
     return (
       <div className="decision-table-properties">
         <DecisionTableName
+          label={ this.translate('Decision name') }
           className="decision-table-name"
           value={ name }
           ctrlForNewline={ true }
@@ -80,7 +81,8 @@ DecisionTablePropertiesComponent.$inject = [
   'sheet',
   'modeling',
   'changeSupport',
-  'components'
+  'components',
+  'translate'
 ];
 
 

@@ -44,6 +44,9 @@ export default class LiteralExpression extends Component {
 
   componentDidMount() {
     this.editor = new FeelEditor({
+      contentAttributes: {
+        'aria-label': this.props.label
+      },
       container: this.node,
       onChange: this.handleChange,
       value: this.state.value,

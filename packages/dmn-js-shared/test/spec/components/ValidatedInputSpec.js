@@ -44,6 +44,18 @@ describe('components/ValidatedInput', function() {
   });
 
 
+  it('should render accessible label', function() {
+
+    // when
+    const renderedTree = renderIntoDocument(<ValidatedInput label="label" />);
+
+    // then
+    const element = findRenderedDOMElementWithClass(renderedTree, 'dms-validated-input');
+
+    expect(element.querySelector('[aria-label]')).to.exist;
+  });
+
+
   it('should notify on change', function() {
 
     // given

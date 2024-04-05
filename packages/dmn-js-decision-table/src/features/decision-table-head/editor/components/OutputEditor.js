@@ -45,6 +45,7 @@ export default class OutputEditor extends Component {
 
         <div className="dms-form-control">
           <ContentEditable
+            label={ this.translate('Output label') }
             className="dms-output-label"
             value={ label || '' }
             placeholder={ this.translate('Output') }
@@ -60,6 +61,7 @@ export default class OutputEditor extends Component {
           </label>
 
           <Input
+            label={ this.translate('Output name') }
             className="ref-output-name"
             value={ name || '' }
             onInput={ this.setName } />

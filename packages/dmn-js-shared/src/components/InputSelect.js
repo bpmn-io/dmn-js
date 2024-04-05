@@ -316,6 +316,7 @@ export default class InputSelect extends Component {
   render() {
     const {
       className,
+      label: inputLabel,
       options,
       noInput,
       title
@@ -340,6 +341,7 @@ export default class InputSelect extends Component {
           noInput
             ? (
               <div
+                aria-label={ inputLabel }
                 className="dms-input"
                 tabindex="0"
                 onKeyDown={ this.onKeyDown }
@@ -347,6 +349,7 @@ export default class InputSelect extends Component {
               >{ label }</div>
             ) : (
               <input
+                aria-label={ inputLabel }
                 className="dms-input"
                 onInput={ this.onInput }
                 onKeyDown={ this.onKeyDown }

@@ -50,6 +50,7 @@ export class DurationInput extends Component {
   render() {
     return (
       <ValidatedInput
+        label={ this.props.label }
         type="text"
         onInput={ this.onInput }
         placeholder={ this._getPlaceholder() }
