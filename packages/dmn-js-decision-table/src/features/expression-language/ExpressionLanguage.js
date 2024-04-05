@@ -123,15 +123,18 @@ export default class ExpressionLanguage {
 
           const options = expressionLanguages.getAll();
 
+          const label = this._translate('Expression language');
+
           return <div className="context-menu-container ref-language">
             <div className="dms-form-control">
               <label className="dms-label">
                 {
-                  this._translate('Expression language')
+                  label
                 }
               </label>
 
               <InputSelect
+                label={ label }
                 className="ref-language"
                 value={ expressionLanguage || '' }
                 onChange={ value => this.onChange(inputExpression, value) }
