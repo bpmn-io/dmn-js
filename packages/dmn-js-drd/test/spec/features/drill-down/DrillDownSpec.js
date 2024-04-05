@@ -91,7 +91,6 @@ describe('features - drilldown', function() {
 
       describe('accessibility', function() {
 
-
         verify(
           'decision table',
           'Decision_Table',
