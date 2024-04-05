@@ -103,7 +103,6 @@ describe('components/EditableComponent', function() {
   });
 
 
-
   describe('empty class', function() {
     it('should render with empty class', function() {
 
