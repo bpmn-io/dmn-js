@@ -10,6 +10,7 @@ export default class DecisionPropertiesEditorComponent extends Component {
 
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
+    this._translate = context.injector.get('translate');
 
     this.setupChangeListeners({
       bind: this.getDecision().id
@@ -55,6 +56,7 @@ export default class DecisionPropertiesEditorComponent extends Component {
     return (
       <header className="decision-properties">
         <DecisionName
+          label={ this._translate('Decision name') }
           className="decision-name editor"
           value={ name }
           onBlur={ resetScroll }
