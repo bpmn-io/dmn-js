@@ -142,10 +142,9 @@ export default function CellSelection(
     // select new element
     if (elementId && elementId !== lastSelection) {
       realSelect(selection.id);
-    } else
+    } else if (oldElementId && oldElementId === lastSelection) {
 
-    // deselect old element
-    if (oldElementId && oldElementId === lastSelection) {
+      // deselect old element
       realSelect();
     }
 
