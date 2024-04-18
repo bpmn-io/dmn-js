@@ -14,6 +14,7 @@ import TranslateModule from 'diagram-js/lib/i18n/translate';
 import RenderModule from './render';
 import PoweredByModule from './features/powered-by';
 import LiteralExpressionModule from './features/literal-expression';
+import FunctionDefinitionEditorModule from './features/function-definition';
 import ViewDrdModule from './features/view-drd';
 import ElementPropertiesModule from './features/element-properties';
 import ElementLogicModule from './features/element-logic';
@@ -225,6 +226,7 @@ export class Viewer extends BaseViewer {
       ViewDrdModule,
       ElementPropertiesModule,
       ElementLogicModule,
+      FunctionDefinitionEditorModule,
       LiteralExpressionModule,
       ElementVariableModule
     ];

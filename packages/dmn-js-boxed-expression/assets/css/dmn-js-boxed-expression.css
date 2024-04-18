@@ -18,6 +18,7 @@
   --boxed-expression-font-family: 'Arial', sans-serif;
   --boxed-expression-font-family-monospace: monospace;
   --section-padding: 20px;
+  --padding: 12px;
   --font-size: 14px;
   --font-size-big: 16px;
   --font-size-bigger: 21px;
@@ -109,13 +110,11 @@
 .dmn-boxed-expression-container .textarea {
   box-sizing: border-box;
   width: 100%;
-  padding: 12px;
+  padding: var(--padding);
   font-family: var(--boxed-expression-font-family-monospace);
   line-height: 1.4;
-  border: 1px solid var(--textarea-border-color);
-  border-bottom-width: 1px;
   white-space: pre;
-  font-size: 14px;
+  font-size: var(--font-size);
   color: var(--textarea-color);
   min-height: 250px;
   overflow: auto;
@@ -156,25 +155,26 @@
 
 /* function definition */
 .dmn-boxed-expression-container .function-definition {
-  & .function-definition-parameters, .function-definition-body {
-    padding: var(--section-padding);
-  }
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+}
+
+.dmn-boxed-expression-container .function-definition .function-definition-kind {
+  padding: var(--padding);
+  font-size: var(--font-size-bigger);
 }
 
 .dmn-boxed-expression-container .function-definition .function-definition-parameters {
-  --border-spacing: 10px;
+  padding: var(--padding);
+  border-left: 1px solid var(--element-properties-border-color);
+  font-size: var(--font-size-big);
+}
 
-  border-bottom: 1px solid var(--element-properties-border-color);
-
-  & table {
-    border-collapse: collapse;
-    border-spacing: var(--border-spacing);
-  }
-
-  & th {
-    text-align: left;
-    width: 160px;
-  }
+.dmn-boxed-expression-container .function-definition .function-definition-body {
+  grid-column: span 2;
+  border-top: 1px solid var(--element-properties-border-color);
 }
 
 .dmn-boxed-expression-container .element-variable {
