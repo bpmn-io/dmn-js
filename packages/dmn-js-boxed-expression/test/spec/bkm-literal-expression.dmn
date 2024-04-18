@@ -3,6 +3,9 @@
   <businessKnowledgeModel id="season" name="Season">
     <variable id="InformationItem_16229yj" name="season" typeRef="string" />
     <encapsulatedLogic>
+      <formalParameter name="abc" typeRef="string" />
+      <formalParameter name="abc" typeRef="number" />
+      <formalParameter name="abc" />
       <literalExpression id="LiteralExpression_0hs8xyn">
         <text>calendar.getSeason(date)</text>
       </literalExpression>

@@ -16,6 +16,9 @@ import simpleXML from './literal-expression.dmn';
 import bkmXML from './bkm-literal-expression.dmn';
 
 
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
+
+
 describe('Viewer', function() {
 
   let testContainer;
@@ -42,7 +45,7 @@ describe('Viewer', function() {
   });
 
 
-  it('should business knowledge model', function() {
+  (singleStart ? it.only : it)('should import business knowledge model', function() {
     return createViewer(bkmXML);
   });
 

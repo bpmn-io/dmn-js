@@ -10,7 +10,9 @@
     "test": "karma start",
     "build": "del-cli lib && babel -s --quiet -d lib src",
     "dev": "npm test -- --no-single-run --auto-watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "start": "cross-env SINGLE_START=editor npm run dev",
+    "start:viewer": "cross-env SINGLE_START=viewer npm run dev"
   },
   "main": "./lib/index.js",
   "repository": {
@@ -26,6 +28,7 @@
     "boxed expression"
   ],
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "dmn-font": "^0.6.2",
     "inferno-test-utils": "~5.6.2"
   },
