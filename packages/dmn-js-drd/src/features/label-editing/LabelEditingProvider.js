@@ -9,6 +9,7 @@ import {
   isDefined
 } from 'min-dash';
 
+var MARKER_LABEL_HIDDEN = 'djs-label-hidden';
 
 export default function LabelEditingProvider(
     canvas,
@@ -21,6 +22,7 @@ export default function LabelEditingProvider(
   this._canvas = canvas;
   this._modeling = modeling;
   this._textRenderer = textRenderer;
+  this._eventBus = eventBus;
 
   directEditing.registerProvider(this);
 
@@ -64,6 +66,17 @@ export default function LabelEditingProvider(
 
   eventBus.on('autoPlace.end', 500, function(event) {
     directEditing.activate(event.shape);
+  });
+
+  this._eventBus.on([
+    'directEditing.complete', 'directEditing.cancel'
+  ], function(context) {
+    var activeProvider = context.active;
+
+    if (activeProvider) {
+      var element = activeProvider.element.label || activeProvider.element;
+      canvas.removeMarker(element, MARKER_LABEL_HIDDEN);
+    }
   });
 }
 
@@ -118,6 +131,8 @@ LabelEditingProvider.prototype.activate = function(element) {
   assign(context, {
     options: options
   });
+
+  this._canvas.addMarker(element, MARKER_LABEL_HIDDEN);
 
   return context;
 };

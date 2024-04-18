@@ -528,6 +528,57 @@ describe('features - label-editing', function() {
 
   });
 
+
+  describe('hiding labels', function() {
+
+    it('should hide label when editing', inject(
+      function(elementRegistry, directEditing, canvas, eventBus) {
+
+        // given
+        var shape = elementRegistry.get('dish-decision');
+
+        // when
+        directEditing.activate(shape);
+
+        // then
+        expect(canvas.hasMarker(shape, 'djs-label-hidden')).to.be.true;
+      }
+    ));
+
+
+    it('should show label when editing cancled', inject(
+      function(elementRegistry, directEditing, canvas, eventBus) {
+
+        // given
+        var shape = elementRegistry.get('dish-decision');
+        directEditing.activate(shape);
+
+        // when
+        directEditing.cancel();
+
+        // then
+        expect(canvas.hasMarker(shape, 'djs-label-hidden')).to.be.false;
+      }
+    ));
+
+
+    it('should show label when editing finished', inject(
+      function(elementRegistry, directEditing, canvas, eventBus) {
+
+        // given
+        var shape = elementRegistry.get('dish-decision');
+        directEditing.activate(shape);
+
+        // when
+        directEditing.complete();
+
+        // then
+        expect(canvas.hasMarker(shape, 'djs-label-hidden')).to.be.false;
+      }
+    ));
+
+  });
+
 });
 
 // helpers //////////
