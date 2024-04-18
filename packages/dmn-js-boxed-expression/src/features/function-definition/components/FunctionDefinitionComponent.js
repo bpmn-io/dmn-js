@@ -19,36 +19,64 @@ function FunctionDefinitionComponent({ expression }, context) {
   const parameters = functionDefinition.getParameters(expression);
   const body = functionDefinition.getBody(expression);
 
-  const BodyExpression = context.components.getComponent('expression', {
-    expression: body
-  });
-
   return (
-    <div class="">
-
+    <div className="function-definition">
+      <Kind kind={ kind } />
       <FormalParameters parameters={ parameters } />
       <BodyExpression expression={ body } />
     </div>
   );
 }
 
+const KIND_MAP = {
+  'FEEL': 'F',
+  'Java': 'J',
+  'PMML': 'P'
+};
+
+function Kind({ kind }, context) {
+  const translate = context.injector.get('translate');
+
+  return (
+    <div
+      className="function-definition-kind"
+      title={ translate('Function kind: {kind}', { kind }) }
+    >
+      { KIND_MAP[kind] }
+    </div>
+  );
+}
+
 function FormalParameters({ parameters }) {
   return (
-    <div>
+    <div className="function-definition-parameters">
       (
       {
-        parameters.map((parameter, idx) => {
-          return <span>{parameter.name}: {parameter.typeRef}</span>;
-        })
+        parameters.reduce((acc, parameter) => {
+          return acc.concat(<Parameter parameter={ parameter } />, ', ');
+        }, []).slice(0, -1)
       }
       )
-      <ul>
-        {
-          parameters.map((parameter, idx) => {
-            return <li key={ idx }>{ parameter.name }</li>;
-          })
-        }
-      </ul>
+    </div>
+  );
+}
+
+function Parameter({ parameter }) {
+  const { name, typeRef } = parameter;
+
+  return <span>
+    {typeRef ? `${name}: ${typeRef}` : name}
+  </span>;
+}
+
+function BodyExpression({ expression }, context) {
+  const Expression = context.components.getComponent('expression', {
+    expression
+  });
+
+  return (
+    <div className="function-definition-body">
+      <Expression expression={ expression } />
     </div>
   );
 }
