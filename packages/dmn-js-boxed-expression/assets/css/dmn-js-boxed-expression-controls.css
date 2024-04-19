@@ -1,0 +1,110 @@
+.dmn-boxed-expression-container {
+  --context-menu-background-color: var(--color-white);
+  --context-menu-border-color: var(--color-grey-225-10-75);
+  --context-menu-color: var(--color-grey-225-10-15);
+  --context-menu-box-shadow-color: var(--color-black-opacity-10);
+  --context-menu-group-entry-border-color: var(--color-grey-225-10-75);
+  --context-menu-group-entry-disabled-color: var(--color-grey-225-10-75);
+  --context-menu-group-entry-hover-background-color: var(--color-grey-225-10-95);
+  --edit-button-color: var(--color-grey-225-10-15);
+  --edit-button-background-color: var(--color-grey-225-10-97);
+  --edit-button-border-color: var(--color-grey-225-10-75);
+  --edit-button-box-shadow-color: var(--color-black-opacity-10);
+  --edit-button-disabled-color: var(--color-grey-225-10-75);
+}
+
+/* common */
+.dmn-boxed-expression-container button {
+  background: var(--color-white);
+  border: solid 1px var(--color-grey-225-10-75);
+  color: var(--color-grey-225-10-15);
+  font-size: var(--font-size);
+}
+
+.dmn-boxed-expression-container button:hover {
+  background-color: var(--color-grey-225-10-97);
+}
+
+/* context-menu */
+
+.dmn-boxed-expression-container .context-menu {
+  position: absolute;
+  background: var(--context-menu-background-color);
+  border: solid 1px var(--context-menu-border-color);
+  border-radius: 2px;
+  font-size: 14px;
+  color: var(--context-menu-color);
+  box-shadow: 1px 1px 1px 1px var(--context-menu-box-shadow-color);
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-container {
+  margin: 8px;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-group-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  padding: 8px 16px;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.dmn-boxed-expression-container .context-menu-group .context-menu-group-entry:hover {
+  background-color: var(--context-menu-group-entry-hover-background-color);
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-group-entry.disabled {
+  pointer-events: none;
+  color: var(--context-menu-group-entry-disabled-color);
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon {
+  display: inline-block;
+  text-align: center;
+  width: 14px;
+  margin-right: 6px;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-group-entry .context-menu-group-entry-icon::before {
+  margin: 0;
+}
+
+.dmn-boxed-expression-container .context-menu-group:not(:last-child)::after {
+  content: '';
+  display: block;
+  margin: 0 8px;
+  border-bottom: 1px solid var(--context-menu-group-entry-border-color);
+  height: 1px;
+}
+
+/* edit-button */
+
+.dmn-boxed-expression-container :hover>.edit-button {
+  display: block;
+}
+
+.dmn-boxed-expression-container .edit-button {
+  display: none;
+  color: var(--edit-button-color);
+  background-color: var(--edit-button-background-color);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  padding: 4px;
+  border-radius: 2px;
+  border: solid 1px var(--edit-button-border-color);
+  font-size: var(--font-size);
+  box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);
+}
+
+/* function-definition */
+.dmn-boxed-expression-container .context-menu .function-definition-parameter button {
+  border: none;
+}

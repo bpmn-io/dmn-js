@@ -12,8 +12,12 @@ insertCSS('dmn-js-shared.css',
   require('dmn-js-shared/assets/css/dmn-js-shared.css')
 );
 
-insertCSS('dmn-js-boxed-expression-js.css',
+insertCSS('dmn-js-boxed-expression.css',
   require('../assets/css/dmn-js-boxed-expression.css')
+);
+
+insertCSS('dmn-js-boxed-expression-controls.css',
+  require('../assets/css/dmn-js-boxed-expression-controls.css')
 );
 
 insertCSS('dmn-js-testing.css',

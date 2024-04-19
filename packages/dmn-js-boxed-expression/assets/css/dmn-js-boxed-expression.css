@@ -49,8 +49,8 @@
 .dmn-boxed-expression-container .dmn-boxed-expression-section {
   border: 1px solid var(--element-properties-border-color);
 
-  &:not(:last-child) {
-    border-bottom: none;
+  &:not(:first-child) {
+    border-top: none;
   }
 }
 
@@ -158,7 +158,10 @@
   display: grid;
   grid-template-columns: min-content auto;
   grid-template-rows: auto auto;
-  align-items: center;
+
+  & .function-definition-kind, & .function-definition-parameters {
+    position: relative;
+  }
 }
 
 .dmn-boxed-expression-container .function-definition .function-definition-kind {

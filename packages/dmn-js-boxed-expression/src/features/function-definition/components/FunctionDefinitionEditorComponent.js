@@ -1,9 +1,7 @@
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
-import Input from 'dmn-js-shared/lib/components/Input';
-import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
-
 import { withChangeSupport } from '../../../util/withChangeSupport';
+import { EditButton } from '../../../components/EditButton';
 
 export class FunctionDefinitionComponentProvider {
   static $inject = [ 'components' ];
@@ -24,96 +22,78 @@ const FunctionDefinitionEditorComponent = withChangeSupport(
 
 function _FunctionDefinitionEditorComponent({ expression }, context) {
   const functionDefinition = context.injector.get('functionDefinition');
+  const contextMenu = context.injector.get('contextMenu');
 
+  const kind = functionDefinition.getKind(expression);
   const parameters = functionDefinition.getParameters(expression);
   const body = functionDefinition.getBody(expression);
 
-  const addParameter = () => {
-    functionDefinition.addParameter(expression);
+  const openKindEditor = event => {
+    const position = getParentPosition(event);
+    contextMenu.open(position, {
+      contextMenuType: 'kind-editor',
+      expression
+    });
   };
-
-  const removeParameter = parameter => {
-    functionDefinition.removeParameter(expression, parameter);
+  const openFormalParametersEditor = event => {
+    const position = getParentPosition(event);
+    contextMenu.open(position, {
+      contextMenuType: 'formal-parameters-editor',
+      expression
+    });
   };
 
   return (
     <div className="function-definition">
+      <Kind kind={ kind } openEditor={ openKindEditor } />
       <FormalParameters
-        add={ addParameter }
-        remove={ removeParameter }
         parameters={ parameters }
+        openEditor={ openFormalParametersEditor }
       />
       <BodyExpression expression={ body } />
     </div>
   );
 }
 
-function FormalParameters({ add, parameters, remove }) {
+const KIND_MAP = {
+  'FEEL': 'F',
+  'Java': 'J',
+  'PMML': 'P'
+};
+
+function Kind({ kind, openEditor }) {
   return (
-    <div className="function-definition-parameters">
-      <h2>Parameters</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            parameters.map((parameter, idx) => (
-              <Parameter
-                key={ idx }
-                parameter={ parameter }
-                remove={ () => remove(parameter) }
-              />
-            ))
-          }
-        </tbody>
-      </table>
-      <button type="button" onClick={ add }>Add parameter</button>
+    <div className="function-definition-kind">
+      <EditButton onClick={ openEditor } />
+      { KIND_MAP[kind] }
     </div>
   );
 }
 
-const Parameter = withChangeSupport(function({ parameter, remove }, context) {
-  const dataTypes = context.injector.get('dataTypes');
-  const translate = context.injector.get('translate');
-  const functionDefinition = context.injector.get('functionDefinition');
-
-  const onNameChange = name => {
-    functionDefinition.updateParameter(parameter, { name });
-  };
-
-  const onTypeRefChange = typeRef => {
-    functionDefinition.updateParameter(parameter, { typeRef });
-  };
-
-  const typeRefOptions = dataTypes.getAll().map(t => {
-    return {
-      label: translate(t),
-      value: t
-    };
-  });
-
+function FormalParameters({ openEditor, parameters }) {
   return (
-    <tr className="function-definition-parameter">
-      <td>
-        <Input onInput={ onNameChange } value={ parameter.get('name') } />
-      </td>
-      <td>
-        <InputSelect
-          onChange={ onTypeRefChange }
-          value={ parameter.get('typeRef') }
-          options={ typeRefOptions }
-        />
-      </td>
-      <td>
-        <button type="button" onClick={ remove }>Remove</button>
-      </td>
-    </tr>
+    <div className="function-definition-parameters">
+      <EditButton onClick={ openEditor } />
+      (
+      {
+        parameters.reduce((acc, parameter) => {
+          return acc.concat(<Parameter parameter={ parameter } />, ', ');
+        }, []).slice(0, -1)
+      }
+      )
+    </div>
   );
-}, props => [ props.parameter ]);
+}
+
+const Parameter = withChangeSupport(_Parameter, props => [ props.parameter ]);
+
+function _Parameter({ parameter }) {
+  const { name, typeRef } = parameter;
+
+  return <span>
+    {typeRef ? `${name}: ${typeRef}` : name}
+  </span>;
+}
 
 function BodyExpression({ expression }, context) {
   const Expression = context.components.getComponent('expression', {
@@ -122,8 +102,17 @@ function BodyExpression({ expression }, context) {
 
   return (
     <div className="function-definition-body">
-      <h2>Expression</h2>
       <Expression expression={ expression } />
     </div>
   );
+}
+
+function getParentPosition(event) {
+  const parent = event.target.parentElement,
+        bbox = parent.getBoundingClientRect();
+
+  return {
+    x: bbox.x,
+    y: bbox.y
+  };
 }
