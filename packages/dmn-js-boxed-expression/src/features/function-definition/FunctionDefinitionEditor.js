@@ -31,4 +31,10 @@ export class FunctionDefinitionEditor extends FunctionDefinition {
   updateParameter(parameter, properties) {
     this._modeling.updateProperties(parameter, properties);
   }
+
+  setKind(functionDefinition, kind) {
+    this._modeling.updateProperties(functionDefinition, {
+      kind
+    });
+  }
 }
