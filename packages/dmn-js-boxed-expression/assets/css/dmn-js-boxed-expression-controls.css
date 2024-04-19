@@ -25,6 +25,16 @@
   background-color: var(--color-grey-225-10-97);
 }
 
+.dmn-boxed-expression-container .dms-input {
+  width: 160px;
+}
+
+/* element-name */
+.dmn-boxed-expression-container .element-name {
+  border: none;
+  width: 100%;
+}
+
 /* context-menu */
 
 .dmn-boxed-expression-container .context-menu {
@@ -86,10 +96,6 @@
 
 /* edit-button */
 
-.dmn-boxed-expression-container :hover>.edit-button {
-  display: block;
-}
-
 .dmn-boxed-expression-container .edit-button {
   display: none;
   color: var(--edit-button-color);
@@ -102,6 +108,10 @@
   border: solid 1px var(--edit-button-border-color);
   font-size: var(--font-size);
   box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);
+}
+
+.dmn-boxed-expression-container :hover>.edit-button {
+  display: block;
 }
 
 /* function-definition */
