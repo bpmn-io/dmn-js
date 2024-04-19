@@ -49,7 +49,7 @@
 .dmn-boxed-expression-container .dmn-boxed-expression-section {
   border: 1px solid var(--element-properties-border-color);
 
-  &:not(:first-child) {
+  & + .dmn-boxed-expression-section {
     border-top: none;
   }
 }
@@ -180,10 +180,21 @@
   border-top: 1px solid var(--element-properties-border-color);
 }
 
+/* element-variable */
+
 .dmn-boxed-expression-container .element-variable {
   padding: var(--section-padding);
+  display: inline-grid;
+  grid: auto / 1fr 1fr;
+  gap: 10px 20px;
 
-  & .element-variable-type-label {
+  & > h2 {
+    grid-column: span 2;
+  }
+
+  & .element-variable-name-label, & .element-variable-type-label {
     display: block;
+    padding-bottom: 7px;
+    color: var(--color-grey-225-10-55)
   }
 }

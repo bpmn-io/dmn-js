@@ -18,23 +18,32 @@ export default class ElementVariableComponentProvider {
 
 function ElementVariableComponent(_, context) {
   const elementVariable = context.injector.get('elementVariable');
+  const translate = context.injector.get('translate');
+
   const name = elementVariable.getName();
 
   return (
     <div className="element-variable">
       <h2>Result</h2>
-      <div>{ name }</div>
+      <div className="element-variable-name">
+        <span className="element-variable-name-label">
+          { translate('Variable name') }
+        </span>
+        <span>
+          { name }
+        </span>
+      </div>
       <div className="element-variable-type">
         <label className="element-variable-type-label" htmlFor={ VARIABLE_TYPE_ID }>
           Result type
         </label>
-        <VariableType />
+        <VariableTypeEditor />
       </div>
     </div>
   );
 }
 
-function VariableType(_, context) {
+function VariableTypeEditor(_, context) {
   const elementVariable = context.injector.get('elementVariable');
   const dataTypes = context.injector.get('dataTypes');
   const translate = context.injector.get('translate');

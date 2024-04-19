@@ -16,6 +16,10 @@ insertCSS('dmn-js-boxed-expression.css',
   require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression.css')
 );
 
+insertCSS('dmn-js-boxed-expression-controls.css',
+  require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression-controls.css')
+);
+
 insertCSS('diagram-js.css', require('diagram-js/assets/diagram-js.css'));
 
 insertCSS('dmn-js-testing.css',

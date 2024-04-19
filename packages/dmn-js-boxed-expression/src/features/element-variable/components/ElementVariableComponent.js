@@ -1,6 +1,3 @@
-const VARIABLE_TYPE_ID = 'dmn-boxed-expression-variable-type';
-
-
 export default class ElementVariableComponentProvider {
   static $inject = [ 'components' ];
 
@@ -12,6 +9,7 @@ export default class ElementVariableComponentProvider {
 
 function ElementVariableComponent(_, context) {
   const elementVariable = context.injector.get('elementVariable');
+  const translate = context.injector.get('translate');
 
   // there is only one single element
   const name = elementVariable.getName();
@@ -20,12 +18,19 @@ function ElementVariableComponent(_, context) {
   return (
     <div className="element-variable">
       <h2>Result</h2>
-      <div>{ name }</div>
+      <div className="element-variable-name">
+        <span className="element-variable-name-label">
+          { translate('Variable name') }
+        </span>
+        <span>
+          { name }
+        </span>
+      </div>
       <div className="element-variable-type">
         <span className="element-variable-type-label">
-          Result type
+          { translate('Variable type') }
         </span>
-        <span id={ VARIABLE_TYPE_ID }>{type}</span>
+        <span>{type}</span>
       </div>
     </div>
   );
