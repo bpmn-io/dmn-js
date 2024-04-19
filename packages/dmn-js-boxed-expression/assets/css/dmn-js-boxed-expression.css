@@ -42,10 +42,6 @@
   box-sizing: border-box;
 }
 
-.dmn-boxed-expression-container .dms-input {
-  width: 160px;
-}
-
 .dmn-boxed-expression-container .dmn-boxed-expression-section {
   border: 1px solid var(--element-properties-border-color);
 
@@ -72,24 +68,7 @@
   font-size: var(--font-size-bigger);
   font-weight: normal;
   white-space: pre;
-}
-
-.dmn-boxed-expression-container .element-name:not(.editor) {
-  cursor: default;
-}
-
-.dmn-boxed-expression-container .element-name.editor {
-  cursor: text;
-}
-
-.dmn-boxed-expression-container .element-name div {
-  outline: none;
-}
-
-.dmn-boxed-expression-container .element-name:not(.editable),
-.dmn-boxed-expression-container .element-name [contenteditable="true"] {
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
 }
 
