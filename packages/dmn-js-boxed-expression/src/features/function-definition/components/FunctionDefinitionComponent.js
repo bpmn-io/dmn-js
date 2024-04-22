@@ -50,13 +50,15 @@ function Kind({ kind }, context) {
 function FormalParameters({ parameters }) {
   return (
     <div className="function-definition-parameters">
-      (
-      {
-        parameters.reduce((acc, parameter) => {
-          return acc.concat(<Parameter parameter={ parameter } />, ', ');
-        }, []).slice(0, -1)
-      }
-      )
+      <div>
+        (
+        {
+          parameters.reduce((acc, parameter) => {
+            return acc.concat(<Parameter parameter={ parameter } />, ', ');
+          }, []).slice(0, -1)
+        }
+        )
+      </div>
     </div>
   );
 }

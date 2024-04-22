@@ -135,8 +135,8 @@
 /* function definition */
 .dmn-boxed-expression-container .function-definition {
   display: grid;
-  grid-template-columns: min-content auto;
-  grid-template-rows: auto auto;
+  grid-template-columns: 50px auto;
+  grid-template-rows: 50px auto;
 
   & .function-definition-kind, & .function-definition-parameters {
     position: relative;
@@ -144,12 +144,18 @@
 }
 
 .dmn-boxed-expression-container .function-definition .function-definition-kind {
-  padding: var(--padding);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
   font-size: var(--font-size-bigger);
 }
 
 .dmn-boxed-expression-container .function-definition .function-definition-parameters {
-  padding: var(--padding);
+  display: flex;
+  align-items: center;
+  padding-left: var(--padding);
   border-left: 1px solid var(--element-properties-border-color);
   font-size: var(--font-size-big);
 }
