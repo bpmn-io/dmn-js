@@ -41,25 +41,29 @@ function _FormalParametersEditor({ context: { expression } }, context) {
   return (
     <div className="context-menu-container">
       <h3>{translate('Edit formal parameters')}</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            parameters.map((parameter, idx) => (
-              <Parameter
-                key={ idx }
-                parameter={ parameter }
-                remove={ () => remove(parameter) }
-              />
-            ))
-          }
-        </tbody>
-      </table>
+      {
+        parameters.length ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                parameters.map((parameter, idx) => (
+                  <Parameter
+                    key={ idx }
+                    parameter={ parameter }
+                    remove={ () => remove(parameter) }
+                  />
+                ))
+              }
+            </tbody>
+          </table>
+        ) : null
+      }
       <button type="button" onClick={ add }>{translate('Add parameter')}</button>
     </div>
   );
