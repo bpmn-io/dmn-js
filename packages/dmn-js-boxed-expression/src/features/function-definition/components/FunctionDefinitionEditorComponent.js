@@ -64,8 +64,8 @@ const KIND_MAP = {
 function Kind({ kind, openEditor }) {
   return (
     <div className="function-definition-kind">
-      <EditButton onClick={ openEditor } />
       { KIND_MAP[kind] }
+      <EditButton onClick={ openEditor } />
     </div>
   );
 }
@@ -73,7 +73,6 @@ function Kind({ kind, openEditor }) {
 function FormalParameters({ openEditor, parameters }) {
   return (
     <div className="function-definition-parameters">
-      <EditButton onClick={ openEditor } />
       <div>
         (
         {
@@ -83,6 +82,7 @@ function FormalParameters({ openEditor, parameters }) {
         }
         )
       </div>
+      <EditButton onClick={ openEditor } />
     </div>
   );
 }
