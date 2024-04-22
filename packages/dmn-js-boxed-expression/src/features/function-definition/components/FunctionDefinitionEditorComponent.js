@@ -61,16 +61,20 @@ const KIND_MAP = {
   'PMML': 'P'
 };
 
-function Kind({ kind, openEditor }) {
+function Kind({ kind, openEditor }, context) {
+  const translate = context.injector.get('translate');
+
   return (
     <div className="function-definition-kind">
       { KIND_MAP[kind] }
-      <EditButton onClick={ openEditor } />
+      <EditButton label={ translate('Edit function kind') } onClick={ openEditor } />
     </div>
   );
 }
 
-function FormalParameters({ openEditor, parameters }) {
+function FormalParameters({ openEditor, parameters }, context) {
+  const translate = context.injector.get('translate');
+
   return (
     <div className="function-definition-parameters">
       <div>
@@ -82,7 +86,7 @@ function FormalParameters({ openEditor, parameters }) {
         }
         )
       </div>
-      <EditButton onClick={ openEditor } />
+      <EditButton label={ translate('Edit formal parameters') } onClick={ openEditor } />
     </div>
   );
 }
