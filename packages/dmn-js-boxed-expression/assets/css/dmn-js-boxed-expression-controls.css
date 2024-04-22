@@ -97,7 +97,6 @@
 /* edit-button */
 
 .dmn-boxed-expression-container .edit-button {
-  display: none;
   color: var(--edit-button-color);
   background-color: var(--edit-button-background-color);
   position: absolute;
@@ -110,8 +109,13 @@
   box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);
 }
 
-.dmn-boxed-expression-container :hover>.edit-button {
-  display: block;
+.dmn-boxed-expression-container :not(:hover, :focus-within) .edit-button {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 /* function-definition */
