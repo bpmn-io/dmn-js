@@ -113,11 +113,17 @@ LabelEditingProvider.prototype.activate = function(element) {
   assign(context, editingBBox);
 
   var options = {};
+  var style = context.style || {};
 
   // DRG elements
   if (is(element, 'dmn:DRGElement')) {
     assign(options, {
       centerVertically: true
+    });
+
+    assign(style, {
+      backgroundColor: null,
+      border: null
     });
   }
 
@@ -129,7 +135,8 @@ LabelEditingProvider.prototype.activate = function(element) {
   }
 
   assign(context, {
-    options: options
+    options: options,
+    style: style
   });
 
   this._canvas.addMarker(element, MARKER_LABEL_HIDDEN);
