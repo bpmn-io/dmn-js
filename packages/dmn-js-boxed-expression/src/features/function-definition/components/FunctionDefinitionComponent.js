@@ -65,9 +65,10 @@ function FormalParameters({ parameters }) {
 
 function Parameter({ parameter }) {
   const { name, typeRef } = parameter;
+  const displayedName = name || '<unnamed>';
 
   return <span>
-    {typeRef ? `${name}: ${typeRef}` : name}
+    {typeRef ? `${displayedName}: ${typeRef}` : displayedName}
   </span>;
 }
 
