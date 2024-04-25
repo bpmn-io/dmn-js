@@ -31,8 +31,8 @@
 
 /* element-name */
 .dmn-boxed-expression-container .element-name {
-  border: none;
-  width: 100%;
+  width: 24em;
+  max-width: 100%;
 }
 
 /* context-menu */
