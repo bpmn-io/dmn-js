@@ -5,6 +5,7 @@ import { withChangeSupport } from '../../../util/withChangeSupport';
 const ElementName = withChangeSupport(function(props, context) {
   const { element } = props;
   const modeling = context.injector.get('modeling');
+  const translate = context.injector.get('translate');
 
   const name = element.get('name');
   const onInput = name => {
@@ -12,6 +13,7 @@ const ElementName = withChangeSupport(function(props, context) {
   };
 
   return <Input
+    label={ translate('Element name') }
     className="element-name editor"
     value={ name }
     onInput={ onInput }
