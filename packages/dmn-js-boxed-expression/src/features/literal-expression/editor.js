@@ -1,8 +1,10 @@
-import TextareaEditor from './LiteralExpressionEditor';
-import DebounceInput from 'dmn-js-shared/lib/features/debounce-input';
+import {
+  LiteralExpressionEditorComponentProvider
+} from './components/LiteralExpressionEditorComponent';
+import LiteralExpressionEditor from './LiteralExpressionEditor';
 
 export default {
-  __depends__: [ DebounceInput ],
-  __init__: [ 'textarea' ],
-  textarea: [ 'type', TextareaEditor ]
+  __init__: [ 'literalExpressionComponent' ],
+  literalExpressionComponent: [ 'type', LiteralExpressionEditorComponentProvider ],
+  literalExpression: [ 'type', LiteralExpressionEditor ]
 };

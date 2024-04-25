@@ -1,46 +1,34 @@
 import { Component } from 'inferno';
 
-import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
 
+import { withChangeSupport } from '../../../util/withChangeSupport';
 
-export default class LiteralExpressionEditorComponent extends Component {
+class _LiteralExpressionEditorComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this._modeling = context.injector.get('modeling');
-
-    this._viewer = context.injector.get('viewer');
+    this._literalExpression = context.injector.get('literalExpression');
+    this._translate = context.injector.get('translate');
     this._expressionLanguages = context.injector.get('expressionLanguages');
     this._variableResolver = context.injector.get('variableResolver', false);
-
-    this.editLiteralExpressionText = this.editLiteralExpressionText.bind(this);
-    this.onElementsChanged = this.onElementsChanged.bind(this);
-
-    // there is only one single element
-    const { id } = this.getLiteralExpression();
-
-    context.changeSupport.onElementsChanged(id, this.onElementsChanged);
   }
 
   getLiteralExpression() {
-    return getBoxedExpression(this._viewer.getRootElement());
+    return this.props.expression;
   }
 
-  onElementsChanged() {
-    this.forceUpdate();
-  }
-
-  editLiteralExpressionText(text) {
+  editLiteralExpressionText = text => {
     const literalExpression = this.getLiteralExpression();
 
-    this._modeling.updateProperties(literalExpression, { text });
-  }
+    this._literalExpression.setText(literalExpression, text);
+  };
 
   getEditor() {
-    return this.isFeel() ? FeelEditor : Editor;
+    return this.isFeel() ? FeelEditor : TextEditor;
   }
 
   isFeel() {
@@ -67,9 +55,11 @@ export default class LiteralExpressionEditorComponent extends Component {
     const { text } = this.getLiteralExpression();
     const Editor = this.getEditor();
     const variables = this._getVariables();
+    const label = this._translate('Literal expression');
 
     return (
       <Editor
+        label={ label }
         className="textarea editor"
         value={ text }
         onChange={ this.editLiteralExpressionText }
@@ -78,18 +68,11 @@ export default class LiteralExpressionEditorComponent extends Component {
   }
 }
 
-class FeelEditor extends Component {
-  render() {
-    return <LiteralExpression
-      className={ this.props.className }
-      value={ this.props.value }
-      onInput={ this.props.onChange }
-      variables={ this.props.variables }
-    />;
-  }
+function FeelEditor(props) {
+  return <LiteralExpression { ...props } onInput={ props.onChange } />;
 }
 
-class Editor extends EditableComponent {
+class TextEditor extends EditableComponent {
 
   render() {
 
@@ -100,4 +83,19 @@ class Editor extends EditableComponent {
     );
   }
 
+}
+
+const LiteralExpressionEditorComponent = withChangeSupport(
+  _LiteralExpressionEditorComponent, props => [ props.expression ]
+);
+
+export class LiteralExpressionEditorComponentProvider {
+
+  constructor(components) {
+    components.onGetComponent('expression', ({ expression }) => {
+      if (is(expression, 'dmn:LiteralExpression')) {
+        return LiteralExpressionEditorComponent;
+      }
+    });
+  }
 }

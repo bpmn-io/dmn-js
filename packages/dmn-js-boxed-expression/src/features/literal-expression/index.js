@@ -1,6 +1,10 @@
+import {
+  LiteralExpressionComponentProvider
+} from './components/LiteralExpressionComponent';
 import LiteralExpression from './LiteralExpression';
 
 export default {
-  __init__: [ 'textarea' ],
-  textarea: [ 'type', LiteralExpression ]
+  __init__: [ 'literalExpressionComponent' ],
+  literalExpressionComponent: [ 'type', LiteralExpressionComponentProvider ],
+  literalExpression: [ 'type', LiteralExpression ]
 };

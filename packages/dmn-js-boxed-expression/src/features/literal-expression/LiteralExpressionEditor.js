@@ -1,15 +1,14 @@
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import LiteralExpression from './LiteralExpression';
 
-import EditorComponent from './components/LiteralExpressionEditorComponent';
+export default class LiteralExpressionEditor extends LiteralExpression {
+  constructor(modeling) {
+    super();
+    this._modeling = modeling;
+  }
 
-export default class LiteralExpressionEditor {
-  constructor(components) {
-    components.onGetComponent('expression', ({ expression }) => {
-      if (is(expression, 'dmn:LiteralExpression')) {
-        return EditorComponent;
-      }
-    });
+  setText(literalExpression, value) {
+    this._modeling.updateProperties(literalExpression, { text: value });
   }
 }
 
-LiteralExpressionEditor.$inject = [ 'components' ];
+LiteralExpressionEditor.$inject = [ 'modeling' ];
