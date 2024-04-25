@@ -1,22 +1,24 @@
-import { Component } from 'inferno';
-
-import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
-export default class LiteralExpressionComponent extends Component {
-  constructor(props, context) {
-    super(props, context);
+export class LiteralExpressionComponentProvider {
 
-    this._viewer = context.injector.get('viewer');
+  constructor(components) {
+    components.onGetComponent('expression', ({ expression }) => {
+      if (is(expression, 'dmn:LiteralExpression')) {
+        return LiteralExpressionComponent;
+      }
+    });
   }
+}
 
-  render() {
-    const { text } = getBoxedExpression(this._viewer.getRootElement());
+function LiteralExpressionComponent({ expression }, context) {
+  const literalExpression = context.injector.get('literalExpression');
+  const text = literalExpression.getText(expression);
 
-    return (
-      <div className="textarea">
-        <div className="content">{ text }</div>
-      </div>
-    );
-  }
+  return (
+    <div className="textarea">
+      <div className="content">{ text }</div>
+    </div>
+  );
 }
