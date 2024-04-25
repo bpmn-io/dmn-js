@@ -1,5 +1,7 @@
 import TestContainer from 'mocha-test-container-support';
 
+import axe from 'axe-core';
+
 import Editor from '../helper/Editor';
 
 import simpleXML from './empty-literal-expression.dmn';
@@ -33,6 +35,23 @@ describe('Editor', function() {
 
   (singleStart ? it.only : it)('should import business knowledge model', function() {
     return createEditor(bkmXML);
+  });
+
+
+  describe('accessibility', function() {
+
+    it('should report no issues', async function() {
+
+      // given
+      await createEditor(bkmXML);
+
+      // when
+      const results = await axe.run(testContainer);
+
+      // then
+      expect(results.passes).to.be.not.empty;
+      expect(results.violations).to.be.empty;
+    });
   });
 
 });

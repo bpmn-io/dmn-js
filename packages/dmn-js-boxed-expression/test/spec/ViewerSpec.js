@@ -2,6 +2,8 @@
 
 import TestContainer from 'mocha-test-container-support';
 
+import axe from 'axe-core';
+
 import {
   bootstrapViewer,
   inject,
@@ -226,4 +228,19 @@ describe('Viewer', function() {
 
   });
 
+
+  describe('accessibility', function() {
+
+    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+
+    it('should report no issues', async function() {
+
+      // when
+      const results = await axe.run(testContainer);
+
+      // then
+      expect(results.passes).to.be.not.empty;
+      expect(results.violations).to.be.empty;
+    });
+  });
 });
