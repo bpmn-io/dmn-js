@@ -95,9 +95,10 @@ const Parameter = withChangeSupport(_Parameter, props => [ props.parameter ]);
 
 function _Parameter({ parameter }) {
   const { name, typeRef } = parameter;
+  const displayedName = name || '<unnamed>';
 
   return <span>
-    {typeRef ? `${name}: ${typeRef}` : name}
+    {typeRef ? `${displayedName}: ${typeRef}` : displayedName}
   </span>;
 }
 
