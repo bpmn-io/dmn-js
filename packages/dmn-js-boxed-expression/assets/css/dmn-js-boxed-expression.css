@@ -180,6 +180,6 @@
   & .element-variable-name-label, & .element-variable-type-label {
     display: block;
     padding-bottom: 7px;
-    color: var(--color-grey-225-10-55)
+    color: var(--color-grey-225-10-35)
   }
 }
