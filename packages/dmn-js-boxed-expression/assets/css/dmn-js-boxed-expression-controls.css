@@ -31,6 +31,8 @@
 
 /* element-name */
 .dmn-boxed-expression-container .element-name {
+  /* TODO(@barmac): rework focus indicators to use outline instead of border */
+  border: solid 1px transparent;
   width: 24em;
   max-width: 100%;
 }
