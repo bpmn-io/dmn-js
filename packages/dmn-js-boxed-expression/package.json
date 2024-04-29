@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-boxed-expression",
   "description": "A boxed expression view for dmn-js",
-  "version": "15.1.0",
+  "version": "16.1.0",
   "files": [
     "assets",
     "lib"
