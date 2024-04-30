@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is, isFeel } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 import LiteralExpression from 'dmn-js-shared/lib/components/LiteralExpression';
@@ -32,14 +32,9 @@ class _LiteralExpressionEditorComponent extends Component {
   }
 
   isFeel() {
-    return this.getExpressionLanguage() === 'feel';
-  }
-
-  getExpressionLanguage() {
     const businessObject = this.getLiteralExpression();
 
-    return businessObject.expressionLanguage ||
-      this._expressionLanguages.getDefault().value;
+    return isFeel(businessObject);
   }
 
   _getVariables() {
