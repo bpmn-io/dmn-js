@@ -78,3 +78,35 @@ export function getBoxedExpression(decisionOrBkm) {
     return encapsulatedLogic && encapsulatedLogic.get('body');
   }
 }
+
+const FEEL_NAMESPACE = 'https://www.omg.org/spec/DMN/20191111/FEEL/';
+
+/**
+ * Return `true` if the expression language for a given element is FEEL.
+ *
+ * @param {ModdleElement} element
+ * @returns {string}
+ */
+export function isFeel(element) {
+  for (let current = element; current; current = current.$parent) {
+    const expressionLanguage = current.get('expressionLanguage');
+
+    if (expressionLanguage) {
+      if (expressionLanguage === FEEL_NAMESPACE || /feel/i.test(expressionLanguage)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (is(current, 'dmn:FunctionDefinition')) {
+
+      // TODO(@barmac): remove fallback when moddle assures the default value
+      const kind = current.get('kind') || 'FEEL';
+
+      return kind === 'FEEL';
+    }
+  }
+
+  return true;
+}
