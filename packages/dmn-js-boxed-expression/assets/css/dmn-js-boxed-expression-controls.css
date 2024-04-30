@@ -124,3 +124,7 @@
 .dmn-boxed-expression-container .context-menu .function-definition-parameter button {
   border: none;
 }
+
+.dmn-boxed-expression-container .context-menu .formal-parameters .add-parameter {
+  margin-left: 3px;
+}
