@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.2.3
+
+* `FIX`: add `$inject` in DmnFactory to make app work when minified
+
 ## 16.2.2
 
 * `FIX`: add `$inject` to make app work when minified

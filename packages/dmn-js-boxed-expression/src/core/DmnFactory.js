@@ -1,5 +1,5 @@
 export class DmnFactory {
-  $inject = [ 'moddle' ];
+  static $inject = [ 'moddle' ];
 
   constructor(moddle) {
     this._moddle = moddle;
