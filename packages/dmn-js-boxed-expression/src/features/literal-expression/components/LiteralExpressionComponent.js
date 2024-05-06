@@ -2,6 +2,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 export class LiteralExpressionComponentProvider {
+  static $inject = [ 'components' ];
 
   constructor(components) {
     components.onGetComponent('expression', ({ expression }) => {

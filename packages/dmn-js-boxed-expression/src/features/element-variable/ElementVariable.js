@@ -1,5 +1,5 @@
 export default class ElementVariable {
-  $inject = [ 'viewer' ];
+  static $inject = [ 'viewer' ];
 
   constructor(viewer) {
     this._viewer = viewer;

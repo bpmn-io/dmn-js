@@ -85,6 +85,7 @@ const LiteralExpressionEditorComponent = withChangeSupport(
 );
 
 export class LiteralExpressionEditorComponentProvider {
+  static $inject = [ 'components' ];
 
   constructor(components) {
     components.onGetComponent('expression', ({ expression }) => {
