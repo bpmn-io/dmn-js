@@ -10,7 +10,7 @@ insertCSS('dmn-font.css',
 
 insertCSS(
   'dmn-js-shared.css',
-  require('../../dmn-js-shared/assets/css/dmn-js-shared.css')
+  require('dmn-js-shared/assets/css/dmn-js-shared.css')
 );
 insertCSS('dmn-js-drd.css', require('../assets/css/dmn-js-drd.css'));
 

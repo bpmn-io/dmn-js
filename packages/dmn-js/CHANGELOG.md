@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.2.1
+
+* `FIX`: correct imports
+
 ## 16.2.0
 
 * `FEAT`: add support for implementing BKM as literal expression ([#704](https://github.com/bpmn-io/dmn-js/issues/704), [#826](https://github.com/bpmn-io/dmn-js/issues/826))
