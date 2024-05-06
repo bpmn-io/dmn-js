@@ -6,6 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.2.0
+
+* `FEAT`: add support for implementing BKM as literal expression ([#704](https://github.com/bpmn-io/dmn-js/issues/704), [#826](https://github.com/bpmn-io/dmn-js/issues/826))
+* `FEAT`: remove background for DRGElements ([#855](https://github.com/bpmn-io/dmn-js/pull/855))
+* `DEPS`: update to `diagram-js-direct-editing@3.0.1` ([#855](https://github.com/bpmn-io/dmn-js/pull/855))
+* `DEPS`: update to `@bpmn-io/dmn-variable-resolver@0.5.0` ([#853](https://github.com/bpmn-io/dmn-js/issues/853))
+
 ## 16.1.0
 
 * `FEAT`: allow to provide accessible names to form fields ([#843](https://github.com/bpmn-io/dmn-js/pull/843))
