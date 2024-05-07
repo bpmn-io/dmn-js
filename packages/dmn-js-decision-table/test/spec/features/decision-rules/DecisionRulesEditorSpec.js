@@ -1,5 +1,3 @@
-/* global sinon */
-
 import { bootstrapModeler, inject, act } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
@@ -385,30 +383,18 @@ describe('features/decision-rules', function() {
       debounceInput: false
     }));
 
-    // needs to have a nested describe block for the fake timer to work correctly
-    describe('variables', function() {
 
-      beforeEach(function() {
-        this.clock = sinon.useFakeTimers({ shouldClearNativeTimers: true });
-      });
+    it('should pass variables to editor', async function() {
 
-      afterEach(function() {
-        this.clock.restore();
-      });
+      // given
+      let editor = queryEditor('[data-element-id="unaryTest_1"]', testContainer);
+      await changeFocus(editor);
 
+      // when
+      await changeInput(document.activeElement, 'Var');
 
-      it('should pass variables to editor', async function() {
-
-        // given
-        let editor = queryEditor('[data-element-id="unaryTest_1"]', testContainer);
-        editor.focus();
-        await this.clock.runAllAsync();
-
-        // when
-        changeInput(document.activeElement, 'Var');
-        await this.clock.runAllAsync();
-
-        // then
+      // then
+      return expectEventually(() => {
         const options = testContainer.querySelectorAll('[role="option"]');
 
         expect(options).to.exist;
@@ -431,10 +417,25 @@ function isNotDisplayed(element) {
  * @param {HTMLElement} input
  * @param {string} value
  */
-function changeInput(input, value) {
-  return act(() => {
-    input.textContent = value;
-  });
+async function changeInput(input, value) {
+  await act(() => input.textContent = value);
+}
+
+async function changeFocus(editor) {
+  await act(() => editor.focus());
+}
+
+async function expectEventually(fn) {
+  for (let i = 0; i < 20; i++) {
+    try {
+      await fn();
+      return;
+    } catch {
+      await act(() => {});
+    }
+  }
+
+  await fn();
 }
 
 function isFirefox() {

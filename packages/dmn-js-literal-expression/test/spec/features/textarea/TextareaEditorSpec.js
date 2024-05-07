@@ -1,5 +1,3 @@
-/* global sinon */
-
 import { bootstrapModeler, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
@@ -90,33 +88,25 @@ describe('textarea editor', function() {
 
   describe('integration', function() {
 
-    beforeEach(function() {
-      this.clock = sinon.useFakeTimers({ shouldClearNativeTimers: true });
-    });
-
-    afterEach(function() {
-      this.clock.restore();
-    });
-
-
     it('should pass variables to editor', async function() {
 
       // given
       const editor = queryEditor('.textarea', testContainer);
-      editor.focus();
+      await changeFocus(editor);
 
       // when
-      changeInput(document.activeElement, 'Var');
+      await changeInput(document.activeElement, 'Var');
 
       // then
-      await this.clock.runAllAsync();
-      const options = testContainer.querySelectorAll('[role="option"]');
+      return expectEventually(() => {
+        const options = testContainer.querySelectorAll('[role="option"]');
 
-      expect(options).to.exist;
-      expect(options).to.satisfy(options => {
-        const result = Array.from(options).some(
-          option => option.textContent === 'Variable');
-        return result;
+        expect(options).to.exist;
+        expect(options).to.satisfy(options => {
+          const result = Array.from(options).some(
+            option => option.textContent === 'Variable');
+          return result;
+        });
       });
     });
   });
@@ -129,8 +119,12 @@ describe('textarea editor', function() {
  * @param {HTMLElement} input
  * @param {string} value
  */
-function changeInput(input, value) {
-  return act(() => input.textContent = value);
+async function changeInput(input, value) {
+  await act(() => input.textContent = value);
+}
+
+async function changeFocus(editor) {
+  await act(() => editor.focus());
 }
 
 async function act(fn) {
@@ -140,4 +134,17 @@ async function act(fn) {
       resolve();
     });
   });
+}
+
+async function expectEventually(fn) {
+  for (let i = 0; i < 20; i++) {
+    try {
+      await fn();
+      return;
+    } catch {
+      await act(() => {});
+    }
+  }
+
+  await fn();
 }

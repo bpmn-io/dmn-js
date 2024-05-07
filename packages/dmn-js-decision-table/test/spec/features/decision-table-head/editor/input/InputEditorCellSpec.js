@@ -1,5 +1,3 @@
-/* global sinon */
-
 import { bootstrapModeler, inject, act } from 'test/helper';
 
 import {
@@ -191,15 +189,6 @@ describe('decision-table-head/editor - input', function() {
 
     describe('integration', function() {
 
-      beforeEach(function() {
-        this.clock = sinon.useFakeTimers({ shouldClearNativeTimers: true });
-      });
-
-      afterEach(function() {
-        this.clock.restore();
-      });
-
-
       it('should pass variables to editor', async function() {
 
         // given
@@ -207,17 +196,18 @@ describe('decision-table-head/editor - input', function() {
         const input = getControl('.ref-text [role="textbox"]', editorEl);
 
         // when
-        changeInput(input, 'Var');
-        await this.clock.runAllAsync();
+        await changeInput(input, 'Var');
 
         // then
-        const options = testContainer.querySelectorAll('[role="option"]');
+        return expectEventually(() => {
+          const options = testContainer.querySelectorAll('[role="option"]');
 
-        expect(options).to.exist;
-        expect(options).to.satisfy(options => {
-          const result = Array.from(options).some(
-            option => option.textContent === 'Variable');
-          return result;
+          expect(options).to.exist;
+          expect(options).to.satisfy(options => {
+            const result = Array.from(options).some(
+              option => option.textContent === 'Variable');
+            return result;
+          });
         });
       });
     });
@@ -278,8 +268,19 @@ function getControl(selector, parent) {
  * @param {HTMLElement} input
  * @param {string} value
  */
-function changeInput(input, value) {
-  return act(() => {
-    input.textContent = value;
-  });
+async function changeInput(input, value) {
+  await act(() => input.textContent = value);
+}
+
+async function expectEventually(fn) {
+  for (let i = 0; i < 20; i++) {
+    try {
+      await fn();
+      return;
+    } catch {
+      await act(() => {});
+    }
+  }
+
+  await fn();
 }
