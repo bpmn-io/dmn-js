@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "16.2.3",
+  "version": "16.3.0",
   "files": [
     "dist",
     "lib",
@@ -59,10 +59,10 @@
     "rollup-plugin-license": "^3.2.0"
   },
   "dependencies": {
-    "dmn-js-boxed-expression": "^16.2.3",
-    "dmn-js-decision-table": "^16.2.3",
-    "dmn-js-drd": "^16.2.1",
-    "dmn-js-literal-expression": "^16.2.3",
-    "dmn-js-shared": "^16.2.0"
+    "dmn-js-boxed-expression": "^16.3.0",
+    "dmn-js-decision-table": "^16.3.0",
+    "dmn-js-drd": "^16.3.0",
+    "dmn-js-literal-expression": "^16.3.0",
+    "dmn-js-shared": "^16.3.0"
   }
 }
