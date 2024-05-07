@@ -443,9 +443,9 @@ function padEntry(element, name) {
 
 function padEvent(entry) {
 
-  return getDrdJS().invoke(function(overlays) {
+  return getDrdJS().invoke(function(canvas) {
 
-    var target = padEntry(overlays._overlayRoot, entry);
+    var target = padEntry(canvas.getContainer(), entry);
 
     return {
       target: target,
