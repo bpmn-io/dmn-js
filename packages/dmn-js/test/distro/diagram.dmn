@@ -12,7 +12,15 @@
       <requiredDecision href="#guestCount" />
     </authorityRequirement>
   </knowledgeSource>
-  <businessKnowledgeModel id="elMenu" name="El menú" />
+  <businessKnowledgeModel id="elMenu" name="El menú">
+    <variable id="InformationItem_0z8b9g5" name="elMenu" typeRef="string" />
+    <encapsulatedLogic>
+      <formalParameter name="dishes" />
+      <literalExpression>
+        <text>concat([ "steak", "salad" ], dishes)</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
   <decision id="dish-decision" name="Dish Decision">
     <informationRequirement id="InformationRequirement_0xyyqln">
       <requiredDecision href="#season" />

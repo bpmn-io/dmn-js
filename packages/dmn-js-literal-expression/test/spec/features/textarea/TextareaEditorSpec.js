@@ -1,3 +1,5 @@
+/* global sinon */
+
 import { bootstrapModeler, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
@@ -88,28 +90,35 @@ describe('textarea editor', function() {
 
   describe('integration', function() {
 
-    it('should pass variables to editor', inject(async function(viewer) {
+    beforeEach(function() {
+      this.clock = sinon.useFakeTimers({ shouldClearNativeTimers: true });
+    });
+
+    afterEach(function() {
+      this.clock.restore();
+    });
+
+
+    it('should pass variables to editor', async function() {
 
       // given
       const editor = queryEditor('.textarea', testContainer);
-
-      await act(() => editor.focus());
+      editor.focus();
 
       // when
-      await changeInput(document.activeElement, 'Var');
+      changeInput(document.activeElement, 'Var');
 
       // then
-      await expectEventually(() => {
-        const options = testContainer.querySelectorAll('[role="option"]');
+      await this.clock.runAllAsync();
+      const options = testContainer.querySelectorAll('[role="option"]');
 
-        expect(options).to.exist;
-        expect(options).to.satisfy(options => {
-          const result = Array.from(options).some(
-            option => option.textContent === 'Variable');
-          return result;
-        });
+      expect(options).to.exist;
+      expect(options).to.satisfy(options => {
+        const result = Array.from(options).some(
+          option => option.textContent === 'Variable');
+        return result;
       });
-    }));
+    });
   });
 
 });
@@ -131,19 +140,4 @@ async function act(fn) {
       resolve();
     });
   });
-}
-
-async function expectEventually(fn) {
-  for (let i = 0; i < 10; i++) {
-    try {
-      await act(() => {});
-      await fn();
-      return;
-    } catch (e) {
-
-      // wait
-    }
-  }
-
-  return fn();
 }
