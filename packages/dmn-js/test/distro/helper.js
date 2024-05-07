@@ -1,47 +1,54 @@
 
-function testImport(DmnJS, done) {
+async function testImport(DmnJS) {
+  const diagram = await get('/base/test/distro/diagram.dmn');
+  const container = createContainer();
+  const modeler = createModeler(DmnJS, container);
 
-  var container = document.createElement('div');
+  await importDiagram(modeler, diagram);
+
+  return modeler;
+}
+
+async function testAllViews(DmnJS) {
+  const modeler = await testImport(DmnJS);
+
+  const views = modeler.getViews();
+
+  for (const view of views) {
+    await modeler.open(view);
+  }
+}
+
+async function get(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('status = ' + response.status);
+  }
+
+  const text = await response.text();
+
+  return text;
+}
+
+function createContainer() {
+  const container = document.createElement('div');
   container.style.height = '500px';
   container.style.border = 'solid 1px #666';
 
   document.body.appendChild(container);
 
-  get('/base/test/distro/diagram.dmn', function(err, text) {
-
-    if (err) {
-      return done(err);
-    }
-
-    var modeler = new DmnJS({ container: container });
-
-    modeler.importXML(text, function(err, warnings) {
-      return done(err, warnings, modeler);
-    });
-  });
-
+  return container;
 }
 
-function get(url, done) {
-  var httpRequest = new XMLHttpRequest();
+function createModeler(DmnJS, container) {
+  return new DmnJS({
+    container: container
+  });
+}
 
-  if (!httpRequest) {
-    return done(new Error('cannot create XMLHttpRequest'));
-  }
-
-  httpRequest.onreadystatechange = checkDone;
-  httpRequest.open('GET', url);
-  httpRequest.send();
-
-  function checkDone() {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        return done(null, httpRequest.responseText);
-      } else {
-        return done(new Error('status = ' + httpRequest.status), null, httpRequest);
-      }
-    }
-  }
+function importDiagram(modeler, diagram) {
+  return modeler.importXML(diagram);
 }
 
 window.testImport = testImport;
+window.testAllViews = testAllViews;

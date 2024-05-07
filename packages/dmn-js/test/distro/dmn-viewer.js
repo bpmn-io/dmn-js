@@ -2,7 +2,7 @@ describe('dmn-viewer', function() {
 
   it('should expose globals', function() {
 
-    var DmnJS = window.DmnJS;
+    const DmnJS = window.DmnJS;
 
     // then
     expect(DmnJS).to.exist;
@@ -10,13 +10,22 @@ describe('dmn-viewer', function() {
   });
 
 
-  it('should import initial diagram', function(done) {
+  it('should import initial diagram', async function() {
 
-    var DmnJS = window.DmnJS;
+    const DmnJS = window.DmnJS;
 
     // then
     /* global testImport */
-    testImport(DmnJS, done);
+    await testImport(DmnJS);
   });
 
+
+  it('should open each view', async function() {
+
+    const DmnJS = window.DmnJS;
+
+    // then
+    /* global testAllViews */
+    await testAllViews(DmnJS);
+  });
 });
