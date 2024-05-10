@@ -2,6 +2,8 @@
 
 import TestContainerSupport from 'mocha-test-container-support';
 
+import { fireEvent, waitFor } from '@testing-library/dom';
+
 import { Component, render } from 'inferno';
 
 import {
@@ -265,6 +267,65 @@ describe('components/LiteralExpression', function() {
       expect(onInput).to.have.been.calledWith('BLUB');
     });
 
+
+    it('should dispatch onChange when content and focus changed', async function() {
+
+      // given
+      const onChange = sinon.spy();
+      const onInput = sinon.spy();
+      const node = renderToNode(
+        <LiteralExpression onChange={ onChange } onInput={ onInput } value={ 'FOO' } />);
+      const editor = getEditor(node);
+      fireEvent.focus(editor);
+
+      // when
+      changeInput(editor, 'BLUB');
+      await waitFor(() => {
+        expect(onInput).to.have.been.called;
+      });
+
+      // assume
+      expect(onChange).not.to.have.been.called;
+      fireEvent.focusOut(node);
+
+      // then
+      await waitFor(() => {
+        expect(innerText(editor)).to.eql('BLUB');
+        expect(onChange).to.have.been.calledWith('BLUB');
+      });
+    });
+
+
+    it('should NOT dispatch onChange when content is unchanged', async function() {
+
+      // given
+      const onChange = sinon.spy();
+      const onInput = sinon.spy();
+      const node = renderToNode(
+        <LiteralExpression onChange={ onChange } onInput={ onInput } value={ 'FOO' } />);
+      const editor = getEditor(node);
+      fireEvent.focus(editor);
+
+      // when
+      changeInput(editor, 'BLUB');
+      await waitFor(() => {
+        expect(onInput).to.have.been.called;
+      });
+      changeInput(editor, 'FOO');
+      await waitFor(() => {
+        expect(onInput).to.have.been.called;
+      });
+
+      // assume
+      expect(onChange).not.to.have.been.called;
+      fireEvent.focusOut(node);
+
+      // then
+      await waitFor(() => {
+        expect(innerText(editor)).to.eql('FOO');
+        expect(onChange).not.to.have.been.called;
+      });
+    });
   });
 
 
@@ -453,11 +514,7 @@ function getEditor(node) {
  * @param {string} value
  */
 function changeInput(input, value) {
-  input.textContent = value;
-
-  return new Promise(resolve => {
-    requestAnimationFrame(() => {
-      resolve();
-    });
-  });
+  fireEvent.change(input, { target: {
+    textContent: value
+  } });
 }

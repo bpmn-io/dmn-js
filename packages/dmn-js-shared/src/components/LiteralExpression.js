@@ -20,6 +20,7 @@ import FeelEditor from '@bpmn-io/feel-editor';
  *         className="some classes"
  *         value={ this.state.text }
  *         onInput={ this.handleInput }
+ *         onChange={ this.handleChange }
  *         onFocus={ ... }
  *         onBlur={ ... } />
  *     );
@@ -133,6 +134,18 @@ export default class LiteralExpression extends Component {
     }
   };
 
+  handleBlur = () => {
+    const { onBlur, onChange } = this.props;
+
+    if (onChange && this.state.value !== this.props.value) {
+      onChange(this.state.value);
+    }
+
+    if (onBlur) {
+      onBlur();
+    }
+  };
+
   setNode = node => {
     this.node = node;
   };
@@ -144,7 +157,7 @@ export default class LiteralExpression extends Component {
         ref={ this.setNode }
         onClick={ this.handleMouseEvent }
         onFocusIn={ this.props.onFocus }
-        onFocusOut={ this.props.onBlur }
+        onFocusOut={ this.handleBlur }
       />
     );
   }
