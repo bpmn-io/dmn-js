@@ -31,6 +31,7 @@ import selectionUpdate from 'selection-update';
  *         className="some classes"
  *         value={ this.state.text }
  *         onInput={ this.handleInput }
+ *         onChange={ this.handleChange }
  *         onFocus={ ... }
  *         onBlur={ ... } />
  *     );
@@ -119,14 +120,26 @@ export default class ContentEditable extends Component {
   };
 
   onBlur = event => {
-    var propsBlur = this.props.onBlur;
+    const {
+      onBlur,
+      onChange,
+      value
+    } = this.props;
 
     this.setState({
       focussed: false
     });
 
-    if (typeof propsBlur === 'function') {
-      propsBlur(event);
+    if (typeof onChange === 'function' && this.node) {
+      const currentValue = innerText(this.node);
+
+      if (currentValue !== value) {
+        onChange(currentValue);
+      }
+    }
+
+    if (typeof onBlur === 'function') {
+      onBlur(event);
     }
   };
 
