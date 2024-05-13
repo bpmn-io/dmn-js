@@ -5,16 +5,36 @@ export default class Input extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      value: props.value
+    };
   }
 
   onInput = (event) => {
     const { onInput } = this.props;
 
-    if (typeof onInput !== 'function') {
+    const value = event.target.value;
+
+    this.setState({
+      value
+    }, () => {
+      if (typeof onInput !== 'function') {
+        return;
+      }
+
+      onInput(value);
+    });
+  };
+
+  onChange = (event) => {
+    const { onChange } = this.props;
+
+    if (typeof onChange !== 'function') {
       return;
     }
 
-    onInput(event.target.value);
+    onChange(event.target.value);
   };
 
   onKeyDown = (event) => {
@@ -37,21 +57,33 @@ export default class Input extends Component {
     onKeyUp(event);
   };
 
+  componentDidUpdate(prevProps) {
+    const { value } = this.props;
+
+    if (value !== prevProps.value && value !== this.state.value) {
+      this.setState({
+        value
+      });
+    }
+  }
+
   render() {
     const {
       className,
       label,
       id,
       placeholder,
-      type,
-      value
+      type
     } = this.props;
+
+    const { value } = this.state;
 
     return (
       <input
         aria-label={ label }
         className={ [ className || '', 'dms-input' ].join(' ') }
         placeholder={ placeholder || '' }
+        onChange={ this.onChange }
         onInput={ this.onInput }
         onKeyDown={ this.onKeyDown }
         onKeyUp={ this.onKeyUp }
