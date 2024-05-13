@@ -12,7 +12,7 @@ import FunctionDefinitionEditorModule from './features/function-definition/edito
 import ElementPropertiesModule from './features/element-properties/editor';
 import CoreModule from './core';
 import ElementVariableModule from './features/element-variable/editor';
-
+import EditorActionsModule from './features/editor-actions';
 
 export class Editor extends Viewer {
   getModules() {
@@ -20,6 +20,7 @@ export class Editor extends Viewer {
       ...super.getModules(),
       CoreModule,
       ModelingModule,
+      EditorActionsModule,
       ElementPropertiesModule,
       FunctionDefinitionEditorModule,
       ExpressionLanguagesModule,
