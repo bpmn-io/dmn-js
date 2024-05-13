@@ -228,6 +228,46 @@ describe('components/ContentEditable', function() {
       expect(onInput).to.have.been.calledWith('BLUB');
     });
 
+
+    it('should dispatch onChange when content and focus changed', function() {
+
+      // given
+      const onChange = sinon.spy();
+      const node = renderToNode(<ContentEditable onChange={ onChange } value={ 'F' } />);
+      node.focus();
+
+      // when
+      triggerInputEvent(node, 'BLUB');
+
+      // assume
+      expect(onChange).not.to.have.been.called;
+      node.blur();
+
+      // then
+      expect(innerText(node)).to.eql('BLUB');
+      expect(onChange).to.have.been.calledWith('BLUB');
+    });
+
+
+    it('should NOT dispatch onChange when content is unchanged', function() {
+
+      // given
+      const onChange = sinon.spy();
+      const node = renderToNode(<ContentEditable onChange={ onChange } value={ 'F' } />);
+      node.focus();
+
+      // when
+      triggerInputEvent(node, 'BLUB');
+      triggerInputEvent(node, 'F');
+
+      // assume
+      expect(onChange).not.to.have.been.called;
+      node.blur();
+
+      // then
+      expect(innerText(node)).to.eql('F');
+      expect(onChange).not.to.have.been.called;
+    });
   });
 
 
