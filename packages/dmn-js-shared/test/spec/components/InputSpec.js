@@ -4,6 +4,8 @@ import TestContainerSupport from 'mocha-test-container-support';
 
 import { render } from 'inferno';
 
+import { fireEvent, waitFor } from '@testing-library/dom';
+
 import {
   findRenderedDOMElementWithClass
 } from 'inferno-test-utils';
@@ -115,6 +117,26 @@ describe('components/Input', function() {
   });
 
 
+  it('should notify on change', function() {
+
+    // given
+    const spy = sinon.spy();
+
+    const renderedTree = renderIntoDocument(
+      <Input
+        onChange={ spy } />
+    );
+
+    const input = findRenderedDOMElementWithClass(renderedTree, 'dms-input');
+
+    // when
+    fireEvent.change(input, { target: { value: 'foo' } });
+
+    // then
+    expect(spy).to.have.been.called;
+  });
+
+
   it('should pass id', function() {
 
     // given
@@ -132,4 +154,25 @@ describe('components/Input', function() {
     expect(input).to.exist;
   });
 
+
+  it('should rerender on external change', function() {
+
+    // given
+    renderIntoDocument(
+      <Input
+        value="initial" />
+    );
+
+    // when
+    const tree = renderIntoDocument(
+      <Input
+        value="newValue" />);
+
+    // then
+    return waitFor(() => {
+      const input = findRenderedDOMElementWithClass(tree, 'dms-input');
+
+      expect(input).to.have.property('value', 'newValue');
+    });
+  });
 });
