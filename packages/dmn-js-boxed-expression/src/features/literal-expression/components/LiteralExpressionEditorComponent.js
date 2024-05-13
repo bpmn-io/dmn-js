@@ -64,7 +64,7 @@ class _LiteralExpressionEditorComponent extends Component {
 }
 
 function FeelEditor(props) {
-  return <LiteralExpression { ...props } onInput={ props.onChange } />;
+  return <LiteralExpression { ...props } onChange={ props.onChange } />;
 }
 
 class TextEditor extends EditableComponent {

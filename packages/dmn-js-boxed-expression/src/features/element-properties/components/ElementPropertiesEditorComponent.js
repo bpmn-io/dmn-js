@@ -8,7 +8,7 @@ const ElementName = withChangeSupport(function(props, context) {
   const translate = context.injector.get('translate');
 
   const name = element.get('name');
-  const onInput = name => {
+  const onChange = name => {
     modeling.updateProperties(element, { name });
   };
 
@@ -16,7 +16,7 @@ const ElementName = withChangeSupport(function(props, context) {
     label={ translate('Element name') }
     className="element-name editor"
     value={ name }
-    onInput={ onInput }
+    onChange={ onChange }
   />;
 }, props => [ props.element ]);
 
