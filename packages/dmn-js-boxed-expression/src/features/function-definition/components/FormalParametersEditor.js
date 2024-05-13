@@ -96,7 +96,7 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
   return (
     <tr className="function-definition-parameter">
       <td>
-        <Input onInput={ onNameChange } value={ name } />
+        <Input onChange={ onNameChange } value={ name } />
       </td>
       <td>
         <InputSelect
