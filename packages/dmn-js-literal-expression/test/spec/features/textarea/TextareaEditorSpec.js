@@ -12,6 +12,8 @@ import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import TestContainer from 'mocha-test-container-support';
 
+import { waitFor } from '@testing-library/dom';
+
 import literalExpressionXML from '../../literal-expression.dmn';
 
 import CoreModule from 'src/core';
@@ -98,7 +100,7 @@ describe('textarea editor', function() {
       await changeInput(document.activeElement, 'Var');
 
       // then
-      return expectEventually(() => {
+      return waitFor(() => {
         const options = testContainer.querySelectorAll('[role="option"]');
 
         expect(options).to.exist;
@@ -134,17 +136,4 @@ async function act(fn) {
       resolve();
     });
   });
-}
-
-async function expectEventually(fn) {
-  for (let i = 0; i < 20; i++) {
-    try {
-      await fn();
-      return;
-    } catch {
-      await act(() => {});
-    }
-  }
-
-  await fn();
 }
