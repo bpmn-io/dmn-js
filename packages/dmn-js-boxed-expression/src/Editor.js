@@ -13,6 +13,7 @@ import ElementPropertiesModule from './features/element-properties/editor';
 import CoreModule from './core';
 import ElementVariableModule from './features/element-variable/editor';
 import EditorActionsModule from './features/editor-actions';
+import ContextEditorModule from './features/context/editor';
 
 export class Editor extends Viewer {
   getModules() {
@@ -28,7 +29,8 @@ export class Editor extends Viewer {
       KeyboardModule,
       DataTypesModule,
       ElementVariableModule,
-      DmnVariableResolverModule
+      DmnVariableResolverModule,
+      ContextEditorModule
     ];
   }
 }
