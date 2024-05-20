@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="dish" name="Desired Dish" namespace="party" exporter="Camunda Modeler" exporterVersion="5.11.0">
+  <decision id="contextWithResult" name="Context with result">
+    <variable name="Context with result" typeRef="string" />
+    <context>
+      <contextEntry>
+        <variable name="basic" />
+        <literalExpression>
+          <text>context</text>
+        </literalExpression>
+      </contextEntry>
+      <contextEntry>
+        <literalExpression>
+          <text>Result entry</text>
+        </literalExpression>
+      </contextEntry>
+    </context>
+  </decision>
+  <decision id="context" name="Context">
+    <variable name="Context" typeRef="string" />
+    <context>
+      <contextEntry>
+        <variable name="basic" />
+        <literalExpression>
+          <text>context</text>
+        </literalExpression>
+      </contextEntry>
+      <contextEntry>
+        <variable name="with" />
+        <literalExpression>
+          <text>two entries</text>
+        </literalExpression>
+      </contextEntry>
+    </context>
+  </decision>  
+  <decision id="nestedContext" name="Nested context">
+    <variable name="Nested context" typeRef="string" />
+    <context>
+      <contextEntry>
+        <variable name="base" />
+        <context>
+          <contextEntry>
+            <variable name="nested" />
+            <literalExpression>
+              <text>base &gt; nested</text>
+            </literalExpression>
+          </contextEntry>
+        </context>
+      </contextEntry>
+    </context>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="contextWithResult">
+        <dc:Bounds height="55" width="100" x="150" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="context">
+        <dc:Bounds height="55" width="100" x="150" y="180" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="nestedContext">
+        <dc:Bounds height="55" width="100" x="150" y="280" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
