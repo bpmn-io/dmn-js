@@ -16,6 +16,7 @@ import { domify } from 'min-dom';
 
 import simpleXML from './literal-expression.dmn';
 import bkmXML from './bkm-literal-expression.dmn';
+import contextXML from './context.dmn';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
@@ -49,6 +50,11 @@ describe('Viewer', function() {
 
   (singleStart ? it.only : it)('should import business knowledge model', function() {
     return createViewer(bkmXML);
+  });
+
+
+  it('should open context', function() {
+    return createViewer(contextXML);
   });
 
 

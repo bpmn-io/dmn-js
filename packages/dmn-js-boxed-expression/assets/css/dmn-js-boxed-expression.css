@@ -183,3 +183,25 @@
     color: var(--color-grey-225-10-35)
   }
 }
+
+/* context */
+
+.dmn-boxed-expression-container .context-entry {
+  display: grid;
+  grid-template-columns: min-content auto;
+
+  & + .context-entry {
+    border-top: 1px solid var(--element-properties-border-color);
+  }
+
+  & > .textarea {
+    min-height: unset;
+  }
+
+  & .context-entry-key {
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    border-right: 1px solid var(--element-properties-border-color);
+  }
+}

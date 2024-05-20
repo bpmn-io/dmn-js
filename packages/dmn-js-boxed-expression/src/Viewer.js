@@ -19,6 +19,7 @@ import ViewDrdModule from './features/view-drd';
 import ElementPropertiesModule from './features/element-properties';
 import ElementLogicModule from './features/element-logic';
 import ElementVariableModule from './features/element-variable';
+import ContextModule from './features/context';
 
 /**
  * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
@@ -228,7 +229,8 @@ export class Viewer extends BaseViewer {
       ElementLogicModule,
       FunctionDefinitionEditorModule,
       LiteralExpressionModule,
-      ElementVariableModule
+      ElementVariableModule,
+      ContextModule
     ];
   }
 
