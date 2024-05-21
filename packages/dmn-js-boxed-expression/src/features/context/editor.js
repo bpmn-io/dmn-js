@@ -1,5 +1,5 @@
 import { ContextEditor } from './ContextEditor';
-import { ContextComponentProvider } from './components/ContextComponent';
+import { ContextEditorComponentProvider } from './components/ContextEditorComponent';
 
 import ModelingModule from '../modeling';
 
@@ -9,5 +9,5 @@ export default {
     ModelingModule
   ],
   context: [ 'type', ContextEditor ],
-  contextComponent: [ 'type', ContextComponentProvider ]
+  contextComponent: [ 'type', ContextEditorComponentProvider ]
 };

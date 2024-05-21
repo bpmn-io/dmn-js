@@ -6,6 +6,7 @@ import Editor from '../helper/Editor';
 
 import simpleXML from './empty-literal-expression.dmn';
 import bkmXML from './bkm-literal-expression.dmn';
+import contextXML from './context.dmn';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'editor';
@@ -35,6 +36,11 @@ describe('Editor', function() {
 
   (singleStart ? it.only : it)('should import business knowledge model', function() {
     return createEditor(bkmXML);
+  });
+
+
+  it.only('should import context', function() {
+    return createEditor(contextXML);
   });
 
 
