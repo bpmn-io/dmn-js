@@ -21,10 +21,10 @@ export default class CreateInputsHeaderCell extends Component {
         className="input-cell create-inputs header actionable"
         onClick={ this.onClick }
         title={ this.translate('Add input') }>
-        { this.translate('Input') } <span
+        { this.translate('Input') } <button
           className="add-input dmn-icon-plus action-icon"
           title={ this.translate('Add input') }
-        ></span>
+        />
       </th>
     );
   }
