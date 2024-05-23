@@ -32,10 +32,10 @@ export default class AddRuleFootComponent extends Component {
 
     const cells = [
       <td className="add-rule-add">
-        <span
+        <button
           className="dmn-icon-plus action-icon"
           title={ this.translate('Add rule') }>
-        </span>
+        </button>
       </td>
     ];
 

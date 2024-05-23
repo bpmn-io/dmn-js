@@ -1,5 +1,6 @@
 .dmn-decision-table-container {
   --action-icon-color: var(--color-blue-205-100-50);
+  --action-icon-background-color: transparent;
   --action-icon-hover-background-color: var(--color-blue-205-100-45);
   --action-icon-hover-color: var(--color-white);
   --add-column-icon-color: var(--color-white);
@@ -363,9 +364,12 @@
 /* actionable icon */
 
 .dmn-decision-table-container .action-icon {
+  border: none;
   border-radius: 2px;
   box-shadow: 0 0 0 2px var(--decision-table-background-color);
   color: var(--action-icon-color);
+  background-color: var(--action-icon-background-color);
+  padding: 0;
 }
 
 .dmn-decision-table-container .create-inputs .action-icon,
