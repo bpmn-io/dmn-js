@@ -380,6 +380,7 @@
   border-radius: 50%;
   color: var(--add-column-icon-color);
   background-color: var(--add-column-icon-background-color);
+  outline-offset: 4px;
 }
 
 .dmn-decision-table-container .actionable:hover .action-icon {
