@@ -1,8 +1,8 @@
+/* global sinon */
+
 import { bootstrapModeler, inject } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
-
-import { DmnVariableResolverModule } from '@bpmn-io/dmn-variable-resolver';
 
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
@@ -11,8 +11,6 @@ import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-lan
 import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
 import TestContainer from 'mocha-test-container-support';
-
-import { waitFor } from '@testing-library/dom';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 
@@ -25,13 +23,21 @@ import ModelingModule from 'src/features/modeling';
 
 describe('textarea editor', function() {
 
+  const variableResolver = {
+    getVariables: () => [
+      { name: 'Variable', typeRef: 'string' }
+    ]
+  };
+
   beforeEach(bootstrapModeler(literalExpressionXML, {
     modules: [
       CoreModule,
       TextareaEditorModule,
       ModelingModule,
       ExpressionLanguagesModule,
-      DmnVariableResolverModule
+      {
+        variableResolver: [ 'value', variableResolver ]
+      }
     ],
     debounceInput: false
   }));
@@ -90,9 +96,15 @@ describe('textarea editor', function() {
 
   describe('integration', function() {
 
+    afterEach(function() {
+      sinon.restore();
+    });
+
+
     it('should pass variables to editor', async function() {
 
       // given
+      const getVariablesSpy = sinon.spy(variableResolver, 'getVariables');
       const editor = queryEditor('.textarea', testContainer);
       await changeFocus(editor);
 
@@ -100,16 +112,7 @@ describe('textarea editor', function() {
       await changeInput(document.activeElement, 'Var');
 
       // then
-      return waitFor(() => {
-        const options = testContainer.querySelectorAll('[role="option"]');
-
-        expect(options).to.exist;
-        expect(options).to.satisfy(options => {
-          const result = Array.from(options).some(
-            option => option.textContent === 'Variable');
-          return result;
-        });
-      });
+      expect(getVariablesSpy).to.have.been.called;
     });
   });
 
