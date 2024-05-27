@@ -6,6 +6,14 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.4.0
+
+* `FEAT`: autocomplete BKMs as snippets ([#785](https://github.com/bpmn-io/dmn-js/issues/785), [#827](https://github.com/bpmn-io/dmn-js/issues/827))
+* `FEAT`: make inputs commit on blur, and let browser handle undo/redo ([#859](https://github.com/bpmn-io/dmn-js/issues/859))
+* `FIX`: show FEEL expressions with line wrapping ([#838](https://github.com/bpmn-io/dmn-js/issues/838))
+* `FIX`: make add column buttons keyboard-accessible ([#847](https://github.com/bpmn-io/dmn-js/issues/847))
+* `FIX`: make add row button keyboard-accessible ([#846](https://github.com/bpmn-io/dmn-js/issues/846))
+
 ## 16.3.2
 
 * `DEPS`: update to `diagram-js@14.5.4`
