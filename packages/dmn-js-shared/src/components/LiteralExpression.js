@@ -2,6 +2,8 @@ import { Component } from 'inferno';
 
 import FeelEditor from '@bpmn-io/feel-editor';
 
+import { EditorView } from '@codemirror/view';
+
 /**
  * A drop-in replacement for ContentEditable which uses FEEL editor under the hood.
  * It does not support placeholder.
@@ -52,6 +54,9 @@ export default class LiteralExpression extends Component {
       onChange: this.handleChange,
       value: this.state.value,
       variables: this.props.variables || [],
+      extensions: [
+        EditorView.lineWrapping
+      ]
     });
 
     this.node.addEventListener('mousedown', this.handleMouseEvent);
