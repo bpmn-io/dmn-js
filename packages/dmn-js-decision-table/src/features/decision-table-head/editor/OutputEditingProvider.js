@@ -5,6 +5,7 @@ import {
 
 import OutputCell from './components/OutputCell';
 import OutputCellContextMenu from './components/OutputCellContextMenu';
+import { OutputEditButton } from './components/OutputEditButton';
 
 
 export default class OutputEditingProvider {
@@ -22,6 +23,16 @@ export default class OutputEditingProvider {
         context.contextMenuType === 'output-edit'
       ) {
         return OutputCellContextMenu;
+      }
+    });
+
+    components.onGetComponent('cell-inner', (context = {}) => {
+      const { cellType } = context;
+
+      if (
+        cellType === 'output-cell'
+      ) {
+        return OutputEditButton;
       }
     });
 

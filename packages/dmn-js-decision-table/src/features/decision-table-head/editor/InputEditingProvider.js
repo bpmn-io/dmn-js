@@ -4,6 +4,7 @@ import {
 
 import InputCell from './components/InputCell';
 import InputCellContextMenu from './components/InputCellContextMenu';
+import { InputEditButton } from './components/InputEditButton';
 
 
 export default class InputCellProvider {
@@ -21,6 +22,16 @@ export default class InputCellProvider {
         context.contextMenuType === 'input-edit'
       ) {
         return InputCellContextMenu;
+      }
+    });
+
+    components.onGetComponent('cell-inner', (context = {}) => {
+      const { cellType } = context;
+
+      if (
+        cellType === 'input-cell'
+      ) {
+        return InputEditButton;
       }
     });
 

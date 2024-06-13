@@ -15,6 +15,11 @@
   --drag-and-drop-handle-hover-color: var(--color-grey-225-10-15);
   --form-control-label-color: var(--color-grey-225-10-15);
   --hint-color: var(--color-grey-225-10-15);
+  --edit-button-color: var(--color-grey-225-10-15);
+  --edit-button-background-color: var(--color-grey-225-10-97);
+  --edit-button-border-color: var(--color-grey-225-10-75);
+  --edit-button-box-shadow-color: var(--color-black-opacity-10);
+  --edit-button-disabled-color: var(--color-grey-225-10-75);
 }
 
 /* simple string edit */
@@ -263,4 +268,28 @@
 
 .dmn-decision-table-container .cell-editor .feel-editor.focussed > :nth-child(2) {
   display: none;
+}
+
+/* edit-button */
+
+.dmn-decision-table-container .edit-button {
+  color: var(--edit-button-color);
+  background-color: var(--edit-button-background-color);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  padding: 4px;
+  border-radius: 2px;
+  border: solid 1px var(--edit-button-border-color);
+  font-size: var(--font-size);
+  box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);
+}
+
+.dmn-decision-table-container :not(:focus-within) .edit-button {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
