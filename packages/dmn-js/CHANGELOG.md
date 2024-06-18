@@ -6,6 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.5.0
+
+* `FEAT`: add edit input/output button ([#845](https://github.com/bpmn-io/dmn-js/issues/845))
+* `DEPS`: update to `diagram-js@14.7.1`
+* `DEPS`: update to `tiny-svg@3.1.2`
+* `DEPS`: update to `min-dom@4.2.1`
+
 ## 16.4.0
 
 * `FEAT`: autocomplete BKMs as snippets ([#785](https://github.com/bpmn-io/dmn-js/issues/785), [#827](https://github.com/bpmn-io/dmn-js/issues/827))
