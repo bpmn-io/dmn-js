@@ -5,6 +5,7 @@ import BaseModeling from 'diagram-js/lib/features/modeling/Modeling';
 import IdClaimHandler from './cmd/IdClaimHandler.js';
 import UpdateLabelHandler from '../label-editing/cmd/UpdateLabelHandler.js';
 import UpdatePropertiesHandler from './cmd/UpdatePropertiesHandler.js';
+import UpdateModdlePropertiesHandler from './cmd/UpdateModdlePropertiesHandler.js';
 
 
 /**
@@ -60,6 +61,7 @@ Modeling.prototype.getHandlers = function() {
   handlers['id.updateClaim'] = IdClaimHandler;
   handlers['element.updateLabel'] = UpdateLabelHandler;
   handlers['element.updateProperties'] = UpdatePropertiesHandler;
+  handlers['element.updateModdleProperties'] = UpdateModdlePropertiesHandler;
 
   return handlers;
 };
@@ -68,6 +70,14 @@ Modeling.prototype.unclaimId = function(id, moddleElement) {
   this._commandStack.execute('id.updateClaim', {
     id: id,
     element: moddleElement
+  });
+};
+
+Modeling.prototype.updateModdleProperties = function(element, moddleElement, properties) {
+  this._commandStack.execute('element.updateModdleProperties', {
+    element: element,
+    moddleElement: moddleElement,
+    properties: properties
   });
 };
 
