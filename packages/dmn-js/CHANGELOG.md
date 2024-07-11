@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.6.0
+
+* `FEAT`: add `Modeling#updateModdleProperties` ([#886](https://github.com/bpmn-io/dmn-js/pull/886))
+
 ## 16.5.0
 
 * `FEAT`: add edit input/output button ([#845](https://github.com/bpmn-io/dmn-js/issues/845))
