@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.6.1
+
+* `FIX`: make it work in web components ([#631](https://github.com/bpmn-io/dmn-js/issues/631))
+* `DEPS`: update to `inferno@5.6.3`
+
 ## 16.6.0
 
 * `FEAT`: add `Modeling#updateModdleProperties` ([#886](https://github.com/bpmn-io/dmn-js/pull/886))
