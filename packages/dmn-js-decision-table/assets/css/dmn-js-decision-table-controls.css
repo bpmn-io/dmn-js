@@ -256,7 +256,7 @@
 }
 
 /* cell editor */
-.dmn-decision-table-container .cell-editor:focus-within .dmn-expression-language {
+.dmn-decision-table-container .cell-editor:focus-visible .dmn-expression-language {
   display: none;
 }
 
@@ -285,7 +285,7 @@
   box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);
 }
 
-.dmn-decision-table-container :not(:focus-within) .edit-button {
+.dmn-decision-table-container :not(:focus-visible) .edit-button {
   clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
