@@ -256,7 +256,7 @@
 }
 
 /* cell editor */
-.dmn-decision-table-container .cell-editor:focus-visible .dmn-expression-language {
+.dmn-decision-table-container .cell-editor:focus-within .dmn-expression-language {
   display: none;
 }
 
