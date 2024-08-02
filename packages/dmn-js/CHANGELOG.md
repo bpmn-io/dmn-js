@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.6.2
+
+* `FIX`: edit button does not flash when adding new column ([#890](https://github.com/bpmn-io/dmn-js/pull/890))
+
 ## 16.6.1
 
 * `FIX`: make it work in web components ([#631](https://github.com/bpmn-io/dmn-js/issues/631))
