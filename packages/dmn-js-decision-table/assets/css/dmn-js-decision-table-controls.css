@@ -293,3 +293,9 @@
   white-space: nowrap;
   width: 1px;
 }
+
+/* context menu */
+
+.dmn-decision-table-container .context-menu-group-entry.focused {
+  background-color: var(--color-grey-225-10-95);
+}

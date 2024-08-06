@@ -47,18 +47,14 @@ export default class ContextMenu {
             </div>
           );
 
-          return () => (
-            <div className="context-menu-flex">
-              { (entries || []).concat(cellEntriesGroup) }
-            </div>
-          );
-        } else {
-          return () => (
-            <div className="context-menu-flex">
-              { entries || [] }
-            </div>
-          );
+          entries.push(cellEntriesGroup);
         }
+
+        return () => (
+          <div className="context-menu-flex" tabIndex={ -1 }>
+            { entries || [] }
+          </div>
+        );
       }
     });
 
