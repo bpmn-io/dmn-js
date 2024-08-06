@@ -296,6 +296,6 @@
 
 /* context menu */
 
-.context-menu-group-entry.focused {
+.dmn-decision-table-container .context-menu-group-entry.focused {
   background-color: var(--color-grey-225-10-95);
 }
