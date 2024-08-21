@@ -1,5 +1,8 @@
 import { query, queryAll, classes } from 'min-dom';
 
+/**
+ * Context menu keyboard navigation.
+ */
 export default class ContextMenuKeyboard {
 
   constructor(eventBus) {
@@ -35,6 +38,9 @@ export default class ContextMenuKeyboard {
     }
   };
 
+  /**
+   * When mouse moves over the context menu, it takes over navigation from keyboard.
+   */
   handleMouseOver = () => {
     const entries = this.getEntries();
     entries.forEach(entry => resetHoverStyle(entry));
@@ -43,12 +49,22 @@ export default class ContextMenuKeyboard {
     focused && classes(focused).remove('focused');
   };
 
+  /**
+   * Get all context menu entries that aren't disabled.
+   * @returns {HTMLElement[]}
+   */
   getEntries = () => {
     return Array.from(
       queryAll('.context-menu-group-entry')
     ).filter(entry => !classes(entry).has('disabled'));
   };
 
+  /**
+   * Get hovered with mouse, focused with keyboard
+   * and currently active context menu entries.
+   * @param {HTMLElement} container - Context menu container.
+   * @returns {Object}
+   */
   getActiveEntries = (container) => {
     const hover = query('.context-menu-group-entry:hover', container);
     const focused = query('.context-menu-group-entry.focused', container);
@@ -61,6 +77,11 @@ export default class ContextMenuKeyboard {
     };
   };
 
+  /**
+   * Move focus to the next or previous menu entry.
+   * @param {HTMLElement} menu - Context menu container.
+   * @param {Number} direction - 1 for moving down, -1 for moving up.
+   */
   move = (menu, direction) => {
     const entries = this.getEntries();
     const { current, hover } = this.getActiveEntries(menu);
@@ -72,9 +93,15 @@ export default class ContextMenuKeyboard {
     }
 
     const index = entries.indexOf(current) + direction;
-    if (index >= entries.length || index < 0) return;
+    let next = entries[index];
 
-    const next = entries[index];
+    if (index < 0) {
+      next = entries[entries.length - 1];
+    }
+
+    if (index >= entries.length) {
+      next = entries[0];
+    }
 
     hover && disableHoverStyle(hover);
     classes(current).remove('focused');

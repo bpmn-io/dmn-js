@@ -78,11 +78,27 @@ describe('context menu keyboard', function() {
   it('should select previous entry on arrow up', inject(function() {
 
     // given
-    const currentFocused = entries[1];
+    const currentFocused = entries[5];
     classes(currentFocused).add('focused');
 
     // when
     triggerKeyEvent(testContainer, 'keydown', { key: 'ArrowUp' });
+
+    // then
+    const focusedEntry = query('.context-menu-group-entry.focused', testContainer);
+    expect(entries.indexOf(focusedEntry))
+      .to.be.lessThan(entries.indexOf(currentFocused));
+  }));
+
+
+  it('should select first entry after last entry', inject(function() {
+
+    // given
+    const currentFocused = entries[entries.length - 1];
+    classes(currentFocused).add('focused');
+
+    // when
+    triggerKeyEvent(testContainer, 'keydown', { key: 'ArrowDown' });
 
     // then
     const focusedEntry = query('.context-menu-group-entry.focused', testContainer);
