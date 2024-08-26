@@ -4,8 +4,10 @@ import {
   forEach
 } from 'min-dash';
 
-var NAME = 'name',
-    ID = 'id';
+import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
+
+const NAME = 'name',
+      ID = 'id';
 
 
 /**
@@ -37,22 +39,21 @@ UpdatePropertiesHandler.$inject = [ 'elementRegistry', 'moddle' ];
  */
 UpdatePropertiesHandler.prototype.execute = function(context) {
 
-  var element = context.element,
-      changed = [ element ];
+  const { element, properties } = context,
+        changed = [ element ];
 
   if (!element) {
     throw new Error('element required');
   }
 
-  var elementRegistry = this._elementRegistry,
-      ids = this._moddle.ids;
+  const elementRegistry = this._elementRegistry,
+        ids = this._moddle.ids;
 
-  var businessObject = element.businessObject,
-      properties = context.properties,
-      oldProperties = (
-        context.oldProperties ||
+  const businessObject = getBusinessObject(element),
+        oldProperties = (
+          context.oldProperties ||
         getProperties(businessObject, keys(properties))
-      );
+        );
 
   if (isIdChange(properties, businessObject)) {
     ids.unclaim(businessObject[ID]);
@@ -86,13 +87,10 @@ UpdatePropertiesHandler.prototype.execute = function(context) {
  * @return {djs.model.Base} the updated element
  */
 UpdatePropertiesHandler.prototype.revert = function(context) {
-
-  var element = context.element,
-      properties = context.properties,
-      oldProperties = context.oldProperties,
-      businessObject = element.businessObject,
-      elementRegistry = this._elementRegistry,
-      ids = this._moddle.ids;
+  const { element, properties, oldProperties } = context;
+  const businessObject = getBusinessObject(element);
+  const elementRegistry = this._elementRegistry,
+        ids = this._moddle.ids;
 
   // update properties
   setProperties(businessObject, oldProperties);

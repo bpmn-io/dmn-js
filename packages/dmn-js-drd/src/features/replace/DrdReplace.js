@@ -59,8 +59,11 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
     }
 
     if (target.expression) {
+
+      // variable set to element name
       var literalExpression = drdFactory.create('dmn:LiteralExpression'),
-          variable = drdFactory.create('dmn:InformationItem');
+          variable = drdFactory.create('dmn:InformationItem',
+            { name: oldBusinessObject.name });
 
       setBoxedExpression(newBusinessObject, literalExpression, drdFactory, variable);
     }
