@@ -6,6 +6,9 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: lint first item access ([feel-lint#25](https://github.com/bpmn-io/feel-lint/issues/25)
+* `DEPS`: update to `@bpmn-io/feel-editor@1.7.0`
+
 ## 16.6.2
 
 * `FIX`: edit button does not flash when adding new column ([#890](https://github.com/bpmn-io/dmn-js/pull/890))
