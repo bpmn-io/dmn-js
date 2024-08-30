@@ -34,7 +34,7 @@ export default class ContextMenuKeyboard {
 
     else if (event.key === 'Enter') {
       event.preventDefault();
-      this.open();
+      this.clickCurrentEntry();
     }
   };
 
@@ -111,7 +111,7 @@ export default class ContextMenuKeyboard {
     next.style.removeProperty('background-color');
   };
 
-  open = () => {
+  clickCurrentEntry = () => {
     const { current } = this.getActiveEntries(document);
     if (current) current.click();
   };
