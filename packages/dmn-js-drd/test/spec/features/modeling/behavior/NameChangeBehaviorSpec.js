@@ -17,21 +17,57 @@ describe('NameChangeBehavior', function() {
       ],
     }));
 
+    describe('should update variable name when label is changed', function() {
 
-    it('should update variable name when label is changed', inject(
-      function(modeling, elementRegistry) {
+
+      it('<do>', inject(
+        function(modeling, elementRegistry) {
+
+          // given
+          const decision = elementRegistry.get('season'),
+                bo = decision.businessObject,
+                variable = bo.variable;
+
+          // when
+          modeling.updateLabel(decision,'foo');
+
+          // then
+          expect(variable.get('name')).to.equal('foo');
+        }
+      ));
+
+
+      it('<undo>', inject(function(modeling, elementRegistry, commandStack) {
 
         // given
         const decision = elementRegistry.get('season'),
               bo = decision.businessObject,
               variable = bo.variable;
+        modeling.updateLabel(decision,'foo');
 
         // when
+        commandStack.undo();
+
+        // then
+        expect(variable.get('name')).to.equal('season');
+      }));
+
+
+      it('<redo>', inject(function(modeling, elementRegistry, commandStack) {
+
+        // given
+        const decision = elementRegistry.get('season'),
+              bo = decision.businessObject,
+              variable = bo.variable;
         modeling.updateLabel(decision,'foo');
+
+        // when
+        commandStack.undo();
+        commandStack.redo();
 
         // then
         expect(variable.get('name')).to.equal('foo');
-      }
-    ));
+      }));
+    });
   });
 });

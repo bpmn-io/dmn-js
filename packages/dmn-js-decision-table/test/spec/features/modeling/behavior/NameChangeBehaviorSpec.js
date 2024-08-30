@@ -6,7 +6,7 @@ import CoreModule from 'src/core';
 import Modeling from 'src/features/modeling';
 
 
-describe('NameChangeBehavior', function() {
+describe('features/modeling/behavior - NameChangeBehavior', function() {
 
   describe('with existing variable', function() {
 
@@ -17,24 +17,70 @@ describe('NameChangeBehavior', function() {
       ],
     }));
 
+    describe('should update variable name when element name is changed', function() {
 
-    it('should update variable name when element name is changed', inject(
-      function(modeling, sheet) {
 
-        // given
-        const root = sheet.getRoot(),
-              decisionTable = root.businessObject;
+      it('<do>', inject(
+        function(modeling, sheet) {
 
-        const decision = decisionTable.$parent;
+          // given
+          const root = sheet.getRoot(),
+                decisionTable = root.businessObject;
 
-        // when
-        modeling.editDecisionTableName('foo');
+          const decision = decisionTable.$parent;
 
-        // then
-        const variable = decision.get('variable');
+          // when
+          modeling.editDecisionTableName('foo');
 
-        expect(variable.get('name')).to.equal('foo');
-      }
-    ));
+          // then
+          const variable = decision.get('variable');
+
+          expect(variable.get('name')).to.equal('foo');
+        }
+      ));
+
+
+      it('<undo>', inject(
+        function(modeling, sheet, commandStack) {
+
+          // given
+          const root = sheet.getRoot(),
+                decisionTable = root.businessObject;
+
+          const decision = decisionTable.$parent;
+          modeling.editDecisionTableName('foo');
+
+          // when
+          commandStack.undo();
+
+          // then
+          const variable = decision.get('variable');
+
+          expect(variable.get('name')).to.equal('Season');
+        }
+      ));
+
+
+      it('<redo>', inject(
+        function(modeling, sheet, commandStack) {
+
+          // given
+          const root = sheet.getRoot(),
+                decisionTable = root.businessObject;
+
+          const decision = decisionTable.$parent;
+          modeling.editDecisionTableName('foo');
+
+          // when
+          commandStack.undo();
+          commandStack.redo();
+
+          // then
+          const variable = decision.get('variable');
+
+          expect(variable.get('name')).to.equal('foo');
+        }
+      ));
+    });
   });
 });
