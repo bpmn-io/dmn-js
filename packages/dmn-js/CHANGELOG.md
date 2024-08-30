@@ -6,7 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
-* `FEAT`: lint first item access ([feel-lint#25](https://github.com/bpmn-io/feel-lint/issues/25)
+## 16.7.0
+
+* `FEAT`: lint first item access ([feel-lint#25](https://github.com/bpmn-io/feel-lint/issues/25))
+* `FEAT`: decision table context menu keyboard navigation ([#848](https://github.com/bpmn-io/dmn-js/issues/848))
 * `DEPS`: update to `@bpmn-io/feel-editor@1.7.0`
 
 ## 16.6.2
