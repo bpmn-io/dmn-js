@@ -12,7 +12,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
     this._viewer = context.injector.get('viewer');
     this._modeling = context.injector.get('modeling');
     this._dataTypes = context.injector.get('dataTypes');
-
+    this._eventBus = context.injector.get('eventBus');
     const decision = this._viewer.getDecision();
 
     this.state = {
@@ -31,6 +31,23 @@ export default class LiteralExpressionPropertiesComponent extends Component {
       name
     });
   }
+
+  componentWillMount() {
+    this._eventBus.on('elements.changed', this.onChange);
+  }
+
+  componentWillUnmount() {
+    this._eventBus.off('elements.changed', this.onChange);
+  }
+
+  onChange = () => {
+    const decision = this._viewer.getDecision();
+    if (decision.variable) {
+      this.setState({
+        name: decision.variable.name
+      });
+    }
+  };
 
   setVariableType(typeRef) {
     if (typeRef === '') {
