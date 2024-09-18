@@ -8,6 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 16.7.1
 
+* `FIX`: make literal expression focus hitbox larger ([camunda/camunda-modeler#4342](https://github.com/camunda/camunda-modeler/issues/4342))
 * `DEPS`: update to `@bpmn-io/feel-editor@1.8.0`
 
 ## 16.7.0
