@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: support Camunda 8 FEEL built-ins
+* `FIX`: improve validation of `first-item` FEEL rule
+* `DEPS`: update to `@bpmn-io/feel-editor@1.9.0`
+
 ## 16.7.1
 
 * `FIX`: make literal expression focus hitbox larger ([camunda/camunda-modeler#4342](https://github.com/camunda/camunda-modeler/issues/4342))
