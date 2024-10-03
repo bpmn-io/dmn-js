@@ -9,6 +9,7 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: support Camunda 8 FEEL built-ins
 * `FIX`: improve validation of `first-item` FEEL rule
 * `DEPS`: update to `@bpmn-io/feel-editor@1.9.0`
+* `FIX`: variable name changes when element name\label changes ([#893](https://github.com/bpmn-io/dmn-js/pull/893))
 
 ## 16.7.1
 
