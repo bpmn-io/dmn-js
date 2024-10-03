@@ -115,6 +115,15 @@ export default class Modeling {
 
     this._commandStack.execute('element.updateProperties', context);
   }
+
+  updateProperties(el, props) {
+    const context = {
+      element: el,
+      properties: props
+    };
+
+    this._commandStack.execute('element.updateProperties', context);
+  }
 }
 
 Modeling.$inject = [ 'commandStack', 'viewer', 'eventBus' ];
