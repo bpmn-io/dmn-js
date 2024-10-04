@@ -6,10 +6,13 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.8.0
+
 * `FEAT`: support Camunda 8 FEEL built-ins
+* `FIX`: display parameterless functions suggestion correctly ([#898](https://github.com/bpmn-io/dmn-js/issues/898))
 * `FIX`: improve validation of `first-item` FEEL rule
-* `DEPS`: update to `@bpmn-io/feel-editor@1.9.0`
-* `FIX`: variable name changes when element name\label changes ([#893](https://github.com/bpmn-io/dmn-js/pull/893))
+* `FIX`: variable name changes when element name\label changes ([#863](https://github.com/bpmn-io/dmn-js/issues/863))
+* `DEPS`: update to `@bpmn-io/feel-editor@1.9.1`
 
 ## 16.7.1
 
