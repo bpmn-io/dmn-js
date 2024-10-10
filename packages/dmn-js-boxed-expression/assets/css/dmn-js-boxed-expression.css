@@ -104,6 +104,7 @@
 }
 
 .dmn-boxed-expression-container .textarea.editor {
+  height: 100%;
   cursor: text;
 }
 
