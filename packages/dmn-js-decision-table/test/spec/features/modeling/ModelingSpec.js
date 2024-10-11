@@ -153,7 +153,7 @@ describe('Modeling', function() {
       }));
 
 
-      it('should undo', inject(function(modeling, commandStack) {
+      it('should redo', inject(function(modeling, commandStack) {
 
         // given
         var col = modeling.addCol({ type: 'dmn:OutputClause' }, 3);
@@ -250,7 +250,7 @@ describe('Modeling', function() {
       }));
 
 
-      it('should undo', inject(function(modeling, sheet, commandStack) {
+      it('should redo', inject(function(modeling, sheet, commandStack) {
 
         // given
         var table = sheet.getRoot();
@@ -301,7 +301,7 @@ describe('Modeling', function() {
       }));
 
 
-      it('should undo', inject(function(modeling, sheet, commandStack) {
+      it('should redo', inject(function(modeling, sheet, commandStack) {
 
         // given
         var table = sheet.getRoot();
@@ -356,7 +356,7 @@ describe('Modeling', function() {
       }));
 
 
-      it('should undo', inject(function(modeling, sheet, commandStack) {
+      it('should redo', inject(function(modeling, sheet, commandStack) {
 
         // given
         var table = sheet.getRoot();
@@ -407,7 +407,7 @@ describe('Modeling', function() {
       }));
 
 
-      it('should undo', inject(function(modeling, sheet, commandStack) {
+      it('should redo', inject(function(modeling, sheet, commandStack) {
 
         // given
         var table = sheet.getRoot();
