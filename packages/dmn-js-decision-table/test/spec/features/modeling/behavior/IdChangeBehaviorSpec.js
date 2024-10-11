@@ -15,7 +15,7 @@ describe('IdChangeBehavior', function() {
   }));
 
 
-  it('should update IDs on decision ID change', inject(function(modeling, sheet) {
+  it('should requirements refs on decision ID change', inject(function(modeling, sheet) {
 
     // given
     const root = sheet.getRoot(),
@@ -48,7 +48,7 @@ describe('IdChangeBehavior', function() {
   }));
 
 
-  it('should update IDs on decision ID change', inject(function(modeling, sheet) {
+  it('should association refs on decision ID change', inject(function(modeling, sheet) {
 
     // given
     const root = sheet.getRoot(),

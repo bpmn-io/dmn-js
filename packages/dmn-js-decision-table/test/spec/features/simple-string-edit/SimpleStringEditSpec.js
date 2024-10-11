@@ -169,7 +169,7 @@ describe('simple string edit', function() {
     }));
 
 
-    it('should override invalid custom value', inject(function(elementRegistry) {
+    it('should override invalid custom value (negate)', inject(function(elementRegistry) {
 
       // given
       const inputEntry3 = elementRegistry.get('inputEntry3');
