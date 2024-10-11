@@ -96,7 +96,7 @@ describe('simple date edit - utils', function() {
       date: '2000-01-01'
     }));
 
-    // eslint-disable-next-line
+     
     it('between', expectParsed('[date("2000-01-01")..date("2000-01-02")]', {
       type: 'between',
       dates: [ '2000-01-01', '2000-01-02' ]

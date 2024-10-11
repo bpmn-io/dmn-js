@@ -344,7 +344,7 @@ export default class InputSelect extends Component {
               <div
                 aria-label={ inputLabel }
                 className="dms-input"
-                tabindex="0"
+                tabIndex="0"
                 onKeyDown={ this.onKeyDown }
                 ref={ node => this.inputNode = node }
               >{ label }</div>
@@ -354,7 +354,7 @@ export default class InputSelect extends Component {
                 className="dms-input"
                 onInput={ this.onInput }
                 onKeyDown={ this.onKeyDown }
-                spellcheck="false"
+                spellCheck="false"
                 ref={ node => this.inputNode = node }
                 type="text"
                 value={ value }

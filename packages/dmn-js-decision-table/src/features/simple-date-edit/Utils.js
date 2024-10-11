@@ -1,9 +1,9 @@
 const ISO_DATE_REGEX = /^\d{4}(?:-\d\d){2}$/;
 
-// eslint-disable-next-line
+
 const BETWEEN_DATE_REGEX = /^\[date\("([^"]*)"\)..date\("([^"]*)"\)\]$/;
 
-// eslint-disable-next-line
+
 const BEFORE_AFTER_DATE_REGEX = /^(<|>)\s*date\("([^"]*)"\)$/;
 
 const EXACT_DATE_REGEX = /^date\("([^"]*)"\)$/;
