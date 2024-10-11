@@ -124,7 +124,7 @@ describe('simple time edit - utils', function() {
       time: '08:00:00Z'
     }));
 
-    // eslint-disable-next-line
+     
     it('between', expectParsed('[time("08:00:00Z")..time("08:00:00Z")]', {
       type: 'between',
       times: [ '08:00:00Z', '08:00:00Z' ]

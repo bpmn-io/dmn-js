@@ -31,9 +31,9 @@ const CUSTOM_OPTIONS = [ {
 
 describe('ExpressionLanguages', function() {
 
-  describe('defaults', () => {
+  describe('defaults', function() {
 
-    it('should set default editor expression language to FEEL', () => {
+    it('should set default editor expression language to FEEL', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages();
@@ -49,7 +49,7 @@ describe('ExpressionLanguages', function() {
     });
 
 
-    it('should set default input cell expression language to FEEL', () => {
+    it('should set default input cell expression language to FEEL', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages();
@@ -65,7 +65,7 @@ describe('ExpressionLanguages', function() {
     });
 
 
-    it('should use user provided defaults', () => {
+    it('should use user provided defaults', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages({
@@ -94,7 +94,7 @@ describe('ExpressionLanguages', function() {
     });
 
 
-    it('should support legacy defaults', () => {
+    it('should support legacy defaults', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages({
@@ -122,9 +122,9 @@ describe('ExpressionLanguages', function() {
   });
 
 
-  describe('options', () => {
+  describe('options', function() {
 
-    it('should correctly set default options', () => {
+    it('should correctly set default options', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages();
@@ -137,7 +137,7 @@ describe('ExpressionLanguages', function() {
     });
 
 
-    it('should use provided options', () => {
+    it('should use provided options', function() {
 
       // given
       const expressionLanguages = createExpressionLanguages({

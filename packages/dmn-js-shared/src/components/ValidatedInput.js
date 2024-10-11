@@ -1,6 +1,6 @@
 import { Component } from 'inferno';
 
-// eslint-disable-next-line
+
 import Input from './Input';
 
 /**

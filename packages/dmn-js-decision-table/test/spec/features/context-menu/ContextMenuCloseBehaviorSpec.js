@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+ 
 import Inferno from 'inferno';
 
 import { bootstrapModeler, inject } from 'test/helper';
