@@ -18,7 +18,7 @@ const DEFAULT_DATA_TYPES = [
 
 describe('DataTypes', function() {
 
-  it('should set default data types', () => {
+  it('should set default data types', function() {
 
     // given
     const dataTypes = createDataTypes();
@@ -31,7 +31,7 @@ describe('DataTypes', function() {
   });
 
 
-  it('should read data types from config', () => {
+  it('should read data types from config', function() {
 
     // given
     const dataTypes = createDataTypes({

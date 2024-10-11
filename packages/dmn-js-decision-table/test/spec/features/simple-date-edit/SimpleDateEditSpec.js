@@ -155,7 +155,7 @@ describe('simple date edit', function() {
       // then
       expect(inputEntry7.businessObject.text).to
 
-        // eslint-disable-next-line
+         
         .equal('[date("2018-01-25")..date("2000-01-01")]');
     }));
 
@@ -175,7 +175,7 @@ describe('simple date edit', function() {
       // then
       expect(inputEntry7.businessObject.text).to
 
-        // eslint-disable-next-line
+         
         .equal('[date("2018-01-25")..date("foo")]');
     }));
 
@@ -195,7 +195,7 @@ describe('simple date edit', function() {
       // then
       expect(inputEntry7.businessObject.text).to
 
-        // eslint-disable-next-line
+         
         .equal(`[date("2018-01-25")..date("${ getSampleDate() }")]`);
     }));
   });

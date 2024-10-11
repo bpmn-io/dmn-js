@@ -593,7 +593,7 @@ describe('Manager', function() {
     });
 
 
-    it('should emit <import.done> when diagram clear fails', async () => {
+    it('should emit <import.done> when diagram clear fails', async function() {
 
       // given
       class ClearErrorView extends TestView {

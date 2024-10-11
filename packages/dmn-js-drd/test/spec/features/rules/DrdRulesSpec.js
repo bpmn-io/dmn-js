@@ -232,7 +232,7 @@ describe('features/rules', function() {
   });
 
 
-  describe('move', function() {
+  describe('move decision', function() {
 
     it('decision -> definitions', inject(
       function(drdRules, elementRegistry) {

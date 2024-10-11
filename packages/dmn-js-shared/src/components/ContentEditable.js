@@ -240,14 +240,14 @@ export default class ContentEditable extends Component {
         tabIndex="0"
         className={ this.getClassName() }
         contentEditable="true"
-        spellcheck="false"
+        spellCheck="false"
         data-placeholder={ placeholder || '' }
         onInput={ this.onInput }
-        onKeypress={ this.onKeypress }
+        onKeyPress={ this.onKeypress }
         onPaste={ this.onPaste }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
-        onKeydown={ this.onKeydown }
+        onKeyDown={ this.onKeydown }
         ref={ node => this.node = node }
         dangerouslySetInnerHTML={ { __html: value } }></div>
     );

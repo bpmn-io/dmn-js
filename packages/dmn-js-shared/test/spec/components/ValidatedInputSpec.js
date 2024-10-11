@@ -10,7 +10,7 @@ import {
 
 import { triggerInputEvent } from 'test/util/EventUtil';
 
-// eslint-disable-next-line
+ 
 import ValidatedInput from 'src/components/ValidatedInput';
 
 

@@ -373,7 +373,7 @@ describe('components/InputSelect', function() {
           });
 
 
-          it('should hide options on ENTER', function() {
+          it('should hide options on ESCAPE', function() {
 
             // given
             const renderedTree = renderIntoDocument(

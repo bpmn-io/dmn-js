@@ -177,7 +177,7 @@ describe('DescriptorUtil', function() {
     }));
 
 
-    it('should create Row descriptor', inject(function(elementRegistry) {
+    it('should create Col descriptor', inject(function(elementRegistry) {
 
       // given
       const col = elementRegistry.get('input1');
