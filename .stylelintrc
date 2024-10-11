@@ -4,6 +4,7 @@
     "hue-degree-notation": "number"
   },
   "ignoreFiles": [
+    "**/coverage/**/*.css",
     "**/dist/**/*.css"
   ]
 }
