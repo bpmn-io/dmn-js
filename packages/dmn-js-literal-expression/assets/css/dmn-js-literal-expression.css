@@ -126,16 +126,16 @@
   color: var(--literal-expression-properties-color);
 }
 
-.dmn-literal-expression-container .literal-expression-properties table {
+.dmn-literal-expression-container .literal-expression-properties .variables-table {
   border-spacing: 8px;
   border-collapse: separate;
 }
 
-.dmn-literal-expression-container .literal-expression-properties table tr td:first-child {
+.dmn-literal-expression-container .literal-expression-properties .variables-table tr td:first-child {
   font-weight: bold;
 }
 
-.dmn-literal-expression-container .literal-expression-properties table tr td:last-child {
+.dmn-literal-expression-container .literal-expression-properties .variables-table tr td:last-child {
   min-width: 100px;
 }
 

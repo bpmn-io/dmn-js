@@ -77,7 +77,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     return (
       <div className="literal-expression-properties">
-        <table>
+        <table className="variables-table">
           <tr>
             <td>{ this._translate('Variable name:') }</td>
             <td>
