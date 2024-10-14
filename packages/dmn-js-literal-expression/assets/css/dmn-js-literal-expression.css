@@ -128,6 +128,7 @@
 
 .dmn-literal-expression-container .literal-expression-properties table {
   border-spacing: 8px;
+  border-collapse: separate;
 }
 
 .dmn-literal-expression-container .literal-expression-properties table tr td:first-child {
