@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
-    "diagram-js": "^14.7.1",
+    "diagram-js": "^15.0.0-alpha-keyboard",
     "dmn-js-shared": "^16.8.0",
     "inferno": "~5.6.3",
     "min-dash": "^4.0.0",
