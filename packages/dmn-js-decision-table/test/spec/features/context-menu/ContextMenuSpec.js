@@ -1,6 +1,3 @@
- 
-import Inferno from 'inferno';
-
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {

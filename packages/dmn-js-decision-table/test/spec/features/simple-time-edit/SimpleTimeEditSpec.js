@@ -155,7 +155,7 @@ describe('simple time edit', function() {
       // then
       expect(inputEntry7.businessObject.text).to
 
-         
+
         .equal('[time("08:00:00Z")..time("18:00:00Z")]');
     }));
 
@@ -175,7 +175,7 @@ describe('simple time edit', function() {
       // then
       expect(inputEntry7.businessObject.text).to
 
-         
+
         .equal('[time("08:00:00Z")..time("foo")]');
     }));
 
@@ -195,7 +195,7 @@ describe('simple time edit', function() {
       // then
       expect(inputEntry7.businessObject.text).to
 
-         
+
         .equal(`[time("08:00:00Z")..time("${ getSampleTime() }")]`);
     }));
   });
