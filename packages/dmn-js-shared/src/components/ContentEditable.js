@@ -143,7 +143,7 @@ export default class ContentEditable extends Component {
     }
   };
 
-  onKeydown = (event) => {
+  onkeydown = (event) => {
 
     // enter
     if (event.which === 13) {
@@ -182,7 +182,7 @@ export default class ContentEditable extends Component {
   };
 
   // TODO(barmac): remove once we drop IE 11 support
-  onKeyPress = (event) => {
+  onkeypress = (event) => {
     if (this.onInputIEPolyfill) {
       this.onInputIEPolyfill(event);
     }
@@ -243,11 +243,11 @@ export default class ContentEditable extends Component {
         spellCheck="false"
         data-placeholder={ placeholder || '' }
         onInput={ this.onInput }
-        onKeyPress={ this.onKeypress }
+        onkeypress={ this.onkeypress }
         onPaste={ this.onPaste }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
-        onKeyDown={ this.onKeydown }
+        onkeydown={ this.onkeydown }
         ref={ node => this.node = node }
         dangerouslySetInnerHTML={ { __html: value } }></div>
     );
