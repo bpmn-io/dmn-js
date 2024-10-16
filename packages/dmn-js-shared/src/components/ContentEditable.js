@@ -243,11 +243,11 @@ export default class ContentEditable extends Component {
         spellCheck="false"
         data-placeholder={ placeholder || '' }
         onInput={ this.onInput }
-        onkeypress={ this.onkeypress }
+        onkeypress={ this.onkeypress } // intentionally lowercase to use native event
         onPaste={ this.onPaste }
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }
-        onkeydown={ this.onkeydown }
+        onkeydown={ this.onkeydown } // intentionally lowercase to use native event
         ref={ node => this.node = node }
         dangerouslySetInnerHTML={ { __html: value } }></div>
     );
