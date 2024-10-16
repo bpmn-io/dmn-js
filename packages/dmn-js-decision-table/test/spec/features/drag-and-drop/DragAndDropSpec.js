@@ -1,6 +1,3 @@
- 
-import Inferno from 'inferno';
-
 /* global sinon */
 
 import { bootstrapModeler, inject } from 'test/helper';

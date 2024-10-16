@@ -14,7 +14,7 @@
     "build": "lerna run build --parallel --stream",
     "lerna-publish": "lerna publish -m \"chore(project): publish %s\"",
     "lint": "run-s lint:*",
-    "lint:js": "eslint packages",
+    "lint:js": "eslint .",
     "lint:style": "stylelint \"packages/**/*.css\"",
     "reinstall": "npm ci",
     "release": "run-s distro test \"lerna-publish -- {@}\" --",

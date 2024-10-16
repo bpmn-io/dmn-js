@@ -30,6 +30,7 @@ describe('DecisionTable', function() {
 
   let dmnJS;
 
+  // eslint-disable-next-line no-constant-binary-expression
   false && afterEach(function() {
     if (dmnJS) {
       dmnJS.destroy();
