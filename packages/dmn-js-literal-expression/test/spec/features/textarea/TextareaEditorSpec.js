@@ -2,6 +2,8 @@
 
 import { bootstrapModeler, inject } from 'test/helper';
 
+import { waitFor } from '@testing-library/dom';
+
 import { query as domQuery } from 'min-dom';
 
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
@@ -101,19 +103,19 @@ describe('textarea editor', function() {
     });
 
 
-    it('should pass variables to editor', async function() {
+    it('should pass variables to editor', inject(async function(modeling) {
 
       // given
       const getVariablesSpy = sinon.spy(variableResolver, 'getVariables');
-      const editor = queryEditor('.textarea', testContainer);
-      await changeFocus(editor);
 
       // when
-      await changeInput(document.activeElement, 'Var');
+      modeling.editLiteralExpressionText('Var');
 
       // then
-      expect(getVariablesSpy).to.have.been.called;
-    });
+      await waitFor(() => {
+        expect(getVariablesSpy).to.have.been.called;
+      });
+    }));
   });
 
 });
@@ -126,10 +128,6 @@ describe('textarea editor', function() {
  */
 async function changeInput(input, value) {
   await act(() => input.textContent = value);
-}
-
-async function changeFocus(editor) {
-  await act(() => editor.focus());
 }
 
 async function act(fn) {
