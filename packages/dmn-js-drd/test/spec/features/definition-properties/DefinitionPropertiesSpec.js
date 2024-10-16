@@ -3,6 +3,8 @@ import {
   query as domQuery
 } from 'min-dom';
 
+import { waitFor } from '@testing-library/dom';
+
 import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
@@ -309,8 +311,8 @@ describe('features/definition-properties', function() {
       ));
 
 
-      skipFF()('should clear error message on blur', inject(
-        function(definitionPropertiesEdit, definitionPropertiesView) {
+      it('should clear error message on blur', inject(
+        async function(definitionPropertiesEdit, definitionPropertiesView) {
 
           // given
           var idContainer = domQuery(
@@ -326,13 +328,15 @@ describe('features/definition-properties', function() {
           idContainer.blur();
 
           // then
-          var errorMessage = domQuery(
-            '.dmn-definitions-error-message',
-            definitionPropertiesView._container
-          );
+          await waitFor(() => {
+            var errorMessage = domQuery(
+              '.dmn-definitions-error-message',
+              definitionPropertiesView._container
+            );
 
-          expect(errorMessage).not.to.exist;
-          expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.false;
+            expect(errorMessage).not.to.exist;
+            expect(domClasses(idContainer).has('dmn-definitions-error')).to.be.false;
+          });
         }
       ));
 
@@ -341,13 +345,3 @@ describe('features/definition-properties', function() {
   });
 
 });
-
-// helpers //////////////////
-
-function isFirefox() {
-  return /Firefox/.test(window.navigator.userAgent);
-}
-
-function skipFF() {
-  return isFirefox() ? it.only : it;
-}
