@@ -16,7 +16,8 @@ const files = {
   ],
   ignored: [
     '**/lib',
-    '**/dist'
+    '**/dist',
+    '**/coverage'
   ]
 };
 
