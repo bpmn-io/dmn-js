@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 16.8.1
+
+* `FIX`: make literal expression editor hitbox bigger in BKM ([camunda/camunda-modeler#4545](https://github.com/camunda/camunda-modeler/issues/4545))
+* `FIX`: make literal expression variables table styles explicit ([camunda/camunda-modeler#4550](https://github.com/camunda/camunda-modeler/issues/4550))
+
 ## 16.8.0
 
 * `FEAT`: support Camunda 8 FEEL built-ins
