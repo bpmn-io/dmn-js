@@ -20,6 +20,7 @@ const FunctionDefinitionEditorComponent = withChangeSupport(
   props => [ props.expression ]
 );
 
+
 function _FunctionDefinitionEditorComponent({ expression }, context) {
   const functionDefinition = context.injector.get('functionDefinition');
   const contextMenu = context.injector.get('contextMenu');
@@ -50,7 +51,7 @@ function _FunctionDefinitionEditorComponent({ expression }, context) {
         parameters={ parameters }
         openEditor={ openFormalParametersEditor }
       />
-      <BodyExpression expression={ body } />
+      <BodyExpression expression={ body } parameters={ parameters } />
     </div>
   );
 }
@@ -102,14 +103,18 @@ function _Parameter({ parameter }) {
   </span>;
 }
 
-function BodyExpression({ expression }, context) {
+const BodyExpression = withChangeSupport(_BodyExpression, props => props.parameters);
+
+function _BodyExpression({ expression, parameters }, context) {
   const Expression = context.components.getComponent('expression', {
     expression
   });
 
+  console.log('parameters BodyExpression: ', parameters);
+
   return (
     <div className="function-definition-body">
-      <Expression expression={ expression } />
+      <Expression expression={ expression } parameters={ parameters } />
     </div>
   );
 }
