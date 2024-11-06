@@ -25,12 +25,7 @@ describe('DecisionTable', function() {
 
   function createDecisionTableEditor(xml) {
     dmnJS = new DmnDecisionTableEditor({
-      container: testContainer,
-      decisionTable: {
-        keyboard: {
-          bindTo: document
-        }
-      }
+      container: testContainer
     });
 
     return dmnJS.importXML(xml);

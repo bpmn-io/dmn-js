@@ -132,11 +132,6 @@ describe('tabs', function() {
       container: $container,
       height: 500,
       width: '100%',
-      common: {
-        keyboard: {
-          bindTo: document
-        }
-      },
       ...(testTranslate && translateModules)
     });
 
