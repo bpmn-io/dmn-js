@@ -6,6 +6,14 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `diagram-js@15.2.0`
+* `DEPS`: update to `diagram-js-direct-editing@3.2.0`
+* `DEPS`: update to `table-js@9.2.0`
+
+### Breaking Changes
+
+* Keyboard (DRD) is now implicit, and canvas is focusable, cf. [bpmn-io/diagram-js#662](https://github.com/bpmn-io/diagram-js/pull/662))
+
 ## 16.8.1
 
 * `FIX`: make literal expression editor hitbox bigger in BKM ([camunda/camunda-modeler#4545](https://github.com/camunda/camunda-modeler/issues/4545))
