@@ -6,7 +6,7 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
-### 17.0.0
+## 17.0.0
 
 * `DEPS`: update to `diagram-js@15.2.0`
 * `DEPS`: update to `diagram-js-direct-editing@3.2.0`
