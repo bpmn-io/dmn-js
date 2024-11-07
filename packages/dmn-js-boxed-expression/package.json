@@ -28,7 +28,7 @@
     "boxed expression"
   ],
   "devDependencies": {
-    "axe-core": "^4.9.0",
+    "axe-core": "^4.10.2",
     "cross-env": "^7.0.3",
     "dmn-font": "^0.6.2",
     "inferno-test-utils": "~5.6.2"
