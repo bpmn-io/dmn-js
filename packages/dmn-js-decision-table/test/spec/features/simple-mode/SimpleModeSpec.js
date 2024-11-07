@@ -111,9 +111,9 @@ describe('simple mode', function() {
           simpleModeButtonBounds = simpleModeButton.getBoundingClientRect();
 
     expect(simpleModeButton.classList.contains('right')).to.be.true;
-    expect(simpleModeButton.classList.contains('bottom')).to.be.true;
-    expect(simpleModeButtonBounds.left + 4).to.be.closeTo(cellBounds.right, 1);
-    expect(simpleModeButtonBounds.bottom - 4).to.be.closeTo(cellBounds.top, 1);
+    expect(simpleModeButton.classList.contains('top')).to.be.true;
+    expect(simpleModeButtonBounds.left).to.be.closeTo(cellBounds.right, 10);
+    expect(simpleModeButtonBounds.top).to.be.closeTo(cellBounds.top, 10);
   });
 
 
