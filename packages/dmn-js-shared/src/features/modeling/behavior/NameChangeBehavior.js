@@ -51,7 +51,7 @@ export default class NameChangeBehavior extends CommandInterceptor {
       return;
     }
 
-    else if (!this.isElementVariable(element)) {
+    else if (!this.shouldSyncVariable(element)) {
       this.syncElementVariableChange(bo);
     }
   };
@@ -68,9 +68,10 @@ export default class NameChangeBehavior extends CommandInterceptor {
     );
   }
 
-  isElementVariable(element) {
-    const variable = element.get('variable');
-    return variable && (element.name === variable.name);
+  shouldSyncVariable(element) {
+    const bo = getBusinessObject(element),
+          variable = bo.get('variable');
+    return variable && (bo.name === variable.name);
   }
 
   syncElementVariableChange(businessObject) {
