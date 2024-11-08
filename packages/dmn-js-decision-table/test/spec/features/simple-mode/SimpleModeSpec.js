@@ -111,7 +111,11 @@ describe('simple mode', function() {
           simpleModeButtonBounds = simpleModeButton.getBoundingClientRect();
 
     expect(simpleModeButtonBounds.left).to.be.closeTo(cellBounds.right, 10);
-    expect(simpleModeButtonBounds.top).to.be.closeTo(cellBounds.top, 10);
+
+    // TODO(@barmac): button bottom should be close to cell top, but exact
+    // position seems to depend on scroll: https://github.com/bpmn-io/dmn-js/pull/919
+    expect(simpleModeButtonBounds.bottom).to.be.closeTo(
+      cellBounds.top, cellBounds.height);
   });
 
 
