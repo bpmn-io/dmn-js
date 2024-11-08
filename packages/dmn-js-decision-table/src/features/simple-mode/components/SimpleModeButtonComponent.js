@@ -148,27 +148,21 @@ export default class SimpleModeButtonComponent extends Component {
       // left
       nodePosition.left =
         (-containerBounds.left
-        + cellBounds.left
-        - nodeBounds.width
-        + OFFSET
-        + scrollLeft)
+          + cellBounds.left
+          - nodeBounds.width
+          + OFFSET
+          + scrollLeft)
         + 'px';
-
-      node.classList.remove('right');
-      node.classList.add('left');
     } else {
 
       // right
       nodePosition.left =
         (-containerBounds.left
-        + cellBounds.left
-        + cellBounds.width
-        - OFFSET
-        + scrollLeft)
+          + cellBounds.left
+          + cellBounds.width
+          - OFFSET
+          + scrollLeft)
         + 'px';
-
-      node.classList.remove('left');
-      node.classList.add('right');
     }
 
     if (cellBounds.top + (cellBounds.height / 2) > containerBounds.height / 2) {
@@ -176,27 +170,20 @@ export default class SimpleModeButtonComponent extends Component {
       // bottom
       nodePosition.top =
         (-containerBounds.top
-        + cellBounds.top
-        - nodeBounds.height
-        + OFFSET
-        + scrollTop)
+          + cellBounds.top
+          - nodeBounds.height
+          + OFFSET
+          + scrollTop)
         + 'px';
-
-      node.classList.remove('top');
-      node.classList.add('bottom');
-
     } else {
 
       // top
       nodePosition.top =
         (-containerBounds.top
-        + cellBounds.top
-        - OFFSET
-        + scrollTop)
+          + cellBounds.top
+          - OFFSET
+          + scrollTop)
         + 'px';
-
-      node.classList.remove('bottom');
-      node.classList.add('top');
     }
 
     assign(this.node.style, nodePosition);
