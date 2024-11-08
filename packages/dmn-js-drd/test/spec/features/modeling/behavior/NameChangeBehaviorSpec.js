@@ -6,7 +6,7 @@ import CoreModule from 'src/core';
 import Modeling from 'src/features/modeling';
 
 
-describe('NameChangeBehavior', function() {
+describe('features/modeling - NameChangeBehavior', function() {
 
   beforeEach(bootstrapModeler(simpleStringEditXML, {
     modules: [
