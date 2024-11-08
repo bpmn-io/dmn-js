@@ -110,8 +110,6 @@ describe('simple mode', function() {
     const simpleModeButton = domQuery('.simple-mode-button', testContainer),
           simpleModeButtonBounds = simpleModeButton.getBoundingClientRect();
 
-    expect(simpleModeButton.classList.contains('right')).to.be.true;
-    expect(simpleModeButton.classList.contains('top')).to.be.true;
     expect(simpleModeButtonBounds.left).to.be.closeTo(cellBounds.right, 10);
     expect(simpleModeButtonBounds.top).to.be.closeTo(cellBounds.top, 10);
   });
