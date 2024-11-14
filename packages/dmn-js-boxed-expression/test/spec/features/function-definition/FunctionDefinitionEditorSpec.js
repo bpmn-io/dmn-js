@@ -1,10 +1,27 @@
+/* global sinon */
+
 import { bootstrapModeler, inject } from 'test/helper';
 
 import functionDefinitionXML from './function-definition.dmn';
 
+import { waitFor } from '@testing-library/dom';
+
 describe('FunctionDefinitionEditor', function() {
 
-  beforeEach(bootstrapModeler(functionDefinitionXML));
+  const variableResolver = {
+    getVariables: () => [
+      { name: 'Variable', typeRef: 'string' }
+    ],
+    registerProvider: () => {}
+  };
+
+  beforeEach(bootstrapModeler(functionDefinitionXML, {
+    additionalModules: [
+      {
+        variableResolver: [ 'value', variableResolver ]
+      }
+    ]
+  }));
 
   describe('#getParameters', function() {
 
@@ -102,6 +119,11 @@ describe('FunctionDefinitionEditor', function() {
 
   describe('#updateParameter', function() {
 
+    afterEach(function() {
+      sinon.restore();
+    });
+
+
     it('should update parameter', inject(
       function(viewer, functionDefinition) {
 
@@ -118,6 +140,29 @@ describe('FunctionDefinitionEditor', function() {
         const updated = functionDefinition.getParameters(expression)[0];
         expect(updated).to.have.property('name', 'foo');
         expect(updated).to.have.property('typeRef', 'bar');
+      })
+    );
+
+    it('should update variable', inject(
+      async function(viewer, functionDefinition) {
+
+        // given
+        const bkm = viewer.getRootElement();
+        const expression = bkm.get('encapsulatedLogic');
+        const parameters = functionDefinition.getParameters(expression);
+        const parameter = parameters[0];
+
+        const getVariablesSpy = sinon.spy(variableResolver, 'getVariables');
+
+        // when
+        functionDefinition.updateParameter(
+          parameter, { name: 'foo-blocker', typeRef: 'bar' }
+        );
+
+        // then
+        await waitFor(() => {
+          expect(getVariablesSpy).to.have.been.called;
+        });
       })
     );
   });
