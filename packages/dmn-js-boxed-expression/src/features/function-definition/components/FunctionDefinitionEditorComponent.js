@@ -110,8 +110,6 @@ function _BodyExpression({ expression, parameters }, context) {
     expression
   });
 
-  console.log('parameters BodyExpression: ', parameters);
-
   return (
     <div className="function-definition-body">
       <Expression expression={ expression } parameters={ parameters } />
