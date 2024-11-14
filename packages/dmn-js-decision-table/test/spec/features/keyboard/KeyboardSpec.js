@@ -26,7 +26,6 @@ import {
 
 describe('features/keyboard', function() {
 
-  const keyboardTarget = document.createElement('div');
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: [
@@ -37,27 +36,42 @@ describe('features/keyboard', function() {
       DecisionRulesEditorModule,
       TablePropertiesEditorModule,
       SelectionModule
-    ],
-    keyboard: {
-      bindTo: keyboardTarget
-    }
+    ]
   }));
 
   describe('keyboard binding', function() {
 
-    it('should integrate with <attach> + <detach> events', inject(
-      function(keyboard, eventBus) {
+    let testContainer;
 
-        // assume
-        expect(keyboard._node).to.eql(keyboardTarget);
+    beforeEach(function() {
+      testContainer = TestContainer.get(this);
+    });
+
+    it('should integrate with <attach> + <detach> events', inject(
+      function(eventBus) {
+
+        // given
+        const keyboardTarget =
+          testContainer.querySelector('.dmn-decision-table-container');
+
+        const bindSpy = sinon.spy();
+        eventBus.on('keyboard.bind', ({ node }) => bindSpy(node));
+
+        // when
+        eventBus.fire('attach');
+
+        // then
+        expect(bindSpy).to.have.been.calledOnceWith(keyboardTarget);
+
+        // and given
+        const unbindSpy = sinon.spy();
+        eventBus.on('keyboard.unbind', ({ node }) => unbindSpy(node));
 
         // when
         eventBus.fire('detach');
-        expect(keyboard._node).not.to.exist;
 
-        // but when
-        eventBus.fire('attach');
-        expect(keyboard._node).to.eql(keyboardTarget);
+        // then
+        expect(unbindSpy).to.have.been.calledOnceWith(keyboardTarget);
       }
     ));
 
@@ -73,7 +87,7 @@ describe('features/keyboard', function() {
     });
 
     beforeEach(inject(function(keyboard) {
-      keyboard.bind(testContainer);
+      keyboard.bind();
     }));
 
     it('should select cell below on <ENTER>', inject(function(cellSelection) {
