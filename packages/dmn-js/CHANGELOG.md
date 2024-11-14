@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.0.2
+
+* `FIX`: display updated formal parameters suggestions ([#914](https://github.com/bpmn-io/dmn-js/pull/914))
+
 ## 17.0.1
 
 * `FIX`: make name change behavior not break on name change ([#917](https://github.com/bpmn-io/dmn-js/pull/917)), port from `v16.8.2`
