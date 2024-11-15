@@ -9,7 +9,7 @@ import {
 
 var compatMessage =
   'Keyboard binding is now implicit; explicit binding to an element got removed. ' +
-  'For more information, see https://github.com/bpmn-io/dmn-js/issues/920';
+  'For more information, see https://github.com/bpmn-io/diagram-js/pull/662';
 
 
 /**
