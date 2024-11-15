@@ -11,6 +11,10 @@ import {
   isShift
 } from './KeyboardUtil';
 
+var compatMessage =
+  'Keyboard binding is now implicit; explicit binding to an element got removed. ' +
+  'For more information, see https://github.com/bpmn-io/diagram-js/pull/662';
+
 
 /**
  * A keyboard abstraction that may be activated and
@@ -27,17 +31,18 @@ import {
  *
  * All events contain the fields (node, listeners).
  *
- * A default binding for the keyboard may be specified via the
- * `keyboard.bindTo` configuration option.
+ * Specify the initial keyboard binding state via the
+ * `keyboard.bind=true|false` configuration option.
  *
  * @param {Config} config
  * @param {EventBus} eventBus
  * @param {EditorActions} editorActions
  * @param {CellSelection} cellSelection
+ * @param {Renderer} renderer
  */
 export default class Keyboard {
 
-  constructor(config, eventBus, editorActions, cellSelection) {
+  constructor(config, eventBus, editorActions, cellSelection, renderer) {
 
     this._config = config || {};
     this._editorActions = editorActions;
@@ -52,7 +57,16 @@ export default class Keyboard {
     eventBus.on('attach', () => {
 
       if (this._config.bindTo) {
-        this.bind(config.bindTo);
+        console.error('unsupported configuration <keyboard.bindTo>',
+          new Error(compatMessage));
+      }
+
+      this._target = renderer.getContainer();
+
+      var bind = this._config && this._config.bind !== false;
+
+      if (bind) {
+        this.bind();
       }
     });
 
@@ -96,10 +110,14 @@ export default class Keyboard {
 
   bind(node) {
 
+    if (node) {
+      console.error('unsupported argument <node>', new Error(compatMessage));
+    }
+
     // make sure that the keyboard is only bound once to the DOM
     this.unbind();
 
-    this._node = node;
+    node = this._node = this._target;
 
     // bind key events
     domEvent.bind(node, 'keydown', this._keyHandler);
@@ -241,7 +259,8 @@ Keyboard.$inject = [
   'config.keyboard',
   'eventBus',
   'editorActions',
-  'cellSelection'
+  'cellSelection',
+  'renderer'
 ];
 
 

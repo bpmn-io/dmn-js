@@ -22,7 +22,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ### Breaking Changes
 
-* Keyboard (DRD) is now implicit, and canvas is focusable, cf. [bpmn-io/diagram-js#662](https://github.com/bpmn-io/diagram-js/pull/662)
+* Keyboard (DRD) is now implicit, and canvas is focusable, cf. ([bpmn-io/diagram-js#662](https://github.com/bpmn-io/diagram-js/pull/662))
 
 ## 16.8.2
 

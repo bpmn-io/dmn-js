@@ -30,7 +30,6 @@ import diagramXML from './copy-cut-paste-key-bindings.dmn';
 
 describe('features/copy-cut-paste/key-bindings', function() {
 
-  const keyboardTarget = document.createElement('div');
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: [
@@ -41,17 +40,16 @@ describe('features/copy-cut-paste/key-bindings', function() {
       DecisionRulesEditorModule,
       CopyCutPasteKeyBindingsModule,
       SelectionModule
-    ],
-    keyboard: {
-      bindTo: keyboardTarget
-    }
+    ]
   }));
 
 
   let testContainer;
+  let keyboardTarget;
 
   beforeEach(function() {
     testContainer = TestContainer.get(this);
+    keyboardTarget = testContainer.querySelector('.dmn-decision-table-container');
   });
 
 
