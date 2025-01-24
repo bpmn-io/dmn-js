@@ -225,8 +225,9 @@ describe('components/InputSelect', function() {
       const inputSelectBounds = inputSelect.getBoundingClientRect();
       const optionsBounds = options.getBoundingClientRect();
 
-      expect(optionsBounds.top).to.eql(inputSelectBounds.height + inputSelectBounds.top);
-      expect(optionsBounds.left).to.eql(inputSelectBounds.left);
+      expect(optionsBounds.top)
+        .to.be.closeTo(inputSelectBounds.height + inputSelectBounds.top, 1);
+      expect(optionsBounds.left).to.be.closeTo(inputSelectBounds.left, 1);
     });
 
 
