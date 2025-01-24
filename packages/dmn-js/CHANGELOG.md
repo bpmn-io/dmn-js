@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.1.0
+
+* `FEAT`: suggest latest Camunda FEEL built-ins ([@bpmn-io/feel-editor#65](https://github.com/bpmn-io/feel-editor/pull/65))
+* `DEPS`: update to `@bpmn-io/feel-editor@1.10.0`
+
 ## 17.0.3
 
 * `FIX`: port implicit keyboard binding configuration to decision editors ([#920](https://github.com/bpmn-io/dmn-js/pull/920))
