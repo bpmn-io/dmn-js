@@ -166,6 +166,30 @@
   border-top: 1px solid var(--element-properties-border-color);
 }
 
+/* boxed-context */
+
+.dmn-boxed-expression-container .boxed-context {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  & .context-entry .textarea {
+    min-height: unset;
+  }
+
+  & > tbody > tr > td.variable-name {
+    text-align: center;
+  }
+
+  & > tbody > tr > td:not(:last-child) {
+    border-right: 1px solid black;
+  }
+
+  & > tbody > tr:not(:last-child) {
+    border-bottom: 1px solid black;
+  }
+}
+
 /* element-variable */
 
 .dmn-boxed-expression-container .element-variable {
