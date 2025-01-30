@@ -185,7 +185,8 @@
     border-right: 1px solid black;
   }
 
-  & > tbody > tr:not(:last-child) {
+  & > tbody > tr:not(:last-child),
+  & > tbody:not(:last-child) {
     border-bottom: 1px solid black;
   }
 }

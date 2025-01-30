@@ -15,7 +15,7 @@ export class BoxedContextEditor extends BoxedContext {
       variable: this._dmnFactory.create('dmn:InformationItem', {
         name: 'ContextEntry'
       }),
-      expression: this._dmnFactory.create('dmn:LiteralExpression', {
+      value: this._dmnFactory.create('dmn:LiteralExpression', {
         text: ''
       })
     });

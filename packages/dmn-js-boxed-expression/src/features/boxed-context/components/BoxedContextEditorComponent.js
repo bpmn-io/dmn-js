@@ -38,6 +38,15 @@ function _BoxedContextEditorComponent({ expression }, context) {
           })
         }
       </tbody>
+      <tfoot>
+        <tr>
+          <td colSpan="2">
+            <button
+              onClick={ () => boxedContext.addEntry(expression) } type="button"
+            >Add entry</button>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   );
 }
