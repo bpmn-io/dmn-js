@@ -178,6 +178,7 @@
   }
 
   & > tbody > tr > td.variable-name {
+    width: 200px;
     text-align: center;
   }
 
@@ -188,6 +189,10 @@
   & > tbody > tr:not(:last-child),
   & > tbody:not(:last-child) {
     border-bottom: 1px solid black;
+  }
+
+  & > tfoot > tr > td {
+    padding: var(--padding);
   }
 }
 
