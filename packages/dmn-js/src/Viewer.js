@@ -5,7 +5,7 @@ import DecisionTableViewer from 'dmn-js-decision-table/lib/Viewer';
 import LiteralExpressionViewer from 'dmn-js-literal-expression/lib/Viewer';
 import { Viewer as BoxedExpressionViewer } from 'dmn-js-boxed-expression';
 
-import { is, getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is, isAny, getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
 
 
@@ -49,8 +49,10 @@ export default class Viewer extends Manager {
         constructor: BoxedExpressionViewer,
         opens(element) {
           return (
-            is(element, 'dmn:BusinessKnowledgeModel') &&
-            getBoxedExpression(element)
+            isAny(element, [ 'dmn:BusinessKnowledgeModel', 'dmn:Decision' ]
+            ) &&
+            isAny(getBoxedExpression(element),
+              [ 'dmn:Context', 'dmn:DecisionTable', 'dmn:LiteralExpression' ])
           );
         }
       }

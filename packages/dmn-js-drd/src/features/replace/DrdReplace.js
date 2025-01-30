@@ -68,6 +68,22 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
       setBoxedExpression(newBusinessObject, literalExpression, drdFactory, variable);
     }
 
+    if (target.context) {
+      var contextEntries = [
+            drdFactory.create('dmn:ContextEntry', {
+              variable: drdFactory.create('dmn:InformationItem',
+                { name: 'ContextEntry' }),
+              value: drdFactory.create('dmn:LiteralExpression',
+                { text: '' })
+            })
+          ],
+          boxedContext = drdFactory.create('dmn:Context', {
+            contextEntry: contextEntries
+          });
+
+      setBoxedExpression(newBusinessObject, boxedContext, drdFactory, variable);
+    }
+
     return replace.replaceElement(element, newElement, hints);
   }
 

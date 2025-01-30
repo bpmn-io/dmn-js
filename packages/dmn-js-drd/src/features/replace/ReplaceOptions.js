@@ -29,6 +29,17 @@ export default {
         table: false,
         expression: true
       }
+    },
+    {
+      label: 'Boxed Context',
+      actionName: 'replace-with-boxed-context',
+      className: 'dmn-icon-boxed-context',
+      target: {
+        type: 'dmn:Decision',
+        table: false,
+        expression: false,
+        context: true
+      }
     }
   ],
   BKM: [
@@ -50,6 +61,17 @@ export default {
         type: 'dmn:BusinessKnowledgeModel',
         table: false,
         expression: true
+      }
+    },
+    {
+      label: 'Boxed Context',
+      actionName: 'replace-with-boxed-context',
+      className: 'dmn-icon-boxed-context',
+      target: {
+        type: 'dmn:BusinessKnowledgeModel',
+        table: false,
+        expression: false,
+        context: true
       }
     }
   ]

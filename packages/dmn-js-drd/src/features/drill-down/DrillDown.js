@@ -31,6 +31,15 @@ var PROVIDERS = [
       return is(boxedExpression, 'dmn:LiteralExpression');
     },
     title: 'Open literal expression'
+  },
+  {
+    className: 'dmn-icon-literal-expression',
+    matches: function(el) {
+      var boxedExpression = getBoxedExpression(el);
+
+      return is(boxedExpression, 'dmn:Context');
+    },
+    title: 'Open boxed context'
   }
 ];
 

@@ -81,8 +81,12 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
         option.actionName === 'replace-with-literal-expression' &&
         !is(boxedExpression, 'dmn:LiteralExpression')
       );
+      var notContext = (
+        option.actionName === 'replace-with-boxed-context' &&
+        !is(boxedExpression, 'dmn:Context')
+      );
 
-      return notEmpty || notTable || notExp;
+      return notEmpty || notTable || notExp || notContext;
     });
 
     return this._createEntries(element, options);
@@ -104,8 +108,12 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
         option.actionName === 'replace-with-literal-expression' &&
         !is(boxedExpression, 'dmn:LiteralExpression')
       );
+      var notContext = (
+        option.actionName === 'replace-with-boxed-context' &&
+        !is(boxedExpression, 'dmn:Context')
+      );
 
-      return notEmpty || notTable || notExp;
+      return notEmpty || notTable || notExp || notContext;
     });
 
     return this._createEntries(element, options);
