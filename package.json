@@ -39,7 +39,7 @@
     "@babel/cli": "^7.25.9",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "babel-plugin-inferno": "~5.0.0",
     "babel-plugin-istanbul": "^7.0.0",
     "chai": "^4.5.0",
