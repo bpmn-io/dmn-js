@@ -1,5 +1,6 @@
 import {
   assign,
+  every,
   isArray
 } from 'min-dash';
 
@@ -297,3 +298,43 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   return actions;
 };
+
+ContextPadProvider.prototype.getMultiElementContextPadEntries = function(
+    elements
+) {
+  var modeling = this._modeling,
+      translate = this._translate;
+
+  var actions = {};
+
+  if (this._isDeleteAllowed(elements)) {
+    assign(actions, {
+      'delete': {
+        group: 'edit',
+        className: 'dmn-icon-trash',
+        title: translate('Delete'),
+        action: {
+          click: (e, elements) => modeling.removeElements(elements.slice())
+        },
+      },
+    });
+  }
+
+  return actions;
+};
+
+ContextPadProvider.prototype._isDeleteAllowed = function(elements) {
+
+  // rules allowed can return boolean or array of elements (not reflected in type )
+  var allowedOrAllowedElements = this._rules.allowed('elements.delete', {
+    elements: elements
+  });
+
+  if (isArray(allowedOrAllowedElements)) {
+    return every(elements, el => allowedOrAllowedElements.includes(el));
+  }
+
+  return allowedOrAllowedElements;
+};
+
+

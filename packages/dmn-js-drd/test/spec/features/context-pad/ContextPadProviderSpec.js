@@ -166,6 +166,64 @@ describe('features - context-pad', function() {
       })
     );
 
+
+    describe('multi remove', function() {
+
+      it('should add delete action by default', inject(
+        function(elementRegistry, contextPad) {
+
+          // given
+          var shape1 = elementRegistry.get('dayType_id'),
+              shape2 = elementRegistry.get('temperature_id');
+
+          // when
+          contextPad.open([ shape1, shape2 ]);
+
+          // then
+          expect(deleteAction([ shape1, shape2 ])).to.exist;
+        }
+      ));
+
+
+      it('should NOT add delete action when rule returns false', inject(
+        function(elementRegistry, contextPad, customRules) {
+
+          // given
+          customRules.addRule('elements.delete', 1500, function() {
+            return false;
+          });
+
+          var shape1 = elementRegistry.get('dayType_id'),
+              shape2 = elementRegistry.get('temperature_id');
+
+          // when
+          contextPad.open([ shape1, shape2 ]);
+
+          // then
+          expect(deleteAction([ shape1, shape2 ])).not.to.exist;
+        }
+      ));
+
+
+      it('should trigger batch delete', inject(
+        function(elementRegistry, contextPad, customRules) {
+
+          // given
+          var shape1 = elementRegistry.get('dayType_id'),
+              shape2 = elementRegistry.get('temperature_id');
+
+          contextPad.open([ shape1, shape2 ]);
+
+          // when
+          contextPad.trigger('click', padEvent('delete'));
+
+          // then
+          expect(elementRegistry.get('dayType_id')).not.to.exist;
+          expect(elementRegistry.get('temperature_id')).not.to.exist;
+        }
+      ));
+
+    });
   });
 
 
