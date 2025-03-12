@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.2.0
+
+* `FEAT`: add delete action for multi element context ([#939](https://github.com/bpmn-io/dmn-js/pull/939))
+
 ## 17.1.0
 
 * `FEAT`: suggest latest Camunda FEEL built-ins ([@bpmn-io/feel-editor#65](https://github.com/bpmn-io/feel-editor/pull/65))
