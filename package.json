@@ -60,7 +60,7 @@
     "lerna": "^8.1.9",
     "mocha": "^10.8.2",
     "mocha-test-container-support": "^0.2.0",
-    "npm-run-all2": "^7.0.1",
+    "npm-run-all2": "^8.0.0",
     "puppeteer": "^24.0.0",
     "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0",
