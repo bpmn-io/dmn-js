@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "17.2.0",
+  "version": "17.2.1",
   "files": [
     "dist",
     "lib",

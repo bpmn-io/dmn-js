@@ -76,3 +76,6 @@ export default class Modeler extends EditingManager {
     return initialView;
   }
 }
+
+export { Modeler };
+
