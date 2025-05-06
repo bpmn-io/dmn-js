@@ -1,6 +1,7 @@
 import ContextMenu from 'table-js/lib/features/context-menu';
 import DebounceInput from 'dmn-js-shared/lib/features/debounce-input';
 import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
+import FeelLanguageContextModule from 'dmn-js-shared/lib/features/feel-language-context';
 
 import OutputEditingProvider from './OutputEditingProvider';
 import InputEditingProvider from './InputEditingProvider';
@@ -18,6 +19,7 @@ export default {
     ContextMenu,
     DebounceInput,
     ExpressionLanguagesModule,
+    FeelLanguageContextModule,
     KeyboardModule,
     TypeRefEditing
   ],

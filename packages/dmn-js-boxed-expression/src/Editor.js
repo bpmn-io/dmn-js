@@ -1,6 +1,7 @@
 import { DmnVariableResolverModule } from '@bpmn-io/dmn-variable-resolver';
 
 import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
+import FeelLanguageContextModule from 'dmn-js-shared/lib/features/feel-language-context';
 import DataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 import { Viewer } from './Viewer';
@@ -24,6 +25,7 @@ export class Editor extends Viewer {
       ElementPropertiesModule,
       FunctionDefinitionEditorModule,
       ExpressionLanguagesModule,
+      FeelLanguageContextModule,
       LiteralExpressionEditorComponent,
       KeyboardModule,
       DataTypesModule,
