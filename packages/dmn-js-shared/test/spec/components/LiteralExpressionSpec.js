@@ -12,7 +12,8 @@ import {
 } from 'selection-ranges';
 
 import {
-  matches
+  matches,
+  query as domQuery
 } from 'min-dom';
 
 import {
@@ -23,8 +24,13 @@ import {
 import {
   triggerKeyEvent
 } from 'test/util/EventUtil';
+import {
+  createInjector
+} from 'test/util/InjectorUtil';
+
 
 import LiteralExpression from 'src/components/LiteralExpression';
+import DiContainer from './DiContainer';
 
 
 describe('components/LiteralExpression', function() {
@@ -246,6 +252,66 @@ describe('components/LiteralExpression', function() {
 
       // then
       expect(onBlur).to.have.been.called;
+    });
+
+
+    it('should warn about backticks without camunda parser dialect', async function() {
+
+      // given
+      const injector = createInjector({
+        feelLanguageContext: {
+          getConfig: () => ({
+            parserDialect: undefined,
+          }),
+        },
+      });
+
+      // when
+      const node = renderToNode(
+        <DiContainer injector={ injector }>
+          <LiteralExpression
+            value={ '`expressionWithBackticks`' } />
+        </DiContainer>
+      );
+
+      // then
+      const editor = getEditor(node);
+      waitFor(() => {
+        const variableNameSpan = domQuery('span.variableName', editor);
+
+        // backticks should get stripped from variableName as they are camunda specific
+        expect(variableNameSpan.innerHTML).to.equal('expressionWithBackticks');
+        expect(domQuery('.lint-error', editor)).to.exist;
+      });
+    });
+
+
+    it('should support backticks with camunda parserDialect', async function() {
+
+      // given
+      const injector = createInjector({
+        feelLanguageContext: {
+          getConfig: () => ({
+            parserDialect: 'camunda',
+          }),
+        },
+      });
+
+      // when
+      const node = renderToNode(
+        <DiContainer injector={ injector }>
+          <LiteralExpression
+            value={ '`expressionWithBackticks`' } />
+        </DiContainer>
+      );
+
+      // then
+      const editor = getEditor(node);
+      waitFor(() => {
+        const variableNameSpan = domQuery('span.variableName', editor);
+        expect(variableNameSpan.innerHTML).to.equal('`expressionWithBackticks`');
+        expect(domQuery('.lint-error', editor)).to.not.exist;
+      });
     });
 
 

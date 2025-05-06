@@ -9,6 +9,7 @@ import { query as domQuery } from 'min-dom';
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import ExpressionLanguagesModule from 'dmn-js-shared/lib/features/expression-languages';
+import FeelLanguageContext from 'dmn-js-shared/lib/features/feel-language-context';
 
 import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -37,6 +38,7 @@ describe('textarea editor', function() {
       TextareaEditorModule,
       ModelingModule,
       ExpressionLanguagesModule,
+      FeelLanguageContext,
       {
         variableResolver: [ 'value', variableResolver ]
       }

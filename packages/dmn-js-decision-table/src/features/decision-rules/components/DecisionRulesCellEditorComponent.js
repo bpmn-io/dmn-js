@@ -235,6 +235,7 @@ class TableCellEditor extends Component {
           value={ value }
           placeholder={ placeholder }
           variables={ variables }
+          feelLanguageDialect="unaryTests"
         />
         {
           !isDefaultExpressionLanguage && (

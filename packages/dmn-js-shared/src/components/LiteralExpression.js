@@ -43,13 +43,24 @@ export default class LiteralExpression extends Component {
     this.state = {
       value: props.value
     };
+
+    this._feelLanguageContext = context.injector?.get('feelLanguageContext', false);
+  }
+
+  _getFeelLanguageContext() {
+    return this._feelLanguageContext && this._feelLanguageContext.getConfig();
   }
 
   componentDidMount() {
+    const feelLanguageContext = this._getFeelLanguageContext();
+
     this.editor = new FeelEditor({
       contentAttributes: {
         'aria-label': this.props.label
       },
+      parserDialect: feelLanguageContext?.parserDialect,
+      builtins: feelLanguageContext?.builtins,
+      dialect: this.props.feelLanguageDialect,
       container: this.node,
       onChange: this.handleChange,
       value: this.state.value,
