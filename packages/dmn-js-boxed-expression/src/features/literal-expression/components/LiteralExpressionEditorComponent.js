@@ -15,6 +15,7 @@ class _LiteralExpressionEditorComponent extends Component {
     this._translate = context.injector.get('translate');
     this._expressionLanguages = context.injector.get('expressionLanguages');
     this._variableResolver = context.injector.get('variableResolver', false);
+    this._feelLanguageContext = context.injector.get('feelLanguageContext');
   }
 
   getLiteralExpression() {
@@ -44,6 +45,11 @@ class _LiteralExpressionEditorComponent extends Component {
       this._variableResolver.getVariables(businessObject);
   }
 
+  _getFeelLanguageContext() {
+    return this.feelLanguageContext && this.feelLanguageContext.getConfig();
+  }
+
+
   render() {
 
     // there is only one single element
@@ -64,7 +70,12 @@ class _LiteralExpressionEditorComponent extends Component {
 }
 
 function FeelEditor(props) {
-  return <LiteralExpression { ...props } onChange={ props.onChange } />;
+  const feelLanguageContext = this._getFeelLanguageContext();
+  return <LiteralExpression
+    { ...props }
+    onChange={ props.onChange }
+    feelLanguageContext={ feelLanguageContext }
+  />;
 }
 
 class TextEditor extends EditableComponent {

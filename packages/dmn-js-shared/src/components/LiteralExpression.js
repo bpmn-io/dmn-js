@@ -50,6 +50,7 @@ export default class LiteralExpression extends Component {
       contentAttributes: {
         'aria-label': this.props.label
       },
+      parserDialect: this.props.feelLanguageContext?.parserDialect,
       container: this.node,
       onChange: this.handleChange,
       value: this.state.value,
