@@ -125,6 +125,7 @@ class TableCellEditor extends Component {
     this._expressionLanguages = context.injector.get('expressionLanguages');
     this._translate = context.injector.get('translate');
     this._variableResolver = context.injector.get('variableResolver', false);
+    this._feelLanguageContext = context.injector.get('feelLanguageContext',false);
   }
 
   isDefaultExpressionLanguage(businessObject) {
@@ -197,6 +198,10 @@ class TableCellEditor extends Component {
       this._variableResolver.getVariables(businessObject);
   }
 
+  _getFeelLanguageContext() {
+    return this._feelLanguageContext && this._feelLanguageContext.getConfig();
+  }
+
   _getLabel() {
     return this._isInputCell() ?
       this._translate('Input') : this._translate('Output');
@@ -220,6 +225,7 @@ class TableCellEditor extends Component {
 
     const Editor = this.getEditor();
     const variables = this._getVariables();
+    const feelLanguageContext = this._getFeelLanguageContext();
 
     return (
       <div className="cell-editor">
@@ -235,6 +241,7 @@ class TableCellEditor extends Component {
           value={ value }
           placeholder={ placeholder }
           variables={ variables }
+          feelLanguageContext={ feelLanguageContext }
         />
         {
           !isDefaultExpressionLanguage && (

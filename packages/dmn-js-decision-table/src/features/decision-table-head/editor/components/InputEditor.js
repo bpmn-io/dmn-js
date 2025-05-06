@@ -11,6 +11,7 @@ export default class InputEditor extends Component {
     this.translate = context.injector.get('translate');
     this.expressionLanguages = context.injector.get('expressionLanguages', false);
     this.variableResolver = context.injector.get('variableResolver', false);
+    this.feelLanguageContext = context.injector.get('feelLanguageContext',false);
 
     this.handleValue = (text) => {
 
@@ -60,6 +61,10 @@ export default class InputEditor extends Component {
       this.variableResolver.getVariables(this.props.element);
   }
 
+  _getFeelLanguageContext() {
+    return this.feelLanguageContext && this.feelLanguageContext.getConfig();
+  }
+
   render() {
 
     const {
@@ -70,6 +75,8 @@ export default class InputEditor extends Component {
     const ExpressionEditor = this.getExpressionEditorComponent();
 
     const variables = this._getVariables();
+
+    const feelLanguageContext = this._getFeelLanguageContext();
 
     return (
       <div className="context-menu-container ref-input-editor input-edit"
@@ -102,6 +109,7 @@ export default class InputEditor extends Component {
               ].join(' ')
             }
             onInput={ this.handleValue }
+            feelLanguageContext={ feelLanguageContext }
             value={ text || '' }
             variables={ variables } />
         </div>
