@@ -8,7 +8,8 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 17.2.1
 
-* `FIX`: Include named exports from Viewer classes.
+* `FIX`: Include named exports from Viewer classes. ([#945](https://github.com/bpmn-io/dmn-js/issues/945))
+
 
 ## 17.2.0
 
