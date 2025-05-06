@@ -59,3 +59,5 @@ export default class Viewer extends Manager {
   }
 
 }
+
+export { Viewer };

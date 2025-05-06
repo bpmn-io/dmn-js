@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.2.1
+
+* `FIX`: Include named exports from Viewer classes. ([#945](https://github.com/bpmn-io/dmn-js/issues/945))
+
+
 ## 17.2.0
 
 * `FEAT`: add delete action for multi element context ([#939](https://github.com/bpmn-io/dmn-js/pull/939))
