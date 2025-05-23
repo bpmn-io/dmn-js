@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.2.1
+
+* `FIX`: correct completion of lang-feel snippets ([@bpmn-io/feel-editor#70](https://github.com/bpmn-io/feel-editor/pull/75))
+* `DEPS`: update to `@bpmn-io/feel-editor@1.10.1`
+
 ## 17.2.0
 
 * `FEAT`: add delete action for multi element context ([#939](https://github.com/bpmn-io/dmn-js/pull/939))
