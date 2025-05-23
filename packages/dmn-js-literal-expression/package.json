@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-literal-expression",
   "description": "A literal expression view for dmn-js",
-  "version": "17.1.0",
+  "version": "17.2.1",
   "files": [
     "assets",
     "lib"
@@ -33,7 +33,7 @@
   "dependencies": {
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
     "diagram-js": "^15.2.0",
-    "dmn-js-shared": "^17.1.0",
+    "dmn-js-shared": "^17.2.1",
     "escape-html": "^1.0.3",
     "inferno": "~5.6.3",
     "min-dash": "^4.2.2",
