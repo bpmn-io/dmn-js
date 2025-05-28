@@ -58,12 +58,18 @@ export default class TextareaEditorComponent extends Component {
       this._variableResolver.getVariables(businessObject);
   }
 
+  _getFeelLanguageContext() {
+    return this.feelLanguageContext && this.feelLanguageContext.getConfig();
+  }
+
+
   render() {
 
     // there is only one single element
     const { text } = this.getLiteralExpression();
     const Editor = this.getEditor();
     const variables = this._getVariables();
+    const feelLanguageContext = this._getFeelLanguageContext();
 
     return (
       <Editor
@@ -71,7 +77,8 @@ export default class TextareaEditorComponent extends Component {
         className="textarea editor"
         value={ text }
         onChange={ this.editLiteralExpressionText }
-        variables={ variables } />
+        variables={ variables }
+        feelLanguageContext={ feelLanguageContext } />
     );
   }
 }
@@ -84,6 +91,7 @@ class FeelEditor extends Component {
       value={ this.props.value }
       onInput={ this.props.onChange }
       variables={ this.props.variables }
+      feelLanguageContext={ this.props.feelLanguageContext }
     />;
   }
 }
