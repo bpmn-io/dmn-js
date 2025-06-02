@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "dmn-js-boxed-expression": [ "./packages/dmn-js-boxed-expression/src", "./packages/dmn-js-boxed-expression/lib", "./node_modules/dmn-js-boxed-expression" ],
+
+      "dmn-js/lib/*": [ "./packages/dmn-js/src/*", "./packages/dmn-js/lib/*", "./node_modules/dmn-js/lib/*" ],
+      "dmn-js-decision-table/lib/*": [ "./packages/dmn-js-decision-table/src/*", "./packages/dmn-js-decision-table/lib/*", "./node_modules/dmn-js-decision-table/lib/*" ],
+      "dmn-js-drd/lib/*": [ "./packages/dmn-js-drd/src/*", "./packages/dmn-js-drd/lib/*", "./node_modules/dmn-js-drd/lib/*" ],
+      "dmn-js-literal-expression/lib/*": [ "./packages/dmn-js-literal-expression/src/*", "./packages/dmn-js-literal-expression/lib/*", "./node_modules/dmn-js-literal-expression/lib/*" ],
+      "dmn-js-shared/lib/*": [ "./packages/dmn-js-shared/src/*", "./packages/dmn-js-shared/lib/*", "./node_modules/dmn-js-shared/lib/*" ],
+    }
+  }
+}
