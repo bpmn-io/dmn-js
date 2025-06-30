@@ -154,8 +154,6 @@ describe('simple date time edit', function() {
 
       // then
       expect(inputEntry7.businessObject.text).to
-
-        // eslint-disable-next-line
         .equal('[date and time("2018-01-25T00:00:00Z")..date and time("2000-01-01T00:00:00Z")]');
     }));
 
@@ -174,8 +172,6 @@ describe('simple date time edit', function() {
 
       // then
       expect(inputEntry7.businessObject.text).to
-
-
         .equal('[date and time("2018-01-25T00:00:00Z")..date and time("foo")]');
     }));
 
@@ -194,8 +190,6 @@ describe('simple date time edit', function() {
 
       // then
       expect(inputEntry7.businessObject.text).to
-
-        // eslint-disable-next-line
         .equal(`[date and time("2018-01-25T00:00:00Z")..date and time("${ getSampleDate() }")]`);
     }));
   });

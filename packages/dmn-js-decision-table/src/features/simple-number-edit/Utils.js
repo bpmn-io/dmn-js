@@ -1,9 +1,7 @@
 import { keys } from 'min-dash';
 
-// eslint-disable-next-line
 const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|\.[0-9])+)$/;
 
-// eslint-disable-next-line
 const RANGE_REGULAR_EXPRESSION = /^(\[|\]){1}(-?(?:[0-9]|\.[0-9])+){1,}\.\.(-?(?:[0-9]|\.[0-9])+){1,}(\[|\]){1}$/;
 
 export const operators = {

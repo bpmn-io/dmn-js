@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import { Cell } from 'table-js/lib/model';

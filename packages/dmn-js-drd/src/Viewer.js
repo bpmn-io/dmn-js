@@ -134,7 +134,6 @@ Viewer.prototype.saveSVG = wrapForCompatibility(function(options) {
 
     var bbox = contentNode.getBBox();
 
-    /* eslint-disable max-len */
     var svg =
       '<?xml version="1.0" encoding="utf-8"?>\n' +
       '<!-- created with dmn-js / http://bpmn.io -->\n' +
@@ -144,7 +143,6 @@ Viewer.prototype.saveSVG = wrapForCompatibility(function(options) {
            'viewBox="' + bbox.x + ' ' + bbox.y + ' ' + bbox.width + ' ' + bbox.height + '" version="1.1">' +
         defs + contents +
       '</svg>';
-    /* eslint-enable */
 
     resolve({ svg });
   });
