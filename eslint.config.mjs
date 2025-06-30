@@ -49,7 +49,6 @@ export default [
   }),
   {
     rules: {
-      'max-len': [ 'error', { 'code': 90 } ],
       'no-restricted-imports': [ 'error', {
         'patterns': [ 'dmn-js/src', 'dmn-js-*/src' ]
       } ],

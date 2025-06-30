@@ -111,7 +111,6 @@ function parseRange(text) {
     end,
     firstValue,
     secondValue
-  // eslint-disable-next-line
   } = match(/^(?<start>[[\]])duration\("(?<firstValue>[^"]*)"\)\.\.duration\("(?<secondValue>[^"]*)"\)(?<end>[[\]])$/, text);
 
   if (start && end) {
