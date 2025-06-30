@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.3.0
+
+* `FEAT`: Support configuring feel language context ([#947](https://github.com/bpmn-io/dmn-js/pull/947))
+* `FEAT`: Input entries of a decision table use the unary-tests expression language dialect
+
 ## 17.2.1
 
 * `FIX`: correct completion of lang-feel snippets ([@bpmn-io/feel-editor#70](https://github.com/bpmn-io/feel-editor/pull/75))
