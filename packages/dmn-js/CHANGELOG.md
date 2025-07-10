@@ -6,10 +6,17 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `dmn-moddle@11` ([#952](https://github.com/bpmn-io/dmn-js/pull/952))
+* `CHORE`: require `Node >= 20`  ([#952](https://github.com/bpmn-io/dmn-js/pull/952))
+
+### Breaking Changes
+
+* Require Node >= 20
+
 ## 17.3.0
 
-* `FEAT`: Support configuring feel language context ([#947](https://github.com/bpmn-io/dmn-js/pull/947))
-* `FEAT`: Input entries of a decision table use the unary-tests expression language dialect
+* `FEAT`: support configuring feel language context ([#947](https://github.com/bpmn-io/dmn-js/pull/947))
+* `FEAT`: input entries of a decision table use the unary-tests expression language dialect ([#880](https://github.com/bpmn-io/dmn-js/issues/880))
 
 ## 17.2.1
 
