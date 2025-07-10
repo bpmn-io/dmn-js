@@ -11,7 +11,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ### Breaking Changes
 
-* Require Node >= 20
+* Require `Node >= 20`
 
 ## 17.3.0
 
