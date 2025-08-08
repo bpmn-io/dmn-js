@@ -3,7 +3,7 @@ import {
 } from 'min-dash';
 
 import UpdatePropertiesHandler
-  from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
+  from './handlers/UpdatePropertiesHandler';
 
 
 export default class Modeling {

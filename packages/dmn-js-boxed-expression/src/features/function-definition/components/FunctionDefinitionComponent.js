@@ -23,7 +23,7 @@ function FunctionDefinitionComponent({ expression }, context) {
     <div className="function-definition">
       <Kind kind={ kind } />
       <FormalParameters parameters={ parameters } />
-      <BodyExpression expression={ body } />
+      <BodyExpression parent={ expression } expression={ body } />
     </div>
   );
 }
@@ -72,14 +72,14 @@ function Parameter({ parameter }) {
   </span>;
 }
 
-function BodyExpression({ expression }, context) {
+function BodyExpression({ expression, parent }, context) {
   const Expression = context.components.getComponent('expression', {
     expression
   });
 
   return (
     <div className="function-definition-body">
-      <Expression expression={ expression } />
+      <Expression parent={ parent } expression={ expression } />
     </div>
   );
 }

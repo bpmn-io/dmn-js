@@ -121,10 +121,19 @@
 }
 
 /* function-definition */
+.dmn-boxed-expression-container .function-definition {
+  border: 3px gray solid;
+}
+
 .dmn-boxed-expression-container .context-menu .function-definition-parameter button {
   border: none;
 }
 
 .dmn-boxed-expression-container .context-menu .formal-parameters .add-parameter {
   margin-left: 3px;
+}
+
+/* element logic selector */
+.dmn-boxed-expression-container .dmn-boxed-expression-element-logic-selector {
+  padding: 1em;
 }

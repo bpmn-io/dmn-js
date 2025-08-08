@@ -51,7 +51,7 @@ function _FunctionDefinitionEditorComponent({ expression }, context) {
         parameters={ parameters }
         openEditor={ openFormalParametersEditor }
       />
-      <BodyExpression expression={ body } parameters={ parameters } />
+      <BodyExpression parent={ expression } expression={ body } parameters={ parameters } />
     </div>
   );
 }
@@ -105,14 +105,14 @@ function _Parameter({ parameter }) {
 
 const BodyExpression = withChangeSupport(_BodyExpression, props => props.parameters);
 
-function _BodyExpression({ expression, parameters }, context) {
+function _BodyExpression({ expression, parameters, parent }, context) {
   const Expression = context.components.getComponent('expression', {
     expression
   });
 
   return (
     <div className="function-definition-body">
-      <Expression expression={ expression } parameters={ parameters } />
+      <Expression parent={ parent } expression={ expression } parameters={ parameters } />
     </div>
   );
 }

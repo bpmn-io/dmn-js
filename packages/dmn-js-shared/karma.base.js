@@ -11,7 +11,7 @@ process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 // configures browsers to run test against
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE' ]
-var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(/\s*,\s*/g);
+var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadlessKeychain').split(/\s*,\s*/g);
 
 const testFile = coverage ? 'test/coverageBundle.js' : 'test/testBundle.js';
 
@@ -22,6 +22,16 @@ module.exports = function(path) {
     const config = {
 
       basePath: path,
+
+      customLaunchers: {
+        'ChromeHeadlessKeychain': {
+          base: 'ChromeHeadless',
+          flags: [
+            '--password-store=basic',
+            '--use-mock-keychain'
+          ]
+        }
+      },
 
       frameworks: [
         'webpack',

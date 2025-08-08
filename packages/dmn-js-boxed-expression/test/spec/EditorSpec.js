@@ -6,9 +6,11 @@ import Editor from '../helper/Editor';
 
 import simpleXML from './empty-literal-expression.dmn';
 import bkmXML from './bkm-literal-expression.dmn';
+import emptyDecisionXML from './empty-decision.dmn';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'editor';
+const singleStartEmpty = window.__env__ && window.__env__.SINGLE_START === 'editor-empty';
 
 
 describe('Editor', function() {
@@ -35,6 +37,11 @@ describe('Editor', function() {
 
   (singleStart ? it.only : it)('should import business knowledge model', function() {
     return createEditor(bkmXML);
+  });
+
+
+  (singleStartEmpty ? it.only : it)('should import empty decision', function() {
+    return createEditor(emptyDecisionXML);
   });
 
 
