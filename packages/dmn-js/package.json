@@ -49,7 +49,7 @@
     "@rollup/plugin-replace": "^6.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "axe-core": "^4.10.2",
-    "cpy": "^11.1.0",
+    "cpy": "^12.0.0",
     "del": "^8.0.0",
     "del-cli": "^6.0.0",
     "diagram-js": "^15.2.0",
