@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: suggest latest Camunda FEEL built-ins, now loaded from `feel-builtins` ([@bpmn-io/feel-editor#71](https://github.com/bpmn-io/feel-editor/pull/71))
+* `FEAT`: allow multiline strings in camunda dialect ([@bpmn-io/lezer-feel#2](https://github.com/bpmn-io/lezer-feel/pull/2))
+* `FIX`: detect unclosed string literals ([nikku/lezer-feel#52](https://github.com/nikku/lezer-feel/pull/52))
+* `DEPS`: update to `@bpmn-io/feel-editor@1.12.0`
 * `DEPS`: update to `dmn-moddle@11` ([#952](https://github.com/bpmn-io/dmn-js/pull/952))
 * `CHORE`: require `Node >= 20`  ([#952](https://github.com/bpmn-io/dmn-js/pull/952))
 
