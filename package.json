@@ -57,7 +57,7 @@
     "karma-mocha": "^2.0.1",
     "karma-sinon-chai": "^2.0.2",
     "karma-webpack": "^5.0.0",
-    "lerna": "^8.1.9",
+    "lerna": "^9.0.0",
     "mocha": "^10.8.2",
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^8.0.0",
