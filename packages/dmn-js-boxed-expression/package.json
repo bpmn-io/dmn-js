@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-boxed-expression",
   "description": "A boxed expression view for dmn-js",
-  "version": "17.4.0",
+  "version": "17.5.0",
   "files": [
     "assets",
     "lib"
@@ -36,7 +36,7 @@
   "dependencies": {
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
     "diagram-js": "^15.2.0",
-    "dmn-js-shared": "^17.4.0",
+    "dmn-js-shared": "^17.5.0",
     "inferno": "~5.6.3",
     "min-dash": "^4.2.2",
     "min-dom": "^4.2.1",
