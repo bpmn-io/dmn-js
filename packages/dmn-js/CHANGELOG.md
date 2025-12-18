@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.5.0
+
+* `DEPS`: update to `@bpmn-io/feel-editor@2`
+
 ## 17.4.0
 
 * `FEAT`: suggest latest Camunda FEEL built-ins, now loaded from `feel-builtins` ([@bpmn-io/feel-editor#71](https://github.com/bpmn-io/feel-editor/pull/71))
