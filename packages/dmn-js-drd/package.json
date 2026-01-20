@@ -31,7 +31,7 @@
     "dmn-js-shared": "^17.5.0",
     "inherits-browser": "^0.1.0",
     "min-dash": "^5.0.0",
-    "min-dom": "^4.2.1",
+    "min-dom": "^5.1.2",
     "object-refs": "^0.4.0",
     "tiny-svg": "^3.1.3"
   },
