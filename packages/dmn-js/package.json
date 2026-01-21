@@ -42,11 +42,11 @@
     "decision modeling"
   ],
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-replace": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "axe-core": "^4.10.2",
     "cpy": "^13.0.0",
@@ -56,8 +56,8 @@
     "dmn-font": "^0.6.2",
     "execa": "^9.5.1",
     "min-dom": "^5.1.2",
-    "rollup": "^4.24.4",
-    "rollup-plugin-license": "^3.5.3"
+    "rollup": "^4.55.3",
+    "rollup-plugin-license": "^3.6.0"
   },
   "dependencies": {
     "dmn-js-boxed-expression": "^17.5.0",
