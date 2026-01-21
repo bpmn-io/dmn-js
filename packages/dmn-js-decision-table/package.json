@@ -38,7 +38,7 @@
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",
     "min-dom": "^5.1.2",
-    "selection-ranges": "^3.0.2",
+    "selection-ranges": "^4.1.1",
     "table-js": "^9.2.0"
   }
 }
