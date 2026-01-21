@@ -9,7 +9,7 @@ import {
   getWindowSelection
 } from 'selection-ranges';
 
-import selectionUpdate from 'selection-update';
+import { calculateUpdate } from 'selection-update';
 
 
 /**
@@ -100,7 +100,7 @@ export default class ContentEditable extends Component {
 
     const newRange = (
       newText !== text
-        ? selectionUpdate(range, text, newText)
+        ? calculateUpdate(range, text, newText)
         : range
     );
 
