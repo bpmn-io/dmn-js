@@ -27,7 +27,7 @@
     "@bpmn-io/feel-editor": "^2.0.0",
     "diagram-js": "^15.6.0",
     "didi": "^11.0.0",
-    "dmn-moddle": "^11.0.0",
+    "dmn-moddle": "^12.0.1",
     "ids": "^3.0.0",
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",
