@@ -1,6 +1,7 @@
-import DmnModdle from 'dmn-moddle';
+import { DmnModdle } from 'dmn-moddle';
 
 import { isFeel } from 'src/util/ModelUtil';
+
 
 describe('ModelUtil', function() {
 

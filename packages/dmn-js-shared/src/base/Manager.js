@@ -1,6 +1,6 @@
 import EventBus from 'diagram-js/lib/core/EventBus';
 
-import DmnModdle from 'dmn-moddle';
+import { DmnModdle } from 'dmn-moddle';
 
 import {
   domify,

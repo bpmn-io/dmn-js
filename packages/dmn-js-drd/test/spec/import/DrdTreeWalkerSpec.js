@@ -2,7 +2,7 @@
 
 import DrdTreeWalker from 'src/import/DrdTreeWalker';
 
-import DmnModdle from 'dmn-moddle';
+import { DmnModdle } from 'dmn-moddle';
 
 import simpleXML from 'test/fixtures/dmn/simple-1-3.dmn';
 
