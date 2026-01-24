@@ -6,6 +6,18 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.6.0
+
+* `DEPS`: update to `diagram-js@15.6.0`
+* `DEPS`: update to `min-dom@5.1.2`
+* `DEPS`: update to `dmn-moddle@12.0.1`
+* `DEPS`: update to `selection-ranges@4.1.1`
+* `DEPS`: update to `selection-update@1.1.1`
+* `DEPS`: update to `table-js@9.4.0`
+* `DEPS`: update to `ids@3.0.0`
+* `DEPS`: update to `@bpmn-io/feel-editor@2.1.0`
+* `DEPS`: update to `diagram-js-direct-editing@3.3.0`
+
 ## 17.5.0
 
 * `DEPS`: update to `@bpmn-io/feel-editor@2`
