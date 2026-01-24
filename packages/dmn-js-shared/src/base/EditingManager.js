@@ -1,6 +1,6 @@
 import Manager from './Manager';
 
-import Ids from 'ids';
+import { Ids } from 'ids';
 
 import { isAny } from '../util/ModelUtil';
 
