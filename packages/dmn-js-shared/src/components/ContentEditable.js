@@ -46,25 +46,6 @@ export default class ContentEditable extends Component {
     super(props, context);
 
     this.state = {};
-
-    // TODO(nikku): remove once we drop IE 11 support
-    if (isIE()) {
-
-      // onInput shim for IE <= 11
-      this.onInputIEPolyfill = (event) => {
-
-        var oldText = this.node.innerHTML;
-
-        setTimeout(() => {
-
-          var text = this.node.innerHTML;
-          if (oldText !== text) {
-            this.onInput(event);
-          }
-        }, 0);
-      };
-
-    }
   }
 
   componentWillUpdate(newProps, newState) {
@@ -181,19 +162,7 @@ export default class ContentEditable extends Component {
     propsInput(text);
   };
 
-  // TODO(barmac): remove once we drop IE 11 support
-  onkeypress = (event) => {
-    if (this.onInputIEPolyfill) {
-      this.onInputIEPolyfill(event);
-    }
-  };
-
   onPaste = (event) => {
-
-    // TODO(barmac): remove once we drop IE 11 support
-    if (this.onInputIEPolyfill) {
-      this.onInputIEPolyfill(event);
-    }
 
     if (this.props.singleLine) {
       const text = (event.clipboardData || window.clipboardData).getData('text');
@@ -290,19 +259,6 @@ function insertLineBreak() {
   newRange.setEndAfter(br);
 
   applyRange(newRange);
-}
-
-function isIE() {
-  var ua = window.navigator.userAgent;
-
-  return (
-
-    // IE 10 or older
-    ua.indexOf('MSIE ') > 0 ||
-
-    // IE 11
-    ua.indexOf('Trident/') > 0
-  );
 }
 
 function isCmd(event) {
