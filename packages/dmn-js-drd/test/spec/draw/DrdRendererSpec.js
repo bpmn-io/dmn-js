@@ -38,6 +38,11 @@ describe('draw - DrdRenderer', function() {
     return bootstrapViewer(xml).call(this);
   });
 
+  it('Decision Service', function() {
+    var xml = require('../../fixtures/dmn/decision-service.dmn');
+
+    return bootstrapViewer(xml).call(this);
+  });
 
   describe('colors', function() {
 

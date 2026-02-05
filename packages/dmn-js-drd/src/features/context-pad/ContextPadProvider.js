@@ -163,7 +163,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     };
   }
 
-  if (is(businessObject, 'dmn:Decision')) {
+  if (isAny(businessObject, [ 'dmn:Decision', 'dmn:DecisionService' ])) {
     assign(actions, {
       'append.decision': appendAction(
         'dmn:Decision',
@@ -191,7 +191,8 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   if (isAny(businessObject, [
     'dmn:BusinessKnowledgeModel',
-    'dmn:Decision'
+    'dmn:Decision',
+    'dmn:DecisionService'
   ])) {
     assign(actions, {
       'append.business-knowledge-model': appendAction(
