@@ -31,7 +31,7 @@
     "ids": "^3.0.0",
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",
-    "min-dom": "^5.1.2",
+    "min-dom": "^5.2.0",
     "selection-ranges": "^4.1.1",
     "selection-update": "^1.1.1",
     "table-js": "^9.4.0"
