@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 17.6.0
 
-* `DEPS`: update to `diagram-js@15.6.0`
+* `DEPS`: update to `diagram-js@15.7.0`
 * `DEPS`: update to `min-dom@5.1.2`
 * `DEPS`: update to `dmn-moddle@12.0.1`
 * `DEPS`: update to `selection-ranges@4.1.1`
