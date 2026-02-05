@@ -34,7 +34,7 @@ git clone git@github.com:bpmn-io/dmn-js.git
 npm run all
 
 // Running the test suite with every file change
-TEST_BROWSERS=(Chrome|Firefox|IE) npm run dev -- dmn-js
+TEST_BROWSERS=(Chrome|Firefox) npm run dev -- dmn-js
 ```
 
 
