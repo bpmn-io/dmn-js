@@ -1,0 +1,4 @@
+include:
+  - project: 'fp/open-source/os-ci'
+    file:
+      - '.gitlab-ci.yml'
