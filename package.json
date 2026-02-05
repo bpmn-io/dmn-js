@@ -43,7 +43,7 @@
     "babel-plugin-inferno": "~5.0.0",
     "babel-plugin-istanbul": "^7.0.1",
     "chai": "^4.5.0",
-    "cross-env": "^10.0.0",
+    "cross-env": "^10.1.0",
     "del-cli": "^7.0.0",
     "eslint": "^9.39.2",
     "eslint-plugin-bpmn-io": "^2.2.0",
