@@ -32,7 +32,7 @@
   "dependencies": {
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
     "css.escape": "^1.5.1",
-    "diagram-js": "^15.6.0",
+    "diagram-js": "^15.7.0",
     "dmn-js-shared": "^17.5.0",
     "escape-html": "^1.0.3",
     "inferno": "~5.6.3",
