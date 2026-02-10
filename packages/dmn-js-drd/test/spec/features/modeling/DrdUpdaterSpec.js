@@ -560,6 +560,74 @@ describe('features/modeling - DrdUpdater', function() {
     ));
 
   });
+
+
+  describe('DecisionService', function() {
+
+    var decisionServiceXML = require('./drd-updater-decision-service.dmn');
+
+    beforeEach(bootstrapModeler(decisionServiceXML, { modules: testModules }));
+
+
+    describe('update parent', function() {
+
+      it('should update parent when decision is moved into DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision = elementRegistry.get('Decision_Outside'),
+              decisionBo = decision.businessObject,
+              decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject,
+              definitions = elementRegistry.get('Definitions_1'),
+              definitionsBo = definitions.businessObject;
+
+          // when
+          modeling.moveShape(decision, { x: 150, y: 280 }, decisionService);
+
+          // then
+          expect(decision.parent).to.equal(decisionService);
+          expect(decisionBo.$parent).to.equal(definitionsBo);
+          expect(definitionsBo.drgElement).to.include(decisionBo);
+
+          var outputDecisions = decisionServiceBo.get('outputDecision');
+          expect(outputDecisions.some(function(d) {
+            return d.href === '#Decision_Outside';
+          })).to.be.true;
+        }
+      ));
+
+
+      it('should update parent when decision is moved out of DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision = elementRegistry.get('Decision_InOutput'),
+              decisionBo = decision.businessObject,
+              decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject,
+              definitions = elementRegistry.get('Definitions_1'),
+              definitionsBo = definitions.businessObject;
+
+          // when
+          modeling.moveShape(decision, { x: 300, y: -100 }, definitions);
+
+          // then
+          expect(decision.parent).to.equal(definitions);
+          expect(decisionBo.$parent).to.equal(definitionsBo);
+          expect(definitionsBo.drgElement).to.include(decisionBo);
+
+          var outputDecisions = decisionServiceBo.get('outputDecision');
+          expect(outputDecisions.some(function(d) {
+            return d.href === '#Decision_InOutput';
+          })).to.be.false;
+        }
+      ));
+
+    });
+
+  });
+
 });
 
 

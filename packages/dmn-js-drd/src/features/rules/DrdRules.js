@@ -68,7 +68,7 @@ DrdRules.prototype.init = function() {
   this.addRule('shape.resize', function(context) {
     var shape = context.shape;
 
-    return is(shape, 'dmn:TextAnnotation');
+    return isAny(shape, [ 'dmn:TextAnnotation', 'dmn:DecisionService' ]);
   });
 
 };
@@ -107,6 +107,10 @@ function canConnect(source, target) {
       return { type: 'dmn:AuthorityRequirement' };
     }
 
+    if (is(target, 'dmn:DecisionService')) {
+      return { type: 'dmn:KnowledgeRequirement' };
+    }
+
   }
 
   if (is(source, 'dmn:Definitions') || is(target, 'dmn:Definitions')) {
@@ -134,6 +138,14 @@ function canConnect(source, target) {
     return { type: 'dmn:AuthorityRequirement' };
   }
 
+  if (is(source, 'dmn:DecisionService') &&
+      isAny(target, [
+        'dmn:BusinessKnowledgeModel',
+        'dmn:Decision'
+      ])) {
+    return { type: 'dmn:KnowledgeRequirement' };
+  }
+
   if ((is(source, 'dmn:TextAnnotation') && !is(target, 'dmn:TextAnnotation'))
   || (!is(source, 'dmn:TextAnnotation') && is(target, 'dmn:TextAnnotation'))) {
     return { type: 'dmn:Association' };
@@ -143,13 +155,23 @@ function canConnect(source, target) {
 }
 
 function canCreate(shape, target) {
-  return isAny(shape, [
+  if (isAny(shape, [
     'dmn:BusinessKnowledgeModel',
     'dmn:Decision',
+    'dmn:DecisionService',
     'dmn:InputData',
     'dmn:KnowledgeSource',
     'dmn:TextAnnotation'
-  ]) && is(target, 'dmn:Definitions');
+  ]) && is(target, 'dmn:Definitions')) {
+    return true;
+  }
+
+  // Allow creating Decision in DecisionService
+  if (is(shape, 'dmn:Decision') && is(target, 'dmn:DecisionService')) {
+    return true;
+  }
+
+  return false;
 }
 
 function canMove(elements, target) {
@@ -166,6 +188,7 @@ function canMove(elements, target) {
     return isAny(element, [
       'dmn:BusinessKnowledgeModel',
       'dmn:Decision',
+      'dmn:DecisionService',
       'dmn:InputData',
       'dmn:KnowledgeSource',
       'dmn:TextAnnotation',
@@ -176,6 +199,13 @@ function canMove(elements, target) {
     ]);
   }) && is(target, 'dmn:Definitions')) {
     return true;
+  }
+
+  // Allow moving Decision into DecisionService
+  if (is(target, 'dmn:DecisionService')) {
+    return every(elements, function(element) {
+      return is(element, 'dmn:Decision');
+    });
   }
 
   return false;

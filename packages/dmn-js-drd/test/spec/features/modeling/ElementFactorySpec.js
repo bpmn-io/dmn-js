@@ -247,6 +247,58 @@ describe('features/modeling - create elements', function() {
         });
       }
     ));
+
+
+    it('should create a DecisionService', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:DecisionService'),
+            decisionService = elementFactory.createShape({
+              type: 'dmn:DecisionService',
+              businessObject: businessObject,
+              x: 100,
+              y: 100
+            });
+
+        // when
+        modeling.createShape(decisionService, { x: 100, y: 100 }, rootElement);
+
+        // then
+        expectShape(decisionService, {
+          type: 'dmn:DecisionService',
+          width: 320,
+          height: 320,
+          businessObject: businessObject
+        });
+      }
+    ));
+
+    it('should create a DecisionService with variable', inject(
+      function(canvas, drdFactory, elementFactory, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement(),
+            businessObject = drdFactory.create('dmn:DecisionService'),
+            decisionService = elementFactory.createShape({
+              type: 'dmn:DecisionService',
+              businessObject: businessObject,
+              x: 100,
+              y: 100
+            });
+
+        // when
+        modeling.createShape(decisionService, { x: 100, y: 100 }, rootElement);
+
+        // then
+        var variable = businessObject.variable;
+        expect(variable).to.exist;
+        expect(variable.$type).to.eql('dmn:InformationItem');
+        expect(variable.name).to.eql('New Decision Service');
+        expect(variable.$parent).to.equal(businessObject);
+      }
+    ));
   });
 
 

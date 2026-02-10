@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="_definitions" name="Decision Service Behavior Test" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_Outside" name="Decision Outside">
+    <variable id="InformationItem_Outside" name="Decision Outside" />
+  </decision>
+  <decision id="Decision_InOutput" name="Decision In Output">
+    <variable id="InformationItem_InOutput" name="Decision In Output" />
+    <informationRequirement id="InfoReq_1">
+      <requiredDecision href="#Decision_1" />
+    </informationRequirement>
+    <informationRequirement id="InfoReq_2">
+      <requiredInput href="#InputData_1" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_InEncapsulated" name="Decision In Encapsulated">
+    <variable id="InformationItem_InEncapsulated" name="Decision In Encapsulated" />
+  </decision>
+  <inputData id="InputData_1" name="Input Data 1">
+    <variable id="InformationItem_InputData1" name="Input Data 1" />
+  </inputData>
+  <decision id="Decision_1" name="Decision_1">
+    <variable id="InformationItem_Decision" name="Decision_1" />
+  </decision>
+  <decision id="Decision_Standalone" name="Decision Standalone">
+    <variable id="InformationItem_Standalone" name="Decision Standalone" />
+  </decision>
+  <decisionService id="DecisionService_1" name="Test Decision Service">
+    <variable id="InformationItem_DS1" name="Test Decision Service" />
+    <outputDecision href="#Decision_InOutput" />
+    <encapsulatedDecision href="#Decision_InEncapsulated" />
+    <inputDecision href="#Decision_1"/>
+    <inputData href="#InputData_1" />
+  </decisionService>
+  <decisionService id="DecisionService_2" name="Second Decision Service">
+    <variable id="InformationItem_DS2" name="Second Decision Service" />
+  </decisionService>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1">
+      <dmndi:DMNShape id="DMNShape_Decision_Outside" dmnElementRef="Decision_Outside">
+        <dc:Bounds height="80" width="180" x="100" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_1" dmnElementRef="Decision_1">
+        <dc:Bounds height="80" width="180" x="400" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_Standalone" dmnElementRef="Decision_Standalone">
+        <dc:Bounds height="80" width="180" x="650" y="350" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_InputData_1" dmnElementRef="InputData_1">
+        <dc:Bounds height="45" width="125" x="450" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_DecisionService_1" dmnElementRef="DecisionService_1">
+        <dc:Bounds height="300" width="400" x="100" y="300" />
+        <dmndi:DMNDecisionServiceDividerLine>
+          <di:waypoint x="100" y="450" />
+          <di:waypoint x="500" y="450" />
+        </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_InOutput" dmnElementRef="Decision_InOutput">
+        <dc:Bounds height="80" width="180" x="200" y="350" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_InEncapsulated" dmnElementRef="Decision_InEncapsulated">
+        <dc:Bounds height="80" width="180" x="200" y="500" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_DecisionService_2" dmnElementRef="DecisionService_2">
+        <dc:Bounds height="200" width="300" x="600" y="300" />
+        <dmndi:DMNDecisionServiceDividerLine>
+          <di:waypoint x="600" y="400" />
+          <di:waypoint x="900" y="400" />
+        </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_InfoReq_1" dmnElementRef="InfoReq_1">
+        <di:waypoint x="490" y="180" />
+        <di:waypoint x="290" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_InfoReq_2" dmnElementRef="InfoReq_2">
+        <di:waypoint x="512" y="145" />
+        <di:waypoint x="290" y="350" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

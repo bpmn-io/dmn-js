@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <decisionService id="DecisionService_0u44mqs" name="New Decision Service">
+    <variable id="InformationItem_1ln5h27" name="New Decision Service" />
+  </decisionService>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_04m4p5u">
+      <dmndi:DMNShape id="DMNShape_0ebc781" dmnElementRef="DecisionService_0u44mqs">
+        <dc:Bounds height="335" width="400" x="330" y="225" />
+        <dmndi:DMNDecisionServiceDividerLine>
+          <di:waypoint x="0" y="75" />
+          <di:waypoint x="200" y="75" />
+        </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
