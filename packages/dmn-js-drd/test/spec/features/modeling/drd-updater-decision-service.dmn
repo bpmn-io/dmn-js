@@ -30,7 +30,7 @@
           <di:waypoint x="100" y="450" />
           <di:waypoint x="500" y="450" />
         </dmndi:DMNDecisionServiceDividerLine>
-      </dmndi:DMNShape>br
+      </dmndi:DMNShape>
       <dmndi:DMNShape id="DMNShape_Decision_InOutput" dmnElementRef="Decision_InOutput">
         <dc:Bounds height="80" width="180" x="200" y="350" />
       </dmndi:DMNShape>
