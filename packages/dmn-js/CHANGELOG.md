@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.7.0
+
+* `DEPS`: update to `ids@3.0.1`
+* `DEPS`: update to `min-dom@5.3.0`
+* `DEPS`: update to `@bpmn-io/feel-editor@2.5.0`
+
 ## 17.6.0
 
 * `CHORE`: remove remainders of IE 11 support
