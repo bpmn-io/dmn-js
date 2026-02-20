@@ -348,6 +348,63 @@ export default function DrdRenderer(
 
       return rect;
     },
+     'dmn:DecisionService': function(p, element) {
+      var rect = drawRect(p, element.width, element.height, 12, {
+        stroke: getStrokeColor(element, defaultStrokeColor),
+        strokeWidth: 4,
+        fill: getFillColor(element, defaultFillColor)
+      });
+
+      var dividerY = element.height / 2;
+      var line = svgCreate('line');
+      svgAttr(line, {
+        x1: 0,
+        y1: dividerY,
+        x2: element.width,
+        y2: dividerY,
+        stroke: getStrokeColor(element, defaultStrokeColor),
+        strokeWidth: 2
+      });
+      svgAppend(p, line);
+
+      var outputText = svgCreate('text');
+      svgAttr(outputText, {
+        x: element.width / 2,
+        y: dividerY - 10,
+        fill: getLabelColor(element, defaultLabelColor, defaultStrokeColor),
+        'font-family': 'Arial, sans-serif',
+        'font-weight': 'bold',
+        'font-size': '12px',
+        'text-anchor': 'middle',
+        'dominant-baseline': 'middle',
+        'display': 'none'
+      });
+      outputText.textContent = 'OUTPUT';
+      domAttr(outputText, 'class', 'djs-label dmn-decision-service-label');
+      svgAppend(p, outputText);
+
+      var encapsulatedText = svgCreate('text');
+      svgAttr(encapsulatedText, {
+        x: element.width / 2,
+        y: dividerY + 10,
+        fill: getLabelColor(element, defaultLabelColor, defaultStrokeColor),
+        'font-family': 'Arial, sans-serif',
+        'font-weight': 'bold',
+        'font-size': '12px',
+        'text-anchor': 'middle',
+        'dominant-baseline': 'middle',
+        'display': 'none'
+      });
+      encapsulatedText.textContent = 'ENCAPSULATED';
+      domAttr(encapsulatedText, 'class', 'djs-label dmn-decision-service-label');
+      svgAppend(p, encapsulatedText);
+
+      renderEmbeddedLabel(p, element, 'center-top', {
+        padding: 10
+      });
+
+      return rect;
+    },
     'dmn:TextAnnotation': function(p, element) {
       var style = {
         'fill': 'none',

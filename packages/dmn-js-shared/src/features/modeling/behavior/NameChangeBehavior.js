@@ -39,7 +39,7 @@ export default class NameChangeBehavior extends CommandInterceptor {
       return;
     }
 
-    if (!(is(element, 'dmn:Decision') || is(element, 'dmn:BusinessKnowledgeModel'))) {
+    if (!(is(element, 'dmn:Decision') || is(element, 'dmn:BusinessKnowledgeModel') || is(element, 'dmn:DecisionService'))) {
       return;
     }
 
