@@ -45,7 +45,7 @@
     "chai": "^4.5.0",
     "cross-env": "^10.1.0",
     "del-cli": "^7.0.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-plugin-bpmn-io": "^2.2.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher-2": "^3.3.0",
