@@ -7,7 +7,14 @@ import {
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
-
+/**
+ *
+ * @param {import('diagram-js/lib/core/EventBus').default} eventBus
+ * @param {import('diagram-js/lib/core/Canvas').default} canvas
+ * @param {import('diagram-js/lib/core/ElementFactory').default} elementFactory
+ * @param {import('diagram-js/lib/core/ElementRegistry').default} elementRegistry
+ * @constructor
+ */
 export default function DrdImporter(
     eventBus,
     canvas,
