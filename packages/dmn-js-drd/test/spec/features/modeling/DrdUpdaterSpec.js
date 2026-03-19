@@ -624,8 +624,31 @@ describe('features/modeling - DrdUpdater', function() {
         }
       ));
 
-    });
+      it('should update divider line waypoints when DecisionService is resized', inject(
+        function(elementRegistry, modeling) {
 
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+          var initialX = decisionService.x;
+          var initialY = decisionService.y;
+
+          // when
+          modeling.resizeShape(decisionService, { x: initialX, y: initialY, width: 500, height: 400 });
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+          expect(dividerLine).to.exist;
+          expect(dividerLine.waypoint).to.have.lengthOf(2);
+          var expectedY = initialY + (400 / 2);
+          expect(dividerLine.waypoint[0].x).to.equal(initialX);
+          expect(dividerLine.waypoint[0].y).to.equal(expectedY);
+          expect(dividerLine.waypoint[1].x).to.equal(initialX + 500);
+          expect(dividerLine.waypoint[1].y).to.equal(expectedY);
+        }
+      ));
+
+    });
   });
 
 });

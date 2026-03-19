@@ -8,8 +8,8 @@
       <dmndi:DMNShape id="DMNShape_0ebc781" dmnElementRef="DecisionService_0u44mqs">
         <dc:Bounds height="335" width="400" x="330" y="225" />
         <dmndi:DMNDecisionServiceDividerLine>
-          <di:waypoint x="0" y="75" />
-          <di:waypoint x="200" y="75" />
+          <di:waypoint x="330" y="392.5" />
+          <di:waypoint x="730" y="392.5" />
         </dmndi:DMNDecisionServiceDividerLine>
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>

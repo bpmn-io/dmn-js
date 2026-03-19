@@ -277,6 +277,25 @@ DrdUpdater.prototype.updateBounds = function(shape) {
     width: shape.width,
     height: shape.height
   });
+
+  // update decision service divider line
+  if (is(shape, 'dmn:DecisionService') && businessObject.di.decisionServiceDividerLine) {
+    var dividerY = shape.y + (shape.height / 2);
+    var dividerLine = businessObject.di.decisionServiceDividerLine;
+
+    if (dividerLine.waypoint && dividerLine.waypoint.length === 2) {
+      assign(dividerLine.waypoint[0], {
+        x: shape.x,
+        y: dividerY
+      });
+
+
+      assign(dividerLine.waypoint[1], {
+        x: shape.x + shape.width,
+        y: dividerY
+      });
+    }
+  }
 };
 
 DrdUpdater.prototype.updateConnectionWaypoints = function(context) {
@@ -322,13 +341,6 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
 
     // Find the Definitions element (Decision still remains under Definitions)
     var definitions = parent.$parent;
-
-    if (!definitions || !is(definitions, 'dmn:Definitions')) {
-      definitions = parent;
-      while (definitions && !is(definitions, 'dmn:Definitions')) {
-        definitions = definitions.$parent;
-      }
-    }
 
     // In case the decision was previously referenced by any services, clean up first
     if (definitions) {
