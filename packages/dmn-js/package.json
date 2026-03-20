@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "17.6.0",
+  "version": "17.7.0",
   "files": [
     "dist",
     "lib",
@@ -42,12 +42,12 @@
     "decision modeling"
   ],
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-babel": "^7.0.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-replace": "^6.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-terser": "^1.0.0",
     "axe-core": "^4.11.1",
     "cpy": "^13.2.0",
     "del": "^8.0.0",
@@ -55,15 +55,15 @@
     "diagram-js": "^15.7.0",
     "dmn-font": "^0.6.2",
     "execa": "^9.6.1",
-    "min-dom": "^5.2.0",
+    "min-dom": "^5.3.0",
     "rollup": "^4.55.3",
     "rollup-plugin-license": "^3.6.0"
   },
   "dependencies": {
-    "dmn-js-boxed-expression": "^17.6.0",
-    "dmn-js-decision-table": "^17.6.0",
-    "dmn-js-drd": "^17.6.0",
-    "dmn-js-literal-expression": "^17.6.0",
-    "dmn-js-shared": "^17.6.0"
+    "dmn-js-boxed-expression": "^17.7.0",
+    "dmn-js-decision-table": "^17.7.0",
+    "dmn-js-drd": "^17.7.0",
+    "dmn-js-literal-expression": "^17.7.0",
+    "dmn-js-shared": "^17.7.0"
   }
 }

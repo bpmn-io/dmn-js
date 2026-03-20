@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-decision-table",
   "description": "A decision table view for dmn-js",
-  "version": "17.6.0",
+  "version": "17.7.0",
   "files": [
     "assets",
     "lib"
@@ -33,11 +33,11 @@
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
     "css.escape": "^1.5.1",
     "diagram-js": "^15.7.0",
-    "dmn-js-shared": "^17.6.0",
+    "dmn-js-shared": "^17.7.0",
     "escape-html": "^1.0.3",
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",
-    "min-dom": "^5.2.0",
+    "min-dom": "^5.3.0",
     "selection-ranges": "^4.1.1",
     "table-js": "^9.4.0"
   }
