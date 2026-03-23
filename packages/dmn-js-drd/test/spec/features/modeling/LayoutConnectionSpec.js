@@ -11,6 +11,8 @@ import {
   getMid
 } from 'diagram-js/lib/layout/LayoutUtil';
 import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/modeling - layout connection', function() {
@@ -19,7 +21,9 @@ describe('features/modeling - layout connection', function() {
 
   var testModules = [
     coreModule,
-    modelingModule
+    modelingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   beforeEach(bootstrapModeler(diagramXML, {

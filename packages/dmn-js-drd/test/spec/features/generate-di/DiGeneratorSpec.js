@@ -9,6 +9,8 @@ import diGeneratorModule from 'src/features/generate-di';
 
 import noDiXML from 'test/fixtures/dmn/no-di.dmn';
 import emptyDefinitionsXML from 'test/fixtures/dmn/empty-definitions.dmn';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features - generate-di', function() {
@@ -17,7 +19,9 @@ describe('features - generate-di', function() {
     modules: [
       coreModule,
       modelingModule,
-      diGeneratorModule
+      diGeneratorModule,
+      overlaysModule,
+      dataTypesModule
     ]
   }));
 
@@ -62,7 +66,9 @@ describe('features - generate-di', function() {
       modules: [
         coreModule,
         modelingModule,
-        diGeneratorModule
+        diGeneratorModule,
+        overlaysModule,
+        dataTypesModule
       ]
     }));
 

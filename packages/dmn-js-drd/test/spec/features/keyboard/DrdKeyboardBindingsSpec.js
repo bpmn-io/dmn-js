@@ -19,6 +19,8 @@ import searchModule from 'src/features/search';
 import {
   createKeyEvent
 } from 'test/util/KeyEvents';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 /* global sinon */
 
@@ -36,7 +38,9 @@ describe('features - keyboard', function() {
       keyboardModule,
       editorActionsModule,
       modelingModule,
-      searchModule
+      searchModule,
+      overlaysModule,
+      dataTypesModule
     ]
   }));
 

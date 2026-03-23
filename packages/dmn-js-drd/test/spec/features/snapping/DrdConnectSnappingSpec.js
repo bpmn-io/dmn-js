@@ -20,6 +20,8 @@ import {
 } from 'diagram-js/lib/layout/LayoutUtil';
 
 import diagramXML from './DrdConnectSnapping.dmn';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 var spy = sinon.spy;
 
@@ -32,7 +34,9 @@ describe('features/snapping - drd connect snapping', function() {
     connectModule,
     coreModule,
     modelingModule,
-    snappingModule
+    snappingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));

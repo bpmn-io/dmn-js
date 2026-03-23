@@ -10,6 +10,8 @@ import modelingModule from 'src/features/modeling';
 import selectionModule from 'diagram-js/lib/features/selection';
 
 import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/auto-place', function() {
@@ -24,7 +26,9 @@ describe('features/auto-place', function() {
         coreModule,
         labelEditingModule,
         modelingModule,
-        selectionModule
+        selectionModule,
+        overlaysModule,
+        dataTypesModule
       ]
     }));
 
@@ -143,7 +147,9 @@ describe('features/auto-place', function() {
         coreModule,
         labelEditingModule,
         modelingModule,
-        selectionModule
+        selectionModule,
+        overlaysModule,
+        dataTypesModule
       ]
     }));
 

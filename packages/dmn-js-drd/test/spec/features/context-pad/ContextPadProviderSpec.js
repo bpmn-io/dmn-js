@@ -24,6 +24,8 @@ import modelingModule from 'src/features/modeling';
 import {
   createCanvasEvent as canvasEvent
 } from '../../../util/MockEvents';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features - context-pad', function() {
@@ -33,7 +35,9 @@ describe('features - context-pad', function() {
     modelingModule,
     contextPadModule,
     createModule,
-    customRulesModule
+    customRulesModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
 

@@ -5,11 +5,13 @@ import {
 
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/modeling - move elements', function() {
 
-  var testModules = [ coreModule, modelingModule ];
+  var testModules = [ coreModule, modelingModule, overlaysModule, dataTypesModule ];
 
   describe('shapes', function() {
 

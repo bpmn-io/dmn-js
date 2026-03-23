@@ -6,8 +6,10 @@ import {
 
 import coreModule from 'src/core';
 import modelingModule from 'src/features/modeling';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
-var testModules = [ coreModule, modelingModule ];
+var testModules = [ coreModule, modelingModule, overlaysModule, dataTypesModule ];
 
 
 describe('features/rules', function() {

@@ -7,11 +7,13 @@ import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
 
 import diagramXML from 'test/fixtures/dmn/simple-1-3.dmn';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/modeling - DrdFactory', function() {
 
-  var testModules = [ modelingModule, coreModule ];
+  var testModules = [ modelingModule, coreModule, overlaysModule, dataTypesModule ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
 

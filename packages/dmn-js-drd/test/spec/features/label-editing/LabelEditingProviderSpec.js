@@ -21,6 +21,8 @@ import {
 } from 'test/util/MockEvents';
 
 import { isString } from 'min-dash';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features - label-editing', function() {
@@ -34,7 +36,9 @@ describe('features - label-editing', function() {
     draggingModule,
     drillDownModule,
     labelEditingModule,
-    modelingModule
+    modelingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));

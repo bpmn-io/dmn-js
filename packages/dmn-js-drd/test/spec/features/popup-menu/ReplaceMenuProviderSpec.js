@@ -21,6 +21,8 @@ import {
   query as domQuery,
   queryAll as domQueryAll
 } from 'min-dom';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/popup-menu - replace menu provider', function() {
@@ -31,7 +33,9 @@ describe('features/popup-menu - replace menu provider', function() {
     coreModule,
     modelingModule,
     replaceMenuProviderModule,
-    customRulesModule
+    customRulesModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   var openPopup = function(element, offset) {

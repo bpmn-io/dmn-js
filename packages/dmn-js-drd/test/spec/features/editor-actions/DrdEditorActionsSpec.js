@@ -13,6 +13,8 @@ import distributeElementsModule from 'src/features/distribute-elements';
 import coreModule from 'src/core';
 import lassoTool from 'diagram-js/lib/features/lasso-tool';
 import searchModule from 'src/features/search';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 var diagramXML = require('./DrdEditorActions.dmn');
 
@@ -29,7 +31,9 @@ describe('features/editor-actions', function() {
       lassoToolModule,
       handToolModule,
       lassoTool,
-      searchModule
+      searchModule,
+      overlaysModule,
+      dataTypesModule
     ]
   }));
 

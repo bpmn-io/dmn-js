@@ -219,3 +219,15 @@ h4.dms-heading {
   position: absolute;
   opacity: 0.5;
 }
+
+.dms-type-ref-dropdown {
+  display: block;
+}
+
+.dms-type-ref-select {
+  background-color: var(--color-white);
+  border: 1px solid var(--input-border-color);
+  box-sizing: border-box;
+  width: 7.9rem;
+  border-radius: 11px;
+}

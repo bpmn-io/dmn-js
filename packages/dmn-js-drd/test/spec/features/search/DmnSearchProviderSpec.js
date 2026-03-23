@@ -6,6 +6,8 @@ import {
 import coreModule from 'src/core';
 import modelingModule from 'src/features/modeling';
 import dmnSearchModule from 'src/features/search';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features - DMN search provider', function() {
@@ -13,7 +15,9 @@ describe('features - DMN search provider', function() {
   const testModules = [
     coreModule,
     modelingModule,
-    dmnSearchModule
+    dmnSearchModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
 

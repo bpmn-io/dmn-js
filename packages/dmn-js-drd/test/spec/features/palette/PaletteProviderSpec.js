@@ -11,6 +11,8 @@ import {
   query as domQuery,
   queryAll as domQueryAll
 } from 'min-dom';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/palette', function() {
@@ -20,7 +22,9 @@ describe('features/palette', function() {
   var testModules = [
     coreModule,
     modelingModule,
-    paletteModule
+    paletteModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
