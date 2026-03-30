@@ -17,6 +17,8 @@ import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'src/features/modeling';
 import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
 
 describe('context menu keyboard', function() {
 
@@ -25,11 +27,14 @@ describe('context menu keyboard', function() {
     modules: [
       ContextMenuModule,
       CoreModule,
+      DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
       InteractionEventsModule,
       ModelingModule,
       DecisionRulesModule,
       ContextMenuKeyboard
-    ]
+    ],
+    debounceInput: false
   }));
 
   let testContainer;
@@ -121,14 +126,15 @@ describe('context menu keyboard', function() {
   }));
 
 
-  it('should not throw error when opened without menu entries', inject(function(eventBus) {
+  it('should not throw error on keyboard navigation when menu do not have group entries', inject(function() {
 
     // given
-    // simulate a popup without navigable entries (e.g. input expression editor)
-    eventBus.fire('contextMenu.open', {
-      position: { x: 0, y: 0 },
-      context: { contextMenuType: 'input-edit' }
-    });
+    const cellEl = query('[data-col-id="input1"]', testContainer);
+    triggerMouseEvent(cellEl, 'dblclick');
+
+    // assume
+    expect(query('.context-menu', testContainer)).to.exist;
+    expect(queryAll('.context-menu-group-entry', testContainer)).to.have.length(0);
 
     // when / then
     expect(() => {
