@@ -119,6 +119,22 @@ describe('context menu keyboard', function() {
     const focusedEntry = query('.context-menu-group-entry.focused', testContainer);
     expect(classes(focusedEntry).contains('disabled')).to.be.false;
   }));
+
+
+  it('should not throw error when opened without menu entries', inject(function(eventBus) {
+
+    // given
+    // simulate a popup without navigable entries (e.g. input expression editor)
+    eventBus.fire('contextMenu.open', {
+      position: { x: 0, y: 0 },
+      context: { contextMenuType: 'input-edit' }
+    });
+
+    // when / then
+    expect(() => {
+      triggerKeyEvent(document, 'keydown', { key: 'ArrowDown' });
+    }).not.to.throw();
+  }));
 });
 
 
