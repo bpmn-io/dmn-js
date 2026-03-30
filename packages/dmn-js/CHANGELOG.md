@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: fix error on keyboard navigation in popups without menu entries ([#991](https://github.com/bpmn-io/dmn-js/pull/991))
+
 ## 17.7.0
 
 * `DEPS`: update to `ids@3.0.1`
