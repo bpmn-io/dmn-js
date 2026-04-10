@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.29.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-inferno": "~5.0.0",
-    "babel-plugin-istanbul": "^7.0.1",
+    "babel-plugin-istanbul": "^8.0.0",
     "chai": "^4.5.0",
     "cross-env": "^10.1.0",
     "del-cli": "^7.0.0",
