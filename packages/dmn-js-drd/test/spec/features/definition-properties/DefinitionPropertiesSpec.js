@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import {
   classes as domClasses,
   query as domQuery

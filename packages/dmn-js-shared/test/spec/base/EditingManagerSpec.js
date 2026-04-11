@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import EditingManager from 'src/base/EditingManager';
 
 import TestView from './TestView';

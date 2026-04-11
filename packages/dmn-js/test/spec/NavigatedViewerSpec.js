@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import NavigatedViewer from 'src/NavigatedViewer';
 
 import { expectToBeAccessible } from 'test/helper';

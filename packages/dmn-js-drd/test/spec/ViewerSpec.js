@@ -1,4 +1,5 @@
-/* global sinon */
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 
 import exampleXML from '../fixtures/dmn/di.dmn';
 import emptyDefsXML from '../fixtures/dmn/empty-definitions.dmn';

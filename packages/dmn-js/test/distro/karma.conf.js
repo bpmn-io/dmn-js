@@ -24,14 +24,19 @@ var NODE_ENV = process.env.NODE_ENV;
 
 var NAME_SUFFIX = (NODE_ENV === 'production' ? 'production.min' : 'development');
 
+var basePath = '../..';
+
+var suite = 'test/distro/' + VARIANT + '.js';
+
+
 module.exports = function(karma) {
   karma.set({
 
-    basePath: '../../',
+    basePath,
 
     frameworks: [
-      'mocha',
-      'sinon-chai'
+      'webpack',
+      'mocha'
     ],
 
     files: [
@@ -46,29 +51,26 @@ module.exports = function(karma) {
       'dist/assets/dmn-js-boxed-expression.css',
       { pattern: 'test/distro/diagram.dmn', included: false },
       { pattern: 'dist/assets/**/*', included: false },
-      'test/distro/helper.js',
-      'test/distro/' + VARIANT + '.js'
+      suite
     ],
 
-    reporters: [ 'progress' ],
-
-    customLaunchers: {
-      ChromeHeadless_Linux: {
-        base: 'ChromeHeadless',
-        flags: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox'
-        ],
-        debug: true
-      }
+    preprocessors: {
+      [ suite ]: [ 'webpack' ]
     },
+
+    reporters: [ 'progress' ],
 
     browsers: browsers,
 
     browserNoActivityTimeout: 30000,
 
     singleRun: true,
-    autoWatch: false
+    autoWatch: false,
+
+    webpack: {
+      mode: 'development',
+      devtool: 'eval-source-map'
+    }
   });
 
 };

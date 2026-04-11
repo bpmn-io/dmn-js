@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import doubleDiXML from '../fixtures/dmn/double-di.dmn';
 import exampleXML from '../fixtures/dmn/di.dmn';
 import noDiXML from '../fixtures/dmn/no-di.dmn';

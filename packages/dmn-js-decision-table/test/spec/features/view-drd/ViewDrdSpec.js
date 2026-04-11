@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import DmnDecisionTableViewer from '../../../helper/DecisionTableViewer';
 import MockViewer from './MockViewer';
 

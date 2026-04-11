@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { parseString } from 'src/features/simple-boolean-edit/Utils';
 
 function expectParsed(string, result) {

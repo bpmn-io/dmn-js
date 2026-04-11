@@ -1,4 +1,6 @@
-/* global sinon */
+import { expect } from 'chai';
+
+import * as sinon from 'sinon';
 
 import Manager from 'src/base/Manager';
 import { is } from 'src/util/ModelUtil';

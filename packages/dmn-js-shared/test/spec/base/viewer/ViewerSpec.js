@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import Viewer from 'src/base/viewer/Viewer';
 
 import { domify, remove as domRemove } from 'min-dom';

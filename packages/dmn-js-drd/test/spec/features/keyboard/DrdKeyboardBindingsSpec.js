@@ -1,3 +1,5 @@
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 import {
   bootstrapViewer,
   inject
@@ -20,7 +22,6 @@ import {
   createKeyEvent
 } from 'test/util/KeyEvents';
 
-/* global sinon */
 
 
 describe('features - keyboard', function() {

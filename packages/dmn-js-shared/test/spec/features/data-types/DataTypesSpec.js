@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { bootstrap, getViewerJS } from '../../base/viewer/TestHelper';
 
 import DataTypesModule from 'src/features/data-types';

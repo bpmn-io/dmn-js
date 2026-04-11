@@ -25,8 +25,7 @@ module.exports = function(path) {
 
       frameworks: [
         'webpack',
-        'mocha',
-        'sinon-chai'
+        'mocha'
       ],
 
       files: [
@@ -57,6 +56,10 @@ module.exports = function(path) {
 
         module: {
           rules: [
+            {
+              test: /test\/globals\.js$/,
+              sideEffects: true
+            },
             {
               test: /\.js$/,
               exclude: /node_modules/,
