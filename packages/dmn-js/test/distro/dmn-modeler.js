@@ -1,3 +1,8 @@
+import { expect } from 'chai';
+
+import { testAllViews, testImport } from './helper.js';
+
+
 describe('dmn-modeler', function() {
 
   it('should expose globals', function() {
@@ -15,7 +20,6 @@ describe('dmn-modeler', function() {
     const DmnJS = window.DmnJS;
 
     // then
-    /* global testImport */
     await testImport(DmnJS);
   });
 
@@ -25,7 +29,6 @@ describe('dmn-modeler', function() {
     const DmnJS = window.DmnJS;
 
     // then
-    /* global testAllViews */
     await testAllViews(DmnJS);
   });
 });

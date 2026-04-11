@@ -1,3 +1,5 @@
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 import TestContainer from 'mocha-test-container-support';
 
 import {
@@ -25,7 +27,6 @@ import ModelingModule from 'src/features/modeling';
 
 import testDiagram from './cell-selection.dmn';
 
-/* global sinon */
 
 
 describe('features/cell-selection', function() {

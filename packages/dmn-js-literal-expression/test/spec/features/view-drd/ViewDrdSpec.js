@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import DmnLiteralExpressionViewer from '../../../helper/LiteralExpressionViewer';
 import MockViewer from './MockViewer';
 

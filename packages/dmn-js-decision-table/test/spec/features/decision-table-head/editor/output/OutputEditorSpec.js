@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { Component, render } from 'inferno';
 import {
   findRenderedDOMElementWithClass

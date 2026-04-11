@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { Component, render } from 'inferno';
 
 import TestContainerSupport from 'mocha-test-container-support';

@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { bootstrapModeler, getDecisionTable, inject } from 'test/helper';
 
 import { query as domQuery, queryAll as domQueryAll } from 'min-dom';

@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { bootstrapModeler, inject } from 'test/helper';
 
 import decisionTableXML from './name-change-behavior.dmn';

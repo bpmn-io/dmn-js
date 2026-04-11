@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { DmnModdle } from 'dmn-moddle';
 
 import { isFeel } from 'src/util/ModelUtil';

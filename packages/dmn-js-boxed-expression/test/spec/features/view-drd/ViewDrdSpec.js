@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import BoxedExpressionViewer from '../../../helper/Viewer';
 import MockViewer from './MockViewer';
 

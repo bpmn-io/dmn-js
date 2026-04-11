@@ -1,9 +1,10 @@
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 import { bootstrap, inject } from '../TestHelper';
 
 import CoreModule from 'src/base/viewer/core';
 
 
-/* global sinon */
 
 describe('ChangeSupport', function() {
 

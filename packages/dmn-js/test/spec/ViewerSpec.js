@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import Viewer from 'src/Viewer';
 
 import DefaultExport from '../../src';
