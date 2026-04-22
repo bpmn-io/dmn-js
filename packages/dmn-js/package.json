@@ -8,6 +8,9 @@
     "test/helper"
   ],
   "scripts": {
+    "start": "cross-env SINGLE_START=modeler npm run dev",
+    "start:viewer": "cross-env SINGLE_START=viewer npm run dev",
+    "start:navigated-viewer": "cross-env SINGLE_START=navigated-viewer npm run dev",
     "test": "karma start",
     "dev": "npm run test -- --no-single-run --auto-watch",
     "test:distro": "node tasks/test-distro.mjs",
