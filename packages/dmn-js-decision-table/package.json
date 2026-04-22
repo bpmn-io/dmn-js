@@ -7,6 +7,8 @@
     "lib"
   ],
   "scripts": {
+    "start": "cross-env SINGLE_START=editor npm run dev",
+    "start:viewer": "cross-env SINGLE_START=viewer npm run dev",
     "test": "karma start",
     "build": "del-cli lib && babel -s --quiet -d lib src",
     "dev": "npm test -- --no-single-run --auto-watch",

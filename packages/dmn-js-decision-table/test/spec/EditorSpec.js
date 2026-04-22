@@ -2,8 +2,18 @@ import TestContainer from 'mocha-test-container-support';
 
 import DmnDecisionTableEditor from '../helper/DecisionTableEditor';
 
+import { insertCSS } from '../helper';
+
 import simpleDiagramXML from './simple.dmn';
 import complexDiagramXML from './complex.dmn';
+
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'editor';
+
+if (singleStart) {
+  insertCSS('dmn-js-decision-table-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
 
 
 describe('DecisionTable', function() {
@@ -12,7 +22,7 @@ describe('DecisionTable', function() {
 
   let dmnJS;
 
-  afterEach(function() {
+  singleStart || afterEach(function() {
     if (dmnJS) {
       dmnJS.destroy();
       dmnJS = null;

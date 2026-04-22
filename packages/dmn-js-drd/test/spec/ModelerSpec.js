@@ -7,6 +7,16 @@ import TestContainer from 'mocha-test-container-support';
 
 import DrdModeler from '../helper/DrdModeler';
 
+import { insertCSS } from '../helper';
+
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
+
+if (singleStart) {
+  insertCSS('dmn-js-drd-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
+
 
 describe('Modeler', function() {
 
@@ -14,6 +24,13 @@ describe('Modeler', function() {
 
   beforeEach(function() {
     container = TestContainer.get(this);
+  });
+
+  singleStart || afterEach(function() {
+    if (modeler) {
+      modeler.destroy();
+      modeler = null;
+    }
   });
 
   function createModeler(xml) {
