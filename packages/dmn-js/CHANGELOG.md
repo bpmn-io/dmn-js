@@ -10,6 +10,7 @@ ___Note:__ Yet to be released changes appear here._
 * `FIX`: fix error on keyboard navigation in popups without menu entries ([#991](https://github.com/bpmn-io/dmn-js/pull/991))
 * `DEPS`: update to `diagram-js@15.13.0`
 * `DEPS`: update to `ids@3.0.2`
+* `DEPS`: update to `@bpmn-io/feel-editor@2.5.2`
 
 ## 17.7.0
 
