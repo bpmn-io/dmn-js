@@ -38,8 +38,8 @@
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.0",
-    "babel-loader": "^10.0.0",
+    "@babel/preset-env": "^7.29.2",
+    "babel-loader": "^10.1.1",
     "babel-plugin-inferno": "~5.0.0",
     "babel-plugin-istanbul": "^8.0.0",
     "chai": "^4.5.0",
