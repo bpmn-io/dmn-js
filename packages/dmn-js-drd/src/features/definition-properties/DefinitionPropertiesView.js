@@ -68,8 +68,13 @@ DefinitionPropertiesView.prototype._init = function() {
 DefinitionPropertiesView.prototype.update = function() {
   var businessObject = this._canvas.getRootElement().businessObject;
 
-  this.nameElement.textContent = businessObject.name;
-  this.idElement.textContent = businessObject.id;
+  if (document.activeElement !== this.nameElement) {
+    this.nameElement.textContent = businessObject.name;
+  }
+
+  if (document.activeElement !== this.idElement) {
+    this.idElement.textContent = businessObject.id;
+  }
 };
 
 
