@@ -6,7 +6,9 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: show outline around lasso-selected elements ([bpmn-io/diagram-js#1021](https://github.com/bpmn-io/diagram-js/pull/1021))
 * `FIX`: fix error on keyboard navigation in popups without menu entries ([#991](https://github.com/bpmn-io/dmn-js/pull/991))
+* `DEPS`: update to `diagram-js@15.13.0`
 
 ## 17.7.0
 
