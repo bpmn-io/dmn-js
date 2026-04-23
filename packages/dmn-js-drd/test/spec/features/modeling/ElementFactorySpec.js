@@ -12,11 +12,13 @@ import {
   asTRBL,
   getMid
 } from 'diagram-js/lib/layout/LayoutUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/modeling - create elements', function() {
 
-  var testModules = [ coreModule, modelingModule ];
+  var testModules = [ coreModule, modelingModule, overlaysModule, dataTypesModule ];
 
   var emptyDefsXML = require('./ElementFactory.dmn');
 

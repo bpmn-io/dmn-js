@@ -23,6 +23,7 @@ import OutlineProvider from './features/outline';
 import PaletteModule from './features/palette';
 import ResizeModule from 'diagram-js/lib/features/resize';
 import SnappingModule from './features/snapping';
+import DataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 /**
  * A modeler for DMN tables.
@@ -121,6 +122,7 @@ Modeler.prototype._modelingModules = [
   BendpointsModule,
   ContextPadModule,
   ConnectPreviewModule,
+  DataTypesModule,
   DefinitionPropertiesModule,
   DistributeElementsModule,
   EditorActionsModule,

@@ -6,6 +6,8 @@ import {
 import modelingModule from 'src/features/modeling';
 import distributeElementsModule from 'src/features/distribute-elements';
 import coreModule from 'src/core';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/distribute-elements', function() {
@@ -13,7 +15,9 @@ describe('features/distribute-elements', function() {
   var testModules = [
     coreModule,
     distributeElementsModule,
-    modelingModule
+    modelingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   var diagramXML = require('./DrdDistributeElements.dmn');

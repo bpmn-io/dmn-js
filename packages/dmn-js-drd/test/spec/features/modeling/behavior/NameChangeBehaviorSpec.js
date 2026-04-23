@@ -4,6 +4,8 @@ import simpleStringEditXML from './name-change-behavior.dmn';
 
 import CoreModule from 'src/core';
 import Modeling from 'src/features/modeling';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/modeling - NameChangeBehavior', function() {
@@ -11,7 +13,9 @@ describe('features/modeling - NameChangeBehavior', function() {
   beforeEach(bootstrapModeler(simpleStringEditXML, {
     modules: [
       CoreModule,
-      Modeling
+      Modeling,
+      overlaysModule,
+      dataTypesModule
     ],
   }));
 

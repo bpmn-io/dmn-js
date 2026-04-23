@@ -8,13 +8,17 @@ import modelingModule from 'src/features/modeling';
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import { getMid } from 'diagram-js/lib/layout/LayoutUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/modeling - replace connection', function() {
 
   var testModules = [
     coreModule,
-    modelingModule
+    modelingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   var diagramXML = require('./replace-connection-behavior.dmn');

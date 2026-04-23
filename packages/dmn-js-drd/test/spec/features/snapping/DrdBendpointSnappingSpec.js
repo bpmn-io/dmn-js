@@ -17,6 +17,8 @@ import {
 import { getMid, asTRBL } from 'diagram-js/lib/layout/LayoutUtil';
 
 import diagramXML from './DrdBendpointSnapping.dmn';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 var spy = sinon.spy;
 
@@ -29,7 +31,9 @@ describe('features/snapping - drd bendpoint snapping', function() {
     bendpointsModule,
     coreModule,
     modelingModule,
-    snappingModule
+    snappingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));

@@ -9,8 +9,10 @@ import {
 
 import modelingModule from 'src/features/modeling';
 import coreModule from 'src/core';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
-var testModules = [ coreModule, modelingModule ];
+var testModules = [ coreModule, modelingModule, overlaysModule, dataTypesModule ];
 
 
 describe('features/modeling - update moddle properties', function() {

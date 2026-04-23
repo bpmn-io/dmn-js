@@ -13,13 +13,17 @@ import {
   KNOWLEDGE_SOURCE_OUTLINE_PATH,
   BUSINESS_KNOWLEDGE_MODEL_OUTLINE_PATH
 } from 'src/features/outline/OutlineUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/outline - outline provider', function() {
   var testModules = [
     coreModule,
     modelingModule,
-    outlineProviderModule
+    outlineProviderModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
 

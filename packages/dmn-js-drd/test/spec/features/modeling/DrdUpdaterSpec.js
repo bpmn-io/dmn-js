@@ -9,13 +9,15 @@ import coreModule from 'src/core';
 import modelingModule from 'src/features/modeling';
 
 import { getMid } from 'diagram-js/lib/layout/LayoutUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 var restore = sinon.restore;
 
 
 describe('features/modeling - DrdUpdater', function() {
 
-  var testModules = [ coreModule, modelingModule ];
+  var testModules = [ coreModule, modelingModule, overlaysModule, dataTypesModule ];
 
   var diagramXML = require('./drd-updater.dmn');
 

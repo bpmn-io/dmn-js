@@ -11,6 +11,8 @@ import coreModule from 'src/core';
 import {
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/replace - drd replace', function() {
@@ -19,7 +21,9 @@ describe('features/replace - drd replace', function() {
     coreModule,
     modelingModule,
     replaceModule,
-    moveModule
+    moveModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
 

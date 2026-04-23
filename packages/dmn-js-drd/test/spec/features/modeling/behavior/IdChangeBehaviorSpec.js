@@ -7,13 +7,17 @@ import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
 
 import diagramXML from 'test/fixtures/dmn/simple-connections.dmn';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 describe('IdChangeBehavior', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: [
       CoreModule,
-      ModelingModule
+      ModelingModule,
+      overlaysModule,
+      dataTypesModule
     ]
   }));
 

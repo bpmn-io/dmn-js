@@ -17,12 +17,15 @@ import modelingModule from 'src/features/modeling';
 import paletteProviderModule from 'src/features/palette';
 import defPropsViewerModule from 'src/features/definition-properties/viewer';
 import defPropsModelerModule from 'src/features/definition-properties/modeler';
+
 import coreModule from 'src/core';
 
 import {
   inputEvent,
   clickElement
 } from 'test/util/EventUtils';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 describe('features/definition-properties', function() {
 
@@ -31,7 +34,9 @@ describe('features/definition-properties', function() {
     paletteProviderModule,
     defPropsViewerModule,
     defPropsModelerModule,
-    modelingModule
+    modelingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   var diagramXML = require('./definitionProperties.dmn');

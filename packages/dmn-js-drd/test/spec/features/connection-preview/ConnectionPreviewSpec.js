@@ -13,6 +13,8 @@ import createModule from 'diagram-js/lib/features/create';
 import {
   createCanvasEvent as canvasEvent
 } from 'test/util/MockEvents';
+import overlaysModule from 'diagram-js/lib/features/overlays';
+import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
 
 describe('features/connection-preview', function() {
@@ -23,7 +25,9 @@ describe('features/connection-preview', function() {
     bendpointsModule,
     coreModule,
     createModule,
-    modelingModule
+    modelingModule,
+    overlaysModule,
+    dataTypesModule
   ];
 
   var testXML = require('./ConnectionPreview.dmn');
