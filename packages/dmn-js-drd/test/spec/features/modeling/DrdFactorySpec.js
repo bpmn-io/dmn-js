@@ -166,6 +166,37 @@ describe('features/modeling - DrdFactory', function() {
         expect(point.$attrs).to.eql({});
       });
     }));
+
+
+    it('should create dmndi:DMNDecisionServiceDividerLine', inject(function(drdFactory) {
+
+      // given
+      var waypoints = [
+        { original: { x: 100, y: 200 }, x: 100, y: 200 },
+        { original: { x: 300, y: 200 }, x: 300, y: 200 }
+      ];
+
+      // when
+      var result = drdFactory.createDiDividerLine(waypoints);
+
+      // then
+      expect(result.$type).to.eql('dmndi:DMNDecisionServiceDividerLine');
+      expect(result).to.not.have.property('id');
+      expect(result).to.not.have.property('dmnElementRef');
+
+      var dividerWaypoints = result.waypoint;
+      expect(dividerWaypoints).to.exist;
+      expect(dividerWaypoints).to.have.lengthOf(2);
+
+      dividerWaypoints.forEach(function(point, index) {
+        expect(point.$type).to.eql('dc:Point');
+        expect(point.x).to.eql(waypoints[index].x);
+        expect(point.y).to.eql(waypoints[index].y);
+
+        // expect
+        expect(point.$attrs).to.eql({});
+      });
+    }));
   });
 
 });

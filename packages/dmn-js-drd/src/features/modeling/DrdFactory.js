@@ -73,3 +73,9 @@ DrdFactory.prototype.createDiWaypoint = function(waypoint) {
 DrdFactory.prototype.createExtensionElements = function() {
   return this.create('dmn:ExtensionElements', { values: [] });
 };
+
+DrdFactory.prototype.createDiDividerLine = function(waypoints) {
+  return this.create('dmndi:DMNDecisionServiceDividerLine', {
+    waypoint: this.createDiWaypoints(waypoints)
+  });
+};

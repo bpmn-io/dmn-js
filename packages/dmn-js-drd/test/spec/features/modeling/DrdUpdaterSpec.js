@@ -560,6 +560,97 @@ describe('features/modeling - DrdUpdater', function() {
     ));
 
   });
+
+
+  describe('DecisionService', function() {
+
+    var decisionServiceXML = require('./drd-updater-decision-service.dmn');
+
+    beforeEach(bootstrapModeler(decisionServiceXML, { modules: testModules }));
+
+
+    describe('update parent', function() {
+
+      it('should update parent when decision is moved into DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision = elementRegistry.get('Decision_Outside'),
+              decisionBo = decision.businessObject,
+              decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject,
+              definitions = elementRegistry.get('Definitions_1'),
+              definitionsBo = definitions.businessObject;
+
+          // when
+          modeling.moveShape(decision, { x: 150, y: 280 }, decisionService);
+
+          // then
+          expect(decision.parent).to.equal(decisionService);
+          expect(decisionBo.$parent).to.equal(definitionsBo);
+          expect(definitionsBo.drgElement).to.include(decisionBo);
+
+          var outputDecisions = decisionServiceBo.get('outputDecision');
+          expect(outputDecisions.some(function(d) {
+            return d.href === '#Decision_Outside';
+          })).to.be.true;
+        }
+      ));
+
+
+      it('should update parent when decision is moved out of DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision = elementRegistry.get('Decision_InOutput'),
+              decisionBo = decision.businessObject,
+              decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject,
+              definitions = elementRegistry.get('Definitions_1'),
+              definitionsBo = definitions.businessObject;
+
+          // when
+          modeling.moveShape(decision, { x: 300, y: -100 }, definitions);
+
+          // then
+          expect(decision.parent).to.equal(definitions);
+          expect(decisionBo.$parent).to.equal(definitionsBo);
+          expect(definitionsBo.drgElement).to.include(decisionBo);
+
+          var outputDecisions = decisionServiceBo.get('outputDecision');
+          expect(outputDecisions.some(function(d) {
+            return d.href === '#Decision_InOutput';
+          })).to.be.false;
+        }
+      ));
+
+      it('should update divider line waypoints when DecisionService is resized', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+          var initialX = decisionService.x;
+          var initialY = decisionService.y;
+
+          // when
+          modeling.resizeShape(decisionService, { x: initialX, y: initialY, width: 500, height: 400 });
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+          expect(dividerLine).to.exist;
+          expect(dividerLine.waypoint).to.have.lengthOf(2);
+          var expectedY = initialY + (400 / 2);
+          expect(dividerLine.waypoint[0].x).to.equal(initialX);
+          expect(dividerLine.waypoint[0].y).to.equal(expectedY);
+          expect(dividerLine.waypoint[1].x).to.equal(initialX + 500);
+          expect(dividerLine.waypoint[1].y).to.equal(expectedY);
+        }
+      ));
+
+    });
+  });
+
 });
 
 

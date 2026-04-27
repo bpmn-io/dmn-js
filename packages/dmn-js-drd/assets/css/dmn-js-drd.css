@@ -93,3 +93,15 @@
 .djs-container.with-palette-two-column .dmn-definitions {
   left: 130px;
 }
+
+.dmn-icon-decision-service::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 24px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="6" width="28" height="18" rx="3" stroke="black" stroke-width="1.5" fill="none"/><line x1="1" y1="15" x2="29" y2="15" stroke="black" stroke-width="1.5" stroke-linecap="butt"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
