@@ -86,10 +86,11 @@ export default class EditPropertiesHandler {
 
       const propertyValue = bo.get(key);
 
-      // handle nested update
+      // handle nested update (plain object), but treat moddle elements
+      // as values to be set directly rather than merged
       if (isContainer(value)) {
 
-        if (!isContainer(propertyValue)) {
+        if (!isModdleElement(propertyValue) && !isContainer(propertyValue)) {
           throw new Error(
             `non-existing property <${key}>: cannot update values`
           );
@@ -150,6 +151,11 @@ function isIdChange(element, newId) {
 function isContainer(o) {
   return (
     isDefined(o) &&
-    isObject(o)
+    isObject(o) &&
+    !isModdleElement(o)
   );
+}
+
+function isModdleElement(o) {
+  return !!o?.$type;
 }
