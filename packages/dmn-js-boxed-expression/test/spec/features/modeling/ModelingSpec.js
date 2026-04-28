@@ -91,4 +91,46 @@ describe('Modeling', function() {
     expect(viewer.getRootElement().variable.typeRef).to.equal('foo');
   }));
 
+
+  it('should set moddle element on previously-empty property',
+    inject(function(modeling, viewer, moddle) {
+
+      // given
+      const decision = viewer.getRootElement();
+
+      decision.variable = undefined;
+
+      const newVariable = moddle.create('dmn:InformationItem', {
+        name: 'foo',
+        typeRef: 'string'
+      });
+
+      // when
+      modeling.updateProperties(decision, { variable: newVariable });
+
+      // then
+      expect(viewer.getRootElement().variable).to.equal(newVariable);
+    })
+  );
+
+
+  it('should replace moddle element value',
+    inject(function(modeling, viewer, moddle) {
+
+      // given
+      const decision = viewer.getRootElement();
+
+      const newVariable = moddle.create('dmn:InformationItem', {
+        name: 'foo',
+        typeRef: 'string'
+      });
+
+      // when
+      modeling.updateProperties(decision, { variable: newVariable });
+
+      // then
+      expect(viewer.getRootElement().variable).to.equal(newVariable);
+    })
+  );
+
 });

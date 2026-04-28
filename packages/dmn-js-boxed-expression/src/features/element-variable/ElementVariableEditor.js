@@ -16,11 +16,13 @@ export default class ElementVariableEditor extends ElementVariable {
     if (!variable) {
       const element = this._getElement();
 
-      this._modeling.updateProperties(element, {
-        variable: this._dmnFactory.create('dmn:InformationItem', {
-          name: element.get('name'), typeRef
-        })
+      const newVariable = this._dmnFactory.create('dmn:InformationItem', {
+        name: element.get('name'), typeRef
       });
+
+      newVariable.$parent = element;
+
+      this._modeling.updateProperties(element, { variable: newVariable });
 
       return;
     }
