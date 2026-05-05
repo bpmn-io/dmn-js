@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require('path');
+
 var coverage = process.env.COVERAGE;
 
 var singleStart = process.env.SINGLE_START;
@@ -15,13 +17,13 @@ var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(/\s*,\s*/g)
 
 const testFile = coverage ? 'test/coverageBundle.js' : 'test/testBundle.js';
 
-module.exports = function(path) {
+module.exports = function(basePath) {
 
   return function(karma) {
 
     const config = {
 
-      basePath: path,
+      basePath,
 
       frameworks: [
         'webpack',
@@ -57,7 +59,7 @@ module.exports = function(path) {
         module: {
           rules: [
             {
-              test: /test\/globals\.js$/,
+              test: path.join(basePath, './test/globals.js'),
               sideEffects: true
             },
             {
@@ -99,7 +101,7 @@ module.exports = function(path) {
           ]),
           modules: [
             'node_modules',
-            path
+            basePath
           ]
         },
         devtool: mode === 'production' ? 'source-map' : 'eval-source-map'
