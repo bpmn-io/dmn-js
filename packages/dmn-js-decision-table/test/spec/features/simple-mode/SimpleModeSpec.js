@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { bootstrapModeler } from 'test/TestHelper';
 
 import { query as domQuery } from 'min-dom';

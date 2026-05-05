@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import Modeler from 'src/Modeler';
 
 import { expectToBeAccessible, insertCSS } from 'test/helper';

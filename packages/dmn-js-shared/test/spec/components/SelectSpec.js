@@ -1,4 +1,5 @@
-/* global sinon */
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 
 import TestContainerSupport from 'mocha-test-container-support';
 

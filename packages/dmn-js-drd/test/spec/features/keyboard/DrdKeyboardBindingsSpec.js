@@ -1,3 +1,5 @@
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 import {
   bootstrapViewer,
   inject
@@ -22,7 +24,6 @@ import {
 import overlaysModule from 'diagram-js/lib/features/overlays';
 import dataTypesModule from 'dmn-js-shared/lib/features/data-types';
 
-/* global sinon */
 
 
 describe('features - keyboard', function() {

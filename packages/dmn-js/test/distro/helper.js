@@ -1,5 +1,4 @@
-
-async function testImport(DmnJS) {
+export async function testImport(DmnJS) {
   const diagram = await get('/base/test/distro/diagram.dmn');
   const container = createContainer();
   const modeler = createModeler(DmnJS, container);
@@ -9,7 +8,7 @@ async function testImport(DmnJS) {
   return modeler;
 }
 
-async function testAllViews(DmnJS) {
+export async function testAllViews(DmnJS) {
   const modeler = await testImport(DmnJS);
 
   const views = modeler.getViews();
@@ -49,6 +48,3 @@ function createModeler(DmnJS, container) {
 function importDiagram(modeler, diagram) {
   return modeler.importXML(diagram);
 }
-
-window.testImport = testImport;
-window.testAllViews = testAllViews;

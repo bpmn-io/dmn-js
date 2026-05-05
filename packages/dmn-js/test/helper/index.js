@@ -1,3 +1,5 @@
+import { expect } from 'chai';
+
 import axe from 'axe-core';
 
 const DEFAULT_AXE_TAGS = [ 'wcag21a', 'wcag21aa' ];

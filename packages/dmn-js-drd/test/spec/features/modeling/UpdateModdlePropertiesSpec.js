@@ -1,4 +1,5 @@
-/* global sinon */
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 
 import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 

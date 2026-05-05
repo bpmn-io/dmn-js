@@ -1,4 +1,5 @@
-/* global sinon */
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 
 import exampleXML from '../fixtures/dmn/di.dmn';
 import emptyDefsXML from '../fixtures/dmn/empty-definitions.dmn';
@@ -12,6 +13,16 @@ import DrdView from 'src/Viewer';
 
 import { keys } from 'min-dash';
 
+import { insertCSS } from '../helper';
+
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
+
+if (singleStart) {
+  insertCSS('dmn-js-drd-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
+
 
 describe('Viewer', function() {
 
@@ -19,6 +30,13 @@ describe('Viewer', function() {
 
   beforeEach(function() {
     container = TestContainer.get(this);
+  });
+
+  singleStart || afterEach(function() {
+    if (viewer) {
+      viewer.destroy();
+      viewer = null;
+    }
   });
 
 

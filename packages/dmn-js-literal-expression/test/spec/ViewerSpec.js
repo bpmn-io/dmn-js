@@ -1,11 +1,14 @@
-/* global sinon */
+import * as sinon from 'sinon';
+import { expect } from 'chai';
+
 
 import TestContainer from 'mocha-test-container-support';
 
 import {
   bootstrapViewer,
   inject,
-  getLiteralExpression
+  getLiteralExpression,
+  insertCSS
 } from 'test/TestHelper';
 
 import DefaultExport from '../../src';
@@ -16,6 +19,14 @@ import DmnLiteralExpressionViewer from '../helper/LiteralExpressionViewer';
 import { domify } from 'min-dom';
 
 import simpleXML from './literal-expression.dmn';
+
+const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
+
+if (singleStart) {
+  insertCSS('dmn-js-literal-expression-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
 
 
 describe('Viewer', function() {

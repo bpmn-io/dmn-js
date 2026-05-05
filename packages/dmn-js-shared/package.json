@@ -1,7 +1,7 @@
 {
   "name": "dmn-js-shared",
   "description": "Shared components used by dmn-js",
-  "version": "17.7.0",
+  "version": "17.8.0",
   "files": [
     "assets",
     "lib"
@@ -24,11 +24,11 @@
     "inferno-test-utils": "~5.6.2"
   },
   "dependencies": {
-    "@bpmn-io/feel-editor": "^2.5.0",
-    "diagram-js": "^15.7.0",
+    "@bpmn-io/feel-editor": "^2.5.2",
+    "diagram-js": "^15.13.0",
     "didi": "^11.0.0",
     "dmn-moddle": "^12.0.1",
-    "ids": "^3.0.1",
+    "ids": "^3.0.2",
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",
     "min-dom": "^5.3.0",

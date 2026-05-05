@@ -260,10 +260,3 @@ export function insertCSS(name, css) {
 }
 
 
-import BoundsMatchers from 'diagram-js/test/matchers/BoundsMatchers';
-import ConnectionMatchers from 'diagram-js/test/matchers/ConnectionMatchers';
-
-/* global chai */
-
-chai.use(BoundsMatchers);
-chai.use(ConnectionMatchers);

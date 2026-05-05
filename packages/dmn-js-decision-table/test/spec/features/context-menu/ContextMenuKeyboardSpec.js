@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { bootstrapModeler, inject } from 'test/helper';
 
 import {
@@ -17,6 +18,8 @@ import CoreModule from 'src/core';
 import InteractionEventsModule from 'table-js/lib/features/interaction-events';
 import ModelingModule from 'src/features/modeling';
 import DecisionRulesModule from 'src/features/decision-rules';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
+import DecisionTableHeadEditorModule from 'src/features/decision-table-head/editor';
 
 describe('context menu keyboard', function() {
 
@@ -25,11 +28,14 @@ describe('context menu keyboard', function() {
     modules: [
       ContextMenuModule,
       CoreModule,
+      DecisionTableHeadModule,
+      DecisionTableHeadEditorModule,
       InteractionEventsModule,
       ModelingModule,
       DecisionRulesModule,
       ContextMenuKeyboard
-    ]
+    ],
+    debounceInput: false
   }));
 
   let testContainer;
@@ -118,6 +124,23 @@ describe('context menu keyboard', function() {
     // then
     const focusedEntry = query('.context-menu-group-entry.focused', testContainer);
     expect(classes(focusedEntry).contains('disabled')).to.be.false;
+  }));
+
+
+  it('should not throw error on keyboard navigation when menu do not have group entries', inject(function() {
+
+    // given
+    const cellEl = query('[data-col-id="input1"]', testContainer);
+    triggerMouseEvent(cellEl, 'dblclick');
+
+    // assume
+    expect(query('.context-menu', testContainer)).to.exist;
+    expect(queryAll('.context-menu-group-entry', testContainer)).to.have.length(0);
+
+    // when / then
+    expect(() => {
+      triggerKeyEvent(document, 'keydown', { key: 'ArrowDown' });
+    }).not.to.throw();
   }));
 });
 

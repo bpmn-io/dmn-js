@@ -1,4 +1,6 @@
-/* global sinon */
+import * as sinon from 'sinon';
+import { expect } from 'chai';
+
 
 import DrdTreeWalker from 'src/import/DrdTreeWalker';
 

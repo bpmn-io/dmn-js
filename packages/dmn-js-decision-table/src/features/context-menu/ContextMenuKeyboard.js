@@ -23,6 +23,10 @@ export default class ContextMenuKeyboard {
   };
 
   handleKeyEvent = (event) => {
+    if (!this.getEntries().length) {
+      return;
+    }
+
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.move(event.target, -1);
@@ -88,6 +92,11 @@ export default class ContextMenuKeyboard {
 
     if (!current) {
       const next = entries[0];
+
+      if (!next) {
+        return;
+      }
+
       classes(next).add('focused');
       return;
     }

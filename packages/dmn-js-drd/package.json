@@ -1,12 +1,14 @@
 {
   "name": "dmn-js-drd",
   "description": "A decision requirements diagram view for dmn-js",
-  "version": "17.7.0",
+  "version": "17.8.0",
   "files": [
     "assets",
     "lib"
   ],
   "scripts": {
+    "start": "cross-env SINGLE_START=modeler npm run dev",
+    "start:viewer": "cross-env SINGLE_START=viewer npm run dev",
     "test": "karma start",
     "build": "del-cli lib && babel -s --quiet -d lib src",
     "dev": "npm test -- --no-single-run --auto-watch",
@@ -26,10 +28,10 @@
     "drd"
   ],
   "dependencies": {
-    "diagram-js": "^15.7.0",
+    "diagram-js": "^15.13.0",
     "diagram-js-direct-editing": "^3.3.0",
-    "dmn-js-shared": "^17.7.0",
-    "ids": "^3.0.1",
+    "dmn-js-shared": "^17.8.0",
+    "ids": "^3.0.2",
     "inherits-browser": "^0.1.0",
     "min-dash": "^5.0.0",
     "min-dom": "^5.3.0",

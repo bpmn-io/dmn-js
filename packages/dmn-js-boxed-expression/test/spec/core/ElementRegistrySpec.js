@@ -1,7 +1,8 @@
+import * as sinon from 'sinon';
+import { expect } from 'chai';
 import ElementRegistry from 'src/core/ElementRegistry';
 import EventBus from 'diagram-js/lib/core/EventBus';
 
-/* global sinon */
 const {
   spy
 } = sinon;
