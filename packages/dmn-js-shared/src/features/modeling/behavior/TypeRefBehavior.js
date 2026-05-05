@@ -75,7 +75,7 @@ export default class TypeRefBehavior extends CommandInterceptor {
     const container = document.createElement('div');
 
     this._currentOverlay = this._overlays.add(element, 'type-ref', {
-      position: { top: -40, left: 0 },
+      position: { top: 60, left: 0 },
       html: container
     });
 
