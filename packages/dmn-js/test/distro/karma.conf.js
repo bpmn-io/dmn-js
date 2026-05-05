@@ -7,6 +7,10 @@ process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 var VARIANT = process.env.VARIANT;
 
+if (!VARIANT) {
+  throw new Error('missing env.VARIANT');
+}
+
 var NODE_ENV = process.env.NODE_ENV;
 
 var NAME_SUFFIX = (NODE_ENV === 'production' ? 'production.min' : 'development');
