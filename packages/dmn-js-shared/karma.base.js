@@ -9,7 +9,6 @@ var singleStart = process.env.SINGLE_START;
 var mode = process.env.NODE_ENV || 'development';
 
 // use puppeteer provided Chrome for testing
-process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 // configures browsers to run test against
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE' ]
