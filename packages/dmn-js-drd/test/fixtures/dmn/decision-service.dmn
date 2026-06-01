@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
-  <decisionService id="DecisionService_0u44mqs" name="New Decision Service">
-    <variable id="InformationItem_1ln5h27" name="New Decision Service" />
+  <decision id="OutputDecision" name="Output decision">
+    <variable name="Output decision" />
+  </decision>
+  <decision id="EncapsulatedDecision" name="Encapsulated decision">
+    <variable name="Encapsulated decision" />
+  </decision>
+  <decisionService id="DecisionService" name="Decision service">
+    <variable name="Decision service" />
+    <outputDecision href="#OutputDecision" />
+    <encapsulatedDecision href="#EncapsulatedDecision" />
   </decisionService>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_04m4p5u">
-      <dmndi:DMNShape id="DMNShape_0ebc781" dmnElementRef="DecisionService_0u44mqs">
+      <dmndi:DMNShape id="DMNShape_0ebc781" dmnElementRef="DecisionService">
         <dc:Bounds height="335" width="400" x="330" y="225" />
         <dmndi:DMNDecisionServiceDividerLine>
           <di:waypoint x="330" y="392.5" />
           <di:waypoint x="730" y="392.5" />
         </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="OutputDecisionDi" dmnElementRef="OutputDecision">
+        <dc:Bounds height="80" width="180" x="440" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="EncapsulatedDecisionDi" dmnElementRef="EncapsulatedDecision">
+        <dc:Bounds height="80" width="180" x="440" y="450" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
