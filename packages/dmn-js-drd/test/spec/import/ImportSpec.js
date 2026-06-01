@@ -1,11 +1,13 @@
 import {
   bootstrapModeler,
   getDrdJS,
-  getDmnJS
+  getDmnJS,
+  inject
 } from 'test/TestHelper';
 
 import exampleXML from '../../fixtures/dmn/di-1-3.dmn';
 import multipleDecisionsXML from '../../fixtures/dmn/multiple-decisions.dmn';
+import decisionServiceXML from '../../fixtures/dmn/decision-service.dmn';
 
 import {
   pick
@@ -167,7 +169,6 @@ describe('DRD - Import', function() {
   });
 
 
-
   describe('cropping', function() {
 
     beforeEach(bootstrapModeler(multipleDecisionsXML));
@@ -212,6 +213,25 @@ describe('DRD - Import', function() {
 
     });
 
+  });
+
+
+  describe('decision service', function() {
+
+    beforeEach(bootstrapModeler(decisionServiceXML));
+
+
+    it('should set decision sevice as parent of encapsulated and output decisions', inject(function(elementRegistry) {
+
+      // given
+      const decisionService = elementRegistry.get('DecisionService');
+      const encapsulatedDecision = elementRegistry.get('EncapsulatedDecision');
+      const outputDecision = elementRegistry.get('OutputDecision');
+
+      // then
+      expect(encapsulatedDecision.parent).to.equal(decisionService);
+      expect(outputDecision.parent).to.equal(decisionService);
+    }));
   });
 
 });
