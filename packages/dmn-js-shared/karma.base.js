@@ -8,8 +8,6 @@ var singleStart = process.env.SINGLE_START;
 
 var mode = process.env.NODE_ENV || 'development';
 
-// use puppeteer provided Chrome for testing
-
 // configures browsers to run test against
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE' ]
 var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(/\s*,\s*/g);
