@@ -35,7 +35,7 @@ module.exports = function(basePath) {
         [testFile]: [ 'webpack', 'env' ]
       },
 
-      reporters: [ 'progress' ].concat(coverage ? 'coverage' : []),
+      reporters: [ 'tldr' ].concat(coverage ? 'coverage' : []),
 
       coverageReporter: {
         reporters: [
