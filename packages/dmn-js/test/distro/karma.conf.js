@@ -46,7 +46,7 @@ module.exports = function(karma) {
       [ suite ]: [ 'webpack' ]
     },
 
-    reporters: [ 'progress' ],
+    reporters: [ 'tldr' ],
 
     browsers: browsers,
 
