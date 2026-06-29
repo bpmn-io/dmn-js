@@ -21,8 +21,7 @@ import defPropsModelerModule from 'src/features/definition-properties/modeler';
 import coreModule from 'src/core';
 
 import {
-  inputEvent,
-  clickElement
+  inputEvent
 } from 'test/util/EventUtils';
 
 describe('features/definition-properties', function() {
@@ -179,7 +178,7 @@ describe('features/definition-properties', function() {
           definitionPropertiesView._container
         );
 
-        clickElement(nameContainer);
+        nameContainer.focus();
 
         // when
         eventBus.on('commandStack.element.updateProperties.postExecute', function() {
@@ -190,9 +189,60 @@ describe('features/definition-properties', function() {
           done();
         });
 
+        nameContainer.textContent = 'hello';
         inputEvent(nameContainer, 'hello');
+        nameContainer.blur();
       };
     }));
+
+
+    it('should not update definition name on input alone', inject(
+      function(canvas, definitionPropertiesView, eventBus) {
+
+        // given
+        var definitions = canvas.getRootElement().businessObject;
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        var updated = false;
+
+        eventBus.on('commandStack.element.updateProperties.postExecute', function() {
+          updated = true;
+        });
+
+        nameContainer.focus();
+
+        // when
+        nameContainer.textContent = 'hello';
+        inputEvent(nameContainer, 'hello');
+
+        // then
+        expect(definitions.name).to.equal('drd-name');
+        expect(updated).to.be.false;
+      }
+    ));
+
+
+    it('should not create a command when blurred unchanged', inject(
+      function(definitionPropertiesView, commandStack) {
+
+        // given
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        nameContainer.focus();
+
+        // when
+        nameContainer.blur();
+
+        // then
+        expect(commandStack.canUndo()).to.be.false;
+      }
+    ));
 
 
     describe('id', function() {
@@ -207,7 +257,7 @@ describe('features/definition-properties', function() {
             definitionPropertiesView._container
           );
 
-          clickElement(idContainer);
+          idContainer.focus();
 
           // when
           eventBus.on('commandStack.element.updateProperties.postExecute', function() {
@@ -218,9 +268,40 @@ describe('features/definition-properties', function() {
             done();
           });
 
+          idContainer.textContent = 'world';
           inputEvent(idContainer, 'world');
+          idContainer.blur();
         };
       }));
+
+
+      it('should revert definition ID on invalid commit', inject(
+        function(canvas, definitionPropertiesView) {
+
+          // given
+          var definitions = canvas.getRootElement().businessObject;
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
+
+          idContainer.focus();
+
+          // when
+          idContainer.textContent = 'invalid id';
+          inputEvent(idContainer, 'invalid id');
+          idContainer.blur();
+
+          // then
+          var errorMessage = domQuery(
+            '.dmn-definitions-error-message',
+            definitionPropertiesView._container
+          );
+
+          expect(errorMessage).to.exist;
+          expect(idContainer.textContent).to.equal(definitions.id);
+        }
+      ));
 
 
       it('should not edit definition ID and show error message (ID not unique)', inject(
