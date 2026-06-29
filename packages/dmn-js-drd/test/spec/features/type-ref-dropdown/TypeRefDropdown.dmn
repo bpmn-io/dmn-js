@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="typeRefDropdown" name="TypeRefDropdown" namespace="http://camunda.org/schema/1.0/dmn">
+  <inputData id="withVariable_id" name="With Variable">
+    <variable id="withVariable_ii" name="With Variable" typeRef="boolean" />
+  </inputData>
+  <inputData id="noVariable_id" name="No Variable" />
+  <inputData id="noTypeRef_id" name="No TypeRef">
+    <variable id="noTypeRef_ii" name="No TypeRef" />
+  </inputData>
+  <inputData id="unknownTypeRef_id" name="Unknown TypeRef">
+    <variable id="unknownTypeRef_ii" name="Unknown TypeRef" typeRef="integer" />
+  </inputData>
+  <decision id="someDecision_id" name="Some Decision">
+    <decisionTable id="someDecisionTable_id">
+      <output id="someDecisionOutput_id" label="" name="" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1">
+      <dmndi:DMNShape id="withVariable_id_di" dmnElementRef="withVariable_id">
+        <dc:Bounds height="45" width="125" x="150" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="noVariable_id_di" dmnElementRef="noVariable_id">
+        <dc:Bounds height="45" width="125" x="330" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="noTypeRef_id_di" dmnElementRef="noTypeRef_id">
+        <dc:Bounds height="45" width="125" x="510" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="unknownTypeRef_id_di" dmnElementRef="unknownTypeRef_id">
+        <dc:Bounds height="45" width="125" x="690" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="someDecision_id_di" dmnElementRef="someDecision_id">
+        <dc:Bounds height="80" width="180" x="150" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
