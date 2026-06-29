@@ -54,7 +54,7 @@
     "karma-env-preprocessor": "^0.1.1",
     "karma-firefox-launcher": "^2.1.2",
     "karma-mocha": "^2.0.1",
-    "karma-tldr-reporter": "^0.0.1",
+    "karma-tldr-reporter": "^1.0.0",
     "karma-webpack": "^5.0.0",
     "lerna": "^9.0.7",
     "mocha": "^11.7.5",
