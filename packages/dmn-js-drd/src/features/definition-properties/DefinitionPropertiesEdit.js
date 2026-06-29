@@ -1,10 +1,4 @@
 import {
-  debounce
-} from 'min-dash';
-
-var DEBOUNCE_DELAY = 300;
-
-import {
   domify,
   classes as domClasses,
   query as domQuery
