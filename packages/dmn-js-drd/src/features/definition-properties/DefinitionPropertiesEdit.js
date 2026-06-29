@@ -1,10 +1,4 @@
 import {
-  debounce
-} from 'min-dash';
-
-var DEBOUNCE_DELAY = 300;
-
-import {
   domify,
   classes as domClasses,
   query as domQuery
@@ -20,12 +14,14 @@ import {
 
 
 export default function DefinitionIdEdit(
-    eventBus, modeling, canvas, definitionPropertiesView, translate) {
+    eventBus, modeling, canvas, definitionPropertiesView, translate, injector) {
   this._eventBus = eventBus;
   this._modeling = modeling;
   this._canvas = canvas;
   this._definitionPropertiesView = definitionPropertiesView;
   this._translate = translate;
+
+  this._elements = {};
 
   eventBus.on('definitionIdView.create', function(event) {
     this._container = event.html;
@@ -35,6 +31,28 @@ export default function DefinitionIdEdit(
     this._setup(nameElement, 'name');
     this._setup(idElement, 'id');
   }, this);
+
+  // the diagram is cleared before the view gets detached (and the field blurred);
+  // discard pending edits until a new diagram is imported
+  eventBus.on('diagram.clear', function() {
+    this._cleared = true;
+  }, this);
+
+  eventBus.on('import.done', function() {
+    this._cleared = false;
+  }, this);
+
+  var parent = injector.get('_parent', false);
+
+  if (parent) {
+    var commitFocused = this._commitFocused.bind(this);
+
+    parent.on('saveXML.start', commitFocused);
+
+    eventBus.on('diagram.destroy', function() {
+      parent.off('saveXML.start', commitFocused);
+    });
+  }
 }
 
 DefinitionIdEdit.$inject = [
@@ -42,7 +60,8 @@ DefinitionIdEdit.$inject = [
   'modeling',
   'canvas',
   'definitionPropertiesView',
-  'translate'
+  'translate',
+  'injector'
 ];
 
 
@@ -56,6 +75,7 @@ DefinitionIdEdit.prototype.update = function(type, newValue) {
 
     if (errorMessage) {
       this._addErrorMessage(errorMessage);
+      this._definitionPropertiesView.update();
 
       return;
     }
@@ -69,13 +89,9 @@ DefinitionIdEdit.prototype.update = function(type, newValue) {
 DefinitionIdEdit.prototype._setup = function(node, type) {
   var self = this;
 
+  this._elements[type] = node;
+
   node.setAttribute('contenteditable', true);
-
-  node.addEventListener('input', debounce(function(evt) {
-    var value = evt.target.value || evt.target.textContent;
-
-    self.update(type, value.trim());
-  }, DEBOUNCE_DELAY));
 
   node.addEventListener('keydown', function(evt) {
     if (evt.keyCode === 13) {
@@ -85,10 +101,48 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
   });
 
   node.addEventListener('blur', function() {
-    self._clearErrorMessage();
-
-    self._definitionPropertiesView.update();
+    self._commit(type);
   });
+};
+
+/**
+ * Commit the displayed value of the given field if it differs from the model.
+ *
+ * @param {'name'|'id'} type
+ */
+DefinitionIdEdit.prototype._commit = function(type) {
+  if (this._cleared) {
+    return;
+  }
+
+  var node = this._elements[type],
+      businessObject = getBusinessObject(this._canvas.getRootElement());
+
+  var value = (node.textContent || '').trim(),
+      currentValue = businessObject.get(type) || '';
+
+  this._clearErrorMessage();
+
+  if (value === currentValue) {
+    this._definitionPropertiesView.update();
+
+    return;
+  }
+
+  this.update(type, value);
+};
+
+/**
+ * Commit the field currently being edited, if any.
+ */
+DefinitionIdEdit.prototype._commitFocused = function() {
+  var activeElement = document.activeElement;
+
+  for (var type in this._elements) {
+    if (this._elements[type] === activeElement) {
+      this._commit(type);
+    }
+  }
 };
 
 DefinitionIdEdit.prototype._addErrorMessage = function(errorMessage) {

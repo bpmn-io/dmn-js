@@ -10,6 +10,7 @@ import { getBusinessObject } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
   bootstrapModeler,
+  getDmnJS,
   inject,
   injectAsync
 } from 'test/TestHelper';
@@ -21,8 +22,7 @@ import defPropsModelerModule from 'src/features/definition-properties/modeler';
 import coreModule from 'src/core';
 
 import {
-  inputEvent,
-  clickElement
+  inputEvent
 } from 'test/util/EventUtils';
 
 describe('features/definition-properties', function() {
@@ -147,6 +147,26 @@ describe('features/definition-properties', function() {
   ));
 
 
+  it('should keep unchanged text in place on update', inject(
+    function(definitionPropertiesView) {
+
+      // given
+      var nameContainer = domQuery(
+        '.dmn-definitions-name',
+        definitionPropertiesView._container
+      );
+
+      var textNode = nameContainer.firstChild;
+
+      // when
+      definitionPropertiesView.update();
+
+      // then
+      expect(nameContainer.firstChild).to.equal(textNode);
+    }
+  ));
+
+
   it('should be responsive', inject(function(canvas, eventBus, definitionPropertiesView) {
 
     // given
@@ -179,7 +199,7 @@ describe('features/definition-properties', function() {
           definitionPropertiesView._container
         );
 
-        clickElement(nameContainer);
+        nameContainer.focus();
 
         // when
         eventBus.on('commandStack.element.updateProperties.postExecute', function() {
@@ -190,9 +210,131 @@ describe('features/definition-properties', function() {
           done();
         });
 
+        nameContainer.textContent = 'hello';
         inputEvent(nameContainer, 'hello');
+        nameContainer.blur();
       };
     }));
+
+
+    it('should not update definition name before blur', inject(
+      async function(canvas, definitionPropertiesView) {
+
+        // given
+        var definitions = canvas.getRootElement().businessObject;
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        nameContainer.focus();
+
+        // when
+        nameContainer.textContent = 'hello';
+        inputEvent(nameContainer, 'hello');
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // then
+        expect(definitions.name).to.equal('drd-name');
+      }
+    ));
+
+
+    it('should not create a command when blurred unchanged', inject(
+      function(definitionPropertiesView, commandStack) {
+
+        // given
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        nameContainer.focus();
+
+        // when
+        nameContainer.blur();
+
+        // then
+        expect(commandStack.canUndo()).to.be.false;
+      }
+    ));
+
+
+    it('should commit pending edit on save', inject(
+      async function(definitionPropertiesView) {
+
+        // given
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        nameContainer.focus();
+
+        nameContainer.textContent = 'hello';
+        inputEvent(nameContainer, 'hello');
+
+        // when
+        var { xml } = await getDmnJS().saveXML();
+
+        // then
+        expect(xml).to.contain('name="hello"');
+      }
+    ));
+
+
+    it('should discard pending edit on import', inject(
+      async function(canvas, definitionPropertiesView, commandStack) {
+
+        // given
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        nameContainer.focus();
+
+        nameContainer.textContent = 'hello';
+        inputEvent(nameContainer, 'hello');
+
+        await getDmnJS().importXML(diagramXML);
+
+        // when
+        nameContainer.blur();
+
+        // then
+        expect(canvas.getRootElement().businessObject.name).to.equal('drd-name');
+        expect(commandStack.canUndo()).to.be.false;
+      }
+    ));
+
+
+    it('should commit displayed value after external update', inject(
+      function(canvas, definitionPropertiesView, modeling) {
+
+        // given
+        var rootElement = canvas.getRootElement();
+        var nameContainer = domQuery(
+          '.dmn-definitions-name',
+          definitionPropertiesView._container
+        );
+
+        nameContainer.focus();
+
+        nameContainer.textContent = 'hello';
+        inputEvent(nameContainer, 'hello');
+
+        modeling.updateProperties(rootElement, { name: 'external' });
+
+        // when
+        nameContainer.blur();
+
+        // then
+        expect(rootElement.businessObject.name).to.equal('external');
+        expect(nameContainer.textContent).to.equal('external');
+      }
+    ));
 
 
     describe('id', function() {
@@ -207,7 +349,7 @@ describe('features/definition-properties', function() {
             definitionPropertiesView._container
           );
 
-          clickElement(idContainer);
+          idContainer.focus();
 
           // when
           eventBus.on('commandStack.element.updateProperties.postExecute', function() {
@@ -218,9 +360,40 @@ describe('features/definition-properties', function() {
             done();
           });
 
+          idContainer.textContent = 'world';
           inputEvent(idContainer, 'world');
+          idContainer.blur();
         };
       }));
+
+
+      it('should revert definition ID on invalid commit', inject(
+        function(canvas, definitionPropertiesView) {
+
+          // given
+          var definitions = canvas.getRootElement().businessObject;
+          var idContainer = domQuery(
+            '.dmn-definitions-id',
+            definitionPropertiesView._container
+          );
+
+          idContainer.focus();
+
+          // when
+          idContainer.textContent = 'invalid id';
+          inputEvent(idContainer, 'invalid id');
+          idContainer.blur();
+
+          // then
+          var errorMessage = domQuery(
+            '.dmn-definitions-error-message',
+            definitionPropertiesView._container
+          );
+
+          expect(errorMessage).to.exist;
+          expect(idContainer.textContent).to.equal(definitions.id);
+        }
+      ));
 
 
       it('should not edit definition ID and show error message (ID not unique)', inject(
