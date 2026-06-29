@@ -23,6 +23,7 @@ import OutlineProvider from './features/outline';
 import PaletteModule from './features/palette';
 import ResizeModule from 'diagram-js/lib/features/resize';
 import SnappingModule from './features/snapping';
+import TypeRefDropdownModule from './features/type-ref-dropdown';
 
 /**
  * A modeler for DMN tables.
@@ -135,7 +136,8 @@ Modeler.prototype._modelingModules = [
   OutlineProvider,
   PaletteModule,
   ResizeModule,
-  SnappingModule
+  SnappingModule,
+  TypeRefDropdownModule
 ];
 
 Modeler.prototype._modules = [].concat(
