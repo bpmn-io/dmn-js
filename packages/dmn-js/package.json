@@ -8,6 +8,7 @@
     "test/helper"
   ],
   "scripts": {
+    "all": "run-s build test",
     "start": "cross-env SINGLE_START=modeler npm run dev",
     "start:viewer": "cross-env SINGLE_START=viewer npm run dev",
     "start:navigated-viewer": "cross-env SINGLE_START=navigated-viewer npm run dev",
