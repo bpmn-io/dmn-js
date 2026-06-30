@@ -69,5 +69,8 @@
     "stylelint": "^16.10.0",
     "stylelint-config-standard": "^39.0.0",
     "webpack": "^5.106.2"
+  },
+  "allowScripts": {
+    "inferno": false
   }
 }
