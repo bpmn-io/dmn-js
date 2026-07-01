@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `diagram-js@15.18.0`
+
 ## 17.8.1
 
 * `FIX`: allow setting variable on element without one ([#994](https://github.com/bpmn-io/dmn-js/issues/994))
