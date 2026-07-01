@@ -27,12 +27,14 @@ describe('Modeler', function() {
     container = TestContainer.get(this);
   });
 
-  singleStart || afterEach(function() {
-    if (modeler) {
-      modeler.destroy();
-      modeler = null;
-    }
-  });
+  if (!singleStart) {
+    afterEach(function() {
+      if (modeler) {
+        modeler.destroy();
+        modeler = null;
+      }
+    });
+  }
 
   function createModeler(xml) {
     modeler = new DrdModeler({

@@ -28,9 +28,11 @@ describe('Viewer', function() {
     document.body.appendChild(container);
   });
 
-  singleStart || afterEach(function() {
-    document.body.removeChild(container);
-  });
+  if (!singleStart) {
+    afterEach(function() {
+      document.body.removeChild(container);
+    });
+  }
 
 
   it('should expose Viewer as library default', function() {
