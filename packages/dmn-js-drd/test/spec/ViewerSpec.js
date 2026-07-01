@@ -32,12 +32,14 @@ describe('Viewer', function() {
     container = TestContainer.get(this);
   });
 
-  singleStart || afterEach(function() {
-    if (viewer) {
-      viewer.destroy();
-      viewer = null;
-    }
-  });
+  if (!singleStart) {
+    afterEach(function() {
+      if (viewer) {
+        viewer.destroy();
+        viewer = null;
+      }
+    });
+  }
 
 
   function createViewer(xml) {

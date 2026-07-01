@@ -23,9 +23,11 @@ describe('NavigatedViewer', function() {
     document.body.appendChild(container);
   });
 
-  singleStart || afterEach(function() {
-    document.body.removeChild(container);
-  });
+  if (!singleStart) {
+    afterEach(function() {
+      document.body.removeChild(container);
+    });
+  }
 
 
   it('should allow to configure container size', function() {

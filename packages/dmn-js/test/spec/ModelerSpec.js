@@ -56,15 +56,17 @@ describe('Modeler', function() {
     });
   });
 
-  singleStart || afterEach(function() {
-    if (editor) {
-      editor.destroy();
+  if (!singleStart) {
+    afterEach(function() {
+      if (editor) {
+        editor.destroy();
 
-      editor = null;
-    }
+        editor = null;
+      }
 
-    document.body.removeChild(container);
-  });
+      document.body.removeChild(container);
+    });
+  }
 
 
   it('should open DMN table', async function() {

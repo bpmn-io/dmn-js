@@ -40,12 +40,14 @@ describe('DecisionTable', function() {
 
   let dmnJS;
 
-  singleStart || afterEach(function() {
-    if (dmnJS) {
-      dmnJS.destroy();
-      dmnJS = null;
-    }
-  });
+  if (!singleStart) {
+    afterEach(function() {
+      if (dmnJS) {
+        dmnJS.destroy();
+        dmnJS = null;
+      }
+    });
+  }
 
   function createDecisionTable(xml) {
     dmnJS = new DmnDecisionTableViewer({
