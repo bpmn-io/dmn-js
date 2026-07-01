@@ -45,9 +45,9 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.2",
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
     "@bpmn-io/release": "^0.1.0",
     "babel-loader": "^10.1.1",
     "babel-plugin-inferno": "~5.0.0",
@@ -68,12 +68,12 @@
     "karma-webpack": "^5.0.0",
     "mocha": "^11.7.5",
     "mocha-test-container-support": "^0.2.0",
-    "npm-run-all2": "^9.0.0",
+    "npm-run-all2": "^9.0.2",
     "sinon": "^22.0.0",
     "sinon-chai": "^4.0.0",
     "stylelint": "^16.10.0",
     "stylelint-config-standard": "^39.0.0",
-    "webpack": "^5.106.2"
+    "webpack": "^5.107.2"
   },
   "allowScripts": {
     "inferno": false
