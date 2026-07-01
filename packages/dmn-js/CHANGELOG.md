@@ -8,6 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 * `DEPS`: update to `diagram-js@15.18.0`
 * `DEPS`: update to `diagram-js-direct-editing@3.4.0`
+* `DEPS`: update to `@bpmn-io/feel-editor@2.6.0`
 
 ## 17.8.1
 
