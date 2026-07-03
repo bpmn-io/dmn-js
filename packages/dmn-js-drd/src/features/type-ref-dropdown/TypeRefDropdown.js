@@ -28,19 +28,13 @@ export default class TypeRefDropdown {
     this._eventBus.on('selection.changed', (event) => {
 
       // clean up any existing overlays
-      this._currentTarget = null;
       this.close();
 
       const selection = event.newSelection;
 
-      const target = selection.length
-        ? selection.length === 1
-          ? selection[0]
-          : selection
-        : null;
+      const target = selection.length === 1 ? selection[0] : null;
 
       if (target && is(target, 'dmn:InputData')) {
-        this._currentTarget = target;
         this.open(target);
       }
     });
@@ -95,9 +89,6 @@ export default class TypeRefDropdown {
     return container;
   }
 
-  _getCurrentTarget() {
-    return this._currentTarget;
-  }
 
   _getTypeRef(element) {
     const bo = getBusinessObject(element);
