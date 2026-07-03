@@ -122,7 +122,7 @@ export default class TypeRefDropdown {
       return;
     }
 
-    this._modeling.updateProperties(variable, { typeRef });
+    this._modeling.updateModdleProperties(element, variable, { typeRef });
   }
 }
 
