@@ -320,6 +320,45 @@ describe('features - type-ref-dropdown', function() {
   });
 
 
+  describe('external changes', function() {
+
+    it('should update select value on undo', inject(
+      function(elementRegistry, selection, commandStack) {
+
+        // given
+        const element = elementRegistry.get('withVariable_id');
+        selection.select(element);
+        triggerSelectChange(querySelect('withVariable_id'), 'number');
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(querySelect('withVariable_id').value).to.equal('boolean');
+      }
+    ));
+
+
+    it('should update select value on redo', inject(
+      function(elementRegistry, selection, commandStack) {
+
+        // given
+        const element = elementRegistry.get('withVariable_id');
+        selection.select(element);
+        triggerSelectChange(querySelect('withVariable_id'), 'number');
+        commandStack.undo();
+
+        // when
+        commandStack.redo();
+
+        // then
+        expect(querySelect('withVariable_id').value).to.equal('number');
+      }
+    ));
+
+  });
+
+
   // helpers //////////////
 
   function queryOverlay(elementId) {

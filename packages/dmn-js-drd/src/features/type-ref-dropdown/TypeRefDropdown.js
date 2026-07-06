@@ -25,6 +25,8 @@ export default class TypeRefDropdown {
     this._modeling = modeling;
     this._translate = translate;
 
+    this._current = null;
+
     this._eventBus.on('selection.changed', (event) => {
 
       // clean up any existing overlays
@@ -38,20 +40,50 @@ export default class TypeRefDropdown {
         this.open(target);
       }
     });
+
+    this._eventBus.on('elements.changed', event => {
+      if (!this._current) {
+        return;
+      }
+
+      const { element } = this._current;
+
+      if (event.elements.includes(element)) {
+        this._update();
+      }
+    });
   }
 
   open(element) {
+    const container = this._getOverlayNode(element);
+    this._current = {
+      element,
+      container
+    };
+
     this._overlays.add(element, 'type-ref-dropdown', {
       position: {
         top: 60,
         left: 0
       },
-      html: this._getOverlayNode(element)
+      html: container
     });
   }
 
   close() {
+    this._current = null;
     this._overlays.remove({ type: 'type-ref-dropdown' });
+  }
+
+  _update() {
+    if (!this._current) {
+      return;
+    }
+
+    const { element, container } = this._current;
+
+    const select = container.querySelector('select');
+    select.value = this._getTypeRef(element);
   }
 
   _getOverlayNode(element) {
