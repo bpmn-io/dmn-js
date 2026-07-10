@@ -6,7 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
-* `DEPS`: update to `diagram-js@15.18.0`
+## 17.9.0
+
+* `FEAT`: add type ref dropdown ([#1009](https://github.com/bpmn-io/dmn-js/pull/1009))
+* `DEPS`: update to `diagram-js@15.21.0`
 * `DEPS`: update to `diagram-js-direct-editing@3.4.0`
 * `DEPS`: update to `@bpmn-io/feel-editor@2.6.0`
 
