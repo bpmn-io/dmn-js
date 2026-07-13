@@ -1,4 +1,5 @@
 import CreateConnectionBehavior from './CreateConnectionBehavior';
+import DecisionServiceBehavior from './DecisionServiceBehavior';
 import LayoutConnectionBehavior from './LayoutConnectionBehavior';
 import ReplaceConnectionBehavior from './ReplaceConnectionBehavior';
 import ReplaceElementBehavior from './ReplaceElementBehavior';
@@ -9,6 +10,7 @@ import NameChangeBehavior from
 export default {
   __init__: [
     'createConnectionBehavior',
+    'decisionServiceBehavior',
     'idChangeBehavior',
     'nameChangeBehavior',
     'layoutConnectionBehavior',
@@ -16,6 +18,7 @@ export default {
     'replaceElementBehavior'
   ],
   createConnectionBehavior: [ 'type', CreateConnectionBehavior ],
+  decisionServiceBehavior: [ 'type', DecisionServiceBehavior ],
   idChangeBehavior: [ 'type', IdChangeBehavior ],
   nameChangeBehavior: [ 'type', NameChangeBehavior ],
   layoutConnectionBehavior: [ 'type', LayoutConnectionBehavior ],
