@@ -348,7 +348,7 @@ export default function DrdRenderer(
 
       return rect;
     },
-     'dmn:DecisionService': function(p, element) {
+    'dmn:DecisionService': function(p, element) {
       var rect = drawRect(p, element.width, element.height, 12, {
         stroke: getStrokeColor(element, defaultStrokeColor),
         strokeWidth: 4,
