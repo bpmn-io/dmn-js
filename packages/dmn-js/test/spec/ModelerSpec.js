@@ -54,6 +54,12 @@ describe('Modeler', function() {
     editor = new Modeler({
       container: container,
     });
+
+    if (singleStart) {
+      editor.on('viewer.created', ({ viewer }) => viewer.on('elements.changed', function() {
+        editor.saveXML({ format: true }).then(({ xml }) => console.log(xml)).catch(console.error);
+      }));
+    }
   });
 
   if (!singleStart) {
