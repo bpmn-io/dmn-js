@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" id="drd-id" name="drd-name" namespace="http://camunda.org/schema/1.0/dmn">
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="Diagram_1" />
+  </dmndi:DMNDI>
+</definitions>
