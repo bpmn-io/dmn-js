@@ -90,6 +90,62 @@ describe('features/replace - drd replace', function() {
     }));
 
 
+    it('should keep existing variable when replacing with literal expression', inject(
+      function(elementRegistry, drdReplace, drdFactory, modeling) {
+
+        // given
+        var decision = elementRegistry.get('decision'),
+            variable = drdFactory.create('dmn:InformationItem', {
+              name: decision.businessObject.name,
+              typeRef: 'boolean'
+            });
+
+        modeling.updateProperties(decision, { variable: variable });
+
+        var newElementData = {
+          type: 'dmn:Decision',
+          table: false,
+          expression: true
+        };
+
+        // when
+        var newElement = drdReplace.replaceElement(decision, newElementData);
+
+        // then
+        expect(newElement.businessObject.variable).to.equal(variable);
+        expect(newElement.businessObject.variable.typeRef).to.equal('boolean');
+      }
+    ));
+
+
+    it('should keep existing variable when replacing with decision table', inject(
+      function(elementRegistry, drdReplace, drdFactory, modeling) {
+
+        // given
+        var decision = elementRegistry.get('decision'),
+            variable = drdFactory.create('dmn:InformationItem', {
+              name: decision.businessObject.name,
+              typeRef: 'boolean'
+            });
+
+        modeling.updateProperties(decision, { variable: variable });
+
+        var newElementData = {
+          type: 'dmn:Decision',
+          table: true,
+          expression: false
+        };
+
+        // when
+        var newElement = drdReplace.replaceElement(decision, newElementData);
+
+        // then
+        expect(newElement.businessObject.variable).to.equal(variable);
+        expect(newElement.businessObject.variable.typeRef).to.equal('boolean');
+      }
+    ));
+
+
     it('nothing', inject(function(elementRegistry, drdReplace) {
 
       // given
