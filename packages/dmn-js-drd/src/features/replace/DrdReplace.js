@@ -34,6 +34,14 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
 
     newBusinessObject.name = oldBusinessObject.name;
 
+    // keep the existing variable (and its type ref) across the morph
+    var variable = oldBusinessObject.variable;
+
+    if (variable) {
+      newBusinessObject.variable = variable;
+      variable.$parent = newBusinessObject;
+    }
+
     if (target.table) {
       var table = drdFactory.create('dmn:DecisionTable');
       table.$parent = newBusinessObject;
@@ -59,13 +67,9 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
     }
 
     if (target.expression) {
+      var literalExpression = drdFactory.create('dmn:LiteralExpression');
 
-      // variable set to element name
-      var literalExpression = drdFactory.create('dmn:LiteralExpression'),
-          variable = drdFactory.create('dmn:InformationItem',
-            { name: oldBusinessObject.name });
-
-      setBoxedExpression(newBusinessObject, literalExpression, drdFactory, variable);
+      setBoxedExpression(newBusinessObject, literalExpression, drdFactory);
     }
 
     return replace.replaceElement(element, newElement, hints);
@@ -82,7 +86,7 @@ DrdReplace.$inject = [
 ];
 
 // helper //////////////////////////////////////////////////////////////
-function setBoxedExpression(bo, expression, drdFactory, variable) {
+function setBoxedExpression(bo, expression, drdFactory) {
   if (is(bo, 'dmn:Decision')) {
     bo.decisionLogic = expression;
     expression.$parent = bo;
@@ -93,10 +97,5 @@ function setBoxedExpression(bo, expression, drdFactory, variable) {
     bo.encapsulatedLogic = encapsulatedLogic;
     encapsulatedLogic.$parent = bo;
     expression.$parent = encapsulatedLogic;
-  }
-
-  if (variable) {
-    bo.variable = variable;
-    variable.$parent = bo;
   }
 }
