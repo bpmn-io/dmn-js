@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.10.0
+
+* `FEAT`: create variable for decision and input data per default ([#1011](https://github.com/bpmn-io/dmn-js/pull/1011))
+* `FIX`: do not remove typeref when decision implementation changes([#1011](https://github.com/bpmn-io/dmn-js/pull/1011))
+
 ## 17.9.0
 
 * `FEAT`: add type ref dropdown ([#1009](https://github.com/bpmn-io/dmn-js/pull/1009))
