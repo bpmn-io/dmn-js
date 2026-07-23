@@ -3,11 +3,11 @@
   <decision id="decision" name="Check Order">
     <decisionTable id="decisionTable">
       <input id="input1" label="Customer Status">
-        <inputExpression id="inputExpression1" typeRef="dateTime">
+        <inputExpression id="inputExpression1" typeRef="date and time">
           <text>status</text>
         </inputExpression>
       </input>
-      <output id="output1" label="Check Result" name="result" typeRef="dateTime" />
+      <output id="output1" label="Check Result" name="result" typeRef="date and time" />
       <rule id="rule1">
         <description>Bronze is really not that good</description>
         <inputEntry id="inputEntry1">

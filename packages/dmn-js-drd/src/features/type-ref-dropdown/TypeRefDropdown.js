@@ -2,6 +2,7 @@ import {
   getBusinessObject,
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 
 /**
  * Displays dropdown overlay that can be used to change element type.
@@ -125,7 +126,7 @@ export default class TypeRefDropdown {
   _getTypeRef(element) {
     const bo = getBusinessObject(element);
 
-    return bo.get('variable')?.get('typeRef') || 'Any';
+    return normalizeTypeRef(bo.get('variable')?.get('typeRef') || 'Any');
   }
 
   _setTypeRef(element, typeRef) {

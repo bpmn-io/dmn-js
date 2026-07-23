@@ -10,9 +10,9 @@ const DEFAULT_DATA_TYPES = [
   'number',
   'date',
   'time',
-  'dateTime',
-  'dayTimeDuration',
-  'yearMonthDuration',
+  'date and time',
+  'days and time duration',
+  'years and months duration',
   'Any'
 ];
 
@@ -53,7 +53,7 @@ describe('DataTypes', function() {
   });
 
 
-  it('should provide DMN spec labels for FEEL data types', function() {
+  it('should normalize legacy FEEL type refs to DMN spec names', function() {
 
     // given
     const dataTypes = createDataTypes();

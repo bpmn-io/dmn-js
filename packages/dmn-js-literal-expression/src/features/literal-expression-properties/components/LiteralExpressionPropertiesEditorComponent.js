@@ -1,5 +1,6 @@
 import { Component } from 'inferno';
 
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
@@ -17,7 +18,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     this.state = {
       name: decision.variable.name,
-      typeRef: decision.variable.typeRef
+      typeRef: normalizeTypeRef(decision.variable.typeRef)
     };
 
     this.setVariableName = this.setVariableName.bind(this);
@@ -67,6 +68,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
   render() {
     const { name, typeRef } = this.state;
+    const normalizedTypeRef = normalizeTypeRef(typeRef);
 
     const typeRefOptions = this._dataTypes.getAll().map(t => {
       return {
@@ -97,7 +99,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
                   label={ this._translate('Variable type') }
                   onChange={ this.setVariableType }
                   options={ typeRefOptions }
-                  value={ typeRef }
+                  value={ normalizedTypeRef }
                   className="variable-type-select dms-block" />
               </div>
             </td>

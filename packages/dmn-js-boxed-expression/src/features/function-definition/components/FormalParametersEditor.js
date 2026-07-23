@@ -1,5 +1,6 @@
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 import Input from 'dmn-js-shared/lib/components/Input';
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
 
@@ -77,6 +78,7 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
   const functionDefinition = context.injector.get('functionDefinition');
 
   const { name, typeRef } = parameter;
+  const normalizedTypeRef = normalizeTypeRef(typeRef);
 
   const onNameChange = name => {
     functionDefinition.updateParameter(parameter, { name });
@@ -101,7 +103,7 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
       <td>
         <InputSelect
           onChange={ onTypeRefChange }
-          value={ typeRef }
+          value={ normalizedTypeRef }
           options={ typeRefOptions }
         />
       </td>

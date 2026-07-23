@@ -11,7 +11,7 @@
         </inputValues>
       </input>
       <input id="input2" label="Order Sum">
-        <inputExpression id="inputExpression2" typeRef="yearMonthDuration">
+        <inputExpression id="inputExpression2" typeRef="years and months duration">
           <text>sum</text>
         </inputExpression>
       </input>
@@ -21,7 +21,7 @@
         </outputValues>
       </output>
       <output id="output2" label="Reason" name="reason" typeRef="string" />
-      <output id="OutputClause_0spghmg" label="" typeRef="dayTimeDuration" />
+      <output id="OutputClause_0spghmg" label="" typeRef="days and time duration" />
       <rule id="rule1">
         <description>Bronze is really not that good</description>
         <inputEntry id="inputEntry1">

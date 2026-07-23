@@ -117,7 +117,7 @@ describe('simple duration edit - utils', function() {
         'P1Y2M3D',
         'invalid'
       ];
-      const validate = value => validateDuration('dayTimeDuration', value);
+      const validate = value => validateDuration('days and time duration', value);
 
       // then
       for (const value of valid) {
@@ -142,7 +142,7 @@ describe('simple duration edit - utils', function() {
         'P1Y2M3D',
         'invalid'
       ];
-      const validate = value => validateDuration('yearMonthDuration', value);
+      const validate = value => validateDuration('years and months duration', value);
 
       // then
       for (const value of valid) {

@@ -2,11 +2,13 @@ import { Component } from 'inferno';
 
 import ValidatedInput from 'dmn-js-shared/lib/components/ValidatedInput';
 
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
+
 import { validateDuration } from '../Utils';
 
 const ERROR_MESSAGE = {
-  yearMonthDuration: 'Must match PnYnM',
-  dayTimeDuration: 'Must match PnDTnH'
+  'years and months duration': 'Must match PnYnM',
+  'days and time duration': 'Must match PnDTnH'
 };
 
 
@@ -34,15 +36,19 @@ export class DurationInput extends Component {
   }
 
   validate(value) {
-    if (!validateDuration(this._type, value)) {
-      return this._translate(ERROR_MESSAGE[this._type]);
+    const normalizedType = normalizeTypeRef(this._type);
+
+    if (!validateDuration(normalizedType, value)) {
+      return this._translate(ERROR_MESSAGE[normalizedType]);
     }
   }
 
   _getPlaceholder() {
-    if (this._type === 'yearMonthDuration') {
+    const normalizedType = normalizeTypeRef(this._type);
+
+    if (normalizedType === 'years and months duration') {
       return this._translate('e.g. { sample }', { sample: 'P1Y2M' });
-    } else if (this._type === 'dayTimeDuration') {
+    } else if (normalizedType === 'days and time duration') {
       this._translate('e.g. { sample }', { sample: 'P1DT2H' });
     }
   }

@@ -2,6 +2,7 @@ import InputDateEdit from './components/InputDateTimeEdit';
 import OutputDateEdit from './components/OutputDateTimeEdit';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 
 export default class SimpleDateEdit {
   constructor(components, simpleMode) {
@@ -50,5 +51,5 @@ function getTypeRef(element) {
 }
 
 function isDateTime(typeRef) {
-  return typeRef === 'dateTime';
+  return normalizeTypeRef(typeRef) === 'date and time';
 }

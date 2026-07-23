@@ -1,5 +1,6 @@
 import { Component } from 'inferno';
 
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 import { is, isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
@@ -46,11 +47,13 @@ export default class TypeRefCellContextMenu extends Component {
   render() {
     const element = this.getElement();
 
-    const typeRef = (
-      is(element, 'dmn:InputClause') ?
-        element.inputExpression :
-        element
-    ).typeRef;
+    const typeRef = normalizeTypeRef(
+      (
+        is(element, 'dmn:InputClause') ?
+          element.inputExpression :
+          element
+      ).typeRef
+    );
 
     const typeRefOptions = this._dataTypes.getAll().map(t => {
       return {

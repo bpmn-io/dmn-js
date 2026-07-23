@@ -4,17 +4,21 @@ const DEFAULT_DATA_TYPES = [
   'number',
   'date',
   'time',
-  'dateTime',
-  'dayTimeDuration',
-  'yearMonthDuration',
+  'date and time',
+  'days and time duration',
+  'years and months duration',
   'Any'
 ];
 
-const TYPE_LABELS = {
+const TYPE_ALIASES = {
   dateTime: 'date and time',
   dayTimeDuration: 'days and time duration',
   yearMonthDuration: 'years and months duration'
 };
+
+export function normalizeTypeRef(typeRef) {
+  return TYPE_ALIASES[typeRef] || typeRef;
+}
 
 /**
  * Provide data types via config.
@@ -41,7 +45,8 @@ export default class DataTypes {
    * @param {string[]} configuredDataTypes
    */
   constructor(configuredDataTypes) {
-    this._dataTypes = configuredDataTypes || DEFAULT_DATA_TYPES;
+    this._dataTypes = (configuredDataTypes || DEFAULT_DATA_TYPES)
+      .map(typeRef => normalizeTypeRef(typeRef));
   }
 
   /**
@@ -61,7 +66,7 @@ export default class DataTypes {
    * @returns {string}
    */
   getLabel(typeRef) {
-    return TYPE_LABELS[typeRef] || typeRef;
+    return normalizeTypeRef(typeRef);
   }
 }
 

@@ -1,5 +1,7 @@
 import { keys } from 'min-dash';
 
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
+
 export const operators = {
   equals: '=',
   less: '<',
@@ -60,9 +62,11 @@ export function getRangeString(
 }
 
 export function validateDuration(type, value) {
-  if (type === 'yearMonthDuration') {
+  const normalizedType = normalizeTypeRef(type);
+
+  if (normalizedType === 'years and months duration') {
     return validateYearMonthDuration(value);
-  } else if (type === 'dayTimeDuration') {
+  } else if (normalizedType === 'days and time duration') {
     return validateDayTimeDuration(value);
   }
 }

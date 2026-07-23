@@ -1,4 +1,5 @@
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
 
@@ -47,7 +48,7 @@ function VariableTypeEditor(_, context) {
   const elementVariable = context.injector.get('elementVariable');
   const dataTypes = context.injector.get('dataTypes');
 
-  const type = elementVariable.getType();
+  const type = normalizeTypeRef(elementVariable.getType());
   const onChange = type => elementVariable.setType(type);
 
   const typeRefOptions = dataTypes.getAll().map(t => {

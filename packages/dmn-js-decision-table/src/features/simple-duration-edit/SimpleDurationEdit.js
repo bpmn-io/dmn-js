@@ -2,6 +2,7 @@ import InputDurationEdit from './components/InputDurationEdit';
 import OutputDurationEdit from './components/OutputDurationEdit';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
+import { normalizeTypeRef } from 'dmn-js-shared/lib/features/data-types/DataTypes';
 
 export default class SimpleDurationEdit {
   constructor(components, simpleMode) {
@@ -50,10 +51,10 @@ function getTypeRef(element) {
 }
 
 const durations = [
-  'yearMonthDuration',
-  'dayTimeDuration'
+  'years and months duration',
+  'days and time duration'
 ];
 
 function isDuration(typeRef) {
-  return durations.includes(typeRef);
+  return durations.includes(normalizeTypeRef(typeRef));
 }
