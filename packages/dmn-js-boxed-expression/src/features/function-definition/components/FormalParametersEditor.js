@@ -88,7 +88,7 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
 
   const typeRefOptions = dataTypes.getAll().map(t => {
     return {
-      label: translate(t),
+      label: dataTypes.getLabel(t),
       value: t
     };
   });

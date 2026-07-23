@@ -70,7 +70,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
     const typeRefOptions = this._dataTypes.getAll().map(t => {
       return {
-        label: this._translate(t),
+        label: this._dataTypes.getLabel(t),
         value: t
       };
     });

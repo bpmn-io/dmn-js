@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: display FEEL type names in type dropdowns using the DMN specification ([#1013](https://github.com/bpmn-io/dmn-js/issues/1013))
+
 ## 17.10.0
 
 * `FEAT`: create variable for decision and input data per default ([#1011](https://github.com/bpmn-io/dmn-js/pull/1011))

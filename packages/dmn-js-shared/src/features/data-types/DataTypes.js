@@ -10,6 +10,12 @@ const DEFAULT_DATA_TYPES = [
   'Any'
 ];
 
+const TYPE_LABELS = {
+  dateTime: 'date and time',
+  dayTimeDuration: 'days and time duration',
+  yearMonthDuration: 'years and months duration'
+};
+
 /**
  * Provide data types via config.
  *
@@ -45,6 +51,17 @@ export default class DataTypes {
    */
   getAll() {
     return this._dataTypes;
+  }
+
+  /**
+   * Get display label for a configured data type.
+   *
+   * @param {string} typeRef
+   *
+   * @returns {string}
+   */
+  getLabel(typeRef) {
+    return TYPE_LABELS[typeRef] || typeRef;
   }
 }
 

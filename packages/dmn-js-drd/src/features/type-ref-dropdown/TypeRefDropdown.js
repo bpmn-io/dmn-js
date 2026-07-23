@@ -103,7 +103,7 @@ export default class TypeRefDropdown {
     const options = types.map(type => {
       const option = document.createElement('option');
       option.value = type;
-      option.textContent = this._translate(type);
+      option.textContent = this._dataTypes.getLabel(type);
 
       return option;
     });

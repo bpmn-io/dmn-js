@@ -46,14 +46,13 @@ function ElementVariableComponent(_, context) {
 function VariableTypeEditor(_, context) {
   const elementVariable = context.injector.get('elementVariable');
   const dataTypes = context.injector.get('dataTypes');
-  const translate = context.injector.get('translate');
 
   const type = elementVariable.getType();
   const onChange = type => elementVariable.setType(type);
 
   const typeRefOptions = dataTypes.getAll().map(t => {
     return {
-      label: translate(t),
+      label: dataTypes.getLabel(t),
       value: t
     };
   });

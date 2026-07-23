@@ -51,6 +51,19 @@ describe('DataTypes', function() {
       'boolean'
     ]);
   });
+
+
+  it('should provide DMN spec labels for FEEL data types', function() {
+
+    // given
+    const dataTypes = createDataTypes();
+
+    // then
+    expect(dataTypes.getLabel('dateTime')).to.equal('date and time');
+    expect(dataTypes.getLabel('dayTimeDuration')).to.equal('days and time duration');
+    expect(dataTypes.getLabel('yearMonthDuration')).to.equal('years and months duration');
+    expect(dataTypes.getLabel('string')).to.equal('string');
+  });
 });
 
 
