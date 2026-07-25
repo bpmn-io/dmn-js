@@ -4,6 +4,7 @@ import NavigatedViewer from './NavigatedViewer';
 
 import AlignElementsModule from 'diagram-js/lib/features/align-elements';
 import AutoPlaceModule from './features/auto-place';
+import AutoResizeModule from './features/auto-resize';
 import AutoScrollModule from 'diagram-js/lib/features/auto-scroll';
 import BendpointsModule from 'diagram-js/lib/features/bendpoints';
 import ContextPadModule from './features/context-pad';
@@ -119,6 +120,7 @@ Modeler.prototype._modelingModules = [
   // modeling components
   AlignElementsModule,
   AutoPlaceModule,
+  AutoResizeModule,
   AutoScrollModule,
   BendpointsModule,
   ContextPadModule,
