@@ -7,6 +7,7 @@
 
 import {
   domify,
+  classes as domClasses,
   query as domQuery,
   remove as domRemove
 } from 'min-dom';
@@ -31,6 +32,23 @@ import {
   addProjectLogo
 } from 'dmn-js-shared/lib/util/PoweredByUtil';
 
+
+/**
+ * Padding added around the diagram bounds on SVG export.
+ *
+ * `getBBox` returns the geometry bounds only, excluding element strokes, so
+ * without padding strokes at the diagram edges get clipped. Historically this
+ * padding was provided implicitly by element outlines, which diagram-js now
+ * creates lazily (diagram-js@15.19, bpmn-io/diagram-js#1064).
+ */
+const EXPORT_PADDING = 5;
+
+/**
+ * Class set on the canvas container to hide element outlines, which diagram-js
+ * excludes from rendering while present. Applied when measuring the export
+ * bounds so lazily created outlines do not skew them.
+ */
+const OUTLINE_HIDDEN_CLS = 'djs-outline-hidden';
 
 /**
  * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
@@ -132,15 +150,31 @@ Viewer.prototype.saveSVG = wrapForCompatibility(function(options) {
     var contents = innerSVG(contentNode),
         defs = (defsNode && defsNode.outerHTML) || '';
 
-    var bbox = contentNode.getBBox();
+    // hide outlines so they do not skew the measured bounds
+    var container = canvas.getContainer();
+
+    domClasses(container).add(OUTLINE_HIDDEN_CLS);
+
+    var bbox;
+
+    try {
+      bbox = contentNode.getBBox();
+    } finally {
+      domClasses(container).remove(OUTLINE_HIDDEN_CLS);
+    }
+
+    var x = bbox.x - EXPORT_PADDING,
+        y = bbox.y - EXPORT_PADDING,
+        width = bbox.width + EXPORT_PADDING * 2,
+        height = bbox.height + EXPORT_PADDING * 2;
 
     var svg =
       '<?xml version="1.0" encoding="utf-8"?>\n' +
       '<!-- created with dmn-js / http://bpmn.io -->\n' +
       '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n' +
       '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ' +
-           'width="' + bbox.width + '" height="' + bbox.height + '" ' +
-           'viewBox="' + bbox.x + ' ' + bbox.y + ' ' + bbox.width + ' ' + bbox.height + '" version="1.1">' +
+           'width="' + width + '" height="' + height + '" ' +
+           'viewBox="' + x + ' ' + y + ' ' + width + ' ' + height + '" version="1.1">' +
         defs + contents +
       '</svg>';
 
