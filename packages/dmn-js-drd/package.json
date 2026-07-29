@@ -29,7 +29,7 @@
     "drd"
   ],
   "dependencies": {
-    "diagram-js": "^15.21.0",
+    "diagram-js": "^15.23.2",
     "diagram-js-direct-editing": "^3.4.0",
     "dmn-js-shared": "^17.10.0",
     "ids": "^3.0.2",
