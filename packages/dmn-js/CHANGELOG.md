@@ -6,6 +6,11 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.10.1
+
+* `FIX`: prevent clipped strokes in exported diagrams ([#1017](https://github.com/bpmn-io/dmn-js/issues/1017))
+* `DEPS`: update to `diagram-js@15.23.2`
+
 ## 17.10.0
 
 * `FEAT`: create variable for decision and input data per default ([#1011](https://github.com/bpmn-io/dmn-js/pull/1011))
