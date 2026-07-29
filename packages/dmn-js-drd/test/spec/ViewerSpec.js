@@ -118,6 +118,13 @@ describe('Viewer', function() {
 
   describe('export', function() {
 
+    function getViewBox(svg) {
+      return new DOMParser()
+        .parseFromString(svg, 'image/svg+xml')
+        .querySelector('svg')
+        .getAttribute('viewBox');
+    }
+
     function expectValidSVG(svg) {
       const expectedStart = '<?xml version="1.0" encoding="utf-8"?>';
       const expectedEnd = '</svg>';
@@ -153,6 +160,61 @@ describe('Viewer', function() {
 
       // then
       expectValidSVG(svg);
+    });
+
+
+    it('should pad viewport to not clip strokes at diagram bounds', async function() {
+
+      // given
+      await createViewer(exampleXML);
+
+      const drdViewer = viewer.getActiveViewer();
+
+      const bbox = drdViewer.get('canvas').getActiveLayer().getBBox();
+
+      // when
+      const { svg } = await drdViewer.saveSVG();
+
+      // then
+      const svgNode = new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('svg');
+
+      expect(svgNode.getAttribute('width')).to.eql(String(bbox.width + 10));
+      expect(svgNode.getAttribute('height')).to.eql(String(bbox.height + 10));
+      expect(svgNode.getAttribute('viewBox')).to.eql(
+        [ bbox.x - 5, bbox.y - 5, bbox.width + 10, bbox.height + 10 ].join(' ')
+      );
+    });
+
+
+    it('should ignore outlines when computing export bounds', async function() {
+
+      // given
+      await createViewer(exampleXML);
+
+      const drdViewer = viewer.getActiveViewer();
+
+      const { svg: withoutOutline } = await drdViewer.saveSVG();
+
+      const elementRegistry = drdViewer.get('elementRegistry');
+
+      const element = elementRegistry.get('dish-decision'),
+            gfx = elementRegistry.getGraphics(element);
+
+      const outline = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+
+      outline.setAttribute('class', 'djs-outline');
+      outline.setAttribute('x', -1000);
+      outline.setAttribute('y', -1000);
+      outline.setAttribute('width', element.width + 2000);
+      outline.setAttribute('height', element.height + 2000);
+
+      gfx.appendChild(outline);
+
+      // when
+      const { svg: withOutline } = await drdViewer.saveSVG();
+
+      // then
+      expect(getViewBox(withOutline)).to.eql(getViewBox(withoutOutline));
     });
 
   });
