@@ -1,10 +1,4 @@
 import {
-  debounce
-} from 'min-dash';
-
-var DEBOUNCE_DELAY = 300;
-
-import {
   domify,
   classes as domClasses,
   query as domQuery
@@ -71,11 +65,15 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
 
   node.setAttribute('contenteditable', true);
 
-  node.addEventListener('input', debounce(function(evt) {
-    var value = evt.target.value || evt.target.textContent;
+  var draftValue;
 
-    self.update(type, value.trim());
-  }, DEBOUNCE_DELAY));
+  node.addEventListener('focus', function(evt) {
+    draftValue = evt.target.textContent || '';
+  });
+
+  node.addEventListener('input', function(evt) {
+    draftValue = evt.target.textContent || '';
+  });
 
   node.addEventListener('keydown', function(evt) {
     if (evt.keyCode === 13) {
@@ -85,9 +83,13 @@ DefinitionIdEdit.prototype._setup = function(node, type) {
   });
 
   node.addEventListener('blur', function() {
+    var value = (draftValue || '').trim();
+
     self._clearErrorMessage();
 
-    self._definitionPropertiesView.update();
+    self.update(type, value);
+
+    draftValue = null;
   });
 };
 
