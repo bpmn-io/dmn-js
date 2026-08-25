@@ -14,6 +14,8 @@ import {
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
+import { getDecisionServiceDividerRatio } from '../../draw/DrdRenderer';
+
 
 /**
  * Update DMN 1.3 information.
@@ -270,6 +272,11 @@ DrdUpdater.prototype.updateBounds = function(shape) {
   var businessObject = shape.businessObject,
       bounds = businessObject.di.bounds;
 
+  var dividerLine = is(shape, 'dmn:DecisionService')
+    && businessObject.di.decisionServiceDividerLine;
+
+  var dividerRatio = dividerLine && getDecisionServiceDividerRatio(businessObject);
+
   // update bounds
   assign(bounds, {
     x: shape.x,
@@ -279,22 +286,21 @@ DrdUpdater.prototype.updateBounds = function(shape) {
   });
 
   // update decision service divider line
-  if (is(shape, 'dmn:DecisionService') && businessObject.di.decisionServiceDividerLine) {
-    var dividerY = shape.y + (shape.height / 2);
-    var dividerLine = businessObject.di.decisionServiceDividerLine;
+  if (dividerLine
+      && dividerLine.waypoint
+      && dividerLine.waypoint.length === 2) {
 
-    if (dividerLine.waypoint && dividerLine.waypoint.length === 2) {
-      assign(dividerLine.waypoint[0], {
-        x: shape.x,
-        y: dividerY
-      });
+    var dividerY = shape.y + (shape.height * dividerRatio);
 
+    assign(dividerLine.waypoint[0], {
+      x: shape.x,
+      y: dividerY
+    });
 
-      assign(dividerLine.waypoint[1], {
-        x: shape.x + shape.width,
-        y: dividerY
-      });
-    }
+    assign(dividerLine.waypoint[1], {
+      x: shape.x + shape.width,
+      y: dividerY
+    });
   }
 };
 

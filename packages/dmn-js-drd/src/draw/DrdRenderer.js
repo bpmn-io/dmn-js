@@ -355,7 +355,7 @@ export default function DrdRenderer(
         fill: getFillColor(element, defaultFillColor)
       });
 
-      var dividerY = element.height / 2;
+      var dividerY = element.height * getDecisionServiceDividerRatio(element.businessObject);
       var line = svgCreate('line');
       svgAttr(line, {
         x1: 0,
@@ -376,8 +376,7 @@ export default function DrdRenderer(
         'font-weight': 'bold',
         'font-size': '12px',
         'text-anchor': 'middle',
-        'dominant-baseline': 'middle',
-        'display': 'none'
+        'dominant-baseline': 'middle'
       });
       outputText.textContent = 'OUTPUT';
       domAttr(outputText, 'class', 'djs-label dmn-decision-service-label');
@@ -392,8 +391,7 @@ export default function DrdRenderer(
         'font-weight': 'bold',
         'font-size': '12px',
         'text-anchor': 'middle',
-        'dominant-baseline': 'middle',
-        'display': 'none'
+        'dominant-baseline': 'middle'
       });
       encapsulatedText.textContent = 'ENCAPSULATED';
       domAttr(encapsulatedText, 'class', 'djs-label dmn-decision-service-label');
@@ -594,4 +592,21 @@ function getFillColor(element, defaultColor) {
 
 function getLabelColor(element, defaultColor, defaultStrokeColor) {
   return defaultColor || getStrokeColor(element, defaultStrokeColor);
+}
+
+export function getDecisionServiceDividerRatio(businessObject) {
+  var di = businessObject && businessObject.di;
+  var dividerLine = di && di.decisionServiceDividerLine;
+  var bounds = di && di.bounds;
+
+  if (!dividerLine
+      || !dividerLine.waypoint
+      || dividerLine.waypoint.length !== 2
+      || !bounds
+      || !bounds.height) {
+    return 0.5;
+  }
+
+  var ratio = (dividerLine.waypoint[0].y - bounds.y) / bounds.height;
+  return Math.max(0, Math.min(1, ratio));
 }

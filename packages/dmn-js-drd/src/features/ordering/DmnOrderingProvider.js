@@ -84,7 +84,7 @@ export default function DmnOrderingProvider(eventBus, canvas) {
   this.getOrdering = function(element, newParent) {
 
     // render labels and text annotations always on top
-    if (element.labelTarget || is(element, 'bpmn:TextAnnotation')) {
+    if (element.labelTarget || is(element, 'dmn:TextAnnotation')) {
       return {
         parent: canvas.findRoot(newParent) || canvas.getRootElement(),
         index: -1

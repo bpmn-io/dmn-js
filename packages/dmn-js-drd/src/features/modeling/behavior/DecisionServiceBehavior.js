@@ -5,25 +5,21 @@ import {
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { getDecisionServiceDividerRatio } from '../../../draw/DrdRenderer';
+
+
 export default function DecisionServiceBehavior(drdFactory, injector, eventBus) {
   this._drdFactory = drdFactory;
   this._injector = injector;
   this._elementRegistry = null;
   this._eventBus = eventBus;
-
-  var self = this;
-
-  // Listen to drag events to show/hide decision service section labels
-  eventBus.on('drag.start', function() {
-    self._updateDecisionServiceLabelsVisibility(true);
-  });
-
-  eventBus.on([ 'drag.end', 'drag.cancel' ], function() {
-    self._updateDecisionServiceLabelsVisibility(false);
-  });
 }
 
-DecisionServiceBehavior.$inject = [ 'drdFactory', 'injector', 'eventBus' ];
+DecisionServiceBehavior.$inject = [
+  'drdFactory',
+  'injector',
+  'eventBus'
+];
 
 /**
  * Get the element registry
@@ -37,23 +33,14 @@ DecisionServiceBehavior.prototype._getElementRegistry = function() {
 };
 
 /**
- * Update the visibility of decision service section labels (OUTPUT/ENCAPSULATED)
- * @param {boolean} visible - Whether to show or hide the labels
- */
-DecisionServiceBehavior.prototype._updateDecisionServiceLabelsVisibility = function(visible) {
-  var labels = document.querySelectorAll('.dmn-decision-service-label');
-  labels.forEach(function(label) {
-    label.style.display = visible ? 'block' : 'none';
-  });
-};
-
-/**
  * Get the divider Y position for a decision service
  * @param {Element} decisionServiceElement - The decision service element
  * @returns {number} The Y position of the divider line
  */
 DecisionServiceBehavior.prototype._getDividerPosition = function(decisionServiceElement) {
-  return decisionServiceElement.y + (decisionServiceElement.height / 2);
+  var ratio = getDecisionServiceDividerRatio(decisionServiceElement.businessObject);
+
+  return decisionServiceElement.y + (decisionServiceElement.height * ratio);
 };
 
 /**
