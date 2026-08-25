@@ -8,6 +8,8 @@ import TestContainer from 'mocha-test-container-support';
 import literalExpressionXML from '../../literal-expression.dmn';
 import literalExpressionNoTypeRefXML
   from './LiteralExpressionEditorProperties.no-type-ref.dmn';
+import literalExpressionNoVariableXML
+  from './LiteralExpressionEditorProperties.no-variable.dmn';
 
 import CoreModule from 'src/core';
 import LiteralExpressionPropertiesModule
@@ -45,6 +47,32 @@ describe('literal expression properties', function() {
   describe('no typeRef', function() {
 
     beforeEach(bootstrapViewer(literalExpressionNoTypeRefXML, {
+      modules: [
+        CoreModule,
+        TranslateModule,
+        LiteralExpressionPropertiesModule
+      ]
+    }));
+
+    let testContainer;
+
+    beforeEach(function() {
+      testContainer = TestContainer.get(this);
+    });
+
+
+    it('should render', function() {
+
+      // then
+      expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    });
+
+  });
+
+
+  describe('no variable', function() {
+
+    beforeEach(bootstrapViewer(literalExpressionNoVariableXML, {
       modules: [
         CoreModule,
         TranslateModule,

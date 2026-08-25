@@ -14,10 +14,11 @@ export default class LiteralExpressionPropertiesComponent extends Component {
     this._dataTypes = context.injector.get('dataTypes');
     this._eventBus = context.injector.get('eventBus');
     const decision = this._viewer.getDecision();
+    const variable = decision.get('variable');
 
     this.state = {
-      name: decision.variable.name,
-      typeRef: decision.variable.typeRef
+      name: variable && variable.get('name'),
+      typeRef: variable && variable.get('typeRef')
     };
 
     this.setVariableName = this.setVariableName.bind(this);
@@ -42,9 +43,11 @@ export default class LiteralExpressionPropertiesComponent extends Component {
 
   onChange = () => {
     const decision = this._viewer.getDecision();
-    if (decision.variable) {
+    const variable = decision.get('variable');
+
+    if (variable) {
       this.setState({
-        name: decision.variable.name
+        name: variable.get('name')
       });
     }
   };
