@@ -8,10 +8,11 @@ import UpdatePropertiesHandler
 
 export default class Modeling {
 
-  constructor(commandStack, viewer, eventBus) {
+  constructor(commandStack, viewer, eventBus, moddle) {
     this._commandStack = commandStack;
     this._viewer = viewer;
     this._eventBus = eventBus;
+    this._moddle = moddle;
 
     eventBus.on('viewer.init', () => {
 
@@ -89,8 +90,14 @@ export default class Modeling {
   }
 
   editVariableName(name) {
-    const decision = this.getDecision(),
-          variable = decision.variable;
+    const decision = this.getDecision();
+    const variable = decision.get('variable');
+
+    if (!variable) {
+      this._createVariable(decision, { name });
+
+      return;
+    }
 
     const context = {
       element: variable,
@@ -103,8 +110,14 @@ export default class Modeling {
   }
 
   editVariableType(typeRef) {
-    const decision = this.getDecision(),
-          variable = decision.variable;
+    const decision = this.getDecision();
+    const variable = decision.get('variable');
+
+    if (!variable) {
+      this._createVariable(decision, { typeRef });
+
+      return;
+    }
 
     const context = {
       element: variable,
@@ -114,6 +127,18 @@ export default class Modeling {
     };
 
     this._commandStack.execute('element.updateProperties', context);
+  }
+
+  _createVariable(decision, properties) {
+    const variable = this._moddle.create('dmn:InformationItem', {
+      name: decision.get('name'),
+      ...properties
+    });
+
+    variable.set('id', this._moddle.ids.nextPrefixed('InformationItem_', variable));
+    variable.$parent = decision;
+
+    this.updateProperties(decision, { variable });
   }
 
   updateProperties(el, props) {
@@ -126,7 +151,7 @@ export default class Modeling {
   }
 }
 
-Modeling.$inject = [ 'commandStack', 'viewer', 'eventBus' ];
+Modeling.$inject = [ 'commandStack', 'viewer', 'eventBus', 'moddle' ];
 
 
 // helpers //////////////////////

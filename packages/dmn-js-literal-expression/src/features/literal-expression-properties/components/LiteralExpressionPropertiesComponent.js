@@ -10,10 +10,10 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   }
 
   render() {
-    const {
-      decisionLogic: literalExpression,
-      variable
-    } = this._viewer.getDecision();
+    const decision = this._viewer.getDecision();
+
+    const literalExpression = decision.get('decisionLogic');
+    const variable = decision.get('variable');
 
     return (
       <div className="literal-expression-properties">
@@ -21,13 +21,13 @@ export default class LiteralExpressionPropertiesComponent extends Component {
           <tr>
             <td>{ this._translate('Variable name:') }</td>
             <td>
-              <span>{ variable.name || '-' }</span>
+              <span>{ (variable && variable.get('name')) || '-' }</span>
             </td>
           </tr>
           <tr>
             <td>{ this._translate('Variable type:') }</td>
             <td>
-              <span>{ this._translate(variable.typeRef || '') || '-' }</span>
+              <span>{ this._translate((variable && variable.get('typeRef')) || '') || '-' }</span>
 
             </td>
           </tr>

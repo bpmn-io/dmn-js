@@ -19,6 +19,8 @@ import literalExpressionXML from '../../literal-expression.dmn';
 import nonDefaultExpressionLanguageXML from '../../expression-language.dmn';
 import literalExpressionNoTypeRefXML
   from './LiteralExpressionEditorProperties.no-type-ref.dmn';
+import literalExpressionNoVariableXML
+  from './LiteralExpressionEditorProperties.no-variable.dmn';
 
 import LiteralExpressionPropertiesEditorModule
   from 'src/features/literal-expression-properties/editor';
@@ -249,6 +251,49 @@ describe('literal expression properties editor', function() {
       // then
       expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
     });
+
+  });
+
+
+  describe('no variable', function() {
+
+    beforeEach(bootstrapModeler(literalExpressionNoVariableXML, {
+      modules: testModules,
+      debounceInput: false
+    }));
+
+
+    it('should render', function() {
+
+      // then
+      expect(domQuery('.literal-expression-properties', testContainer)).to.exist;
+    });
+
+
+    it('should create variable when editing name', inject(function(viewer) {
+
+      // given
+      const input = domQuery('.variable-name-input', testContainer);
+
+      // when
+      triggerInputEvent(input, 'foo');
+
+      // then
+      expect(viewer.getDecision().variable.name).to.equal('foo');
+    }));
+
+
+    it('should create variable when editing type', inject(function(viewer) {
+
+      // given
+      const inputSelect = domQuery('.variable-type-select', testContainer);
+
+      // when
+      triggerInputSelectChange(inputSelect, 'boolean', testContainer);
+
+      // then
+      expect(viewer.getDecision().variable.typeRef).to.equal('boolean');
+    }));
 
   });
 
