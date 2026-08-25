@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.10.2
+
+* `FIX`: open literal expression decisions without variable element ([#1023](https://github.com/bpmn-io/dmn-js/pull/1023))
+
 ## 17.10.1
 
 * `FIX`: prevent clipped strokes in exported diagrams ([#1017](https://github.com/bpmn-io/dmn-js/issues/1017))
