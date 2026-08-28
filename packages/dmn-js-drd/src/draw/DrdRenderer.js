@@ -348,6 +348,61 @@ export default function DrdRenderer(
 
       return rect;
     },
+    'dmn:DecisionService': function(p, element) {
+      var rect = drawRect(p, element.width, element.height, 12, {
+        stroke: getStrokeColor(element, defaultStrokeColor),
+        strokeWidth: 4,
+        fill: getFillColor(element, defaultFillColor)
+      });
+
+      var dividerY = element.height * getDecisionServiceDividerRatio(element.businessObject);
+      var line = svgCreate('line');
+      svgAttr(line, {
+        x1: 0,
+        y1: dividerY,
+        x2: element.width,
+        y2: dividerY,
+        stroke: getStrokeColor(element, defaultStrokeColor),
+        strokeWidth: 2
+      });
+      svgAppend(p, line);
+
+      var outputText = svgCreate('text');
+      svgAttr(outputText, {
+        x: element.width / 2,
+        y: dividerY - 10,
+        fill: getLabelColor(element, defaultLabelColor, defaultStrokeColor),
+        'font-family': 'Arial, sans-serif',
+        'font-weight': 'bold',
+        'font-size': '12px',
+        'text-anchor': 'middle',
+        'dominant-baseline': 'middle'
+      });
+      outputText.textContent = 'OUTPUT';
+      domAttr(outputText, 'class', 'djs-label dmn-decision-service-label');
+      svgAppend(p, outputText);
+
+      var encapsulatedText = svgCreate('text');
+      svgAttr(encapsulatedText, {
+        x: element.width / 2,
+        y: dividerY + 10,
+        fill: getLabelColor(element, defaultLabelColor, defaultStrokeColor),
+        'font-family': 'Arial, sans-serif',
+        'font-weight': 'bold',
+        'font-size': '12px',
+        'text-anchor': 'middle',
+        'dominant-baseline': 'middle'
+      });
+      encapsulatedText.textContent = 'ENCAPSULATED';
+      domAttr(encapsulatedText, 'class', 'djs-label dmn-decision-service-label');
+      svgAppend(p, encapsulatedText);
+
+      renderEmbeddedLabel(p, element, 'center-top', {
+        padding: 10
+      });
+
+      return rect;
+    },
     'dmn:TextAnnotation': function(p, element) {
       var style = {
         'fill': 'none',
@@ -537,4 +592,21 @@ function getFillColor(element, defaultColor) {
 
 function getLabelColor(element, defaultColor, defaultStrokeColor) {
   return defaultColor || getStrokeColor(element, defaultStrokeColor);
+}
+
+export function getDecisionServiceDividerRatio(businessObject) {
+  var di = businessObject && businessObject.di;
+  var dividerLine = di && di.decisionServiceDividerLine;
+  var bounds = di && di.bounds;
+
+  if (!dividerLine
+      || !dividerLine.waypoint
+      || dividerLine.waypoint.length !== 2
+      || !bounds
+      || !bounds.height) {
+    return 0.5;
+  }
+
+  var ratio = (dividerLine.waypoint[0].y - bounds.y) / bounds.height;
+  return Math.max(0, Math.min(1, ratio));
 }

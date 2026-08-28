@@ -26,8 +26,8 @@ export function importDRD(drd, definitions, done) {
         return importer.root(element);
       },
 
-      element: function(element, di) {
-        return importer.add(element, di);
+      element: function(element, parentSemantic) {
+        return importer.add(element, parentSemantic);
       },
 
       error: function(message, context) {
