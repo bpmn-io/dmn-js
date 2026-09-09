@@ -7,6 +7,7 @@ import {
 
 import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
+import ReplaceModule from 'src/features/replace';
 
 import diagramXML from './decision-service-behavior.dmn';
 
@@ -244,5 +245,81 @@ describe('DecisionServiceBehavior', function() {
     );
 
   });
+
+});
+
+
+describe('DecisionServiceBehavior - replace', function() {
+
+  beforeEach(bootstrapModeler(diagramXML, {
+    modules: [
+      CoreModule,
+      ModelingModule,
+      ReplaceModule
+    ]
+  }));
+
+
+  it('should remove a replaced output decision that lost its logic', inject(
+    function(drdReplace, elementRegistry) {
+
+      // given
+      var decision = elementRegistry.get('Decision_InOutput');
+      var decisionServiceBo = elementRegistry.get('DecisionService_1').businessObject;
+
+      drdReplace.replaceElement(decision, { type: 'dmn:Decision', expression: true });
+      decision = elementRegistry.get('Decision_InOutput');
+
+      // when
+      drdReplace.replaceElement(decision, { type: 'dmn:Decision' });
+
+      // then
+      var outputDecisions = decisionServiceBo.get('outputDecision') || [];
+      expect(outputDecisions.some(function(ref) {
+        return ref.href === '#Decision_InOutput';
+      })).to.be.false;
+    }
+  ));
+
+
+  it('should remove a replaced encapsulated decision that lost its logic', inject(
+    function(drdReplace, elementRegistry) {
+
+      // given
+      var decision = elementRegistry.get('Decision_InEncapsulated');
+      var decisionServiceBo = elementRegistry.get('DecisionService_1').businessObject;
+
+      drdReplace.replaceElement(decision, { type: 'dmn:Decision', expression: true });
+      decision = elementRegistry.get('Decision_InEncapsulated');
+
+      // when
+      drdReplace.replaceElement(decision, { type: 'dmn:Decision' });
+
+      // then
+      var encapsulatedDecisions = decisionServiceBo.get('encapsulatedDecision') || [];
+      expect(encapsulatedDecisions.some(function(ref) {
+        return ref.href === '#Decision_InEncapsulated';
+      })).to.be.false;
+    }
+  ));
+
+
+  it('should keep a replaced decision that still has logic in its section', inject(
+    function(drdReplace, elementRegistry) {
+
+      // given
+      var decision = elementRegistry.get('Decision_InOutput');
+      var decisionServiceBo = elementRegistry.get('DecisionService_1').businessObject;
+
+      // when
+      drdReplace.replaceElement(decision, { type: 'dmn:Decision', expression: true });
+
+      // then
+      var outputDecisions = decisionServiceBo.get('outputDecision') || [];
+      expect(outputDecisions.some(function(ref) {
+        return ref.href === '#Decision_InOutput';
+      })).to.be.true;
+    }
+  ));
 
 });

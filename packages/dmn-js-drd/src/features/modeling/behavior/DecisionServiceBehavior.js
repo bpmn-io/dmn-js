@@ -1,3 +1,7 @@
+import inherits from 'inherits-browser';
+
+import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
+
 import {
   add as collectionAdd,
   remove as collectionRemove
@@ -8,18 +12,38 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 import { getDecisionServiceDividerRatio } from '../../../draw/DrdRenderer';
 
 
-export default function DecisionServiceBehavior(drdFactory, injector, eventBus) {
+export default function DecisionServiceBehavior(drdFactory, injector, canvas) {
+  injector.invoke(CommandInterceptor, this);
+
   this._drdFactory = drdFactory;
   this._injector = injector;
+  this._canvas = canvas;
   this._elementRegistry = null;
-  this._eventBus = eventBus;
+
+  var self = this;
+
+  // keep decision service references consistent when a contained
+  // decision's logic is replaced (e.g. literal expression <-> empty)
+  this.postExecuted('shape.replace', function(event) {
+    var context = event.context;
+
+    self._updateReferencesAfterReplace(context.oldShape, context.newShape);
+  });
+
+  this.reverted('shape.replace', function(event) {
+    var context = event.context;
+
+    self._updateReferencesAfterReplace(context.newShape, context.oldShape);
+  });
 }
 
 DecisionServiceBehavior.$inject = [
   'drdFactory',
   'injector',
-  'eventBus'
+  'canvas'
 ];
+
+inherits(DecisionServiceBehavior, CommandInterceptor);
 
 /**
  * Get the element registry
@@ -30,6 +54,48 @@ DecisionServiceBehavior.prototype._getElementRegistry = function() {
     this._elementRegistry = this._injector.get('elementRegistry');
   }
   return this._elementRegistry;
+};
+
+/**
+ * Keep a decision service's output/encapsulated references consistent
+ * after one of its decisions got its logic replaced (e.g. via the
+ * decision's morph menu, cf. dmn-js-drd/src/features/replace/ReplaceOptions).
+ *
+ * A decision that still carries decision logic is (re-)sectioned into the
+ * correct part of the decision service. A decision that lost its logic
+ * (replaced with an empty decision, or with a non-decision element) is
+ * removed from the decision service entirely.
+ *
+ * @param {Element} previousShape - the shape before the replace (old on
+ *   execute, new on revert)
+ * @param {Element} currentShape - the shape after the replace (new on
+ *   execute, old on revert)
+ */
+DecisionServiceBehavior.prototype._updateReferencesAfterReplace = function(
+    previousShape,
+    currentShape
+) {
+  var decisionService = currentShape.parent;
+
+  if (!is(decisionService, 'dmn:DecisionService')) {
+    decisionService = previousShape.parent;
+  }
+
+  if (!is(decisionService, 'dmn:DecisionService')) {
+    return;
+  }
+
+  var currentBo = currentShape.businessObject;
+
+  if (is(currentBo, 'dmn:Decision') && currentBo.decisionLogic) {
+    this.updateDecisionSection(currentShape, decisionService.businessObject);
+
+    return;
+  }
+
+  var definitions = this._canvas.getRootElement().businessObject;
+
+  this.removeElementFromAllServices(currentBo.id, definitions);
 };
 
 /**
