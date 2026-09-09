@@ -107,10 +107,6 @@ function canConnect(source, target) {
       return { type: 'dmn:AuthorityRequirement' };
     }
 
-    if (is(target, 'dmn:DecisionService')) {
-      return { type: 'dmn:KnowledgeRequirement' };
-    }
-
   }
 
   if (is(source, 'dmn:Definitions') || is(target, 'dmn:Definitions')) {
