@@ -60,7 +60,7 @@ inherits(CreateConnectionBehavior, CommandInterceptor);
 // helpers //////////
 
 function getRequirementType(source) {
-  if (is(source, 'dmn:BusinessKnowledgeModel')) {
+  if (is(source, 'dmn:BusinessKnowledgeModel') || is(source, 'dmn:DecisionService')) {
     return 'Knowledge';
   } else if (is(source, 'dmn:Decision')) {
     return 'Decision';

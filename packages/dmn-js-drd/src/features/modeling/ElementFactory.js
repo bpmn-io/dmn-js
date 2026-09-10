@@ -12,6 +12,7 @@ import BaseElementFactory from 'diagram-js/lib/core/ElementFactory';
 
 export var BUSINESS_KNOWLEDGE_MODEL_SIZE = { width: 135, height: 46 };
 export var DECISION_SIZE = { width: 180, height: 80 };
+export var DECISION_SERVICE_SIZE = { width: 320, height: 320 };
 export var INPUT_DATA_SIZE = { width: 125, height: 45 };
 export var KNOWLEDGE_SOURCE_SIZE = { width: 100, height: 63 };
 
@@ -58,6 +59,31 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
       businessObject.di = drdFactory.createDiEdge(businessObject, []);
     } else if (elementType === 'shape') {
       businessObject.di = drdFactory.createDiShape(businessObject, {});
+
+
+      if (is(businessObject, 'dmn:DecisionService')) {
+        size = this._getDefaultSize(businessObject);
+        var dividerY = (attrs.y || 0) + (size.height / 2);
+        var dividerWaypoints = [
+          { x: attrs.x || 0, y: dividerY },
+          { x: (attrs.x || 0) + size.width, y: dividerY }
+        ];
+        businessObject.di.decisionServiceDividerLine = drdFactory.createDiDividerLine(dividerWaypoints);
+
+        // Set default name if not provided
+        if (!businessObject.name) {
+          businessObject.name = 'New Decision Service';
+        }
+
+        // Create variable for Decision Service
+        if (!businessObject.variable) {
+          var variable = drdFactory.create('dmn:InformationItem', {
+            name: businessObject.name
+          });
+          businessObject.variable = variable;
+          variable.$parent = businessObject;
+        }
+      }
     }
   }
 
@@ -79,6 +105,10 @@ ElementFactory.prototype._getDefaultSize = function(semantic) {
 
   if (is(semantic, 'dmn:Decision')) {
     return DECISION_SIZE;
+  }
+
+  if (is(semantic, 'dmn:DecisionService')) {
+    return DECISION_SERVICE_SIZE;
   }
 
   if (is(semantic, 'dmn:InputData')) {
