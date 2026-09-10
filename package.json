@@ -48,7 +48,7 @@
     "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
-    "@bpmn-io/release": "^0.1.0",
+    "@bpmn-io/release": "^0.5.0",
     "babel-loader": "^10.1.1",
     "babel-plugin-inferno": "~5.0.0",
     "babel-plugin-istanbul": "^8.0.0",
