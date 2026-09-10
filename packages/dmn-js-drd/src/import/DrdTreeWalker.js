@@ -16,9 +16,14 @@ export default function DRDTreeWalker(handler, options) {
 
   // list of elements to handle deferred to ensure
   // prerequisites are drawn
-  var deferred = [];
+  var deferred = [],
+      refToParent = new Map();
 
-  function visit(element) {
+  function mapRefToParent(ref, parent) {
+    refToParent.set(ref.href.replace(/^#/, ''), parent);
+  }
+
+  function visit(element, parentSemantic) {
 
     var gfx = element.gfx;
 
@@ -28,17 +33,17 @@ export default function DRDTreeWalker(handler, options) {
     }
 
     // call handler
-    return handler.element(element);
+    return handler.element(element, parentSemantic);
   }
 
   function visitRoot(element) {
     return handler.root(element);
   }
 
-  function visitIfDi(element) {
+  function visitIfDi(element, parentSemantic) {
 
     try {
-      var gfx = element.di && visit(element);
+      var gfx = element.di && visit(element, parentSemantic);
 
       return gfx;
     } catch (e) {
@@ -97,8 +102,16 @@ export default function DRDTreeWalker(handler, options) {
 
   function handleDrgElements(elements) {
     forEach(elements, function(element) {
-      visitIfDi(element);
+      if (is(element, 'dmn:DecisionService')) {
+        handleDecisionService(element);
+      } else if (is(element, 'dmn:Decision')) {
+        handleDecision(element);
+      } else {
+        visitIfDi(element);
+      }
+    });
 
+    forEach(elements, function(element) {
       handleRequirements(element);
     });
   }
@@ -140,6 +153,25 @@ export default function DRDTreeWalker(handler, options) {
           visitIfDi(requirement);
         });
       });
+    });
+  }
+
+  function handleDecisionService(element) {
+    visitIfDi(element);
+
+    forEach(element.get('encapsulatedDecision'), function(decisionRef) {
+      mapRefToParent(decisionRef, element);
+    });
+
+    forEach(element.get('outputDecision'), function(decisionRef) {
+      mapRefToParent(decisionRef, element);
+    });
+  }
+
+  function handleDecision(element) {
+    defer(function() {
+      var parent = refToParent.get(element.id);
+      visitIfDi(element, parent);
     });
   }
 
