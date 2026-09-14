@@ -1,20 +1,20 @@
 .dmn-boxed-expression-container {
-  --element-properties-background-color: var(--color-white);
-  --element-properties-border-color: var(--color-grey-225-10-15);
-  --element-properties-color: var(--color-grey-225-10-15);
-  --boxed-expression-color: var(--color-grey-225-10-15);
-  --boxed-expression-properties-border-color: var(--color-grey-225-10-15);
-  --boxed-expression-properties-color: var(--color-grey-225-10-15);
-  --powered-by-overlay-background-color: var(--color-black-opacity-20);
-  --powered-by-overlay-content-background-color: var(--color-white);
-  --powered-by-overlay-content-border-color: var(--color-grey-225-10-75);
-  --powered-by-overlay-content-color: var(--color-grey-225-10-15);
-  --textarea-border-color: var(--color-grey-225-10-15);
-  --textarea-color: var(--color-grey-225-10-15);
-  --view-drd-button-background-color: var(--color-white);
-  --view-drd-button-border-color: var(--color-grey-225-10-75);
-  --view-drd-button-color: var(--color-grey-225-10-15);
-  --view-drd-button-hover-background-color: var(--color-grey-225-10-97);
+  --element-properties-background-color: var(--bio-surface);
+  --element-properties-border-color: var(--bio-border);
+  --element-properties-color: var(--bio-text);
+  --boxed-expression-color: var(--bio-text);
+  --boxed-expression-properties-border-color: var(--bio-border);
+  --boxed-expression-properties-color: var(--bio-text);
+  --powered-by-overlay-background-color: hsl(0 0% 0% / 20%);
+  --powered-by-overlay-content-background-color: var(--bio-surface);
+  --powered-by-overlay-content-border-color: var(--bio-border);
+  --powered-by-overlay-content-color: var(--bio-text);
+  --textarea-border-color: var(--bio-border);
+  --textarea-color: var(--bio-text);
+  --view-drd-button-background-color: var(--bio-surface);
+  --view-drd-button-border-color: var(--bio-border);
+  --view-drd-button-color: var(--bio-text);
+  --view-drd-button-hover-background-color: var(--bio-surface-subtle);
   --boxed-expression-font-family: 'Arial', sans-serif;
   --boxed-expression-font-family-monospace: monospace;
   --section-padding: 20px;
@@ -44,6 +44,14 @@
 
 .dmn-boxed-expression-container .dmn-boxed-expression-section {
   border: 1px solid var(--element-properties-border-color);
+
+  &.dmn-boxed-expression-header {
+    border-radius: var(--panel-border-radius) var(--panel-border-radius) 0 0;
+  }
+
+  &.dmn-boxed-expression-footer {
+    border-radius: 0 0 var(--panel-border-radius) var(--panel-border-radius);
+  }
 
   & + .dmn-boxed-expression-section {
     border-top: none;
@@ -122,7 +130,7 @@
   background: var(--view-drd-button-background-color);
   padding: 8px;
   border: solid 1px var(--view-drd-button-border-color);
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   font-size: 14px;
   color: var(--view-drd-button-color);
   font-weight: bold;
@@ -181,6 +189,6 @@
   & .element-variable-name-label, & .element-variable-type-label {
     display: block;
     padding-bottom: 7px;
-    color: var(--color-grey-225-10-35)
+    color: var(--bio-text-subtle)
   }
 }

@@ -230,7 +230,7 @@ export default class Viewer extends Table {
 
   static _createContainer() {
     return domify(
-      '<div class="dmn-decision-table-container"></div>'
+      '<div class="dmn-decision-table-container bio-theme-parent"></div>'
     );
   }
 

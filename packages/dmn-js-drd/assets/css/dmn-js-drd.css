@@ -1,12 +1,12 @@
 .dmn-drd-container {
-  --dmn-definitions-background-color: var(--color-grey-225-10-97);
-  --dmn-definitions-border-color: var(--color-grey-225-10-75);
-  --dmn-definitions-focus-border-color: var(--color-grey-225-10-75);
-  --dmn-definitions-error-color: var(--color-red-360-100-45);
-  --dmn-definitions-error-border-color: var(--color-red-360-100-45);
-  --dmn-definitions-error-background-color: var(--color-red-360-100-97);
-  --drill-down-overlay-background-color: var(--color-blue-205-100-50);
-  --drill-down-overlay-color: var(--color-white);
+  --dmn-definitions-background-color: var(--bio-surface-subtle);
+  --dmn-definitions-border-color: var(--bio-border);
+  --dmn-definitions-focus-border-color: var(--bio-border);
+  --dmn-definitions-error-color: var(--bio-danger);
+  --dmn-definitions-error-border-color: var(--bio-danger);
+  --dmn-definitions-error-background-color: var(--bio-danger-surface-subtle);
+  --drill-down-overlay-background-color: var(--bio-canvas-accent);
+  --drill-down-overlay-color: var(--bio-text-on-primary);
   --drd-font-family-monospace: monospace;
 
   width: 100%;
@@ -30,6 +30,8 @@
   padding: 2px 4px;
   margin: 0;
   border: none;
+
+  /* a hairline, deliberately tighter than the button scale */
   border-radius: 1px;
   background: var(--drill-down-overlay-background-color);
   color: var(--drill-down-overlay-color);
@@ -43,7 +45,7 @@
   left: 20px;
   background-color: var(--dmn-definitions-background-color);
   border: solid 1px var(--dmn-definitions-border-color);
-  border-radius: 2px;
+  border-radius: var(--surface-border-radius);
   padding: 4px;
 }
 
@@ -69,8 +71,8 @@
 .dmn-definitions > [contenteditable]:hover,
 .dmn-definitions > [contenteditable]:focus {
   padding: 2px;
-  background-color: var(--color-white);
-  border-radius: 2px;
+  background-color: var(--bio-surface);
+  border-radius: var(--input-border-radius);
   border: 1px solid var(--dmn-definitions-focus-border-color);
 }
 
@@ -100,7 +102,7 @@
   }
 
   & .dms-type-ref-select {
-    background-color: var(--color-white);
+    background-color: var(--bio-surface);
     border: 1px solid var(--input-border-color);
     width: 125px;
     border-radius: 12px;

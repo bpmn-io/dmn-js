@@ -20,7 +20,8 @@
     "release": "run-s lint release:publish",
     "release:publish": "bio-release",
     "test": "npm run test --workspaces --if-present",
-    "ci": "run-s all build-distro"
+    "ci": "run-s all build-distro",
+    "lint:theme": "bpmn-io-theme-validate packages/dmn-js-shared/assets/css/dmn-js-shared.css"
   },
   "releaseConfig": {
     "strategy": "fixed"
@@ -49,6 +50,7 @@
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
     "@bpmn-io/release": "^0.5.1",
+    "@bpmn-io/theme": "^0.2.0",
     "babel-loader": "^10.1.1",
     "babel-plugin-inferno": "~5.0.0",
     "babel-plugin-istanbul": "^8.0.0",
