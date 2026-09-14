@@ -235,7 +235,7 @@ export class Viewer extends BaseViewer {
 
   static _createContainer() {
     return domify(
-      '<div class="dmn-boxed-expression-container"></div>'
+      '<div class="dmn-boxed-expression-container bio-theme-parent"></div>'
     );
   }
 

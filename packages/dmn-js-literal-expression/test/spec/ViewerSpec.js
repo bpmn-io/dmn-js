@@ -60,6 +60,18 @@ describe('Viewer', function() {
   });
 
 
+  it('should have <bio-theme-parent> at the root', async function() {
+
+    // when
+    await createViewer(simpleXML);
+
+    // then
+    // the --bio-* tokens are declared on this class; without it every
+    // component variable resolves to nothing
+    expect(testContainer.querySelector('.dmn-literal-expression-container.bio-theme-parent')).to.exist;
+  });
+
+
   describe('getDecision', function() {
 
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
