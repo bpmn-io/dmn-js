@@ -277,7 +277,7 @@ Viewer.prototype._emit = function(type, event) {
 
 Viewer.prototype._createContainer = function() {
   return domify(
-    '<div class="dmn-drd-container"></div>'
+    '<div class="dmn-drd-container bio-theme-parent"></div>'
   );
 };
 

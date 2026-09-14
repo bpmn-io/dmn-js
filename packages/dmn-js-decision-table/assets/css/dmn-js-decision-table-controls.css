@@ -1,25 +1,25 @@
 .dmn-decision-table-container {
-  --allowed-values-placeholder-color: var(--color-grey-225-10-35);
-  --cell-description-editor-border-color: var(--color-grey-225-10-15);
-  --create-inputs-border-color: var(--color-grey-225-10-75);
-  --create-inputs-color: var(--color-grey-225-10-35);
-  --create-inputs-hover-color: var(--color-grey-225-10-15);
-  --context-menu-background-color: var(--color-white);
-  --context-menu-border-color: var(--color-grey-225-10-75);
-  --context-menu-color: var(--color-grey-225-10-15);
-  --context-menu-box-shadow-color: var(--color-black-opacity-10);
-  --context-menu-group-entry-border-color: var(--color-grey-225-10-75);
-  --context-menu-group-entry-disabled-color: var(--color-grey-225-10-75);
-  --context-menu-group-entry-hover-background-color: var(--color-grey-225-10-95);
-  --drag-and-drop-handle-color: var(--color-grey-225-10-55);
-  --drag-and-drop-handle-hover-color: var(--color-grey-225-10-15);
-  --form-control-label-color: var(--color-grey-225-10-15);
-  --hint-color: var(--color-grey-225-10-15);
-  --edit-button-color: var(--color-grey-225-10-15);
-  --edit-button-background-color: var(--color-grey-225-10-97);
-  --edit-button-border-color: var(--color-grey-225-10-75);
-  --edit-button-box-shadow-color: var(--color-black-opacity-10);
-  --edit-button-disabled-color: var(--color-grey-225-10-75);
+  --allowed-values-placeholder-color: var(--bio-text-subtle);
+  --cell-description-editor-border-color: var(--bio-border);
+  --create-inputs-border-color: var(--bio-border);
+  --create-inputs-color: var(--bio-text-subtle);
+  --create-inputs-hover-color: var(--bio-text);
+  --context-menu-background-color: var(--bio-surface);
+  --context-menu-border-color: var(--bio-border);
+  --context-menu-color: var(--bio-text);
+  --context-menu-box-shadow-color: var(--bio-shadow-subtle);
+  --context-menu-group-entry-border-color: var(--bio-border);
+  --context-menu-group-entry-disabled-color: var(--bio-text-subtlest);
+  --context-menu-group-entry-hover-background-color: var(--bio-surface-medium);
+  --drag-and-drop-handle-color: var(--bio-text-subtlest);
+  --drag-and-drop-handle-hover-color: var(--bio-text);
+  --form-control-label-color: var(--bio-text);
+  --hint-color: var(--bio-text);
+  --edit-button-color: var(--bio-text);
+  --edit-button-background-color: var(--bio-surface-subtle);
+  --edit-button-border-color: var(--bio-border);
+  --edit-button-box-shadow-color: var(--bio-shadow-subtle);
+  --edit-button-disabled-color: var(--bio-border);
 }
 
 /* simple string edit */
@@ -84,7 +84,7 @@
   position: absolute;
   background: var(--context-menu-background-color);
   border: solid 1px var(--context-menu-border-color);
-  border-radius: 2px;
+  border-radius: var(--surface-border-radius);
   font-size: 14px;
   color: var(--context-menu-color);
   z-index: 6;
@@ -173,7 +173,7 @@
 
 .dmn-decision-table-container .dms-form-control .dms-input {
   padding-right: 24px;
-  border-radius: 3px;
+  border-radius: var(--input-border-radius);
 }
 
 .dmn-decision-table-container .dms-form-control .dms-list-component {
@@ -279,7 +279,7 @@
   top: 2px;
   left: 2px;
   padding: 4px;
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   border: solid 1px var(--edit-button-border-color);
   font-size: var(--font-size);
   box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);
@@ -297,5 +297,5 @@
 /* context menu */
 
 .dmn-decision-table-container .context-menu-group-entry.focused {
-  background-color: var(--color-grey-225-10-95);
+  background-color: var(--bio-surface-medium);
 }

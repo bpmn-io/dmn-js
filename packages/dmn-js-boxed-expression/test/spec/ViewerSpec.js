@@ -49,6 +49,18 @@ describe('Viewer', function() {
   });
 
 
+  it('should have <bio-theme-parent> at the root', async function() {
+
+    // when
+    await createViewer(simpleXML);
+
+    // then
+    // the --bio-* tokens are declared on this class; without it every
+    // component variable resolves to nothing
+    expect(testContainer.querySelector('.dmn-boxed-expression-container.bio-theme-parent')).to.exist;
+  });
+
+
   (singleStart ? it.only : it)('should import business knowledge model', function() {
     return createViewer(bkmXML);
   });

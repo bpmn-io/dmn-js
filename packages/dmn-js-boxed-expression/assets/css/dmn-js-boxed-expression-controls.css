@@ -1,28 +1,29 @@
 .dmn-boxed-expression-container {
-  --context-menu-background-color: var(--color-white);
-  --context-menu-border-color: var(--color-grey-225-10-75);
-  --context-menu-color: var(--color-grey-225-10-15);
-  --context-menu-box-shadow-color: var(--color-black-opacity-10);
-  --context-menu-group-entry-border-color: var(--color-grey-225-10-75);
-  --context-menu-group-entry-disabled-color: var(--color-grey-225-10-75);
-  --context-menu-group-entry-hover-background-color: var(--color-grey-225-10-95);
-  --edit-button-color: var(--color-grey-225-10-15);
-  --edit-button-background-color: var(--color-grey-225-10-97);
-  --edit-button-border-color: var(--color-grey-225-10-75);
-  --edit-button-box-shadow-color: var(--color-black-opacity-10);
-  --edit-button-disabled-color: var(--color-grey-225-10-75);
+  --context-menu-background-color: var(--bio-surface);
+  --context-menu-border-color: var(--bio-border);
+  --context-menu-color: var(--bio-text);
+  --context-menu-box-shadow-color: var(--bio-shadow-subtle);
+  --context-menu-group-entry-border-color: var(--bio-border);
+  --context-menu-group-entry-disabled-color: var(--bio-text-subtlest);
+  --context-menu-group-entry-hover-background-color: var(--bio-surface-medium);
+  --edit-button-color: var(--bio-text);
+  --edit-button-background-color: var(--bio-surface-subtle);
+  --edit-button-border-color: var(--bio-border);
+  --edit-button-box-shadow-color: var(--bio-shadow-subtle);
+  --edit-button-disabled-color: var(--bio-border);
 }
 
 /* common */
 .dmn-boxed-expression-container button {
-  background: var(--color-white);
-  border: solid 1px var(--color-grey-225-10-75);
-  color: var(--color-grey-225-10-15);
+  background: var(--bio-surface);
+  border: solid 1px var(--bio-border);
+  border-radius: var(--button-border-radius);
+  color: var(--bio-text);
   font-size: var(--font-size);
 }
 
 .dmn-boxed-expression-container button:hover {
-  background-color: var(--color-grey-225-10-97);
+  background-color: var(--bio-surface-subtle);
 }
 
 .dmn-boxed-expression-container .dms-input {
@@ -43,7 +44,7 @@
   position: absolute;
   background: var(--context-menu-background-color);
   border: solid 1px var(--context-menu-border-color);
-  border-radius: 2px;
+  border-radius: var(--surface-border-radius);
   font-size: 14px;
   color: var(--context-menu-color);
   box-shadow: 1px 1px 1px 1px var(--context-menu-box-shadow-color);
@@ -105,7 +106,7 @@
   top: 2px;
   left: 2px;
   padding: 4px;
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   border: solid 1px var(--edit-button-border-color);
   font-size: var(--font-size);
   box-shadow: 1px 1px 1px 1px var(--edit-button-box-shadow-color);

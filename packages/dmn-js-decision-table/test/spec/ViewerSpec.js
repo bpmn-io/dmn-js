@@ -72,6 +72,18 @@ describe('DecisionTable', function() {
   });
 
 
+  it('should have <bio-theme-parent> at the root', async function() {
+
+    // when
+    await createDecisionTable(simpleDiagramXML);
+
+    // then
+    // the --bio-* tokens are declared on this class; without it every
+    // component variable resolves to nothing
+    expect(testContainer.querySelector('.dmn-decision-table-container.bio-theme-parent')).to.exist;
+  });
+
+
   it('should import complex decision', function() {
     this.timeout(5000);
 
