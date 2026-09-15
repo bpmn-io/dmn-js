@@ -416,7 +416,7 @@ export default class Manager {
     this._viewers = {};
     this._views = [];
 
-    const container = domify('<div class="dmn-js-parent"></div>');
+    const container = domify('<div class="dmn-js-parent bio-theme-parent"></div>');
 
     const containerOptions = assign({}, DEFAULT_CONTAINER_OPTIONS, options);
 

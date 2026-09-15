@@ -1,44 +1,43 @@
 .dmn-decision-table-container {
-  --action-icon-color: var(--color-blue-205-100-50);
+  --action-icon-color: var(--bio-primary);
   --action-icon-background-color: transparent;
-  --action-icon-hover-background-color: var(--color-blue-205-100-45);
-  --action-icon-hover-color: var(--color-white);
-  --add-column-icon-color: var(--color-white);
-  --add-column-icon-background-color: var(--color-grey-225-10-35);
-  --decision-table-color: var(--color-grey-225-10-15);
-  --decision-table-background-color: var(--color-white);
-  --decision-table-properties-color: var(--color-grey-225-10-15);
-  --dmn-expression-language-background-color: var(--color-blue-205-100-45-opacity-30);
-  --dmn-expression-language-color: var(--color-white);
-  --dmn-expression-language-hover-background-color: var(--color-blue-205-100-50);
-  --drag-and-drop-drag-color: var(--color-grey-225-10-55);
-  --drag-and-drop-drop-marker-color: var(--color-grey-225-10-35);
-  --hit-policy-explanation-color: var(--color-grey-225-10-35);
-  --powered-by-overlay-background-color: var(--color-black-opacity-20);
-  --powered-by-overlay-content-background-color: var(--color-white);
-  --powered-by-overlay-content-color: var(--color-grey-225-10-15);
-  --powered-by-overlay-content-border-color: var(--color-grey-225-10-75);
-  --simple-mode-button-color: var(--color-grey-225-10-15);
-  --simple-mode-button-background-color: var(--color-grey-225-10-97);
-  --simple-mode-button-border-color: var(--color-grey-225-10-75);
-  --simple-mode-button-box-shadow-color: var(--color-black-opacity-10);
-  --simple-mode-button-disabled-color: var(--color-grey-225-10-75);
-  --table-cell-color: var(--color-grey-225-10-15);
-  --table-cell-border-color: var(--color-grey-225-10-15);
-  --table-cell-selected-outline-color: var(--color-blue-205-100-45);
-  --table-foot-add-rule-border-color: var(--color-grey-225-10-75);
-  --table-foot-add-rule-color: var(--color-grey-225-10-75);
-  --table-foot-add-rule-hover-border-color: var(--color-grey-225-10-15);
-  --table-foot-add-rule-hover-color: var(--color-grey-225-10-15);
-  --table-head-border-color: var(--color-grey-225-10-15);
-  --table-head-clause-color: var(--color-grey-225-10-35);
-  --table-head-separator-color: var(--color-grey-225-10-75);
-  --table-head-variable-color: var(--color-grey-225-10-35);
-  --table-row-alternative-background-color: var(--color-grey-225-10-97);
-  --view-drd-button-background-color: var(--color-white);
-  --view-drd-button-border-color: var(--color-grey-225-10-75);
-  --view-drd-button-color: var(--color-grey-225-10-15);
-  --view-drd-button-hover-background-color: var(--color-grey-225-10-97);
+  --action-icon-hover-background-color: var(--bio-primary-hover);
+  --action-icon-hover-color: var(--bio-text-on-primary);
+  --add-column-icon-color: var(--bio-text-on-inverted);
+  --add-column-icon-background-color: var(--bio-neutral);
+  --decision-table-color: var(--bio-text);
+  --decision-table-background-color: var(--bio-surface);
+  --decision-table-properties-color: var(--bio-text);
+  --dmn-expression-language-background-color: color-mix(in srgb, var(--bio-primary) 30%, transparent);
+  --dmn-expression-language-color: var(--bio-text-on-primary);
+  --dmn-expression-language-hover-background-color: var(--bio-primary);
+  --drag-and-drop-drag-color: var(--bio-text-subtlest);
+  --drag-and-drop-drop-marker-color: var(--bio-text-subtle);
+  --hit-policy-explanation-color: var(--bio-text-subtle);
+  --powered-by-overlay-background-color: hsl(0 0% 0% / 20%);
+  --powered-by-overlay-content-background-color: var(--bio-surface);
+  --powered-by-overlay-content-color: var(--bio-text);
+  --powered-by-overlay-content-border-color: var(--bio-border);
+  --simple-mode-button-color: var(--bio-text);
+  --simple-mode-button-background-color: var(--bio-surface-subtle);
+  --simple-mode-button-border-color: var(--bio-border);
+  --simple-mode-button-box-shadow-color: var(--bio-shadow-subtle);
+  --simple-mode-button-disabled-color: var(--bio-border);
+  --table-cell-color: var(--bio-text);
+  --table-cell-border-color: var(--bio-border);
+  --table-foot-add-rule-border-color: var(--bio-border);
+  --table-foot-add-rule-color: var(--bio-text-subtlest);
+  --table-foot-add-rule-hover-border-color: var(--bio-border);
+  --table-foot-add-rule-hover-color: var(--bio-text);
+  --table-head-border-color: var(--bio-border);
+  --table-head-clause-color: var(--bio-text-subtle);
+  --table-head-separator-color: var(--bio-border);
+  --table-head-variable-color: var(--bio-text-subtle);
+  --table-row-alternative-background-color: var(--bio-surface-subtle);
+  --view-drd-button-background-color: var(--bio-surface);
+  --view-drd-button-border-color: var(--bio-border);
+  --view-drd-button-color: var(--bio-text);
+  --view-drd-button-hover-background-color: var(--bio-surface-subtle);
   --decision-table-font-family: 'Arial', sans-serif;
 
   width: 100%;
@@ -209,11 +208,6 @@
   position: relative;
 }
 
-.dmn-decision-table-container .selected {
-  outline: var(--table-cell-selected-outline-color);
-  outline-offset: -1px;
-}
-
 .dmn-decision-table-container th.selected:not(.focussed) {
   background: var(--selected-not-focused-border-color);
 }
@@ -365,7 +359,7 @@
 
 .dmn-decision-table-container .action-icon {
   border: none;
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   box-shadow: 0 0 0 2px var(--decision-table-background-color);
   color: var(--action-icon-color);
   background-color: var(--action-icon-background-color);
@@ -419,7 +413,7 @@
   background: var(--view-drd-button-background-color);
   padding: 8px;
   border: solid 1px var(--view-drd-button-border-color);
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   font-size: 14px;
   color: var(--view-drd-button-color);
   font-weight: bold;
@@ -439,7 +433,7 @@
   background-color: var(--simple-mode-button-background-color);
   position: absolute;
   padding: 4px;
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   border: solid 1px var(--simple-mode-button-border-color);
   cursor: pointer;
   font-size: 14px;
@@ -466,7 +460,7 @@
 /* badges */
 
 .dms-badge {
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   padding: 3px 6px;
   font-size: 0.8em;
   height: 19px;
@@ -572,7 +566,7 @@
   right: -4px;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-bottom: 4px solid var(--color-black);
+  border-bottom: 4px solid var(--bio-text);
   transform: rotate(45deg);
   transform-origin: top;
 }

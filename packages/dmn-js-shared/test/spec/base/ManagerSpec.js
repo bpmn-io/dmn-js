@@ -106,6 +106,21 @@ describe('Manager', function() {
       expect(manager).to.be.instanceOf(Manager);
     });
 
+
+    it('should have <bio-theme-parent> at the root', function() {
+
+      // given
+      const parent = document.createElement('div');
+
+      // when
+      new Manager({ container: parent });
+
+      // then
+      // the --bio-* tokens are declared on this class; without it every
+      // component variable resolves to nothing
+      expect(parent.querySelector('.dmn-js-parent.bio-theme-parent')).to.exist;
+    });
+
   });
 
 

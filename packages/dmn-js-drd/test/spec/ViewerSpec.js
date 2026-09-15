@@ -59,6 +59,18 @@ describe('Viewer', function() {
   });
 
 
+  it('should have <bio-theme-parent> at the root', async function() {
+
+    // when
+    await createViewer(exampleXML);
+
+    // then
+    // the --bio-* tokens are declared on this class; without it every
+    // component variable resolves to nothing
+    expect(container.querySelector('.dmn-drd-container.bio-theme-parent')).to.exist;
+  });
+
+
   it('should re-import simple DRD', async function() {
 
     // given
