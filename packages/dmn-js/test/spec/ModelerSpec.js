@@ -186,6 +186,36 @@ describe('Modeler', function() {
     });
 
 
+    it('should select a custom type for a newly added formal parameter', async function() {
+
+      // given
+      const view = editor.getViews().find(view => view.type === 'boxedExpression');
+      await editor.open(view);
+      triggerClick(container.querySelector('[aria-label="Edit formal parameters"]'));
+
+      // when
+      triggerClick(container.querySelector('.add-parameter'));
+      const selects = container.querySelectorAll('.function-definition-parameter .dms-input-select');
+      const select = selects[selects.length - 1];
+      triggerClick(select);
+
+      // then
+      const option = container.querySelector('.option[data-value="Applicant"]');
+      expect(option).to.exist;
+
+      // when
+      triggerClick(option);
+
+      // then
+      const parameters = view.element.encapsulatedLogic.formalParameter;
+      expect(parameters[parameters.length - 1].typeRef).to.equal('Applicant');
+
+      const reopened = await saveAndReopen(view);
+      const savedParameters = reopened.encapsulatedLogic.formalParameter;
+      expect(savedParameters[savedParameters.length - 1].typeRef).to.equal('Applicant');
+    });
+
+
     it('should select a custom DRD input data type', async function() {
 
       // given
