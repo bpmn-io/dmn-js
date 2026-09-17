@@ -1,5 +1,7 @@
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
+import { getTypeRefOptions } from 'dmn-js-shared/lib/util/TypeRefUtil';
+
 import { withChangeSupport } from '../../../util/withChangeSupport';
 
 const VARIABLE_TYPE_ID = 'dmn-boxed-expression-variable-type';
@@ -52,12 +54,9 @@ function VariableTypeEditor(_, context) {
   const type = elementVariable.getType();
   const onChange = type => elementVariable.setType(type);
 
-  const typeRefOptions = dataTypes.getAll(viewer.getRootElement()).map(t => {
-    return {
-      label: translate(t),
-      value: t
-    };
-  });
+  const typeRefOptions = getTypeRefOptions(
+    dataTypes, viewer.getRootElement(), translate
+  );
 
   return <InputSelect
     value={ type }

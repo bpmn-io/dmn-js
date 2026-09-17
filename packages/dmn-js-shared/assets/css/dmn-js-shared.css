@@ -205,6 +205,16 @@ h4.dms-heading {
   padding: 4px 9px;
 }
 
+.dms-select-options .option-group-label {
+  padding: 4px 9px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.dms-select-options .option-group + .option-group {
+  border-top: solid 1px var(--select-options-border-color);
+}
+
 .dms-select-options .option.active {
   color: var(--select-option-selected-color);
 }

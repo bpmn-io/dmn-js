@@ -1,4 +1,6 @@
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+
+import { getTypeRefOptions } from 'dmn-js-shared/lib/util/TypeRefUtil';
 import Input from 'dmn-js-shared/lib/components/Input';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
@@ -87,12 +89,9 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
     functionDefinition.updateParameter(parameter, { typeRef });
   };
 
-  const typeRefOptions = dataTypes.getAll(viewer.getRootElement()).map(t => {
-    return {
-      label: translate(t),
-      value: t
-    };
-  });
+  const typeRefOptions = getTypeRefOptions(
+    dataTypes, viewer.getRootElement(), translate
+  );
 
   return (
     <tr className="function-definition-parameter">

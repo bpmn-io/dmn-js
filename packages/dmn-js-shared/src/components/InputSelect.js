@@ -292,22 +292,55 @@ export default class InputSelect extends Component {
     }
   };
 
+  /**
+   * Render options in their original order, grouping adjacent entries by ID.
+   * Option groups may be strings or objects with an `id` and optional `name`.
+   * Named headers are shown only when there are multiple distinct groups.
+   */
   renderOptions(options, activeOption) {
+    const groups = [];
+
+    options.forEach(option => {
+      const group = typeof option.group === 'string'
+        ? { id: option.group }
+        : option.group || {};
+
+      const previous = groups[groups.length - 1];
+
+      if (previous && previous.id === group.id) {
+        previous.options.push(option);
+      } else {
+        groups.push({ ...group, options: [ option ] });
+      }
+    });
+
+    const showHeaders = new Set(groups.map(group => group.id)).size > 1;
+
     return (
       <div className="options">
         {
-          options.map(option => {
-            return (
-              <div
-                className={
-                  [ 'option', activeOption === option ? 'active' : '' ].join(' ')
-                }
-                data-value={ option.value }
-                onClick={ e => this.onOptionClick(option.value, e) }>
-                { option.label }
-              </div>
-            );
-          })
+          groups.map(group => (
+            <div className="option-group" role="group"
+              aria-label={ group.name }>
+              {
+                showHeaders && group.name && (
+                  <div className="option-group-label">{ group.name }</div>
+                )
+              }
+              {
+                group.options.map(option => (
+                  <div
+                    className={
+                      [ 'option', activeOption === option ? 'active' : '' ].join(' ')
+                    }
+                    data-value={ option.value }
+                    onClick={ e => this.onOptionClick(option.value, e) }>
+                    { option.label }
+                  </div>
+                ))
+              }
+            </div>
+          ))
         }
       </div>
     );

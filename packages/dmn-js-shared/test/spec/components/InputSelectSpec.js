@@ -50,6 +50,157 @@ describe('components/InputSelect', function() {
   });
 
 
+  describe('option groups', function() {
+
+    const primitive = { id: 'primitive', name: 'Primitive' };
+    const custom = { id: 'custom', name: 'Custom' };
+
+    function openOptions(groups, props = {}) {
+      const injector = createInjector({
+        keyboard: getKeyboardMock(testContainer),
+        renderer: getRendererMock(testContainer)
+      });
+      const options = groups.map((group, index) => ({
+        value: String(index), label: String(index), group
+      }));
+
+      renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect options={ options } { ...props } />
+        </DiContainer>
+      );
+
+      const input = testContainer.querySelector('.dms-input');
+      triggerClick(input);
+
+      return input;
+    }
+
+    function labels() {
+      return Array.from(testContainer.querySelectorAll('.option-group-label'))
+        .map(node => node.textContent);
+    }
+
+
+    it('should preserve ungrouped options', function() {
+
+      // when
+      openOptions([ undefined, undefined ]);
+
+      // then
+      expect(labels()).to.eql([]);
+      expect(testContainer.querySelectorAll('.option')).to.have.length(2);
+    });
+
+
+    it('should hide the header for a single distinct group', function() {
+
+      // when
+      openOptions([ primitive, { ...primitive } ]);
+
+      // then
+      expect(labels()).to.eql([]);
+    });
+
+
+    it('should render producer labels and group adjacent entries by ID', function() {
+
+      // when
+      openOptions([ primitive, { ...primitive }, custom,
+        { id: 'imported', name: 'Imported types' } ]);
+
+      // then
+      expect(labels()).to.eql([ 'Primitive', 'Custom', 'Imported types' ]);
+      expect(testContainer.querySelectorAll('.option-group')).to.have.length(3);
+    });
+
+
+    it('should preserve order when groups are not adjacent', function() {
+
+      // when
+      openOptions([ primitive, custom, primitive ]);
+
+      // then
+      expect(labels()).to.eql([ 'Primitive', 'Custom', 'Primitive' ]);
+      expect(Array.from(testContainer.querySelectorAll('.option'))
+        .map(node => node.dataset.value)).to.eql([ '0', '1', '2' ]);
+    });
+
+
+    it('should support unnamed string groups and ungrouped entries', function() {
+
+      // when
+      openOptions([ undefined, 'primitive', custom ]);
+
+      // then
+      expect(labels()).to.eql([ 'Custom' ]);
+      expect(testContainer.querySelectorAll('.option-group')).to.have.length(3);
+    });
+
+
+    it('should distinguish IDs even when names match object properties', function() {
+
+      // when
+      openOptions([
+        { id: '__proto__', name: 'Types' },
+        { id: 'constructor', name: 'Types' }
+      ]);
+
+      // then
+      expect(labels()).to.eql([ 'Types', 'Types' ]);
+      expect(testContainer.querySelectorAll('.option')).to.have.length(2);
+    });
+
+
+    it('should not select headers', function() {
+
+      // given
+      const onChange = sinon.spy();
+      openOptions([ primitive, custom ], { onChange });
+      const header = testContainer.querySelector('.option-group-label');
+
+      // when
+      triggerClick(header);
+
+      // then
+      expect(onChange).not.to.have.been.called;
+      expect(header.hasAttribute('tabindex')).to.be.false;
+      expect(testContainer.querySelector('.options')).to.exist;
+
+      // when
+      triggerClick(testContainer.querySelector('.option[data-value="1"]'));
+
+      // then
+      expect(onChange).to.have.been.calledOnceWith('1');
+    });
+
+
+    [ true, false ].forEach(noInput => {
+
+      it(`should navigate groups in visual order (noInput=${ noInput })`, function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openOptions([ primitive, custom, primitive ], {
+          value: '0', onChange, noInput
+        });
+
+        // when
+        [ 40, 40, 40, 38, 38 ].forEach(key => triggerKeyEvent(input, 'keydown', key));
+
+        // then
+        expect(onChange.args).to.eql([ [ '1' ], [ '2' ], [ '0' ], [ '2' ], [ '1' ] ]);
+
+        // when
+        triggerKeyEvent(input, 'keydown', 13);
+
+        // then
+        expect(testContainer.querySelector('.options')).not.to.exist;
+      });
+    });
+  });
+
+
   it('should render', function() {
 
     // given

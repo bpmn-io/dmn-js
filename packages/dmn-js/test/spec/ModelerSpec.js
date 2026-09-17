@@ -83,6 +83,15 @@ describe('Modeler', function() {
 
   describe('custom data types', function() {
 
+    function expectTypeGroups(select) {
+      triggerClick(select);
+
+      const groups = Array.from(container.querySelectorAll('.option-group-label'));
+      expect(groups.map(group => group.textContent)).to.eql([ 'Primitive', 'Custom' ]);
+
+      triggerClick(select);
+    }
+
     async function saveAndReopen(view) {
       const { xml } = await editor.saveXML();
 
@@ -116,6 +125,7 @@ describe('Modeler', function() {
         const select = container.querySelector('.type-ref-edit-select');
 
         // when
+        expectTypeGroups(select);
         triggerInputSelectChange(select, 'Applicant', container);
 
         // then
@@ -139,6 +149,7 @@ describe('Modeler', function() {
       const select = container.querySelector('.variable-type-select');
 
       // when
+      expectTypeGroups(select);
       triggerInputSelectChange(select, 'Applicant', container);
 
       // then
@@ -157,6 +168,7 @@ describe('Modeler', function() {
       const select = container.querySelector('.element-variable-type .dms-input-select');
 
       // when
+      expectTypeGroups(select);
       triggerInputSelectChange(select, 'Applicant', container);
 
       // then
@@ -176,6 +188,7 @@ describe('Modeler', function() {
       const select = container.querySelector('.function-definition-parameter .dms-input-select');
 
       // when
+      expectTypeGroups(select);
       triggerInputSelectChange(select, 'Applicant', container);
 
       // then
