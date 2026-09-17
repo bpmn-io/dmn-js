@@ -1,3 +1,5 @@
+import { is } from '../../util/ModelUtil';
+
 /**
  * Provide data types via config, or via registered providers.
  *
@@ -66,7 +68,7 @@ export default class DataTypes {
    *
    * @returns {string[]}
    */
-  getAll() {
+  getAll(element) {
     const event = this._eventBus.createEvent({
       type: 'dataTypes.getProviders',
       providers: []
@@ -74,9 +76,28 @@ export default class DataTypes {
 
     this._eventBus.fire(event);
 
-    return event.providers
+    const types = event.providers
       .reduce((dataTypes, provider) => provider.getDataTypes(dataTypes), []);
+
+    const definitions = getDefinitions(element);
+    if (!definitions) {
+      return types;
+    }
+
+    const customTypes = definitions.get('itemDefinition').map(type => type.name).filter(Boolean);
+    return [ ...new Set([ ...types, ...customTypes ]) ];
   }
 }
 
 DataTypes.$inject = [ 'eventBus' ];
+
+
+// helpers //////////
+
+function getDefinitions(element) {
+  while (element && !is(element, 'dmn:Definitions')) {
+    element = element.$parent;
+  }
+
+  return element;
+}

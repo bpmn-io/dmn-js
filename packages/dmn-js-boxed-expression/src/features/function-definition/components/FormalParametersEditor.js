@@ -86,7 +86,7 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
     functionDefinition.updateParameter(parameter, { typeRef });
   };
 
-  const typeRefOptions = dataTypes.getAll().map(t => {
+  const typeRefOptions = dataTypes.getAll(parameter).map(t => {
     return {
       label: translate(t),
       value: t
