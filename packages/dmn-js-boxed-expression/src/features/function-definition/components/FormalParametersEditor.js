@@ -73,6 +73,7 @@ function _FormalParametersEditor({ context: { expression } }, context) {
 
 const Parameter = withChangeSupport(function({ parameter, remove }, context) {
   const dataTypes = context.injector.get('dataTypes');
+  const viewer = context.injector.get('viewer');
   const translate = context.injector.get('translate');
   const functionDefinition = context.injector.get('functionDefinition');
 
@@ -86,7 +87,7 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
     functionDefinition.updateParameter(parameter, { typeRef });
   };
 
-  const typeRefOptions = dataTypes.getAll(parameter).map(t => {
+  const typeRefOptions = dataTypes.getAll(viewer.getRootElement()).map(t => {
     return {
       label: translate(t),
       value: t
