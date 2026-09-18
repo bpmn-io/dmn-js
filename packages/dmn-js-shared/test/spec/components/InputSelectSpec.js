@@ -52,6 +52,18 @@ describe('components/InputSelect', function() {
 
   describe('option groups', function() {
 
+    let style;
+
+    beforeEach(function() {
+      style = document.createElement('style');
+      style.textContent = require('assets/css/dmn-js-shared.css');
+      document.head.appendChild(style);
+    });
+
+    afterEach(function() {
+      style.remove();
+    });
+
     const primitive = { id: 'primitive', name: 'Primitive' };
     const custom = { id: 'custom', name: 'Custom' };
 
@@ -157,6 +169,46 @@ describe('components/InputSelect', function() {
       // then
       expect(labels()).to.eql([ 'Types', 'Types' ]);
       expect(testContainer.querySelectorAll('.option')).to.have.length(2);
+    });
+
+
+    [ false, true ].forEach(upwards => {
+
+      it(`should keep long lists scrollable (upwards=${ upwards })`, function() {
+
+        // given
+        testContainer.style.height = '200px';
+        testContainer.style.position = 'relative';
+
+        if (upwards) {
+          testContainer.style.display = 'flex';
+          testContainer.style.flexDirection = 'column-reverse';
+        }
+
+        const input = openOptions([ primitive, ...Array(60).fill(custom) ], { value: '0' });
+        const dropdown = testContainer.querySelector('.dms-select-options');
+
+        // then
+        expect(dropdown.scrollHeight).to.be.greaterThan(dropdown.clientHeight);
+        expect(dropdown.getBoundingClientRect().height).to.be.at.most(200);
+
+        // when - wrap to the final option
+        triggerKeyEvent(input, 'keydown', 38);
+
+        // then
+        expect(dropdown.scrollTop).to.be.greaterThan(0);
+        expect(testContainer.querySelector('.option.active').dataset.value).to.equal('60');
+        expect(testContainer.querySelector('.option.active').getBoundingClientRect().bottom)
+          .to.be.at.most(dropdown.getBoundingClientRect().bottom + 1);
+
+        // when - wrap back to the first option
+        triggerKeyEvent(input, 'keydown', 40);
+
+        // then
+        expect(testContainer.querySelector('.option.active').dataset.value).to.equal('0');
+        expect(testContainer.querySelector('.option.active').getBoundingClientRect().top)
+          .to.be.at.least(dropdown.getBoundingClientRect().top - 1);
+      });
     });
 
 
