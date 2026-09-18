@@ -90,6 +90,8 @@ describe('components/InputSelect', function() {
       // then
       expect(labels()).to.eql([]);
       expect(testContainer.querySelectorAll('.option')).to.have.length(2);
+      expect(testContainer.querySelector('.option-group').hasAttribute('role')).to.be.false;
+      expect(testContainer.querySelector('.option-group').hasAttribute('aria-label')).to.be.false;
     });
 
 
@@ -100,6 +102,8 @@ describe('components/InputSelect', function() {
 
       // then
       expect(labels()).to.eql([]);
+      expect(testContainer.querySelector('.option-group').hasAttribute('role')).to.be.false;
+      expect(testContainer.querySelector('.option-group').hasAttribute('aria-label')).to.be.false;
     });
 
 
@@ -112,6 +116,10 @@ describe('components/InputSelect', function() {
       // then
       expect(labels()).to.eql([ 'Primitive', 'Custom', 'Imported types' ]);
       expect(testContainer.querySelectorAll('.option-group')).to.have.length(3);
+      const groups = Array.from(testContainer.querySelectorAll('.option-group'));
+      expect(groups.map(group => group.getAttribute('role'))).to.eql([ 'group', 'group', 'group' ]);
+      expect(groups.map(group => group.getAttribute('aria-label')))
+        .to.eql([ 'Primitive', 'Custom', 'Imported types' ]);
     });
 
 
