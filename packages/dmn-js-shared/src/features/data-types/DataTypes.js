@@ -1,4 +1,4 @@
-import { is } from '../../util/ModelUtil';
+import { getBusinessObject, is } from '../../util/ModelUtil';
 
 const DEFAULT_DATA_TYPES = [
   'string',
@@ -43,7 +43,7 @@ export default class DataTypes {
   /**
    * Get configured data types and named item definitions from the given model.
    *
-   * @param {ModdleElement} [element] - An element in the current diagram.
+   * @param {tjs.model.Base|ModdleElement} [element] - An element in the current diagram.
    *
    * @returns {string[]}
    */
@@ -68,6 +68,8 @@ DataTypes.$inject = [ 'config.dataTypes' ];
 // helpers //////////
 
 function getDefinitions(element) {
+  element = getBusinessObject(element);
+
   while (element && !is(element, 'dmn:Definitions')) {
     element = element.$parent;
   }

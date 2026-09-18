@@ -73,6 +73,24 @@ describe('DataTypes', function() {
     });
 
 
+    [ 'definitions', 'decision', 'inputExpression' ].forEach(id => {
+
+      it(`should resolve custom types from a wrapped ${ id }`, async function() {
+
+        // given
+        const dataTypes = createDataTypes();
+        const { elementsById } = await createDiagram([ 'Applicant', 'Address' ]);
+        const element = { businessObject: elementsById[id] };
+
+        // when
+        const types = dataTypes.getAll(element);
+
+        // then
+        expect(types).to.eql([ ...DEFAULT_DATA_TYPES, 'Applicant', 'Address' ]);
+      });
+    });
+
+
     it('should ignore unnamed types and deduplicate names', async function() {
 
       // given
