@@ -1,4 +1,4 @@
-import { is } from '../../util/ModelUtil';
+import { getBusinessObject, is } from '../../util/ModelUtil';
 
 /**
  * Provide data types via config, or via registered providers.
@@ -66,6 +66,8 @@ export default class DataTypes {
   /**
    * Get list of data types, as collected from all registered providers.
    *
+   * @param {tjs.model.Base|ModdleElement} [element] - An element in the current diagram.
+   *
    * @returns {string[]}
    */
   getAll(element) {
@@ -95,6 +97,8 @@ DataTypes.$inject = [ 'eventBus' ];
 // helpers //////////
 
 function getDefinitions(element) {
+  element = getBusinessObject(element);
+
   while (element && !is(element, 'dmn:Definitions')) {
     element = element.$parent;
   }
