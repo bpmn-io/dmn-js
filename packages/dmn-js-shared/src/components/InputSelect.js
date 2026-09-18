@@ -67,8 +67,8 @@ export default class InputSelect extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const { optionsVisible } = this.state;
+  componentDidUpdate(previousProps, previousState) {
+    const { optionsVisible, value } = this.state;
 
     if (!optionsVisible || !this.inputNode) {
       return;
@@ -77,6 +77,21 @@ export default class InputSelect extends Component {
     const optionsBounds = this.getOptionsBounds();
 
     assign(this._portalEl.style, optionsBounds);
+
+    if (!previousState.optionsVisible || previousState.value !== value) {
+      const activeOption = this._portalEl.querySelector('.option.active');
+
+      if (activeOption) {
+        const containerBounds = this._portalEl.getBoundingClientRect();
+        const optionBounds = activeOption.getBoundingClientRect();
+
+        if (optionBounds.top < containerBounds.top) {
+          this._portalEl.scrollTop -= containerBounds.top - optionBounds.top;
+        } else if (optionBounds.bottom > containerBounds.bottom) {
+          this._portalEl.scrollTop += optionBounds.bottom - containerBounds.bottom;
+        }
+      }
+    }
   }
 
   getOptionsBounds() {
@@ -103,7 +118,7 @@ export default class InputSelect extends Component {
     if (containerBottom - inputBottom < height) {
       const bottom = containerBottom - inputTop;
       bounds.bottom = `${bottom}px`;
-      bounds['max-height'] = `calc(100% - ${bottom})`;
+      bounds['max-height'] = `calc(100% - ${bottom}px)`;
 
       delete bounds.top;
     }
