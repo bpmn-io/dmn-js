@@ -320,8 +320,9 @@ export default class InputSelect extends Component {
       <div className="options">
         {
           groups.map(group => (
-            <div className="option-group" role="group"
-              aria-label={ group.name }>
+            <div className="option-group"
+              role={ showHeaders ? 'group' : undefined }
+              aria-label={ showHeaders ? group.name : undefined }>
               {
                 showHeaders && group.name && (
                   <div className="option-group-label">{ group.name }</div>
