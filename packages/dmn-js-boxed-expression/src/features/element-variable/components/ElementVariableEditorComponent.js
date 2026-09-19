@@ -48,6 +48,7 @@ function ElementVariableComponent(_, context) {
 function VariableTypeEditor(_, context) {
   const elementVariable = context.injector.get('elementVariable');
   const dataTypes = context.injector.get('dataTypes');
+  const translate = context.injector.get('translate');
 
   const type = elementVariable.getType();
   const onChange = type => elementVariable.setType(type);
@@ -57,6 +58,8 @@ function VariableTypeEditor(_, context) {
   return <InputSelect
     value={ type }
     onChange={ onChange }
+    searchable
+    emptyLabel={ translate('No matching types') }
     options={ typeRefOptions }
     id={ VARIABLE_TYPE_ID }
   />;

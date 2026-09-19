@@ -3,6 +3,8 @@ import Modeler from 'src/Modeler';
 
 import {
   triggerClick,
+  triggerInputEvent,
+  triggerKeyEvent,
   triggerMouseEvent,
   triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
@@ -119,6 +121,38 @@ describe('Modeler', function() {
 
       return container.querySelector('.type-ref-edit-select');
     }
+
+    it('should save only confirmed type searches', async function() {
+
+      // given
+      const view = await openView('decisionTable');
+      const select = openClauseTypeSelect('input');
+      const input = select.querySelector('input');
+      const original = (await editor.saveXML()).xml;
+
+      // when
+      triggerInputEvent(input, 'Gue');
+
+      // then
+      expect((await editor.saveXML()).xml).to.equal(original);
+      expect(container.querySelectorAll('.dms-select-options .option')).to.have.length(1);
+
+      // when
+      triggerKeyEvent(input, 'keydown', 27);
+
+      // then
+      expect((await editor.saveXML()).xml).to.equal(original);
+
+      // when
+      triggerInputEvent(input, 'Gue');
+      triggerKeyEvent(input, 'keydown', 40);
+      triggerKeyEvent(input, 'keydown', 13);
+      const reopened = await saveAndReopen(view);
+
+      // then
+      expect(reopened.decisionLogic.input[0].inputExpression.typeRef).to.equal('Guest');
+    });
+
 
     function addClauseAndOpenTypeSelect(view, kind) {
       const viewer = editor.getActiveViewer();
