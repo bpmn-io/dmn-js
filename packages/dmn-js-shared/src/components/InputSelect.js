@@ -23,7 +23,10 @@ export default class InputSelect extends Component {
 
     this.state = {
       value,
-      optionsVisible: false
+      optionsVisible: false,
+      filter: '',
+      draft: undefined,
+      activeValue: undefined
     };
 
     this._portalEl = null;
@@ -48,9 +51,9 @@ export default class InputSelect extends Component {
   componentWillReceiveProps(props) {
     const { value } = props;
 
-    this.setState({
-      value
-    });
+    if (value !== this.props.value) {
+      this.setState({ value, draft: undefined, activeValue: undefined, filter: '' });
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -78,15 +81,16 @@ export default class InputSelect extends Component {
 
     assign(this._portalEl.style, optionsBounds);
 
-    if (!previousState.optionsVisible || previousState.value !== value) {
+    if (!previousState.optionsVisible || previousState.value !== value || previousState.activeValue !== this.state.activeValue) {
       const activeOption = this._portalEl.querySelector('.option.active');
 
       if (activeOption) {
         const containerBounds = this._portalEl.getBoundingClientRect();
         const optionBounds = activeOption.getBoundingClientRect();
+        const visibleTop = containerBounds.top;
 
-        if (optionBounds.top < containerBounds.top) {
-          this._portalEl.scrollTop -= containerBounds.top - optionBounds.top;
+        if (optionBounds.top < visibleTop) {
+          this._portalEl.scrollTop -= visibleTop - optionBounds.top;
         } else if (optionBounds.bottom > containerBounds.bottom) {
           this._portalEl.scrollTop += optionBounds.bottom - containerBounds.bottom;
         }
@@ -111,14 +115,14 @@ export default class InputSelect extends Component {
       top: `${top}px`,
       left: `${left}px`,
       width: `${width}px`,
-      'max-height': `calc(100% - ${top}px)`
+      'max-height': `min(320px, calc(100% - ${top}px))`
     };
 
     // open the options upwards when not even one option (=input height) fits
     if (containerBottom - inputBottom < height) {
       const bottom = containerBottom - inputTop;
       bounds.bottom = `${bottom}px`;
-      bounds['max-height'] = `calc(100% - ${bottom}px)`;
+      bounds['max-height'] = `min(320px, calc(100% - ${bottom}px))`;
 
       delete bounds.top;
     }
@@ -165,6 +169,10 @@ export default class InputSelect extends Component {
     event.preventDefault();
     event.stopPropagation();
 
+    if (this.props.searchable && event.target === this.inputNode && this.state.optionsVisible) {
+      return;
+    }
+
     this.setOptionsVisible(!this.state.optionsVisible);
 
     this.focusInput();
@@ -173,7 +181,12 @@ export default class InputSelect extends Component {
   onInput = (event) => {
     const { value } = event.target;
 
-    this.onChange(value);
+    if (this.props.searchable) {
+      this.setState({ draft: value, filter: value, activeValue: undefined, optionsVisible: true });
+      this._portalEl.scrollTop = 0;
+    } else {
+      this.onChange(value);
+    }
   };
 
   onOptionClick = (value, event) => {
@@ -218,17 +231,20 @@ export default class InputSelect extends Component {
     this.checkClose(evt.target);
   };
 
+  getFilteredOptions() {
+    const { options = [] } = this.props;
+    const { filter } = this.state;
+    const query = filter.toLowerCase();
+
+    return options.filter(option => String(option.label).toLowerCase().includes(query));
+  }
+
   select(direction) {
+    const options = this.getFilteredOptions();
 
-    const {
-      options
-    } = this.props;
+    const value = this.props.searchable ? this.state.activeValue : this.state.value;
 
-    const {
-      value
-    } = this.state;
-
-    if (!options) {
+    if (!options.length) {
       return;
     }
 
@@ -249,12 +265,19 @@ export default class InputSelect extends Component {
 
     const nextOption = options[nextIdx < 0 ? options.length + nextIdx : nextIdx];
 
-    this.onChange(nextOption.value);
+    if (this.props.searchable) {
+      this.setState({ draft: nextOption.value, activeValue: nextOption.value });
+    } else {
+      this.onChange(nextOption.value);
+    }
   }
 
   setOptionsVisible(optionsVisible) {
     this.setState({
-      optionsVisible
+      optionsVisible,
+      filter: '',
+      draft: undefined,
+      activeValue: undefined
     });
   }
 
@@ -287,6 +310,15 @@ export default class InputSelect extends Component {
         evt.stopPropagation();
         evt.preventDefault();
 
+        if (code === 13 && this.props.searchable && this.state.draft !== undefined) {
+          const draft = this.state.draft;
+          const match = this.getFilteredOptions().find(option =>
+            String(option.label).toLowerCase() === draft.toLowerCase()
+          );
+
+          this.onChange(this.state.activeValue !== undefined ? this.state.activeValue : match ? match.value : draft);
+        }
+
         this.setOptionsVisible(false);
       }
     }
@@ -313,6 +345,7 @@ export default class InputSelect extends Component {
    * Named headers are shown only when there are multiple distinct groups.
    */
   renderOptions(options, activeOption) {
+    const { searchable, emptyLabel } = this.props;
     const groups = [];
 
     options.forEach(option => {
@@ -333,6 +366,11 @@ export default class InputSelect extends Component {
 
     return (
       <div className="options">
+        {
+          searchable && !options.length && (
+            <div className="option-empty" role="status">{ emptyLabel }</div>
+          )
+        }
         {
           groups.map(group => (
             <div className="option-group"
@@ -369,15 +407,19 @@ export default class InputSelect extends Component {
       id,
       options,
       noInput,
+      searchable,
       title
     } = this.props;
 
     const {
       optionsVisible,
-      value
+      value,
+      draft,
+      activeValue
     } = this.state;
 
-    const option = options ? options.filter(o => o.value === value)[0] : false;
+    const selectedValue = searchable && optionsVisible ? activeValue : value;
+    const option = options ? options.find(o => o.value === selectedValue) : false;
 
     const label = option ? option.label : value;
 
@@ -406,7 +448,7 @@ export default class InputSelect extends Component {
                 spellCheck="false"
                 ref={ node => this.inputNode = node }
                 type="text"
-                value={ value }
+                value={ searchable && draft !== undefined ? draft : value }
                 id={ id }
               />
             )
@@ -419,7 +461,7 @@ export default class InputSelect extends Component {
         </span>
         {
           optionsVisible
-            && createPortal(this.renderOptions(options, option), this._portalEl)
+            && createPortal(this.renderOptions(this.getFilteredOptions(), option), this._portalEl)
         }
       </div>
     );

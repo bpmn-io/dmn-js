@@ -231,3 +231,7 @@ h4.dms-heading {
   position: absolute;
   opacity: 0.5;
 }
+
+.dms-select-options .option-empty {
+  padding: 4px 9px;
+}
