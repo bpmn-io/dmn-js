@@ -71,6 +71,8 @@ export default class TypeRefCellContextMenu extends Component {
             className="type-ref-edit-select"
             label={ label }
             onChange={ this.onTypeChange }
+            searchable
+            emptyLabel={ this._translate('No matching types') }
             options={ typeRefOptions }
             value={ typeRef } />
         </div>

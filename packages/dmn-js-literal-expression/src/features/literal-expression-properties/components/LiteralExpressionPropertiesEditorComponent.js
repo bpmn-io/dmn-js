@@ -100,6 +100,8 @@ export default class LiteralExpressionPropertiesComponent extends Component {
                 <InputSelect
                   label={ this._translate('Variable type') }
                   onChange={ this.setVariableType }
+                  searchable
+                  emptyLabel={ this._translate('No matching types') }
                   options={ typeRefOptions }
                   value={ typeRef }
                   className="variable-type-select dms-block" />

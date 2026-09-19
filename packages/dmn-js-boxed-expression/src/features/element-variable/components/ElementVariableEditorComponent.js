@@ -62,6 +62,8 @@ function VariableTypeEditor(_, context) {
   return <InputSelect
     value={ type }
     onChange={ onChange }
+    searchable
+    emptyLabel={ translate('No matching types') }
     options={ typeRefOptions }
     id={ VARIABLE_TYPE_ID }
   />;
