@@ -1,3 +1,5 @@
+import { is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 import ElementVariable from './ElementVariable';
 
 export default class ElementVariableEditor extends ElementVariable {
@@ -11,11 +13,17 @@ export default class ElementVariableEditor extends ElementVariable {
   }
 
   setType(typeRef) {
+    const element = this._getElement();
+
+    if (is(element, 'dmn:BusinessKnowledgeModel')) {
+      this._modeling.updateProperties(this.getTypeHolder(), { typeRef });
+
+      return;
+    }
+
     const variable = this.getVariable();
 
     if (!variable) {
-      const element = this._getElement();
-
       const newVariable = this._dmnFactory.create('dmn:InformationItem', {
         name: element.get('name'), typeRef
       });

@@ -1,3 +1,5 @@
+import { getBoxedExpression, is } from 'dmn-js-shared/lib/util/ModelUtil';
+
 export default class ElementVariable {
   static $inject = [ 'viewer' ];
 
@@ -15,9 +17,22 @@ export default class ElementVariable {
   }
 
   getType() {
-    const variable = this.getVariable();
+    const typeHolder = this.getTypeHolder();
 
-    return variable ? variable.get('typeRef') : 'Any';
+    return (typeHolder && typeHolder.get('typeRef')) || 'Any';
+  }
+
+  // a business knowledge model's variable is of a function type and
+  // cannot carry the result type; that lives on the body of its
+  // encapsulated function instead
+  getTypeHolder() {
+    const element = this._getElement();
+
+    if (is(element, 'dmn:BusinessKnowledgeModel')) {
+      return getBoxedExpression(element);
+    }
+
+    return this.getVariable();
   }
 
   _getElement() {

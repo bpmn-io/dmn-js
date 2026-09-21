@@ -9,7 +9,8 @@ export default class ElementVariableComponentProvider {
 
   constructor(components, elementVariable) {
     const component = withChangeSupport(
-      ElementVariableComponent, () => [ elementVariable.getVariable() ]
+      ElementVariableComponent,
+      () => [ elementVariable.getVariable(), elementVariable.getTypeHolder() ]
     );
 
     components.onGetComponent('footer', () => component);

@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: persist BKM result type on function body, not variable ([#1027](https://github.com/bpmn-io/dmn-js/issues/1027))
+
 ## 17.12.1
 
 * `FIX`: update DRD requirement and association references on reconnect ([#1032](https://github.com/bpmn-io/dmn-js/issues/1032))
