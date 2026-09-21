@@ -40,7 +40,7 @@ function _FormalParametersEditor({ context: { expression } }, context) {
 
   return (
     <div className="context-menu-container formal-parameters">
-      <h3>{translate('Edit formal parameters')}</h3>
+      <h3 className="dms-heading">{translate('Edit formal parameters')}</h3>
       {
         parameters.length ? (
           <table>

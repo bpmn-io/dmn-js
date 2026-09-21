@@ -184,10 +184,12 @@
 
 .dmn-decision-table-container th.index-column {
   width: 56px;
+  padding: 1px;
 }
 
 .dmn-decision-table-container td.rule-index {
   text-align: right;
+  padding: 1px;
   padding-right: 8px;
 }
 
@@ -223,6 +225,7 @@
 
 .dmn-decision-table-container tfoot.add-rule td.add-rule-add {
   text-align: right;
+  padding: 1px;
   padding-right: 4px;
 }
 
