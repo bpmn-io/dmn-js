@@ -1,6 +1,18 @@
-import Input from 'dmn-js-shared/lib/components/Input';
+import EditableComponent from 'dmn-js-shared/lib/components/EditableComponent';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
+
+class ElementNameEditor extends EditableComponent {
+
+  render() {
+    return (
+      <h2 className={ this.getClassName() }>
+        { this.getEditor() }
+      </h2>
+    );
+  }
+
+}
 
 const ElementName = withChangeSupport(function(props, context) {
   const { element } = props;
@@ -12,7 +24,7 @@ const ElementName = withChangeSupport(function(props, context) {
     modeling.updateProperties(element, { name });
   };
 
-  return <Input
+  return <ElementNameEditor
     label={ translate('Element name') }
     className="element-name editor"
     value={ name }

@@ -80,6 +80,25 @@
   overflow: hidden;
 }
 
+.dmn-boxed-expression-container .element-name:not(.editor) {
+  cursor: default;
+}
+
+.dmn-boxed-expression-container .element-name.editor {
+  cursor: text;
+}
+
+.dmn-boxed-expression-container .element-name div {
+  outline: none;
+}
+
+.dmn-boxed-expression-container .element-name:not(.editable),
+.dmn-boxed-expression-container .element-name [contenteditable="true"] {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .dmn-boxed-expression-container .textarea .content-editable {
   height: 100%;
   box-sizing: border-box;
