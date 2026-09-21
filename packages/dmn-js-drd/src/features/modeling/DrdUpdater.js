@@ -15,6 +15,7 @@ import {
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 import { getRequirementType } from './util/RequirementUtil.js';
+import { MIN_SECTION_HEIGHT } from '../decision-service-divider/DecisionServiceDivider';
 
 
 /**
@@ -22,6 +23,7 @@ import { getRequirementType } from './util/RequirementUtil.js';
  */
 export default function DrdUpdater(
     connectionDocking,
+    decisionServiceBehavior,
     definitionPropertiesView,
     drdFactory,
     drdRules,
@@ -32,6 +34,8 @@ export default function DrdUpdater(
   this._definitionPropertiesView = definitionPropertiesView;
   this._drdFactory = drdFactory;
   this._drdRules = drdRules;
+  this._injector = injector;
+  this._decisionServiceBehavior = decisionServiceBehavior;
 
   var self = this;
 
@@ -106,9 +110,89 @@ export default function DrdUpdater(
     self.updateBounds(shape);
   }
 
-  this.executed([ 'shape.create', 'shape.move', 'shape.resize' ], updateBounds, true);
+  this.executed([ 'shape.create', 'shape.move' ], updateBounds, true);
 
-  this.reverted([ 'shape.create', 'shape.move', 'shape.resize' ], updateBounds, true);
+  this.reverted([ 'shape.create', 'shape.move' ], updateBounds, true);
+
+  // a decision service divider keeps its absolute position when the
+  // service is resized, so decisions never end up on the wrong side of it
+  this.executed('shape.resize', function(context) {
+    var shape = context.shape;
+
+    if (!(is(shape, 'dmn:DRGElement') || is(shape, 'dmn:TextAnnotation'))) {
+      return;
+    }
+
+    if (context.dividerY === undefined) {
+      context.dividerY = self.getDividerY(shape);
+    }
+
+    self.updateBounds(shape, constrainDividerY(shape, context.dividerY));
+  }, true);
+
+  this.reverted('shape.resize', function(context) {
+    var shape = context.shape;
+
+    if (!(is(shape, 'dmn:DRGElement') || is(shape, 'dmn:TextAnnotation'))) {
+      return;
+    }
+
+    self.updateBounds(shape, context.dividerY);
+  }, true);
+
+  // A decision service carries its decisions along when it is moved. That
+  // must not change the section they are in; only decisions that are moved
+  // on their own are assigned to a section (again).
+  var serviceMoves = new WeakMap();
+
+  this.executed('shape.move', function(context, command, event) {
+    if (is(context.shape, 'dmn:DecisionService')) {
+      serviceMoves.set(context.shape, {
+        id: event.id,
+        delta: context.delta
+      });
+    }
+  }, true);
+
+  function isCarriedByService(context, event) {
+    var move = serviceMoves.get(context.shape.parent);
+
+    return !!move &&
+      move.id === event.id &&
+      move.delta.x === context.delta.x &&
+      move.delta.y === context.delta.y;
+  }
+
+  function updateDecisionSection(context, command, event) {
+    var shape = context.shape;
+
+    if (!shape || !is(shape, 'dmn:Decision')) {
+      return;
+    }
+
+    // determined once, on execution: when undoing, the decision is reverted
+    // before its decision service, whose divider is then still moved
+    if (context.carriedByService === undefined) {
+      context.carriedByService = isCarriedByService(context, event);
+    }
+
+    if (context.carriedByService) {
+      return;
+    }
+
+    var parent = shape.parent;
+    var businessObject = shape.businessObject;
+
+    if (parent && is(parent, 'dmn:DecisionService')) {
+      self._decisionServiceBehavior.updateDecisionSection(shape, parent.businessObject);
+    } else if (parent && is(parent, 'dmn:Definitions')) {
+      self._decisionServiceBehavior.removeDecisionFromServices(businessObject, parent.businessObject);
+    }
+  }
+
+  this.executed([ 'shape.move' ], updateDecisionSection, true);
+
+  this.reverted([ 'shape.move' ], updateDecisionSection, true);
 
   function updateConnectionWaypoints(context) {
     self.updateConnectionWaypoints(context);
@@ -140,11 +224,44 @@ export default function DrdUpdater(
 
       // parent is target
       self.updateSemanticParent(connectionBo, targetBo);
+
+      // Update decision services when information requirement is created
+      if (is(connection, 'dmn:InformationRequirement')) {
+        self.updateDecisionServicesForTarget(target);
+      }
     }
   }, true);
 
   this.reverted('connection.create', function(context) {
     reverseUpdateParent(context);
+
+    // Update decision services when information requirement is deleted
+    var connection = context.connection,
+        target = context.target;
+
+    if (is(connection, 'dmn:InformationRequirement')) {
+      self.updateDecisionServicesForTarget(target);
+    }
+  }, true);
+
+  this.executed('connection.delete', function(context) {
+    var connection = context.connection,
+        target = context.target;
+
+    // Update decision services when information requirement is deleted
+    if (is(connection, 'dmn:InformationRequirement')) {
+      self.updateDecisionServicesForTarget(target);
+    }
+  }, true);
+
+  this.reverted('connection.delete', function(context) {
+    var connection = context.connection,
+        target = context.target;
+
+    // Update decision services when information requirement is restored
+    if (is(connection, 'dmn:InformationRequirement')) {
+      self.updateDecisionServicesForTarget(target);
+    }
   }, true);
 
   function updateReconnected(context) {
@@ -178,11 +295,49 @@ export default function DrdUpdater(
     if (sourceChanged) {
       self.updateRequirementSource(connectionBo, connection.source.businessObject);
     }
+
+    // Update decision services when an information requirement is
+    // reconnected, so their inputDecision/inputData stay in sync
+    if (is(connection, 'dmn:InformationRequirement')) {
+      if (targetChanged) {
+        self.updateDecisionServicesForTarget(context.oldTarget);
+      }
+
+      self.updateDecisionServicesForTarget(connection.target);
+    }
   }
 
   this.executed('connection.reconnect', updateReconnected, true);
 
   this.reverted('connection.reconnect', updateReconnected, true);
+
+  // Handle shape deletion - update decision services that reference the deleted element
+  this.executed('shape.delete', function(context) {
+    var shape = context.shape;
+
+    // Update decision services when a decision or input data is deleted
+    if (isAny(shape, [ 'dmn:Decision', 'dmn:InputData' ])) {
+      self.removeElementFromAllDecisionServices(shape);
+    }
+  }, true);
+
+  this.reverted('shape.create', function(context) {
+    var shape = context.shape;
+
+    // Remove element references when creation is undone
+    if (isAny(shape, [ 'dmn:Decision', 'dmn:InputData' ])) {
+      self.removeElementFromAllDecisionServices(shape);
+    }
+  }, true);
+
+  this.reverted('shape.delete', function(context) {
+    var shape = context.shape;
+
+    // Re-add element references when deletion is undone
+    if (isAny(shape, [ 'dmn:Decision', 'dmn:InputData' ])) {
+      self.updateAllDecisionServices();
+    }
+  }, true);
 
   this.executed('element.updateProperties', function(context) {
     definitionPropertiesView.update();
@@ -198,15 +353,41 @@ inherits(DrdUpdater, CommandInterceptor);
 
 DrdUpdater.$inject = [
   'connectionDocking',
+  'decisionServiceBehavior',
   'definitionPropertiesView',
   'drdFactory',
   'drdRules',
   'injector'
 ];
 
-DrdUpdater.prototype.updateBounds = function(shape) {
+DrdUpdater.prototype.getDividerY = function(shape) {
+  var dividerLine = is(shape, 'dmn:DecisionService')
+    && shape.businessObject.di.decisionServiceDividerLine;
+
+  return hasWaypoints(dividerLine) ? dividerLine.waypoint[0].y : undefined;
+};
+
+/**
+ * Sync the DI with the given shape. A decision service divider is moved
+ * along with the shape, unless an explicit divider position is given.
+ *
+ * @param {djs.model.Shape} shape
+ * @param {number} [dividerY]
+ */
+DrdUpdater.prototype.updateBounds = function(shape, dividerY) {
   var businessObject = shape.businessObject,
       bounds = businessObject.di.bounds;
+
+  var dividerLine = is(shape, 'dmn:DecisionService')
+    && businessObject.di.decisionServiceDividerLine;
+
+  var hasDivider = hasWaypoints(dividerLine);
+
+  if (hasDivider && dividerY === undefined) {
+    dividerY = bounds.height
+      ? dividerLine.waypoint[0].y + (shape.y - bounds.y)
+      : shape.y + (shape.height / 2);
+  }
 
   // update bounds
   assign(bounds, {
@@ -215,6 +396,19 @@ DrdUpdater.prototype.updateBounds = function(shape) {
     width: shape.width,
     height: shape.height
   });
+
+  // update decision service divider line
+  if (hasDivider) {
+    assign(dividerLine.waypoint[0], {
+      x: shape.x,
+      y: dividerY
+    });
+
+    assign(dividerLine.waypoint[1], {
+      x: shape.x + shape.width,
+      y: dividerY
+    });
+  }
 };
 
 DrdUpdater.prototype.updateConnectionWaypoints = function(context) {
@@ -252,6 +446,30 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
       containment;
 
   if (businessObject.$parent === parent) {
+    return;
+  }
+
+  // Handle Decision being moved into DecisionService
+  if (is(businessObject, 'dmn:Decision') && parent && is(parent, 'dmn:DecisionService')) {
+
+    // Find the Definitions element (Decision still remains under Definitions)
+    var definitions = parent.$parent;
+
+    // In case the decision was previously referenced by any services, clean up first
+    if (definitions) {
+      this._decisionServiceBehavior.removeDecisionFromServices(businessObject, definitions);
+    }
+
+    // Add reference to the target DecisionService (Decision stays in Definitions)
+    this._decisionServiceBehavior.addDecisionToService(businessObject, parent, definitions);
+
+    return;
+  }
+
+  // Handle Decision being moved out of DecisionService back to Definitions
+  if (is(businessObject, 'dmn:Decision') && parent && is(parent, 'dmn:Definitions')) {
+    this._decisionServiceBehavior.removeDecisionFromServices(businessObject, parent);
+
     return;
   }
 
@@ -374,6 +592,52 @@ DrdUpdater.prototype.updateDiParent = function(di, parentDi) {
   }
 };
 
+/**
+ * Update all decision services that contain the given decision element.
+ * This should be called when information requirements change.
+ *
+ * @param {Element} decisionElement - The decision element whose requirements changed
+ */
+DrdUpdater.prototype.updateDecisionServicesForTarget = function(decisionElement) {
+  var canvas = this._injector.get('canvas');
+  var rootElement = canvas.getRootElement();
+  var definitions = rootElement.businessObject;
+
+  this._decisionServiceBehavior.updateServicesContainingDecision(decisionElement, definitions);
+};
+
+/**
+ * Remove references to a deleted element from all decision services.
+ * This should be called when a decision or input data is deleted.
+ *
+ * @param {Element} deletedElement - The element that was deleted
+ */
+DrdUpdater.prototype.removeElementFromAllDecisionServices = function(deletedElement) {
+  if (!deletedElement || !deletedElement.businessObject) {
+    return;
+  }
+
+  var canvas = this._injector.get('canvas');
+  var rootElement = canvas.getRootElement();
+  var definitions = rootElement.businessObject;
+
+  var deletedId = deletedElement.businessObject.id;
+
+  this._decisionServiceBehavior.removeElementFromAllServices(deletedId, definitions);
+};
+
+/**
+ * Update all decision services by recalculating their inputs.
+ * This is a brute-force approach used when undoing deletions.
+ */
+DrdUpdater.prototype.updateAllDecisionServices = function() {
+  var canvas = this._injector.get('canvas');
+  var rootElement = canvas.getRootElement();
+  var definitions = rootElement.businessObject;
+
+  this._decisionServiceBehavior.updateAllServices(definitions);
+};
+
 // helpers //////////
 
 var REQUIREMENT_PROPERTIES = [
@@ -387,4 +651,23 @@ function getRequirementProperty(businessObject) {
   return find(REQUIREMENT_PROPERTIES, function(property) {
     return businessObject.get(property);
   });
+}
+
+function hasWaypoints(dividerLine) {
+  return !!(dividerLine && dividerLine.waypoint && dividerLine.waypoint.length === 2);
+}
+
+function constrainDividerY(shape, dividerY) {
+  if (dividerY === undefined) {
+    return dividerY;
+  }
+
+  var min = shape.y + MIN_SECTION_HEIGHT,
+      max = shape.y + shape.height - MIN_SECTION_HEIGHT;
+
+  if (min > max) {
+    return shape.y + (shape.height / 2);
+  }
+
+  return Math.max(min, Math.min(max, dividerY));
 }

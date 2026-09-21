@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_Member" name="Decision Member">
+    <variable id="InformationItem_Member" name="Decision Member" />
+    <informationRequirement id="InformationRequirement_Required">
+      <requiredDecision href="model.dmn#Decision_Required" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_Internal">
+      <requiredDecision href="#Decision_Internal" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_Internal" name="Decision Internal">
+    <variable id="InformationItem_Internal" name="Decision Internal" />
+    <informationRequirement id="InformationRequirement_Input">
+      <requiredInput href="model.dmn#InputData_Required" />
+    </informationRequirement>
+  </decision>
+  <decision id="Decision_Required" name="Decision Required">
+    <variable id="InformationItem_Required" name="Decision Required" />
+  </decision>
+  <inputData id="InputData_Required" name="Input Data Required">
+    <variable id="InformationItem_Input" name="Input Data Required" />
+  </inputData>
+  <decision id="Decision_Root" name="Decision Root">
+    <variable id="InformationItem_Root" name="Decision Root" />
+  </decision>
+  <decisionService id="DecisionService_1" name="Decision Service">
+    <variable id="InformationItem_Service" name="Decision Service" />
+    <outputDecision href="model.dmn#Decision_Member" />
+    <encapsulatedDecision href="#Decision_Internal" />
+    <inputDecision href="model.dmn#Decision_Required" />
+    <inputData href="model.dmn#InputData_Required" />
+  </decisionService>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1">
+      <dmndi:DMNShape id="DMNShape_Decision_Required" dmnElementRef="Decision_Required">
+        <dc:Bounds height="80" width="180" x="100" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_InputData_Required" dmnElementRef="InputData_Required">
+        <dc:Bounds height="45" width="125" x="350" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_Root" dmnElementRef="Decision_Root">
+        <dc:Bounds height="80" width="180" x="600" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_DecisionService_1" dmnElementRef="DecisionService_1">
+        <dc:Bounds height="300" width="400" x="100" y="300" />
+        <dmndi:DMNDecisionServiceDividerLine>
+          <di:waypoint x="100" y="450" />
+          <di:waypoint x="500" y="450" />
+        </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_Member" dmnElementRef="Decision_Member">
+        <dc:Bounds height="80" width="180" x="200" y="350" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

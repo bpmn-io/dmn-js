@@ -7,6 +7,8 @@ import {
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { getIdFromHref } from '../features/modeling/util/HrefUtil';
+
 
 export default function DrdImporter(
     eventBus,
@@ -39,11 +41,14 @@ DrdImporter.prototype.root = function(semantic) {
 /**
  * Add drd element (semantic) to the canvas.
  */
-DrdImporter.prototype.add = function(semantic) {
+DrdImporter.prototype.add = function(semantic, parentSemantic) {
   var elementFactory = this._elementFactory,
       canvas = this._canvas,
       eventBus = this._eventBus,
-      di = semantic.di;
+      di = semantic.di,
+      parent;
+
+  parent = parentSemantic && this._getShape(parentSemantic.id);
 
   var element, waypoints, source, target, elementDefinition, bounds;
 
@@ -59,7 +64,7 @@ DrdImporter.prototype.add = function(semantic) {
 
     element = elementFactory.createShape(elementDefinition);
 
-    canvas.addShape(element);
+    canvas.addShape(element, parent);
 
     eventBus.fire('drdElement.added', { element: element, di: di });
 
@@ -147,8 +152,4 @@ function collectWaypoints(edge) {
       return assign({ original: position }, position);
     });
   }
-}
-
-function getIdFromHref(href) {
-  return href.split('#').pop();
 }
