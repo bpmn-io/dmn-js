@@ -117,9 +117,13 @@ LabelEditingProvider.prototype.activate = function(element) {
 
   // DRG elements
   if (is(element, 'dmn:DRGElement')) {
-    assign(options, {
-      centerVertically: true
-    });
+
+    // Exception not to center vertically for DecisionService
+    if (!is(element, 'dmn:DecisionService')) {
+      assign(options, {
+        centerVertically: true
+      });
+    }
 
     assign(style, {
       backgroundColor: null,
