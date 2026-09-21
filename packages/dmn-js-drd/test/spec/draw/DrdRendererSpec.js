@@ -39,6 +39,35 @@ describe('draw - DrdRenderer', function() {
     return bootstrapViewer(xml).call(this);
   });
 
+  it('Decision Service', function() {
+    var xml = require('../../fixtures/dmn/decision-service.dmn');
+
+    return bootstrapViewer(xml).call(this);
+  });
+
+  describe('decision service', function() {
+
+    beforeEach(bootstrapViewer(require('../../fixtures/dmn/decision-service.dmn')));
+
+
+    it('should hide section labels by presentation attribute', inject(function(elementRegistry) {
+
+      // given
+      var gfx = elementRegistry.getGraphics('DecisionService');
+
+      // when
+      var labels = gfx.querySelectorAll('.dmn-decision-service-label');
+
+      // then
+      expect(labels).to.have.lengthOf(2);
+
+      labels.forEach(function(label) {
+        expect(label.getAttribute('display')).to.equal('none');
+      });
+    }));
+
+  });
+
 
   describe('colors', function() {
 

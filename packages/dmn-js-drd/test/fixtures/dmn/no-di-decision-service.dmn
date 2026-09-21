@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="Definitions_1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="OutputDecision" name="Output decision" />
+  <decision id="EncapsulatedDecision" name="Encapsulated decision" />
+  <decisionService id="DecisionService_1" name="Decision service">
+    <outputDecision href="#OutputDecision" />
+    <encapsulatedDecision href="#EncapsulatedDecision" />
+  </decisionService>
+</definitions>

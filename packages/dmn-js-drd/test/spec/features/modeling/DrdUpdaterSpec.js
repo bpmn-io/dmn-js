@@ -12,6 +12,8 @@ import modelingModule from 'src/features/modeling';
 
 import { getMid } from 'diagram-js/lib/layout/LayoutUtil';
 
+import { MIN_SECTION_HEIGHT } from 'src/features/decision-service-divider/DecisionServiceDivider';
+
 var restore = sinon.restore;
 
 
@@ -958,6 +960,534 @@ describe('features/modeling - DrdUpdater', function() {
     });
 
   });
+
+
+  describe('DecisionService', function() {
+
+    var decisionServiceXML = require('./drd-updater-decision-service.dmn');
+
+    beforeEach(bootstrapModeler(decisionServiceXML, { modules: testModules }));
+
+
+    describe('update parent', function() {
+
+      it('should update parent when decision is moved into DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision = elementRegistry.get('Decision_Outside'),
+              decisionBo = decision.businessObject,
+              decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject,
+              definitions = elementRegistry.get('Definitions_1'),
+              definitionsBo = definitions.businessObject;
+
+          // when
+          modeling.moveShape(decision, { x: 150, y: 280 }, decisionService);
+
+          // then
+          expect(decision.parent).to.equal(decisionService);
+          expect(decisionBo.$parent).to.equal(definitionsBo);
+          expect(definitionsBo.drgElement).to.include(decisionBo);
+
+          var outputDecisions = decisionServiceBo.get('outputDecision');
+          expect(outputDecisions.some(function(d) {
+            return d.href === '#Decision_Outside';
+          })).to.be.true;
+        }
+      ));
+
+
+      it('should update parent when decision is moved out of DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decision = elementRegistry.get('Decision_InOutput'),
+              decisionBo = decision.businessObject,
+              decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject,
+              definitions = elementRegistry.get('Definitions_1'),
+              definitionsBo = definitions.businessObject;
+
+          // when
+          modeling.moveShape(decision, { x: 300, y: -100 }, definitions);
+
+          // then
+          expect(decision.parent).to.equal(definitions);
+          expect(decisionBo.$parent).to.equal(definitionsBo);
+          expect(definitionsBo.drgElement).to.include(decisionBo);
+
+          var outputDecisions = decisionServiceBo.get('outputDecision');
+          expect(outputDecisions.some(function(d) {
+            return d.href === '#Decision_InOutput';
+          })).to.be.false;
+        }
+      ));
+
+      it('should keep divider line in place when DecisionService is resized', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+
+          // when
+          modeling.resizeShape(decisionService, {
+            x: decisionService.x,
+            y: decisionService.y,
+            width: 500,
+            height: 600
+          });
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+
+          expect(dividerLine.waypoint).to.have.lengthOf(2);
+          expect(dividerLine.waypoint[0]).to.include({ x: 100, y: 450 });
+          expect(dividerLine.waypoint[1]).to.include({ x: 600, y: 450 });
+        }
+      ));
+
+
+      it('should keep divider line in place when DecisionService is resized from top', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+
+          // when
+          modeling.resizeShape(decisionService, {
+            x: decisionService.x,
+            y: 200,
+            width: decisionService.width,
+            height: 400
+          });
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+
+          expect(dividerLine.waypoint[0].y).to.equal(450);
+          expect(dividerLine.waypoint[1].y).to.equal(450);
+        }
+      ));
+
+
+      it('should keep contained decisions in their sections when DecisionService is resized', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+
+          // when
+          modeling.resizeShape(decisionService, {
+            x: decisionService.x,
+            y: decisionService.y,
+            width: decisionService.width,
+            height: 600
+          });
+
+          // then
+          expect(decisionServiceBo.get('encapsulatedDecision').map(function(d) {
+            return d.href;
+          })).to.eql([ '#Decision_InEncapsulated' ]);
+        }
+      ));
+
+
+      it('should keep divider line within minimum section height when DecisionService is shrunk', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+
+          // when
+          modeling.resizeShape(decisionService, {
+            x: decisionService.x,
+            y: decisionService.y,
+            width: decisionService.width,
+            height: 250
+          });
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+
+          expect(dividerLine.waypoint[0].y).to.equal(
+            decisionService.y + decisionService.height - MIN_SECTION_HEIGHT
+          );
+        }
+      ));
+
+
+      it('should restore divider line when DecisionService resize is undone', inject(
+        function(commandStack, elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+
+          modeling.resizeShape(decisionService, {
+            x: decisionService.x,
+            y: decisionService.y,
+            width: decisionService.width,
+            height: 250
+          });
+
+          // when
+          commandStack.undo();
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+
+          expect(dividerLine.waypoint[0].y).to.equal(450);
+          expect(dividerLine.waypoint[1].y).to.equal(450);
+        }
+      ));
+
+
+      it('should move divider line along with DecisionService', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1'),
+              decisionServiceBo = decisionService.businessObject;
+
+          // when
+          modeling.moveElements([ decisionService ], { x: 50, y: 100 });
+
+          // then
+          var dividerLine = decisionServiceBo.di.decisionServiceDividerLine;
+
+          expect(dividerLine.waypoint[0]).to.include({ x: 150, y: 550 });
+          expect(dividerLine.waypoint[1]).to.include({ x: 550, y: 550 });
+        }
+      ));
+
+    });
+
+
+    describe('move', function() {
+
+      function getSections(decisionService) {
+        var decisionServiceBo = decisionService.businessObject;
+
+        return {
+          output: (decisionServiceBo.get('outputDecision') || []).map(function(ref) {
+            return ref.href;
+          }),
+          encapsulated: (decisionServiceBo.get('encapsulatedDecision') || []).map(function(ref) {
+            return ref.href;
+          })
+        };
+      }
+
+      function getDividerY(decisionService) {
+        return decisionService.businessObject.di.decisionServiceDividerLine.waypoint[0].y;
+      }
+
+      var UNCHANGED = {
+        output: [ '#Decision_InOutput' ],
+        encapsulated: [ '#Decision_InEncapsulated' ]
+      };
+
+
+      describe('decision service', function() {
+
+        it('should keep decisions in their sections', inject(
+          function(elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1');
+
+            // when
+            modeling.moveElements([ decisionService ], { x: 0, y: 100 });
+
+            // then
+            expect(getDividerY(decisionService)).to.equal(550);
+            expect(getSections(decisionService)).to.eql(UNCHANGED);
+          }
+        ));
+
+
+        it('should keep decisions in their sections on undo', inject(
+          function(commandStack, elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1'),
+                encapsulatedDecision = elementRegistry.get('Decision_InEncapsulated');
+
+            modeling.moveElements([ decisionService ], { x: 0, y: 100 });
+
+            // when
+            commandStack.undo();
+
+            // then
+            expect(decisionService.y).to.equal(300);
+            expect(encapsulatedDecision.y).to.equal(500);
+            expect(getDividerY(decisionService)).to.equal(450);
+            expect(getSections(decisionService)).to.eql(UNCHANGED);
+          }
+        ));
+
+
+        it('should keep decisions in their sections on redo', inject(
+          function(commandStack, elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1'),
+                encapsulatedDecision = elementRegistry.get('Decision_InEncapsulated');
+
+            modeling.moveElements([ decisionService ], { x: 0, y: 100 });
+
+            commandStack.undo();
+
+            // when
+            commandStack.redo();
+
+            // then
+            expect(decisionService.y).to.equal(400);
+            expect(encapsulatedDecision.y).to.equal(600);
+            expect(getDividerY(decisionService)).to.equal(550);
+            expect(getSections(decisionService)).to.eql(UNCHANGED);
+          }
+        ));
+
+
+        it('should keep decisions in their sections on undo (shape move)', inject(
+          function(commandStack, elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1');
+
+            modeling.moveShape(decisionService, { x: 0, y: 100 });
+
+            // when
+            commandStack.undo();
+
+            // then
+            expect(getDividerY(decisionService)).to.equal(450);
+            expect(getSections(decisionService)).to.eql(UNCHANGED);
+          }
+        ));
+
+
+        it('should not reassign decisions not matching their position', inject(
+          function(commandStack, elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1'),
+                dividerLine = decisionService.businessObject.di.decisionServiceDividerLine;
+
+            // the divider is below the encapsulated decision
+            dividerLine.waypoint[0].y = dividerLine.waypoint[1].y = 600;
+
+            // when
+            modeling.moveElements([ decisionService ], { x: 0, y: 100 });
+
+            commandStack.undo();
+            commandStack.redo();
+
+            // then
+            expect(getSections(decisionService)).to.eql(UNCHANGED);
+          }
+        ));
+
+      });
+
+
+      describe('decision', function() {
+
+        it('should assign decision to the section it is moved to', inject(
+          function(elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1'),
+                outputDecision = elementRegistry.get('Decision_InOutput');
+
+            // when
+            modeling.moveShape(outputDecision, { x: 0, y: 150 }, decisionService);
+
+            // then
+            expect(getSections(decisionService)).to.eql({
+              output: [],
+              encapsulated: [ '#Decision_InEncapsulated', '#Decision_InOutput' ]
+            });
+          }
+        ));
+
+
+        it('should restore section on undo', inject(
+          function(commandStack, elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1'),
+                outputDecision = elementRegistry.get('Decision_InOutput');
+
+            modeling.moveShape(outputDecision, { x: 0, y: 150 }, decisionService);
+
+            // when
+            commandStack.undo();
+
+            // then
+            expect(getSections(decisionService)).to.eql(UNCHANGED);
+          }
+        ));
+
+
+        it('should assign section again on redo', inject(
+          function(commandStack, elementRegistry, modeling) {
+
+            // given
+            var decisionService = elementRegistry.get('DecisionService_1'),
+                outputDecision = elementRegistry.get('Decision_InOutput');
+
+            modeling.moveShape(outputDecision, { x: 0, y: 150 }, decisionService);
+
+            commandStack.undo();
+
+            // when
+            commandStack.redo();
+
+            // then
+            expect(getSections(decisionService)).to.eql({
+              output: [],
+              encapsulated: [ '#Decision_InEncapsulated', '#Decision_InOutput' ]
+            });
+          }
+        ));
+
+      });
+
+    });
+
+
+    describe('create', function() {
+
+      function createDecision(elementFactory, modeling, decisionService) {
+        var decision = elementFactory.create('shape', { type: 'dmn:Decision' });
+
+        modeling.createShape(decision, { x: 300, y: 380 }, decisionService);
+
+        return decision;
+      }
+
+      function hasReference(decisionServiceBo, decisionBo) {
+        return [ 'outputDecision', 'encapsulatedDecision' ].some(function(name) {
+          return (decisionServiceBo.get(name) || []).some(function(ref) {
+            return ref.href === '#' + decisionBo.id;
+          });
+        });
+      }
+
+
+      it('should reference decision created in DecisionService', inject(
+        function(elementFactory, elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1');
+
+          // when
+          var decision = createDecision(elementFactory, modeling, decisionService);
+
+          // then
+          expect(hasReference(decisionService.businessObject, decision.businessObject)).to.be.true;
+        }
+      ));
+
+
+      it('should remove reference on undo', inject(
+        function(commandStack, elementFactory, elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1');
+
+          var decision = createDecision(elementFactory, modeling, decisionService);
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(hasReference(decisionService.businessObject, decision.businessObject)).to.be.false;
+        }
+      ));
+
+
+      it('should restore reference on redo', inject(
+        function(commandStack, elementFactory, elementRegistry, modeling) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService_1');
+
+          var decision = createDecision(elementFactory, modeling, decisionService);
+
+          commandStack.undo();
+
+          // when
+          commandStack.redo();
+
+          // then
+          expect(hasReference(decisionService.businessObject, decision.businessObject)).to.be.true;
+        }
+      ));
+
+    });
+
+
+    describe('update inputs on delete', function() {
+
+      it('should remove input decision when requirement is deleted', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var outsideDecision = elementRegistry.get('Decision_Outside'),
+              outputDecision = elementRegistry.get('Decision_InOutput'),
+              decisionServiceBo = elementRegistry.get('DecisionService_1').businessObject;
+
+          var requirement = modeling.connect(outsideDecision, outputDecision);
+
+          // when
+          modeling.removeConnection(requirement);
+
+          // then
+          expect(decisionServiceBo.get('inputDecision') || []).to.be.empty;
+        }
+      ));
+
+    });
+
+
+    describe('update inputs on reconnect', function() {
+
+      it('should update decision service inputs when a requirement is reconnected', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var outsideDecision = elementRegistry.get('Decision_Outside'),
+              outputDecision = elementRegistry.get('Decision_InOutput'),
+              standaloneDecision = elementRegistry.get('Decision_Standalone'),
+              decisionServiceBo = elementRegistry.get('DecisionService_1').businessObject;
+
+          var requirement = modeling.connect(outsideDecision, outputDecision);
+
+          // when
+          modeling.reconnectStart(requirement, standaloneDecision, getMid(standaloneDecision));
+
+          // then
+          var inputDecisions = decisionServiceBo.get('inputDecision');
+          expect(inputDecisions.some(function(d) {
+            return d.href === '#Decision_Standalone';
+          })).to.be.true;
+          expect(inputDecisions.some(function(d) {
+            return d.href === '#Decision_Outside';
+          })).to.be.false;
+        }
+      ));
+
+    });
+  });
+
 });
 
 

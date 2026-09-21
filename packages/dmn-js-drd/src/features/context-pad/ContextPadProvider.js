@@ -121,6 +121,19 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   }
 
   /**
+   * Appended elements normally provide for the element they are appended
+   * to. A decision service can only provide, i.e. appended elements
+   * require it instead.
+   */
+  function getAppendHints(element) {
+    if (is(element, 'dmn:DecisionService')) {
+      return {};
+    }
+
+    return { connectionTarget: element };
+  }
+
+  /**
   * Create an append action
   *
   * @param {string} type
@@ -138,18 +151,14 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
       create.start(event, shape, {
         source: element,
-        hints: {
-          connectionTarget: element
-        }
+        hints: getAppendHints(element)
       });
     }
 
     var append = autoPlace ? function(event, element) {
       var shape = elementFactory.createShape(assign({ type: type }, options));
 
-      autoPlace.append(element, shape, {
-        connectionTarget: element
-      });
+      autoPlace.append(element, shape, getAppendHints(element));
     } : appendStart;
 
     return {
@@ -163,7 +172,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     };
   }
 
-  if (is(businessObject, 'dmn:Decision')) {
+  if (isAny(businessObject, [ 'dmn:Decision', 'dmn:DecisionService' ])) {
     assign(actions, {
       'append.decision': appendAction(
         'dmn:Decision',
@@ -191,7 +200,8 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   if (isAny(businessObject, [
     'dmn:BusinessKnowledgeModel',
-    'dmn:Decision'
+    'dmn:Decision',
+    'dmn:DecisionService'
   ])) {
     assign(actions, {
       'append.business-knowledge-model': appendAction(

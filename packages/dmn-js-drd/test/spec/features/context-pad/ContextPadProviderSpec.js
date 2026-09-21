@@ -493,6 +493,69 @@ describe('features - context-pad', function() {
 
   });
 
+
+  describe('decision service', function() {
+
+    var diagramXML = require('../../../fixtures/dmn/decision-service.dmn');
+
+    beforeEach(bootstrapModeler(diagramXML, {
+      modules: testModules.concat(autoPlaceModule)
+    }));
+
+
+    [
+      [ 'append.decision', 'dmn:Decision' ],
+      [ 'append.business-knowledge-model', 'dmn:BusinessKnowledgeModel' ]
+    ].forEach(function(entry) {
+
+      var action = entry[0],
+          type = entry[1];
+
+      it('should auto place <' + action + '> requiring the service', inject(
+        function(contextPad, elementRegistry) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService');
+
+          contextPad.open(decisionService);
+
+          // when
+          contextPad.trigger('click', padEvent(action));
+
+          // then
+          expect(decisionService.outgoing).to.have.length(1);
+          expect(decisionService.outgoing[0].type).to.equal('dmn:KnowledgeRequirement');
+          expect(decisionService.outgoing[0].target.type).to.equal(type);
+        }
+      ));
+
+
+      it('should drag <' + action + '> requiring the service', inject(
+        function(contextPad, dragging, elementRegistry) {
+
+          // given
+          var decisionService = elementRegistry.get('DecisionService');
+
+          contextPad.open(decisionService);
+
+          // when
+          contextPad.trigger('dragstart', padEvent(action));
+
+          dragging.move(canvasEvent({ x: 900, y: 300 }));
+          dragging.hover({ element: decisionService.parent });
+          dragging.move(canvasEvent({ x: 920, y: 320 }));
+          dragging.end();
+
+          // then
+          expect(decisionService.outgoing).to.have.length(1);
+          expect(decisionService.outgoing[0].target.type).to.equal(type);
+        }
+      ));
+
+    });
+
+  });
+
 });
 
 
