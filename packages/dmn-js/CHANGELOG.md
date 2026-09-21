@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `dmn-moddle@12.2.1`
+
 ## 17.11.0
 
 * `DEPS`: update to `dmn-moddle@12.2.0`
