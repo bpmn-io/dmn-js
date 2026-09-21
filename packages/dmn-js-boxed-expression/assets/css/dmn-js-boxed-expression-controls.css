@@ -124,8 +124,24 @@
 /* function-definition */
 .dmn-boxed-expression-container .context-menu .function-definition-parameter button {
   border: none;
+  padding: 1px 6px;
+}
+
+.dmn-boxed-expression-container .context-menu .formal-parameters table {
+  /* do not inherit the user agent's 2px spacing: a host that collapses tables
+     would shift the cells out from under the button below */
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .dmn-boxed-expression-container .context-menu .formal-parameters .add-parameter {
-  margin-left: 3px;
+  /* the cells pad by 1px; match it so the button lines up with the inputs above */
+  margin-top: 6px;
+  margin-left: 1px;
+  padding: 1px 6px;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-container th,
+.dmn-boxed-expression-container .context-menu .context-menu-container td {
+  padding: 1px;
 }

@@ -133,6 +133,10 @@
   border-collapse: separate;
 }
 
+.dmn-literal-expression-container .literal-expression-properties .variables-table td {
+  padding: 1px;
+}
+
 .dmn-literal-expression-container .literal-expression-properties .variables-table tr td:first-child {
   font-weight: bold;
 }
