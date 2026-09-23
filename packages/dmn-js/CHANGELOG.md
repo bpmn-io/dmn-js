@@ -6,7 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
-* `FEAT`: source color variables from `@bpmn-io/theme`
+## 17.12.0
+
+* `FEAT`: source colors and corner radii from `@bpmn-io/theme` tokens. The `--color-*` palette variables are removed. Override the `--bio-*` tokens instead. ([#1028](https://github.com/bpmn-io/dmn-js/pull/1028))
+* `FEAT`: add `--table-border-radius` and `--panel-border-radius` for the decision table and expression surfaces ([#1028](https://github.com/bpmn-io/dmn-js/pull/1028))
+* `FIX`: stop relying on user agent table spacing and control styling ([#1028](https://github.com/bpmn-io/dmn-js/pull/1028))
+* `FIX`: edit the boxed expression name like the other view names ([#1028](https://github.com/bpmn-io/dmn-js/pull/1028))
 
 ## 17.11.1
 
