@@ -30,20 +30,34 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
 
     forEach(definitions.get('drgElement'), function(drgElement) {
 
-      // generate DI for decisions only
-      if (!is(drgElement, 'dmn:Decision')) {
+      // generate DI for decisions and decision services only
+      if (!is(drgElement, 'dmn:Decision') && !is(drgElement, 'dmn:DecisionService')) {
         return;
       }
 
-
       var dimensions = elementFactory._getDefaultSize(drgElement);
 
+      var x = 150 + (index * 30),
+          y = 150 + (index * 30);
+
       var di = drdFactory.createDiShape(drgElement, {
-        x: 150 + (index * 30),
-        y: 150 + (index * 30),
+        x: x,
+        y: y,
         width: dimensions.width,
         height: dimensions.height
       });
+
+      if (is(drgElement, 'dmn:DecisionService')) {
+        var dividerY = y + (dimensions.height / 2);
+
+        var dividerLine = drdFactory.createDiDividerLine([
+          { x: x, y: dividerY },
+          { x: x + dimensions.width, y: dividerY }
+        ]);
+
+        dividerLine.$parent = di;
+        di.decisionServiceDividerLine = dividerLine;
+      }
 
       drdUpdater.updateDiParent(di, diagram);
 
