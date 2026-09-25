@@ -1,4 +1,4 @@
-import { assign } from 'min-dash';
+import { assign, find } from 'min-dash';
 
 import inherits from 'inherits-browser';
 
@@ -13,6 +13,8 @@ import {
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
+
+import { getRequirementType } from './util/RequirementUtil.js';
 
 
 /**
@@ -145,31 +147,42 @@ export default function DrdUpdater(
     reverseUpdateParent(context);
   }, true);
 
-  this.executed('connection.reconnect', function(context) {
+  function updateReconnected(context) {
     var connection = context.connection,
         connectionBo = connection.businessObject,
-        newTarget = context.newTarget,
-        newTargetBo = newTarget.businessObject;
+        sourceChanged = context.oldSource !== context.newSource,
+        targetChanged = context.oldTarget !== context.newTarget;
 
     if (is(connectionBo, 'dmn:Association')) {
+
+      // only touch the endpoint that actually reconnected, so the untouched
+      // reference (and any extension elements/attributes on it) is never
+      // rewritten, regardless of its href format
+      if (sourceChanged) {
+        self.updateAssociationRef(
+          connectionBo, 'sourceRef', connection.source.businessObject
+        );
+      }
+
+      if (targetChanged) {
+        self.updateAssociationRef(
+          connectionBo, 'targetRef', connection.target.businessObject
+        );
+      }
+
       return;
     }
 
-    self.updateSemanticParent(connectionBo, newTargetBo);
-  }, true);
+    self.updateSemanticParent(connectionBo, connection.target.businessObject);
 
-  this.reverted('connection.reconnect', function(context) {
-    var connection = context.connection,
-        connectionBo = connection.businessObject,
-        oldTarget = context.oldTarget,
-        oldTargetBo = oldTarget.businessObject;
-
-    if (is(connectionBo, 'dmn:Association')) {
-      return;
+    if (sourceChanged) {
+      self.updateRequirementSource(connectionBo, connection.source.businessObject);
     }
+  }
 
-    self.updateSemanticParent(connectionBo, oldTargetBo);
-  }, true);
+  this.executed('connection.reconnect', updateReconnected, true);
+
+  this.reverted('connection.reconnect', updateReconnected, true);
 
   this.executed('element.updateProperties', function(context) {
     definitionPropertiesView.update();
@@ -277,6 +290,62 @@ DrdUpdater.prototype.updateSemanticParent = function(businessObject, parent) {
   }
 };
 
+DrdUpdater.prototype.updateRequirementSource = function(businessObject, source) {
+  var drdFactory = this._drdFactory;
+
+  var requirementType = getRequirementType(source);
+
+  if (!requirementType) {
+    return;
+  }
+
+  var property = 'required' + requirementType,
+      existingProperty = getRequirementProperty(businessObject),
+      href = '#' + source.id;
+
+  if (property === existingProperty && businessObject.get(property).get('href') === href) {
+    return;
+  }
+
+  // (re-)use the existing element reference rather than replacing it, so that
+  // extension elements and attributes on it survive a reconnect (and its undo)
+  var elementRef = existingProperty ?
+    businessObject.get(existingProperty) :
+    drdFactory.create('dmn:DMNElementReference', {});
+
+  elementRef.set('href', href);
+  elementRef.$parent = businessObject;
+
+  if (existingProperty) {
+    businessObject.set(existingProperty, undefined);
+  }
+
+  businessObject.set(property, elementRef);
+};
+
+DrdUpdater.prototype.updateAssociationRef = function(businessObject, property, element) {
+  var drdFactory = this._drdFactory;
+
+  var href = '#' + element.id,
+      elementRef = businessObject.get(property);
+
+  if (elementRef && elementRef.get('href') === href) {
+    return;
+  }
+
+  // (re-)use the existing element reference rather than replacing it, so that
+  // extension elements and attributes on it survive a reconnect (and its undo)
+  if (!elementRef) {
+    elementRef = drdFactory.create('dmn:DMNElementReference', {});
+
+    elementRef.$parent = businessObject;
+
+    businessObject.set(property, elementRef);
+  }
+
+  elementRef.set('href', href);
+};
+
 DrdUpdater.prototype.updateDiParent = function(di, parentDi) {
 
   if (di.$parent === parentDi) {
@@ -304,3 +373,18 @@ DrdUpdater.prototype.updateDiParent = function(di, parentDi) {
     throw new Error('unsupported');
   }
 };
+
+// helpers //////////
+
+var REQUIREMENT_PROPERTIES = [
+  'requiredDecision',
+  'requiredInput',
+  'requiredKnowledge',
+  'requiredAuthority'
+];
+
+function getRequirementProperty(businessObject) {
+  return find(REQUIREMENT_PROPERTIES, function(property) {
+    return businessObject.get(property);
+  });
+}
