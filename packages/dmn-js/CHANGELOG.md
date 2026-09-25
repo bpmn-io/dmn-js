@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.12.1
+
+* `FIX`: update DRD requirement and association references on reconnect ([#1032](https://github.com/bpmn-io/dmn-js/issues/1032))
+
 ## 17.12.0
 
 * `FEAT`: source colors and corner radii from `@bpmn-io/theme` tokens. The `--color-*` palette variables are removed. Override the `--bio-*` tokens instead. ([#1028](https://github.com/bpmn-io/dmn-js/pull/1028))
