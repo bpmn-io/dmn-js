@@ -3,7 +3,8 @@ import { expect } from 'chai';
 
 import {
   bootstrapModeler,
-  inject
+  inject,
+  injectAsync
 } from 'test/TestHelper';
 
 import coreModule from 'src/core';
@@ -559,6 +560,402 @@ describe('features/modeling - DrdUpdater', function() {
         expect(edge.waypoint[ 1 ].original).not.to.exist;
       }
     ));
+
+  });
+
+
+  describe('update connection reference', function() {
+
+    describe('information requirement', function() {
+
+      it('should update source on reconnect start', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              decision3 = elementRegistry.get('Decision_3');
+
+          // when
+          modeling.reconnectStart(informationRequirement, decision3, getMid(decision3));
+
+          // then
+          expect(informationRequirementBo.requiredDecision.get('href')).to.equal('#Decision_3');
+        }
+      ));
+
+
+      it('should preserve the element reference when only its href changes', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              decision3 = elementRegistry.get('Decision_3'),
+              elementRef = informationRequirementBo.requiredDecision;
+
+          elementRef.someExtension = 'keep-me';
+
+          // when
+          modeling.reconnectStart(informationRequirement, decision3, getMid(decision3));
+
+          // then
+          expect(informationRequirementBo.requiredDecision).to.equal(elementRef);
+          expect(informationRequirementBo.requiredDecision.someExtension).to.equal('keep-me');
+        }
+      ));
+
+
+      it('should revert source on reconnect start undo', inject(
+        function(commandStack, elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              decision3 = elementRegistry.get('Decision_3');
+
+          modeling.reconnectStart(informationRequirement, decision3, getMid(decision3));
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(informationRequirementBo.requiredDecision.get('href')).to.equal('#Decision_1');
+        }
+      ));
+
+
+      it('should not update source on reconnect end', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              decision3 = elementRegistry.get('Decision_3');
+
+          // when
+          modeling.reconnectEnd(informationRequirement, decision3, getMid(decision3));
+
+          // then
+          expect(informationRequirementBo.requiredDecision.get('href')).to.equal('#Decision_1');
+        }
+      ));
+
+
+      it('should not touch the untouched source reference on reconnect end', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              decision3 = elementRegistry.get('Decision_3'),
+              elementRef = informationRequirementBo.requiredDecision;
+
+          elementRef.set('href', 'other-namespace#Decision_1');
+
+          // when
+          modeling.reconnectEnd(informationRequirement, decision3, getMid(decision3));
+
+          // then
+          expect(informationRequirementBo.requiredDecision).to.equal(elementRef);
+          expect(informationRequirementBo.requiredDecision.get('href'))
+            .to.equal('other-namespace#Decision_1');
+        }
+      ));
+
+
+      it('should switch requirement property when source type changes', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              inputData = elementRegistry.get('InputData_1');
+
+          // when
+          modeling.reconnectStart(informationRequirement, inputData, getMid(inputData));
+
+          // then
+          expect(informationRequirementBo.requiredDecision).not.to.exist;
+          expect(informationRequirementBo.requiredInput.get('href')).to.equal('#InputData_1');
+        }
+      ));
+
+
+      it('should preserve the element reference when switching property', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              inputData = elementRegistry.get('InputData_1'),
+              elementRef = informationRequirementBo.requiredDecision;
+
+          elementRef.someExtension = 'keep-me';
+
+          // when
+          modeling.reconnectStart(informationRequirement, inputData, getMid(inputData));
+
+          // then
+          expect(informationRequirementBo.requiredInput).to.equal(elementRef);
+          expect(informationRequirementBo.requiredInput.someExtension).to.equal('keep-me');
+        }
+      ));
+
+
+      it('should revert requirement property switch on undo', inject(
+        function(commandStack, elementRegistry, modeling) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              informationRequirementBo = informationRequirement.businessObject,
+              inputData = elementRegistry.get('InputData_1');
+
+          modeling.reconnectStart(informationRequirement, inputData, getMid(inputData));
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(informationRequirementBo.requiredInput).not.to.exist;
+          expect(informationRequirementBo.requiredDecision.get('href')).to.equal('#Decision_1');
+        }
+      ));
+
+
+      it('should update the exported XML', injectAsync(function(done) {
+        return function(elementRegistry, modeling, moddle) {
+
+          // given
+          var informationRequirement = elementRegistry.get('InformationRequirement_1'),
+              decision3 = elementRegistry.get('Decision_3'),
+              definitions = elementRegistry.get('Definitions_1').businessObject;
+
+          // when
+          modeling.reconnectStart(informationRequirement, decision3, getMid(decision3));
+
+          // then
+          moddle.toXML(definitions).then(function(result) {
+            expect(result.xml).to.contain('<requiredDecision href="#Decision_3" />');
+            expect(result.xml).not.to.contain('href="#Decision_1"');
+
+            done();
+          }).catch(done);
+        };
+      }));
+
+    });
+
+
+    describe('knowledge requirement', function() {
+
+      it('should update source on reconnect start', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var knowledgeRequirement = elementRegistry.get('KnowledgeRequirement_1'),
+              knowledgeRequirementBo = knowledgeRequirement.businessObject,
+              bkm3 = elementRegistry.get('BusinessKnowledgeModel_3');
+
+          // when
+          modeling.reconnectStart(knowledgeRequirement, bkm3, getMid(bkm3));
+
+          // then
+          expect(knowledgeRequirementBo.requiredKnowledge.get('href'))
+            .to.equal('#BusinessKnowledgeModel_3');
+        }
+      ));
+
+    });
+
+
+    describe('authority requirement', function() {
+
+      it('should update source on reconnect start', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var authorityRequirement = elementRegistry.get('AuthorityRequirement_1'),
+              authorityRequirementBo = authorityRequirement.businessObject,
+              inputData = elementRegistry.get('InputData_1');
+
+          // when
+          modeling.reconnectStart(authorityRequirement, inputData, getMid(inputData));
+
+          // then
+          expect(authorityRequirementBo.requiredDecision).not.to.exist;
+          expect(authorityRequirementBo.requiredInput.get('href')).to.equal('#InputData_1');
+        }
+      ));
+
+
+      it('should move to the new parent when the connection reverses', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var knowledgeSource = elementRegistry.get('KnowledgeSource_1'),
+              decision1 = elementRegistry.get('Decision_1'),
+              inputData = elementRegistry.get('InputData_1'),
+              authorityRequirement = modeling.connect(knowledgeSource, decision1),
+              authorityRequirementBo = authorityRequirement.businessObject;
+
+          // when
+          // reconnecting the target (decision1) to inputData is invalid
+          // (knowledgeSource -> inputData is not a valid pairing), so diagram-js's
+          // bendpoint drag reverses the connection instead of rejecting the drop,
+          // reusing the old source (knowledgeSource) as the new target/parent
+          modeling.reconnect(
+            authorityRequirement, inputData, knowledgeSource, getMid(inputData)
+          );
+
+          // then
+          expect(authorityRequirementBo.$parent).to.equal(knowledgeSource.businessObject);
+          expect(authorityRequirementBo.requiredInput.get('href')).to.equal('#InputData_1');
+        }
+      ));
+
+    });
+
+
+    describe('association', function() {
+
+      it('should update sourceRef on reconnect start', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              decision1 = elementRegistry.get('Decision_1');
+
+          // when
+          modeling.reconnectStart(association, decision1, getMid(decision1));
+
+          // then
+          expect(associationBo.sourceRef.get('href')).to.equal('#Decision_1');
+          expect(associationBo.targetRef.get('href')).to.equal('#TextAnnotation_2');
+        }
+      ));
+
+
+      it('should revert sourceRef on reconnect start undo', inject(
+        function(commandStack, elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              decision1 = elementRegistry.get('Decision_1');
+
+          modeling.reconnectStart(association, decision1, getMid(decision1));
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(associationBo.sourceRef.get('href')).to.equal('#Decision_3');
+        }
+      ));
+
+
+      it('should update targetRef on reconnect end', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              textAnnotation1 = elementRegistry.get('TextAnnotation_1');
+
+          // when
+          modeling.reconnectEnd(association, textAnnotation1, getMid(textAnnotation1));
+
+          // then
+          expect(associationBo.targetRef.get('href')).to.equal('#TextAnnotation_1');
+          expect(associationBo.sourceRef.get('href')).to.equal('#Decision_3');
+        }
+      ));
+
+
+      it('should not touch the untouched sourceRef on reconnect end', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              textAnnotation1 = elementRegistry.get('TextAnnotation_1'),
+              elementRef = associationBo.sourceRef;
+
+          elementRef.set('href', 'other-namespace#Decision_3');
+
+          // when
+          modeling.reconnectEnd(association, textAnnotation1, getMid(textAnnotation1));
+
+          // then
+          expect(associationBo.sourceRef).to.equal(elementRef);
+          expect(associationBo.sourceRef.get('href')).to.equal('other-namespace#Decision_3');
+        }
+      ));
+
+
+      it('should not touch the untouched targetRef on reconnect start', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              decision1 = elementRegistry.get('Decision_1'),
+              elementRef = associationBo.targetRef;
+
+          elementRef.set('href', 'other-namespace#TextAnnotation_2');
+
+          // when
+          modeling.reconnectStart(association, decision1, getMid(decision1));
+
+          // then
+          expect(associationBo.targetRef).to.equal(elementRef);
+          expect(associationBo.targetRef.get('href')).to.equal('other-namespace#TextAnnotation_2');
+        }
+      ));
+
+
+      it('should revert targetRef on reconnect end undo', inject(
+        function(commandStack, elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              textAnnotation1 = elementRegistry.get('TextAnnotation_1');
+
+          modeling.reconnectEnd(association, textAnnotation1, getMid(textAnnotation1));
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(associationBo.targetRef.get('href')).to.equal('#TextAnnotation_2');
+        }
+      ));
+
+
+      it('should preserve the sourceRef element reference', inject(
+        function(elementRegistry, modeling) {
+
+          // given
+          var association = elementRegistry.get('Association_1'),
+              associationBo = association.businessObject,
+              decision1 = elementRegistry.get('Decision_1'),
+              elementRef = associationBo.sourceRef;
+
+          elementRef.someExtension = 'keep-me';
+
+          // when
+          modeling.reconnectStart(association, decision1, getMid(decision1));
+
+          // then
+          expect(associationBo.sourceRef).to.equal(elementRef);
+          expect(associationBo.sourceRef.someExtension).to.equal('keep-me');
+        }
+      ));
+
+    });
 
   });
 });

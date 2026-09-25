@@ -13,6 +13,19 @@
     <sourceRef href="#Decision_3" />
     <targetRef href="#TextAnnotation_2" />
   </association>
+  <inputData id="InputData_1" name="InputData_1" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1" name="BusinessKnowledgeModel_1" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel_3" name="BusinessKnowledgeModel_3" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel_2" name="BusinessKnowledgeModel_2">
+    <knowledgeRequirement id="KnowledgeRequirement_1">
+      <requiredKnowledge href="#BusinessKnowledgeModel_1" />
+    </knowledgeRequirement>
+  </businessKnowledgeModel>
+  <knowledgeSource id="KnowledgeSource_1" name="KnowledgeSource_1">
+    <authorityRequirement id="AuthorityRequirement_1">
+      <requiredDecision href="#Decision_3" />
+    </authorityRequirement>
+  </knowledgeSource>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_1x1utnd">
       <dmndi:DMNShape id="Decision_1_di" dmnElementRef="Decision_1">
@@ -38,6 +51,29 @@
       <dmndi:DMNShape id="TextAnnotation_2_di" dmnElementRef="TextAnnotation_2">
         <dc:Bounds height="80" width="100" x="400" y="400" />
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="InputData_1_di" dmnElementRef="InputData_1">
+        <dc:Bounds height="80" width="180" x="600" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="BusinessKnowledgeModel_1_di" dmnElementRef="BusinessKnowledgeModel_1">
+        <dc:Bounds height="80" width="180" x="600" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="BusinessKnowledgeModel_3_di" dmnElementRef="BusinessKnowledgeModel_3">
+        <dc:Bounds height="80" width="180" x="850" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="BusinessKnowledgeModel_2_di" dmnElementRef="BusinessKnowledgeModel_2">
+        <dc:Bounds height="80" width="180" x="600" y="400" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="KnowledgeRequirement_1_di" dmnElementRef="KnowledgeRequirement_1">
+        <di:waypoint x="690" y="330" />
+        <di:waypoint x="690" y="400" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="KnowledgeSource_1_di" dmnElementRef="KnowledgeSource_1">
+        <dc:Bounds height="80" width="180" x="600" y="550" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="AuthorityRequirement_1_di" dmnElementRef="AuthorityRequirement_1">
+        <di:waypoint x="247" y="380" />
+        <di:waypoint x="690" y="550" />
+      </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </definitions>

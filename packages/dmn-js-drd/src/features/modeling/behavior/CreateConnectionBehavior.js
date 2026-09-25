@@ -4,6 +4,8 @@ import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { getRequirementType } from '../util/RequirementUtil.js';
+
 
 /**
  * Creates DMN-specific refs for new connection.
@@ -56,17 +58,3 @@ CreateConnectionBehavior.$inject = [
 
 inherits(CreateConnectionBehavior, CommandInterceptor);
 
-
-// helpers //////////
-
-function getRequirementType(source) {
-  if (is(source, 'dmn:BusinessKnowledgeModel')) {
-    return 'Knowledge';
-  } else if (is(source, 'dmn:Decision')) {
-    return 'Decision';
-  } else if (is(source, 'dmn:InputData')) {
-    return 'Input';
-  } else if (is(source, 'dmn:KnowledgeSource')) {
-    return 'Authority';
-  }
-}
