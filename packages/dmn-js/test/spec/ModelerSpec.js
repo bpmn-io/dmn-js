@@ -1,6 +1,12 @@
 import { expect } from 'chai';
 import Modeler from 'src/Modeler';
 
+import {
+  triggerClick,
+  triggerMouseEvent,
+  triggerInputSelectChange
+} from 'dmn-js-shared/test/util/EventUtil';
+
 import { expectToBeAccessible, insertCSS } from 'test/helper';
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
@@ -73,6 +79,181 @@ describe('Modeler', function() {
       document.body.removeChild(container);
     });
   }
+
+
+  describe('custom data types', function() {
+
+    function expectTypeGroups(select) {
+      triggerClick(select);
+
+      const groups = Array.from(container.querySelectorAll('.option-group-label'));
+      expect(groups.map(group => group.textContent)).to.eql([ 'Primitive', 'Custom' ]);
+
+      triggerClick(select);
+    }
+
+    async function saveAndReopen(view) {
+      const { xml } = await editor.saveXML();
+
+      await editor.importXML(xml, { open: false });
+
+      const reopened = editor.getViews().find(candidate => candidate.element.id === view.element.id);
+      await editor.open(reopened);
+
+      return reopened.element;
+    }
+
+    beforeEach(async function() {
+      const customTypesDiagram = diagram.replace('<inputData', `
+        <itemDefinition id="applicantType" name="Applicant" />
+        <itemDefinition id="addressType" name="Address" />
+        <inputData`);
+
+      await editor.importXML(customTypesDiagram, { open: false });
+    });
+
+
+    [ 'input', 'output' ].forEach(kind => {
+
+      it(`should select a custom ${ kind } type in a decision table`, async function() {
+
+        // given
+        const view = editor.getViews().find(view => view.type === 'decisionTable');
+        await editor.open(view);
+
+        triggerMouseEvent(container.querySelector(`.${ kind }-label`), 'dblclick');
+        const select = container.querySelector('.type-ref-edit-select');
+
+        // when
+        expectTypeGroups(select);
+        triggerInputSelectChange(select, 'Applicant', container);
+
+        // then
+        const clause = view.element.decisionLogic[kind][0];
+        const typeRef = kind === 'input' ? clause.inputExpression.typeRef : clause.typeRef;
+        expect(typeRef).to.equal('Applicant');
+
+        const reopened = await saveAndReopen(view);
+        const savedClause = reopened.decisionLogic[kind][0];
+        const savedTypeRef = kind === 'input' ? savedClause.inputExpression.typeRef : savedClause.typeRef;
+        expect(savedTypeRef).to.equal('Applicant');
+      });
+    });
+
+
+    it('should select a custom literal expression type', async function() {
+
+      // given
+      const view = editor.getViews().find(view => view.type === 'literalExpression');
+      await editor.open(view);
+      const select = container.querySelector('.variable-type-select');
+
+      // when
+      expectTypeGroups(select);
+      triggerInputSelectChange(select, 'Applicant', container);
+
+      // then
+      expect(view.element.variable.typeRef).to.equal('Applicant');
+
+      const reopened = await saveAndReopen(view);
+      expect(reopened.variable.typeRef).to.equal('Applicant');
+    });
+
+
+    it('should select a custom boxed expression result type', async function() {
+
+      // given
+      const view = editor.getViews().find(view => view.type === 'boxedExpression');
+      await editor.open(view);
+      const select = container.querySelector('.element-variable-type .dms-input-select');
+
+      // when
+      expectTypeGroups(select);
+      triggerInputSelectChange(select, 'Applicant', container);
+
+      // then
+      expect(view.element.variable.typeRef).to.equal('Applicant');
+
+      const reopened = await saveAndReopen(view);
+      expect(reopened.variable.typeRef).to.equal('Applicant');
+    });
+
+
+    it('should select a custom formal parameter type', async function() {
+
+      // given
+      const view = editor.getViews().find(view => view.type === 'boxedExpression');
+      await editor.open(view);
+      triggerClick(container.querySelector('[aria-label="Edit formal parameters"]'));
+      const select = container.querySelector('.function-definition-parameter .dms-input-select');
+
+      // when
+      expectTypeGroups(select);
+      triggerInputSelectChange(select, 'Applicant', container);
+
+      // then
+      expect(view.element.encapsulatedLogic.formalParameter[0].typeRef).to.equal('Applicant');
+
+      const reopened = await saveAndReopen(view);
+      expect(reopened.encapsulatedLogic.formalParameter[0].typeRef).to.equal('Applicant');
+    });
+
+
+    it('should select a custom type for a newly added formal parameter', async function() {
+
+      // given
+      const view = editor.getViews().find(view => view.type === 'boxedExpression');
+      await editor.open(view);
+      triggerClick(container.querySelector('[aria-label="Edit formal parameters"]'));
+
+      // when
+      triggerClick(container.querySelector('.add-parameter'));
+      const selects = container.querySelectorAll('.function-definition-parameter .dms-input-select');
+      const select = selects[selects.length - 1];
+      triggerClick(select);
+
+      // then
+      const option = container.querySelector('.option[data-value="Applicant"]');
+      expect(option).to.exist;
+
+      // when
+      triggerClick(option);
+
+      // then
+      const parameters = view.element.encapsulatedLogic.formalParameter;
+      expect(parameters[parameters.length - 1].typeRef).to.equal('Applicant');
+
+      const reopened = await saveAndReopen(view);
+      const savedParameters = reopened.encapsulatedLogic.formalParameter;
+      expect(savedParameters[savedParameters.length - 1].typeRef).to.equal('Applicant');
+    });
+
+
+    it('should select a custom DRD input data type', async function() {
+
+      // given
+      const view = editor.getViews().find(view => view.type === 'drd');
+      await editor.open(view);
+      const viewer = editor.getActiveViewer();
+      const element = viewer.get('elementRegistry').get('dayType_id');
+      viewer.get('selection').select(element);
+      const select = container.querySelector('.dms-type-ref-select');
+
+      // then
+      expect(Array.from(select.options).map(option => option.value)).to.include('Applicant');
+
+      // when
+      select.value = 'Applicant';
+      select.dispatchEvent(new Event('change'));
+
+      // then
+      expect(element.businessObject.variable.typeRef).to.equal('Applicant');
+
+      const reopened = await saveAndReopen(view);
+      const inputData = reopened.drgElement.find(element => element.id === 'dayType_id');
+      expect(inputData.variable.typeRef).to.equal('Applicant');
+    });
+  });
 
 
   it('should open DMN table', async function() {

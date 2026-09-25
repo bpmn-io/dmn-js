@@ -3,6 +3,7 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import {
   triggerInputEvent,
+  triggerKeyEvent,
   triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
 
@@ -125,6 +126,7 @@ describe('literal expression properties editor', function() {
 
       // when
       triggerInputEvent(input, 'foo');
+      triggerKeyEvent(input, 'keydown', 13);
 
       // then
       expect(viewer.getDecision().variable.typeRef).to.equal('foo');
@@ -155,6 +157,7 @@ describe('literal expression properties editor', function() {
 
       // when
       triggerInputEvent(input, '');
+      triggerKeyEvent(input, 'keydown', 13);
 
       // then
       expect(viewer.getDecision().variable.typeRef).to.not.exist;
@@ -230,6 +233,7 @@ describe('literal expression properties editor', function() {
 
       // when
       triggerInputEvent(input, '');
+      triggerKeyEvent(input, 'keydown', 13);
 
       // then
       expect(viewer.getDecision().decisionLogic.expressionLanguage)
