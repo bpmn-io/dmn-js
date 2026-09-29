@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: allow registering data types providers via `DataTypes#registerProvider` ([#1035](https://github.com/bpmn-io/dmn-js/pull/1035))
+
 ## 17.12.2
 
 * `FIX`: persist BKM result type on function body, not variable ([#1027](https://github.com/bpmn-io/dmn-js/issues/1027))
