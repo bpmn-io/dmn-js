@@ -6,6 +6,7 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: allow registering data types providers via `DataTypes#registerProvider` ([#1035](https://github.com/bpmn-io/dmn-js/pull/1035))
 * `FEAT`: support letter shortcuts on non-Latin keyboard layouts ([bpmn-io/diagram-js#1112](https://github.com/bpmn-io/diagram-js/pull/1112), [bpmn-io/diagram-js#928](https://github.com/bpmn-io/diagram-js/issues/928))
 * `FEAT`: add tooltip with title and shortcut on palette entries ([bpmn-io/diagram-js#1082](https://github.com/bpmn-io/diagram-js/pull/1082))
 * `FEAT`: source DRD canvas colors and corner radii from `@bpmn-io/theme` tokens ([bpmn-io/diagram-js#1102](https://github.com/bpmn-io/diagram-js/pull/1102))
