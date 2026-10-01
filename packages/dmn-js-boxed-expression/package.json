@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
-    "diagram-js": "^15.21.0",
+    "diagram-js": "^15.28.0",
     "dmn-js-shared": "^17.12.2",
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",

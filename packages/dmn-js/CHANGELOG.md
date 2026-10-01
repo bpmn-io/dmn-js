@@ -6,6 +6,18 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: support letter shortcuts on non-Latin keyboard layouts ([bpmn-io/diagram-js#1112](https://github.com/bpmn-io/diagram-js/pull/1112), [bpmn-io/diagram-js#928](https://github.com/bpmn-io/diagram-js/issues/928))
+* `FEAT`: add tooltip with title and shortcut on palette entries ([bpmn-io/diagram-js#1082](https://github.com/bpmn-io/diagram-js/pull/1082))
+* `FEAT`: source DRD canvas colors and corner radii from `@bpmn-io/theme` tokens ([bpmn-io/diagram-js#1102](https://github.com/bpmn-io/diagram-js/pull/1102))
+* `FEAT`: give resize handle and segment dragger a border radius ([bpmn-io/diagram-js#1100](https://github.com/bpmn-io/diagram-js/pull/1100))
+* `FEAT`: add `--accent-color` theming token ([bpmn-io/diagram-js#1099](https://github.com/bpmn-io/diagram-js/pull/1099))
+* `FIX`: use WCAG AA compliant primary accent color ([bpmn-io/diagram-js#1099](https://github.com/bpmn-io/diagram-js/pull/1099))
+* `FIX`: prevent overflowing of text when layouting it ([bpmn-io/diagram-js#1106](https://github.com/bpmn-io/diagram-js/pull/1106), [bpmn-io/diagram-js#1105](https://github.com/bpmn-io/diagram-js/pull/1105))
+* `FIX`: prevent text layouting from looping in certain scenarios ([bpmn-io/diagram-js#1106](https://github.com/bpmn-io/diagram-js/pull/1106), [bpmn-io/diagram-js#1105](https://github.com/bpmn-io/diagram-js/pull/1105))
+* `FIX`: cancel canvas move on diagram destroy ([bpmn-io/diagram-js#1110](https://github.com/bpmn-io/diagram-js/pull/1110), [bpmn-io/diagram-js#1109](https://github.com/bpmn-io/diagram-js/issues/1109))
+* `FIX`: do not keep selection visible after diagram destroy ([bpmn-io/diagram-js#1098](https://github.com/bpmn-io/diagram-js/pull/1098))
+* `DEPS`: update to `diagram-js@15.28.0`
+
 ## 17.12.2
 
 * `FIX`: persist BKM result type on function body, not variable ([#1027](https://github.com/bpmn-io/dmn-js/issues/1027))

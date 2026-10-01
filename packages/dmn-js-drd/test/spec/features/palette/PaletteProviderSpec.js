@@ -9,6 +9,7 @@ import paletteModule from 'src/features/palette';
 import coreModule from 'src/core';
 
 import {
+  attr as domAttr,
   query as domQuery,
   queryAll as domQueryAll
 } from 'min-dom';
@@ -46,8 +47,7 @@ describe('features/palette', function() {
 
     // then
     entries.forEach(function(entry) {
-      expect(entry).to.have.property('title');
-      expect(entry.title).to.have.lengthOf.above(0);
+      expect(domAttr(entry, 'aria-label')).to.have.lengthOf.above(0);
     });
   }));
 
