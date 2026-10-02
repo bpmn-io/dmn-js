@@ -232,6 +232,18 @@ h4.dms-heading {
   padding: 4px 9px;
 }
 
+.dms-select-options .option-group-label {
+  padding: 8px 9px 4px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.dms-select-options .option-group + .option-group {
+  border-top: solid 1px var(--select-options-border-color);
+}
+
 .dms-select-options .option.active {
   color: var(--select-option-selected-color);
 }
@@ -245,4 +257,8 @@ h4.dms-heading {
   content: attr(data-placeholder);
   position: absolute;
   opacity: 0.5;
+}
+
+.dms-select-options .option-empty {
+  padding: 4px 9px;
 }

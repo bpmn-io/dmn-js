@@ -1,4 +1,6 @@
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+
+import { getTypeRefOptions } from 'dmn-js-shared/lib/util/TypeRefUtil';
 import Input from 'dmn-js-shared/lib/components/Input';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
@@ -73,6 +75,7 @@ function _FormalParametersEditor({ context: { expression } }, context) {
 
 const Parameter = withChangeSupport(function({ parameter, remove }, context) {
   const dataTypes = context.injector.get('dataTypes');
+  const viewer = context.injector.get('viewer');
   const translate = context.injector.get('translate');
   const functionDefinition = context.injector.get('functionDefinition');
 
@@ -86,12 +89,9 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
     functionDefinition.updateParameter(parameter, { typeRef });
   };
 
-  const typeRefOptions = dataTypes.getAll().map(t => {
-    return {
-      label: translate(t),
-      value: t
-    };
-  });
+  const typeRefOptions = getTypeRefOptions(
+    dataTypes, viewer.getRootElement(), translate
+  );
 
   return (
     <tr className="function-definition-parameter">
@@ -102,6 +102,8 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
         <InputSelect
           onChange={ onTypeRefChange }
           value={ typeRef }
+          searchable
+          emptyLabel={ translate('No matching types') }
           options={ typeRefOptions }
         />
       </td>
