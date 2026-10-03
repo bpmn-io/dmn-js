@@ -57,4 +57,3 @@ CreateConnectionBehavior.$inject = [
 ];
 
 inherits(CreateConnectionBehavior, CommandInterceptor);
-

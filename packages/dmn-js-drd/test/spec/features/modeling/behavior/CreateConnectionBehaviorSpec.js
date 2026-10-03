@@ -66,6 +66,32 @@ describe('features/modeling', function() {
       expect(requiredDecision.href).to.equal('#Decision_1');
     }));
 
+
+    it('should create requiredKnowledge for decision service used by a decision', inject(
+      function(elementRegistry, modeling) {
+
+        // given
+        var decisionService = elementRegistry.get('DecisionService_1'),
+            decision = elementRegistry.get('Decision_1');
+
+        // when
+        var knowledgeRequirement = modeling.connect(decisionService, decision);
+
+        // then
+        var knowledgeRequirementBo = knowledgeRequirement.businessObject,
+            requiredKnowledge = knowledgeRequirementBo.requiredKnowledge;
+
+        expect(requiredKnowledge).to.exist;
+        expect(requiredKnowledge.$parent).to.equal(knowledgeRequirementBo);
+        expect(requiredKnowledge.href).to.equal('#DecisionService_1');
+
+        // and the requirement is parented under the requiring decision,
+        // not the decision service
+        expect(decision.businessObject.get('knowledgeRequirement')).to.include(knowledgeRequirementBo);
+        expect(decisionService.businessObject.get('knowledgeRequirement') || []).to.be.empty;
+      }
+    ));
+
   });
 
 });

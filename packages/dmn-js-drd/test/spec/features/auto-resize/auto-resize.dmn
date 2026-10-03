@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="_definitions" name="Auto Resize Test" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_Inside" name="Decision Inside">
+    <variable id="InformationItem_Inside" name="Decision Inside" />
+  </decision>
+  <inputData id="InputData_Outside" name="Input Data Outside">
+    <variable id="InformationItem_InputDataOutside" name="Input Data Outside" />
+  </inputData>
+  <decisionService id="DecisionService_1" name="Test Decision Service">
+    <variable id="InformationItem_DS1" name="Test Decision Service" />
+    <outputDecision href="#Decision_Inside" />
+  </decisionService>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1">
+      <dmndi:DMNShape id="DMNShape_DecisionService_1" dmnElementRef="DecisionService_1">
+        <dc:Bounds height="300" width="400" x="100" y="100" />
+        <dmndi:DMNDecisionServiceDividerLine>
+          <di:waypoint x="100" y="250" />
+          <di:waypoint x="500" y="250" />
+        </dmndi:DMNDecisionServiceDividerLine>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_Decision_Inside" dmnElementRef="Decision_Inside">
+        <dc:Bounds height="80" width="180" x="200" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_InputData_Outside" dmnElementRef="InputData_Outside">
+        <dc:Bounds height="45" width="125" x="700" y="300" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

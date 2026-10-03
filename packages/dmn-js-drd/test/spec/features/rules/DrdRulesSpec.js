@@ -181,6 +181,27 @@ describe('features/rules', function() {
     ));
 
 
+    it('decision -> decision service', expectCanConnect(
+      'Decision_1',
+      'DecisionService_1',
+      false
+    ));
+
+
+    it('decision service -> decision', expectCanConnect(
+      'DecisionService_1',
+      'Decision_1',
+      { type: 'dmn:KnowledgeRequirement' }
+    ));
+
+
+    it('decision service -> business knowledge model', expectCanConnect(
+      'DecisionService_1',
+      'BusinessKnowledgeModel_1',
+      { type: 'dmn:KnowledgeRequirement' }
+    ));
+
+
     it('text annotation -> decision', expectCanConnect(
       'TextAnnotation_1',
       'Decision_2',
