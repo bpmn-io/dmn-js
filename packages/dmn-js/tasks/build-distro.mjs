@@ -52,20 +52,9 @@ async function run() {
 
   console.log('building pre-packaged distributions');
 
-  var NODE_ENV = process.env.NODE_ENV;
-
-  try {
-    for (const env of [ 'production', 'development' ]) {
-
-      process.env.NODE_ENV = env;
-
-      await exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
-        stdio: 'inherit'
-      });
-    }
-  } finally {
-    process.env.NODE_ENV = NODE_ENV;
-  }
+  await exec('rollup', [ '-c', '--bundleConfigAsCjs' ], {
+    stdio: 'inherit'
+  });
 
   console.log('done.');
 }

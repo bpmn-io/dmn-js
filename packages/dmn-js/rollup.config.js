@@ -44,7 +44,7 @@ const configs = distros.reduce(function(configs, distro) {
         file: `${outputDir}/${output}.development.js`,
         format: 'umd'
       },
-      plugins: pgl([
+      plugins: pgl('development', [
         banner(output)
       ])
     },
@@ -55,7 +55,7 @@ const configs = distros.reduce(function(configs, distro) {
         file: `${outputDir}/${output}.production.min.js`,
         format: 'umd'
       },
-      plugins: pgl([
+      plugins: pgl('production', [
         banner(output, true),
         terser({
           output: {
@@ -93,10 +93,7 @@ function banner(bundleName, minified) {
   });
 }
 
-function pgl(plugins = []) {
-
-  const NODE_ENV = process.env.NODE_ENV || 'production';
-
+function pgl(NODE_ENV, plugins = []) {
   return [
     replace({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
