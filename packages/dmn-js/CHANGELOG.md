@@ -18,6 +18,10 @@ ___Note:__ Yet to be released changes appear here._
 * `FIX`: do not keep selection visible after diagram destroy ([bpmn-io/diagram-js#1098](https://github.com/bpmn-io/diagram-js/pull/1098))
 * `DEPS`: update to `diagram-js@15.28.0`
 
+## 17.12.3
+
+* `FIX`: bundle the production build of Inferno into the production distribution ([#965](https://github.com/bpmn-io/dmn-js/issues/965))
+
 ## 17.12.2
 
 * `FIX`: persist BKM result type on function body, not variable ([#1027](https://github.com/bpmn-io/dmn-js/issues/1027))

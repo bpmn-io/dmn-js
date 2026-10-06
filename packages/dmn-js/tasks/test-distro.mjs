@@ -1,6 +1,6 @@
 import { execaSync as exec } from 'execa';
 
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 var failures = 0;
 
@@ -19,6 +19,25 @@ function verifyAssets() {
 
     if (!existsSync(assetPath)) {
       console.error(`expected file <${assetPath}> does not exist!`);
+
+      failures++;
+    }
+  }
+}
+
+
+function verifyProductionBundles() {
+  const variants = [
+    'dmn-modeler',
+    'dmn-navigated-viewer',
+    'dmn-viewer'
+  ];
+
+  for (const variant of variants) {
+    const bundlePath = `dist/${variant}.production.min.js`;
+
+    if (readFileSync(bundlePath, 'utf8').includes('Inferno is in development mode')) {
+      console.error(`expected <${bundlePath}> to bundle the production build of Inferno!`);
 
       failures++;
     }
@@ -52,6 +71,7 @@ function runTest(variant, env) {
 function test() {
 
   verifyAssets();
+  verifyProductionBundles();
 
   runTest('dmn-modeler', 'development');
   runTest('dmn-modeler', 'production');
