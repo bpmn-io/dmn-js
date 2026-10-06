@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 17.12.3
+
 * `FIX`: bundle the production build of Inferno into the production distribution ([#965](https://github.com/bpmn-io/dmn-js/issues/965))
 
 ## 17.12.2
