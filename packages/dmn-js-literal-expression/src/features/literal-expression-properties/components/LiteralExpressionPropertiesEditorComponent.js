@@ -71,7 +71,9 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   render() {
     const { name, typeRef } = this.state;
 
-    const typeRefOptions = this._dataTypes.getAll().map(t => {
+    const decision = this._viewer.getDecision();
+
+    const typeRefOptions = this._dataTypes.getAll(decision).map(t => {
       return {
         label: this._translate(t),
         value: t

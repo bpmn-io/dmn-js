@@ -52,7 +52,7 @@ export default class TypeRefCellContextMenu extends Component {
         element
     ).typeRef;
 
-    const typeRefOptions = this._dataTypes.getAll().map(t => {
+    const typeRefOptions = this._dataTypes.getAll(element).map(t => {
       return {
         label: this._translate(t),
         value: t
