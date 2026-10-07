@@ -95,7 +95,7 @@ export default class TypeRefDropdown {
     select.ariaLabel = this._translate('Type');
 
     const currentTypeRef = this._getTypeRef(element);
-    const dataTypes = this._dataTypes.getAll();
+    const dataTypes = this._dataTypes.getAll(getBusinessObject(element));
     const types = dataTypes.includes(currentTypeRef)
       ? dataTypes
       : [ currentTypeRef, ...dataTypes ];
