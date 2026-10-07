@@ -9,6 +9,7 @@
   <knowledgeSource id="KnowledgeSource_2" name="KnowledgeSource_2" />
   <businessKnowledgeModel id="BusinessKnowledgeModel_2" name="BusinessKnowledgeModel_2" />
   <textAnnotation id="TextAnnotation_1" />
+  <decisionService id="DecisionService_1" name="DecisionService_1" />
   <association id="Association_1">
     <sourceRef href="#Decision_2" />
     <targetRef href="#TextAnnotation_1" />
@@ -41,6 +42,9 @@
       </dmndi:DMNShape>
       <dmndi:DMNShape id="TextAnnotation_1_di" dmnElementRef="TextAnnotation_1">
         <dc:Bounds height="80" width="100" x="600" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DecisionService_1_di" dmnElementRef="DecisionService_1">
+        <dc:Bounds height="200" width="300" x="700" y="400" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="Association_1_di" dmnElementRef="Association_1">
         <di:waypoint x="490" y="140" />
