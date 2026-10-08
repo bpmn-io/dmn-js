@@ -12,7 +12,7 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
  * @returns {string} [requirementType]
  */
 export function getRequirementType(source) {
-  if (is(source, 'dmn:BusinessKnowledgeModel')) {
+  if (is(source, 'dmn:BusinessKnowledgeModel') || is(source, 'dmn:DecisionService')) {
     return 'Knowledge';
   } else if (is(source, 'dmn:Decision')) {
     return 'Decision';

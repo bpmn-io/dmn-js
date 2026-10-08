@@ -10,6 +10,7 @@ import diGeneratorModule from 'src/features/generate-di';
 
 import noDiXML from 'test/fixtures/dmn/no-di.dmn';
 import emptyDefinitionsXML from 'test/fixtures/dmn/empty-definitions.dmn';
+import noDiDecisionServiceXML from 'test/fixtures/dmn/no-di-decision-service.dmn';
 
 
 describe('features - generate-di', function() {
@@ -73,5 +74,44 @@ describe('features - generate-di', function() {
       // then
       expect(canvas.getRootElement()).to.have.property('id', 'definitions');
     }));
+  });
+
+
+  describe('decision service', function() {
+
+    beforeEach(bootstrapModeler(noDiDecisionServiceXML, {
+      modules: [
+        coreModule,
+        modelingModule,
+        diGeneratorModule
+      ]
+    }));
+
+
+    it('should generate DI for the decision service', inject(function(elementRegistry) {
+
+      // when
+      var decisionService = elementRegistry.get('DecisionService_1');
+
+      // then
+      expect(decisionService).to.exist;
+      expect(decisionService.businessObject.di.decisionServiceDividerLine).to.exist;
+    }));
+
+
+    it('should parent contained decisions under the generated decision service', inject(
+      function(elementRegistry) {
+
+        // when
+        var decisionService = elementRegistry.get('DecisionService_1');
+        var outputDecision = elementRegistry.get('OutputDecision');
+        var encapsulatedDecision = elementRegistry.get('EncapsulatedDecision');
+
+        // then
+        expect(outputDecision.parent).to.equal(decisionService);
+        expect(encapsulatedDecision.parent).to.equal(decisionService);
+      }
+    ));
+
   });
 });
