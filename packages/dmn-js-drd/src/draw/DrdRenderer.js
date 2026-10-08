@@ -371,6 +371,7 @@ export default function DrdRenderer(
         stroke: getStrokeColor(element, defaultStrokeColor),
         strokeWidth: 2
       });
+      domAttr(line, 'class', 'dmn-decision-service-divider');
       svgAppend(p, line);
 
       var outputText = svgCreate('text');

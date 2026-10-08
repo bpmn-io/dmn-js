@@ -26,6 +26,7 @@ import PaletteModule from './features/palette';
 import ResizeModule from 'diagram-js/lib/features/resize';
 import SnappingModule from './features/snapping';
 import TypeRefDropdownModule from './features/type-ref-dropdown';
+import DecisionServiceDividerModule from './features/decision-service-divider';
 
 /**
  * A modeler for DMN tables.
@@ -125,6 +126,7 @@ Modeler.prototype._modelingModules = [
   BendpointsModule,
   ContextPadModule,
   ConnectPreviewModule,
+  DecisionServiceDividerModule,
   DefinitionPropertiesModule,
   DistributeElementsModule,
   EditorActionsModule,

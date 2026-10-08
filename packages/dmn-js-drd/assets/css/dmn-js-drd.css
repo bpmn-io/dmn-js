@@ -129,3 +129,16 @@
 .dmn-drd-container .djs-shape:is(.new-parent, .drop-ok, .drop-not-ok, .attach-ok) .dmn-decision-service-label {
   display: block;
 }
+
+.djs-divider-handle {
+  cursor: ns-resize;
+}
+
+.djs-divider-handle-hit {
+  fill: none;
+  pointer-events: all;
+}
+
+.djs-divider-dragging .dmn-decision-service-divider {
+  display: none;
+}
