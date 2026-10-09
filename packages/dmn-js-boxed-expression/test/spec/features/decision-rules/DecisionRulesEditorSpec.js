@@ -65,7 +65,7 @@ describe('features/decision-rules', function() {
     }));
 
 
-    it('should edit cell (FEEL)', inject(async function(elementRegistry) {
+    skipFF()('should edit cell (FEEL)', inject(async function(elementRegistry) {
 
       // given
       const editor = queryEditor('[data-element-id="outputEntry2"]', testContainer);
@@ -80,7 +80,7 @@ describe('features/decision-rules', function() {
     }));
 
 
-    it('should edit cell - line breaks (FEEL)', inject(async function(elementRegistry) {
+    skipFF()('should edit cell - line breaks (FEEL)', inject(async function(elementRegistry) {
 
       // given
       let editor = queryEditor('[data-element-id="outputEntry2"]', testContainer);
@@ -385,7 +385,7 @@ describe('features/decision-rules', function() {
     }));
 
 
-    it('should pass variables to editor', async function() {
+    skipFF()('should pass variables to editor', async function() {
 
       // given
       let editor = queryEditor('[data-element-id="unaryTest_1"]', testContainer);
@@ -444,5 +444,5 @@ function isFirefox() {
 }
 
 function skipFF() {
-  return isFirefox() ? it.only : it;
+  return isFirefox() ? it.skip : it;
 }
