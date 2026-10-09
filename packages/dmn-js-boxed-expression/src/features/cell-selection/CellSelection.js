@@ -150,6 +150,10 @@ export default function CellSelection(
 
   });
 
+  eventBus.on('table.clear', function() {
+    lastSelection = null;
+  });
+
   // API //////////////////////
 
   /**
