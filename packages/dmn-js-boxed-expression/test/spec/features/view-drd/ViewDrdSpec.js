@@ -7,6 +7,7 @@ import TestContainer from 'mocha-test-container-support';
 import { query as domQuery } from 'min-dom';
 
 import simpleXML from '../../literal-expression.dmn';
+import decisionTableXML from '../../simple.dmn';
 
 
 describe('view drd', function() {
@@ -44,6 +45,14 @@ describe('view drd', function() {
 
   it('should show view drd button', async function() {
     await createViewer(MockViewer, simpleXML);
+
+    // then
+    expect(domQuery('.view-drd-button', testContainer)).to.exist;
+  });
+
+
+  it('should show view drd button for decision table', async function() {
+    await createViewer(MockViewer, decisionTableXML);
 
     // then
     expect(domQuery('.view-drd-button', testContainer)).to.exist;
