@@ -243,6 +243,11 @@
 }
 
 /* decision table */
+.dmn-boxed-expression-container .dmn-boxed-expression-body:has(> .dmn-decision-table-container) {
+  flex: 1 1 auto;
+  min-height: 150px;
+}
+
 .dmn-boxed-expression-container .dmn-decision-table-container {
   position: relative;
   width: 100%;
