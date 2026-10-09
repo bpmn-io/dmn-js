@@ -37,7 +37,6 @@
     "packages/dmn-js-literal-expression",
     "packages/dmn-js-drd",
     "packages/dmn-js-boxed-expression",
-    "packages/dmn-js-decision-table",
     "packages/dmn-js"
   ],
   "repository": {

@@ -1,7 +1,6 @@
 import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
 import DrdModeler from 'dmn-js-drd/lib/Modeler';
-import DecisionTableEditor from 'dmn-js-decision-table/lib/Editor';
 import LiteralExpressionEditor from 'dmn-js-literal-expression/lib/Editor';
 import { Editor as BoxedExpressionEditor } from 'dmn-js-boxed-expression';
 
@@ -25,16 +24,6 @@ export default class Modeler extends EditingManager {
         opens: 'dmn:Definitions'
       },
       {
-        id: 'decisionTable',
-        constructor: DecisionTableEditor,
-        opens(element) {
-          return (
-            is(element, 'dmn:Decision') &&
-            is(element.decisionLogic, 'dmn:DecisionTable')
-          );
-        }
-      },
-      {
         id: 'literalExpression',
         constructor: LiteralExpressionEditor,
         opens(element) {
@@ -49,8 +38,14 @@ export default class Modeler extends EditingManager {
         constructor: BoxedExpressionEditor,
         opens(element) {
           return (
-            is(element, 'dmn:BusinessKnowledgeModel') &&
-            getBoxedExpression(element)
+            (
+              is(element, 'dmn:Decision') &&
+              is(element.decisionLogic, 'dmn:DecisionTable')
+            ) ||
+            (
+              is(element, 'dmn:BusinessKnowledgeModel') &&
+              getBoxedExpression(element)
+            )
           );
         }
       }

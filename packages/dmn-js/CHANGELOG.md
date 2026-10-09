@@ -6,6 +6,9 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: render decision tables as boxed expressions, including as the body of a business knowledge model
+* `CHORE`: merge `dmn-js-decision-table` into `dmn-js-boxed-expression`
+* `FIX`: clear undo history of the boxed expression view when opening another element
 * `FEAT`: allow registering data types providers via `DataTypes#registerProvider` ([#1035](https://github.com/bpmn-io/dmn-js/pull/1035))
 * `FEAT`: support letter shortcuts on non-Latin keyboard layouts ([bpmn-io/diagram-js#1112](https://github.com/bpmn-io/diagram-js/pull/1112), [bpmn-io/diagram-js#928](https://github.com/bpmn-io/diagram-js/issues/928))
 * `FEAT`: add tooltip with title and shortcut on palette entries ([bpmn-io/diagram-js#1082](https://github.com/bpmn-io/diagram-js/pull/1082))
@@ -18,6 +21,15 @@ ___Note:__ Yet to be released changes appear here._
 * `FIX`: cancel canvas move on diagram destroy ([bpmn-io/diagram-js#1110](https://github.com/bpmn-io/diagram-js/pull/1110), [bpmn-io/diagram-js#1109](https://github.com/bpmn-io/diagram-js/issues/1109))
 * `FIX`: do not keep selection visible after diagram destroy ([bpmn-io/diagram-js#1098](https://github.com/bpmn-io/diagram-js/pull/1098))
 * `DEPS`: update to `diagram-js@15.28.0`
+
+### Breaking Changes
+
+* The `decisionTable` view is replaced by the `boxedExpression` view. Decisions with a decision table and business knowledge models are opened in the same view type; use `view.element` to tell them apart.
+* The `decisionTable` configuration is replaced by the `boxedExpression` configuration. A decision table only honors the `boxedExpression` and `common` options; `decisionTable` options are ignored.
+* The `dmn-js-decision-table` package is removed. Import from `dmn-js-boxed-expression` instead; modules that inject `decisionTable` must inject `viewer`. `modeling#editDecisionTableName` and `modeling#editDecisionTableId` are removed, update the decision via `modeling#updateProperties` instead.
+* `dmn-js-decision-table.css` and `dmn-js-decision-table-controls.css` are removed. The styles are part of `dmn-js-boxed-expression.css` and `dmn-js-boxed-expression-controls.css`.
+* The decision table is rendered inside of `.dmn-boxed-expression-container`, and the decision name is edited in the shared header. Review custom styles and selectors that target the decision table.
+* Undo and redo use a single history across the decision table and the remaining boxed expression view.
 
 ## 17.12.3
 

@@ -1,6 +1,7 @@
 import CommandInterceptor from 'diagram-js/lib/command/CommandInterceptor';
 
 import {
+  getBusinessObject,
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
@@ -45,7 +46,7 @@ export default class NameChangeBehavior extends CommandInterceptor {
   }
 
   isVariableContainer(element) {
-    const variable = element.get('variable');
+    const variable = getBusinessObject(element).get('variable');
 
     return variable && is(variable, 'dmn:InformationItem');
   }

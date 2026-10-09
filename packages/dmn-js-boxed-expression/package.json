@@ -1,6 +1,6 @@
 {
   "name": "dmn-js-boxed-expression",
-  "description": "A boxed expression view for dmn-js",
+  "description": "A boxed expression view for dmn-js, including decision tables",
   "version": "17.12.3",
   "files": [
     "assets",
@@ -26,7 +26,8 @@
     "dmn",
     "dmn-js",
     "dmn-js-view",
-    "boxed expression"
+    "boxed expression",
+    "decision table"
   ],
   "devDependencies": {
     "axe-core": "^4.12.1",
@@ -36,11 +37,13 @@
   },
   "dependencies": {
     "@bpmn-io/dmn-variable-resolver": "^0.7.0",
+    "css.escape": "^1.5.1",
     "diagram-js": "^15.28.0",
     "dmn-js-shared": "^17.12.3",
     "inferno": "~5.6.3",
     "min-dash": "^5.0.0",
     "min-dom": "^5.3.0",
+    "selection-ranges": "^4.1.1",
     "table-js": "^9.4.0"
   }
 }

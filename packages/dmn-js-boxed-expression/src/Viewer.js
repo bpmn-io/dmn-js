@@ -11,6 +11,8 @@ import {
 
 import TranslateModule from 'diagram-js/lib/i18n/translate';
 
+import { importTable } from './import/Importer';
+
 import RenderModule from './render';
 import PoweredByModule from './features/powered-by';
 import LiteralExpressionModule from './features/literal-expression';
@@ -19,6 +21,12 @@ import ViewDrdModule from './features/view-drd';
 import ElementPropertiesModule from './features/element-properties';
 import ElementLogicModule from './features/element-logic';
 import ElementVariableModule from './features/element-variable';
+import AnnotationsModule from './features/annotations';
+import DecisionRuleIndicesModule from './features/decision-rule-indices';
+import DecisionRulesModule from './features/decision-rules';
+import DecisionTableModule from './features/decision-table';
+import DecisionTableHeadModule from './features/decision-table-head';
+import HitPolicyModule from './features/hit-policy';
 
 /**
  * @typedef {import('dmn-js-shared/lib/base/View).OpenResult} OpenResult
@@ -41,6 +49,9 @@ export class Viewer extends BaseViewer {
     }));
 
     this._container = container;
+
+    // modules built on top of table-js rely on the table lifecycle
+    this.get('eventBus').fire('table.init');
   }
 
   /**
@@ -63,15 +74,15 @@ export class Viewer extends BaseViewer {
 
         if (rootElement) {
 
-          // clear existing literal expression
+          // clear existing state
           this.clear();
-
-          // unmount first
-          eventBus.fire('renderer.unmount');
         }
 
-        // update literal expression
+        // update root element
         this._setRootElement(element);
+
+        // import decision table, if any
+        importTable(this, element);
 
         // let others know about import
         eventBus.fire('import', element);
@@ -212,10 +223,35 @@ export class Viewer extends BaseViewer {
     domRemove(container);
   }
 
+  /**
+   * Clear the viewer. Unmounts the rendered view and resets all state.
+   */
+  clear() {
+    const eventBus = this.get('eventBus');
+
+    // unmount first, mounted components rely on the table
+    eventBus.fire('renderer.unmount');
+
+    eventBus.fire('table.clear');
+    eventBus.fire('diagram.clear');
+
+    super.clear();
+  }
+
   destroy() {
+    const eventBus = this.get('eventBus');
+
+    // unmount first, mounted components rely on the table
+    eventBus.fire('renderer.unmount');
+
     super.destroy();
 
     this.detach();
+
+    eventBus.fire('table.destroy');
+
+    // removes all event bus listeners and must go last
+    eventBus.fire('diagram.destroy');
   }
 
   getModules() {
@@ -228,7 +264,13 @@ export class Viewer extends BaseViewer {
       ElementLogicModule,
       FunctionDefinitionEditorModule,
       LiteralExpressionModule,
-      ElementVariableModule
+      ElementVariableModule,
+      DecisionTableModule,
+      AnnotationsModule,
+      DecisionTableHeadModule,
+      DecisionRuleIndicesModule,
+      DecisionRulesModule,
+      HitPolicyModule
     ];
   }
 

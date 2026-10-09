@@ -65,7 +65,6 @@
   },
   "dependencies": {
     "dmn-js-boxed-expression": "^17.12.3",
-    "dmn-js-decision-table": "^17.12.3",
     "dmn-js-drd": "^17.12.3",
     "dmn-js-literal-expression": "^17.12.3",
     "dmn-js-shared": "^17.12.3"

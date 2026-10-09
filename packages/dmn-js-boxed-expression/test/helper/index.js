@@ -241,6 +241,21 @@ export function getBoxedExpressionViewer() {
   return DMN_JS.getActiveViewer();
 }
 
+/**
+ * Execute function and resolve in next frame.
+ *
+ * @param {Function} fn
+ */
+export function act(fn) {
+  fn();
+
+  return new Promise(resolve => {
+    requestAnimationFrame(() => {
+      resolve();
+    });
+  });
+}
+
 export function insertCSS(name, css) {
   if (document.querySelector('[data-css-file="' + name + '"]')) {
     return;
