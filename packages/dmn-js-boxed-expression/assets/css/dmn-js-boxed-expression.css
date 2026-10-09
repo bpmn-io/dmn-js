@@ -243,9 +243,19 @@
 }
 
 /* decision table */
-.dmn-boxed-expression-container .dmn-boxed-expression-body:has(> .dmn-decision-table-container) {
+.dmn-boxed-expression-container .dmn-boxed-expression-body:has(.dmn-decision-table-container) {
   flex: 1 1 auto;
   min-height: 150px;
+}
+
+.dmn-boxed-expression-container .function-definition:has(.dmn-decision-table-container) {
+  height: 100%;
+  grid-template-columns: 50px minmax(0, 1fr);
+  grid-template-rows: 50px minmax(0, 1fr);
+}
+
+.dmn-boxed-expression-container .function-definition:has(.dmn-decision-table-container) .function-definition-body {
+  min-height: 0;
 }
 
 .dmn-boxed-expression-container .dmn-decision-table-container {
@@ -721,3 +731,14 @@
 }
 
 /* end cell description */
+
+/* the sections of the boxed expression draw the outer borders */
+.dmn-boxed-expression-container .dmn-boxed-expression-body .decision-table-properties {
+  border-width: 0 0 1px;
+  border-radius: 0;
+}
+
+.dmn-boxed-expression-container .dmn-boxed-expression-body .tjs-table-container {
+  border: none;
+  border-radius: 0;
+}

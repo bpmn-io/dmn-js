@@ -350,6 +350,11 @@
 
 /* context menu */
 
+.dmn-boxed-expression-container .context-menu-flex[tabindex],
+.dmn-boxed-expression-container .context-menu-group-entry[tabindex] {
+  outline: none;
+}
+
 .dmn-boxed-expression-container .context-menu-group-entry.focused {
   background-color: var(--bio-surface-medium);
 }
