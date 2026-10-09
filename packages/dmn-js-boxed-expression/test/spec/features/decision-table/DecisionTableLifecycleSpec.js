@@ -4,7 +4,10 @@ import * as sinon from 'sinon';
 
 import TestContainer from 'mocha-test-container-support';
 
-import { queryAll as domQueryAll } from 'min-dom';
+import {
+  query as domQuery,
+  queryAll as domQueryAll
+} from 'min-dom';
 
 import {
   bootstrapModeler,
@@ -12,6 +15,8 @@ import {
   getDmnJS,
   inject
 } from 'test/TestHelper';
+
+import { triggerClick } from 'dmn-js-shared/test/util/EventUtil';
 
 import twoDecisionsXML from '../../two-decisions.dmn';
 
@@ -70,7 +75,9 @@ describe('features/decision-table - lifecycle', function() {
     it('should clear cell selection', inject(function(cellSelection) {
 
       // given
-      cellSelection.selectCell('inputEntry1');
+      triggerClick(domQuery('[data-element-id="inputEntry1"]', testContainer));
+
+      expect(cellSelection.getCellSelection()).to.exist;
 
       // when
       getBoxedExpressionViewer().clear();
@@ -148,6 +155,25 @@ describe('features/decision-table - lifecycle', function() {
 
 
   describe('#destroy', function() {
+
+    it('should unmount before tearing down table', function() {
+
+      // given
+      const viewer = getBoxedExpressionViewer();
+
+      const events = [];
+
+      viewer.on([ 'renderer.unmount', 'table.destroy', 'diagram.destroy' ], 10000, ({ type }) => {
+        events.push(type);
+      });
+
+      // when
+      viewer.destroy();
+
+      // then
+      expect(events).to.eql([ 'renderer.unmount', 'table.destroy', 'diagram.destroy' ]);
+    });
+
 
     it('should unbind keyboard', inject(function(keyboard) {
 

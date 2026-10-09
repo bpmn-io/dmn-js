@@ -13,6 +13,7 @@ import {
 } from 'test/TestHelper';
 
 import {
+  triggerClick,
   triggerKeyEvent,
   triggerMouseEvent
 } from 'dmn-js-shared/test/util/EventUtil';
@@ -61,6 +62,8 @@ describe('features/decision-table - interaction', function() {
   it('should NOT add rule on <ENTER> in decision name', inject(function(sheet) {
 
     // given
+    triggerClick(domQuery('[data-element-id="inputEntry7"]', testContainer));
+
     const name = domQuery('.dmn-boxed-expression-header [contenteditable]', testContainer);
 
     const rowCount = sheet.getRoot().rows.length;
