@@ -7,6 +7,7 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: render decision tables as boxed expressions, including as the body of a business knowledge model
+* `FEAT`: add drill-down for business knowledge models with a decision table body
 * `CHORE`: merge `dmn-js-decision-table` into `dmn-js-boxed-expression`
 * `FIX`: clear undo history of the boxed expression view when opening another element
 * `FEAT`: allow registering data types providers via `DataTypes#registerProvider` ([#1035](https://github.com/bpmn-io/dmn-js/pull/1035))
