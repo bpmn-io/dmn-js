@@ -1,4 +1,9 @@
 .dmn-boxed-expression-container {
+  --allowed-values-placeholder-color: var(--bio-text-subtle);
+  --cell-description-editor-border-color: var(--bio-border);
+  --create-inputs-border-color: var(--bio-border);
+  --create-inputs-color: var(--bio-text-subtle);
+  --create-inputs-hover-color: var(--bio-text);
   --context-menu-background-color: var(--bio-surface);
   --context-menu-border-color: var(--bio-border);
   --context-menu-color: var(--bio-text);
@@ -6,6 +11,10 @@
   --context-menu-group-entry-border-color: var(--bio-border);
   --context-menu-group-entry-disabled-color: var(--bio-text-subtlest);
   --context-menu-group-entry-hover-background-color: var(--bio-surface-medium);
+  --drag-and-drop-handle-color: var(--bio-text-subtlest);
+  --drag-and-drop-handle-hover-color: var(--bio-text);
+  --form-control-label-color: var(--bio-text);
+  --hint-color: var(--bio-text);
   --edit-button-color: var(--bio-text);
   --edit-button-background-color: var(--bio-surface-subtle);
   --edit-button-border-color: var(--bio-border);
@@ -14,7 +23,7 @@
 }
 
 /* common */
-.dmn-boxed-expression-container button {
+:where(.dmn-boxed-expression-container) button {
   background: var(--bio-surface);
   border: solid 1px var(--bio-border);
   border-radius: var(--button-border-radius);
@@ -22,11 +31,13 @@
   font-size: var(--font-size);
 }
 
-.dmn-boxed-expression-container button:hover {
+:where(.dmn-boxed-expression-container) button:hover {
   background-color: var(--bio-surface-subtle);
 }
 
-.dmn-boxed-expression-container .dms-input {
+.dmn-boxed-expression-container .element-variable .dms-input,
+.dmn-boxed-expression-container .formal-parameters .dms-input,
+.dmn-boxed-expression-container .kind-editor .dms-input {
   width: 160px;
 }
 
@@ -39,6 +50,7 @@
   border-radius: var(--surface-border-radius);
   font-size: 14px;
   color: var(--context-menu-color);
+  z-index: 6;
   box-shadow: 1px 1px 1px 1px var(--context-menu-box-shadow-color);
 }
 
@@ -136,4 +148,208 @@
 .dmn-boxed-expression-container .context-menu .context-menu-container th,
 .dmn-boxed-expression-container .context-menu .context-menu-container td {
   padding: 1px;
+}
+
+/* decision table */
+
+/* simple string edit */
+.dmn-boxed-expression-container .simple-string-edit,
+.dmn-boxed-expression-container .simple-date-edit {
+  width: 250px;
+}
+
+.dmn-boxed-expression-container .dms-form-control {
+  padding: 9px 0;
+}
+
+.dmn-boxed-expression-container .allowed-values-edit .dms-form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.dmn-boxed-expression-container .allowed-values-edit .values {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dmn-boxed-expression-container .allowed-values-edit .placeholder {
+  color: var(--allowed-values-placeholder-color);
+}
+
+/** create inputs **/
+.dmn-decision-table-container thead .input-cell.create-inputs,
+.dmn-decision-table-container tbody .input-cell.create-inputs {
+  white-space: normal;
+  border-color: var(--create-inputs-border-color);
+  color: var(--create-inputs-color);
+  min-width: 50px;
+  width: 50px;
+}
+
+.dmn-decision-table-container thead .input-cell.create-inputs {
+  text-align: center;
+}
+
+.dmn-decision-table-container .create-inputs .add-input {
+  right: 50%;
+}
+
+.dmn-decision-table-container .create-inputs:hover {
+  border-color: var(--create-inputs-hover-color);
+  color: var(--create-inputs-hover-color);
+}
+
+.dmn-decision-table-container th.create-inputs {
+  vertical-align: top;
+}
+
+/** end create inputs **/
+
+/* input/output editor */
+
+.dmn-boxed-expression-container .context-menu .context-menu-container.input-edit,
+.dmn-boxed-expression-container .context-menu .context-menu-container.output-edit {
+  margin: 34px 10px 10px;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-container.type-ref-edit,
+.dmn-boxed-expression-container .context-menu .context-menu-container.allowed-values-edit {
+  margin: 10px;
+}
+
+.dmn-boxed-expression-container .dms-output-label,
+.dmn-boxed-expression-container .dms-input-label {
+  padding-right: 30px;
+  padding-left: 0;
+  border: none;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.dmn-boxed-expression-container .dms-form-control:first-child {
+  padding-top: 0;
+}
+
+.dmn-boxed-expression-container .dms-form-control .dms-label {
+  display: block;
+  margin: unset;
+  margin-bottom: 6px;
+  color: var(--form-control-label-color);
+  font-weight: normal;
+}
+
+.dmn-boxed-expression-container .dms-form-control .dms-input {
+  padding-right: 24px;
+  border-radius: var(--input-border-radius);
+}
+
+.dmn-boxed-expression-container .dms-form-control .dms-list-component {
+  max-width: 179px;
+}
+
+/* expression language */
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-entry-set-expression-language {
+  flex-direction: column;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-entry-set-expression-language:hover {
+  background-color: unset;
+}
+
+.dmn-boxed-expression-container .context-menu .context-menu-group .context-menu-entry-set-expression-language .expression-language {
+  margin-top: 8px;
+}
+
+/* drag and drop */
+.dmn-decision-table-container .dmn-icon-drag {
+  color: transparent;
+}
+
+.dmn-decision-table-container th .dmn-icon-drag {
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  transform: translateY(-50%);
+}
+
+.dmn-decision-table-container .dmn-icon-drag:hover {
+  color: var(--drag-and-drop-handle-hover-color);
+}
+
+.dmn-decision-table-container th:hover .dmn-icon-drag,
+.dmn-decision-table-container td:hover .dmn-icon-drag {
+  color: var(--drag-and-drop-handle-color);
+}
+
+.dmn-decision-table-container .input-cell.input-editor:hover .clause,
+.dmn-decision-table-container .output-cell.output-editor:hover .clause {
+  visibility: hidden;
+}
+
+.dmn-decision-table-container .dmn-icon-drag.horizontal,
+.dmn-decision-table-container .dmn-icon-drag.vertical {
+  cursor: grab;
+}
+
+/* description editor */
+
+.dmn-boxed-expression-container .context-menu .description-editor {
+  margin: 0;
+  padding: 5px 0;
+  width: 192px;
+  border-left: solid 3px var(--cell-description-editor-border-color);
+}
+
+.dmn-boxed-expression-container .description-editor .dms-input {
+  border: none;
+  min-height: 0;
+}
+
+/* end description editor */
+
+.dmn-decision-table-container .resize-column-handle {
+  width: 25px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -5px;
+  z-index: 1;
+  cursor: col-resize;
+}
+
+.dmn-decision-table-container .resize-column-handle:last-child {
+  width: 20px;
+  right: 0;
+}
+
+/* cell editor */
+.dmn-decision-table-container .cell-editor:focus-within .dmn-expression-language {
+  display: none;
+}
+
+.dmn-decision-table-container .cell-editor,
+.dmn-decision-table-container .cell-editor .cm-scroller {
+  line-height: 1.4;
+  font-family: monospace;
+}
+
+.dmn-decision-table-container .cell-editor .feel-editor.focussed > :nth-child(2) {
+  display: none;
+}
+
+/* edit-button */
+
+.dmn-decision-table-container :not(:has(:focus-visible)) .edit-button {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* context menu */
+
+.dmn-boxed-expression-container .context-menu-group-entry.focused {
+  background-color: var(--bio-surface-medium);
 }
