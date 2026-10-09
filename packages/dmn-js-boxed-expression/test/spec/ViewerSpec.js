@@ -9,7 +9,7 @@ import axe from 'axe-core';
 import {
   bootstrapViewer,
   inject,
-  getLiteralExpression
+  getBoxedExpressionViewer
 } from 'test/TestHelper';
 
 import Viewer from '../helper/Viewer';
@@ -85,12 +85,12 @@ describe('Viewer', function() {
 
   describe('#attachTo', function() {
 
-    let literalExpressionViewer;
+    let boxedExpressionViewer;
 
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
-      literalExpressionViewer = getLiteralExpression();
+      boxedExpressionViewer = getBoxedExpressionViewer();
     });
 
 
@@ -100,10 +100,10 @@ describe('Viewer', function() {
       const container = domify('<div></div>');
 
       // when
-      literalExpressionViewer.attachTo(container);
+      boxedExpressionViewer.attachTo(container);
 
       // then
-      expect(literalExpressionViewer._container.parentNode).to.equal(container);
+      expect(boxedExpressionViewer._container.parentNode).to.equal(container);
     });
 
 
@@ -114,10 +114,10 @@ describe('Viewer', function() {
 
       const spy = sinon.spy();
 
-      literalExpressionViewer.on('attach', spy);
+      boxedExpressionViewer.on('attach', spy);
 
       // when
-      literalExpressionViewer.attachTo(container);
+      boxedExpressionViewer.attachTo(container);
 
       // then
       expect(spy).to.have.been.called;
@@ -128,22 +128,22 @@ describe('Viewer', function() {
 
   describe('#detach', function() {
 
-    let literalExpressionViewer;
+    let boxedExpressionViewer;
 
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
-      literalExpressionViewer = getLiteralExpression();
+      boxedExpressionViewer = getBoxedExpressionViewer();
     });
 
 
     it('should detach', function() {
 
       // when
-      literalExpressionViewer.detach();
+      boxedExpressionViewer.detach();
 
       // then
-      expect(literalExpressionViewer._container.parentNode).to.not.exist;
+      expect(boxedExpressionViewer._container.parentNode).to.not.exist;
     });
 
 
@@ -152,10 +152,10 @@ describe('Viewer', function() {
       // given
       const spy = sinon.spy();
 
-      literalExpressionViewer.on('detach', spy);
+      boxedExpressionViewer.on('detach', spy);
 
       // when
-      literalExpressionViewer.detach();
+      boxedExpressionViewer.detach();
 
       // then
       expect(spy).to.have.been.called;
@@ -166,21 +166,21 @@ describe('Viewer', function() {
 
   describe('#destroy', function() {
 
-    let literalExpressionViewer;
+    let boxedExpressionViewer;
 
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
-      literalExpressionViewer = getLiteralExpression();
+      boxedExpressionViewer = getBoxedExpressionViewer();
     });
 
     it('should destroy', function() {
 
       // when
-      literalExpressionViewer.destroy();
+      boxedExpressionViewer.destroy();
 
       // then
-      expect(literalExpressionViewer._container.parentNode).to.not.exist;
+      expect(boxedExpressionViewer._container.parentNode).to.not.exist;
     });
 
   });
@@ -188,23 +188,23 @@ describe('Viewer', function() {
 
   describe('#on', function() {
 
-    let literalExpressionViewer;
+    let boxedExpressionViewer;
 
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
-      literalExpressionViewer = getLiteralExpression();
+      boxedExpressionViewer = getBoxedExpressionViewer();
     });
 
     it('should add listener', function() {
 
       // when
-      literalExpressionViewer.on('foo', () => {
+      boxedExpressionViewer.on('foo', () => {
         return 'bar';
       });
 
       // then
-      const result = literalExpressionViewer.get('eventBus').fire('foo');
+      const result = boxedExpressionViewer.get('eventBus').fire('foo');
 
       expect(result).to.eql('bar');
     });
@@ -214,12 +214,12 @@ describe('Viewer', function() {
 
   describe('#off', function() {
 
-    let literalExpressionViewer;
+    let boxedExpressionViewer;
 
     beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
 
     beforeEach(function() {
-      literalExpressionViewer = getLiteralExpression();
+      boxedExpressionViewer = getBoxedExpressionViewer();
     });
 
     it('should remove listener', function() {
@@ -229,13 +229,13 @@ describe('Viewer', function() {
         return 'bar';
       };
 
-      literalExpressionViewer.on('foo', listener);
+      boxedExpressionViewer.on('foo', listener);
 
       // when
-      literalExpressionViewer.off('foo', listener);
+      boxedExpressionViewer.off('foo', listener);
 
       // then
-      const result = literalExpressionViewer.get('eventBus').fire('foo');
+      const result = boxedExpressionViewer.get('eventBus').fire('foo');
 
       expect(result).to.not.exist;
     });

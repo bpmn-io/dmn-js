@@ -100,7 +100,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
 
     _options = {
       container: testContainer,
-      literalExpression: assign({
+      boxedExpression: assign({
         modules: _modules || undefined
       }, OPTIONS || {}, _options || {})
     };
@@ -150,10 +150,10 @@ export function inject(fn) {
       );
     }
 
-    var view = getLiteralExpression();
+    var view = getBoxedExpressionViewer();
 
     if (!view) {
-      throw new Error('DecisionTable instance not found');
+      throw new Error('Boxed expression viewer not found');
     }
 
     return view.invoke(fn);
@@ -237,7 +237,7 @@ export function getDmnJS() {
   return DMN_JS;
 }
 
-export function getLiteralExpression() {
+export function getBoxedExpressionViewer() {
   return DMN_JS.getActiveViewer();
 }
 

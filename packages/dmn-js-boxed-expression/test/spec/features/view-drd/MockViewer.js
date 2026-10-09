@@ -9,7 +9,7 @@ export default class MockViewer extends Manager {
   _getViewProviders() {
 
     return [ {
-      id: 'literalExpression',
+      id: 'boxedExpression',
       constructor: Viewer,
       opens(element) {
         return (

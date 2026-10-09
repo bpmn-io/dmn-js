@@ -24,7 +24,7 @@ describe('view drd', function() {
 
     return viewer.importXML(xml, { open: false }).then((importXMLResult) => {
 
-      const view = viewer._views.filter(v => v.type === 'literalExpression')[0];
+      const view = viewer._views.filter(v => v.type === 'boxedExpression')[0];
 
       expect(view).to.exist;
 
