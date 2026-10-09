@@ -61,6 +61,7 @@ class DecisionTableComponent extends Component {
     const { rows, cols } = this._sheet.getRoot();
 
     const HitPolicy = this._components.getComponent('hit-policy');
+    const afterComponents = this._components.getComponents('table.after');
     const Head = this._components.getComponent('table.head');
     const Body = this._components.getComponent('table.body');
     const Foot = this._components.getComponent('table.foot');
@@ -84,6 +85,7 @@ class DecisionTableComponent extends Component {
               { Foot && <Foot rows={ rows } cols={ cols } /> }
             </table>
           </div>
+          { afterComponents.map((Component, index) => <Component key={ index } />) }
         </div>
       </div>
     );
