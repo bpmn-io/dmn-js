@@ -27,7 +27,8 @@ ___Note:__ Yet to be released changes appear here._
 
 * The `decisionTable` view is replaced by the `boxedExpression` view. Decisions with a decision table and business knowledge models are opened in the same view type; use `view.element` to tell them apart.
 * The `decisionTable` configuration is replaced by the `boxedExpression` configuration. A decision table only honors the `boxedExpression` and `common` options; `decisionTable` options are ignored.
-* The `dmn-js-decision-table` package is removed. Import from `dmn-js-boxed-expression` instead; modules that inject `decisionTable` must inject `viewer`. `modeling#editDecisionTableName` and `modeling#editDecisionTableId` are removed, update the decision via `modeling#updateProperties` instead.
+* The `dmn-js-decision-table` package is removed; decision tables are part of `dmn-js-boxed-expression`, whose `Viewer` and `Editor` are named exports. Modules that inject `decisionTable` must inject `viewer`. `modeling#editDecisionTableName` and `modeling#editDecisionTableId` are removed, update the decision via `modeling#updateProperties` instead.
+* The view no longer emits `import.render.start`, `import.render.complete`, the post-import `elements.changed`, `dmnElement.added` and `diagram.init`. Listen to the `import` event of the view, or to `import.render.start` and `import.render.complete` of the manager, instead.
 * `dmn-js-decision-table.css` and `dmn-js-decision-table-controls.css` are removed. The styles are part of `dmn-js-boxed-expression.css` and `dmn-js-boxed-expression-controls.css`.
 * The decision table is rendered inside of `.dmn-boxed-expression-container`, and the decision name is edited in the shared header. Review custom styles and selectors that target the decision table.
 * Undo and redo use a single history across the decision table and the remaining boxed expression view.
