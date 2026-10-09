@@ -13,7 +13,9 @@
     "dev": "npm test -- --no-single-run --auto-watch",
     "prepublishOnly": "npm run build",
     "start": "cross-env SINGLE_START=editor npm run dev",
-    "start:viewer": "cross-env SINGLE_START=viewer npm run dev"
+    "start:viewer": "cross-env SINGLE_START=viewer npm run dev",
+    "start:decision-table": "cross-env SINGLE_START=decision-table-editor npm run dev",
+    "start:decision-table:viewer": "cross-env SINGLE_START=decision-table-viewer npm run dev"
   },
   "main": "./lib/index.js",
   "repository": {
