@@ -296,8 +296,11 @@ export default class InputSelect extends Component {
     return (
       <div className="options">
         {
-          options.map(option => {
-            return (
+          options.flatMap((option, idx) => {
+            const showGroup = option.group
+              && option.group !== (options[idx - 1] || {}).group;
+
+            const optionNode = (
               <div
                 className={
                   [ 'option', activeOption === option ? 'active' : '' ].join(' ')
@@ -307,6 +310,13 @@ export default class InputSelect extends Component {
                 { option.label }
               </div>
             );
+
+            return showGroup
+              ? [
+                <div className="group-label">{ option.group }</div>,
+                optionNode
+              ]
+              : [ optionNode ];
           })
         }
       </div>

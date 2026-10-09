@@ -141,6 +141,43 @@ describe('features - type-ref-dropdown', function() {
       ));
 
 
+      it('should NOT group options by default', inject(
+        function(elementRegistry, selection) {
+
+          // when
+          selection.select(elementRegistry.get('withVariable_id'));
+
+          // then
+          expect(domQueryAll('optgroup', querySelect('withVariable_id'))).to.be.empty;
+        }
+      ));
+
+
+      it('should group options if there are multiple groups', inject(
+        function(elementRegistry, selection, dataTypes) {
+
+          // given
+          dataTypes.registerProvider(500, {
+            getDataTypes(types) {
+              return [
+                ...types,
+                { name: 'myType', group: { id: 'custom', name: 'Custom' } }
+              ];
+            }
+          });
+
+          // when
+          selection.select(elementRegistry.get('withVariable_id'));
+
+          // then
+          const groups = domQueryAll('optgroup', querySelect('withVariable_id'));
+
+          expect([ ...groups ].map(g => g.label)).to.eql([ 'Built-ins', 'Custom' ]);
+          expect(domQueryAll('option', groups[1])).to.have.length(1);
+        }
+      ));
+
+
       it('should pre-select the current typeRef', inject(
         function(elementRegistry, selection) {
 

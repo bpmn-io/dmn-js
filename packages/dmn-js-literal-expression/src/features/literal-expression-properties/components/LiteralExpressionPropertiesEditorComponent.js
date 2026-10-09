@@ -2,6 +2,7 @@ import { Component } from 'inferno';
 
 import Input from 'dmn-js-shared/lib/components/Input';
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+import { getTypeRefOptions } from 'dmn-js-shared/lib/features/data-types/DataTypesUtil';
 
 
 export default class LiteralExpressionPropertiesComponent extends Component {
@@ -71,12 +72,7 @@ export default class LiteralExpressionPropertiesComponent extends Component {
   render() {
     const { name, typeRef } = this.state;
 
-    const typeRefOptions = this._dataTypes.getAll().map(t => {
-      return {
-        label: this._translate(t),
-        value: t
-      };
-    });
+    const typeRefOptions = getTypeRefOptions(this._dataTypes.getAll());
 
     return (
       <div className="literal-expression-properties">
