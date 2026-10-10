@@ -162,7 +162,9 @@ describe('Modeler', function() {
       const { xml } = await editor.saveXML();
 
       // then
-      expect(xml).to.match(/<encapsulatedLogic[^>]*>\s*<decisionTable/);
+      expect(xml).to.match(
+        /<encapsulatedLogic[^>]*>\s*(<formalParameter[^>]*\/>\s*)*<decisionTable/
+      );
     });
 
   });
