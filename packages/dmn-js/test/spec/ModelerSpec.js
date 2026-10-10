@@ -122,9 +122,7 @@ describe('Modeler', function() {
 
   describe('replace business knowledge model with decision table', function() {
 
-    beforeEach(async function() {
-      await editor.importXML(diagram);
-
+    function replaceWithDecisionTable() {
       const drdViewer = editor.getActiveViewer();
 
       drdViewer.get('drdReplace').replaceElement(
@@ -135,12 +133,18 @@ describe('Modeler', function() {
           expression: false
         }
       );
+    }
+
+    beforeEach(async function() {
+      await editor.importXML(diagram);
     });
 
 
     it('should display decision table', async function() {
 
       // when
+      replaceWithDecisionTable();
+
       await editor.open(findView(editor.getViews(), 'elMenu'));
 
       // then
@@ -153,6 +157,8 @@ describe('Modeler', function() {
     it('should export decision table as body of encapsulated logic', async function() {
 
       // when
+      replaceWithDecisionTable();
+
       const { xml } = await editor.saveXML();
 
       // then

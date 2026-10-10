@@ -115,6 +115,22 @@ describe('features/popup-menu - replace menu provider', function() {
       );
 
 
+      it('should NOT offer literal expression if BKM has literal expression',
+        inject(function(elementRegistry) {
+
+          // given
+          var bkm = elementRegistry.get('bkmLiteral');
+
+          // when
+          openPopup(bkm);
+
+          // then
+          expect(queryEntry('replace-with-literal-expression')).to.be.null;
+          expect(queryEntries()).to.have.length(2);
+        })
+      );
+
+
       it('should NOT offer decision table if BKM has decision table',
         inject(function(elementRegistry) {
 
@@ -140,27 +156,6 @@ describe('features/popup-menu - replace menu provider', function() {
     describe('business knowledge models', function() {
 
       beforeEach(bootstrapModeler(diagramXMLReplace, { modules: testModules }));
-
-      it('should replace empty BKM with decision table',
-        inject(function(elementRegistry) {
-
-          // given
-          var bkm = elementRegistry.get('bkm');
-
-          // when
-          openPopup(bkm);
-
-          triggerAction('replace-with-decision-table');
-
-          // then
-          bkm = elementRegistry.get('bkm');
-
-          expect(
-            is(getBoxedExpression(bkm.businessObject), 'dmn:DecisionTable')
-          ).to.be.true;
-        })
-      );
-
 
       it('should define decision table as body of encapsulated logic',
         inject(function(elementRegistry) {
