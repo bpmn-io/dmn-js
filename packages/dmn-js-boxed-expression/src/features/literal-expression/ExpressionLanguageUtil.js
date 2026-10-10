@@ -1,4 +1,6 @@
-import { getBoxedExpression, is } from 'dmn-js-shared/lib/util/ModelUtil';
+import { find } from 'min-dash';
+
+import { getBoxedExpression, is, isFeel } from 'dmn-js-shared/lib/util/ModelUtil';
 
 /**
  * Return the literal expression of the displayed decision, if any.
@@ -21,7 +23,8 @@ export function getDecisionLiteralExpression(viewer) {
 
 /**
  * Return the expression language of a literal expression, falling back
- * to the configured default.
+ * to the configured default. Like the choice of the editor, it is inherited
+ * from the closest ancestor which specifies one.
  *
  * @param {ModdleElement} literalExpression
  * @param {ExpressionLanguages} expressionLanguages
@@ -29,11 +32,31 @@ export function getDecisionLiteralExpression(viewer) {
  * @return {string}
  */
 export function getExpressionLanguage(literalExpression, expressionLanguages) {
-  const { expressionLanguage } = literalExpression;
+  const expressionLanguage = getDeclaredExpressionLanguage(literalExpression);
 
-  return expressionLanguage
-    ? expressionLanguage.toLowerCase()
-    : expressionLanguages.getDefault().value;
+  if (!expressionLanguage) {
+    return expressionLanguages.getDefault().value;
+  }
+
+  const options = expressionLanguages.getAll();
+
+  // languages are compared case-insensitively; FEEL may also be
+  // referred to by its namespace
+  const option = find(options, ({ value }) => (
+    value.toLowerCase() === expressionLanguage.toLowerCase()
+  )) || (isFeel(literalExpression) && find(options, ({ value }) => /feel/i.test(value)));
+
+  return option ? option.value : expressionLanguage.toLowerCase();
+}
+
+function getDeclaredExpressionLanguage(element) {
+  for (let current = element; current; current = current.$parent) {
+    const expressionLanguage = current.get('expressionLanguage');
+
+    if (expressionLanguage) {
+      return expressionLanguage;
+    }
+  }
 }
 
 /**

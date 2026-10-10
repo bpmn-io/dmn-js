@@ -17,6 +17,9 @@ import {
 
 import literalExpressionXML from '../../literal-expression.dmn';
 import nonDefaultExpressionLanguageXML from '../../expression-language.dmn';
+import definitionsExpressionLanguageXML from '../../definitions-expression-language.dmn';
+import definitionsFeelExpressionLanguageXML from
+  '../../definitions-feel-expression-language.dmn';
 import bkmXML from '../../bkm-literal-expression.dmn';
 import decisionTableXML from '../../simple.dmn';
 
@@ -182,6 +185,86 @@ describe('features/literal-expression - expression language', function() {
         expect(viewer.getRootElement().decisionLogic.expressionLanguage)
           .to.not.exist;
       }));
+
+    });
+
+
+    describe('inherited expression language', function() {
+
+      describe('non-default', function() {
+
+        beforeEach(bootstrapModeler(definitionsExpressionLanguageXML, {
+          expressionLanguages: {
+            options: CUSTOM_EXPRESSION_LANGUAGES
+          },
+          debounceInput: false
+        }));
+
+
+        it('should display', function() {
+
+          // when
+          const input = domQuery('.dms-input', queryExpressionLanguageSelect());
+
+          // then
+          expect(input.value).to.equal('juel');
+        });
+
+
+        it('should use matching editor', function() {
+
+          // then
+          expect(domQuery('.dmn-boxed-expression-body .textarea.editor [role="textbox"]',
+            testContainer)).to.exist;
+          expect(domQuery('.dmn-boxed-expression-body .cm-editor', testContainer))
+            .not.to.exist;
+        });
+
+      });
+
+
+      describe('FEEL namespace', function() {
+
+        beforeEach(bootstrapModeler(definitionsFeelExpressionLanguageXML, {
+          expressionLanguages: {
+            options: CUSTOM_EXPRESSION_LANGUAGES
+          },
+          debounceInput: false
+        }));
+
+
+        it('should display as FEEL', function() {
+
+          // when
+          const input = domQuery('.dms-input', queryExpressionLanguageSelect());
+
+          // then
+          expect(input.value).to.equal('feel');
+        });
+
+      });
+
+    });
+
+
+    describe('case-insensitive match', function() {
+
+      beforeEach(bootstrapModeler(nonDefaultExpressionLanguageXML, {
+        expressionLanguages: {
+          options: [ { label: 'FEEL', value: 'feel' }, { label: 'JS', value: 'JavaScript' } ]
+        },
+        debounceInput: false
+      }));
+
+
+      it('should display label of option', function() {
+
+        // when
+        const input = domQuery('.dms-input', queryExpressionLanguageSelect());
+
+        // then
+        expect(input.value).to.equal('JavaScript');
+      });
 
     });
 
