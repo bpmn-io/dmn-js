@@ -21,10 +21,6 @@ insertCSS('dmn-js-shared.css',
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
-insertCSS('dmn-js-literal-expression.css',
-  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css')
-);
-
 insertCSS('dmn-js-boxed-expression.css',
   require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression.css')
 );
@@ -95,13 +91,13 @@ function getClassName({ element, type }) {
     return 'dmn-icon-lasso-tool';
   }
 
-  if (type === 'literalExpression') {
-    return 'dmn-icon-literal-expression';
+  if (element.$instanceOf('dmn:BusinessKnowledgeModel')) {
+    return 'dmn-icon-business-knowledge';
   }
 
-  return element.$instanceOf('dmn:Decision') ?
-    'dmn-icon-decision-table' :
-    'dmn-icon-business-knowledge';
+  return element.decisionLogic.$instanceOf('dmn:LiteralExpression') ?
+    'dmn-icon-literal-expression' :
+    'dmn-icon-decision-table';
 }
 
 var diagramXML = require('./diagram.dmn');
@@ -130,9 +126,6 @@ describe('tabs', function() {
 
     const translateModules = {
       drd: {
-        additionalModules: [ translateModule ]
-      },
-      literalExpression: {
         additionalModules: [ translateModule ]
       },
       boxedExpression: {

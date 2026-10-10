@@ -1,10 +1,9 @@
 import EditingManager from 'dmn-js-shared/lib/base/EditingManager';
 
 import DrdModeler from 'dmn-js-drd/lib/Modeler';
-import LiteralExpressionEditor from 'dmn-js-literal-expression/lib/Editor';
 import { Editor as BoxedExpressionEditor } from 'dmn-js-boxed-expression';
 
-import { is, getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
+import { is, isAny, getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
 
 import { find } from 'min-dash';
@@ -24,23 +23,16 @@ export default class Modeler extends EditingManager {
         opens: 'dmn:Definitions'
       },
       {
-        id: 'literalExpression',
-        constructor: LiteralExpressionEditor,
-        opens(element) {
-          return (
-            is(element, 'dmn:Decision') &&
-            is(element.decisionLogic, 'dmn:LiteralExpression')
-          );
-        }
-      },
-      {
         id: 'boxedExpression',
         constructor: BoxedExpressionEditor,
         opens(element) {
           return (
             (
               is(element, 'dmn:Decision') &&
-              is(element.decisionLogic, 'dmn:DecisionTable')
+              isAny(element.decisionLogic, [
+                'dmn:DecisionTable',
+                'dmn:LiteralExpression'
+              ])
             ) ||
             (
               is(element, 'dmn:BusinessKnowledgeModel') &&

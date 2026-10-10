@@ -10,7 +10,6 @@ function verifyAssets() {
     'dist/assets/dmn-js-boxed-expression-controls.css',
     'dist/assets/dmn-js-boxed-expression.css',
     'dist/assets/dmn-js-drd.css',
-    'dist/assets/dmn-js-literal-expression.css',
     'dist/assets/dmn-js-shared.css',
     'dist/assets/dmn-font/css/dmn.css'
   ];

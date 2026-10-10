@@ -29,9 +29,11 @@
     "dmn-js",
     "dmn-js-view",
     "boxed expression",
-    "decision table"
+    "decision table",
+    "literal expression"
   ],
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
     "axe-core": "^4.12.1",
     "cross-env": "^10.1.0",
     "dmn-font": "^0.6.2",

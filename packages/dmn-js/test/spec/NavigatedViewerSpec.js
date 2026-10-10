@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import NavigatedViewer from 'src/NavigatedViewer';
 
+import { query as domQuery } from 'min-dom';
+
 import { expectToBeAccessible, findView } from 'test/helper';
 
 
@@ -82,6 +84,21 @@ describe('NavigatedViewer', function() {
   });
 
 
+  it('should not provide <literalExpression> view', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    const viewTypes = editor.getViews().map(view => view.type);
+
+    // then
+    expect(viewTypes).not.to.include('literalExpression');
+  });
+
+
   it('should open business knowledge model with decision table', async function() {
 
     // given
@@ -107,14 +124,32 @@ describe('NavigatedViewer', function() {
     await editor.importXML(diagram, { open: false });
 
     const views = editor.getViews();
-    const decisionView = views.filter(v => v.type === 'literalExpression')[0];
+    const decisionView = findView(views, 'Decision_1koag35');
 
     // can open decisions
     expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    expect(decisionView.type).to.eql('boxedExpression');
 
     const { warnings } = await editor.open(decisionView);
 
     expect(warnings).to.have.lengthOf(0);
+  });
+
+
+  it('should display literal expression', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    await editor.open(findView(editor.getViews(), 'Decision_1koag35'));
+
+    // then
+    expect(
+      domQuery('.dmn-boxed-expression-container .dmn-boxed-expression-body .textarea', container)
+    ).to.exist;
   });
 
 
@@ -178,7 +213,7 @@ describe('NavigatedViewer', function() {
       },
       {
         name: 'literal expression',
-        getView: views => views.find(v => v.type === 'literalExpression')
+        getView: views => findView(views, 'Decision_1koag35')
       },
       {
         name: 'decision table',
