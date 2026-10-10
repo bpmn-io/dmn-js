@@ -12,6 +12,9 @@ import { EditorView } from '@codemirror/view';
  * only. Updating the value via props will update the selection
  * if needed, too.
  *
+ * Without `onInput`, text is committed via `onChange` on blur. Undo and redo
+ * key events do not leave the component then.
+ *
  * @example
  *
  * class SomeComponent extends Component {
@@ -136,6 +139,12 @@ export default class LiteralExpression extends Component {
     if ([ 'Enter', 'Escape' ].includes(event.key) && event.triggeredFromAutocomplete) {
       event.stopPropagation();
     }
+
+    // the editor has no history of its own and, without `onInput`, text is
+    // committed on blur only; global undo / redo would revert an unrelated command
+    if (!this.props.onInput && isUndoRedo(event)) {
+      event.stopPropagation();
+    }
   };
 
   handleChange = (value) => {
@@ -181,6 +190,10 @@ export default class LiteralExpression extends Component {
 
 function isCmd(event) {
   return event.metaKey || event.ctrlKey;
+}
+
+function isUndoRedo(event) {
+  return isCmd(event) && [ 'z', 'y' ].includes(event.key?.toLowerCase());
 }
 
 function isAutocompleteOpen(node) {

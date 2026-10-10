@@ -396,6 +396,82 @@ describe('components/LiteralExpression', function() {
   });
 
 
+  describe('undo / redo', function() {
+
+    let onInput;
+    let globalOnKeydown;
+
+    beforeEach(function() {
+      onInput = sinon.spy();
+      globalOnKeydown = sinon.spy();
+
+      document.addEventListener('keydown', globalOnKeydown);
+    });
+
+    afterEach(function() {
+      document.removeEventListener('keydown', globalOnKeydown);
+    });
+
+    [
+      [ 'undo', { key: 'z', ctrlKey: true } ],
+      [ 'undo / metaKey', { key: 'z', metaKey: true } ],
+      [ 'redo', { key: 'y', ctrlKey: true } ],
+      [ 'redo / shift', { key: 'Z', metaKey: true, shiftKey: true } ]
+    ].forEach(function([ name, event ]) {
+
+      it(`should contain ${ name } without onInput`, function() {
+
+        // given
+        const node = renderToNode(
+          <LiteralExpression value={ 'FOO' } />
+        );
+        const editor = getEditor(node);
+
+        // when
+        triggerKeyEvent(editor, 'keydown', event);
+
+        // then
+        expect(globalOnKeydown).not.to.have.been.called;
+      });
+
+
+      it(`should NOT contain ${ name } with onInput`, function() {
+
+        // given
+        const node = renderToNode(
+          <LiteralExpression onInput={ onInput } value={ 'FOO' } />
+        );
+        const editor = getEditor(node);
+
+        // when
+        triggerKeyEvent(editor, 'keydown', event);
+
+        // then
+        expect(globalOnKeydown).to.have.been.called;
+      });
+
+    });
+
+
+    it('should NOT contain other keys', function() {
+
+      // given
+      const node = renderToNode(
+        <LiteralExpression value={ 'FOO' } />
+      );
+      const editor = getEditor(node);
+
+      // when
+      triggerKeyEvent(editor, 'keydown', { key: 'a', ctrlKey: true });
+      triggerKeyEvent(editor, 'keydown', { key: 'z' });
+
+      // then
+      expect(globalOnKeydown).to.have.been.calledTwice;
+    });
+
+  });
+
+
   // not implemented
   describe.skip('newline behavior', function() {
 

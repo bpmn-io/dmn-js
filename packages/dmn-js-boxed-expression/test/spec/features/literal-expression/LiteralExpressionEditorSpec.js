@@ -14,7 +14,10 @@ import {
   skipFF
 } from 'test/helper';
 
-import { triggerInputEvent } from 'dmn-js-shared/test/util/EventUtil';
+import {
+  triggerInputEvent,
+  triggerKeyEvent
+} from 'dmn-js-shared/test/util/EventUtil';
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
 
 import literalExpressionXML from '../../literal-expression.dmn';
@@ -87,6 +90,34 @@ describe('features/literal-expression - editor', function() {
 
         // then
         expect(viewer.getRootElement().decisionLogic.text).to.equal('foo');
+      }
+    ));
+
+
+    skipFF()('should NOT undo unrelated command on undo (FEEL)', inject(
+      async function(commandStack, literalExpression, viewer) {
+
+        // given
+        const decisionLogic = viewer.getRootElement().decisionLogic;
+
+        literalExpression.setText(decisionLogic, 'committed');
+
+        const editor = queryEditor('.textarea', testContainer);
+
+        await act(() => editor.focus());
+
+        // when
+        await act(() => {
+          triggerKeyEvent(document.activeElement, 'keydown', {
+            key: 'z',
+            keyCode: 90,
+            ctrlKey: true
+          });
+        });
+
+        // then
+        expect(decisionLogic.text).to.equal('committed');
+        expect(commandStack.canRedo()).to.be.false;
       }
     ));
 
