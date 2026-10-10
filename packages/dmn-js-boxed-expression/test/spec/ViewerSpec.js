@@ -16,11 +16,20 @@ import Viewer from '../helper/Viewer';
 
 import { domify } from 'min-dom';
 
+import { insertCSS } from '../helper';
+
 import simpleXML from './literal-expression.dmn';
+import emptyXML from './empty-literal-expression.dmn';
 import bkmXML from './bkm-literal-expression.dmn';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'viewer';
+
+if (singleStart) {
+  insertCSS('dmn-js-boxed-expression-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
 
 
 describe('Viewer', function() {
@@ -46,6 +55,11 @@ describe('Viewer', function() {
 
   it('should import decision', function() {
     return createViewer(simpleXML);
+  });
+
+
+  it('should import decision with empty literal expression', function() {
+    return createViewer(emptyXML);
   });
 
 

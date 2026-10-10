@@ -241,6 +241,19 @@ export function getBoxedExpressionViewer() {
   return DMN_JS.getActiveViewer();
 }
 
+export function isFirefox() {
+  return /Firefox/.test(window.navigator.userAgent);
+}
+
+/**
+ * Skip tests that depend on real focus events in Firefox.
+ *
+ * @return {Function} <it> or <it.skip>
+ */
+export function skipFF() {
+  return isFirefox() ? it.skip : it;
+}
+
 /**
  * Execute function and resolve in next frame.
  *

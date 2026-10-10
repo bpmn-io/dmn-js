@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { bootstrapModeler, inject, act } from 'test/helper';
+import { bootstrapModeler, inject, act, skipFF } from 'test/helper';
 
 import { query as domQuery } from 'min-dom';
 
@@ -439,10 +439,4 @@ async function expectEventually(fn) {
   await fn();
 }
 
-function isFirefox() {
-  return /Firefox/.test(window.navigator.userAgent);
-}
 
-function skipFF() {
-  return isFirefox() ? it.skip : it;
-}
