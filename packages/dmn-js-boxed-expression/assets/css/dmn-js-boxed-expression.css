@@ -242,6 +242,20 @@
   }
 }
 
+/* element expression language */
+
+.dmn-boxed-expression-container .element-expression-language {
+  padding: var(--section-padding) var(--section-padding) var(--section-padding) 0;
+  display: inline-block;
+  vertical-align: bottom;
+
+  & .element-expression-language-label {
+    display: block;
+    padding-bottom: 7px;
+    color: var(--bio-text-subtle)
+  }
+}
+
 /* decision table */
 .dmn-boxed-expression-container .dmn-boxed-expression-body:has(.dmn-decision-table-container) {
   flex: 1 1 auto;
