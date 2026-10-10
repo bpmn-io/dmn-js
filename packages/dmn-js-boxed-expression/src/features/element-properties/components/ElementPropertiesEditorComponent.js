@@ -28,6 +28,7 @@ const ElementName = withChangeSupport(function(props, context) {
     label={ translate('Element name') }
     className="element-name editor"
     value={ name }
+    onBlur={ resetScroll }
     onChange={ onChange }
   />;
 }, props => [ props.element ]);
@@ -42,4 +43,8 @@ export default function ElementPropertiesEditorComponent(_, context) {
       <ElementName element={ rootElement } />
     </div>
   );
+}
+
+function resetScroll(event) {
+  event.target.scroll(0, 0);
 }
