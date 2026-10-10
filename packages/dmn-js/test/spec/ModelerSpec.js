@@ -120,6 +120,48 @@ describe('Modeler', function() {
   });
 
 
+  describe('replace business knowledge model with decision table', function() {
+
+    beforeEach(async function() {
+      await editor.importXML(diagram);
+
+      const drdViewer = editor.getActiveViewer();
+
+      drdViewer.get('drdReplace').replaceElement(
+        drdViewer.get('elementRegistry').get('elMenu'),
+        {
+          type: 'dmn:BusinessKnowledgeModel',
+          table: true,
+          expression: false
+        }
+      );
+    });
+
+
+    it('should display decision table', async function() {
+
+      // when
+      await editor.open(findView(editor.getViews(), 'elMenu'));
+
+      // then
+      expect(
+        domQuery('.dmn-boxed-expression-container .dmn-decision-table-container', container)
+      ).to.exist;
+    });
+
+
+    it('should export decision table as body of encapsulated logic', async function() {
+
+      // when
+      const { xml } = await editor.saveXML();
+
+      // then
+      expect(xml).to.match(/<encapsulatedLogic[^>]*>\s*<decisionTable/);
+    });
+
+  });
+
+
   it('should open DMN literal expression', async function() {
 
     await editor.importXML(diagram, { open: false });
