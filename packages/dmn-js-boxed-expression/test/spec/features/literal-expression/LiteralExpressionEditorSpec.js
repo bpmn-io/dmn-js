@@ -10,6 +10,7 @@ import { query as domQuery } from 'min-dom';
 import {
   act,
   bootstrapModeler,
+  getDmnJS,
   inject,
   skipFF
 } from 'test/helper';
@@ -100,6 +101,98 @@ describe('features/literal-expression - editor', function() {
 
         // then
         expect(viewer.getRootElement().decisionLogic.text).to.equal('foo');
+      }
+    ));
+
+
+    skipFF()('should commit pending text on save (FEEL)', async function() {
+
+      // given
+      const editor = queryEditor('.textarea', testContainer);
+
+      await act(() => editor.focus());
+
+      await act(() => document.activeElement.textContent = 'foo');
+
+      // when
+      const { xml } = await getDmnJS().saveXML();
+
+      // then
+      expect(xml).to.contain('<text>foo</text>');
+    });
+
+
+    skipFF()('should keep focus on save (FEEL)', async function() {
+
+      // given
+      const editor = queryEditor('.textarea', testContainer);
+
+      await act(() => editor.focus());
+
+      const input = document.activeElement;
+
+      await act(() => input.textContent = 'foo');
+
+      // when
+      await getDmnJS().saveXML();
+
+      // then
+      expect(document.activeElement).to.equal(input);
+    });
+
+
+    skipFF()('should commit once on save and blur (FEEL)', inject(
+      async function(commandStack, viewer) {
+
+        // given
+        const decisionLogic = viewer.getRootElement().decisionLogic;
+        const { text } = decisionLogic;
+
+        const editor = queryEditor('.textarea', testContainer);
+
+        await act(() => editor.focus());
+
+        const input = document.activeElement;
+
+        await act(() => input.textContent = 'foo');
+
+        await getDmnJS().saveXML();
+
+        await act(() => input.blur());
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(decisionLogic.text).to.equal(text);
+      }
+    ));
+
+
+    skipFF()('should NOT revert undo on save (FEEL)', inject(
+      async function(commandStack, viewer) {
+
+        // given
+        const decisionLogic = viewer.getRootElement().decisionLogic;
+        const { text } = decisionLogic;
+
+        const editor = queryEditor('.textarea', testContainer);
+
+        await act(() => editor.focus());
+
+        const input = document.activeElement;
+
+        await act(() => input.textContent = 'foo');
+        await act(() => input.blur());
+
+        // when
+        commandStack.undo();
+
+        const { xml } = await getDmnJS().saveXML();
+
+        // then
+        expect(xml).to.contain(`<text>${ text }</text>`);
+        expect(commandStack.canRedo()).to.be.true;
       }
     ));
 
