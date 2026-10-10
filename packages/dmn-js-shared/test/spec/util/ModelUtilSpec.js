@@ -110,6 +110,74 @@ describe('ModelUtil', function() {
     });
 
 
+    it('should return false if default expression language is different', async function() {
+
+      // given
+      const moddle = await getModdle(
+        '<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" />'
+      );
+
+      // when
+      const language = isFeel(moddle.rootElement, 'juel');
+
+      // then
+      expect(language).to.be.false;
+    });
+
+
+    it('should return true if default expression language is FEEL', async function() {
+
+      // given
+      const moddle = await getModdle(
+        '<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" />'
+      );
+
+      // when
+      const language = isFeel(moddle.rootElement, 'feel');
+
+      // then
+      expect(language).to.be.true;
+    });
+
+
+    it('should prefer expression language of element over default', async function() {
+
+      // given
+      const moddle = await getModdle(
+        '<definitions expressionLanguage="feel" ' +
+        'xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" />'
+      );
+
+      // when
+      const language = isFeel(moddle.rootElement, 'juel');
+
+      // then
+      expect(language).to.be.true;
+    });
+
+
+    it('should prefer function kind over default expression language', async function() {
+
+      // given
+      const moddle = await getModdle(
+        '<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/">' +
+          '<businessKnowledgeModel id="bkm">' +
+            '<encapsulatedLogic>' +
+              '<literalExpression id="literalExpression" />' +
+            '</encapsulatedLogic>' +
+          '</businessKnowledgeModel>' +
+        '</definitions>'
+      );
+      const literalExpression = moddle.elementsById.literalExpression;
+
+      // when
+      const language = isFeel(literalExpression, 'juel');
+
+      // then
+      expect(language).to.be.true;
+    });
+
+
     it('should return false if EL is different via function kind', async function() {
 
       // given

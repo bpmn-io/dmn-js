@@ -81,22 +81,24 @@ export function getBoxedExpression(decisionOrBkm) {
 
 const FEEL_NAMESPACE = 'https://www.omg.org/spec/DMN/20191111/FEEL/';
 
+function isFeelLanguage(expressionLanguage) {
+  return expressionLanguage === FEEL_NAMESPACE || /feel/i.test(expressionLanguage);
+}
+
 /**
  * Return `true` if the expression language for a given element is FEEL.
  *
  * @param {ModdleElement} element
- * @returns {string}
+ * @param {string} [defaultExpressionLanguage] expression language to assume
+ * if neither the element nor any of its ancestors specifies one
+ * @returns {boolean}
  */
-export function isFeel(element) {
+export function isFeel(element, defaultExpressionLanguage) {
   for (let current = element; current; current = current.$parent) {
     const expressionLanguage = current.get('expressionLanguage');
 
     if (expressionLanguage) {
-      if (expressionLanguage === FEEL_NAMESPACE || /feel/i.test(expressionLanguage)) {
-        return true;
-      } else {
-        return false;
-      }
+      return isFeelLanguage(expressionLanguage);
     }
 
     if (is(current, 'dmn:FunctionDefinition')) {
@@ -108,5 +110,5 @@ export function isFeel(element) {
     }
   }
 
-  return true;
+  return defaultExpressionLanguage ? isFeelLanguage(defaultExpressionLanguage) : true;
 }
