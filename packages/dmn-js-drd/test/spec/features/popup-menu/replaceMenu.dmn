@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="My Decision" />
+  <businessKnowledgeModel id="bkm" name="My BKM">
+    <variable id="bkmVariable" name="My BKM" typeRef="number" />
+  </businessKnowledgeModel>
+  <businessKnowledgeModel id="bkmTable" name="BKM with table">
+    <encapsulatedLogic id="bkmTableFunction">
+      <decisionTable id="bkmTableDecisionTable">
+        <input id="bkmTableInput">
+          <inputExpression id="bkmTableInputExpression" typeRef="string">
+            <text></text>
+          </inputExpression>
+        </input>
+        <output id="bkmTableOutput" typeRef="string" />
+      </decisionTable>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <businessKnowledgeModel id="bkmLiteral" name="BKM with literal expression">
+    <encapsulatedLogic id="bkmLiteralFunction">
+      <literalExpression id="bkmLiteralExpression">
+        <text></text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_1o3wc02">
       <dmndi:DMNShape id="decision_di" dmnElementRef="decision">
         <dc:Bounds height="55" width="100" x="150" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkm_di" dmnElementRef="bkm">
+        <dc:Bounds height="46" width="135" x="150" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkmTable_di" dmnElementRef="bkmTable">
+        <dc:Bounds height="46" width="135" x="350" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkmLiteral_di" dmnElementRef="bkmLiteral">
+        <dc:Bounds height="46" width="135" x="550" y="150" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
