@@ -41,12 +41,6 @@ async function run() {
   console.log('copy dmn-js-drd assets to ' + dest);
   await cp(resolve('dmn-js-drd', '/assets/css/**'), dest + '/assets');
 
-  console.log('copy dmn-js-decision-table assets to ' + dest);
-  await cp(resolve('dmn-js-decision-table', '/assets/css/**'), dest + '/assets');
-
-  console.log('copy dmn-js-literal-expression assets to ' + dest);
-  await cp(resolve('dmn-js-literal-expression', '/assets/css/**'), dest + '/assets');
-
   console.log('copy dmn-js-boxed-expression assets to ' + dest);
   await cp(resolve('dmn-js-boxed-expression', '/assets/css/**'), dest + '/assets');
 

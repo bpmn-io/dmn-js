@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="definitions" name="Mixed" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="literalDecision" name="Literal decision">
+    <variable id="literalVariable" name="Literal decision" typeRef="string" />
+    <literalExpression id="literalExpression">
+      <text>"foo"</text>
+    </literalExpression>
+  </decision>
+  <decision id="tableDecision" name="Table decision">
+    <decisionTable id="decisionTable">
+      <input id="input1">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text>status</text>
+        </inputExpression>
+      </input>
+      <output id="output1" name="result" typeRef="string" />
+      <rule id="rule1">
+        <inputEntry id="inputEntry1">
+          <text>"gold"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry1">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <businessKnowledgeModel id="bkm" name="BKM">
+    <variable id="bkmVariable" name="BKM" />
+    <encapsulatedLogic>
+      <formalParameter id="parameter" name="age" typeRef="number" />
+      <literalExpression id="bkmLiteralExpression">
+        <text>age</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="literalDecision_di" dmnElementRef="literalDecision">
+        <dc:Bounds height="55" width="100" x="150" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="tableDecision_di" dmnElementRef="tableDecision">
+        <dc:Bounds height="55" width="100" x="350" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkm_di" dmnElementRef="bkm">
+        <dc:Bounds height="46" width="135" x="550" y="10" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -100,7 +100,7 @@ function bootstrapDmnJS(DmnJS, diagram, options, locals) {
 
     _options = {
       container: testContainer,
-      literalExpression: assign({
+      boxedExpression: assign({
         modules: _modules || undefined
       }, OPTIONS || {}, _options || {})
     };
@@ -150,10 +150,10 @@ export function inject(fn) {
       );
     }
 
-    var view = getLiteralExpression();
+    var view = getBoxedExpressionViewer();
 
     if (!view) {
-      throw new Error('DecisionTable instance not found');
+      throw new Error('Boxed expression viewer not found');
     }
 
     return view.invoke(fn);
@@ -237,8 +237,36 @@ export function getDmnJS() {
   return DMN_JS;
 }
 
-export function getLiteralExpression() {
+export function getBoxedExpressionViewer() {
   return DMN_JS.getActiveViewer();
+}
+
+export function isFirefox() {
+  return /Firefox/.test(window.navigator.userAgent);
+}
+
+/**
+ * Skip tests that depend on real focus events in Firefox.
+ *
+ * @return {Function} <it> or <it.skip>
+ */
+export function skipFF() {
+  return isFirefox() ? it.skip : it;
+}
+
+/**
+ * Execute function and resolve in next frame.
+ *
+ * @param {Function} fn
+ */
+export function act(fn) {
+  fn();
+
+  return new Promise(resolve => {
+    requestAnimationFrame(() => {
+      resolve();
+    });
+  });
 }
 
 export function insertCSS(name, css) {

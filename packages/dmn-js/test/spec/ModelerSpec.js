@@ -1,17 +1,11 @@
 import { expect } from 'chai';
 import Modeler from 'src/Modeler';
 
-import { expectToBeAccessible, insertCSS } from 'test/helper';
+import { query as domQuery } from 'min-dom';
+
+import { expectToBeAccessible, findView, insertCSS } from 'test/helper';
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
-
-insertCSS('dmn-js-decision-table.css',
-  require('dmn-js-decision-table/assets/css/dmn-js-decision-table.css')
-);
-
-insertCSS('dmn-js-literal-expression.css',
-  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css')
-);
 
 insertCSS('dmn-js-boxed-expression.css',
   require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression.css')
@@ -41,6 +35,7 @@ describe('Modeler', function() {
   const diagram = require('./diagram.dmn');
   const noDi = require('./no-di.dmn');
   const noDisplayableContents = require('./no-displayable-contents.dmn');
+  const bkmDecisionTable = require('./bkm-decision-table.dmn');
 
   let container;
   let editor;
@@ -80,7 +75,7 @@ describe('Modeler', function() {
     await editor.importXML(diagram, { open: false });
 
     const views = editor.getViews();
-    const decisionView = views.filter(v => v.type === 'decisionTable')[0];
+    const decisionView = findView(views, 'dish-decision');
 
     // can open decisions
     expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
@@ -91,19 +86,141 @@ describe('Modeler', function() {
   });
 
 
+  it('should not provide <decisionTable> view', async function() {
+
+    // given
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    const viewTypes = editor.getViews().map(view => view.type);
+
+    // then
+    expect(viewTypes).not.to.include('decisionTable');
+  });
+
+
+  it('should not provide <literalExpression> view', async function() {
+
+    // given
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    const viewTypes = editor.getViews().map(view => view.type);
+
+    // then
+    expect(viewTypes).not.to.include('literalExpression');
+  });
+
+
+  it('should open business knowledge model with decision table', async function() {
+
+    // given
+    await editor.importXML(bkmDecisionTable, { open: false });
+
+    const bkmView = findView(editor.getViews(), 'BKM_1');
+
+    // when
+    const { warnings } = await editor.open(bkmView);
+
+    // then
+    expect(bkmView.type).to.eql('boxedExpression');
+    expect(warnings).to.have.lengthOf(0);
+    expect(domQuery('.dmn-decision-table-container', container)).to.exist;
+  });
+
+
+  describe('replace business knowledge model with decision table', function() {
+
+    function replaceWithDecisionTable() {
+      const drdViewer = editor.getActiveViewer();
+
+      drdViewer.get('drdReplace').replaceElement(
+        drdViewer.get('elementRegistry').get('elMenu'),
+        {
+          type: 'dmn:BusinessKnowledgeModel',
+          table: true,
+          expression: false
+        }
+      );
+    }
+
+    beforeEach(async function() {
+      await editor.importXML(diagram);
+    });
+
+
+    it('should display decision table', async function() {
+
+      // when
+      replaceWithDecisionTable();
+
+      await editor.open(findView(editor.getViews(), 'elMenu'));
+
+      // then
+      expect(
+        domQuery('.dmn-boxed-expression-container .dmn-decision-table-container', container)
+      ).to.exist;
+    });
+
+
+    it('should keep formal parameters', async function() {
+
+      // when
+      replaceWithDecisionTable();
+
+      await editor.open(findView(editor.getViews(), 'elMenu'));
+
+      // then
+      expect(domQuery('.function-definition-parameters', container).textContent)
+        .to.contain('menu');
+    });
+
+
+    it('should export decision table as body of encapsulated logic', async function() {
+
+      // when
+      replaceWithDecisionTable();
+
+      const { xml } = await editor.saveXML();
+
+      // then
+      expect(xml).to.match(
+        /<encapsulatedLogic[^>]*>\s*(<formalParameter[^>]*\/>\s*)*<decisionTable/
+      );
+    });
+
+  });
+
+
   it('should open DMN literal expression', async function() {
 
     await editor.importXML(diagram, { open: false });
 
     const views = editor.getViews();
-    const decisionView = views.filter(v => v.type === 'literalExpression')[0];
+    const decisionView = findView(views, 'Decision_1koag35');
 
     // can open decisions
     expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    expect(decisionView.type).to.eql('boxedExpression');
 
     const { warnings } = await editor.open(decisionView);
 
     expect(warnings).to.have.lengthOf(0);
+  });
+
+
+  it('should display literal expression', async function() {
+
+    // given
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    await editor.open(findView(editor.getViews(), 'Decision_1koag35'));
+
+    // then
+    expect(
+      domQuery('.dmn-boxed-expression-container .dmn-boxed-expression-body .textarea', container)
+    ).to.exist;
   });
 
 
@@ -131,7 +248,7 @@ describe('Modeler', function() {
 
       const activeView = editor.getActiveView();
 
-      expect(activeView.type).to.eql('decisionTable');
+      expect(activeView.type).to.eql('boxedExpression');
       expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
     });
 
@@ -144,7 +261,7 @@ describe('Modeler', function() {
 
       const activeView = editor.getActiveView();
 
-      expect(activeView.type).to.eql('decisionTable');
+      expect(activeView.type).to.eql('boxedExpression');
       expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
     });
 
@@ -185,7 +302,7 @@ describe('Modeler', function() {
     await editor.importXML(diagram);
 
     const views = editor.getViews();
-    const tableView = views.filter(v => v.type === 'decisionTable')[0];
+    const tableView = findView(views, 'dish-decision');
 
     const { warnings } = await editor.open(tableView);
 
@@ -199,13 +316,117 @@ describe('Modeler', function() {
 
     expect(warnings[0]).to.be.undefined;
 
-    expect(activeView.type).to.eql('decisionTable');
+    expect(activeView.type).to.eql('boxedExpression');
     expect(element.$instanceOf('dmn:Decision')).to.be.true;
     expect(element.id).to.eql(tableView.element.id);
   });
 
 
+  it('should update views on decision name change', async function() {
+
+    // given
+    await editor.importXML(diagram, { open: false });
+
+    const decisionView = findView(editor.getViews(), 'dish-decision');
+
+    await editor.open(decisionView);
+
+    // when
+    editor.getActiveViewer().get('modeling').updateProperties(
+      decisionView.element, { name: 'Renamed' }
+    );
+
+    // then
+    expect(findView(editor.getViews(), 'dish-decision').name).to.eql('Renamed');
+  });
+
+
   describe('config', function() {
+
+    it('should use options provided via <boxedExpression>', async function() {
+
+      // given
+      editor = new Modeler({
+        container: container,
+        boxedExpression: {
+          keyboard: { bind: false }
+        }
+      });
+
+      await editor.importXML(diagram, { open: false });
+
+      // when
+      await editor.open(findView(editor.getViews(), 'dish-decision'));
+
+      // then
+      expect(editor.getActiveViewer().get('keyboard').getBinding()).not.to.exist;
+    });
+
+
+    it('should ignore options provided via <literalExpression>', async function() {
+
+      // given
+      editor = new Modeler({
+        container: container,
+        literalExpression: {
+          keyboard: { bind: false }
+        }
+      });
+
+      await editor.importXML(diagram, { open: false });
+
+      // when
+      await editor.open(findView(editor.getViews(), 'Decision_1koag35'));
+
+      // then
+      expect(editor.getActiveViewer().get('keyboard').getBinding()).to.exist;
+    });
+
+
+    it('should use expression languages provided via <common>', async function() {
+
+      // given
+      editor = new Modeler({
+        container: container,
+        common: {
+          expressionLanguages: {
+            options: [
+              { value: 'feel', label: 'FEEL' },
+              { value: 'juel', label: 'JUEL' }
+            ]
+          }
+        }
+      });
+
+      await editor.importXML(diagram, { open: false });
+
+      // when
+      await editor.open(findView(editor.getViews(), 'Decision_1koag35'));
+
+      // then
+      expect(domQuery('.element-expression-language', container)).to.exist;
+    });
+
+
+    it('should ignore options provided via <decisionTable>', async function() {
+
+      // given
+      editor = new Modeler({
+        container: container,
+        decisionTable: {
+          keyboard: { bind: false }
+        }
+      });
+
+      await editor.importXML(diagram, { open: false });
+
+      // when
+      await editor.open(findView(editor.getViews(), 'dish-decision'));
+
+      // then
+      expect(editor.getActiveViewer().get('keyboard').getBinding()).to.exist;
+    });
+
 
     it('should use data types provided via <common.dataTypes>', async function() {
 
@@ -220,8 +441,8 @@ describe('Modeler', function() {
         }
       });
       await editor.importXML(diagram);
-      const decisionTableView = editor.getViews().find(v => v.type === 'decisionTable');
-      editor.open(decisionTableView);
+      const decisionTableView = findView(editor.getViews(), 'dish-decision');
+      await editor.open(decisionTableView);
 
       // when
       const dataTypes = editor.getActiveViewer().get('dataTypes');
@@ -238,20 +459,32 @@ describe('Modeler', function() {
 
   describe('accessibility', function() {
 
-    for (const viewType of [
-      'drd',
-      'literalExpression',
-      'decisionTable',
-      'boxedExpression'
+    for (const { name, getView } of [
+      {
+        name: 'drd',
+        getView: views => views.find(v => v.type === 'drd')
+      },
+      {
+        name: 'literal expression',
+        getView: views => findView(views, 'Decision_1koag35')
+      },
+      {
+        name: 'decision table',
+        getView: views => findView(views, 'dish-decision')
+      },
+      {
+        name: 'business knowledge model',
+        getView: views => findView(views, 'elMenu')
+      }
     ]) {
-      it(`should report no issues (${viewType})`, async function() {
+      it(`should report no issues (${name})`, async function() {
 
         // given
         const editor = new Modeler({ container: container });
         await editor.importXML(diagram, { open: false });
 
         const views = editor.getViews();
-        const decisionView = views.filter(v => v.type === viewType)[0];
+        const decisionView = getView(views);
 
         // when
         await editor.open(decisionView);

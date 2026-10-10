@@ -1,19 +1,22 @@
 import Manager from 'dmn-js-shared/lib/base/Manager';
-import { isAny } from 'dmn-js-shared/lib/util/ModelUtil';
+import { getBoxedExpression, isAny } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import { Viewer } from 'src';
 
 
-export default class LiteralExpressionViewer extends Manager {
+export default class BoxedExpressionViewer extends Manager {
 
   _getViewProviders() {
 
     return [
       {
-        id: 'literalExpression',
+        id: 'boxedExpression',
         constructor: Viewer,
         opens(element) {
-          return isAny(element, [ 'dmn:Decision', 'dmn:BusinessKnowledgeModel' ]);
+          return (
+            isAny(element, [ 'dmn:Decision', 'dmn:BusinessKnowledgeModel' ]) &&
+            !!getBoxedExpression(element)
+          );
         }
       }
     ];

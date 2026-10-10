@@ -6,6 +6,16 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: open decisions with a literal expression in the boxed expression view
+* `FEAT`: allow choosing the expression language of a decision in the boxed expression view
+* `FEAT`: render decision tables as boxed expressions, including as the body of a business knowledge model
+* `FEAT`: keep formal parameters when replacing the implementation of a business knowledge model
+* `FEAT`: allow replacing a business knowledge model with a decision table
+* `FEAT`: add drill-down for business knowledge models with a decision table body
+* `CHORE`: merge `dmn-js-decision-table` and `dmn-js-literal-expression` into `dmn-js-boxed-expression`
+* `FIX`: clear undo history of the boxed expression view when opening another element
+* `FIX`: remove the type reference instead of writing an empty one when clearing the result type
+* `FIX`: translate the result section of the boxed expression view
 * `FEAT`: allow registering data types providers via `DataTypes#registerProvider` ([#1035](https://github.com/bpmn-io/dmn-js/pull/1035))
 * `FEAT`: support letter shortcuts on non-Latin keyboard layouts ([bpmn-io/diagram-js#1112](https://github.com/bpmn-io/diagram-js/pull/1112), [bpmn-io/diagram-js#928](https://github.com/bpmn-io/diagram-js/issues/928))
 * `FEAT`: add tooltip with title and shortcut on palette entries ([bpmn-io/diagram-js#1082](https://github.com/bpmn-io/diagram-js/pull/1082))
@@ -18,6 +28,18 @@ ___Note:__ Yet to be released changes appear here._
 * `FIX`: cancel canvas move on diagram destroy ([bpmn-io/diagram-js#1110](https://github.com/bpmn-io/diagram-js/pull/1110), [bpmn-io/diagram-js#1109](https://github.com/bpmn-io/diagram-js/issues/1109))
 * `FIX`: do not keep selection visible after diagram destroy ([bpmn-io/diagram-js#1098](https://github.com/bpmn-io/diagram-js/pull/1098))
 * `DEPS`: update to `diagram-js@15.28.0`
+
+### Breaking Changes
+
+* The `decisionTable` and `literalExpression` views are replaced by the `boxedExpression` view. Decisions with a decision table or a literal expression and business knowledge models are opened in the same view type; use `view.element` to tell them apart.
+* The `decisionTable` and `literalExpression` configurations are replaced by the `boxedExpression` configuration. Decision tables and literal expressions only honor the `boxedExpression` and `common` options; `decisionTable` and `literalExpression` options are ignored.
+* The `dmn-js-decision-table` and `dmn-js-literal-expression` packages are removed; decision tables and literal expressions are part of `dmn-js-boxed-expression`, whose `Viewer` and `Editor` are named exports. Modules that inject `decisionTable` must inject `viewer`, and `Viewer#getDecision` is replaced by `Viewer#getRootElement`. The `modeling` methods `editDecisionTableName`, `editDecisionTableId`, `editDecisionName`, `editDecisionId`, `editLiteralExpressionText`, `editVariableName` and `editVariableType` are removed, update elements via `modeling#updateProperties` instead. `modeling#editExpressionLanguage` expects the literal expression as first argument.
+* The view no longer emits `import.render.start`, `import.render.complete`, the post-import `elements.changed`, `dmnElement.added` and `diagram.init`. Listen to the `import` event of the view, or to `import.render.start` and `import.render.complete` of the manager, instead.
+* `dmn-js-decision-table.css`, `dmn-js-decision-table-controls.css` and `dmn-js-literal-expression.css` are removed. The styles are part of `dmn-js-boxed-expression.css` and `dmn-js-boxed-expression-controls.css`. The CSS custom properties `--decision-table-font-family`, `--literal-expression-font-family`, `--literal-expression-font-family-monospace` and `--literal-expression-color` are replaced by `--boxed-expression-font-family`, `--boxed-expression-font-family-monospace` and `--boxed-expression-color`; `--table-head-separator-color`, `--decision-properties-*` and `--literal-expression-properties-*` are removed.
+* The decision table is rendered inside of `.dmn-boxed-expression-container`, and the decision name is edited in the shared header. The literal expression is rendered in the same container instead of `.dmn-literal-expression-container`, with `.element-properties` and `.element-name` replacing `.decision-properties` and `.decision-name`, and the result section `.element-variable` replacing `.literal-expression-properties`. Review custom styles and selectors that target the decision table or the literal expression.
+* The variable name of a decision cannot be edited independently of the name of the decision any longer. It follows the name of the decision.
+* Changes to the text of a FEEL literal expression are committed when the editor loses focus or the XML is saved instead of on every change. A literal expression with the expression language `FEEL`, in any case, or the FEEL namespace is edited with the FEEL editor.
+* Undo and redo use a single history across the decision table and the remaining boxed expression view.
 
 ## 17.12.3
 

@@ -53,7 +53,7 @@ describe('features - drilldown', function() {
         var drillDownOverlayEls = queryAll('.drill-down-overlay', container);
 
         // then
-        expect(drillDownOverlayEls).to.have.length(2);
+        expect(drillDownOverlayEls).to.have.length(3);
       });
 
 
@@ -62,6 +62,12 @@ describe('features - drilldown', function() {
         verify(
           'decision table',
           'Decision_Table',
+          'dmn-icon-decision-table'
+        );
+
+        verify(
+          'decision table of business knowledge model',
+          'BKM_Table',
           'dmn-icon-decision-table'
         );
 
@@ -95,6 +101,12 @@ describe('features - drilldown', function() {
         verify(
           'decision table',
           'Decision_Table',
+          'Open decision table'
+        );
+
+        verify(
+          'decision table of business knowledge model',
+          'BKM_Table',
           'Open decision table'
         );
 
@@ -219,7 +231,7 @@ describe('features - drilldown', function() {
         var drillDownOverlayEls = queryAll('.drill-down-overlay', container);
 
         // then
-        expect(drillDownOverlayEls).to.have.length(2);
+        expect(drillDownOverlayEls).to.have.length(3);
       });
 
 
@@ -228,6 +240,12 @@ describe('features - drilldown', function() {
         verify(
           'decision table',
           'Decision_Table',
+          'dmn-icon-decision-table'
+        );
+
+        verify(
+          'decision table of business knowledge model',
+          'BKM_Table',
           'dmn-icon-decision-table'
         );
 

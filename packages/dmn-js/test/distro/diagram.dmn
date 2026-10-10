@@ -21,6 +21,28 @@
       </literalExpression>
     </encapsulatedLogic>
   </businessKnowledgeModel>
+  <businessKnowledgeModel id="discount" name="Discount">
+    <variable id="InformationItem_1pgyk2m" name="discount" typeRef="number" />
+    <encapsulatedLogic>
+      <formalParameter name="age" typeRef="number" />
+      <decisionTable id="DecisionTable_0h8jm3a">
+        <input id="Input_1">
+          <inputExpression id="InputExpression_1" typeRef="number">
+            <text>age</text>
+          </inputExpression>
+        </input>
+        <output id="Output_1" name="discount" typeRef="number" />
+        <rule id="DecisionRule_0q5k1ny">
+          <inputEntry id="UnaryTests_0b1nh6e">
+            <text>&lt; 18</text>
+          </inputEntry>
+          <outputEntry id="LiteralExpression_1xj0d4w">
+            <text>10</text>
+          </outputEntry>
+        </rule>
+      </decisionTable>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
   <decision id="dish-decision" name="Dish Decision">
     <informationRequirement id="InformationRequirement_0xyyqln">
       <requiredDecision href="#season" />

@@ -1,5 +1,6 @@
 import Manager from 'dmn-js-shared/lib/base/Manager';
 import View from 'dmn-js-shared/lib/base/View';
+import { getBoxedExpression } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import { Viewer } from 'src';
 
@@ -9,14 +10,10 @@ export default class MockViewer extends Manager {
   _getViewProviders() {
 
     return [ {
-      id: 'literalExpression',
+      id: 'boxedExpression',
       constructor: Viewer,
       opens(element) {
-        return (
-          element.$type === 'dmn:Decision' &&
-          element.decisionLogic &&
-          element.decisionLogic.$type === 'dmn:LiteralExpression'
-        );
+        return element.$type === 'dmn:Decision' && !!getBoxedExpression(element);
       }
     }, {
       id: 'drd',

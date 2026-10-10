@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions_bkm" name="Discount" namespace="http://camunda.org/schema/1.0/dmn">
+  <businessKnowledgeModel id="BKM_1" name="Discount">
+    <variable id="BKM_1_variable" name="Discount" />
+    <encapsulatedLogic id="FunctionDefinition_1">
+      <formalParameter id="FormalParameter_1" name="age" typeRef="number" />
+      <decisionTable id="DecisionTable_1">
+        <input id="Input_1">
+          <inputExpression id="InputExpression_1" typeRef="number">
+            <text>age</text>
+          </inputExpression>
+        </input>
+        <output id="Output_1" name="discount" typeRef="number" />
+        <rule id="Rule_1">
+          <inputEntry id="UnaryTests_1">
+            <text>&lt; 18</text>
+          </inputEntry>
+          <outputEntry id="LiteralExpression_1">
+            <text>10</text>
+          </outputEntry>
+        </rule>
+      </decisionTable>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+</definitions>

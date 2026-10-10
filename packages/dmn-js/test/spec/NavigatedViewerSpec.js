@@ -1,11 +1,14 @@
 import { expect } from 'chai';
 import NavigatedViewer from 'src/NavigatedViewer';
 
-import { expectToBeAccessible } from 'test/helper';
+import { query as domQuery } from 'min-dom';
+
+import { expectToBeAccessible, findView } from 'test/helper';
 
 
 const diagram = require('./diagram.dmn');
 const noDi = require('./no-di.dmn');
+const bkmDecisionTable = require('./bkm-decision-table.dmn');
 
 const dmn_11 = require('./dmn-11.dmn');
 
@@ -55,13 +58,61 @@ describe('NavigatedViewer', function() {
     await editor.importXML(diagram, { open: false });
 
     const views = editor.getViews();
-    const decisionView = views.filter(v => v.type === 'decisionTable')[0];
+    const decisionView = findView(views, 'dish-decision');
 
     // can open decisions
     expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
 
     const { warnings } = await editor.open(decisionView);
 
+    expect(warnings).to.have.lengthOf(0);
+  });
+
+
+  it('should not provide <decisionTable> view', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    const viewTypes = editor.getViews().map(view => view.type);
+
+    // then
+    expect(viewTypes).not.to.include('decisionTable');
+  });
+
+
+  it('should not provide <literalExpression> view', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    const viewTypes = editor.getViews().map(view => view.type);
+
+    // then
+    expect(viewTypes).not.to.include('literalExpression');
+  });
+
+
+  it('should open business knowledge model with decision table', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(bkmDecisionTable, { open: false });
+
+    const bkmView = findView(editor.getViews(), 'BKM_1');
+
+    // when
+    const { warnings } = await editor.open(bkmView);
+
+    // then
+    expect(bkmView.type).to.eql('boxedExpression');
     expect(warnings).to.have.lengthOf(0);
   });
 
@@ -73,14 +124,32 @@ describe('NavigatedViewer', function() {
     await editor.importXML(diagram, { open: false });
 
     const views = editor.getViews();
-    const decisionView = views.filter(v => v.type === 'literalExpression')[0];
+    const decisionView = findView(views, 'Decision_1koag35');
 
     // can open decisions
     expect(decisionView.element.$instanceOf('dmn:Decision')).to.be.true;
+    expect(decisionView.type).to.eql('boxedExpression');
 
     const { warnings } = await editor.open(decisionView);
 
     expect(warnings).to.have.lengthOf(0);
+  });
+
+
+  it('should display literal expression', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(diagram, { open: false });
+
+    // when
+    await editor.open(findView(editor.getViews(), 'Decision_1koag35'));
+
+    // then
+    expect(
+      domQuery('.dmn-boxed-expression-container .dmn-boxed-expression-body .textarea', container)
+    ).to.exist;
   });
 
 
@@ -110,7 +179,7 @@ describe('NavigatedViewer', function() {
 
     const activeView = editor.getActiveView();
 
-    expect(activeView.type).to.eql('decisionTable');
+    expect(activeView.type).to.eql('boxedExpression');
     expect(activeView.element.$instanceOf('dmn:Decision')).to.be.true;
   });
 
@@ -137,20 +206,32 @@ describe('NavigatedViewer', function() {
 
   describe('accessibility', function() {
 
-    for (const viewType of [
-      'drd',
-      'literalExpression',
-      'decisionTable',
-      'boxedExpression'
+    for (const { name, getView } of [
+      {
+        name: 'drd',
+        getView: views => views.find(v => v.type === 'drd')
+      },
+      {
+        name: 'literal expression',
+        getView: views => findView(views, 'Decision_1koag35')
+      },
+      {
+        name: 'decision table',
+        getView: views => findView(views, 'dish-decision')
+      },
+      {
+        name: 'business knowledge model',
+        getView: views => findView(views, 'elMenu')
+      }
     ]) {
-      it(`should report no issues (${viewType})`, async function() {
+      it(`should report no issues (${name})`, async function() {
 
         // given
         const editor = new NavigatedViewer({ container: container });
         await editor.importXML(diagram, { open: false });
 
         const views = editor.getViews();
-        const decisionView = views.filter(v => v.type === viewType)[0];
+        const decisionView = getView(views);
 
         // when
         await editor.open(decisionView);
