@@ -1,6 +1,6 @@
 {
   "name": "dmn-js-boxed-expression",
-  "description": "A boxed expression view for dmn-js, including decision tables",
+  "description": "A boxed expression view for dmn-js: literal expressions, functions and decision tables",
   "version": "17.12.3",
   "files": [
     "assets",
