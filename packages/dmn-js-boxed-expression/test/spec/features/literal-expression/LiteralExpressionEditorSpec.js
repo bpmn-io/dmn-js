@@ -19,6 +19,7 @@ import {
   triggerKeyEvent
 } from 'dmn-js-shared/test/util/EventUtil';
 import { queryEditor } from 'dmn-js-shared/test/util/EditorUtil';
+import { translateModule } from 'dmn-js-shared/test/util/TranslateUtil';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 import nonDefaultExpressionLanguageXML from '../../expression-language.dmn';
@@ -50,6 +51,7 @@ describe('features/literal-expression - editor', function() {
     beforeEach(bootstrapModeler(literalExpressionXML, {
       debounceInput: false,
       additionalModules: [
+        translateModule,
         { variableResolver: [ 'value', variableResolver ] }
       ]
     }));
@@ -70,6 +72,14 @@ describe('features/literal-expression - editor', function() {
 
       // then
       expect(domQuery('.textarea [aria-label]', testContainer)).to.exist;
+    });
+
+
+    it('should translate accessible label', function() {
+
+      // then
+      expect(domQuery('.textarea [aria-label]', testContainer).getAttribute('aria-label'))
+        .to.equal('tr(Literal expression)');
     });
 
 

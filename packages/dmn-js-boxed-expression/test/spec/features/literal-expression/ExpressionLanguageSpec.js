@@ -14,6 +14,7 @@ import {
   triggerInputEvent,
   triggerInputSelectChange
 } from 'dmn-js-shared/test/util/EventUtil';
+import { translateModule } from 'dmn-js-shared/test/util/TranslateUtil';
 
 import literalExpressionXML from '../../literal-expression.dmn';
 import nonDefaultExpressionLanguageXML from '../../expression-language.dmn';
@@ -269,6 +270,25 @@ describe('features/literal-expression - expression language', function() {
     });
 
 
+    describe('translation', function() {
+
+      beforeEach(bootstrapModeler(nonDefaultExpressionLanguageXML, {
+        additionalModules: [ translateModule ]
+      }));
+
+
+      it('should translate label', function() {
+
+        // when
+        const label = domQuery('label', queryExpressionLanguage());
+
+        // then
+        expect(label.textContent).to.equal('tr(Expression language)');
+      });
+
+    });
+
+
     describe('business knowledge model', function() {
 
       beforeEach(bootstrapModeler(bkmXML, {
@@ -342,6 +362,25 @@ describe('features/literal-expression - expression language', function() {
 
         // then
         expect(queryExpressionLanguageSelect()).not.to.exist;
+      });
+
+    });
+
+
+    describe('translation', function() {
+
+      beforeEach(bootstrapViewer(nonDefaultExpressionLanguageXML, {
+        additionalModules: [ translateModule ]
+      }));
+
+
+      it('should translate label', function() {
+
+        // when
+        const expressionLanguage = queryExpressionLanguage();
+
+        // then
+        expect(expressionLanguage.textContent).to.contain('tr(Expression language)');
       });
 
     });
