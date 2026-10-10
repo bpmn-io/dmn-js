@@ -154,6 +154,19 @@ describe('Modeler', function() {
     });
 
 
+    it('should keep formal parameters', async function() {
+
+      // when
+      replaceWithDecisionTable();
+
+      await editor.open(findView(editor.getViews(), 'elMenu'));
+
+      // then
+      expect(domQuery('.function-definition-parameters', container).textContent)
+        .to.contain('menu');
+    });
+
+
     it('should export decision table as body of encapsulated logic', async function() {
 
       // when
