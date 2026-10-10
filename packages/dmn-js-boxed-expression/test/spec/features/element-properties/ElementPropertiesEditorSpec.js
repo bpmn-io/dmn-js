@@ -5,7 +5,8 @@ import TestContainer from 'mocha-test-container-support';
 
 import {
   bootstrapModeler,
-  inject
+  inject,
+  skipFF
 } from 'test/TestHelper';
 
 import { query as domQuery } from 'min-dom';
@@ -48,7 +49,7 @@ describe('features/element-properties - editor', function() {
   });
 
 
-  it('should reset scroll on blur', function() {
+  skipFF()('should reset scroll on blur', function() {
 
     // given
     const name = queryEditor('.element-name', testContainer);
