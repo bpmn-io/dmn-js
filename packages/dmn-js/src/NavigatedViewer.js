@@ -30,6 +30,7 @@ export default class Viewer extends Manager {
             (
               is(element, 'dmn:Decision') &&
               isAny(element.decisionLogic, [
+                'dmn:Context',
                 'dmn:DecisionTable',
                 'dmn:LiteralExpression'
               ])

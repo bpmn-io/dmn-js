@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import NavigatedViewer from 'src/NavigatedViewer';
 
-import { query as domQuery } from 'min-dom';
+import { query as domQuery, queryAll as domQueryAll } from 'min-dom';
 
 import { expectToBeAccessible, findView } from 'test/helper';
 
@@ -9,6 +9,7 @@ import { expectToBeAccessible, findView } from 'test/helper';
 const diagram = require('./diagram.dmn');
 const noDi = require('./no-di.dmn');
 const bkmDecisionTable = require('./bkm-decision-table.dmn');
+const contextDecision = require('./context-decision.dmn');
 
 const dmn_11 = require('./dmn-11.dmn');
 
@@ -114,6 +115,40 @@ describe('NavigatedViewer', function() {
     // then
     expect(bkmView.type).to.eql('boxedExpression');
     expect(warnings).to.have.lengthOf(0);
+  });
+
+
+  it('should open decision with context', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(contextDecision, { open: false });
+
+    const decisionView = findView(editor.getViews(), 'Decision_pricing');
+
+    // when
+    const { warnings } = await editor.open(decisionView);
+
+    // then
+    expect(decisionView.type).to.eql('boxedExpression');
+    expect(warnings).to.have.lengthOf(0);
+    expect(domQuery('.dmn-boxed-expression-body .context', container)).to.exist;
+  });
+
+
+  it('should display all decision tables of context', async function() {
+
+    // given
+    const editor = new NavigatedViewer({ container: container });
+
+    await editor.importXML(contextDecision, { open: false });
+
+    // when
+    await editor.open(findView(editor.getViews(), 'Decision_pricing'));
+
+    // then
+    expect(domQueryAll('.dmn-decision-table-container', container)).to.have.length(2);
   });
 
 
