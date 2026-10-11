@@ -290,18 +290,23 @@
 }
 
 /* decision table */
-.dmn-boxed-expression-container .dmn-boxed-expression-body:has(.dmn-decision-table-container) {
+
+/*
+ * a decision table which is the expression, or the body of the function which
+ * is the expression, fills the body; tables in contexts keep their height
+ */
+.dmn-boxed-expression-container .dmn-boxed-expression-body:not(:has(.context)):has(.dmn-decision-table-container) {
   flex: 1 1 auto;
   min-height: 150px;
 }
 
-.dmn-boxed-expression-container .function-definition:has(.dmn-decision-table-container) {
+.dmn-boxed-expression-container .function-definition:not(:has(.context)):has(.dmn-decision-table-container) {
   height: 100%;
   grid-template-columns: 50px minmax(0, 1fr);
   grid-template-rows: 50px minmax(0, 1fr);
 }
 
-.dmn-boxed-expression-container .function-definition:has(.dmn-decision-table-container) .function-definition-body {
+.dmn-boxed-expression-container .function-definition:not(:has(.context)):has(.dmn-decision-table-container) > .function-definition-body {
   min-height: 0;
 }
 
