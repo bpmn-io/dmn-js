@@ -9,8 +9,8 @@ export class DecisionTableComponentProvider {
   constructor(components, tableImporter) {
     components.onGetComponent('expression', ({ expression }) => {
 
-      // there is a single sheet, so only the imported table can be displayed
-      if (is(expression, 'dmn:DecisionTable') && tableImporter.getTable() === expression) {
+      // only imported tables can be displayed
+      if (is(expression, 'dmn:DecisionTable') && tableImporter.getRoot(expression)) {
         return DecisionTableComponent;
       }
     });
@@ -27,7 +27,7 @@ class DecisionTableComponent extends Component {
 
     const { injector } = context;
 
-    this._sheet = injector.get('sheet');
+    this._tableImporter = injector.get('tableImporter');
     this._eventBus = injector.get('eventBus');
     this._changeSupport = context.changeSupport;
     this._components = context.components;
@@ -35,6 +35,10 @@ class DecisionTableComponent extends Component {
     const throttle = injector.get('throttle');
 
     this.onScroll = throttle(this.onScroll);
+  }
+
+  getRoot() {
+    return this._tableImporter.getRoot(this.props.expression);
   }
 
   onElementsChanged = () => {
@@ -46,19 +50,20 @@ class DecisionTableComponent extends Component {
   };
 
   componentWillMount() {
-    const { id } = this._sheet.getRoot();
+    const { id } = this.getRoot();
+
+    // the root may be gone when unmounting
+    this._rootId = id;
 
     this._changeSupport.onElementsChanged(id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
-    const { id } = this._sheet.getRoot();
-
-    this._changeSupport.offElementsChanged(id, this.onElementsChanged);
+    this._changeSupport.offElementsChanged(this._rootId, this.onElementsChanged);
   }
 
   render() {
-    const { rows, cols } = this._sheet.getRoot();
+    const { rows, cols } = this.getRoot();
 
     const HitPolicy = this._components.getComponent('hit-policy');
     const afterComponents = this._components.getComponents('table.after');

@@ -11,7 +11,7 @@ import {
 
 import TranslateModule from 'diagram-js/lib/i18n/translate';
 
-import { importTable } from './import/Importer';
+import { importTables } from './import/Importer';
 
 import RenderModule from './render';
 import PoweredByModule from './features/powered-by';
@@ -81,8 +81,8 @@ export class Viewer extends BaseViewer {
         // update root element
         this._setRootElement(element);
 
-        // import decision table, if any
-        importTable(this, element);
+        // import decision tables, if any
+        importTables(this, element);
 
         // let others know about import
         eventBus.fire('import', element);

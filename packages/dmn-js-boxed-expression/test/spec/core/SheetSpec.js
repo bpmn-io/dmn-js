@@ -209,6 +209,8 @@ describe('core/Sheet', function() {
         // given
         addRoot(injector);
 
+        eventBus.fire('renderer.unmount');
+
         // when
         eventBus.fire('table.clear');
 
