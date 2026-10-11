@@ -223,6 +223,39 @@
   border-top: 1px solid var(--element-properties-border-color);
 }
 
+/* context */
+.dmn-boxed-expression-container .context {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+}
+
+.dmn-boxed-expression-container .context-entry {
+  display: contents;
+}
+
+.dmn-boxed-expression-container .context-entry-variable {
+  padding: var(--padding);
+  border-right: 1px solid var(--element-properties-border-color);
+  font-size: var(--font-size-big);
+}
+
+.dmn-boxed-expression-container .context-entry-variable-type {
+  color: var(--bio-text-subtle);
+}
+
+.dmn-boxed-expression-container .context-entry-variable,
+.dmn-boxed-expression-container .context-entry-value {
+  min-width: 0;
+  border-bottom: 1px solid var(--element-properties-border-color);
+}
+
+.dmn-boxed-expression-container .context-entry:last-child {
+  & .context-entry-variable,
+  & .context-entry-value {
+    border-bottom: none;
+  }
+}
+
 /* element-variable */
 
 .dmn-boxed-expression-container .element-variable {

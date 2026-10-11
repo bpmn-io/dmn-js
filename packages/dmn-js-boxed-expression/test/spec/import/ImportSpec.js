@@ -10,7 +10,7 @@ import noOutputXML from './no-output.dmn';
 import noTableXML from './no-decision-table.dmn';
 import noTableIdXML from './no-table-id.dmn';
 import missingEntriesXML from './missing-entries.dmn';
-import contextInFunctionXML from './context-in-function.dmn';
+import contextInFunctionXML from '../context-in-function.dmn';
 import contextInvalidTableXML from './context-invalid-table.dmn';
 import contextXML from '../context-two-tables.dmn';
 

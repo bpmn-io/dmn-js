@@ -15,8 +15,6 @@ import {
   inject
 } from 'test/helper';
 
-import ContextHost from 'test/helper/ContextHost';
-
 import { triggerClick } from 'dmn-js-shared/test/util/EventUtil';
 
 import contextXML from '../../context-two-tables.dmn';
@@ -26,10 +24,7 @@ describe('features/decision-table - several tables', function() {
 
   let testContainer, discount, shipping;
 
-  beforeEach(bootstrapModeler(contextXML, {
-    additionalModules: [ ContextHost ],
-    debounceInput: false
-  }));
+  beforeEach(bootstrapModeler(contextXML, { debounceInput: false }));
 
   beforeEach(inject(function(sheet) {
     [ discount, shipping ] = sheet.getRoots();

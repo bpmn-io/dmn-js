@@ -15,6 +15,7 @@ import { importTables } from './import/Importer';
 
 import RenderModule from './render';
 import PoweredByModule from './features/powered-by';
+import ContextModule from './features/context';
 import LiteralExpressionModule from './features/literal-expression';
 import FunctionDefinitionEditorModule from './features/function-definition';
 import ViewDrdModule from './features/view-drd';
@@ -262,6 +263,7 @@ export class Viewer extends BaseViewer {
       ViewDrdModule,
       ElementPropertiesModule,
       ElementLogicModule,
+      ContextModule,
       FunctionDefinitionEditorModule,
       LiteralExpressionModule,
       ElementVariableModule,

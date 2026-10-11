@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions_nested" name="Nested" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_nested" name="Nested">
+    <variable id="Decision_nested_variable" name="Nested" typeRef="number" />
+    <context id="Context_outer">
+      <contextEntry id="ContextEntry_inner">
+        <variable id="Variable_inner" name="inner" />
+        <context id="Context_inner">
+          <contextEntry id="ContextEntry_a">
+            <variable id="Variable_a" name="a" typeRef="number" />
+            <literalExpression id="LiteralExpression_a">
+              <text>1</text>
+            </literalExpression>
+          </contextEntry>
+          <contextEntry id="ContextEntry_inner_result">
+            <literalExpression id="LiteralExpression_inner_result">
+              <text>a + 1</text>
+            </literalExpression>
+          </contextEntry>
+        </context>
+      </contextEntry>
+      <contextEntry id="ContextEntry_result">
+        <literalExpression id="LiteralExpression_result">
+          <text>inner</text>
+        </literalExpression>
+      </contextEntry>
+    </context>
+  </decision>
+</definitions>
