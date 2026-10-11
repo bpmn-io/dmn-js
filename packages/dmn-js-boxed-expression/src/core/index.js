@@ -1,9 +1,9 @@
 import ElementFactory from 'table-js/lib/core/ElementFactory';
 import ElementRegistry from 'table-js/lib/core/ElementRegistry';
-import Sheet from 'table-js/lib/core/Sheet';
 import Throttle from 'table-js/lib/core/Throttle';
 
 import DmnFactory from './DmnFactory';
+import Sheet from './Sheet';
 import ImportModule from '../import';
 
 /**
