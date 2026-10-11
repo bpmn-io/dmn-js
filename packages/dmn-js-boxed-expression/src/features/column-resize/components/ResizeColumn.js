@@ -18,19 +18,19 @@ export default class ResizeColumn extends Component {
   }
 
   componentDidMount() {
-    const root = this.getRoot();
+    const { id } = this.getRoot();
 
-    this.changeSupport.onElementsChanged(root, this.onElementsChanged);
+    this.changeSupport.onElementsChanged(id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
-    const root = this.getRoot();
+    const { id } = this.getRoot();
 
-    this.changeSupport.offElementsChanged(root, this.onElementsChanged);
+    this.changeSupport.offElementsChanged(id, this.onElementsChanged);
   }
 
   getRoot() {
-    return this.sheet.getRoot();
+    return this.context.root;
   }
 
   onElementsChanged = () => {
@@ -95,7 +95,7 @@ export default class ResizeColumn extends Component {
   }
 }
 
-ResizeColumn.$inject = [ 'sheet', 'changeSupport', 'translate', 'modeling' ];
+ResizeColumn.$inject = [ 'changeSupport', 'translate', 'modeling' ];
 
 // helper
 function startResize({ node, event, minWidth, onEnd = noop }) {

@@ -680,6 +680,75 @@ describe('features/editor-actions', function() {
       ]);
     }));
   });
+
+
+  describe('row or col selected', function() {
+
+    [
+      'addRuleAbove',
+      'addRuleBelow'
+    ].forEach(function(action) {
+
+      it(`${ action } should do nothing`, inject(function(editorActions, selection) {
+
+        // given
+        selection.select(rule1);
+
+        // when
+        const rule = editorActions.trigger(action);
+
+        // then
+        expect(rule).not.to.exist;
+        expect(root.rows).to.have.lengthOf(4);
+      }));
+
+    });
+
+
+    [
+      'addInputLeft',
+      'addInputRight',
+      'addOutputLeft',
+      'addOutputRight'
+    ].forEach(function(action) {
+
+      it(`${ action } should do nothing`, inject(function(editorActions, selection) {
+
+        // given
+        selection.select(input1);
+
+        // when
+        const col = editorActions.trigger(action);
+
+        // then
+        expect(col).not.to.exist;
+        expect(root.cols).to.have.lengthOf(4);
+      }));
+
+    });
+
+  });
+
+
+  describe('cut cell', function() {
+
+    it('should keep command stack working', inject(
+      function(commandStack, editorActions, elementRegistry) {
+
+        // given
+        editorActions.trigger('cut', { element: elementRegistry.get('inputEntry1') });
+
+        editorActions.trigger('addRule');
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(root.rows).to.have.lengthOf(4);
+      }
+    ));
+
+  });
 });
 
 

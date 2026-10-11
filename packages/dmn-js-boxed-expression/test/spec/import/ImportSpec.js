@@ -12,7 +12,7 @@ import noTableIdXML from './no-table-id.dmn';
 import missingEntriesXML from './missing-entries.dmn';
 import contextInFunctionXML from './context-in-function.dmn';
 import contextInvalidTableXML from './context-invalid-table.dmn';
-import contextXML from './context-two-tables.dmn';
+import contextXML from '../context-two-tables.dmn';
 
 
 describe('import', function() {
@@ -72,7 +72,7 @@ describe('import', function() {
       // then
       const [ discount, shipping ] = getSheet().getRoots();
 
-      expect([ discount.cols.length, discount.rows.length ]).to.eql([ 2, 2 ]);
+      expect([ discount.cols.length, discount.rows.length ]).to.eql([ 3, 2 ]);
       expect([ shipping.cols.length, shipping.rows.length ]).to.eql([ 3, 1 ]);
     });
 

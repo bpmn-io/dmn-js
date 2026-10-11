@@ -46,7 +46,9 @@ export default class SimpleModeButtonComponent extends Component {
 
     eventBus.on('commandStack.changed', this.updatePosition);
 
-    eventBus.on('sheet.scroll', this.hideAndShowDebounced);
+    // scrolling happens within tables as well as within the view, which scrolls
+    // if tables share it with other expressions; scroll events do not bubble
+    this.renderer.getContainer().addEventListener('scroll', this.hideAndShowDebounced, true);
   }
 
   componentWillUnmount() {
@@ -56,7 +58,7 @@ export default class SimpleModeButtonComponent extends Component {
 
     eventBus.off('commandStack.changed', this.updatePosition);
 
-    eventBus.off('sheet.scroll', this.hideAndShowDebounced);
+    this.renderer.getContainer().removeEventListener('scroll', this.hideAndShowDebounced, true);
   }
 
   hideAndShowDebounced() {

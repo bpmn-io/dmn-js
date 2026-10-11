@@ -41,12 +41,19 @@ class DecisionTableComponent extends Component {
     return this._tableImporter.getRoot(this.props.expression);
   }
 
+  // descendants display and edit the table of this component
+  getChildContext() {
+    return {
+      root: this.getRoot()
+    };
+  }
+
   onElementsChanged = () => {
     this.forceUpdate();
   };
 
   onScroll = () => {
-    this._eventBus.fire('sheet.scroll');
+    this._eventBus.fire('sheet.scroll', { root: this.getRoot() });
   };
 
   componentWillMount() {

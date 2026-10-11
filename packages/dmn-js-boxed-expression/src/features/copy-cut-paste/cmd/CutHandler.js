@@ -6,10 +6,9 @@ import { Row, Col } from 'table-js/lib/model';
  */
 export default class CutHandler {
 
-  constructor(clipboard, modeling, sheet) {
+  constructor(clipboard, modeling) {
     this._clipboard = clipboard;
     this._modeling = modeling;
-    this._sheet = sheet;
   }
 
 
@@ -18,14 +17,18 @@ export default class CutHandler {
    */
   execute(context) {
     let {
-      data
+      data,
+      elements
     } = context;
 
     context.oldData = this._clipboard.get();
 
+    // the tables of the elements, which are removed afterwards
+    const roots = context.roots = unique(elements.map(element => element.root));
+
     this._clipboard.set(data);
 
-    return this._sheet.getRoot();
+    return roots;
   }
 
   postExecute(context) {
@@ -48,14 +51,22 @@ export default class CutHandler {
   revert(context) {
 
     const {
-      oldData
+      oldData,
+      roots
     } = context;
 
     this._clipboard.set(oldData);
 
-    return this._sheet.getRoot();
+    return roots;
   }
 
 }
 
-CutHandler.$inject = [ 'clipboard', 'modeling', 'sheet' ];
+CutHandler.$inject = [ 'clipboard', 'modeling' ];
+
+
+// helpers //////////
+
+function unique(array) {
+  return array.filter((element, index) => element && array.indexOf(element) === index);
+}

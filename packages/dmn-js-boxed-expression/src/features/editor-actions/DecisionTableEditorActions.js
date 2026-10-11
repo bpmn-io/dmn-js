@@ -3,9 +3,23 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 export default class DecisionTableEditorActions {
 
   constructor(copyCutPaste, editorActions, modeling, selection, cellSelection, sheet) {
+
+    // the table to act on: the one given, the one of the given element or
+    // selection, or the primary one
+    function getRoot(context = {}) {
+      const element = context.rule || context.input || context.output;
+
+      return context.root ||
+        (element && element.root) ||
+        (selection.hasSelection() && sheet.getRootOf(selection.get())) ||
+        sheet.getRoot();
+    }
+
     const actions = {
-      addRule() {
-        return modeling.addRow({ type: 'dmn:DecisionRule' });
+      addRule(context) {
+        const root = getRoot(context);
+
+        return modeling.addRow({ type: 'dmn:DecisionRule' }, undefined, root);
       },
       addRuleAbove(context) {
         let rule = context && context.rule;
@@ -16,14 +30,18 @@ export default class DecisionTableEditorActions {
 
         rule = rule || selection.get().row;
 
-        const root = sheet.getRoot(),
-              index = root.rows.indexOf(rule);
+        if (!rule) {
+          return;
+        }
+
+        const root = rule.root,
+              index = root ? root.rows.indexOf(rule) : -1;
 
         if (index === -1) {
           return;
         }
 
-        return modeling.addRow({ type: 'dmn:DecisionRule' }, index);
+        return modeling.addRow({ type: 'dmn:DecisionRule' }, index, root);
       },
       addRuleBelow(context) {
         let rule = context && context.rule;
@@ -34,14 +52,18 @@ export default class DecisionTableEditorActions {
 
         rule = rule || selection.get().row;
 
-        const root = sheet.getRoot(),
-              index = root.rows.indexOf(rule);
+        if (!rule) {
+          return;
+        }
+
+        const root = rule.root,
+              index = root ? root.rows.indexOf(rule) : -1;
 
         if (index === -1) {
           return;
         }
 
-        return modeling.addRow({ type: 'dmn:DecisionRule' }, index + 1);
+        return modeling.addRow({ type: 'dmn:DecisionRule' }, index + 1, root);
       },
       removeRule(context) {
         let rule = context && context.rule;
@@ -54,15 +76,15 @@ export default class DecisionTableEditorActions {
 
         modeling.removeRow(rule);
       },
-      addInput() {
-        const root = sheet.getRoot(),
+      addInput(context) {
+        const root = getRoot(context),
               businessObject = root.businessObject;
 
         const { input } = businessObject;
 
         return modeling.addCol({
           type: 'dmn:InputClause'
-        }, input ? input.length : 0);
+        }, input ? input.length : 0, root);
       },
       addInputLeft(context) {
         let input = context && context.input;
@@ -73,14 +95,18 @@ export default class DecisionTableEditorActions {
 
         input = input || selection.get().col;
 
-        const root = sheet.getRoot(),
-              index = root.cols.indexOf(input);
+        if (!input) {
+          return;
+        }
+
+        const root = input.root,
+              index = root ? root.cols.indexOf(input) : -1;
 
         if (index === -1) {
           return;
         }
 
-        return modeling.addCol({ type: 'dmn:InputClause' }, index);
+        return modeling.addCol({ type: 'dmn:InputClause' }, index, root);
       },
       addInputRight(context) {
         let input = context && context.input;
@@ -91,14 +117,18 @@ export default class DecisionTableEditorActions {
 
         input = input || selection.get().col;
 
-        const root = sheet.getRoot(),
-              index = root.cols.indexOf(input);
+        if (!input) {
+          return;
+        }
+
+        const root = input.root,
+              index = root ? root.cols.indexOf(input) : -1;
 
         if (index === -1) {
           return;
         }
 
-        return modeling.addCol({ type: 'dmn:InputClause' }, index + 1);
+        return modeling.addCol({ type: 'dmn:InputClause' }, index + 1, root);
       },
       removeInput(context) {
         let input = context && context.input;
@@ -111,8 +141,8 @@ export default class DecisionTableEditorActions {
 
         modeling.removeCol(input);
       },
-      addOutput() {
-        const root = sheet.getRoot(),
+      addOutput(context) {
+        const root = getRoot(context),
               businessObject = root.businessObject;
 
         const input = businessObject.get('input'),
@@ -120,7 +150,8 @@ export default class DecisionTableEditorActions {
 
         return modeling.addCol(
           { type: 'dmn:OutputClause' },
-          input.length + output.length
+          input.length + output.length,
+          root
         );
       },
       addOutputLeft(context) {
@@ -132,14 +163,18 @@ export default class DecisionTableEditorActions {
 
         output = output || selection.get().col;
 
-        const root = sheet.getRoot(),
-              index = root.cols.indexOf(output);
+        if (!output) {
+          return;
+        }
+
+        const root = output.root,
+              index = root ? root.cols.indexOf(output) : -1;
 
         if (index === -1) {
           return;
         }
 
-        return modeling.addCol({ type: 'dmn:OutputClause' }, index);
+        return modeling.addCol({ type: 'dmn:OutputClause' }, index, root);
       },
       addOutputRight(context) {
         let output = context && context.output;
@@ -150,14 +185,18 @@ export default class DecisionTableEditorActions {
 
         output = output || selection.get().col;
 
-        const root = sheet.getRoot(),
-              index = root.cols.indexOf(output);
+        if (!output) {
+          return;
+        }
+
+        const root = output.root,
+              index = root ? root.cols.indexOf(output) : -1;
 
         if (index === -1) {
           return;
         }
 
-        return modeling.addCol({ type: 'dmn:OutputClause' }, index + 1);
+        return modeling.addCol({ type: 'dmn:OutputClause' }, index + 1, root);
       },
       removeOutput(context) {
         let output = context && context.output;

@@ -12,15 +12,9 @@ const HIGH_PRIORITY = 2000;
 
 export default class DecisionTableModelingRules extends RuleProvider {
 
-  constructor(eventBus, sheet) {
-    super(eventBus);
-
-    this._sheet = sheet;
-  }
-
   init() {
     this.addRule('col.move', HIGH_PRIORITY, ({ col, index }) => {
-      const { businessObject } = this._sheet.getRoot(),
+      const { businessObject } = col.root,
             { input } = businessObject;
 
       if (isInput(col)) {
@@ -31,7 +25,7 @@ export default class DecisionTableModelingRules extends RuleProvider {
     });
 
     this.addRule('col.remove', HIGH_PRIORITY, ({ col }) => {
-      const { cols } = this._sheet.getRoot();
+      const { cols } = col.root;
 
       if (isOutput(col)) {
         return cols.filter(c => isOutput(c)).length > 1;
@@ -42,14 +36,14 @@ export default class DecisionTableModelingRules extends RuleProvider {
 
     // a rule that is aware of the data structure coming from copy and paste
     this.addRule('paste', HIGH_PRIORITY, ({ data, target }) => {
-      if (!data || !target) {
+      if (!data || !target || !target.root) {
         return false;
       }
 
       const { root } = data;
 
       if (target instanceof Row) {
-        return this.canPasteRows(root);
+        return this.canPasteRows(root, target.root);
       }
 
       if (target instanceof Col) {
@@ -60,8 +54,8 @@ export default class DecisionTableModelingRules extends RuleProvider {
     });
   }
 
-  canPasteRows(root) {
-    const { cols } = this._sheet.getRoot();
+  canPasteRows(root, targetRoot) {
+    const { cols } = targetRoot;
 
     return every(root, descriptor => {
       if (descriptor.type !== 'row') {
@@ -84,7 +78,7 @@ export default class DecisionTableModelingRules extends RuleProvider {
   }
 
   canPasteCols(root, targetCol) {
-    const { rows } = this._sheet.getRoot();
+    const { rows } = targetCol.root;
 
     return every(root, descriptor => {
       if (descriptor.type !== 'col') {
@@ -104,4 +98,4 @@ export default class DecisionTableModelingRules extends RuleProvider {
   }
 }
 
-DecisionTableModelingRules.$inject = [ 'eventBus', 'sheet' ];
+DecisionTableModelingRules.$inject = [ 'eventBus' ];

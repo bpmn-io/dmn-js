@@ -188,4 +188,29 @@ describe('simple mode', function() {
     }, 300);
   });
 
+
+  it('should hide and show debounced when scrolling view', function(done) {
+
+    // given
+    const view = domQuery('.viewer-container', testContainer);
+
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    triggerClick(cell, 0, 0);
+
+    // when
+    view.dispatchEvent(new Event('scroll'));
+
+    // then
+    expect(domQuery('.simple-mode-button', testContainer)).not.to.exist;
+
+    setTimeout(() => {
+
+      // but then
+      expect(domQuery('.simple-mode-button', testContainer)).to.exist;
+
+      done();
+    }, 300);
+  });
+
 });

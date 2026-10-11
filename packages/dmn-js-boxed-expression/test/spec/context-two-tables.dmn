@@ -12,12 +12,16 @@
             </inputExpression>
           </input>
           <output id="Output_discount" name="discount" typeRef="number" />
+          <output id="Output_reason" name="reason" typeRef="string" />
           <rule id="Rule_discount_1">
             <inputEntry id="UnaryTests_discount_1">
               <text>&lt; 18</text>
             </inputEntry>
             <outputEntry id="LiteralExpression_discount_1">
               <text>10</text>
+            </outputEntry>
+            <outputEntry id="LiteralExpression_reason_1">
+              <text>"youth"</text>
             </outputEntry>
           </rule>
           <rule id="Rule_discount_2">
@@ -26,6 +30,9 @@
             </inputEntry>
             <outputEntry id="LiteralExpression_discount_2">
               <text>0</text>
+            </outputEntry>
+            <outputEntry id="LiteralExpression_reason_2">
+              <text>"adult"</text>
             </outputEntry>
           </rule>
         </decisionTable>

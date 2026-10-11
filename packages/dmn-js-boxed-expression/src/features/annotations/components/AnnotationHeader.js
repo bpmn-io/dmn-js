@@ -23,11 +23,11 @@ export default class AnnotationHeader extends Component {
   }
 
   componentDidMount() {
-    this.changeSupport.onElementsChanged(this.getRoot(), this.onElementsChanged);
+    this.changeSupport.onElementsChanged(this.getRoot().id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
-    this.changeSupport.offElementsChanged(this.getRoot(), this.onElementsChanged);
+    this.changeSupport.offElementsChanged(this.getRoot().id, this.onElementsChanged);
   }
 
   onElementsChanged = () => {
@@ -35,7 +35,7 @@ export default class AnnotationHeader extends Component {
   };
 
   getRoot() {
-    return this.sheet.getRoot();
+    return this.context.root;
   }
 
   render() {
@@ -53,7 +53,7 @@ export default class AnnotationHeader extends Component {
             type: 'cell-inner',
             context: {
               cellType: 'annotations',
-              col: this.sheet.getRoot(),
+              col: this.getRoot(),
               minWidth: MIN_WIDTH
             }
           })
@@ -65,4 +65,4 @@ export default class AnnotationHeader extends Component {
   }
 }
 
-AnnotationHeader.$inject = [ 'changeSupport', 'sheet', 'translate' ];
+AnnotationHeader.$inject = [ 'changeSupport', 'translate' ];

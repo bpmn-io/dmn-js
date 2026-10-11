@@ -21,8 +21,6 @@ export default class DecisionTableHead extends Component {
 
     mixin(this, ComponentWithSlots);
 
-    this._sheet = context.injector.get('sheet');
-
     this._changeSupport = context.changeSupport;
   }
 
@@ -31,19 +29,19 @@ export default class DecisionTableHead extends Component {
   };
 
   componentWillMount() {
-    const root = this._sheet.getRoot();
+    const { root } = this.context;
 
     this._changeSupport.onElementsChanged(root.id, this.onElementsChanged);
   }
 
   componentWillUnmount() {
-    const root = this._sheet.getRoot();
+    const { root } = this.context;
 
     this._changeSupport.offElementsChanged(root.id, this.onElementsChanged);
   }
 
   render() {
-    const root = this._sheet.getRoot();
+    const { root } = this.context;
 
     if (!is(root, 'dmn:DMNElement')) {
       return null;
@@ -63,7 +61,7 @@ export default class DecisionTableHead extends Component {
         {
           this.slotFills({
             type: 'cell',
-            context: { cellType: 'before-label-cells' }
+            context: { cellType: 'before-label-cells', root }
           })
         }
 
@@ -102,7 +100,7 @@ export default class DecisionTableHead extends Component {
         {
           this.slotFills({
             type: 'cell',
-            context: { cellType: 'after-label-cells' }
+            context: { cellType: 'after-label-cells', root }
           })
         }
       </tr>

@@ -18,12 +18,12 @@ export default function AddInputOutputProvider(
     }
   });
 
-  eventBus.on('addInput', () => {
-    editorActions.trigger('addInput');
+  eventBus.on('addInput', (_, context) => {
+    editorActions.trigger('addInput', context);
   });
 
-  eventBus.on('addOutput', () => {
-    editorActions.trigger('addOutput');
+  eventBus.on('addOutput', (_, context) => {
+    editorActions.trigger('addOutput', context);
   });
 }
 
