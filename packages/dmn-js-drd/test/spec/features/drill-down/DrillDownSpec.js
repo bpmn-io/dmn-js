@@ -53,7 +53,7 @@ describe('features - drilldown', function() {
         var drillDownOverlayEls = queryAll('.drill-down-overlay', container);
 
         // then
-        expect(drillDownOverlayEls).to.have.length(3);
+        expect(drillDownOverlayEls).to.have.length(4);
       });
 
 
@@ -75,6 +75,12 @@ describe('features - drilldown', function() {
           'literal expression',
           'Decision_LiteralExpression',
           'dmn-icon-literal-expression'
+        );
+
+        verify(
+          'context',
+          'Decision_Context',
+          'dmn-icon-context'
         );
 
 
@@ -114,6 +120,12 @@ describe('features - drilldown', function() {
           'literal expression',
           'Decision_LiteralExpression',
           'Open literal expression'
+        );
+
+        verify(
+          'context',
+          'Decision_Context',
+          'Open context'
         );
 
         function verify(type, element, title) {
@@ -231,7 +243,7 @@ describe('features - drilldown', function() {
         var drillDownOverlayEls = queryAll('.drill-down-overlay', container);
 
         // then
-        expect(drillDownOverlayEls).to.have.length(3);
+        expect(drillDownOverlayEls).to.have.length(4);
       });
 
 
@@ -253,6 +265,12 @@ describe('features - drilldown', function() {
           'literal expression',
           'Decision_LiteralExpression',
           'dmn-icon-literal-expression'
+        );
+
+        verify(
+          'context',
+          'Decision_Context',
+          'dmn-icon-context'
         );
 
 

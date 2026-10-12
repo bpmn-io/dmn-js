@@ -14,6 +14,7 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: display contexts in the boxed expression view, and open decisions with a context in it
 * `FEAT`: display and edit several decision tables in one boxed expression view
 * `FEAT`: add drill-down for business knowledge models with a decision table body
+* `FEAT`: add drill-down for decisions and business knowledge models with a context
 * `CHORE`: merge `dmn-js-decision-table` and `dmn-js-literal-expression` into `dmn-js-boxed-expression`
 * `FIX`: clear undo history of the boxed expression view when opening another element
 * `FIX`: remove the type reference instead of writing an empty one when clearing the result type

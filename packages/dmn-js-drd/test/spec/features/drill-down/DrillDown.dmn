@@ -28,6 +28,17 @@
       </decisionTable>
     </encapsulatedLogic>
   </businessKnowledgeModel>
+  <decision id="Decision_Context" name="E">
+    <variable id="InformationItem_0ctx" name="E" />
+    <context id="Context_1">
+      <contextEntry id="ContextEntry_1">
+        <variable id="InformationItem_0ent" name="entry" />
+        <literalExpression id="LiteralExpression_0ent">
+          <text>1</text>
+        </literalExpression>
+      </contextEntry>
+    </context>
+  </decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_0kvydih">
       <dmndi:DMNShape id="Decision_Table_di" dmnElementRef="Decision_Table">
@@ -41,6 +52,9 @@
       </dmndi:DMNShape>
       <dmndi:DMNShape id="BKM_Table_di" dmnElementRef="BKM_Table">
         <dc:Bounds height="46" width="135" x="383" y="268" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="Decision_Context_di" dmnElementRef="Decision_Context">
+        <dc:Bounds height="80" width="180" x="151" y="388" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

@@ -39,6 +39,17 @@
   outline-offset: 2px;
 }
 
+/* the icon font has no context glyph */
+.djs-overlay .drill-down-overlay .dmn-icon-context::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: top;
+  background: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5'%3E%3Crect x='2' y='2' width='12' height='12'/%3E%3Cpath d='M6 2v12M2 8h12'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 .dmn-definitions {
   position: absolute;
   top: 20px;
