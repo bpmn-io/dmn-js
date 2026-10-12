@@ -206,6 +206,89 @@ else
       </rule>
     </decisionTable>
   </decision>
+  <decision id="dishCost" name="Dish Cost">
+    <variable id="dishCost_variable" name="dishCost" typeRef="number" />
+    <informationRequirement id="InformationRequirement_dishCost">
+      <requiredDecision href="#guestCount" />
+    </informationRequirement>
+    <context id="dishCostContext">
+      <contextEntry id="ContextEntry_food">
+        <variable id="Variable_food" name="food" typeRef="number" />
+        <decisionTable id="foodDecisionTable">
+          <input id="foodInput" label="Guest count">
+            <inputExpression id="foodInputExpression" typeRef="number">
+              <text>guestCount</text>
+            </inputExpression>
+          </input>
+          <output id="foodOutput" label="Cost per guest" name="food" typeRef="number" />
+          <rule id="foodRule1">
+            <inputEntry id="foodRule1Input">
+              <text>&lt; 10</text>
+            </inputEntry>
+            <outputEntry id="foodRule1Output">
+              <text>12</text>
+            </outputEntry>
+          </rule>
+          <rule id="foodRule2">
+            <inputEntry id="foodRule2Input">
+              <text>[10..20)</text>
+            </inputEntry>
+            <outputEntry id="foodRule2Output">
+              <text>10</text>
+            </outputEntry>
+          </rule>
+          <rule id="foodRule3">
+            <inputEntry id="foodRule3Input">
+              <text>&gt;= 20</text>
+            </inputEntry>
+            <outputEntry id="foodRule3Output">
+              <text>8</text>
+            </outputEntry>
+          </rule>
+        </decisionTable>
+      </contextEntry>
+      <contextEntry id="ContextEntry_service">
+        <variable id="Variable_service" name="service" typeRef="number" />
+        <decisionTable id="serviceDecisionTable" hitPolicy="FIRST">
+          <input id="serviceInput" label="Guest count">
+            <inputExpression id="serviceInputExpression" typeRef="number">
+              <text>guestCount</text>
+            </inputExpression>
+          </input>
+          <output id="serviceOutput" label="Service fee" name="service" typeRef="number" />
+          <rule id="serviceRule1">
+            <inputEntry id="serviceRule1Input">
+              <text>&gt; 15</text>
+            </inputEntry>
+            <outputEntry id="serviceRule1Output">
+              <text>50</text>
+            </outputEntry>
+          </rule>
+          <rule id="serviceRule2">
+            <inputEntry id="serviceRule2Input">
+              <text>&gt; 8</text>
+            </inputEntry>
+            <outputEntry id="serviceRule2Output">
+              <text>20</text>
+            </outputEntry>
+          </rule>
+          <rule id="serviceRule3">
+            <inputEntry id="serviceRule3Input">
+              <text></text>
+            </inputEntry>
+            <outputEntry id="serviceRule3Output">
+              <text>0</text>
+            </outputEntry>
+          </rule>
+        </decisionTable>
+      </contextEntry>
+      <contextEntry id="ContextEntry_result">
+        <literalExpression id="dishCostResult">
+          <text>guestCount * food + service</text>
+        </literalExpression>
+      </contextEntry>
+    </context>
+  </decision>
   <decision id="Decision_1koag35" name="It&#39;s lit">
     <variable id="InformationItem_10cg57g" name="itsLit" typeRef="string" />
     <literalExpression id="LiteralExpression_0bhgyiw" expressionLanguage="javascript">
@@ -272,6 +355,13 @@ else
       <dmndi:DMNEdge id="KnowledgeRequirement_0gybckk_di" dmnElementRef="KnowledgeRequirement_0gybckk">
         <di:waypoint x="450" y="275" />
         <di:waypoint x="410" y="209" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="dishCost_di" dmnElementRef="dishCost">
+        <dc:Bounds height="80" width="180" x="430" y="380" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="InformationRequirement_dishCost_di" dmnElementRef="InformationRequirement_dishCost">
+        <di:waypoint x="380" y="218" />
+        <di:waypoint x="500" y="380" />
       </dmndi:DMNEdge>
       <dmndi:DMNShape id="Decision_1koag35_di" dmnElementRef="Decision_1koag35">
         <dc:Bounds height="80" width="180" x="670" y="141" />
