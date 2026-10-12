@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Modeler from 'src/Modeler';
 
-import { query as domQuery } from 'min-dom';
+import { query as domQuery, queryAll as domQueryAll } from 'min-dom';
 
 import { expectToBeAccessible, findView, insertCSS } from 'test/helper';
 
@@ -36,6 +36,7 @@ describe('Modeler', function() {
   const noDi = require('./no-di.dmn');
   const noDisplayableContents = require('./no-displayable-contents.dmn');
   const bkmDecisionTable = require('./bkm-decision-table.dmn');
+  const contextDecision = require('./context-decision.dmn');
 
   let container;
   let editor;
@@ -109,6 +110,79 @@ describe('Modeler', function() {
 
     // then
     expect(viewTypes).not.to.include('literalExpression');
+  });
+
+
+  it('should open decision with context', async function() {
+
+    // given
+    await editor.importXML(contextDecision, { open: false });
+
+    const decisionView = findView(editor.getViews(), 'Decision_pricing');
+
+    // when
+    const { warnings } = await editor.open(decisionView);
+
+    // then
+    expect(decisionView.type).to.eql('boxedExpression');
+    expect(warnings).to.have.lengthOf(0);
+    expect(domQuery('.dmn-boxed-expression-body .context', container)).to.exist;
+  });
+
+
+  it('should display all decision tables of context', async function() {
+
+    // given
+    await editor.importXML(contextDecision, { open: false });
+
+    // when
+    await editor.open(findView(editor.getViews(), 'Decision_pricing'));
+
+    // then
+    expect(domQueryAll('.dmn-decision-table-container', container)).to.have.length(2);
+  });
+
+
+  it('should edit decision tables of context independently', async function() {
+
+    // given
+    await editor.importXML(contextDecision, { open: false });
+
+    await editor.open(findView(editor.getViews(), 'Decision_pricing'));
+
+    const sheet = editor.getActiveViewer().get('sheet');
+
+    const [ discount, shipping ] = sheet.getRoots();
+
+    // when
+    editor.getActiveViewer().get('editorActions').trigger('addRule', { root: shipping });
+
+    // then
+    expect(shipping.businessObject.rule).to.have.length(2);
+    expect(discount.businessObject.rule).to.have.length(2);
+  });
+
+
+  it('should export edited decision tables of context', async function() {
+
+    // given
+    await editor.importXML(contextDecision, { open: false });
+
+    await editor.open(findView(editor.getViews(), 'Decision_pricing'));
+
+    const viewer = editor.getActiveViewer();
+
+    const [ , shipping ] = viewer.get('sheet').getRoots();
+
+    viewer.get('editorActions').trigger('addRule', { root: shipping });
+
+    // when
+    const { xml } = await editor.saveXML();
+
+    // then
+    const shippingTable = xml.slice(xml.indexOf('DecisionTable_shipping'));
+
+    expect(shippingTable.match(/<rule /g)).to.have.length(2);
   });
 
 

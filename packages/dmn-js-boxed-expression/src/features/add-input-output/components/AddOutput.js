@@ -6,7 +6,7 @@ export default class AddOutput extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this._sheet = context.injector.get('sheet');
+    this._root = context.root;
     this._eventBus = context.injector.get('eventBus');
 
     this._changeSupport = context.changeSupport;
@@ -30,7 +30,7 @@ export default class AddOutput extends Component {
   }
 
   getRoot() {
-    return this._sheet.getRoot();
+    return this._root;
   }
 
   handleClick = (e) => {
@@ -40,7 +40,7 @@ export default class AddOutput extends Component {
   };
 
   add = () => {
-    this._eventBus.fire('addOutput');
+    this._eventBus.fire('addOutput', { root: this.getRoot() });
   };
 
   render() {

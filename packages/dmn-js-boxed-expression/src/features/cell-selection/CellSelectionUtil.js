@@ -14,6 +14,8 @@ export const SELECTABLE_SELECTOR = '[contenteditable]';
 
 export const ELEMENT_SELECTOR = '[data-element-id]';
 
+export const TABLE_SELECTOR = '.tjs-table';
+
 
 export function getElementId(node) {
   return node.getAttribute('data-element-id');
@@ -34,6 +36,15 @@ export function getElementCoords(node) {
   };
 }
 
+/**
+ * Return the node with the given coordinates. Coordinates are only unique
+ * within a table.
+ *
+ * @param {{ row: string, col: string }} elementCoords
+ * @param {Element} container container of a table
+ *
+ * @return {Element|null}
+ */
 export function getNodeByCoords(elementCoords, container) {
   const coordsAttr = `${elementCoords.row}:${elementCoords.col}`;
 

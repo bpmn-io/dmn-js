@@ -2,6 +2,12 @@ import { assign } from 'min-dash';
 
 import BaseModeling from 'table-js/lib/features/modeling/Modeling';
 
+import AddColHandler from './cmd/AddColHandler';
+import AddRowHandler from './cmd/AddRowHandler';
+import MoveColHandler from './cmd/MoveColHandler';
+import MoveRowHandler from './cmd/MoveRowHandler';
+import RemoveColHandler from './cmd/RemoveColHandler';
+import RemoveRowHandler from './cmd/RemoveRowHandler';
 import UpdateAllowedValuesHandler from './cmd/UpdateAllowedValuesHandler';
 import UpdatePropertiesHandler
   from 'dmn-js-shared/lib/features/modeling/cmd/UpdatePropertiesHandler';
@@ -25,15 +31,59 @@ export default class Modeling extends BaseModeling {
 
   static _getHandlers() {
     return assign({}, super._getHandlers(), {
+      'col.add': AddColHandler,
+      'col.move': MoveColHandler,
+      'col.remove': RemoveColHandler,
+      'row.add': AddRowHandler,
+      'row.move': MoveRowHandler,
+      'row.remove': RemoveRowHandler,
       'editAllowedValues': UpdateAllowedValuesHandler,
       'element.updateProperties': UpdatePropertiesHandler,
       'id.updateClaim': IdClaimHandler
     });
   }
 
-  editHitPolicy(hitPolicy, aggregation) {
-    const root = this._sheet.getRoot(),
-          businessObject = root.businessObject;
+  /**
+   * Add a row to a root.
+   *
+   * @param {Object} attrs
+   * @param {number} [index]
+   * @param {Root} [root] defaults to the primary root
+   *
+   * @return {Row}
+   */
+  addRow(attrs, index, root) {
+    const row = this._create('row', attrs);
+
+    this._commandStack.execute('row.add', { row, index, root });
+
+    return row;
+  }
+
+  /**
+   * Add a col to a root.
+   *
+   * @param {Object} attrs
+   * @param {number} [index]
+   * @param {Root} [root] defaults to the primary root
+   *
+   * @return {Col}
+   */
+  addCol(attrs, index, root) {
+    const col = this._create('col', attrs);
+
+    this._commandStack.execute('col.add', { col, index, root });
+
+    return col;
+  }
+
+  /**
+   * @param {string} hitPolicy
+   * @param {string} aggregation
+   * @param {ModdleElement} [table] defaults to the table of the primary root
+   */
+  editHitPolicy(hitPolicy, aggregation, table) {
+    const businessObject = table || this._sheet.getRoot().businessObject;
 
     const context = {
       element: businessObject,

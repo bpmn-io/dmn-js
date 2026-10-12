@@ -1,4 +1,7 @@
+import { closest } from 'min-dom';
+
 import {
+  TABLE_SELECTOR,
   ensureFocus,
   findSelectableAncestor,
   getElementCoords,
@@ -204,7 +207,10 @@ export default function CellSelection(
 
     const nextCoords = getNextCoords(coords, direction);
 
-    const nextNode = getNodeByCoords(nextCoords, container);
+    // coordinates are only unique within the table of the selected cell
+    const tableNode = closest(selectionEl, TABLE_SELECTOR, true) || container;
+
+    const nextNode = getNodeByCoords(nextCoords, tableNode);
 
     if (!nextNode) {
       return false;

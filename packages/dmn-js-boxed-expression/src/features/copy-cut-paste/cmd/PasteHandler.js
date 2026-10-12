@@ -14,8 +14,7 @@ export default class PasteHandler {
       elementRegistry,
       eventBus,
       moddle,
-      modeling,
-      sheet
+      modeling
   ) {
     this._clipboard = clipboard;
     this._dmnFactory = dmnFactory;
@@ -24,7 +23,6 @@ export default class PasteHandler {
     this._eventBus = eventBus;
     this._model = moddle;
     this._modeling = modeling;
-    this._sheet = sheet;
   }
 
 
@@ -43,7 +41,11 @@ export default class PasteHandler {
       throw new Error('missing clipboard data');
     }
 
-    const root = this._sheet.getRoot();
+    const root = element.root;
+
+    if (!root) {
+      return;
+    }
 
     // (1) create elements from descriptors
     const elements = reviveDescriptor(data.elements, {
@@ -66,7 +68,7 @@ export default class PasteHandler {
           index++;
         }
 
-        this._modeling.addRow(element, index);
+        this._modeling.addRow(element, index, root);
       });
 
     } else if (element instanceof Col) {
@@ -82,14 +84,14 @@ export default class PasteHandler {
           index++;
         }
 
-        this._modeling.addCol(element, index);
+        this._modeling.addCol(element, index, root);
       });
 
     }
 
     context.oldElements = this._clipboard.get();
 
-    return this._sheet.getRoot();
+    return root;
   }
 
   /**
@@ -108,6 +110,5 @@ PasteHandler.$inject = [
   'elementRegistry',
   'eventBus',
   'moddle',
-  'modeling',
-  'sheet'
+  'modeling'
 ];

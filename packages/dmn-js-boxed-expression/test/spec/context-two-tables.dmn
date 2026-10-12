@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions_context" name="Pricing" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_pricing" name="Pricing">
+    <variable id="Decision_pricing_variable" name="Pricing" typeRef="number" />
+    <context id="Context_1">
+      <contextEntry id="ContextEntry_discount">
+        <variable id="Variable_discount" name="discount" typeRef="number" />
+        <decisionTable id="DecisionTable_discount">
+          <input id="Input_age">
+            <inputExpression id="InputExpression_age" typeRef="number">
+              <text>age</text>
+            </inputExpression>
+          </input>
+          <output id="Output_discount" name="discount" typeRef="number" />
+          <output id="Output_reason" name="reason" typeRef="string" />
+          <rule id="Rule_discount_1">
+            <inputEntry id="UnaryTests_discount_1">
+              <text>&lt; 18</text>
+            </inputEntry>
+            <outputEntry id="LiteralExpression_discount_1">
+              <text>10</text>
+            </outputEntry>
+            <outputEntry id="LiteralExpression_reason_1">
+              <text>"youth"</text>
+            </outputEntry>
+          </rule>
+          <rule id="Rule_discount_2">
+            <inputEntry id="UnaryTests_discount_2">
+              <text>&gt;= 18</text>
+            </inputEntry>
+            <outputEntry id="LiteralExpression_discount_2">
+              <text>0</text>
+            </outputEntry>
+            <outputEntry id="LiteralExpression_reason_2">
+              <text>"adult"</text>
+            </outputEntry>
+          </rule>
+        </decisionTable>
+      </contextEntry>
+      <contextEntry id="ContextEntry_shipping">
+        <variable id="Variable_shipping" name="shipping" typeRef="number" />
+        <decisionTable id="DecisionTable_shipping" hitPolicy="FIRST">
+          <input id="Input_weight">
+            <inputExpression id="InputExpression_weight" typeRef="number">
+              <text>weight</text>
+            </inputExpression>
+          </input>
+          <input id="Input_express">
+            <inputExpression id="InputExpression_express" typeRef="boolean">
+              <text>express</text>
+            </inputExpression>
+          </input>
+          <output id="Output_shipping" name="shipping" typeRef="number" />
+          <rule id="Rule_shipping_1">
+            <inputEntry id="UnaryTests_shipping_1">
+              <text>&lt; 5</text>
+            </inputEntry>
+            <inputEntry id="UnaryTests_shipping_2">
+              <text>true</text>
+            </inputEntry>
+            <outputEntry id="LiteralExpression_shipping_1">
+              <text>15</text>
+            </outputEntry>
+          </rule>
+        </decisionTable>
+      </contextEntry>
+      <contextEntry id="ContextEntry_result">
+        <literalExpression id="LiteralExpression_result">
+          <text>shipping - discount</text>
+        </literalExpression>
+      </contextEntry>
+    </context>
+  </decision>
+</definitions>

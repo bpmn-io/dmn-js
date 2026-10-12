@@ -1,21 +1,21 @@
 import TableTreeWalker from './TableTreeWalker';
 
-import { getDecisionTable } from './Util';
+import { getDecisionTables } from './Util';
 
 
 /**
- * Import the decision table of a decision or business knowledge model,
+ * Import the decision tables of a decision or business knowledge model,
  * if it has any, into the sheet.
  *
- * Throws if the decision table is not valid.
+ * Throws if a decision table is not valid.
  *
  * @param {Viewer} viewer
  * @param {ModdleElement} element decision or business knowledge model
  */
-export function importTable(viewer, element) {
-  const table = getDecisionTable(element);
+export function importTables(viewer, element) {
+  const tables = getDecisionTables(element);
 
-  if (!table) {
+  if (!tables.length) {
     return;
   }
 
@@ -31,5 +31,7 @@ export function importTable(viewer, element) {
     }
   };
 
-  new TableTreeWalker(visitor).handleTable(table);
+  const walker = new TableTreeWalker(visitor);
+
+  tables.forEach(table => walker.handleTable(table));
 }

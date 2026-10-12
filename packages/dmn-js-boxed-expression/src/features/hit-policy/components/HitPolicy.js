@@ -1,9 +1,5 @@
 import { Component } from 'inferno';
 
-import {
-  inject
-} from 'table-js/lib/components';
-
 import { HIT_POLICIES } from './../HitPolicies';
 
 import { find } from 'min-dash';
@@ -14,12 +10,10 @@ export default class HitPolicy extends Component {
     super(props, context);
 
     this._translate = context.injector.get('translate');
-
-    inject(this);
   }
 
   getRoot() {
-    return this.sheet.getRoot();
+    return this.context.root;
   }
 
   render() {
@@ -47,11 +41,6 @@ export default class HitPolicy extends Component {
     );
   }
 }
-
-HitPolicy.$inject = [
-  'sheet'
-];
-
 
 // helpers //////////////////////
 function isEqualHitPolicy(a, b) {

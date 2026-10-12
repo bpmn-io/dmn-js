@@ -45,11 +45,10 @@ export default class InputCell extends Component {
     const { injector } = this.context;
 
     this._changeSupport = this.context.changeSupport;
-    this._sheet = injector.get('sheet');
     this._eventBus = injector.get('eventBus');
     this._elementRegistry = injector.get('elementRegistry');
 
-    const root = this._sheet.getRoot();
+    const { root } = this.context;
 
     const { input } = this.props;
 
@@ -58,7 +57,7 @@ export default class InputCell extends Component {
   }
 
   componentWillUnmount() {
-    const root = this._sheet.getRoot();
+    const { root } = this.context;
 
     const { input } = this.props;
 

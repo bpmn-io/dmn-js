@@ -24,7 +24,7 @@ export default class AddRuleFootComponent extends Component {
   };
 
   addRule(colIndex) {
-    this._eventBus.fire('addRule', { colIndex });
+    this._eventBus.fire('addRule', { colIndex, root: this.context.root });
   }
 
   render() {
@@ -39,7 +39,7 @@ export default class AddRuleFootComponent extends Component {
       </td>
     ];
 
-    const { businessObject } = this.sheet.getRoot();
+    const { businessObject } = this.context.root;
 
     if (!businessObject.input || !businessObject.input.length) {
       cells.push(<td className="input-cell">-</td>);
@@ -80,4 +80,4 @@ export default class AddRuleFootComponent extends Component {
   }
 }
 
-AddRuleFootComponent.$inject = [ 'sheet', 'translate' ];
+AddRuleFootComponent.$inject = [ 'translate' ];

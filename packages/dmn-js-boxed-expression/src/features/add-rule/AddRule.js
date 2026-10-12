@@ -5,7 +5,7 @@ export default class AddRule {
     components.onGetComponent('table.foot', () => AddRuleFootComponent);
 
     eventBus.on('addRule', (e, context) => {
-      const rule = editorActions.trigger('addRule');
+      const rule = editorActions.trigger('addRule', { root: context.root });
       const colIndex = context.colIndex;
 
       if (rule.cells[colIndex]) {

@@ -15,20 +15,32 @@ export default class TableImporter {
   constructor(elementFactory, eventBus, sheet) {
     this._elementFactory = elementFactory;
     this._sheet = sheet;
-    this._table = null;
+
+    // decision table -> root
+    this._roots = new Map();
+
+    // the root which is imported at the moment
+    this._root = null;
 
     eventBus.on('table.clear', () => {
-      this._table = null;
+      this._roots.clear();
+      this._root = null;
+    });
+
+    eventBus.on('sheet.rootRemoved', ({ root }) => {
+      this._roots.delete(root.businessObject);
     });
   }
 
   /**
-   * Return the decision table that has been imported, if any.
+   * Return the root of a decision table that has been imported.
    *
-   * @return {ModdleElement|null}
+   * @param {ModdleElement} table
+   *
+   * @return {Root|undefined}
    */
-  getTable() {
-    return this._table;
+  getRoot(table) {
+    return this._roots.get(table);
   }
 
   /**
@@ -41,23 +53,30 @@ export default class TableImporter {
     if (is(semantic, 'dmn:DecisionTable')) {
       element = this._elementFactory.createRoot(elementData(semantic));
 
-      this._sheet.setRoot(element);
+      // the first table is the primary root
+      if (this._roots.size) {
+        this._sheet.addRoot(element);
+      } else {
+        this._sheet.setRoot(element);
+      }
 
-      this._table = semantic;
+      this._roots.set(semantic, element);
+
+      this._root = element;
     }
 
     // input clause
     else if (is(semantic, 'dmn:InputClause')) {
       element = this._elementFactory.createCol(elementData(semantic));
 
-      this._sheet.addCol(element);
+      this._sheet.addCol(element, undefined, this._root);
     }
 
     // output clause
     else if (is(semantic, 'dmn:OutputClause')) {
       element = this._elementFactory.createCol(elementData(semantic));
 
-      this._sheet.addCol(element);
+      this._sheet.addCol(element, undefined, this._root);
     }
 
     // rule
@@ -81,7 +100,7 @@ export default class TableImporter {
         cells
       }));
 
-      this._sheet.addRow(element);
+      this._sheet.addRow(element, undefined, this._root);
     }
 
     return element;

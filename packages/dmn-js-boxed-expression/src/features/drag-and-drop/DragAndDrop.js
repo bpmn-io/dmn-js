@@ -21,13 +21,12 @@ export default class DragAndDrop {
 
   constructor(
       components, elementRegistry, eventBus,
-      dragAndDrop, renderer, rules, sheet, translate) {
+      dragAndDrop, renderer, rules, translate) {
 
     this._elementRegistry = elementRegistry;
     this._dragAndDrop = dragAndDrop;
     this._renderer = renderer;
     this._rules = rules;
-    this._sheet = sheet;
     this._translate = translate;
 
     // provide drag handle for drag and drop
@@ -62,13 +61,17 @@ export default class DragAndDrop {
         hoverEl
       } = dragContext;
 
-      // can always drag rows
+      // can drag rows within their table
       if (draggedElement instanceof Row) {
-        return true;
+        const hoverRow = this._elementRegistry.get(hoverEl.dataset.rowId);
+
+        return !hoverRow || hoverRow.root === draggedElement.root;
       }
 
       if (draggedElement instanceof Col) {
-        const dropIndex = getTargetColIndex(hoverEl, this._elementRegistry, this._sheet);
+        const dropIndex = getTargetColIndex(
+          hoverEl, this._elementRegistry, draggedElement
+        );
 
         // cannot drop as we cannot compute the drop index
         if (dropIndex === -1) {
@@ -209,7 +212,7 @@ export default class DragAndDrop {
         const rowId = targetEl.dataset.rowId,
               row = this._elementRegistry.get(rowId);
 
-        if (!row || row === draggedElement) {
+        if (!row || row === draggedElement || row.root !== draggedElement.root) {
           return;
         }
 
@@ -217,7 +220,7 @@ export default class DragAndDrop {
           draggedElement,
           row,
           verticalPosition,
-          this._sheet.getRoot().rows
+          draggedElement.root.rows
         );
 
         if (targetRow === draggedElement) {
@@ -238,7 +241,7 @@ export default class DragAndDrop {
         const colId = targetEl.dataset.colId,
               col = this._elementRegistry.get(colId);
 
-        if (!col || col === draggedElement) {
+        if (!col || col === draggedElement || col.root !== draggedElement.root) {
           return;
         }
 
@@ -246,7 +249,7 @@ export default class DragAndDrop {
           draggedElement,
           col,
           horizontalPosition,
-          this._sheet.getRoot().cols
+          draggedElement.root.cols
         );
 
         if (targetCol === draggedElement) {
@@ -310,22 +313,20 @@ DragAndDrop.$inject = [
   'dragAndDrop',
   'renderer',
   'rules',
-  'sheet',
   'translate'
 ];
 
 // helpers //////////
 
-function getTargetColIndex(cellEl, elementRegistry, sheet) {
+function getTargetColIndex(cellEl, elementRegistry, draggedCol) {
   const targetCol = elementRegistry.get(cellEl.dataset.colId);
 
-  if (!targetCol) {
+  // cols cannot be dropped onto another table
+  if (!targetCol || targetCol.root !== draggedCol.root) {
     return -1;
   }
 
-  const { cols } = sheet.getRoot();
-
-  return cols.indexOf(targetCol);
+  return targetCol.root.cols.indexOf(targetCol);
 }
 
 function highlightRow(dragOverCell, container, position) {

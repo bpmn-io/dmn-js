@@ -22,7 +22,7 @@ export default class EditableHitPolicy extends Component {
   }
 
   onChange = ({ aggregation, hitPolicy }) => {
-    this.modeling.editHitPolicy(hitPolicy, aggregation);
+    this.modeling.editHitPolicy(hitPolicy, aggregation, this.getRoot().businessObject);
   };
 
   onElementsChanged = () => {
@@ -38,7 +38,7 @@ export default class EditableHitPolicy extends Component {
   }
 
   getRoot() {
-    return this.sheet.getRoot();
+    return this.context.root;
   }
 
   render() {
@@ -73,7 +73,6 @@ export default class EditableHitPolicy extends Component {
 
 EditableHitPolicy.$inject = [
   'changeSupport',
-  'sheet',
   'modeling'
 ];
 

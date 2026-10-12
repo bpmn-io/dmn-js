@@ -4,9 +4,13 @@ import CreateInputsCell from './components/CreateInputCell';
 const LOW_PRIORITY = 500;
 
 export default class CreateInputsProvider {
-  constructor(components, sheet) {
-    components.onGetComponent('cell', LOW_PRIORITY, ({ cellType }) => {
-      const { businessObject } = sheet.getRoot();
+  constructor(components) {
+    components.onGetComponent('cell', LOW_PRIORITY, ({ cellType, root, row }) => {
+      if (cellType !== 'before-label-cells' && cellType !== 'before-rule-cells') {
+        return;
+      }
+
+      const { businessObject } = root || row.root;
 
       if (businessObject.input && businessObject.input.length) {
         return;
@@ -14,11 +18,11 @@ export default class CreateInputsProvider {
 
       if (cellType === 'before-label-cells') {
         return CreateInputsHeaderCell;
-      } else if (cellType === 'before-rule-cells') {
+      } else {
         return CreateInputsCell;
       }
     });
   }
 }
 
-CreateInputsProvider.$inject = [ 'components', 'sheet' ];
+CreateInputsProvider.$inject = [ 'components' ];

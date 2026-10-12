@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions_empty" name="Empty" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="Decision_empty" name="Empty">
+    <variable id="Decision_empty_variable" name="Empty" />
+    <context id="Context_1">
+      <contextEntry id="ContextEntry_unnamed">
+        <variable id="Variable_unnamed" />
+        <literalExpression id="LiteralExpression_1">
+          <text>1</text>
+        </literalExpression>
+      </contextEntry>
+      <contextEntry id="ContextEntry_no_value">
+        <variable id="Variable_no_value" name="empty" typeRef="string" />
+      </contextEntry>
+    </context>
+  </decision>
+</definitions>

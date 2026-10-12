@@ -155,8 +155,6 @@ describe('modeling rules', function() {
           // given
           const rule1 = elementRegistry.get('rule1');
 
-          modeling.removeRow(rule1);
-
           modeling.addCol({ type: 'dmn:InputClause' }, 0);
 
           // when
@@ -214,8 +212,6 @@ describe('modeling rules', function() {
 
           // given
           const input1 = elementRegistry.get('input1');
-
-          modeling.removeCol(input1);
 
           modeling.addRow({ type: 'dmn:DecisionRule' });
 
