@@ -1,7 +1,8 @@
 import { expect } from 'chai';
 
 import { DmnModdle } from 'dmn-moddle';
-import DataTypes from 'src/features/data-types/DataTypes';
+import { bootstrap, getViewerJS } from '../base/viewer/TestHelper';
+import DataTypesModule from 'src/features/data-types';
 import { getTypeRefOptions } from 'src/util/TypeRefUtil';
 
 
@@ -15,7 +16,12 @@ describe('util/TypeRefUtil', function() {
       itemDefinition: [ 'Applicant', 'string', 'Applicant', 'Address' ]
         .map(name => moddle.create('dmn:ItemDefinition', { name }))
     });
-    const dataTypes = new DataTypes([ 'string', 'integer' ]);
+    bootstrap({
+      modules: [ DataTypesModule ],
+      dataTypes: [ 'string', 'integer' ]
+    })();
+
+    const dataTypes = getViewerJS().get('dataTypes');
     const translate = text => `translated ${ text }`;
 
     // when
