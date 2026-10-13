@@ -163,6 +163,53 @@ describe('DataTypes', function() {
   });
 
 
+  it('should pass model context to providers and preserve provider precedence', async function() {
+
+    // given
+    const dataTypes = createDataTypes({ dataTypes: [ 'string' ] });
+    const { rootElement } = await createDiagram([ 'Applicant', 'Applicant' ]);
+    const provider = { getDataTypes: sinon.spy((types, element) => {
+      expect(element).to.equal(rootElement);
+      return [ ...types, 'Address' ];
+    }) };
+    dataTypes.registerProvider(750, provider);
+
+    // when
+    const types = dataTypes.getAll(rootElement);
+
+    // then
+    expect(types).to.eql([ 'string', 'Address', 'Applicant' ]);
+    expect(provider.getDataTypes).to.have.been.calledOnce;
+  });
+
+
+  it('should allow a later provider to replace model types', async function() {
+
+    // given
+    const dataTypes = createDataTypes();
+    const { rootElement } = await createDiagram([ 'Applicant' ]);
+    dataTypes.registerProvider(250, { getDataTypes: () => [ 'Replacement' ] });
+
+    // then
+    expect(dataTypes.getAll(rootElement)).to.eql([ 'Replacement' ]);
+  });
+
+
+  it('should pick up item definitions added without reimport', async function() {
+
+    // given
+    const dataTypes = createDataTypes();
+    const { rootElement } = await createDiagram([]);
+    dataTypes.getAll(rootElement);
+    rootElement.get('itemDefinition').push(new DmnModdle().create('dmn:ItemDefinition', {
+      name: 'Applicant'
+    }));
+
+    // then
+    expect(dataTypes.getAll(rootElement)).to.eql([ ...DEFAULT_DATA_TYPES, 'Applicant' ]);
+  });
+
+
   describe('diagram types', function() {
 
     [ 'definitions', 'decision', 'inputExpression' ].forEach(id => {

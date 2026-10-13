@@ -1,5 +1,3 @@
-import { getBusinessObject, is } from '../../util/ModelUtil';
-
 /**
  * Provide data types via config, or via registered providers.
  *
@@ -44,7 +42,7 @@ export default class DataTypes {
    *
    * @param {number} [priority]
    * @param {Object} provider
-   * @param {(dataTypes: string[]) => string[]} provider.getDataTypes
+   * @param {(dataTypes: string[], element?: ModdleElement) => string[]} provider.getDataTypes
    */
   registerProvider(priority, provider) {
     if (!provider) {
@@ -66,7 +64,7 @@ export default class DataTypes {
   /**
    * Get list of data types, as collected from all registered providers.
    *
-   * @param {tjs.model.Base|ModdleElement} [element] - An element in the current diagram.
+   * @param {tjs.model.Base|ModdleElement} [element] - Context for model-aware providers.
    *
    * @returns {string[]}
    */
@@ -78,30 +76,9 @@ export default class DataTypes {
 
     this._eventBus.fire(event);
 
-    const types = event.providers
-      .reduce((dataTypes, provider) => provider.getDataTypes(dataTypes), []);
-
-    const definitions = getDefinitions(element);
-    if (!definitions) {
-      return types;
-    }
-
-    const customTypes = definitions.get('itemDefinition').map(type => type.name).filter(Boolean);
-    return [ ...new Set([ ...types, ...customTypes ]) ];
+    return event.providers
+      .reduce((dataTypes, provider) => provider.getDataTypes(dataTypes, element), []);
   }
 }
 
 DataTypes.$inject = [ 'eventBus' ];
-
-
-// helpers //////////
-
-function getDefinitions(element) {
-  element = getBusinessObject(element);
-
-  while (element && !is(element, 'dmn:Definitions')) {
-    element = element.$parent;
-  }
-
-  return element;
-}

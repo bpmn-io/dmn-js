@@ -160,10 +160,10 @@ describe('Modeler', function() {
       triggerInputSelectChange(select, 'Applicant', container);
 
       // then
-      expect(view.element.variable.typeRef).to.equal('Applicant');
+      expect(view.element.encapsulatedLogic.body.typeRef).to.equal('Applicant');
 
       const reopened = await saveAndReopen(view);
-      expect(reopened.variable.typeRef).to.equal('Applicant');
+      expect(reopened.encapsulatedLogic.body.typeRef).to.equal('Applicant');
     });
 
 
