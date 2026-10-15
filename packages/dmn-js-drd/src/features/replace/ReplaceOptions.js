@@ -43,6 +43,16 @@ export default {
       }
     },
     {
+      label: 'Decision table',
+      actionName: 'replace-with-decision-table',
+      className: 'dmn-icon-decision-table',
+      target: {
+        type: 'dmn:BusinessKnowledgeModel',
+        table: true,
+        expression: false
+      }
+    },
+    {
       label: 'Literal Expression',
       actionName: 'replace-with-literal-expression',
       className: 'dmn-icon-literal-expression',

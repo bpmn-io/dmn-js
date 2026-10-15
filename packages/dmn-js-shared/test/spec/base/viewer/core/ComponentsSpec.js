@@ -86,6 +86,29 @@ describe('Components', function() {
       ]);
     }));
 
+
+    it('should get empty list if no listener is registered', inject(
+      function(components) {
+
+        // when
+        // then
+        expect(components.getComponents('unknown')).to.eql([]);
+      }
+    ));
+
+
+    it('should get empty list if no component matches', inject(
+      function(components) {
+
+        // given
+        components.onGetComponent('nothing', () => null);
+
+        // when
+        // then
+        expect(components.getComponents('nothing')).to.eql([]);
+      }
+    ));
+
   });
 
 });

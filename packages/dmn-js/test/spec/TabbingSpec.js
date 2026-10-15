@@ -21,12 +21,12 @@ insertCSS('dmn-js-shared.css',
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
 
-insertCSS('dmn-js-literal-expression.css',
-  require('dmn-js-literal-expression/assets/css/dmn-js-literal-expression.css')
+insertCSS('dmn-js-boxed-expression.css',
+  require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression.css')
 );
 
-insertCSS('dmn-js-decision-table-controls.css',
-  require('dmn-js-decision-table/assets/css/dmn-js-decision-table-controls.css')
+insertCSS('dmn-js-boxed-expression-controls.css',
+  require('dmn-js-boxed-expression/assets/css/dmn-js-boxed-expression-controls.css')
 );
 
 insertCSS('dmn-js-testing.css', `
@@ -86,11 +86,19 @@ insertCSS('tabs.css', `
 
 const testTranslate = window.__env__ && window.__env__.SINGLE_START === 'translate';
 
-const CLASS_NAMES = {
-  drd: 'dmn-icon-lasso-tool',
-  decisionTable: 'dmn-icon-decision-table',
-  literalExpression: 'dmn-icon-literal-expression'
-};
+function getClassName({ element, type }) {
+  if (type === 'drd') {
+    return 'dmn-icon-lasso-tool';
+  }
+
+  if (element.$instanceOf('dmn:BusinessKnowledgeModel')) {
+    return 'dmn-icon-business-knowledge';
+  }
+
+  return element.decisionLogic.$instanceOf('dmn:LiteralExpression') ?
+    'dmn-icon-literal-expression' :
+    'dmn-icon-decision-table';
+}
 
 var diagramXML = require('./diagram.dmn');
 
@@ -120,12 +128,9 @@ describe('tabs', function() {
       drd: {
         additionalModules: [ translateModule ]
       },
-      decisionTable: {
+      boxedExpression: {
         additionalModules: [ translateModule ]
-      },
-      literalExpression: {
-        additionalModules: [ translateModule ]
-      },
+      }
     };
 
     var editor = new Modeler({
@@ -155,7 +160,7 @@ describe('tabs', function() {
 
       views.forEach(function(v, idx) {
 
-        const className = CLASS_NAMES[v.type];
+        const className = getClassName(v);
 
         var tab = domify(`
           <div class="tab ${ v === activeView ? 'active' : ''}" data-id="${idx}">

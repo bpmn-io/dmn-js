@@ -5,11 +5,20 @@ import axe from 'axe-core';
 
 import Editor from '../helper/Editor';
 
-import simpleXML from './empty-literal-expression.dmn';
+import { insertCSS } from '../helper';
+
+import decisionXML from './empty-literal-expression.dmn';
 import bkmXML from './bkm-literal-expression.dmn';
+import bkmEmptyXML from './bkm-empty-literal-expression.dmn';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START === 'editor';
+
+if (singleStart) {
+  insertCSS('dmn-js-boxed-expression-single-start.css',
+    'html, body, .test-container { margin: 0; height: 100%; }'
+  );
+}
 
 
 describe('Editor', function() {
@@ -30,7 +39,12 @@ describe('Editor', function() {
 
 
   it('should import decision', function() {
-    return createEditor(simpleXML);
+    return createEditor(decisionXML);
+  });
+
+
+  it('should import business knowledge model with empty literal expression', function() {
+    return createEditor(bkmEmptyXML);
   });
 
 

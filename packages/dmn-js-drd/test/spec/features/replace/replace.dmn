@@ -4,6 +4,23 @@
   <decision id="table" name="Decision with table">
     <decisionTable id="DecisionTable_1yurqes" />
   </decision>
+  <businessKnowledgeModel id="bkmEmpty" name="Empty BKM" />
+  <businessKnowledgeModel id="bkmLiteral" name="BKM with literal expression">
+    <variable id="bkmLiteralVariable" name="BKM with literal expression" typeRef="string" />
+    <encapsulatedLogic id="bkmLiteralFunction">
+      <formalParameter id="bkmLiteralAge" name="age" typeRef="number" />
+      <formalParameter id="bkmLiteralDish" name="dish" label="Dish" />
+      <literalExpression id="bkmLiteralExpression">
+        <text>age</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <businessKnowledgeModel id="bkmTable" name="BKM with table">
+    <encapsulatedLogic id="bkmTableFunction">
+      <formalParameter id="bkmTablePrice" name="price" typeRef="number" />
+      <decisionTable id="bkmTableDecisionTable" />
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_18snuok">
       <dmndi:DMNShape id="decision_di" dmnElementRef="decision">
@@ -11,6 +28,15 @@
       </dmndi:DMNShape>
       <dmndi:DMNShape id="table_di" dmnElementRef="table">
         <dc:Bounds height="55" width="100" x="150" y="10" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkmEmpty_di" dmnElementRef="bkmEmpty">
+        <dc:Bounds height="46" width="135" x="150" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkmLiteral_di" dmnElementRef="bkmLiteral">
+        <dc:Bounds height="46" width="135" x="350" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="bkmTable_di" dmnElementRef="bkmTable">
+        <dc:Bounds height="46" width="135" x="550" y="150" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>

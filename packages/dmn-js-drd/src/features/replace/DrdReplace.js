@@ -63,13 +63,15 @@ export default function DrdReplace(drdFactory, replace, selection, modeling) {
 
       table.input = [ input ];
 
-      setBoxedExpression(newBusinessObject, table, drdFactory);
+      setBoxedExpression(newBusinessObject, table, drdFactory, oldBusinessObject);
     }
 
     if (target.expression) {
       var literalExpression = drdFactory.create('dmn:LiteralExpression');
 
-      setBoxedExpression(newBusinessObject, literalExpression, drdFactory);
+      setBoxedExpression(
+        newBusinessObject, literalExpression, drdFactory, oldBusinessObject
+      );
     }
 
     return replace.replaceElement(element, newElement, hints);
@@ -86,7 +88,7 @@ DrdReplace.$inject = [
 ];
 
 // helper //////////////////////////////////////////////////////////////
-function setBoxedExpression(bo, expression, drdFactory) {
+function setBoxedExpression(bo, expression, drdFactory, oldBo) {
   if (is(bo, 'dmn:Decision')) {
     bo.decisionLogic = expression;
     expression.$parent = bo;
@@ -94,8 +96,43 @@ function setBoxedExpression(bo, expression, drdFactory) {
     var encapsulatedLogic = drdFactory.create('dmn:FunctionDefinition', {
       body: expression });
 
+    // keep the signature of the function, the implementation is replaced
+    var formalParameters = copyFormalParameters(oldBo, drdFactory);
+
+    if (formalParameters.length) {
+      encapsulatedLogic.formalParameter = formalParameters;
+
+      formalParameters.forEach(function(parameter) {
+        parameter.$parent = encapsulatedLogic;
+      });
+    }
+
     bo.encapsulatedLogic = encapsulatedLogic;
     encapsulatedLogic.$parent = bo;
     expression.$parent = encapsulatedLogic;
   }
+}
+
+/**
+ * Copy the formal parameters of a business knowledge model, so that
+ * the replaced one stays intact, e.g. when undoing the replacement.
+ */
+function copyFormalParameters(bo, drdFactory) {
+  var encapsulatedLogic = bo.encapsulatedLogic;
+
+  if (!encapsulatedLogic) {
+    return [];
+  }
+
+  return (encapsulatedLogic.formalParameter || []).map(function(parameter) {
+    var attrs = {};
+
+    [ 'name', 'typeRef', 'label', 'description' ].forEach(function(name) {
+      if (parameter[name] !== undefined) {
+        attrs[name] = parameter[name];
+      }
+    });
+
+    return drdFactory.create('dmn:InformationItem', attrs);
+  });
 }

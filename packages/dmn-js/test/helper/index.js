@@ -24,6 +24,18 @@ export function insertCSS(name, css) {
 }
 
 /**
+ * Find the view of the element with the given id.
+ *
+ * @param {Array<Object>} views
+ * @param {string} elementId
+ *
+ * @return {Object|undefined}
+ */
+export function findView(views, elementId) {
+  return views.find(view => view.element.id === elementId);
+}
+
+/**
  * Verify no accessibility rules violations in the container.
  *
  * @param {Element} container

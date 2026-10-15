@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="definitions_0fe6s5f" name="Decision" namespace="http://camunda.org/schema/1.0/dmn">
+  <businessKnowledgeModel id="BKM" name="BKM">
+    <variable id="InformationItem_12kmse5" name="BKM" />
+    <encapsulatedLogic>
+      <literalExpression id="LiteralExpression_1la0dth" />
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1qdr0s3">
+      <dmndi:DMNShape id="BKM_di" dmnElementRef="BKM">
+        <dc:Bounds height="80" width="180" x="200" y="200" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

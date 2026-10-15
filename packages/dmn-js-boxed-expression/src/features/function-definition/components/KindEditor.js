@@ -37,7 +37,7 @@ function KindEditor({ context: { expression } }, context) {
   };
 
   return (
-    <div className="context-menu-container">
+    <div className="context-menu-container kind-editor">
       <h3 className="dms-heading">{translate('Edit function kind')}</h3>
       <InputSelect
         label={ translate('Kind') }
