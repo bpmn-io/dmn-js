@@ -3,6 +3,7 @@
   <decision id="Decision_1" name="Decision_1" />
   <decision id="Decision_2" name="Decision_2" />
   <textAnnotation id="TextAnnotation_1" />
+  <decisionService id="DecisionService_1" name="DecisionService_1" />
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_0bs1w2k">
       <dmndi:DMNShape id="Decision_1_di" dmnElementRef="Decision_1">
@@ -13,6 +14,9 @@
       </dmndi:DMNShape>
       <dmndi:DMNShape id="TextAnnotation_1_di" dmnElementRef="TextAnnotation_1">
         <dc:Bounds height="80" width="100" x="157" y="200" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DecisionService_1_di" dmnElementRef="DecisionService_1">
+        <dc:Bounds height="200" width="300" x="400" y="100" />
       </dmndi:DMNShape>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
