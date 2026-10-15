@@ -4,6 +4,7 @@ import NavigatedViewer from './NavigatedViewer';
 
 import AlignElementsModule from 'diagram-js/lib/features/align-elements';
 import AutoPlaceModule from './features/auto-place';
+import AutoResizeModule from './features/auto-resize';
 import AutoScrollModule from 'diagram-js/lib/features/auto-scroll';
 import BendpointsModule from 'diagram-js/lib/features/bendpoints';
 import ContextPadModule from './features/context-pad';
@@ -19,11 +20,13 @@ import KeyboardMoveSelectionModule from 'diagram-js/lib/features/keyboard-move-s
 import LabelEditingModule from './features/label-editing';
 import ModelingModule from './features/modeling';
 import MoveModule from 'diagram-js/lib/features/move';
+import OrderingProviderModule from './features/ordering';
 import OutlineProvider from './features/outline';
 import PaletteModule from './features/palette';
 import ResizeModule from 'diagram-js/lib/features/resize';
 import SnappingModule from './features/snapping';
 import TypeRefDropdownModule from './features/type-ref-dropdown';
+import DecisionServiceDividerModule from './features/decision-service-divider';
 
 /**
  * A modeler for DMN tables.
@@ -118,10 +121,12 @@ Modeler.prototype._modelingModules = [
   // modeling components
   AlignElementsModule,
   AutoPlaceModule,
+  AutoResizeModule,
   AutoScrollModule,
   BendpointsModule,
   ContextPadModule,
   ConnectPreviewModule,
+  DecisionServiceDividerModule,
   DefinitionPropertiesModule,
   DistributeElementsModule,
   EditorActionsModule,
@@ -134,6 +139,7 @@ Modeler.prototype._modelingModules = [
   ModelingModule,
   MoveModule,
   OutlineProvider,
+  OrderingProviderModule,
   PaletteModule,
   ResizeModule,
   SnappingModule,
