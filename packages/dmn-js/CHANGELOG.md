@@ -6,6 +6,7 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: support grouping data types; data types provided via `DataTypes#registerProvider` are objects with `name`, `label` and `group`, shown grouped in type dropdowns ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
 * `FEAT`: allow registering data types providers via `DataTypes#registerProvider` ([#1035](https://github.com/bpmn-io/dmn-js/pull/1035))
 * `FEAT`: support letter shortcuts on non-Latin keyboard layouts ([bpmn-io/diagram-js#1112](https://github.com/bpmn-io/diagram-js/pull/1112), [bpmn-io/diagram-js#928](https://github.com/bpmn-io/diagram-js/issues/928))
 * `FEAT`: add tooltip with title and shortcut on palette entries ([bpmn-io/diagram-js#1082](https://github.com/bpmn-io/diagram-js/pull/1082))
@@ -18,6 +19,10 @@ ___Note:__ Yet to be released changes appear here._
 * `FIX`: cancel canvas move on diagram destroy ([bpmn-io/diagram-js#1110](https://github.com/bpmn-io/diagram-js/pull/1110), [bpmn-io/diagram-js#1109](https://github.com/bpmn-io/diagram-js/issues/1109))
 * `FIX`: do not keep selection visible after diagram destroy ([bpmn-io/diagram-js#1098](https://github.com/bpmn-io/diagram-js/pull/1098))
 * `DEPS`: update to `diagram-js@15.28.0`
+
+### Breaking Changes
+
+* `DataTypes#getAll` returns data type objects (`{ name, label, group? }`) instead of strings. Update custom code that reads data types from the `dataTypes` service, i.e. use `dataType.name` as the `typeRef` value and `dataType.label` as the display text.
 
 ## 17.12.3
 

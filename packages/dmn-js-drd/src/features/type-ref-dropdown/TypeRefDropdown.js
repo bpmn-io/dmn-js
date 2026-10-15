@@ -1,3 +1,5 @@
+import { groupDataTypes } from 'dmn-js-shared/lib/features/data-types/DataTypesUtil';
+
 import {
   getBusinessObject,
   is
@@ -96,19 +98,25 @@ export default class TypeRefDropdown {
 
     const currentTypeRef = this._getTypeRef(element);
     const dataTypes = this._dataTypes.getAll();
-    const types = dataTypes.includes(currentTypeRef)
-      ? dataTypes
-      : [ currentTypeRef, ...dataTypes ];
 
-    const options = types.map(type => {
-      const option = document.createElement('option');
-      option.value = type;
-      option.textContent = this._translate(type);
+    if (!dataTypes.some(type => type.name === currentTypeRef)) {
+      select.appendChild(
+        this._createOption({ name: currentTypeRef, label: currentTypeRef })
+      );
+    }
 
-      return option;
+    groupDataTypes(dataTypes).forEach(({ name, types }) => {
+      let parent = select;
+
+      if (name) {
+        parent = document.createElement('optgroup');
+        parent.label = name;
+
+        select.appendChild(parent);
+      }
+
+      types.forEach(type => parent.appendChild(this._createOption(type)));
     });
-
-    options.forEach(option => select.appendChild(option));
 
     select.value = currentTypeRef;
 
@@ -119,6 +127,15 @@ export default class TypeRefDropdown {
     });
 
     return container;
+  }
+
+
+  _createOption(type) {
+    const option = document.createElement('option');
+    option.value = type.name;
+    option.textContent = type.label;
+
+    return option;
   }
 
 

@@ -181,6 +181,34 @@ describe('components/InputSelect', function() {
     });
 
 
+    it('should render group labels', function() {
+
+      // given
+      const options = [
+        { label: 'Foo', value: 'foo', group: 'Group 1' },
+        { label: 'Bar', value: 'bar', group: 'Group 1' },
+        { label: 'Baz', value: 'baz', group: 'Group 2' }
+      ];
+
+      const renderedTree = renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect options={ options } />
+        </DiContainer>
+      );
+
+      // when
+      triggerClick(
+        findRenderedDOMElementWithClass(renderedTree, 'dms-input-select')
+      );
+
+      // then
+      const labels = document.querySelectorAll('.dms-select-options .group-label');
+
+      expect([ ...labels ].map(l => l.textContent)).to.eql([ 'Group 1', 'Group 2' ]);
+      expect(document.querySelectorAll('.dms-select-options .option')).to.have.length(3);
+    });
+
+
     it('should show options on input click', function() {
 
       // given

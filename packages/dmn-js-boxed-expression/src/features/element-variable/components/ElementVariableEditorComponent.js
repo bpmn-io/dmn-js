@@ -1,4 +1,5 @@
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
+import { getTypeRefOptions } from 'dmn-js-shared/lib/features/data-types/DataTypesUtil';
 
 import { withChangeSupport } from '../../../util/withChangeSupport';
 
@@ -47,17 +48,11 @@ function ElementVariableComponent(_, context) {
 function VariableTypeEditor(_, context) {
   const elementVariable = context.injector.get('elementVariable');
   const dataTypes = context.injector.get('dataTypes');
-  const translate = context.injector.get('translate');
 
   const type = elementVariable.getType();
   const onChange = type => elementVariable.setType(type);
 
-  const typeRefOptions = dataTypes.getAll().map(t => {
-    return {
-      label: translate(t),
-      value: t
-    };
-  });
+  const typeRefOptions = getTypeRefOptions(dataTypes.getAll());
 
   return <InputSelect
     value={ type }
