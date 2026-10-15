@@ -4,6 +4,8 @@ import { is, isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import InputSelect from 'dmn-js-shared/lib/components/InputSelect';
 
+import { getTypeRefOptions } from 'dmn-js-shared/lib/util/TypeRefUtil';
+
 
 export default class TypeRefCellContextMenu extends Component {
 
@@ -52,12 +54,9 @@ export default class TypeRefCellContextMenu extends Component {
         element
     ).typeRef;
 
-    const typeRefOptions = this._dataTypes.getAll().map(t => {
-      return {
-        label: this._translate(t),
-        value: t
-      };
-    });
+    const typeRefOptions = getTypeRefOptions(
+      this._dataTypes, element, this._translate
+    );
 
     const label = this._translate('Type');
 
@@ -72,6 +71,8 @@ export default class TypeRefCellContextMenu extends Component {
             className="type-ref-edit-select"
             label={ label }
             onChange={ this.onTypeChange }
+            searchable
+            emptyLabel={ this._translate('No matching types') }
             options={ typeRefOptions }
             value={ typeRef } />
         </div>

@@ -42,7 +42,7 @@ export default class DataTypes {
    *
    * @param {number} [priority]
    * @param {Object} provider
-   * @param {(dataTypes: string[]) => string[]} provider.getDataTypes
+   * @param {(dataTypes: string[], element?: ModdleElement) => string[]} provider.getDataTypes
    */
   registerProvider(priority, provider) {
     if (!provider) {
@@ -64,9 +64,11 @@ export default class DataTypes {
   /**
    * Get list of data types, as collected from all registered providers.
    *
+   * @param {tjs.model.Base|ModdleElement} [element] - Context for model-aware providers.
+   *
    * @returns {string[]}
    */
-  getAll() {
+  getAll(element) {
     const event = this._eventBus.createEvent({
       type: 'dataTypes.getProviders',
       providers: []
@@ -75,7 +77,7 @@ export default class DataTypes {
     this._eventBus.fire(event);
 
     return event.providers
-      .reduce((dataTypes, provider) => provider.getDataTypes(dataTypes), []);
+      .reduce((dataTypes, provider) => provider.getDataTypes(dataTypes, element), []);
   }
 }
 
