@@ -54,7 +54,7 @@
     "@rollup/plugin-terser": "^1.0.0",
     "axe-core": "^4.12.1",
     "cpy": "^13.2.2",
-    "del": "^8.0.0",
+    "del": "^9.0.0",
     "del-cli": "^8.0.0",
     "diagram-js": "^15.28.0",
     "dmn-font": "^0.6.2",
