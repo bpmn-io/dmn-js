@@ -39,16 +39,16 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
 
     // ids of decisions referenced by a decision service, laid out inside
     // of it rather than on their own
-    var referenced = {};
+    var referenced = new Set();
 
     // ids of decisions already laid out inside a decision service
-    var placed = {};
+    var placed = new Set();
 
     forEach(drgElements, function(drgElement) {
       if (is(drgElement, 'dmn:DecisionService')) {
         forEach([ 'outputDecision', 'encapsulatedDecision' ], function(property) {
           forEach(drgElement.get(property), function(reference) {
-            referenced[getIdFromHref(reference.href)] = true;
+            referenced.add(getIdFromHref(reference.href));
           });
         });
       }
@@ -72,8 +72,8 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
           return drgElement.id === id && is(drgElement, 'dmn:Decision');
         });
 
-        if (decision && !placed[id]) {
-          placed[id] = true;
+        if (decision && !placed.has(id)) {
+          placed.add(id);
 
           decisions.push(decision);
         }
@@ -143,7 +143,7 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
         return;
       }
 
-      if (referenced[drgElement.id]) {
+      if (referenced.has(drgElement.id)) {
         return;
       }
 
