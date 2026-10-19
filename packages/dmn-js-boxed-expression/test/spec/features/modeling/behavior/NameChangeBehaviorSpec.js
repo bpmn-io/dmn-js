@@ -3,8 +3,10 @@ import { bootstrapModeler, inject } from 'test/helper';
 
 import simpleStringEditXML from '../../../literal-expression.dmn';
 import noVariableXML from '../../../no-variable.dmn';
+import decisionTableXML from '../../../simple.dmn';
 
 import CoreModule from 'src/core';
+import DecisionTableModule from 'src/features/decision-table';
 import Modeling from 'src/features/modeling';
 
 
@@ -37,6 +39,26 @@ describe('NameChangeBehavior', function() {
     ));
 
 
+    it('should undo element and variable name change at once', inject(
+      function(commandStack, modeling, viewer) {
+
+        // given
+        const decision = viewer.getRootElement();
+        const name = decision.get('name');
+        const variableName = decision.get('variable').get('name');
+
+        modeling.updateProperties(decision, { name: 'foo' });
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(decision.get('name')).to.equal(name);
+        expect(decision.get('variable').get('name')).to.equal(variableName);
+      }
+    ));
+
+
     it('should update element name when variable name is changed', inject(
       function(modeling, viewer) {
 
@@ -49,6 +71,32 @@ describe('NameChangeBehavior', function() {
 
         // then
         expect(decision.get('name')).to.equal('foo');
+      }
+    ));
+  });
+
+
+  describe('with decision table', function() {
+
+    beforeEach(bootstrapModeler(decisionTableXML, {
+      modules: [
+        DecisionTableModule,
+        Modeling
+      ],
+    }));
+
+
+    it('should update name of table element', inject(
+      function(elementRegistry, modeling) {
+
+        // given
+        const output = elementRegistry.get('output1');
+
+        // when
+        modeling.updateProperties(output, { name: 'foo' });
+
+        // then
+        expect(output.businessObject.get('name')).to.equal('foo');
       }
     ));
   });

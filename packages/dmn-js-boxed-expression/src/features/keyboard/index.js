@@ -1,11 +1,14 @@
-import KeyboardModule from 'diagram-js/lib/features/keyboard';
+import EditorActions from '../editor-actions';
 
-import { KeyboardBindings } from './KeyboardBindings';
+import Keyboard from './Keyboard';
+
 
 export default {
   __depends__: [
-    KeyboardModule
+    EditorActions
   ],
-  __init__: [ 'keyboardBindings' ],
-  keyboardBindings: [ 'type', KeyboardBindings ]
+  __init__: [
+    'keyboard'
+  ],
+  keyboard: [ 'type', Keyboard ]
 };

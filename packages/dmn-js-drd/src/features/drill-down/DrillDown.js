@@ -1,6 +1,5 @@
 import {
   getBoxedExpression,
-  getBusinessObject,
   is
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
@@ -14,12 +13,9 @@ var PROVIDERS = [
   {
     className: 'dmn-icon-decision-table',
     matches: function(el) {
-      var businessObject = getBusinessObject(el);
+      var boxedExpression = getBoxedExpression(el);
 
-      return (
-        is(businessObject, 'dmn:Decision') &&
-        is(businessObject.decisionLogic, 'dmn:DecisionTable')
-      );
+      return is(boxedExpression, 'dmn:DecisionTable');
     },
     title: 'Open decision table'
   },

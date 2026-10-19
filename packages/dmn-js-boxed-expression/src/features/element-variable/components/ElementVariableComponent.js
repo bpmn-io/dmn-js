@@ -17,7 +17,7 @@ function ElementVariableComponent(_, context) {
 
   return (
     <div className="element-variable">
-      <h2>Result</h2>
+      <h2>{ translate('Result') }</h2>
       <div className="element-variable-name">
         <span className="element-variable-name-label">
           { translate('Variable name') }
@@ -28,9 +28,9 @@ function ElementVariableComponent(_, context) {
       </div>
       <div className="element-variable-type">
         <span className="element-variable-type-label">
-          { translate('Variable type') }
+          { translate('Result type') }
         </span>
-        <span>{type}</span>
+        <span>{ translate(type) }</span>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ export default class Components {
     const listeners = this._listeners[type];
 
     if (!listeners) {
-      return;
+      return [];
     }
 
     const components = [];
@@ -47,10 +47,6 @@ export default class Components {
       if (component) {
         components.push(component);
       }
-    }
-
-    if (!components.length) {
-      return;
     }
 
     return components;

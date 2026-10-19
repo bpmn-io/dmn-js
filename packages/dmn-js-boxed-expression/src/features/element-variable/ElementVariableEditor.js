@@ -13,6 +13,10 @@ export default class ElementVariableEditor extends ElementVariable {
   }
 
   setType(typeRef) {
+
+    // an empty type removes the type reference
+    typeRef = typeRef || undefined;
+
     const element = this._getElement();
 
     if (is(element, 'dmn:BusinessKnowledgeModel')) {

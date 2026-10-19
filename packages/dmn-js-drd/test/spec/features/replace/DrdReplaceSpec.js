@@ -14,6 +14,19 @@ import {
 } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
+// helpers //////////////////////
+
+function getFormalParameters(element) {
+  return element.businessObject.encapsulatedLogic.get('formalParameter');
+}
+
+function describeFormalParameters(element) {
+  return getFormalParameters(element).map(function(parameter) {
+    return [ parameter.name, parameter.typeRef, parameter.label ];
+  });
+}
+
+
 describe('features/replace - drd replace', function() {
 
   var testModules = [
@@ -219,6 +232,199 @@ describe('features/replace - drd replace', function() {
 
       expect(is(businessObject.decisionLogic, 'dmn:LiteralExpression')).to.be.true;
     }));
+  });
+
+
+  describe('should keep formal parameters of business knowledge model', function() {
+
+    var diagramXML = require('./replace.dmn');
+
+    var TABLE = {
+      type: 'dmn:BusinessKnowledgeModel',
+      table: true,
+      expression: false
+    };
+
+    var LITERAL_EXPRESSION = {
+      type: 'dmn:BusinessKnowledgeModel',
+      table: false,
+      expression: true
+    };
+
+    beforeEach(bootstrapModeler(diagramXML, { modules: testModules }));
+
+
+    it('when replacing literal expression with decision table', inject(
+      function(elementRegistry, drdReplace) {
+
+        // given
+        var bkm = elementRegistry.get('bkmLiteral');
+
+        // when
+        var newElement = drdReplace.replaceElement(bkm, TABLE);
+
+        // then
+        expect(describeFormalParameters(newElement)).to.eql([
+          [ 'age', 'number', undefined ],
+          [ 'dish', undefined, 'Dish' ]
+        ]);
+      }
+    ));
+
+
+    it('when replacing decision table with literal expression', inject(
+      function(elementRegistry, drdReplace) {
+
+        // given
+        var bkm = elementRegistry.get('bkmTable');
+
+        // when
+        var newElement = drdReplace.replaceElement(bkm, LITERAL_EXPRESSION);
+
+        // then
+        expect(describeFormalParameters(newElement)).to.eql([
+          [ 'price', 'number', undefined ]
+        ]);
+      }
+    ));
+
+
+    it('as copies', inject(function(elementRegistry, drdReplace) {
+
+      // given
+      var bkm = elementRegistry.get('bkmLiteral');
+
+      var oldParameters = getFormalParameters(bkm);
+
+      // when
+      var newElement = drdReplace.replaceElement(bkm, TABLE);
+
+      // then
+      var shared = getFormalParameters(newElement).filter(function(parameter) {
+        return oldParameters.indexOf(parameter) !== -1;
+      });
+
+      expect(shared).to.be.empty;
+    }));
+
+
+    it('with new ids', inject(function(elementRegistry, drdReplace) {
+
+      // given
+      var bkm = elementRegistry.get('bkmLiteral');
+
+      var oldIds = getFormalParameters(bkm).map(function(parameter) {
+        return parameter.id;
+      });
+
+      // when
+      var newElement = drdReplace.replaceElement(bkm, TABLE);
+
+      // then
+      var newIds = getFormalParameters(newElement).map(function(parameter) {
+        return parameter.id;
+      });
+
+      expect(newIds).to.have.length(2);
+
+      newIds.forEach(function(id) {
+        expect(id).to.exist;
+        expect(oldIds).not.to.include(id);
+      });
+    }));
+
+
+    it('with function definition as parent', inject(
+      function(elementRegistry, drdReplace) {
+
+        // given
+        var bkm = elementRegistry.get('bkmLiteral');
+
+        // when
+        var newElement = drdReplace.replaceElement(bkm, TABLE);
+
+        // then
+        var encapsulatedLogic = newElement.businessObject.encapsulatedLogic;
+
+        expect(encapsulatedLogic.formalParameter.every(function(parameter) {
+          return parameter.$parent === encapsulatedLogic;
+        })).to.be.true;
+      }
+    ));
+
+
+    it('on undo', inject(function(elementRegistry, drdReplace, commandStack) {
+
+      // given
+      var bkm = elementRegistry.get('bkmLiteral');
+
+      drdReplace.replaceElement(bkm, TABLE);
+
+      // when
+      commandStack.undo();
+
+      // then
+      var encapsulatedLogic = elementRegistry.get('bkmLiteral')
+        .businessObject.encapsulatedLogic;
+
+      expect(encapsulatedLogic.formalParameter.every(function(parameter) {
+        return parameter.$parent === encapsulatedLogic;
+      })).to.be.true;
+    }));
+
+
+    it('on redo', inject(function(elementRegistry, drdReplace, commandStack) {
+
+      // given
+      var bkm = elementRegistry.get('bkmLiteral');
+
+      drdReplace.replaceElement(bkm, TABLE);
+
+      // when
+      commandStack.undo();
+      commandStack.redo();
+
+      // then
+      expect(describeFormalParameters(elementRegistry.get('bkmLiteral'))).to.eql([
+        [ 'age', 'number', undefined ],
+        [ 'dish', undefined, 'Dish' ]
+      ]);
+    }));
+
+
+    it('NOT for business knowledge model without implementation', inject(
+      function(elementRegistry, drdReplace) {
+
+        // given
+        var bkm = elementRegistry.get('bkmEmpty');
+
+        // when
+        var newElement = drdReplace.replaceElement(bkm, TABLE);
+
+        // then
+        expect(getFormalParameters(newElement)).to.be.empty;
+      }
+    ));
+
+
+    it('NOT when replacing with nothing', inject(
+      function(elementRegistry, drdReplace) {
+
+        // given
+        var bkm = elementRegistry.get('bkmLiteral');
+
+        // when
+        var newElement = drdReplace.replaceElement(bkm, {
+          type: 'dmn:BusinessKnowledgeModel',
+          table: false,
+          expression: false
+        });
+
+        // then
+        expect(newElement.businessObject.encapsulatedLogic).not.to.exist;
+      }
+    ));
+
   });
 
 

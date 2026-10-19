@@ -30,6 +30,8 @@ import {
 } from 'test/util/InjectorUtil';
 
 
+import EventBus from 'diagram-js/lib/core/EventBus';
+
 import LiteralExpression from 'src/components/LiteralExpression';
 import DiContainer from './DiContainer';
 
@@ -393,6 +395,250 @@ describe('components/LiteralExpression', function() {
         expect(onChange).not.to.have.been.called;
       });
     });
+  });
+
+
+  describe('saveXML', function() {
+
+    let eventBus, injector, onChange, onInput;
+
+    beforeEach(function() {
+      eventBus = new EventBus();
+      injector = createInjector({ _parent: eventBus });
+      onChange = sinon.spy();
+      onInput = sinon.spy();
+    });
+
+    function renderWithParent(value = 'FOO') {
+      return renderToNode(
+        <DiContainer injector={ injector }>
+          <LiteralExpression
+            onChange={ onChange }
+            onInput={ onInput }
+            value={ value } />
+        </DiContainer>
+      );
+    }
+
+    async function type(editor, text) {
+      changeInput(editor, text);
+
+      await waitFor(() => {
+        expect(onInput).to.have.been.calledWith(text);
+      });
+    }
+
+
+    it('should commit pending text on saveXML.start', async function() {
+
+      // given
+      const editor = getEditor(renderWithParent());
+
+      await type(editor, 'BLUB');
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(onChange).to.have.been.calledOnceWithExactly('BLUB');
+    });
+
+
+    it('should commit before other saveXML.start listeners', async function() {
+
+      // given
+      const calls = [];
+
+      onChange = sinon.spy(() => calls.push('commit'));
+
+      eventBus.on('saveXML.start', () => {
+        calls.push('export');
+      });
+
+      const editor = getEditor(renderWithParent());
+
+      await type(editor, 'BLUB');
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(calls).to.eql([ 'commit', 'export' ]);
+    });
+
+
+    it('should NOT stop saveXML.start', async function() {
+
+      // given
+      const editor = getEditor(renderWithParent());
+      const listener = sinon.spy();
+
+      eventBus.on('saveXML.start', listener);
+
+      await type(editor, 'BLUB');
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(listener).to.have.been.calledOnce;
+    });
+
+
+    it('should commit once', async function() {
+
+      // given
+      const editor = getEditor(renderWithParent());
+
+      await type(editor, 'BLUB');
+
+      // when
+      eventBus.fire('saveXML.start');
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(onChange).to.have.been.calledOnce;
+    });
+
+
+    it('should NOT commit text replaced by new value on saveXML.start', async function() {
+
+      // given
+      const editor = getEditor(renderWithParent());
+
+      await type(editor, 'BLUB');
+
+      renderWithParent('BAR');
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(onChange).not.to.have.been.called;
+    });
+
+
+    it('should NOT commit text typed back to value on saveXML.start', async function() {
+
+      // given
+      const editor = getEditor(renderWithParent());
+
+      await type(editor, 'BLUB');
+      await type(editor, 'FOO');
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(onChange).not.to.have.been.called;
+    });
+
+
+    it('should NOT commit unchanged text on saveXML.start', function() {
+
+      // given
+      renderWithParent();
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(onChange).not.to.have.been.called;
+    });
+
+
+    it('should NOT commit on saveXML.start after unmount', async function() {
+
+      // given
+      const editor = getEditor(renderWithParent());
+
+      await type(editor, 'BLUB');
+
+      render(null, container);
+
+      // when
+      eventBus.fire('saveXML.start');
+
+      // then
+      expect(onChange).not.to.have.been.called;
+    });
+
+  });
+
+
+  describe('undo / redo', function() {
+
+    let onInput;
+    let globalOnKeydown;
+
+    beforeEach(function() {
+      onInput = sinon.spy();
+      globalOnKeydown = sinon.spy();
+
+      document.addEventListener('keydown', globalOnKeydown);
+    });
+
+    afterEach(function() {
+      document.removeEventListener('keydown', globalOnKeydown);
+    });
+
+    [
+      [ 'undo', { key: 'z', ctrlKey: true } ],
+      [ 'undo / metaKey', { key: 'z', metaKey: true } ],
+      [ 'redo', { key: 'y', ctrlKey: true } ],
+      [ 'redo / shift', { key: 'Z', metaKey: true, shiftKey: true } ]
+    ].forEach(function([ name, event ]) {
+
+      it(`should contain ${ name } without onInput`, function() {
+
+        // given
+        const node = renderToNode(
+          <LiteralExpression value={ 'FOO' } />
+        );
+        const editor = getEditor(node);
+
+        // when
+        triggerKeyEvent(editor, 'keydown', event);
+
+        // then
+        expect(globalOnKeydown).not.to.have.been.called;
+      });
+
+
+      it(`should NOT contain ${ name } with onInput`, function() {
+
+        // given
+        const node = renderToNode(
+          <LiteralExpression onInput={ onInput } value={ 'FOO' } />
+        );
+        const editor = getEditor(node);
+
+        // when
+        triggerKeyEvent(editor, 'keydown', event);
+
+        // then
+        expect(globalOnKeydown).to.have.been.called;
+      });
+
+    });
+
+
+    it('should NOT contain other keys', function() {
+
+      // given
+      const node = renderToNode(
+        <LiteralExpression value={ 'FOO' } />
+      );
+      const editor = getEditor(node);
+
+      // when
+      triggerKeyEvent(editor, 'keydown', { key: 'a', ctrlKey: true });
+      triggerKeyEvent(editor, 'keydown', { key: 'z' });
+
+      // then
+      expect(globalOnKeydown).to.have.been.calledTwice;
+    });
+
   });
 
 

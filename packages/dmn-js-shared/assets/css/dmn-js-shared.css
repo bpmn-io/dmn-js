@@ -39,8 +39,6 @@
 /* Color definitions */
 .dmn-js-parent,
 .dmn-drd-container,
-.dmn-decision-table-container,
-.dmn-literal-expression-container,
 .dmn-boxed-expression-container {
   --hint-button-color: var(--bio-primary-hover);
   --hint-invalid-color: var(--bio-danger-text);

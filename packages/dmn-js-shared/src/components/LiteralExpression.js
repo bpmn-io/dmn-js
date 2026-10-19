@@ -4,6 +4,9 @@ import FeelEditor from '@bpmn-io/feel-editor';
 
 import { EditorView } from '@codemirror/view';
 
+// commit before listeners which export the definitions
+const SAVE_XML_PRIORITY = 1500;
+
 /**
  * A drop-in replacement for ContentEditable which uses FEEL editor under the hood.
  * It does not support placeholder.
@@ -11,6 +14,11 @@ import { EditorView } from '@codemirror/view';
  * The callback `onInput(text)` receives text (including line breaks)
  * only. Updating the value via props will update the selection
  * if needed, too.
+ *
+ * Without `onInput`, text is committed via `onChange` on blur. Undo and redo
+ * key events do not leave the component then.
+ *
+ * Pending text is committed via `onChange` before the XML is saved, too.
  *
  * @example
  *
@@ -44,7 +52,11 @@ export default class LiteralExpression extends Component {
       value: props.value
     };
 
+    /** @type {string|null} text typed by the user which is not committed yet */
+    this._pendingText = null;
+
     this._feelLanguageContext = context.injector?.get('feelLanguageContext', false);
+    this._parent = context.injector?.get('_parent', false);
   }
 
   _getFeelLanguageContext() {
@@ -76,6 +88,10 @@ export default class LiteralExpression extends Component {
     this.node.addEventListener('keydown', this.handleKeyDownCapture, true);
     this.node.addEventListener('keydown', this.handleKeyDown);
 
+    if (this._parent) {
+      this._parent.on('saveXML.start', SAVE_XML_PRIORITY, this.commit);
+    }
+
     if (this.props.autoFocus) {
       this.editor.focus(this.state.value.length);
     }
@@ -84,12 +100,18 @@ export default class LiteralExpression extends Component {
   componentDidUpdate(prevProps) {
     const { value } = this.props;
 
-    if (prevProps.value !== value && value !== this.state.value) {
-      this.setState({
-        value
-      }, () => {
-        this.editor.setValue(value);
-      });
+    if (prevProps.value !== value) {
+
+      // the new value takes precedence over uncommitted text
+      this._pendingText = null;
+
+      if (value !== this.state.value) {
+        this.setState({
+          value
+        }, () => {
+          this.editor.setValue(value);
+        });
+      }
     }
 
     if (!deepEqual(prevProps.variables, this.props.variables)) {
@@ -103,6 +125,10 @@ export default class LiteralExpression extends Component {
     // `capture: true` is needed to precede FEEL editor default handling
     this.node.removeEventListener('keydown', this.handleKeyDownCapture, true);
     this.node.removeEventListener('keydown', this.handleKeyDown);
+
+    if (this._parent) {
+      this._parent.off('saveXML.start', this.commit);
+    }
   }
 
   handleMouseEvent = event => {
@@ -136,10 +162,18 @@ export default class LiteralExpression extends Component {
     if ([ 'Enter', 'Escape' ].includes(event.key) && event.triggeredFromAutocomplete) {
       event.stopPropagation();
     }
+
+    // the editor has no history of its own and, without `onInput`, text is
+    // committed on blur only; global undo / redo would revert an unrelated command
+    if (!this.props.onInput && isUndoRedo(event)) {
+      event.stopPropagation();
+    }
   };
 
   handleChange = (value) => {
     const { onInput } = this.props;
+
+    this._pendingText = value === this.props.value ? null : value;
 
     this.setState({
       value
@@ -150,12 +184,22 @@ export default class LiteralExpression extends Component {
     }
   };
 
-  handleBlur = () => {
-    const { onBlur, onChange } = this.props;
+  commit = () => {
+    const { onChange, value } = this.props;
 
-    if (onChange && this.state.value !== this.props.value) {
-      onChange(this.state.value);
+    const text = this._pendingText;
+
+    this._pendingText = null;
+
+    if (onChange && text !== null && text !== value) {
+      onChange(text);
     }
+  };
+
+  handleBlur = () => {
+    const { onBlur } = this.props;
+
+    this.commit();
 
     if (onBlur) {
       onBlur();
@@ -181,6 +225,10 @@ export default class LiteralExpression extends Component {
 
 function isCmd(event) {
   return event.metaKey || event.ctrlKey;
+}
+
+function isUndoRedo(event) {
+  return isCmd(event) && [ 'z', 'y' ].includes(event.key?.toLowerCase());
 }
 
 function isAutocompleteOpen(node) {

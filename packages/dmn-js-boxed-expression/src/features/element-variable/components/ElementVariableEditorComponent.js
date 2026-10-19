@@ -5,12 +5,16 @@ import { withChangeSupport } from '../../../util/withChangeSupport';
 const VARIABLE_TYPE_ID = 'dmn-boxed-expression-variable-type';
 
 export default class ElementVariableComponentProvider {
-  static $inject = [ 'components', 'elementVariable' ];
+  static $inject = [ 'components', 'elementVariable', 'viewer' ];
 
-  constructor(components, elementVariable) {
+  constructor(components, elementVariable, viewer) {
     const component = withChangeSupport(
       ElementVariableComponent,
-      () => [ elementVariable.getVariable(), elementVariable.getTypeHolder() ]
+      () => [
+        viewer.getRootElement(),
+        elementVariable.getVariable(),
+        elementVariable.getTypeHolder()
+      ]
     );
 
     components.onGetComponent('footer', () => component);
@@ -25,7 +29,7 @@ function ElementVariableComponent(_, context) {
 
   return (
     <div className="element-variable">
-      <h2>Result</h2>
+      <h2>{ translate('Result') }</h2>
       <div className="element-variable-name">
         <span className="element-variable-name-label">
           { translate('Variable name') }
@@ -36,7 +40,7 @@ function ElementVariableComponent(_, context) {
       </div>
       <div className="element-variable-type">
         <label className="element-variable-type-label" htmlFor={ VARIABLE_TYPE_ID }>
-          Result type
+          { translate('Result type') }
         </label>
         <VariableTypeEditor />
       </div>

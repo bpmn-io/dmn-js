@@ -7,10 +7,9 @@ var failures = 0;
 function verifyAssets() {
   const assetPaths = [
     'dist/assets/diagram-js.css',
-    'dist/assets/dmn-js-decision-table-controls.css',
-    'dist/assets/dmn-js-decision-table.css',
+    'dist/assets/dmn-js-boxed-expression-controls.css',
+    'dist/assets/dmn-js-boxed-expression.css',
     'dist/assets/dmn-js-drd.css',
-    'dist/assets/dmn-js-literal-expression.css',
     'dist/assets/dmn-js-shared.css',
     'dist/assets/dmn-font/css/dmn.css'
   ];

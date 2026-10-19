@@ -34,7 +34,7 @@ class _LiteralExpressionEditorComponent extends Component {
   isFeel() {
     const businessObject = this.getLiteralExpression();
 
-    return isFeel(businessObject);
+    return isFeel(businessObject, this._expressionLanguages.getDefault().value);
   }
 
   _getVariables() {
