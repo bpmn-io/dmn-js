@@ -1,4 +1,5 @@
 import BaseViewer from 'dmn-js-shared/lib/base/viewer/Viewer';
+import { getDefinitions } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
   assign
@@ -166,6 +167,15 @@ export default class Viewer extends BaseViewer {
    */
   getDecision() {
     return this._decision;
+  }
+
+  /**
+   * Returns the definitions of the currently displayed decision.
+   *
+   * @return {ModdleElement|undefined}
+   */
+  getDefinitions() {
+    return getDefinitions(this._decision);
   }
 
   /**

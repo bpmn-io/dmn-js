@@ -62,6 +62,23 @@ export function isAny(element, types) {
 }
 
 /**
+ * Return the definitions an element belongs to.
+ *
+ * @param {tjs.model.Base|ModdleElement} element
+ *
+ * @return {ModdleElement|undefined} undefined if the element is detached
+ */
+export function getDefinitions(element) {
+  let bo = getBusinessObject(element);
+
+  while (bo && !is(bo, 'dmn:Definitions')) {
+    bo = bo.$parent;
+  }
+
+  return bo;
+}
+
+/**
  * Return main boxed expression of a given decision or BKM.
  *
  * @param {ModdleElement} decisionOrBkm - the decision or business knowledge model

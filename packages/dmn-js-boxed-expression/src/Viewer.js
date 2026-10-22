@@ -1,4 +1,5 @@
 import BaseViewer from 'dmn-js-shared/lib/base/viewer/Viewer';
+import { getDefinitions } from 'dmn-js-shared/lib/util/ModelUtil';
 
 import {
   assign
@@ -169,6 +170,15 @@ export class Viewer extends BaseViewer {
    */
   getRootElement() {
     return this._root;
+  }
+
+  /**
+   * Returns the definitions of the currently displayed element.
+   *
+   * @return {ModdleElement|undefined}
+   */
+  getDefinitions() {
+    return getDefinitions(this._root);
   }
 
   _setRootElement(element) {

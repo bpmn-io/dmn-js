@@ -89,6 +89,23 @@ describe('Viewer', function() {
   });
 
 
+  describe('#getDefinitions', function() {
+
+    beforeEach(bootstrapViewer(simpleXML, { container: testContainer }));
+
+    it('should provide definitions of viewed decision', inject(function(viewer) {
+
+      // when
+      const definitions = viewer.getDefinitions();
+
+      // then
+      expect(definitions.$instanceOf('dmn:Definitions')).to.be.true;
+      expect(definitions.get('drgElement')).to.include(viewer.getDecision());
+    }));
+
+  });
+
+
   describe('#attachTo', function() {
 
     let literalExpressionViewer;
