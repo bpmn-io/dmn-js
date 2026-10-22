@@ -18,8 +18,7 @@ export default class ViewDrd {
     eventBus.on('showDrd', () => {
       const parent = injector.get('_parent', false);
 
-      // there is only one single element
-      const definitions = this.getDefinitions();
+      const definitions = viewer.getDefinitions();
 
       // open definitions
       const view = parent.getView(definitions);
@@ -35,25 +34,9 @@ export default class ViewDrd {
       return;
     }
 
-    // there is only one single element
-    const definitions = this.getDefinitions();
-
-    return !!parent.getView(definitions);
-  }
-
-  getDefinitions() {
-    return getDefinitions(this._viewer.getDecision());
+    return !!parent.getView(this._viewer.getDefinitions());
   }
 
 }
 
 ViewDrd.$inject = [ 'components', 'viewer', 'eventBus', 'injector' ];
-
-
-// helpers //////////////////////
-
-function getDefinitions(decision) {
-  const definitions = decision.$parent;
-
-  return definitions;
-}
