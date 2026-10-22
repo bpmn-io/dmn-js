@@ -6,6 +6,12 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: support grouping data types; data types provided via `DataTypes#registerProvider` are objects with `name`, `label` and `group`, shown grouped in type dropdowns ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
+
+### Breaking Changes
+
+* `DataTypes#getAll` returns data type objects (`{ name, label, group? }`) instead of strings, and data types providers registered via `DataTypes#registerProvider` receive and return such objects. Update custom code that reads or provides data types, i.e. use `dataType.name` as the `typeRef` value and `dataType.label` as the display text.
+
 ## 17.13.0
 
 * `FEAT`: support decision services ([#957](https://github.com/bpmn-io/dmn-js/issues/957))

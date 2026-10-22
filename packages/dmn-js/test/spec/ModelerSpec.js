@@ -229,8 +229,8 @@ describe('Modeler', function() {
 
       // then
       expect(dataTypesList).to.eql([
-        'double',
-        'long'
+        { name: 'double', label: 'double' },
+        { name: 'long', label: 'long' }
       ]);
     });
   });

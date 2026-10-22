@@ -181,6 +181,79 @@ describe('components/InputSelect', function() {
     });
 
 
+    describe('groups', function() {
+
+      function openWithOptions(options) {
+        const renderedTree = renderIntoDocument(
+          <DiContainer injector={ injector }>
+            <InputSelect label="Type" options={ options } />
+          </DiContainer>
+        );
+
+        triggerClick(
+          findRenderedDOMElementWithClass(renderedTree, 'dms-input-select')
+        );
+      }
+
+      const GROUP_1 = { id: 'group-1', name: 'Group 1' };
+      const GROUP_2 = { id: 'group-2', name: 'Group 2' };
+
+
+      it('should render group labels', function() {
+
+        // when
+        openWithOptions([
+          { label: 'Foo', value: 'foo', group: GROUP_1 },
+          { label: 'Bar', value: 'bar', group: GROUP_1 },
+          { label: 'Baz', value: 'baz', group: GROUP_2 }
+        ]);
+
+        // then
+        const labels = document.querySelectorAll('.dms-select-options .group-label');
+
+        expect([ ...labels ].map(l => l.textContent)).to.eql([ 'Group 1', 'Group 2' ]);
+        expect(document.querySelectorAll('.dms-select-options .option')).to.have.length(3);
+      });
+
+
+      it('should keep groups with same name apart', function() {
+
+        // when
+        openWithOptions([
+          { label: 'Foo', value: 'foo', group: { id: 'a', name: 'Shared' } },
+          { label: 'Bar', value: 'bar', group: { id: 'b', name: 'Shared' } }
+        ]);
+
+        // then
+        expect(document.querySelectorAll('.dms-select-options .group-label'))
+          .to.have.length(2);
+      });
+
+
+      it('should expose group semantics', function() {
+
+        // when
+        openWithOptions([
+          { label: 'Foo', value: 'foo', group: GROUP_1 },
+          { label: 'Bar', value: 'bar', group: GROUP_2 }
+        ]);
+
+        // then
+        const listbox = document.querySelector('.dms-select-options [role=listbox]');
+
+        expect(listbox.getAttribute('aria-label')).to.eql('Type');
+
+        const groups = listbox.querySelectorAll('[role=group]');
+
+        expect([ ...groups ].map(g => g.getAttribute('aria-label')))
+          .to.eql([ 'Group 1', 'Group 2' ]);
+
+        expect(groups[0].querySelectorAll('[role=option]')).to.have.length(1);
+      });
+
+    });
+
+
     it('should show options on input click', function() {
 
       // given

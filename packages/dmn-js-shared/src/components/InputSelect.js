@@ -293,18 +293,35 @@ export default class InputSelect extends Component {
   };
 
   renderOptions(options, activeOption) {
+    const { label } = this.props;
+
+    const renderOption = option => (
+      <div
+        className={
+          [ 'option', activeOption === option ? 'active' : '' ].join(' ')
+        }
+        role="option"
+        aria-selected={ activeOption === option }
+        data-value={ option.value }
+        onClick={ e => this.onOptionClick(option.value, e) }>
+        { option.label }
+      </div>
+    );
+
     return (
-      <div className="options">
+      <div className="options" role="listbox" aria-label={ label }>
         {
-          options.map(option => {
+          groupOptions(options).flatMap(({ group, options }) => {
+            if (!group || !group.name) {
+              return options.map(renderOption);
+            }
+
             return (
-              <div
-                className={
-                  [ 'option', activeOption === option ? 'active' : '' ].join(' ')
-                }
-                data-value={ option.value }
-                onClick={ e => this.onOptionClick(option.value, e) }>
-                { option.label }
+              <div role="group" aria-label={ group.name }>
+                <div className="group-label" aria-hidden="true">
+                  { group.name }
+                </div>
+                { options.map(renderOption) }
               </div>
             );
           })
@@ -383,4 +400,28 @@ InputSelect.$inject = [ 'keyboard', 'renderer' ];
 // helper ////
 function stopPropagation(event) {
   event.stopPropagation();
+}
+
+/**
+ * Split options into runs of options belonging to the same group, as
+ * identified by the group ID.
+ */
+function groupOptions(options) {
+  const runs = [];
+
+  options.forEach(option => {
+    const run = runs[runs.length - 1];
+
+    if (run && getGroupId(run.group) === getGroupId(option.group)) {
+      return run.options.push(option);
+    }
+
+    runs.push({ group: option.group, options: [ option ] });
+  });
+
+  return runs;
+}
+
+function getGroupId(group) {
+  return group && group.id;
 }

@@ -15,7 +15,11 @@ const DEFAULT_DATA_TYPES = [
   'dayTimeDuration',
   'yearMonthDuration',
   'Any'
-];
+].map(name => ({
+  name,
+  label: name,
+  group: { id: 'built-in', name: 'Built-ins' }
+}));
 
 
 describe('DataTypes', function() {
@@ -48,8 +52,125 @@ describe('DataTypes', function() {
 
     // then
     expect(dataTypesList).to.eql([
-      'string',
-      'boolean'
+      { name: 'string', label: 'string' },
+      { name: 'boolean', label: 'boolean' }
+    ]);
+  });
+
+
+  it('should read data types with group from config', function() {
+
+    // given
+    const group = { id: 'custom', name: 'Custom' };
+
+    const dataTypes = createDataTypes({
+      dataTypes: [
+        'string',
+        { name: 'myType', group }
+      ]
+    });
+
+    // when
+    const dataTypesList = dataTypes.getAll();
+
+    // then
+    expect(dataTypesList).to.eql([
+      { name: 'string', label: 'string' },
+      { name: 'myType', label: 'myType', group }
+    ]);
+  });
+
+
+  it('should translate labels and group names from config', function() {
+
+    // given
+    const dataTypes = createDataTypes({
+      dataTypes: [
+        { name: 'foo', group: { id: 'custom', name: 'Custom' } },
+        { name: 'bar', label: 'Bar label' }
+      ],
+      additionalModules: [
+        {
+          translate: [ 'value', text => ({
+            foo: 'Foo!',
+            'Bar label': 'Bar!',
+            Custom: 'Eigene'
+          }[text] || text) ]
+        }
+      ]
+    });
+
+    // when
+    const dataTypesList = dataTypes.getAll();
+
+    // then
+    expect(dataTypesList).to.eql([
+      { name: 'foo', label: 'Foo!', group: { id: 'custom', name: 'Eigene' } },
+      { name: 'bar', label: 'Bar!' }
+    ]);
+  });
+
+
+  it('should not translate group ID used as name', function() {
+
+    // given
+    const dataTypes = createDataTypes({
+      dataTypes: [
+        { name: 'foo', group: 'custom' },
+        { name: 'bar', group: { id: 'other' } }
+      ],
+      additionalModules: [
+        { translate: [ 'value', text => text.toUpperCase() ] }
+      ]
+    });
+
+    // when
+    const dataTypesList = dataTypes.getAll();
+
+    // then
+    expect(dataTypesList.map(t => t.group)).to.eql([
+      { id: 'custom', name: 'custom' },
+      { id: 'other', name: 'other' }
+    ]);
+  });
+
+
+  it('should keep empty label', function() {
+
+    // given
+    const dataTypes = createDataTypes({ dataTypes: [] });
+
+    dataTypes.registerProvider(500, {
+      getDataTypes() {
+        return [ { name: 'foo', label: '' } ];
+      }
+    });
+
+    // when
+    const dataTypesList = dataTypes.getAll();
+
+    // then
+    expect(dataTypesList).to.eql([ { name: 'foo', label: '' } ]);
+  });
+
+
+  it('should use group ID as name by default', function() {
+
+    // given
+    const dataTypes = createDataTypes({ dataTypes: [] });
+
+    dataTypes.registerProvider(500, {
+      getDataTypes() {
+        return [ { name: 'foo', group: 'custom' } ];
+      }
+    });
+
+    // when
+    const dataTypesList = dataTypes.getAll();
+
+    // then
+    expect(dataTypesList).to.eql([
+      { name: 'foo', label: 'foo', group: { id: 'custom', name: 'custom' } }
     ]);
   });
 
@@ -66,7 +187,7 @@ describe('DataTypes', function() {
 
     dataTypes.registerProvider(500, {
       getDataTypes(dataTypes) {
-        return [ ...dataTypes, 'myCustomType' ];
+        return [ ...dataTypes, { name: 'myCustomType' } ];
       }
     });
 
@@ -75,9 +196,9 @@ describe('DataTypes', function() {
 
     // then
     expect(dataTypesList).to.eql([
-      'string',
-      'boolean',
-      'myCustomType'
+      { name: 'string', label: 'string' },
+      { name: 'boolean', label: 'boolean' },
+      { name: 'myCustomType', label: 'myCustomType' }
     ]);
   });
 
@@ -94,7 +215,7 @@ describe('DataTypes', function() {
 
     dataTypes.registerProvider(500, {
       getDataTypes() {
-        return [ 'onlyThisType' ];
+        return [ { name: 'onlyThisType' } ];
       }
     });
 
@@ -103,7 +224,7 @@ describe('DataTypes', function() {
 
     // then
     expect(dataTypesList).to.eql([
-      'onlyThisType'
+      { name: 'onlyThisType', label: 'onlyThisType' }
     ]);
   });
 
@@ -119,13 +240,13 @@ describe('DataTypes', function() {
 
     dataTypes.registerProvider(500, {
       getDataTypes(dataTypes) {
-        return [ ...dataTypes, 'lowPriorityType' ];
+        return [ ...dataTypes, { name: 'lowPriorityType' } ];
       }
     });
 
     dataTypes.registerProvider(2000, {
       getDataTypes(dataTypes) {
-        return [ ...dataTypes, 'highPriorityType' ];
+        return [ ...dataTypes, { name: 'highPriorityType' } ];
       }
     });
 
@@ -134,9 +255,39 @@ describe('DataTypes', function() {
 
     // then
     expect(dataTypesList).to.eql([
-      'highPriorityType',
-      'string',
-      'lowPriorityType'
+      { name: 'highPriorityType', label: 'highPriorityType' },
+      { name: 'string', label: 'string' },
+      { name: 'lowPriorityType', label: 'lowPriorityType' }
+    ]);
+  });
+
+
+  it('should dedupe data types by name, last one wins', function() {
+
+    // given
+    const group = { id: 'custom', name: 'Custom' };
+
+    const dataTypes = createDataTypes({
+      dataTypes: [
+        'string',
+        'boolean'
+      ]
+    });
+
+    dataTypes.registerProvider(500, {
+      getDataTypes(dataTypes) {
+        return [ ...dataTypes, { name: 'string', group }, { name: 'other' } ];
+      }
+    });
+
+    // when
+    const dataTypesList = dataTypes.getAll();
+
+    // then
+    expect(dataTypesList).to.eql([
+      { name: 'string', label: 'string', group },
+      { name: 'boolean', label: 'boolean' },
+      { name: 'other', label: 'other' }
     ]);
   });
 
@@ -165,10 +316,11 @@ describe('DataTypes', function() {
 
 
 // helper
-function createDataTypes(config) {
+function createDataTypes({ additionalModules = [], ...config } = {}) {
   bootstrap({
     modules: [
-      DataTypesModule
+      DataTypesModule,
+      ...additionalModules
     ],
     ...config
   })();
