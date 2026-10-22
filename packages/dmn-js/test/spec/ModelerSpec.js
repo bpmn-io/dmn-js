@@ -1,6 +1,12 @@
 import { expect } from 'chai';
 import Modeler from 'src/Modeler';
 
+import {
+  triggerClick,
+  triggerMouseEvent,
+  triggerInputSelectChange
+} from 'dmn-js-shared/test/util/EventUtil';
+
 import { expectToBeAccessible, insertCSS } from 'test/helper';
 
 insertCSS('dmn-js-drd.css', require('dmn-js-drd/assets/css/dmn-js-drd.css'));
@@ -56,19 +62,6 @@ describe('Modeler', function() {
     });
 
     if (singleStart) {
-      editor.on('viewer.created', ({ viewer }) => {
-        const dataTypes = viewer.get('dataTypes', false);
-
-        dataTypes && dataTypes.registerProvider(500, {
-          getDataTypes: types => [
-            ...types,
-            { name: 'Customer', group: { id: 'custom', name: 'Custom' } },
-            { name: 'Order', group: { id: 'custom', name: 'Custom' } },
-            { name: 'Invoice', group: { id: 'other', name: 'Imported' } }
-          ]
-        });
-      });
-
       editor.on('viewer.created', ({ viewer }) => viewer.on('elements.changed', function() {
         editor.saveXML({ format: true }).then(({ xml }) => console.log(xml)).catch(console.error);
       }));
@@ -86,6 +79,229 @@ describe('Modeler', function() {
       document.body.removeChild(container);
     });
   }
+
+
+  describe('custom data types', function() {
+
+    beforeEach(async function() {
+      await editor.importXML(diagram, { open: false });
+    });
+
+
+    async function openView(type) {
+      const view = editor.getViews().find(view => view.type === type);
+
+      await editor.open(view);
+
+      return view;
+    }
+
+    async function saveAndReopen(view) {
+      const { xml } = await editor.saveXML();
+
+      await editor.importXML(xml, { open: false });
+
+      const reopened = editor.getViews().find(
+        candidate => candidate.element.id === view.element.id
+      );
+
+      await editor.open(reopened);
+
+      return reopened.element;
+    }
+
+    function selectCustomType(select) {
+      triggerInputSelectChange(select, 'Guest', container);
+    }
+
+    function openClauseTypeSelect(kind) {
+      triggerMouseEvent(container.querySelector(`.${ kind }-label`), 'dblclick');
+
+      return container.querySelector('.type-ref-edit-select');
+    }
+
+    function addClauseAndOpenTypeSelect(view, kind) {
+      const viewer = editor.getActiveViewer();
+      const clauses = view.element.decisionLogic[kind];
+      const col = viewer.get('elementRegistry').get(clauses[clauses.length - 1].id);
+
+      viewer.get('editorActions').trigger(
+        kind === 'input' ? 'addInputRight' : 'addOutputRight',
+        { [ kind ]: col }
+      );
+
+      const cells = container.querySelectorAll(`th.${ kind }-cell`);
+
+      triggerMouseEvent(cells[cells.length - 1], 'dblclick');
+
+      return container.querySelector('.type-ref-edit-select');
+    }
+
+    function openFormalParametersSelect(add = false) {
+      triggerClick(container.querySelector('[aria-label="Edit formal parameters"]'));
+
+      if (add) {
+        triggerClick(container.querySelector('.add-parameter'));
+      }
+
+      const selects = container.querySelectorAll(
+        '.function-definition-parameter .dms-input-select'
+      );
+
+      return selects[add ? selects.length - 1 : 0];
+    }
+
+    const last = array => array[array.length - 1];
+
+    const getClauseTypeRef = (kind, clause) => {
+      return kind === 'input' ? clause.inputExpression.typeRef : clause.typeRef;
+    };
+
+
+    [
+      {
+        name: 'decision table input',
+        type: 'decisionTable',
+        openSelect: () => openClauseTypeSelect('input'),
+        getTypeRef: decision => getClauseTypeRef('input', decision.decisionLogic.input[0])
+      },
+      {
+        name: 'decision table output',
+        type: 'decisionTable',
+        openSelect: () => openClauseTypeSelect('output'),
+        getTypeRef: decision => getClauseTypeRef('output', decision.decisionLogic.output[0])
+      },
+      {
+        name: 'newly added decision table input',
+        type: 'decisionTable',
+        openSelect: view => addClauseAndOpenTypeSelect(view, 'input'),
+        getTypeRef: decision => getClauseTypeRef('input', last(decision.decisionLogic.input))
+      },
+      {
+        name: 'newly added decision table output',
+        type: 'decisionTable',
+        openSelect: view => addClauseAndOpenTypeSelect(view, 'output'),
+        getTypeRef: decision => getClauseTypeRef('output', last(decision.decisionLogic.output))
+      },
+      {
+        name: 'literal expression variable',
+        type: 'literalExpression',
+        openSelect: () => container.querySelector('.variable-type-select'),
+        getTypeRef: decision => decision.variable.typeRef
+      },
+      {
+        name: 'boxed expression result',
+        type: 'boxedExpression',
+        openSelect: () => container.querySelector('.element-variable-type .dms-input-select'),
+        getTypeRef: decision => decision.encapsulatedLogic.body.typeRef
+      },
+      {
+        name: 'formal parameter',
+        type: 'boxedExpression',
+        openSelect: () => openFormalParametersSelect(),
+        getTypeRef: bkm => bkm.encapsulatedLogic.formalParameter[0].typeRef
+      },
+      {
+        name: 'newly added formal parameter',
+        type: 'boxedExpression',
+        openSelect: () => openFormalParametersSelect(true),
+        getTypeRef: bkm => last(bkm.encapsulatedLogic.formalParameter).typeRef
+      }
+    ].forEach(({ name, type, openSelect, getTypeRef }) => {
+
+      describe(name, function() {
+
+        let view, select;
+
+        beforeEach(async function() {
+          view = await openView(type);
+
+          select = openSelect(view);
+        });
+
+
+        it('should select custom type', function() {
+
+          // when
+          selectCustomType(select);
+
+          // then
+          expect(getTypeRef(view.element)).to.equal('Guest');
+        });
+
+
+        it('should persist custom type', async function() {
+
+          // given
+          selectCustomType(select);
+
+          // when
+          const reopened = await saveAndReopen(view);
+
+          // then
+          expect(getTypeRef(reopened)).to.equal('Guest');
+        });
+      });
+    });
+
+
+    describe('DRD input data', function() {
+
+      let view, element, select;
+
+      beforeEach(async function() {
+        view = await openView('drd');
+
+        const viewer = editor.getActiveViewer();
+
+        element = viewer.get('elementRegistry').get('dayType_id');
+
+        viewer.get('selection').select(element);
+
+        select = container.querySelector('.dms-type-ref-select');
+      });
+
+      function selectOption(value) {
+        select.value = value;
+        select.dispatchEvent(new Event('change'));
+      }
+
+
+      it('should offer custom types', function() {
+
+        // when
+        const values = Array.from(select.options).map(option => option.value);
+
+        // then
+        expect(values).to.include.members([ 'Guest', 'Season' ]);
+      });
+
+
+      it('should select custom type', function() {
+
+        // when
+        selectOption('Guest');
+
+        // then
+        expect(element.businessObject.variable.typeRef).to.equal('Guest');
+      });
+
+
+      it('should persist custom type', async function() {
+
+        // given
+        selectOption('Guest');
+
+        // when
+        const reopened = await saveAndReopen(view);
+
+        // then
+        const inputData = reopened.drgElement.find(element => element.id === 'dayType_id');
+
+        expect(inputData.variable.typeRef).to.equal('Guest');
+      });
+    });
+  });
 
 
   it('should open DMN table', async function() {
@@ -243,7 +459,9 @@ describe('Modeler', function() {
       // then
       expect(dataTypesList).to.eql([
         { name: 'double', label: 'double' },
-        { name: 'long', label: 'long' }
+        { name: 'long', label: 'long' },
+        { name: 'Guest', label: 'Guest', group: { id: 'custom', name: 'Custom' } },
+        { name: 'Season', label: 'Season', group: { id: 'custom', name: 'Custom' } }
       ]);
     });
   });

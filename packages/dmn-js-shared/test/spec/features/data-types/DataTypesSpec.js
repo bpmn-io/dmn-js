@@ -1,5 +1,6 @@
 import * as sinon from 'sinon';
 import { expect } from 'chai';
+import { DmnModdle } from 'dmn-moddle';
 import { bootstrap, getViewerJS } from '../../base/viewer/TestHelper';
 
 import DataTypesModule from 'src/features/data-types';
@@ -311,6 +312,254 @@ describe('DataTypes', function() {
     // then
     expect(getDataTypes).to.have.been.calledOnceWith([]);
   });
+
+
+  describe('model data types', function() {
+
+    it('should not add custom types without viewer', async function() {
+
+      // given
+      const dataTypes = createDataTypes();
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql(DEFAULT_DATA_TYPES);
+    });
+
+
+    it('should not add custom types without definitions', function() {
+
+      // given
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => undefined) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql(DEFAULT_DATA_TYPES);
+    });
+
+
+    it('should not add custom types without item definitions', async function() {
+
+      // given
+      const definitions = await createDefinitions([]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql(DEFAULT_DATA_TYPES);
+    });
+
+
+    it('should add item definitions of viewer definitions', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'Guest', 'Season' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([
+        ...DEFAULT_DATA_TYPES,
+        customType('Guest'),
+        customType('Season')
+      ]);
+    });
+
+
+    it('should translate group name', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'Guest' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [
+          createViewerModule(() => definitions),
+          { translate: [ 'value', text => text === 'Custom' ? 'Eigene' : text ] }
+        ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types.pop()).to.eql({
+        name: 'Guest',
+        label: 'Guest',
+        group: { id: 'custom', name: 'Eigene' }
+      });
+    });
+
+
+    it('should ignore unnamed item definitions', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'Guest', '' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([ ...DEFAULT_DATA_TYPES, customType('Guest') ]);
+    });
+
+
+    it('should dedupe item definitions by name', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'Guest', 'Guest' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([ ...DEFAULT_DATA_TYPES, customType('Guest') ]);
+    });
+
+
+    it('should keep existing data type of same name', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'string' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql(DEFAULT_DATA_TYPES);
+    });
+
+
+    it('should append to configured data types', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'Guest', 'Season' ]);
+
+      const dataTypes = createDataTypes({
+        dataTypes: [ 'boolean', 'Guest' ],
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([
+        { name: 'boolean', label: 'boolean' },
+        { name: 'Guest', label: 'Guest' },
+        customType('Season')
+      ]);
+    });
+
+
+    it('should not modify configured data types', async function() {
+
+      // given
+      const configuredTypes = [ 'boolean', 'Guest' ];
+      const definitions = await createDefinitions([ 'Season' ]);
+
+      const dataTypes = createDataTypes({
+        dataTypes: configuredTypes,
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      // when
+      dataTypes.getAll();
+
+      // then
+      expect(configuredTypes).to.eql([ 'boolean', 'Guest' ]);
+    });
+
+
+    it('should allow later provider to alter custom types', async function() {
+
+      // given
+      const definitions = await createDefinitions([ 'Guest' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      dataTypes.registerProvider(250, {
+        getDataTypes: types => types.filter(({ group }) => group.id === 'custom')
+      });
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([ customType('Guest') ]);
+    });
+
+
+    it('should pick up item definitions added after import', async function() {
+
+      // given
+      const definitions = await createDefinitions([]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      definitions.get('itemDefinition').push(
+        new DmnModdle().create('dmn:ItemDefinition', { name: 'Guest' })
+      );
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([ ...DEFAULT_DATA_TYPES, customType('Guest') ]);
+    });
+
+
+    it('should follow definitions of viewer', async function() {
+
+      // given
+      let definitions = await createDefinitions([ 'Guest' ]);
+
+      const dataTypes = createDataTypes({
+        additionalModules: [ createViewerModule(() => definitions) ]
+      });
+
+      dataTypes.getAll();
+
+      definitions = await createDefinitions([ 'Season' ]);
+
+      // when
+      const types = dataTypes.getAll();
+
+      // then
+      expect(types).to.eql([ ...DEFAULT_DATA_TYPES, customType('Season') ]);
+    });
+  });
 });
 
 
@@ -326,4 +575,29 @@ function createDataTypes({ additionalModules = [], ...config } = {}) {
   })();
 
   return getViewerJS().get('dataTypes');
+}
+
+
+function createViewerModule(getDefinitions) {
+  return { viewer: [ 'value', { getDefinitions } ] };
+}
+
+
+function customType(name) {
+  return { name, label: name, group: { id: 'custom', name: 'Custom' } };
+}
+
+
+async function createDefinitions(names) {
+  const itemDefinitions = names
+    .map((name, index) => `<itemDefinition id="type_${ index }" name="${ name }" />`)
+    .join('');
+
+  const { rootElement } = await new DmnModdle().fromXML(`
+    <definitions id="definitions" xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/">
+      ${ itemDefinitions }
+    </definitions>
+  `);
+
+  return rootElement;
 }
