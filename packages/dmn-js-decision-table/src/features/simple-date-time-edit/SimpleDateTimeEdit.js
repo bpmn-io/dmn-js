@@ -49,6 +49,7 @@ function getTypeRef(element) {
   }
 }
 
+// `dateTime` is the legacy name of the type
 function isDateTime(typeRef) {
-  return typeRef === 'dateTime';
+  return typeRef === 'date and time' || typeRef === 'dateTime';
 }

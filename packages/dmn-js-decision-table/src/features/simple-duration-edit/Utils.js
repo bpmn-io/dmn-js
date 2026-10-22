@@ -59,10 +59,33 @@ export function getRangeString(
     `..duration("${ rangeEndValue }")${ rangeEndChar }`;
 }
 
+// `yearMonthDuration` and `dayTimeDuration` are the legacy names of the types
+const YEARS_MONTHS_DURATION_TYPES = [
+  'years and months duration',
+  'yearMonthDuration'
+];
+
+const DAYS_TIME_DURATION_TYPES = [
+  'days and time duration',
+  'dayTimeDuration'
+];
+
+export function isYearsMonthsDuration(typeRef) {
+  return YEARS_MONTHS_DURATION_TYPES.includes(typeRef);
+}
+
+export function isDaysTimeDuration(typeRef) {
+  return DAYS_TIME_DURATION_TYPES.includes(typeRef);
+}
+
+export function isDuration(typeRef) {
+  return isYearsMonthsDuration(typeRef) || isDaysTimeDuration(typeRef);
+}
+
 export function validateDuration(type, value) {
-  if (type === 'yearMonthDuration') {
+  if (isYearsMonthsDuration(type)) {
     return validateYearMonthDuration(value);
-  } else if (type === 'dayTimeDuration') {
+  } else if (isDaysTimeDuration(type)) {
     return validateDayTimeDuration(value);
   }
 }

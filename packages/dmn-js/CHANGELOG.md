@@ -8,9 +8,11 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: support grouping data types; data types provided via `DataTypes#registerProvider` are objects with `name`, `label` and `group`, shown grouped in type dropdowns ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
 * `FIX`: clear element variable type in boxed expression instead of persisting an empty one ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
+* `FIX`: use FEEL data type names `date and time`, `years and months duration` and `days and time duration` ([#1013](https://github.com/bpmn-io/dmn-js/issues/1013), [#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
 
 ### Breaking Changes
 
+* The default data types `dateTime`, `yearMonthDuration` and `dayTimeDuration` are now `date and time`, `years and months duration` and `days and time duration`, as per the DMN specification. Newly picked types are persisted in the `typeRef` attribute with these names. Existing diagrams using the old names remain supported by the decision table's simple editors but are not migrated. Provide the old names via the `dataTypes` configuration if you depend on them, and adjust any engine or tooling that reads the `typeRef` values.
 * `DataTypes#getAll` returns data type objects (`{ name, label, group? }`) instead of strings, and data types providers registered via `DataTypes#registerProvider` receive and return such objects. Update custom code that reads or provides data types, i.e. use `dataType.name` as the `typeRef` value and `dataType.label` as the display text.
 
 ## 17.13.0

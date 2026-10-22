@@ -3,6 +3,8 @@ import OutputDurationEdit from './components/OutputDurationEdit';
 
 import { isInput, isOutput } from 'dmn-js-shared/lib/util/ModelUtil';
 
+import { isDuration } from './Utils';
+
 export default class SimpleDurationEdit {
   constructor(components, simpleMode) {
     simpleMode.registerProvider(element => {
@@ -47,13 +49,4 @@ function getTypeRef(element) {
   } else {
     return element.col && element.col.businessObject.typeRef;
   }
-}
-
-const durations = [
-  'yearMonthDuration',
-  'dayTimeDuration'
-];
-
-function isDuration(typeRef) {
-  return durations.includes(typeRef);
 }
