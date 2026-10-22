@@ -188,7 +188,7 @@ export default class InputDateEdit extends Component {
               type === BETWEEN ? this._translate('Start date') : this._translate('Date') }
             className="start-date-input dms-block"
             onInput={ this.onStartDateInput }
-            placeholder={ this._translate('e.g. { sample }', {
+            placeholder={ this._translate('e.g. {sample}', {
               sample: getSampleDate()
             }) }
             validate={ string => validateISOString(string) &&
@@ -218,7 +218,7 @@ export default class InputDateEdit extends Component {
                 label={ this._translate('End date') }
                 className="end-date-input dms-block"
                 onInput={ this.onEndDateInput }
-                placeholder={ this._translate('e.g. { sample }', {
+                placeholder={ this._translate('e.g. {sample}', {
                   sample: getSampleDate()
                 }) }
                 validate={ string => validateISOString(string) &&

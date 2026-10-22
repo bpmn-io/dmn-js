@@ -188,8 +188,8 @@ export default class InputTimeEdit extends Component {
             label={ this._translate('Start time') }
             className="start-time-input dms-block"
             onInput={ this.onStartTimeInput }
-            placeholder={ this._translate('e.g. { example } ', {
-              example: getSampleDate()
+            placeholder={ this._translate('e.g. {sample}', {
+              sample: getSampleDate()
             }) }
             validate={ string => validateISOString(string) &&
               this._translate(validateISOString(string)) }
@@ -218,8 +218,8 @@ export default class InputTimeEdit extends Component {
                 label={ this._translate('End time') }
                 className="end-time-input dms-block"
                 onInput={ this.onEndTimeInput }
-                placeholder={ this._translate('e.g. { example } ', {
-                  example: getSampleDate()
+                placeholder={ this._translate('e.g. {sample}', {
+                  sample: getSampleDate()
                 }) }
                 validate={ string => validateISOString(string) &&
                   this._translate(validateISOString(string)) }

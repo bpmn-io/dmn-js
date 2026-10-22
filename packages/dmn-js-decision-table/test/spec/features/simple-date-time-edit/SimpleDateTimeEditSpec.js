@@ -208,6 +208,19 @@ describe('simple date time edit', function() {
     });
 
 
+    it('should show example as placeholder', function() {
+
+      // given
+      const simpleDateEdit = openSimpleDateEdit('outputEntry1');
+
+      // when
+      const input = domQuery('.dms-input', simpleDateEdit);
+
+      // then
+      expect(input.placeholder).to.match(/^e\.g\. [^{}]+$/);
+    });
+
+
     it('should edit date', inject(function(elementRegistry) {
 
       // given

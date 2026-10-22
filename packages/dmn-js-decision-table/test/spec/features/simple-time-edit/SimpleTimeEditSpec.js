@@ -214,6 +214,19 @@ describe('simple time edit', function() {
     });
 
 
+    it('should show example as placeholder', function() {
+
+      // given
+      const simpleTimeEdit = openSimpleTimeEdit('outputEntry1');
+
+      // when
+      const input = domQuery('.dms-input', simpleTimeEdit);
+
+      // then
+      expect(input.placeholder).to.match(/^e\.g\. [^{}]+$/);
+    });
+
+
     it('should edit time', inject(function(elementRegistry) {
 
       // given
