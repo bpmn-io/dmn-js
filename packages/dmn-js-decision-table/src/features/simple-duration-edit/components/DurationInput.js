@@ -42,9 +42,9 @@ export class DurationInput extends Component {
 
   _getPlaceholder() {
     if (isYearsMonthsDuration(this._type)) {
-      return this._translate('e.g. { sample }', { sample: 'P1Y2M' });
+      return this._translate('e.g. {sample}', { sample: 'P1Y2M' });
     } else if (isDaysTimeDuration(this._type)) {
-      this._translate('e.g. { sample }', { sample: 'P1DT2H' });
+      return this._translate('e.g. {sample}', { sample: 'P1DT2H' });
     }
   }
 

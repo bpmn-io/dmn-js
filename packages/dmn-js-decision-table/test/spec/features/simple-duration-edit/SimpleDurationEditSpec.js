@@ -173,6 +173,16 @@ describe('simple duration edit', function() {
       }));
 
 
+      it('should show placeholder of <years and months duration>', function() {
+
+        // when
+        const input = domQuery('.range-start-duration-input input', simpleDurationEdit);
+
+        // then
+        expect(input.placeholder).to.equal('e.g. P1Y2M');
+      });
+
+
       it('should render', function() {
 
         // then
@@ -285,6 +295,16 @@ describe('simple duration edit', function() {
 
       // then
       expect(simpleDurationEdit).to.exist;
+    });
+
+
+    it('should show placeholder of <days and time duration>', function() {
+
+      // when
+      const input = domQuery('.dms-input', simpleDurationEdit);
+
+      // then
+      expect(input.placeholder).to.equal('e.g. P1DT2H');
     });
 
 

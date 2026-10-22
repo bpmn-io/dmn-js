@@ -74,7 +74,7 @@ export default class OutputDateEdit extends Component {
           <ValidatedInput
             label={ this._translate('Date and time value') }
             onInput={ this.onInput }
-            placeholder={ this._translate('e.g. { sample }', {
+            placeholder={ this._translate('e.g. {sample}', {
               sample: getSampleDate()
             }) }
             validate={ string => validateISOString(string) &&
