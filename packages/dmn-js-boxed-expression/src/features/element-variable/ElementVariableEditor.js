@@ -15,6 +15,9 @@ export default class ElementVariableEditor extends ElementVariable {
   setType(typeRef) {
     const element = this._getElement();
 
+    // clear the type, instead of persisting an empty one
+    typeRef = typeRef || undefined;
+
     if (is(element, 'dmn:BusinessKnowledgeModel')) {
       this._modeling.updateProperties(this.getTypeHolder(), { typeRef });
 
@@ -24,6 +27,10 @@ export default class ElementVariableEditor extends ElementVariable {
     const variable = this.getVariable();
 
     if (!variable) {
+      if (!typeRef) {
+        return;
+      }
+
       const newVariable = this._dmnFactory.create('dmn:InformationItem', {
         name: element.get('name'), typeRef
       });

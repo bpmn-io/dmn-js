@@ -7,6 +7,7 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: support grouping data types; data types provided via `DataTypes#registerProvider` are objects with `name`, `label` and `group`, shown grouped in type dropdowns ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
+* `FIX`: clear element variable type in boxed expression instead of persisting an empty one ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
 
 ### Breaking Changes
 

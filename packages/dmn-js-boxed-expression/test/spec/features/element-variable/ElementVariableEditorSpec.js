@@ -48,6 +48,26 @@ describe('ElementVariableEditor', function() {
       ));
 
 
+      it('should clear type on function body if empty', inject(
+        function(elementVariable, viewer, functionDefinition) {
+
+          // given
+          const bkm = viewer.getRootElement();
+          const encapsulatedLogic = bkm.get('encapsulatedLogic');
+
+          elementVariable.setType('number');
+
+          // when
+          elementVariable.setType('');
+
+          // then
+          const body = functionDefinition.getBody(encapsulatedLogic);
+
+          expect(body.get('typeRef')).not.to.exist;
+        }
+      ));
+
+
       it('should not write type to variable', inject(
         function(elementVariable, viewer) {
 
@@ -120,6 +140,40 @@ describe('ElementVariableEditor', function() {
           const variable = decision.get('variable');
 
           expect(variable.get('typeRef')).to.equal('number');
+        }
+      ));
+
+
+      it('should clear type on variable if empty', inject(
+        function(elementVariable, viewer) {
+
+          // given
+          const decision = viewer.getRootElement();
+
+          // when
+          elementVariable.setType('');
+
+          // then
+          const variable = decision.get('variable');
+
+          expect(variable.get('typeRef')).not.to.exist;
+        }
+      ));
+
+
+      it('should not create variable if empty', inject(
+        function(elementVariable, viewer) {
+
+          // given
+          const decision = viewer.getRootElement();
+
+          decision.set('variable', undefined);
+
+          // when
+          elementVariable.setType('');
+
+          // then
+          expect(decision.get('variable')).not.to.exist;
         }
       ));
     });
