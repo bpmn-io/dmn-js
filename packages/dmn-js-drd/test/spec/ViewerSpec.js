@@ -86,6 +86,39 @@ describe('Viewer', function() {
   });
 
 
+  describe('#getDefinitions', function() {
+
+    it('should provide displayed definitions', async function() {
+
+      // given
+      await createViewer(exampleXML);
+
+      // when
+      const definitions = viewer.getActiveViewer().getDefinitions();
+
+      // then
+      expect(definitions).to.exist;
+      expect(definitions).to.equal(viewer.getDefinitions());
+    });
+
+  });
+
+
+  it('should expose viewer as <viewer> service', async function() {
+
+    // given
+    await createViewer(exampleXML);
+
+    const drdViewer = viewer.getActiveViewer();
+
+    // when
+    const service = drdViewer.get('viewer');
+
+    // then
+    expect(service).to.equal(drdViewer);
+  });
+
+
   describe('import events', function() {
 
     it('should emit <import.*> events', async function() {

@@ -91,6 +91,32 @@ describe('DecisionTable', function() {
   });
 
 
+  describe('#getDefinitions', function() {
+
+    beforeEach(bootstrapViewer(simpleDiagramXML, { container: testContainer }));
+
+    it('should provide definitions of viewed decision', function() {
+
+      // when
+      const definitions = getDecisionTable().getDefinitions();
+
+      // then
+      expect(definitions.$instanceOf('dmn:Definitions')).to.be.true;
+    });
+
+
+    it('should expose viewer as <viewer> service', function() {
+
+      // when
+      const service = getDecisionTable().get('viewer');
+
+      // then
+      expect(service).to.equal(getDecisionTable());
+    });
+
+  });
+
+
   describe('#attachTo', function() {
 
     let decisionTableViewer;

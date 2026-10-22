@@ -235,7 +235,7 @@ Viewer.prototype._init = function(container, options) {
   var baseModules = options.modules || this.getModules(),
       staticModules = [
         {
-          drd: [ 'value', this ]
+          viewer: [ 'value', this ]
         }
       ];
 
@@ -327,6 +327,15 @@ Viewer.prototype.open = function(definitions) {
       resolve({ warnings: [] });
     }
   });
+};
+
+/**
+ * Return the currently displayed definitions.
+ *
+ * @return {ModdleElement|undefined}
+ */
+Viewer.prototype.getDefinitions = function() {
+  return this._definitions;
 };
 
 /**

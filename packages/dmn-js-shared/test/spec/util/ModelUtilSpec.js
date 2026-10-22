@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { DmnModdle } from 'dmn-moddle';
 
-import { isFeel } from 'src/util/ModelUtil';
+import { getDefinitions, isFeel } from 'src/util/ModelUtil';
 
 
 describe('ModelUtil', function() {
@@ -129,6 +129,75 @@ describe('ModelUtil', function() {
 
       // then
       expect(language).to.be.false;
+    });
+  });
+
+
+  describe('#getDefinitions', function() {
+
+    let moddle;
+
+    beforeEach(async function() {
+      moddle = await getModdle(
+        '<definitions id="definitions" ' +
+        'xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/">' +
+          '<decision id="decision">' +
+            '<literalExpression id="literalExpression" />' +
+          '</decision>' +
+        '</definitions>'
+      );
+    });
+
+
+    it('should return definitions of element', function() {
+
+      // when
+      const definitions = getDefinitions(moddle.elementsById.literalExpression);
+
+      // then
+      expect(definitions).to.equal(moddle.rootElement);
+    });
+
+
+    it('should return definitions of wrapped element', function() {
+
+      // when
+      const definitions = getDefinitions({
+        businessObject: moddle.elementsById.decision
+      });
+
+      // then
+      expect(definitions).to.equal(moddle.rootElement);
+    });
+
+
+    it('should return definitions given definitions', function() {
+
+      // when
+      const definitions = getDefinitions(moddle.rootElement);
+
+      // then
+      expect(definitions).to.equal(moddle.rootElement);
+    });
+
+
+    it('should return undefined for detached element', function() {
+
+      // when
+      const definitions = getDefinitions(DmnModdle().create('dmn:Decision'));
+
+      // then
+      expect(definitions).not.to.exist;
+    });
+
+
+    it('should return undefined without element', function() {
+
+      // when
+      const definitions = getDefinitions(undefined);
+
+      // then
+      expect(definitions).not.to.exist;
     });
   });
 });

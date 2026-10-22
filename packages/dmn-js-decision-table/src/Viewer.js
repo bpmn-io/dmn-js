@@ -4,6 +4,8 @@ import { importDecision } from './import/Importer';
 
 import { assign } from 'min-dash';
 
+import { getDefinitions } from 'dmn-js-shared/lib/util/ModelUtil';
+
 import {
   domify,
   remove as domRemove
@@ -94,6 +96,15 @@ export default class Viewer extends Table {
   }
 
   /**
+   * Return the definitions of the currently displayed decision.
+   *
+   * @return {ModdleElement|undefined}
+   */
+  getDefinitions() {
+    return getDefinitions(this._decision);
+  }
+
+  /**
    * Initialize the table, returning { modules: [], config }.
    *
    * @param  {Object} options
@@ -112,7 +123,7 @@ export default class Viewer extends Table {
     let extraModules = additionalModules || [];
     let staticModules = [
       {
-        decisionTable: [ 'value', this ]
+        viewer: [ 'value', this ]
       }
     ];
 
