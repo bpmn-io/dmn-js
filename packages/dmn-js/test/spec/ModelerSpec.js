@@ -56,6 +56,19 @@ describe('Modeler', function() {
     });
 
     if (singleStart) {
+      editor.on('viewer.created', ({ viewer }) => {
+        const dataTypes = viewer.get('dataTypes', false);
+
+        dataTypes && dataTypes.registerProvider(500, {
+          getDataTypes: types => [
+            ...types,
+            { name: 'Customer', group: { id: 'custom', name: 'Custom' } },
+            { name: 'Order', group: { id: 'custom', name: 'Custom' } },
+            { name: 'Invoice', group: { id: 'other', name: 'Imported' } }
+          ]
+        });
+      });
+
       editor.on('viewer.created', ({ viewer }) => viewer.on('elements.changed', function() {
         editor.saveXML({ format: true }).then(({ xml }) => console.log(xml)).catch(console.error);
       }));
