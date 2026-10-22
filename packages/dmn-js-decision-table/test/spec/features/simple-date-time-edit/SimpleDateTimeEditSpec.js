@@ -264,3 +264,42 @@ describe('simple date time edit', function() {
   });
 
 });
+
+
+describe('simple date time edit - type name per DMN specification', function() {
+
+  const xml = simpleNumberEditXML.replace(/"dateTime"/g, '"date and time"');
+
+  beforeEach(bootstrapModeler(xml, {
+    modules: [
+      CoreModule,
+      InteractionEventsModule,
+      ModelingModule,
+      DecisionRulesEditorModule,
+      SimpleDateTimeEditModule
+    ],
+    debounceInput: false
+  }));
+
+  let testContainer;
+
+  beforeEach(function() {
+    testContainer = TestContainer.get(this);
+  });
+
+
+  it('should open input of <date and time>', function() {
+
+    // given
+    const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+    triggerClick(cell);
+
+    // when
+    triggerClick(domQuery('.simple-mode-button', testContainer));
+
+    // then
+    expect(domQuery('.simple-date-edit', testContainer)).to.exist;
+  });
+
+});

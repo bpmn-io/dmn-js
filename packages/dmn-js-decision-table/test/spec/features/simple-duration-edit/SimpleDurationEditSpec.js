@@ -318,6 +318,52 @@ describe('simple duration edit', function() {
 });
 
 
+describe('simple duration edit - type names per DMN specification', function() {
+
+  const xml = simpleDurationEditXML
+    .replace(/yearMonthDuration/g, 'years and months duration')
+    .replace(/dayTimeDuration/g, 'days and time duration');
+
+  beforeEach(bootstrapModeler(xml, {
+    modules: [
+      CoreModule,
+      InteractionEventsModule,
+      ModelingModule,
+      DecisionRulesEditorModule,
+      SimpleDurationEditModule
+    ],
+    debounceInput: false
+  }));
+
+  let testContainer;
+
+  beforeEach(function() {
+    testContainer = TestContainer.get(this);
+  });
+
+
+  it('should open input of <years and months duration>', function() {
+
+    // when
+    const simpleEdit = openSimpleEdit('inputEntry2', testContainer);
+
+    // then
+    expect(simpleEdit).to.exist;
+  });
+
+
+  it('should open output of <days and time duration>', function() {
+
+    // when
+    const simpleEdit = openSimpleEdit('outputEntry9', testContainer);
+
+    // then
+    expect(simpleEdit).to.exist;
+  });
+
+});
+
+
 // helper //////////
 function openSimpleEdit(elementId, container) {
   const cell = domQuery(`[data-element-id="${elementId}"]`, container);

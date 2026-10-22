@@ -11,9 +11,9 @@ const DEFAULT_DATA_TYPES = [
   'number',
   'date',
   'time',
-  'dateTime',
-  'dayTimeDuration',
-  'yearMonthDuration',
+  'date and time',
+  'days and time duration',
+  'years and months duration',
   'Any'
 ].map(name => ({
   name,

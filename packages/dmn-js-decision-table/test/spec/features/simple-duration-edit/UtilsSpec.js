@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import {
+  isDuration,
   parseDuration,
   validateDuration
 } from 'src/features/simple-duration-edit/Utils';
@@ -155,4 +156,59 @@ describe('simple duration edit - utils', function() {
     });
   });
 
+
+  describe('isDuration', function() {
+
+    [
+      'years and months duration',
+      'days and time duration',
+      'yearMonthDuration',
+      'dayTimeDuration'
+    ].forEach(function(typeRef) {
+
+      it(`should recognize <${ typeRef }>`, function() {
+
+        // when
+        const result = isDuration(typeRef);
+
+        // then
+        expect(result).to.be.true;
+      });
+    });
+
+
+    it('should not recognize other types', function() {
+
+      // when
+      const result = isDuration('string');
+
+      // then
+      expect(result).to.be.false;
+    });
+
+  });
+
+
+  describe('validateDuration (names per DMN specification)', function() {
+
+    it('should validate years and months duration', function() {
+
+      // when
+      const result = validateDuration('years and months duration', 'P1Y2M');
+
+      // then
+      expect(result).to.be.true;
+    });
+
+
+    it('should validate days and time duration', function() {
+
+      // when
+      const result = validateDuration('days and time duration', 'P1DT1H');
+
+      // then
+      expect(result).to.be.true;
+    });
+
+  });
 });
