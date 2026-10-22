@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_dish" name="Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <itemDefinition id="guestType" name="Guest">
+    <itemComponent id="guestTypeName" name="name">
+      <typeRef>string</typeRef>
+    </itemComponent>
+    <itemComponent id="guestTypeVegetarian" name="vegetarian">
+      <typeRef>boolean</typeRef>
+    </itemComponent>
+  </itemDefinition>
+  <itemDefinition id="seasonType" name="Season">
+    <typeRef>string</typeRef>
+    <allowedValues id="seasonTypeAllowedValues">
+      <text>"Fall","Winter","Spring","Summer"</text>
+    </allowedValues>
+  </itemDefinition>
   <inputData id="dayType_id" name="Type of day">
     <variable id="dayType_ii" name="Type of day" typeRef="string" />
   </inputData>
