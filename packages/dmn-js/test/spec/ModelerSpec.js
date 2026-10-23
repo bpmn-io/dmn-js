@@ -292,19 +292,21 @@ describe('Modeler', function() {
 
         viewer.get('selection').select(element);
 
-        select = container.querySelector('.dms-type-ref-select');
+        select = container.querySelector('.dms-type-ref-select input');
       });
 
       function selectOption(value) {
         select.value = value;
-        select.dispatchEvent(new Event('change'));
+        select.dispatchEvent(new Event('input', { bubbles: true }));
+        select.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: 13, which: 13 }));
       }
 
 
       it('should offer custom types', function() {
 
         // when
-        const values = Array.from(select.options).map(option => option.value);
+        select.click();
+        const values = Array.from(container.querySelectorAll('[role=option]')).map(option => option.dataset.value);
 
         // then
         expect(values).to.include.members([ 'Guest', 'Season' ]);

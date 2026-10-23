@@ -588,7 +588,9 @@ describe('components/InputSelect', function() {
       const optionsBounds = options.getBoundingClientRect();
 
       expect(optionsBounds.top).to.be.lessThan(inputSelectBounds.top);
-      expect(optionsBounds.bottom).to.eql(inputSelectBounds.top);
+
+      // Allow subpixel rounding when converting between container coordinates.
+      expect(optionsBounds.bottom).to.be.closeTo(inputSelectBounds.top, 0.01);
       expect(optionsBounds.left).to.eql(inputSelectBounds.left);
     });
 
