@@ -98,6 +98,8 @@ const Parameter = withChangeSupport(function({ parameter, remove }, context) {
         <InputSelect
           onChange={ onTypeRefChange }
           value={ typeRef }
+          searchable
+          emptyLabel={ translate('No matching types') }
           options={ typeRefOptions }
         />
       </td>
