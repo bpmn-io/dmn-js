@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 18.0.0
+
 * `FEAT`: support grouping data types; data types provided via `DataTypes#registerProvider` are objects with `name`, `label` and `group`, shown grouped in type dropdowns ([#1039](https://github.com/bpmn-io/dmn-js/pull/1039))
 * `FEAT`: show named item definitions of the diagram as custom data types in type dropdowns ([#1018](https://github.com/bpmn-io/dmn-js/issues/1018), [#1029](https://github.com/bpmn-io/dmn-js/pull/1029), [#1048](https://github.com/bpmn-io/dmn-js/pull/1048))
 * `FEAT`: add `getDefinitions` to the DRD, decision table, literal expression and boxed expression viewers ([#1048](https://github.com/bpmn-io/dmn-js/pull/1048))
