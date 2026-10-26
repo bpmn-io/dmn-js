@@ -67,6 +67,7 @@
   --select-options-border-color: var(--bio-border);
   --select-options-box-shadow-color: var(--bio-shadow-subtle);
   --select-options-color: var(--bio-text);
+  --select-options-group-label-color: var(--bio-text-subtle);
 }
 
 .dms-list-component .items {
@@ -235,7 +236,7 @@ h4.dms-heading {
 .dms-select-options .group-label {
   padding: 4px 9px;
   font-size: 12px;
-  opacity: 0.6;
+  color: var(--select-options-group-label-color);
   cursor: default;
 }
 
