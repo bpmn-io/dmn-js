@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 18.0.1
+
 * `FIX`: use theme token instead of opacity for group labels in select options ([#1050](https://github.com/bpmn-io/dmn-js/pull/1050))
 
 ## 18.0.0
