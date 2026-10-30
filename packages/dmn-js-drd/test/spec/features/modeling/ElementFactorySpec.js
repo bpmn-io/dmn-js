@@ -297,6 +297,7 @@ describe('features/modeling - create elements', function() {
         expect(variable).to.exist;
         expect(variable.$type).to.eql('dmn:InformationItem');
         expect(variable.name).to.eql('New Decision Service');
+        expect(variable.typeRef).to.eql('Any');
         expect(variable.$parent).to.equal(businessObject);
       }
     ));

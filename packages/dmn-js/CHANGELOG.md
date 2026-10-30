@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: create a `variable` with `typeRef="Any"` for new business knowledge models and decision services ([#1051](https://github.com/bpmn-io/dmn-js/issues/1051))
+
 ## 18.0.1
 
 * `FIX`: use theme token instead of opacity for group labels in select options ([#1050](https://github.com/bpmn-io/dmn-js/pull/1050))

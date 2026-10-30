@@ -59,6 +59,27 @@ describe('features/modeling - CreateShapeBehavior', function() {
   ));
 
 
+  it('should create a default variable for a new business knowledge model', inject(
+    function(canvas, elementFactory, modeling) {
+
+      // given
+      var rootElement = canvas.getRootElement();
+
+      // when
+      var bkm = elementFactory.createShape({ type: 'dmn:BusinessKnowledgeModel' });
+      modeling.createShape(bkm, { x: 100, y: 100 }, rootElement);
+
+      // then
+      var variable = bkm.businessObject.variable;
+
+      expect(variable).to.exist;
+      expect(variable.typeRef).to.equal('Any');
+      expect(variable.name).to.equal(bkm.businessObject.name);
+      expect(variable.$parent).to.equal(bkm.businessObject);
+    }
+  ));
+
+
   it('should not create a variable for other shapes', inject(
     function(canvas, elementFactory, modeling) {
 
