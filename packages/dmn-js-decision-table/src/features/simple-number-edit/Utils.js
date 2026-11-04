@@ -2,7 +2,7 @@ import { keys } from 'min-dash';
 
 const COMPARISON_REGULAR_EXPRESSION = /^(-?(?:[0-9]|\.[0-9])+)$|^((?:<|>|=){0,2})\s*(-?(?:[0-9]|\.[0-9])+)$/;
 
-const RANGE_REGULAR_EXPRESSION = /^(\[|\]){1}(-?(?:[0-9]|\.[0-9])+){1,}\.\.(-?(?:[0-9]|\.[0-9])+){1,}(\[|\]){1}$/;
+const RANGE_REGULAR_EXPRESSION = /^(\[|\])(-?(?:[0-9]|\.[0-9])+)\.\.(-?(?:[0-9]|\.[0-9])+)(\[|\])$/;
 
 export const operators = {
   equals: '=',
