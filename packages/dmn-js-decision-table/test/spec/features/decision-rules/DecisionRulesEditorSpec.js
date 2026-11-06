@@ -189,6 +189,32 @@ describe('features/decision-rules', function() {
           expect(badge).to.satisfy(isNotDisplayed);
         });
 
+
+        it('should display above row background', function() {
+
+          // given
+          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+          // then
+          // cell isolates the badge from the row background
+          expect(getComputedStyle(cell).isolation).to.equal('isolate');
+        });
+
+
+        skipFF()('should let editor popups overlap other rows if focussed', function() {
+
+          // given
+          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+
+          const editor = queryEditor('[data-element-id="inputEntry1"]', testContainer);
+
+          // when
+          editor.focus();
+
+          // then
+          expect(getComputedStyle(cell).isolation).to.equal('auto');
+        });
+
       });
 
 
