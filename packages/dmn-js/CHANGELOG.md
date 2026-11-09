@@ -6,6 +6,10 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 18.0.3
+
+* `FIX`: show expression language badge in every decision table row ([#647](https://github.com/bpmn-io/dmn-js/issues/647), [#1055](https://github.com/bpmn-io/dmn-js/pull/1055))
+
 ## 18.0.2
 
 * `FIX`: prevent ReDoS when parsing malformed ranges in the decision table's simple number editor ([GHSA-827x-p4p3-vpw8](https://github.com/bpmn-io/dmn-js/security/advisories/GHSA-827x-p4p3-vpw8))
