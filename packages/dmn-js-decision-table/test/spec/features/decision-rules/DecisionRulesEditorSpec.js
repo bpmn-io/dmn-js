@@ -13,11 +13,14 @@ import TestContainer from 'mocha-test-container-support';
 
 import emptyRuleXML from './empty-rule.dmn';
 import languageExpressionXML from '../../expression-language.dmn';
+import languageRowsXML from './expression-language-rows.dmn';
 
 import CoreModule from 'src/core';
 import ModelingModule from 'src/features/modeling';
 import DecisionRulesModule from 'src/features/decision-rules';
 import DecisionRulesEditorModule from 'src/features/decision-rules/editor';
+import DecisionRuleIndicesModule from 'src/features/decision-rule-indices';
+import DecisionTableHeadModule from 'src/features/decision-table-head';
 
 const CUSTOM_EXPRESSION_LANGUAGES = [ {
   label: 'FEEL',
@@ -189,32 +192,6 @@ describe('features/decision-rules', function() {
           expect(badge).to.satisfy(isNotDisplayed);
         });
 
-
-        it('should display above row background', function() {
-
-          // given
-          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
-
-          // then
-          // cell isolates the badge from the row background
-          expect(getComputedStyle(cell).isolation).to.equal('isolate');
-        });
-
-
-        skipFF()('should let editor popups overlap other rows if focussed', function() {
-
-          // given
-          const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
-
-          const editor = queryEditor('[data-element-id="inputEntry1"]', testContainer);
-
-          // when
-          editor.focus();
-
-          // then
-          expect(getComputedStyle(cell).isolation).to.equal('auto');
-        });
-
       });
 
 
@@ -359,6 +336,100 @@ describe('features/decision-rules', function() {
 
     });
 
+
+    describe('stacking', function() {
+
+      // hit testing follows paint order: the elements found at
+      // a point, topmost first, tell what is painted above what
+
+      beforeEach(bootstrapModeler(languageRowsXML, {
+        expressionLanguages: {
+          options: CUSTOM_EXPRESSION_LANGUAGES
+        },
+        modules: [
+          CoreModule,
+          ModelingModule,
+          DecisionRulesModule,
+          DecisionRulesEditorModule,
+          DecisionRuleIndicesModule,
+          DecisionTableHeadModule
+        ]
+      }));
+
+
+      [ 'inputEntry1', 'inputEntry2', 'inputEntry3' ].forEach(function(id) {
+
+        describe('badge of <' + id + '>', function() {
+
+          let cell, badge;
+
+          beforeEach(function() {
+            cell = domQuery(`[data-element-id="${ id }"]`, testContainer);
+            badge = domQuery('.dmn-expression-language', cell);
+
+            // badge ignores pointer events, make it hit-testable
+            badge.style.pointerEvents = 'auto';
+          });
+
+
+          it('should be above row background', function() {
+
+            // when
+            const elements = elementsAtCenter(badge);
+
+            // then
+            expect(elements).to.include(badge);
+            expect(elements.indexOf(badge)).to.be.below(elements.indexOf(cell));
+          });
+
+
+          it('should be below cell content', function() {
+
+            // given
+            const editor = queryEditor(`[data-element-id="${ id }"]`, testContainer);
+
+            // when
+            const elements = elementsAtCenter(badge);
+
+            // then
+            expect(elements).to.include(editor);
+            expect(elements.indexOf(editor)).to.be.below(elements.indexOf(badge));
+          });
+
+        });
+
+      });
+
+
+      skipFF()('should let focussed cell content overlap next row', function() {
+
+        // given
+        const cell = domQuery('[data-element-id="inputEntry1"]', testContainer);
+        const nextCell = domQuery('[data-element-id="inputEntry2"]', testContainer);
+
+        // simulates a popup reaching out of the cell
+        const popup = document.createElement('div');
+
+        popup.style.cssText = 'position: absolute; top: 100%; left: 0; ' +
+          'width: 20px; height: 10px; z-index: 1;';
+
+        cell.appendChild(popup);
+
+        const editor = queryEditor('[data-element-id="inputEntry1"]', testContainer);
+
+        // when
+        editor.focus();
+
+        // then
+        const elements = elementsAtCenter(popup);
+
+        expect(elements).to.include(popup);
+        expect(elements).to.include(nextCell);
+        expect(elements.indexOf(popup)).to.be.below(elements.indexOf(nextCell));
+      });
+
+    });
+
   });
 
 
@@ -463,6 +534,21 @@ async function expectEventually(fn) {
   }
 
   await fn();
+}
+
+/**
+ * Return elements at the center of the given element, topmost first.
+ *
+ * @param {HTMLElement} element
+ *
+ * @return {HTMLElement[]}
+ */
+function elementsAtCenter(element) {
+  element.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+
+  const { left, top, width, height } = element.getBoundingClientRect();
+
+  return document.elementsFromPoint(left + width / 2, top + height / 2);
 }
 
 function isFirefox() {
