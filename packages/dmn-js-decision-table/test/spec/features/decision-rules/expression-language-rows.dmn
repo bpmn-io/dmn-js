@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="Check Order">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="Customer Status">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text>status</text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="Check Result" name="result" typeRef="string" />
+      <rule id="rule1">
+        <inputEntry id="inputEntry1" expressionLanguage="jruby">
+          <text>"bronze"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry1">
+          <text>"notok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule2">
+        <inputEntry id="inputEntry2" expressionLanguage="jruby">
+          <text>"silver"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry2">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule3">
+        <inputEntry id="inputEntry3" expressionLanguage="jruby">
+          <text>"gold"</text>
+        </inputEntry>
+        <outputEntry id="outputEntry3">
+          <text>"ok"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
