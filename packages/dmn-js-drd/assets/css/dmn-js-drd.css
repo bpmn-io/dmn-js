@@ -114,10 +114,10 @@
     display: block;
   }
 
-  & .dms-type-ref-select {
+  & .dms-type-ref-select .dms-input {
     background-color: var(--bio-surface);
     border: 1px solid var(--input-border-color);
-    width: 125px;
+    width: 160px;
     border-radius: 12px;
   }
 }

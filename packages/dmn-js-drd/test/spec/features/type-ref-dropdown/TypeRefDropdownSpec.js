@@ -136,7 +136,7 @@ describe('features - type-ref-dropdown', function() {
 
           // then
           const selectEl = querySelect('withVariable_id');
-          expect(domQueryAll('option', selectEl)).to.have.length(dataTypes.getAll().length);
+          expect(domQueryAll('[role=option]', openOptions(selectEl))).to.have.length(dataTypes.getAll().length);
         }
       ));
 
@@ -148,7 +148,7 @@ describe('features - type-ref-dropdown', function() {
           selection.select(elementRegistry.get('withVariable_id'));
 
           // then
-          expect(domQueryAll('optgroup', querySelect('withVariable_id'))).to.be.empty;
+          expect(domQueryAll('[role=group]', openOptions(querySelect('withVariable_id')))).to.be.empty;
         }
       ));
 
@@ -170,10 +170,10 @@ describe('features - type-ref-dropdown', function() {
           selection.select(elementRegistry.get('withVariable_id'));
 
           // then
-          const groups = domQueryAll('optgroup', querySelect('withVariable_id'));
+          const groups = domQueryAll('[role=group]', openOptions(querySelect('withVariable_id')));
 
-          expect([ ...groups ].map(g => g.label)).to.eql([ 'Built-ins', 'Custom' ]);
-          expect(domQueryAll('option', groups[1])).to.have.length(1);
+          expect([ ...groups ].map(g => g.getAttribute('aria-label'))).to.eql([ 'Built-ins', 'Custom' ]);
+          expect(domQueryAll('[role=option]', groups[1])).to.have.length(1);
         }
       ));
 
@@ -396,6 +396,115 @@ describe('features - type-ref-dropdown', function() {
   });
 
 
+  describe('search', function() {
+
+    it('should filter without changing the model and cancel with Escape', inject(
+      function(elementRegistry, selection) {
+
+        // given
+        const element = elementRegistry.get('withVariable_id');
+        selection.select(element);
+        const input = querySelect(element.id);
+
+        // when
+        input.value = 'num';
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // then
+        expect(getBusinessObject(element).variable.typeRef).to.equal('boolean');
+        expect([ ...domQueryAll('[role=option]', container) ].map(node => node.dataset.value)).to.eql([ 'number' ]);
+
+        // when
+        input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: 27, which: 27 }));
+
+        // then
+        expect(input.value).to.equal('boolean');
+        expect(domQuery('.dms-select-options', container)).not.to.exist;
+      }
+    ));
+
+
+    it('should apply a clicked custom type and undo it', inject(
+      function(elementRegistry, selection, dataTypes, commandStack) {
+
+        // given
+        dataTypes.registerProvider(500, {
+          getDataTypes: types => [ ...types, { name: 'Applicant', group: { id: 'custom', name: 'Custom' } } ]
+        });
+        const element = elementRegistry.get('withVariable_id');
+        selection.select(element);
+        openOptions(querySelect(element.id));
+
+        // when
+        domQuery('[data-value="Applicant"]', container).click();
+
+        // then
+        expect(getBusinessObject(element).variable.typeRef).to.equal('Applicant');
+
+        // when
+        commandStack.undo();
+
+        // then
+        expect(querySelect(element.id).value).to.equal('boolean');
+      }
+    ));
+
+
+    it('should cap long lists and confirm keyboard selection', inject(
+      function(elementRegistry, selection, dataTypes) {
+
+        // given
+        dataTypes.registerProvider(500, {
+          getDataTypes: types => [ ...types, ...Array.from({ length: 60 }, (_, i) => ({
+            name: 'Applicant' + i,
+            group: { id: 'custom', name: 'Custom' }
+          })) ]
+        });
+        const element = elementRegistry.get('withVariable_id');
+        selection.select(element);
+        const input = querySelect(element.id);
+        const popup = openOptions(input);
+
+        // then
+        expect(popup.clientHeight).to.be.at.most(320);
+        expect(popup.scrollHeight).to.be.greaterThan(popup.clientHeight);
+
+        // when
+        input.value = 'Applicant59';
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: 40 }));
+
+        // then
+        expect(getBusinessObject(element).variable.typeRef).to.equal('boolean');
+
+        // when
+        input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: 13 }));
+
+        // then
+        expect(getBusinessObject(element).variable.typeRef).to.equal('Applicant59');
+      }
+    ));
+
+
+    it('should remove open options when selection changes', inject(
+      function(elementRegistry, selection) {
+
+        // given
+        selection.select(elementRegistry.get('withVariable_id'));
+        openOptions(querySelect('withVariable_id'));
+
+        // when
+        selection.select(elementRegistry.get('noVariable_id'));
+
+        // then
+        expect(domQuery('.dms-select-options', container)).not.to.exist;
+        expect(querySelect('noVariable_id').value).to.equal('Any');
+      }
+    ));
+
+  });
+
+
   // helpers //////////////
 
   function queryOverlay(elementId) {
@@ -405,12 +514,18 @@ describe('features - type-ref-dropdown', function() {
 
   function querySelect(elementId) {
     const overlay = queryOverlay(elementId);
-    return overlay && domQuery('select', overlay);
+    return overlay && domQuery('input', overlay);
+  }
+
+  function openOptions(input) {
+    input.click();
+    return domQuery('.dms-select-options', container);
   }
 
   function triggerSelectChange(selectEl, value) {
     selectEl.value = value;
-    selectEl.dispatchEvent(new Event('change'));
+    selectEl.dispatchEvent(new Event('input', { bubbles: true }));
+    selectEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: 13, which: 13 }));
   }
 
 });
