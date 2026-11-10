@@ -8,6 +8,14 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: create a `variable` with `typeRef="Any"` for new business knowledge models and decision services ([#1051](https://github.com/bpmn-io/dmn-js/issues/1051))
 
+## 18.0.3
+
+* `FIX`: show expression language badge in every decision table row ([#647](https://github.com/bpmn-io/dmn-js/issues/647), [#1055](https://github.com/bpmn-io/dmn-js/pull/1055))
+
+## 18.0.2
+
+* `FIX`: prevent ReDoS when parsing malformed ranges in the decision table's simple number editor ([GHSA-827x-p4p3-vpw8](https://github.com/bpmn-io/dmn-js/security/advisories/GHSA-827x-p4p3-vpw8))
+
 ## 18.0.1
 
 * `FIX`: use theme token instead of opacity for group labels in select options ([#1050](https://github.com/bpmn-io/dmn-js/pull/1050))

@@ -134,6 +134,22 @@ describe('simple number edit - utils', function() {
 
     it('invalid string', expectParsed('foo', undefined));
 
+
+    it('should not backtrack catastrophically on malformed range', function() {
+
+      // given
+      const input = '[' + '1'.repeat(64) + '..';
+
+      // when
+      const start = Date.now();
+
+      const result = parseString(input);
+
+      // then
+      expect(result).to.be.undefined;
+      expect(Date.now() - start).to.be.below(100);
+    });
+
   });
 
 });

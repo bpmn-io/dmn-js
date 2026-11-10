@@ -498,6 +498,14 @@
   display: inline-block;
 }
 
+/*
+ * keep the badge behind the cell content, but above the row background;
+ * skip focused cells, so editor popups can overlap the rows below
+ */
+.dmn-decision-table-container .cell:not(:focus-within) {
+  isolation: isolate;
+}
+
 .dmn-decision-table-container .cell .dms-badge.dmn-expression-language {
   z-index: -1;
 }
