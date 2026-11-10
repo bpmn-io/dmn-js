@@ -6,8 +6,8 @@ import { is } from 'dmn-js-shared/lib/util/ModelUtil';
 
 
 /**
- * Assigns a default variable to newly created Decisions, Input Data and
- * Business Knowledge Models.
+ * Assigns a default variable to newly created Decisions, Input Data,
+ * Business Knowledge Models and Decision Services.
  */
 export default function CreateShapeBehavior(drdFactory, injector) {
   injector.invoke(CommandInterceptor, this);
@@ -28,7 +28,8 @@ export default function CreateShapeBehavior(drdFactory, injector) {
     if (!(
       is(shape, 'dmn:Decision') ||
       is(shape, 'dmn:InputData') ||
-      is(shape, 'dmn:BusinessKnowledgeModel')
+      is(shape, 'dmn:BusinessKnowledgeModel') ||
+      is(shape, 'dmn:DecisionService')
     )) {
       return;
     }

@@ -77,16 +77,6 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
         if (!businessObject.name) {
           businessObject.name = 'New Decision Service';
         }
-
-        // Create variable for Decision Service
-        if (!businessObject.variable) {
-          var variable = drdFactory.create('dmn:InformationItem', {
-            name: businessObject.name,
-            typeRef: 'Any'
-          });
-          businessObject.variable = variable;
-          variable.$parent = businessObject;
-        }
       }
     }
   }
