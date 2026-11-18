@@ -59,6 +59,75 @@ describe('features/modeling - CreateShapeBehavior', function() {
   ));
 
 
+  it('should create a default variable for a new business knowledge model', inject(
+    function(canvas, drdFactory, elementFactory, modeling) {
+
+      // given
+      var rootElement = canvas.getRootElement();
+
+      var bkm = elementFactory.createShape({
+        type: 'dmn:BusinessKnowledgeModel',
+        businessObject: drdFactory.create('dmn:BusinessKnowledgeModel', {
+          name: 'My BKM'
+        })
+      });
+
+      // when
+      modeling.createShape(bkm, { x: 100, y: 100 }, rootElement);
+
+      // then
+      var variable = bkm.businessObject.variable;
+
+      expect(variable).to.exist;
+      expect(variable.typeRef).to.equal('Any');
+      expect(variable.name).to.equal('My BKM');
+      expect(variable.$parent).to.equal(bkm.businessObject);
+    }
+  ));
+
+
+  it('should not create a variable before shape.create', inject(
+    function(elementFactory) {
+
+      // when
+      var decisionService = elementFactory.createShape({
+        type: 'dmn:DecisionService',
+        x: 100,
+        y: 100
+      });
+
+      // then
+      expect(decisionService.businessObject.variable).not.to.exist;
+    }
+  ));
+
+
+  it('should create a default variable for a new decision service', inject(
+    function(canvas, elementFactory, modeling) {
+
+      // given
+      var rootElement = canvas.getRootElement();
+
+      // when
+      var decisionService = elementFactory.createShape({
+        type: 'dmn:DecisionService',
+        x: 100,
+        y: 100
+      });
+      modeling.createShape(decisionService, { x: 100, y: 100 }, rootElement);
+
+      // then
+      var variable = decisionService.businessObject.variable;
+
+      expect(variable).to.exist;
+      expect(variable.$type).to.equal('dmn:InformationItem');
+      expect(variable.typeRef).to.equal('Any');
+      expect(variable.name).to.equal('New Decision Service');
+      expect(variable.$parent).to.equal(decisionService.businessObject);
+    }
+  ));
+
+
   it('should not create a variable for other shapes', inject(
     function(canvas, elementFactory, modeling) {
 
