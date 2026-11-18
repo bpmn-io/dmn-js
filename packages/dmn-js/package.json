@@ -1,7 +1,7 @@
 {
   "name": "dmn-js",
   "description": "A dmn toolkit and web modeler",
-  "version": "18.0.3",
+  "version": "18.1.0",
   "files": [
     "dist",
     "lib",
@@ -66,7 +66,7 @@
   "dependencies": {
     "dmn-js-boxed-expression": "^18.0.1",
     "dmn-js-decision-table": "^18.0.3",
-    "dmn-js-drd": "^18.0.1",
+    "dmn-js-drd": "^18.1.0",
     "dmn-js-literal-expression": "^18.0.1",
     "dmn-js-shared": "^18.0.1"
   }
