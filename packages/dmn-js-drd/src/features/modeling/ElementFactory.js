@@ -53,6 +53,11 @@ ElementFactory.prototype.createDrdElement = function(elementType, attrs) {
     }
 
     businessObject = drdFactory.create(attrs.type);
+
+    // name is required by the DMN schema
+    if (is(businessObject, 'dmn:DRGElement') && !businessObject.name) {
+      businessObject.name = '';
+    }
   }
 
   if (!businessObject.di) {
