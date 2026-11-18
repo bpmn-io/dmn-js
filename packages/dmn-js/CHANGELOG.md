@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+## 18.1.0
+
 * `FEAT`: create a `variable` with `typeRef="Any"` for new business knowledge models and decision services ([#1051](https://github.com/bpmn-io/dmn-js/issues/1051))
 
 ## 18.0.3
