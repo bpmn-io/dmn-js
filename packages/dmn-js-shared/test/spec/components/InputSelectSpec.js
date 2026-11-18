@@ -50,6 +50,263 @@ describe('components/InputSelect', function() {
   });
 
 
+  describe('search and scrolling', function() {
+
+    let style;
+
+    beforeEach(function() {
+      style = document.createElement('style');
+      style.textContent = require('assets/css/dmn-js-shared.css');
+      document.head.appendChild(style);
+    });
+
+    afterEach(function() {
+      style.remove();
+    });
+
+    const primitive = { id: 'built-in', name: 'Built-ins' };
+    const custom = { id: 'custom', name: 'Custom' };
+
+    function openOptions(groups, props = {}) {
+      const injector = createInjector({
+        keyboard: getKeyboardMock(testContainer),
+        renderer: getRendererMock(testContainer)
+      });
+      const options = groups.map((group, index) => ({
+        value: String(index), label: String(index), group
+      }));
+
+      renderIntoDocument(
+        <DiContainer injector={ injector }>
+          <InputSelect options={ options } { ...props } />
+        </DiContainer>
+      );
+
+      const input = testContainer.querySelector('.dms-input');
+      triggerClick(input);
+
+      return input;
+    }
+
+    function labels() {
+      return Array.from(testContainer.querySelectorAll('.group-label'))
+        .map(node => node.textContent);
+    }
+
+
+    [ { upwards: false, height: 200 }, { upwards: true, height: 200 },
+      { upwards: false, height: 600 }, { upwards: true, height: 600 } ].forEach(({ upwards, height }) => {
+
+      it(`should keep long lists scrollable (upwards=${ upwards }, height=${ height })`, function() {
+
+        // given
+        testContainer.style.height = `${ height }px`;
+        testContainer.style.position = 'relative';
+
+        if (upwards) {
+          testContainer.style.display = 'flex';
+          testContainer.style.flexDirection = 'column-reverse';
+        }
+
+        const input = openOptions([ primitive, ...Array(60).fill(custom) ], { value: '0' });
+        const dropdown = testContainer.querySelector('.dms-select-options');
+
+        // then
+        expect(dropdown.scrollHeight).to.be.greaterThan(dropdown.clientHeight);
+        expect(dropdown.getBoundingClientRect().height).to.be.at.most(Math.min(height, 322));
+
+        // when - wrap to the final option
+        triggerKeyEvent(input, 'keydown', 38);
+
+        // then
+        expect(dropdown.scrollTop).to.be.greaterThan(0);
+        expect(testContainer.querySelector('.option.active').dataset.value).to.equal('60');
+        expect(testContainer.querySelector('.option.active').getBoundingClientRect().bottom)
+          .to.be.at.most(dropdown.getBoundingClientRect().bottom + 1);
+
+        // when - wrap back to the first option
+        triggerKeyEvent(input, 'keydown', 40);
+
+        // then
+        expect(testContainer.querySelector('.option.active').dataset.value).to.equal('0');
+        expect(testContainer.querySelector('.option.active').getBoundingClientRect().top)
+          .to.be.at.least(dropdown.getBoundingClientRect().top - 1);
+      });
+    });
+
+
+    describe('searching in the type field', function() {
+
+      const options = [
+        { value: 'string', label: 'String', group: primitive },
+        { value: 'Applicant', label: 'Applicant', group: custom },
+        { value: 'externalApplicant', label: 'External Applicant', group: { id: 'external', name: 'External' } }
+      ];
+
+      function openSearch(props = {}) {
+        return openOptions([], {
+          options,
+          searchable: true,
+          emptyLabel: 'No matching types',
+          value: 'string',
+          ...props
+        });
+      }
+
+      function values() {
+        return Array.from(testContainer.querySelectorAll('.option')).map(node => node.dataset.value);
+      }
+
+      it('should search all groups without changing the model', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+
+        // when
+        triggerInputEvent(input, 'APPLICANT');
+
+        // then
+        expect(values()).to.eql([ 'Applicant', 'externalApplicant' ]);
+        expect(labels()).to.eql([ 'Custom', 'External' ]);
+        expect(onChange).not.to.have.been.called;
+
+        // when
+        triggerInputEvent(input, 'STR');
+
+        // then
+        expect(values()).to.eql([ 'string' ]);
+      });
+
+      it('should navigate matches without committing until Enter', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+        triggerInputEvent(input, 'applicant');
+
+        // when
+        triggerKeyEvent(input, 'keydown', 40);
+        triggerKeyEvent(input, 'keydown', 40);
+
+        // then
+        expect(input.value).to.equal('externalApplicant');
+        expect(onChange).not.to.have.been.called;
+
+        // when
+        triggerKeyEvent(input, 'keydown', 13);
+
+        // then
+        expect(onChange).to.have.been.calledOnceWith('externalApplicant');
+        expect(testContainer.querySelector('.dms-select-options')).not.to.exist;
+      });
+
+      it('should cancel pending text on Escape', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+        triggerInputEvent(input, 'Applicant');
+
+        // when
+        triggerKeyEvent(input, 'keydown', 27);
+
+        // then
+        expect(input.value).to.equal('string');
+        expect(onChange).not.to.have.been.called;
+      });
+
+      it('should cancel pending text on outside click', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+        triggerInputEvent(input, 'Applicant');
+
+        // when
+        triggerMouseEvent(document.body, 'mousedown');
+
+        // then
+        expect(input.value).to.equal('string');
+        expect(onChange).not.to.have.been.called;
+      });
+
+      it('should accept manual types and handle no matches safely', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+
+        // when
+        triggerInputEvent(input, 'MyOwnType');
+        triggerKeyEvent(input, 'keydown', 40);
+
+        // then
+        expect(values()).to.eql([]);
+        expect(testContainer.querySelector('[role="status"]').textContent).to.equal('No matching types');
+        expect(onChange).not.to.have.been.called;
+
+        // when
+        triggerKeyEvent(input, 'keydown', 13);
+
+        // then
+        expect(onChange).to.have.been.calledOnceWith('MyOwnType');
+      });
+
+      it('should restore all options on clearing and confirm removal with Enter', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+
+        // when
+        triggerInputEvent(input, '');
+
+        // then
+        expect(values()).to.have.length(3);
+        expect(onChange).not.to.have.been.called;
+
+        // when
+        triggerKeyEvent(input, 'keydown', 13);
+
+        // then
+        expect(onChange).to.have.been.calledOnceWith('');
+      });
+
+      it('should select a result by click', function() {
+
+        // given
+        const onChange = sinon.spy();
+        const input = openSearch({ onChange });
+        triggerInputEvent(input, 'applicant');
+
+        // when
+        triggerClick(testContainer.querySelector('.option'));
+
+        // then
+        expect(onChange).to.have.been.calledOnceWith('Applicant');
+      });
+
+      it('should keep search open when clicking the editable field', function() {
+
+        // given
+        const input = openSearch();
+        triggerInputEvent(input, 'applicant');
+
+        // when
+        triggerClick(input);
+
+        // then
+        expect(values()).to.eql([ 'Applicant', 'externalApplicant' ]);
+        expect(input.value).to.equal('applicant');
+      });
+
+    });
+
+
+  });
+
+
   it('should render', function() {
 
     // given
@@ -331,7 +588,9 @@ describe('components/InputSelect', function() {
       const optionsBounds = options.getBoundingClientRect();
 
       expect(optionsBounds.top).to.be.lessThan(inputSelectBounds.top);
-      expect(optionsBounds.bottom).to.eql(inputSelectBounds.top);
+
+      // Allow subpixel rounding when converting between container coordinates.
+      expect(optionsBounds.bottom).to.be.closeTo(inputSelectBounds.top, 0.01);
       expect(optionsBounds.left).to.eql(inputSelectBounds.left);
     });
 

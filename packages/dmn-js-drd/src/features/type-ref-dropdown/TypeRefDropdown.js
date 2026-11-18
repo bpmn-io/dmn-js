@@ -1,4 +1,6 @@
-import { groupDataTypes } from 'dmn-js-shared/lib/util/TypeRefUtil';
+import mountInputSelect from 'dmn-js-shared/lib/components/mountInputSelect';
+
+import { getTypeRefOptions } from 'dmn-js-shared/lib/util/TypeRefUtil';
 
 import {
   getBusinessObject,
@@ -18,14 +20,17 @@ export default class TypeRefDropdown {
    * @param {import('../modeling/DrdFactory').default} drdFactory
    * @param {import('../modeling/Modeling').default} modeling
    * @param {import('diagram-js/lib/i18n/translate/Translate').default} translate
+   * @param {import('diagram-js/lib/core/Canvas').default} canvas
    */
-  constructor(eventBus, overlays, dataTypes, drdFactory, modeling, translate) {
+  constructor(eventBus, overlays, dataTypes, drdFactory, modeling, translate, canvas) {
     this._eventBus = eventBus;
     this._overlays = overlays;
     this._dataTypes = dataTypes;
     this._drdFactory = drdFactory;
     this._modeling = modeling;
     this._translate = translate;
+
+    this._canvas = canvas;
 
     this._current = null;
 
@@ -43,6 +48,10 @@ export default class TypeRefDropdown {
       }
     });
 
+    this._eventBus.on([ 'diagram.clear', 'diagram.destroy' ], () => this.close());
+
+    this._eventBus.on('canvas.viewbox.changed', () => this._update());
+
     this._eventBus.on('elements.changed', event => {
       if (!this._current) {
         return;
@@ -57,11 +66,20 @@ export default class TypeRefDropdown {
   }
 
   open(element) {
-    const container = this._getOverlayNode(element);
+    this.close();
+
+    const container = document.createElement('div');
+    container.className = 'dms-type-ref-dropdown';
+    container.addEventListener('mousedown', event => event.stopPropagation());
+
+    const selector = mountInputSelect(container, this._canvas.getContainer());
     this._current = {
       element,
-      container
+      container,
+      selector
     };
+
+    this._update();
 
     this._overlays.add(element, 'type-ref-dropdown', {
       position: {
@@ -73,6 +91,10 @@ export default class TypeRefDropdown {
   }
 
   close() {
+    if (this._current) {
+      this._current.selector.destroy();
+    }
+
     this._current = null;
     this._overlays.remove({ type: 'type-ref-dropdown' });
   }
@@ -82,60 +104,17 @@ export default class TypeRefDropdown {
       return;
     }
 
-    const { element, container } = this._current;
+    const { element, selector } = this._current;
 
-    const select = container.querySelector('select');
-    select.value = this._getTypeRef(element);
-  }
-
-  _getOverlayNode(element) {
-    const container = document.createElement('div');
-    container.className = 'dms-type-ref-dropdown';
-
-    const select = document.createElement('select');
-    select.className = 'dms-type-ref-select dms-select';
-    select.ariaLabel = this._translate('Type');
-
-    const currentTypeRef = this._getTypeRef(element);
-    const dataTypes = this._dataTypes.getAll();
-
-    if (!dataTypes.some(type => type.name === currentTypeRef)) {
-      select.appendChild(
-        this._createOption({ name: currentTypeRef, label: currentTypeRef })
-      );
-    }
-
-    groupDataTypes(dataTypes).forEach(({ name, types }) => {
-      let parent = select;
-
-      if (name) {
-        parent = document.createElement('optgroup');
-        parent.label = name;
-
-        select.appendChild(parent);
-      }
-
-      types.forEach(type => parent.appendChild(this._createOption(type)));
+    selector.update({
+      className: 'dms-type-ref-select',
+      label: this._translate('Type'),
+      value: this._getTypeRef(element),
+      options: getTypeRefOptions(this._dataTypes.getAll()),
+      searchable: true,
+      emptyLabel: this._translate('No matching types'),
+      onChange: typeRef => this._setTypeRef(element, typeRef)
     });
-
-    select.value = currentTypeRef;
-
-    container.appendChild(select);
-
-    select.addEventListener('change', (event) => {
-      this._setTypeRef(element, event.target.value);
-    });
-
-    return container;
-  }
-
-
-  _createOption(type) {
-    const option = document.createElement('option');
-    option.value = type.name;
-    option.textContent = type.label;
-
-    return option;
   }
 
 
@@ -172,5 +151,6 @@ TypeRefDropdown.$inject = [
   'dataTypes',
   'drdFactory',
   'modeling',
-  'translate'
+  'translate',
+  'canvas'
 ];
