@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: create a `variable` with `typeRef="Any"` for new business knowledge models and decision services ([#1051](https://github.com/bpmn-io/dmn-js/issues/1051))
+
 ## 18.0.3
 
 * `FIX`: show expression language badge in every decision table row ([#647](https://github.com/bpmn-io/dmn-js/issues/647), [#1055](https://github.com/bpmn-io/dmn-js/pull/1055))
