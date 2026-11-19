@@ -68,8 +68,25 @@ DefinitionPropertiesView.prototype._init = function() {
 DefinitionPropertiesView.prototype.update = function() {
   var businessObject = this._canvas.getRootElement().businessObject;
 
-  this.nameElement.textContent = businessObject.name;
-  this.idElement.textContent = businessObject.id;
+  setText(this.nameElement, businessObject.name);
+  setText(this.idElement, businessObject.id);
 };
+
+
+// helpers //////////
+
+/**
+ * Set text only if changed to keep the caret of a focused element in place.
+ *
+ * @param {HTMLElement} element
+ * @param {string} [text]
+ */
+function setText(element, text) {
+  text = text || '';
+
+  if (element.textContent !== text) {
+    element.textContent = text;
+  }
+}
 
 

@@ -155,7 +155,7 @@ export function inject(fn) {
       throw new Error('dmn-js-drd viewer not found');
     }
 
-    view.invoke(fn);
+    return view.invoke(fn);
   };
 }
 
