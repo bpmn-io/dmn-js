@@ -77,6 +77,29 @@ describe('features - generate-di', function() {
   });
 
 
+  describe('without modeling', function() {
+
+    beforeEach(bootstrapModeler(noDiXML, {
+      modules: [
+        coreModule,
+        diGeneratorModule
+      ]
+    }));
+
+
+    it('should generate DMNDI', inject(function(canvas, elementRegistry) {
+
+      // when
+      var definitions = canvas.getRootElement().businessObject;
+
+      // then
+      expect(elementRegistry.getAll()).to.have.length(5);
+      expect(definitions.dmnDI.diagrams[0].diagramElements).to.have.length(4);
+    }));
+
+  });
+
+
   describe('decision service', function() {
 
     beforeEach(bootstrapModeler(noDiDecisionServiceXML, {

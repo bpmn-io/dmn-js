@@ -6,6 +6,8 @@ All notable changes to [dmn-js](https://github.com/bpmn-io/dmn-js) are documente
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: generate missing DRD DI without the modeling module ([camunda/camunda-modeler#3595](https://github.com/camunda/camunda-modeler/issues/3595))
+
 ## 18.1.0
 
 * `FEAT`: create a `variable` with `typeRef="Any"` for new business knowledge models and decision services ([#1051](https://github.com/bpmn-io/dmn-js/issues/1051))
