@@ -7,6 +7,7 @@ import { MIN_SECTION_HEIGHT } from '../decision-service-divider/DecisionServiceD
 
 import {
   DECISION_SERVICE_PADDING,
+  DECISION_SERVICE_SIZE,
   DECISION_SIZE
 } from '../modeling/ElementFactory';
 
@@ -17,10 +18,9 @@ import { getIdFromHref } from '../modeling/util/HrefUtil';
  * Generates missing DI on import.
  *
  * @param {DrdFactory} drdFactory
- * @param {ElementFactory} elementFactory
  * @param {EventBus} eventBus
  */
-export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpdater) {
+export default function DiGenerator(drdFactory, eventBus) {
   function createDi(definitions) {
 
     // retrieve or create dmnDI
@@ -57,7 +57,8 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
     function createShapeDi(drgElement, bounds) {
       var di = drdFactory.createDiShape(drgElement, bounds);
 
-      drdUpdater.updateDiParent(di, diagram);
+      di.$parent = diagram;
+      diagram.get('diagramElements').push(di);
 
       return di;
     }
@@ -109,7 +110,7 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
 
       var outputHeight = getSectionHeight(output.length),
           width = Math.max(
-            elementFactory._getDefaultSize(decisionService).width,
+            DECISION_SERVICE_SIZE.width,
             DECISION_SIZE.width + 2 * DECISION_SERVICE_PADDING
           );
 
@@ -153,13 +154,11 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
       if (is(drgElement, 'dmn:DecisionService')) {
         createDecisionServiceDi(drgElement, x, y);
       } else {
-        var dimensions = elementFactory._getDefaultSize(drgElement);
-
         createShapeDi(drgElement, {
           x: x,
           y: y,
-          width: dimensions.width,
-          height: dimensions.height
+          width: DECISION_SIZE.width,
+          height: DECISION_SIZE.height
         });
       }
 
@@ -176,7 +175,5 @@ export default function DiGenerator(drdFactory, elementFactory, eventBus, drdUpd
 
 DiGenerator.$inject = [
   'drdFactory',
-  'elementFactory',
-  'eventBus',
-  'drdUpdater'
+  'eventBus'
 ];
