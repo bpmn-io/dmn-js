@@ -33,7 +33,11 @@ export function setLabel(element, text, isExternal) {
   var semantic = element.businessObject,
       attr = getLabelAttr(semantic);
 
-  if (attr) {
+  if (attr === 'name') {
+
+    // name is required by the DMN schema
+    semantic.name = text || '';
+  } else if (attr) {
     semantic[attr] = text;
   }
 

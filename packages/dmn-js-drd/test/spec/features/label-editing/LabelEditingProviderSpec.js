@@ -342,7 +342,8 @@ describe('features - label-editing', function() {
       directEdit('dish-decision', ' ');
 
       // then
-      expect(getBusinessObject(decision).name).not.to.exist;
+      // name is required by the DMN schema
+      expect(getBusinessObject(decision).name).to.equal('');
     });
 
   });

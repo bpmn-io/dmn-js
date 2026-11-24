@@ -105,6 +105,46 @@ describe('features/modeling - create elements', function() {
       expect(di.$type).to.eql('dmndi:DMNEdge');
       expect(di.id).to.match(/DMNEdge_/);
     }));
+
+
+    // name is required by the DMN schema
+    forEach([
+      'dmn:Decision',
+      'dmn:BusinessKnowledgeModel',
+      'dmn:InputData',
+      'dmn:KnowledgeSource'
+    ], function(type) {
+
+      it('should create ' + type + ' with empty name', inject(
+        function(elementFactory) {
+
+          // when
+          var shape = elementFactory.createShape({ type: type });
+
+          // then
+          expect(shape.businessObject.name).to.equal('');
+        }
+      ));
+
+    });
+
+
+    it('should keep given name', inject(function(drdFactory, elementFactory) {
+
+      // given
+      var businessObject = drdFactory.create('dmn:Decision', {
+        name: 'Season'
+      });
+
+      // when
+      var decision = elementFactory.createShape({
+        type: 'dmn:Decision',
+        businessObject: businessObject
+      });
+
+      // then
+      expect(decision.businessObject.name).to.equal('Season');
+    }));
   });
 
 
