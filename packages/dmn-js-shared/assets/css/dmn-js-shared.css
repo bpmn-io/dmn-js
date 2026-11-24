@@ -234,7 +234,9 @@ h4.dms-heading {
 }
 
 .dms-select-options .group-label {
-  padding: 4px 9px;
+  padding: 8px 9px 4px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
   font-size: 12px;
   color: var(--select-options-group-label-color);
   cursor: default;
@@ -253,4 +255,8 @@ h4.dms-heading {
   content: attr(data-placeholder);
   position: absolute;
   opacity: 0.5;
+}
+
+.dms-select-options .option-empty {
+  padding: 4px 9px;
 }
